@@ -1,0 +1,42 @@
+{
+  "id": "openai-dall-e-3",
+  "name": "DALL·E 3",
+  "slug": "dall-e-3",
+  "developer": "OpenAI",
+  "releaseDate": "2023-10-03",
+  "updatedAt": "2023-10-03",
+  "type": "closed-source",
+  "modality": [
+    "image"
+  ],
+  "license": "Proprietary",
+  "parameters": "undisclosed",
+  "contextWindow": "N/A (image generation)",
+  "description": "OpenAI's third-generation image synthesis model, natively integrated with ChatGPT for iterative prompt refinement, with significantly improved prompt following and text rendering compared to DALL·E 2.",
+  "keyFeatures": [
+    "Native ChatGPT integration for prompt refinement",
+    "Dramatically improved prompt adherence",
+    "Text rendering in images",
+    "Built-in safety mitigations"
+  ],
+  "benchmarks": [],
+  "family": "DALL·E",
+  "previousVersion": null,
+  "links": {
+    "website": "https://openai.com/index/dall-e-3/"
+  },
+  "logo": "/logos/openai.svg",
+  "tags": [
+    "image-generation",
+    "creative"
+  ],
+  "sources": [
+    "https://openai.com/index/dall-e-3/"
+  ],
+  "verified": true,
+  "curatorNotes": "",
+  "primaryTask": "image-generation",
+  "deployment": [
+    "api-only"
+  ]
+}

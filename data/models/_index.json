@@ -1,0 +1,66 @@
+[
+  {
+    "id": "meta-llama-3-1-405b",
+    "name": "Llama 3.1 405B",
+    "slug": "llama-3-1-405b",
+    "developer": "Meta",
+    "releaseDate": "2024-07-23",
+    "type": "open-weights"
+  },
+  {
+    "id": "anthropic-claude-3-5-sonnet",
+    "name": "Claude 3.5 Sonnet",
+    "slug": "claude-3-5-sonnet",
+    "developer": "Anthropic",
+    "releaseDate": "2024-06-20",
+    "type": "closed-source"
+  },
+  {
+    "id": "stability-stable-diffusion-3",
+    "name": "Stable Diffusion 3 Medium",
+    "slug": "stable-diffusion-3",
+    "developer": "Stability AI",
+    "releaseDate": "2024-06-12",
+    "type": "open-weights"
+  },
+  {
+    "id": "openai-gpt-4o",
+    "name": "GPT-4o",
+    "slug": "gpt-4o",
+    "developer": "OpenAI",
+    "releaseDate": "2024-05-13",
+    "type": "closed-source"
+  },
+  {
+    "id": "mistral-mixtral-8x22b",
+    "name": "Mixtral 8x22B",
+    "slug": "mixtral-8x22b",
+    "developer": "Mistral AI",
+    "releaseDate": "2024-04-17",
+    "type": "open-weights"
+  },
+  {
+    "id": "cohere-command-r-plus",
+    "name": "Command R+",
+    "slug": "command-r-plus",
+    "developer": "Cohere",
+    "releaseDate": "2024-04-04",
+    "type": "closed-source"
+  },
+  {
+    "id": "google-gemini-1-5-pro",
+    "name": "Gemini 1.5 Pro",
+    "slug": "gemini-1-5-pro",
+    "developer": "Google DeepMind",
+    "releaseDate": "2024-02-15",
+    "type": "closed-source"
+  },
+  {
+    "id": "openai-dall-e-3",
+    "name": "DALL·E 3",
+    "slug": "dall-e-3",
+    "developer": "OpenAI",
+    "releaseDate": "2023-10-03",
+    "type": "closed-source"
+  }
+]

@@ -1,0 +1,45 @@
+{
+  "id": "openai-gpt-4o",
+  "name": "GPT-4o",
+  "slug": "gpt-4o",
+  "developer": "OpenAI",
+  "releaseDate": "2024-05-13",
+  "updatedAt": "2024-05-13",
+  "type": "closed-source",
+  "modality": [
+    "text",
+    "code",
+    "image",
+    "audio"
+  ],
+  "license": "Proprietary",
+  "parameters": "undisclosed",
+  "contextWindow": "128K",
+  "description": "OpenAI's multimodal flagship model accepting text, image, and audio inputs natively, with GPT-4-level intelligence at faster speed and lower cost.",
+  "keyFeatures": [
+    "Native multimodal I/O across text, image, and audio",
+    "2x faster than GPT-4 Turbo",
+    "50% cheaper API pricing compared to GPT-4 Turbo",
+    "Improved multilingual and vision capabilities"
+  ],
+  "benchmarks": [],
+  "family": "GPT",
+  "previousVersion": null,
+  "links": {
+    "website": "https://openai.com/index/hello-gpt-4o/"
+  },
+  "logo": "/logos/openai.svg",
+  "tags": [
+    "multimodal",
+    "flagship"
+  ],
+  "sources": [
+    "https://openai.com/index/hello-gpt-4o/"
+  ],
+  "verified": true,
+  "curatorNotes": "",
+  "primaryTask": "multimodal-general",
+  "deployment": [
+    "api-only"
+  ]
+}

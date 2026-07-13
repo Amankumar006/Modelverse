@@ -1,0 +1,46 @@
+{
+  "id": "google-gemini-1-5-pro",
+  "name": "Gemini 1.5 Pro",
+  "slug": "gemini-1-5-pro",
+  "developer": "Google DeepMind",
+  "releaseDate": "2024-02-15",
+  "updatedAt": "2024-02-15",
+  "type": "closed-source",
+  "modality": [
+    "text",
+    "code",
+    "image",
+    "video",
+    "audio"
+  ],
+  "license": "Proprietary",
+  "parameters": "undisclosed",
+  "contextWindow": "1M tokens (up to 2M)",
+  "description": "Google DeepMind's mid-size multimodal model featuring an industry-leading 1 million token context window, built on a Mixture-of-Experts architecture for efficient processing of extremely long documents, videos, and codebases.",
+  "keyFeatures": [
+    "1M token context window",
+    "Native multimodal input across text, image, video, and audio",
+    "Mixture-of-Experts (MoE) architecture",
+    "Processes up to 1 hour of video or 30K lines of code"
+  ],
+  "benchmarks": [],
+  "family": "Gemini",
+  "previousVersion": null,
+  "links": {
+    "website": "https://blog.google/technology/ai/google-gemini-next-generation-model-february-2024/"
+  },
+  "logo": "/logos/google.svg",
+  "tags": [
+    "long-context",
+    "multimodal"
+  ],
+  "sources": [
+    "https://blog.google/technology/ai/google-gemini-next-generation-model-february-2024/"
+  ],
+  "verified": true,
+  "curatorNotes": "",
+  "primaryTask": "multimodal-general",
+  "deployment": [
+    "api-only"
+  ]
+}

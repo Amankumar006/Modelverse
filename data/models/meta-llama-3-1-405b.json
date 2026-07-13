@@ -1,0 +1,50 @@
+{
+  "id": "meta-llama-3-1-405b",
+  "name": "Llama 3.1 405B",
+  "slug": "llama-3-1-405b",
+  "developer": "Meta",
+  "releaseDate": "2024-07-23",
+  "updatedAt": "2024-07-23",
+  "type": "open-weights",
+  "modality": [
+    "text",
+    "code"
+  ],
+  "license": "Llama Community License",
+  "parameters": "405B",
+  "contextWindow": "128K",
+  "description": "Meta's largest open-weights model and the first open model to rival closed frontier models on general benchmarks, released with a permissive community license allowing commercial use and fine-tuning.",
+  "keyFeatures": [
+    "Largest open-weights model at release",
+    "Competitive with GPT-4o on key benchmarks",
+    "128K context window",
+    "Permissive commercial license"
+  ],
+  "benchmarks": [
+    {
+      "name": "MMLU",
+      "score": "88.6%",
+      "verified": true
+    }
+  ],
+  "family": "Llama",
+  "previousVersion": null,
+  "links": {
+    "website": "https://ai.meta.com/blog/meta-llama-3-1/"
+  },
+  "logo": "/logos/meta.svg",
+  "tags": [
+    "open-source",
+    "frontier",
+    "large"
+  ],
+  "sources": [
+    "https://ai.meta.com/blog/meta-llama-3-1/"
+  ],
+  "verified": true,
+  "curatorNotes": "",
+  "primaryTask": "chat-reasoning",
+  "deployment": [
+    "self-hostable"
+  ]
+}

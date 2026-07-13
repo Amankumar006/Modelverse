@@ -1,0 +1,44 @@
+{
+  "id": "cohere-command-r-plus",
+  "name": "Command R+",
+  "slug": "command-r-plus",
+  "developer": "Cohere",
+  "releaseDate": "2024-04-04",
+  "updatedAt": "2024-04-04",
+  "type": "closed-source",
+  "modality": [
+    "text",
+    "code"
+  ],
+  "license": "Proprietary",
+  "parameters": "104B",
+  "contextWindow": "128K",
+  "description": "Cohere's most capable generation model optimized for enterprise RAG workflows and multilingual tasks, with strong performance on complex reasoning while maintaining efficiency for large-scale production deployments.",
+  "keyFeatures": [
+    "Optimized for RAG workflows",
+    "Strong multilingual support (10+ languages)",
+    "128K context window",
+    "Enterprise-focused API"
+  ],
+  "benchmarks": [],
+  "family": "Command",
+  "previousVersion": null,
+  "links": {
+    "website": "https://cohere.com/blog/command-r-plus-microsoft-azure"
+  },
+  "logo": "/logos/cohere.svg",
+  "tags": [
+    "enterprise",
+    "rag",
+    "multilingual"
+  ],
+  "sources": [
+    "https://cohere.com/blog/command-r-plus-microsoft-azure"
+  ],
+  "verified": true,
+  "curatorNotes": "",
+  "primaryTask": "chat-reasoning",
+  "deployment": [
+    "api-only"
+  ]
+}

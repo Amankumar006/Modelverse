@@ -1,0 +1,44 @@
+{
+  "id": "anthropic-claude-3-5-sonnet",
+  "name": "Claude 3.5 Sonnet",
+  "slug": "claude-3-5-sonnet",
+  "developer": "Anthropic",
+  "releaseDate": "2024-06-20",
+  "updatedAt": "2024-06-20",
+  "type": "closed-source",
+  "modality": [
+    "text",
+    "code",
+    "image"
+  ],
+  "license": "Proprietary",
+  "parameters": "undisclosed",
+  "contextWindow": "200K",
+  "description": "Anthropic's mid-tier model in the Claude 3.5 family, offering frontier-level intelligence at the speed and cost tier of Claude 3 Sonnet, with particular strength in coding and reasoning tasks.",
+  "keyFeatures": [
+    "Outperforms Claude 3 Opus at lower cost",
+    "Strong coding performance",
+    "200K context window",
+    "Artifacts feature for interactive content"
+  ],
+  "benchmarks": [],
+  "family": "Claude",
+  "previousVersion": null,
+  "links": {
+    "website": "https://www.anthropic.com/news/claude-3-5-sonnet"
+  },
+  "logo": "/logos/anthropic.svg",
+  "tags": [
+    "reasoning",
+    "coding"
+  ],
+  "sources": [
+    "https://www.anthropic.com/news/claude-3-5-sonnet"
+  ],
+  "verified": true,
+  "curatorNotes": "",
+  "primaryTask": "chat-reasoning",
+  "deployment": [
+    "api-only"
+  ]
+}

@@ -1,0 +1,52 @@
+{
+  "id": "mistral-mixtral-8x22b",
+  "name": "Mixtral 8x22B",
+  "slug": "mixtral-8x22b",
+  "developer": "Mistral AI",
+  "releaseDate": "2024-04-17",
+  "updatedAt": "2024-04-17",
+  "type": "open-weights",
+  "modality": [
+    "text",
+    "code"
+  ],
+  "license": "Apache 2.0",
+  "parameters": "8x22B MoE (~39B active)",
+  "contextWindow": "64K",
+  "description": "A sparse mixture-of-experts model from Mistral AI, released with open weights under Apache 2.0, positioned as a strong open alternative to closed frontier models on reasoning and coding benchmarks.",
+  "keyFeatures": [
+    "Sparse MoE architecture",
+    "Fully open weights with commercially permissive Apache 2.0 license",
+    "Native function calling support"
+  ],
+  "benchmarks": [
+    {
+      "name": "MMLU",
+      "score": "77.75%",
+      "verified": true
+    }
+  ],
+  "family": "Mixtral",
+  "previousVersion": null,
+  "links": {
+    "website": "https://mistral.ai/news/mixtral-8x22b/",
+    "huggingface": "https://huggingface.co/mistralai/Mixtral-8x22B-v0.1"
+  },
+  "logo": "/logos/mistral.svg",
+  "tags": [
+    "open-source",
+    "moe",
+    "coding",
+    "apache-2.0"
+  ],
+  "sources": [
+    "https://mistral.ai/news/mixtral-8x22b/",
+    "https://huggingface.co/mistralai/Mixtral-8x22B-v0.1"
+  ],
+  "verified": true,
+  "curatorNotes": "",
+  "primaryTask": "chat-reasoning",
+  "deployment": [
+    "self-hostable"
+  ]
+}

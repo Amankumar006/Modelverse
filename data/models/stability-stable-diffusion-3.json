@@ -1,0 +1,43 @@
+{
+  "id": "stability-stable-diffusion-3",
+  "name": "Stable Diffusion 3 Medium",
+  "slug": "stable-diffusion-3",
+  "developer": "Stability AI",
+  "releaseDate": "2024-06-12",
+  "updatedAt": "2024-06-12",
+  "type": "open-weights",
+  "modality": [
+    "image"
+  ],
+  "license": "Stability AI Community License",
+  "parameters": "~2B",
+  "contextWindow": "N/A (image generation)",
+  "description": "Stability AI's latest open-weights image generation model using a novel Multimodal Diffusion Transformer (MMDiT) architecture with separate weights for image and text, delivering improved typography, prompt adherence, and image quality.",
+  "keyFeatures": [
+    "MMDiT architecture with separate image and text weights",
+    "Improved text rendering in generated images",
+    "Flow matching training",
+    "Runs on consumer GPUs"
+  ],
+  "benchmarks": [],
+  "family": "Stable Diffusion",
+  "previousVersion": null,
+  "links": {
+    "website": "https://stability.ai/news/stable-diffusion-3"
+  },
+  "logo": "/logos/stability.svg",
+  "tags": [
+    "image-generation",
+    "open-source",
+    "diffusion"
+  ],
+  "sources": [
+    "https://stability.ai/news/stable-diffusion-3"
+  ],
+  "verified": true,
+  "curatorNotes": "",
+  "primaryTask": "image-generation",
+  "deployment": [
+    "self-hostable"
+  ]
+}

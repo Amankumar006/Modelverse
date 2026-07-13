@@ -1,0 +1,74 @@
+@import "tailwindcss";
+
+/* ------------------------------------------------------------------ */
+/*  Theme tokens                                                       */
+/* ------------------------------------------------------------------ */
+@theme {
+  --color-brand-pink: #FF2D78;
+  --color-brand-orange: #FF6B35;
+  --color-brand-blue: #3B82F6;
+  --color-brand-violet: #8B5CF6;
+}
+
+/* ------------------------------------------------------------------ */
+/*  Font fallbacks                                                     */
+/* ------------------------------------------------------------------ */
+/*  --font-body is set by next/font/google (Inter) on <html>.          */
+/*  --font-display will be set by next/font/local (Clash Display)      */
+/*  once the woff2 files are added. Until then this fallback applies.  */
+:root {
+  --font-display: ui-sans-serif, system-ui, -apple-system, sans-serif;
+}
+
+body {
+  font-family: var(--font-body, ui-sans-serif, system-ui, sans-serif);
+}
+
+/* ------------------------------------------------------------------ */
+/*  Hero entrance animations (page-load only, not scroll-linked)       */
+/* ------------------------------------------------------------------ */
+@keyframes heroReveal {
+  0%   { opacity: 0; transform: translateY(28px); filter: blur(12px); }
+  100% { opacity: 1; transform: translateY(0);    filter: blur(0); }
+}
+
+@keyframes heroFadeUp {
+  0%   { opacity: 0; transform: translateY(20px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes heroZoom {
+  0%   { transform: scale(1.12); }
+  100% { transform: scale(1); }
+}
+
+.hero-anim {
+  opacity: 0;
+  animation-fill-mode: forwards;
+  animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.hero-reveal {
+  animation-name: heroReveal;
+  animation-duration: 1.1s;
+}
+
+.hero-fade {
+  animation-name: heroFadeUp;
+  animation-duration: 1s;
+}
+
+.hero-zoom {
+  animation: heroZoom 1.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* ------------------------------------------------------------------ */
+/*  Accessibility: disable non-essential motion                        */
+/* ------------------------------------------------------------------ */
+@media (prefers-reduced-motion: reduce) {
+  .hero-anim,
+  .hero-zoom {
+    animation: none;
+    opacity: 1;
+  }
+}
