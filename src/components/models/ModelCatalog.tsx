@@ -241,24 +241,20 @@ function ModelCatalogContent({
   };
 
   const toggleFilter = (key: keyof Omit<FiltersState, "q">, val: string) => {
-    setFilters((prev) => {
-      const current = prev[key] as string[];
-      const next = current.includes(val)
-        ? current.filter((v) => v !== val)
-        : [...current, val];
+    const current = filters[key] as string[];
+    const next = current.includes(val)
+      ? current.filter((v) => v !== val)
+      : [...current, val];
 
-      const newFilters = { ...prev, [key]: next };
-      updateUrl(newFilters, sortKey);
-      return newFilters;
-    });
+    const newFilters = { ...filters, [key]: next };
+    setFilters(newFilters);
+    updateUrl(newFilters, sortKey);
   };
 
   const handleSearchChange = (val: string) => {
-    setFilters((prev) => {
-      const newFilters = { ...prev, q: val };
-      updateUrl(newFilters, sortKey);
-      return newFilters;
-    });
+    const newFilters = { ...filters, q: val };
+    setFilters(newFilters);
+    updateUrl(newFilters, sortKey);
   };
 
   const handleSortChange = (newSort: string) => {
