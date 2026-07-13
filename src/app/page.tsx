@@ -89,9 +89,9 @@ export default function Home() {
           </div>
 
           {/* Grid Layout */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5 items-stretch">
             {/* Column 1: Tracked Releases (Large Row Span Card) */}
-            <div className="lg:row-span-2 rounded-2xl border border-white/[0.05] relative overflow-hidden bg-black p-6 sm:p-8 flex flex-col justify-between min-h-[480px] lg:min-h-full">
+            <div className="rounded-2xl border border-white/[0.05] relative overflow-hidden bg-black p-6 sm:p-8 flex flex-col justify-between h-full min-h-[480px]">
               {/* Autoplay Loop Background Video */}
               <video
                 autoPlay
@@ -143,7 +143,7 @@ export default function Home() {
             {/* Column 2: Stacked Cards (Methodology & stats) */}
             <div className="flex flex-col gap-4 md:gap-5 h-full">
               {/* Methodology Card */}
-              <div className="rounded-2xl border border-white/[0.05] relative overflow-hidden bg-[#1C201E] noise-overlay p-6 sm:p-7 flex flex-col justify-between min-h-[220px]">
+              <div className="rounded-2xl border border-white/[0.05] relative overflow-hidden bg-[#1C201E] noise-overlay p-6 sm:p-7 flex flex-col justify-between flex-1">
                 <div className="relative z-10">
                   <div className="flex items-center gap-2 text-[10px] font-semibold uppercase tracking-[0.22em] text-white/50">
                     <ShieldCheck size={12} className="text-brand-orange" />
@@ -159,7 +159,7 @@ export default function Home() {
               </div>
 
               {/* Statistics Card */}
-              <div className="rounded-2xl border border-white/[0.05] relative overflow-hidden bg-black p-6 sm:p-7 flex flex-col justify-between min-h-[220px]">
+              <div className="rounded-2xl border border-white/[0.05] relative overflow-hidden bg-black p-6 sm:p-7 flex flex-col justify-between flex-1">
                 <video
                   autoPlay
                   loop
@@ -191,7 +191,7 @@ export default function Home() {
             {/* Column 3: Stacked Cards (Developers Marquee & Inaccuracy suggestions) */}
             <div className="flex flex-col gap-4 md:gap-5 h-full">
               {/* Developers Marquee */}
-              <div className="rounded-2xl border border-white/[0.05] relative overflow-hidden bg-black p-6 flex flex-col justify-between min-h-[280px] lg:flex-[1.4] flex-1">
+              <div className="rounded-2xl border border-white/[0.05] relative overflow-hidden bg-black p-6 flex flex-col justify-between flex-[1.3]">
                 <div className="flex items-center gap-2 text-[10px] font-semibold uppercase tracking-[0.22em] text-white/50 mb-4">
                   <CheckCircle size={12} className="text-brand-orange" />
                   <span>Developers We Track</span>
@@ -200,7 +200,7 @@ export default function Home() {
               </div>
 
               {/* Spot an Inaccuracy Suggestions Card */}
-              <div className="rounded-2xl border border-white/[0.05] relative overflow-hidden bg-[#1C201E] noise-overlay p-5 sm:p-6 flex flex-col justify-between min-h-[160px] lg:flex-[0.6] flex-1">
+              <div className="rounded-2xl border border-white/[0.05] relative overflow-hidden bg-[#1C201E] noise-overlay p-5 sm:p-6 flex flex-col justify-between flex-[0.7]">
                 <a
                   href="mailto:corrections@modelverse.ai?subject=Modelverse Correction"
                   className="absolute top-5 right-5 h-9 w-9 rounded-full bg-white/5 border border-white/10 hover:bg-white/10 hover:border-white/20 transition-all flex items-center justify-center text-white/70 hover:text-white z-20"
