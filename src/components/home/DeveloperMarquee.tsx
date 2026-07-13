@@ -83,23 +83,31 @@ export default function DeveloperMarquee({ developers }: { developers: string[] 
   const duplicatedDevs = [...displayDevs, ...displayDevs, ...displayDevs];
 
   return (
-    <div className="space-y-3 overflow-hidden py-1 relative [mask-image:linear-gradient(to_right,transparent,black_12%,black_88%,transparent)]">
+    <div className="space-y-3.5 overflow-hidden py-1 relative [mask-image:linear-gradient(to_right,transparent,black_12%,black_88%,transparent)] mt-auto z-10 w-full">
+      {/* Inline styles to guarantee keyframes and animation load correctly in all Next.js environments */}
+      <style dangerouslySetInnerHTML={{ __html: `
+        @keyframes marquee-right-loop {
+          0% { transform: translateX(-50%); }
+          100% { transform: translateX(0); }
+        }
+        .animate-marquee-right-1 {
+          animation: marquee-right-loop 24s linear infinite !important;
+        }
+        .animate-marquee-right-2 {
+          animation: marquee-right-loop 30s linear infinite !important;
+        }
+      ` }} />
+
       {/* Row 1: Left-to-Right (Fast) */}
-      <div className="flex gap-3 w-max animate-marquee-right" style={{ animationDuration: "20s" }}>
+      <div className="flex gap-3.5 w-max animate-marquee-right-1">
         {duplicatedDevs.map((dev, idx) => (
           <DeveloperTile key={`row1-${dev}-${idx}`} developer={dev} />
         ))}
       </div>
-      {/* Row 2: Left-to-Right (Medium) */}
-      <div className="flex gap-3 w-max animate-marquee-right" style={{ animationDuration: "26s" }}>
+      {/* Row 2: Left-to-Right (Slow) */}
+      <div className="flex gap-3.5 w-max animate-marquee-right-2">
         {duplicatedDevs.map((dev, idx) => (
           <DeveloperTile key={`row2-${dev}-${idx}`} developer={dev} />
-        ))}
-      </div>
-      {/* Row 3: Left-to-Right (Slow) */}
-      <div className="flex gap-3 w-max animate-marquee-right" style={{ animationDuration: "32s" }}>
-        {duplicatedDevs.map((dev, idx) => (
-          <DeveloperTile key={`row3-${dev}-${idx}`} developer={dev} />
         ))}
       </div>
     </div>

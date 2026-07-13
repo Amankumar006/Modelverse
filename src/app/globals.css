@@ -11,6 +11,18 @@
   --color-brand-orange: #FF6B35;
   --color-brand-blue: #3B82F6;
   --color-brand-violet: #8B5CF6;
+
+  --animate-marquee-left: marquee-left 22s linear infinite;
+  --animate-marquee-right: marquee-right 26s linear infinite;
+
+  @keyframes marquee-left {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+  @keyframes marquee-right {
+    from { transform: translateX(-50%); }
+    to { transform: translateX(0); }
+  }
 }
 
 body {
@@ -88,10 +100,12 @@ body {
   pointer-events: none;
 }
 
-@keyframes marquee-left { from { transform: translateX(0); } to { transform: translateX(-50%); } }
-@keyframes marquee-right { from { transform: translateX(-50%); } to { transform: translateX(0); } }
-.animate-marquee-left { animation: marquee-left 22s linear infinite; }
-.animate-marquee-right { animation: marquee-right 26s linear infinite; }
+.animate-marquee-left {
+  animation: marquee-left 22s linear infinite !important;
+}
+.animate-marquee-right {
+  animation: marquee-right 26s linear infinite !important;
+}
 
 .noise-overlay::after {
   content: '';
