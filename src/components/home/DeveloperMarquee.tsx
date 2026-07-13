@@ -90,22 +90,26 @@ export default function DeveloperMarquee({ developers }: { developers: string[] 
           0% { transform: translateX(-50%); }
           100% { transform: translateX(0); }
         }
+        @keyframes marquee-left-loop {
+          0% { transform: translateX(0); }
+          100% { transform: translateX(-50%); }
+        }
         .animate-marquee-right-1 {
           animation: marquee-right-loop 24s linear infinite !important;
         }
-        .animate-marquee-right-2 {
-          animation: marquee-right-loop 30s linear infinite !important;
+        .animate-marquee-left-1 {
+          animation: marquee-left-loop 30s linear infinite !important;
         }
       ` }} />
 
-      {/* Row 1: Left-to-Right (Fast) */}
+      {/* Row 1: Left-to-Right */}
       <div className="flex gap-3.5 w-max animate-marquee-right-1">
         {duplicatedDevs.map((dev, idx) => (
           <DeveloperTile key={`row1-${dev}-${idx}`} developer={dev} />
         ))}
       </div>
-      {/* Row 2: Left-to-Right (Slow) */}
-      <div className="flex gap-3.5 w-max animate-marquee-right-2">
+      {/* Row 2: Right-to-Left */}
+      <div className="flex gap-3.5 w-max animate-marquee-left-1">
         {duplicatedDevs.map((dev, idx) => (
           <DeveloperTile key={`row2-${dev}-${idx}`} developer={dev} />
         ))}
