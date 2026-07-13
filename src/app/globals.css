@@ -1,4 +1,7 @@
+@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital,wght@0,400;1,400&family=Inter:wght@400;500;600;700&display=swap');
 @import "tailwindcss";
+@import "../styles/fonts.css";
+@import "../styles/theme.css";
 
 /* ------------------------------------------------------------------ */
 /*  Theme tokens                                                       */
@@ -8,16 +11,6 @@
   --color-brand-orange: #FF6B35;
   --color-brand-blue: #3B82F6;
   --color-brand-violet: #8B5CF6;
-}
-
-/* ------------------------------------------------------------------ */
-/*  Font fallbacks                                                     */
-/* ------------------------------------------------------------------ */
-/*  --font-body is set by next/font/google (Inter) on <html>.          */
-/*  --font-display will be set by next/font/local (Clash Display)      */
-/*  once the woff2 files are added. Until then this fallback applies.  */
-:root {
-  --font-display: ui-sans-serif, system-ui, -apple-system, sans-serif;
 }
 
 body {
