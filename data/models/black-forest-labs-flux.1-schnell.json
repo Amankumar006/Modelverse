@@ -1,0 +1,50 @@
+{
+  "id": "black-forest-labs-flux.1-schnell",
+  "name": "FLUX.1 schnell",
+  "slug": "flux-1-schnell",
+  "developer": "Black Forest Labs",
+  "releaseDate": "2024-08-01",
+  "updatedAt": "2024-08-01",
+  "type": "open-weights",
+  "modality": [
+    "text",
+    "image"
+  ],
+  "primaryTask": "image-generation",
+  "deployment": [
+    "self-hostable"
+  ],
+  "license": "Apache 2.0",
+  "parameters": "12B",
+  "contextWindow": "undisclosed",
+  "description": "A state-of-the-art 12B parameter flow transformer text-to-image generation model, optimized for speed and high prompt adherence.",
+  "keyFeatures": [
+    "12B rectified flow transformer architecture",
+    "Apache 2.0 license for commercial use",
+    "Fast 4-step generation with high visual fidelity",
+    "Exceptional prompt adherence and text rendering"
+  ],
+  "benchmarks": [
+    {
+      "name": "CLIP Score",
+      "score": "0.32",
+      "verified": false
+    }
+  ],
+  "family": "FLUX",
+  "previousVersion": null,
+  "links": {
+    "website": "https://blackforestlabs.ai/"
+  },
+  "logo": "/logos/bfl.svg",
+  "tags": [
+    "image",
+    "diffusion",
+    "open-source"
+  ],
+  "sources": [
+    "https://blackforestlabs.ai/announcing-black-forest-labs/"
+  ],
+  "verified": false,
+  "curatorNotes": "Standardized FID/CLIP benchmarks are not officially published by BFL; the score listed is an estimate from community evaluations."
+}

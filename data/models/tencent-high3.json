@@ -1,0 +1,41 @@
+{
+  "id": "tencent-high3",
+  "name": "High3",
+  "slug": "high3",
+  "developer": "Tencent",
+  "releaseDate": "2026-07-01",
+  "updatedAt": "2026-07-01",
+  "type": "open-weights",
+  "modality": [
+    "text",
+    "code"
+  ],
+  "primaryTask": "agentic",
+  "deployment": [
+    "self-hostable"
+  ],
+  "license": "Other/Custom",
+  "parameters": "295B",
+  "contextWindow": "undisclosed",
+  "description": "A large open-weights Mixture of Experts (MoE) model focused on reasoning, math, and agentic coding that punches above its weight class against much larger trillion-parameter models.",
+  "keyFeatures": [
+    "295 billion total parameters, with only 21 billion active during inference",
+    "Exceptional capability in vibe-coding UI components and web applications",
+    "Competes closely on agentic benchmarks with models 4-5x its size"
+  ],
+  "benchmarks": [],
+  "family": "High",
+  "previousVersion": null,
+  "links": [
+    "https://tencent.com"
+  ],
+  "logo": "/logos/tencent.svg",
+  "tags": [
+    "mixture-of-experts"
+  ],
+  "sources": [
+    "https://www.youtube.com/watch?v=Ti1V7OI2Rro"
+  ],
+  "verified": false,
+  "curatorNotes": "Phonetically transcribed as \"High3\" (potentially Hy3). Details strictly from the video transcript."
+}

@@ -8,6 +8,15 @@ export const DEVELOPERS = [
   "DeepSeek",
   "xAI",
   "Stability AI",
+  "Alibaba",
+  "Microsoft",
+  "Black Forest Labs",
+  "Midjourney",
+  "Runway",
+  "Kuaishou",
+  "Suno",
+  "ByteDance",
+  "Tencent",
   "Other",
 ] as const;
 

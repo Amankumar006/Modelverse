@@ -35,7 +35,7 @@ export const ModelSchema = z.object({
   developer: z.enum(DEVELOPERS),
   releaseDate: z.string().regex(/^\d{4}-\d{2}-\d{2}$/, "Must be YYYY-MM-DD"),
   updatedAt: z.string().regex(/^\d{4}-\d{2}-\d{2}$/, "Must be YYYY-MM-DD"),
-  type: z.enum(["open-weights", "closed-source", "api-only", "research-preview"]),
+  type: z.enum(["open-source", "open-weights", "closed-source", "api-only", "research-preview"]),
   modality: z.array(z.string()).min(1),
   primaryTask: PrimaryTaskEnum,
   deployment: z.array(DeploymentEnum).min(1),
@@ -48,7 +48,7 @@ export const ModelSchema = z.object({
   family: z.string().nullable(),
   previousVersion: z.string().nullable(),
   links: z.record(z.string(), z.string()),
-  logo: z.string(),
+  logo: z.string().nullable(),
   // Namespaced tags: "arxiv:2401.xxxxx" (paper), "base:<model-id>" (lineage,
   // in addition to the structured `previousVersion`/`family` fields).
   // Unnamespaced tags are free descriptive terms (e.g. "long-context",
@@ -58,6 +58,8 @@ export const ModelSchema = z.object({
   tags: z.array(z.string()),
   sources: z.array(z.string()).min(1),
   verified: z.boolean(),
+  featured: z.boolean().default(false),
+  boost: z.number().min(1).max(5).default(1),
   curatorNotes: z.string().default(""),
 });
 

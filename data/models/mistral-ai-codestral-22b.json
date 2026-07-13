@@ -1,0 +1,49 @@
+{
+  "id": "mistral-ai-codestral-22b",
+  "name": "Codestral 22B",
+  "slug": "codestral-22b",
+  "developer": "Mistral AI",
+  "releaseDate": "2024-05-29",
+  "updatedAt": "2024-05-29",
+  "type": "open-weights",
+  "modality": [
+    "text"
+  ],
+  "primaryTask": "code-generation",
+  "deployment": [
+    "self-hostable",
+    "api-only"
+  ],
+  "license": "Other/Custom",
+  "parameters": "22B",
+  "contextWindow": "32K",
+  "description": "Mistral AI's specialized open-weights model optimized for code generation, supporting over 80 programming languages.",
+  "keyFeatures": [
+    "Supports 80+ programming languages including Python, C++, Java, Bash, SQL",
+    "Optimized for code completion and fill-in-the-middle tasks",
+    "32K context window for large repository parsing",
+    "Highly efficient 22B parameter density"
+  ],
+  "benchmarks": [
+    {
+      "name": "HumanEval",
+      "score": "81.1%",
+      "verified": true
+    }
+  ],
+  "family": "Mistral",
+  "previousVersion": null,
+  "links": {
+    "website": "https://mistral.ai/news/codestral/"
+  },
+  "logo": "/logos/mistral.svg",
+  "tags": [
+    "coding",
+    "open-weights"
+  ],
+  "sources": [
+    "https://mistral.ai/news/codestral/"
+  ],
+  "verified": true,
+  "curatorNotes": "Released under the Mistral Non-Production License (MNPL) for research and non-commercial testing."
+}

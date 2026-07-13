@@ -1,0 +1,55 @@
+{
+  "id": "openai-computer-using-agent",
+  "name": "OpenAI Computer-Using Agent",
+  "slug": "computer-using-agent",
+  "developer": "OpenAI",
+  "releaseDate": "2025-01-23",
+  "updatedAt": "2025-01-23",
+  "type": "closed-source",
+  "modality": [
+    "text",
+    "image"
+  ],
+  "primaryTask": "agentic",
+  "deployment": [
+    "api-only"
+  ],
+  "license": "Proprietary",
+  "parameters": "undisclosed",
+  "contextWindow": "128K",
+  "description": "OpenAI's foundational model optimized for GUI automation, computer use, and active web navigation, powering the OpenAI Operator assistant.",
+  "keyFeatures": [
+    "GUI screen navigation, mouse control, and typing",
+    "Optimized for OSWorld and WebArena tasks",
+    "Reinforcement learning for tool use and goal-directed agent workflows",
+    "High prompt-adherence for multi-step browser automations"
+  ],
+  "benchmarks": [
+    {
+      "name": "OSWorld (GUI Agent)",
+      "score": "38.1%",
+      "verified": true
+    },
+    {
+      "name": "WebArena (Web Agent)",
+      "score": "58.1%",
+      "verified": true
+    }
+  ],
+  "family": "Operator",
+  "previousVersion": null,
+  "links": {
+    "website": "https://openai.com/blog"
+  },
+  "logo": "/logos/openai.svg",
+  "tags": [
+    "agentic",
+    "computer-use",
+    "closed-source"
+  ],
+  "sources": [
+    "https://openai.com/blog"
+  ],
+  "verified": true,
+  "curatorNotes": "Launched under the 'Operator' research preview. Focuses on browser-based GUI automation and action planning."
+}

@@ -1,0 +1,40 @@
+{
+  "id": "meta-muse-spark-1.1",
+  "name": "Muse Spark 1.1",
+  "slug": "muse-spark-1-1",
+  "developer": "Meta",
+  "releaseDate": "2026-07-01",
+  "updatedAt": "2026-07-01",
+  "type": "closed-source",
+  "modality": [
+    "multimodal"
+  ],
+  "primaryTask": "agentic",
+  "deployment": [
+    "api-only"
+  ],
+  "license": "Proprietary",
+  "parameters": "undisclosed",
+  "contextWindow": "undisclosed",
+  "description": "A multimodal reasoning model built for agentic tasks. It can autonomously use browsers, write and deploy code, and visually verify changes by taking and analyzing application screenshots.",
+  "keyFeatures": [
+    "Multimodal debugging by correlating application screenshots directly with source code",
+    "Agentic browser control for automating web tasks (e.g., social media messaging)",
+    "Long-horizon planning for autonomous execution"
+  ],
+  "benchmarks": [],
+  "family": "Muse Spark",
+  "previousVersion": null,
+  "links": [
+    "https://meta.com"
+  ],
+  "logo": "/logos/meta.svg",
+  "tags": [
+    "agentic-browser"
+  ],
+  "sources": [
+    "https://www.youtube.com/watch?v=Ti1V7OI2Rro"
+  ],
+  "verified": false,
+  "curatorNotes": "While internal Meta coding benchmarks claim top-tier performance, independent leaderboards suggest it currently performs closer to open-source models like GLM 5.2."
+}

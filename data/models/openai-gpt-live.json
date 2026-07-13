@@ -1,0 +1,41 @@
+{
+  "id": "openai-gpt-live",
+  "name": "GPT Live",
+  "slug": "gpt-live",
+  "developer": "OpenAI",
+  "releaseDate": "2026-07-01",
+  "updatedAt": "2026-07-01",
+  "type": "closed-source",
+  "modality": [
+    "audio",
+    "multimodal"
+  ],
+  "primaryTask": "audio-speech",
+  "deployment": [
+    "api-only"
+  ],
+  "license": "Proprietary",
+  "parameters": "undisclosed",
+  "contextWindow": "undisclosed",
+  "description": "OpenAI's latest real-time voice interface designed to enable natural, flowing conversation. It supports dynamic interruptions, background task delegation to stronger frontier models, and can generate contextual visual responses in the UI.",
+  "keyFeatures": [
+    "Supports natural conversational interruptions and pauses",
+    "Delegates complex reasoning tasks to background models like GPT 5.5",
+    "Generates live visual UI cards (e.g., weather, stocks) alongside voice responses"
+  ],
+  "benchmarks": [],
+  "family": "GPT",
+  "previousVersion": null,
+  "links": [
+    "https://openai.com"
+  ],
+  "logo": "/logos/openai.svg",
+  "tags": [
+    "real-time-voice"
+  ],
+  "sources": [
+    "https://www.youtube.com/watch?v=Ti1V7OI2Rro"
+  ],
+  "verified": false,
+  "curatorNotes": "Details and specs extracted strictly from the video transcript. Release date estimated based on the context of the news roundup."
+}

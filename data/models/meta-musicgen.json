@@ -1,0 +1,50 @@
+{
+  "id": "meta-musicgen",
+  "name": "MusicGen",
+  "slug": "musicgen",
+  "developer": "Meta",
+  "releaseDate": "2023-06-08",
+  "updatedAt": "2023-06-08",
+  "type": "open-weights",
+  "modality": [
+    "text",
+    "audio"
+  ],
+  "primaryTask": "audio-speech",
+  "deployment": [
+    "self-hostable"
+  ],
+  "license": "Other/Custom",
+  "parameters": "3.3B",
+  "contextWindow": "30s",
+  "description": "Meta's single-stage auto-regressive transformer model for high-quality music generation from text prompts or melodic inputs.",
+  "keyFeatures": [
+    "Generates stereo music from text prompts",
+    "Supports conditioning generation on reference melodies",
+    "Trained on 20,000 hours of licensed music",
+    "Open weight files under CC-BY-NC 4.0"
+  ],
+  "benchmarks": [
+    {
+      "name": "FAD (Fréchet Audio Distance)",
+      "score": "3.4",
+      "verified": true
+    }
+  ],
+  "family": "AudioCraft",
+  "previousVersion": null,
+  "links": {
+    "website": "https://github.com/facebookresearch/audiocraft"
+  },
+  "logo": "/logos/meta.svg",
+  "tags": [
+    "audio",
+    "music-generation",
+    "open-weights"
+  ],
+  "sources": [
+    "https://github.com/facebookresearch/audiocraft"
+  ],
+  "verified": true,
+  "curatorNotes": "Weights released under Creative Commons Attribution-NonCommercial 4.0 International license."
+}

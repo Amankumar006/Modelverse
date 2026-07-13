@@ -1,0 +1,49 @@
+{
+  "id": "alibaba-qwen2.5-coder-32b-instruct",
+  "name": "Qwen2.5-Coder 32B Instruct",
+  "slug": "qwen2-5-coder-32b-instruct",
+  "developer": "Alibaba",
+  "releaseDate": "2024-11-12",
+  "updatedAt": "2024-11-12",
+  "type": "open-weights",
+  "modality": [
+    "text"
+  ],
+  "primaryTask": "code-generation",
+  "deployment": [
+    "self-hostable",
+    "api-only"
+  ],
+  "license": "Apache 2.0",
+  "parameters": "32.5B",
+  "contextWindow": "128K",
+  "description": "Alibaba's state-of-the-art open-weights coding model, achieving coding capabilities comparable to GPT-4o on major benchmarks.",
+  "keyFeatures": [
+    "Native Apache 2.0 open-source licensing",
+    "128K context window for full codebase reasoning",
+    "Top-tier performance in code completion, debugging, and math",
+    "Multi-programming language reasoning"
+  ],
+  "benchmarks": [
+    {
+      "name": "HumanEval",
+      "score": "92.7%",
+      "verified": true
+    }
+  ],
+  "family": "Qwen",
+  "previousVersion": "qwen2-coder-7b",
+  "links": {
+    "website": "https://qwenlm.github.io/blog/qwen2.5-coder/"
+  },
+  "logo": "/logos/alibaba.svg",
+  "tags": [
+    "coding",
+    "open-source"
+  ],
+  "sources": [
+    "https://qwenlm.github.io/blog/qwen2.5-coder/"
+  ],
+  "verified": true,
+  "curatorNotes": "Released under Apache 2.0, establishing a new SOTA for open-weights coding models."
+}

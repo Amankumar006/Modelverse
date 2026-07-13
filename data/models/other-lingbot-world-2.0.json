@@ -1,0 +1,42 @@
+{
+  "id": "other-lingbot-world-2.0",
+  "name": "LingBot-World 2.0",
+  "slug": "lingbot-world-2-0",
+  "developer": "Other",
+  "releaseDate": "2026-07-09",
+  "updatedAt": "2026-07-09",
+  "type": "open-weights",
+  "modality": [
+    "video",
+    "multimodal"
+  ],
+  "primaryTask": "video-generation",
+  "deployment": [
+    "self-hostable"
+  ],
+  "license": "Apache 2.0",
+  "parameters": "undisclosed",
+  "contextWindow": "undisclosed",
+  "description": "An interactive world model that supports continuous, hour-long real-time generation. It features a native dual-agent mechanism that allows for dynamically evolving environments responding to real-time user inputs without scene collapse.",
+  "keyFeatures": [
+    "Continuous hour-long generation at 720p/60fps with zero quality drift",
+    "Dual-agent mechanism (Pilot Agent and Director Agent) for dynamic scene events",
+    "Supports multiplayer persistence within a single generated world"
+  ],
+  "benchmarks": [],
+  "family": "LingBot",
+  "previousVersion": "lingbot-world-1.0",
+  "links": {
+    "website": "https://reactor.inc/lingbot-world-v2"
+  },
+  "logo": null,
+  "tags": [
+    "real-time",
+    "world-model"
+  ],
+  "sources": [
+    "https://mediaconnect.com/robbyant-unveils-lingbot-world-2-0-pioneering-hour-long-real-time-generation-in-world-models"
+  ],
+  "verified": true,
+  "curatorNotes": "Developed by Robbyant (Ant Group)."
+}

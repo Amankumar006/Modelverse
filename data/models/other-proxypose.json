@@ -1,0 +1,41 @@
+{
+  "id": "other-proxypose",
+  "name": "ProxyPose",
+  "slug": "proxypose",
+  "developer": "Other",
+  "releaseDate": "2026-07-01",
+  "updatedAt": "2026-07-01",
+  "type": "open-weights",
+  "modality": [
+    "video"
+  ],
+  "primaryTask": "other",
+  "deployment": [
+    "self-hostable"
+  ],
+  "license": "Other/Custom",
+  "parameters": "undisclosed",
+  "contextWindow": "undisclosed",
+  "description": "A novel 6-DoF pose tracking system that reframes 3D position and rotation tracking as a video-to-video translation problem. It operates entirely at the pixel level without requiring 3D models or depth sensors.",
+  "keyFeatures": [
+    "Tracks full 3D position and rotation from standard 2D video",
+    "Replaces tracked objects with a synthetic proxy polyhedron",
+    "Handles transparent, reflective, and highly occluded surfaces effectively"
+  ],
+  "benchmarks": [],
+  "family": null,
+  "previousVersion": null,
+  "links": {
+    "paper": "https://arxiv.org/html/2607.06555v1",
+    "github": "https://github.com/ruihangzhang97/proxypose"
+  },
+  "logo": null,
+  "tags": [
+    "3d-tracking"
+  ],
+  "sources": [
+    "https://arxiv.org/html/2607.06555v1"
+  ],
+  "verified": true,
+  "curatorNotes": "Release date estimated based on the ArXiv publication date."
+}

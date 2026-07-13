@@ -1,0 +1,40 @@
+{
+  "id": "bytedance-seedream-5-pro",
+  "name": "Seedream 5 Pro",
+  "slug": "seedream-5-pro",
+  "developer": "ByteDance",
+  "releaseDate": "2026-07-01",
+  "updatedAt": "2026-07-01",
+  "type": "closed-source",
+  "modality": [
+    "image"
+  ],
+  "primaryTask": "image-generation",
+  "deployment": [
+    "api-only"
+  ],
+  "license": "Proprietary",
+  "parameters": "undisclosed",
+  "contextWindow": "undisclosed",
+  "description": "A highly performant image model with robust editing capabilities. It allows users to sketch interfaces, draw bounding boxes, and provide detailed annotations to guide precise structural edits.",
+  "keyFeatures": [
+    "Natively generates and breaks down transparent image layers",
+    "Strong multilingual text rendering for graphic design and posters",
+    "Translates rough user sketches into finalized UI designs"
+  ],
+  "benchmarks": [],
+  "family": "Seedream",
+  "previousVersion": null,
+  "links": [
+    "https://bytedance.com"
+  ],
+  "logo": "/logos/bytedance.svg",
+  "tags": [
+    "image-editing"
+  ],
+  "sources": [
+    "https://www.youtube.com/watch?v=Ti1V7OI2Rro"
+  ],
+  "verified": false,
+  "curatorNotes": "Transcribed as \"Cream 5 Pro\" but matches the Seedream chapter. Hosted on ByteDance's DreamLau platform."
+}

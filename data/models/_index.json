@@ -1,5 +1,205 @@
 [
   {
+    "id": "alibaba-abot-world",
+    "name": "ABot-World",
+    "slug": "abot-world",
+    "developer": "Alibaba",
+    "releaseDate": "2026-07-09",
+    "type": "open-weights"
+  },
+  {
+    "id": "other-lingbot-world-2.0",
+    "name": "LingBot-World 2.0",
+    "slug": "lingbot-world-2-0",
+    "developer": "Other",
+    "releaseDate": "2026-07-09",
+    "type": "open-weights"
+  },
+  {
+    "id": "other-proxypose",
+    "name": "ProxyPose",
+    "slug": "proxypose",
+    "developer": "Other",
+    "releaseDate": "2026-07-01",
+    "type": "open-weights"
+  },
+  {
+    "id": "openai-gpt-live",
+    "name": "GPT Live",
+    "slug": "gpt-live",
+    "developer": "OpenAI",
+    "releaseDate": "2026-07-01",
+    "type": "closed-source"
+  },
+  {
+    "id": "other-pixworld",
+    "name": "PixWorld",
+    "slug": "pixworld",
+    "developer": "Other",
+    "releaseDate": "2026-07-01",
+    "type": "open-source"
+  },
+  {
+    "id": "other-wan-streamer-0.2",
+    "name": "Wan Streamer 0.2",
+    "slug": "wan-streamer-0-2",
+    "developer": "Other",
+    "releaseDate": "2026-07-01",
+    "type": "research-preview"
+  },
+  {
+    "id": "other-mira",
+    "name": "Mira",
+    "slug": "mira",
+    "developer": "Other",
+    "releaseDate": "2026-07-01",
+    "type": "research-preview"
+  },
+  {
+    "id": "xai-grok-4.5",
+    "name": "Grok 4.5",
+    "slug": "grok-4-5",
+    "developer": "xAI",
+    "releaseDate": "2026-07-01",
+    "type": "closed-source"
+  },
+  {
+    "id": "meta-muse-spark-1.1",
+    "name": "Muse Spark 1.1",
+    "slug": "muse-spark-1-1",
+    "developer": "Meta",
+    "releaseDate": "2026-07-01",
+    "type": "closed-source"
+  },
+  {
+    "id": "openai-gpt-5.6",
+    "name": "GPT 5.6",
+    "slug": "gpt-5-6",
+    "developer": "OpenAI",
+    "releaseDate": "2026-07-01",
+    "type": "closed-source"
+  },
+  {
+    "id": "bytedance-seedream-5-pro",
+    "name": "Seedream 5 Pro",
+    "slug": "seedream-5-pro",
+    "developer": "ByteDance",
+    "releaseDate": "2026-07-01",
+    "type": "closed-source"
+  },
+  {
+    "id": "tencent-high3",
+    "name": "High3",
+    "slug": "high3",
+    "developer": "Tencent",
+    "releaseDate": "2026-07-01",
+    "type": "open-weights"
+  },
+  {
+    "id": "meta-muse-image",
+    "name": "Muse Image",
+    "slug": "muse-image",
+    "developer": "Meta",
+    "releaseDate": "2026-07-01",
+    "type": "closed-source"
+  },
+  {
+    "id": "meta-muse-video",
+    "name": "Muse Video",
+    "slug": "muse-video",
+    "developer": "Meta",
+    "releaseDate": "2026-07-01",
+    "type": "research-preview"
+  },
+  {
+    "id": "other-reve-2.1",
+    "name": "Reve 2.1",
+    "slug": "reve-2-1",
+    "developer": "Other",
+    "releaseDate": "2026-07-01",
+    "type": "closed-source"
+  },
+  {
+    "id": "other-booster-t2",
+    "name": "Booster T2",
+    "slug": "booster-t2",
+    "developer": "Other",
+    "releaseDate": "2026-07-01",
+    "type": "open-source"
+  },
+  {
+    "id": "other-sefi-image",
+    "name": "SeFi-Image",
+    "slug": "sefi-image",
+    "developer": "Other",
+    "releaseDate": "2026-06-01",
+    "type": "open-weights"
+  },
+  {
+    "id": "openai-computer-using-agent",
+    "name": "OpenAI Computer-Using Agent",
+    "slug": "computer-using-agent",
+    "developer": "OpenAI",
+    "releaseDate": "2025-01-23",
+    "type": "closed-source"
+  },
+  {
+    "id": "microsoft-phi-4",
+    "name": "Phi-4",
+    "slug": "phi-4",
+    "developer": "Microsoft",
+    "releaseDate": "2024-12-12",
+    "type": "open-weights"
+  },
+  {
+    "id": "suno-suno-v4",
+    "name": "Suno v4",
+    "slug": "suno-v4",
+    "developer": "Suno",
+    "releaseDate": "2024-11-19",
+    "type": "closed-source"
+  },
+  {
+    "id": "alibaba-qwen2.5-coder-32b-instruct",
+    "name": "Qwen2.5-Coder 32B Instruct",
+    "slug": "qwen2-5-coder-32b-instruct",
+    "developer": "Alibaba",
+    "releaseDate": "2024-11-12",
+    "type": "open-weights"
+  },
+  {
+    "id": "alibaba-qwen2.5-72b-instruct",
+    "name": "Qwen2.5 72B Instruct",
+    "slug": "qwen2-5-72b-instruct",
+    "developer": "Alibaba",
+    "releaseDate": "2024-09-19",
+    "type": "open-weights"
+  },
+  {
+    "id": "xai-grok-2",
+    "name": "Grok 2",
+    "slug": "grok-2",
+    "developer": "xAI",
+    "releaseDate": "2024-08-13",
+    "type": "closed-source"
+  },
+  {
+    "id": "google-deepmind-imagen-3",
+    "name": "Imagen 3",
+    "slug": "imagen-3",
+    "developer": "Google DeepMind",
+    "releaseDate": "2024-08-13",
+    "type": "closed-source"
+  },
+  {
+    "id": "black-forest-labs-flux.1-schnell",
+    "name": "FLUX.1 schnell",
+    "slug": "flux-1-schnell",
+    "developer": "Black Forest Labs",
+    "releaseDate": "2024-08-01",
+    "type": "open-weights"
+  },
+  {
     "id": "meta-llama-3-1-405b",
     "name": "Llama 3.1 405B",
     "slug": "llama-3-1-405b",
@@ -16,11 +216,43 @@
     "type": "closed-source"
   },
   {
+    "id": "deepseek-deepseek-coder-v2-instruct",
+    "name": "DeepSeek-Coder-V2 Instruct",
+    "slug": "deepseek-coder-v2-instruct",
+    "developer": "DeepSeek",
+    "releaseDate": "2024-06-17",
+    "type": "open-weights"
+  },
+  {
+    "id": "runway-gen-3-alpha",
+    "name": "Runway Gen-3 Alpha",
+    "slug": "gen-3-alpha",
+    "developer": "Runway",
+    "releaseDate": "2024-06-17",
+    "type": "closed-source"
+  },
+  {
     "id": "stability-stable-diffusion-3",
     "name": "Stable Diffusion 3 Medium",
     "slug": "stable-diffusion-3",
     "developer": "Stability AI",
     "releaseDate": "2024-06-12",
+    "type": "open-weights"
+  },
+  {
+    "id": "kuaishou-kling-1.0",
+    "name": "Kling 1.0",
+    "slug": "kling-1-0",
+    "developer": "Kuaishou",
+    "releaseDate": "2024-06-06",
+    "type": "closed-source"
+  },
+  {
+    "id": "mistral-ai-codestral-22b",
+    "name": "Codestral 22B",
+    "slug": "codestral-22b",
+    "developer": "Mistral AI",
+    "releaseDate": "2024-05-29",
     "type": "open-weights"
   },
   {
@@ -30,6 +262,14 @@
     "developer": "OpenAI",
     "releaseDate": "2024-05-13",
     "type": "closed-source"
+  },
+  {
+    "id": "other-unitree-g1",
+    "name": "Unitree G1",
+    "slug": "unitree-g1",
+    "developer": "Other",
+    "releaseDate": "2024-05-13",
+    "type": "open-weights"
   },
   {
     "id": "mistral-mixtral-8x22b",
@@ -56,11 +296,67 @@
     "type": "closed-source"
   },
   {
+    "id": "openai-sora",
+    "name": "Sora Research Preview",
+    "slug": "sora",
+    "developer": "OpenAI",
+    "releaseDate": "2024-02-15",
+    "type": "research-preview"
+  },
+  {
+    "id": "openai-text-embedding-3-large",
+    "name": "text-embedding-3-large",
+    "slug": "text-embedding-3-large",
+    "developer": "OpenAI",
+    "releaseDate": "2024-01-25",
+    "type": "api-only"
+  },
+  {
+    "id": "midjourney-midjourney-v6",
+    "name": "Midjourney v6",
+    "slug": "midjourney-v6",
+    "developer": "Midjourney",
+    "releaseDate": "2023-12-21",
+    "type": "closed-source"
+  },
+  {
+    "id": "openai-whisper-large-v3",
+    "name": "Whisper large-v3",
+    "slug": "whisper-large-v3",
+    "developer": "OpenAI",
+    "releaseDate": "2023-11-06",
+    "type": "open-weights"
+  },
+  {
+    "id": "cohere-embed-english-v3.0",
+    "name": "Embed v3 (English)",
+    "slug": "embed-english-v3",
+    "developer": "Cohere",
+    "releaseDate": "2023-11-02",
+    "type": "api-only"
+  },
+  {
     "id": "openai-dall-e-3",
     "name": "DALL·E 3",
     "slug": "dall-e-3",
     "developer": "OpenAI",
     "releaseDate": "2023-10-03",
     "type": "closed-source"
+  },
+  {
+    "id": "openai-gpt-4v",
+    "name": "GPT-4 with Vision",
+    "slug": "gpt-4-vision",
+    "developer": "OpenAI",
+    "releaseDate": "2023-09-25",
+    "type": "closed-source"
+  },
+  {
+    "id": "meta-musicgen",
+    "name": "MusicGen",
+    "slug": "musicgen",
+    "developer": "Meta",
+    "releaseDate": "2023-06-08",
+    "type": "open-weights"
   }
 ]

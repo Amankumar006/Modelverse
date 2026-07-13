@@ -1,0 +1,50 @@
+{
+  "id": "openai-sora",
+  "name": "Sora Research Preview",
+  "slug": "sora",
+  "developer": "OpenAI",
+  "releaseDate": "2024-02-15",
+  "updatedAt": "2024-02-15",
+  "type": "research-preview",
+  "modality": [
+    "text",
+    "video"
+  ],
+  "primaryTask": "video-generation",
+  "deployment": [
+    "api-only"
+  ],
+  "license": "Proprietary",
+  "parameters": "undisclosed",
+  "contextWindow": "undisclosed",
+  "description": "OpenAI's text-to-video diffusion transformer model, generating high-fidelity video clips up to 60 seconds with physical simulation.",
+  "keyFeatures": [
+    "Generates videos up to 60 seconds in duration",
+    "Maintains character and style consistency over time",
+    "Simulates basic physical interactions and object permanence",
+    "Handles complex camera motions natively"
+  ],
+  "benchmarks": [
+    {
+      "name": "VBench (Consistency)",
+      "score": "84.3%",
+      "verified": false
+    }
+  ],
+  "family": "Sora",
+  "previousVersion": null,
+  "links": {
+    "website": "https://openai.com/sora"
+  },
+  "logo": "/logos/openai.svg",
+  "tags": [
+    "video",
+    "research-preview",
+    "closed-source"
+  ],
+  "sources": [
+    "https://openai.com/sora"
+  ],
+  "verified": false,
+  "curatorNotes": "Announced as a research preview on Feb 15, 2024. Operates as closed source."
+}

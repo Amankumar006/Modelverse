@@ -1,0 +1,41 @@
+{
+  "id": "other-pixworld",
+  "name": "PixWorld",
+  "slug": "pixworld",
+  "developer": "Other",
+  "releaseDate": "2026-07-01",
+  "updatedAt": "2026-07-01",
+  "type": "open-source",
+  "modality": [
+    "video",
+    "image"
+  ],
+  "primaryTask": "video-generation",
+  "deployment": [
+    "self-hostable"
+  ],
+  "license": "Other/Custom",
+  "parameters": "undisclosed",
+  "contextWindow": "undisclosed",
+  "description": "A 3D scene generator that reconstructs fully consistent 3D environments directly in pixel space from one or multiple reference images, avoiding the visual artifacts often caused by latent-space generation.",
+  "keyFeatures": [
+    "Generates 3D scenes in pixel space rather than latent space",
+    "Four-step version generates scenes in ~6 seconds at 480p resolution",
+    "Fully open-source roadmap including data sets and inference code"
+  ],
+  "benchmarks": [],
+  "family": null,
+  "previousVersion": null,
+  "links": [
+    "https://other.com"
+  ],
+  "logo": null,
+  "tags": [
+    "3d-generation"
+  ],
+  "sources": [
+    "https://www.youtube.com/watch?v=Ti1V7OI2Rro"
+  ],
+  "verified": false,
+  "curatorNotes": "Details strictly from the video transcript; exact release date estimated. Transcribed as \"Pixorld\"."
+}

@@ -11,7 +11,9 @@ export interface ModelIndex {
   slug: string;
   developer: string;
   releaseDate: string;
-  type: "open-weights" | "closed-source" | "api-only" | "research-preview";
+  type: "open-source" | "open-weights" | "closed-source" | "api-only" | "research-preview";
+  featured?: boolean;
+  boost?: number;
 }
 
 export interface Benchmark {
@@ -38,6 +40,8 @@ export interface ModelEntry extends ModelIndex {
   tags: string[];
   sources: string[];
   verified: boolean;
+  featured: boolean;
+  boost: number;
   curatorNotes: string;
 }
 
@@ -95,7 +99,15 @@ export function getModelBySlug(slug: string): ModelEntry | null {
   if (!fs.existsSync(filePath)) return null;
 
   const raw = fs.readFileSync(filePath, "utf-8");
-  return JSON.parse(raw) as ModelEntry;
+  const parsed = JSON.parse(raw) as Partial<ModelEntry>;
+  
+  // Inject defaults for fields that might be missing in older JSON files
+  return {
+    ...entry, // fallbacks from index
+    ...parsed,
+    featured: parsed.featured ?? false,
+    boost: parsed.boost ?? 1,
+  } as ModelEntry;
 }
 
 /** Get all unique developers from the index. */
@@ -125,5 +137,5 @@ export function getDeveloperCounts(): { developer: string; count: number }[] {
 /*  Constants                                                          */
 /* ------------------------------------------------------------------ */
 
-/** Placeholder base URL — update when real domain is assigned. */
-export const SITE_URL = "https://modelverse.dev";
+/** Base URL for canonical links and OG images. */
+export const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://modelverse-ai.vercel.app";

@@ -1,0 +1,50 @@
+{
+  "id": "openai-whisper-large-v3",
+  "name": "Whisper large-v3",
+  "slug": "whisper-large-v3",
+  "developer": "OpenAI",
+  "releaseDate": "2023-11-06",
+  "updatedAt": "2023-11-06",
+  "type": "open-weights",
+  "modality": [
+    "audio"
+  ],
+  "primaryTask": "audio-speech",
+  "deployment": [
+    "self-hostable",
+    "api-only"
+  ],
+  "license": "MIT",
+  "parameters": "1.55B",
+  "contextWindow": "30s",
+  "description": "OpenAI's third-generation multilingual speech recognition and translation model, trained on extensive audio datasets.",
+  "keyFeatures": [
+    "Supports speech-to-text transcription and translation",
+    "Trained on 1M hours of weakly labeled audio data",
+    "Highly accurate across 99+ languages",
+    "Permissive MIT open-source license"
+  ],
+  "benchmarks": [
+    {
+      "name": "LibriSpeech WER",
+      "score": "2.7%",
+      "verified": true
+    }
+  ],
+  "family": "Whisper",
+  "previousVersion": "whisper-large-v2",
+  "links": {
+    "website": "https://github.com/openai/whisper"
+  },
+  "logo": "/logos/openai.svg",
+  "tags": [
+    "audio",
+    "speech-to-text",
+    "open-source"
+  ],
+  "sources": [
+    "https://github.com/openai/whisper"
+  ],
+  "verified": true,
+  "curatorNotes": "Released during OpenAI DevDay. Uses 128 mel frequency bins and processes audio in 30-second sliding windows."
+}

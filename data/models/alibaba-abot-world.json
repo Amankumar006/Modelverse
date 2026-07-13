@@ -1,0 +1,42 @@
+{
+  "id": "alibaba-abot-world",
+  "name": "ABot-World",
+  "slug": "abot-world",
+  "developer": "Alibaba",
+  "releaseDate": "2026-07-09",
+  "updatedAt": "2026-07-09",
+  "type": "open-weights",
+  "modality": [
+    "video",
+    "multimodal"
+  ],
+  "primaryTask": "video-generation",
+  "deployment": [
+    "self-hostable"
+  ],
+  "license": "Apache 2.0",
+  "parameters": "5B",
+  "contextWindow": "undisclosed",
+  "description": "A real-time interactive world simulator that turns a single desktop GPU into an infinite action-conditioned world generator. It allows users to continuously explore and interact with the environment rather than passively watching pre-rendered video.",
+  "keyFeatures": [
+    "Runs at 720p and 16 FPS on a single RTX 5090",
+    "Supports infinite world rollout without scene lock-in",
+    "Operates with 1.2s latency and a 19GB GPU memory footprint"
+  ],
+  "benchmarks": [],
+  "family": null,
+  "previousVersion": null,
+  "links": {
+    "github": "https://github.com/amap-cvlab"
+  },
+  "logo": "/logos/alibaba.svg",
+  "tags": [
+    "real-time",
+    "world-model"
+  ],
+  "sources": [
+    "https://modelscope.ai/models/amap_cvlab/ABot-World-0-5B-LF/summary"
+  ],
+  "verified": true,
+  "curatorNotes": ""
+}

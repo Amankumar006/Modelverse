@@ -1,0 +1,38 @@
+{
+  "id": "meta-muse-video",
+  "name": "Muse Video",
+  "slug": "muse-video",
+  "developer": "Meta",
+  "releaseDate": "2026-07-01",
+  "updatedAt": "2026-07-01",
+  "type": "research-preview",
+  "modality": [
+    "video",
+    "audio"
+  ],
+  "primaryTask": "video-generation",
+  "deployment": [
+    "api-only"
+  ],
+  "license": "Proprietary",
+  "parameters": "undisclosed",
+  "contextWindow": "undisclosed",
+  "description": "Meta's previewed video generation model showcasing complex physical comprehension and natively integrated audio.",
+  "keyFeatures": [
+    "Audio generation is natively baked into the video rendering process",
+    "High physical plausibility for complex movements like juggling"
+  ],
+  "benchmarks": [],
+  "family": "Muse",
+  "previousVersion": null,
+  "links": [
+    "https://meta.com"
+  ],
+  "logo": "/logos/meta.svg",
+  "tags": [],
+  "sources": [
+    "https://www.youtube.com/watch?v=Ti1V7OI2Rro"
+  ],
+  "verified": false,
+  "curatorNotes": "Currently in preview mode with no API availability or technical specifics disclosed in the transcript."
+}

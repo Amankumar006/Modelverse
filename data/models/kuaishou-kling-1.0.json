@@ -1,0 +1,50 @@
+{
+  "id": "kuaishou-kling-1.0",
+  "name": "Kling 1.0",
+  "slug": "kling-1-0",
+  "developer": "Kuaishou",
+  "releaseDate": "2024-06-06",
+  "updatedAt": "2024-06-06",
+  "type": "closed-source",
+  "modality": [
+    "text",
+    "video"
+  ],
+  "primaryTask": "video-generation",
+  "deployment": [
+    "api-only"
+  ],
+  "license": "Proprietary",
+  "parameters": "undisclosed",
+  "contextWindow": "undisclosed",
+  "description": "Cinematic text-to-video model by Kuaishou, supporting high-resolution generation, long durations, and realistic physical simulations.",
+  "keyFeatures": [
+    "Generates videos up to 2 minutes in length (via extensions)",
+    "Supports 1080p high-definition video outputs",
+    "Accurate simulation of complex physical motions",
+    "Advanced prompt-to-motion understanding"
+  ],
+  "benchmarks": [
+    {
+      "name": "VBench (Motion)",
+      "score": "82.5%",
+      "verified": false
+    }
+  ],
+  "family": "Kling",
+  "previousVersion": null,
+  "links": {
+    "website": "https://kling.kuaishou.com/en"
+  },
+  "logo": "/logos/kuaishou.svg",
+  "tags": [
+    "video",
+    "closed-source",
+    "asia-pacific"
+  ],
+  "sources": [
+    "https://klingai.com/"
+  ],
+  "verified": false,
+  "curatorNotes": "Originally launched in China in June 2024, later made available globally via API."
+}
