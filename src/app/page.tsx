@@ -134,10 +134,10 @@ export default function Home() {
             </div>
 
             {/* Column 2: Stacked Cards (Methodology & Statistics) */}
-            <div className="flex flex-col gap-4 md:gap-5">
+            <div className="grid grid-cols-1 lg:grid-rows-2 gap-4 md:gap-5">
               
               {/* Methodology Card */}
-              <div className="rounded-2xl border border-white/[0.05] relative overflow-hidden bg-[#324444] noise-overlay p-6 sm:p-7 flex flex-col justify-between flex-1 min-h-[220px]">
+              <div className="rounded-2xl border border-white/[0.05] relative overflow-hidden bg-[#324444] noise-overlay p-6 sm:p-7 flex flex-col justify-between">
                 <div className="relative z-10 text-left">
                   <div className="flex items-center gap-2 text-[10px] font-semibold uppercase tracking-[0.22em] text-white/70">
                     <Sparkle size={10} className="text-brand-orange" strokeWidth={1.5} />
@@ -153,7 +153,7 @@ export default function Home() {
               </div>
 
               {/* Statistics Card */}
-              <div className="rounded-2xl border border-white/[0.05] relative overflow-hidden bg-black p-6 sm:p-7 flex flex-col justify-between flex-1 min-h-[220px]">
+              <div className="rounded-2xl border border-white/[0.05] relative overflow-hidden bg-black p-6 sm:p-7 flex flex-col justify-between">
                 <video
                   autoPlay
                   loop
@@ -186,10 +186,10 @@ export default function Home() {
             </div>
 
             {/* Column 3: Stacked Cards (Developers Marquee & Help Us Improve) */}
-            <div className="flex flex-col gap-4 md:gap-5">
+            <div className="grid grid-cols-1 lg:grid-rows-[1.2fr_0.8fr] gap-4 md:gap-5">
               
               {/* Developers Marquee Card */}
-              <div className="rounded-2xl border border-white/[0.05] relative overflow-hidden bg-black p-6 flex flex-col justify-between flex-[1.4] min-h-[260px]">
+              <div className="rounded-2xl border border-white/[0.05] relative overflow-hidden bg-black p-6 flex flex-col justify-between">
                 <video
                   autoPlay
                   loop
@@ -209,7 +209,7 @@ export default function Home() {
               </div>
 
               {/* Help Us Improve Card */}
-              <div className="rounded-2xl border border-white/[0.05] relative overflow-hidden bg-[#324444] noise-overlay p-5 sm:p-6 flex flex-col justify-between flex-[0.6] min-h-[180px]">
+              <div className="rounded-2xl border border-white/[0.05] relative overflow-hidden bg-[#324444] noise-overlay p-5 sm:p-6 flex flex-col justify-between">
                 <a
                   href="mailto:corrections@modelverse.ai?subject=Modelverse Correction"
                   className="absolute top-5 right-5 h-9 w-9 rounded-full bg-white/5 border border-white/10 hover:bg-white/10 hover:border-white/20 transition-all flex items-center justify-center text-white/70 hover:text-white z-20"
