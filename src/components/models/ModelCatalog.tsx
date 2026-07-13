@@ -1,281 +1,607 @@
 "use client";
 
 import { useState, useMemo, Suspense } from "react";
-import type { ModelIndex } from "@/lib/models";
+import type { ModelEntry } from "@/lib/models";
 import ModelCard from "@/components/models/ModelCard";
-import { Search, SlidersHorizontal, X } from "lucide-react";
-import { useSearchParams } from "next/navigation";
+import { Search, SlidersHorizontal, X, ArrowUpDown } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 /* ------------------------------------------------------------------ */
-/*  Filter pill button                                                 */
+/*  Facet Filters Config                                               */
 /* ------------------------------------------------------------------ */
 
-function FilterPill({
-  label,
-  active,
-  onClick,
-}: {
-  label: string;
-  active: boolean;
-  onClick: () => void;
-}) {
-  return (
-    <button
-      onClick={onClick}
-      className={`px-3 py-1.5 rounded-full text-xs font-medium transition-all whitespace-nowrap ${
-        active
-          ? "bg-brand-orange text-white"
-          : "bg-white/[0.06] text-white/60 hover:bg-white/[0.1] hover:text-white/80 border border-white/[0.08]"
-      }`}
-    >
-      {label}
-    </button>
-  );
-}
-
-/* ------------------------------------------------------------------ */
-/*  Sort options                                                       */
-/* ------------------------------------------------------------------ */
-
-type SortKey = "newest" | "oldest" | "name";
-
-const SORT_OPTIONS: { key: SortKey; label: string }[] = [
-  { key: "newest", label: "Newest" },
-  { key: "oldest", label: "Oldest" },
-  { key: "name", label: "A–Z" },
+const TASK_OPTIONS = [
+  { value: "chat-reasoning", label: "Chat & Reasoning" },
+  { value: "code-generation", label: "Code Generation" },
+  { value: "image-generation", label: "Image Generation" },
+  { value: "video-generation", label: "Video Generation" },
+  { value: "audio-speech", label: "Audio & Speech" },
+  { value: "embedding", label: "Embedding" },
+  { value: "agentic", label: "Agentic" },
+  { value: "multimodal-general", label: "Multimodal General" },
+  { value: "translation", label: "Translation" },
+  { value: "search-retrieval", label: "Search & Retrieval" },
+  { value: "other", label: "Specialized/Other" },
 ];
 
-/* ------------------------------------------------------------------ */
-/*  Type options                                                       */
-/* ------------------------------------------------------------------ */
-
 const TYPE_OPTIONS = [
-  { value: "all", label: "All types" },
   { value: "open-weights", label: "Open Weights" },
   { value: "closed-source", label: "Closed Source" },
   { value: "api-only", label: "API Only" },
   { value: "research-preview", label: "Research Preview" },
 ];
 
+const DEPLOYMENT_OPTIONS = [
+  { value: "api-only", label: "API Only" },
+  { value: "self-hostable", label: "Self-Hostable" },
+  { value: "on-device", label: "On-Device" },
+];
+
+const SORT_OPTIONS = [
+  { key: "newest", label: "Newest First" },
+  { key: "oldest", label: "Oldest First" },
+  { key: "name-asc", label: "Name A–Z" },
+  { key: "developer-asc", label: "Developer A–Z" },
+];
+
 /* ------------------------------------------------------------------ */
-/*  ModelCatalog                                                        */
+/*  Faceted Filter & Search Calculations                              */
+/* ------------------------------------------------------------------ */
+
+interface FiltersState {
+  q: string;
+  type: string[];
+  task: string[];
+  modality: string[];
+  developer: string[];
+  license: string[];
+  deployment: string[];
+}
+
+function filterModels(
+  models: ModelEntry[],
+  filters: FiltersState,
+  excludeKey?: keyof FiltersState
+): ModelEntry[] {
+  return models.filter((model) => {
+    // 1. Search Query
+    if (excludeKey !== "q" && filters.q) {
+      const q = filters.q.toLowerCase();
+      const match =
+        model.name.toLowerCase().includes(q) ||
+        model.developer.toLowerCase().includes(q);
+      if (!match) return false;
+    }
+
+    // 2. Type Filter
+    if (excludeKey !== "type" && filters.type.length > 0) {
+      if (!filters.type.includes(model.type)) return false;
+    }
+
+    // 3. Task Filter
+    if (excludeKey !== "task" && filters.task.length > 0) {
+      if (!filters.task.includes(model.primaryTask)) return false;
+    }
+
+    // 4. Modality Filter
+    if (excludeKey !== "modality" && filters.modality.length > 0) {
+      const intersect = model.modality.some((m) => filters.modality.includes(m));
+      if (!intersect) return false;
+    }
+
+    // 5. Developer Filter
+    if (excludeKey !== "developer" && filters.developer.length > 0) {
+      if (!filters.developer.includes(model.developer)) return false;
+    }
+
+    // 6. License Filter
+    if (excludeKey !== "license" && filters.license.length > 0) {
+      if (!filters.license.includes(model.license)) return false;
+    }
+
+    // 7. Deployment Filter
+    if (excludeKey !== "deployment" && filters.deployment.length > 0) {
+      const intersect = model.deployment.some((d) => filters.deployment.includes(d));
+      if (!intersect) return false;
+    }
+
+    return true;
+  });
+}
+
+/* ------------------------------------------------------------------ */
+/*  ModelCatalogContent client workspace                              */
 /* ------------------------------------------------------------------ */
 
 function ModelCatalogContent({
   models,
   developers,
+  initialSearchParams,
 }: {
-  models: ModelIndex[];
+  models: ModelEntry[];
   developers: string[];
+  initialSearchParams?: Record<string, string | string[] | undefined>;
 }) {
-  const searchParams = useSearchParams();
-  const qParam = searchParams?.get("q") || "";
-  const typeParam = searchParams?.get("type") || "all";
+  const router = useRouter();
 
-  const [search, setSearch] = useState(qParam);
-  const [typeFilter, setTypeFilter] = useState(typeParam);
-  const [developerFilter, setDeveloperFilter] = useState("all");
-  const [sortKey, setSortKey] = useState<SortKey>("newest");
-  const [showFilters, setShowFilters] = useState(false);
+  // Helper to parse query arrays on load
+  const parseQueryList = (key: string): string[] => {
+    const val = initialSearchParams?.[key];
+    if (!val) return [];
+    if (Array.isArray(val)) return val.flatMap((v) => v.split(","));
+    return val.split(",");
+  };
 
-  const hasActiveFilter =
-    typeFilter !== "all" || developerFilter !== "all" || search !== "";
+  // State initialization hydrated from Server Search Params
+  const [filters, setFilters] = useState<FiltersState>({
+    q: (initialSearchParams?.q as string) || "",
+    type: parseQueryList("type"),
+    task: parseQueryList("task"),
+    modality: parseQueryList("modality"),
+    developer: parseQueryList("developer"),
+    license: parseQueryList("license"),
+    deployment: parseQueryList("deployment"),
+  });
 
+  const [sortKey, setSortKey] = useState<string>(
+    (initialSearchParams?.sort as string) || "newest"
+  );
+
+  const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
+
+  // Dynamic facet value lists harvested from actual data entries
+  const dynamicOptions = useMemo(() => {
+    const licenses = [...new Set(models.map((m) => m.license))].sort();
+    const modalities = [...new Set(models.flatMap((m) => m.modality))].sort();
+    return { licenses, modalities };
+  }, [models]);
+
+  // Compute live option counts for each facet given currently-applied sibling criteria
+  const facetCounts = useMemo(() => {
+    const getCounts = (
+      key: keyof FiltersState,
+      options: string[],
+      matchFn: (model: ModelEntry, opt: string) => boolean
+    ) => {
+      const modelsFiltered = filterModels(models, filters, key);
+      const counts: Record<string, number> = {};
+      for (const opt of options) {
+        counts[opt] = modelsFiltered.filter((m) => matchFn(m, opt)).length;
+      }
+      return counts;
+    };
+
+    return {
+      type: getCounts("type", TYPE_OPTIONS.map((o) => o.value), (m, opt) => m.type === opt),
+      task: getCounts("task", TASK_OPTIONS.map((o) => o.value), (m, opt) => m.primaryTask === opt),
+      modality: getCounts("modality", dynamicOptions.modalities, (m, opt) => m.modality.includes(opt)),
+      developer: getCounts("developer", developers, (m, opt) => m.developer === opt),
+      license: getCounts("license", dynamicOptions.licenses, (m, opt) => m.license === opt),
+      deployment: getCounts(
+        "deployment",
+        DEPLOYMENT_OPTIONS.map((o) => o.value),
+        (m, opt) => m.deployment.includes(opt as any)
+      ),
+    };
+  }, [models, filters, dynamicOptions, developers]);
+
+  // Calculate matching models with all active parameters applied
   const filtered = useMemo(() => {
-    let result = [...models];
+    let result = filterModels(models, filters);
 
-    /* Search */
-    if (search) {
-      const q = search.toLowerCase();
-      result = result.filter(
-        (m) =>
-          m.name.toLowerCase().includes(q) ||
-          m.developer.toLowerCase().includes(q)
-      );
-    }
-
-    /* Type filter */
-    if (typeFilter !== "all") {
-      result = result.filter((m) => m.type === typeFilter);
-    }
-
-    /* Developer filter */
-    if (developerFilter !== "all") {
-      result = result.filter((m) => m.developer === developerFilter);
-    }
-
-    /* Sort */
+    // Apply sorting
     switch (sortKey) {
       case "newest":
         result.sort(
           (a, b) =>
-            new Date(b.releaseDate).getTime() -
-            new Date(a.releaseDate).getTime()
+            new Date(b.releaseDate).getTime() - new Date(a.releaseDate).getTime()
         );
         break;
       case "oldest":
         result.sort(
           (a, b) =>
-            new Date(a.releaseDate).getTime() -
-            new Date(b.releaseDate).getTime()
+            new Date(a.releaseDate).getTime() - new Date(b.releaseDate).getTime()
         );
         break;
-      case "name":
+      case "name-asc":
         result.sort((a, b) => a.name.localeCompare(b.name));
+        break;
+      case "developer-asc":
+        result.sort((a, b) => a.developer.localeCompare(b.developer));
         break;
     }
 
     return result;
-  }, [models, search, typeFilter, developerFilter, sortKey]);
+  }, [models, filters, sortKey]);
 
-  const clearFilters = () => {
-    setSearch("");
-    setTypeFilter("all");
-    setDeveloperFilter("all");
+  const hasActiveFilters =
+    filters.q !== "" ||
+    filters.type.length > 0 ||
+    filters.task.length > 0 ||
+    filters.modality.length > 0 ||
+    filters.developer.length > 0 ||
+    filters.license.length > 0 ||
+    filters.deployment.length > 0;
+
+  // Sync state parameters to query parameters
+  const updateUrl = (updatedFilters: FiltersState, updatedSort: string) => {
+    const params = new URLSearchParams();
+
+    if (updatedFilters.q) params.set("q", updatedFilters.q);
+    if (updatedFilters.type.length > 0) params.set("type", updatedFilters.type.join(","));
+    if (updatedFilters.task.length > 0) params.set("task", updatedFilters.task.join(","));
+    if (updatedFilters.modality.length > 0) params.set("modality", updatedFilters.modality.join(","));
+    if (updatedFilters.developer.length > 0) params.set("developer", updatedFilters.developer.join(","));
+    if (updatedFilters.license.length > 0) params.set("license", updatedFilters.license.join(","));
+    if (updatedFilters.deployment.length > 0) params.set("deployment", updatedFilters.deployment.join(","));
+    if (updatedSort !== "newest") params.set("sort", updatedSort);
+
+    const queryStr = params.toString();
+    router.replace(`/models${queryStr ? `?${queryStr}` : ""}`, { scroll: false });
   };
 
-  return (
-    <div className="space-y-6">
-      {/* ── Controls bar ─────────────────────────────────────── */}
-      <div className="flex flex-col gap-4">
-        <div className="flex items-center gap-3">
-          {/* Search input */}
-          <div className="relative flex-1 max-w-md">
-            <Search
-              size={16}
-              className="absolute left-3 top-1/2 -translate-y-1/2 text-white/30"
-            />
-            <input
-              type="text"
-              placeholder="Search models..."
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
-              className="w-full bg-white/[0.04] border border-white/[0.08] rounded-xl pl-9 pr-4 py-2.5 text-sm text-white placeholder:text-white/30 focus:outline-none focus:border-white/20 focus:ring-1 focus:ring-white/10 transition-colors"
-            />
-          </div>
+  const toggleFilter = (key: keyof Omit<FiltersState, "q">, val: string) => {
+    setFilters((prev) => {
+      const current = prev[key] as string[];
+      const next = current.includes(val)
+        ? current.filter((v) => v !== val)
+        : [...current, val];
 
-          {/* Filter toggle (mobile) */}
-          <button
-            onClick={() => setShowFilters(!showFilters)}
-            className={`sm:hidden p-2.5 rounded-xl border transition-colors ${
-              showFilters || hasActiveFilter
-                ? "bg-brand-orange/10 border-brand-orange/30 text-brand-orange"
-                : "bg-white/[0.04] border-white/[0.08] text-white/50"
-            }`}
-            aria-label="Toggle filters"
-          >
-            <SlidersHorizontal size={16} />
-          </button>
+      const newFilters = { ...prev, [key]: next };
+      updateUrl(newFilters, sortKey);
+      return newFilters;
+    });
+  };
 
-          {/* Sort pills (desktop) */}
-          <div className="hidden sm:flex items-center gap-1.5 ml-auto">
-            {SORT_OPTIONS.map((opt) => (
-              <FilterPill
-                key={opt.key}
-                label={opt.label}
-                active={sortKey === opt.key}
-                onClick={() => setSortKey(opt.key)}
-              />
-            ))}
-          </div>
+  const handleSearchChange = (val: string) => {
+    setFilters((prev) => {
+      const newFilters = { ...prev, q: val };
+      updateUrl(newFilters, sortKey);
+      return newFilters;
+    });
+  };
+
+  const handleSortChange = (newSort: string) => {
+    setSortKey(newSort);
+    updateUrl(filters, newSort);
+  };
+
+  const clearAllFilters = () => {
+    const blankFilters = {
+      q: "",
+      type: [],
+      task: [],
+      modality: [],
+      developer: [],
+      license: [],
+      deployment: [],
+    };
+    setFilters(blankFilters);
+    updateUrl(blankFilters, sortKey);
+  };
+
+  // Compile active pills
+  const activeChips = useMemo(() => {
+    const chips: { key: keyof Omit<FiltersState, "q">; val: string; label: string }[] = [];
+
+    const addChips = (key: keyof Omit<FiltersState, "q">, labelMap?: Record<string, string>) => {
+      for (const val of filters[key]) {
+        const label = labelMap?.[val] || val;
+        chips.push({ key, val, label });
+      }
+    };
+
+    const taskLabels: Record<string, string> = {
+      "chat-reasoning": "Chat & Reasoning",
+      "code-generation": "Coding",
+      "image-generation": "Image Gen",
+      "video-generation": "Video Gen",
+      "audio-speech": "Audio & Speech",
+      "embedding": "Embedding",
+      "agentic": "Agentic",
+      "multimodal-general": "Multimodal",
+      "translation": "Translation",
+      "search-retrieval": "Search & RAG",
+      "other": "Specialized",
+    };
+
+    const typeLabels: Record<string, string> = {
+      "open-weights": "Open Weights",
+      "closed-source": "Closed Source",
+      "api-only": "API Only",
+      "research-preview": "Research Preview",
+    };
+
+    const deploymentLabels: Record<string, string> = {
+      "api-only": "API Only",
+      "self-hostable": "Self-Hostable",
+      "on-device": "On-Device",
+    };
+
+    addChips("type", typeLabels);
+    addChips("task", taskLabels);
+    addChips("modality");
+    addChips("developer");
+    addChips("license");
+    addChips("deployment", deploymentLabels);
+
+    return chips;
+  }, [filters]);
+
+  /* Sidebar Render Builder */
+  const renderFacetGroup = <T,>(
+    title: string,
+    key: keyof Omit<FiltersState, "q">,
+    options: T[],
+    valFn: (opt: T) => string,
+    labelFn: (opt: T) => string
+  ) => {
+    return (
+      <div className="space-y-3">
+        <h4 className="text-[10px] font-bold text-white/30 uppercase tracking-widest border-b border-white/[0.04] pb-1.5">
+          {title}
+        </h4>
+        <div className="space-y-1.5 flex flex-col max-h-48 overflow-y-auto pr-1 select-none scrollbar-thin">
+          {options.map((opt) => {
+            const val = valFn(opt);
+            const label = labelFn(opt);
+            const isChecked = filters[key].includes(val);
+            const count = facetCounts[key][val] ?? 0;
+            const isDisabled = count === 0 && !isChecked;
+
+            return (
+              <label
+                key={val}
+                className={`flex items-center justify-between text-xs cursor-pointer py-0.5 rounded transition-colors ${
+                  isChecked
+                    ? "text-brand-orange"
+                    : isDisabled
+                    ? "text-white/20 cursor-not-allowed"
+                    : "text-white/60 hover:text-white"
+                }`}
+              >
+                <div className="flex items-center gap-2 min-w-0">
+                  <input
+                    type="checkbox"
+                    checked={isChecked}
+                    disabled={isDisabled}
+                    onChange={() => toggleFilter(key, val)}
+                    className="h-3.5 w-3.5 rounded border border-white/20 bg-transparent text-brand-orange focus:ring-offset-black focus:ring-1 focus:ring-brand-orange/50 accent-brand-orange cursor-pointer disabled:cursor-not-allowed"
+                  />
+                  <span className="truncate pr-1">{label}</span>
+                </div>
+                <span
+                  className={`text-[10px] tabular-nums font-mono ${
+                    isChecked ? "text-brand-orange" : "text-white/25"
+                  }`}
+                >
+                  {count}
+                </span>
+              </label>
+            );
+          })}
         </div>
+      </div>
+    );
+  };
 
-        {/* Filter row */}
-        <div
-          className={`flex flex-wrap items-center gap-2 ${
-            showFilters ? "flex" : "hidden sm:flex"
-          }`}
-        >
-          {/* Type pills */}
-          {TYPE_OPTIONS.map((opt) => (
-            <FilterPill
-              key={opt.value}
-              label={opt.label}
-              active={typeFilter === opt.value}
-              onClick={() =>
-                setTypeFilter(typeFilter === opt.value ? "all" : opt.value)
-              }
-            />
-          ))}
+  const renderSidebar = () => (
+    <div className="space-y-8">
+      {renderFacetGroup("Type", "type", TYPE_OPTIONS, (o) => o.value, (o) => o.label)}
+      {renderFacetGroup("Primary Task", "task", TASK_OPTIONS, (o) => o.value, (o) => o.label)}
+      {renderFacetGroup(
+        "Modality",
+        "modality",
+        dynamicOptions.modalities.map((m) => ({ value: m, label: m.toUpperCase() })),
+        (o) => o.value,
+        (o) => o.label
+      )}
+      {renderFacetGroup(
+        "Developer",
+        "developer",
+        developers.map((d) => ({ value: d, label: d })),
+        (o) => o.value,
+        (o) => o.label
+      )}
+      {renderFacetGroup(
+        "License",
+        "license",
+        dynamicOptions.licenses.map((l) => ({ value: l, label: l })),
+        (o) => o.value,
+        (o) => o.label
+      )}
+      {renderFacetGroup(
+        "Deployment",
+        "deployment",
+        DEPLOYMENT_OPTIONS,
+        (o) => o.value,
+        (o) => o.label
+      )}
+    </div>
+  );
 
-          {/* Developer select */}
-          <select
-            value={developerFilter}
-            onChange={(e) => setDeveloperFilter(e.target.value)}
-            className="bg-white/[0.06] border border-white/[0.08] rounded-full px-3 py-1.5 text-xs font-medium text-white/60 focus:outline-none focus:border-white/20 appearance-none cursor-pointer"
-          >
-            <option value="all">All developers</option>
-            {developers.map((d) => (
-              <option key={d} value={d}>
-                {d}
-              </option>
-            ))}
-          </select>
-
-          {/* Sort (mobile) */}
-          <div className="sm:hidden flex items-center gap-1.5">
-            {SORT_OPTIONS.map((opt) => (
-              <FilterPill
-                key={opt.key}
-                label={opt.label}
-                active={sortKey === opt.key}
-                onClick={() => setSortKey(opt.key)}
-              />
-            ))}
-          </div>
-
-          {/* Clear filters */}
-          {hasActiveFilter && (
+  return (
+    <div className="flex flex-col md:flex-row gap-8 items-start relative">
+      {/* ── Desktop Sidebar Facets (z-10) ────────────────────── */}
+      <aside className="hidden md:block w-64 shrink-0 space-y-6 sticky top-24 max-h-[calc(100vh-10rem)] overflow-y-auto pr-2 scrollbar-thin">
+        <div className="flex items-center justify-between">
+          <span className="text-xs font-bold uppercase tracking-widest text-white/50">Filters</span>
+          {hasActiveFilters && (
             <button
-              onClick={clearFilters}
-              className="flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-medium text-white/40 hover:text-white/70 transition-colors"
+              onClick={clearAllFilters}
+              className="text-[10px] text-brand-orange hover:text-[#e85a28] hover:underline"
             >
-              <X size={12} />
-              Clear
+              Clear All
             </button>
           )}
         </div>
-      </div>
+        {renderSidebar()}
+      </aside>
 
-      {/* ── Results count ────────────────────────────────────── */}
-      <p className="text-xs text-white/30">
-        {filtered.length} of {models.length} models
-      </p>
+      {/* ── Main Catalog Workspace ───────────────────────────── */}
+      <div className="flex-1 w-full space-y-6">
+        {/* Controls Panel */}
+        <div className="flex flex-col sm:flex-row gap-4 items-stretch sm:items-center justify-between border-b border-white/[0.06] pb-4">
+          {/* Search inputs */}
+          <div className="relative flex-1 max-w-md">
+            <Search size={16} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-white/30" />
+            <input
+              type="text"
+              placeholder="Search by name or developer..."
+              value={filters.q}
+              onChange={(e) => handleSearchChange(e.target.value)}
+              className="w-full bg-white/[0.03] border border-white/[0.08] rounded-full pl-10 pr-4 py-2 text-sm text-white placeholder:text-white/35 focus:outline-none focus:border-white/20 transition-colors"
+            />
+          </div>
 
-      {/* ── Model list ───────────────────────────────────────── */}
-      {/* Column headers (desktop) */}
-      <div className="hidden sm:grid grid-cols-[1.4fr_0.8fr_0.6fr_0.5fr_auto] gap-4 px-4 pb-2 text-[11px] font-medium text-white/25 uppercase tracking-wider border-b border-white/[0.06]">
-        <span>Model</span>
-        <span>Developer</span>
-        <span>Type</span>
-        <span>Released</span>
-        <span />
-      </div>
+          <div className="flex items-center gap-3 justify-between sm:justify-start">
+            {/* Mobile Filters Toggle Button */}
+            <button
+              onClick={() => setMobileFiltersOpen(true)}
+              className="md:hidden flex items-center gap-2 px-4 py-2 border border-white/10 rounded-full text-xs font-medium text-white/60 hover:text-white bg-white/[0.02]"
+            >
+              <SlidersHorizontal size={14} />
+              Filters
+              {activeChips.length > 0 && (
+                <span className="h-4 w-4 bg-brand-orange text-white text-[9px] rounded-full flex items-center justify-center font-bold">
+                  {activeChips.length}
+                </span>
+              )}
+            </button>
 
-      <div className="flex flex-col">
-        {filtered.map((model) => (
-          <ModelCard key={model.id} model={model} variant="row" />
-        ))}
+            {/* Sort & Count */}
+            <div className="flex items-center gap-2">
+              <span className="text-xs text-white/30 whitespace-nowrap hidden sm:block">Sort By</span>
+              <div className="relative">
+                <select
+                  value={sortKey}
+                  onChange={(e) => handleSortChange(e.target.value)}
+                  className="bg-white/[0.03] border border-white/[0.08] rounded-full px-4 py-2 pr-8 text-xs font-medium text-white/60 focus:outline-none focus:border-white/25 appearance-none cursor-pointer"
+                >
+                  {SORT_OPTIONS.map((opt) => (
+                    <option key={opt.key} value={opt.key} className="bg-[#0c0c0c] text-white">
+                      {opt.label}
+                    </option>
+                  ))}
+                </select>
+                <ArrowUpDown size={12} className="absolute right-3.5 top-1/2 -translate-y-1/2 text-white/30 pointer-events-none" />
+              </div>
+            </div>
+          </div>
+        </div>
 
+        {/* Info panel: Match Counts & Active Filter Chips */}
+        <div className="flex flex-wrap items-center gap-3 justify-between">
+          <p className="text-xs text-white/35">
+            Showing <span className="text-white font-medium">{filtered.length}</span> of {models.length} models
+          </p>
+
+          {activeChips.length > 0 && (
+            <div className="flex flex-wrap items-center gap-2">
+              {activeChips.map((chip) => (
+                <span
+                  key={`${chip.key}-${chip.val}`}
+                  className="inline-flex items-center gap-1.5 text-[10px] font-semibold bg-[#FF6B35]/10 border border-[#FF6B35]/15 text-[#FF6B35] px-2.5 py-1 rounded-full shrink-0"
+                >
+                  {chip.label}
+                  <button
+                    onClick={() => toggleFilter(chip.key, chip.val)}
+                    className="hover:bg-[#FF6B35]/20 rounded-full p-0.5 transition-colors"
+                  >
+                    <X size={10} />
+                  </button>
+                </span>
+              ))}
+              <button
+                onClick={clearAllFilters}
+                className="text-[10px] font-semibold text-white/40 hover:text-white/80 transition-colors ml-1"
+              >
+                Clear all
+              </button>
+            </div>
+          )}
+        </div>
+
+        {/* ── Results Cards Grid ────────────────────────────── */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          {filtered.map((model) => (
+            <ModelCard key={model.id} model={model} variant="card" />
+          ))}
+        </div>
+
+        {/* Empty States */}
         {filtered.length === 0 && (
-          <div className="py-20 text-center flex flex-col items-center justify-center">
+          <div className="py-24 text-center flex flex-col items-center justify-center border border-white/[0.04] bg-white/[0.01] rounded-3xl p-8">
             <p className="text-white/60 text-sm">
               No models match these filters yet — try removing one
             </p>
             <button
-              onClick={clearFilters}
-              className="mt-4 bg-[#FF6B35] hover:bg-[#e85a28] text-white text-xs font-semibold px-6 py-2.5 rounded-full hover:scale-[1.03] active:scale-95 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FF6B35]/70 focus-visible:ring-offset-2 focus-visible:ring-offset-black"
+              onClick={clearAllFilters}
+              className="mt-4 bg-brand-orange hover:bg-[#e85a28] text-white text-xs font-semibold px-6 py-2.5 rounded-full hover:scale-[1.03] active:scale-95 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-orange/50 focus-visible:ring-offset-2 focus-visible:ring-offset-black"
             >
               Clear filters
             </button>
           </div>
         )}
       </div>
+
+      {/* ── Mobile Filters Bottom Drawer (z-50) ──────────────── */}
+      {mobileFiltersOpen && (
+        <div className="fixed inset-0 z-50 md:hidden flex flex-col justify-end bg-black/75 backdrop-blur-sm">
+          <div className="absolute inset-0" onClick={() => setMobileFiltersOpen(false)} />
+
+          <div className="relative w-full max-h-[85vh] bg-[#0A0A0A] border-t border-white/[0.08] rounded-t-3xl flex flex-col z-10">
+            {/* Drag Handle Bar Accent */}
+            <div className="h-1.5 w-12 bg-white/20 rounded-full mx-auto my-3 shrink-0" />
+
+            {/* Header */}
+            <div className="flex items-center justify-between px-6 pb-4 border-b border-white/[0.06]">
+              <span className="text-xs font-bold uppercase tracking-wider text-white/50">Filters</span>
+              <button
+                onClick={() => setMobileFiltersOpen(false)}
+                className="p-1.5 hover:bg-white/5 rounded-full text-white/40 hover:text-white transition-colors"
+              >
+                <X size={18} />
+              </button>
+            </div>
+
+            {/* Facet Groups */}
+            <div className="overflow-y-auto p-6 space-y-6 flex-1 scrollbar-thin">
+              {renderSidebar()}
+            </div>
+
+            {/* Bottom Actions Row */}
+            <div className="p-4 border-t border-white/[0.06] bg-[#0A0A0A] flex gap-3 shrink-0">
+              {hasActiveFilters && (
+                <button
+                  onClick={() => {
+                    clearAllFilters();
+                    setMobileFiltersOpen(false);
+                  }}
+                  className="flex-1 py-3.5 border border-white/10 hover:border-white/20 text-white/80 hover:text-white rounded-2xl text-xs font-semibold transition-colors"
+                >
+                  Clear All
+                </button>
+              )}
+              <button
+                onClick={() => setMobileFiltersOpen(false)}
+                className="flex-1 py-3.5 bg-brand-orange hover:bg-[#e85a28] text-white rounded-2xl text-xs font-semibold transition-colors"
+              >
+                View {filtered.length} Results
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
 
-export default function ModelCatalog(props: { models: ModelIndex[]; developers: string[] }) {
+export default function ModelCatalog(props: {
+  models: ModelEntry[];
+  developers: string[];
+  initialSearchParams?: Record<string, string | string[] | undefined>;
+}) {
   return (
     <Suspense fallback={<div className="text-white/40 text-sm py-20 text-center">Loading catalog...</div>}>
       <ModelCatalogContent {...props} />

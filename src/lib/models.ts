@@ -23,6 +23,8 @@ export interface Benchmark {
 export interface ModelEntry extends ModelIndex {
   updatedAt: string;
   modality: string[];
+  primaryTask: string;
+  deployment: string[];
   license: string;
   parameters: string;
   contextWindow: string;
@@ -58,6 +60,19 @@ export function getAllModels(): ModelIndex[] {
     (a, b) =>
       new Date(b.releaseDate).getTime() - new Date(a.releaseDate).getTime()
   );
+}
+
+/** Read all model files and return full entries, sorted newest-first. */
+export function getAllModelEntries(): ModelEntry[] {
+  const index = getAllModels();
+  const entries: ModelEntry[] = [];
+  for (const item of index) {
+    const entry = getModelBySlug(item.slug);
+    if (entry) {
+      entries.push(entry);
+    }
+  }
+  return entries;
 }
 
 /** Return the N most recently released models. */
