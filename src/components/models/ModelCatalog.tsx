@@ -1,9 +1,10 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useState, useMemo, Suspense } from "react";
 import type { ModelIndex } from "@/lib/models";
 import ModelCard from "@/components/models/ModelCard";
 import { Search, SlidersHorizontal, X } from "lucide-react";
+import { useSearchParams } from "next/navigation";
 
 /* ------------------------------------------------------------------ */
 /*  Filter pill button                                                 */
@@ -60,15 +61,19 @@ const TYPE_OPTIONS = [
 /*  ModelCatalog                                                        */
 /* ------------------------------------------------------------------ */
 
-export default function ModelCatalog({
+function ModelCatalogContent({
   models,
   developers,
 }: {
   models: ModelIndex[];
   developers: string[];
 }) {
-  const [search, setSearch] = useState("");
-  const [typeFilter, setTypeFilter] = useState("all");
+  const searchParams = useSearchParams();
+  const qParam = searchParams?.get("q") || "";
+  const typeParam = searchParams?.get("type") || "all";
+
+  const [search, setSearch] = useState(qParam);
+  const [typeFilter, setTypeFilter] = useState(typeParam);
   const [developerFilter, setDeveloperFilter] = useState("all");
   const [sortKey, setSortKey] = useState<SortKey>("newest");
   const [showFilters, setShowFilters] = useState(false);
@@ -253,19 +258,27 @@ export default function ModelCatalog({
         ))}
 
         {filtered.length === 0 && (
-          <div className="py-20 text-center">
-            <p className="text-white/40 text-sm">
-              No models match your filters.
+          <div className="py-20 text-center flex flex-col items-center justify-center">
+            <p className="text-white/60 text-sm">
+              No models match these filters yet — try removing one
             </p>
             <button
               onClick={clearFilters}
-              className="mt-3 text-brand-orange text-sm hover:underline"
+              className="mt-4 bg-[#FF6B35] hover:bg-[#e85a28] text-white text-xs font-semibold px-6 py-2.5 rounded-full hover:scale-[1.03] active:scale-95 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FF6B35]/70 focus-visible:ring-offset-2 focus-visible:ring-offset-black"
             >
-              Clear all filters
+              Clear filters
             </button>
           </div>
         )}
       </div>
     </div>
+  );
+}
+
+export default function ModelCatalog(props: { models: ModelIndex[]; developers: string[] }) {
+  return (
+    <Suspense fallback={<div className="text-white/40 text-sm py-20 text-center">Loading catalog...</div>}>
+      <ModelCatalogContent {...props} />
+    </Suspense>
   );
 }

@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import JsonLd from "@/components/JsonLd";
 import { SITE_URL } from "@/lib/models";
+import Footer from "@/components/layout/Footer";
 
 /* ------------------------------------------------------------------ */
 /*  Fonts                                                              */
@@ -25,6 +26,11 @@ export const metadata: Metadata = {
     "From frontier closed-source releases to open-weight breakthroughs, Modelverse tracks every model as it ships — a living, always-current archive.",
   alternates: {
     canonical: "./",
+    types: {
+      "application/rss+xml": [
+        { url: `${SITE_URL}/feed.xml`, title: "Modelverse RSS Feed" },
+      ],
+    },
   },
   openGraph: {
     title: "Modelverse — Every AI Model, Every Release",
@@ -81,9 +87,12 @@ export default function RootLayout({
 
   return (
     <html lang="en" className={inter.variable}>
-      <body className="min-h-screen bg-black tracking-[-0.02em] antialiased">
-        <JsonLd data={sitewideSchema} />
-        {children}
+      <body className="min-h-screen bg-black tracking-[-0.02em] antialiased flex flex-col justify-between">
+        <div>
+          <JsonLd data={sitewideSchema} />
+          {children}
+        </div>
+        <Footer />
       </body>
     </html>
   );
