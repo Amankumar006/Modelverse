@@ -92,17 +92,15 @@ export default function Home() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5 items-stretch">
             {/* Column 1: Tracked Releases (Large Row Span Card) */}
             <div className="rounded-2xl border border-white/[0.05] relative overflow-hidden bg-black p-6 sm:p-8 flex flex-col justify-between h-full min-h-[480px]">
-              {/* Autoplay Loop Background Video */}
-              <video
-                autoPlay
-                loop
-                muted
-                playsInline
-                className="absolute inset-0 w-full h-full object-cover z-0 pointer-events-none opacity-30"
-              >
-                <source src="/videos/tracked-releases-bg.mp4" type="video/mp4" />
-              </video>
-              <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/40 to-black/90 z-0" />
+              {/* Background Image */}
+              <div className="absolute inset-0 z-0 pointer-events-none">
+                <img
+                  src="/videos/tracked-releases-bg.jpg"
+                  alt="Background"
+                  className="w-full h-full object-cover opacity-20"
+                />
+                <div className="absolute inset-0 bg-gradient-to-b from-black/60 to-black/90" />
+              </div>
 
               <div className="relative z-10 flex items-center justify-center gap-2 text-[11px] font-semibold uppercase tracking-[0.22em] text-white/70 text-center">
                 <Sparkles size={11} className="text-brand-orange" />
@@ -144,6 +142,16 @@ export default function Home() {
             <div className="flex flex-col gap-4 md:gap-5 h-full">
               {/* Methodology Card */}
               <div className="rounded-2xl border border-white/[0.05] relative overflow-hidden bg-[#1C201E] noise-overlay p-6 sm:p-7 flex flex-col justify-between flex-1">
+                {/* Background Image */}
+                <div className="absolute inset-0 z-0 pointer-events-none">
+                  <img
+                    src="/videos/tracked-releases-bg.jpg"
+                    alt="Background"
+                    className="w-full h-full object-cover opacity-15 mix-blend-luminosity"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-b from-black/40 to-black/80" />
+                </div>
+
                 <div className="relative z-10">
                   <div className="flex items-center gap-2 text-[10px] font-semibold uppercase tracking-[0.22em] text-white/50">
                     <ShieldCheck size={12} className="text-brand-orange" />
@@ -160,22 +168,21 @@ export default function Home() {
 
               {/* Statistics Card */}
               <div className="rounded-2xl border border-white/[0.05] relative overflow-hidden bg-black p-6 sm:p-7 flex flex-col justify-between flex-1">
-                <video
-                  autoPlay
-                  loop
-                  muted
-                  playsInline
-                  className="absolute inset-0 w-full h-full object-cover z-0 pointer-events-none opacity-20"
-                >
-                  <source src="/videos/stat-card-bg.mp4" type="video/mp4" />
-                </video>
-                <div className="absolute inset-0 bg-gradient-to-b from-black/60 to-black/90 z-0" />
+                {/* Background Image */}
+                <div className="absolute inset-0 z-0 pointer-events-none">
+                  <img
+                    src="/videos/tracked-releases-bg.jpg"
+                    alt="Background"
+                    className="w-full h-full object-cover opacity-20"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-b from-black/60 to-black/90" />
+                </div>
 
                 <div className="relative z-10 flex items-center justify-center gap-2 text-[10px] font-semibold uppercase tracking-[0.22em] text-white/50">
                   <Layers size={12} className="text-brand-orange" />
                   <span>Database Statistics</span>
                 </div>
-                
+
                 <div className="relative z-10 text-center py-2">
                   <span className="text-6xl sm:text-7xl font-extralight tracking-tighter text-white drop-shadow select-none">
                     {modelCount}+
@@ -191,8 +198,18 @@ export default function Home() {
             {/* Column 3: Stacked Cards (Developers Marquee & Inaccuracy suggestions) */}
             <div className="flex flex-col gap-4 md:gap-5 h-full">
               {/* Developers Marquee */}
-              <div className="rounded-2xl border border-white/[0.05] relative overflow-hidden bg-black p-6 flex flex-col justify-between flex-[1.3]">
-                <div className="flex items-center gap-2 text-[10px] font-semibold uppercase tracking-[0.22em] text-white/50 mb-4">
+              <div className="rounded-2xl border border-white/[0.05] relative overflow-hidden bg-black p-6 flex flex-col justify-between flex-[1.6]">
+                {/* Background Image */}
+                <div className="absolute inset-0 z-0 pointer-events-none">
+                  <img
+                    src="/videos/tracked-releases-bg.jpg"
+                    alt="Background"
+                    className="w-full h-full object-cover opacity-20"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-b from-black/60 to-black/90" />
+                </div>
+
+                <div className="flex items-center gap-2 text-[10px] font-semibold uppercase tracking-[0.22em] text-white/50 mb-4 z-10">
                   <CheckCircle size={12} className="text-brand-orange" />
                   <span>Developers We Track</span>
                 </div>
@@ -200,7 +217,17 @@ export default function Home() {
               </div>
 
               {/* Spot an Inaccuracy Suggestions Card */}
-              <div className="rounded-2xl border border-white/[0.05] relative overflow-hidden bg-[#1C201E] noise-overlay p-5 sm:p-6 flex flex-col justify-between flex-[0.7]">
+              <div className="rounded-2xl border border-white/[0.05] relative overflow-hidden bg-[#1C201E] noise-overlay p-5 sm:p-6 flex flex-col justify-between flex-[0.4]">
+                {/* Background Image */}
+                <div className="absolute inset-0 z-0 pointer-events-none">
+                  <img
+                    src="/videos/tracked-releases-bg.jpg"
+                    alt="Background"
+                    className="w-full h-full object-cover opacity-15 mix-blend-luminosity"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-b from-black/40 to-black/80" />
+                </div>
+
                 <a
                   href="mailto:corrections@modelverse.ai?subject=Modelverse Correction"
                   className="absolute top-5 right-5 h-9 w-9 rounded-full bg-white/5 border border-white/10 hover:bg-white/10 hover:border-white/20 transition-all flex items-center justify-center text-white/70 hover:text-white z-20"
