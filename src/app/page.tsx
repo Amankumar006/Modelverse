@@ -5,11 +5,7 @@ import { getRecentModels, getModelCount, getAllDevelopers, SITE_URL } from "@/li
 import Link from "next/link";
 import {
   ArrowRight,
-  Rss,
-  ShieldCheck,
-  Layers,
-  CheckCircle,
-  Sparkles,
+  Sparkle,
   ArrowUpRight,
 } from "lucide-react";
 
@@ -49,185 +45,171 @@ export default function Home() {
       {/* ── Hero Section ───────────────────────────────────── */}
       <HeroSection />
 
-      {/* ── Bento-Grid Features Section ────────────────────── */}
-      <section className="bg-[#0a0a0a] text-white py-24 px-4 sm:px-6 md:px-8 border-t border-white/[0.04] relative overflow-hidden z-10">
-        <div className="max-w-6xl mx-auto space-y-12">
-          {/* Header Row */}
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
-            <div>
+      {/* ── Portfolio Bento-Grid Features Section ───────────── */}
+      <section className="bg-[#0a0a0a] text-white px-4 sm:px-6 md:px-10 lg:px-14 py-12 sm:py-16 md:py-20 lg:min-h-screen flex flex-col justify-center border-t border-white/[0.04] relative z-10 antialiased">
+        <div className="max-w-7xl mx-auto w-full flex flex-col justify-between gap-8 md:gap-10">
+          
+          {/* Top Header Row */}
+          <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
+            <div className="max-w-3xl space-y-4 text-left">
               <h2
-                className="text-3xl sm:text-4xl font-normal tracking-tight text-white"
+                className="text-[28px] sm:text-3xl md:text-4xl lg:text-[44px] leading-[1.15] font-normal tracking-tight text-white"
                 style={{
                   fontFamily: "var(--font-display, ui-sans-serif, system-ui, sans-serif)",
                 }}
               >
-                What We <span className="italic text-white/50">Track</span>
+                Every Model. <span className="italic text-white/50">Every Release.</span>
               </h2>
-              <p className="text-sm text-white/40 mt-2 max-w-md">
-                From open-weight research breakthroughs to proprietary cloud APIs, follow the entire index of modern AI.
+              <p className="text-sm md:text-[15px] leading-[1.6] text-white/60">
+                A living reference of foundation AI models, tracking open-weights releases and frontier closed APIs. Fact-checked by curators using primary documentation, technical reports, and official announcements.
               </p>
             </div>
 
-            <div className="flex flex-wrap items-center gap-4">
-              <a
-                href="/feed.xml"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 text-xs text-white/60 hover:text-white transition-colors bg-white/[0.04] border border-white/[0.08] hover:bg-white/[0.08] px-3.5 py-1.5 rounded-full"
-              >
-                <Rss size={13} className="text-brand-orange" />
-                Subscribe via RSS
-              </a>
+            <div className="flex shrink-0">
               <Link
                 href="/models"
-                className="group inline-flex items-center gap-1.5 text-sm font-medium text-brand-orange hover:text-[#e85a28] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-orange/50 focus-visible:ring-offset-2 focus-visible:ring-offset-black rounded-lg px-2 py-1"
+                className="liquid-glass inline-flex items-center gap-2 px-5 sm:px-6 py-2.5 sm:py-3 rounded-full text-sm font-semibold hover:bg-white/5 border border-white/10 hover:border-white/20 transition-all"
               >
-                Browse full catalog
-                <ArrowRight size={16} className="transition-transform group-hover:translate-x-0.5" />
+                Browse Full Catalog
+                <ArrowRight size={14} />
               </Link>
             </div>
           </div>
 
           {/* Grid Layout */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5 items-stretch">
-            {/* Column 1: Tracked Releases (Large Row Span Card) */}
+            
+            {/* Column 1: Tracked Releases (Large Card) */}
             <div className="rounded-2xl border border-white/[0.05] relative overflow-hidden bg-black p-6 sm:p-8 flex flex-col justify-between min-h-[480px]">
-              {/* Background Image */}
-              <div className="absolute inset-0 z-0 pointer-events-none">
-                <img
-                  src="/videos/tracked-releases-bg.jpg"
-                  alt="Background"
-                  className="w-full h-full object-cover opacity-20"
-                />
-                <div className="absolute inset-0 bg-gradient-to-b from-black/60 to-black/90" />
-              </div>
+              {/* Background Video */}
+              <video
+                autoPlay
+                loop
+                muted
+                playsInline
+                className="absolute inset-0 w-full h-full object-cover z-0 pointer-events-none opacity-35"
+              >
+                <source src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260507_150203_44a5bd32-516a-47ce-a077-8acbf9aa8991.mp4" type="video/mp4" />
+              </video>
+              <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/40 to-black/90 z-0" />
 
+              {/* Top Label */}
               <div className="relative z-10 flex items-center justify-center gap-2 text-[11px] font-semibold uppercase tracking-[0.22em] text-white/70 text-center">
-                <Sparkles size={11} className="text-brand-orange" />
+                <Sparkle size={10} className="text-brand-orange" strokeWidth={1.5} />
                 <span>Tracked Releases</span>
-                <Sparkles size={11} className="text-brand-orange" />
+                <Sparkle size={10} className="text-brand-orange" strokeWidth={1.5} />
               </div>
 
-              {/* Mini timeline of recent 3 releases */}
-              <div className="relative z-10 space-y-3.5 mt-auto">
+              {/* Bottom Timeline */}
+              <div className="relative z-10 space-y-4 mt-auto">
                 <p className="text-[10px] uppercase tracking-wider text-white/40 font-semibold mb-2">Recently Added</p>
-                {recentModels.map((model) => {
-                  const dateObj = new Date(model.releaseDate);
-                  const formattedDate = dateObj.toLocaleDateString("en-US", {
-                    month: "short",
-                    day: "numeric",
-                  });
-                  return (
-                    <Link
-                      key={model.id}
-                      href={`/models/${model.slug}`}
-                      className="block p-4 rounded-xl bg-white/[0.02] hover:bg-brand-orange/10 border border-white/[0.04] hover:border-brand-orange/30 transition-all text-left group/item"
-                    >
-                      <div className="flex items-center gap-2 text-[10px] font-semibold uppercase tracking-wider text-white/35 group-hover/item:text-brand-orange/80 transition-colors">
-                        <span>{formattedDate}</span>
-                        <span>•</span>
-                        <span>{model.developer}</span>
+                
+                <div className="space-y-1">
+                  {recentModels.map((model) => {
+                    const dateObj = new Date(model.releaseDate);
+                    const formattedDate = dateObj.toLocaleDateString("en-US", {
+                      month: "short",
+                      day: "numeric",
+                    });
+                    
+                    return (
+                      <div
+                        key={model.id}
+                        className="grid grid-cols-[auto_auto_1fr_auto] items-center gap-3 py-3 border-b border-white/[0.04] last:border-0"
+                      >
+                        <span className="text-[11px] font-mono text-white/40">{formattedDate}</span>
+                        <Sparkle size={8} className="text-white/20" strokeWidth={1.5} />
+                        <span className="text-xs font-semibold text-white/60 truncate">{model.developer}</span>
+                        <Link
+                          href={`/models/${model.slug}`}
+                          className="text-xs font-bold text-brand-orange hover:text-[#e85a28] transition-colors hover:underline text-right"
+                        >
+                          {model.name}
+                        </Link>
                       </div>
-                      <div className="text-sm font-semibold text-white/80 group-hover/item:text-white transition-colors mt-1 flex items-center justify-between">
-                        <span>{model.name}</span>
-                        <span className="text-xs text-white/30 group-hover/item:text-white/60 transition-colors opacity-0 group-hover/item:opacity-100">&rarr;</span>
-                      </div>
-                    </Link>
-                  );
-                })}
+                    );
+                  })}
+                </div>
               </div>
             </div>
 
-            {/* Column 2: Stacked Cards (Methodology & stats) */}
+            {/* Column 2: Stacked Cards (Methodology & Statistics) */}
             <div className="flex flex-col gap-4 md:gap-5">
+              
               {/* Methodology Card */}
-              <div className="rounded-2xl border border-white/[0.05] relative overflow-hidden bg-[#1C201E] noise-overlay p-6 sm:p-7 flex flex-col justify-between flex-1">
-                {/* Background Image */}
-                <div className="absolute inset-0 z-0 pointer-events-none">
-                  <img
-                    src="/videos/tracked-releases-bg.jpg"
-                    alt="Background"
-                    className="w-full h-full object-cover opacity-15 mix-blend-luminosity"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-b from-black/40 to-black/80" />
-                </div>
-
-                <div className="relative z-10">
-                  <div className="flex items-center gap-2 text-[10px] font-semibold uppercase tracking-[0.22em] text-white/50">
-                    <ShieldCheck size={12} className="text-brand-orange" />
+              <div className="rounded-2xl border border-white/[0.05] relative overflow-hidden bg-[#324444] noise-overlay p-6 sm:p-7 flex flex-col justify-between flex-1 min-h-[220px]">
+                <div className="relative z-10 text-left">
+                  <div className="flex items-center gap-2 text-[10px] font-semibold uppercase tracking-[0.22em] text-white/70">
+                    <Sparkle size={10} className="text-brand-orange" strokeWidth={1.5} />
                     <span>Our Methodology</span>
                   </div>
-                  <p className="text-[13px] sm:text-[13.5px] leading-[1.6] text-white/80 mt-4">
-                    Every entry on Modelverse is sourced from official documentation, model cards, and primary announcements, then fact-checked before publishing. If we can't verify a detail, we say so plainly.
+                  <p className="text-[13px] sm:text-[13.5px] leading-[1.6] text-white/85 mt-4">
+                    "Every entry on Modelverse is sourced from official documentation, model cards, and primary announcements, then fact-checked before publishing. If we can't verify a detail, we say so plainly."
                   </p>
                 </div>
-                <div className="relative z-10 text-[11px] text-white/40 font-medium italic mt-4">
-                  — Modelverse Editorial Standards
+                <div className="relative z-10 text-[11px] text-white/50 font-medium mt-4 text-left">
+                  — <span className="font-semibold text-white/80">Modelverse Editorial Standards</span>
                 </div>
               </div>
 
               {/* Statistics Card */}
-              <div className="rounded-2xl border border-white/[0.05] relative overflow-hidden bg-black p-6 sm:p-7 flex flex-col justify-between flex-1">
-                {/* Background Image */}
-                <div className="absolute inset-0 z-0 pointer-events-none">
-                  <img
-                    src="/videos/tracked-releases-bg.jpg"
-                    alt="Background"
-                    className="w-full h-full object-cover opacity-20"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-b from-black/60 to-black/90" />
-                </div>
+              <div className="rounded-2xl border border-white/[0.05] relative overflow-hidden bg-black p-6 sm:p-7 flex flex-col justify-between flex-1 min-h-[220px]">
+                <video
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
+                  className="absolute inset-0 w-full h-full object-cover z-0 pointer-events-none opacity-20"
+                >
+                  <source src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260507_154543_d5b83fc1-9cea-44f3-b5e8-8f325935211a.mp4" type="video/mp4" />
+                </video>
+                <div className="absolute inset-0 bg-gradient-to-b from-black/60 to-black/90 z-0" />
 
                 <div className="relative z-10 flex items-center justify-center gap-2 text-[10px] font-semibold uppercase tracking-[0.22em] text-white/50">
-                  <Layers size={12} className="text-brand-orange" />
+                  <Sparkle size={10} className="text-brand-orange" strokeWidth={1.5} />
                   <span>Database Statistics</span>
                 </div>
-
+                
                 <div className="relative z-10 text-center py-2">
-                  <span className="text-6xl sm:text-7xl font-extralight tracking-tighter text-white drop-shadow select-none">
+                  <span
+                    className="text-5xl sm:text-6xl md:text-7xl lg:text-[88px] font-light tracking-tight text-white drop-shadow"
+                    style={{ fontFamily: "var(--font-body)" }}
+                  >
                     {modelCount}+
                   </span>
                 </div>
 
-                <div className="relative z-10 text-[11px] text-white/40 tracking-wider text-center uppercase font-semibold">
+                <div className="relative z-10 text-xs text-white/85 tracking-wide text-center">
                   Models tracked and counting
                 </div>
               </div>
             </div>
 
-            {/* Column 3: Stacked Cards (Developers Marquee & Inaccuracy suggestions) */}
+            {/* Column 3: Stacked Cards (Developers Marquee & Help Us Improve) */}
             <div className="flex flex-col gap-4 md:gap-5">
-              {/* Developers Marquee */}
-              <div className="rounded-2xl border border-white/[0.05] relative overflow-hidden bg-black p-6 flex flex-col justify-between flex-[1.2]">
-                {/* Background Image */}
-                <div className="absolute inset-0 z-0 pointer-events-none">
-                  <img
-                    src="/videos/tracked-releases-bg.jpg"
-                    alt="Background"
-                    className="w-full h-full object-cover opacity-20"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-b from-black/60 to-black/90" />
-                </div>
+              
+              {/* Developers Marquee Card */}
+              <div className="rounded-2xl border border-white/[0.05] relative overflow-hidden bg-black p-6 flex flex-col justify-between flex-[1.4] min-h-[260px]">
+                <video
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
+                  className="absolute inset-0 w-full h-full object-cover z-0 pointer-events-none opacity-20"
+                >
+                  <source src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260507_153148_d7a3e1dd-e5d0-4ce6-8306-00d7522ecc44.mp4" type="video/mp4" />
+                </video>
+                <div className="absolute inset-0 bg-gradient-to-b from-black/70 to-black/90 z-0" />
 
-                <div className="flex items-center gap-2 text-[10px] font-semibold uppercase tracking-[0.22em] text-white/50 mb-4 z-10">
-                  <CheckCircle size={12} className="text-brand-orange" />
+                <div className="flex items-center gap-2 text-[10px] font-semibold uppercase tracking-[0.22em] text-white/50 mb-4 z-10 text-left">
+                  <Sparkle size={10} className="text-brand-orange" strokeWidth={1.5} />
                   <span>Developers We Track</span>
                 </div>
                 <DeveloperMarquee developers={developers} />
               </div>
 
-              {/* Spot an Inaccuracy Suggestions Card */}
-              <div className="rounded-2xl border border-white/[0.05] relative overflow-hidden bg-[#1C201E] noise-overlay p-5 sm:p-6 flex flex-col justify-between flex-[0.8]">
-                {/* Background Image */}
-                <div className="absolute inset-0 z-0 pointer-events-none">
-                  <img
-                    src="/videos/tracked-releases-bg.jpg"
-                    alt="Background"
-                    className="w-full h-full object-cover opacity-15 mix-blend-luminosity"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-b from-black/40 to-black/80" />
-                </div>
-
+              {/* Help Us Improve Card */}
+              <div className="rounded-2xl border border-white/[0.05] relative overflow-hidden bg-[#324444] noise-overlay p-5 sm:p-6 flex flex-col justify-between flex-[0.6] min-h-[180px]">
                 <a
                   href="mailto:corrections@modelverse.ai?subject=Modelverse Correction"
                   className="absolute top-5 right-5 h-9 w-9 rounded-full bg-white/5 border border-white/10 hover:bg-white/10 hover:border-white/20 transition-all flex items-center justify-center text-white/70 hover:text-white z-20"
@@ -237,8 +219,8 @@ export default function Home() {
                 </a>
 
                 <div className="relative z-10 text-left">
-                  <div className="flex items-center gap-2 text-[10px] font-semibold uppercase tracking-[0.22em] text-white/50">
-                    <Sparkles size={11} className="text-brand-orange" />
+                  <div className="flex items-center gap-2 text-[10px] font-semibold uppercase tracking-[0.22em] text-white/70">
+                    <Sparkle size={10} className="text-brand-orange" strokeWidth={1.5} />
                     <span>Help Us Improve</span>
                   </div>
                   <div className="mt-3.5 space-y-1">
@@ -257,6 +239,7 @@ export default function Home() {
                 </div>
               </div>
             </div>
+
           </div>
         </div>
       </section>
