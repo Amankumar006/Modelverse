@@ -148,9 +148,9 @@ export default function HeroSection() {
               fontFamily: "var(--font-display, 'Instrument Serif', serif)",
             }}
           >
-            Aethera<sup className="text-sm font-sans select-none">®</sup>
+            Modelverse<sup className="text-sm font-sans select-none">®</sup>
           </Link>
-
+ 
           {/* Menu Items (desktop) */}
           <div className="hidden md:flex items-center gap-6 lg:gap-8">
             <Link
@@ -159,15 +159,18 @@ export default function HeroSection() {
             >
               Home
             </Link>
-            {["Studio", "About", "Journal", "Reach Us"].map((item) => (
-              <Link
-                key={item}
-                href={`/${item.toLowerCase().replace(" ", "-")}`}
-                className="text-sm font-medium text-[#6F6F6F] hover:text-[#000000] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black focus-visible:ring-offset-2 rounded-md px-1"
-              >
-                {item}
-              </Link>
-            ))}
+            <Link
+              href="/models"
+              className="text-sm font-medium text-[#6F6F6F] hover:text-[#000000] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black focus-visible:ring-offset-2 rounded-md px-1"
+            >
+              Models
+            </Link>
+            <Link
+              href="/timeline"
+              className="text-sm font-medium text-[#6F6F6F] hover:text-[#000000] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black focus-visible:ring-offset-2 rounded-md px-1"
+            >
+              Timeline
+            </Link>
           </div>
 
           {/* Desktop Search Input */}
@@ -240,9 +243,12 @@ export default function HeroSection() {
 
           {/* CTA & Mobile Hamburger */}
           <div className="flex items-center gap-2 shrink-0">
-            <button className="bg-[#000000] text-[#FFFFFF] text-sm font-medium px-6 py-2.5 rounded-full hover:scale-[1.03] active:scale-[0.98] transition-all hover:bg-black/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black focus-visible:ring-offset-2">
-              Begin Journey
-            </button>
+            <Link
+              href="/models"
+              className="bg-[#000000] text-[#FFFFFF] text-sm font-medium px-6 py-2.5 rounded-full hover:scale-[1.03] active:scale-[0.98] transition-all hover:bg-black/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black focus-visible:ring-offset-2 flex items-center justify-center"
+            >
+              Browse Catalog
+            </Link>
 
             {/* Mobile menu trigger */}
             <button
@@ -323,16 +329,20 @@ export default function HeroSection() {
               >
                 Home
               </Link>
-              {["Studio", "About", "Journal", "Reach Us"].map((item) => (
-                <Link
-                  key={item}
-                  href={`/${item.toLowerCase().replace(" ", "-")}`}
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="text-sm font-medium text-[#6F6F6F] hover:text-[#000000] px-3 py-2 rounded-xl hover:bg-black/5"
-                >
-                  {item}
-                </Link>
-              ))}
+              <Link
+                href="/models"
+                onClick={() => setMobileMenuOpen(false)}
+                className="text-sm font-medium text-[#6F6F6F] hover:text-[#000000] px-3 py-2 rounded-xl hover:bg-black/5"
+              >
+                Models
+              </Link>
+              <Link
+                href="/timeline"
+                onClick={() => setMobileMenuOpen(false)}
+                className="text-sm font-medium text-[#6F6F6F] hover:text-[#000000] px-3 py-2 rounded-xl hover:bg-black/5"
+              >
+                Timeline
+              </Link>
             </div>
           </div>
         )}
@@ -354,24 +364,27 @@ export default function HeroSection() {
           >
             Beyond{" "}
             <span className="italic text-[#6F6F6F]">
-              silence,
+              the noise,
             </span>{" "}
-            we build{" "}
+            we track{" "}
             <span className="italic text-[#6F6F6F]">
-              the eternal.
+              the frontier.
             </span>
           </h1>
 
           {/* Description */}
           <p className="text-base sm:text-lg text-[#6F6F6F] max-w-2xl mt-8 leading-relaxed animate-fade-rise-delay">
-            Building platforms for brilliant minds, fearless makers, and thoughtful souls.
-            Through the noise, we craft digital havens for deep work and pure flows.
+            A living, fact-checked archive of every notable AI model release. Tracking parameters,
+            context sizes, and benchmarks straight from primary documentation.
           </p>
 
           {/* Hero CTA */}
-          <button className="rounded-full bg-[#000000] text-[#FFFFFF] text-base font-medium px-14 py-5 mt-12 hover:scale-[1.03] active:scale-[0.98] transition-all hover:bg-black/90 animate-fade-rise-delay-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black focus-visible:ring-offset-2">
-            Begin Journey
-          </button>
+          <Link
+            href="/models"
+            className="rounded-full bg-[#000000] text-[#FFFFFF] text-base font-medium px-14 py-5 mt-12 hover:scale-[1.03] active:scale-[0.98] transition-all hover:bg-black/90 animate-fade-rise-delay-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black focus-visible:ring-offset-2 flex items-center justify-center inline-flex"
+          >
+            Explore Catalog
+          </Link>
         </div>
       </div>
     </section>
