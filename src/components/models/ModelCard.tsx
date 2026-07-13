@@ -61,7 +61,7 @@ export default function ModelCard({
   return (
     <Link
       href={`/models/${model.slug}`}
-      className="group flex flex-col gap-3 p-5 rounded-2xl bg-white/[0.03] border border-white/[0.06] hover:border-white/[0.12] hover:bg-white/[0.05] transition-all min-w-[240px] sm:min-w-[280px]"
+      className="group flex flex-col gap-3 p-5 rounded-2xl bg-white/[0.03] border border-white/[0.06] hover:border-white/[0.12] hover:bg-white/[0.05] transition-all w-full"
     >
       <div className="flex items-start justify-between gap-2">
         <div className="min-w-0">

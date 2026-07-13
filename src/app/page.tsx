@@ -44,12 +44,12 @@ export default function Home() {
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-10">
           <div>
             <h2
-              className="text-2xl sm:text-3xl font-bold tracking-tight text-white"
+              className="text-2xl sm:text-3xl font-normal tracking-tight text-white"
               style={{
                 fontFamily: "var(--font-display, ui-sans-serif, system-ui, sans-serif)",
               }}
             >
-              Recently Tracked
+              Recently <span className="italic text-white/50">Tracked</span>
             </h2>
             <p className="text-sm text-white/50 mt-1.5">
               The latest open-weights breakthroughs and closed-source frontier releases.
@@ -77,12 +77,12 @@ export default function Home() {
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-10">
           <div>
             <h2
-              className="text-2xl sm:text-3xl font-bold tracking-tight text-white"
+              className="text-2xl sm:text-3xl font-normal tracking-tight text-white"
               style={{
                 fontFamily: "var(--font-display, ui-sans-serif, system-ui, sans-serif)",
               }}
             >
-              This Week in AI
+              This Week <span className="italic text-white/50">in AI</span>
             </h2>
             <p className="text-sm text-white/50 mt-1.5">
               Follow changes and updates in chronological order.
@@ -119,21 +119,31 @@ export default function Home() {
             });
 
             return (
-              <div key={model.id} className="relative group">
-                <span className="absolute -left-[31px] top-1 h-3.5 w-3.5 rounded-full bg-black border border-white/20 group-hover:border-brand-orange transition-colors" />
-                <div className="space-y-1">
-                  <div className="flex items-center gap-2">
-                    <span className="text-[11px] font-semibold text-white/40 tabular-nums uppercase">{formattedDate}</span>
-                    <span className="text-xs text-white/30">•</span>
-                    <span className="text-xs text-white/50">{model.developer}</span>
+              <div key={model.id} className="relative group pl-2">
+                {/* Bullet */}
+                <span className="absolute -left-[30px] top-4.5 h-2 w-2 rounded-full bg-black border border-white/30 group-hover:border-brand-orange group-hover:bg-brand-orange transition-all duration-300 z-10" />
+                
+                <Link
+                  href={`/models/${model.slug}`}
+                  className="block p-4 rounded-2xl bg-white/[0.01] hover:bg-white/[0.03] border border-white/[0.03] hover:border-white/[0.08] transition-all duration-300"
+                >
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                    <div className="space-y-1.5 min-w-0">
+                      <div className="flex items-center gap-2 text-[10px] font-semibold uppercase tracking-wider text-white/35">
+                        <span className="tabular-nums">{formattedDate}</span>
+                        <span>•</span>
+                        <span>{model.developer}</span>
+                      </div>
+                      <h3 className="text-base font-semibold text-white group-hover:text-brand-orange transition-colors">
+                        {model.name}
+                      </h3>
+                    </div>
+                    
+                    <span className="self-start sm:self-center text-xs text-white/50 group-hover:text-white border border-white/10 group-hover:border-white/20 px-3.5 py-1.5 rounded-full transition-colors whitespace-nowrap">
+                      Specs &rarr;
+                    </span>
                   </div>
-                  <Link
-                    href={`/models/${model.slug}`}
-                    className="block text-sm font-semibold text-white group-hover:text-brand-orange transition-colors"
-                  >
-                    {model.name}
-                  </Link>
-                </div>
+                </Link>
               </div>
             );
           })}
@@ -144,14 +154,14 @@ export default function Home() {
       <section className="relative py-20 px-4 sm:px-6 md:px-8 max-w-6xl mx-auto border-t border-white/[0.06] z-50 text-center">
         <div className="max-w-2xl mx-auto space-y-6">
           <h2
-            className="text-2xl sm:text-3xl font-bold tracking-tight text-white"
+            className="text-2xl sm:text-3xl font-normal tracking-tight text-white"
             style={{
               fontFamily: "var(--font-display, ui-sans-serif, system-ui, sans-serif)",
             }}
           >
-            Our Curation Integrity
+            Our Curation <span className="italic text-white/50">Integrity</span>
           </h2>
-          <p className="text-sm sm:text-base text-white/70 leading-relaxed">
+          <p className="text-sm sm:text-base text-white/60 leading-relaxed max-w-xl mx-auto">
             Every entry on Modelverse is sourced directly from official developer blogs, technical
             model cards, or verified primary documentation. If we cannot corroborate a claim or a
             benchmark score, we mark it as unverified in the catalog rather than presenting guesses.
@@ -159,21 +169,27 @@ export default function Home() {
         </div>
 
         {/* 3 Callout features */}
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 mt-12 max-w-4xl mx-auto">
-          <div className="flex flex-col items-center p-5 rounded-2xl bg-white/[0.02] border border-white/[0.04]">
-            <ShieldCheck size={20} className="text-brand-orange mb-3" />
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mt-16 max-w-4xl mx-auto">
+          <div className="flex flex-col items-center p-6 rounded-2xl bg-white/[0.01] border border-white/[0.04] hover:border-white/[0.1] hover:bg-white/[0.03] hover:scale-[1.02] transition-all duration-300">
+            <div className="p-3 bg-brand-orange/10 rounded-xl mb-4">
+              <ShieldCheck size={20} className="text-brand-orange" />
+            </div>
             <p className="text-xs font-semibold text-white/80 uppercase tracking-wider">Fact-Checked Specs</p>
-            <p className="text-[11px] text-white/45 mt-1.5 max-w-[200px]">Only real facts sourced from formal technical documentation.</p>
+            <p className="text-[11px] text-white/40 mt-2 max-w-[200px] leading-relaxed">Only real facts sourced from formal technical documentation.</p>
           </div>
-          <div className="flex flex-col items-center p-5 rounded-2xl bg-white/[0.02] border border-white/[0.04]">
-            <Layers size={20} className="text-brand-orange mb-3" />
+          <div className="flex flex-col items-center p-6 rounded-2xl bg-white/[0.01] border border-white/[0.04] hover:border-white/[0.1] hover:bg-white/[0.03] hover:scale-[1.02] transition-all duration-300">
+            <div className="p-3 bg-brand-orange/10 rounded-xl mb-4">
+              <Layers size={20} className="text-brand-orange" />
+            </div>
             <p className="text-xs font-semibold text-white/80 uppercase tracking-wider">No Sponsored Claims</p>
-            <p className="text-[11px] text-white/45 mt-1.5 max-w-[200px]">No paid benchmarking or biased developer evaluations.</p>
+            <p className="text-[11px] text-white/40 mt-2 max-w-[200px] leading-relaxed">No paid benchmarking or biased developer evaluations.</p>
           </div>
-          <div className="flex flex-col items-center p-5 rounded-2xl bg-white/[0.02] border border-white/[0.04]">
-            <CheckCircle size={20} className="text-brand-orange mb-3" />
+          <div className="flex flex-col items-center p-6 rounded-2xl bg-white/[0.01] border border-white/[0.04] hover:border-white/[0.1] hover:bg-white/[0.03] hover:scale-[1.02] transition-all duration-300">
+            <div className="p-3 bg-brand-orange/10 rounded-xl mb-4">
+              <CheckCircle size={20} className="text-brand-orange" />
+            </div>
             <p className="text-xs font-semibold text-white/80 uppercase tracking-wider">Always Current</p>
-            <p className="text-[11px] text-white/45 mt-1.5 max-w-[200px]">Updated dynamically directly as new foundation models release.</p>
+            <p className="text-[11px] text-white/40 mt-2 max-w-[200px] leading-relaxed">Updated dynamically directly as new foundation models release.</p>
           </div>
         </div>
       </section>
