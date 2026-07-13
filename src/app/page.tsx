@@ -191,7 +191,7 @@ export default function Home() {
             {/* Column 3: Stacked Cards (Developers Marquee & Inaccuracy suggestions) */}
             <div className="flex flex-col gap-4 md:gap-5 h-full">
               {/* Developers Marquee */}
-              <div className="rounded-2xl border border-white/[0.05] relative overflow-hidden bg-black p-6 flex flex-col justify-between min-h-[220px]">
+              <div className="rounded-2xl border border-white/[0.05] relative overflow-hidden bg-black p-6 flex flex-col justify-between min-h-[280px] lg:flex-[1.4] flex-1">
                 <div className="flex items-center gap-2 text-[10px] font-semibold uppercase tracking-[0.22em] text-white/50 mb-4">
                   <CheckCircle size={12} className="text-brand-orange" />
                   <span>Developers We Track</span>
@@ -200,10 +200,10 @@ export default function Home() {
               </div>
 
               {/* Spot an Inaccuracy Suggestions Card */}
-              <div className="rounded-2xl border border-white/[0.05] relative overflow-hidden bg-[#1C201E] noise-overlay p-6 sm:p-7 flex flex-col justify-between min-h-[220px]">
+              <div className="rounded-2xl border border-white/[0.05] relative overflow-hidden bg-[#1C201E] noise-overlay p-5 sm:p-6 flex flex-col justify-between min-h-[160px] lg:flex-[0.6] flex-1">
                 <a
                   href="mailto:corrections@modelverse.ai?subject=Modelverse Correction"
-                  className="absolute top-6 right-6 h-9 w-9 rounded-full bg-white/5 border border-white/10 hover:bg-white/10 hover:border-white/20 transition-all flex items-center justify-center text-white/70 hover:text-white z-20"
+                  className="absolute top-5 right-5 h-9 w-9 rounded-full bg-white/5 border border-white/10 hover:bg-white/10 hover:border-white/20 transition-all flex items-center justify-center text-white/70 hover:text-white z-20"
                   title="Submit Correction"
                 >
                   <ArrowUpRight size={16} />
@@ -214,13 +214,13 @@ export default function Home() {
                     <Sparkles size={11} className="text-brand-orange" />
                     <span>Help Us Improve</span>
                   </div>
-                  <div className="mt-4 space-y-1">
+                  <div className="mt-3.5 space-y-1">
                     <p className="text-sm font-semibold text-white/90 font-mono">corrections@modelverse.ai</p>
-                    <p className="text-xs text-white/60">Know a model we're missing? Suggest it.</p>
+                    <p className="text-xs text-white/55">Know a model we're missing? Suggest it.</p>
                   </div>
                 </div>
 
-                <div className="relative z-10 mt-4 text-left">
+                <div className="relative z-10 mt-3 text-left">
                   <a
                     href="mailto:corrections@modelverse.ai?subject=Model Suggestion"
                     className="inline-flex items-center gap-1.5 text-xs text-brand-orange hover:text-[#e85a28] font-semibold hover:underline"

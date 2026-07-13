@@ -73,23 +73,33 @@ export default function DeveloperMarquee({ developers }: { developers: string[] 
     "Google",
     "Meta",
     "Mistral",
+    "Cohere",
+    "Stability AI",
+    "DeepSeek",
+    "Microsoft",
   ];
 
   // Duplicate to ensure smooth scrolling loop
-  const duplicatedDevs = [...displayDevs, ...displayDevs, ...displayDevs, ...displayDevs];
+  const duplicatedDevs = [...displayDevs, ...displayDevs, ...displayDevs];
 
   return (
-    <div className="space-y-3.5 overflow-hidden py-1 relative [mask-image:linear-gradient(to_right,transparent,black_12%,black_88%,transparent)]">
-      {/* Row 1: Left */}
-      <div className="flex gap-3.5 w-max animate-marquee-left">
+    <div className="space-y-3 overflow-hidden py-1 relative [mask-image:linear-gradient(to_right,transparent,black_12%,black_88%,transparent)]">
+      {/* Row 1: Left-to-Right (Fast) */}
+      <div className="flex gap-3 w-max animate-marquee-right" style={{ animationDuration: "20s" }}>
         {duplicatedDevs.map((dev, idx) => (
-          <DeveloperTile key={`left-${dev}-${idx}`} developer={dev} />
+          <DeveloperTile key={`row1-${dev}-${idx}`} developer={dev} />
         ))}
       </div>
-      {/* Row 2: Right */}
-      <div className="flex gap-3.5 w-max animate-marquee-right">
+      {/* Row 2: Left-to-Right (Medium) */}
+      <div className="flex gap-3 w-max animate-marquee-right" style={{ animationDuration: "26s" }}>
         {duplicatedDevs.map((dev, idx) => (
-          <DeveloperTile key={`right-${dev}-${idx}`} developer={dev} />
+          <DeveloperTile key={`row2-${dev}-${idx}`} developer={dev} />
+        ))}
+      </div>
+      {/* Row 3: Left-to-Right (Slow) */}
+      <div className="flex gap-3 w-max animate-marquee-right" style={{ animationDuration: "32s" }}>
+        {duplicatedDevs.map((dev, idx) => (
+          <DeveloperTile key={`row3-${dev}-${idx}`} developer={dev} />
         ))}
       </div>
     </div>
