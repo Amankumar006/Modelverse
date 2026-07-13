@@ -1,9 +1,17 @@
 import type { Metadata } from "next";
 import HeroSection from "@/components/hero/HeroSection";
-import ModelCard from "@/components/models/ModelCard";
-import { getRecentModels, SITE_URL } from "@/lib/models";
+import DeveloperMarquee from "@/components/home/DeveloperMarquee";
+import { getRecentModels, getModelCount, getAllDevelopers, SITE_URL } from "@/lib/models";
 import Link from "next/link";
-import { ArrowRight, Rss, ShieldCheck, Layers, CheckCircle } from "lucide-react";
+import {
+  ArrowRight,
+  Rss,
+  ShieldCheck,
+  Layers,
+  CheckCircle,
+  Sparkles,
+  ArrowUpRight,
+} from "lucide-react";
 
 export const dynamic = "force-static";
 
@@ -32,164 +40,196 @@ export const metadata: Metadata = {
 };
 
 export default function Home() {
-  const recentModels = getRecentModels(4);
+  const recentModels = getRecentModels(3);
+  const modelCount = getModelCount();
+  const developers = getAllDevelopers();
 
   return (
     <main className="bg-black text-white selection:bg-brand-orange selection:text-white">
       {/* ── Hero Section ───────────────────────────────────── */}
       <HeroSection />
 
-      {/* ── Recently Added Models Strip ────────────────────── */}
-      <section className="relative py-20 px-4 sm:px-6 md:px-8 max-w-6xl mx-auto border-t border-white/[0.06] z-50">
-        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-10">
-          <div>
-            <h2
-              className="text-2xl sm:text-3xl font-normal tracking-tight text-white"
-              style={{
-                fontFamily: "var(--font-display, ui-sans-serif, system-ui, sans-serif)",
-              }}
-            >
-              Recently <span className="italic text-white/50">Tracked</span>
-            </h2>
-            <p className="text-sm text-white/50 mt-1.5">
-              The latest open-weights breakthroughs and closed-source frontier releases.
-            </p>
+      {/* ── Bento-Grid Features Section ────────────────────── */}
+      <section className="bg-[#0a0a0a] text-white py-24 px-4 sm:px-6 md:px-8 border-t border-white/[0.04] relative overflow-hidden z-10">
+        <div className="max-w-6xl mx-auto space-y-12">
+          {/* Header Row */}
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
+            <div>
+              <h2
+                className="text-3xl sm:text-4xl font-normal tracking-tight text-white"
+                style={{
+                  fontFamily: "var(--font-display, ui-sans-serif, system-ui, sans-serif)",
+                }}
+              >
+                What We <span className="italic text-white/50">Track</span>
+              </h2>
+              <p className="text-sm text-white/40 mt-2 max-w-md">
+                From open-weight research breakthroughs to proprietary cloud APIs, follow the entire index of modern AI.
+              </p>
+            </div>
+
+            <div className="flex flex-wrap items-center gap-4">
+              <a
+                href="/feed.xml"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 text-xs text-white/60 hover:text-white transition-colors bg-white/[0.04] border border-white/[0.08] hover:bg-white/[0.08] px-3.5 py-1.5 rounded-full"
+              >
+                <Rss size={13} className="text-brand-orange" />
+                Subscribe via RSS
+              </a>
+              <Link
+                href="/models"
+                className="group inline-flex items-center gap-1.5 text-sm font-medium text-brand-orange hover:text-[#e85a28] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-orange/50 focus-visible:ring-offset-2 focus-visible:ring-offset-black rounded-lg px-2 py-1"
+              >
+                Browse full catalog
+                <ArrowRight size={16} className="transition-transform group-hover:translate-x-0.5" />
+              </Link>
+            </div>
           </div>
-          <Link
-            href="/models"
-            className="group inline-flex items-center gap-1.5 text-sm font-medium text-brand-orange hover:text-[#e85a28] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-orange/50 focus-visible:ring-offset-2 focus-visible:ring-offset-black rounded-lg px-2 py-1"
-          >
-            Browse entire catalog
-            <ArrowRight size={16} className="transition-transform group-hover:translate-x-0.5" />
-          </Link>
-        </div>
 
-        {/* Horizontal flex / grid cards */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-          {recentModels.map((model) => (
-            <ModelCard key={model.id} model={model} variant="card" />
-          ))}
-        </div>
-      </section>
+          {/* Grid Layout */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5">
+            {/* Column 1: Tracked Releases (Large Row Span Card) */}
+            <div className="lg:row-span-2 rounded-2xl border border-white/[0.05] relative overflow-hidden bg-black p-6 sm:p-8 flex flex-col justify-between min-h-[480px] lg:min-h-full">
+              {/* Autoplay Loop Background Video */}
+              <video
+                autoPlay
+                loop
+                muted
+                playsInline
+                className="absolute inset-0 w-full h-full object-cover z-0 pointer-events-none opacity-30"
+              >
+                <source src="/videos/tracked-releases-bg.mp4" type="video/mp4" />
+              </video>
+              <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/40 to-black/90 z-0" />
 
-      {/* ── Timeline / Changelog Teaser Section ──────────────── */}
-      <section className="relative py-20 px-4 sm:px-6 md:px-8 max-w-6xl mx-auto border-t border-white/[0.06] z-50">
-        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-10">
-          <div>
-            <h2
-              className="text-2xl sm:text-3xl font-normal tracking-tight text-white"
-              style={{
-                fontFamily: "var(--font-display, ui-sans-serif, system-ui, sans-serif)",
-              }}
-            >
-              This Week <span className="italic text-white/50">in AI</span>
-            </h2>
-            <p className="text-sm text-white/50 mt-1.5">
-              Follow changes and updates in chronological order.
-            </p>
-          </div>
-          
-          <div className="flex flex-wrap items-center gap-4">
-            <a
-              href="/feed.xml"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 text-xs text-white/60 hover:text-white transition-colors bg-white/[0.04] border border-white/[0.08] hover:bg-white/[0.08] px-3.5 py-1.5 rounded-full"
-            >
-              <Rss size={13} className="text-brand-orange" />
-              Subscribe via RSS
-            </a>
-            <Link
-              href="/timeline"
-              className="group inline-flex items-center gap-1.5 text-sm font-medium text-brand-orange hover:text-[#e85a28] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-orange/50 focus-visible:ring-offset-2 focus-visible:ring-offset-black rounded-lg px-2 py-1"
-            >
-              View full timeline
-              <ArrowRight size={16} className="transition-transform group-hover:translate-x-0.5" />
-            </Link>
-          </div>
-        </div>
+              <div className="relative z-10 flex items-center justify-center gap-2 text-[11px] font-semibold uppercase tracking-[0.22em] text-white/70 text-center">
+                <Sparkles size={11} className="text-brand-orange" />
+                <span>Tracked Releases</span>
+                <Sparkles size={11} className="text-brand-orange" />
+              </div>
 
-        {/* Timeline Changelog List */}
-        <div className="border-l border-white/[0.08] ml-4 pl-6 space-y-6">
-          {recentModels.map((model) => {
-            const dateObj = new Date(model.releaseDate);
-            const formattedDate = dateObj.toLocaleDateString("en-US", {
-              month: "short",
-              day: "numeric",
-            });
-
-            return (
-              <div key={model.id} className="relative group pl-2">
-                {/* Bullet */}
-                <span className="absolute -left-[30px] top-4.5 h-2 w-2 rounded-full bg-black border border-white/30 group-hover:border-brand-orange group-hover:bg-brand-orange transition-all duration-300 z-10" />
-                
-                <Link
-                  href={`/models/${model.slug}`}
-                  className="block p-4 rounded-2xl bg-white/[0.01] hover:bg-white/[0.03] border border-white/[0.03] hover:border-white/[0.08] transition-all duration-300"
-                >
-                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-                    <div className="space-y-1.5 min-w-0">
-                      <div className="flex items-center gap-2 text-[10px] font-semibold uppercase tracking-wider text-white/35">
-                        <span className="tabular-nums">{formattedDate}</span>
+              {/* Mini timeline of recent 3 releases */}
+              <div className="relative z-10 space-y-3.5 mt-auto">
+                <p className="text-[10px] uppercase tracking-wider text-white/40 font-semibold mb-2">Recently Added</p>
+                {recentModels.map((model) => {
+                  const dateObj = new Date(model.releaseDate);
+                  const formattedDate = dateObj.toLocaleDateString("en-US", {
+                    month: "short",
+                    day: "numeric",
+                  });
+                  return (
+                    <Link
+                      key={model.id}
+                      href={`/models/${model.slug}`}
+                      className="block p-4 rounded-xl bg-white/[0.02] hover:bg-brand-orange/10 border border-white/[0.04] hover:border-brand-orange/30 transition-all text-left group/item"
+                    >
+                      <div className="flex items-center gap-2 text-[10px] font-semibold uppercase tracking-wider text-white/35 group-hover/item:text-brand-orange/80 transition-colors">
+                        <span>{formattedDate}</span>
                         <span>•</span>
                         <span>{model.developer}</span>
                       </div>
-                      <h3 className="text-base font-semibold text-white group-hover:text-brand-orange transition-colors">
-                        {model.name}
-                      </h3>
-                    </div>
-                    
-                    <span className="self-start sm:self-center text-xs text-white/50 group-hover:text-white border border-white/10 group-hover:border-white/20 px-3.5 py-1.5 rounded-full transition-colors whitespace-nowrap">
-                      Specs &rarr;
-                    </span>
-                  </div>
-                </Link>
+                      <div className="text-sm font-semibold text-white/80 group-hover/item:text-white transition-colors mt-1 flex items-center justify-between">
+                        <span>{model.name}</span>
+                        <span className="text-xs text-white/30 group-hover/item:text-white/60 transition-colors opacity-0 group-hover/item:opacity-100">&rarr;</span>
+                      </div>
+                    </Link>
+                  );
+                })}
               </div>
-            );
-          })}
-        </div>
-      </section>
+            </div>
 
-      {/* ── Trust / Methodology Section ────────────────────── */}
-      <section className="relative py-20 px-4 sm:px-6 md:px-8 max-w-6xl mx-auto border-t border-white/[0.06] z-50 text-center">
-        <div className="max-w-2xl mx-auto space-y-6">
-          <h2
-            className="text-2xl sm:text-3xl font-normal tracking-tight text-white"
-            style={{
-              fontFamily: "var(--font-display, ui-sans-serif, system-ui, sans-serif)",
-            }}
-          >
-            Our Curation <span className="italic text-white/50">Integrity</span>
-          </h2>
-          <p className="text-sm sm:text-base text-white/60 leading-relaxed max-w-xl mx-auto">
-            Every entry on Modelverse is sourced directly from official developer blogs, technical
-            model cards, or verified primary documentation. If we cannot corroborate a claim or a
-            benchmark score, we mark it as unverified in the catalog rather than presenting guesses.
-          </p>
-        </div>
+            {/* Column 2: Stacked Cards (Methodology & stats) */}
+            <div className="flex flex-col gap-4 md:gap-5 h-full">
+              {/* Methodology Card */}
+              <div className="rounded-2xl border border-white/[0.05] relative overflow-hidden bg-[#1C201E] noise-overlay p-6 sm:p-7 flex flex-col justify-between min-h-[220px]">
+                <div className="relative z-10">
+                  <div className="flex items-center gap-2 text-[10px] font-semibold uppercase tracking-[0.22em] text-white/50">
+                    <ShieldCheck size={12} className="text-brand-orange" />
+                    <span>Our Methodology</span>
+                  </div>
+                  <p className="text-[13px] sm:text-[13.5px] leading-[1.6] text-white/80 mt-4">
+                    Every entry on Modelverse is sourced from official documentation, model cards, and primary announcements, then fact-checked before publishing. If we can't verify a detail, we say so plainly.
+                  </p>
+                </div>
+                <div className="relative z-10 text-[11px] text-white/40 font-medium italic mt-4">
+                  — Modelverse Editorial Standards
+                </div>
+              </div>
 
-        {/* 3 Callout features */}
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mt-16 max-w-4xl mx-auto">
-          <div className="flex flex-col items-center p-6 rounded-2xl bg-white/[0.01] border border-white/[0.04] hover:border-white/[0.1] hover:bg-white/[0.03] hover:scale-[1.02] transition-all duration-300">
-            <div className="p-3 bg-brand-orange/10 rounded-xl mb-4">
-              <ShieldCheck size={20} className="text-brand-orange" />
+              {/* Statistics Card */}
+              <div className="rounded-2xl border border-white/[0.05] relative overflow-hidden bg-black p-6 sm:p-7 flex flex-col justify-between min-h-[220px]">
+                <video
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
+                  className="absolute inset-0 w-full h-full object-cover z-0 pointer-events-none opacity-20"
+                >
+                  <source src="/videos/stat-card-bg.mp4" type="video/mp4" />
+                </video>
+                <div className="absolute inset-0 bg-gradient-to-b from-black/60 to-black/90 z-0" />
+
+                <div className="relative z-10 flex items-center justify-center gap-2 text-[10px] font-semibold uppercase tracking-[0.22em] text-white/50">
+                  <Layers size={12} className="text-brand-orange" />
+                  <span>Database Statistics</span>
+                </div>
+                
+                <div className="relative z-10 text-center py-2">
+                  <span className="text-6xl sm:text-7xl font-extralight tracking-tighter text-white drop-shadow select-none">
+                    {modelCount}+
+                  </span>
+                </div>
+
+                <div className="relative z-10 text-[11px] text-white/40 tracking-wider text-center uppercase font-semibold">
+                  Models tracked and counting
+                </div>
+              </div>
             </div>
-            <p className="text-xs font-semibold text-white/80 uppercase tracking-wider">Fact-Checked Specs</p>
-            <p className="text-[11px] text-white/40 mt-2 max-w-[200px] leading-relaxed">Only real facts sourced from formal technical documentation.</p>
-          </div>
-          <div className="flex flex-col items-center p-6 rounded-2xl bg-white/[0.01] border border-white/[0.04] hover:border-white/[0.1] hover:bg-white/[0.03] hover:scale-[1.02] transition-all duration-300">
-            <div className="p-3 bg-brand-orange/10 rounded-xl mb-4">
-              <Layers size={20} className="text-brand-orange" />
+
+            {/* Column 3: Stacked Cards (Developers Marquee & Inaccuracy suggestions) */}
+            <div className="flex flex-col gap-4 md:gap-5 h-full">
+              {/* Developers Marquee */}
+              <div className="rounded-2xl border border-white/[0.05] relative overflow-hidden bg-black p-6 flex flex-col justify-between min-h-[220px]">
+                <div className="flex items-center gap-2 text-[10px] font-semibold uppercase tracking-[0.22em] text-white/50 mb-4">
+                  <CheckCircle size={12} className="text-brand-orange" />
+                  <span>Developers We Track</span>
+                </div>
+                <DeveloperMarquee developers={developers} />
+              </div>
+
+              {/* Spot an Inaccuracy Suggestions Card */}
+              <div className="rounded-2xl border border-white/[0.05] relative overflow-hidden bg-[#1C201E] noise-overlay p-6 sm:p-7 flex flex-col justify-between min-h-[220px]">
+                <a
+                  href="mailto:corrections@modelverse.ai?subject=Modelverse Correction"
+                  className="absolute top-6 right-6 h-9 w-9 rounded-full bg-white/5 border border-white/10 hover:bg-white/10 hover:border-white/20 transition-all flex items-center justify-center text-white/70 hover:text-white z-20"
+                  title="Submit Correction"
+                >
+                  <ArrowUpRight size={16} />
+                </a>
+
+                <div className="relative z-10 text-left">
+                  <div className="flex items-center gap-2 text-[10px] font-semibold uppercase tracking-[0.22em] text-white/50">
+                    <Sparkles size={11} className="text-brand-orange" />
+                    <span>Help Us Improve</span>
+                  </div>
+                  <div className="mt-4 space-y-1">
+                    <p className="text-sm font-semibold text-white/90 font-mono">corrections@modelverse.ai</p>
+                    <p className="text-xs text-white/60">Know a model we're missing? Suggest it.</p>
+                  </div>
+                </div>
+
+                <div className="relative z-10 mt-4 text-left">
+                  <a
+                    href="mailto:corrections@modelverse.ai?subject=Model Suggestion"
+                    className="inline-flex items-center gap-1.5 text-xs text-brand-orange hover:text-[#e85a28] font-semibold hover:underline"
+                  >
+                    Send Suggestion &rarr;
+                  </a>
+                </div>
+              </div>
             </div>
-            <p className="text-xs font-semibold text-white/80 uppercase tracking-wider">No Sponsored Claims</p>
-            <p className="text-[11px] text-white/40 mt-2 max-w-[200px] leading-relaxed">No paid benchmarking or biased developer evaluations.</p>
-          </div>
-          <div className="flex flex-col items-center p-6 rounded-2xl bg-white/[0.01] border border-white/[0.04] hover:border-white/[0.1] hover:bg-white/[0.03] hover:scale-[1.02] transition-all duration-300">
-            <div className="p-3 bg-brand-orange/10 rounded-xl mb-4">
-              <CheckCircle size={20} className="text-brand-orange" />
-            </div>
-            <p className="text-xs font-semibold text-white/80 uppercase tracking-wider">Always Current</p>
-            <p className="text-[11px] text-white/40 mt-2 max-w-[200px] leading-relaxed">Updated dynamically directly as new foundation models release.</p>
           </div>
         </div>
       </section>

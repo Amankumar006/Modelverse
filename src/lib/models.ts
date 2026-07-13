@@ -104,6 +104,23 @@ export function getAllDevelopers(): string[] {
   return [...new Set(models.map((m) => m.developer))].sort();
 }
 
+/** Get total count of models tracked. */
+export function getModelCount(): number {
+  return getAllModels().length;
+}
+
+/** Get developers and their counts of tracked models. */
+export function getDeveloperCounts(): { developer: string; count: number }[] {
+  const models = getAllModels();
+  const counts: Record<string, number> = {};
+  for (const m of models) {
+    counts[m.developer] = (counts[m.developer] || 0) + 1;
+  }
+  return Object.entries(counts)
+    .map(([developer, count]) => ({ developer, count }))
+    .sort((a, b) => b.count - a.count || a.developer.localeCompare(b.developer));
+}
+
 /* ------------------------------------------------------------------ */
 /*  Constants                                                          */
 /* ------------------------------------------------------------------ */
