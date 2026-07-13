@@ -91,7 +91,7 @@ export default function Home() {
           {/* Grid Layout */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5 items-stretch">
             {/* Column 1: Tracked Releases (Large Row Span Card) */}
-            <div className="rounded-2xl border border-white/[0.05] relative overflow-hidden bg-black p-6 sm:p-8 flex flex-col justify-between h-full min-h-[480px]">
+            <div className="rounded-2xl border border-white/[0.05] relative overflow-hidden bg-black p-6 sm:p-8 flex flex-col justify-between min-h-[480px]">
               {/* Background Image */}
               <div className="absolute inset-0 z-0 pointer-events-none">
                 <img
@@ -139,7 +139,7 @@ export default function Home() {
             </div>
 
             {/* Column 2: Stacked Cards (Methodology & stats) */}
-            <div className="flex flex-col gap-4 md:gap-5 h-full">
+            <div className="flex flex-col gap-4 md:gap-5">
               {/* Methodology Card */}
               <div className="rounded-2xl border border-white/[0.05] relative overflow-hidden bg-[#1C201E] noise-overlay p-6 sm:p-7 flex flex-col justify-between flex-1">
                 {/* Background Image */}
@@ -196,9 +196,9 @@ export default function Home() {
             </div>
 
             {/* Column 3: Stacked Cards (Developers Marquee & Inaccuracy suggestions) */}
-            <div className="flex flex-col gap-4 md:gap-5 h-full">
+            <div className="flex flex-col gap-4 md:gap-5">
               {/* Developers Marquee */}
-              <div className="rounded-2xl border border-white/[0.05] relative overflow-hidden bg-black p-6 flex flex-col justify-between flex-[1.6]">
+              <div className="rounded-2xl border border-white/[0.05] relative overflow-hidden bg-black p-6 flex flex-col justify-between flex-[1.2]">
                 {/* Background Image */}
                 <div className="absolute inset-0 z-0 pointer-events-none">
                   <img
@@ -217,7 +217,7 @@ export default function Home() {
               </div>
 
               {/* Spot an Inaccuracy Suggestions Card */}
-              <div className="rounded-2xl border border-white/[0.05] relative overflow-hidden bg-[#1C201E] noise-overlay p-5 sm:p-6 flex flex-col justify-between flex-[0.4]">
+              <div className="rounded-2xl border border-white/[0.05] relative overflow-hidden bg-[#1C201E] noise-overlay p-5 sm:p-6 flex flex-col justify-between flex-[0.8]">
                 {/* Background Image */}
                 <div className="absolute inset-0 z-0 pointer-events-none">
                   <img
