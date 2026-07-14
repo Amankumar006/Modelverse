@@ -1,0 +1,37 @@
+{
+  "id": "gpt-image-2",
+  "name": "GPT Image 2",
+  "slug": "gpt-image-2",
+  "developer": "OpenAI",
+  "releaseDate": "2026-07-14",
+  "updatedAt": "2026-07-14",
+  "type": "api-only",
+  "modality": [
+    "text",
+    "image"
+  ],
+  "primaryTask": "image-generation",
+  "deployment": [
+    "api-only"
+  ],
+  "license": "Proprietary",
+  "parameters": "Unknown",
+  "contextWindow": "Unknown",
+  "description": "State-of-the-art image generation model",
+  "keyFeatures": [],
+  "benchmarks": [],
+  "family": "gpt-image",
+  "previousVersion": null,
+  "links": {
+    "Documentation": "https://developers.openai.com/api/docs/models/all"
+  },
+  "logo": null,
+  "tags": [],
+  "sources": [
+    "https://developers.openai.com/api/docs/models/all"
+  ],
+  "verified": true,
+  "featured": false,
+  "boost": 1,
+  "curatorNotes": "Bulk imported from OpenAI developer docs."
+}

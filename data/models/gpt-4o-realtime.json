@@ -1,0 +1,36 @@
+{
+  "id": "gpt-4o-realtime",
+  "name": "GPT-4o Realtime",
+  "slug": "gpt-4o-realtime",
+  "developer": "OpenAI",
+  "releaseDate": "2026-07-14",
+  "updatedAt": "2026-07-14",
+  "type": "closed-source",
+  "modality": [
+    "audio"
+  ],
+  "primaryTask": "audio-speech",
+  "deployment": [
+    "api-only"
+  ],
+  "license": "Proprietary",
+  "parameters": "Unknown",
+  "contextWindow": "Unknown",
+  "description": "Model capable of realtime text and audio inputs and outputs",
+  "keyFeatures": [],
+  "benchmarks": [],
+  "family": "gpt-4o",
+  "previousVersion": null,
+  "links": {
+    "Documentation": "https://developers.openai.com/api/docs/models/all"
+  },
+  "logo": null,
+  "tags": [],
+  "sources": [
+    "https://developers.openai.com/api/docs/models/all"
+  ],
+  "verified": true,
+  "featured": false,
+  "boost": 1,
+  "curatorNotes": "Bulk imported from OpenAI developer docs."
+}

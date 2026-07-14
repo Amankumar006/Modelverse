@@ -51,9 +51,30 @@ export default function sitemap(): MetadataRoute.Sitemap {
     };
   });
 
+  // Dynamic family pages
+  const families = [...new Set(entries.map((e) => e.family))].filter(Boolean) as string[];
+  const familyRoutes: MetadataRoute.Sitemap = families.map((familySlug) => {
+    return {
+      url: `${SITE_URL}/models/family/${familySlug}`,
+      lastModified: new Date(),
+      changeFrequency: "weekly",
+      priority: 0.65,
+    };
+  });
+
+  // Dynamic developer pages
+  const developers = [...new Set(entries.map((e) => e.developer))].filter(Boolean);
+  const developerRoutes: MetadataRoute.Sitemap = developers.map((developer) => {
+    return {
+      url: `${SITE_URL}/models/developer/${encodeURIComponent(developer)}`,
+      lastModified: new Date(),
+      changeFrequency: "weekly",
+      priority: 0.7,
+    };
+  });
+
   // Collect unique single-facet values
   const tasks = [...new Set(entries.map((e) => e.primaryTask))].filter(Boolean);
-  const developers = [...new Set(entries.map((e) => e.developer))].filter(Boolean);
   const types = [...new Set(entries.map((e) => e.type))].filter(Boolean);
   const modalities = [...new Set(entries.flatMap((e) => e.modality))].filter(Boolean);
   const licenses = [...new Set(entries.map((e) => e.license))].filter(Boolean);
@@ -80,5 +101,5 @@ export default function sitemap(): MetadataRoute.Sitemap {
   addFacetUrls("license", licenses);
   addFacetUrls("deployment", deployments);
 
-  return [...staticRoutes, ...modelRoutes, ...facetRoutes];
+  return [...staticRoutes, ...modelRoutes, ...familyRoutes, ...developerRoutes, ...facetRoutes];
 }

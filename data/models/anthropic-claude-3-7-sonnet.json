@@ -1,0 +1,52 @@
+{
+  "name": "Claude 3.7 Sonnet",
+  "developer": "Anthropic",
+  "type": "api-only",
+  "modality": [
+    "text",
+    "image",
+    "code"
+  ],
+  "primaryTask": "chat-reasoning",
+  "deployment": [
+    "api-only"
+  ],
+  "license": "Proprietary",
+  "parameters": "undisclosed",
+  "contextWindow": "200K tokens",
+  "releaseDate": "2025-02-24",
+  "description": "Anthropic's first hybrid reasoning model. It functions as both an ordinary LLM and an extended reasoning model, giving API users strict control over \"thinking token\" budgets for advanced math and science.",
+  "keyFeatures": [
+    "Visible, controllable extended thinking",
+    "Advanced agentic software engineering"
+  ],
+  "benchmarks": [
+    {
+      "name": "SWE-bench Verified",
+      "score": "State of the art (at release)"
+    }
+  ],
+  "family": "Claude",
+  "previousVersion": "anthropic-claude-3-5-sonnet-new",
+  "website": "https://www.anthropic.com/news/claude-3-7-sonnet",
+  "paper": "",
+  "huggingFace": "",
+  "github": "",
+  "blogPost": "https://www.anthropic.com/news/claude-3-7-sonnet",
+  "sources": [
+    "https://www.anthropic.com/news/claude-3-7-sonnet"
+  ],
+  "logo": "/public/logos/anthropic.png",
+  "tags": [
+    "hybrid-reasoning",
+    "extended-thinking"
+  ],
+  "verified": true,
+  "curatorNotes": "",
+  "id": "anthropic-claude-3-7-sonnet",
+  "slug": "anthropic-claude-3-7-sonnet",
+  "updatedAt": "2026-07-14",
+  "featured": false,
+  "boost": 1,
+  "costTiers": []
+}

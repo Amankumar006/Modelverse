@@ -1,0 +1,43 @@
+{
+  "name": "Claude Sonnet 4.6",
+  "developer": "Anthropic",
+  "type": "api-only",
+  "modality": [
+    "text",
+    "image",
+    "code"
+  ],
+  "primaryTask": "code-generation",
+  "deployment": [
+    "api-only"
+  ],
+  "license": "Proprietary",
+  "parameters": "undisclosed",
+  "contextWindow": "1M tokens",
+  "releaseDate": "2026-02-17",
+  "description": "A frontier-level model optimized for professional work at scale, specifically focusing on coding workflows and agent tooling.",
+  "keyFeatures": [
+    "Scaled professional work capabilities"
+  ],
+  "benchmarks": [],
+  "family": "Claude",
+  "previousVersion": "anthropic-claude-sonnet-4-5",
+  "website": "https://www.anthropic.com",
+  "paper": "",
+  "huggingFace": "",
+  "github": "",
+  "blogPost": "",
+  "sources": [
+    "https://en.wikipedia.org/wiki/Claude_(AI)"
+  ],
+  "logo": "/public/logos/anthropic.png",
+  "tags": [],
+  "verified": true,
+  "curatorNotes": "",
+  "id": "anthropic-claude-sonnet-4-6",
+  "slug": "anthropic-claude-sonnet-4-6",
+  "updatedAt": "2026-07-14",
+  "featured": false,
+  "boost": 1,
+  "costTiers": []
+}

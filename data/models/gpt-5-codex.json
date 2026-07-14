@@ -1,0 +1,36 @@
+{
+  "id": "gpt-5-codex",
+  "name": "GPT-5-Codex",
+  "slug": "gpt-5-codex",
+  "developer": "OpenAI",
+  "releaseDate": "2026-07-14",
+  "updatedAt": "2026-07-14",
+  "type": "closed-source",
+  "modality": [
+    "text"
+  ],
+  "primaryTask": "code-generation",
+  "deployment": [
+    "api-only"
+  ],
+  "license": "Proprietary",
+  "parameters": "Unknown",
+  "contextWindow": "Unknown",
+  "description": "A version of GPT-5 optimized for agentic coding in Codex",
+  "keyFeatures": [],
+  "benchmarks": [],
+  "family": "gpt-5",
+  "previousVersion": null,
+  "links": {
+    "Documentation": "https://developers.openai.com/api/docs/models/all"
+  },
+  "logo": null,
+  "tags": [],
+  "sources": [
+    "https://developers.openai.com/api/docs/models/all"
+  ],
+  "verified": true,
+  "featured": false,
+  "boost": 1,
+  "curatorNotes": "Bulk imported from OpenAI developer docs."
+}

@@ -1,0 +1,44 @@
+{
+  "id": "sora-2",
+  "name": "Sora 2",
+  "slug": "sora-2",
+  "developer": "OpenAI",
+  "releaseDate": "2026-07-14",
+  "updatedAt": "2026-07-14",
+  "type": "closed-source",
+  "modality": [
+    "text",
+    "video"
+  ],
+  "primaryTask": "video-generation",
+  "deployment": [
+    "api-only"
+  ],
+  "license": "Proprietary",
+  "parameters": "Unknown",
+  "contextWindow": "Unknown",
+  "description": "Flagship video generation with synced audio",
+  "keyFeatures": [],
+  "benchmarks": [],
+  "family": "sora",
+  "previousVersion": null,
+  "links": {
+    "Documentation": "https://developers.openai.com/api/docs/models/all"
+  },
+  "logo": null,
+  "tags": [],
+  "sources": [
+    "https://developers.openai.com/api/docs/models/all"
+  ],
+  "verified": true,
+  "featured": false,
+  "boost": 1,
+  "curatorNotes": "Bulk imported from OpenAI developer docs.",
+  "costTiers": [
+    {
+      "id": "sora-2-pro",
+      "label": "Sora 2 Pro",
+      "description": "Most advanced synced-audio video generation"
+    }
+  ]
+}

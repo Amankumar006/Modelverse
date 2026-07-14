@@ -1,0 +1,49 @@
+{
+  "name": "Claude Fable 5",
+  "developer": "Anthropic",
+  "type": "api-only",
+  "modality": [
+    "text",
+    "image",
+    "code",
+    "multimodal"
+  ],
+  "primaryTask": "agentic",
+  "deployment": [
+    "api-only"
+  ],
+  "license": "Proprietary",
+  "parameters": "undisclosed",
+  "contextWindow": "1M tokens",
+  "releaseDate": "2026-06-09",
+  "description": "Anthropic's most capable publicly available frontier model as of mid-2026. It is engineered for long-running, multi-agent autonomous workflows and sustained logical reasoning.",
+  "keyFeatures": [
+    "Mythos-level capabilities available to the general public",
+    "Native multi-agent team coordination",
+    "Optimized for advanced coding and autonomous task execution"
+  ],
+  "benchmarks": [],
+  "family": "Claude",
+  "previousVersion": "anthropic-claude-opus-4-8",
+  "website": "https://www.anthropic.com",
+  "paper": "",
+  "huggingFace": "",
+  "github": "",
+  "blogPost": "",
+  "sources": [
+    "https://en.wikipedia.org/wiki/Claude_(AI)"
+  ],
+  "logo": "/public/logos/anthropic.png",
+  "tags": [
+    "agentic-tooling",
+    "frontier-model"
+  ],
+  "verified": true,
+  "curatorNotes": "",
+  "id": "anthropic-claude-fable-5",
+  "slug": "anthropic-claude-fable-5",
+  "updatedAt": "2026-07-14",
+  "featured": false,
+  "boost": 1,
+  "costTiers": []
+}

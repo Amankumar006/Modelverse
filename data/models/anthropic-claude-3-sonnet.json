@@ -1,0 +1,42 @@
+{
+  "name": "Claude 3 Sonnet",
+  "developer": "Anthropic",
+  "type": "api-only",
+  "modality": [
+    "text",
+    "image"
+  ],
+  "primaryTask": "chat-reasoning",
+  "deployment": [
+    "api-only"
+  ],
+  "license": "Proprietary",
+  "parameters": "undisclosed",
+  "contextWindow": "200K tokens",
+  "releaseDate": "2024-03-04",
+  "description": "The balanced mid-tier model of the Claude 3 generation, offering strong capabilities at an efficient price point.",
+  "keyFeatures": [
+    "Multimodal vision input"
+  ],
+  "benchmarks": [],
+  "family": "Claude",
+  "previousVersion": "anthropic-claude-2-1",
+  "website": "https://www.anthropic.com",
+  "paper": "",
+  "huggingFace": "",
+  "github": "",
+  "blogPost": "",
+  "sources": [
+    "https://hidekazu-konishi.com/entry/anthropic_claude_model_release_timeline.html"
+  ],
+  "logo": "/public/logos/anthropic.png",
+  "tags": [],
+  "verified": true,
+  "curatorNotes": "",
+  "id": "anthropic-claude-3-sonnet",
+  "slug": "anthropic-claude-3-sonnet",
+  "updatedAt": "2026-07-14",
+  "featured": false,
+  "boost": 1,
+  "costTiers": []
+}

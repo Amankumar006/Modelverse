@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import HeroSection from "@/components/hero/HeroSection";
 import DeveloperMarquee from "@/components/home/DeveloperMarquee";
-import { getRecentModels, getModelCount, getAllDevelopers, SITE_URL } from "@/lib/models";
+import { getRecentModels, getModelCount, getAllDevelopers, SITE_URL, getModelBySlug, getAllModelEntries } from "@/lib/models";
+import FrontierShowcase from "@/components/home/FrontierShowcase";
 import Link from "next/link";
 import {
   ArrowRight,
@@ -10,6 +11,7 @@ import {
   Flame,
 } from "lucide-react";
 import { getTrendingModels } from "@/lib/trending";
+import type { ModelEntry } from "@/lib/models";
 
 export const revalidate = 3600;
 
@@ -42,28 +44,82 @@ export default function Home() {
   const trendingModels = getTrendingModels(3);
   const modelCount = getModelCount();
   const developers = getAllDevelopers();
+  
+  // Fetch entries for the horizontal showcase pulling top models per key developer
+  const allModels = getAllModelEntries();
+  const byDeveloper = new Map<string, ModelEntry[]>();
+  for (const m of allModels) {
+    if (!byDeveloper.has(m.developer)) {
+      byDeveloper.set(m.developer, []);
+    }
+    byDeveloper.get(m.developer)!.push(m);
+  }
+
+  const showcaseModels: ModelEntry[] = [];
+  const priorityDevs = ["OpenAI", "Anthropic", "Google", "Meta", "Mistral", "Cohere", "xAI"];
+  
+  for (const dev of priorityDevs) {
+    if (byDeveloper.has(dev) && byDeveloper.get(dev)!.length > 0) {
+      // Pick the most recent/featured model for this developer
+      // For OpenAI, explicitly prefer gpt-4o if available, else first
+      // For Anthropic, explicitly prefer claude-3-5-sonnet if available, else first
+      let best = byDeveloper.get(dev)![0];
+      if (dev === "OpenAI") {
+        best = byDeveloper.get(dev)!.find(m => m.slug.includes("gpt-4o")) || best;
+      } else if (dev === "Anthropic") {
+        best = byDeveloper.get(dev)!.find(m => m.slug.includes("claude-3-5-sonnet")) || best;
+      }
+      showcaseModels.push(best);
+    }
+  }
+  
+  // Fill the rest up to 6 with other developers
+  for (const [dev, models] of byDeveloper.entries()) {
+    if (showcaseModels.length >= 6) break;
+    if (!priorityDevs.includes(dev) && models.length > 0) {
+      showcaseModels.push(models[0]);
+    }
+  }
+  
+  // Fallback if we still don't have 6 (e.g. only 2 developers exist)
+  if (showcaseModels.length < 6) {
+    const showcaseSlugs = new Set(showcaseModels.map(m => m.slug));
+    for (const m of getTrendingModels(10)) {
+      if (showcaseModels.length >= 6) break;
+      if (!showcaseSlugs.has(m.slug)) {
+        const fullModel = getModelBySlug(m.slug);
+        if (fullModel) {
+          showcaseModels.push(fullModel);
+          showcaseSlugs.add(m.slug);
+        }
+      }
+    }
+  }
 
   return (
-    <main className="bg-black text-white selection:bg-brand-orange selection:text-white">
+    <main className="bg-[#FFFFFF] text-black selection:bg-brand-orange selection:text-white">
       {/* ── Hero Section ───────────────────────────────────── */}
       <HeroSection />
 
+      {/* ── Frontier Horizontal Showcase ────────────────────── */}
+      <FrontierShowcase models={showcaseModels} />
+
       {/* ── Portfolio Bento-Grid Features Section ───────────── */}
-      <section className="bg-[#0a0a0a] text-white px-4 sm:px-6 md:px-10 lg:px-14 py-6 sm:py-8 md:py-10 lg:h-screen flex flex-col justify-between border-t border-white/[0.04] relative z-10 antialiased">
+      <section className="bg-[#FFFFFF] text-black px-4 sm:px-6 md:px-10 lg:px-14 py-6 sm:py-8 md:py-10 lg:h-screen flex flex-col justify-between border-t border-black/[0.04] relative z-10 antialiased">
         <div className="max-w-7xl mx-auto w-full flex flex-col justify-between gap-6 md:gap-8 lg:h-full">
           
           {/* Top Header Row */}
           <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
             <div className="max-w-3xl space-y-3 text-left">
               <h2
-                className="text-[28px] sm:text-3xl md:text-4xl lg:text-[44px] leading-[1.15] font-normal tracking-tight text-white"
+                className="text-[28px] sm:text-3xl md:text-4xl lg:text-[44px] leading-[1.15] font-normal tracking-tight text-black"
                 style={{
                   fontFamily: "var(--font-display, ui-sans-serif, system-ui, sans-serif)",
                 }}
               >
-                Every Model. <span className="italic text-white/50">Every Release.</span>
+                Every Model. <span className="italic text-black/50">Every Release.</span>
               </h2>
-              <p className="text-sm md:text-[15px] leading-[1.6] text-white/60">
+              <p className="text-sm md:text-[15px] leading-[1.6] text-black/60">
                 A living reference of foundation AI models, tracking open-weights releases and frontier closed APIs. Fact-checked by curators using primary documentation, technical reports, and official announcements.
               </p>
             </div>
@@ -71,7 +127,7 @@ export default function Home() {
             <div className="flex shrink-0">
               <Link
                 href="/models"
-                className="liquid-glass inline-flex items-center gap-2 px-5 sm:px-6 py-2.5 sm:py-3 rounded-full text-sm font-semibold hover:bg-white/5 border border-white/10 hover:border-white/20 transition-all cursor-pointer"
+                className="inline-flex items-center gap-2 px-5 sm:px-6 py-2.5 sm:py-3 rounded-full text-sm font-semibold hover:bg-black/5 border border-black/10 hover:border-black/20 transition-all cursor-pointer text-black"
               >
                 Browse Full Catalog
                 <ArrowRight size={14} />
@@ -82,22 +138,22 @@ export default function Home() {
           {/* Grid Layout */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5 items-stretch lg:flex-1">
             
-            {/* Column 1 - Background card (rounded-2xl, bg-black) */}
-            <div className="rounded-2xl border border-white/[0.05] relative overflow-hidden bg-black p-6 sm:p-8 flex flex-col justify-between min-h-[440px] md:min-h-[480px] lg:h-full">
+            {/* Column 1 - Background card (rounded-2xl, bg-white) */}
+            <div className="rounded-2xl border border-black/[0.05] relative overflow-hidden bg-[#F7F7F7] p-6 sm:p-8 flex flex-col justify-between min-h-[440px] md:min-h-[480px] lg:h-full">
               {/* Background Video */}
               <video
                 autoPlay
                 loop
                 muted
                 playsInline
-                className="absolute inset-0 w-full h-full object-cover z-0 pointer-events-none opacity-90"
+                className="absolute inset-0 w-full h-full object-cover z-0 pointer-events-none opacity-40 mix-blend-multiply"
               >
                 <source src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260507_150203_44a5bd32-516a-47ce-a077-8acbf9aa8991.mp4" type="video/mp4" />
               </video>
-              <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-transparent to-black/80 z-0" />
+              <div className="absolute inset-0 bg-gradient-to-b from-white/60 via-transparent to-white/90 z-0" />
 
               {/* Top Label */}
-              <div className="relative z-10 flex items-center justify-center gap-2 text-[11px] font-semibold uppercase tracking-[0.22em] text-white/70 text-center">
+              <div className="relative z-10 flex items-center justify-center gap-2 text-[11px] font-semibold uppercase tracking-[0.22em] text-black/70 text-center">
                 <Sparkle size={12} className="text-brand-orange" strokeWidth={1.5} />
                 <span>Tracked Releases</span>
                 <Sparkle size={12} className="text-brand-orange" strokeWidth={1.5} />
@@ -108,10 +164,10 @@ export default function Home() {
                 {/* Trending Now */}
                 <div className="space-y-3">
                   <div className="flex items-center justify-between pl-1">
-                    <p className="text-[10px] uppercase tracking-wider text-brand-orange/80 font-bold flex items-center gap-1.5">
+                    <p className="text-[10px] uppercase tracking-wider text-brand-orange font-bold flex items-center gap-1.5">
                       <Flame size={12} strokeWidth={2.5} /> Trending Now
                     </p>
-                    <Link href="/trending" className="text-[10px] text-white/30 hover:text-white/60 transition-colors uppercase tracking-wider font-semibold">View Top 20 &rarr;</Link>
+                    <Link href="/trending" className="text-[10px] text-black/40 hover:text-black/70 transition-colors uppercase tracking-wider font-semibold">View Top 20 &rarr;</Link>
                   </div>
                   
                   <div className="space-y-1">
@@ -125,14 +181,14 @@ export default function Home() {
                       return (
                         <div
                           key={`trend-${model.id}`}
-                          className="grid grid-cols-[auto_auto_1fr_auto] items-center gap-3 py-2.5 border-b border-white/[0.04] last:border-0 relative z-10"
+                          className="grid grid-cols-[auto_auto_1fr_auto] items-center gap-3 py-2.5 border-b border-black/[0.04] last:border-0 relative z-10"
                         >
-                          <span className="text-[11px] font-mono text-brand-orange/60">{formattedDate}</span>
-                          <Sparkle size={12} className="text-white/30" strokeWidth={1.5} />
-                          <span className="text-xs text-white/80 font-medium truncate pr-2 text-left">{model.developer}</span>
+                          <span className="text-[11px] font-mono text-brand-orange">{formattedDate}</span>
+                          <Sparkle size={12} className="text-black/30" strokeWidth={1.5} />
+                          <span className="text-xs text-black/70 font-medium truncate pr-2 text-left">{model.developer}</span>
                           <Link
                             href={`/models/${model.slug}`}
-                            className="text-xs font-semibold text-white hover:text-brand-orange transition-colors hover:underline text-right"
+                            className="text-xs font-semibold text-black hover:text-brand-orange transition-colors hover:underline text-right"
                           >
                             {model.name}
                           </Link>
@@ -145,7 +201,7 @@ export default function Home() {
                 {/* Recently Released */}
                 <div className="space-y-3">
                   <div className="flex items-center justify-between pl-1">
-                    <p className="text-[10px] uppercase tracking-wider text-white/40 font-semibold">Recently Released</p>
+                    <p className="text-[10px] uppercase tracking-wider text-black/50 font-semibold">Recently Released</p>
                   </div>
                   
                   <div className="space-y-1">
@@ -159,14 +215,14 @@ export default function Home() {
                       return (
                         <div
                           key={`recent-${model.id}`}
-                          className="grid grid-cols-[auto_auto_1fr_auto] items-center gap-3 py-2.5 border-b border-white/[0.04] last:border-0 relative z-10"
+                          className="grid grid-cols-[auto_auto_1fr_auto] items-center gap-3 py-2.5 border-b border-black/[0.04] last:border-0 relative z-10"
                         >
-                          <span className="text-[11px] font-mono text-white/30">{formattedDate}</span>
-                          <Sparkle size={12} className="text-white/20" strokeWidth={1.5} />
-                          <span className="text-xs text-white/50 truncate pr-2 text-left">{model.developer}</span>
+                          <span className="text-[11px] font-mono text-black/40">{formattedDate}</span>
+                          <Sparkle size={12} className="text-black/20" strokeWidth={1.5} />
+                          <span className="text-xs text-black/60 truncate pr-2 text-left">{model.developer}</span>
                           <Link
                             href={`/models/${model.slug}`}
-                            className="text-xs font-medium text-white/70 hover:text-white transition-colors hover:underline text-right"
+                            className="text-xs font-medium text-black/80 hover:text-black transition-colors hover:underline text-right"
                           >
                             {model.name}
                           </Link>
@@ -182,35 +238,35 @@ export default function Home() {
             <div className="grid grid-cols-1 md:grid-rows-[auto_1fr] gap-4 md:gap-5 lg:h-full">
               
               {/* Methodology Card (Top) */}
-              <div className="rounded-2xl border border-white/[0.05] relative overflow-hidden bg-[#324444] noise-overlay p-5 md:p-6 flex flex-col justify-between min-h-[180px]">
+              <div className="rounded-2xl border border-black/[0.05] relative overflow-hidden bg-[#F0F2F2] p-5 md:p-6 flex flex-col justify-between min-h-[180px]">
                 <div className="relative z-10 text-left">
-                  <div className="flex items-center justify-start gap-2 text-[11px] font-semibold uppercase tracking-[0.22em] text-white/70">
+                  <div className="flex items-center justify-start gap-2 text-[11px] font-semibold uppercase tracking-[0.22em] text-black/70">
                     <Sparkle size={12} className="text-brand-orange" strokeWidth={1.5} />
                     <span>Our Methodology</span>
                   </div>
-                  <p className="text-[13px] sm:text-[13.5px] leading-[1.6] text-white/85 mt-4">
+                  <p className="text-[13px] sm:text-[13.5px] leading-[1.6] text-black/80 mt-4">
                     "Every entry on Modelverse is sourced from official documentation, model cards, and primary announcements, then fact-checked before publishing. If we can't verify a detail, we say so plainly."
                   </p>
                 </div>
-                <div className="relative z-10 text-[11px] text-white/50 font-medium mt-4 text-left">
-                  — <span className="font-semibold text-white/80">Modelverse Editorial Standards</span>
+                <div className="relative z-10 text-[11px] text-black/50 font-medium mt-4 text-left">
+                  — <span className="font-semibold text-black/80">Modelverse Editorial Standards</span>
                 </div>
               </div>
 
               {/* Statistics Card (Bottom) */}
-              <div className="rounded-2xl border border-white/[0.05] relative overflow-hidden bg-black p-5 md:p-6 flex flex-col justify-between min-h-[220px]">
+              <div className="rounded-2xl border border-black/[0.05] relative overflow-hidden bg-white p-5 md:p-6 flex flex-col justify-between min-h-[220px]">
                 <video
                   autoPlay
                   loop
                   muted
                   playsInline
-                  className="absolute inset-0 w-full h-full object-cover z-0 pointer-events-none opacity-85"
+                  className="absolute inset-0 w-full h-full object-cover z-0 pointer-events-none opacity-40 mix-blend-multiply"
                 >
                   <source src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260507_154543_d5b83fc1-9cea-44f3-b5e8-8f325935211a.mp4" type="video/mp4" />
                 </video>
-                <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-transparent to-black/75 z-0" />
+                <div className="absolute inset-0 bg-gradient-to-b from-white/50 via-transparent to-white/90 z-0" />
 
-                <div className="relative z-10 flex items-center justify-center gap-2 text-[11px] font-semibold uppercase tracking-[0.22em] text-white/70 text-center">
+                <div className="relative z-10 flex items-center justify-center gap-2 text-[11px] font-semibold uppercase tracking-[0.22em] text-black/70 text-center">
                   <Sparkle size={12} className="text-brand-orange" strokeWidth={1.5} />
                   <span>Database Statistics</span>
                   <Sparkle size={12} className="text-brand-orange" strokeWidth={1.5} />
@@ -218,14 +274,14 @@ export default function Home() {
                 
                 <div className="relative z-10 text-center py-2">
                   <span
-                    className="text-5xl sm:text-6xl md:text-7xl lg:text-[88px] font-light tracking-tight text-white drop-shadow"
+                    className="text-5xl sm:text-6xl md:text-7xl lg:text-[88px] font-light tracking-tight text-black drop-shadow-sm"
                     style={{ fontFamily: "var(--font-body, ui-sans-serif, system-ui)" }}
                   >
                     {modelCount}+
                   </span>
                 </div>
 
-                <div className="relative z-10 text-xs text-white/85 tracking-wide text-center">
+                <div className="relative z-10 text-xs text-black/70 tracking-wide text-center">
                   Models tracked and counting
                 </div>
               </div>
@@ -235,43 +291,45 @@ export default function Home() {
             <div className="grid grid-cols-1 lg:grid-rows-[1.2fr_0.8fr] gap-4 md:gap-5 lg:h-full">
               
               {/* Developers Marquee Card (Top) */}
-              <div className="rounded-2xl border border-white/[0.05] relative overflow-hidden bg-black p-5 md:p-6 flex flex-col justify-between min-h-[220px]">
+              <div className="rounded-2xl border border-black/[0.05] relative overflow-hidden bg-white p-5 md:p-6 flex flex-col justify-between min-h-[220px]">
                 <video
                   autoPlay
                   loop
                   muted
                   playsInline
-                  className="absolute inset-0 w-full h-full object-cover z-0 pointer-events-none opacity-85"
+                  className="absolute inset-0 w-full h-full object-cover z-0 pointer-events-none opacity-30 mix-blend-multiply"
                 >
                   <source src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260507_153148_d7a3e1dd-e5d0-4ce6-8306-00d7522ecc44.mp4" type="video/mp4" />
                 </video>
-                <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-transparent to-black/75 z-0" />
+                <div className="absolute inset-0 bg-gradient-to-b from-white/50 via-transparent to-white/90 z-0" />
 
-                <div className="relative z-10 flex items-center justify-start gap-2 text-[11px] font-semibold uppercase tracking-[0.22em] text-white/70 text-left">
+                <div className="relative z-10 flex items-center justify-start gap-2 text-[11px] font-semibold uppercase tracking-[0.22em] text-black/70 text-left">
                   <Sparkle size={12} className="text-brand-orange" strokeWidth={1.5} />
                   <span>Developers We Track</span>
                 </div>
-                <DeveloperMarquee developers={developers} />
+                <div className="filter invert">
+                  <DeveloperMarquee developers={developers} />
+                </div>
               </div>
 
               {/* Help Us Improve Card (Bottom) */}
-              <div className="rounded-2xl border border-white/[0.05] relative overflow-hidden bg-[#324444] noise-overlay p-5 md:p-6 flex flex-col justify-between min-h-[180px]">
+              <div className="rounded-2xl border border-black/[0.05] relative overflow-hidden bg-[#F0F2F2] p-5 md:p-6 flex flex-col justify-between min-h-[180px]">
                 <a
                   href="mailto:corrections@modelverse.ai?subject=Modelverse Correction"
-                  className="absolute top-5 right-5 h-9 w-9 rounded-full bg-white/5 border border-white/10 hover:bg-white/10 hover:border-white/20 transition-all flex items-center justify-center text-white/70 hover:text-white z-20 cursor-pointer"
+                  className="absolute top-5 right-5 h-9 w-9 rounded-full bg-black/5 border border-black/10 hover:bg-black/10 hover:border-black/20 transition-all flex items-center justify-center text-black/70 hover:text-black z-20 cursor-pointer"
                   title="Submit Correction"
                 >
                   <ArrowUpRight size={16} />
                 </a>
 
                 <div className="relative z-10 text-left">
-                  <div className="flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.22em] text-white/70">
+                  <div className="flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.22em] text-black/70">
                     <Sparkle size={12} className="text-brand-orange" strokeWidth={1.5} />
                     <span>Help Us Improve</span>
                   </div>
                   <div className="mt-4 space-y-1">
-                    <p className="text-sm sm:text-base font-semibold text-white/90 font-mono">corrections@modelverse.ai</p>
-                    <p className="text-xs sm:text-[13px] text-white/55">Know a model we're missing? Suggest it.</p>
+                    <p className="text-sm sm:text-base font-semibold text-black/90 font-mono">corrections@modelverse.ai</p>
+                    <p className="text-xs sm:text-[13px] text-black/60">Know a model we're missing? Suggest it.</p>
                   </div>
                 </div>
 

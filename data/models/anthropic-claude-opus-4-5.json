@@ -1,0 +1,44 @@
+{
+  "name": "Claude Opus 4.5",
+  "developer": "Anthropic",
+  "type": "api-only",
+  "modality": [
+    "text",
+    "image",
+    "code"
+  ],
+  "primaryTask": "chat-reasoning",
+  "deployment": [
+    "api-only"
+  ],
+  "license": "Proprietary",
+  "parameters": "undisclosed",
+  "contextWindow": "1M tokens",
+  "releaseDate": "2025-11-24",
+  "description": "An update focusing heavily on coding, workplace tasks, and producing spreadsheets. It introduced the \"Infinite Chats\" feature to handle context window limits.",
+  "keyFeatures": [
+    "Infinite Chats implementation",
+    "Advanced workplace and spreadsheet generation"
+  ],
+  "benchmarks": [],
+  "family": "Claude",
+  "previousVersion": "anthropic-claude-opus-4-1",
+  "website": "https://www.anthropic.com",
+  "paper": "",
+  "huggingFace": "",
+  "github": "",
+  "blogPost": "",
+  "sources": [
+    "https://en.wikipedia.org/wiki/Claude_(AI)"
+  ],
+  "logo": "/public/logos/anthropic.png",
+  "tags": [],
+  "verified": true,
+  "curatorNotes": "",
+  "id": "anthropic-claude-opus-4-5",
+  "slug": "anthropic-claude-opus-4-5",
+  "updatedAt": "2026-07-14",
+  "featured": false,
+  "boost": 1,
+  "costTiers": []
+}

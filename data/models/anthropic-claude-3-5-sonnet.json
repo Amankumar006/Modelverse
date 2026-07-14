@@ -1,44 +1,46 @@
 {
-  "id": "anthropic-claude-3-5-sonnet",
   "name": "Claude 3.5 Sonnet",
-  "slug": "claude-3-5-sonnet",
   "developer": "Anthropic",
-  "releaseDate": "2024-06-20",
-  "updatedAt": "2024-06-20",
-  "type": "closed-source",
+  "type": "api-only",
   "modality": [
     "text",
-    "code",
-    "image"
+    "image",
+    "code"
+  ],
+  "primaryTask": "code-generation",
+  "deployment": [
+    "api-only"
   ],
   "license": "Proprietary",
   "parameters": "undisclosed",
-  "contextWindow": "200K",
-  "description": "Anthropic's mid-tier model in the Claude 3.5 family, offering frontier-level intelligence at the speed and cost tier of Claude 3 Sonnet, with particular strength in coding and reasoning tasks.",
+  "contextWindow": "200K tokens",
+  "releaseDate": "2024-06-20",
+  "description": "The model that introduced the \"Artifacts\" interface in the Claude web app, allowing users to generate and interact with code, websites, and documents in a dedicated panel.",
   "keyFeatures": [
-    "Outperforms Claude 3 Opus at lower cost",
-    "Strong coding performance",
-    "200K context window",
-    "Artifacts feature for interactive content"
+    "Powers interactive Artifacts UI",
+    "Significant coding and reasoning jump"
   ],
   "benchmarks": [],
   "family": "Claude",
-  "previousVersion": null,
-  "links": {
-    "website": "https://www.anthropic.com/news/claude-3-5-sonnet"
-  },
-  "logo": "/logos/anthropic.svg",
-  "tags": [
-    "reasoning",
-    "coding"
-  ],
+  "previousVersion": "anthropic-claude-3-sonnet",
+  "website": "https://www.anthropic.com",
+  "paper": "",
+  "huggingFace": "",
+  "github": "",
+  "blogPost": "",
   "sources": [
-    "https://www.anthropic.com/news/claude-3-5-sonnet"
+    "https://hidekazu-konishi.com/entry/anthropic_claude_model_release_timeline.html"
+  ],
+  "logo": "/public/logos/anthropic.png",
+  "tags": [
+    "artifacts"
   ],
   "verified": true,
   "curatorNotes": "",
-  "primaryTask": "chat-reasoning",
-  "deployment": [
-    "api-only"
-  ]
+  "id": "anthropic-claude-3-5-sonnet",
+  "slug": "anthropic-claude-3-5-sonnet",
+  "updatedAt": "2026-07-14",
+  "featured": false,
+  "boost": 1,
+  "costTiers": []
 }

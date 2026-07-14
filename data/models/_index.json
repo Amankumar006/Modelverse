@@ -1,11 +1,628 @@
 [
   {
+    "id": "codex-mini",
+    "name": "codex-mini-latest",
+    "slug": "codex-mini",
+    "developer": "OpenAI",
+    "releaseDate": "2026-07-14",
+    "type": "closed-source",
+    "featured": false,
+    "boost": 1,
+    "family": "gpt"
+  },
+  {
+    "id": "dall-e-2",
+    "name": "DALL·E 2",
+    "slug": "dall-e-2",
+    "developer": "OpenAI",
+    "releaseDate": "2026-07-14",
+    "type": "closed-source",
+    "featured": false,
+    "boost": 1,
+    "family": "dall-e"
+  },
+  {
+    "id": "davinci-002",
+    "name": "davinci-002",
+    "slug": "davinci-002",
+    "developer": "OpenAI",
+    "releaseDate": "2026-07-14",
+    "type": "closed-source",
+    "featured": false,
+    "boost": 1,
+    "family": "gpt-3-base"
+  },
+  {
+    "id": "gpt-3.5-turbo",
+    "name": "GPT-3.5 Turbo",
+    "slug": "gpt-3-5-turbo",
+    "developer": "OpenAI",
+    "releaseDate": "2026-07-14",
+    "type": "closed-source",
+    "featured": false,
+    "boost": 1,
+    "family": "gpt"
+  },
+  {
+    "id": "gpt-4.1",
+    "name": "GPT-4.1",
+    "slug": "gpt-4-1",
+    "developer": "OpenAI",
+    "releaseDate": "2026-07-14",
+    "type": "api-only",
+    "featured": false,
+    "boost": 1,
+    "family": "gpt"
+  },
+  {
+    "id": "gpt-4.5",
+    "name": "GPT-4.5 Preview",
+    "slug": "gpt-4-5",
+    "developer": "OpenAI",
+    "releaseDate": "2026-07-14",
+    "type": "closed-source",
+    "featured": false,
+    "boost": 1,
+    "family": "gpt-4-5"
+  },
+  {
+    "id": "gpt-4-turbo",
+    "name": "GPT-4 Turbo",
+    "slug": "gpt-4-turbo",
+    "developer": "OpenAI",
+    "releaseDate": "2026-07-14",
+    "type": "closed-source",
+    "featured": false,
+    "boost": 1,
+    "family": "gpt-4-turbo"
+  },
+  {
+    "id": "gpt-4",
+    "name": "GPT-4",
+    "slug": "gpt-4",
+    "developer": "OpenAI",
+    "releaseDate": "2026-07-14",
+    "type": "closed-source",
+    "featured": false,
+    "boost": 1,
+    "family": "gpt-4"
+  },
+  {
+    "id": "gpt-4o-audio",
+    "name": "GPT-4o Audio",
+    "slug": "gpt-4o-audio",
+    "developer": "OpenAI",
+    "releaseDate": "2026-07-14",
+    "type": "closed-source",
+    "featured": false,
+    "boost": 1,
+    "family": "gpt-4o"
+  },
+  {
+    "id": "gpt-4o-mini-audio",
+    "name": "GPT-4o mini Audio",
+    "slug": "gpt-4o-mini-audio",
+    "developer": "OpenAI",
+    "releaseDate": "2026-07-14",
+    "type": "closed-source",
+    "featured": false,
+    "boost": 1,
+    "family": "gpt-4o-mini"
+  },
+  {
+    "id": "gpt-4o-mini-realtime",
+    "name": "GPT-4o mini Realtime",
+    "slug": "gpt-4o-mini-realtime",
+    "developer": "OpenAI",
+    "releaseDate": "2026-07-14",
+    "type": "closed-source",
+    "featured": false,
+    "boost": 1,
+    "family": "gpt-4o-mini"
+  },
+  {
+    "id": "gpt-4o-mini-search",
+    "name": "GPT-4o mini Search Preview",
+    "slug": "gpt-4o-mini-search",
+    "developer": "OpenAI",
+    "releaseDate": "2026-07-14",
+    "type": "closed-source",
+    "featured": false,
+    "boost": 1,
+    "family": "gpt-4o-mini"
+  },
+  {
+    "id": "gpt-4o-mini-transcribe",
+    "name": "GPT-4o mini Transcribe",
+    "slug": "gpt-4o-mini-transcribe",
+    "developer": "OpenAI",
+    "releaseDate": "2026-07-14",
+    "type": "api-only",
+    "featured": false,
+    "boost": 1,
+    "family": "gpt-4o-mini"
+  },
+  {
+    "id": "gpt-4o-mini-tts",
+    "name": "GPT-4o mini TTS",
+    "slug": "gpt-4o-mini-tts",
+    "developer": "OpenAI",
+    "releaseDate": "2026-07-14",
+    "type": "closed-source",
+    "featured": false,
+    "boost": 1,
+    "family": "gpt-4o-mini"
+  },
+  {
+    "id": "gpt-4o-realtime",
+    "name": "GPT-4o Realtime",
+    "slug": "gpt-4o-realtime",
+    "developer": "OpenAI",
+    "releaseDate": "2026-07-14",
+    "type": "closed-source",
+    "featured": false,
+    "boost": 1,
+    "family": "gpt-4o"
+  },
+  {
+    "id": "gpt-4o-search",
+    "name": "GPT-4o Search Preview",
+    "slug": "gpt-4o-search",
+    "developer": "OpenAI",
+    "releaseDate": "2026-07-14",
+    "type": "closed-source",
+    "featured": false,
+    "boost": 1,
+    "family": "gpt-4o"
+  },
+  {
+    "id": "gpt-4o-transcribe",
+    "name": "GPT-4o Transcribe",
+    "slug": "gpt-4o-transcribe",
+    "developer": "OpenAI",
+    "releaseDate": "2026-07-14",
+    "type": "api-only",
+    "featured": false,
+    "boost": 1,
+    "family": "gpt-4o"
+  },
+  {
+    "id": "gpt-5.1-chat",
+    "name": "GPT-5.1 Chat",
+    "slug": "gpt-5-1-chat",
+    "developer": "OpenAI",
+    "releaseDate": "2026-07-14",
+    "type": "closed-source",
+    "featured": false,
+    "boost": 1,
+    "family": "gpt-5-1"
+  },
+  {
+    "id": "gpt-5.1-codex",
+    "name": "GPT-5.1-Codex",
+    "slug": "gpt-5-1-codex",
+    "developer": "OpenAI",
+    "releaseDate": "2026-07-14",
+    "type": "closed-source",
+    "featured": false,
+    "boost": 1,
+    "family": "gpt-5-1"
+  },
+  {
+    "id": "gpt-5.1",
+    "name": "GPT-5.1",
+    "slug": "gpt-5-1",
+    "developer": "OpenAI",
+    "releaseDate": "2026-07-14",
+    "type": "api-only",
+    "featured": false,
+    "boost": 1,
+    "family": "gpt-5-1"
+  },
+  {
+    "id": "gpt-5.2-chat",
+    "name": "GPT-5.2 Chat",
+    "slug": "gpt-5-2-chat",
+    "developer": "OpenAI",
+    "releaseDate": "2026-07-14",
+    "type": "closed-source",
+    "featured": false,
+    "boost": 1,
+    "family": "gpt-5-2"
+  },
+  {
+    "id": "gpt-5.2-codex",
+    "name": "GPT-5.2-Codex",
+    "slug": "gpt-5-2-codex",
+    "developer": "OpenAI",
+    "releaseDate": "2026-07-14",
+    "type": "closed-source",
+    "featured": false,
+    "boost": 1,
+    "family": "gpt-5-2"
+  },
+  {
+    "id": "gpt-5.2",
+    "name": "GPT-5.2",
+    "slug": "gpt-5-2",
+    "developer": "OpenAI",
+    "releaseDate": "2026-07-14",
+    "type": "api-only",
+    "featured": false,
+    "boost": 1,
+    "family": "gpt-5-2"
+  },
+  {
+    "id": "gpt-5.3-chat",
+    "name": "GPT-5.3 Chat",
+    "slug": "gpt-5-3-chat",
+    "developer": "OpenAI",
+    "releaseDate": "2026-07-14",
+    "type": "closed-source",
+    "featured": false,
+    "boost": 1,
+    "family": "gpt-5-3"
+  },
+  {
+    "id": "gpt-5.3-codex",
+    "name": "GPT-5.3-Codex",
+    "slug": "gpt-5-3-codex",
+    "developer": "OpenAI",
+    "releaseDate": "2026-07-14",
+    "type": "api-only",
+    "featured": false,
+    "boost": 1,
+    "family": "gpt-5-3"
+  },
+  {
+    "id": "gpt-5.4",
+    "name": "GPT-5.4",
+    "slug": "gpt-5-4",
+    "developer": "OpenAI",
+    "releaseDate": "2026-07-14",
+    "type": "api-only",
+    "featured": false,
+    "boost": 1,
+    "family": "gpt-5-4"
+  },
+  {
+    "id": "gpt-5.5",
+    "name": "GPT-5.5",
+    "slug": "gpt-5-5",
+    "developer": "OpenAI",
+    "releaseDate": "2026-07-14",
+    "type": "api-only",
+    "featured": false,
+    "boost": 1,
+    "family": "gpt-5-5"
+  },
+  {
+    "id": "gpt-5-chat",
+    "name": "GPT-5 Chat",
+    "slug": "gpt-5-chat",
+    "developer": "OpenAI",
+    "releaseDate": "2026-07-14",
+    "type": "closed-source",
+    "featured": false,
+    "boost": 1,
+    "family": "gpt-5"
+  },
+  {
+    "id": "gpt-5-codex",
+    "name": "GPT-5-Codex",
+    "slug": "gpt-5-codex",
+    "developer": "OpenAI",
+    "releaseDate": "2026-07-14",
+    "type": "closed-source",
+    "featured": false,
+    "boost": 1,
+    "family": "gpt-5"
+  },
+  {
+    "id": "gpt-5",
+    "name": "GPT-5",
+    "slug": "gpt-5",
+    "developer": "OpenAI",
+    "releaseDate": "2026-07-14",
+    "type": "api-only",
+    "featured": false,
+    "boost": 1,
+    "family": "gpt-5"
+  },
+  {
+    "id": "gpt-audio-1.5",
+    "name": "gpt-audio-1.5",
+    "slug": "gpt-audio-1-5",
+    "developer": "OpenAI",
+    "releaseDate": "2026-07-14",
+    "type": "api-only",
+    "featured": false,
+    "boost": 1,
+    "family": "gpt-audio"
+  },
+  {
+    "id": "gpt-audio",
+    "name": "gpt-audio",
+    "slug": "gpt-audio",
+    "developer": "OpenAI",
+    "releaseDate": "2026-07-14",
+    "type": "api-only",
+    "featured": false,
+    "boost": 1,
+    "family": "gpt-audio"
+  },
+  {
+    "id": "gpt-image-1.5",
+    "name": "GPT Image 1.5",
+    "slug": "gpt-image-1-5",
+    "developer": "OpenAI",
+    "releaseDate": "2026-07-14",
+    "type": "closed-source",
+    "featured": false,
+    "boost": 1,
+    "family": "gpt-image"
+  },
+  {
+    "id": "gpt-image-1",
+    "name": "GPT Image 1",
+    "slug": "gpt-image-1",
+    "developer": "OpenAI",
+    "releaseDate": "2026-07-14",
+    "type": "closed-source",
+    "featured": false,
+    "boost": 1,
+    "family": "gpt-image"
+  },
+  {
+    "id": "gpt-image-2",
+    "name": "GPT Image 2",
+    "slug": "gpt-image-2",
+    "developer": "OpenAI",
+    "releaseDate": "2026-07-14",
+    "type": "api-only",
+    "featured": false,
+    "boost": 1,
+    "family": "gpt-image"
+  },
+  {
+    "id": "gpt-oss-120b",
+    "name": "gpt-oss-120b",
+    "slug": "gpt-oss-120b",
+    "developer": "OpenAI",
+    "releaseDate": "2026-07-14",
+    "type": "open-weights",
+    "featured": false,
+    "boost": 1,
+    "family": "gpt"
+  },
+  {
+    "id": "gpt-oss-20b",
+    "name": "gpt-oss-20b",
+    "slug": "gpt-oss-20b",
+    "developer": "OpenAI",
+    "releaseDate": "2026-07-14",
+    "type": "open-weights",
+    "featured": false,
+    "boost": 1,
+    "family": "gpt"
+  },
+  {
+    "id": "gpt-realtime-1.5",
+    "name": "GPT-Realtime-1.5",
+    "slug": "gpt-realtime-1-5",
+    "developer": "OpenAI",
+    "releaseDate": "2026-07-14",
+    "type": "api-only",
+    "featured": false,
+    "boost": 1,
+    "family": "gpt-realtime"
+  },
+  {
+    "id": "gpt-realtime-2.1",
+    "name": "GPT-Realtime-2.1",
+    "slug": "gpt-realtime-2-1",
+    "developer": "OpenAI",
+    "releaseDate": "2026-07-14",
+    "type": "api-only",
+    "featured": false,
+    "boost": 1,
+    "family": "gpt-realtime"
+  },
+  {
+    "id": "gpt-realtime-2",
+    "name": "GPT-Realtime-2",
+    "slug": "gpt-realtime-2",
+    "developer": "OpenAI",
+    "releaseDate": "2026-07-14",
+    "type": "api-only",
+    "featured": false,
+    "boost": 1,
+    "family": "gpt-realtime"
+  },
+  {
+    "id": "gpt-realtime-translate",
+    "name": "GPT-Realtime-Translate",
+    "slug": "gpt-realtime-translate",
+    "developer": "OpenAI",
+    "releaseDate": "2026-07-14",
+    "type": "api-only",
+    "featured": false,
+    "boost": 1,
+    "family": "gpt-realtime"
+  },
+  {
+    "id": "gpt-realtime-whisper",
+    "name": "GPT-Realtime-Whisper",
+    "slug": "gpt-realtime-whisper",
+    "developer": "OpenAI",
+    "releaseDate": "2026-07-14",
+    "type": "api-only",
+    "featured": false,
+    "boost": 1,
+    "family": "gpt-realtime"
+  },
+  {
+    "id": "gpt-realtime",
+    "name": "GPT-Realtime",
+    "slug": "gpt-realtime",
+    "developer": "OpenAI",
+    "releaseDate": "2026-07-14",
+    "type": "api-only",
+    "featured": false,
+    "boost": 1,
+    "family": "gpt-realtime"
+  },
+  {
+    "id": "o1",
+    "name": "o1",
+    "slug": "o1",
+    "developer": "OpenAI",
+    "releaseDate": "2026-07-14",
+    "type": "closed-source",
+    "featured": false,
+    "boost": 1,
+    "family": "o1"
+  },
+  {
+    "id": "o3-deep-research",
+    "name": "o3-deep-research",
+    "slug": "o3-deep-research",
+    "developer": "OpenAI",
+    "releaseDate": "2026-07-14",
+    "type": "closed-source",
+    "featured": false,
+    "boost": 1,
+    "family": "o3"
+  },
+  {
+    "id": "o3",
+    "name": "o3",
+    "slug": "o3",
+    "developer": "OpenAI",
+    "releaseDate": "2026-07-14",
+    "type": "api-only",
+    "featured": false,
+    "boost": 1,
+    "family": "o3"
+  },
+  {
+    "id": "o4-mini-deep-research",
+    "name": "o4-mini-deep-research",
+    "slug": "o4-mini-deep-research",
+    "developer": "OpenAI",
+    "releaseDate": "2026-07-14",
+    "type": "closed-source",
+    "featured": false,
+    "boost": 1,
+    "family": "o4"
+  },
+  {
+    "id": "o4",
+    "name": "o4-mini",
+    "slug": "o4",
+    "developer": "OpenAI",
+    "releaseDate": "2026-07-14",
+    "type": "closed-source",
+    "featured": false,
+    "boost": 1,
+    "family": "o4"
+  },
+  {
+    "id": "omni-moderation",
+    "name": "omni-moderation",
+    "slug": "omni-moderation",
+    "developer": "OpenAI",
+    "releaseDate": "2026-07-14",
+    "type": "api-only",
+    "featured": false,
+    "boost": 1,
+    "family": "gpt"
+  },
+  {
+    "id": "sora-2",
+    "name": "Sora 2",
+    "slug": "sora-2",
+    "developer": "OpenAI",
+    "releaseDate": "2026-07-14",
+    "type": "closed-source",
+    "featured": false,
+    "boost": 1,
+    "family": "sora"
+  },
+  {
+    "id": "text-embedding-3-small",
+    "name": "text-embedding-3-small",
+    "slug": "text-embedding-3-small",
+    "developer": "OpenAI",
+    "releaseDate": "2026-07-14",
+    "type": "api-only",
+    "featured": false,
+    "boost": 1,
+    "family": "text-embedding-3"
+  },
+  {
+    "id": "text-embedding-ada-002",
+    "name": "text-embedding-ada-002",
+    "slug": "text-embedding-ada-002",
+    "developer": "OpenAI",
+    "releaseDate": "2026-07-14",
+    "type": "api-only",
+    "featured": false,
+    "boost": 1,
+    "family": "gpt"
+  },
+  {
+    "id": "text-moderation-stable",
+    "name": "text-moderation-stable",
+    "slug": "text-moderation-stable",
+    "developer": "OpenAI",
+    "releaseDate": "2026-07-14",
+    "type": "closed-source",
+    "featured": false,
+    "boost": 1,
+    "family": "gpt"
+  },
+  {
+    "id": "text-moderation",
+    "name": "text-moderation",
+    "slug": "text-moderation",
+    "developer": "OpenAI",
+    "releaseDate": "2026-07-14",
+    "type": "closed-source",
+    "featured": false,
+    "boost": 1,
+    "family": "gpt"
+  },
+  {
+    "id": "tts-1",
+    "name": "TTS-1",
+    "slug": "tts-1",
+    "developer": "OpenAI",
+    "releaseDate": "2026-07-14",
+    "type": "api-only",
+    "featured": false,
+    "boost": 1,
+    "family": "gpt"
+  },
+  {
+    "id": "whisper-1",
+    "name": "Whisper",
+    "slug": "whisper-1",
+    "developer": "OpenAI",
+    "releaseDate": "2026-07-14",
+    "type": "api-only",
+    "featured": false,
+    "boost": 1,
+    "family": "gpt"
+  },
+  {
     "id": "alibaba-abot-world",
     "name": "ABot-World",
     "slug": "abot-world",
     "developer": "Alibaba",
     "releaseDate": "2026-07-09",
-    "type": "open-weights"
+    "type": "open-weights",
+    "family": null
   },
   {
     "id": "other-lingbot-world-2.0",
@@ -13,71 +630,8 @@
     "slug": "lingbot-world-2-0",
     "developer": "Other",
     "releaseDate": "2026-07-09",
-    "type": "open-weights"
-  },
-  {
-    "id": "other-proxypose",
-    "name": "ProxyPose",
-    "slug": "proxypose",
-    "developer": "Other",
-    "releaseDate": "2026-07-01",
-    "type": "open-weights"
-  },
-  {
-    "id": "openai-gpt-live",
-    "name": "GPT Live",
-    "slug": "gpt-live",
-    "developer": "OpenAI",
-    "releaseDate": "2026-07-01",
-    "type": "closed-source"
-  },
-  {
-    "id": "other-pixworld",
-    "name": "PixWorld",
-    "slug": "pixworld",
-    "developer": "Other",
-    "releaseDate": "2026-07-01",
-    "type": "open-source"
-  },
-  {
-    "id": "other-wan-streamer-0.2",
-    "name": "Wan Streamer 0.2",
-    "slug": "wan-streamer-0-2",
-    "developer": "Other",
-    "releaseDate": "2026-07-01",
-    "type": "research-preview"
-  },
-  {
-    "id": "other-mira",
-    "name": "Mira",
-    "slug": "mira",
-    "developer": "Other",
-    "releaseDate": "2026-07-01",
-    "type": "research-preview"
-  },
-  {
-    "id": "xai-grok-4.5",
-    "name": "Grok 4.5",
-    "slug": "grok-4-5",
-    "developer": "xAI",
-    "releaseDate": "2026-07-01",
-    "type": "closed-source"
-  },
-  {
-    "id": "meta-muse-spark-1.1",
-    "name": "Muse Spark 1.1",
-    "slug": "muse-spark-1-1",
-    "developer": "Meta",
-    "releaseDate": "2026-07-01",
-    "type": "closed-source"
-  },
-  {
-    "id": "openai-gpt-5.6",
-    "name": "GPT 5.6",
-    "slug": "gpt-5-6",
-    "developer": "OpenAI",
-    "releaseDate": "2026-07-01",
-    "type": "closed-source"
+    "type": "open-weights",
+    "family": "LingBot"
   },
   {
     "id": "bytedance-seedream-5-pro",
@@ -85,15 +639,8 @@
     "slug": "seedream-5-pro",
     "developer": "ByteDance",
     "releaseDate": "2026-07-01",
-    "type": "closed-source"
-  },
-  {
-    "id": "tencent-high3",
-    "name": "High3",
-    "slug": "high3",
-    "developer": "Tencent",
-    "releaseDate": "2026-07-01",
-    "type": "open-weights"
+    "type": "closed-source",
+    "family": "Seedream"
   },
   {
     "id": "meta-muse-image",
@@ -101,7 +648,17 @@
     "slug": "muse-image",
     "developer": "Meta",
     "releaseDate": "2026-07-01",
-    "type": "closed-source"
+    "type": "closed-source",
+    "family": "Muse"
+  },
+  {
+    "id": "meta-muse-spark-1.1",
+    "name": "Muse Spark 1.1",
+    "slug": "muse-spark-1-1",
+    "developer": "Meta",
+    "releaseDate": "2026-07-01",
+    "type": "closed-source",
+    "family": "Muse Spark"
   },
   {
     "id": "meta-muse-video",
@@ -109,15 +666,26 @@
     "slug": "muse-video",
     "developer": "Meta",
     "releaseDate": "2026-07-01",
-    "type": "research-preview"
+    "type": "research-preview",
+    "family": "Muse"
   },
   {
-    "id": "other-reve-2.1",
-    "name": "Reve 2.1",
-    "slug": "reve-2-1",
-    "developer": "Other",
+    "id": "openai-gpt-5.6",
+    "name": "GPT 5.6",
+    "slug": "gpt-5-6",
+    "developer": "OpenAI",
     "releaseDate": "2026-07-01",
-    "type": "closed-source"
+    "type": "closed-source",
+    "family": "gpt-5-6"
+  },
+  {
+    "id": "openai-gpt-live",
+    "name": "GPT Live",
+    "slug": "gpt-live",
+    "developer": "OpenAI",
+    "releaseDate": "2026-07-01",
+    "type": "closed-source",
+    "family": "GPT"
   },
   {
     "id": "other-booster-t2",
@@ -125,7 +693,101 @@
     "slug": "booster-t2",
     "developer": "Other",
     "releaseDate": "2026-07-01",
-    "type": "open-source"
+    "type": "open-source",
+    "family": "Booster"
+  },
+  {
+    "id": "other-mira",
+    "name": "Mira",
+    "slug": "mira",
+    "developer": "Other",
+    "releaseDate": "2026-07-01",
+    "type": "research-preview",
+    "family": null
+  },
+  {
+    "id": "other-pixworld",
+    "name": "PixWorld",
+    "slug": "pixworld",
+    "developer": "Other",
+    "releaseDate": "2026-07-01",
+    "type": "open-source",
+    "family": null
+  },
+  {
+    "id": "other-proxypose",
+    "name": "ProxyPose",
+    "slug": "proxypose",
+    "developer": "Other",
+    "releaseDate": "2026-07-01",
+    "type": "open-weights",
+    "family": null
+  },
+  {
+    "id": "other-reve-2.1",
+    "name": "Reve 2.1",
+    "slug": "reve-2-1",
+    "developer": "Other",
+    "releaseDate": "2026-07-01",
+    "type": "closed-source",
+    "family": "Reve"
+  },
+  {
+    "id": "other-wan-streamer-0.2",
+    "name": "Wan Streamer 0.2",
+    "slug": "wan-streamer-0-2",
+    "developer": "Other",
+    "releaseDate": "2026-07-01",
+    "type": "research-preview",
+    "family": "Wan Streamer"
+  },
+  {
+    "id": "tencent-high3",
+    "name": "High3",
+    "slug": "high3",
+    "developer": "Tencent",
+    "releaseDate": "2026-07-01",
+    "type": "open-weights",
+    "family": "High"
+  },
+  {
+    "id": "xai-grok-4.5",
+    "name": "Grok 4.5",
+    "slug": "grok-4-5",
+    "developer": "xAI",
+    "releaseDate": "2026-07-01",
+    "type": "closed-source",
+    "family": "Grok"
+  },
+  {
+    "id": "anthropic-claude-sonnet-5",
+    "name": "Claude Sonnet 5",
+    "slug": "anthropic-claude-sonnet-5",
+    "developer": "Anthropic",
+    "releaseDate": "2026-06-30",
+    "type": "api-only",
+    "featured": false,
+    "boost": 1
+  },
+  {
+    "id": "anthropic-claude-fable-5",
+    "name": "Claude Fable 5",
+    "slug": "anthropic-claude-fable-5",
+    "developer": "Anthropic",
+    "releaseDate": "2026-06-09",
+    "type": "api-only",
+    "featured": false,
+    "boost": 1
+  },
+  {
+    "id": "anthropic-claude-mythos-5",
+    "name": "Claude Mythos 5",
+    "slug": "anthropic-claude-mythos-5",
+    "developer": "Anthropic",
+    "releaseDate": "2026-06-09",
+    "type": "closed-source",
+    "featured": false,
+    "boost": 1
   },
   {
     "id": "other-sefi-image",
@@ -133,7 +795,128 @@
     "slug": "sefi-image",
     "developer": "Other",
     "releaseDate": "2026-06-01",
-    "type": "open-weights"
+    "type": "open-weights",
+    "family": null
+  },
+  {
+    "id": "anthropic-claude-opus-4-8",
+    "name": "Claude Opus 4.8",
+    "slug": "anthropic-claude-opus-4-8",
+    "developer": "Anthropic",
+    "releaseDate": "2026-05-28",
+    "type": "api-only",
+    "featured": false,
+    "boost": 1
+  },
+  {
+    "id": "anthropic-claude-opus-4-7",
+    "name": "Claude Opus 4.7",
+    "slug": "anthropic-claude-opus-4-7",
+    "developer": "Anthropic",
+    "releaseDate": "2026-04-16",
+    "type": "api-only",
+    "featured": false,
+    "boost": 1
+  },
+  {
+    "id": "anthropic-claude-mythos-preview",
+    "name": "Claude Mythos Preview",
+    "slug": "anthropic-claude-mythos-preview",
+    "developer": "Anthropic",
+    "releaseDate": "2026-04-07",
+    "type": "closed-source",
+    "featured": false,
+    "boost": 1
+  },
+  {
+    "id": "anthropic-claude-sonnet-4-6",
+    "name": "Claude Sonnet 4.6",
+    "slug": "anthropic-claude-sonnet-4-6",
+    "developer": "Anthropic",
+    "releaseDate": "2026-02-17",
+    "type": "api-only",
+    "featured": false,
+    "boost": 1
+  },
+  {
+    "id": "anthropic-claude-opus-4-6",
+    "name": "Claude Opus 4.6",
+    "slug": "anthropic-claude-opus-4-6",
+    "developer": "Anthropic",
+    "releaseDate": "2026-02-05",
+    "type": "api-only",
+    "featured": false,
+    "boost": 1
+  },
+  {
+    "id": "anthropic-claude-opus-4-5",
+    "name": "Claude Opus 4.5",
+    "slug": "anthropic-claude-opus-4-5",
+    "developer": "Anthropic",
+    "releaseDate": "2025-11-24",
+    "type": "api-only",
+    "featured": false,
+    "boost": 1
+  },
+  {
+    "id": "anthropic-claude-haiku-4-5",
+    "name": "Claude Haiku 4.5",
+    "slug": "anthropic-claude-haiku-4-5",
+    "developer": "Anthropic",
+    "releaseDate": "2025-10-15",
+    "type": "api-only",
+    "featured": false,
+    "boost": 1
+  },
+  {
+    "id": "anthropic-claude-sonnet-4-5",
+    "name": "Claude Sonnet 4.5",
+    "slug": "anthropic-claude-sonnet-4-5",
+    "developer": "Anthropic",
+    "releaseDate": "2025-09-29",
+    "type": "api-only",
+    "featured": false,
+    "boost": 1
+  },
+  {
+    "id": "anthropic-claude-opus-4-1",
+    "name": "Claude Opus 4.1",
+    "slug": "anthropic-claude-opus-4-1",
+    "developer": "Anthropic",
+    "releaseDate": "2025-08-05",
+    "type": "api-only",
+    "featured": false,
+    "boost": 1
+  },
+  {
+    "id": "anthropic-claude-sonnet-4",
+    "name": "Claude Sonnet 4",
+    "slug": "anthropic-claude-sonnet-4",
+    "developer": "Anthropic",
+    "releaseDate": "2025-05-22",
+    "type": "api-only",
+    "featured": false,
+    "boost": 1
+  },
+  {
+    "id": "anthropic-claude-opus-4",
+    "name": "Claude Opus 4",
+    "slug": "anthropic-claude-opus-4",
+    "developer": "Anthropic",
+    "releaseDate": "2025-05-22",
+    "type": "api-only",
+    "featured": false,
+    "boost": 1
+  },
+  {
+    "id": "anthropic-claude-3-7-sonnet",
+    "name": "Claude 3.7 Sonnet",
+    "slug": "anthropic-claude-3-7-sonnet",
+    "developer": "Anthropic",
+    "releaseDate": "2025-02-24",
+    "type": "api-only",
+    "featured": false,
+    "boost": 1
   },
   {
     "id": "openai-computer-using-agent",
@@ -141,7 +924,8 @@
     "slug": "computer-using-agent",
     "developer": "OpenAI",
     "releaseDate": "2025-01-23",
-    "type": "closed-source"
+    "type": "closed-source",
+    "family": "Operator"
   },
   {
     "id": "microsoft-phi-4",
@@ -149,7 +933,8 @@
     "slug": "phi-4",
     "developer": "Microsoft",
     "releaseDate": "2024-12-12",
-    "type": "open-weights"
+    "type": "open-weights",
+    "family": "Phi"
   },
   {
     "id": "suno-suno-v4",
@@ -157,7 +942,8 @@
     "slug": "suno-v4",
     "developer": "Suno",
     "releaseDate": "2024-11-19",
-    "type": "closed-source"
+    "type": "closed-source",
+    "family": "Suno"
   },
   {
     "id": "alibaba-qwen2.5-coder-32b-instruct",
@@ -165,7 +951,28 @@
     "slug": "qwen2-5-coder-32b-instruct",
     "developer": "Alibaba",
     "releaseDate": "2024-11-12",
-    "type": "open-weights"
+    "type": "open-weights",
+    "family": "Qwen"
+  },
+  {
+    "id": "anthropic-claude-3-5-haiku",
+    "name": "Claude 3.5 Haiku",
+    "slug": "anthropic-claude-3-5-haiku",
+    "developer": "Anthropic",
+    "releaseDate": "2024-10-22",
+    "type": "api-only",
+    "featured": false,
+    "boost": 1
+  },
+  {
+    "id": "anthropic-claude-3-5-sonnet-new",
+    "name": "Claude 3.5 Sonnet (new)",
+    "slug": "anthropic-claude-3-5-sonnet-new",
+    "developer": "Anthropic",
+    "releaseDate": "2024-10-22",
+    "type": "api-only",
+    "featured": false,
+    "boost": 1
   },
   {
     "id": "alibaba-qwen2.5-72b-instruct",
@@ -173,15 +980,8 @@
     "slug": "qwen2-5-72b-instruct",
     "developer": "Alibaba",
     "releaseDate": "2024-09-19",
-    "type": "open-weights"
-  },
-  {
-    "id": "xai-grok-2",
-    "name": "Grok 2",
-    "slug": "grok-2",
-    "developer": "xAI",
-    "releaseDate": "2024-08-13",
-    "type": "closed-source"
+    "type": "open-weights",
+    "family": "Qwen"
   },
   {
     "id": "google-deepmind-imagen-3",
@@ -189,7 +989,17 @@
     "slug": "imagen-3",
     "developer": "Google DeepMind",
     "releaseDate": "2024-08-13",
-    "type": "closed-source"
+    "type": "closed-source",
+    "family": "Imagen"
+  },
+  {
+    "id": "xai-grok-2",
+    "name": "Grok 2",
+    "slug": "grok-2",
+    "developer": "xAI",
+    "releaseDate": "2024-08-13",
+    "type": "closed-source",
+    "family": "Grok"
   },
   {
     "id": "black-forest-labs-flux.1-schnell",
@@ -197,7 +1007,8 @@
     "slug": "flux-1-schnell",
     "developer": "Black Forest Labs",
     "releaseDate": "2024-08-01",
-    "type": "open-weights"
+    "type": "open-weights",
+    "family": "FLUX"
   },
   {
     "id": "meta-llama-3-1-405b",
@@ -205,15 +1016,18 @@
     "slug": "llama-3-1-405b",
     "developer": "Meta",
     "releaseDate": "2024-07-23",
-    "type": "open-weights"
+    "type": "open-weights",
+    "family": "Llama"
   },
   {
     "id": "anthropic-claude-3-5-sonnet",
     "name": "Claude 3.5 Sonnet",
-    "slug": "claude-3-5-sonnet",
+    "slug": "anthropic-claude-3-5-sonnet",
     "developer": "Anthropic",
     "releaseDate": "2024-06-20",
-    "type": "closed-source"
+    "type": "api-only",
+    "featured": false,
+    "boost": 1
   },
   {
     "id": "deepseek-deepseek-coder-v2-instruct",
@@ -221,7 +1035,8 @@
     "slug": "deepseek-coder-v2-instruct",
     "developer": "DeepSeek",
     "releaseDate": "2024-06-17",
-    "type": "open-weights"
+    "type": "open-weights",
+    "family": "DeepSeek"
   },
   {
     "id": "runway-gen-3-alpha",
@@ -229,7 +1044,8 @@
     "slug": "gen-3-alpha",
     "developer": "Runway",
     "releaseDate": "2024-06-17",
-    "type": "closed-source"
+    "type": "closed-source",
+    "family": "Gen"
   },
   {
     "id": "stability-stable-diffusion-3",
@@ -237,7 +1053,8 @@
     "slug": "stable-diffusion-3",
     "developer": "Stability AI",
     "releaseDate": "2024-06-12",
-    "type": "open-weights"
+    "type": "open-weights",
+    "family": "Stable Diffusion"
   },
   {
     "id": "kuaishou-kling-1.0",
@@ -245,7 +1062,8 @@
     "slug": "kling-1-0",
     "developer": "Kuaishou",
     "releaseDate": "2024-06-06",
-    "type": "closed-source"
+    "type": "closed-source",
+    "family": "Kling"
   },
   {
     "id": "mistral-ai-codestral-22b",
@@ -253,7 +1071,8 @@
     "slug": "codestral-22b",
     "developer": "Mistral AI",
     "releaseDate": "2024-05-29",
-    "type": "open-weights"
+    "type": "open-weights",
+    "family": "Mistral"
   },
   {
     "id": "openai-gpt-4o",
@@ -261,7 +1080,8 @@
     "slug": "gpt-4o",
     "developer": "OpenAI",
     "releaseDate": "2024-05-13",
-    "type": "closed-source"
+    "type": "closed-source",
+    "family": "gpt-4o"
   },
   {
     "id": "other-unitree-g1",
@@ -269,7 +1089,8 @@
     "slug": "unitree-g1",
     "developer": "Other",
     "releaseDate": "2024-05-13",
-    "type": "open-weights"
+    "type": "open-weights",
+    "family": "Unitree Humanoid"
   },
   {
     "id": "mistral-mixtral-8x22b",
@@ -277,7 +1098,8 @@
     "slug": "mixtral-8x22b",
     "developer": "Mistral AI",
     "releaseDate": "2024-04-17",
-    "type": "open-weights"
+    "type": "open-weights",
+    "family": "Mixtral"
   },
   {
     "id": "cohere-command-r-plus",
@@ -285,7 +1107,38 @@
     "slug": "command-r-plus",
     "developer": "Cohere",
     "releaseDate": "2024-04-04",
-    "type": "closed-source"
+    "type": "closed-source",
+    "family": "Command"
+  },
+  {
+    "id": "anthropic-claude-3-haiku",
+    "name": "Claude 3 Haiku",
+    "slug": "anthropic-claude-3-haiku",
+    "developer": "Anthropic",
+    "releaseDate": "2024-03-13",
+    "type": "api-only",
+    "featured": false,
+    "boost": 1
+  },
+  {
+    "id": "anthropic-claude-3-sonnet",
+    "name": "Claude 3 Sonnet",
+    "slug": "anthropic-claude-3-sonnet",
+    "developer": "Anthropic",
+    "releaseDate": "2024-03-04",
+    "type": "api-only",
+    "featured": false,
+    "boost": 1
+  },
+  {
+    "id": "anthropic-claude-3-opus",
+    "name": "Claude 3 Opus",
+    "slug": "anthropic-claude-3-opus",
+    "developer": "Anthropic",
+    "releaseDate": "2024-03-04",
+    "type": "api-only",
+    "featured": false,
+    "boost": 1
   },
   {
     "id": "google-gemini-1-5-pro",
@@ -293,7 +1146,8 @@
     "slug": "gemini-1-5-pro",
     "developer": "Google DeepMind",
     "releaseDate": "2024-02-15",
-    "type": "closed-source"
+    "type": "closed-source",
+    "family": "Gemini"
   },
   {
     "id": "openai-sora",
@@ -301,7 +1155,8 @@
     "slug": "sora",
     "developer": "OpenAI",
     "releaseDate": "2024-02-15",
-    "type": "research-preview"
+    "type": "research-preview",
+    "family": "Sora"
   },
   {
     "id": "openai-text-embedding-3-large",
@@ -309,7 +1164,8 @@
     "slug": "text-embedding-3-large",
     "developer": "OpenAI",
     "releaseDate": "2024-01-25",
-    "type": "api-only"
+    "type": "api-only",
+    "family": "Embeddings"
   },
   {
     "id": "midjourney-midjourney-v6",
@@ -317,7 +1173,18 @@
     "slug": "midjourney-v6",
     "developer": "Midjourney",
     "releaseDate": "2023-12-21",
-    "type": "closed-source"
+    "type": "closed-source",
+    "family": "Midjourney"
+  },
+  {
+    "id": "anthropic-claude-2-1",
+    "name": "Claude 2.1",
+    "slug": "anthropic-claude-2-1",
+    "developer": "Anthropic",
+    "releaseDate": "2023-11-21",
+    "type": "api-only",
+    "featured": false,
+    "boost": 1
   },
   {
     "id": "openai-whisper-large-v3",
@@ -325,7 +1192,8 @@
     "slug": "whisper-large-v3",
     "developer": "OpenAI",
     "releaseDate": "2023-11-06",
-    "type": "open-weights"
+    "type": "open-weights",
+    "family": "Whisper"
   },
   {
     "id": "cohere-embed-english-v3.0",
@@ -333,7 +1201,8 @@
     "slug": "embed-english-v3",
     "developer": "Cohere",
     "releaseDate": "2023-11-02",
-    "type": "api-only"
+    "type": "api-only",
+    "family": "Embeddings"
   },
   {
     "id": "openai-dall-e-3",
@@ -341,7 +1210,8 @@
     "slug": "dall-e-3",
     "developer": "OpenAI",
     "releaseDate": "2023-10-03",
-    "type": "closed-source"
+    "type": "closed-source",
+    "family": "dall-e"
   },
   {
     "id": "openai-gpt-4v",
@@ -349,7 +1219,28 @@
     "slug": "gpt-4-vision",
     "developer": "OpenAI",
     "releaseDate": "2023-09-25",
-    "type": "closed-source"
+    "type": "closed-source",
+    "family": "gpt-4"
+  },
+  {
+    "id": "anthropic-claude-instant-1-2",
+    "name": "Claude Instant 1.2",
+    "slug": "anthropic-claude-instant-1-2",
+    "developer": "Anthropic",
+    "releaseDate": "2023-08-09",
+    "type": "api-only",
+    "featured": false,
+    "boost": 1
+  },
+  {
+    "id": "anthropic-claude-2",
+    "name": "Claude 2",
+    "slug": "anthropic-claude-2",
+    "developer": "Anthropic",
+    "releaseDate": "2023-07-11",
+    "type": "api-only",
+    "featured": false,
+    "boost": 1
   },
   {
     "id": "meta-musicgen",
@@ -357,6 +1248,17 @@
     "slug": "musicgen",
     "developer": "Meta",
     "releaseDate": "2023-06-08",
-    "type": "open-weights"
+    "type": "open-weights",
+    "family": "AudioCraft"
+  },
+  {
+    "id": "anthropic-claude-1",
+    "name": "Claude 1",
+    "slug": "anthropic-claude-1",
+    "developer": "Anthropic",
+    "releaseDate": "2023-03-14",
+    "type": "api-only",
+    "featured": false,
+    "boost": 1
   }
 ]

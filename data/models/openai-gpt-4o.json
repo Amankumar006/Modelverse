@@ -23,7 +23,7 @@
     "Improved multilingual and vision capabilities"
   ],
   "benchmarks": [],
-  "family": "GPT",
+  "family": "gpt-4o",
   "previousVersion": null,
   "links": {
     "website": "https://openai.com/index/hello-gpt-4o/"
@@ -41,5 +41,17 @@
   "primaryTask": "multimodal-general",
   "deployment": [
     "api-only"
+  ],
+  "costTiers": [
+    {
+      "id": "gpt-4o-mini",
+      "label": "GPT-4o mini",
+      "description": "Fast, affordable small model for focused tasks"
+    },
+    {
+      "name": "ChatGPT-4o",
+      "id": "chatgpt-4o",
+      "description": "GPT-4o model used in ChatGPT"
+    }
   ]
 }

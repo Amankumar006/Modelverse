@@ -1,0 +1,36 @@
+{
+  "id": "gpt-4",
+  "name": "GPT-4",
+  "slug": "gpt-4",
+  "developer": "OpenAI",
+  "releaseDate": "2026-07-14",
+  "updatedAt": "2026-07-14",
+  "type": "closed-source",
+  "modality": [
+    "text"
+  ],
+  "primaryTask": "chat-reasoning",
+  "deployment": [
+    "api-only"
+  ],
+  "license": "Proprietary",
+  "parameters": "Unknown",
+  "contextWindow": "Unknown",
+  "description": "An older high-intelligence GPT model",
+  "keyFeatures": [],
+  "benchmarks": [],
+  "family": "gpt-4",
+  "previousVersion": null,
+  "links": {
+    "Documentation": "https://developers.openai.com/api/docs/models/all"
+  },
+  "logo": null,
+  "tags": [],
+  "sources": [
+    "https://developers.openai.com/api/docs/models/all"
+  ],
+  "verified": true,
+  "featured": false,
+  "boost": 1,
+  "curatorNotes": "Bulk imported from OpenAI developer docs."
+}

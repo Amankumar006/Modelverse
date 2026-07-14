@@ -1,0 +1,43 @@
+{
+  "name": "Claude Sonnet 4.5",
+  "developer": "Anthropic",
+  "type": "api-only",
+  "modality": [
+    "text",
+    "image",
+    "code"
+  ],
+  "primaryTask": "chat-reasoning",
+  "deployment": [
+    "api-only"
+  ],
+  "license": "Proprietary",
+  "parameters": "undisclosed",
+  "contextWindow": "200K tokens",
+  "releaseDate": "2025-09-29",
+  "description": "Designed for balanced performance and everyday professional workflows.",
+  "keyFeatures": [
+    "Balanced reasoning and cost profile"
+  ],
+  "benchmarks": [],
+  "family": "Claude",
+  "previousVersion": "anthropic-claude-sonnet-4",
+  "website": "https://www.anthropic.com",
+  "paper": "",
+  "huggingFace": "",
+  "github": "",
+  "blogPost": "",
+  "sources": [
+    "https://en.wikipedia.org/wiki/Claude_(AI)"
+  ],
+  "logo": "/public/logos/anthropic.png",
+  "tags": [],
+  "verified": true,
+  "curatorNotes": "",
+  "id": "anthropic-claude-sonnet-4-5",
+  "slug": "anthropic-claude-sonnet-4-5",
+  "updatedAt": "2026-07-14",
+  "featured": false,
+  "boost": 1,
+  "costTiers": []
+}

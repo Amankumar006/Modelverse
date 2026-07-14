@@ -1,0 +1,36 @@
+{
+  "id": "gpt-oss-20b",
+  "name": "gpt-oss-20b",
+  "slug": "gpt-oss-20b",
+  "developer": "OpenAI",
+  "releaseDate": "2026-07-14",
+  "updatedAt": "2026-07-14",
+  "type": "open-weights",
+  "modality": [
+    "text"
+  ],
+  "primaryTask": "chat-reasoning",
+  "deployment": [
+    "self-hostable"
+  ],
+  "license": "Apache 2.0",
+  "parameters": "Unknown",
+  "contextWindow": "Unknown",
+  "description": "Medium-sized open-weight model for low latency",
+  "keyFeatures": [],
+  "benchmarks": [],
+  "family": "gpt",
+  "previousVersion": null,
+  "links": {
+    "Documentation": "https://developers.openai.com/api/docs/models/all"
+  },
+  "logo": null,
+  "tags": [],
+  "sources": [
+    "https://developers.openai.com/api/docs/models/all"
+  ],
+  "verified": true,
+  "featured": false,
+  "boost": 1,
+  "curatorNotes": "Bulk imported from OpenAI developer docs."
+}

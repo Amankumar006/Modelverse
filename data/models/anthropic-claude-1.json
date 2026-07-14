@@ -1,0 +1,43 @@
+{
+  "name": "Claude 1",
+  "developer": "Anthropic",
+  "type": "api-only",
+  "modality": [
+    "text"
+  ],
+  "primaryTask": "chat-reasoning",
+  "deployment": [
+    "api-only"
+  ],
+  "license": "Proprietary",
+  "parameters": "undisclosed",
+  "contextWindow": "100K tokens",
+  "releaseDate": "2023-03-14",
+  "description": "The inaugural foundational model from Anthropic, built on Constitutional AI principles and introduced alongside the initial Anthropic API.",
+  "keyFeatures": [
+    "Constitutional AI alignment"
+  ],
+  "benchmarks": [],
+  "family": "Claude",
+  "previousVersion": "",
+  "website": "https://www.anthropic.com",
+  "paper": "",
+  "huggingFace": "",
+  "github": "",
+  "blogPost": "",
+  "sources": [
+    "https://hidekazu-konishi.com/entry/anthropic_claude_model_release_timeline.html"
+  ],
+  "logo": "/public/logos/anthropic.png",
+  "tags": [
+    "constitutional-ai"
+  ],
+  "verified": true,
+  "curatorNotes": "",
+  "id": "anthropic-claude-1",
+  "slug": "anthropic-claude-1",
+  "updatedAt": "2026-07-14",
+  "featured": false,
+  "boost": 1,
+  "costTiers": []
+}

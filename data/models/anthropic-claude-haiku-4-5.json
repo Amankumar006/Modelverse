@@ -1,0 +1,46 @@
+{
+  "name": "Claude Haiku 4.5",
+  "developer": "Anthropic",
+  "type": "api-only",
+  "modality": [
+    "text",
+    "image"
+  ],
+  "primaryTask": "chat-reasoning",
+  "deployment": [
+    "api-only"
+  ],
+  "license": "Proprietary",
+  "parameters": "undisclosed",
+  "contextWindow": "200K tokens",
+  "releaseDate": "2025-10-15",
+  "description": "The fastest and most cost-efficient generation 4 model, designed for high-volume use, automation, and lightweight corporate tasks.",
+  "keyFeatures": [
+    "Extremely low latency",
+    "High-volume automation"
+  ],
+  "benchmarks": [],
+  "family": "Claude",
+  "previousVersion": "anthropic-claude-3-5-haiku",
+  "website": "https://www.anthropic.com",
+  "paper": "",
+  "huggingFace": "",
+  "github": "",
+  "blogPost": "",
+  "sources": [
+    "https://en.wikipedia.org/wiki/Claude_(AI)"
+  ],
+  "logo": "/public/logos/anthropic.png",
+  "tags": [
+    "fast",
+    "efficient"
+  ],
+  "verified": true,
+  "curatorNotes": "",
+  "id": "anthropic-claude-haiku-4-5",
+  "slug": "anthropic-claude-haiku-4-5",
+  "updatedAt": "2026-07-14",
+  "featured": false,
+  "boost": 1,
+  "costTiers": []
+}

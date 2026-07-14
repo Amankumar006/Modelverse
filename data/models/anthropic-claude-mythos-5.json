@@ -1,0 +1,49 @@
+{
+  "name": "Claude Mythos 5",
+  "developer": "Anthropic",
+  "type": "closed-source",
+  "modality": [
+    "text",
+    "image",
+    "code",
+    "multimodal"
+  ],
+  "primaryTask": "multimodal-general",
+  "deployment": [
+    "api-only"
+  ],
+  "license": "Proprietary",
+  "parameters": "undisclosed",
+  "contextWindow": "1M tokens",
+  "releaseDate": "2026-06-09",
+  "description": "A highly restricted enterprise model available exclusively through Project Glasswing. It shares the core architecture of Fable 5 but contains advanced capabilities specifically optimized for life sciences, biology research, and high-security cyber contexts.",
+  "keyFeatures": [
+    "Advanced biological and life sciences modeling",
+    "Restricted availability (Project Glasswing only)"
+  ],
+  "benchmarks": [],
+  "family": "Claude",
+  "previousVersion": "anthropic-claude-mythos-preview",
+  "website": "https://www.anthropic.com",
+  "paper": "",
+  "huggingFace": "",
+  "github": "",
+  "blogPost": "",
+  "sources": [
+    "https://www.lorka.ai/ai-models/anthropic"
+  ],
+  "logo": "/public/logos/anthropic.png",
+  "tags": [
+    "enterprise-restricted",
+    "biology",
+    "project-glasswing"
+  ],
+  "verified": true,
+  "curatorNotes": "",
+  "id": "anthropic-claude-mythos-5",
+  "slug": "anthropic-claude-mythos-5",
+  "updatedAt": "2026-07-14",
+  "featured": false,
+  "boost": 1,
+  "costTiers": []
+}

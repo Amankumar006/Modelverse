@@ -1,0 +1,47 @@
+{
+  "name": "Claude Opus 4.7",
+  "developer": "Anthropic",
+  "type": "api-only",
+  "modality": [
+    "text",
+    "image",
+    "code"
+  ],
+  "primaryTask": "code-generation",
+  "deployment": [
+    "api-only"
+  ],
+  "license": "Proprietary",
+  "parameters": "undisclosed",
+  "contextWindow": "1M tokens",
+  "releaseDate": "2026-04-16",
+  "description": "A major reasoning upgrade specifically improving advanced software engineering and file-system memory usage. It accepts high-resolution images up to ~3.75 megapixels for pixel-perfect screenshot reading.",
+  "keyFeatures": [
+    "Enhanced file system-based memory across sessions",
+    "3.75 megapixel vision capabilities",
+    "Strict instruction following"
+  ],
+  "benchmarks": [],
+  "family": "Claude",
+  "previousVersion": "anthropic-claude-opus-4-6",
+  "website": "https://www.anthropic.com/news/claude-opus-4-7",
+  "paper": "",
+  "huggingFace": "",
+  "github": "",
+  "blogPost": "https://www.anthropic.com/news/claude-opus-4-7",
+  "sources": [
+    "https://www.anthropic.com/news/claude-opus-4-7"
+  ],
+  "logo": "/public/logos/anthropic.png",
+  "tags": [
+    "agentic-tooling"
+  ],
+  "verified": true,
+  "curatorNotes": "",
+  "id": "anthropic-claude-opus-4-7",
+  "slug": "anthropic-claude-opus-4-7",
+  "updatedAt": "2026-07-14",
+  "featured": false,
+  "boost": 1,
+  "costTiers": []
+}

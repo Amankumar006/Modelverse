@@ -1,0 +1,48 @@
+{
+  "id": "gpt-5.1-codex",
+  "name": "GPT-5.1-Codex",
+  "slug": "gpt-5-1-codex",
+  "developer": "OpenAI",
+  "releaseDate": "2026-07-14",
+  "updatedAt": "2026-07-14",
+  "type": "closed-source",
+  "modality": [
+    "text"
+  ],
+  "primaryTask": "code-generation",
+  "deployment": [
+    "api-only"
+  ],
+  "license": "Proprietary",
+  "parameters": "Unknown",
+  "contextWindow": "Unknown",
+  "description": "A version of GPT-5.1 optimized for agentic coding in Codex.",
+  "keyFeatures": [],
+  "benchmarks": [],
+  "family": "gpt-5-1",
+  "previousVersion": null,
+  "links": {
+    "Documentation": "https://developers.openai.com/api/docs/models/all"
+  },
+  "logo": null,
+  "tags": [],
+  "sources": [
+    "https://developers.openai.com/api/docs/models/all"
+  ],
+  "verified": true,
+  "featured": false,
+  "boost": 1,
+  "curatorNotes": "Bulk imported from OpenAI developer docs.",
+  "costTiers": [
+    {
+      "id": "gpt-5.1-codex-max",
+      "label": "GPT-5.1-Codex-Max",
+      "description": "A version of GPT-5.1-codex optimized for long running tasks."
+    },
+    {
+      "id": "gpt-5.1-codex-mini",
+      "label": "GPT-5.1-Codex mini",
+      "description": "Smaller, more cost-effective, less-capable version of GPT-5.1-Codex"
+    }
+  ]
+}

@@ -1,0 +1,48 @@
+{
+  "name": "Claude Sonnet 5",
+  "developer": "Anthropic",
+  "type": "api-only",
+  "modality": [
+    "text",
+    "image",
+    "code"
+  ],
+  "primaryTask": "agentic",
+  "deployment": [
+    "api-only"
+  ],
+  "license": "Proprietary",
+  "parameters": "undisclosed",
+  "contextWindow": "1M tokens",
+  "releaseDate": "2026-06-30",
+  "description": "Built specifically as an execution layer for multi-step software engineering work. It handles sustained coding, browser tool use, and debugging autonomously at speeds matching previous Opus models.",
+  "keyFeatures": [
+    "1M token context window",
+    "Native browser and terminal tool use",
+    "Adaptive thinking enabled by default"
+  ],
+  "benchmarks": [],
+  "family": "Claude",
+  "previousVersion": "anthropic-claude-sonnet-4-6",
+  "website": "https://www.anthropic.com/news/claude-sonnet-5",
+  "paper": "",
+  "huggingFace": "",
+  "github": "",
+  "blogPost": "https://www.anthropic.com/news/claude-sonnet-5",
+  "sources": [
+    "https://www.anthropic.com/news/claude-sonnet-5"
+  ],
+  "logo": "/public/logos/anthropic.png",
+  "tags": [
+    "agentic-tooling",
+    "code-generation"
+  ],
+  "verified": true,
+  "curatorNotes": "",
+  "id": "anthropic-claude-sonnet-5",
+  "slug": "anthropic-claude-sonnet-5",
+  "updatedAt": "2026-07-14",
+  "featured": false,
+  "boost": 1,
+  "costTiers": []
+}

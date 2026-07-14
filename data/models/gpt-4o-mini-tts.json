@@ -1,0 +1,37 @@
+{
+  "id": "gpt-4o-mini-tts",
+  "name": "GPT-4o mini TTS",
+  "slug": "gpt-4o-mini-tts",
+  "developer": "OpenAI",
+  "releaseDate": "2026-07-14",
+  "updatedAt": "2026-07-14",
+  "type": "closed-source",
+  "modality": [
+    "text",
+    "audio"
+  ],
+  "primaryTask": "audio-speech",
+  "deployment": [
+    "api-only"
+  ],
+  "license": "Proprietary",
+  "parameters": "Unknown",
+  "contextWindow": "Unknown",
+  "description": "Text-to-speech model powered by GPT-4o mini",
+  "keyFeatures": [],
+  "benchmarks": [],
+  "family": "gpt-4o-mini",
+  "previousVersion": null,
+  "links": {
+    "Documentation": "https://developers.openai.com/api/docs/models/all"
+  },
+  "logo": null,
+  "tags": [],
+  "sources": [
+    "https://developers.openai.com/api/docs/models/all"
+  ],
+  "verified": true,
+  "featured": false,
+  "boost": 1,
+  "curatorNotes": "Bulk imported from OpenAI developer docs."
+}

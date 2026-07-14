@@ -1,0 +1,41 @@
+{
+  "name": "Claude 2",
+  "developer": "Anthropic",
+  "type": "api-only",
+  "modality": [
+    "text"
+  ],
+  "primaryTask": "chat-reasoning",
+  "deployment": [
+    "api-only"
+  ],
+  "license": "Proprietary",
+  "parameters": "undisclosed",
+  "contextWindow": "100K tokens",
+  "releaseDate": "2023-07-11",
+  "description": "The second major generation of Claude, significantly improving coding, math, and logical reasoning while expanding the context window.",
+  "keyFeatures": [
+    "100K token context window"
+  ],
+  "benchmarks": [],
+  "family": "Claude",
+  "previousVersion": "anthropic-claude-1",
+  "website": "https://www.anthropic.com",
+  "paper": "",
+  "huggingFace": "",
+  "github": "",
+  "blogPost": "",
+  "sources": [
+    "https://en.wikipedia.org/wiki/Claude_(AI)"
+  ],
+  "logo": "/public/logos/anthropic.png",
+  "tags": [],
+  "verified": true,
+  "curatorNotes": "",
+  "id": "anthropic-claude-2",
+  "slug": "anthropic-claude-2",
+  "updatedAt": "2026-07-14",
+  "featured": false,
+  "boost": 1,
+  "costTiers": []
+}

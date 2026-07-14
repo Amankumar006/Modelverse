@@ -1,0 +1,44 @@
+{
+  "name": "Claude Opus 4.1",
+  "developer": "Anthropic",
+  "type": "api-only",
+  "modality": [
+    "text",
+    "image",
+    "code"
+  ],
+  "primaryTask": "chat-reasoning",
+  "deployment": [
+    "api-only"
+  ],
+  "license": "Proprietary",
+  "parameters": "undisclosed",
+  "contextWindow": "200K tokens",
+  "releaseDate": "2025-08-05",
+  "description": "Built for sustained reasoning, multistep workflows, and long structured problem-solving. Implemented new safety protocols to terminate persistently abusive conversations.",
+  "keyFeatures": [
+    "Sustained multi-step problem solving",
+    "Enhanced safety interventions"
+  ],
+  "benchmarks": [],
+  "family": "Claude",
+  "previousVersion": "anthropic-claude-opus-4",
+  "website": "https://www.anthropic.com",
+  "paper": "",
+  "huggingFace": "",
+  "github": "",
+  "blogPost": "",
+  "sources": [
+    "https://en.wikipedia.org/wiki/Claude_(AI)"
+  ],
+  "logo": "/public/logos/anthropic.png",
+  "tags": [],
+  "verified": true,
+  "curatorNotes": "",
+  "id": "anthropic-claude-opus-4-1",
+  "slug": "anthropic-claude-opus-4-1",
+  "updatedAt": "2026-07-14",
+  "featured": false,
+  "boost": 1,
+  "costTiers": []
+}

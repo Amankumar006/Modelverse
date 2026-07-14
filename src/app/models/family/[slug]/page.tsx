@@ -1,0 +1,120 @@
+import type { Metadata } from "next";
+import Link from "next/link";
+import { notFound } from "next/navigation";
+import {
+  getAllModels,
+  getAllModelEntries,
+  SITE_URL,
+} from "@/lib/models";
+import Breadcrumb from "@/components/models/Breadcrumb";
+import ModelCard from "@/components/models/ModelCard";
+import Navbar from "@/components/layout/Navbar";
+import { ChevronLeft, Sparkles } from "lucide-react";
+
+export const dynamic = "force-static";
+
+export async function generateStaticParams() {
+  const models = getAllModelEntries();
+  const families = new Set<string>();
+  for (const m of models) {
+    if (m.family) families.add(m.family);
+  }
+  return Array.from(families).map((slug) => ({
+    slug,
+  }));
+}
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}): Promise<Metadata> {
+  const { slug } = await params;
+  const models = getAllModelEntries().filter((m) => m.family === slug);
+  
+  if (models.length === 0) {
+    return { title: "Family Not Found — Modelverse" };
+  }
+
+  const primaryModel = models.find((m) => m.primaryTask === "chat-reasoning") || models.sort((a, b) => b.boost - a.boost)[0];
+  const developer = primaryModel.developer;
+  
+  const title = `${slug} Family by ${developer} — Modelverse`;
+  const description = `Explore all variants in the ${slug} family by ${developer}.`;
+
+  return {
+    title,
+    description,
+    alternates: {
+      canonical: `${SITE_URL}/models/family/${slug}`,
+    },
+    openGraph: {
+      title,
+      description,
+      url: `${SITE_URL}/models/family/${slug}`,
+      type: "website",
+      siteName: "Modelverse",
+    },
+  };
+}
+
+export default async function FamilyPage({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}) {
+  const { slug } = await params;
+  const models = getAllModelEntries().filter((m) => m.family === slug);
+
+  if (models.length === 0) {
+    notFound();
+  }
+
+  const primaryModel = models.find((m) => m.primaryTask === "chat-reasoning") || models.sort((a, b) => b.boost - a.boost)[0];
+  const developer = primaryModel.developer;
+
+  return (
+    <main className="min-h-screen bg-white text-[#0a0a0a] selection:bg-brand-orange selection:text-white pb-24 relative">
+      <Navbar theme="light" />
+      {/* ── Top Bar / Breadcrumb ─────────────────────────────── */}
+      <header className="max-w-4xl mx-auto px-4 sm:px-6 pt-8 pb-4">
+        <Breadcrumb developer={developer} family={{ slug, label: slug }} />
+      </header>
+
+      {/* ── Content ────────────────────────────────────────── */}
+      <article className="max-w-4xl mx-auto px-4 sm:px-6 mt-6">
+        <Link
+          href={`/models/developer/${encodeURIComponent(developer)}`}
+          className="inline-flex items-center gap-1.5 text-xs text-[#6f6f6f] hover:text-[#0a0a0a] transition-colors group mb-8 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black/50 focus-visible:ring-offset-2 rounded-lg px-2 py-1"
+        >
+          <ChevronLeft size={14} className="transition-transform group-hover:-translate-x-0.5" />
+          Back to {developer}
+        </Link>
+
+        <div className="mb-10 space-y-4">
+          <div className="inline-flex items-center gap-2 text-brand-orange bg-brand-orange/10 px-3 py-1 rounded-full text-xs font-semibold mb-2">
+            <Sparkles size={14} />
+            Model Family
+          </div>
+          <h1
+            className="text-4xl sm:text-5xl font-normal tracking-tight text-[#0a0a0a] leading-none"
+            style={{
+              fontFamily: "var(--font-display, ui-sans-serif, system-ui, sans-serif)",
+            }}
+          >
+            {slug}
+          </h1>
+          <p className="text-[#6f6f6f] text-lg">
+            Developed by {developer}. Explore the {models.length} variants available in this generation.
+          </p>
+        </div>
+
+        <div className="flex flex-col gap-3">
+          {models.map((model) => (
+            <ModelCard key={model.id} model={model} variant="row" />
+          ))}
+        </div>
+      </article>
+    </main>
+  );
+}

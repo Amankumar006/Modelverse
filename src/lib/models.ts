@@ -14,6 +14,7 @@ export interface ModelIndex {
   type: "open-source" | "open-weights" | "closed-source" | "api-only" | "research-preview";
   featured?: boolean;
   boost?: number;
+  family?: string | null;
 }
 
 export interface Benchmark {

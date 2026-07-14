@@ -1,0 +1,43 @@
+{
+  "id": "gpt-realtime",
+  "name": "GPT-Realtime",
+  "slug": "gpt-realtime",
+  "developer": "OpenAI",
+  "releaseDate": "2026-07-14",
+  "updatedAt": "2026-07-14",
+  "type": "api-only",
+  "modality": [
+    "audio"
+  ],
+  "primaryTask": "audio-speech",
+  "deployment": [
+    "api-only"
+  ],
+  "license": "Proprietary",
+  "parameters": "Unknown",
+  "contextWindow": "Unknown",
+  "description": "Model capable of realtime text and audio inputs and outputs",
+  "keyFeatures": [],
+  "benchmarks": [],
+  "family": "gpt-realtime",
+  "previousVersion": null,
+  "links": {
+    "Documentation": "https://developers.openai.com/api/docs/models/all"
+  },
+  "logo": null,
+  "tags": [],
+  "sources": [
+    "https://developers.openai.com/api/docs/models/all"
+  ],
+  "verified": true,
+  "featured": false,
+  "boost": 1,
+  "curatorNotes": "Bulk imported from OpenAI developer docs.",
+  "costTiers": [
+    {
+      "id": "gpt-realtime-mini",
+      "label": "GPT-Realtime mini",
+      "description": "A cost-efficient version of GPT-Realtime"
+    }
+  ]
+}

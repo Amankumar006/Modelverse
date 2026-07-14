@@ -1,0 +1,36 @@
+{
+  "id": "text-embedding-3-small",
+  "name": "text-embedding-3-small",
+  "slug": "text-embedding-3-small",
+  "developer": "OpenAI",
+  "releaseDate": "2026-07-14",
+  "updatedAt": "2026-07-14",
+  "type": "api-only",
+  "modality": [
+    "text"
+  ],
+  "primaryTask": "embedding",
+  "deployment": [
+    "api-only"
+  ],
+  "license": "Proprietary",
+  "parameters": "Unknown",
+  "contextWindow": "Unknown",
+  "description": "Small embedding model",
+  "keyFeatures": [],
+  "benchmarks": [],
+  "family": "text-embedding-3",
+  "previousVersion": null,
+  "links": {
+    "Documentation": "https://developers.openai.com/api/docs/models/all"
+  },
+  "logo": null,
+  "tags": [],
+  "sources": [
+    "https://developers.openai.com/api/docs/models/all"
+  ],
+  "verified": true,
+  "featured": false,
+  "boost": 1,
+  "curatorNotes": "Bulk imported from OpenAI developer docs."
+}

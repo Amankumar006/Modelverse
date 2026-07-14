@@ -1,0 +1,43 @@
+{
+  "id": "davinci-002",
+  "name": "davinci-002",
+  "slug": "davinci-002",
+  "developer": "OpenAI",
+  "releaseDate": "2026-07-14",
+  "updatedAt": "2026-07-14",
+  "type": "closed-source",
+  "modality": [
+    "text"
+  ],
+  "primaryTask": "chat-reasoning",
+  "deployment": [
+    "api-only"
+  ],
+  "license": "Proprietary",
+  "parameters": "Unknown",
+  "contextWindow": "Unknown",
+  "description": "Replacement for the GPT-3 curie and davinci base models",
+  "keyFeatures": [],
+  "benchmarks": [],
+  "family": "gpt-3-base",
+  "previousVersion": null,
+  "links": {
+    "Documentation": "https://developers.openai.com/api/docs/models/all"
+  },
+  "logo": null,
+  "tags": [],
+  "sources": [
+    "https://developers.openai.com/api/docs/models/all"
+  ],
+  "verified": true,
+  "featured": false,
+  "boost": 1,
+  "curatorNotes": "Bulk imported from OpenAI developer docs.",
+  "costTiers": [
+    {
+      "name": "babbage-002",
+      "id": "babbage-002",
+      "description": "Replacement for the GPT-3 ada and babbage base models"
+    }
+  ]
+}

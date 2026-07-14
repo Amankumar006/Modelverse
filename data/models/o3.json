@@ -1,0 +1,48 @@
+{
+  "id": "o3",
+  "name": "o3",
+  "slug": "o3",
+  "developer": "OpenAI",
+  "releaseDate": "2026-07-14",
+  "updatedAt": "2026-07-14",
+  "type": "api-only",
+  "modality": [
+    "text"
+  ],
+  "primaryTask": "chat-reasoning",
+  "deployment": [
+    "api-only"
+  ],
+  "license": "Proprietary",
+  "parameters": "Unknown",
+  "contextWindow": "Unknown",
+  "description": "Reasoning model for complex tasks, succeeded by GPT-5",
+  "keyFeatures": [],
+  "benchmarks": [],
+  "family": "o3",
+  "previousVersion": null,
+  "links": {
+    "Documentation": "https://developers.openai.com/api/docs/models/all"
+  },
+  "logo": null,
+  "tags": [],
+  "sources": [
+    "https://developers.openai.com/api/docs/models/all"
+  ],
+  "verified": true,
+  "featured": false,
+  "boost": 1,
+  "curatorNotes": "Bulk imported from OpenAI developer docs.",
+  "costTiers": [
+    {
+      "id": "o3-pro",
+      "label": "o3-pro",
+      "description": "Version of o3 with more compute for better responses"
+    },
+    {
+      "id": "o3-mini",
+      "label": "o3-mini",
+      "description": "A small model alternative to o3"
+    }
+  ]
+}

@@ -1,0 +1,48 @@
+{
+  "id": "gpt-4.1",
+  "name": "GPT-4.1",
+  "slug": "gpt-4-1",
+  "developer": "OpenAI",
+  "releaseDate": "2026-07-14",
+  "updatedAt": "2026-07-14",
+  "type": "api-only",
+  "modality": [
+    "text"
+  ],
+  "primaryTask": "chat-reasoning",
+  "deployment": [
+    "api-only"
+  ],
+  "license": "Proprietary",
+  "parameters": "Unknown",
+  "contextWindow": "Unknown",
+  "description": "Smartest non-reasoning model",
+  "keyFeatures": [],
+  "benchmarks": [],
+  "family": "gpt",
+  "previousVersion": null,
+  "links": {
+    "Documentation": "https://developers.openai.com/api/docs/models/all"
+  },
+  "logo": null,
+  "tags": [],
+  "sources": [
+    "https://developers.openai.com/api/docs/models/all"
+  ],
+  "verified": true,
+  "featured": false,
+  "boost": 1,
+  "curatorNotes": "Bulk imported from OpenAI developer docs.",
+  "costTiers": [
+    {
+      "id": "gpt-4.1-mini",
+      "label": "GPT-4.1 mini",
+      "description": "Smaller, faster version of GPT-4.1"
+    },
+    {
+      "id": "gpt-4.1-nano",
+      "label": "GPT-4.1 nano",
+      "description": "Fastest, most cost-efficient version of GPT-4.1"
+    }
+  ]
+}

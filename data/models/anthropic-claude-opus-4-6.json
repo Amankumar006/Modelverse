@@ -1,0 +1,46 @@
+{
+  "name": "Claude Opus 4.6",
+  "developer": "Anthropic",
+  "type": "api-only",
+  "modality": [
+    "text",
+    "image",
+    "code"
+  ],
+  "primaryTask": "agentic",
+  "deployment": [
+    "api-only"
+  ],
+  "license": "Proprietary",
+  "parameters": "undisclosed",
+  "contextWindow": "1M tokens",
+  "releaseDate": "2026-02-05",
+  "description": "This release introduced native capabilities for coordinating agent teams directly and featured heavy architectural optimizations for deep causal reasoning.",
+  "keyFeatures": [
+    "Agent team coordination",
+    "Claude in PowerPoint integrations"
+  ],
+  "benchmarks": [],
+  "family": "Claude",
+  "previousVersion": "anthropic-claude-opus-4-5",
+  "website": "https://www.anthropic.com",
+  "paper": "",
+  "huggingFace": "",
+  "github": "",
+  "blogPost": "",
+  "sources": [
+    "https://en.wikipedia.org/wiki/Claude_(AI)"
+  ],
+  "logo": "/public/logos/anthropic.png",
+  "tags": [
+    "agentic-tooling"
+  ],
+  "verified": true,
+  "curatorNotes": "",
+  "id": "anthropic-claude-opus-4-6",
+  "slug": "anthropic-claude-opus-4-6",
+  "updatedAt": "2026-07-14",
+  "featured": false,
+  "boost": 1,
+  "costTiers": []
+}

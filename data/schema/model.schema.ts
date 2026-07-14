@@ -45,8 +45,16 @@ export const ModelSchema = z.object({
   description: z.string(),
   keyFeatures: z.array(z.string()),
   benchmarks: z.array(BenchmarkSchema),
+  // family: the generation-level identifier shared by every variant of one release
+  // (e.g. "gpt-5.6" shared by chat, codex, realtime). Convention: lowercase, hyphenated, matches the primary base entry's slug.
   family: z.string().nullable(),
+  // previousVersion: lineage pointing to the specific prior-generation entry (e.g. gpt-5.6 chat points to gpt-5.5 chat).
   previousVersion: z.string().nullable(),
+  costTiers: z.array(z.object({
+    id: z.string(),
+    label: z.string(),
+    description: z.string().optional(),
+  })).optional(),
   links: z.record(z.string(), z.string()),
   logo: z.string().nullable(),
   // Namespaced tags: "arxiv:2401.xxxxx" (paper), "base:<model-id>" (lineage,
