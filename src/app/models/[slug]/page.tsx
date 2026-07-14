@@ -436,81 +436,83 @@ export default async function ModelDetailPage({
             </section>
 
             {/* Links Section */}
-            <section className="p-5 rounded-2xl bg-[#fafaf8] border border-black/10 space-y-3.5 text-left">
-              <h2 className="text-[10px] font-bold uppercase tracking-widest text-[#6f6f6f]/80">Links</h2>
-              <div className="flex flex-col gap-2">
-                {model.links.website && (
-                  <a
-                    href={model.links.website}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center justify-between p-3 rounded-xl bg-white hover:bg-black/5 border border-black/10 text-xs font-semibold text-[#6f6f6f] hover:text-[#0a0a0a] transition-colors group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-orange/50"
-                  >
-                    <span className="flex items-center gap-2">
-                      <Globe size={13} className="text-black/40" />
-                      Official Website
-                    </span>
-                    <ExternalLink size={12} className="text-black/25 group-hover:text-black/60 transition-colors" />
-                  </a>
-                )}
-                {model.links.paper && (
-                  <a
-                    href={model.links.paper}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center justify-between p-3 rounded-xl bg-white hover:bg-black/5 border border-black/10 text-xs font-semibold text-[#6f6f6f] hover:text-[#0a0a0a] transition-colors group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-orange/50"
-                  >
-                    <span className="flex items-center gap-2">
-                      <FileText size={13} className="text-black/40" />
-                      Research Paper
-                    </span>
-                    <ExternalLink size={12} className="text-black/25 group-hover:text-black/60 transition-colors" />
-                  </a>
-                )}
-                {model.links.huggingface && (
-                  <a
-                    href={model.links.huggingface}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center justify-between p-3 rounded-xl bg-white hover:bg-black/5 border border-black/10 text-xs font-semibold text-[#6f6f6f] hover:text-[#0a0a0a] transition-colors group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-orange/50"
-                  >
-                    <span className="flex items-center gap-2">
-                      <Layers size={13} className="text-black/40" />
-                      Hugging Face
-                    </span>
-                    <ExternalLink size={12} className="text-black/25 group-hover:text-black/60 transition-colors" />
-                  </a>
-                )}
-                {model.links.github && (
-                  <a
-                    href={model.links.github}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center justify-between p-3 rounded-xl bg-white hover:bg-black/5 border border-black/10 text-xs font-semibold text-[#6f6f6f] hover:text-[#0a0a0a] transition-colors group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-orange/50"
-                  >
-                    <span className="flex items-center gap-2">
-                      <Terminal size={13} className="text-black/40" />
-                      GitHub Repository
-                    </span>
-                    <ExternalLink size={12} className="text-black/25 group-hover:text-black/60 transition-colors" />
-                  </a>
-                )}
-                {model.links.blogPost && (
-                  <a
-                    href={model.links.blogPost}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center justify-between p-3 rounded-xl bg-white hover:bg-black/5 border border-black/10 text-xs font-semibold text-[#6f6f6f] hover:text-[#0a0a0a] transition-colors group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-orange/50"
-                  >
-                    <span className="flex items-center gap-2">
-                      <Link2 size={13} className="text-black/40" />
-                      Developer Blog
-                    </span>
-                    <ExternalLink size={12} className="text-black/25 group-hover:text-black/60 transition-colors" />
-                  </a>
-                )}
-              </div>
-            </section>
+            {model.links && (model.links.website || model.links.paper || model.links.huggingface || model.links.github || model.links.blogPost) && (
+              <section className="p-5 rounded-2xl bg-[#fafaf8] border border-black/10 space-y-3.5 text-left">
+                <h2 className="text-[10px] font-bold uppercase tracking-widest text-[#6f6f6f]/80">Links</h2>
+                <div className="flex flex-col gap-2">
+                  {model.links.website && (
+                    <a
+                      href={model.links.website}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center justify-between p-3 rounded-xl bg-white hover:bg-black/5 border border-black/10 text-xs font-semibold text-[#6f6f6f] hover:text-[#0a0a0a] transition-colors group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-orange/50"
+                    >
+                      <span className="flex items-center gap-2">
+                        <Globe size={13} className="text-black/40" />
+                        Official Website
+                      </span>
+                      <ExternalLink size={12} className="text-black/25 group-hover:text-black/60 transition-colors" />
+                    </a>
+                  )}
+                  {model.links.paper && (
+                    <a
+                      href={model.links.paper}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center justify-between p-3 rounded-xl bg-white hover:bg-black/5 border border-black/10 text-xs font-semibold text-[#6f6f6f] hover:text-[#0a0a0a] transition-colors group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-orange/50"
+                    >
+                      <span className="flex items-center gap-2">
+                        <FileText size={13} className="text-black/40" />
+                        Research Paper
+                      </span>
+                      <ExternalLink size={12} className="text-black/25 group-hover:text-black/60 transition-colors" />
+                    </a>
+                  )}
+                  {model.links.huggingface && (
+                    <a
+                      href={model.links.huggingface}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center justify-between p-3 rounded-xl bg-white hover:bg-black/5 border border-black/10 text-xs font-semibold text-[#6f6f6f] hover:text-[#0a0a0a] transition-colors group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-orange/50"
+                    >
+                      <span className="flex items-center gap-2">
+                        <Layers size={13} className="text-black/40" />
+                        Hugging Face
+                      </span>
+                      <ExternalLink size={12} className="text-black/25 group-hover:text-black/60 transition-colors" />
+                    </a>
+                  )}
+                  {model.links.github && (
+                    <a
+                      href={model.links.github}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center justify-between p-3 rounded-xl bg-white hover:bg-black/5 border border-black/10 text-xs font-semibold text-[#6f6f6f] hover:text-[#0a0a0a] transition-colors group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-orange/50"
+                    >
+                      <span className="flex items-center gap-2">
+                        <Terminal size={13} className="text-black/40" />
+                        GitHub Repository
+                      </span>
+                      <ExternalLink size={12} className="text-black/25 group-hover:text-black/60 transition-colors" />
+                    </a>
+                  )}
+                  {model.links.blogPost && (
+                    <a
+                      href={model.links.blogPost}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center justify-between p-3 rounded-xl bg-white hover:bg-black/5 border border-black/10 text-xs font-semibold text-[#6f6f6f] hover:text-[#0a0a0a] transition-colors group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-orange/50"
+                    >
+                      <span className="flex items-center gap-2">
+                        <Link2 size={13} className="text-black/40" />
+                        Developer Blog
+                      </span>
+                      <ExternalLink size={12} className="text-black/25 group-hover:text-black/60 transition-colors" />
+                    </a>
+                  )}
+                </div>
+              </section>
+            )}
 
             {/* Lineage & Family Section */}
             {(model.family || prevVersionModel) && (
