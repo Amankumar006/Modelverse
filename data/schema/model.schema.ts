@@ -48,6 +48,8 @@ export const ModelSchema = z.object({
   // family: the generation-level identifier shared by every variant of one release
   // (e.g. "gpt-5.6" shared by chat, codex, realtime). Convention: lowercase, hyphenated, matches the primary base entry's slug.
   family: z.string().nullable(),
+  // tier: the persistent product-tier identity across generations (e.g., Opus, Sonnet, Flash, Pro)
+  tier: z.string().optional(),
   // previousVersion: lineage pointing to the specific prior-generation entry (e.g. gpt-5.6 chat points to gpt-5.5 chat).
   previousVersion: z.string().nullable(),
   costTiers: z.array(z.object({

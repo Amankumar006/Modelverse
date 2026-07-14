@@ -9,7 +9,7 @@ import {
 import Breadcrumb from "@/components/models/Breadcrumb";
 import ModelCard from "@/components/models/ModelCard";
 import Navbar from "@/components/layout/Navbar";
-import { ChevronLeft, Sparkles } from "lucide-react";
+import { ChevronLeft, Sparkles, ArrowLeft, ArrowRight } from "lucide-react";
 
 export const dynamic = "force-static";
 
@@ -109,10 +109,40 @@ export default async function FamilyPage({
           </p>
         </div>
 
-        <div className="flex flex-col gap-3">
-          {models.map((model) => (
-            <ModelCard key={model.id} model={model} variant="row" />
-          ))}
+        <div className="flex flex-col gap-6">
+          {models.map((model) => {
+            const allModels = getAllModelEntries();
+            const nextVersionModel = allModels.find(m => m.previousVersion === model.slug);
+            const prevVersionModel = model.previousVersion ? allModels.find(m => m.slug === model.previousVersion) : null;
+            
+            return (
+              <div key={model.id} className="flex flex-col gap-2 bg-[#fdfdfd] p-3 rounded-2xl border border-black/5">
+                <ModelCard model={model} variant="row" />
+                
+                {/* Cross-Generation Nav */}
+                {(nextVersionModel || prevVersionModel) && (
+                  <div className="flex flex-wrap items-center gap-x-4 gap-y-2 px-3 py-1 text-xs text-[#6f6f6f] font-medium">
+                    <span className="text-black/40 text-[10px] uppercase tracking-widest font-bold">Lineage</span>
+                    <div className="flex items-center gap-3">
+                      {prevVersionModel && prevVersionModel.family && (
+                         <Link href={`/models/family/${prevVersionModel.family}`} className="flex items-center gap-1 hover:text-[#0a0a0a] transition-colors">
+                           <ArrowLeft size={12} />
+                           {prevVersionModel.family} {prevVersionModel.tier ? `(${prevVersionModel.tier})` : ''}
+                         </Link>
+                      )}
+                      {(prevVersionModel && nextVersionModel) && <span className="text-black/20">|</span>}
+                      {nextVersionModel && nextVersionModel.family && (
+                         <Link href={`/models/family/${nextVersionModel.family}`} className="flex items-center gap-1 hover:text-[#0a0a0a] transition-colors">
+                           {nextVersionModel.family} {nextVersionModel.tier ? `(${nextVersionModel.tier})` : ''}
+                           <ArrowRight size={12} />
+                         </Link>
+                      )}
+                    </div>
+                  </div>
+                )}
+              </div>
+            );
+          })}
         </div>
       </article>
     </main>

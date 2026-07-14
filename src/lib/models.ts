@@ -15,6 +15,7 @@ export interface ModelIndex {
   featured?: boolean;
   boost?: number;
   family?: string | null;
+  tier?: string | null;
 }
 
 export interface Benchmark {
