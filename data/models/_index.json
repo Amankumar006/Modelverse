@@ -1260,5 +1260,458 @@
     "type": "api-only",
     "featured": false,
     "boost": 1
+  },
+  {
+    "id": "google-deepmind-gemini-3-5-flash",
+    "slug": "google-deepmind-gemini-3-5-flash",
+    "name": "Gemini 3.5 Flash",
+    "developer": "Google DeepMind",
+    "type": "api-only",
+    "modality": [
+      "text",
+      "image",
+      "audio",
+      "video",
+      "code"
+    ],
+    "primaryTask": "agentic",
+    "deployment": [
+      "api-only"
+    ],
+    "license": "Proprietary",
+    "parameters": "undisclosed",
+    "contextWindow": "1M tokens",
+    "releaseDate": "2026-05-19",
+    "description": "Google's most intelligent model for sustained frontier performance on agentic and coding tasks, optimized for fast agent loops and multi-step workflows.",
+    "keyFeatures": [
+      "Frontier intelligence built for speed",
+      "Optimized for autonomous agent loops"
+    ],
+    "benchmarks": [],
+    "family": "Gemini",
+    "previousVersion": "gemini-3-flash",
+    "website": "https://aistudio.google.com/models/gemini-3",
+    "paper": "",
+    "huggingFace": "",
+    "github": "",
+    "blogPost": "",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Gemini_(language_model)",
+      "https://www.moin.ai/en/chatbot-wiki/google-gemini"
+    ],
+    "logo": "/public/logos/google.png",
+    "tags": [
+      "agentic-tooling",
+      "fast",
+      "frontier-model"
+    ],
+    "verified": true,
+    "curatorNotes": "",
+    "links": {
+      "website": "https://aistudio.google.com/models/gemini-3",
+      "paper": "",
+      "huggingface": "",
+      "github": "",
+      "blogPost": ""
+    }
+  },
+  {
+    "id": "google-deepmind-gemini-3-1-flash-lite",
+    "slug": "google-deepmind-gemini-3-1-flash-lite",
+    "name": "Gemini 3.1 Flash-Lite",
+    "developer": "Google DeepMind",
+    "type": "api-only",
+    "modality": [
+      "text",
+      "image",
+      "audio",
+      "video",
+      "code"
+    ],
+    "primaryTask": "chat-reasoning",
+    "deployment": [
+      "api-only"
+    ],
+    "license": "Proprietary",
+    "parameters": "undisclosed",
+    "contextWindow": "undisclosed",
+    "releaseDate": "2026-03-03",
+    "description": "An extremely cost-effective model designed for high-frequency everyday tasks and bulk API queries, rivaling larger models.",
+    "keyFeatures": [
+      "Ultra-low latency",
+      "Optimized for high-volume tasks"
+    ],
+    "benchmarks": [],
+    "family": "Gemini",
+    "previousVersion": "gemini-2-5-flash-lite",
+    "website": "https://aistudio.google.com/models/gemini-3",
+    "paper": "",
+    "huggingFace": "",
+    "github": "",
+    "blogPost": "",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Gemini_(language_model)"
+    ],
+    "logo": "/public/logos/google.png",
+    "tags": [
+      "efficient",
+      "fast"
+    ],
+    "verified": true,
+    "curatorNotes": "",
+    "links": {
+      "website": "https://aistudio.google.com/models/gemini-3",
+      "paper": "",
+      "huggingface": "",
+      "github": "",
+      "blogPost": ""
+    }
+  },
+  {
+    "id": "google-deepmind-gemini-3-1-pro",
+    "slug": "google-deepmind-gemini-3-1-pro",
+    "name": "Gemini 3.1 Pro",
+    "developer": "Google DeepMind",
+    "type": "api-only",
+    "modality": [
+      "text",
+      "image",
+      "audio",
+      "video",
+      "code"
+    ],
+    "primaryTask": "agentic",
+    "deployment": [
+      "api-only"
+    ],
+    "license": "Proprietary",
+    "parameters": "undisclosed",
+    "contextWindow": "2M tokens",
+    "releaseDate": "2026-02-19",
+    "description": "Google's top-tier model focused on extreme reasoning, vibe coding, and complex agent-based workflows.",
+    "keyFeatures": [
+      "Deep reasoning capabilities",
+      "Complex workflow orchestration"
+    ],
+    "benchmarks": [],
+    "family": "Gemini",
+    "previousVersion": "gemini-3-pro",
+    "website": "https://aistudio.google.com/models/gemini-3",
+    "paper": "",
+    "huggingFace": "",
+    "github": "",
+    "blogPost": "",
+    "sources": [
+      "https://www.moin.ai/en/chatbot-wiki/google-gemini"
+    ],
+    "logo": "/public/logos/google.png",
+    "tags": [
+      "agentic-tooling",
+      "reasoning"
+    ],
+    "verified": true,
+    "curatorNotes": "",
+    "links": {
+      "website": "https://aistudio.google.com/models/gemini-3",
+      "paper": "",
+      "huggingface": "",
+      "github": "",
+      "blogPost": ""
+    }
+  },
+  {
+    "id": "google-deepmind-gemini-3-deep-think",
+    "slug": "google-deepmind-gemini-3-deep-think",
+    "name": "Gemini 3 Deep Think",
+    "developer": "Google DeepMind",
+    "type": "api-only",
+    "modality": [
+      "text",
+      "code"
+    ],
+    "primaryTask": "chat-reasoning",
+    "deployment": [
+      "api-only"
+    ],
+    "license": "Proprietary",
+    "parameters": "undisclosed",
+    "contextWindow": "undisclosed",
+    "releaseDate": "2025-12-03",
+    "description": "A specialized reasoning model optimized for highly complex mathematical and logical problems.",
+    "keyFeatures": [
+      "Extended thinking capabilities",
+      "Math and logic optimization"
+    ],
+    "benchmarks": [],
+    "family": "Gemini",
+    "previousVersion": "",
+    "website": "https://aistudio.google.com/models/gemini-3",
+    "paper": "",
+    "huggingFace": "",
+    "github": "",
+    "blogPost": "",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Gemini_(language_model)"
+    ],
+    "logo": "/public/logos/google.png",
+    "tags": [
+      "extended-thinking"
+    ],
+    "verified": true,
+    "curatorNotes": "",
+    "links": {
+      "website": "https://aistudio.google.com/models/gemini-3",
+      "paper": "",
+      "huggingface": "",
+      "github": "",
+      "blogPost": ""
+    }
+  },
+  {
+    "id": "google-deepmind-gemma-4-31b-dense",
+    "slug": "google-deepmind-gemma-4-31b-dense",
+    "name": "Gemma 4 (31B Dense)",
+    "developer": "Google DeepMind",
+    "type": "open-weights",
+    "modality": [
+      "text",
+      "image",
+      "audio",
+      "video",
+      "code"
+    ],
+    "primaryTask": "multimodal-general",
+    "deployment": [
+      "api-only",
+      "self-hostable",
+      "on-device"
+    ],
+    "license": "Apache 2.0",
+    "parameters": "31B",
+    "contextWindow": "256K tokens",
+    "releaseDate": "2026-04-02",
+    "description": "Google's most capable open-weights model, featuring a unified multimodal architecture that processes images and audio natively.",
+    "keyFeatures": [
+      "Open-weights multimodal architecture",
+      "Native image and audio processing"
+    ],
+    "benchmarks": [],
+    "family": "Gemma",
+    "previousVersion": "gemma-3-27b",
+    "website": "https://ai.google.dev/gemma",
+    "paper": "",
+    "huggingFace": "",
+    "github": "",
+    "blogPost": "",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Gemma_(language_model)"
+    ],
+    "logo": "/public/logos/google.png",
+    "tags": [
+      "open-weights",
+      "multimodal"
+    ],
+    "verified": true,
+    "curatorNotes": "",
+    "links": {
+      "website": "https://ai.google.dev/gemma",
+      "paper": "",
+      "huggingface": "",
+      "github": "",
+      "blogPost": ""
+    }
+  },
+  {
+    "id": "google-deepmind-gemini-2-5-pro",
+    "slug": "google-deepmind-gemini-2-5-pro",
+    "name": "Gemini 2.5 Pro",
+    "developer": "Google DeepMind",
+    "type": "api-only",
+    "modality": [
+      "text",
+      "image",
+      "audio",
+      "video",
+      "code"
+    ],
+    "primaryTask": "chat-reasoning",
+    "deployment": [
+      "api-only"
+    ],
+    "license": "Proprietary",
+    "parameters": "undisclosed",
+    "contextWindow": "2M tokens",
+    "releaseDate": "2025-03-25",
+    "description": "An advanced model for complex tasks featuring deep reasoning and coding capabilities, preceding the Gemini 3 lineup.",
+    "keyFeatures": [
+      "Deep reasoning and coding",
+      "Native multimodal capabilities"
+    ],
+    "benchmarks": [],
+    "family": "Gemini",
+    "previousVersion": "gemini-2-0-pro",
+    "website": "https://aistudio.google.com/models/gemini-2",
+    "paper": "",
+    "huggingFace": "",
+    "github": "",
+    "blogPost": "",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Gemini_(language_model)"
+    ],
+    "logo": "/public/logos/google.png",
+    "tags": [],
+    "verified": true,
+    "curatorNotes": "",
+    "links": {
+      "website": "https://aistudio.google.com/models/gemini-2",
+      "paper": "",
+      "huggingface": "",
+      "github": "",
+      "blogPost": ""
+    }
+  },
+  {
+    "id": "google-deepmind-veo-3-1",
+    "slug": "google-deepmind-veo-3-1",
+    "name": "Veo 3.1",
+    "developer": "Google DeepMind",
+    "type": "api-only",
+    "modality": [
+      "video"
+    ],
+    "primaryTask": "video-generation",
+    "deployment": [
+      "api-only"
+    ],
+    "license": "Proprietary",
+    "parameters": "undisclosed",
+    "contextWindow": "undisclosed",
+    "releaseDate": "2025-11-17",
+    "description": "Google's standard model for professional video generation.",
+    "keyFeatures": [
+      "High-fidelity video generation"
+    ],
+    "benchmarks": [],
+    "family": "Veo",
+    "previousVersion": "veo-3-0",
+    "website": "https://deepmind.google/technologies/veo/",
+    "paper": "",
+    "huggingFace": "",
+    "github": "",
+    "blogPost": "",
+    "sources": [
+      "https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/model-versions"
+    ],
+    "logo": "/public/logos/google.png",
+    "tags": [
+      "video-generation"
+    ],
+    "verified": true,
+    "curatorNotes": "",
+    "links": {
+      "website": "https://deepmind.google/technologies/veo/",
+      "paper": "",
+      "huggingface": "",
+      "github": "",
+      "blogPost": ""
+    }
+  },
+  {
+    "id": "google-deepmind-gemini-1-5-pro",
+    "slug": "google-deepmind-gemini-1-5-pro",
+    "name": "Gemini 1.5 Pro",
+    "developer": "Google DeepMind",
+    "type": "api-only",
+    "modality": [
+      "text",
+      "image",
+      "audio",
+      "video",
+      "code"
+    ],
+    "primaryTask": "chat-reasoning",
+    "deployment": [
+      "api-only"
+    ],
+    "license": "Proprietary",
+    "parameters": "undisclosed",
+    "contextWindow": "10M tokens",
+    "releaseDate": "2024-02-15",
+    "description": "The flagship model of the Gemini 1.5 family, introducing a massive breakthrough with a 1 million token context window in production APIs, up to 10M tokens.",
+    "keyFeatures": [
+      "Massive 1M+ context window"
+    ],
+    "benchmarks": [],
+    "family": "Gemini",
+    "previousVersion": "gemini-1-0-ultra",
+    "website": "https://aistudio.google.com/",
+    "paper": "",
+    "huggingFace": "",
+    "github": "",
+    "blogPost": "",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Gemini_(language_model)"
+    ],
+    "logo": "/public/logos/google.png",
+    "tags": [
+      "long-context"
+    ],
+    "verified": true,
+    "curatorNotes": "",
+    "links": {
+      "website": "https://aistudio.google.com/",
+      "paper": "",
+      "huggingface": "",
+      "github": "",
+      "blogPost": ""
+    }
+  },
+  {
+    "id": "google-deepmind-gemini-1-0-ultra",
+    "slug": "google-deepmind-gemini-1-0-ultra",
+    "name": "Gemini 1.0 Ultra",
+    "developer": "Google DeepMind",
+    "type": "api-only",
+    "modality": [
+      "text",
+      "image",
+      "audio",
+      "video",
+      "code"
+    ],
+    "primaryTask": "chat-reasoning",
+    "deployment": [
+      "api-only"
+    ],
+    "license": "Proprietary",
+    "parameters": "undisclosed",
+    "contextWindow": "32K tokens",
+    "releaseDate": "2024-02-08",
+    "description": "Google's most powerful offering in the original Gemini 1.0 family.",
+    "keyFeatures": [
+      "Native multimodality"
+    ],
+    "benchmarks": [],
+    "family": "Gemini",
+    "previousVersion": "",
+    "website": "https://deepmind.google/technologies/gemini/",
+    "paper": "",
+    "huggingFace": "",
+    "github": "",
+    "blogPost": "",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Gemini_(language_model)"
+    ],
+    "logo": "/public/logos/google.png",
+    "tags": [],
+    "verified": true,
+    "curatorNotes": "",
+    "links": {
+      "website": "https://deepmind.google/technologies/gemini/",
+      "paper": "",
+      "huggingface": "",
+      "github": "",
+      "blogPost": ""
+    }
   }
 ]
