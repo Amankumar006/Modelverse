@@ -1,0 +1,47 @@
+{
+  "id": "google-deepmind-medgemma-1-5-4b",
+  "name": "MedGemma 1.5 4B",
+  "slug": "google-deepmind-medgemma-1-5-4b",
+  "developer": "Google DeepMind",
+  "releaseDate": "2026-01-13",
+  "updatedAt": "2026-01-13",
+  "type": "open-weights",
+  "modality": [
+    "text",
+    "image"
+  ],
+  "primaryTask": "multimodal-general",
+  "deployment": [
+    "self-hostable"
+  ],
+  "license": "Gemma Terms of Use",
+  "parameters": "4B",
+  "contextWindow": "8k",
+  "description": "A fine-tuned multimodal open-weights variant of Google's Gemma 3/Gemma 3.5 architecture, optimized specifically for medical and healthcare AI applications. MedGemma 1.5 features advanced support for high-dimensional medical imaging analysis including 3D CT/MRI scans, histopathology Whole Slide Images (WSI), and EHR report generation.",
+  "keyFeatures": [
+    "Fine-tuned specifically for healthcare domain terminology and reasoning",
+    "Support for high-dimensional medical imaging (CT scans, MRI scans, and longitudinal X-rays)",
+    "Anatomical localization and Whole Slide Image (WSI) parsing for histopathology",
+    "Generates structured medical reports from clinical image data"
+  ],
+  "benchmarks": [],
+  "family": "gemma",
+  "previousVersion": null,
+  "links": {
+    "Website": "https://deepmind.google/blog/medgemma-our-most-capable-open-models-for-health-ai-development/"
+  },
+  "logo": null,
+  "tags": [
+    "medical",
+    "healthcare",
+    "multimodal",
+    "open-weights"
+  ],
+  "sources": [
+    "https://deepmind.google/blog/medgemma-our-most-capable-open-models-for-health-ai-development/"
+  ],
+  "verified": true,
+  "featured": false,
+  "boost": 1,
+  "curatorNotes": "Registered MedGemma 1.5 4B variant released on Jan 13, 2026. Highly capable open weights medical multimodal assistant."
+}
