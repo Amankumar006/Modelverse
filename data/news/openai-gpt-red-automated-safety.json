@@ -1,0 +1,27 @@
+{
+  "id": "post-8",
+  "slug": "openai-gpt-red-automated-safety",
+  "title": "OpenAI Announces GPT-Red: Automated Red-Teaming via Self-Play",
+  "category": "short-news",
+  "publishDate": "2026-07-15",
+  "author": "Modelverse Editorial",
+  "readTime": "3 min read",
+  "excerpt": "OpenAI has unveiled GPT-Red, an internal system designed to automate red-teaming simulations and secure models against prompt injection attacks using reinforcement learning self-play.",
+  "body": "OpenAI has announced **GPT-Red**, an automated red-teaming system trained via self-play reinforcement learning to discover and patch security vulnerabilities in language models prior to public release. By automating the generation of adversarial attack scenarios, the system helps OpenAI scale its model alignment and safety verification workflows.\n\n### Scaling Adversarial Testing\nTraditional manual red-teaming requires human experts to think up and test edge cases—a process that is slow, expensive, and difficult to scale. GPT-Red acts as an automated simulator that continuously generates sophisticated attack vectors. During its training phase, the model competes against multiple 'defender' models across diverse security scenarios, learning to exploit weak points.\n\n### Securing the Next Generation\nA primary focus of GPT-Red is neutralizing **prompt injections**—malicious inputs hidden inside files, emails, or websites that attempt to override a model's safety instructions. OpenAI states that GPT-Red has been an integral part of its training pipeline, directly contributing to making the recently detailed **GPT-5.6** its most robust model yet against injection exploits.",
+  "coverImage": "/images/news/news_short.jpg",
+  "status": "published",
+  "confidenceLevel": "confirmed",
+  "externalSources": [
+    "https://openai.com/index/unlocking-self-improvement-gpt-red"
+  ],
+  "relatedModels": [
+    "openai-gpt-red",
+    "openai-gpt-5.6"
+  ],
+  "tags": [
+    "openai",
+    "safety",
+    "red-teaming",
+    "gpt-red"
+  ]
+}

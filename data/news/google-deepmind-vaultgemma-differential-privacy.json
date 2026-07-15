@@ -1,0 +1,26 @@
+{
+  "id": "post-11",
+  "slug": "google-deepmind-vaultgemma-differential-privacy",
+  "title": "Google DeepMind Launches VaultGemma: Differentially Private Open Model",
+  "category": "short-news",
+  "publishDate": "2025-09-13",
+  "author": "Modelverse Editorial",
+  "readTime": "3 min read",
+  "excerpt": "Google DeepMind has released VaultGemma 1B, a lightweight open model trained from scratch using differential privacy to mathematically prevent training data leakage.",
+  "body": "Google DeepMind has released **VaultGemma 1B**, a specialized lightweight open weights model designed for strict data protection. Built specifically for fields like finance, healthcare, and law, VaultGemma is trained from scratch utilizing differential privacy (DP) algorithms.\n\n### Mathematical Privacy Guarantees\nTraditional models run the risk of memorizing specific details from their training data, which can later be leaked through targeted prompts. VaultGemma prevents this by adding calibrated noise directly into the training process. This creates a mathematically proven limit on information leakage, ensuring the model cannot expose sensitive proprietary training data. Its compact 1B size makes it ideal for local, secure deployments on edge devices.",
+  "coverImage": "/images/news/news_short.jpg",
+  "status": "published",
+  "confidenceLevel": "confirmed",
+  "externalSources": [
+    "https://deepmind.google/blog/vaultgemma-the-worlds-most-capable-differentially-private-llm/"
+  ],
+  "relatedModels": [
+    "google-deepmind-vaultgemma-1b"
+  ],
+  "tags": [
+    "privacy",
+    "vaultgemma",
+    "gemma",
+    "open-weights"
+  ]
+}
