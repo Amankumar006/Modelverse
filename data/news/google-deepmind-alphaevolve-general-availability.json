@@ -9,7 +9,7 @@
   "excerpt": "Google DeepMind's autonomous algorithm discovery and optimization agent, AlphaEvolve, is now generally available on the Gemini Enterprise Agent Platform.",
   "body": "Google DeepMind has announced the general availability of **AlphaEvolve** on the Google Cloud Gemini Enterprise Agent Platform. Initially unveiled in May 2025, AlphaEvolve is an autonomous agent designed to discover, write, and optimize advanced mathematical and computational algorithms.\n\n### Evolutionary Programming\nUnlike traditional code assistants that write standard boilerplate code, AlphaEvolve works as an evolutionary collaborator. Users supply a seed algorithm with targeted optimization areas. AlphaEvolve then uses an ensemble of Gemini models (utilizing Flash for rapid generation and Pro for logical filtering) to mutate and refine the algorithm in an automated evaluation loop.\n\n### Breakthrough Performance\nDeepMind has used AlphaEvolve internally to optimize data center heuristic systems, accelerate the training of its own Gemini architectures, and improve hardware accelerator designs. Notably, the agent discovered a new procedure for multiplying $4 \\times 4$ complex-valued matrices using 48 scalar multiplications, representing the first optimization over Strassen’s algorithm in 56 years. Google Cloud customers can now deploy the agent for logistics, semiconductors, and genomics workflows.",
   "coverImage": "/images/news/news_weekly.jpg",
-  "status": "published",
+  "status": "draft",
   "confidenceLevel": "confirmed",
   "externalSources": [
     "https://deepmind.google/blog/alphaevolve-impact/"
