@@ -1,5 +1,32 @@
 [
   {
+    "id": "post-8",
+    "slug": "weekly-recap-gpt-red-safety-roundup",
+    "title": "Weekly Recap: OpenAI GPT-Red, Security Research, and Agent Robustness",
+    "category": "weekly-news",
+    "publishDate": "2026-07-16",
+    "author": "Modelverse Editorial",
+    "readTime": "4 min read",
+    "excerpt": "This week, we explore OpenAI's new GPT-Red system for automated safety red-teaming, alongside a broader roundup of security research, adversarial prompt injection defenses, and agent robustness.",
+    "coverImage": "/images/news/news_weekly.jpg",
+    "status": "published",
+    "confidenceLevel": "confirmed",
+    "externalSources": [
+      "https://openai.com/index/unlocking-self-improvement-gpt-red"
+    ],
+    "relatedModels": [
+      "openai-gpt-red",
+      "openai-gpt-5.6"
+    ],
+    "tags": [
+      "openai",
+      "safety",
+      "red-teaming",
+      "weekly-recap"
+    ],
+    "issueNumber": 3
+  },
+  {
     "id": "anthropic-india-rupee-pricing",
     "slug": "anthropic-india-rupee-pricing",
     "title": "Anthropic Localizes Claude Pricing in India with Rupee Billing",
@@ -17,6 +44,31 @@
     ],
     "relatedModels": [
       "anthropic-claude-sonnet-5"
+    ]
+  },
+  {
+    "id": "post-9",
+    "slug": "google-deepmind-alphaevolve-general-availability",
+    "title": "Google DeepMind's AlphaEvolve Coding Agent Launches on Gemini Enterprise",
+    "category": "short-news",
+    "publishDate": "2026-07-15",
+    "author": "Modelverse Editorial",
+    "readTime": "3 min read",
+    "excerpt": "Google DeepMind's autonomous algorithm discovery and optimization agent, AlphaEvolve, is now generally available on the Gemini Enterprise Agent Platform.",
+    "coverImage": "/images/news/alphaevolve_cover.jpg",
+    "status": "published",
+    "confidenceLevel": "confirmed",
+    "externalSources": [
+      "https://deepmind.google/blog/alphaevolve-impact/"
+    ],
+    "relatedModels": [
+      "google-deepmind-alphaevolve"
+    ],
+    "tags": [
+      "google",
+      "deepmind",
+      "alphaevolve",
+      "agentic"
     ]
   },
   {
@@ -155,6 +207,56 @@
       "google",
       "diffusion",
       "open-source"
+    ]
+  },
+  {
+    "id": "post-10",
+    "slug": "google-deepmind-medgemma-healthcare-comprehension",
+    "title": "Google DeepMind Details MedGemma: Advanced Open Healthcare Models",
+    "category": "short-news",
+    "publishDate": "2026-01-13",
+    "author": "Modelverse Editorial",
+    "readTime": "3 min read",
+    "excerpt": "Google DeepMind has introduced MedGemma 1.5 4B, an open-weights multimodal assistant optimized for high-dimensional medical imaging (CT, MRI, X-Ray) and clinical QA.",
+    "coverImage": "/images/news/medgemma_cover.jpg",
+    "status": "published",
+    "confidenceLevel": "confirmed",
+    "externalSources": [
+      "https://deepmind.google/blog/medgemma-our-most-capable-open-models-for-health-ai-development/"
+    ],
+    "relatedModels": [
+      "google-deepmind-medgemma-1-5-4b"
+    ],
+    "tags": [
+      "medgemma",
+      "medical",
+      "healthcare",
+      "open-weights"
+    ]
+  },
+  {
+    "id": "post-11",
+    "slug": "google-deepmind-vaultgemma-differential-privacy",
+    "title": "Google DeepMind Launches VaultGemma: Differentially Private Open Model",
+    "category": "short-news",
+    "publishDate": "2025-09-13",
+    "author": "Modelverse Editorial",
+    "readTime": "3 min read",
+    "excerpt": "Google DeepMind has released VaultGemma 1B, a lightweight open model trained from scratch using differential privacy to mathematically prevent training data leakage.",
+    "coverImage": "/images/news/vaultgemma_cover.jpg",
+    "status": "published",
+    "confidenceLevel": "confirmed",
+    "externalSources": [
+      "https://deepmind.google/blog/vaultgemma-the-worlds-most-capable-differentially-private-llm/"
+    ],
+    "relatedModels": [
+      "google-deepmind-vaultgemma-1b"
+    ],
+    "tags": [
+      "privacy",
+      "vaultgemma",
+      "gemma",
+      "open-weights"
     ]
   }
 ]

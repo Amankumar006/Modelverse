@@ -9,7 +9,7 @@
   "excerpt": "Google DeepMind has introduced MedGemma 1.5 4B, an open-weights multimodal assistant optimized for high-dimensional medical imaging (CT, MRI, X-Ray) and clinical QA.",
   "body": "Google DeepMind has released **MedGemma 1.5 4B**, a specialized open-weights research model trained on medical text and clinical images. Building on the Gemma 3 architecture, the model is intended to help developers research and construct medical AI helper prototypes. DeepMind notes that these models are experimental research previews and are not intended for direct diagnostic use in clinical decision-making.\n\n### Healthcare Multimodality\nMedGemma 1.5 introduces native support for processing high-dimensional clinical imaging formats. This includes analyzing 3D CT/MRI volumetric scans, Whole Slide Images (WSI) for histopathology, and comparing longitudinal X-rays. To align the model's visual representation space with medical features, the architecture integrates a SigLIP vision encoder trained on diverse, de-identified clinical imaging datasets.\n\n### Use Cases and Open Ecosystem\nThe model is designed to process electronic health record (EHR) data, generate initial drafts of medical reports, and respond to clinical question-answering queries. By sharing these research weights under the Gemma Terms of Use on Kaggle, Hugging Face, and Vertex AI Model Garden, DeepMind aims to enable safe, open, and compliant academic research into healthcare AI capabilities.",
   "coverImage": "/images/news/medgemma_cover.jpg",
-  "status": "draft",
+  "status": "published",
   "confidenceLevel": "confirmed",
   "externalSources": [
     "https://deepmind.google/blog/medgemma-our-most-capable-open-models-for-health-ai-development/"
