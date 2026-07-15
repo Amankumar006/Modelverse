@@ -19,7 +19,7 @@
   "description": "GPT-4o models capable of audio inputs and outputs",
   "keyFeatures": [],
   "benchmarks": [],
-  "family": "gpt-4o",
+  "family": null,
   "previousVersion": null,
   "links": {
     "Documentation": "https://developers.openai.com/api/docs/models/all"

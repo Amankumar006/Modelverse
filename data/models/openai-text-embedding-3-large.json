@@ -30,7 +30,7 @@
       "verified": true
     }
   ],
-  "family": "openai-embeddings",
+  "family": null,
   "previousVersion": "text-embedding-ada-002",
   "links": {
     "website": "https://openai.com/index/new-embedding-models-and-api-updates/"

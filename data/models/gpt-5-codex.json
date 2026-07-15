@@ -19,7 +19,7 @@
   "description": "A version of GPT-5 optimized for agentic coding in Codex",
   "keyFeatures": [],
   "benchmarks": [],
-  "family": "gpt-5",
+  "family": null,
   "previousVersion": null,
   "links": {
     "Documentation": "https://developers.openai.com/api/docs/models/all"

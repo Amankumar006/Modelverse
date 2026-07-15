@@ -31,7 +31,7 @@
       "verified": true
     }
   ],
-  "family": "gpt-4",
+  "family": null,
   "previousVersion": "gpt-4",
   "links": {
     "website": "https://openai.com/research"

@@ -19,7 +19,7 @@
   "description": "GPT model for web search in Chat Completions",
   "keyFeatures": [],
   "benchmarks": [],
-  "family": "gpt-4o",
+  "family": null,
   "previousVersion": null,
   "links": {
     "Documentation": "https://developers.openai.com/api/docs/models/all"

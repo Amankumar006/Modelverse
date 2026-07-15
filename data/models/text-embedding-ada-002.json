@@ -19,7 +19,7 @@
   "description": "Older embedding model",
   "keyFeatures": [],
   "benchmarks": [],
-  "family": "openai-embeddings",
+  "family": null,
   "previousVersion": null,
   "links": {
     "Documentation": "https://developers.openai.com/api/docs/models/all"

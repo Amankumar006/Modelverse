@@ -25,7 +25,7 @@
     "Generates structured medical reports from clinical image data"
   ],
   "benchmarks": [],
-  "family": "gemma",
+  "family": null,
   "previousVersion": null,
   "links": {
     "Website": "https://deepmind.google/blog/medgemma-our-most-capable-open-models-for-health-ai-development/"

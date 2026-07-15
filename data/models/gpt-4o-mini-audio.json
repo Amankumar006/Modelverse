@@ -19,7 +19,7 @@
   "description": "Smaller model capable of audio inputs and outputs",
   "keyFeatures": [],
   "benchmarks": [],
-  "family": "gpt-4o-mini",
+  "family": null,
   "previousVersion": null,
   "links": {
     "Documentation": "https://developers.openai.com/api/docs/models/all"

@@ -36,7 +36,7 @@
       "verified": true
     }
   ],
-  "family": "gemma-4",
+  "family": null,
   "previousVersion": null,
   "links": {
     "Website": "https://deepmind.google/blog/diffusiongemma-4x-faster-text-generation/",

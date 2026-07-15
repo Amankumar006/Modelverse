@@ -194,6 +194,22 @@ export default function ModelCard({
           )}
         </div>
       </div>
+
+      {isDetailed && (model as ModelEntry).costTiers && (model as ModelEntry).costTiers!.length > 0 && (
+        <div className="flex border-t border-black/10 px-5 py-2 bg-black/[0.01] items-center gap-1.5 overflow-x-auto no-scrollbar">
+          <span className="text-[9px] uppercase tracking-wider font-mono text-[#6f6f6f]/60 shrink-0">Tiers:</span>
+          <div className="flex flex-wrap gap-1">
+            {(model as ModelEntry).costTiers!.map((tier) => (
+              <span
+                key={tier.id}
+                className="text-[9px] font-medium bg-black/[0.03] text-[#6f6f6f] px-1.5 py-0.5 rounded-full tracking-wide border border-black/[0.04]"
+              >
+                {tier.label}
+              </span>
+            ))}
+          </div>
+        </div>
+      )}
     </Link>
   );
 }

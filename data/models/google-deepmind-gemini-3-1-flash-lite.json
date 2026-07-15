@@ -26,7 +26,7 @@
     "Optimized for high-volume tasks"
   ],
   "benchmarks": [],
-  "family": "gemini-3-1",
+  "family": null,
   "previousVersion": "google-deepmind-gemini-2-5-flash-lite",
   "links": {
     "website": "https://aistudio.google.com/models/gemini-3"

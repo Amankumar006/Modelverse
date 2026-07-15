@@ -431,6 +431,29 @@ export default async function ModelDetailPage({
                   ))}
                 </div>
               </div>
+
+              {/* Cost Tiers */}
+              {model.costTiers && model.costTiers.length > 0 && (
+                <div className="space-y-2 pt-4 border-t border-black/10">
+                  <p className="text-[10px] text-[#6f6f6f] uppercase tracking-wider font-semibold">Cost Tiers</p>
+                  <div className="flex flex-wrap gap-2 mt-1">
+                    {model.costTiers.map((tier) => (
+                      <div key={tier.id} className="group/tier relative inline-block">
+                        <span className="inline-flex items-center text-[10px] font-semibold bg-brand-orange/10 text-brand-orange border border-brand-orange/20 px-2.5 py-1 rounded-full cursor-help hover:bg-brand-orange/20 transition-all select-none">
+                          {tier.label}
+                        </span>
+                        {tier.description && (
+                          <div className="absolute left-1/2 -translate-x-1/2 bottom-full mb-2 hidden group-hover/tier:block z-30 w-56 p-3 bg-white border border-black/10 text-[10px] text-[#6f6f6f] leading-relaxed rounded-xl shadow-xl font-sans text-center">
+                            {tier.description}
+                            <div className="absolute top-full left-1/2 -translate-x-1/2 border-8 border-transparent border-t-white" />
+                            <div className="absolute top-full left-1/2 -translate-x-1/2 border-8 border-transparent border-t-black/10 -z-10" style={{ transform: 'translateX(-50%) translateY(1px)' }} />
+                          </div>
+                        )}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
             </section>
 
             {/* Links Section */}

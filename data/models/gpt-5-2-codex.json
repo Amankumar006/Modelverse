@@ -19,7 +19,7 @@
   "description": "Our most intelligent coding model optimized for long-horizon, agentic coding tasks.",
   "keyFeatures": [],
   "benchmarks": [],
-  "family": "gpt-5-2",
+  "family": null,
   "previousVersion": null,
   "links": {
     "Documentation": "https://developers.openai.com/api/docs/models/all"

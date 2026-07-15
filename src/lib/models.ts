@@ -88,6 +88,7 @@ function loadDevEntries(): ModelEntry[] {
     benchmarks: z.array(z.object({ name: z.string(), score: z.string(), verified: z.boolean() })),
     family: z.string().nullable(),
     tier: z.string().optional(),
+    institution: z.string().optional(),
     previousVersion: z.string().nullable(),
     costTiers: z.array(z.object({ id: z.string(), label: z.string(), description: z.string().optional() })).optional(),
     links: z.record(z.string(), z.string()),

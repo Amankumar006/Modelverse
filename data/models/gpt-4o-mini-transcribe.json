@@ -20,7 +20,7 @@
   "description": "Speech-to-text model powered by GPT-4o mini",
   "keyFeatures": [],
   "benchmarks": [],
-  "family": "gpt-4o-mini",
+  "family": null,
   "previousVersion": null,
   "links": {
     "Documentation": "https://developers.openai.com/api/docs/models/all"

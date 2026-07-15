@@ -43,6 +43,7 @@ const ModelSchema = z.object({
   benchmarks: z.array(BenchmarkSchema),
   family: z.string().nullable(),
   tier: z.string().optional(),
+  institution: z.string().optional(),
   previousVersion: z.string().nullable(),
   costTiers: z.array(z.object({
     id: z.string(),
@@ -56,6 +57,7 @@ const ModelSchema = z.object({
   verified: z.boolean(),
   featured: z.boolean().default(false),
   boost: z.number().min(1).max(5).default(1),
+  // curatorNotes is intentionally internal-only; not exposed in search indexes or route types
   curatorNotes: z.string().default("")
 });
 

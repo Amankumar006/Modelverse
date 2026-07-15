@@ -24,7 +24,7 @@
     "Ideal for sensitive domains like finance, law, or healthcare requiring strict data compliance"
   ],
   "benchmarks": [],
-  "family": "gemma",
+  "family": null,
   "previousVersion": null,
   "links": {
     "Website": "https://deepmind.google/blog/vaultgemma-the-worlds-most-capable-differentially-private-llm/"
