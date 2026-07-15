@@ -20,7 +20,7 @@
   "description": "General-purpose speech recognition model",
   "keyFeatures": [],
   "benchmarks": [],
-  "family": "gpt",
+  "family": "whisper",
   "previousVersion": null,
   "links": {
     "Documentation": "https://developers.openai.com/api/docs/models/all"

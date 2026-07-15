@@ -19,8 +19,7 @@
     "High performance-to-cost ratio"
   ],
   "benchmarks": [],
-  "family": "Claude",
-  "previousVersion": "anthropic-claude-3-haiku",
+  "family": "Claude 3.5",
   "website": "https://www.anthropic.com",
   "paper": "",
   "huggingFace": "",
@@ -40,5 +39,9 @@
   "updatedAt": "2026-07-14",
   "featured": false,
   "boost": 1,
-  "costTiers": []
+  "costTiers": [],
+  "tier": "Haiku",
+  "previousVersion": "anthropic-claude-3-haiku",
+  "nextVersion": "anthropic-claude-haiku-4-5",
+  "links": {}
 }

@@ -17,6 +17,9 @@ export const DEVELOPERS = [
   "Suno",
   "ByteDance",
   "Tencent",
+  "NVIDIA",
+  "Apple",
+  "Academic/Research",
   "Other",
 ] as const;
 

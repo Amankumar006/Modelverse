@@ -1,0 +1,39 @@
+{
+  "id": "stability-ai-stable-layers",
+  "name": "Stable Layers",
+  "slug": "stability-ai-stable-layers",
+  "developer": "Stability AI",
+  "releaseDate": "2026-07-15",
+  "updatedAt": "2026-07-15",
+  "type": "research-preview",
+  "modality": [
+    "text"
+  ],
+  "primaryTask": "other",
+  "deployment": [
+    "self-hostable"
+  ],
+  "license": "Other/Custom",
+  "parameters": "undisclosed",
+  "contextWindow": "undisclosed",
+  "description": "A research preview model focusing on other: Stable Layers. Published by Stability AI.",
+  "keyFeatures": [],
+  "benchmarks": [],
+  "family": null,
+  "previousVersion": null,
+  "links": {
+    "Website": "https://stability-ai.github.io/stable-layers/"
+  },
+  "logo": null,
+  "tags": [
+    "research-preview",
+    "other"
+  ],
+  "sources": [
+    "https://stability-ai.github.io/stable-layers/"
+  ],
+  "verified": false,
+  "featured": false,
+  "boost": 1,
+  "curatorNotes": "Ingested research preview via bulk triage. Affiliation: Stability AI. Traction signal: Initial release."
+}

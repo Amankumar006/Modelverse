@@ -1,0 +1,40 @@
+{
+  "id": "academic-research-cogomnicontrol",
+  "name": "CogOmniControl",
+  "slug": "academic-research-cogomnicontrol",
+  "developer": "Academic/Research",
+  "releaseDate": "2026-07-15",
+  "updatedAt": "2026-07-15",
+  "type": "research-preview",
+  "modality": [
+    "text"
+  ],
+  "primaryTask": "other",
+  "deployment": [
+    "self-hostable"
+  ],
+  "license": "Other/Custom",
+  "parameters": "undisclosed",
+  "contextWindow": "undisclosed",
+  "description": "A research preview model focusing on other: CogOmniControl. Published by University of Macau.",
+  "keyFeatures": [],
+  "benchmarks": [],
+  "family": null,
+  "previousVersion": null,
+  "links": {
+    "Website": "https://um-lab.github.io/CogOmniControl/"
+  },
+  "logo": null,
+  "tags": [
+    "research-preview",
+    "other"
+  ],
+  "sources": [
+    "https://um-lab.github.io/CogOmniControl/"
+  ],
+  "verified": false,
+  "featured": false,
+  "boost": 1,
+  "curatorNotes": "Ingested research preview via bulk triage. Affiliation: University of Macau. Traction signal: Initial release.",
+  "institution": "University of Macau"
+}

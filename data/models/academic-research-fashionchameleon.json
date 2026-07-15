@@ -1,0 +1,40 @@
+{
+  "id": "academic-research-fashionchameleon",
+  "name": "FashionChameleon",
+  "slug": "academic-research-fashionchameleon",
+  "developer": "Academic/Research",
+  "releaseDate": "2026-07-15",
+  "updatedAt": "2026-07-15",
+  "type": "research-preview",
+  "modality": [
+    "text"
+  ],
+  "primaryTask": "other",
+  "deployment": [
+    "self-hostable"
+  ],
+  "license": "Other/Custom",
+  "parameters": "undisclosed",
+  "contextWindow": "undisclosed",
+  "description": "A research preview model focusing on other: FashionChameleon. Published by quanjiansong.",
+  "keyFeatures": [],
+  "benchmarks": [],
+  "family": null,
+  "previousVersion": null,
+  "links": {
+    "Website": "https://quanjiansong.github.io/projects/FashionChameleon/"
+  },
+  "logo": null,
+  "tags": [
+    "research-preview",
+    "other"
+  ],
+  "sources": [
+    "https://quanjiansong.github.io/projects/FashionChameleon/"
+  ],
+  "verified": false,
+  "featured": false,
+  "boost": 1,
+  "curatorNotes": "Ingested research preview via bulk triage. Affiliation: quanjiansong. Traction signal: Initial release.",
+  "institution": "quanjiansong"
+}

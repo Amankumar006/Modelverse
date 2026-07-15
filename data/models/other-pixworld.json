@@ -26,15 +26,15 @@
   "benchmarks": [],
   "family": null,
   "previousVersion": null,
-  "links": [
-    "https://other.com"
-  ],
+  "links": {
+    "website": "https://github.com/SensenGao/PixWorld"
+  },
   "logo": null,
   "tags": [
     "3d-generation"
   ],
   "sources": [
-    "https://www.youtube.com/watch?v=Ti1V7OI2Rro"
+    "https://github.com/SensenGao/PixWorld"
   ],
   "verified": false,
   "curatorNotes": "Details strictly from the video transcript; exact release date estimated. Transcribed as \"Pixorld\"."

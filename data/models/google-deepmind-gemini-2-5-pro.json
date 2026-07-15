@@ -1,0 +1,43 @@
+{
+  "id": "google-deepmind-gemini-2-5-pro",
+  "name": "Gemini 2.5 Pro",
+  "slug": "google-deepmind-gemini-2-5-pro",
+  "developer": "Google DeepMind",
+  "releaseDate": "2025-03-25",
+  "updatedAt": "2025-03-25",
+  "type": "api-only",
+  "modality": [
+    "text",
+    "image",
+    "audio",
+    "video",
+    "code"
+  ],
+  "primaryTask": "chat-reasoning",
+  "deployment": [
+    "api-only"
+  ],
+  "license": "Proprietary",
+  "parameters": "undisclosed",
+  "contextWindow": "2M tokens",
+  "description": "An advanced model for complex tasks featuring deep reasoning and coding capabilities, preceding the Gemini 3 lineup.",
+  "keyFeatures": [
+    "Deep reasoning and coding",
+    "Native multimodal capabilities"
+  ],
+  "benchmarks": [],
+  "family": "gemini-2-5",
+  "previousVersion": "google-deepmind-gemini-2-0-pro",
+  "links": {
+    "website": "https://aistudio.google.com/models/gemini-2"
+  },
+  "logo": "/logos/google.svg",
+  "tags": [],
+  "sources": [
+    "https://en.wikipedia.org/wiki/Gemini_(language_model)"
+  ],
+  "verified": true,
+  "featured": false,
+  "boost": 1,
+  "curatorNotes": ""
+}

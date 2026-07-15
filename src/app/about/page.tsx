@@ -242,7 +242,7 @@ export default function AboutPage() {
             </div>
             <div className="px-4">
               <div className="text-4xl md:text-6xl font-extrabold text-[#111] mb-2 drop-shadow-[0_1px_4px_rgba(255,255,255,0.6)]">0</div>
-              <div className="text-xs md:text-sm text-black/75 uppercase tracking-wider font-bold drop-shadow-[0_1px_4px_rgba(255,255,255,0.6)]">Speculative Listings</div>
+              <div className="text-xs md:text-sm text-black/75 uppercase tracking-wider font-bold drop-shadow-[0_1px_4px_rgba(255,255,255,0.6)]">Speculative Catalog Listings</div>
             </div>
           </div>
         </div>

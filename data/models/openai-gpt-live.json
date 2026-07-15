@@ -26,9 +26,9 @@
   "benchmarks": [],
   "family": "GPT",
   "previousVersion": null,
-  "links": [
-    "https://openai.com"
-  ],
+  "links": {
+    "website": "https://openai.com"
+  },
   "logo": "/logos/openai.svg",
   "tags": [
     "real-time-voice"

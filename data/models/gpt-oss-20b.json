@@ -19,7 +19,7 @@
   "description": "Medium-sized open-weight model for low latency",
   "keyFeatures": [],
   "benchmarks": [],
-  "family": "gpt",
+  "family": "gpt-oss",
   "previousVersion": null,
   "links": {
     "Documentation": "https://developers.openai.com/api/docs/models/all"

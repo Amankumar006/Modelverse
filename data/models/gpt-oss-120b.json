@@ -19,7 +19,7 @@
   "description": "Most powerful open-weight model, fits into an H100 GPU",
   "keyFeatures": [],
   "benchmarks": [],
-  "family": "gpt",
+  "family": "gpt-oss",
   "previousVersion": null,
   "links": {
     "Documentation": "https://developers.openai.com/api/docs/models/all"

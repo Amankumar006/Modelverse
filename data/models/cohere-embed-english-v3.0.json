@@ -30,7 +30,7 @@
       "verified": true
     }
   ],
-  "family": "Embeddings",
+  "family": "cohere-embeddings",
   "previousVersion": "embed-english-v2.0",
   "links": {
     "website": "https://cohere.com/blog/introducing-embed-v3"

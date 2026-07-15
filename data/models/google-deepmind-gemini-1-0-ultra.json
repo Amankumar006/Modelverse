@@ -1,0 +1,42 @@
+{
+  "id": "google-deepmind-gemini-1-0-ultra",
+  "name": "Gemini 1.0 Ultra",
+  "slug": "google-deepmind-gemini-1-0-ultra",
+  "developer": "Google DeepMind",
+  "releaseDate": "2024-02-08",
+  "updatedAt": "2024-02-08",
+  "type": "api-only",
+  "modality": [
+    "text",
+    "image",
+    "audio",
+    "video",
+    "code"
+  ],
+  "primaryTask": "chat-reasoning",
+  "deployment": [
+    "api-only"
+  ],
+  "license": "Proprietary",
+  "parameters": "undisclosed",
+  "contextWindow": "32K tokens",
+  "description": "Google's most powerful offering in the original Gemini 1.0 family.",
+  "keyFeatures": [
+    "Native multimodality"
+  ],
+  "benchmarks": [],
+  "family": "gemini-1-0",
+  "previousVersion": null,
+  "links": {
+    "website": "https://deepmind.google/technologies/gemini/"
+  },
+  "logo": "/logos/google.svg",
+  "tags": [],
+  "sources": [
+    "https://en.wikipedia.org/wiki/Gemini_(language_model)"
+  ],
+  "verified": true,
+  "featured": false,
+  "boost": 1,
+  "curatorNotes": ""
+}

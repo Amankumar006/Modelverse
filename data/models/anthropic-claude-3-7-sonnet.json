@@ -23,11 +23,11 @@
   "benchmarks": [
     {
       "name": "SWE-bench Verified",
-      "score": "State of the art (at release)"
+      "score": "State of the art (at release)",
+      "verified": false
     }
   ],
-  "family": "Claude",
-  "previousVersion": "anthropic-claude-3-5-sonnet-new",
+  "family": "Claude 3.7",
   "website": "https://www.anthropic.com/news/claude-3-7-sonnet",
   "paper": "",
   "huggingFace": "",
@@ -48,5 +48,9 @@
   "updatedAt": "2026-07-14",
   "featured": false,
   "boost": 1,
-  "costTiers": []
+  "costTiers": [],
+  "tier": "Sonnet",
+  "previousVersion": "anthropic-claude-3-5-sonnet-new",
+  "nextVersion": "anthropic-claude-sonnet-4",
+  "links": {}
 }

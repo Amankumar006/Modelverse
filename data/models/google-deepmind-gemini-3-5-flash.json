@@ -1,0 +1,48 @@
+{
+  "id": "google-deepmind-gemini-3-5-flash",
+  "name": "Gemini 3.5 Flash",
+  "slug": "google-deepmind-gemini-3-5-flash",
+  "developer": "Google DeepMind",
+  "releaseDate": "2026-05-19",
+  "updatedAt": "2026-05-19",
+  "type": "api-only",
+  "modality": [
+    "text",
+    "image",
+    "audio",
+    "video",
+    "code"
+  ],
+  "primaryTask": "agentic",
+  "deployment": [
+    "api-only"
+  ],
+  "license": "Proprietary",
+  "parameters": "undisclosed",
+  "contextWindow": "1M tokens",
+  "description": "Google's most intelligent model for sustained frontier performance on agentic and coding tasks, optimized for fast agent loops and multi-step workflows.",
+  "keyFeatures": [
+    "Frontier intelligence built for speed",
+    "Optimized for autonomous agent loops"
+  ],
+  "benchmarks": [],
+  "family": "gemini-3-5",
+  "previousVersion": "google-deepmind-gemini-3-flash",
+  "links": {
+    "website": "https://aistudio.google.com/models/gemini-3"
+  },
+  "logo": "/logos/google.svg",
+  "tags": [
+    "agentic-tooling",
+    "fast",
+    "frontier-model"
+  ],
+  "sources": [
+    "https://en.wikipedia.org/wiki/Gemini_(language_model)",
+    "https://www.moin.ai/en/chatbot-wiki/google-gemini"
+  ],
+  "verified": true,
+  "featured": false,
+  "boost": 1,
+  "curatorNotes": ""
+}

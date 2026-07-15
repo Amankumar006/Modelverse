@@ -26,16 +26,16 @@
   "benchmarks": [],
   "family": null,
   "previousVersion": null,
-  "links": [
-    "https://other.com"
-  ],
+  "links": {
+    "website": "https://github.com/mira-wm/mira"
+  },
   "logo": null,
   "tags": [
     "multiplayer",
     "world-model"
   ],
   "sources": [
-    "https://www.youtube.com/watch?v=Ti1V7OI2Rro"
+    "https://mira-wm.com/blog-post/"
   ],
   "verified": false,
   "curatorNotes": "Details strictly from the video transcript."

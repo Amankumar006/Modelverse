@@ -1,0 +1,48 @@
+{
+  "id": "google-deepmind-gemma-4-31b-dense",
+  "name": "Gemma 4 (31B Dense)",
+  "slug": "google-deepmind-gemma-4-31b-dense",
+  "developer": "Google DeepMind",
+  "releaseDate": "2026-04-02",
+  "updatedAt": "2026-04-02",
+  "type": "open-weights",
+  "modality": [
+    "text",
+    "image",
+    "audio",
+    "video",
+    "code"
+  ],
+  "primaryTask": "multimodal-general",
+  "deployment": [
+    "api-only",
+    "self-hostable",
+    "on-device"
+  ],
+  "license": "Apache 2.0",
+  "parameters": "31B",
+  "contextWindow": "256K tokens",
+  "description": "Google's most capable open-weights model, featuring a unified multimodal architecture that processes images and audio natively.",
+  "keyFeatures": [
+    "Open-weights multimodal architecture",
+    "Native image and audio processing"
+  ],
+  "benchmarks": [],
+  "family": "Gemma",
+  "previousVersion": "google-deepmind-gemma-3-27b",
+  "links": {
+    "website": "https://ai.google.dev/gemma"
+  },
+  "logo": "/logos/google.svg",
+  "tags": [
+    "open-weights",
+    "multimodal"
+  ],
+  "sources": [
+    "https://en.wikipedia.org/wiki/Gemma_(language_model)"
+  ],
+  "verified": true,
+  "featured": false,
+  "boost": 1,
+  "curatorNotes": ""
+}

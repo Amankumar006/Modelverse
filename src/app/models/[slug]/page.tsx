@@ -12,6 +12,7 @@ import JsonLd from "@/components/JsonLd";
 import TypeBadge from "@/components/ui/TypeBadge";
 import ModalityTag from "@/components/ui/ModalityTag";
 import Breadcrumb from "@/components/models/Breadcrumb";
+import ClientBackButton from "@/components/ui/ClientBackButton";
 import Navbar from "@/components/layout/Navbar";
 import {
   ChevronRight,
@@ -222,13 +223,10 @@ export default async function ModelDetailPage({
 
       {/* ── Detail Content ─────────────────────────────────── */}
       <article className="max-w-4xl mx-auto px-4 sm:px-6 mt-6">
-        <Link
-          href={model.family ? `/models/family/${model.family}` : `/models/developer/${encodeURIComponent(model.developer)}`}
-          className="inline-flex items-center gap-1.5 text-xs text-[#6f6f6f] hover:text-[#0a0a0a] transition-colors group mb-8 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black/50 focus-visible:ring-offset-2 rounded-lg px-2 py-1"
-        >
-          <ChevronLeft size={14} className="transition-transform group-hover:-translate-x-0.5" />
-          Back to {model.family ? model.family : model.developer}
-        </Link>
+        <ClientBackButton
+          fallbackHref={model.family ? `/models/family/${model.family}` : `/models/developer/${encodeURIComponent(model.developer)}`}
+          fallbackLabel={model.family ? model.family : model.developer}
+        />
 
         {/* ── Header Card ─────────────────────────────────────── */}
         <div className="relative rounded-3xl p-6 sm:p-8 bg-[#fafaf8] border border-black/10 overflow-hidden">

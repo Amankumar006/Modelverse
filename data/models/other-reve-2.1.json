@@ -25,15 +25,15 @@
   "benchmarks": [],
   "family": "Reve",
   "previousVersion": "reve-2.0",
-  "links": [
-    "https://other.com"
-  ],
+  "links": {
+    "website": "https://app.reve.com/"
+  },
   "logo": null,
   "tags": [
     "high-resolution"
   ],
   "sources": [
-    "https://www.youtube.com/watch?v=Ti1V7OI2Rro"
+    "https://blog.reve.com/posts/launching-reve-2.1"
   ],
   "verified": false,
   "curatorNotes": "Transcribed phonetically as \"Reef 2.1\" / \"Reve 2.1\". Details strictly from the video transcript."

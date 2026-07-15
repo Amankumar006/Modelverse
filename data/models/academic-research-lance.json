@@ -1,0 +1,40 @@
+{
+  "id": "academic-research-lance",
+  "name": "Lance",
+  "slug": "academic-research-lance",
+  "developer": "Academic/Research",
+  "releaseDate": "2026-07-15",
+  "updatedAt": "2026-07-15",
+  "type": "research-preview",
+  "modality": [
+    "text"
+  ],
+  "primaryTask": "other",
+  "deployment": [
+    "self-hostable"
+  ],
+  "license": "Other/Custom",
+  "parameters": "undisclosed",
+  "contextWindow": "undisclosed",
+  "description": "A research preview model focusing on other: Lance. Published by lance-project.",
+  "keyFeatures": [],
+  "benchmarks": [],
+  "family": null,
+  "previousVersion": null,
+  "links": {
+    "Website": "https://lance-project.github.io/"
+  },
+  "logo": null,
+  "tags": [
+    "research-preview",
+    "other"
+  ],
+  "sources": [
+    "https://lance-project.github.io/"
+  ],
+  "verified": false,
+  "featured": false,
+  "boost": 1,
+  "curatorNotes": "Ingested research preview via bulk triage. Affiliation: lance-project. Traction signal: Initial release.",
+  "institution": "lance-project"
+}

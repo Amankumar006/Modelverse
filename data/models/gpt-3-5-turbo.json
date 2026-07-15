@@ -19,7 +19,7 @@
   "description": "Legacy GPT model for cheaper chat and non-chat tasks",
   "keyFeatures": [],
   "benchmarks": [],
-  "family": "gpt",
+  "family": "gpt-3-5",
   "previousVersion": null,
   "links": {
     "Documentation": "https://developers.openai.com/api/docs/models/all"

@@ -1,0 +1,42 @@
+{
+  "id": "google-deepmind-gemini-3-deep-think",
+  "name": "Gemini 3 Deep Think",
+  "slug": "google-deepmind-gemini-3-deep-think",
+  "developer": "Google DeepMind",
+  "releaseDate": "2025-12-03",
+  "updatedAt": "2025-12-03",
+  "type": "api-only",
+  "modality": [
+    "text",
+    "code"
+  ],
+  "primaryTask": "chat-reasoning",
+  "deployment": [
+    "api-only"
+  ],
+  "license": "Proprietary",
+  "parameters": "undisclosed",
+  "contextWindow": "undisclosed",
+  "description": "A specialized reasoning model optimized for highly complex mathematical and logical problems.",
+  "keyFeatures": [
+    "Extended thinking capabilities",
+    "Math and logic optimization"
+  ],
+  "benchmarks": [],
+  "family": "gemini-3",
+  "previousVersion": null,
+  "links": {
+    "website": "https://aistudio.google.com/models/gemini-3"
+  },
+  "logo": "/logos/google.svg",
+  "tags": [
+    "extended-thinking"
+  ],
+  "sources": [
+    "https://en.wikipedia.org/wiki/Gemini_(language_model)"
+  ],
+  "verified": true,
+  "featured": false,
+  "boost": 1,
+  "curatorNotes": ""
+}

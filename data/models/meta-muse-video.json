@@ -25,9 +25,9 @@
   "benchmarks": [],
   "family": "Muse",
   "previousVersion": null,
-  "links": [
-    "https://meta.com"
-  ],
+  "links": {
+    "website": "https://meta.com"
+  },
   "logo": "/logos/meta.svg",
   "tags": [],
   "sources": [

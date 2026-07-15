@@ -20,7 +20,7 @@
   "description": "Text-to-speech model optimized for speed",
   "keyFeatures": [],
   "benchmarks": [],
-  "family": "gpt",
+  "family": "openai-tts",
   "previousVersion": null,
   "links": {
     "Documentation": "https://developers.openai.com/api/docs/models/all"

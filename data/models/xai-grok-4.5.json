@@ -26,9 +26,9 @@
   "benchmarks": [],
   "family": "Grok",
   "previousVersion": null,
-  "links": [
-    "https://xai.com"
-  ],
+  "links": {
+    "website": "https://xai.com"
+  },
   "logo": "/logos/xai.svg",
   "tags": [
     "cost-efficient"

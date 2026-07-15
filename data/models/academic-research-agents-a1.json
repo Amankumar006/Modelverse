@@ -1,0 +1,40 @@
+{
+  "id": "academic-research-agents-a1",
+  "name": "Agents A1",
+  "slug": "academic-research-agents-a1",
+  "developer": "Academic/Research",
+  "releaseDate": "2026-07-15",
+  "updatedAt": "2026-07-15",
+  "type": "research-preview",
+  "modality": [
+    "text"
+  ],
+  "primaryTask": "agentic",
+  "deployment": [
+    "self-hostable"
+  ],
+  "license": "Other/Custom",
+  "parameters": "undisclosed",
+  "contextWindow": "undisclosed",
+  "description": "A research preview model focusing on agentic: Agents A1. Published by internscience.",
+  "keyFeatures": [],
+  "benchmarks": [],
+  "family": null,
+  "previousVersion": null,
+  "links": {
+    "Website": "https://internscience.github.io/Agents-A1/"
+  },
+  "logo": null,
+  "tags": [
+    "research-preview",
+    "agentic"
+  ],
+  "sources": [
+    "https://internscience.github.io/Agents-A1/"
+  ],
+  "verified": false,
+  "featured": false,
+  "boost": 1,
+  "curatorNotes": "Ingested research preview via bulk triage. Affiliation: internscience. Traction signal: Initial release.",
+  "institution": "internscience"
+}

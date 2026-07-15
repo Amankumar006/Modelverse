@@ -4,13 +4,13 @@ import { useState, useMemo } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import Fuse from "fuse.js";
-import modelIndexData from "../../../data/models/_index.json";
+import modelIndexData from "@/lib/search-index.json";
 import { Search, X, Menu } from "lucide-react";
 
 export default function Navbar({ theme = "light" }: { theme?: "light" | "dark" }) {
   // Search states
   const [searchQuery, setSearchQuery] = useState("");
-  const [searchResults, setSearchResults] = useState<typeof modelIndexData>([]);
+  const [searchResults, setSearchResults] = useState<Array<{ id: string; name: string; slug: string; developer: string; type: string }>>([]);
   const [searchFocused, setSearchFocused] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const pathname = usePathname();
@@ -93,6 +93,12 @@ export default function Navbar({ theme = "light" }: { theme?: "light" | "dark" }
             className={`text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black focus-visible:ring-offset-2 rounded-md px-1 ${getLinkClasses('/about')}`}
           >
             About
+          </Link>
+          <Link
+            href="/news"
+            className={`text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black focus-visible:ring-offset-2 rounded-md px-1 ${getLinkClasses('/news')}`}
+          >
+            News
           </Link>
         </div>
 
@@ -272,6 +278,13 @@ export default function Navbar({ theme = "light" }: { theme?: "light" | "dark" }
               className={`text-sm font-medium px-3 py-2 rounded-xl transition-colors ${getMobileLinkClasses('/about')}`}
             >
               About
+            </Link>
+            <Link
+              href="/news"
+              onClick={() => setMobileMenuOpen(false)}
+              className={`text-sm font-medium px-3 py-2 rounded-xl transition-colors ${getMobileLinkClasses('/news')}`}
+            >
+              News
             </Link>
           </div>
         </div>

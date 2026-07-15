@@ -1,0 +1,40 @@
+{
+  "id": "academic-research-l2p",
+  "name": "L2P",
+  "slug": "academic-research-l2p",
+  "developer": "Academic/Research",
+  "releaseDate": "2026-07-15",
+  "updatedAt": "2026-07-15",
+  "type": "research-preview",
+  "modality": [
+    "text"
+  ],
+  "primaryTask": "other",
+  "deployment": [
+    "self-hostable"
+  ],
+  "license": "Other/Custom",
+  "parameters": "undisclosed",
+  "contextWindow": "undisclosed",
+  "description": "A research preview model focusing on other: L2P. Published by Nanjing University.",
+  "keyFeatures": [],
+  "benchmarks": [],
+  "family": null,
+  "previousVersion": null,
+  "links": {
+    "Website": "https://nju-pcalab.github.io/projects/L2P/"
+  },
+  "logo": null,
+  "tags": [
+    "research-preview",
+    "other"
+  ],
+  "sources": [
+    "https://nju-pcalab.github.io/projects/L2P/"
+  ],
+  "verified": false,
+  "featured": false,
+  "boost": 1,
+  "curatorNotes": "Ingested research preview via bulk triage. Affiliation: Nanjing University. Traction signal: Initial release.",
+  "institution": "Nanjing University"
+}

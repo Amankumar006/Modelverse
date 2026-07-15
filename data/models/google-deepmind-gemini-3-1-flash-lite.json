@@ -1,0 +1,46 @@
+{
+  "id": "google-deepmind-gemini-3-1-flash-lite",
+  "name": "Gemini 3.1 Flash-Lite",
+  "slug": "google-deepmind-gemini-3-1-flash-lite",
+  "developer": "Google DeepMind",
+  "releaseDate": "2026-03-03",
+  "updatedAt": "2026-03-03",
+  "type": "api-only",
+  "modality": [
+    "text",
+    "image",
+    "audio",
+    "video",
+    "code"
+  ],
+  "primaryTask": "chat-reasoning",
+  "deployment": [
+    "api-only"
+  ],
+  "license": "Proprietary",
+  "parameters": "undisclosed",
+  "contextWindow": "undisclosed",
+  "description": "An extremely cost-effective model designed for high-frequency everyday tasks and bulk API queries, rivaling larger models.",
+  "keyFeatures": [
+    "Ultra-low latency",
+    "Optimized for high-volume tasks"
+  ],
+  "benchmarks": [],
+  "family": "gemini-3-1",
+  "previousVersion": "google-deepmind-gemini-2-5-flash-lite",
+  "links": {
+    "website": "https://aistudio.google.com/models/gemini-3"
+  },
+  "logo": "/logos/google.svg",
+  "tags": [
+    "efficient",
+    "fast"
+  ],
+  "sources": [
+    "https://en.wikipedia.org/wiki/Gemini_(language_model)"
+  ],
+  "verified": true,
+  "featured": false,
+  "boost": 1,
+  "curatorNotes": ""
+}

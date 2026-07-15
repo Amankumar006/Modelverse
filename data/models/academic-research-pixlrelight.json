@@ -1,0 +1,41 @@
+{
+  "id": "academic-research-pixlrelight",
+  "name": "PixlRelight",
+  "slug": "academic-research-pixlrelight",
+  "developer": "Academic/Research",
+  "releaseDate": "2026-07-15",
+  "updatedAt": "2026-07-15",
+  "type": "research-preview",
+  "modality": [
+    "text",
+    "image"
+  ],
+  "primaryTask": "image-generation",
+  "deployment": [
+    "self-hostable"
+  ],
+  "license": "Other/Custom",
+  "parameters": "undisclosed",
+  "contextWindow": "undisclosed",
+  "description": "A research preview model focusing on image generation: PixlRelight. Published by mlfarinha.",
+  "keyFeatures": [],
+  "benchmarks": [],
+  "family": null,
+  "previousVersion": null,
+  "links": {
+    "Website": "https://mlfarinha.github.io/pixl-relight/"
+  },
+  "logo": null,
+  "tags": [
+    "research-preview",
+    "image-generation"
+  ],
+  "sources": [
+    "https://mlfarinha.github.io/pixl-relight/"
+  ],
+  "verified": false,
+  "featured": false,
+  "boost": 1,
+  "curatorNotes": "Ingested research preview via bulk triage. Affiliation: mlfarinha. Traction signal: Initial release.",
+  "institution": "mlfarinha"
+}

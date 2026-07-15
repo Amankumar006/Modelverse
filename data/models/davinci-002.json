@@ -35,9 +35,9 @@
   "curatorNotes": "Bulk imported from OpenAI developer docs.",
   "costTiers": [
     {
-      "name": "babbage-002",
       "id": "babbage-002",
-      "description": "Replacement for the GPT-3 ada and babbage base models"
+      "description": "Replacement for the GPT-3 ada and babbage base models",
+      "label": "babbage-002"
     }
   ]
 }

@@ -19,7 +19,7 @@
   "description": "Small embedding model",
   "keyFeatures": [],
   "benchmarks": [],
-  "family": "text-embedding-3",
+  "family": "openai-embeddings",
   "previousVersion": null,
   "links": {
     "Documentation": "https://developers.openai.com/api/docs/models/all"

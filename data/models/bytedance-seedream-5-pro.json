@@ -25,9 +25,9 @@
   "benchmarks": [],
   "family": "Seedream",
   "previousVersion": null,
-  "links": [
-    "https://bytedance.com"
-  ],
+  "links": {
+    "website": "https://bytedance.com"
+  },
   "logo": "/logos/bytedance.svg",
   "tags": [
     "image-editing"

@@ -21,8 +21,7 @@
     "Advanced workplace and spreadsheet generation"
   ],
   "benchmarks": [],
-  "family": "Claude",
-  "previousVersion": "anthropic-claude-opus-4-1",
+  "family": "Claude 4.5",
   "website": "https://www.anthropic.com",
   "paper": "",
   "huggingFace": "",
@@ -40,5 +39,9 @@
   "updatedAt": "2026-07-14",
   "featured": false,
   "boost": 1,
-  "costTiers": []
+  "costTiers": [],
+  "tier": "Opus",
+  "previousVersion": "anthropic-claude-opus-4-1",
+  "nextVersion": "anthropic-claude-opus-4-6",
+  "links": {}
 }

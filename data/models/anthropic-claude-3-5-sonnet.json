@@ -21,8 +21,7 @@
     "Significant coding and reasoning jump"
   ],
   "benchmarks": [],
-  "family": "Claude",
-  "previousVersion": "anthropic-claude-3-sonnet",
+  "family": "Claude 3.5",
   "website": "https://www.anthropic.com",
   "paper": "",
   "huggingFace": "",
@@ -42,5 +41,9 @@
   "updatedAt": "2026-07-14",
   "featured": false,
   "boost": 1,
-  "costTiers": []
+  "costTiers": [],
+  "tier": "Sonnet",
+  "previousVersion": "anthropic-claude-3-sonnet",
+  "nextVersion": "anthropic-claude-3-5-sonnet-new",
+  "links": {}
 }

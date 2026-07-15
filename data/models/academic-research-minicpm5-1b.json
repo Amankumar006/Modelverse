@@ -1,0 +1,40 @@
+{
+  "id": "academic-research-minicpm5-1b",
+  "name": "MiniCPM5 1B",
+  "slug": "academic-research-minicpm5-1b",
+  "developer": "Academic/Research",
+  "releaseDate": "2026-07-15",
+  "updatedAt": "2026-07-15",
+  "type": "research-preview",
+  "modality": [
+    "text"
+  ],
+  "primaryTask": "other",
+  "deployment": [
+    "self-hostable"
+  ],
+  "license": "Other/Custom",
+  "parameters": "undisclosed",
+  "contextWindow": "undisclosed",
+  "description": "A research preview model focusing on other: MiniCPM5 1B. Published by OpenBMB.",
+  "keyFeatures": [],
+  "benchmarks": [],
+  "family": null,
+  "previousVersion": null,
+  "links": {
+    "Website": "https://huggingface.co/openbmb/MiniCPM5-1B"
+  },
+  "logo": null,
+  "tags": [
+    "research-preview",
+    "other"
+  ],
+  "sources": [
+    "https://huggingface.co/openbmb/MiniCPM5-1B"
+  ],
+  "verified": false,
+  "featured": false,
+  "boost": 1,
+  "curatorNotes": "Ingested research preview via bulk triage. Affiliation: OpenBMB. Traction signal: Initial release.",
+  "institution": "OpenBMB"
+}

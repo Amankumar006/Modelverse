@@ -20,8 +20,7 @@
     "Advanced complex reasoning"
   ],
   "benchmarks": [],
-  "family": "Claude",
-  "previousVersion": "anthropic-claude-2-1",
+  "family": "Claude 3",
   "website": "https://www.anthropic.com",
   "paper": "",
   "huggingFace": "",
@@ -39,5 +38,9 @@
   "updatedAt": "2026-07-14",
   "featured": false,
   "boost": 1,
-  "costTiers": []
+  "costTiers": [],
+  "tier": "Opus",
+  "nextVersion": "anthropic-claude-opus-4",
+  "links": {},
+  "previousVersion": null
 }

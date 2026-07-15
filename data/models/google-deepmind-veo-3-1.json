@@ -1,0 +1,40 @@
+{
+  "id": "google-deepmind-veo-3-1",
+  "name": "Veo 3.1",
+  "slug": "google-deepmind-veo-3-1",
+  "developer": "Google DeepMind",
+  "releaseDate": "2025-11-17",
+  "updatedAt": "2025-11-17",
+  "type": "api-only",
+  "modality": [
+    "video"
+  ],
+  "primaryTask": "video-generation",
+  "deployment": [
+    "api-only"
+  ],
+  "license": "Proprietary",
+  "parameters": "undisclosed",
+  "contextWindow": "undisclosed",
+  "description": "Google's standard model for professional video generation.",
+  "keyFeatures": [
+    "High-fidelity video generation"
+  ],
+  "benchmarks": [],
+  "family": "Veo",
+  "previousVersion": "google-deepmind-veo-3-0",
+  "links": {
+    "website": "https://deepmind.google/technologies/veo/"
+  },
+  "logo": "/logos/google.svg",
+  "tags": [
+    "video-generation"
+  ],
+  "sources": [
+    "https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/model-versions"
+  ],
+  "verified": true,
+  "featured": false,
+  "boost": 1,
+  "curatorNotes": ""
+}

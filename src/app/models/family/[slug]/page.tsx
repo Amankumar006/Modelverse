@@ -9,6 +9,7 @@ import {
 import Breadcrumb from "@/components/models/Breadcrumb";
 import ModelCard from "@/components/models/ModelCard";
 import Navbar from "@/components/layout/Navbar";
+import ClientBackButton from "@/components/ui/ClientBackButton";
 import { ChevronLeft, Sparkles, ArrowLeft, ArrowRight } from "lucide-react";
 
 export const dynamic = "force-static";
@@ -83,13 +84,10 @@ export default async function FamilyPage({
 
       {/* ── Content ────────────────────────────────────────── */}
       <article className="max-w-4xl mx-auto px-4 sm:px-6 mt-6">
-        <Link
-          href={`/models/developer/${encodeURIComponent(developer)}`}
-          className="inline-flex items-center gap-1.5 text-xs text-[#6f6f6f] hover:text-[#0a0a0a] transition-colors group mb-8 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black/50 focus-visible:ring-offset-2 rounded-lg px-2 py-1"
-        >
-          <ChevronLeft size={14} className="transition-transform group-hover:-translate-x-0.5" />
-          Back to {developer}
-        </Link>
+        <ClientBackButton
+          fallbackHref={`/models/developer/${encodeURIComponent(developer)}`}
+          fallbackLabel={developer}
+        />
 
         <div className="mb-10 space-y-4">
           <div className="inline-flex items-center gap-2 text-brand-orange bg-brand-orange/10 px-3 py-1 rounded-full text-xs font-semibold mb-2">

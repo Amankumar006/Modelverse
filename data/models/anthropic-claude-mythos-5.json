@@ -22,8 +22,7 @@
     "Restricted availability (Project Glasswing only)"
   ],
   "benchmarks": [],
-  "family": "Claude",
-  "previousVersion": "anthropic-claude-mythos-preview",
+  "family": "Claude 5",
   "website": "https://www.anthropic.com",
   "paper": "",
   "huggingFace": "",
@@ -45,5 +44,8 @@
   "updatedAt": "2026-07-14",
   "featured": false,
   "boost": 1,
-  "costTiers": []
+  "costTiers": [],
+  "tier": "Mythos",
+  "previousVersion": "anthropic-claude-mythos-preview",
+  "links": {}
 }

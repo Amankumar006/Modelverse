@@ -20,8 +20,7 @@
     "Broad knowledge retrieval"
   ],
   "benchmarks": [],
-  "family": "Claude",
-  "previousVersion": "anthropic-claude-3-7-sonnet",
+  "family": "Claude 4",
   "website": "https://www.anthropic.com",
   "paper": "",
   "huggingFace": "",
@@ -39,5 +38,9 @@
   "updatedAt": "2026-07-14",
   "featured": false,
   "boost": 1,
-  "costTiers": []
+  "costTiers": [],
+  "tier": "Sonnet",
+  "previousVersion": "anthropic-claude-3-7-sonnet",
+  "nextVersion": "anthropic-claude-sonnet-4-5",
+  "links": {}
 }

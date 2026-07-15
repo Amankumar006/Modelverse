@@ -56,7 +56,7 @@ export default function Home() {
   }
 
   const showcaseModels: ModelEntry[] = [];
-  const priorityDevs = ["OpenAI", "Anthropic", "Google", "Meta", "Mistral", "Cohere", "xAI"];
+  const priorityDevs = ["OpenAI", "Anthropic", "Google DeepMind", "Meta", "Mistral AI", "Cohere", "xAI"];
   
   for (const dev of priorityDevs) {
     if (byDeveloper.has(dev) && byDeveloper.get(dev)!.length > 0) {

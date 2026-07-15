@@ -19,7 +19,7 @@
   "description": "Identify potentially harmful content in text and images",
   "keyFeatures": [],
   "benchmarks": [],
-  "family": "gpt",
+  "family": "openai-moderation",
   "previousVersion": null,
   "links": {
     "Documentation": "https://developers.openai.com/api/docs/models/all"

@@ -33,6 +33,7 @@ export const ModelSchema = z.object({
   name: z.string(),
   slug: z.string(),
   developer: z.enum(DEVELOPERS),
+  institution: z.string().optional(),
   releaseDate: z.string().regex(/^\d{4}-\d{2}-\d{2}$/, "Must be YYYY-MM-DD"),
   updatedAt: z.string().regex(/^\d{4}-\d{2}-\d{2}$/, "Must be YYYY-MM-DD"),
   type: z.enum(["open-source", "open-weights", "closed-source", "api-only", "research-preview"]),
@@ -70,6 +71,7 @@ export const ModelSchema = z.object({
   verified: z.boolean(),
   featured: z.boolean().default(false),
   boost: z.number().min(1).max(5).default(1),
+  // curatorNotes: internal-only notes for curation triage, deliberately omitted from any client-facing rendering
   curatorNotes: z.string().default(""),
 });
 

@@ -19,7 +19,7 @@
   "description": "Fast reasoning model optimized for the Codex CLI",
   "keyFeatures": [],
   "benchmarks": [],
-  "family": "gpt",
+  "family": "codex",
   "previousVersion": null,
   "links": {
     "Documentation": "https://developers.openai.com/api/docs/models/all"

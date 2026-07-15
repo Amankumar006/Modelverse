@@ -32,7 +32,7 @@
     }
   ],
   "family": "gpt-4",
-  "previousVersion": "openai-gpt-4",
+  "previousVersion": "gpt-4",
   "links": {
     "website": "https://openai.com/research"
   },

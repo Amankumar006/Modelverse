@@ -20,8 +20,7 @@
     "High-volume automation"
   ],
   "benchmarks": [],
-  "family": "Claude",
-  "previousVersion": "anthropic-claude-3-5-haiku",
+  "family": "Claude 4.5",
   "website": "https://www.anthropic.com",
   "paper": "",
   "huggingFace": "",
@@ -42,5 +41,8 @@
   "updatedAt": "2026-07-14",
   "featured": false,
   "boost": 1,
-  "costTiers": []
+  "costTiers": [],
+  "tier": "Haiku",
+  "previousVersion": "anthropic-claude-3-5-haiku",
+  "links": {}
 }

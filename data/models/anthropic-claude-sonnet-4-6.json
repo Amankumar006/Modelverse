@@ -20,8 +20,7 @@
     "Scaled professional work capabilities"
   ],
   "benchmarks": [],
-  "family": "Claude",
-  "previousVersion": "anthropic-claude-sonnet-4-5",
+  "family": "Claude 4.6",
   "website": "https://www.anthropic.com",
   "paper": "",
   "huggingFace": "",
@@ -39,5 +38,9 @@
   "updatedAt": "2026-07-14",
   "featured": false,
   "boost": 1,
-  "costTiers": []
+  "costTiers": [],
+  "tier": "Sonnet",
+  "previousVersion": "anthropic-claude-sonnet-4-5",
+  "nextVersion": "anthropic-claude-sonnet-5",
+  "links": {}
 }

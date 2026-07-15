@@ -228,8 +228,18 @@ function ModelCatalogContent({
     const finalItems: CatalogItem[] = [];
     const seenFamilies = new Set<string>();
 
+    // Only group families if we aren't applying filters that might exclude members of that family.
+    // Developer is safe because families belong entirely to one developer.
+    const shouldGroup = 
+      filters.q === "" &&
+      filters.type.length === 0 &&
+      filters.task.length === 0 &&
+      filters.modality.length === 0 &&
+      filters.license.length === 0 &&
+      filters.deployment.length === 0;
+
     for (const model of filtered) {
-      if (model.family) {
+      if (model.family && shouldGroup) {
         if (!seenFamilies.has(model.family)) {
           seenFamilies.add(model.family);
           const allVariants = models.filter((m) => m.family === model.family);
@@ -254,7 +264,7 @@ function ModelCatalogContent({
       }
     }
     return finalItems;
-  }, [filtered, models]);
+  }, [filtered, models, filters]);
 
   const hasActiveFilters =
     filters.q !== "" ||

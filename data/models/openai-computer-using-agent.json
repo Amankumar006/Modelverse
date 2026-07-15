@@ -54,9 +54,9 @@
   "curatorNotes": "Launched under the 'Operator' research preview. Focuses on browser-based GUI automation and action planning.",
   "costTiers": [
     {
-      "name": "computer-use-preview",
       "id": "computer-use",
-      "description": "Specialized model for computer use tool"
+      "description": "Specialized model for computer use tool",
+      "label": "computer-use-preview"
     }
   ]
 }

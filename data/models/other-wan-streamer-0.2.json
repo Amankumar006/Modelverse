@@ -17,7 +17,7 @@
   "license": "Other/Custom",
   "parameters": "undisclosed",
   "contextWindow": "undisclosed",
-  "description": "A real-time character simulation framework allowing users to converse with generated avatars\u2014including humans, animals, or fictional characters\u2014with highly responsive audio-visual sync.",
+  "description": "A real-time character simulation framework allowing users to converse with generated avatars—including humans, animals, or fictional characters—with highly responsive audio-visual sync.",
   "keyFeatures": [
     "Outputs at 640px resolution on the long edge",
     "Streams at 25 frames per second",
@@ -26,15 +26,15 @@
   "benchmarks": [],
   "family": "Wan Streamer",
   "previousVersion": "wan-streamer-0.1",
-  "links": [
-    "https://other.com"
-  ],
+  "links": {
+    "website": "https://wan-streamer.com/v0.2/"
+  },
   "logo": null,
   "tags": [
     "real-time-avatar"
   ],
   "sources": [
-    "https://www.youtube.com/watch?v=Ti1V7OI2Rro"
+    "https://huggingface.co/papers/2607.04443"
   ],
   "verified": false,
   "curatorNotes": "Only a technical paper is currently released according to the transcript."

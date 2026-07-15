@@ -20,8 +20,7 @@
     "Deep reasoning optimizations"
   ],
   "benchmarks": [],
-  "family": "Claude",
-  "previousVersion": "anthropic-claude-3-opus",
+  "family": "Claude 4",
   "website": "https://www.anthropic.com",
   "paper": "",
   "huggingFace": "",
@@ -39,5 +38,9 @@
   "updatedAt": "2026-07-14",
   "featured": false,
   "boost": 1,
-  "costTiers": []
+  "costTiers": [],
+  "tier": "Opus",
+  "previousVersion": "anthropic-claude-3-opus",
+  "nextVersion": "anthropic-claude-opus-4-1",
+  "links": {}
 }

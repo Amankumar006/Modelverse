@@ -49,9 +49,9 @@
       "description": "Fast, affordable small model for focused tasks"
     },
     {
-      "name": "ChatGPT-4o",
       "id": "chatgpt-4o",
-      "description": "GPT-4o model used in ChatGPT"
+      "description": "GPT-4o model used in ChatGPT",
+      "label": "ChatGPT-4o"
     }
   ]
 }

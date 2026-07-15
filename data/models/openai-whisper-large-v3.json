@@ -31,7 +31,7 @@
       "verified": true
     }
   ],
-  "family": "Whisper",
+  "family": "whisper",
   "previousVersion": "whisper-large-v2",
   "links": {
     "website": "https://github.com/openai/whisper"

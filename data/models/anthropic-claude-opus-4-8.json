@@ -20,8 +20,7 @@
     "Deep sustained reasoning capabilities"
   ],
   "benchmarks": [],
-  "family": "Claude",
-  "previousVersion": "anthropic-claude-opus-4-7",
+  "family": "Claude 4.8",
   "website": "https://www.anthropic.com",
   "paper": "",
   "huggingFace": "",
@@ -39,5 +38,8 @@
   "updatedAt": "2026-07-14",
   "featured": false,
   "boost": 1,
-  "costTiers": []
+  "costTiers": [],
+  "tier": "Opus",
+  "previousVersion": "anthropic-claude-opus-4-7",
+  "links": {}
 }

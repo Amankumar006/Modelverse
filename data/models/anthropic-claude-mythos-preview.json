@@ -20,8 +20,7 @@
     "Restricted release for enterprise/safety testing"
   ],
   "benchmarks": [],
-  "family": "Claude",
-  "previousVersion": "",
+  "family": "Claude Mythos Preview",
   "website": "https://www.anthropic.com",
   "paper": "",
   "huggingFace": "",
@@ -41,5 +40,9 @@
   "updatedAt": "2026-07-14",
   "featured": false,
   "boost": 1,
-  "costTiers": []
+  "costTiers": [],
+  "tier": "Mythos",
+  "nextVersion": "anthropic-claude-mythos-5",
+  "links": {},
+  "previousVersion": null
 }

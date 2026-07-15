@@ -1,5 +1,7 @@
 import type { MetadataRoute } from "next";
 import { getAllModels, getAllModelEntries, SITE_URL } from "@/lib/models";
+import { getAllArticles } from "@/lib/news";
+import { NewsCategory } from "../../data/schema/news.schema";
 
 export const dynamic = "force-static";
 
@@ -36,6 +38,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       url: `${SITE_URL}/trending`,
       lastModified: new Date(),
       changeFrequency: "hourly",
+      priority: 0.8,
+    },
+    {
+      url: `${SITE_URL}/news`,
+      lastModified: new Date(),
+      changeFrequency: "daily",
       priority: 0.8,
     },
   ];
@@ -101,5 +109,33 @@ export default function sitemap(): MetadataRoute.Sitemap {
   addFacetUrls("license", licenses);
   addFacetUrls("deployment", deployments);
 
-  return [...staticRoutes, ...modelRoutes, ...familyRoutes, ...developerRoutes, ...facetRoutes];
+  // Dynamic news categories
+  const newsCategoryRoutes: MetadataRoute.Sitemap = NewsCategory.options.map((cat) => ({
+    url: `${SITE_URL}/news/category/${cat}`,
+    lastModified: new Date(),
+    changeFrequency: "daily",
+    priority: 0.7,
+  }));
+
+  // Dynamic news articles
+  const articles = getAllArticles();
+  const newsArticleRoutes: MetadataRoute.Sitemap = articles.map((article) => {
+    const lastModDate = article.updatedDate || article.publishDate;
+    return {
+      url: `${SITE_URL}/news/${article.slug}`,
+      lastModified: new Date(lastModDate),
+      changeFrequency: "weekly",
+      priority: 0.75,
+    };
+  });
+
+  return [
+    ...staticRoutes,
+    ...modelRoutes,
+    ...familyRoutes,
+    ...developerRoutes,
+    ...facetRoutes,
+    ...newsCategoryRoutes,
+    ...newsArticleRoutes,
+  ];
 }

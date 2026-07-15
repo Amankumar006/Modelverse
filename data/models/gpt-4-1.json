@@ -19,7 +19,7 @@
   "description": "Smartest non-reasoning model",
   "keyFeatures": [],
   "benchmarks": [],
-  "family": "gpt",
+  "family": "gpt-4",
   "previousVersion": null,
   "links": {
     "Documentation": "https://developers.openai.com/api/docs/models/all"

@@ -26,9 +26,9 @@
   "benchmarks": [],
   "family": "High",
   "previousVersion": null,
-  "links": [
-    "https://tencent.com"
-  ],
+  "links": {
+    "website": "https://tencent.com"
+  },
   "logo": "/logos/tencent.svg",
   "tags": [
     "mixture-of-experts"

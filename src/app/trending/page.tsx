@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { getTrendingModels } from "@/lib/trending";
 import { SITE_URL } from "@/lib/models";
-import { ChevronLeft, Flame, Sparkle } from "lucide-react";
 import JsonLd from "@/components/JsonLd";
+import Navbar from "@/components/layout/Navbar";
+import TrendingClient from "@/components/trending/TrendingClient";
 
 // Revalidate every hour so the decay function is reflected in the static build
 export const revalidate = 3600;
@@ -24,7 +24,6 @@ export const metadata: Metadata = {
 export default function TrendingPage() {
   const trendingModels = getTrendingModels(20);
 
-  // Generate structured data for the list
   const structuredData = {
     "@context": "https://schema.org",
     "@type": "ItemList",
@@ -39,82 +38,38 @@ export default function TrendingPage() {
   };
 
   return (
-    <main className="min-h-screen bg-black text-white selection:bg-brand-orange selection:text-white pb-24">
+    <main className="min-h-screen bg-[#F2EFE9] text-[#2E352B] selection:bg-[#2E352B] selection:text-[#F2EFE9] pb-24 font-sans antialiased relative">
       <JsonLd data={structuredData} />
       
-      <div className="absolute top-0 left-0 w-full h-[500px] bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-brand-orange/10 via-brand-pink/2 to-transparent pointer-events-none" />
+      {/* Navbar with light theme to blend with linen background */}
+      <div className="w-full">
+        <Navbar theme="light" />
+      </div>
 
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 md:px-8 pt-8 relative z-10">
-        <Link
-          href="/"
-          className="inline-flex items-center gap-1 text-sm text-white/40 hover:text-white/80 transition-colors group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/50 focus-visible:ring-offset-2 focus-visible:ring-offset-black rounded-lg px-2 py-1 mb-8"
-        >
-          <ChevronLeft size={16} className="transition-transform group-hover:-translate-x-0.5" />
-          Back to Home
-        </Link>
-        
-        <div className="border-b border-white/[0.06] pb-8 mb-12 flex flex-col md:flex-row md:items-end justify-between gap-6">
-          <div>
-            <h1
-              className="text-4xl sm:text-5xl font-normal tracking-tight text-white flex items-center gap-3"
-              style={{
-                fontFamily: "var(--font-display, ui-sans-serif, system-ui, sans-serif)",
-              }}
-            >
-              Trending <span className="italic text-white/50">Now</span>
-            </h1>
-            <p className="mt-4 text-sm md:text-base text-white/60 max-w-xl leading-relaxed">
-              Models with the highest current momentum, driven by recency and editorial curation.
-            </p>
+      <div className="max-w-6xl mx-auto px-6 sm:px-8 lg:px-12 pt-16 sm:pt-24">
+        {/* Style block for dimming hover logic */}
+        <style dangerouslySetInnerHTML={{ __html: `
+          .list-container:hover .list-item {
+            opacity: 0.25;
+          }
+          .list-container .list-item:hover {
+            opacity: 1;
+          }
+          .list-item .item-title {
+            font-family: var(--font-serif), 'Cormorant Garamond', Georgia, serif;
+          }
+        `}} />
+
+        <header className="fade-in flex flex-col sm:flex-row justify-between items-baseline gap-4 mb-16 sm:mb-24">
+          <div className="text-[10px] sm:text-xs uppercase tracking-[0.2em] text-[#8C9485] font-semibold">
+            Index 01—20 · Updated Hourly
           </div>
-          <div className="shrink-0 flex items-center gap-2 text-xs font-mono text-white/40 bg-white/5 border border-white/10 px-3 py-1.5 rounded-full">
-            <Flame size={14} className="text-brand-orange" />
-            <span>Updated Hourly</span>
-          </div>
-        </div>
+          <h1 className="text-4xl sm:text-5xl font-light italic text-[#2E352B]" style={{ fontFamily: "var(--font-serif), serif" }}>
+            Trending Now
+          </h1>
+        </header>
 
-        <div className="space-y-4">
-          {trendingModels.map((model, index) => (
-            <Link
-              key={model.id}
-              href={`/models/${model.slug}`}
-              className="group block rounded-xl border border-white/[0.06] bg-white/[0.02] hover:bg-white/[0.04] p-4 sm:p-5 transition-all duration-300 relative overflow-hidden"
-            >
-              {/* Rank Number */}
-              <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity pointer-events-none">
-                <span className="text-6xl font-bold font-mono tracking-tighter italic">#{index + 1}</span>
-              </div>
-
-              <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4 relative z-10">
-                <div className="max-w-[85%]">
-                  <div className="flex items-center gap-2 mb-1">
-                    {index < 3 && (
-                      <Flame size={14} className="text-brand-orange shrink-0" strokeWidth={2} />
-                    )}
-                    <div className="text-xs font-mono text-white/50 uppercase tracking-wider">
-                      {model.developer}
-                    </div>
-                  </div>
-                  <h3 className="text-xl font-semibold tracking-tight text-white/90 group-hover:text-white transition-colors">
-                    {model.name}
-                  </h3>
-                  <p className="text-sm text-white/60 mt-2 line-clamp-2 max-w-2xl">
-                    {model.description}
-                  </p>
-                </div>
-                
-                <div className="flex flex-wrap sm:flex-col items-center sm:items-end gap-2 shrink-0">
-                  <span className="text-xs font-mono text-brand-orange/80">
-                    {new Date(model.releaseDate).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" })}
-                  </span>
-                  <div className="px-2 py-1 rounded bg-white/5 border border-white/10 text-[10px] uppercase tracking-widest text-white/50 font-semibold">
-                    {model.type.replace("-", " ")}
-                  </div>
-                </div>
-              </div>
-            </Link>
-          ))}
-        </div>
+        <TrendingClient initialModels={trendingModels} />
       </div>
     </main>
   );

@@ -19,7 +19,7 @@
   "description": "Previous generation text-only moderation model",
   "keyFeatures": [],
   "benchmarks": [],
-  "family": "gpt",
+  "family": "openai-moderation",
   "previousVersion": null,
   "links": {
     "Documentation": "https://developers.openai.com/api/docs/models/all"

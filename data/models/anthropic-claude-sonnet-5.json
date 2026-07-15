@@ -22,8 +22,7 @@
     "Adaptive thinking enabled by default"
   ],
   "benchmarks": [],
-  "family": "Claude",
-  "previousVersion": "anthropic-claude-sonnet-4-6",
+  "family": "Claude 5",
   "website": "https://www.anthropic.com/news/claude-sonnet-5",
   "paper": "",
   "huggingFace": "",
@@ -44,5 +43,8 @@
   "updatedAt": "2026-07-14",
   "featured": false,
   "boost": 1,
-  "costTiers": []
+  "costTiers": [],
+  "tier": "Sonnet",
+  "previousVersion": "anthropic-claude-sonnet-4-6",
+  "links": {}
 }

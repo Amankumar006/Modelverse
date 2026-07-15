@@ -39,3 +39,9 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Generated search index
+src/lib/search-index.json
+src/lib/models-archive.json
+src/lib/news-archive.json
+src/lib/news-index.json

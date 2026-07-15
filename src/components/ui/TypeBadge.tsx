@@ -1,30 +1,30 @@
 const TYPE_STYLES: Record<string, { bg: string; text: string; label: string }> = {
   "open-weights": {
-    bg: "bg-emerald-500/15",
-    text: "text-emerald-400",
+    bg: "bg-emerald-50",
+    text: "text-emerald-700",
     label: "Open Weights",
   },
   "closed-source": {
-    bg: "bg-violet-500/15",
-    text: "text-violet-400",
+    bg: "bg-violet-50",
+    text: "text-violet-700",
     label: "Closed Source",
   },
   "api-only": {
-    bg: "bg-blue-500/15",
-    text: "text-blue-400",
+    bg: "bg-blue-50",
+    text: "text-blue-700",
     label: "API Only",
   },
   "research-preview": {
-    bg: "bg-orange-500/15",
-    text: "text-orange-400",
+    bg: "bg-orange-50",
+    text: "text-orange-700",
     label: "Research Preview",
   },
 };
 
 export default function TypeBadge({ type }: { type: string }) {
   const style = TYPE_STYLES[type] ?? {
-    bg: "bg-white/10",
-    text: "text-white/70",
+    bg: "bg-gray-50",
+    text: "text-gray-700",
     label: type,
   };
 
