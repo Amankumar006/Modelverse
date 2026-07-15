@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { getAllModelEntries, getAllDevelopers, SITE_URL } from "@/lib/models";
+import { getAllModelEntries, getAllDevelopers, getDeveloperCounts, SITE_URL } from "@/lib/models";
 import ModelCatalog from "@/components/models/ModelCatalog";
 import Navbar from "@/components/layout/Navbar";
 import { ChevronLeft } from "lucide-react";
@@ -34,7 +34,12 @@ function getActiveFacets(resolvedParams: Record<string, string | string[] | unde
   return { facets, activeCount };
 }
 
-function getCanonicalUrl(facets: Record<string, string[]>) {
+function getCanonicalUrl(facets: Record<string, string[]>, activeCount: number) {
+  // Single active facet developer override
+  if (activeCount === 1 && facets.developer && facets.developer.length === 1) {
+    return `${SITE_URL}/models/developer/${encodeURIComponent(facets.developer[0])}`;
+  }
+
   // Priority: task > developer > type > modality > license > deployment
   for (const key of FACET_PRIORITY) {
     if (facets[key] && facets[key].length > 0) {
@@ -51,7 +56,7 @@ export async function generateMetadata({ searchParams }: PageProps): Promise<Met
   const { facets, activeCount } = getActiveFacets(resolvedParams);
 
   // Canonical computation
-  const canonicalUrl = getCanonicalUrl(facets);
+  const canonicalUrl = getCanonicalUrl(facets, activeCount);
 
   // Indexing rules:
   // - Noindex if search query q is active
@@ -124,6 +129,7 @@ export default async function BrowsePage({ searchParams }: PageProps) {
   const resolvedSearchParams = await searchParams;
   const models = getAllModelEntries();
   const developers = getAllDevelopers();
+  const developersWithCounts = getDeveloperCounts();
 
   return (
     <main className="min-h-screen bg-white text-[#0a0a0a] selection:bg-brand-orange selection:text-white pb-24 relative">
@@ -154,6 +160,25 @@ export default async function BrowsePage({ searchParams }: PageProps) {
             A comprehensive, always-up-to-date registry of every released AI model.
             Filter by task, deployment type, or developer.
           </p>
+        </div>
+
+        {/* Browse by Developer Tiles */}
+        <div className="mb-10">
+          <h3 className="text-[10px] font-bold uppercase tracking-widest text-[#6f6f6f]/60 mb-3">Browse by Developer</h3>
+          <div className="flex flex-wrap gap-2">
+            {developersWithCounts.map((dev) => (
+              <Link
+                key={dev.developer}
+                href={`/models/developer/${encodeURIComponent(dev.developer)}`}
+                className="inline-flex items-center gap-2 bg-black/[0.04] hover:bg-black/[0.08] text-xs font-semibold text-[#6f6f6f] hover:text-[#0a0a0a] px-3.5 py-1.5 rounded-full transition-colors"
+              >
+                <span>{dev.developer}</span>
+                <span className="bg-black/5 text-[#6f6f6f]/80 px-1.5 py-0.5 rounded-full text-[9px] font-mono">
+                  {dev.count}
+                </span>
+              </Link>
+            ))}
+          </div>
         </div>
 
         {/* Catalog component (dense table + client filters) */}

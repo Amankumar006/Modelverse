@@ -125,11 +125,16 @@ export default function ModelCard({
 
   /* Redesigned Card variant (single or family) */
   return (
-    <Link
-      href={targetHref}
-      className="group relative flex flex-col justify-between h-full rounded-2xl bg-white border border-black/10 hover:border-black/20 hover:shadow-sm hover:-translate-y-[3px] active:scale-95 transition-all duration-300 w-full text-left overflow-hidden"
+    <div
+      className="group relative flex flex-col justify-between h-full rounded-2xl bg-white border border-black/10 hover:border-black/20 hover:shadow-sm hover:-translate-y-[3px] active:scale-[0.98] transition-all duration-300 w-full text-left overflow-hidden z-0"
     >
-      <div className="flex flex-col flex-1 p-5 lg:p-6 pb-0">
+      <Link
+        href={targetHref}
+        className="absolute inset-0 z-10"
+        aria-label={`View ${model.name}`}
+      />
+
+      <div className="flex flex-col flex-1 p-5 lg:p-6 pb-0 relative z-20 pointer-events-none">
         {/* Top Pill */}
         <div className="mb-4 flex items-start">
           {variant === "family" && primaryTask ? (
@@ -156,7 +161,23 @@ export default function ModelCard({
               model.name
             )}
           </h3>
-          <p className="text-xs text-[#6f6f6f] mb-3">{model.developer}</p>
+
+          <div className="flex flex-col gap-1 mb-3 pointer-events-auto">
+            <Link
+              href={`/models/developer/${encodeURIComponent(model.developer)}`}
+              className="inline-block text-xs text-[#6f6f6f] hover:text-brand-orange transition-colors relative z-35"
+            >
+              {model.developer}
+            </Link>
+            {variant !== "family" && model.family && (
+              <Link
+                href={`/models/family/${model.family}`}
+                className="inline-block text-[10px] text-brand-orange hover:underline font-medium relative z-35"
+              >
+                Part of the {model.family.replace(/-/g, " ").replace(/\b\w/g, c => c.toUpperCase())} family &rarr;
+              </Link>
+            )}
+          </div>
 
           {description && (
             <p className={`text-sm text-[#6f6f6f] leading-relaxed ${isFeatured ? "line-clamp-3" : "line-clamp-2"}`}>
@@ -167,7 +188,7 @@ export default function ModelCard({
       </div>
 
       {/* Stat Strip Footer */}
-      <div className="flex border-t border-black/10 divide-x divide-black/10 mt-auto">
+      <div className="flex border-t border-black/10 divide-x divide-black/10 mt-auto relative z-20 pointer-events-none">
         <div className="flex-1 min-w-0 px-2 sm:px-3 py-3 flex items-center justify-center text-center">
           <span className="font-mono text-[10px] uppercase tracking-[0.08em] text-[#6f6f6f] truncate">
             {statValue}
@@ -196,7 +217,7 @@ export default function ModelCard({
       </div>
 
       {isDetailed && (model as ModelEntry).costTiers && (model as ModelEntry).costTiers!.length > 0 && (
-        <div className="flex border-t border-black/10 px-5 py-2 bg-black/[0.01] items-center gap-1.5 overflow-x-auto no-scrollbar">
+        <div className="flex border-t border-black/10 px-5 py-2 bg-black/[0.01] items-center gap-1.5 overflow-x-auto no-scrollbar relative z-20 pointer-events-none">
           <span className="text-[9px] uppercase tracking-wider font-mono text-[#6f6f6f]/60 shrink-0">Tiers:</span>
           <div className="flex flex-wrap gap-1">
             {(model as ModelEntry).costTiers!.map((tier) => (
@@ -210,6 +231,6 @@ export default function ModelCard({
           </div>
         </div>
       )}
-    </Link>
+    </div>
   );
 }
