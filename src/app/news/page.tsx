@@ -89,6 +89,29 @@ export default async function NewsPage({ searchParams }: NewsPageProps) {
         </h1>
       </div>
 
+      {/* Browse by Category Tiles */}
+      <div className="max-w-6xl mx-auto px-6 sm:px-8 lg:px-12 mb-12">
+        <div className="flex flex-wrap justify-center gap-2">
+          {[
+            { value: "weekly-news", label: "Weekly News" },
+            { value: "short-news", label: "Short News" },
+            { value: "model-review", label: "Model Reviews" },
+            { value: "other", label: "Other" }
+          ].map((cat) => (
+            <Link
+              key={cat.value}
+              href={`/news/category/${cat.value}`}
+              className="inline-flex items-center gap-2 bg-black/[0.04] hover:bg-black/[0.08] text-xs font-semibold text-black/60 hover:text-[#0a0a0a] px-3.5 py-1.5 rounded-full transition-colors"
+            >
+              <span>{cat.label}</span>
+              <span className="bg-black/5 text-black/50 px-1.5 py-0.5 rounded-full text-[9px] font-mono">
+                {posts.filter((p) => p.category === cat.value).length}
+              </span>
+            </Link>
+          ))}
+        </div>
+      </div>
+
       {/* Main Grid Container */}
       <div className="max-w-6xl mx-auto px-6 sm:px-8 lg:px-12 space-y-16">
         
@@ -99,10 +122,15 @@ export default async function NewsPage({ searchParams }: NewsPageProps) {
               <h2 className="text-xs font-bold uppercase tracking-wider text-black/40">Latest Issue</h2>
               <span className="text-xs font-bold uppercase tracking-wider text-brand-orange">Flagship Edition</span>
             </div>
-            <Link
-              href={`/news/${latestIssue.slug}`}
-              className="group bg-[#F7F7F7] rounded-3xl border border-black/[0.05] hover:border-black/[0.08] transition-all duration-300 overflow-hidden grid grid-cols-1 lg:grid-cols-2"
+            <div
+              className="group relative bg-[#F7F7F7] rounded-3xl border border-black/[0.05] hover:border-black/[0.08] transition-all duration-300 overflow-hidden grid grid-cols-1 lg:grid-cols-2 z-0"
             >
+              <Link
+                href={`/news/${latestIssue.slug}`}
+                className="absolute inset-0 z-10"
+                aria-label={`Read ${latestIssue.title}`}
+              />
+
               {/* Image Container */}
               <div className="relative h-[250px] sm:h-[350px] lg:h-full min-h-[350px] bg-black">
                 <Image
@@ -116,13 +144,16 @@ export default async function NewsPage({ searchParams }: NewsPageProps) {
               </div>
 
               {/* Content Block */}
-              <div className="p-8 sm:p-12 lg:p-16 flex flex-col justify-between">
+              <div className="p-8 sm:p-12 lg:p-16 flex flex-col justify-between relative z-20 pointer-events-none">
                 <div>
                   {/* Issue Number Label */}
-                  <div className="flex items-center gap-2 mb-6">
-                    <span className="inline-block text-[10px] font-bold uppercase tracking-wider text-white px-2.5 py-1 rounded bg-black/90 shadow-sm">
+                  <div className="flex items-center gap-2 mb-6 pointer-events-auto">
+                    <Link
+                      href={`/news/category/weekly-news`}
+                      className="inline-block text-[10px] font-bold uppercase tracking-wider text-white px-2.5 py-1 rounded bg-black/90 shadow-sm hover:bg-brand-orange transition-colors relative z-30"
+                    >
                       Issue {latestIssue.issueNumber}
-                    </span>
+                    </Link>
                     <ConfidenceBadge confidence={latestIssue.confidenceLevel} />
                   </div>
 
@@ -155,7 +186,7 @@ export default async function NewsPage({ searchParams }: NewsPageProps) {
                   </span>
                 </div>
               </div>
-            </Link>
+            </div>
           </div>
         ) : (
           <div className="text-center py-12 bg-[#F7F7F7] rounded-3xl border border-black/[0.05]">
@@ -171,11 +202,15 @@ export default async function NewsPage({ searchParams }: NewsPageProps) {
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
               {recentIssues.map((issue) => (
-                <Link
+                <div
                   key={issue.id}
-                  href={`/news/${issue.slug}`}
-                  className="group bg-[#F7F7F7] rounded-3xl border border-black/[0.05] hover:border-black/[0.08] hover:shadow-sm transition-all duration-300 overflow-hidden flex flex-col justify-between"
+                  className="group relative bg-[#F7F7F7] rounded-3xl border border-black/[0.05] hover:border-black/[0.08] hover:shadow-sm transition-all duration-300 overflow-hidden flex flex-col justify-between z-0"
                 >
+                  <Link
+                    href={`/news/${issue.slug}`}
+                    className="absolute inset-0 z-10"
+                    aria-label={`Read ${issue.title}`}
+                  />
                   <div>
                     <div className="relative h-[160px] w-full bg-black overflow-hidden">
                       <Image
@@ -184,14 +219,17 @@ export default async function NewsPage({ searchParams }: NewsPageProps) {
                         fill
                         className="object-cover transition-transform duration-700 group-hover:scale-102"
                       />
-                      <span className="absolute top-4 left-4 text-[9px] font-bold uppercase tracking-wider text-white px-2.5 py-1 rounded-full bg-black/80 backdrop-blur-sm shadow-sm z-10">
+                      <Link
+                        href={`/news/category/weekly-news`}
+                        className="absolute top-4 left-4 text-[9px] font-bold uppercase tracking-wider text-white px-2.5 py-1 rounded-full bg-black/80 backdrop-blur-sm shadow-sm z-30 hover:bg-brand-orange transition-colors"
+                      >
                         Issue {issue.issueNumber}
-                      </span>
-                      <div className="absolute top-4 right-4 z-10">
+                      </Link>
+                      <div className="absolute top-4 right-4 z-20">
                         <ConfidenceBadge confidence={issue.confidenceLevel} />
                       </div>
                     </div>
-                    <div className="p-6">
+                    <div className="p-6 relative z-20 pointer-events-none">
                       <h3 className="text-base font-semibold tracking-tight text-black group-hover:text-brand-orange transition-colors mb-2 line-clamp-2 leading-snug">
                         {issue.title}
                       </h3>
@@ -200,7 +238,7 @@ export default async function NewsPage({ searchParams }: NewsPageProps) {
                       </p>
                     </div>
                   </div>
-                </Link>
+                </div>
               ))}
             </div>
           </div>
@@ -214,11 +252,15 @@ export default async function NewsPage({ searchParams }: NewsPageProps) {
             </div>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
               {trendingNews.map((post) => (
-                <Link
+                <div
                   key={post.id}
-                  href={`/news/${post.slug}`}
-                  className="group bg-white rounded-3xl border border-black/[0.05] hover:border-black/[0.08] hover:shadow-sm transition-all duration-300 overflow-hidden flex flex-col justify-between"
+                  className="group relative bg-white rounded-3xl border border-black/[0.05] hover:border-black/[0.08] hover:shadow-sm transition-all duration-300 overflow-hidden flex flex-col justify-between z-0"
                 >
+                  <Link
+                    href={`/news/${post.slug}`}
+                    className="absolute inset-0 z-10"
+                    aria-label={`Read ${post.title}`}
+                  />
                   <div>
                     <div className="relative h-[180px] w-full bg-black overflow-hidden">
                       <Image
@@ -227,14 +269,17 @@ export default async function NewsPage({ searchParams }: NewsPageProps) {
                         fill
                         className="object-cover transition-transform duration-700 group-hover:scale-102"
                       />
-                      <span className="absolute top-4 right-4 text-[9px] font-bold uppercase tracking-wider text-black/60 px-2.5 py-1 rounded-full bg-white/95 backdrop-blur-sm shadow-sm z-10">
+                      <Link
+                        href={`/news/category/${post.category}`}
+                        className="absolute top-4 right-4 text-[9px] font-bold uppercase tracking-wider text-black/60 px-2.5 py-1 rounded-full bg-white/95 backdrop-blur-sm shadow-sm z-30 hover:bg-black/10 hover:text-black transition-colors"
+                      >
                         {getCategoryLabel(post.category)}
-                      </span>
-                      <div className="absolute top-4 left-4 z-10">
+                      </Link>
+                      <div className="absolute top-4 left-4 z-20">
                         <ConfidenceBadge confidence={post.confidenceLevel} />
                       </div>
                     </div>
-                    <div className="p-6">
+                    <div className="p-6 relative z-20 pointer-events-none">
                       <h3 className="text-lg font-semibold tracking-tight text-black group-hover:text-brand-orange transition-colors mb-3 leading-snug">
                         {post.title}
                       </h3>
@@ -243,7 +288,7 @@ export default async function NewsPage({ searchParams }: NewsPageProps) {
                       </p>
                     </div>
                   </div>
-                  <div className="px-6 pb-6">
+                  <div className="px-6 pb-6 relative z-20 pointer-events-none">
                     <div className="pt-4 border-t border-black/[0.05] flex items-center justify-between text-[11px] text-black/40">
                       <span className="flex items-center gap-1">
                         <Clock size={11} />
@@ -254,7 +299,7 @@ export default async function NewsPage({ searchParams }: NewsPageProps) {
                       </span>
                     </div>
                   </div>
-                </Link>
+                </div>
               ))}
             </div>
           </div>
@@ -270,11 +315,15 @@ export default async function NewsPage({ searchParams }: NewsPageProps) {
             <div className="space-y-12">
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
                 {archivePosts.map((post) => (
-                  <Link
+                  <div
                     key={post.id}
-                    href={`/news/${post.slug}`}
-                    className="group bg-white rounded-3xl border border-black/[0.05] hover:border-black/[0.08] hover:shadow-sm transition-all duration-300 overflow-hidden flex flex-col justify-between"
+                    className="group relative bg-white rounded-3xl border border-black/[0.05] hover:border-black/[0.08] hover:shadow-sm transition-all duration-300 overflow-hidden flex flex-col justify-between z-0"
                   >
+                    <Link
+                      href={`/news/${post.slug}`}
+                      className="absolute inset-0 z-10"
+                      aria-label={`Read ${post.title}`}
+                    />
                     <div>
                       <div className="relative h-[180px] w-full bg-black overflow-hidden">
                         <Image
@@ -283,14 +332,17 @@ export default async function NewsPage({ searchParams }: NewsPageProps) {
                           fill
                           className="object-cover transition-transform duration-700 group-hover:scale-102"
                         />
-                        <span className="absolute top-4 right-4 text-[9px] font-bold uppercase tracking-wider text-black/60 px-2.5 py-1 rounded-full bg-white/95 backdrop-blur-sm shadow-sm z-10">
+                        <Link
+                          href={`/news/category/${post.category}`}
+                          className="absolute top-4 right-4 text-[9px] font-bold uppercase tracking-wider text-black/60 px-2.5 py-1 rounded-full bg-white/95 backdrop-blur-sm shadow-sm z-30 hover:bg-black/10 hover:text-black transition-colors"
+                        >
                           {post.category === "weekly-news" ? `Issue ${post.issueNumber}` : getCategoryLabel(post.category)}
-                        </span>
-                        <div className="absolute top-4 left-4 z-10">
+                        </Link>
+                        <div className="absolute top-4 left-4 z-20">
                           <ConfidenceBadge confidence={post.confidenceLevel} />
                         </div>
                       </div>
-                      <div className="p-6">
+                      <div className="p-6 relative z-20 pointer-events-none">
                         <h3 className="text-lg font-semibold tracking-tight text-black group-hover:text-brand-orange transition-colors mb-3 leading-snug">
                           {post.title}
                         </h3>
@@ -299,7 +351,7 @@ export default async function NewsPage({ searchParams }: NewsPageProps) {
                         </p>
                       </div>
                     </div>
-                    <div className="px-6 pb-6">
+                    <div className="px-6 pb-6 relative z-20 pointer-events-none">
                       <div className="pt-4 border-t border-black/[0.05] flex items-center justify-between text-[11px] text-black/40">
                         <span className="flex items-center gap-1">
                           <Clock size={11} />
@@ -310,7 +362,7 @@ export default async function NewsPage({ searchParams }: NewsPageProps) {
                         </span>
                       </div>
                     </div>
-                  </Link>
+                  </div>
                 ))}
               </div>
 
