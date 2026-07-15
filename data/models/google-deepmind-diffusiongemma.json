@@ -3,8 +3,8 @@
   "name": "DiffusionGemma",
   "slug": "google-deepmind-diffusiongemma",
   "developer": "Google DeepMind",
-  "releaseDate": "2026-07-15",
-  "updatedAt": "2026-07-15",
+  "releaseDate": "2026-06-10",
+  "updatedAt": "2026-06-10",
   "type": "research-preview",
   "modality": [
     "text"
@@ -13,27 +13,47 @@
   "deployment": [
     "self-hostable"
   ],
-  "license": "Other/Custom",
-  "parameters": "undisclosed",
-  "contextWindow": "undisclosed",
-  "description": "A research preview model focusing on other: DiffusionGemma. Published by Google DeepMind.",
-  "keyFeatures": [],
-  "benchmarks": [],
-  "family": null,
+  "license": "Apache 2.0",
+  "parameters": "26B total (3.8B active MoE)",
+  "contextWindow": "8k",
+  "description": "An experimental open-weights text diffusion model by Google DeepMind. Moving beyond traditional sequential autoregressive decoding, DiffusionGemma utilizes parallel block decoding to generate 256 tokens simultaneously, achieving up to 4x faster generation speeds on modern GPU hardware.",
+  "keyFeatures": [
+    "Parallel block decoding (generates 256 tokens simultaneously in a single forward pass)",
+    "Bi-directional attention allowing all tokens to attend to all others (ideal for code infilling, editing, and non-linear data)",
+    "Intelligent self-correction through iterative refinement of text blocks",
+    "Efficient Mixture of Experts (MoE) footprint, activating 3.8B parameters out of 26B total",
+    "Open Apache 2.0 licensed weights for research and developer workflows"
+  ],
+  "benchmarks": [
+    {
+      "name": "NVIDIA H100 GPU Inference Speed",
+      "score": "1000+ tokens/sec",
+      "verified": true
+    },
+    {
+      "name": "NVIDIA GeForce RTX 5090 Inference Speed",
+      "score": "700+ tokens/sec",
+      "verified": true
+    }
+  ],
+  "family": "gemma-4",
   "previousVersion": null,
   "links": {
-    "Website": "https://blog.google/innovation-and-ai/technology/developers-tools/diffusion-gemma-faster-text-generation/"
+    "Website": "https://deepmind.google/blog/diffusiongemma-4x-faster-text-generation/",
+    "Fine-tuning (Unsloth)": "https://unsloth.ai/docs/models/diffusiongemma"
   },
   "logo": null,
   "tags": [
-    "research-preview",
-    "other"
+    "diffusion",
+    "text-diffusion",
+    "moe",
+    "open-weights"
   ],
   "sources": [
-    "https://blog.google/innovation-and-ai/technology/developers-tools/diffusion-gemma-faster-text-generation/"
+    "https://deepmind.google/blog/diffusiongemma-4x-faster-text-generation/"
   ],
-  "verified": false,
-  "featured": false,
-  "boost": 1,
-  "curatorNotes": "Ingested research preview via bulk triage. Affiliation: Google DeepMind. Traction signal: Initial release."
+  "verified": true,
+  "featured": true,
+  "boost": 2,
+  "curatorNotes": "Verified DiffusionGemma. Release date: 2026-06-10. Apache 2.0 open weights. MoE parameter count: 26B total (3.8B active). Parallel block decoder technique."
 }

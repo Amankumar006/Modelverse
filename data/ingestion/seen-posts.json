@@ -1168,5 +1168,30 @@
     "lab": "Google DeepMind",
     "link": "https://deepmind.google/blog/introducing-the-gemini-25-computer-use-model/",
     "firstSeenAt": "2026-07-14T08:01:47.002Z"
+  },
+  {
+    "lab": "OpenAI",
+    "link": "https://openai.com/index/unlocking-self-improvement-gpt-red",
+    "firstSeenAt": "2026-07-15T18:29:48.211Z"
+  },
+  {
+    "lab": "Google DeepMind",
+    "link": "https://deepmind.google/blog/diffusiongemma-4x-faster-text-generation/",
+    "firstSeenAt": "2026-07-15T18:29:48.211Z"
+  },
+  {
+    "lab": "Google DeepMind",
+    "link": "https://deepmind.google/blog/alphaevolve-impact/",
+    "firstSeenAt": "2026-07-15T18:29:48.211Z"
+  },
+  {
+    "lab": "Google DeepMind",
+    "link": "https://deepmind.google/blog/medgemma-our-most-capable-open-models-for-health-ai-development/",
+    "firstSeenAt": "2026-07-15T18:29:48.211Z"
+  },
+  {
+    "lab": "Google DeepMind",
+    "link": "https://deepmind.google/blog/vaultgemma-the-worlds-most-capable-differentially-private-llm/",
+    "firstSeenAt": "2026-07-15T18:29:48.211Z"
   }
 ]
