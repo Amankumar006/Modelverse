@@ -93,7 +93,7 @@
     "author": "Hardware Desk",
     "readTime": "3 min read",
     "excerpt": "With Apple and Google rolling out smaller, high-capability models locally, the demand for dedicated on-device NPU hardware is skyrocketing. We review the latest silicon developments.",
-    "coverImage": "/images/news/news_short.jpg",
+    "coverImage": "/images/news/on_device_reasoning_cover.jpg",
     "status": "published",
     "confidenceLevel": "confirmed",
     "relatedModels": [
@@ -130,6 +130,31 @@
       "gemini",
       "benchmarks",
       "speed"
+    ]
+  },
+  {
+    "id": "post-7",
+    "slug": "diffusiongemma-4x-faster-text-generation",
+    "title": "DiffusionGemma: Google DeepMind's 4x Faster Text Diffusion MoE Model",
+    "category": "short-news",
+    "publishDate": "2026-06-10",
+    "author": "Modelverse Editorial",
+    "readTime": "3 min read",
+    "excerpt": "Google DeepMind has introduced DiffusionGemma, an experimental 26B open model exploring text diffusion. By generating entire blocks of 256 tokens simultaneously, it achieves up to 4x faster text generation speeds on GPUs.",
+    "coverImage": "/images/news/diffusiongemma_cover.jpg",
+    "status": "published",
+    "confidenceLevel": "confirmed",
+    "externalSources": [
+      "https://deepmind.google/blog/diffusiongemma-4x-faster-text-generation/"
+    ],
+    "relatedModels": [
+      "google-deepmind-diffusiongemma"
+    ],
+    "tags": [
+      "gemma",
+      "google",
+      "diffusion",
+      "open-source"
     ]
   }
 ]
