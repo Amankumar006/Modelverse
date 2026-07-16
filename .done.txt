@@ -1,0 +1,11 @@
+anthropic-claude-3-5-sonnet
+anthropic-claude-3-opus
+dall-e-3
+gen-3-alpha
+google-deepmind-gemini-1-5-pro
+gpt-4o
+llama-3-1-405b
+midjourney-v6
+mixtral-8x22b
+sora
+suno-v4

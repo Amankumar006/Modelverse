@@ -1,0 +1,37 @@
+{
+  "id": "thinking-machines-inkling",
+  "name": "Inkling",
+  "slug": "thinking-machines-inkling",
+  "developer": "Thinking Machines",
+  "releaseDate": "2026-07-15",
+  "updatedAt": "2026-07-15",
+  "type": "open-weights",
+  "modality": ["text", "image", "audio"],
+  "primaryTask": "multimodal-general",
+  "deployment": ["self-hostable"],
+  "license": "Other/Custom",
+  "parameters": "975B (41B active)",
+  "contextWindow": "1000K tokens",
+  "description": "Thinking Machines' flagship open-weights Mixture-of-Experts multimodal model, supporting Native MoE transformer architecture and up to 1M token context window.",
+  "keyFeatures": [
+    "Native MoE architecture with 975B total parameters and 41B active parameters",
+    "Pretrained on 45 trillion tokens including text, images, audio, and video",
+    "Support for 1 million tokens context window at full inference"
+  ],
+  "benchmarks": [],
+  "family": "thinking-machines-inkling",
+  "previousVersion": null,
+  "links": {
+    "website": "https://thinkingmachines.ai/news/introducing-inkling/"
+  },
+  "logo": null,
+  "tags": ["moe", "multimodal", "tinker"],
+  "sources": [
+    "https://thinkingmachines.ai/news/introducing-inkling/"
+  ],
+  "verified": false,
+  "featured": false,
+  "boost": 1,
+  "curatorNotes": "First open-weights model from Thinking Machines. Features a massive 975B MoE structure with sparse active routing.",
+  "templatedDescription": false
+}

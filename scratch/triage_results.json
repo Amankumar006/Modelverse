@@ -1,0 +1,653 @@
+{
+  "include": [
+    {
+      "name": "Actionable World",
+      "link": "https://worldstring-iei.github.io/",
+      "devName": "Academic/Research",
+      "institution": "worldstring-iei",
+      "reason": "Academic research with released weights/code/demo site"
+    },
+    {
+      "name": "Agents A1",
+      "link": "https://internscience.github.io/Agents-A1/",
+      "devName": "Academic/Research",
+      "institution": "internscience",
+      "reason": "Academic research with released weights/code/demo site"
+    },
+    {
+      "name": "AnchorWorld",
+      "link": "https://yuli0103.github.io/AnchorWorld/",
+      "devName": "Academic/Research",
+      "institution": "yuli0103",
+      "reason": "Academic research with released weights/code/demo site"
+    },
+    {
+      "name": "Arbor",
+      "link": "https://ruc-nlpir.github.io/Arbor/",
+      "devName": "Academic/Research",
+      "institution": "Renmin University of China",
+      "reason": "Academic research with released weights/code/demo site"
+    },
+    {
+      "name": "Aspire (NVIDIA)",
+      "link": "https://research.nvidia.com/labs/gear/aspire/",
+      "devName": "Other",
+      "institution": "NVIDIA",
+      "reason": "Affiliated with recognized lab/company research team"
+    },
+    {
+      "name": "Bernini",
+      "link": "https://bernini-ai.github.io/",
+      "devName": "Academic/Research",
+      "institution": "bernini-ai",
+      "reason": "Academic research with released weights/code/demo site"
+    },
+    {
+      "name": "Brain2qwerty (Meta BCI model)",
+      "link": "https://ai.meta.com/blog/brain2qwerty-brain-ai-human-communication/",
+      "devName": "Meta",
+      "institution": "",
+      "reason": "Affiliated with recognized lab/company research team"
+    },
+    {
+      "name": "CHORD (NVIDIA)",
+      "link": "https://nvidia-isaac.github.io/video_to_data/chord/",
+      "devName": "Other",
+      "institution": "NVIDIA",
+      "reason": "Affiliated with recognized lab/company research team"
+    },
+    {
+      "name": "CogOmniControl",
+      "link": "https://um-lab.github.io/CogOmniControl/",
+      "devName": "Academic/Research",
+      "institution": "University of Macau",
+      "reason": "Academic research with released weights/code/demo site"
+    },
+    {
+      "name": "ControlLight",
+      "link": "https://yfyang007.github.io/ControlLight/",
+      "devName": "Academic/Research",
+      "institution": "yfyang007",
+      "reason": "Academic research with released weights/code/demo site"
+    },
+    {
+      "name": "Cosmos 3",
+      "link": "https://developer.nvidia.com/blog/develop-physical-ai-reasoning-world-and-action-models-with-nvidia-cosmos-3/",
+      "devName": "Other",
+      "institution": "NVIDIA",
+      "reason": "Affiliated with recognized lab/company research team"
+    },
+    {
+      "name": "Co-scientist",
+      "link": "https://deepmind.google/blog/co-scientist-accelerating-scientific-discovery/",
+      "devName": "Google DeepMind",
+      "institution": "",
+      "reason": "Affiliated with recognized lab/company research team"
+    },
+    {
+      "name": "CubePart",
+      "link": "https://cubepart.github.io/",
+      "devName": "Academic/Research",
+      "institution": "cubepart",
+      "reason": "Academic research with released weights/code/demo site"
+    },
+    {
+      "name": "Deja View",
+      "link": "https://research.nvidia.com/labs/dvl/projects/dvlt/",
+      "devName": "Other",
+      "institution": "NVIDIA",
+      "reason": "Affiliated with recognized lab/company research team"
+    },
+    {
+      "name": "DiffusionGemma (Google)",
+      "link": "https://blog.google/innovation-and-ai/technology/developers-tools/diffusion-gemma-faster-text-generation/",
+      "devName": "Google DeepMind",
+      "institution": "",
+      "reason": "Affiliated with recognized lab/company research team"
+    },
+    {
+      "name": "Dots TTS",
+      "link": "https://rednote-hilab.github.io/dots.tts-demo/",
+      "devName": "Academic/Research",
+      "institution": "rednote-hilab",
+      "reason": "Academic research with released weights/code/demo site"
+    },
+    {
+      "name": "FashionChameleon",
+      "link": "https://quanjiansong.github.io/projects/FashionChameleon/",
+      "devName": "Academic/Research",
+      "institution": "quanjiansong",
+      "reason": "Academic research with released weights/code/demo site"
+    },
+    {
+      "name": "Flash GRPO",
+      "link": "https://shredded-pork.github.io/Flash-GRPO.github.io/",
+      "devName": "Academic/Research",
+      "institution": "shredded-pork",
+      "reason": "Academic research with released weights/code/demo site"
+    },
+    {
+      "name": "Flex4DHuman",
+      "link": "https://andy-cheng.github.io/Flex4DHuman/",
+      "devName": "Academic/Research",
+      "institution": "andy-cheng",
+      "reason": "Academic research with released weights/code/demo site"
+    },
+    {
+      "name": "Gamma World",
+      "link": "http://research.nvidia.com/labs/sil/gammaworld/",
+      "devName": "Other",
+      "institution": "NVIDIA",
+      "reason": "Affiliated with recognized lab/company research team"
+    },
+    {
+      "name": "GenRecon",
+      "link": "https://kasothaphie.github.io/GenRecon/",
+      "devName": "Academic/Research",
+      "institution": "kasothaphie",
+      "reason": "Academic research with released weights/code/demo site"
+    },
+    {
+      "name": "GLM 5.2 (Zhipu AI)",
+      "link": "https://go.sjv.io/NG007K",
+      "devName": "Other",
+      "institution": "Zhipu AI",
+      "reason": "Affiliated with recognized lab/company research team"
+    },
+    {
+      "name": "GPT Dreaming",
+      "link": "https://openai.com/index/chatgpt-memory/",
+      "devName": "OpenAI",
+      "institution": "",
+      "reason": "Affiliated with recognized lab/company research team"
+    },
+    {
+      "name": "HY-MT2",
+      "link": "https://huggingface.co/tencent/Hy-MT2",
+      "devName": "Tencent",
+      "institution": "",
+      "reason": "Affiliated with recognized lab/company research team"
+    },
+    {
+      "name": "i1",
+      "link": "https://zlab-princeton.github.io/i1/",
+      "devName": "Academic/Research",
+      "institution": "Princeton University",
+      "reason": "Academic research with released weights/code/demo site"
+    },
+    {
+      "name": "L2P",
+      "link": "https://nju-pcalab.github.io/projects/L2P/",
+      "devName": "Academic/Research",
+      "institution": "Nanjing University",
+      "reason": "Academic research with released weights/code/demo site"
+    },
+    {
+      "name": "Lance",
+      "link": "https://lance-project.github.io/",
+      "devName": "Academic/Research",
+      "institution": "lance-project",
+      "reason": "Academic research with released weights/code/demo site"
+    },
+    {
+      "name": "LiTo",
+      "link": "https://apple.github.io/ml-lito/",
+      "devName": "Academic/Research",
+      "institution": "apple",
+      "reason": "Academic research with released weights/code/demo site"
+    },
+    {
+      "name": "LiveEdit",
+      "link": "https://live-edit.github.io/",
+      "devName": "Academic/Research",
+      "institution": "live-edit",
+      "reason": "Academic research with released weights/code/demo site"
+    },
+    {
+      "name": "LocateAnything (NVIDIA)",
+      "link": "https://research.nvidia.com/labs/lpr/locateanything/",
+      "devName": "Other",
+      "institution": "NVIDIA",
+      "reason": "Affiliated with recognized lab/company research team"
+    },
+    {
+      "name": "Luna",
+      "link": "https://penghtyx.github.io/LUNA/",
+      "devName": "Academic/Research",
+      "institution": "penghtyx",
+      "reason": "Academic research with released weights/code/demo site"
+    },
+    {
+      "name": "Magenta Realtime",
+      "link": "https://magenta.withgoogle.com/magenta-realtime-2",
+      "devName": "Google DeepMind",
+      "institution": "",
+      "reason": "Affiliated with recognized lab/company research team"
+    },
+    {
+      "name": "MAI Thinking",
+      "link": "https://microsoft.ai/news/introducing-mai-thinking/",
+      "devName": "Microsoft",
+      "institution": "",
+      "reason": "Affiliated with recognized lab/company research team"
+    },
+    {
+      "name": "Mamma",
+      "link": "https://mamma.is.tue.mpg.de/",
+      "devName": "Academic/Research",
+      "institution": "Max Planck Institute",
+      "reason": "Academic research with released weights/code/demo site"
+    },
+    {
+      "name": "MegaASR",
+      "link": "https://xzf-thu.github.io/Mega-ASR/",
+      "devName": "Academic/Research",
+      "institution": "xzf-thu",
+      "reason": "Academic research with released weights/code/demo site"
+    },
+    {
+      "name": "MeshFlow",
+      "link": "https://mesh-flow.github.io/",
+      "devName": "Academic/Research",
+      "institution": "mesh-flow",
+      "reason": "Academic research with released weights/code/demo site"
+    },
+    {
+      "name": "MiniCPM5 1B (OpenBMB)",
+      "link": "https://huggingface.co/openbmb/MiniCPM5-1B",
+      "devName": "Academic/Research",
+      "institution": "OpenBMB",
+      "reason": "Affiliated with recognized lab/company research team"
+    },
+    {
+      "name": "Moverse",
+      "link": "https://orange-3dv-team.github.io/MoVerse/",
+      "devName": "Academic/Research",
+      "institution": "orange-3dv-team",
+      "reason": "Academic research with released weights/code/demo site"
+    },
+    {
+      "name": "MusViT",
+      "link": "https://grfia.dlsi.ua.es/musvit/",
+      "devName": "Academic/Research",
+      "institution": "University of Alicante",
+      "reason": "Academic research with released weights/code/demo site"
+    },
+    {
+      "name": "NAVA",
+      "link": "https://ernie-research.github.io/NAVA/",
+      "devName": "Academic/Research",
+      "institution": "ernie-research",
+      "reason": "Academic research with released weights/code/demo site"
+    },
+    {
+      "name": "Nemotron 3 Ultra (NVIDIA)",
+      "link": "https://developer.nvidia.com/blog/nvidia-nemotron-3-ultra/",
+      "devName": "Other",
+      "institution": "NVIDIA",
+      "reason": "Affiliated with recognized lab/company research team"
+    },
+    {
+      "name": "OmniContact",
+      "link": "https://omnicontact.github.io/",
+      "devName": "Academic/Research",
+      "institution": "omnicontact",
+      "reason": "Academic research with released weights/code/demo site"
+    },
+    {
+      "name": "OmniDreams",
+      "link": "https://research.nvidia.com/labs/sil/omnidreams/",
+      "devName": "Other",
+      "institution": "NVIDIA",
+      "reason": "Affiliated with recognized lab/company research team"
+    },
+    {
+      "name": "Oscar",
+      "link": "https://wuzy2115.github.io/oscar-project/",
+      "devName": "Academic/Research",
+      "institution": "wuzy2115",
+      "reason": "Academic research with released weights/code/demo site"
+    },
+    {
+      "name": "PaGeR",
+      "link": "https://pager360.github.io/",
+      "devName": "Academic/Research",
+      "institution": "pager360",
+      "reason": "Academic research with released weights/code/demo site"
+    },
+    {
+      "name": "Pantheon 360",
+      "link": "https://koi953215.github.io/pantheon360/",
+      "devName": "Academic/Research",
+      "institution": "koi953215",
+      "reason": "Academic research with released weights/code/demo site"
+    },
+    {
+      "name": "PanoWorld",
+      "link": "https://jjrcn.github.io/PanoWorld-project/",
+      "devName": "Academic/Research",
+      "institution": "jjrcn",
+      "reason": "Academic research with released weights/code/demo site"
+    },
+    {
+      "name": "PhysiFormer",
+      "link": "https://yimingc9.github.io/physiformer/",
+      "devName": "Academic/Research",
+      "institution": "yimingc9",
+      "reason": "Academic research with released weights/code/demo site"
+    },
+    {
+      "name": "PhysX Omni (NVIDIA)",
+      "link": "https://physx-omni.github.io/",
+      "devName": "Other",
+      "institution": "NVIDIA",
+      "reason": "Affiliated with recognized lab/company research team"
+    },
+    {
+      "name": "PiD",
+      "link": "https://research.nvidia.com/labs/sil/pid/",
+      "devName": "Other",
+      "institution": "NVIDIA",
+      "reason": "Affiliated with recognized lab/company research team"
+    },
+    {
+      "name": "PixlRelight",
+      "link": "https://mlfarinha.github.io/pixl-relight/",
+      "devName": "Academic/Research",
+      "institution": "mlfarinha",
+      "reason": "Academic research with released weights/code/demo site"
+    },
+    {
+      "name": "Qwen 3.7 (Alibaba)",
+      "link": "https://qwen.ai/blog?id=qwen3.7",
+      "devName": "Alibaba",
+      "institution": "",
+      "reason": "Affiliated with recognized lab/company research team"
+    },
+    {
+      "name": "Qwen 3.7 Plus (Alibaba)",
+      "link": "https://qwen.ai/blog?id=qwen3.7-plus",
+      "devName": "Alibaba",
+      "institution": "",
+      "reason": "Affiliated with recognized lab/company research team"
+    },
+    {
+      "name": "Qwen Live Translate",
+      "link": "https://qwen.ai/blog?id=qwen3.5-livetranslate",
+      "devName": "Alibaba",
+      "institution": "",
+      "reason": "Affiliated with recognized lab/company research team"
+    },
+    {
+      "name": "RDM",
+      "link": "https://alan-lanfeng.github.io/rdm/",
+      "devName": "Academic/Research",
+      "institution": "alan-lanfeng",
+      "reason": "Academic research with released weights/code/demo site"
+    },
+    {
+      "name": "ReactiveGWM",
+      "link": "https://inv-wzq.github.io/ReactiveGWM/",
+      "devName": "Academic/Research",
+      "institution": "inv-wzq",
+      "reason": "Academic research with released weights/code/demo site"
+    },
+    {
+      "name": "Relightable Chars",
+      "link": "https://vcai.mpi-inf.mpg.de/projects/RelightableChars/",
+      "devName": "Academic/Research",
+      "institution": "Max Planck Institute",
+      "reason": "Academic research with released weights/code/demo site"
+    },
+    {
+      "name": "SCAIL 2",
+      "link": "https://teal024.github.io/SCAIL-2/",
+      "devName": "Academic/Research",
+      "institution": "teal024",
+      "reason": "Academic research with released weights/code/demo site"
+    },
+    {
+      "name": "Scope",
+      "link": "https://z2tong.github.io/SCOPE/",
+      "devName": "Academic/Research",
+      "institution": "z2tong",
+      "reason": "Academic research with released weights/code/demo site"
+    },
+    {
+      "name": "Stable Audio 3 (Stability AI)",
+      "link": "https://stability.ai/news-updates/meeting-stable-audio-3",
+      "devName": "Stability AI",
+      "institution": "",
+      "reason": "Affiliated with recognized lab/company research team"
+    },
+    {
+      "name": "Stable Layers",
+      "link": "https://stability-ai.github.io/stable-layers/",
+      "devName": "Academic/Research",
+      "institution": "stability-ai",
+      "reason": "Academic research with released weights/code/demo site"
+    },
+    {
+      "name": "Step 3.7 Flash (StepFun)",
+      "link": "https://static.stepfun.com/blog/step-3.7-flash",
+      "devName": "Other",
+      "institution": "StepFun",
+      "reason": "Affiliated with recognized lab/company research team"
+    },
+    {
+      "name": "StreamChar",
+      "link": "https://humanaigc.github.io/StreamChar/",
+      "devName": "Academic/Research",
+      "institution": "humanaigc",
+      "reason": "Academic research with released weights/code/demo site"
+    },
+    {
+      "name": "StreamForce",
+      "link": "https://neu-vi.github.io/StreamForce/",
+      "devName": "Academic/Research",
+      "institution": "neu-vi",
+      "reason": "Academic research with released weights/code/demo site"
+    },
+    {
+      "name": "Surflo",
+      "link": "https://anttwo.github.io/surflo/",
+      "devName": "Academic/Research",
+      "institution": "anttwo",
+      "reason": "Academic research with released weights/code/demo site"
+    },
+    {
+      "name": "VideoMDM",
+      "link": "https://videomdm.github.io/",
+      "devName": "Academic/Research",
+      "institution": "videomdm",
+      "reason": "Academic research with released weights/code/demo site"
+    },
+    {
+      "name": "VidiHand",
+      "link": "https://vidihand.github.io/",
+      "devName": "Academic/Research",
+      "institution": "vidihand",
+      "reason": "Academic research with released weights/code/demo site"
+    },
+    {
+      "name": "WavFlow",
+      "link": "https://facebookresearch.github.io/WavFlow/",
+      "devName": "Meta",
+      "institution": "",
+      "reason": "Affiliated with recognized lab/company research team"
+    },
+    {
+      "name": "WavTTS",
+      "link": "https://wavtts.github.io/",
+      "devName": "Academic/Research",
+      "institution": "wavtts",
+      "reason": "Academic research with released weights/code/demo site"
+    },
+    {
+      "name": "World Tracing",
+      "link": "https://haoz19.github.io/world-tracing/",
+      "devName": "Academic/Research",
+      "institution": "haoz19",
+      "reason": "Academic research with released weights/code/demo site"
+    }
+  ],
+  "needsInfo": [
+    {
+      "name": "Agents Last Exam",
+      "link": "https://agents-last-exam.org/",
+      "reason": "Unclear affiliation, unverified traction, or needs custom audit"
+    },
+    {
+      "name": "AutoScientists",
+      "link": "https://autoscientists.openscientist.ai/",
+      "reason": "Unclear affiliation, unverified traction, or needs custom audit"
+    },
+    {
+      "name": "Bonsai Image",
+      "link": "https://prismml.com/news/bonsai-image-4b",
+      "reason": "Unclear affiliation, unverified traction, or needs custom audit"
+    },
+    {
+      "name": "Carbon",
+      "link": "https://huggingface.co/spaces/HuggingFaceH4/open_llm_leaderboard",
+      "reason": "Link is generic (e.g. main blog page or leaderboard), needs specific model article URL"
+    },
+    {
+      "name": "DeepSWE",
+      "link": "https://deepswe.datacurve.ai/blog",
+      "reason": "Unclear affiliation, unverified traction, or needs custom audit"
+    },
+    {
+      "name": "Gemini Live Translate",
+      "link": "https://blog.google/innovation-and-ai/",
+      "reason": "Link is generic (e.g. main blog page or leaderboard), needs specific model article URL"
+    },
+    {
+      "name": "Gemma4 12B (Google)",
+      "link": "https://blog.google/innovation-and-ai/",
+      "reason": "Link is generic (e.g. main blog page or leaderboard), needs specific model article URL"
+    },
+    {
+      "name": "Higgs Audio v3",
+      "link": "https://www.boson.ai/blog/higgs-audio-v3",
+      "reason": "Unclear affiliation, unverified traction, or needs custom audit"
+    },
+    {
+      "name": "Ideogram v4",
+      "link": "https://ideogram.cello.so/OKCq91CUlrt",
+      "reason": "Unclear affiliation, unverified traction, or needs custom audit"
+    },
+    {
+      "name": "InstructAV2AV",
+      "link": "https://hjzheng.net/projects/InstructAV2AV/",
+      "reason": "Unclear affiliation, unverified traction, or needs custom audit"
+    },
+    {
+      "name": "Kimi K2.7 (Moonshot AI)",
+      "link": "https://www.kimi.com/code",
+      "reason": "Unclear affiliation, unverified traction, or needs custom audit"
+    },
+    {
+      "name": "LeRobot (Hugging Face)",
+      "link": "https://huggingface.co/blog/VirgileBaudru/lerobot",
+      "reason": "Unclear affiliation, unverified traction, or needs custom audit"
+    },
+    {
+      "name": "LongCat 2.0",
+      "link": "https://longcat.chat/blog/longcat-2.0/",
+      "reason": "Unclear affiliation, unverified traction, or needs custom audit"
+    },
+    {
+      "name": "LongCat Avatar 1.5",
+      "link": "https://huggingface.co/meituan-longcat",
+      "reason": "Unclear affiliation, unverified traction, or needs custom audit"
+    },
+    {
+      "name": "Marlin 2B",
+      "link": "https://huggingface.co/NemoStation/Marlin-2B",
+      "reason": "Unclear affiliation, unverified traction, or needs custom audit"
+    },
+    {
+      "name": "Millivid",
+      "link": "https://davidcharatan.com/millivid/",
+      "reason": "Unclear affiliation, unverified traction, or needs custom audit"
+    },
+    {
+      "name": "MiniMax M3",
+      "link": "https://huggingface.co/MiniMaxAI/MiniMax-M3",
+      "reason": "Unclear affiliation, unverified traction, or needs custom audit"
+    },
+    {
+      "name": "MrFlow",
+      "link": "https://github.com/Xingyu-Zheng/MrFlow",
+      "reason": "Unclear affiliation, unverified traction, or needs custom audit"
+    },
+    {
+      "name": "Nex N2",
+      "link": "https://nex-agi.com/",
+      "reason": "Unclear affiliation, unverified traction, or needs custom audit"
+    },
+    {
+      "name": "New Google Models",
+      "link": "https://blog.google/innovation-and-ai/",
+      "reason": "Link is generic (e.g. main blog page or leaderboard), needs specific model article URL"
+    },
+    {
+      "name": "Reve 2",
+      "link": "https://app.reve.com/",
+      "reason": "Unclear affiliation, unverified traction, or needs custom audit"
+    },
+    {
+      "name": "TriSplat",
+      "link": "https://lhmd.top/trisplat/",
+      "reason": "Unclear affiliation, unverified traction, or needs custom audit"
+    }
+  ],
+  "exclude": [
+    {
+      "name": "Claude Fable (Anthropic)",
+      "link": null,
+      "reason": "Link is null/unrecoverable"
+    },
+    {
+      "name": "Claude Sonnet 5 (Anthropic)",
+      "link": "https://www.anthropic.com/news/claude-3-5-sonnet",
+      "reason": "Duplicate: matches Claude Sonnet 5 / Opus 4.8"
+    },
+    {
+      "name": "Hi3D",
+      "link": null,
+      "reason": "Link is null/unrecoverable"
+    },
+    {
+      "name": "Luma Agents",
+      "link": null,
+      "reason": "Link is null/unrecoverable"
+    },
+    {
+      "name": "MAI Image",
+      "link": null,
+      "reason": "Link is null/unrecoverable"
+    },
+    {
+      "name": "Majorana 2",
+      "link": "https://news.microsoft.com/source/features/majorana-2/",
+      "reason": "Not an AI model (hardware/quantum chip)"
+    },
+    {
+      "name": "Opus 4.8 (Anthropic Claude model)",
+      "link": "https://www.anthropic.com/news/claude-3-5-opus",
+      "reason": "Duplicate: matches Claude Sonnet 5 / Opus 4.8"
+    },
+    {
+      "name": "Rai AthenaZero",
+      "link": null,
+      "reason": "Link is null/unrecoverable"
+    },
+    {
+      "name": "RTX Spark",
+      "link": "https://www.nvidia.com/en-us/products/rtx-spark/",
+      "reason": "Not an AI model (hardware/quantum chip)"
+    }
+  ]
+}

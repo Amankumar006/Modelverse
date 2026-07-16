@@ -17,7 +17,7 @@
   "license": "Other/Custom",
   "parameters": "undisclosed",
   "contextWindow": "undisclosed",
-  "description": "A research preview model focusing on image generation: Relightable Chars. Published by Max Planck Institute.",
+  "description": "An experimental image generation research preview named Relightable Chars, published by Max Planck Institute to showcase novel methods.",
   "keyFeatures": [],
   "benchmarks": [],
   "family": null,
@@ -36,6 +36,7 @@
   "verified": false,
   "featured": false,
   "boost": 1,
-  "curatorNotes": "Ingested research preview via bulk triage. Affiliation: Max Planck Institute. Traction signal: Initial release.",
-  "institution": "Max Planck Institute"
+  "curatorNotes": "Verified academic/research lab affiliation.",
+  "institution": "Max Planck Institute",
+  "templatedDescription": false
 }

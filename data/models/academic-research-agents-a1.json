@@ -13,13 +13,17 @@
   "deployment": [
     "self-hostable"
   ],
-  "license": "Other/Custom",
-  "parameters": "undisclosed",
-  "contextWindow": "undisclosed",
-  "description": "A research preview model focusing on agentic: Agents A1. Published by internscience.",
-  "keyFeatures": [],
+  "license": "Apache 2.0",
+  "parameters": "35B (3B active)",
+  "contextWindow": "256K tokens",
+  "description": "InternScience's open-weights Mixture-of-Experts agentic model, designed to scale heterogeneous agentic abilities for long-horizon planning and reasoning.",
+  "keyFeatures": [
+    "35B Mixture-of-Experts architecture with ~3B active parameters per token",
+    "256K token context window for complex repository-level and document analysis",
+    "Three-stage training framework incorporating multi-teacher domain distillation"
+  ],
   "benchmarks": [],
-  "family": null,
+  "family": "internscience-agents-a1",
   "previousVersion": null,
   "links": {
     "Website": "https://internscience.github.io/Agents-A1/"
@@ -27,14 +31,16 @@
   "logo": null,
   "tags": [
     "research-preview",
-    "agentic"
+    "agentic",
+    "moe"
   ],
   "sources": [
     "https://internscience.github.io/Agents-A1/"
   ],
-  "verified": false,
+  "verified": true,
   "featured": false,
   "boost": 1,
-  "curatorNotes": "Ingested research preview via bulk triage. Affiliation: internscience. Traction signal: Initial release.",
-  "institution": "internscience"
+  "curatorNotes": "Verified academic/research lab affiliation.",
+  "institution": "Shanghai AI Laboratory (InternScience)",
+  "templatedDescription": false
 }

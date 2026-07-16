@@ -16,7 +16,7 @@
   "license": "Other/Custom",
   "parameters": "undisclosed",
   "contextWindow": "undisclosed",
-  "description": "A research preview model focusing on other: NAVA. Published by ernie-research.",
+  "description": "A research-preview model from Baidu ERNIE Research focusing on specialized research capabilities to invite community feedback.",
   "keyFeatures": [],
   "benchmarks": [],
   "family": null,
@@ -35,6 +35,7 @@
   "verified": false,
   "featured": false,
   "boost": 1,
-  "curatorNotes": "Ingested research preview via bulk triage. Affiliation: ernie-research. Traction signal: Initial release.",
-  "institution": "ernie-research"
+  "curatorNotes": "Verified academic/research lab affiliation. Originally ingested via bulk triage as 'ernie-research'. Verified as: Baidu ERNIE Research.",
+  "institution": "Baidu ERNIE Research",
+  "templatedDescription": false
 }

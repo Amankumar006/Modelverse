@@ -109,6 +109,110 @@ function filterModels(
   });
 }
 
+function FacetGroupFilter<T>({
+  title,
+  options,
+  valFn,
+  labelFn,
+  selectedValues,
+  counts,
+  onToggle,
+}: {
+  title: string;
+  options: T[];
+  valFn: (opt: T) => string;
+  labelFn: (opt: T) => string;
+  selectedValues: string[];
+  counts: Record<string, number>;
+  onToggle: (val: string) => void;
+}) {
+  const [searchQuery, setSearchQuery] = useState("");
+
+  const showSearch = options.length > 10;
+
+  const filteredOptions = useMemo(() => {
+    if (!searchQuery) return options;
+    const q = searchQuery.toLowerCase();
+    return options.filter((opt) => {
+      const val = valFn(opt).toLowerCase();
+      const label = labelFn(opt).toLowerCase();
+      return val.includes(q) || label.includes(q);
+    });
+  }, [options, searchQuery, valFn, labelFn]);
+
+  return (
+    <div className="space-y-3">
+      <h4 className="text-[10px] font-bold text-gray-400/50 uppercase tracking-widest border-b border-white/5 pb-1.5">
+        {title}
+      </h4>
+      {showSearch && (
+        <div className="relative mb-2">
+          <input
+            type="text"
+            placeholder={`Search ${title.toLowerCase()}...`}
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            className="w-full bg-[#0b0f19] border border-white/10 rounded-lg px-2.5 py-1 text-[11px] text-white placeholder:text-gray-400/60 focus:outline-none focus:border-white/20 focus:ring-1 focus:ring-black/10 transition-colors"
+          />
+          {searchQuery && (
+            <button
+              onClick={() => setSearchQuery("")}
+              className="absolute right-2 top-1/2 -translate-y-1/2 text-gray-400/60 hover:text-white p-0.5"
+            >
+              <X size={10} />
+            </button>
+          )}
+        </div>
+      )}
+      <div className="space-y-1.5 flex flex-col max-h-48 overflow-y-auto pr-1 select-none scrollbar-thin">
+        {filteredOptions.map((opt) => {
+          const val = valFn(opt);
+          const label = labelFn(opt);
+          const isChecked = selectedValues.includes(val);
+          const count = counts[val] ?? 0;
+          const isDisabled = count === 0 && !isChecked;
+
+          return (
+            <label
+              key={val}
+              className={`flex items-center justify-between text-xs cursor-pointer py-0.5 rounded transition-colors ${
+                isChecked
+                  ? "text-brand-orange"
+                  : isDisabled
+                  ? "text-gray-400/40 cursor-not-allowed"
+                  : "text-gray-400 hover:text-white"
+              }`}
+            >
+              <div className="flex items-center gap-2 min-w-0">
+                <input
+                  type="checkbox"
+                  checked={isChecked}
+                  disabled={isDisabled}
+                  onChange={() => onToggle(val)}
+                  className="h-3.5 w-3.5 rounded border border-white/20 bg-transparent text-brand-orange focus:ring-offset-white focus:ring-1 focus:ring-brand-orange/50 accent-brand-orange cursor-pointer disabled:cursor-not-allowed"
+                />
+                <span className="truncate pr-1">{label}</span>
+              </div>
+              <span
+                className={`text-[10px] tabular-nums font-mono ${
+                  isChecked ? "text-brand-orange" : "text-gray-400/40"
+                }`}
+              >
+                {count}
+              </span>
+            </label>
+          );
+        })}
+        {filteredOptions.length === 0 && (
+          <p className="text-[11px] text-gray-400/50 py-1 italic">
+            No matching {title.toLowerCase()}
+          </p>
+        )}
+      </div>
+    </div>
+  );
+}
+
 /* ------------------------------------------------------------------ */
 /*  ModelCatalogContent client workspace                              */
 /* ------------------------------------------------------------------ */
@@ -376,104 +480,71 @@ function ModelCatalogContent({
     return chips;
   }, [filters]);
 
-  /* Sidebar Render Builder */
-  const renderFacetGroup = <T,>(
-    title: string,
-    key: keyof Omit<FiltersState, "q">,
-    options: T[],
-    valFn: (opt: T) => string,
-    labelFn: (opt: T) => string
-  ) => {
-    return (
-      <div className="space-y-3">
-        <h4 className="text-[10px] font-bold text-[#6f6f6f]/50 uppercase tracking-widest border-b border-black/5 pb-1.5">
-          {title}
-        </h4>
-        <div className="space-y-1.5 flex flex-col max-h-48 overflow-y-auto pr-1 select-none scrollbar-thin">
-          {options.map((opt) => {
-            const val = valFn(opt);
-            const label = labelFn(opt);
-            const isChecked = filters[key].includes(val);
-            const count = facetCounts[key][val] ?? 0;
-            const isDisabled = count === 0 && !isChecked;
-
-            return (
-              <label
-                key={val}
-                className={`flex items-center justify-between text-xs cursor-pointer py-0.5 rounded transition-colors ${
-                  isChecked
-                    ? "text-brand-orange"
-                    : isDisabled
-                    ? "text-[#6f6f6f]/40 cursor-not-allowed"
-                    : "text-[#6f6f6f] hover:text-[#0a0a0a]"
-                }`}
-              >
-                <div className="flex items-center gap-2 min-w-0">
-                  <input
-                    type="checkbox"
-                    checked={isChecked}
-                    disabled={isDisabled}
-                    onChange={() => toggleFilter(key, val)}
-                    className="h-3.5 w-3.5 rounded border border-black/20 bg-transparent text-brand-orange focus:ring-offset-white focus:ring-1 focus:ring-brand-orange/50 accent-brand-orange cursor-pointer disabled:cursor-not-allowed"
-                  />
-                  <span className="truncate pr-1">{label}</span>
-                </div>
-                <span
-                  className={`text-[10px] tabular-nums font-mono ${
-                    isChecked ? "text-brand-orange" : "text-[#6f6f6f]/40"
-                  }`}
-                >
-                  {count}
-                </span>
-              </label>
-            );
-          })}
-        </div>
-      </div>
-    );
-  };
-
   const renderSidebar = () => (
     <div className="space-y-8">
-      {renderFacetGroup("Type", "type", TYPE_OPTIONS, (o) => o.value, (o) => o.label)}
-      {renderFacetGroup("Primary Task", "task", TASK_OPTIONS, (o) => o.value, (o) => o.label)}
-      {renderFacetGroup(
-        "Modality",
-        "modality",
-        dynamicOptions.modalities.map((m) => ({ value: m, label: m.toUpperCase() })),
-        (o) => o.value,
-        (o) => o.label
-      )}
-      {renderFacetGroup(
-        "Developer",
-        "developer",
-        developers.map((d) => ({ value: d, label: d })),
-        (o) => o.value,
-        (o) => o.label
-      )}
-      {renderFacetGroup(
-        "License",
-        "license",
-        dynamicOptions.licenses.map((l) => ({ value: l, label: l })),
-        (o) => o.value,
-        (o) => o.label
-      )}
-      {renderFacetGroup(
-        "Deployment",
-        "deployment",
-        DEPLOYMENT_OPTIONS,
-        (o) => o.value,
-        (o) => o.label
-      )}
+      <FacetGroupFilter
+        title="Type"
+        options={TYPE_OPTIONS}
+        valFn={(o) => o.value}
+        labelFn={(o) => o.label}
+        selectedValues={filters.type}
+        counts={facetCounts.type}
+        onToggle={(val) => toggleFilter("type", val)}
+      />
+      <FacetGroupFilter
+        title="Primary Task"
+        options={TASK_OPTIONS}
+        valFn={(o) => o.value}
+        labelFn={(o) => o.label}
+        selectedValues={filters.task}
+        counts={facetCounts.task}
+        onToggle={(val) => toggleFilter("task", val)}
+      />
+      <FacetGroupFilter
+        title="Modality"
+        options={dynamicOptions.modalities.map((m) => ({ value: m, label: m.toUpperCase() }))}
+        valFn={(o) => o.value}
+        labelFn={(o) => o.label}
+        selectedValues={filters.modality}
+        counts={facetCounts.modality}
+        onToggle={(val) => toggleFilter("modality", val)}
+      />
+      <FacetGroupFilter
+        title="Developer"
+        options={developers.map((d) => ({ value: d, label: d }))}
+        valFn={(o) => o.value}
+        labelFn={(o) => o.label}
+        selectedValues={filters.developer}
+        counts={facetCounts.developer}
+        onToggle={(val) => toggleFilter("developer", val)}
+      />
+      <FacetGroupFilter
+        title="License"
+        options={dynamicOptions.licenses.map((l) => ({ value: l, label: l }))}
+        valFn={(o) => o.value}
+        labelFn={(o) => o.label}
+        selectedValues={filters.license}
+        counts={facetCounts.license}
+        onToggle={(val) => toggleFilter("license", val)}
+      />
+      <FacetGroupFilter
+        title="Deployment"
+        options={DEPLOYMENT_OPTIONS}
+        valFn={(o) => o.value}
+        labelFn={(o) => o.label}
+        selectedValues={filters.deployment}
+        counts={facetCounts.deployment}
+        onToggle={(val) => toggleFilter("deployment", val)}
+      />
     </div>
   );
 
   return (
     <div className="flex flex-col md:flex-row gap-8 items-start relative">
       {/* ── Desktop Sidebar Facets (z-10) ────────────────────── */}
-      <aside className="hidden md:block w-64 shrink-0 space-y-6 sticky top-24 max-h-[calc(100vh-10rem)] overflow-y-auto pr-2 scrollbar-thin">
+      <aside className="hidden md:block w-64 shrink-0 space-y-6 sticky top-6 max-h-[calc(100vh-4rem)] overflow-y-auto pr-2 scrollbar-thin">
         <div className="flex items-center justify-between">
-          <span className="text-xs font-bold uppercase tracking-widest text-[#6f6f6f]">Filters</span>
+          <span className="text-xs font-bold uppercase tracking-widest text-gray-400">Filters</span>
           {hasActiveFilters && (
             <button
               onClick={clearAllFilters}
@@ -489,13 +560,13 @@ function ModelCatalogContent({
       {/* ── Main Catalog Workspace ───────────────────────────── */}
       <div className="flex-1 w-full space-y-6">
         {/* Top-level Pill Tabs for Type */}
-        <div className="flex flex-wrap items-center gap-2 border-b border-black/10 pb-4">
+        <div className="flex flex-wrap items-center gap-2 border-b border-white/10 pb-4">
           <button
             onClick={() => setFilters(f => ({ ...f, type: [] }))}
             className={`px-4 py-1.5 rounded-full text-xs font-semibold tracking-wide transition-colors ${
               filters.type.length === 0
-                ? "bg-black/5 text-[#0a0a0a]"
-                : "bg-black/[0.04] text-[#6f6f6f] hover:bg-black/[0.08] hover:text-[#0a0a0a]"
+                ? "bg-[#0b0f19]/5 text-white"
+                : "bg-[#0b0f19]/[0.04] text-gray-400 hover:bg-[#0b0f19]/[0.08] hover:text-white"
             }`}
           >
             All
@@ -515,8 +586,8 @@ function ModelCatalogContent({
                 }}
                 className={`px-4 py-1.5 rounded-full text-xs font-semibold tracking-wide transition-colors ${
                   isActive
-                    ? "bg-black/5 text-[#0a0a0a]"
-                    : "bg-black/[0.04] text-[#6f6f6f] hover:bg-black/[0.08] hover:text-[#0a0a0a]"
+                    ? "bg-[#0b0f19]/5 text-white"
+                    : "bg-[#0b0f19]/[0.04] text-gray-400 hover:bg-[#0b0f19]/[0.08] hover:text-white"
                 }`}
               >
                 {opt.label}
@@ -526,16 +597,16 @@ function ModelCatalogContent({
         </div>
 
         {/* Controls Panel */}
-        <div className="flex flex-col sm:flex-row gap-4 items-stretch sm:items-center justify-between border-b border-black/10 pb-4">
+        <div className="flex flex-col sm:flex-row gap-4 items-stretch sm:items-center justify-between border-b border-white/10 pb-4">
           {/* Search inputs */}
           <div className="relative flex-1 max-w-md">
-            <Search size={16} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-[#6f6f6f]/50" />
+            <Search size={16} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-400/50" />
             <input
               type="text"
               placeholder="Search by name or developer..."
               value={filters.q}
               onChange={(e) => handleSearchChange(e.target.value)}
-              className="w-full bg-[#fafaf8] border border-black/10 rounded-full pl-10 pr-4 py-2 text-sm text-[#0a0a0a] placeholder:text-[#6f6f6f] focus:outline-none focus:border-black/20 transition-colors"
+              className="w-full bg-[#0b0f19] border border-white/10 rounded-full pl-10 pr-4 py-2 text-sm text-white placeholder:text-gray-400 focus:outline-none focus:border-white/20 transition-colors"
             />
           </div>
 
@@ -543,7 +614,7 @@ function ModelCatalogContent({
             {/* Mobile Filters Toggle Button */}
             <button
               onClick={() => setMobileFiltersOpen(true)}
-              className="md:hidden flex items-center gap-2 px-4 py-2 border border-black/10 rounded-full text-xs font-medium text-[#6f6f6f] hover:text-[#0a0a0a] bg-black/5"
+              className="md:hidden flex items-center gap-2 px-4 py-2 border border-white/10 rounded-full text-xs font-medium text-gray-400 hover:text-white bg-[#0b0f19]/5"
             >
               <SlidersHorizontal size={14} />
               Filters
@@ -556,28 +627,28 @@ function ModelCatalogContent({
 
             {/* Sort & Count */}
             <div className="flex items-center gap-2">
-              <span className="text-xs text-[#6f6f6f]/50 whitespace-nowrap hidden sm:block">Sort By</span>
+              <span className="text-xs text-gray-400/50 whitespace-nowrap hidden sm:block">Sort By</span>
               <div className="relative">
                 <select
                   value={sortKey}
                   onChange={(e) => handleSortChange(e.target.value)}
-                  className="bg-[#fafaf8] border border-black/10 rounded-full px-4 py-2 pr-8 text-xs font-medium text-[#6f6f6f] focus:outline-none focus:border-black/20 appearance-none cursor-pointer"
+                  className="bg-[#0b0f19] border border-white/10 rounded-full px-4 py-2 pr-8 text-xs font-medium text-gray-400 focus:outline-none focus:border-white/20 appearance-none cursor-pointer"
                 >
                   {SORT_OPTIONS.map((opt) => (
-                    <option key={opt.key} value={opt.key} className="bg-white text-[#0a0a0a]">
+                    <option key={opt.key} value={opt.key} className="bg-[#111827] text-white">
                       {opt.label}
                     </option>
                   ))}
                 </select>
-                <ArrowUpDown size={12} className="absolute right-3.5 top-1/2 -translate-y-1/2 text-[#6f6f6f]/50 pointer-events-none" />
+                <ArrowUpDown size={12} className="absolute right-3.5 top-1/2 -translate-y-1/2 text-gray-400/50 pointer-events-none" />
               </div>
             </div>
           </div>
         </div>
 
         <div className="flex flex-wrap items-center gap-3 justify-between">
-          <p className="text-xs text-[#6f6f6f]">
-            Showing <span className="text-[#0a0a0a] font-medium">{groupedItems.length}</span> cards (from {filtered.length} matching models)
+          <p className="text-xs text-gray-400">
+            Showing <span className="text-white font-medium">{groupedItems.length}</span> cards (from {filtered.length} matching models)
           </p>
 
           {activeChips.length > 0 && (
@@ -598,7 +669,7 @@ function ModelCatalogContent({
               ))}
               <button
                 onClick={clearAllFilters}
-                className="text-[10px] font-semibold text-[#6f6f6f] hover:text-[#0a0a0a] transition-colors ml-1"
+                className="text-[10px] font-semibold text-gray-400 hover:text-white transition-colors ml-1"
               >
                 Clear all
               </button>
@@ -607,10 +678,10 @@ function ModelCatalogContent({
         </div>
 
         {/* ── Results Cards Grid ────────────────────────────── */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 auto-rows-fr">
+        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-4 auto-rows-fr">
           {groupedItems.map((item) => {
             const model = item.type === "family" ? item.primaryModel : item.model;
-            const featuredClass = model.featured ? "md:col-span-2 lg:col-span-2 row-span-2" : "";
+            const featuredClass = model.featured ? "md:col-span-2 xl:col-span-2 row-span-2" : "";
 
             if (item.type === "family") {
               return (
@@ -638,8 +709,8 @@ function ModelCatalogContent({
         </div>
 
         {groupedItems.length === 0 && (
-          <div className="py-24 text-center flex flex-col items-center justify-center border border-black/5 bg-black/[0.02] rounded-3xl p-8">
-            <p className="text-[#6f6f6f] text-sm">
+          <div className="py-24 text-center flex flex-col items-center justify-center border border-white/5 bg-[#0b0f19]/[0.02] rounded-3xl p-8">
+            <p className="text-gray-400 text-sm">
               No models match these filters yet — try removing one
             </p>
             <button
@@ -654,19 +725,19 @@ function ModelCatalogContent({
 
       {/* ── Mobile Filters Bottom Drawer (z-50) ──────────────── */}
       {mobileFiltersOpen && (
-        <div className="fixed inset-0 z-50 md:hidden flex flex-col justify-end bg-black/50 backdrop-blur-sm">
+        <div className="fixed inset-0 z-50 md:hidden flex flex-col justify-end bg-[#0b0f19]/50 backdrop-blur-sm">
           <div className="absolute inset-0" onClick={() => setMobileFiltersOpen(false)} />
 
-          <div className="relative w-full max-h-[85vh] bg-white border-t border-black/10 rounded-t-3xl flex flex-col z-10">
+          <div className="relative w-full max-h-[85vh] bg-[#111827] border-t border-white/10 rounded-t-3xl flex flex-col z-10">
             {/* Drag Handle Bar Accent */}
-            <div className="h-1.5 w-12 bg-black/20 rounded-full mx-auto my-3 shrink-0" />
+            <div className="h-1.5 w-12 bg-white/20 rounded-full mx-auto my-3 shrink-0" />
 
             {/* Header */}
-            <div className="flex items-center justify-between px-6 pb-4 border-b border-black/10">
-              <span className="text-xs font-bold uppercase tracking-wider text-[#6f6f6f]">Filters</span>
+            <div className="flex items-center justify-between px-6 pb-4 border-b border-white/10">
+              <span className="text-xs font-bold uppercase tracking-wider text-gray-400">Filters</span>
               <button
                 onClick={() => setMobileFiltersOpen(false)}
-                className="p-1.5 hover:bg-black/5 rounded-full text-[#6f6f6f] hover:text-[#0a0a0a] transition-colors"
+                className="p-1.5 hover:bg-[#0b0f19]/5 rounded-full text-gray-400 hover:text-white transition-colors"
               >
                 <X size={18} />
               </button>
@@ -678,14 +749,14 @@ function ModelCatalogContent({
             </div>
 
             {/* Bottom Actions Row */}
-            <div className="p-4 border-t border-black/10 bg-white flex gap-3 shrink-0">
+            <div className="p-4 border-t border-white/10 bg-[#111827] flex gap-3 shrink-0">
               {hasActiveFilters && (
                 <button
                   onClick={() => {
                     clearAllFilters();
                     setMobileFiltersOpen(false);
                   }}
-                  className="flex-1 py-3.5 border border-black/10 hover:border-black/20 text-[#6f6f6f] hover:text-[#0a0a0a] rounded-2xl text-xs font-semibold transition-colors"
+                  className="flex-1 py-3.5 border border-white/10 hover:border-white/20 text-gray-400 hover:text-white rounded-2xl text-xs font-semibold transition-colors"
                 >
                   Clear All
                 </button>

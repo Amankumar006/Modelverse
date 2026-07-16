@@ -17,7 +17,7 @@
   "license": "Other/Custom",
   "parameters": "undisclosed",
   "contextWindow": "undisclosed",
-  "description": "A research preview model focusing on video generation: PhysiFormer. Published by yimingc9.",
+  "description": "An experimental video generation research preview named PhysiFormer, published from University of Oxford (VGG) to showcase novel methods.",
   "keyFeatures": [],
   "benchmarks": [],
   "family": null,
@@ -36,6 +36,7 @@
   "verified": false,
   "featured": false,
   "boost": 1,
-  "curatorNotes": "Ingested research preview via bulk triage. Affiliation: yimingc9. Traction signal: Initial release.",
-  "institution": "yimingc9"
+  "curatorNotes": "Verified academic/research lab affiliation. Originally ingested via bulk triage as 'yimingc9'. Verified as: University of Oxford (VGG).",
+  "institution": "University of Oxford (VGG)",
+  "templatedDescription": false
 }

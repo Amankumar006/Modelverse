@@ -1,3 +1,7 @@
+import fs from "fs/promises";
+import path from "path";
+import MarkdownRenderer from "@/components/ui/MarkdownRenderer";
+
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -100,7 +104,7 @@ function TaskBadge({ task }: { task: string }) {
   const label = taskNames[task] || task;
 
   return (
-    <span className="text-xs font-semibold bg-white/5 border border-white/10 text-white/70 px-3 py-1 rounded-full shrink-0">
+    <span className="text-xs font-semibold bg-[#0b0f19]/5 border border-white/10 text-white/70 px-3 py-1 rounded-full shrink-0">
       {label}
     </span>
   );
@@ -119,6 +123,15 @@ export default async function ModelDetailPage({
   }
 
   // Fetch static lists
+  
+  let markdownContent: string | null = null;
+  try {
+    const readmePath = path.join(process.cwd(), "data", "models", "readme", `${slug}.md`);
+    markdownContent = await fs.readFile(readmePath, "utf-8");
+  } catch (err) {
+    // silently ignore
+  }
+
   const allEntries = getAllModelEntries();
 
   // Find other models in the same family
@@ -208,12 +221,12 @@ export default async function ModelDetailPage({
   };
 
   return (
-    <main className="min-h-screen bg-white text-[#0a0a0a] selection:bg-brand-orange selection:text-white pb-24 relative">
-      <Navbar theme="light" />
+    <main className="min-h-screen bg-[#0b0f19] text-gray-100 selection:bg-brand-orange selection:text-white pb-24 relative">
+      <Navbar theme="dark" />
       <JsonLd data={softwareAppSchema} />
 
       {/* ── Top Bar / Breadcrumb ─────────────────────────────── */}
-      <header className="max-w-4xl mx-auto px-4 sm:px-6 pt-8 pb-4">
+      <header className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 pb-4">
         <Breadcrumb 
           developer={model.developer} 
           family={model.family ? { slug: model.family, label: model.family } : undefined} 
@@ -222,46 +235,48 @@ export default async function ModelDetailPage({
       </header>
 
       {/* ── Detail Content ─────────────────────────────────── */}
-      <article className="max-w-4xl mx-auto px-4 sm:px-6 mt-6">
+      <article className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-6">
         <ClientBackButton
           fallbackHref={model.family ? `/models/family/${model.family}` : `/models/developer/${encodeURIComponent(model.developer)}`}
           fallbackLabel={model.family ? model.family : model.developer}
         />
 
-        {/* ── Header Card ─────────────────────────────────────── */}
-        <div className="relative rounded-3xl p-6 sm:p-8 bg-[#fafaf8] border border-black/10 overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-br from-brand-orange/5 to-brand-pink/5 opacity-40" />
+        {/* ── Flat Header ─────────────────────────────────────── */}
+        <div className="pb-6 border-b border-white/10 mb-8 mt-4">
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
+            <div className="space-y-4">
+              <div>
+                <Link
+                  href={`/models?developer=${encodeURIComponent(model.developer)}`}
+                  className="inline-block text-gray-400 hover:text-white text-base font-medium transition-colors mb-1"
+                >
+                  {model.developer} /
+                </Link>
+                <h1
+                  className="text-3xl sm:text-4xl font-bold tracking-tight text-white leading-none flex items-center gap-3"
+                >
+                  {model.name}
+                  {model.featured && (
+                    <span className="text-[10px] font-bold uppercase tracking-wider text-brand-orange bg-brand-orange/10 border border-brand-orange/20 px-2 py-0.5 rounded-full shrink-0">
+                      Featured
+                    </span>
+                  )}
+                </h1>
+              </div>
 
-          <div className="relative flex flex-col md:flex-row md:items-center justify-between gap-6">
-            <div className="space-y-3.5">
-              <div className="flex flex-wrap items-center gap-2.5">
+              <div className="flex flex-wrap items-center gap-2">
                 <TypeBadge type={model.type} />
                 <TaskBadge task={model.primaryTask} />
-                <span className="text-xs text-[#6f6f6f] flex items-center gap-1.5 ml-1">
+                
+                {model.modality.map((mod) => (
+                  <ModalityTag key={mod} modality={mod} />
+                ))}
+
+                <span className="text-xs text-gray-400 flex items-center gap-1.5 ml-1">
                   <Calendar size={12} />
-                  Released {releaseDateFormatted}
+                  Updated {releaseDateFormatted}
                 </span>
               </div>
-              <h1
-                className="text-4xl sm:text-5xl font-normal tracking-tight text-[#0a0a0a] leading-none"
-                style={{
-                  fontFamily: "var(--font-display, ui-sans-serif, system-ui, sans-serif)",
-                }}
-              >
-                {model.name}
-              </h1>
-              <Link
-                href={`/models?developer=${encodeURIComponent(model.developer)}`}
-                className="inline-block text-[#6f6f6f] hover:text-brand-orange text-sm font-medium transition-colors"
-              >
-                Developed by {model.developer}
-              </Link>
-            </div>
-
-            <div className="flex flex-wrap gap-2 md:self-end">
-              {model.modality.map((mod) => (
-                <ModalityTag key={mod} modality={mod} />
-              ))}
             </div>
           </div>
         </div>
@@ -275,24 +290,30 @@ export default async function ModelDetailPage({
         )}
 
         {/* ── Grid Layout for Stats & Desc ────────────────────── */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-10">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 mt-10">
           {/* Main Info Columns (left) */}
-          <div className="md:col-span-2 space-y-10">
+          <div className="lg:col-span-8 space-y-10">
+            {markdownContent ? (
+              <section className="pt-2 pb-8 border-b border-white/10 mb-8">
+                <MarkdownRenderer content={markdownContent} />
+              </section>
+            ) : (
+              <>
             {/* Description */}
             <section className="space-y-3">
-              <h2 className="text-[10px] font-bold uppercase tracking-widest text-[#6f6f6f]/60">Description</h2>
-              <p className="text-[#6f6f6f] leading-relaxed text-sm sm:text-base">{model.description}</p>
+              <h2 className="text-[10px] font-bold uppercase tracking-widest text-gray-400/60">Description</h2>
+              <p className="text-gray-400 leading-relaxed text-sm sm:text-base">{model.description}</p>
             </section>
 
             {/* Key Features */}
             {model.keyFeatures && model.keyFeatures.length > 0 && (
               <section className="space-y-4">
-                <h2 className="text-[10px] font-bold uppercase tracking-widest text-[#6f6f6f]/60">Key Features</h2>
+                <h2 className="text-[10px] font-bold uppercase tracking-widest text-gray-400/60">Key Features</h2>
                 <ul className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   {model.keyFeatures.map((feat, idx) => (
                     <li
                       key={idx}
-                      className="flex items-start gap-2.5 text-xs text-[#6f6f6f] bg-black/5 border border-black/10 p-3 rounded-xl hover:border-black/20 transition-colors"
+                      className="flex items-start gap-2.5 text-xs text-gray-400 bg-white/5 border border-white/10 p-3 rounded-xl hover:border-white/20 transition-colors"
                     >
                       <Sparkles size={13} className="text-brand-orange shrink-0 mt-0.5" />
                       <span>{feat}</span>
@@ -305,21 +326,21 @@ export default async function ModelDetailPage({
             {/* Benchmarks Table */}
             {model.benchmarks && model.benchmarks.length > 0 && (
               <section className="space-y-4">
-                <h2 className="text-[10px] font-bold uppercase tracking-widest text-[#6f6f6f]/60">Benchmarks</h2>
-                <div className="border border-black/10 rounded-xl overflow-hidden bg-[#fafaf8]">
+                <h2 className="text-[10px] font-bold uppercase tracking-widest text-gray-400/60">Benchmarks</h2>
+                <div className="border border-white/10 rounded-xl overflow-hidden bg-white/5">
                   <table className="w-full text-left border-collapse text-xs">
                     <thead>
-                      <tr className="border-b border-black/10 bg-black/5 text-[#6f6f6f] font-medium">
+                      <tr className="border-b border-white/10 bg-white/5 text-gray-400 font-medium">
                         <th className="p-3">Benchmark</th>
                         <th className="p-3 text-right">Score</th>
                         <th className="p-3 text-center">Status</th>
                       </tr>
                     </thead>
-                    <tbody className="divide-y divide-black/10">
+                    <tbody className="divide-y divide-white/10">
                       {model.benchmarks.map((bench, idx) => (
-                        <tr key={idx} className="hover:bg-black/5 transition-colors">
-                          <td className="p-3 text-[#0a0a0a] font-medium">{bench.name}</td>
-                          <td className="p-3 text-right text-[#0a0a0a] font-semibold tabular-nums">{bench.score}</td>
+                        <tr key={idx} className="hover:bg-white/5 transition-colors">
+                          <td className="p-3 text-white font-medium">{bench.name}</td>
+                          <td className="p-3 text-right text-white font-semibold tabular-nums">{bench.score}</td>
                           <td className="p-3 text-center">
                             {bench.verified ? (
                               <span className="inline-flex items-center gap-1.5 text-[10px] text-emerald-600 font-medium">
@@ -327,8 +348,8 @@ export default async function ModelDetailPage({
                                 Verified
                               </span>
                             ) : (
-                              <span className="inline-flex items-center gap-1.5 text-[10px] text-[#6f6f6f] font-medium" title="Self-reported score">
-                                <span className="w-1.5 h-1.5 rounded-full bg-black/20" />
+                              <span className="inline-flex items-center gap-1.5 text-[10px] text-gray-400 font-medium" title="Self-reported score">
+                                <span className="w-1.5 h-1.5 rounded-full bg-white/20" />
                                 Self-Reported
                               </span>
                             )}
@@ -341,24 +362,27 @@ export default async function ModelDetailPage({
               </section>
             )}
 
+              </>
+            )}
+
             {/* Related Models Strip */}
             {relatedModels.length > 0 && (
               <section className="space-y-4 pt-4">
-                <h2 className="text-[10px] font-bold uppercase tracking-widest text-[#6f6f6f]/60">You might also want to compare</h2>
+                <h2 className="text-[10px] font-bold uppercase tracking-widest text-gray-400/60">You might also want to compare</h2>
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                   {relatedModels.map((item) => (
                     <Link
                       key={item.id}
                       href={`/models/${item.slug}`}
-                      className="group p-4 rounded-xl bg-[#fafaf8] hover:bg-white border border-black/10 hover:border-black/20 transition-all flex flex-col gap-2 text-left"
+                      className="group p-4 rounded-xl bg-white/5 hover:bg-[#0b0f19] border border-white/10 hover:border-white/20 transition-all flex flex-col gap-2 text-left"
                     >
                       <div className="min-w-0">
-                        <h4 className="text-xs font-semibold text-[#0a0a0a] truncate group-hover:text-brand-orange transition-colors">
+                        <h4 className="text-xs font-semibold text-white truncate group-hover:text-brand-orange transition-colors">
                           {item.name}
                         </h4>
-                        <p className="text-[10px] text-[#6f6f6f] mt-0.5">{item.developer}</p>
+                        <p className="text-[10px] text-gray-400 mt-0.5">{item.developer}</p>
                       </div>
-                      <span className="text-[9px] text-[#6f6f6f] border border-black/10 px-2 py-0.5 rounded-full self-start mt-auto">
+                      <span className="text-[9px] text-gray-400 border border-white/10 px-2 py-0.5 rounded-full self-start mt-auto">
                         Specs &rarr;
                       </span>
                     </Link>
@@ -369,17 +393,17 @@ export default async function ModelDetailPage({
 
             {/* Sourcing Ledger */}
             {model.sources && model.sources.length > 0 && (
-              <section className="space-y-3 pt-6 border-t border-black/10">
-                <h2 className="text-[10px] font-bold uppercase tracking-widest text-[#6f6f6f]/60">Verified Sources</h2>
+              <section className="space-y-3 pt-6 border-t border-white/10">
+                <h2 className="text-[10px] font-bold uppercase tracking-widest text-gray-400/60">Verified Sources</h2>
                 <ul className="space-y-1.5">
                   {model.sources.map((src, idx) => (
                     <li key={idx} className="flex items-center gap-2">
-                      <span className="text-[10px] text-[#6f6f6f]/50 select-none">[{idx + 1}]</span>
+                      <span className="text-[10px] text-gray-400/50 select-none">[{idx + 1}]</span>
                       <a
                         href={src}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-xs text-[#6f6f6f] font-mono truncate hover:text-brand-orange hover:underline transition-colors max-w-full"
+                        className="text-xs text-gray-400 font-mono truncate hover:text-brand-orange hover:underline transition-colors max-w-full"
                       >
                         {src}
                       </a>
@@ -391,41 +415,41 @@ export default async function ModelDetailPage({
           </div>
 
           {/* Sidebar Specs & Relationships Columns (right) */}
-          <div className="space-y-6">
+          <div className="lg:col-span-4 space-y-6 lg:sticky lg:top-8 h-fit">
             {/* Specs Card */}
-            <section className="p-5 rounded-2xl bg-[#fafaf8] border border-black/10 space-y-6 text-left">
-              <h2 className="text-[10px] font-bold uppercase tracking-widest text-[#6f6f6f]/80">Model Specs</h2>
+            <section className="p-5 rounded-2xl bg-white/5 border border-white/10 space-y-6 text-left">
+              <h2 className="text-[10px] font-bold uppercase tracking-widest text-gray-400/80">Model Specs</h2>
 
               {/* Params */}
               <div className="space-y-1">
-                <p className="text-[10px] text-[#6f6f6f] uppercase tracking-wider font-semibold">Parameters</p>
-                <p className="text-xs text-[#0a0a0a] font-mono">
+                <p className="text-[10px] text-gray-400 uppercase tracking-wider font-semibold">Parameters</p>
+                <p className="text-xs text-white font-mono">
                   {model.parameters === "undisclosed" ? "undisclosed" : model.parameters}
                 </p>
               </div>
 
               {/* Context window */}
               <div className="space-y-1">
-                <p className="text-[10px] text-[#6f6f6f] uppercase tracking-wider font-semibold">Context Window</p>
-                <p className="text-xs text-[#0a0a0a] font-mono">
+                <p className="text-[10px] text-gray-400 uppercase tracking-wider font-semibold">Context Window</p>
+                <p className="text-xs text-white font-mono">
                   {model.contextWindow}
                 </p>
               </div>
 
               {/* License */}
               <div className="space-y-1">
-                <p className="text-[10px] text-[#6f6f6f] uppercase tracking-wider font-semibold">License</p>
-                <p className="text-xs text-[#0a0a0a] font-mono truncate" title={model.license}>
+                <p className="text-[10px] text-gray-400 uppercase tracking-wider font-semibold">License</p>
+                <p className="text-xs text-white font-mono truncate" title={model.license}>
                   {model.license}
                 </p>
               </div>
 
               {/* Deployments */}
               <div className="space-y-1">
-                <p className="text-[10px] text-[#6f6f6f] uppercase tracking-wider font-semibold">Deployment</p>
+                <p className="text-[10px] text-gray-400 uppercase tracking-wider font-semibold">Deployment</p>
                 <div className="flex flex-wrap gap-1.5 mt-1">
                   {model.deployment.map((dep) => (
-                    <span key={dep} className="text-[9px] uppercase tracking-wide bg-black/5 text-[#6f6f6f] border border-black/10 px-2 py-0.5 rounded">
+                    <span key={dep} className="text-[9px] uppercase tracking-wide bg-white/5 text-gray-400 border border-white/10 px-2 py-0.5 rounded">
                       {dep}
                     </span>
                   ))}
@@ -434,8 +458,8 @@ export default async function ModelDetailPage({
 
               {/* Cost Tiers */}
               {model.costTiers && model.costTiers.length > 0 && (
-                <div className="space-y-2 pt-4 border-t border-black/10">
-                  <p className="text-[10px] text-[#6f6f6f] uppercase tracking-wider font-semibold">Cost Tiers</p>
+                <div className="space-y-2 pt-4 border-t border-white/10">
+                  <p className="text-[10px] text-gray-400 uppercase tracking-wider font-semibold">Cost Tiers</p>
                   <div className="flex flex-wrap gap-2 mt-1">
                     {model.costTiers.map((tier) => (
                       <div key={tier.id} className="group/tier relative inline-block">
@@ -443,7 +467,7 @@ export default async function ModelDetailPage({
                           {tier.label}
                         </span>
                         {tier.description && (
-                          <div className="absolute left-1/2 -translate-x-1/2 bottom-full mb-2 hidden group-hover/tier:block z-30 w-56 p-3 bg-white border border-black/10 text-[10px] text-[#6f6f6f] leading-relaxed rounded-xl shadow-xl font-sans text-center">
+                          <div className="absolute left-1/2 -translate-x-1/2 bottom-full mb-2 hidden group-hover/tier:block z-30 w-56 p-3 bg-[#0b0f19] border border-white/10 text-[10px] text-gray-400 leading-relaxed rounded-xl shadow-xl font-sans text-center">
                             {tier.description}
                             <div className="absolute top-full left-1/2 -translate-x-1/2 border-8 border-transparent border-t-white" />
                             <div className="absolute top-full left-1/2 -translate-x-1/2 border-8 border-transparent border-t-black/10 -z-10" style={{ transform: 'translateX(-50%) translateY(1px)' }} />
@@ -454,19 +478,44 @@ export default async function ModelDetailPage({
                   </div>
                 </div>
               )}
+
+              {/* Pricing */}
+              {model.pricing && model.pricing.length > 0 && (
+                <div className="space-y-2 pt-4 border-t border-white/10">
+                  <p className="text-[10px] text-gray-400 uppercase tracking-wider font-semibold">Pricing</p>
+                  <ul className="space-y-1.5 mt-1">
+                    {model.pricing.map((price, idx) => (
+                      <li key={idx} className="text-xs text-white flex items-center justify-between border-b border-black/5 pb-1.5 last:border-0 last:pb-0">
+                        <span className="text-gray-400">
+                          {price.tier ? <span className="font-semibold mr-1">{price.tier}:</span> : null}
+                          {price.unit}
+                        </span>
+                        <span className="font-mono font-medium">
+                          {price.currency !== "USD" ? `${price.currency} ` : "$"}{price.amount}
+                        </span>
+                      </li>
+                    ))}
+                  </ul>
+                  {model.pricingLastVerified && (
+                    <p className="text-[9px] text-gray-400/70 text-right italic pt-1">
+                      as of {model.pricingLastVerified}
+                    </p>
+                  )}
+                </div>
+              )}
             </section>
 
             {/* Links Section */}
             {model.links && (model.links.website || model.links.paper || model.links.huggingface || model.links.github || model.links.blogPost) && (
-              <section className="p-5 rounded-2xl bg-[#fafaf8] border border-black/10 space-y-3.5 text-left">
-                <h2 className="text-[10px] font-bold uppercase tracking-widest text-[#6f6f6f]/80">Links</h2>
+              <section className="p-5 rounded-2xl bg-white/5 border border-white/10 space-y-3.5 text-left">
+                <h2 className="text-[10px] font-bold uppercase tracking-widest text-gray-400/80">Links</h2>
                 <div className="flex flex-col gap-2">
                   {model.links.website && (
                     <a
                       href={model.links.website}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center justify-between p-3 rounded-xl bg-white hover:bg-black/5 border border-black/10 text-xs font-semibold text-[#6f6f6f] hover:text-[#0a0a0a] transition-colors group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-orange/50"
+                      className="flex items-center justify-between p-3 rounded-xl bg-[#0b0f19] hover:bg-white/5 border border-white/10 text-xs font-semibold text-gray-400 hover:text-white transition-colors group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-orange/50"
                     >
                       <span className="flex items-center gap-2">
                         <Globe size={13} className="text-black/40" />
@@ -480,7 +529,7 @@ export default async function ModelDetailPage({
                       href={model.links.paper}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center justify-between p-3 rounded-xl bg-white hover:bg-black/5 border border-black/10 text-xs font-semibold text-[#6f6f6f] hover:text-[#0a0a0a] transition-colors group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-orange/50"
+                      className="flex items-center justify-between p-3 rounded-xl bg-[#0b0f19] hover:bg-white/5 border border-white/10 text-xs font-semibold text-gray-400 hover:text-white transition-colors group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-orange/50"
                     >
                       <span className="flex items-center gap-2">
                         <FileText size={13} className="text-black/40" />
@@ -494,7 +543,7 @@ export default async function ModelDetailPage({
                       href={model.links.huggingface}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center justify-between p-3 rounded-xl bg-white hover:bg-black/5 border border-black/10 text-xs font-semibold text-[#6f6f6f] hover:text-[#0a0a0a] transition-colors group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-orange/50"
+                      className="flex items-center justify-between p-3 rounded-xl bg-[#0b0f19] hover:bg-white/5 border border-white/10 text-xs font-semibold text-gray-400 hover:text-white transition-colors group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-orange/50"
                     >
                       <span className="flex items-center gap-2">
                         <Layers size={13} className="text-black/40" />
@@ -508,7 +557,7 @@ export default async function ModelDetailPage({
                       href={model.links.github}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center justify-between p-3 rounded-xl bg-white hover:bg-black/5 border border-black/10 text-xs font-semibold text-[#6f6f6f] hover:text-[#0a0a0a] transition-colors group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-orange/50"
+                      className="flex items-center justify-between p-3 rounded-xl bg-[#0b0f19] hover:bg-white/5 border border-white/10 text-xs font-semibold text-gray-400 hover:text-white transition-colors group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-orange/50"
                     >
                       <span className="flex items-center gap-2">
                         <Terminal size={13} className="text-black/40" />
@@ -522,7 +571,7 @@ export default async function ModelDetailPage({
                       href={model.links.blogPost}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center justify-between p-3 rounded-xl bg-white hover:bg-black/5 border border-black/10 text-xs font-semibold text-[#6f6f6f] hover:text-[#0a0a0a] transition-colors group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-orange/50"
+                      className="flex items-center justify-between p-3 rounded-xl bg-[#0b0f19] hover:bg-white/5 border border-white/10 text-xs font-semibold text-gray-400 hover:text-white transition-colors group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-orange/50"
                     >
                       <span className="flex items-center gap-2">
                         <Link2 size={13} className="text-black/40" />
@@ -537,13 +586,13 @@ export default async function ModelDetailPage({
 
             {/* Lineage & Family Section */}
             {(model.family || prevVersionModel) && (
-              <section className="p-5 rounded-2xl bg-[#fafaf8] border border-black/10 space-y-3.5 text-left">
-                <h2 className="text-[10px] font-bold uppercase tracking-widest text-[#6f6f6f]/80">Lineage</h2>
+              <section className="p-5 rounded-2xl bg-white/5 border border-white/10 space-y-3.5 text-left">
+                <h2 className="text-[10px] font-bold uppercase tracking-widest text-gray-400/80">Lineage</h2>
                 
                 {/* Family line */}
                 {model.family && (
                   <div className="space-y-1">
-                    <p className="text-[10px] text-[#6f6f6f] font-medium">Part of the {model.family} family</p>
+                    <p className="text-[10px] text-gray-400 font-medium">Part of the {model.family} family</p>
                     {familyMembers.length > 0 ? (
                       <div className="flex flex-wrap gap-1.5 pt-1">
                         {familyMembers.map((member) => (
@@ -557,15 +606,15 @@ export default async function ModelDetailPage({
                         ))}
                       </div>
                     ) : (
-                      <p className="text-xs text-[#6f6f6f]">Only release in this line currently tracked.</p>
+                      <p className="text-xs text-gray-400">Only release in this line currently tracked.</p>
                     )}
                   </div>
                 )}
 
                 {/* Previous version link */}
                 {prevVersionModel && (
-                  <div className="space-y-1.5 pt-2 border-t border-black/10">
-                    <p className="text-[10px] text-[#6f6f6f] font-medium">Predecessor</p>
+                  <div className="space-y-1.5 pt-2 border-t border-white/10">
+                    <p className="text-[10px] text-gray-400 font-medium">Predecessor</p>
                     <Link
                       href={`/models/${prevVersionModel.slug}`}
                       className="inline-flex items-center gap-1.5 text-xs text-brand-orange hover:text-[#e85a28] hover:underline group"
@@ -580,8 +629,8 @@ export default async function ModelDetailPage({
 
             {/* Compare CTA Box */}
             <section className="p-5 rounded-2xl bg-[#FF6B35]/5 border border-[#FF6B35]/15 space-y-3 text-left">
-              <h3 className="text-xs font-semibold text-[#0a0a0a]">Compare Specs</h3>
-              <p className="text-[11px] text-[#6f6f6f] leading-relaxed">
+              <h3 className="text-xs font-semibold text-white">Compare Specs</h3>
+              <p className="text-[11px] text-gray-400 leading-relaxed">
                 Compare the parameters, context windows, and benchmarks of this model against others side-by-side.
               </p>
               <Link

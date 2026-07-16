@@ -3,8 +3,8 @@
   "name": "Muse Spark 1.1",
   "slug": "muse-spark-1-1",
   "developer": "Meta",
-  "releaseDate": "2026-07-01",
-  "updatedAt": "2026-07-01",
+  "releaseDate": "2026-04-08",
+  "updatedAt": "2026-04-08",
   "type": "closed-source",
   "modality": [
     "multimodal"
@@ -33,7 +33,8 @@
     "agentic-browser"
   ],
   "sources": [
-    "https://www.youtube.com/watch?v=Ti1V7OI2Rro"
+    "https://www.youtube.com/watch?v=Ti1V7OI2Rro",
+    "https://ai.meta.com/blog/introducing-muse-spark-msl/"
   ],
   "verified": false,
   "curatorNotes": "While internal Meta coding benchmarks claim top-tier performance, independent leaderboards suggest it currently performs closer to open-source models like GLM 5.2."

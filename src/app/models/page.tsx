@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { getAllModelEntries, getAllDevelopers, getDeveloperCounts, SITE_URL } from "@/lib/models";
+import { getAllModelEntries, getAllDevelopers, SITE_URL } from "@/lib/models";
 import ModelCatalog from "@/components/models/ModelCatalog";
 import Navbar from "@/components/layout/Navbar";
 import { ChevronLeft } from "lucide-react";
@@ -129,16 +129,15 @@ export default async function BrowsePage({ searchParams }: PageProps) {
   const resolvedSearchParams = await searchParams;
   const models = getAllModelEntries();
   const developers = getAllDevelopers();
-  const developersWithCounts = getDeveloperCounts();
 
   return (
-    <main className="min-h-screen bg-white text-[#0a0a0a] selection:bg-brand-orange selection:text-white pb-24 relative">
-      <Navbar theme="light" />
+    <main className="min-h-screen bg-[#0b0f19] text-gray-100 selection:bg-brand-orange selection:text-white pb-24 relative">
+      <Navbar theme="dark" />
       {/* ── Fixed Minimal Nav Back Link ─────────────────────── */}
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 md:px-8 pt-8">
+      <div className="w-full px-4 sm:px-6 lg:px-8 2xl:px-12 pt-8">
         <Link
           href="/"
-          className="inline-flex items-center gap-1 text-sm text-[#6f6f6f] hover:text-[#0a0a0a] transition-colors group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black/50 focus-visible:ring-offset-2 rounded-lg px-2 py-1"
+          className="inline-flex items-center gap-1 text-sm text-gray-400 hover:text-white transition-colors group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/50 focus-visible:ring-offset-2 rounded-lg px-2 py-1"
         >
           <ChevronLeft size={16} className="transition-transform group-hover:-translate-x-0.5" />
           Back to Home
@@ -146,39 +145,20 @@ export default async function BrowsePage({ searchParams }: PageProps) {
       </div>
 
       {/* ── Content Container ───────────────────────────────── */}
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 md:px-8 mt-10 relative">
-        <div className="border-b border-black/10 pb-8 mb-8">
+      <div className="w-full px-4 sm:px-6 lg:px-8 2xl:px-12 mt-10 relative">
+        <div className="border-b border-white/10 pb-8 mb-8">
           <h1
-            className="text-4xl sm:text-5xl font-normal tracking-tight text-[#0a0a0a]"
+            className="text-4xl sm:text-5xl font-normal tracking-tight text-white"
             style={{
               fontFamily: "var(--font-display, ui-sans-serif, system-ui, sans-serif)",
             }}
           >
-            Model <span className="italic text-[#6f6f6f]">Catalog</span>
+            Model <span className="italic text-gray-400">Catalog</span>
           </h1>
-          <p className="mt-2 text-sm text-[#6f6f6f] max-w-xl">
+          <p className="mt-2 text-sm text-gray-400 max-w-xl">
             A comprehensive, always-up-to-date registry of every released AI model.
             Filter by task, deployment type, or developer.
           </p>
-        </div>
-
-        {/* Browse by Developer Tiles */}
-        <div className="mb-10">
-          <h3 className="text-[10px] font-bold uppercase tracking-widest text-[#6f6f6f]/60 mb-3">Browse by Developer</h3>
-          <div className="flex flex-wrap gap-2">
-            {developersWithCounts.map((dev) => (
-              <Link
-                key={dev.developer}
-                href={`/models/developer/${encodeURIComponent(dev.developer)}`}
-                className="inline-flex items-center gap-2 bg-black/[0.04] hover:bg-black/[0.08] text-xs font-semibold text-[#6f6f6f] hover:text-[#0a0a0a] px-3.5 py-1.5 rounded-full transition-colors"
-              >
-                <span>{dev.developer}</span>
-                <span className="bg-black/5 text-[#6f6f6f]/80 px-1.5 py-0.5 rounded-full text-[9px] font-mono">
-                  {dev.count}
-                </span>
-              </Link>
-            ))}
-          </div>
         </div>
 
         {/* Catalog component (dense table + client filters) */}

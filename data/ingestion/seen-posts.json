@@ -1193,5 +1193,80 @@
     "lab": "Google DeepMind",
     "link": "https://deepmind.google/blog/vaultgemma-the-worlds-most-capable-differentially-private-llm/",
     "firstSeenAt": "2026-07-15T18:29:48.211Z"
+  },
+  {
+    "lab": "Other",
+    "link": "https://thinkingmachines.ai/news/introducing-inkling/",
+    "firstSeenAt": "2026-07-16T07:57:17.518586Z"
+  },
+  {
+    "lab": "Other",
+    "link": "https://manus.im/blog",
+    "firstSeenAt": "2026-07-16T07:57:17.518586Z"
+  },
+  {
+    "lab": "Meta",
+    "link": "https://ai.meta.com/blog/introducing-muse-spark-msl/",
+    "firstSeenAt": "2026-07-16T07:57:17.518586Z"
+  },
+  {
+    "lab": "Tencent",
+    "link": "https://hy.tencent.com/research/hy3",
+    "firstSeenAt": "2026-07-16T07:57:17.518586Z"
+  },
+  {
+    "lab": "Other",
+    "link": "https://deep-reinforce.com/ornith_1_0.html",
+    "firstSeenAt": "2026-07-16T07:57:17.518586Z"
+  },
+  {
+    "lab": "Other",
+    "link": "https://ollama.com/library/ornith",
+    "firstSeenAt": "2026-07-16T07:57:17.518586Z"
+  },
+  {
+    "lab": "Other",
+    "link": "https://huggingface.co/collections/deepreinforce-ai/ornith-10",
+    "firstSeenAt": "2026-07-16T07:57:17.518586Z"
+  },
+  {
+    "lab": "Other",
+    "link": "https://sakana.ai/fugu/",
+    "firstSeenAt": "2026-07-16T07:57:17.518586Z"
+  },
+  {
+    "lab": "Cohere",
+    "link": "https://cohere.com/blog/north-mini-code",
+    "firstSeenAt": "2026-07-16T07:57:17.518586Z"
+  },
+  {
+    "lab": "Other",
+    "link": "https://www.liquid.ai/blog/introducing-lfm2-5-the-next-generation-of-on-device-ai",
+    "firstSeenAt": "2026-07-16T07:57:17.518586Z"
+  },
+  {
+    "lab": "Other",
+    "link": "https://docs.z.ai/guides/llm/glm-5.2",
+    "firstSeenAt": "2026-07-16T07:57:17.518586Z"
+  },
+  {
+    "lab": "Other",
+    "link": "https://z.ai/blog/glm-5.2",
+    "firstSeenAt": "2026-07-16T07:57:17.518586Z"
+  },
+  {
+    "lab": "Other",
+    "link": "https://z.ai/blog/glm-4.5",
+    "firstSeenAt": "2026-07-16T07:57:17.518586Z"
+  },
+  {
+    "lab": "Other",
+    "link": "https://www.kimi.com/ai-models/kimi-k2-6",
+    "firstSeenAt": "2026-07-16T07:57:17.518586Z"
+  },
+  {
+    "lab": "Other",
+    "link": "https://platform.minimax.io/docs/guides/models-intro",
+    "firstSeenAt": "2026-07-16T07:57:17.518586Z"
   }
 ]

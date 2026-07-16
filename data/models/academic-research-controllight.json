@@ -16,7 +16,7 @@
   "license": "Other/Custom",
   "parameters": "undisclosed",
   "contextWindow": "undisclosed",
-  "description": "A research preview model focusing on other: ControlLight. Published by yfyang007.",
+  "description": "Developed from Sony Computer Science Laboratories ControlLight is a research preview model exploring new techniques in specialized research.",
   "keyFeatures": [],
   "benchmarks": [],
   "family": null,
@@ -35,6 +35,7 @@
   "verified": false,
   "featured": false,
   "boost": 1,
-  "curatorNotes": "Ingested research preview via bulk triage. Affiliation: yfyang007. Traction signal: Initial release.",
-  "institution": "yfyang007"
+  "curatorNotes": "Verified academic/research lab affiliation. Originally ingested via bulk triage as 'yfyang007'. Verified as: Sony Computer Science Laboratories.",
+  "institution": "Sony Computer Science Laboratories",
+  "templatedDescription": false
 }

@@ -20,7 +20,8 @@ function TaskBadge({ task }: { task: string }) {
   const label = taskNames[task] || task;
 
   return (
-    <span className="text-[10px] font-medium bg-black/5 text-[#6f6f6f] px-2.5 py-1 rounded-full shrink-0 tracking-wide">
+    <span className="text-[10px] font-medium bg-white/20 text-brand-orange px-2.5 py-1 rounded-full shrink-0 tracking-wide border border-white/5 flex items-center gap-1.5">
+      <div className="w-1.5 h-1.5 rounded-full bg-brand-orange animate-pulse" />
       {label}
     </span>
   );
@@ -33,10 +34,18 @@ function SimpleTypeBadge({ type }: { type: string }) {
     "api-only": "API Only",
   };
   return (
-    <span className="text-[10px] font-medium bg-black/5 text-[#6f6f6f] px-2.5 py-1 rounded-full shrink-0 tracking-wide">
+    <span className="text-[10px] font-medium bg-white/20 text-gray-400 px-2.5 py-1 rounded-full shrink-0 tracking-wide border border-white/5">
       {typeMap[type] || type}
     </span>
   );
+}
+
+function truncateAtWordBoundary(text: string, maxLength: number): string {
+  if (text.length <= maxLength) return text;
+  const sub = text.slice(0, maxLength);
+  const lastSpace = sub.lastIndexOf(" ");
+  if (lastSpace === -1) return sub + "...";
+  return sub.slice(0, lastSpace) + "...";
 }
 
 /**
@@ -63,17 +72,23 @@ export default function ModelCard({
 
   // Check if model has detailed entry fields
   const isDetailed = "description" in model;
-  const description = isDetailed ? (model as ModelEntry).description : "";
+  const rawDescription = isDetailed ? (model as ModelEntry).description : "";
+  const description = truncateAtWordBoundary(rawDescription, isFeatured ? 160 : 110);
   const primaryTask = isDetailed ? (model as ModelEntry).primaryTask : undefined;
   
   const contextWindow = isDetailed ? (model as ModelEntry).contextWindow : undefined;
   const parameters = isDetailed ? (model as ModelEntry).parameters : undefined;
 
   let statValue = "N/A";
-  if (contextWindow && contextWindow !== "Unknown") {
+  const hasValidContext = contextWindow && contextWindow !== "Unknown" && contextWindow.toLowerCase() !== "undisclosed";
+  const hasValidParams = parameters && parameters !== "Unknown" && parameters.toLowerCase() !== "undisclosed";
+
+  if (hasValidContext) {
     statValue = contextWindow.includes("context") ? contextWindow : `${contextWindow} Context`;
-  } else if (parameters && parameters !== "Unknown") {
+  } else if (hasValidParams) {
     statValue = parameters.includes("params") ? parameters : `${parameters} Params`;
+  } else if (contextWindow?.toLowerCase() === "undisclosed" || parameters?.toLowerCase() === "undisclosed") {
+    statValue = "—";
   }
 
   const targetHref = familySlug ? `/models/family/${familySlug}` : `/models/${model.slug}`;
@@ -82,12 +97,12 @@ export default function ModelCard({
     return (
       <Link
         href={targetHref}
-        className="group grid grid-cols-[1fr_auto_auto_auto] sm:grid-cols-[1.4fr_0.8fr_0.6fr_0.5fr_auto] items-center gap-3 sm:gap-4 px-4 py-3.5 rounded-xl hover:bg-black/[0.04] transition-colors border border-transparent hover:border-black/10"
+        className="group grid grid-cols-[1fr_auto_auto_auto] sm:grid-cols-[1.4fr_0.8fr_0.6fr_0.5fr_auto] items-center gap-3 sm:gap-4 px-4 py-3.5 rounded-xl hover:bg-white/[0.04] transition-colors border border-transparent hover:border-white/10"
       >
         {/* Name + developer */}
         <div className="min-w-0">
           <div className="flex items-center gap-2">
-            <p className="text-sm font-medium text-[#0a0a0a] truncate group-hover:text-brand-orange transition-colors">
+            <p className="text-sm font-medium text-white truncate group-hover:text-brand-orange transition-colors">
               {model.name}
             </p>
             {familyVariantCount && (
@@ -96,11 +111,11 @@ export default function ModelCard({
               </span>
             )}
           </div>
-          <p className="text-xs text-[#6f6f6f] truncate">{model.developer}</p>
+          <p className="text-xs text-gray-400 truncate">{model.developer}</p>
         </div>
 
         {/* Developer (wider screens) */}
-        <p className="hidden sm:block text-sm text-[#6f6f6f] truncate">
+        <p className="hidden sm:block text-sm text-gray-400 truncate">
           {model.developer}
         </p>
 
@@ -110,7 +125,7 @@ export default function ModelCard({
         </div>
 
         {/* Date */}
-        <p className="text-xs text-[#6f6f6f]/60 tabular-nums whitespace-nowrap">
+        <p className="text-xs text-gray-400/60 tabular-nums whitespace-nowrap">
           {formattedDate}
         </p>
 
@@ -126,7 +141,7 @@ export default function ModelCard({
   /* Redesigned Card variant (single or family) */
   return (
     <div
-      className="group relative flex flex-col justify-between h-full rounded-2xl bg-white border border-black/10 hover:border-black/20 hover:shadow-sm hover:-translate-y-[3px] active:scale-[0.98] transition-all duration-300 w-full text-left overflow-hidden z-0"
+      className="group relative flex flex-col justify-center h-full rounded-xl bg-[#0b0f19]/5 border border-white/10 hover:border-white/20 hover:bg-[#0b0f19]/10 transition-colors duration-200 w-full text-left overflow-hidden z-0"
     >
       <Link
         href={targetHref}
@@ -134,103 +149,69 @@ export default function ModelCard({
         aria-label={`View ${model.name}`}
       />
 
-      <div className="flex flex-col flex-1 p-5 lg:p-6 pb-0 relative z-20 pointer-events-none">
-        {/* Top Pill */}
-        <div className="mb-4 flex items-start">
-          {variant === "family" && primaryTask ? (
-            <TaskBadge task={primaryTask} />
-          ) : (
-            <SimpleTypeBadge type={model.type} />
-          )}
-        </div>
-
+      <div className="flex flex-col p-4 relative z-20 pointer-events-none">
         {/* Main Content */}
-        <div className="flex-1 min-w-0 mb-5">
-          <h3
-            className={`font-semibold text-[#0a0a0a] group-hover:text-brand-orange transition-colors mb-1 ${
-              isFeatured ? "text-2xl sm:text-3xl line-clamp-2" : "text-lg sm:text-xl line-clamp-1"
-            }`}
-            style={{
-              fontFamily: "var(--font-display, ui-sans-serif, system-ui, sans-serif)",
-            }}
-          >
-            {variant === "family" && familySlug ? (
-              // Basic capitalization for family slugs, with special case for GPT
-              familySlug.replace(/^gpt/i, "GPT").replace(/-/g, " ").replace(/\b\w/g, c => c.toUpperCase())
-            ) : (
-              model.name
+        <div className="flex items-start justify-between min-w-0 mb-2">
+          <div className="flex flex-wrap items-center gap-1.5 truncate">
+            {variant !== "family" && (
+              <span className="text-gray-400 font-normal text-sm md:text-base">{model.developer} /</span>
             )}
-          </h3>
-
-          <div className="flex flex-col gap-1 mb-3 pointer-events-auto">
-            <Link
-              href={`/models/developer/${encodeURIComponent(model.developer)}`}
-              className="inline-block text-xs text-[#6f6f6f] hover:text-brand-orange transition-colors relative z-35"
-            >
-              {model.developer}
-            </Link>
-            {variant !== "family" && model.family && (
-              <Link
-                href={`/models/family/${model.family}`}
-                className="inline-block text-[10px] text-brand-orange hover:underline font-medium relative z-35"
-              >
-                Part of the {model.family.replace(/-/g, " ").replace(/\b\w/g, c => c.toUpperCase())} family &rarr;
-              </Link>
-            )}
+            <h3 className="font-semibold text-white text-sm md:text-base truncate">
+              {variant === "family" && familySlug ? (
+                familySlug.replace(/^gpt/i, "GPT").replace(/-/g, " ").replace(/\b\w/g, c => c.toUpperCase())
+              ) : (
+                model.name
+              )}
+            </h3>
           </div>
-
-          {description && (
-            <p className={`text-sm text-[#6f6f6f] leading-relaxed ${isFeatured ? "line-clamp-3" : "line-clamp-2"}`}>
-              {description}
-            </p>
+          {variant === "family" && familyVariantCount && (
+            <span className="text-[10px] font-semibold bg-[#0b0f19]/10 text-gray-300 px-1.5 py-0.5 rounded-full shrink-0 border border-white/10 ml-2">
+              {familyVariantCount} vars
+            </span>
           )}
         </div>
-      </div>
 
-      {/* Stat Strip Footer */}
-      <div className="flex border-t border-black/10 divide-x divide-black/10 mt-auto relative z-20 pointer-events-none">
-        <div className="flex-1 min-w-0 px-2 sm:px-3 py-3 flex items-center justify-center text-center">
-          <span className="font-mono text-[10px] uppercase tracking-[0.08em] text-[#6f6f6f] truncate">
-            {statValue}
+        {/* Badges & Stats Row */}
+        <div className="flex flex-wrap items-center gap-x-2.5 gap-y-1.5 text-[11px] text-gray-400 mt-1">
+          {/* Task */}
+          {primaryTask && (
+             <span className="flex items-center gap-1 font-medium bg-white/20 px-2 py-0.5 rounded border border-white/5">
+               <svg className="w-3 h-3 text-brand-orange" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+               </svg>
+               {primaryTask.split("-").map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(" ")}
+             </span>
+          )}
+
+          {/* Type Badge (open weights, etc) */}
+          <span className="flex items-center gap-1 font-medium bg-white/20 px-2 py-0.5 rounded border border-white/5">
+             <SimpleTypeBadge type={model.type} />
           </span>
-        </div>
-        <div className="flex-1 min-w-0 px-2 sm:px-3 py-3 flex items-center justify-center text-center">
-          <span className="font-mono text-[10px] uppercase tracking-[0.08em] text-[#6f6f6f] truncate">
+          
+          <span className="text-gray-600">•</span>
+          
+          {/* Params */}
+          {hasValidParams && parameters !== "undisclosed" && (
+            <>
+              <span className="flex items-center gap-1 font-mono">
+                <svg className="w-3 h-3 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+                </svg>
+                {parameters}
+              </span>
+              <span className="text-gray-600">•</span>
+            </>
+          )}
+
+          {/* Date */}
+          <span className="truncate flex items-center gap-1">
+            <svg className="w-3 h-3 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
             {formattedDate}
           </span>
         </div>
-        <div className="flex-1 min-w-0 px-2 sm:px-3 py-3 flex items-center justify-center text-center group-hover:bg-black/[0.02] transition-colors">
-          {variant === "family" && familyVariantCount ? (
-            <div className="flex items-center gap-1 text-brand-orange min-w-0">
-              <span className="font-mono text-[10px] uppercase tracking-[0.08em] truncate">
-                {familyVariantCount} vars
-              </span>
-              <ArrowUpRight size={14} className="shrink-0" />
-            </div>
-          ) : (
-            <ArrowUpRight
-              size={18}
-              className="text-black/20 group-hover:text-black/60 transition-colors shrink-0"
-            />
-          )}
-        </div>
       </div>
-
-      {isDetailed && (model as ModelEntry).costTiers && (model as ModelEntry).costTiers!.length > 0 && (
-        <div className="flex border-t border-black/10 px-5 py-2 bg-black/[0.01] items-center gap-1.5 overflow-x-auto no-scrollbar relative z-20 pointer-events-none">
-          <span className="text-[9px] uppercase tracking-wider font-mono text-[#6f6f6f]/60 shrink-0">Tiers:</span>
-          <div className="flex flex-wrap gap-1">
-            {(model as ModelEntry).costTiers!.map((tier) => (
-              <span
-                key={tier.id}
-                className="text-[9px] font-medium bg-black/[0.03] text-[#6f6f6f] px-1.5 py-0.5 rounded-full tracking-wide border border-black/[0.04]"
-              >
-                {tier.label}
-              </span>
-            ))}
-          </div>
-        </div>
-      )}
     </div>
   );
 }

@@ -17,7 +17,7 @@
   "license": "Other/Custom",
   "parameters": "undisclosed",
   "contextWindow": "undisclosed",
-  "description": "A research preview model focusing on audio speech: Dots TTS. Published by rednote-hilab.",
+  "description": "An experimental audio and speech research preview named Dots TTS, published from Xiaohongshu (Rednote HiLab) to showcase novel methods.",
   "keyFeatures": [],
   "benchmarks": [],
   "family": null,
@@ -36,6 +36,7 @@
   "verified": false,
   "featured": false,
   "boost": 1,
-  "curatorNotes": "Ingested research preview via bulk triage. Affiliation: rednote-hilab. Traction signal: Initial release.",
-  "institution": "rednote-hilab"
+  "curatorNotes": "Verified academic/research lab affiliation. Originally ingested via bulk triage as 'rednote-hilab'. Verified as: Xiaohongshu (Rednote HiLab).",
+  "institution": "Xiaohongshu (Rednote HiLab)",
+  "templatedDescription": false
 }

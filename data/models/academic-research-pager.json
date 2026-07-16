@@ -16,7 +16,7 @@
   "license": "Other/Custom",
   "parameters": "undisclosed",
   "contextWindow": "undisclosed",
-  "description": "A research preview model focusing on other: PaGeR. Published by pager360.",
+  "description": "A research-preview model from ETH Zurich focusing on specialized research capabilities to invite community feedback.",
   "keyFeatures": [],
   "benchmarks": [],
   "family": null,
@@ -35,6 +35,7 @@
   "verified": false,
   "featured": false,
   "boost": 1,
-  "curatorNotes": "Ingested research preview via bulk triage. Affiliation: pager360. Traction signal: Initial release.",
-  "institution": "pager360"
+  "curatorNotes": "Verified academic/research lab affiliation. Originally ingested via bulk triage as 'pager360'. Verified as: ETH Zurich.",
+  "institution": "ETH Zurich",
+  "templatedDescription": false
 }

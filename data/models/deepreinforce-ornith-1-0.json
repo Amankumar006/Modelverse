@@ -1,0 +1,40 @@
+{
+  "id": "deepreinforce-ornith-1-0",
+  "name": "Ornith 1.0",
+  "slug": "deepreinforce-ornith-1-0",
+  "developer": "Other",
+  "institution": "DeepReinforce",
+  "releaseDate": "2026-06-25",
+  "updatedAt": "2026-06-25",
+  "type": "open-weights",
+  "modality": ["text"],
+  "primaryTask": "code-generation",
+  "deployment": ["self-hostable", "on-device"],
+  "license": "MIT",
+  "parameters": "9B to 397B",
+  "contextWindow": "256K tokens",
+  "description": "DeepReinforce's open-weights family of self-scaffolding models optimized for agentic coding, post-trained on Gemma 4 and Qwen 3.5.",
+  "keyFeatures": [
+    "Self-scaffolding training framework utilizing reinforcement learning (RL) to learn solution and harness logic",
+    "Spans compact 9B/31B dense models up to 35B and 397B MoE frontier sizes",
+    "Context window expandable up to 1M tokens via YaRN RoPE scaling"
+  ],
+  "benchmarks": [],
+  "family": "deepreinforce-ornith-1-0",
+  "previousVersion": null,
+  "links": {
+    "website": "https://deep-reinforce.com/ornith_1_0.html"
+  },
+  "logo": null,
+  "tags": ["agentic-coding", "self-scaffolding", "moe"],
+  "sources": [
+    "https://deep-reinforce.com/ornith_1_0.html",
+    "https://ollama.com/library/ornith",
+    "https://huggingface.co/collections/deepreinforce-ai/ornith-10"
+  ],
+  "verified": false,
+  "featured": false,
+  "boost": 1,
+  "curatorNotes": "Deduplicated from Ollama and Hugging Face collection URLs. A self-scaffolding RL coding model designed to run locally.",
+  "templatedDescription": false
+}

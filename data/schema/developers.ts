@@ -19,6 +19,12 @@ export const DEVELOPERS = [
   "Tencent",
   "NVIDIA",
   "Apple",
+  "Thinking Machines",
+  "Moonshot AI",
+  "MiniMax",
+  "Liquid AI",
+  "Zhipu AI",
+  "Sakana AI",
   "Academic/Research",
   "Other",
 ] as const;

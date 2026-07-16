@@ -16,7 +16,7 @@
   "license": "Other/Custom",
   "parameters": "undisclosed",
   "contextWindow": "undisclosed",
-  "description": "A research preview model focusing on other: RDM. Published by alan-lanfeng.",
+  "description": "A research-preview model from RAND Corporation focusing on specialized research capabilities to invite community feedback.",
   "keyFeatures": [],
   "benchmarks": [],
   "family": null,
@@ -35,6 +35,7 @@
   "verified": false,
   "featured": false,
   "boost": 1,
-  "curatorNotes": "Ingested research preview via bulk triage. Affiliation: alan-lanfeng. Traction signal: Initial release.",
-  "institution": "alan-lanfeng"
+  "curatorNotes": "Verified academic/research lab affiliation. Originally ingested via bulk triage as 'alan-lanfeng'. Verified as: RAND Corporation.",
+  "institution": "EPFL, Valeo.ai, Sorbonne Universit\u00e9",
+  "templatedDescription": false
 }

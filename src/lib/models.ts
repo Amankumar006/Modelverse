@@ -48,6 +48,8 @@ export interface ModelEntry extends ModelIndex {
   boost: number;
   curatorNotes: string;
   costTiers?: { id: string; label: string; description?: string }[];
+  pricing?: { tier?: string; unit: string; amount: number; currency: string; notes?: string }[];
+  pricingLastVerified?: string;
 }
 
 /* ------------------------------------------------------------------ */
@@ -84,6 +86,7 @@ function loadDevEntries(): ModelEntry[] {
     parameters: z.string(),
     contextWindow: z.string(),
     description: z.string(),
+    templatedDescription: z.boolean().optional(),
     keyFeatures: z.array(z.string()),
     benchmarks: z.array(z.object({ name: z.string(), score: z.string(), verified: z.boolean() })),
     family: z.string().nullable(),
@@ -91,6 +94,8 @@ function loadDevEntries(): ModelEntry[] {
     institution: z.string().optional(),
     previousVersion: z.string().nullable(),
     costTiers: z.array(z.object({ id: z.string(), label: z.string(), description: z.string().optional() })).optional(),
+    pricing: z.array(z.object({ tier: z.string().optional(), unit: z.string(), amount: z.number(), currency: z.string().default("USD"), notes: z.string().optional() })).optional(),
+    pricingLastVerified: z.string().regex(/^\d{4}-\d{2}-\d{2}$/).optional(),
     links: z.record(z.string(), z.string()),
     logo: z.string().nullable(),
     tags: z.array(z.string()),

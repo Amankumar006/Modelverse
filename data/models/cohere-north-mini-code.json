@@ -1,0 +1,37 @@
+{
+  "id": "cohere-north-mini-code",
+  "name": "North Mini Code",
+  "slug": "cohere-north-mini-code",
+  "developer": "Cohere",
+  "releaseDate": "2026-06-09",
+  "updatedAt": "2026-06-09",
+  "type": "open-weights",
+  "modality": ["text"],
+  "primaryTask": "code-generation",
+  "deployment": ["self-hostable"],
+  "license": "Apache 2.0",
+  "parameters": "30B (3B active)",
+  "contextWindow": "256K tokens",
+  "description": "Cohere's open-weights sparse Mixture-of-Experts coding model, optimized for agentic software engineering tasks and low-latency edge deployment.",
+  "keyFeatures": [
+    "Sparse MoE with 128 experts (8 active per token)",
+    "Post-trained across multiple SWE environments and harnesses",
+    "Optimized for local deployment on a single GPU (FP8/FP4)"
+  ],
+  "benchmarks": [],
+  "family": "cohere-north-mini-code",
+  "previousVersion": null,
+  "links": {
+    "website": "https://cohere.com/blog/north-mini-code"
+  },
+  "logo": "/logos/cohere.svg",
+  "tags": ["moe", "coding-agent", "low-latency"],
+  "sources": [
+    "https://cohere.com/blog/north-mini-code"
+  ],
+  "verified": false,
+  "featured": false,
+  "boost": 1,
+  "curatorNotes": "First model in Cohere's North series. Specifically designed to automate repository-level coding actions.",
+  "templatedDescription": false
+}

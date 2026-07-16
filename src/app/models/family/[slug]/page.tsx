@@ -75,8 +75,8 @@ export default async function FamilyPage({
   const developer = primaryModel.developer;
 
   return (
-    <main className="min-h-screen bg-white text-[#0a0a0a] selection:bg-brand-orange selection:text-white pb-24 relative">
-      <Navbar theme="light" />
+    <main className="min-h-screen bg-[#0b0f19] text-white selection:bg-brand-orange selection:text-white pb-24 relative">
+      <Navbar theme="dark" />
       {/* ── Top Bar / Breadcrumb ─────────────────────────────── */}
       <header className="max-w-4xl mx-auto px-4 sm:px-6 pt-8 pb-4">
         <Breadcrumb developer={developer} family={{ slug, label: slug }} />
@@ -95,14 +95,14 @@ export default async function FamilyPage({
             Model Family
           </div>
           <h1
-            className="text-4xl sm:text-5xl font-normal tracking-tight text-[#0a0a0a] leading-none"
+            className="text-4xl sm:text-5xl font-normal tracking-tight text-white leading-none"
             style={{
               fontFamily: "var(--font-display, ui-sans-serif, system-ui, sans-serif)",
             }}
           >
             {slug}
           </h1>
-          <p className="text-[#6f6f6f] text-lg">
+          <p className="text-gray-400 text-lg">
             Developed by {developer}. Explore the {models.length} variants available in this generation.
           </p>
         </div>
@@ -119,18 +119,18 @@ export default async function FamilyPage({
                 
                 {/* Cross-Generation Nav */}
                 {(nextVersionModel || prevVersionModel) && (
-                  <div className="flex flex-wrap items-center gap-x-4 gap-y-2 px-3 py-1 text-xs text-[#6f6f6f] font-medium">
+                  <div className="flex flex-wrap items-center gap-x-4 gap-y-2 px-3 py-1 text-xs text-gray-400 font-medium">
                     <span className="text-black/40 text-[10px] uppercase tracking-widest font-bold">Lineage</span>
                     <div className="flex items-center gap-3">
                       {prevVersionModel && prevVersionModel.family && (
-                         <Link href={`/models/family/${prevVersionModel.family}`} className="flex items-center gap-1 hover:text-[#0a0a0a] transition-colors">
+                         <Link href={`/models/family/${prevVersionModel.family}`} className="flex items-center gap-1 hover:text-white transition-colors">
                            <ArrowLeft size={12} />
                            {prevVersionModel.family} {prevVersionModel.tier ? `(${prevVersionModel.tier})` : ''}
                          </Link>
                       )}
                       {(prevVersionModel && nextVersionModel) && <span className="text-black/20">|</span>}
                       {nextVersionModel && nextVersionModel.family && (
-                         <Link href={`/models/family/${nextVersionModel.family}`} className="flex items-center gap-1 hover:text-[#0a0a0a] transition-colors">
+                         <Link href={`/models/family/${nextVersionModel.family}`} className="flex items-center gap-1 hover:text-white transition-colors">
                            {nextVersionModel.family} {nextVersionModel.tier ? `(${nextVersionModel.tier})` : ''}
                            <ArrowRight size={12} />
                          </Link>

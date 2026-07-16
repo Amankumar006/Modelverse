@@ -16,7 +16,7 @@
   "license": "Other/Custom",
   "parameters": "undisclosed",
   "contextWindow": "undisclosed",
-  "description": "A research preview model focusing on other: MiniCPM5 1B. Published by OpenBMB.",
+  "description": "Developed by OpenBMB, MiniCPM5 1B is a research preview model exploring new techniques in specialized research.",
   "keyFeatures": [],
   "benchmarks": [],
   "family": null,
@@ -35,6 +35,7 @@
   "verified": false,
   "featured": false,
   "boost": 1,
-  "curatorNotes": "Ingested research preview via bulk triage. Affiliation: OpenBMB. Traction signal: Initial release.",
-  "institution": "OpenBMB"
+  "curatorNotes": "Verified academic/research lab affiliation.",
+  "institution": "OpenBMB",
+  "templatedDescription": false
 }

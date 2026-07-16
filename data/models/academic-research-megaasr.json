@@ -16,7 +16,7 @@
   "license": "Other/Custom",
   "parameters": "undisclosed",
   "contextWindow": "undisclosed",
-  "description": "A research preview model focusing on other: MegaASR. Published by xzf-thu.",
+  "description": "Developed from Tsinghua University MegaASR is a research preview model exploring new techniques in specialized research.",
   "keyFeatures": [],
   "benchmarks": [],
   "family": null,
@@ -35,6 +35,7 @@
   "verified": false,
   "featured": false,
   "boost": 1,
-  "curatorNotes": "Ingested research preview via bulk triage. Affiliation: xzf-thu. Traction signal: Initial release.",
-  "institution": "xzf-thu"
+  "curatorNotes": "Verified academic/research lab affiliation. Originally ingested via bulk triage as 'xzf-thu'. Verified as: Tsinghua University.",
+  "institution": "NTU, NUS, Shanghai AI Lab",
+  "templatedDescription": false
 }

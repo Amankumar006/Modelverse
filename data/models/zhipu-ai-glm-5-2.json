@@ -1,26 +1,22 @@
 {
-  "id": "other-glm-5-2",
+  "id": "zhipu-ai-glm-5-2",
   "name": "GLM 5.2",
-  "slug": "other-glm-5-2",
-  "developer": "Other",
+  "slug": "zhipu-ai-glm-5-2",
+  "developer": "Zhipu AI",
   "releaseDate": "2026-07-15",
   "updatedAt": "2026-07-15",
   "type": "research-preview",
-  "modality": [
-    "text"
-  ],
-  "primaryTask": "other",
-  "deployment": [
-    "self-hostable"
-  ],
+  "modality": ["text"],
+  "primaryTask": "chat-reasoning",
+  "deployment": ["self-hostable"],
   "license": "Other/Custom",
   "parameters": "undisclosed",
   "contextWindow": "undisclosed",
-  "description": "A research preview model focusing on other: GLM 5.2. Published by Zhipu AI.",
+  "description": "An experimental specialized research research preview named GLM 5.2, published by Zhipu AI to showcase novel methods.",
   "keyFeatures": [],
   "benchmarks": [],
-  "family": null,
-  "previousVersion": null,
+  "family": "glm-5-2",
+  "previousVersion": "zhipu-ai-glm-4-5",
   "links": {
     "Website": "https://go.sjv.io/NG007K"
   },
@@ -30,11 +26,13 @@
     "other"
   ],
   "sources": [
-    "https://go.sjv.io/NG007K"
+    "https://go.sjv.io/NG007K",
+    "https://docs.z.ai/guides/llm/glm-5.2",
+    "https://z.ai/blog/glm-5.2"
   ],
   "verified": false,
   "featured": false,
   "boost": 1,
   "curatorNotes": "Ingested research preview via bulk triage. Affiliation: Zhipu AI. Traction signal: Initial release.",
-  "institution": "Zhipu AI"
+  "templatedDescription": true
 }

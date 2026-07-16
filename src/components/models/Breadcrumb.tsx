@@ -15,12 +15,12 @@ interface BreadcrumbProps {
 
 export default function Breadcrumb({ developer, family, model }: BreadcrumbProps) {
   return (
-    <nav aria-label="Breadcrumb" className="flex flex-wrap items-center gap-1.5 text-xs sm:text-sm text-[#6f6f6f]">
-      <Link href="/" className="hover:text-[#0a0a0a] transition-colors">
+    <nav aria-label="Breadcrumb" className="flex flex-wrap items-center gap-1.5 text-xs sm:text-sm text-gray-400">
+      <Link href="/" className="hover:text-white transition-colors">
         Home
       </Link>
       <ChevronRight size={12} className="opacity-40 shrink-0" />
-      <Link href="/models" className="hover:text-[#0a0a0a] transition-colors">
+      <Link href="/models" className="hover:text-white transition-colors">
         Models
       </Link>
       <ChevronRight size={12} className="opacity-40 shrink-0" />
@@ -28,12 +28,12 @@ export default function Breadcrumb({ developer, family, model }: BreadcrumbProps
       {family || model ? (
         <Link
           href={`/models/developer/${encodeURIComponent(developer)}`}
-          className="hover:text-[#0a0a0a] transition-colors truncate max-w-[120px]"
+          className="hover:text-white transition-colors truncate max-w-[120px]"
         >
           {developer}
         </Link>
       ) : (
-        <span className="text-[#0a0a0a] truncate max-w-[150px] font-medium">{developer}</span>
+        <span className="text-white truncate max-w-[150px] font-medium">{developer}</span>
       )}
 
       {family && (
@@ -42,12 +42,12 @@ export default function Breadcrumb({ developer, family, model }: BreadcrumbProps
           {model ? (
             <Link
               href={`/models/family/${family.slug}`}
-              className="hover:text-[#0a0a0a] transition-colors truncate max-w-[120px]"
+              className="hover:text-white transition-colors truncate max-w-[120px]"
             >
               {family.label}
             </Link>
           ) : (
-            <span className="text-[#0a0a0a] truncate max-w-[150px] font-medium">{family.label}</span>
+            <span className="text-white truncate max-w-[150px] font-medium">{family.label}</span>
           )}
         </>
       )}
@@ -55,7 +55,7 @@ export default function Breadcrumb({ developer, family, model }: BreadcrumbProps
       {model && (
         <>
           <ChevronRight size={12} className="opacity-40 shrink-0" />
-          <span className="text-[#0a0a0a] truncate max-w-[150px] sm:max-w-xs font-medium">{model.name}</span>
+          <span className="text-white truncate max-w-[150px] sm:max-w-xs font-medium">{model.name}</span>
         </>
       )}
     </nav>

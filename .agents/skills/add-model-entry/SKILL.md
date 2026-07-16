@@ -53,4 +53,11 @@ description: Adds a single new AI model (open-source, closed-source, API-only, o
   closed-source models — it's informative that it's unknown.
 - `releaseDate`: if only a month is known, use the 1st of that month and
   note the imprecision in `curatorNotes`.
+- `description`: If a custom description cannot be authored and you must use a templated description (e.g. for batch research-previews), set `"templatedDescription": true` in the JSON entry, and rotate/vary the description text using one of the predefined description templates to avoid repeating boilerplate.
+- **Family and Lineage Guidelines**:
+  - **Avoid Over-broad Families**: Never pool all models from a developer under a single brand-level family (e.g., do not put all Kimi models in `"Kimi"` or all Claude models in `"Claude"`).
+  - **Split by Task**: Models with different `primaryTask` or `modality` belong to different family branches (e.g., `gpt-5-codex` is a separate family from `gpt-5`, and `kimi-k2-7-code` is separate from `kimi-k2-6`).
+  - **Linear Chaining Rules**: Only chain models via `previousVersion` if they share the same task and represent a direct version upgrade within the same branch. If the task changes, start a new branch with `previousVersion: null`.
+- **First-class Developers**:
+  - Do not default to `developer: "Other"` for recurring commercial labs (such as Moonshot AI, Liquid AI, Zhipu AI, etc.). First add them to `data/schema/developers.ts` so they get proper navigation, filters, and page rendering.
 - Full field reference: `references/model-entry-example.json`.

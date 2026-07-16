@@ -16,7 +16,7 @@
   "license": "Other/Custom",
   "parameters": "undisclosed",
   "contextWindow": "undisclosed",
-  "description": "A research preview model focusing on other: MusViT. Published by University of Alicante.",
+  "description": "A research-preview model by University of Alicante focusing on specialized research capabilities to invite community feedback.",
   "keyFeatures": [],
   "benchmarks": [],
   "family": null,
@@ -35,6 +35,7 @@
   "verified": false,
   "featured": false,
   "boost": 1,
-  "curatorNotes": "Ingested research preview via bulk triage. Affiliation: University of Alicante. Traction signal: Initial release.",
-  "institution": "University of Alicante"
+  "curatorNotes": "Verified academic/research lab affiliation.",
+  "institution": "University of Alicante",
+  "templatedDescription": false
 }

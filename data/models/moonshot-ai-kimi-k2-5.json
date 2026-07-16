@@ -1,0 +1,37 @@
+{
+  "id": "moonshot-ai-kimi-k2-5",
+  "name": "Kimi K2.5",
+  "slug": "moonshot-ai-kimi-k2-5",
+  "developer": "Moonshot AI",
+  "releaseDate": "2026-01-27",
+  "updatedAt": "2026-01-27",
+  "type": "open-weights",
+  "modality": ["text", "image"],
+  "primaryTask": "multimodal-general",
+  "deployment": ["self-hostable"],
+  "license": "Other/Custom",
+  "parameters": "1T (32B active)",
+  "contextWindow": "256K tokens",
+  "description": "Moonshot AI's open-weights Mixture-of-Experts multimodal model, introducing Agent Swarm orchestration and visual agentic intelligence.",
+  "keyFeatures": [
+    "Mixture-of-Experts architecture with ~1T parameters and 32B active per token",
+    "Incorporates MoonViT 400M parameter vision encoder for native multimodality",
+    "Agent Swarm architecture for task decomposition and multi-agent coordination"
+  ],
+  "benchmarks": [],
+  "family": "kimi-agentic-multimodal",
+  "previousVersion": null,
+  "links": {
+    "website": "https://www.kimi.com"
+  },
+  "logo": null,
+  "tags": ["moe", "agent-swarm", "multimodal"],
+  "sources": [
+    "https://www.kimi.com/ai-models/kimi-k2-6"
+  ],
+  "verified": false,
+  "featured": false,
+  "boost": 1,
+  "curatorNotes": "The base foundation for Moonshot's Kimi K2 series, establishing the Agent Swarm paradigm.",
+  "templatedDescription": false
+}

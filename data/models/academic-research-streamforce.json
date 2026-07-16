@@ -16,7 +16,7 @@
   "license": "Other/Custom",
   "parameters": "undisclosed",
   "contextWindow": "undisclosed",
-  "description": "A research preview model focusing on other: StreamForce. Published by neu-vi.",
+  "description": "Developed from Northeastern University StreamForce is a research preview model exploring new techniques in specialized research.",
   "keyFeatures": [],
   "benchmarks": [],
   "family": null,
@@ -35,6 +35,7 @@
   "verified": false,
   "featured": false,
   "boost": 1,
-  "curatorNotes": "Ingested research preview via bulk triage. Affiliation: neu-vi. Traction signal: Initial release.",
-  "institution": "neu-vi"
+  "curatorNotes": "Verified academic/research lab affiliation. Originally ingested via bulk triage as 'neu-vi'. Verified as: Northeastern University.",
+  "institution": "Northeastern University",
+  "templatedDescription": false
 }

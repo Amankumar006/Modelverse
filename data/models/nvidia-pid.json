@@ -16,7 +16,7 @@
   "license": "Other/Custom",
   "parameters": "undisclosed",
   "contextWindow": "undisclosed",
-  "description": "A research preview model focusing on other: PiD. Published by NVIDIA.",
+  "description": "An experimental specialized research research preview named PiD, published by NVIDIA to showcase novel methods.",
   "keyFeatures": [],
   "benchmarks": [],
   "family": null,
@@ -35,5 +35,6 @@
   "verified": false,
   "featured": false,
   "boost": 1,
-  "curatorNotes": "Ingested research preview via bulk triage. Affiliation: NVIDIA. Traction signal: Initial release."
+  "curatorNotes": "Ingested research preview via bulk triage. Affiliation: NVIDIA. Traction signal: Initial release.",
+  "templatedDescription": true
 }

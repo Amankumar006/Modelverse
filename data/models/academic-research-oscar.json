@@ -16,7 +16,7 @@
   "license": "Other/Custom",
   "parameters": "undisclosed",
   "contextWindow": "undisclosed",
-  "description": "A research preview model focusing on other: Oscar. Published by wuzy2115.",
+  "description": "A research-preview model from University of Washington, Microsoft focusing on specialized research capabilities to invite community feedback.",
   "keyFeatures": [],
   "benchmarks": [],
   "family": null,
@@ -35,6 +35,8 @@
   "verified": false,
   "featured": false,
   "boost": 1,
-  "curatorNotes": "Ingested research preview via bulk triage. Affiliation: wuzy2115. Traction signal: Initial release.",
-  "institution": "wuzy2115"
+  "curatorNotes": "Verified academic/research lab affiliation. Originally ingested via bulk triage as 'wuzy2115'. Verified as: University of Washington, Microsoft.",
+  "institution": "University of Washington, Microsoft",
+  "templatedDescription": false,
+  "url": "https://www.microsoft.com/en-us/research/publication/oscar-object-semantics-aligned-pre-training-for-vision-language-tasks/"
 }

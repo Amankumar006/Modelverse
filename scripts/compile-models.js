@@ -39,6 +39,7 @@ const ModelSchema = z.object({
   parameters: z.string(),
   contextWindow: z.string(),
   description: z.string(),
+  templatedDescription: z.boolean().optional(),
   keyFeatures: z.array(z.string()),
   benchmarks: z.array(BenchmarkSchema),
   family: z.string().nullable(),
@@ -50,6 +51,14 @@ const ModelSchema = z.object({
     label: z.string(),
     description: z.string().optional()
   })).optional(),
+  pricing: z.array(z.object({
+    tier: z.string().optional(),
+    unit: z.string(),
+    amount: z.number(),
+    currency: z.string().default("USD"),
+    notes: z.string().optional()
+  })).optional(),
+  pricingLastVerified: z.string().regex(/^\d{4}-\d{2}-\d{2}$/).optional(),
   links: z.record(z.string(), z.string()),
   logo: z.string().nullable(),
   tags: z.array(z.string()),

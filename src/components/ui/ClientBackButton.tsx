@@ -25,7 +25,7 @@ export default function ClientBackButton({
     return (
       <button
         onClick={() => router.back()}
-        className="inline-flex items-center gap-1.5 text-xs text-[#6f6f6f] hover:text-[#0a0a0a] transition-colors group mb-8 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black/50 focus-visible:ring-offset-2 rounded-lg px-2 py-1"
+        className="inline-flex items-center gap-1.5 text-xs text-gray-400 hover:text-white transition-colors group mb-8 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black/50 focus-visible:ring-offset-2 rounded-lg px-2 py-1"
       >
         <ChevronLeft size={14} className="transition-transform group-hover:-translate-x-0.5" />
         Back to previous
@@ -36,7 +36,7 @@ export default function ClientBackButton({
   return (
     <Link
       href={fallbackHref}
-      className="inline-flex items-center gap-1.5 text-xs text-[#6f6f6f] hover:text-[#0a0a0a] transition-colors group mb-8 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black/50 focus-visible:ring-offset-2 rounded-lg px-2 py-1"
+      className="inline-flex items-center gap-1.5 text-xs text-gray-400 hover:text-white transition-colors group mb-8 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black/50 focus-visible:ring-offset-2 rounded-lg px-2 py-1"
     >
       <ChevronLeft size={14} className="transition-transform group-hover:-translate-x-0.5" />
       Back to {fallbackLabel}

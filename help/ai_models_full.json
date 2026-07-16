@@ -1,0 +1,406 @@
+[
+    {
+        "name": "Actionable World",
+        "link": "https://worldstring-iei.github.io/"
+    },
+    {
+        "name": "Agents A1",
+        "link": "https://internscience.github.io/Agents-A1/"
+    },
+    {
+        "name": "Agents Last Exam",
+        "link": "https://agents-last-exam.org/"
+    },
+    {
+        "name": "AnchorWorld",
+        "link": "https://yuli0103.github.io/AnchorWorld/"
+    },
+    {
+        "name": "Arbor",
+        "link": "https://ruc-nlpir.github.io/Arbor/"
+    },
+    {
+        "name": "Aspire (NVIDIA)",
+        "link": "https://research.nvidia.com/labs/gear/aspire/"
+    },
+    {
+        "name": "AutoScientists",
+        "link": "https://autoscientists.openscientist.ai/"
+    },
+    {
+        "name": "Bernini",
+        "link": "https://bernini-ai.github.io/"
+    },
+    {
+        "name": "Bonsai Image",
+        "link": "https://prismml.com/news/bonsai-image-4b"
+    },
+    {
+        "name": "Brain2qwerty (Meta BCI model)",
+        "link": "https://ai.meta.com/blog/brain2qwerty-brain-ai-human-communication/"
+    },
+    {
+        "name": "Carbon",
+        "link": "https://huggingface.co/spaces/HuggingFaceH4/open_llm_leaderboard"
+    },
+    {
+        "name": "CHORD (NVIDIA)",
+        "link": "https://nvidia-isaac.github.io/video_to_data/chord/"
+    },
+    {
+        "name": "Claude Fable (Anthropic)",
+        "link": null
+    },
+    {
+        "name": "Claude Sonnet 5 (Anthropic)",
+        "link": "https://www.anthropic.com/news/claude-3-5-sonnet"
+    },
+    {
+        "name": "CogOmniControl",
+        "link": "https://um-lab.github.io/CogOmniControl/"
+    },
+    {
+        "name": "ControlLight",
+        "link": "https://yfyang007.github.io/ControlLight/"
+    },
+    {
+        "name": "Cosmos 3",
+        "link": "https://developer.nvidia.com/blog/develop-physical-ai-reasoning-world-and-action-models-with-nvidia-cosmos-3/"
+    },
+    {
+        "name": "Co-scientist",
+        "link": "https://deepmind.google/blog/co-scientist-accelerating-scientific-discovery/"
+    },
+    {
+        "name": "CubePart",
+        "link": "https://cubepart.github.io/"
+    },
+    {
+        "name": "Deja View",
+        "link": "https://research.nvidia.com/labs/dvl/projects/dvlt/"
+    },
+    {
+        "name": "DeepSWE",
+        "link": "https://deepswe.datacurve.ai/blog"
+    },
+    {
+        "name": "DiffusionGemma (Google)",
+        "link": "https://blog.google/innovation-and-ai/technology/developers-tools/diffusion-gemma-faster-text-generation/"
+    },
+    {
+        "name": "Dots TTS",
+        "link": "https://rednote-hilab.github.io/dots.tts-demo/"
+    },
+    {
+        "name": "FashionChameleon",
+        "link": "https://quanjiansong.github.io/projects/FashionChameleon/"
+    },
+    {
+        "name": "Flash GRPO",
+        "link": "https://shredded-pork.github.io/Flash-GRPO.github.io/"
+    },
+    {
+        "name": "Flex4DHuman",
+        "link": "https://andy-cheng.github.io/Flex4DHuman/"
+    },
+    {
+        "name": "Gamma World",
+        "link": "http://research.nvidia.com/labs/sil/gammaworld/"
+    },
+    {
+        "name": "Gemini Live Translate",
+        "link": "https://blog.google/innovation-and-ai/"
+    },
+    {
+        "name": "Gemma4 12B (Google)",
+        "link": "https://blog.google/innovation-and-ai/"
+    },
+    {
+        "name": "GenRecon",
+        "link": "https://kasothaphie.github.io/GenRecon/"
+    },
+    {
+        "name": "GLM 5.2 (Zhipu AI)",
+        "link": "https://go.sjv.io/NG007K"
+    },
+    {
+        "name": "GPT Dreaming",
+        "link": "https://openai.com/index/chatgpt-memory/"
+    },
+    {
+        "name": "Hi3D",
+        "link": null
+    },
+    {
+        "name": "Higgs Audio v3",
+        "link": "https://www.boson.ai/blog/higgs-audio-v3"
+    },
+    {
+        "name": "HY-MT2",
+        "link": "https://huggingface.co/tencent/Hy-MT2"
+    },
+    {
+        "name": "i1",
+        "link": "https://zlab-princeton.github.io/i1/"
+    },
+    {
+        "name": "Ideogram v4",
+        "link": "https://ideogram.cello.so/OKCq91CUlrt"
+    },
+    {
+        "name": "InstructAV2AV",
+        "link": "https://hjzheng.net/projects/InstructAV2AV/"
+    },
+    {
+        "name": "Kimi K2.7 (Moonshot AI)",
+        "link": "https://www.kimi.com/code"
+    },
+    {
+        "name": "L2P",
+        "link": "https://nju-pcalab.github.io/projects/L2P/"
+    },
+    {
+        "name": "Lance",
+        "link": "https://lance-project.github.io/"
+    },
+    {
+        "name": "LeRobot (Hugging Face)",
+        "link": "https://huggingface.co/blog/VirgileBaudru/lerobot"
+    },
+    {
+        "name": "LiTo",
+        "link": "https://apple.github.io/ml-lito/"
+    },
+    {
+        "name": "LiveEdit",
+        "link": "https://live-edit.github.io/"
+    },
+    {
+        "name": "LocateAnything (NVIDIA)",
+        "link": "https://research.nvidia.com/labs/lpr/locateanything/"
+    },
+    {
+        "name": "LongCat 2.0",
+        "link": "https://longcat.chat/blog/longcat-2.0/"
+    },
+    {
+        "name": "LongCat Avatar 1.5",
+        "link": "https://huggingface.co/meituan-longcat"
+    },
+    {
+        "name": "Luma Agents",
+        "link": null
+    },
+    {
+        "name": "Luna",
+        "link": "https://penghtyx.github.io/LUNA/"
+    },
+    {
+        "name": "Magenta Realtime",
+        "link": "https://magenta.withgoogle.com/magenta-realtime-2"
+    },
+    {
+        "name": "MAI Image",
+        "link": null
+    },
+    {
+        "name": "MAI Thinking",
+        "link": "https://microsoft.ai/news/introducing-mai-thinking/"
+    },
+    {
+        "name": "Majorana 2",
+        "link": "https://news.microsoft.com/source/features/majorana-2/"
+    },
+    {
+        "name": "Mamma",
+        "link": "https://mamma.is.tue.mpg.de/"
+    },
+    {
+        "name": "Marlin 2B",
+        "link": "https://huggingface.co/NemoStation/Marlin-2B"
+    },
+    {
+        "name": "MegaASR",
+        "link": "https://xzf-thu.github.io/Mega-ASR/"
+    },
+    {
+        "name": "MeshFlow",
+        "link": "https://mesh-flow.github.io/"
+    },
+    {
+        "name": "Millivid",
+        "link": "https://davidcharatan.com/millivid/"
+    },
+    {
+        "name": "MiniCPM5 1B (OpenBMB)",
+        "link": "https://huggingface.co/openbmb/MiniCPM5-1B"
+    },
+    {
+        "name": "MiniMax M3",
+        "link": "https://huggingface.co/MiniMaxAI/MiniMax-M3"
+    },
+    {
+        "name": "Moverse",
+        "link": "https://orange-3dv-team.github.io/MoVerse/"
+    },
+    {
+        "name": "MrFlow",
+        "link": "https://github.com/Xingyu-Zheng/MrFlow"
+    },
+    {
+        "name": "MusViT",
+        "link": "https://grfia.dlsi.ua.es/musvit/"
+    },
+    {
+        "name": "NAVA",
+        "link": "https://ernie-research.github.io/NAVA/"
+    },
+    {
+        "name": "Nemotron 3 Ultra (NVIDIA)",
+        "link": "https://developer.nvidia.com/blog/nvidia-nemotron-3-ultra/"
+    },
+    {
+        "name": "Nex N2",
+        "link": "https://nex-agi.com/"
+    },
+    {
+        "name": "New Google Models",
+        "link": "https://blog.google/innovation-and-ai/"
+    },
+    {
+        "name": "OmniContact",
+        "link": "https://omnicontact.github.io/"
+    },
+    {
+        "name": "OmniDreams",
+        "link": "https://research.nvidia.com/labs/sil/omnidreams/"
+    },
+    {
+        "name": "Opus 4.8 (Anthropic Claude model)",
+        "link": "https://www.anthropic.com/news/claude-3-5-opus"
+    },
+    {
+        "name": "Oscar",
+        "link": "https://wuzy2115.github.io/oscar-project/"
+    },
+    {
+        "name": "PaGeR",
+        "link": "https://pager360.github.io/"
+    },
+    {
+        "name": "Pantheon 360",
+        "link": "https://koi953215.github.io/pantheon360/"
+    },
+    {
+        "name": "PanoWorld",
+        "link": "https://jjrcn.github.io/PanoWorld-project/"
+    },
+    {
+        "name": "PhysiFormer",
+        "link": "https://yimingc9.github.io/physiformer/"
+    },
+    {
+        "name": "PhysX Omni (NVIDIA)",
+        "link": "https://physx-omni.github.io/"
+    },
+    {
+        "name": "PiD",
+        "link": "https://research.nvidia.com/labs/sil/pid/"
+    },
+    {
+        "name": "PixlRelight",
+        "link": "https://mlfarinha.github.io/pixl-relight/"
+    },
+    {
+        "name": "Qwen 3.7 (Alibaba)",
+        "link": "https://qwen.ai/blog?id=qwen3.7"
+    },
+    {
+        "name": "Qwen 3.7 Plus (Alibaba)",
+        "link": "https://qwen.ai/blog?id=qwen3.7-plus"
+    },
+    {
+        "name": "Qwen Live Translate",
+        "link": "https://qwen.ai/blog?id=qwen3.5-livetranslate"
+    },
+    {
+        "name": "Rai AthenaZero",
+        "link": null
+    },
+    {
+        "name": "RDM",
+        "link": "https://alan-lanfeng.github.io/rdm/"
+    },
+    {
+        "name": "ReactiveGWM",
+        "link": "https://inv-wzq.github.io/ReactiveGWM/"
+    },
+    {
+        "name": "Relightable Chars",
+        "link": "https://vcai.mpi-inf.mpg.de/projects/RelightableChars/"
+    },
+    {
+        "name": "Reve 2",
+        "link": "https://app.reve.com/"
+    },
+    {
+        "name": "RTX Spark",
+        "link": "https://www.nvidia.com/en-us/products/rtx-spark/"
+    },
+    {
+        "name": "SCAIL 2",
+        "link": "https://teal024.github.io/SCAIL-2/"
+    },
+    {
+        "name": "Scope",
+        "link": "https://z2tong.github.io/SCOPE/"
+    },
+    {
+        "name": "Stable Audio 3 (Stability AI)",
+        "link": "https://stability.ai/news-updates/meeting-stable-audio-3"
+    },
+    {
+        "name": "Stable Layers",
+        "link": "https://stability-ai.github.io/stable-layers/"
+    },
+    {
+        "name": "Step 3.7 Flash (StepFun)",
+        "link": "https://static.stepfun.com/blog/step-3.7-flash"
+    },
+    {
+        "name": "StreamChar",
+        "link": "https://humanaigc.github.io/StreamChar/"
+    },
+    {
+        "name": "StreamForce",
+        "link": "https://neu-vi.github.io/StreamForce/"
+    },
+    {
+        "name": "Surflo",
+        "link": "https://anttwo.github.io/surflo/"
+    },
+    {
+        "name": "TriSplat",
+        "link": "https://lhmd.top/trisplat/"
+    },
+    {
+        "name": "VideoMDM",
+        "link": "https://videomdm.github.io/"
+    },
+    {
+        "name": "VidiHand",
+        "link": "https://vidihand.github.io/"
+    },
+    {
+        "name": "WavFlow",
+        "link": "https://facebookresearch.github.io/WavFlow/"
+    },
+    {
+        "name": "WavTTS",
+        "link": "https://wavtts.github.io/"
+    },
+    {
+        "name": "World Tracing",
+        "link": "https://haoz19.github.io/world-tracing/"
+    }
+]
