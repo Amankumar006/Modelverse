@@ -36,10 +36,12 @@ Use this skill to draft News section content (Short News and Weekly News roundup
 ---
 
 ## Hard Constraints (Non-Negotiable)
-1. **House Byline**: The `author` field must always be `"Modelverse Editorial"`. Never fabricate a person's name.
-2. **Draft Status**: Every drafted article MUST be written to disk with `"status": "draft"`. Never auto-set `"status": "published"`.
-3. **Appropriate Categories**: This skill only drafts `"short-news"` and `"weekly-news"` category entries. It does NOT draft `"model-review"` or `"other"` categories.
-4. **No Cover Art Generation**: Do NOT generate cover art. Leave the `coverImage` field as an empty string `""` and flag it to the curator.
+1. **Prioritize User-Provided Data**: If the user provides specific links, quotes, or data points in their prompt, you MUST prioritize this information and use it as the primary source material for the article. Make sure to include all provided links in the article body where relevant, and add them to the `externalSources` array.
+2. **House Byline**: The `author` field must always be `"Modelverse Editorial"`. Never fabricate a person's name.
+3. **Draft Status**: Every drafted article MUST be written to disk with `"status": "draft"`. Never auto-set `"status": "published"`.
+4. **Appropriate Categories**: This skill only drafts `"short-news"`, `"weekly-news"`, and `"model-review"` categories.
+5. **Standard Markdown Syntax**: You MUST strictly use standard Markdown syntax for all formatting and embedded media (e.g., `![alt text](url)` for images, `[link text](url)` for links). **NEVER** use raw HTML tags like `<img src="...">` or `<div>`, as the frontend parser explicitly escapes raw HTML for security reasons.
+6. **No Cover Art Generation**: Do NOT generate cover art. Leave the `coverImage` field as an empty string `""` and flag it to the curator.
 
 ---
 

@@ -66,7 +66,7 @@ export default async function DeveloperPage({
   }
 
   return (
-    <main className="min-h-screen bg-[#0b0f19] text-gray-100 selection:bg-brand-orange selection:text-white pb-24 relative">
+    <main className="min-h-screen bg-[#0C120F] text-gray-100 selection:bg-[#4ADE80] selection:text-white pb-24 relative">
       <Navbar theme="dark" />
       {/* ── Top Bar / Breadcrumb ─────────────────────────────── */}
       <header className="w-full mx-auto px-4 sm:px-6 lg:px-8 2xl:px-12 pt-8 pb-4">
@@ -90,7 +90,11 @@ export default async function DeveloperPage({
         </div>
 
         {/* Catalog component (dense table + client filters) */}
-        <ModelCatalog models={models} developers={developers} />
+        <ModelCatalog 
+          models={models} 
+          developers={developers} 
+          hideDeveloperPrefix={true} 
+        />
       </div>
     </main>
   );

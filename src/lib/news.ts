@@ -35,7 +35,9 @@ function loadDevNewsIndex(): NewsArticleIndexEntry[] {
     relatedModels: z.array(z.string()).optional(),
     tags: z.array(z.string()).optional(),
     seoTitle: z.string().optional(),
-    seoDescription: z.string().optional()
+    seoDescription: z.string().optional(),
+    isFeatured: z.boolean().optional().default(false),
+    isTrending: z.boolean().optional().default(false)
   });
 
   for (const file of files) {
@@ -107,7 +109,9 @@ function loadDevArticleBySlug(slug: string): NewsArticle | null {
     relatedModels: z.array(z.string()).optional(),
     tags: z.array(z.string()).optional(),
     seoTitle: z.string().optional(),
-    seoDescription: z.string().optional()
+    seoDescription: z.string().optional(),
+    isFeatured: z.boolean().optional().default(false),
+    isTrending: z.boolean().optional().default(false)
   });
 
   const rawEntries: any[] = [];

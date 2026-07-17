@@ -22,6 +22,8 @@ export const NewsArticleSchema = z.object({
   tags: z.array(z.string()).optional(),
   seoTitle: z.string().optional(), // override <title>
   seoDescription: z.string().optional(), // override meta description
+  isFeatured: z.boolean().optional().default(false), // pin to Hero section
+  isTrending: z.boolean().optional().default(false), // pin to Trending section
 });
 
 export type NewsArticle = z.infer<typeof NewsArticleSchema>;

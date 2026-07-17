@@ -1,5 +1,63 @@
 [
   {
+    "id": "kimi-k3-full-review",
+    "slug": "kimi-k3-full-review",
+    "title": "Kimi K3 Full Review: Redefining Open-Source AI at the 3-Trillion Scale",
+    "category": "model-review",
+    "publishDate": "2026-07-18",
+    "author": "Modelverse Editorial",
+    "readTime": "8 min read",
+    "excerpt": "An in-depth review of Kimi K3, examining its hybrid KDA architecture, long-horizon coding capabilities, visual reasoning, API features, and how it handles a 1M-token context efficiently.",
+    "coverImage": "/images/news/kimi_k3_review_cover.jpg",
+    "status": "published",
+    "confidenceLevel": "confirmed",
+    "externalSources": [
+      "https://platform.kimi.ai/docs/guide/kimi-k3-quickstart",
+      "https://www.kimi.com/blog/kimi-k3",
+      "https://www.kimi.com/?chat_enter_method=new_chat"
+    ],
+    "relatedModels": [
+      "moonshot-ai-kimi-k3"
+    ],
+    "tags": [
+      "kimi-k3",
+      "model-review",
+      "open-weights",
+      "architecture"
+    ],
+    "isFeatured": true,
+    "isTrending": true
+  },
+  {
+    "id": "kimi-k3-release-short",
+    "slug": "kimi-k3-release-short",
+    "title": "Moonshot AI Unveils Kimi K3: A 2.8 Trillion Parameter Open-Source Flagship",
+    "category": "short-news",
+    "publishDate": "2026-07-18",
+    "author": "Modelverse Editorial",
+    "readTime": "3 min read",
+    "excerpt": "Kimi K3 is a new open-source model with 2.8 trillion parameters, built on KDA and featuring a 1M-token context window with automatic caching.",
+    "coverImage": "/images/news/kimi_k3_news_cover.jpg",
+    "status": "published",
+    "confidenceLevel": "confirmed",
+    "externalSources": [
+      "https://platform.kimi.ai/docs/guide/kimi-k3-quickstart",
+      "https://www.kimi.com/blog/kimi-k3",
+      "https://www.kimi.com/?chat_enter_method=new_chat"
+    ],
+    "relatedModels": [
+      "moonshot-ai-kimi-k3"
+    ],
+    "tags": [
+      "kimi",
+      "open-source",
+      "kimi-k3",
+      "moonshot-ai"
+    ],
+    "isFeatured": false,
+    "isTrending": true
+  },
+  {
     "id": "post-8",
     "slug": "weekly-recap-gpt-red-safety-roundup",
     "title": "Weekly Recap: OpenAI GPT-Red, Security Research, and Agent Robustness",
@@ -24,6 +82,8 @@
       "red-teaming",
       "weekly-recap"
     ],
+    "isFeatured": false,
+    "isTrending": false,
     "issueNumber": 3
   },
   {
@@ -44,7 +104,9 @@
     ],
     "relatedModels": [
       "anthropic-claude-sonnet-5"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "post-9",
@@ -69,7 +131,9 @@
       "deepmind",
       "alphaevolve",
       "agentic"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": false
   },
   {
     "id": "openai-codex-chatgpt-sol-updates",
@@ -88,7 +152,9 @@
     ],
     "relatedModels": [
       "gpt-5-6"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": false
   },
   {
     "id": "featured-1",
@@ -111,6 +177,8 @@
       "safety",
       "rlhf"
     ],
+    "isFeatured": false,
+    "isTrending": false,
     "issueNumber": 2
   },
   {
@@ -134,6 +202,8 @@
       "claude",
       "open-weights"
     ],
+    "isFeatured": false,
+    "isTrending": false,
     "issueNumber": 1
   },
   {
@@ -155,7 +225,9 @@
       "hardware",
       "on-device",
       "npu"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": false
   },
   {
     "id": "post-3",
@@ -182,7 +254,9 @@
       "gemini",
       "benchmarks",
       "speed"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": false
   },
   {
     "id": "post-7",
@@ -207,7 +281,9 @@
       "google",
       "diffusion",
       "open-source"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "post-10",
@@ -232,7 +308,9 @@
       "medical",
       "healthcare",
       "open-weights"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": false
   },
   {
     "id": "post-11",
@@ -257,6 +335,8 @@
       "vaultgemma",
       "gemma",
       "open-weights"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": false
   }
 ]

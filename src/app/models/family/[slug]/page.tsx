@@ -30,7 +30,8 @@ export async function generateMetadata({
 }: {
   params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
-  const { slug } = await params;
+  const { slug: rawSlug } = await params;
+  const slug = decodeURIComponent(rawSlug);
   const models = getAllModelEntries().filter((m) => m.family === slug);
   
   if (models.length === 0) {
@@ -47,12 +48,12 @@ export async function generateMetadata({
     title,
     description,
     alternates: {
-      canonical: `${SITE_URL}/models/family/${slug}`,
+      canonical: `${SITE_URL}/models/family/${encodeURIComponent(slug)}`,
     },
     openGraph: {
       title,
       description,
-      url: `${SITE_URL}/models/family/${slug}`,
+      url: `${SITE_URL}/models/family/${encodeURIComponent(slug)}`,
       type: "website",
       siteName: "Modelverse",
     },
@@ -64,7 +65,8 @@ export default async function FamilyPage({
 }: {
   params: Promise<{ slug: string }>;
 }) {
-  const { slug } = await params;
+  const { slug: rawSlug } = await params;
+  const slug = decodeURIComponent(rawSlug);
   const models = getAllModelEntries().filter((m) => m.family === slug);
 
   if (models.length === 0) {
@@ -75,7 +77,7 @@ export default async function FamilyPage({
   const developer = primaryModel.developer;
 
   return (
-    <main className="min-h-screen bg-[#0b0f19] text-white selection:bg-brand-orange selection:text-white pb-24 relative">
+    <main className="min-h-screen bg-[#0C120F] text-white selection:bg-[#4ADE80] selection:text-white pb-24 relative">
       <Navbar theme="dark" />
       {/* ── Top Bar / Breadcrumb ─────────────────────────────── */}
       <header className="max-w-4xl mx-auto px-4 sm:px-6 pt-8 pb-4">
@@ -90,7 +92,7 @@ export default async function FamilyPage({
         />
 
         <div className="mb-10 space-y-4">
-          <div className="inline-flex items-center gap-2 text-brand-orange bg-brand-orange/10 px-3 py-1 rounded-full text-xs font-semibold mb-2">
+          <div className="inline-flex items-center gap-2 text-[#4ADE80] bg-[#4ADE80]/10 px-3 py-1 rounded-full text-xs font-semibold mb-2">
             <Sparkles size={14} />
             Model Family
           </div>
@@ -114,13 +116,13 @@ export default async function FamilyPage({
             const prevVersionModel = model.previousVersion ? allModels.find(m => m.slug === model.previousVersion) : null;
             
             return (
-              <div key={model.id} className="flex flex-col gap-2 bg-[#fdfdfd] p-3 rounded-2xl border border-black/5">
+              <div key={model.id} className="flex flex-col gap-2 bg-white/5 p-3 rounded-2xl border border-white/10">
                 <ModelCard model={model} variant="row" />
                 
                 {/* Cross-Generation Nav */}
                 {(nextVersionModel || prevVersionModel) && (
                   <div className="flex flex-wrap items-center gap-x-4 gap-y-2 px-3 py-1 text-xs text-gray-400 font-medium">
-                    <span className="text-black/40 text-[10px] uppercase tracking-widest font-bold">Lineage</span>
+                    <span className="text-white/40 text-[10px] uppercase tracking-widest font-bold">Lineage</span>
                     <div className="flex items-center gap-3">
                       {prevVersionModel && prevVersionModel.family && (
                          <Link href={`/models/family/${prevVersionModel.family}`} className="flex items-center gap-1 hover:text-white transition-colors">
@@ -128,7 +130,7 @@ export default async function FamilyPage({
                            {prevVersionModel.family} {prevVersionModel.tier ? `(${prevVersionModel.tier})` : ''}
                          </Link>
                       )}
-                      {(prevVersionModel && nextVersionModel) && <span className="text-black/20">|</span>}
+                      {(prevVersionModel && nextVersionModel) && <span className="text-white/20">|</span>}
                       {nextVersionModel && nextVersionModel.family && (
                          <Link href={`/models/family/${nextVersionModel.family}`} className="flex items-center gap-1 hover:text-white transition-colors">
                            {nextVersionModel.family} {nextVersionModel.tier ? `(${nextVersionModel.tier})` : ''}

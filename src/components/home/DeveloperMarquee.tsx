@@ -8,7 +8,7 @@ function getAbstractLogo(developer: string) {
   // 1. Anthropic: Triangle with a horizontal bar
   if (name.includes("anthropic")) {
     return (
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="w-6 h-6 text-white/80 group-hover/tile:text-brand-orange transition-colors">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="w-6 h-6 text-[#A3B8AA] group-hover/tile:text-[#4ADE80] transition-colors">
         <path d="M12 4L4 20h16z" strokeLinejoin="round" />
         <path d="M8 15h8" />
       </svg>
@@ -18,7 +18,7 @@ function getAbstractLogo(developer: string) {
   // 2. ChatGPT / OpenAI: Double ring/loop
   if (name.includes("openai") || name.includes("chatgpt")) {
     return (
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="w-6 h-6 text-white/80 group-hover/tile:text-brand-orange transition-colors">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="w-6 h-6 text-[#A3B8AA] group-hover/tile:text-[#4ADE80] transition-colors">
         <circle cx="9" cy="12" r="3.5" />
         <circle cx="15" cy="12" r="3.5" />
       </svg>
@@ -28,7 +28,7 @@ function getAbstractLogo(developer: string) {
   // 3. Gemini / Google: Four-pointed star with a center dot
   if (name.includes("google") || name.includes("gemini")) {
     return (
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="w-6 h-6 text-white/80 group-hover/tile:text-brand-orange transition-colors">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="w-6 h-6 text-[#A3B8AA] group-hover/tile:text-[#4ADE80] transition-colors">
         <path d="M12 4c0 4 4 8 8 8-4 0-8 4-8 8 0-4-4-8-8-8 4 0 8-4 8-8z" strokeLinejoin="round" />
         <circle cx="12" cy="12" r="1.5" fill="currentColor" />
       </svg>
@@ -38,7 +38,7 @@ function getAbstractLogo(developer: string) {
   // 4. DeepSeek / Meta: Infinity symbol
   if (name.includes("meta") || name.includes("llama") || name.includes("deepseek")) {
     return (
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="w-6 h-6 text-white/80 group-hover/tile:text-brand-orange transition-colors">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="w-6 h-6 text-[#A3B8AA] group-hover/tile:text-[#4ADE80] transition-colors">
         <path d="M8 9a3 3 0 1 0 0 6c1.8 0 3-1.2 4-3 1 1.8 2.2 3 4 3a3 3 0 1 0 0-6c-1.8 0-3 1.2-4 3-1-1.8-2.2-3-4-3z" />
       </svg>
     );
@@ -46,7 +46,7 @@ function getAbstractLogo(developer: string) {
 
   // 5. Mistral / others: Diamond with a center dot
   return (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="w-6 h-6 text-white/80 group-hover/tile:text-brand-orange transition-colors">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="w-6 h-6 text-[#A3B8AA] group-hover/tile:text-[#4ADE80] transition-colors">
       <path d="M12 4l7 8-7 8-7-8z" strokeLinejoin="round" />
       <circle cx="12" cy="12" r="1.8" fill="currentColor" />
     </svg>
@@ -56,7 +56,7 @@ function getAbstractLogo(developer: string) {
 function DeveloperTile({ developer }: { developer: string }) {
   return (
     <div
-      className="liquid-glass h-14 w-14 md:h-16 md:w-16 rounded-xl flex items-center justify-center shrink-0 border border-white/[0.08] relative group/tile transition-all duration-300 hover:scale-105 active:scale-95"
+      className="liquid-glass h-14 w-14 md:h-16 md:w-16 rounded-xl flex items-center justify-center shrink-0 border border-[#243629] relative group/tile transition-all duration-300 hover:scale-105 active:scale-95"
       title={developer}
     >
       {getAbstractLogo(developer)}

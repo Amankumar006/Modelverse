@@ -22,7 +22,6 @@ export default function TimelineContainer({ initialModels }: TimelineContainerPr
   const requestRef = useRef<number | null>(null);
 
   const wheelRef = useRef<HTMLDivElement>(null);
-  const bgRef = useRef<HTMLDivElement>(null);
 
   const dragStartY = useRef(0);
   const dragStartAngle = useRef(0);
@@ -147,10 +146,6 @@ export default function TimelineContainer({ initialModels }: TimelineContainerPr
       // Update rotating dial wheel
       if (wheelRef.current) {
         wheelRef.current.style.transform = `translate(-50%, -50%) rotate(${-angleRef.current}deg)`;
-      }
-
-      if (bgRef.current) {
-        bgRef.current.style.transform = `translate(-50%, -50%)`;
       }
 
       requestRef.current = requestAnimationFrame(animate);
@@ -298,21 +293,20 @@ export default function TimelineContainer({ initialModels }: TimelineContainerPr
         __html: `
         :root {
           --wheel-radius: 55vw;
-          --wheel-left: -15vw;
-          --content-left: 46vw;
+          --wheel-left: calc(27.3vw - var(--wheel-radius));
+          --wheel-top: 55.1vh;
+          --content-left: calc(27.3vw + 18vw);
         }
         @media (min-width: 768px) {
           :root {
             --wheel-radius: 42vw;
-            --wheel-left: -5vw;
-            --content-left: 48vw;
+            --content-left: calc(27.3vw + 20vw);
           }
         }
         @media (min-width: 1200px) {
           :root {
             --wheel-radius: 500px;
-            --wheel-left: -50px;
-            --content-left: 550px;
+            --content-left: calc(27.3vw + 30px);
           }
         }
         
@@ -333,30 +327,20 @@ export default function TimelineContainer({ initialModels }: TimelineContainerPr
         }
       `}} />
 
-      {/* ── Seamless Dial Face Background (Uncropped, contained to the left dial axis) ── */}
+      {/* ── Full Page Background ── */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none z-1">
         <div
-          ref={bgRef}
-          className="absolute bg-[url('/images/timeline-dial-bg.png')] bg-cover bg-center opacity-[0.88] transition-all duration-300 mix-blend-darken"
-          style={{
-            left: "var(--wheel-left)",
-            top: "50%",
-            width: "calc(var(--wheel-radius) * 2.2)",
-            height: "calc(var(--wheel-radius) * 2.2)",
-            transform: "translate(-50%, -50%)",
-          }}
+          className="absolute inset-0 bg-[url('/images/timeline-dial-bg.jpg')] bg-cover opacity-[0.85] mix-blend-darken"
+          style={{ backgroundPosition: '27.3% 55.1%' }}
         />
-        {/* Soft horizontal fade gradient starting right at the edge of the wheel to keep text clear */}
-        <div
-          className="absolute inset-y-0 left-0 right-0 bg-gradient-to-r from-transparent via-[#d7d7d7]/65 to-[#d7d7d7] z-[2]"
-          style={{
-            marginLeft: "calc(var(--wheel-left) + var(--wheel-radius) * 1.0)",
-          }}
-        />
+        {/* Horizontal fade gradient to ensure text remains highly readable */}
+        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-[#d7d7d7]/60 to-[#d7d7d7]/95 z-[2]" />
       </div>
 
       {/* ── Global Navigation Bar ── */}
       <div className="absolute top-0 left-0 w-full z-50">
+        {/* Top gradient for nav text visibility */}
+        <div className="absolute top-0 left-0 w-full h-32 bg-gradient-to-b from-[#d7d7d7]/95 via-[#d7d7d7]/60 to-transparent pointer-events-none -z-10" />
         <Navbar />
       </div>
 
@@ -367,8 +351,9 @@ export default function TimelineContainer({ initialModels }: TimelineContainerPr
 
         {/* Static Indicator Bullet (Highlight point) */}
         <div
-          className="absolute top-1/2 -translate-y-1/2 rounded-full bg-black z-20 pointer-events-none transition-all duration-300 shadow-md shadow-black/20"
+          className="absolute rounded-full bg-black z-20 pointer-events-none transition-all duration-300 shadow-md shadow-black/20"
           style={{
+            top: "var(--wheel-top)",
             left: "calc(var(--wheel-left) + var(--wheel-radius))",
             width: "8px",
             height: "8px",
@@ -382,7 +367,7 @@ export default function TimelineContainer({ initialModels }: TimelineContainerPr
           style={{
             position: "absolute",
             left: "var(--wheel-left)",
-            top: "50%",
+            top: "var(--wheel-top)",
             width: "calc(var(--wheel-radius) * 2)",
             height: "calc(var(--wheel-radius) * 2)",
             borderRadius: "50%",

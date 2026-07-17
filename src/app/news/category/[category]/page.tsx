@@ -68,8 +68,8 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
   const label = getCategoryLabel(category);
 
   return (
-    <main className="min-h-screen bg-[#FFFFFF] text-black selection:bg-brand-orange selection:text-white pb-24 font-sans antialiased relative">
-      <Navbar theme="light" />
+    <main className="min-h-screen bg-[#0C120F] text-[#E2E8E4] selection:bg-[#4ADE80] selection:text-[#0C120F] pb-24 font-sans antialiased relative">
+      <Navbar theme="dark" />
 
       {/* Header Container */}
       <div className="max-w-6xl mx-auto px-6 sm:px-8 lg:px-12 pt-16 sm:pt-24 text-left">
@@ -77,31 +77,31 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
 
         {/* Category Label Title */}
         <h1
-          className="text-4xl sm:text-5xl md:text-6xl font-light text-black tracking-tight leading-tight mb-4"
+          className="text-4xl sm:text-5xl md:text-6xl font-light text-[#F0FDF4] tracking-tight leading-tight mb-4"
           style={{ fontFamily: "var(--font-display, 'Instrument Serif', serif)" }}
         >
           {label}
         </h1>
-        <p className="text-sm sm:text-base text-black/50 max-w-2xl mb-16">
-          Showing all articles filed under the <span className="font-semibold text-black">{label}</span> category, listed newest to oldest.
+        <p className="text-sm sm:text-base text-[#8C9E91] max-w-2xl mb-16">
+          Showing all articles filed under the <span className="font-semibold text-[#E2E8E4]">{label}</span> category, listed newest to oldest.
         </p>
       </div>
 
       {/* Main Grid Container */}
       <div className="max-w-6xl mx-auto px-6 sm:px-8 lg:px-12">
         {posts.length === 0 ? (
-          <p className="text-sm text-black/40 py-12">No articles found in this category.</p>
+          <p className="text-sm text-[#5A6E60] py-12">No articles found in this category.</p>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
             {posts.map((post) => (
               <Link
                 key={post.id}
                 href={`/news/${post.slug}`}
-                className="group bg-white rounded-3xl border border-black/[0.05] hover:border-black/[0.08] hover:shadow-sm transition-all duration-300 overflow-hidden flex flex-col justify-between"
+                className="group bg-[#121A15] rounded-3xl border border-[#243629] hover:border-[#334D3A] hover:shadow-[0_0_20px_rgba(74,222,128,0.05)] transition-all duration-300 overflow-hidden flex flex-col justify-between"
               >
                 <div>
                   {/* Image Container */}
-                  <div className="relative h-[200px] w-full bg-black overflow-hidden">
+                  <div className="relative h-[200px] w-full bg-[#0C120F] overflow-hidden">
                     <Image
                       src={post.coverImage}
                       alt={post.title}
@@ -115,10 +115,10 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
 
                   {/* Content */}
                   <div className="p-6 sm:p-8">
-                    <h3 className="text-lg sm:text-xl font-semibold tracking-tight text-black group-hover:text-brand-orange transition-colors mb-3 leading-snug">
+                    <h3 className="text-lg sm:text-xl font-semibold tracking-tight text-[#F0FDF4] group-hover:text-[#4ADE80] transition-colors mb-3 leading-snug">
                       {post.title}
                     </h3>
-                    <p className="text-xs sm:text-sm text-black/60 leading-relaxed line-clamp-3">
+                    <p className="text-xs sm:text-sm text-[#8C9E91] leading-relaxed line-clamp-3">
                       {post.excerpt}
                     </p>
                   </div>
@@ -126,12 +126,12 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
 
                 {/* Card Footer */}
                 <div className="px-6 sm:px-8 pb-6 sm:pb-8">
-                  <div className="pt-4 border-t border-black/[0.05] flex items-center justify-between text-[11px] text-black/40">
+                  <div className="pt-4 border-t border-[#243629] flex items-center justify-between text-[11px] text-[#5A6E60]">
                     <span className="flex items-center gap-1">
                       <Clock size={11} />
                       {post.readTime}
                     </span>
-                    <span className="font-semibold text-black/70 flex items-center gap-1 group-hover:text-brand-orange transition-colors">
+                    <span className="font-semibold text-[#A3B8AA] flex items-center gap-1 group-hover:text-[#4ADE80] transition-colors">
                       Read Article <ArrowRight size={10} className="group-hover:translate-x-0.5 transition-transform" />
                     </span>
                   </div>
@@ -144,9 +144,9 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
 
       {/* Styled Footer Frame */}
       <div className="max-w-6xl mx-auto px-6 sm:px-8 lg:px-12 mt-24">
-        <div className="border-t border-black/10 pt-8 flex justify-between items-center text-xs text-black/40 font-light">
+        <div className="border-t border-[#243629] pt-8 flex justify-between items-center text-xs text-[#5A6E60] font-light">
           <span>© 2026 Modelverse®. All rights reserved.</span>
-          <span className="uppercase tracking-widest text-[9px] font-bold text-black/30">
+          <span className="uppercase tracking-widest text-[9px] font-bold text-[#3A4D39]">
             Modelverse Newsroom
           </span>
         </div>

@@ -3,43 +3,6 @@ import type { ModelIndex, ModelEntry } from "@/lib/models";
 import TypeBadge from "@/components/ui/TypeBadge";
 import { ArrowUpRight } from "lucide-react";
 
-function TaskBadge({ task }: { task: string }) {
-  const taskNames: Record<string, string> = {
-    "chat-reasoning": "Chat & Reasoning",
-    "code-generation": "Coding",
-    "image-generation": "Image Gen",
-    "video-generation": "Video Gen",
-    "audio-speech": "Audio & Speech",
-    "embedding": "Embedding",
-    "agentic": "Agentic",
-    "multimodal-general": "Multimodal",
-    "translation": "Translation",
-    "search-retrieval": "Search & RAG",
-    "other": "Specialized",
-  };
-  const label = taskNames[task] || task;
-
-  return (
-    <span className="text-[10px] font-medium bg-white/20 text-brand-orange px-2.5 py-1 rounded-full shrink-0 tracking-wide border border-white/5 flex items-center gap-1.5">
-      <div className="w-1.5 h-1.5 rounded-full bg-brand-orange animate-pulse" />
-      {label}
-    </span>
-  );
-}
-
-function SimpleTypeBadge({ type }: { type: string }) {
-  const typeMap: Record<string, string> = {
-    "open-weights": "Open Weights",
-    "closed-source": "Closed Source",
-    "api-only": "API Only",
-  };
-  return (
-    <span className="text-[10px] font-medium bg-white/20 text-gray-400 px-2.5 py-1 rounded-full shrink-0 tracking-wide border border-white/5">
-      {typeMap[type] || type}
-    </span>
-  );
-}
-
 function truncateAtWordBoundary(text: string, maxLength: number): string {
   if (text.length <= maxLength) return text;
   const sub = text.slice(0, maxLength);
@@ -58,12 +21,14 @@ export default function ModelCard({
   familyVariantCount,
   familySlug,
   isFeatured = false,
+  hideDeveloperPrefix = false,
 }: {
   model: ModelIndex | ModelEntry;
   variant?: "single" | "family" | "row" | "card"; // Support "card" for backward compatibility if any
   familyVariantCount?: number;
   familySlug?: string;
   isFeatured?: boolean;
+  hideDeveloperPrefix?: boolean;
 }) {
   const formattedDate = new Date(model.releaseDate).toLocaleDateString(
     "en-US",
@@ -102,11 +67,11 @@ export default function ModelCard({
         {/* Name + developer */}
         <div className="min-w-0">
           <div className="flex items-center gap-2">
-            <p className="text-sm font-medium text-white truncate group-hover:text-brand-orange transition-colors">
+            <p className="text-sm font-medium text-white truncate group-hover:text-[#4ADE80] transition-colors">
               {model.name}
             </p>
             {familyVariantCount && (
-              <span className="text-[10px] font-semibold bg-brand-orange/10 text-brand-orange px-1.5 py-0.5 rounded-full shrink-0">
+              <span className="text-[10px] font-semibold bg-[#4ADE80]/10 text-[#4ADE80] px-1.5 py-0.5 rounded-full shrink-0">
                 {familyVariantCount} variants
               </span>
             )}
@@ -141,7 +106,7 @@ export default function ModelCard({
   /* Redesigned Card variant (single or family) */
   return (
     <div
-      className="group relative flex flex-col justify-center h-full rounded-xl bg-[#0b0f19]/5 border border-white/10 hover:border-white/20 hover:bg-[#0b0f19]/10 transition-colors duration-200 w-full text-left overflow-hidden z-0"
+      className="group relative flex flex-col justify-center h-full rounded-xl bg-white/5 border border-white/10 hover:border-white/20 hover:bg-white/10 transition-colors duration-200 w-full text-left overflow-hidden z-0"
     >
       <Link
         href={targetHref}
@@ -153,7 +118,7 @@ export default function ModelCard({
         {/* Main Content */}
         <div className="flex items-start justify-between min-w-0 mb-2">
           <div className="flex flex-wrap items-center gap-1.5 truncate">
-            {variant !== "family" && (
+            {variant !== "family" && !hideDeveloperPrefix && (
               <span className="text-gray-400 font-normal text-sm md:text-base">{model.developer} /</span>
             )}
             <h3 className="font-semibold text-white text-sm md:text-base truncate">
@@ -165,7 +130,7 @@ export default function ModelCard({
             </h3>
           </div>
           {variant === "family" && familyVariantCount && (
-            <span className="text-[10px] font-semibold bg-[#0b0f19]/10 text-gray-300 px-1.5 py-0.5 rounded-full shrink-0 border border-white/10 ml-2">
+            <span className="text-[10px] font-semibold bg-[#121A15]/10 text-gray-300 px-1.5 py-0.5 rounded-full shrink-0 border border-white/10 ml-2">
               {familyVariantCount} vars
             </span>
           )}
@@ -176,7 +141,7 @@ export default function ModelCard({
           {/* Task */}
           {primaryTask && (
              <span className="flex items-center gap-1 font-medium bg-white/20 px-2 py-0.5 rounded border border-white/5">
-               <svg className="w-3 h-3 text-brand-orange" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+               <svg className="w-3 h-3 text-[#4ADE80]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
                </svg>
                {primaryTask.split("-").map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(" ")}
@@ -185,7 +150,15 @@ export default function ModelCard({
 
           {/* Type Badge (open weights, etc) */}
           <span className="flex items-center gap-1 font-medium bg-white/20 px-2 py-0.5 rounded border border-white/5">
-             <SimpleTypeBadge type={model.type} />
+            {(() => {
+              const typeMap: Record<string, string> = {
+                "open-weights": "Open Weights",
+                "closed-source": "Closed Source",
+                "api-only": "API Only",
+                "research-preview": "Research Preview",
+              };
+              return typeMap[model.type] || model.type;
+            })()}
           </span>
           
           <span className="text-gray-600">•</span>

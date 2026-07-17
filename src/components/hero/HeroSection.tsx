@@ -1,151 +1,110 @@
 "use client";
 
-import { useRef, useState, useEffect } from "react";
+import { useRef, useEffect } from "react";
 import Link from "next/link";
 import Navbar from "@/components/layout/Navbar";
+import { motion, useInView } from "framer-motion";
 
-/* ------------------------------------------------------------------ */
-/*  Constants                                                          */
-/* ------------------------------------------------------------------ */
+const VIDEO_URL = "https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260619_191346_9d19d66e-86a4-47f7-8dc6-712c1788c3b2.mp4";
 
-const VIDEO_URL =
-  "https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260328_083109_283f3553-e28f-428b-a723-d639c617eb2b.mp4";
+// Staggered Fade Component
+const StaggeredFade = ({ text }: { text: string }) => {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, margin: "-50px" });
 
-/* ------------------------------------------------------------------ */
-/*  Aethera Cinematic Hero Section                                     */
-/* ------------------------------------------------------------------ */
+  const letters = Array.from(text);
+
+  return (
+    <span ref={ref} className="inline-block">
+      {letters.map((char, index) => (
+        <motion.span
+          key={index}
+          initial={{ opacity: 0, y: 10 }}
+          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
+          transition={{ duration: 0.5, delay: index * 0.07, ease: "easeOut" }}
+          className="inline-block"
+        >
+          {char === " " ? "\u00A0" : char}
+        </motion.span>
+      ))}
+    </span>
+  );
+};
 
 export default function HeroSection() {
   const videoRef = useRef<HTMLVideoElement>(null);
-  const [videoOpacity, setVideoOpacity] = useState(0);
 
-  // Monitor currentTime & duration to apply 0.5s fade-in/fade-out manual loop transitions
   useEffect(() => {
-    const video = videoRef.current;
-    if (!video) return;
-
-    let rafId: number;
-
-    const updateOpacity = () => {
-      if (video.duration && !video.paused) {
-        const currentTime = video.currentTime;
-        const duration = video.duration;
-        const fadeTime = 0.5;
-
-        let targetOpacity = 1;
-        if (currentTime < fadeTime) {
-          // Fade in at the start
-          targetOpacity = currentTime / fadeTime;
-        } else if (currentTime > duration - fadeTime) {
-          // Fade out before the end
-          targetOpacity = Math.max(0, (duration - currentTime) / fadeTime);
-        }
-
-        setVideoOpacity(targetOpacity);
-      }
-      rafId = requestAnimationFrame(updateOpacity);
-    };
-
-    const handleEnded = () => {
-      setVideoOpacity(0);
-      setTimeout(() => {
-        if (video) {
-          video.currentTime = 0;
-          video.play().catch((err) => {
-            console.log("Video loop playback interrupted:", err);
-          });
-        }
-      }, 100);
-    };
-
-    video.addEventListener("ended", handleEnded);
-    const startPlay = () => {
-      video.play().catch((err) => {
-        console.log("Video autoplay blocked or interrupted:", err);
+    // Ensure video plays
+    if (videoRef.current) {
+      videoRef.current.play().catch((err) => {
+        console.log("Video autoplay blocked:", err);
       });
-    };
-    video.addEventListener("loadedmetadata", startPlay);
-
-    if (video.readyState >= 1) {
-      startPlay();
     }
-
-    rafId = requestAnimationFrame(updateOpacity);
-
-    return () => {
-      cancelAnimationFrame(rafId);
-      video.removeEventListener("ended", handleEnded);
-      video.removeEventListener("loadedmetadata", startPlay);
-    };
   }, []);
 
   return (
-    <section className="relative min-h-screen w-full overflow-hidden bg-[#FFFFFF]">
+    <section className="relative min-h-screen w-full overflow-hidden bg-[#0C120F] flex flex-col">
       {/* ── Background Video Layer (z-0) ────────────────────── */}
-      <div
-        className="absolute w-full z-0 overflow-hidden pointer-events-none transition-opacity duration-300"
-        style={{
-          inset: "auto 0 0 0",
-          top: "300px",
-          opacity: videoOpacity,
-        }}
-      >
+      <div className="absolute inset-0 w-full h-full z-0 overflow-hidden pointer-events-none">
         <video
           ref={videoRef}
           src={VIDEO_URL}
+          autoPlay
           muted
+          loop
           playsInline
-          className="w-full h-full object-cover"
-          style={{ minHeight: "calc(100vh - 300px)" }}
+          className="w-full h-full object-cover object-center opacity-100"
         />
+        {/* Dark overlay for readability */}
+        <div className="absolute inset-0 bg-black/20 z-0 pointer-events-none" />
+        {/* Seamless blend into the next section */}
+        <div className="absolute bottom-0 left-0 w-full h-[30vh] bg-gradient-to-b from-transparent to-[#0C120F] z-0 pointer-events-none" />
       </div>
 
-      {/* ── Gradient Overlay on Video ───────────────────────── */}
-      <div
-        className="absolute inset-0 bg-gradient-to-b from-[#FFFFFF] via-transparent to-[#FFFFFF] z-0 pointer-events-none"
-        style={{ top: "300px" }}
-      />
-
-      {/* ── Navigation Bar (z-10) ── */}
-      <Navbar />
+      {/* ── Navigation Bar (z-20) ── */}
+      <div className="relative z-20">
+        <Navbar theme="dark" />
+      </div>
 
       {/* ── Hero Content (z-10) ─────────────────────────────── */}
-      <div className="relative z-10 flex flex-col items-center justify-center text-center px-6 max-w-7xl mx-auto">
-        <div
-          className="w-full flex flex-col items-center"
-          style={{ paddingTop: "calc(8rem - 75px)", paddingBottom: "10rem" }}
-        >
-          {/* Headline */}
-          <h1
-            className="text-5xl sm:text-7xl md:text-8xl font-normal leading-[0.95] text-[#000000] max-w-7xl animate-fade-rise"
-            style={{
-              fontFamily: "var(--font-display, 'Instrument Serif', serif)",
-              letterSpacing: "-2.46px",
-            }}
-          >
-            Beyond{" "}
-            <span className="italic text-[#6F6F6F]">
-              the noise,
-            </span>{" "}
-            we track{" "}
-            <span className="italic text-[#6F6F6F]">
-              the frontier.
+      <div className="relative z-10 flex-1 flex flex-col items-center justify-start text-center px-5 sm:px-8 pt-4 sm:pt-8 md:pt-12 w-full">
+        <div className="w-full flex flex-col items-center">
+          
+          {/* Headings */}
+          <h1 className="flex flex-col items-center justify-center text-[#E2E8E4] mb-6 sm:mb-8 tracking-tight font-normal" style={{ fontFamily: "var(--font-serif)", lineHeight: "1.08" }}>
+            <span className="text-5xl sm:text-7xl md:text-8xl lg:text-9xl uppercase block">
+              <StaggeredFade text="BEYOND THE" />
+            </span>
+            <span className="text-5xl sm:text-7xl md:text-8xl lg:text-9xl uppercase block">
+              <StaggeredFade text="NOISE" />
             </span>
           </h1>
 
-          {/* Description */}
-          <p className="text-base sm:text-lg text-[#6F6F6F] max-w-2xl mt-8 leading-relaxed animate-fade-rise-delay">
-            A living, fact-checked archive of every notable AI model release. Tracking parameters,
-            context sizes, and benchmarks straight from primary documentation.
-          </p>
-
-          {/* Hero CTA */}
-          <Link
-            href="/models"
-            className="rounded-full bg-[#000000] text-[#FFFFFF] text-base font-medium px-14 py-5 mt-12 hover:scale-[1.03] active:scale-[0.98] transition-all hover:bg-black/90 animate-fade-rise-delay-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black focus-visible:ring-offset-2 flex items-center justify-center inline-flex"
+          {/* Subtitle */}
+          <motion.p 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 1.6 }}
+            className="text-[#8C9E91] font-light leading-relaxed max-w-xs sm:max-w-md md:max-w-xl text-sm sm:text-base md:text-lg mb-8 sm:mb-10"
           >
-            Explore Catalog
-          </Link>
+            We track the frontier. A living, fact-checked archive of every notable AI model release. Tracking parameters, context sizes, and benchmarks straight from primary documentation.
+          </motion.p>
+
+          {/* CTA Button */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 2.0 }}
+          >
+            <Link
+              href="/models"
+              className="liquid-glass rounded-full text-[#E2E8E4] uppercase tracking-[0.18em] sm:tracking-[0.2em] px-7 sm:px-10 py-3.5 sm:py-4 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#4ADE80] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0C120F] inline-flex items-center justify-center transition-all"
+            >
+              Explore Catalog
+            </Link>
+          </motion.div>
+
         </div>
       </div>
     </section>

@@ -152,7 +152,7 @@ function FacetGroupFilter<T>({
             placeholder={`Search ${title.toLowerCase()}...`}
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full bg-[#0b0f19] border border-white/10 rounded-lg px-2.5 py-1 text-[11px] text-white placeholder:text-gray-400/60 focus:outline-none focus:border-white/20 focus:ring-1 focus:ring-black/10 transition-colors"
+            className="w-full bg-[#121A15] border border-white/10 rounded-lg px-2.5 py-1 text-[11px] text-white placeholder:text-gray-400/60 focus:outline-none focus:border-white/20 focus:ring-1 focus:ring-black/10 transition-colors"
           />
           {searchQuery && (
             <button
@@ -177,7 +177,7 @@ function FacetGroupFilter<T>({
               key={val}
               className={`flex items-center justify-between text-xs cursor-pointer py-0.5 rounded transition-colors ${
                 isChecked
-                  ? "text-brand-orange"
+                  ? "text-[#4ADE80]"
                   : isDisabled
                   ? "text-gray-400/40 cursor-not-allowed"
                   : "text-gray-400 hover:text-white"
@@ -189,13 +189,13 @@ function FacetGroupFilter<T>({
                   checked={isChecked}
                   disabled={isDisabled}
                   onChange={() => onToggle(val)}
-                  className="h-3.5 w-3.5 rounded border border-white/20 bg-transparent text-brand-orange focus:ring-offset-white focus:ring-1 focus:ring-brand-orange/50 accent-brand-orange cursor-pointer disabled:cursor-not-allowed"
+                  className="h-3.5 w-3.5 rounded border border-white/20 bg-transparent text-[#4ADE80] focus:ring-offset-white focus:ring-1 focus:ring-[#4ADE80]/50 accent-[#4ADE80] cursor-pointer disabled:cursor-not-allowed"
                 />
                 <span className="truncate pr-1">{label}</span>
               </div>
               <span
                 className={`text-[10px] tabular-nums font-mono ${
-                  isChecked ? "text-brand-orange" : "text-gray-400/40"
+                  isChecked ? "text-[#4ADE80]" : "text-gray-400/40"
                 }`}
               >
                 {count}
@@ -221,10 +221,12 @@ function ModelCatalogContent({
   models,
   developers,
   initialSearchParams,
+  hideDeveloperPrefix = false,
 }: {
   models: ModelEntry[];
   developers: string[];
   initialSearchParams?: Record<string, string | string[] | undefined>;
+  hideDeveloperPrefix?: boolean;
 }) {
   const router = useRouter();
 
@@ -509,15 +511,17 @@ function ModelCatalogContent({
         counts={facetCounts.modality}
         onToggle={(val) => toggleFilter("modality", val)}
       />
-      <FacetGroupFilter
-        title="Developer"
-        options={developers.map((d) => ({ value: d, label: d }))}
-        valFn={(o) => o.value}
-        labelFn={(o) => o.label}
-        selectedValues={filters.developer}
-        counts={facetCounts.developer}
-        onToggle={(val) => toggleFilter("developer", val)}
-      />
+      {!hideDeveloperPrefix && (
+        <FacetGroupFilter
+          title="Developer"
+          options={developers.map((d) => ({ value: d, label: d }))}
+          valFn={(o) => o.value}
+          labelFn={(o) => o.label}
+          selectedValues={filters.developer}
+          counts={facetCounts.developer}
+          onToggle={(val) => toggleFilter("developer", val)}
+        />
+      )}
       <FacetGroupFilter
         title="License"
         options={dynamicOptions.licenses.map((l) => ({ value: l, label: l }))}
@@ -548,7 +552,7 @@ function ModelCatalogContent({
           {hasActiveFilters && (
             <button
               onClick={clearAllFilters}
-              className="text-[10px] text-brand-orange hover:text-[#e85a28] hover:underline"
+              className="text-[10px] text-[#4ADE80] hover:text-[#e85a28] hover:underline"
             >
               Clear All
             </button>
@@ -565,8 +569,8 @@ function ModelCatalogContent({
             onClick={() => setFilters(f => ({ ...f, type: [] }))}
             className={`px-4 py-1.5 rounded-full text-xs font-semibold tracking-wide transition-colors ${
               filters.type.length === 0
-                ? "bg-[#0b0f19]/5 text-white"
-                : "bg-[#0b0f19]/[0.04] text-gray-400 hover:bg-[#0b0f19]/[0.08] hover:text-white"
+                ? "bg-[#121A15]/5 text-white"
+                : "bg-[#121A15]/[0.04] text-gray-400 hover:bg-[#121A15]/[0.08] hover:text-white"
             }`}
           >
             All
@@ -586,8 +590,8 @@ function ModelCatalogContent({
                 }}
                 className={`px-4 py-1.5 rounded-full text-xs font-semibold tracking-wide transition-colors ${
                   isActive
-                    ? "bg-[#0b0f19]/5 text-white"
-                    : "bg-[#0b0f19]/[0.04] text-gray-400 hover:bg-[#0b0f19]/[0.08] hover:text-white"
+                    ? "bg-[#121A15]/5 text-white"
+                    : "bg-[#121A15]/[0.04] text-gray-400 hover:bg-[#121A15]/[0.08] hover:text-white"
                 }`}
               >
                 {opt.label}
@@ -606,7 +610,7 @@ function ModelCatalogContent({
               placeholder="Search by name or developer..."
               value={filters.q}
               onChange={(e) => handleSearchChange(e.target.value)}
-              className="w-full bg-[#0b0f19] border border-white/10 rounded-full pl-10 pr-4 py-2 text-sm text-white placeholder:text-gray-400 focus:outline-none focus:border-white/20 transition-colors"
+              className="w-full bg-[#121A15] border border-white/10 rounded-full pl-10 pr-4 py-2 text-sm text-white placeholder:text-gray-400 focus:outline-none focus:border-white/20 transition-colors"
             />
           </div>
 
@@ -614,12 +618,12 @@ function ModelCatalogContent({
             {/* Mobile Filters Toggle Button */}
             <button
               onClick={() => setMobileFiltersOpen(true)}
-              className="md:hidden flex items-center gap-2 px-4 py-2 border border-white/10 rounded-full text-xs font-medium text-gray-400 hover:text-white bg-[#0b0f19]/5"
+              className="md:hidden flex items-center gap-2 px-4 py-2 border border-white/10 rounded-full text-xs font-medium text-gray-400 hover:text-white bg-[#121A15]/5"
             >
               <SlidersHorizontal size={14} />
               Filters
               {activeChips.length > 0 && (
-                <span className="h-4 w-4 bg-brand-orange text-white text-[9px] rounded-full flex items-center justify-center font-bold">
+                <span className="h-4 w-4 bg-[#4ADE80] text-white text-[9px] rounded-full flex items-center justify-center font-bold">
                   {activeChips.length}
                 </span>
               )}
@@ -632,10 +636,10 @@ function ModelCatalogContent({
                 <select
                   value={sortKey}
                   onChange={(e) => handleSortChange(e.target.value)}
-                  className="bg-[#0b0f19] border border-white/10 rounded-full px-4 py-2 pr-8 text-xs font-medium text-gray-400 focus:outline-none focus:border-white/20 appearance-none cursor-pointer"
+                  className="bg-[#121A15] border border-white/10 rounded-full px-4 py-2 pr-8 text-xs font-medium text-gray-400 focus:outline-none focus:border-white/20 appearance-none cursor-pointer"
                 >
                   {SORT_OPTIONS.map((opt) => (
-                    <option key={opt.key} value={opt.key} className="bg-[#111827] text-white">
+                    <option key={opt.key} value={opt.key} className="bg-[#121A15] text-white">
                       {opt.label}
                     </option>
                   ))}
@@ -656,12 +660,12 @@ function ModelCatalogContent({
               {activeChips.map((chip) => (
                 <span
                   key={`${chip.key}-${chip.val}`}
-                  className="inline-flex items-center gap-1.5 text-[10px] font-semibold bg-[#FF6B35]/10 border border-[#FF6B35]/15 text-[#FF6B35] px-2.5 py-1 rounded-full shrink-0"
+                  className="inline-flex items-center gap-1.5 text-[10px] font-semibold bg-[#4ADE80]/10 border border-[#4ADE80]/15 text-[#4ADE80] px-2.5 py-1 rounded-full shrink-0"
                 >
                   {chip.label}
                   <button
                     onClick={() => toggleFilter(chip.key, chip.val)}
-                    className="hover:bg-[#FF6B35]/20 rounded-full p-0.5 transition-colors"
+                    className="hover:bg-[#4ADE80]/20 rounded-full p-0.5 transition-colors"
                   >
                     <X size={10} />
                   </button>
@@ -702,6 +706,7 @@ function ModelCatalogContent({
                   model={item.model} 
                   variant="single" 
                   isFeatured={model.featured} 
+                  hideDeveloperPrefix={hideDeveloperPrefix}
                 />
               </div>
             );
@@ -709,13 +714,13 @@ function ModelCatalogContent({
         </div>
 
         {groupedItems.length === 0 && (
-          <div className="py-24 text-center flex flex-col items-center justify-center border border-white/5 bg-[#0b0f19]/[0.02] rounded-3xl p-8">
+          <div className="py-24 text-center flex flex-col items-center justify-center border border-white/5 bg-[#121A15]/[0.02] rounded-3xl p-8">
             <p className="text-gray-400 text-sm">
               No models match these filters yet — try removing one
             </p>
             <button
               onClick={clearAllFilters}
-              className="mt-4 bg-brand-orange hover:bg-[#e85a28] text-white text-xs font-semibold px-6 py-2.5 rounded-full hover:scale-[1.03] active:scale-95 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-orange/50 focus-visible:ring-offset-2 focus-visible:ring-offset-white"
+              className="mt-4 bg-[#4ADE80] hover:bg-[#e85a28] text-white text-xs font-semibold px-6 py-2.5 rounded-full hover:scale-[1.03] active:scale-95 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#4ADE80]/50 focus-visible:ring-offset-2 focus-visible:ring-offset-white"
             >
               Clear filters
             </button>
@@ -725,10 +730,10 @@ function ModelCatalogContent({
 
       {/* ── Mobile Filters Bottom Drawer (z-50) ──────────────── */}
       {mobileFiltersOpen && (
-        <div className="fixed inset-0 z-50 md:hidden flex flex-col justify-end bg-[#0b0f19]/50 backdrop-blur-sm">
+        <div className="fixed inset-0 z-50 md:hidden flex flex-col justify-end bg-[#121A15]/50 backdrop-blur-sm">
           <div className="absolute inset-0" onClick={() => setMobileFiltersOpen(false)} />
 
-          <div className="relative w-full max-h-[85vh] bg-[#111827] border-t border-white/10 rounded-t-3xl flex flex-col z-10">
+          <div className="relative w-full max-h-[85vh] bg-[#121A15] border-t border-white/10 rounded-t-3xl flex flex-col z-10">
             {/* Drag Handle Bar Accent */}
             <div className="h-1.5 w-12 bg-white/20 rounded-full mx-auto my-3 shrink-0" />
 
@@ -737,7 +742,7 @@ function ModelCatalogContent({
               <span className="text-xs font-bold uppercase tracking-wider text-gray-400">Filters</span>
               <button
                 onClick={() => setMobileFiltersOpen(false)}
-                className="p-1.5 hover:bg-[#0b0f19]/5 rounded-full text-gray-400 hover:text-white transition-colors"
+                className="p-1.5 hover:bg-[#121A15]/5 rounded-full text-gray-400 hover:text-white transition-colors"
               >
                 <X size={18} />
               </button>
@@ -749,7 +754,7 @@ function ModelCatalogContent({
             </div>
 
             {/* Bottom Actions Row */}
-            <div className="p-4 border-t border-white/10 bg-[#111827] flex gap-3 shrink-0">
+            <div className="p-4 border-t border-white/10 bg-[#121A15] flex gap-3 shrink-0">
               {hasActiveFilters && (
                 <button
                   onClick={() => {
@@ -763,7 +768,7 @@ function ModelCatalogContent({
               )}
               <button
                 onClick={() => setMobileFiltersOpen(false)}
-                className="flex-1 py-3.5 bg-brand-orange hover:bg-[#e85a28] text-white rounded-2xl text-xs font-semibold transition-colors"
+                className="flex-1 py-3.5 bg-[#4ADE80] hover:bg-[#e85a28] text-white rounded-2xl text-xs font-semibold transition-colors"
               >
                 View {filtered.length} Results
               </button>
@@ -779,6 +784,7 @@ export default function ModelCatalog(props: {
   models: ModelEntry[];
   developers: string[];
   initialSearchParams?: Record<string, string | string[] | undefined>;
+  hideDeveloperPrefix?: boolean;
 }) {
   return (
     <Suspense fallback={<div className="text-white/40 text-sm py-20 text-center">Loading catalog...</div>}>

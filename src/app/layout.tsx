@@ -87,7 +87,7 @@ export default function RootLayout({
         url: SITE_URL,
         logo: {
           "@type": "ImageObject",
-          url: `${SITE_URL}/logos/logo-large.png`, // placeholder logo
+          url: `${SITE_URL}/logo.jpg`,
         },
       },
     ],

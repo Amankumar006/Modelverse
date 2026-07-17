@@ -131,10 +131,25 @@ export default async function BrowsePage({ searchParams }: PageProps) {
   const developers = getAllDevelopers();
 
   return (
-    <main className="min-h-screen bg-[#0b0f19] text-gray-100 selection:bg-brand-orange selection:text-white pb-24 relative">
-      <Navbar theme="dark" />
+    <main className="min-h-screen bg-[#0C120F] text-gray-100 selection:bg-[#4ADE80] selection:text-white pb-24 relative">
+      
+      {/* ── Top Hero Background Image ── */}
+      <div className="absolute top-0 left-0 w-full h-[60vh] z-0 pointer-events-none select-none">
+        <img 
+          src="/images/branch-bg.jpg" 
+          alt="" 
+          className="w-full h-full object-cover object-[center_30%] opacity-40 mix-blend-screen"
+        />
+        {/* Seamless blend into the black background */}
+        <div className="absolute inset-0 bg-gradient-to-b from-[#0C120F]/20 via-[#0C120F]/60 to-[#0C120F] pointer-events-none" />
+      </div>
+
+      <div className="relative z-20">
+        <Navbar theme="dark" />
+      </div>
+
       {/* ── Fixed Minimal Nav Back Link ─────────────────────── */}
-      <div className="w-full px-4 sm:px-6 lg:px-8 2xl:px-12 pt-8">
+      <div className="relative z-10 w-full px-4 sm:px-6 lg:px-8 2xl:px-12 pt-8">
         <Link
           href="/"
           className="inline-flex items-center gap-1 text-sm text-gray-400 hover:text-white transition-colors group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/50 focus-visible:ring-offset-2 rounded-lg px-2 py-1"
@@ -145,7 +160,7 @@ export default async function BrowsePage({ searchParams }: PageProps) {
       </div>
 
       {/* ── Content Container ───────────────────────────────── */}
-      <div className="w-full px-4 sm:px-6 lg:px-8 2xl:px-12 mt-10 relative">
+      <div className="relative z-10 w-full px-4 sm:px-6 lg:px-8 2xl:px-12 mt-10">
         <div className="border-b border-white/10 pb-8 mb-8">
           <h1
             className="text-4xl sm:text-5xl font-normal tracking-tight text-white"

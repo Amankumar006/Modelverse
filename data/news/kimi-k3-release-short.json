@@ -1,0 +1,22 @@
+{
+  "id": "kimi-k3-release-short",
+  "slug": "kimi-k3-release-short",
+  "title": "Moonshot AI Unveils Kimi K3: A 2.8 Trillion Parameter Open-Source Flagship",
+  "category": "short-news",
+  "isTrending": true,
+  "publishDate": "2026-07-18",
+  "author": "Modelverse Editorial",
+  "readTime": "3 min read",
+  "excerpt": "Kimi K3 is a new open-source model with 2.8 trillion parameters, built on KDA and featuring a 1M-token context window with automatic caching.",
+  "body": "Moonshot AI has officially launched **Kimi K3**, their most capable flagship model to date and the world's first open-source model in the 3-trillion-parameter class. With **2.8 trillion parameters**, Kimi K3 is designed to tackle frontier intelligence scenarios including long-horizon coding, knowledge work, and complex reasoning.\n\n### Breakthrough Architecture & Efficiency\nBuilt on **Kimi Delta Attention (KDA)** and **Attention Residuals (AttnRes)**, the model boasts native visual understanding and a massive **1M-token context window**. Kimi K3 efficiently utilizes a highly sparse Mixture of Experts (MoE) through the Stable LatentMoE framework, activating just 16 out of 896 experts during inference. This results in roughly 2.5x the overall scaling efficiency of its predecessor, K2. \n\nNotably, K3 features **automatic context caching** for regular requests, requiring no cache ID or TTL, and uses flat pay-as-you-go pricing without tiering by context length.\n\n### API and Integration Highlights\nThe K3 API introduces several developer-focused capabilities:\n- **Always-on Thinking**: K3's thinking mode is always enabled, currently locked to the `reasoning_effort=\"max\"` setting.\n- **Massive Outputs**: The `max_completion_tokens` defaults to 131,072 and can scale up to an unprecedented **1,048,576 tokens**.\n- **Advanced Tooling**: Supports Structured Output (strict JSON Schema), Partial Mode (continuing from a prefix), Dynamic Tool Loading, and Official Tools via Formula.\n\nDevelopers can experiment with the model via the [Official Kimi Playground](https://www.kimi.com/?chat_enter_method=new_chat). For technical details and code examples, refer to the [Quickstart Guide](https://platform.kimi.ai/docs/guide/kimi-k3-quickstart).",
+  "coverImage": "/images/news/kimi_k3_news_cover.jpg",
+  "status": "published",
+  "confidenceLevel": "confirmed",
+  "externalSources": [
+    "https://platform.kimi.ai/docs/guide/kimi-k3-quickstart",
+    "https://www.kimi.com/blog/kimi-k3",
+    "https://www.kimi.com/?chat_enter_method=new_chat"
+  ],
+  "relatedModels": ["moonshot-ai-kimi-k3"],
+  "tags": ["kimi", "open-source", "kimi-k3", "moonshot-ai"]
+}

@@ -4,6 +4,7 @@ import MarkdownRenderer from "@/components/ui/MarkdownRenderer";
 
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import { notFound } from "next/navigation";
 import {
   getAllModels,
@@ -104,7 +105,7 @@ function TaskBadge({ task }: { task: string }) {
   const label = taskNames[task] || task;
 
   return (
-    <span className="text-xs font-semibold bg-[#0b0f19]/5 border border-white/10 text-white/70 px-3 py-1 rounded-full shrink-0">
+    <span className="text-xs font-semibold bg-[#121A15]/5 border border-white/10 text-white/70 px-3 py-1 rounded-full shrink-0">
       {label}
     </span>
   );
@@ -221,12 +222,12 @@ export default async function ModelDetailPage({
   };
 
   return (
-    <main className="min-h-screen bg-[#0b0f19] text-gray-100 selection:bg-brand-orange selection:text-white pb-24 relative">
+    <main className="min-h-screen bg-[#0C120F] text-gray-100 selection:bg-[#4ADE80] selection:text-white pb-24 relative">
       <Navbar theme="dark" />
       <JsonLd data={softwareAppSchema} />
 
       {/* ── Top Bar / Breadcrumb ─────────────────────────────── */}
-      <header className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 pb-4">
+      <header className="w-full max-w-[1920px] mx-auto px-4 sm:px-8 lg:px-12 xl:px-16 pt-8 pb-4">
         <Breadcrumb 
           developer={model.developer} 
           family={model.family ? { slug: model.family, label: model.family } : undefined} 
@@ -235,7 +236,7 @@ export default async function ModelDetailPage({
       </header>
 
       {/* ── Detail Content ─────────────────────────────────── */}
-      <article className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-6">
+      <article className="w-full max-w-[1920px] mx-auto px-4 sm:px-8 lg:px-12 xl:px-16 mt-6">
         <ClientBackButton
           fallbackHref={model.family ? `/models/family/${model.family}` : `/models/developer/${encodeURIComponent(model.developer)}`}
           fallbackLabel={model.family ? model.family : model.developer}
@@ -250,14 +251,19 @@ export default async function ModelDetailPage({
                   href={`/models?developer=${encodeURIComponent(model.developer)}`}
                   className="inline-block text-gray-400 hover:text-white text-base font-medium transition-colors mb-1"
                 >
-                  {model.developer} /
+                  {model.developer} {model.institution && ` / ${model.institution}`} /
                 </Link>
                 <h1
                   className="text-3xl sm:text-4xl font-bold tracking-tight text-white leading-none flex items-center gap-3"
                 >
+                  {model.logo && (
+                    <div className="relative w-8 h-8 rounded-full overflow-hidden shrink-0 border border-white/10">
+                      <Image src={model.logo} alt={model.name} fill className="object-cover" />
+                    </div>
+                  )}
                   {model.name}
                   {model.featured && (
-                    <span className="text-[10px] font-bold uppercase tracking-wider text-brand-orange bg-brand-orange/10 border border-brand-orange/20 px-2 py-0.5 rounded-full shrink-0">
+                    <span className="text-[10px] font-bold uppercase tracking-wider text-[#4ADE80] bg-[#4ADE80]/10 border border-[#4ADE80]/20 px-2 py-0.5 rounded-full shrink-0">
                       Featured
                     </span>
                   )}
@@ -301,21 +307,21 @@ export default async function ModelDetailPage({
               <>
             {/* Description */}
             <section className="space-y-3">
-              <h2 className="text-[10px] font-bold uppercase tracking-widest text-gray-400/60">Description</h2>
-              <p className="text-gray-400 leading-relaxed text-sm sm:text-base">{model.description}</p>
+              <h2 className="text-xs font-bold uppercase tracking-widest text-gray-400/60">Description</h2>
+              <p className="text-gray-300 leading-relaxed text-base sm:text-lg">{model.description}</p>
             </section>
 
             {/* Key Features */}
             {model.keyFeatures && model.keyFeatures.length > 0 && (
               <section className="space-y-4">
-                <h2 className="text-[10px] font-bold uppercase tracking-widest text-gray-400/60">Key Features</h2>
-                <ul className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <h2 className="text-xs font-bold uppercase tracking-widest text-gray-400/60">Key Features</h2>
+                <ul className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   {model.keyFeatures.map((feat, idx) => (
                     <li
                       key={idx}
-                      className="flex items-start gap-2.5 text-xs text-gray-400 bg-white/5 border border-white/10 p-3 rounded-xl hover:border-white/20 transition-colors"
+                      className="flex items-start gap-3 text-sm sm:text-base text-gray-300 bg-white/5 border border-white/10 p-4 rounded-xl hover:border-white/20 transition-colors"
                     >
-                      <Sparkles size={13} className="text-brand-orange shrink-0 mt-0.5" />
+                      <Sparkles size={16} className="text-[#4ADE80] shrink-0 mt-0.5" />
                       <span>{feat}</span>
                     </li>
                   ))}
@@ -374,10 +380,10 @@ export default async function ModelDetailPage({
                     <Link
                       key={item.id}
                       href={`/models/${item.slug}`}
-                      className="group p-4 rounded-xl bg-white/5 hover:bg-[#0b0f19] border border-white/10 hover:border-white/20 transition-all flex flex-col gap-2 text-left"
+                      className="group p-4 rounded-xl bg-white/5 hover:bg-[#121A15] border border-white/10 hover:border-white/20 transition-all flex flex-col gap-2 text-left"
                     >
                       <div className="min-w-0">
-                        <h4 className="text-xs font-semibold text-white truncate group-hover:text-brand-orange transition-colors">
+                        <h4 className="text-xs font-semibold text-white truncate group-hover:text-[#4ADE80] transition-colors">
                           {item.name}
                         </h4>
                         <p className="text-[10px] text-gray-400 mt-0.5">{item.developer}</p>
@@ -391,7 +397,7 @@ export default async function ModelDetailPage({
               </section>
             )}
 
-            {/* Sourcing Ledger */}
+             {/* Sourcing Ledger */}
             {model.sources && model.sources.length > 0 && (
               <section className="space-y-3 pt-6 border-t border-white/10">
                 <h2 className="text-[10px] font-bold uppercase tracking-widest text-gray-400/60">Verified Sources</h2>
@@ -403,13 +409,27 @@ export default async function ModelDetailPage({
                         href={src}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-xs text-gray-400 font-mono truncate hover:text-brand-orange hover:underline transition-colors max-w-full"
+                        className="text-xs text-gray-400 font-mono truncate hover:text-[#4ADE80] hover:underline transition-colors max-w-full"
                       >
                         {src}
                       </a>
                     </li>
                   ))}
                  </ul>
+              </section>
+            )}
+
+            {/* Tags */}
+            {model.tags && model.tags.length > 0 && (
+              <section className="space-y-3 pt-6 border-t border-white/10">
+                <h2 className="text-[10px] font-bold uppercase tracking-widest text-gray-400/60">Tags</h2>
+                <div className="flex flex-wrap gap-2">
+                  {model.tags.map((tag, idx) => (
+                    <span key={idx} className="text-xs bg-[#121A15] border border-white/10 text-gray-400 px-2.5 py-1 rounded-md">
+                      {tag}
+                    </span>
+                  ))}
+                </div>
               </section>
             )}
           </div>
@@ -435,6 +455,16 @@ export default async function ModelDetailPage({
                   {model.contextWindow}
                 </p>
               </div>
+
+              {/* Tier */}
+              {model.tier && (
+                <div className="space-y-1">
+                  <p className="text-[10px] text-gray-400 uppercase tracking-wider font-semibold">Tier</p>
+                  <p className="text-xs text-white font-mono">
+                    {model.tier}
+                  </p>
+                </div>
+              )}
 
               {/* License */}
               <div className="space-y-1">
@@ -463,11 +493,11 @@ export default async function ModelDetailPage({
                   <div className="flex flex-wrap gap-2 mt-1">
                     {model.costTiers.map((tier) => (
                       <div key={tier.id} className="group/tier relative inline-block">
-                        <span className="inline-flex items-center text-[10px] font-semibold bg-brand-orange/10 text-brand-orange border border-brand-orange/20 px-2.5 py-1 rounded-full cursor-help hover:bg-brand-orange/20 transition-all select-none">
+                        <span className="inline-flex items-center text-[10px] font-semibold bg-[#4ADE80]/10 text-[#4ADE80] border border-[#4ADE80]/20 px-2.5 py-1 rounded-full cursor-help hover:bg-[#4ADE80]/20 transition-all select-none">
                           {tier.label}
                         </span>
                         {tier.description && (
-                          <div className="absolute left-1/2 -translate-x-1/2 bottom-full mb-2 hidden group-hover/tier:block z-30 w-56 p-3 bg-[#0b0f19] border border-white/10 text-[10px] text-gray-400 leading-relaxed rounded-xl shadow-xl font-sans text-center">
+                          <div className="absolute left-1/2 -translate-x-1/2 bottom-full mb-2 hidden group-hover/tier:block z-30 w-56 p-3 bg-[#121A15] border border-white/10 text-[10px] text-gray-400 leading-relaxed rounded-xl shadow-xl font-sans text-center">
                             {tier.description}
                             <div className="absolute top-full left-1/2 -translate-x-1/2 border-8 border-transparent border-t-white" />
                             <div className="absolute top-full left-1/2 -translate-x-1/2 border-8 border-transparent border-t-black/10 -z-10" style={{ transform: 'translateX(-50%) translateY(1px)' }} />
@@ -506,80 +536,42 @@ export default async function ModelDetailPage({
             </section>
 
             {/* Links Section */}
-            {model.links && (model.links.website || model.links.paper || model.links.huggingface || model.links.github || model.links.blogPost) && (
+            {model.links && Object.keys(model.links).length > 0 && (
               <section className="p-5 rounded-2xl bg-white/5 border border-white/10 space-y-3.5 text-left">
                 <h2 className="text-[10px] font-bold uppercase tracking-widest text-gray-400/80">Links</h2>
                 <div className="flex flex-col gap-2">
-                  {model.links.website && (
-                    <a
-                      href={model.links.website}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center justify-between p-3 rounded-xl bg-[#0b0f19] hover:bg-white/5 border border-white/10 text-xs font-semibold text-gray-400 hover:text-white transition-colors group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-orange/50"
-                    >
-                      <span className="flex items-center gap-2">
-                        <Globe size={13} className="text-black/40" />
-                        Official Website
-                      </span>
-                      <ExternalLink size={12} className="text-black/25 group-hover:text-black/60 transition-colors" />
-                    </a>
-                  )}
-                  {model.links.paper && (
-                    <a
-                      href={model.links.paper}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center justify-between p-3 rounded-xl bg-[#0b0f19] hover:bg-white/5 border border-white/10 text-xs font-semibold text-gray-400 hover:text-white transition-colors group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-orange/50"
-                    >
-                      <span className="flex items-center gap-2">
-                        <FileText size={13} className="text-black/40" />
-                        Research Paper
-                      </span>
-                      <ExternalLink size={12} className="text-black/25 group-hover:text-black/60 transition-colors" />
-                    </a>
-                  )}
-                  {model.links.huggingface && (
-                    <a
-                      href={model.links.huggingface}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center justify-between p-3 rounded-xl bg-[#0b0f19] hover:bg-white/5 border border-white/10 text-xs font-semibold text-gray-400 hover:text-white transition-colors group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-orange/50"
-                    >
-                      <span className="flex items-center gap-2">
-                        <Layers size={13} className="text-black/40" />
-                        Hugging Face
-                      </span>
-                      <ExternalLink size={12} className="text-black/25 group-hover:text-black/60 transition-colors" />
-                    </a>
-                  )}
-                  {model.links.github && (
-                    <a
-                      href={model.links.github}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center justify-between p-3 rounded-xl bg-[#0b0f19] hover:bg-white/5 border border-white/10 text-xs font-semibold text-gray-400 hover:text-white transition-colors group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-orange/50"
-                    >
-                      <span className="flex items-center gap-2">
-                        <Terminal size={13} className="text-black/40" />
-                        GitHub Repository
-                      </span>
-                      <ExternalLink size={12} className="text-black/25 group-hover:text-black/60 transition-colors" />
-                    </a>
-                  )}
-                  {model.links.blogPost && (
-                    <a
-                      href={model.links.blogPost}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center justify-between p-3 rounded-xl bg-[#0b0f19] hover:bg-white/5 border border-white/10 text-xs font-semibold text-gray-400 hover:text-white transition-colors group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-orange/50"
-                    >
-                      <span className="flex items-center gap-2">
-                        <Link2 size={13} className="text-black/40" />
-                        Developer Blog
-                      </span>
-                      <ExternalLink size={12} className="text-black/25 group-hover:text-black/60 transition-colors" />
-                    </a>
-                  )}
+                  {Object.entries(model.links).map(([key, url]) => {
+                    let Icon = ExternalLink;
+                    const lowerKey = key.toLowerCase();
+                    if (lowerKey.includes('github') || lowerKey.includes('repo')) Icon = Terminal;
+                    else if (lowerKey.includes('hugging') || lowerKey.includes('weights')) Icon = Layers;
+                    else if (lowerKey.includes('paper') || lowerKey.includes('arxiv') || lowerKey.includes('api') || lowerKey.includes('doc')) Icon = FileText;
+                    else if (lowerKey.includes('site') || lowerKey.includes('official') || lowerKey === 'website') Icon = Globe;
+                    else if (lowerKey.includes('blog') || lowerKey.includes('post')) Icon = Link2;
+
+                    let displayName = key;
+                    if (key === 'blogPost') displayName = 'Developer Blog';
+                    else if (key === 'huggingface') displayName = 'Hugging Face';
+                    else if (key === 'github') displayName = 'GitHub Repository';
+                    else if (key === 'paper') displayName = 'Research Paper';
+                    else if (key === 'website') displayName = 'Official Website';
+
+                    return (
+                      <a
+                        key={key}
+                        href={url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center justify-between p-3 rounded-xl bg-[#121A15] hover:bg-white/5 border border-white/10 text-xs font-semibold text-gray-400 hover:text-white transition-colors group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#4ADE80]/50"
+                      >
+                        <span className="flex items-center gap-2">
+                          <Icon size={13} className="text-black/40" />
+                          {displayName}
+                        </span>
+                        <ExternalLink size={12} className="text-black/25 group-hover:text-black/60 transition-colors" />
+                      </a>
+                    );
+                  })}
                 </div>
               </section>
             )}
@@ -599,7 +591,7 @@ export default async function ModelDetailPage({
                           <Link
                             key={member.id}
                             href={`/models/${member.slug}`}
-                            className="text-xs text-brand-orange hover:text-[#e85a28] hover:underline"
+                            className="text-xs text-[#4ADE80] hover:text-[#e85a28] hover:underline"
                           >
                             {member.name}
                           </Link>
@@ -617,7 +609,7 @@ export default async function ModelDetailPage({
                     <p className="text-[10px] text-gray-400 font-medium">Predecessor</p>
                     <Link
                       href={`/models/${prevVersionModel.slug}`}
-                      className="inline-flex items-center gap-1.5 text-xs text-brand-orange hover:text-[#e85a28] hover:underline group"
+                      className="inline-flex items-center gap-1.5 text-xs text-[#4ADE80] hover:text-[#e85a28] hover:underline group"
                     >
                       <GitCompare size={12} className="shrink-0" />
                       {prevVersionModel.name}
@@ -627,15 +619,25 @@ export default async function ModelDetailPage({
               </section>
             )}
 
+            {/* Curator Notes */}
+            {model.curatorNotes && (
+              <section className="p-5 rounded-2xl bg-amber-500/5 border border-amber-500/15 space-y-2 text-left">
+                <h3 className="text-[10px] font-bold uppercase tracking-widest text-amber-500/80">Curator Notes</h3>
+                <p className="text-[11px] text-amber-500/80 leading-relaxed">
+                  {model.curatorNotes}
+                </p>
+              </section>
+            )}
+
             {/* Compare CTA Box */}
-            <section className="p-5 rounded-2xl bg-[#FF6B35]/5 border border-[#FF6B35]/15 space-y-3 text-left">
+            <section className="p-5 rounded-2xl bg-[#4ADE80]/5 border border-[#4ADE80]/15 space-y-3 text-left">
               <h3 className="text-xs font-semibold text-white">Compare Specs</h3>
               <p className="text-[11px] text-gray-400 leading-relaxed">
                 Compare the parameters, context windows, and benchmarks of this model against others side-by-side.
               </p>
               <Link
                 href={`/compare?models=${model.slug}`}
-                className="w-full py-2.5 bg-brand-orange hover:bg-[#e85a28] text-white rounded-xl text-xs font-bold transition-all flex items-center justify-center hover:scale-[1.02] active:scale-95"
+                className="w-full py-2.5 bg-[#4ADE80] hover:bg-[#e85a28] text-white rounded-xl text-xs font-bold transition-all flex items-center justify-center hover:scale-[1.02] active:scale-95"
               >
                 Compare Model
               </Link>
