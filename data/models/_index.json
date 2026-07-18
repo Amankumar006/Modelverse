@@ -1,0 +1,10 @@
+[
+  {
+    "id": "prismml-bonsai-27b",
+    "name": "Bonsai 27B",
+    "slug": "bonsai-27b",
+    "developer": "PrismML",
+    "releaseDate": "2026-07-14",
+    "type": "open-weights"
+  }
+]

@@ -1,0 +1,73 @@
+{
+  "id": "prismml-bonsai-27b",
+  "name": "Bonsai 27B",
+  "slug": "bonsai-27b",
+  "developer": "PrismML",
+  "releaseDate": "2026-07-14",
+  "updatedAt": "2026-07-18",
+  "type": "open-weights",
+  "modality": [
+    "text",
+    "image"
+  ],
+  "primaryTask": "agentic",
+  "deployment": [
+    "on-device",
+    "self-hostable"
+  ],
+  "license": "Apache 2.0",
+  "parameters": "27B",
+  "contextWindow": "262K tokens",
+  "description": "Bonsai 27B is a 27B-class multimodal model based on Qwen3.6 27B, optimized for on-device and local agentic workflows. It is available in two highly compressed variants: a 5.9 GB Ternary variant (1.71 bits/weight) and a 3.9 GB 1-bit variant (1.125 bits/weight), allowing it to fit within the memory budget of everyday laptops and phones (like the iPhone 17 Pro).",
+  "keyFeatures": [
+    "Ternary (1.71 effective bits) and 1-bit (1.125 effective bits) variants with no higher-precision escape hatches",
+    "Multimodal with a compact 4-bit vision tower",
+    "Supports multi-step reasoning, structured tool calls, and computer-use agentic loops",
+    "Native support on Apple devices via MLX and NVIDIA GPUs via CUDA",
+    "Supports speculative decoding"
+  ],
+  "benchmarks": [
+    {
+      "name": "Math (GSM8K, MATH-500, AIME25, AIME26)",
+      "score": "93.4 (Ternary)",
+      "verified": false
+    },
+    {
+      "name": "Coding (HumanEval+, MBPP+, LiveCodeBench)",
+      "score": "86.0 (Ternary)",
+      "verified": false
+    },
+    {
+      "name": "Agentic and Tool-calling",
+      "score": "74.0 (Ternary)",
+      "verified": false
+    },
+    {
+      "name": "Overall (15 benchmarks)",
+      "score": "80.5 (Ternary)",
+      "verified": false
+    }
+  ],
+  "family": "bonsai",
+  "previousVersion": null,
+  "links": {
+    "website": "https://prismml.com/news/bonsai-27b",
+    "huggingface": "https://huggingface.co/collections/prism-ml/bonsai-27b"
+  },
+  "logo": null,
+  "tags": [
+    "on-device",
+    "agentic",
+    "1-bit",
+    "ternary",
+    "multimodal",
+    "apple-mlx",
+    "cuda"
+  ],
+  "sources": [
+    "https://prismml.com/news/bonsai-27b",
+    "https://huggingface.co/collections/prism-ml/bonsai-27b"
+  ],
+  "verified": false,
+  "curatorNotes": ""
+}

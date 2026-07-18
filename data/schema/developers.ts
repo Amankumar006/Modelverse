@@ -25,6 +25,7 @@ export const DEVELOPERS = [
   "Liquid AI",
   "Zhipu AI",
   "Sakana AI",
+  "PrismML",
   "Academic/Research",
   "Other",
 ] as const;
