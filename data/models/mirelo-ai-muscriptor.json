@@ -1,0 +1,47 @@
+{
+  "id": "mirelo-ai-muscriptor",
+  "name": "MuScriptor",
+  "slug": "muscriptor",
+  "developer": "Mirelo AI",
+  "releaseDate": "2026-07-09",
+  "updatedAt": "2026-07-22",
+  "type": "open-weights",
+  "modality": [
+    "audio"
+  ],
+  "primaryTask": "other",
+  "deployment": [
+    "api-only",
+    "self-hostable"
+  ],
+  "license": "Other/Custom",
+  "parameters": "undisclosed",
+  "contextWindow": "unknown",
+  "description": "MuScriptor is an open-weights multi-instrument audio-to-MIDI model developed by Mirelo AI and Kyutai.",
+  "keyFeatures": [
+    "Automatic instrument detection",
+    "Separate MIDI track per instrument",
+    "Trained on synthetic and real music audio"
+  ],
+  "benchmarks": [],
+  "family": null,
+  "previousVersion": null,
+  "links": {
+    "Project": "https://mirelo.ai/blog/turning-audio-to-midi",
+    "Paper": "https://arxiv.org/abs/2607.08168",
+    "Code": "https://github.com/muscriptor/muscriptor",
+    "Weights": "https://huggingface.co/MuScriptor"
+  },
+  "logo": null,
+  "tags": [
+    "audio-to-midi",
+    "music-transcription"
+  ],
+  "sources": [
+    "https://mirelo.ai/blog/turning-audio-to-midi"
+  ],
+  "verified": false,
+  "featured": false,
+  "boost": 1,
+  "curatorNotes": "Used 'other' for primaryTask since music transcription/audio-to-midi isn't in default tasks."
+}

@@ -1,0 +1,48 @@
+{
+  "id": "nvidia-ardy",
+  "name": "ARDY",
+  "slug": "ardy",
+  "developer": "NVIDIA",
+  "releaseDate": "2026-07-22",
+  "updatedAt": "2026-07-22",
+  "type": "open-weights",
+  "modality": [
+    "text",
+    "motion"
+  ],
+  "primaryTask": "other",
+  "deployment": [
+    "self-hostable"
+  ],
+  "license": "Other/Custom",
+  "parameters": "undisclosed",
+  "contextWindow": "unknown",
+  "description": "ARDY is an autoregressive diffusion model for interactive human motion generation with online text prompting and flexible kinematic constraints.",
+  "keyFeatures": [
+    "Interactive human motion generation",
+    "Autoregressive diffusion",
+    "Supports spatial goal constraints and text prompts"
+  ],
+  "benchmarks": [],
+  "family": null,
+  "previousVersion": null,
+  "links": {
+    "Project": "https://research.nvidia.com/labs/sil/projects/ardy/",
+    "Paper": "https://research.nvidia.com/labs/sil/projects/ardy/assets/ardy_paper.pdf",
+    "Code": "https://github.com/nv-tlabs/ardy",
+    "Weights": "https://huggingface.co/collections/nvidia/ardy"
+  },
+  "logo": null,
+  "tags": [
+    "motion-generation",
+    "diffusion",
+    "autoregressive"
+  ],
+  "sources": [
+    "https://research.nvidia.com/labs/sil/projects/ardy/"
+  ],
+  "verified": false,
+  "featured": false,
+  "boost": 1,
+  "curatorNotes": "Modality includes 'motion' which might need checking against schema. 'other' task used as motion generation is not a default."
+}

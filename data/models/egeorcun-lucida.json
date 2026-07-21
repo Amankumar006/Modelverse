@@ -1,0 +1,42 @@
+{
+  "id": "egeorcun-lucida",
+  "name": "Lucida",
+  "slug": "lucida",
+  "developer": "Ege Orcun",
+  "releaseDate": "2026-07-22",
+  "updatedAt": "2026-07-22",
+  "type": "open-weights",
+  "modality": [
+    "image"
+  ],
+  "primaryTask": "other",
+  "deployment": [
+    "self-hostable"
+  ],
+  "license": "MIT",
+  "parameters": "undisclosed",
+  "contextWindow": "unknown",
+  "description": "Lucida is a background removal model that keeps what matters: glass, camouflage, text, glow, and line art. It is a BiRefNet fine-tune.",
+  "keyFeatures": [
+    "Background removal",
+    "Preserves glass, text, and glow"
+  ],
+  "benchmarks": [],
+  "family": null,
+  "previousVersion": null,
+  "links": {
+    "Code": "https://github.com/egeorcun/lucida"
+  },
+  "logo": null,
+  "tags": [
+    "image-segmentation",
+    "background-removal"
+  ],
+  "sources": [
+    "https://github.com/egeorcun/lucida"
+  ],
+  "verified": false,
+  "featured": false,
+  "boost": 1,
+  "curatorNotes": "Fine-tune of BiRefNet."
+}

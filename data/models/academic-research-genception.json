@@ -1,0 +1,45 @@
+{
+  "id": "academic-research-genception",
+  "name": "GenCeption",
+  "slug": "genception",
+  "developer": "Academic Research",
+  "releaseDate": "2026-07-22",
+  "updatedAt": "2026-07-22",
+  "type": "research-preview",
+  "modality": [
+    "text",
+    "video",
+    "image"
+  ],
+  "primaryTask": "multimodal-general",
+  "deployment": [
+    "api-only"
+  ],
+  "license": "Other/Custom",
+  "parameters": "undisclosed",
+  "contextWindow": "unknown",
+  "description": "GenCeption repurposes a text-to-video generative diffusion model into a single feed-forward, general-purpose vision model steered by text instructions.",
+  "keyFeatures": [
+    "General-purpose vision learner",
+    "Built on video generative pretraining",
+    "Steered by text instructions"
+  ],
+  "benchmarks": [],
+  "family": null,
+  "previousVersion": null,
+  "links": {
+    "Project": "https://genception.github.io/"
+  },
+  "logo": null,
+  "tags": [
+    "computer-vision",
+    "video-diffusion"
+  ],
+  "sources": [
+    "https://genception.github.io/"
+  ],
+  "verified": false,
+  "featured": false,
+  "boost": 1,
+  "curatorNotes": ""
+}

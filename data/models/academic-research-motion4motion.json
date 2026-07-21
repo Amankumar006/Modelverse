@@ -1,0 +1,42 @@
+{
+  "id": "academic-research-motion4motion",
+  "name": "Motion4Motion",
+  "slug": "motion4motion",
+  "developer": "Tsinghua University & StepFun",
+  "releaseDate": "2026-07-22",
+  "updatedAt": "2026-07-22",
+  "type": "research-preview",
+  "modality": [
+    "video"
+  ],
+  "primaryTask": "video-generation",
+  "deployment": [
+    "self-hostable"
+  ],
+  "license": "Other/Custom",
+  "parameters": "undisclosed",
+  "contextWindow": "unknown",
+  "description": "Motion4Motion is a training-free framework for cross-subject motion transfer via Transferring Positional Encoding (TransPE).",
+  "keyFeatures": [
+    "Skeleton-free motion transfer",
+    "Training-free framework"
+  ],
+  "benchmarks": [],
+  "family": null,
+  "previousVersion": null,
+  "links": {
+    "Project": "https://lhchen.top/Motion4Motion/"
+  },
+  "logo": null,
+  "tags": [
+    "motion-transfer",
+    "video-generation"
+  ],
+  "sources": [
+    "https://lhchen.top/Motion4Motion/"
+  ],
+  "verified": false,
+  "featured": false,
+  "boost": 1,
+  "curatorNotes": "SIGGRAPH 2026 Conference Paper."
+}

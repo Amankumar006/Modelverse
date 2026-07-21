@@ -1,0 +1,43 @@
+{
+  "id": "alibaba-wan-dancer",
+  "name": "Wan-Dancer",
+  "slug": "wan-dancer",
+  "developer": "Alibaba Group (Tongyi Lab)",
+  "releaseDate": "2026-07-22",
+  "updatedAt": "2026-07-22",
+  "type": "research-preview",
+  "modality": [
+    "audio",
+    "video"
+  ],
+  "primaryTask": "video-generation",
+  "deployment": [
+    "api-only"
+  ],
+  "license": "Other/Custom",
+  "parameters": "14B",
+  "contextWindow": "unknown",
+  "description": "Wan-Dancer is a hierarchical framework for minute-scale coherent music-to-dance generation, developed by Tongyi Lab at Alibaba Group.",
+  "keyFeatures": [
+    "Minute-scale coherent generation",
+    "Music-to-dance video synthesis"
+  ],
+  "benchmarks": [],
+  "family": "Wan",
+  "previousVersion": null,
+  "links": {
+    "Project": "https://humanaigc.github.io/wan-dancer-project/"
+  },
+  "logo": null,
+  "tags": [
+    "music-to-dance",
+    "video-generation"
+  ],
+  "sources": [
+    "https://humanaigc.github.io/wan-dancer-project/"
+  ],
+  "verified": false,
+  "featured": false,
+  "boost": 1,
+  "curatorNotes": "Developed by Tongyi Lab, Alibaba Group."
+}

@@ -2,6 +2,7 @@ export const DEVELOPERS = [
   "OpenAI",
   "Anthropic",
   "Google DeepMind",
+  "Google",
   "Meta",
   "Mistral AI",
   "Cohere",
@@ -26,6 +27,8 @@ export const DEVELOPERS = [
   "Zhipu AI",
   "Sakana AI",
   "PrismML",
+  "Qualcomm",
+  "Mirelo AI",
   "Academic/Research",
   "Other",
 ] as const;

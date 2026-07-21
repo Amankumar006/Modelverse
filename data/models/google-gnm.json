@@ -1,0 +1,43 @@
+{
+  "id": "google-gnm",
+  "name": "Google Navigation Model (GNM Head)",
+  "slug": "google-gnm",
+  "developer": "Google",
+  "releaseDate": "2026-07-22",
+  "updatedAt": "2026-07-22",
+  "type": "open-weights",
+  "modality": [
+    "image"
+  ],
+  "primaryTask": "other",
+  "deployment": [
+    "self-hostable"
+  ],
+  "license": "Other/Custom",
+  "parameters": "undisclosed",
+  "contextWindow": "unknown",
+  "description": "GNM is an open ecosystem of parametric human models and perception stacks, starting with GNM Head by Google.",
+  "keyFeatures": [
+    "Parametric human models",
+    "Perception stacks"
+  ],
+  "benchmarks": [],
+  "family": null,
+  "previousVersion": null,
+  "links": {
+    "Code": "https://github.com/google/GNM"
+  },
+  "logo": null,
+  "tags": [
+    "3d-reconstruction",
+    "parametric-model",
+    "perception"
+  ],
+  "sources": [
+    "https://github.com/google/GNM"
+  ],
+  "verified": false,
+  "featured": false,
+  "boost": 1,
+  "curatorNotes": ""
+}
