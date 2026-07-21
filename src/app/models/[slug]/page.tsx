@@ -299,19 +299,7 @@ export default async function ModelDetailPage({
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 mt-10">
           {/* Main Info Columns (left) */}
           <div className="lg:col-span-8 space-y-10">
-            {markdownContent ? (
-              <section className="pt-2 pb-8 border-b border-white/10 mb-8">
-                <MarkdownRenderer content={markdownContent} />
-              </section>
-            ) : (
-              <>
-            {/* Description */}
-            <section className="space-y-3">
-              <h2 className="text-xs font-bold uppercase tracking-widest text-gray-400/60">Description</h2>
-              <p className="text-gray-300 leading-relaxed text-base sm:text-lg">{model.description}</p>
-            </section>
-
-            {/* Key Features */}
+            {/* Key Features Header Badges */}
             {model.keyFeatures && model.keyFeatures.length > 0 && (
               <section className="space-y-4">
                 <h2 className="text-xs font-bold uppercase tracking-widest text-gray-400/60">Key Features</h2>
@@ -329,45 +317,57 @@ export default async function ModelDetailPage({
               </section>
             )}
 
-            {/* Benchmarks Table */}
-            {model.benchmarks && model.benchmarks.length > 0 && (
-              <section className="space-y-4">
-                <h2 className="text-[10px] font-bold uppercase tracking-widest text-gray-400/60">Benchmarks</h2>
-                <div className="border border-white/10 rounded-xl overflow-hidden bg-white/5">
-                  <table className="w-full text-left border-collapse text-xs">
-                    <thead>
-                      <tr className="border-b border-white/10 bg-white/5 text-gray-400 font-medium">
-                        <th className="p-3">Benchmark</th>
-                        <th className="p-3 text-right">Score</th>
-                        <th className="p-3 text-center">Status</th>
-                      </tr>
-                    </thead>
-                    <tbody className="divide-y divide-white/10">
-                      {model.benchmarks.map((bench, idx) => (
-                        <tr key={idx} className="hover:bg-white/5 transition-colors">
-                          <td className="p-3 text-white font-medium">{bench.name}</td>
-                          <td className="p-3 text-right text-white font-semibold tabular-nums">{bench.score}</td>
-                          <td className="p-3 text-center">
-                            {bench.verified ? (
-                              <span className="inline-flex items-center gap-1.5 text-[10px] text-emerald-600 font-medium">
-                                <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
-                                Verified
-                              </span>
-                            ) : (
-                              <span className="inline-flex items-center gap-1.5 text-[10px] text-gray-400 font-medium" title="Self-reported score">
-                                <span className="w-1.5 h-1.5 rounded-full bg-white/20" />
-                                Self-Reported
-                              </span>
-                            )}
-                          </td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
-                </div>
+            {/* Markdown Documentation or Fallback Description & Benchmarks */}
+            {markdownContent ? (
+              <section className="pt-4 pb-8 border-b border-white/10 mb-8">
+                <MarkdownRenderer content={markdownContent} />
               </section>
-            )}
+            ) : (
+              <>
+                {/* Description */}
+                <section className="space-y-3">
+                  <h2 className="text-xs font-bold uppercase tracking-widest text-gray-400/60">Description</h2>
+                  <p className="text-gray-300 leading-relaxed text-base sm:text-lg">{model.description}</p>
+                </section>
 
+                {/* Benchmarks Table */}
+                {model.benchmarks && model.benchmarks.length > 0 && (
+                  <section className="space-y-4">
+                    <h2 className="text-[10px] font-bold uppercase tracking-widest text-gray-400/60">Benchmarks</h2>
+                    <div className="border border-white/10 rounded-xl overflow-hidden bg-white/5">
+                      <table className="w-full text-left border-collapse text-xs">
+                        <thead>
+                          <tr className="border-b border-white/10 bg-white/5 text-gray-400 font-medium">
+                            <th className="p-3">Benchmark</th>
+                            <th className="p-3 text-right">Score</th>
+                            <th className="p-3 text-center">Status</th>
+                          </tr>
+                        </thead>
+                        <tbody className="divide-y divide-white/10">
+                          {model.benchmarks.map((bench, idx) => (
+                            <tr key={idx} className="hover:bg-white/5 transition-colors">
+                              <td className="p-3 text-white font-medium">{bench.name}</td>
+                              <td className="p-3 text-right text-white font-semibold tabular-nums">{bench.score}</td>
+                              <td className="p-3 text-center">
+                                {bench.verified ? (
+                                  <span className="inline-flex items-center gap-1.5 text-[10px] text-emerald-600 font-medium">
+                                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
+                                    Verified
+                                  </span>
+                                ) : (
+                                  <span className="inline-flex items-center gap-1.5 text-[10px] text-gray-400 font-medium" title="Self-reported score">
+                                    <span className="w-1.5 h-1.5 rounded-full bg-white/20" />
+                                    Self-Reported
+                                  </span>
+                                )}
+                              </td>
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                    </div>
+                  </section>
+                )}
               </>
             )}
 
