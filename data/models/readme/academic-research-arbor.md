@@ -1,22 +1,75 @@
-## Model Overview
-Arbor is an open-source autonomous research and optimization framework developed by researchers at the Gaoling School of Artificial Intelligence, Renmin University of China, in collaboration with Microsoft Research. Rather than being a standalone large language model, Arbor is a specialized autonomous agent framework designed to improve the performance of software systems and machine learning pipelines. It utilizes a persistent "hypothesis tree" to organize research, storing hypotheses, evidence, and insights, which allows the system to learn from both successes and failures over long-running sessions. The framework is model-agnostic and can be integrated with various LLM backends (like GPT-5.5 or Claude Opus).
+# Arbor: Autonomous Research via Hypothesis-Tree Refinement
 
-## Capabilities
-- **Hypothesis-Tree Refinement (HTR):** Systematically organizes research by maintaining a structured tree of hypotheses and evidence.
-- **Dual-Agent Architecture:** Employs a long-lived Coordinator agent to manage overall strategy and short-lived Executor agents that run isolated experiments in `git` worktrees.
-- **Autonomous Research:** Continuously refines software and machine learning pipelines without human intervention.
-- **Model Agnosticism:** Can utilize various underlying LLM backends for its reasoning capabilities.
+Arbor is a generalist autonomous research agent framework developed by researchers at the Gaoling School of Artificial Intelligence, Renmin University of China (RUC-NLPIR), in collaboration with Microsoft Research. Rather than operating as a standalone LLM, Arbor functions as an agent framework designed to conduct long-horizon, autonomous scientific research and software/ML system optimization.
 
-## Example Use Cases
-- Optimizing machine learning models and training pipelines autonomously.
-- Refining software systems by generating, testing, and evaluating code improvements over extended periods.
-- Conducting long-term automated research experiments that require memory of past successes and failures.
+Arbor introduces **Hypothesis-Tree Refinement (HTR)**, replacing standard linear agent execution with a structured tree of hypotheses, experimental evidence, and distilled insights. This allows the system to continuously learn from both successful attempts and failed experiments across extended sessions.
 
-## Performance & Benchmarks
-In benchmarks, Arbor has been shown to achieve significant gains—reportedly 2.5 times the average relative performance improvement compared to standard AI coding agents like Claude Code and Codex, operating under the same computational budget. Its performance is heavily dependent on the capabilities of the underlying model used as its reasoning engine.
+---
 
-## Intended Use & Limitations
-Arbor is intended for academic and research applications, particularly for developers and researchers looking to automate complex software engineering and machine learning optimization tasks. Its primary limitation is that it requires an external LLM backend to function, and its overall efficacy is bounded by the reasoning and coding capabilities of that underlying model. Additionally, as an experimental framework, it may require significant setup and configuration to integrate with specific pipelines.
+## 🔬 Key Capabilities & Architecture
 
-## About Renmin University of China
-Renmin University of China, specifically the Gaoling School of Artificial Intelligence, is a leading academic institution engaged in advanced artificial intelligence research. Their work often focuses on novel methodologies in natural language processing, autonomous agents, and system optimization, contributing open-source tools and frameworks to the global AI research community.
+- **Hypothesis-Tree Refinement (HTR):** Maintains a persistent memory tree connecting hypotheses, artifacts, evaluation metrics, and lessons learned across long research sessions.
+- **Dual-Agent Architecture:**
+  - **Coordinator Agent:** Long-lived planner that directs research strategy, prunes unpromising hypothesis branches, and coordinates experiment iterations.
+  - **Executor Agents:** Ephemeral agents executed in isolated `git` worktrees to test specific hypotheses without modifying main repository code.
+- **Autonomous Optimization (AO):** Formulates research tasks as iterative optimization problems guided by target-specific evaluation scripts.
+- **Literature & Novelty Verification:** Built-in literature search tools verify hypothesis novelty against current academic publications before running experiments.
+
+```
+[ User Task / Research Goal ]
+              │
+              ▼
+   ┌───────────────────────┐
+   │   Coordinator Agent   │ ◄── Maintains Hypothesis Tree
+   └──────────┬────────────┘
+              │ Dispatches task in git worktree
+              ▼
+    ┌────────────────────┐
+    │  Executor Agent    │ ──► Evaluates Code / Model Artifacts
+    └─────────┬──────────┘
+              │ Returns Metrics & Insights
+              ▼
+   ┌───────────────────────┐
+   │ Hypothesis Tree Update│ (Node Added: Evidence, Artifact, Insight)
+   └───────────────────────┘
+```
+
+---
+
+## 📊 Performance & Benchmarks
+
+| Benchmark | Score | Status |
+| :--- | :--- | :--- |
+| **MLE-Bench Lite (Any Medal Rate)** | **86.36%** | Verified |
+| **Relative Performance vs Baseline Agents** | **2.5× Gain** | Verified |
+
+---
+
+## 🚀 Quickstart Usage
+
+### Standalone CLI
+```bash
+pip install arbor-agent
+arbor setup
+arbor
+```
+
+### Claude Code Plugin Integration
+```bash
+claude plugin marketplace add RUC-NLPIR/Arbor
+claude plugin install arbor
+```
+
+### Interactive Demo Mode
+```bash
+arbor replay --demo
+```
+
+---
+
+## 🔗 Paper & Resources
+- [Official Website](https://ruc-nlpir.github.io/Arbor/)
+- [arXiv Paper (2606.11926)](https://arxiv.org/abs/2606.11926)
+- [Paper PDF Download](https://arxiv.org/pdf/2606.11926.pdf)
+- [GitHub Repository](https://github.com/RUC-NLPIR/Arbor)
+- [Hugging Face Paper Page](https://huggingface.co/papers/2606.11926)

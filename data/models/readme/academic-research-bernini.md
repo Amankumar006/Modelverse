@@ -1,23 +1,69 @@
-## Model Overview
-Bernini is a unified artificial intelligence framework for video generation and editing developed by ByteDance Research. Introduced in May 2026, the model employs a "partitioned" architecture that separates semantic understanding from pixel rendering. This design includes a Semantic Planner based on Qwen 2.5-VL-7B for reasoning and planning, and a Renderer utilizing a Diffusion Transformer (DiT) based on the Wan 2.2-A14B model for synthesizing high-quality visual outputs. Named after the Italian Baroque sculptor Gian Lorenzo Bernini, the framework excels at minimizing common video generation issues such as flickering and drift in untouched regions.
+# Bernini: Latent Semantic Planning for Video Diffusion
 
-## Capabilities
-- **Text-to-Video Generation:** Creates high-quality video sequences from descriptive text prompts.
-- **Instruction-Based Video Editing:** Modifies existing videos based on natural language instructions.
-- **Reference-Guided Editing:** Edits video content while adhering to provided visual references.
-- **Subject-to-Video Generation:** Generates videos centered around specific, user-provided subjects.
-- **Content Insertion:** Seamlessly integrates new elements into existing video footage.
+**Bernini** is a unified artificial intelligence framework for video generation and instruction-based video editing developed by **ByteDance Research**. Introduced in May 2026 (*"Bernini: Latent Semantic Planning for Video Diffusion"*), Bernini employs a decoupled "division of labor" architecture that separates high-level semantic reasoning from fine-grained pixel synthesis.
 
-## Example Use Cases
-- Professional video editing and post-production, automating complex visual modifications.
-- Generating cinematic sequences from scripts or storyboards for filmmakers and content creators.
-- Creating dynamic marketing content by animating static images or integrating specific subjects into new environments.
+---
 
-## Performance & Benchmarks
-By separating semantic planning from pixel generation, Bernini demonstrates superior performance in maintaining temporal consistency and spatial coherence. It effectively minimizes artifacts like flickering and drift, which are common in traditional diffusion models, resulting in highly stable and realistic video outputs suitable for commercial applications.
+## 🔬 Architecture & Methodology
 
-## Intended Use & Limitations
-Bernini is intended for both academic research and commercial applications in video production and editing. Released under the Apache License 2.0, it allows for wide adoption and modification. However, as a complex dual-model framework, it requires substantial computational resources for inference and fine-tuning. Users should also consider the ethical implications of video generation, including the potential for generating misleading content.
+The framework consists of two core components:
+1. **Semantic Planner:** Powered by an MLLM (Qwen2.5-VL-7B) that generates target semantic plans directly in the Vision Transformer (ViT) embedding space using Chain-of-Thought (CoT) reasoning.
+2. **Pixel Renderer (Bernini-R):** Powered by a Diffusion Transformer (DiT based on Wan2.2-A14B) that executes flow-matching denoising in VAE latent space conditioned on the planner's semantic representations.
 
-## About ByteDance Research
-ByteDance Research is the research and development arm of ByteDance, a global technology company known for innovative applications of artificial intelligence. The research division focuses on advancing the state-of-the-art in machine learning, computer vision, natural language processing, and generative AI, often releasing open-source models and frameworks to foster community collaboration and innovation.
+```
+Input Video & Prompt ───► MLLM Semantic Planner (Qwen2.5-VL-7B) ───► Target ViT Semantic Vectors ───► DiT Latent Renderer (Bernini-R) ───► Output Video
+```
+
+---
+
+## 📊 Benchmarks & Performance
+
+| Benchmark | Score (7B+14B) | Score (14B Renderer) | Status |
+| :--- | :--- | :--- | :--- |
+| **EditVerse** | **8.02** | 7.99 | Verified |
+| **OpenVE** | **4.03** | 3.78 | Verified |
+| **VBench** | **84.37** | 84.64 | Verified |
+
+---
+
+## 🚀 Quickstart & Usage
+
+```bash
+git clone https://github.com/bytedance/Bernini.git
+cd Bernini
+pip install -r requirements.txt
+pip install -U huggingface_hub
+hf download ByteDance/Bernini-R-Diffusers --local-dir pretrained_models/Bernini-R-Diffusers
+```
+
+```python
+import torch
+from diffusers import DiffusionPipeline
+
+# Load Bernini-R Diffusers pipeline
+pipe = DiffusionPipeline.from_pretrained(
+    "ByteDance/Bernini-R-Diffusers",
+    torch_dtype=torch.bfloat16
+).to("cuda")
+
+# Run video inference
+output = pipe(
+    prompt="A cinematic drone shot of a snowy mountain peak at sunrise",
+    num_inference_steps=50,
+    guidance_scale=6.0,
+    height=480,
+    width=832,
+    num_frames=81
+)
+
+video_frames = output.frames
+```
+
+---
+
+## 🔗 Official Resources & Links
+- [Official Project Page](https://bernini-ai.github.io/)
+- [arXiv Paper (arXiv:2605.22344)](https://arxiv.org/abs/2605.22344)
+- [Paper PDF Download](https://arxiv.org/pdf/2605.22344)
+- [GitHub Repository](https://github.com/bytedance/Bernini)
+- [Hugging Face Models Collection](https://huggingface.co/collections/ByteDance/bernini-665e75141071d279930f36f6)

@@ -1,28 +1,47 @@
-# Actionable World
+# WorldString: Actionable World Representation
 
-## Model Overview
-WorldString, often referred to as "Actionable World", is an advanced artificial intelligence framework introduced in a research paper titled *"Actionable World Representation"*. The project is a major collaborative effort between researchers from Tsinghua University (IEI Lab), UC San Diego (UCSD), CalTech, and NVIDIA. Serving as a digital twin of the physical environment, Actionable World aims to model the dynamic states of various entities, including articulated, skinning, and soft objects. This model acts as a foundational building block for future physical world models, bridging the gap between digital simulation and actionable robotic control.
+**WorldString** (commonly known as **Actionable World**) is a foundational neural architecture designed for physical world modeling. Developed through a collaboration between researchers from **Tsinghua University (IEI Lab)**, **UC San Diego (UCSD)**, **CalTech**, and **NVIDIA**, WorldString acts as an interactive digital twin. Rather than focusing solely on passive video generation or static 3D scene reconstruction, WorldString explicitly represents real-world objects as **actionable entities** with dynamic physical states—spanning articulated, skinned, and soft/deformable categories.
 
-## Capabilities
-- **Direct Learning from Physical Streams**: Unlike traditional methods that rely solely on video generation or scene reconstruction, WorldString learns directly from point clouds or RGB-D video streams.
-- **Dynamic State Modeling**: The model accurately captures the states and transformations of physical objects, including complex interactions with soft, skinning, and articulated entities.
-- **Differentiable Architecture**: The fully differentiable nature of its architecture enables seamless integration with policy learning and neural dynamics.
-- **Physical World Simulation**: Capable of creating a highly accurate "actionable world representation" which mirrors physical realities to an advanced degree of precision.
+---
 
-## Example Use Cases
-- **Robotic Control and Automation**: Providing a reliable physical world model for training embodied AI and robotic systems to perform complex, dynamic physical tasks.
-- **Digital Twins**: Creating accurate digital replicas of real-world scenarios to simulate outcomes without requiring physical trials.
-- **Policy Learning Integration**: Empowering AI agents with deep understanding of physics and environment states to optimize learning pathways for autonomous navigation and manipulation.
+## 🔬 Core Capabilities & Architecture
 
-## Performance & Benchmarks
-While specific quantitative benchmarks are undisclosed, Actionable World's performance is noted for its high-fidelity representation of complex physical states that traditional scene reconstruction methods struggle to achieve. The research demonstrates significant leaps in enabling perception-based algorithms to cross over into actionable robotic manipulation.
+- **Direct Physical Stream Learning**: Processes 3D point clouds and RGB-D video streams directly without requiring hand-coded parametric CAD models.
+- **Unified Representation across Object Types**:
+  - **Articulable Objects**: Handles robotic hands, arms, doors, and jointed assemblies (e.g., XHand, Unitree Go2, Unitree H1).
+  - **Skinning Objects**: Models humans and biological structures with skeletal hierarchies.
+  - **Soft / Deformable Objects**: Captures dynamic states of cloth, ropes, and flexible materials.
+- **Keypoint & Canonical Embedding Space**: Bridges rigid kinematics and non-rigid deformations into a shared, compact state representation.
+- **Fully Differentiable Architecture**: Enables seamless end-to-end integration with neural dynamics simulators and reinforcement learning / policy learning algorithms.
 
-## Intended Use & Limitations
-**Intended Use**: This model is primarily designed as a research preview and foundational tool for institutions and developers creating embodied AI, robotics, and complex physical simulation environments. 
+```
+Input State Encoder (Point Cloud / RGB-D) ───► Canonical Keypoint Tokenizer ───► Neural Point Cloud Renderer ───► Physics Simulator Alignment
+```
 
-**Limitations**: 
-- The model is currently heavily geared towards research and requires significant technical expertise to integrate with downstream policy learning frameworks.
-- It relies on high-quality point clouds or RGB-D video streams, which may limit its applicability in environments where such data is unavailable or noisy.
+---
 
-## About Tsinghua University, UCSD, CalTech, NVIDIA
-This collaborative initiative brings together some of the brightest minds in artificial intelligence and robotics. The Tsinghua University IEI Lab focuses on cutting-edge intelligent environment research. UC San Diego and CalTech are globally renowned for their engineering, computer science, and robotics programs, pushing the boundaries of AI research. NVIDIA brings unparalleled expertise in accelerated computing, simulation, and foundational AI model development, empowering this cross-institutional team to achieve breakthroughs in modeling the physical world.
+## 🚀 Quickstart & Installation
+
+```bash
+# Clone the repository
+git clone https://github.com/MaureenZOU/worldstring.git
+cd worldstring
+
+# Create Conda environment & install dependencies
+conda create -n worldstring python=3.11 -y
+conda activate worldstring
+pip install torch torchvision --index-url https://download.pytorch.org/whl/cu121
+pip install gradio numpy scipy pyyaml open3d pybullet mujoco trimesh
+
+# Launch interactive Gradio visualization demo
+python app.py
+```
+
+---
+
+## 🔗 Official Links & Resources
+- [Official Website](https://worldstring-iei.github.io/)
+- [arXiv Paper (arXiv:2605.18743)](https://arxiv.org/abs/2605.18743)
+- [Paper PDF Download](https://arxiv.org/pdf/2605.18743)
+- [GitHub Repository](https://github.com/MaureenZOU/worldstring)
+- [Hugging Face Dataset (Tera-AI/STRIDE)](https://huggingface.co/datasets/Tera-AI/STRIDE)

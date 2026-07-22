@@ -3,8 +3,8 @@
   "name": "Arbor",
   "slug": "academic-research-arbor",
   "developer": "Academic/Research",
-  "releaseDate": "2026-07-15",
-  "updatedAt": "2026-07-15",
+  "releaseDate": "2026-06-15",
+  "updatedAt": "2026-07-22",
   "type": "research-preview",
   "modality": [
     "text"
@@ -16,26 +16,51 @@
   "license": "Other/Custom",
   "parameters": "undisclosed",
   "contextWindow": "undisclosed",
-  "description": "An experimental specialized research research preview named Arbor, published by Renmin University of China to showcase novel methods.",
-  "keyFeatures": [],
-  "benchmarks": [],
+  "description": "Generalist autonomous research agent framework developed by Renmin University of China (RUC-NLPIR) and Microsoft Research, utilizing Hypothesis-Tree Refinement (HTR) for long-horizon scientific research and system optimization.",
+  "keyFeatures": [
+    "Hypothesis-Tree Refinement (HTR)",
+    "Dual Coordinator-Executor Architecture",
+    "Autonomous Optimization Setting",
+    "Model Agnostic Engine (GPT-5.5 / Claude / Codex)",
+    "Literature & Novelty Verification",
+    "Claude Code Plugin & MCP Support"
+  ],
+  "benchmarks": [
+    {
+      "name": "MLE-Bench Lite (Any Medal Rate)",
+      "score": "86.36%",
+      "verified": true
+    },
+    {
+      "name": "Relative Performance vs Baseline Agents",
+      "score": "2.5x Improvement",
+      "verified": true
+    }
+  ],
   "family": null,
   "previousVersion": null,
   "links": {
-    "Website": "https://ruc-nlpir.github.io/Arbor/"
+    "website": "https://ruc-nlpir.github.io/Arbor/",
+    "paper": "https://arxiv.org/abs/2606.11926",
+    "github": "https://github.com/RUC-NLPIR/Arbor",
+    "huggingface": "https://huggingface.co/papers/2606.11926"
   },
   "logo": null,
   "tags": [
     "research-preview",
-    "other"
+    "autonomous-agents",
+    "hypothesis-tree-refinement",
+    "system-optimization"
   ],
   "sources": [
-    "https://ruc-nlpir.github.io/Arbor/"
+    "https://ruc-nlpir.github.io/Arbor/",
+    "https://arxiv.org/abs/2606.11926",
+    "https://github.com/RUC-NLPIR/Arbor"
   ],
-  "verified": false,
+  "verified": true,
   "featured": false,
   "boost": 1,
-  "curatorNotes": "Verified academic/research lab affiliation.",
+  "curatorNotes": "Verified academic research framework from RUC-NLPIR (Gaoling School of AI, Renmin University of China) in collaboration with Microsoft Research.",
   "institution": "Renmin University of China",
   "templatedDescription": false
 }

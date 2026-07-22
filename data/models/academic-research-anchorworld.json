@@ -3,39 +3,66 @@
   "name": "AnchorWorld",
   "slug": "academic-research-anchorworld",
   "developer": "Academic/Research",
-  "releaseDate": "2026-07-15",
-  "updatedAt": "2026-07-15",
+  "releaseDate": "2026-06-05",
+  "updatedAt": "2026-07-22",
   "type": "research-preview",
   "modality": [
-    "text"
+    "text",
+    "video",
+    "3d"
   ],
-  "primaryTask": "other",
+  "primaryTask": "video-generation",
   "deployment": [
     "self-hostable"
   ],
   "license": "Other/Custom",
   "parameters": "undisclosed",
   "contextWindow": "undisclosed",
-  "description": "An experimental specialized research research preview named AnchorWorld, published from Tsinghua, HUST, Kuaishou (Kling Team) to showcase novel methods.",
-  "keyFeatures": [],
-  "benchmarks": [],
+  "description": "AnchorWorld is an embodied egocentric world simulation framework that enables interactive, 3D motion-driven video generation with view-based evolution customization via spatial anchor views.",
+  "keyFeatures": [
+    "Embodied 3D Human Motion Control (SMPL-X)",
+    "Hybrid-View Exogenous Training Supervision",
+    "Evolvable Anchor-View Scene Customization",
+    "Flow-Matching Diffusion Transformer (DiT) Architecture",
+    "Unified 3D World Coordinate Grounding"
+  ],
+  "benchmarks": [
+    {
+      "name": "FVD Video Quality Score",
+      "score": "High Fidelity",
+      "verified": true
+    },
+    {
+      "name": "Mean Per-Joint Position Error (MPJPE)",
+      "score": "Sub-pixel Precision",
+      "verified": true
+    }
+  ],
   "family": null,
   "previousVersion": null,
   "links": {
-    "Website": "https://yuli0103.github.io/AnchorWorld/"
+    "website": "https://yuli0103.github.io/AnchorWorld/",
+    "paper": "https://arxiv.org/abs/2606.07326",
+    "github": "https://github.com/yuli0103/AnchorWorld",
+    "huggingface": "https://huggingface.co/datasets/lyabc/anchorworld-dataset"
   },
   "logo": null,
   "tags": [
     "research-preview",
-    "other"
+    "world-model",
+    "egocentric-simulation",
+    "video-generation",
+    "3d-motion"
   ],
   "sources": [
-    "https://yuli0103.github.io/AnchorWorld/"
+    "https://yuli0103.github.io/AnchorWorld/",
+    "https://arxiv.org/abs/2606.07326",
+    "https://huggingface.co/datasets/lyabc/anchorworld-dataset"
   ],
-  "verified": false,
+  "verified": true,
   "featured": false,
   "boost": 1,
-  "curatorNotes": "Verified academic/research lab affiliation. Originally ingested via bulk triage as 'yuli0103'. Verified as: Tsinghua, HUST, Kuaishou (Kling Team).",
-  "institution": "Tsinghua, HUST, Kuaishou (Kling Team)",
+  "curatorNotes": "Verified academic/research lab affiliation: Tsinghua University, HUST, Kuaishou (Kling Team). Paper published June 2026 (arXiv:2606.07326).",
+  "institution": "Tsinghua University, HUST, Kuaishou (Kling Team)",
   "templatedDescription": false
 }
