@@ -3,39 +3,65 @@
   "name": "ControlLight",
   "slug": "academic-research-controllight",
   "developer": "Academic/Research",
-  "releaseDate": "2026-07-15",
-  "updatedAt": "2026-07-15",
+  "releaseDate": "2026-05-15",
+  "updatedAt": "2026-07-22",
   "type": "research-preview",
   "modality": [
-    "text"
+    "image"
   ],
   "primaryTask": "other",
   "deployment": [
     "self-hostable"
   ],
   "license": "Other/Custom",
-  "parameters": "undisclosed",
+  "parameters": "9B (FLUX.2-klein Base) + LoRA",
   "contextWindow": "undisclosed",
-  "description": "Developed from Sony Computer Science Laboratories ControlLight is a research preview model exploring new techniques in specialized research.",
-  "keyFeatures": [],
-  "benchmarks": [],
+  "description": "ControlLight is a controllable, consistent, and generalizable low-light image enhancement framework built as a LoRA on FLUX.2-klein-9B. It enables continuous illumination adjustment while preserving scene structure and fine-grained visual details.",
+  "keyFeatures": [
+    "Controllable illumination strength via continuous scaling factor alpha (0.0 to 1.0)",
+    "Built on FLUX.2-klein-9B architecture using Low-Rank Adaptation (LoRA)",
+    "Structural preservation and fine-grained visual detail retention",
+    "Trained on Light100K dataset for continuous illumination learning",
+    "Evaluated on RealIR-Bench, LOL-v1, LWSR, DICM, and LIME benchmarks"
+  ],
+  "benchmarks": [
+    {
+      "name": "LOL-v1 / LWSR PSNR & SSIM",
+      "score": "State-of-the-Art",
+      "verified": true
+    },
+    {
+      "name": "RealIR-Bench Non-Reference Perceptual Metrics",
+      "score": "Top Perceptual Quality",
+      "verified": true
+    }
+  ],
   "family": null,
   "previousVersion": null,
   "links": {
-    "Website": "https://yfyang007.github.io/ControlLight/"
+    "website": "https://yfyang007.github.io/ControlLight/",
+    "paper": "https://arxiv.org/abs/2605.25569",
+    "github": "https://github.com/yfyang007/ControlLight",
+    "huggingface": "https://huggingface.co/ControlLight/ControlLight"
   },
   "logo": null,
   "tags": [
     "research-preview",
-    "other"
+    "low-light-enhancement",
+    "flux2",
+    "lora",
+    "image-to-image",
+    "computer-vision"
   ],
   "sources": [
-    "https://yfyang007.github.io/ControlLight/"
+    "https://yfyang007.github.io/ControlLight/",
+    "https://arxiv.org/abs/2605.25569",
+    "https://github.com/yfyang007/ControlLight"
   ],
-  "verified": false,
+  "verified": true,
   "featured": false,
   "boost": 1,
-  "curatorNotes": "Verified academic/research lab affiliation. Originally ingested via bulk triage as 'yfyang007'. Verified as: Sony Computer Science Laboratories.",
+  "curatorNotes": "Verified academic/research paper (arXiv:2605.25569). Authored by Yufeng Yang et al.",
   "institution": "Sony Computer Science Laboratories",
   "templatedDescription": false
 }

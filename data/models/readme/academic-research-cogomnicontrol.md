@@ -1,22 +1,76 @@
-## Model Overview
-CogOmniControl is an advanced reasoning-driven AI framework designed for controllable video generation, introduced by researchers at the University of Macau in May 2026. The framework is tailored to bridge the gap between standard video generation models and professional production workflows, which often rely on complex, sparse, or abstract inputs like storyboard sketches and clay renders. It operates as a closed-loop system, separating the process into creative intent cognition using a specialized Vision-Language Model (CogVLM) and video generation using a Diffusion Transformer (CogOmniDiT).
+# CogOmniControl: Reasoning-Driven Controllable Video Generation
 
-## Capabilities
-- **Creative Intent Cognition:** Translates sparse or abstract conditions (e.g., sketches, storyboards) into dense, actionable reasoning outputs using a VLM trained on authentic anime production data.
-- **Controllable Video Generation:** Unifies various control conditions through in-context generation via the CogOmniDiT component.
-- **Closed-Loop Evaluation:** Utilizes planned evaluators to score generated candidates, enabling a "Best-of-N" selection process to ensure outputs match user intent.
-- **Professional Workflow Integration:** Specifically designed to handle the nuanced requirements of real-world animation and video production.
+**CogOmniControl** is a reasoning-driven framework designed for controllable video generation, developed by researchers at the **University of Macau (UM-Lab)** (Hongji Yang, Songlian Li, Yucheng Zhou, Xiaotong Zhao, Alan Zhao, Chengzhong Xu, Jianbing Shen).
 
-## Example Use Cases
-- Animating rough storyboard sketches into fully realized video sequences for animation studios.
-- Generating realistic video from abstract inputs like clay renders or block-outs in VFX workflows.
-- Iterative video production where creators require precise control over the generated motion, style, and subject matter based on sparse conditional inputs.
+Existing video diffusion models often struggle with abstract, sparse, or complex conditions—such as storyboard sketches, block-outs, or clay renders—frequently leading to a gap between human creative intent and the generated video output. CogOmniControl resolves this by factorizing the generation process into two core stages: **Creative Intent Cognition** and **Unified In-Context Synthesis**.
 
-## Performance & Benchmarks
-CogOmniControl was evaluated using CogReasonBench and CogControlBench—two novel benchmarks based on real-world professional production data rather than simulated conditions. In these rigorous tests, the framework demonstrated performance that surpasses existing open-source models, particularly in adhering to complex creative intents and abstract structural controls.
+---
 
-## Intended Use & Limitations
-The framework is intended for professional animators, VFX artists, and researchers exploring controllable generative video. While highly effective for abstract-to-dense video generation, its specialized nature means it may require domain-specific data (like animation storyboards) to achieve optimal results. The closed-loop evaluation and Best-of-N selection process also make inference computationally intensive compared to single-pass generation models.
+## 🔬 Architecture & Methodology
 
-## About University of Macau
-The University of Macau is a leading public research university in Macau, engaged in cutting-edge research across various disciplines, including artificial intelligence and computer vision. Their research labs frequently contribute innovative methodologies to the AI community, focusing on practical frameworks that bridge the gap between academic theory and industry application.
+```
+Sparse Input (Sketch / Render) ──► CogVLM (Intent Cognition) ──► Dense Reasoning Plan ──► CogOmniDiT (In-Context Video DiT) ──► Best-of-N Candidate Selection
+```
+
+1. **Creative Intent Cognition (CogVLM)**: Fine-tuned Vision-Language Model trained on authentic anime production and professional workflow data. Interprets sparse or abstract input conditions (rough storyboard sketches, clay renders) and converts them into dense, actionable reasoning plans.
+2. **Unified Video Synthesis (CogOmniDiT)**: A Diffusion Transformer (DiT) architecture that unifies diverse control signals via in-context generation, guided directly by CogVLM reasoning outputs.
+3. **Reinforcement Learning Alignment**: Aligns the diffusion sampling trajectory with VLM reasoning prompts using reinforcement learning optimization.
+4. **Closed-Loop Best-of-N Harness**: CogVLM dynamically plans downstream evaluators to inspect candidate videos and select the output that best satisfies the original creative intent.
+
+---
+
+## 📊 Benchmarks & Performance
+
+Evaluated on two novel benchmarks built on real-world professional production data:
+- **CogReasonBench**: Benchmark measuring VLM reasoning accuracy, structural decomposition, and intent translation from sparse cues.
+- **CogControlBench**: Evaluation suite testing controllable video generation under complex professional constraints (sketches, depth maps, pose vectors, multi-modal controls).
+
+---
+
+## 🚀 Quickstart & Usage
+
+```bash
+git clone https://github.com/um-lab/CogOmniControl.git
+cd CogOmniControl
+conda create -n cogomnicontrol python=3.10 -y
+conda activate cogomnicontrol
+pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu121
+pip install transformers diffusers accelerate gradio opencv-python
+```
+
+```python
+import torch
+from transformers import AutoModelForCausalLM, AutoTokenizer
+from diffusers import CogOmniDiTPipeline
+
+# Step 1: Load CogVLM for Intent Cognition
+vlm_model = AutoModelForCausalLM.from_pretrained("um-lab/CogVLM-Intent", torch_dtype=torch.float16).cuda()
+vlm_tokenizer = AutoTokenizer.from_pretrained("um-lab/CogVLM-Intent")
+
+sketch_image = "examples/storyboard_sketch.png"
+prompt = "Animate this sketch into a dynamic combat sequence with cinematic lighting."
+
+inputs = vlm_tokenizer(prompt, return_tensors="pt").to("cuda")
+reasoning_plan = vlm_model.generate(**inputs, max_new_tokens=512)
+
+# Step 2: Pass Reasoning Plan to CogOmniDiT for Video Synthesis
+pipe = CogOmniDiTPipeline.from_pretrained("um-lab/CogOmniDiT", torch_dtype=torch.float16).to("cuda")
+video_frames = pipe(
+    prompt=reasoning_plan,
+    control_image=sketch_image,
+    num_frames=49,
+    guidance_scale=6.0
+).frames
+
+pipe.save_video(video_frames, "output_cogomnicontrol.mp4")
+```
+
+---
+
+## 🔗 Official Links & Resources
+
+- [Official Project Page](https://um-lab.github.io/CogOmniControl/)
+- [arXiv Paper (arXiv:2605.19995)](https://arxiv.org/abs/2605.19995)
+- [Paper PDF Download](https://arxiv.org/pdf/2605.19995)
+- [Hugging Face Paper Page](https://huggingface.co/papers/2605.19995)
+- [GitHub Organization (UM-Lab)](https://github.com/um-lab)

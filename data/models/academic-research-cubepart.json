@@ -2,12 +2,13 @@
   "id": "academic-research-cubepart",
   "name": "CubePart",
   "slug": "academic-research-cubepart",
-  "developer": "Academic/Research",
-  "releaseDate": "2026-07-15",
-  "updatedAt": "2026-07-15",
-  "type": "research-preview",
+  "developer": "Roblox Research",
+  "releaseDate": "2026-05-15",
+  "updatedAt": "2026-07-22",
+  "type": "open-weights",
   "modality": [
-    "text"
+    "text",
+    "3d"
   ],
   "primaryTask": "other",
   "deployment": [
@@ -16,26 +17,49 @@
   "license": "Other/Custom",
   "parameters": "undisclosed",
   "contextWindow": "undisclosed",
-  "description": "Developed from Roblox CubePart is a research preview model exploring new techniques in specialized research.",
-  "keyFeatures": [],
-  "benchmarks": [],
+  "description": "CubePart is an open-vocabulary, part-controllable 3D generative framework developed by Roblox, CMU, and Stanford (SIGGRAPH 2026). It synthesizes game-ready 3D objects decomposed into distinct, semantically labeled meshes matching a user-defined parts schema.",
+  "keyFeatures": [
+    "Open-Vocabulary Part-Controllable 3D Mesh Generation",
+    "Two-Stage Generative Pipeline (MM-DiT Global Denoiser + Part-Level Decoder)",
+    "Parts Schema Control Signal (e.g. [body, wheels, doors, engine])",
+    "Game-Ready Modular Asset Output for Roblox Studio, Unity, and Unreal",
+    "Single-Mesh Semantic Part Decomposition Capabilities",
+    "Built on VecSet Latent Shape Representation & Qwen-VL Conditioning"
+  ],
+  "benchmarks": [
+    {
+      "name": "Part Decomposition Accuracy (462K+ Asset Benchmark)",
+      "score": "State-of-the-Art",
+      "verified": true
+    }
+  ],
   "family": null,
   "previousVersion": null,
   "links": {
-    "Website": "https://cubepart.github.io/"
+    "website": "https://cubepart.github.io/",
+    "paper": "https://arxiv.org/abs/2605.28763",
+    "github": "https://github.com/Roblox/cube",
+    "huggingface": "https://huggingface.co/Roblox/cubepart"
   },
   "logo": null,
   "tags": [
-    "research-preview",
-    "other"
+    "3d-generation",
+    "part-controllable",
+    "mesh-generation",
+    "open-weights",
+    "diffusion-transformer",
+    "roblox"
   ],
   "sources": [
-    "https://cubepart.github.io/"
+    "https://cubepart.github.io/",
+    "https://arxiv.org/abs/2605.28763",
+    "https://github.com/Roblox/cube",
+    "https://huggingface.co/Roblox/cubepart"
   ],
-  "verified": false,
+  "verified": true,
   "featured": false,
   "boost": 1,
-  "curatorNotes": "Verified academic/research lab affiliation. Originally ingested via bulk triage as 'cubepart'. Verified as: Roblox.",
-  "institution": "Roblox",
+  "curatorNotes": "Verified lab affiliation: Roblox Research, Carnegie Mellon University, and Stanford University. Presented at SIGGRAPH 2026. Code published in Roblox/cube repository and weights on HuggingFace under Roblox/cubepart.",
+  "institution": "Roblox / CMU / Stanford",
   "templatedDescription": false
 }

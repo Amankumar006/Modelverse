@@ -3,8 +3,8 @@
   "name": "Dots TTS",
   "slug": "academic-research-dots-tts",
   "developer": "Academic/Research",
-  "releaseDate": "2026-07-15",
-  "updatedAt": "2026-07-15",
+  "releaseDate": "2026-06-15",
+  "updatedAt": "2026-07-22",
   "type": "research-preview",
   "modality": [
     "text",
@@ -14,29 +14,60 @@
   "deployment": [
     "self-hostable"
   ],
-  "license": "Other/Custom",
-  "parameters": "undisclosed",
+  "license": "Apache-2.0",
+  "parameters": "2B",
   "contextWindow": "undisclosed",
-  "description": "An experimental audio and speech research preview named Dots TTS, published from Xiaohongshu (Rednote HiLab) to showcase novel methods.",
-  "keyFeatures": [],
-  "benchmarks": [],
+  "description": "Dots TTS (dots.tts) is a 2-billion parameter, fully continuous, end-to-end autoregressive text-to-speech foundation model developed by RedNote HiLab (Xiaohongshu). It operates over continuous latent space via a 48 kHz AudioVAE, offering state-of-the-art zero-shot voice cloning across 24 languages.",
+  "keyFeatures": [
+    "Fully Continuous Latent Space: Replaces discrete codec tokens with a continuous 48 kHz AudioVAE representation",
+    "Autoregressive Flow-Matching Architecture: Integrates a Qwen2.5-1.5B LLM backbone with an autoregressive flow-matching acoustic head",
+    "Self-Corrective Alignment (SCA): Refined alignment strategy in dots.tts-soar checkpoint for superior zero-shot speaker similarity",
+    "MeanFlow Low-Latency Distillation: Enables few-step generation in dots.tts-mf with first-packet latency as low as 54ms",
+    "Multilingual Zero-Shot Voice Cloning: Native support for 24 languages with prompt-based acoustic adaptation"
+  ],
+  "benchmarks": [
+    {
+      "name": "Seed-TTS-Eval Speaker Similarity & Accuracy",
+      "score": "State-of-the-Art",
+      "verified": true
+    },
+    {
+      "name": "MiniMax Multilingual TTS Benchmark",
+      "score": "Top Open Model",
+      "verified": true
+    },
+    {
+      "name": "First-Packet Streaming Latency (MeanFlow variant)",
+      "score": "54 ms",
+      "verified": true
+    }
+  ],
   "family": null,
   "previousVersion": null,
   "links": {
-    "Website": "https://rednote-hilab.github.io/dots.tts-demo/"
+    "website": "https://rednote-hilab.github.io/dots.tts-demo/",
+    "paper": "https://arxiv.org/abs/2606.07080",
+    "github": "https://github.com/rednote-hilab/dots.tts",
+    "huggingface": "https://huggingface.co/collections/rednote-hilab/dotstts"
   },
   "logo": null,
   "tags": [
     "research-preview",
-    "audio-speech"
+    "audio-speech",
+    "text-to-speech",
+    "zero-shot-voice-cloning",
+    "flow-matching",
+    "audio-vae"
   ],
   "sources": [
-    "https://rednote-hilab.github.io/dots.tts-demo/"
+    "https://rednote-hilab.github.io/dots.tts-demo/",
+    "https://arxiv.org/abs/2606.07080",
+    "https://github.com/rednote-hilab/dots.tts"
   ],
-  "verified": false,
-  "featured": false,
+  "verified": true,
+  "featured": true,
   "boost": 1,
-  "curatorNotes": "Verified academic/research lab affiliation. Originally ingested via bulk triage as 'rednote-hilab'. Verified as: Xiaohongshu (Rednote HiLab).",
-  "institution": "Xiaohongshu (Rednote HiLab)",
+  "curatorNotes": "Verified academic research paper and open-source project from RedNote HiLab (Xiaohongshu). Paper available on arXiv (2606.07080), GitHub repository under Apache-2.0 license, and model weights on Hugging Face.",
+  "institution": "Xiaohongshu (RedNote HiLab)",
   "templatedDescription": false
 }

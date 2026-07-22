@@ -1,26 +1,65 @@
-# ControlLight
+# ControlLight: Controllable Low-Light Image Enhancement
 
-## Model Overview
-ControlLight is an innovative research preview model developed by Sony Computer Science Laboratories (Sony CSL) focused on controllable, consistent, and generalizable low-light image enhancement. Built upon the powerful FLUX.2 9B architecture, the model incorporates advanced Low-Rank Adaptation (LoRA) techniques to offer precise control over the image enhancement process. ControlLight allows users to seamlessly adjust the strength and style of illumination while preserving the core structural integrity and intricate details of the original image, making it an essential tool for specialized visual research and computational photography.
+**ControlLight** is a controllable, consistent, and generalizable low-light image enhancement framework introduced by Yufeng Yang et al. (May 2026). Built as a Low-Rank Adaptation (LoRA) upon the **FLUX.2-klein-9B** generative foundation architecture, ControlLight empowers users with continuous control over illumination enhancement strength via an adjustable scaling parameter ($\alpha$).
 
-## Capabilities
-*   **Controllable Low-Light Enhancement:** Provides tunable control over illumination intensity, enabling users to dial in the exact level of brightness required for an image without overexposing highlights.
-*   **Structural Preservation:** Highly capable of retaining complex structures, textures, and fine-grained details even in severely under-illuminated areas.
-*   **Generalization:** Built on a robust 9B parameter foundation model, ensuring consistent performance across diverse environments, from indoor settings to complex nightscapes.
-*   **LoRA-Driven Customization:** Utilizes Low-Rank Adaptation for efficient deployment, allowing researchers to fine-tune the enhancement parameters for specific visual styles or sensor characteristics.
+---
 
-## Example Use Cases
-*   **Computational Photography:** Enhancing photos taken in extreme low-light conditions to reveal hidden details without introducing excessive noise or artifacts.
-*   **Scientific and Research Imaging:** Clarifying visual data in research fields where illumination is naturally constrained (e.g., specific microscopy or night-time wildlife observation).
-*   **Post-Production in Media:** Providing granular control for lighting adjustments in visual effects and digital asset creation pipelines.
-*   **Surveillance and Security:** Improving visibility and contrast in low-light security footage for better analysis and object recognition.
+## 🔬 Key Features & Core Innovations
 
-## Performance & Benchmarks
-While exact quantitative benchmarks remain undisclosed for this research preview, ControlLight demonstrates state-of-the-art qualitative results in structural preservation and noise suppression compared to previous low-light enhancement models. Its foundation on the FLUX.2 9B architecture ensures highly competitive generation quality, operating with high fidelity in zero-shot generalizability tests across diverse low-light datasets.
+- **Controllable Illumination Scale ($\alpha$)**: Allows continuous adjustment of enhancement intensity from mild shadow recovery ($\alpha \to 0$) to bright, well-exposed scenes ($\alpha \to 1$) without overexposure or contrast loss.
+- **FLUX.2-klein-9B LoRA Adaptation**: Leverages the high visual quality and deep generative priors of FLUX.2-klein-9B while training lightweight LoRA weights (`controllight.safetensors`).
+- **Structural & Detail Preservation**: Ensures strict preservation of underlying scene layout, high-frequency textures, and edge fidelity even under severe low-light conditions.
+- **Light100K Dataset**: Trained on Light100K, a curated large-scale dataset specifically constructed for continuous illumination learning.
 
-## Intended Use & Limitations
-**Intended Use:** ControlLight is currently released as a research preview and is intended primarily for academic, research, and non-commercial prototyping. It is designed for researchers exploring controllable generative models and computational photography techniques.
-**Limitations:** As a research model, it may occasionally struggle with extreme sensor noise patterns not present in its training data. The model operates exclusively on image modalities and requires adequate computational resources to run the underlying 9B parameter architecture effectively.
+```
+Low-Light Input (x_0) ──► Latent Encoder ──► FLUX.2-klein-9B + ControlLight LoRA (scale α) ──► Enhanced Image
+```
 
-## About Sony Computer Science Laboratories
-Sony Computer Science Laboratories (Sony CSL) is a leading research entity dedicated to exploring the frontiers of science and technology. With a focus on foundational research and cutting-edge applications, Sony CSL develops novel techniques in artificial intelligence, computational creativity, and physical systems, pushing the boundaries of what is possible in both digital and physical domains.
+---
+
+## 🚀 Quickstart & Usage
+
+```bash
+git clone https://github.com/yfyang007/ControlLight.git
+cd ControlLight
+conda create -n controlight python=3.12 -y
+conda activate controlight
+pip install -r requirements.txt
+```
+
+```python
+import torch
+from diffusers import FluxPipeline
+
+# Load base FLUX.2-klein-9B pipeline
+pipe = FluxPipeline.from_pretrained(
+    "black-forest-labs/FLUX.2-klein-base-9B",
+    torch_dtype=torch.bfloat16
+).to("cuda")
+
+# Attach ControlLight LoRA weights
+pipe.load_lora_weights("ControlLight/ControlLight", weight_name="controllight.safetensors")
+
+# Enhance low-light image with controllable alpha strength
+alpha_strength = 0.5  # Range [0.0, 1.0]
+enhanced_image = pipe(
+    prompt="A clearly lit scene with natural colors and balanced contrast",
+    image=input_image,
+    joint_attention_kwargs={"scale": alpha_strength},
+    num_inference_steps=20,
+    guidance_scale=1.0,
+).images[0]
+
+enhanced_image.save("enhanced_output.png")
+```
+
+---
+
+## 🔗 Official Links & Resources
+
+- [Official Project Webpage](https://yfyang007.github.io/ControlLight/)
+- [arXiv Paper (arXiv:2605.25569)](https://arxiv.org/abs/2605.25569)
+- [Paper PDF Download](https://arxiv.org/pdf/2605.25569)
+- [GitHub Code Repository](https://github.com/yfyang007/ControlLight)
+- [Hugging Face Model Weights](https://huggingface.co/ControlLight/ControlLight)
+- [Hugging Face Light100K Dataset](https://huggingface.co/datasets/ControlLight/Light100K)

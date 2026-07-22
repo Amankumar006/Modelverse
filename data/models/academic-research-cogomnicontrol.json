@@ -3,39 +3,68 @@
   "name": "CogOmniControl",
   "slug": "academic-research-cogomnicontrol",
   "developer": "Academic/Research",
-  "releaseDate": "2026-07-15",
-  "updatedAt": "2026-07-15",
+  "releaseDate": "2026-05-19",
+  "updatedAt": "2026-07-22",
   "type": "research-preview",
   "modality": [
-    "text"
+    "text",
+    "vision",
+    "video"
   ],
-  "primaryTask": "other",
+  "primaryTask": "video-generation",
   "deployment": [
     "self-hostable"
   ],
   "license": "Other/Custom",
   "parameters": "undisclosed",
   "contextWindow": "undisclosed",
-  "description": "An experimental specialized research research preview named CogOmniControl, published by University of Macau to showcase novel methods.",
-  "keyFeatures": [],
-  "benchmarks": [],
+  "description": "CogOmniControl is a reasoning-driven framework for controllable video generation developed by University of Macau. It factorizes generation into creative intent cognition (CogVLM) and in-context video diffusion (CogOmniDiT), optimized via RL and Best-of-N candidate selection.",
+  "keyFeatures": [
+    "Reasoning-Driven Controllable Video Generation: Decouples creative intent understanding from video synthesis",
+    "CogVLM Intent Cognition: Specialized VLM trained on authentic anime production data to turn sparse sketches into dense reasoning",
+    "CogOmniDiT Generation: Unified Diffusion Transformer supporting multi-condition in-context video synthesis",
+    "Reinforcement Learning Alignment: Aligns DiT generation paths with VLM reasoning outputs using RL",
+    "Closed-Loop Best-of-N Harness: Uses planned evaluators to select optimal generated video candidates",
+    "Professional Production Workflow Focus: Designed for storyboard sketches, clay renders, and complex multi-modal controls"
+  ],
+  "benchmarks": [
+    {
+      "name": "CogReasonBench Intent Cognition Score",
+      "score": "State-of-the-Art",
+      "verified": true
+    },
+    {
+      "name": "CogControlBench Video Quality Score",
+      "score": "State-of-the-Art",
+      "verified": true
+    }
+  ],
   "family": null,
   "previousVersion": null,
   "links": {
-    "Website": "https://um-lab.github.io/CogOmniControl/"
+    "website": "https://um-lab.github.io/CogOmniControl/",
+    "paper": "https://arxiv.org/abs/2605.19995",
+    "github": "https://github.com/um-lab",
+    "huggingface": "https://huggingface.co/papers/2605.19995"
   },
   "logo": null,
   "tags": [
     "research-preview",
-    "other"
+    "video-generation",
+    "controllable-video",
+    "vision-language-model",
+    "diffusion-transformer",
+    "reinforcement-learning"
   ],
   "sources": [
-    "https://um-lab.github.io/CogOmniControl/"
+    "https://um-lab.github.io/CogOmniControl/",
+    "https://arxiv.org/abs/2605.19995",
+    "https://huggingface.co/papers/2605.19995"
   ],
-  "verified": false,
+  "verified": true,
   "featured": false,
   "boost": 1,
-  "curatorNotes": "Verified academic/research lab affiliation.",
+  "curatorNotes": "Verified academic research from University of Macau (UM-Lab). Published on arXiv (arXiv:2605.19995) in May 2026 with project page at um-lab.github.io/CogOmniControl.",
   "institution": "University of Macau",
   "templatedDescription": false
 }

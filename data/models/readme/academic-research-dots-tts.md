@@ -1,27 +1,65 @@
-## Model Overview
+# Dots TTS (`dots.tts`): Continuous Space Text-to-Speech Foundation Model
 
-**Dots TTS** is an advanced academic research model developed by Xiaohongshu (Rednote HiLab). Released in 2026-07-15, it represents a significant step forward in the field of text, audio AI models, specifically designed for audio-speech. An experimental audio and speech research preview named Dots TTS, published from Xiaohongshu (Rednote HiLab) to showcase novel methods.
+**Dots TTS** (`dots.tts`) is a 2-billion parameter, fully continuous, end-to-end autoregressive text-to-speech (TTS) foundation model developed by **RedNote HiLab** (the AI research division of Xiaohongshu).
 
-## Capabilities
+Traditional TTS models often rely on discrete speech codec tokens (such as EnCodec or SoundStream), which can introduce acoustic information loss similar to image pixelation. In contrast, **Dots TTS** operates entirely within a **continuous latent space**, using a 48 kHz AudioVAE combined with an autoregressive flow-matching head over a Qwen2.5-1.5B LLM backbone. This design achieves exceptionally high acoustic fidelity, natural intonation, and superior zero-shot speaker cloning.
 
-*   **Advanced Processing:** Dots TTS utilizes state-of-the-art architectures to process text, audio inputs efficiently.
-*   **Specialized Domain Knowledge:** Optimized for tasks related to audio-speech, providing high accuracy and reliability.
-*   **Robust Generalization:** Demonstrated ability to perform zero-shot and few-shot tasks on challenging datasets.
+---
 
-## Example Use Cases
+## 🔬 Key Features & Architecture
 
-*   **Academic Research:** Assisting researchers in complex data analysis and experimentation.
-*   **Enterprise Integration:** Acting as a foundational component for enterprise tools relying on text, audio data.
-*   **Creative Automation:** Streamlining workflows that require nuanced understanding of text, audio.
+- **Fully Continuous Latent Representation:** Operates over continuous audio embeddings via a high-resolution 48 kHz AudioVAE, eliminating discrete tokenization artifacts.
+- **Qwen2.5 Backbone + Flow-Matching Acoustic Head:** Combines semantic reasoning capabilities of a Qwen2.5 LLM backbone with autoregressive flow-matching for detailed audio synthesis.
+- **Self-Corrective Alignment (SCA):** Incorporated into the `dots.tts-soar` model variant to minimize alignment drift and enhance speaker identity preservation.
+- **MeanFlow Low-Latency Distillation:** Powers `dots.tts-mf`, enabling few-step inference for real-time speech generation with first-packet latency as low as **54 ms**.
+- **Multilingual Zero-Shot Voice Cloning:** Supports 24 languages with prompt-based zero-shot voice cloning from short audio reference clips.
 
-## Performance & Benchmarks
+```
+Text Input + Audio Reference Prompt ───► Qwen2.5-1.5B LLM ───► Flow-Matching Acoustic Head ───► 48kHz AudioVAE Decoder ───► High-Fidelity Audio
+```
 
-While specific benchmark figures (such as parameter count or context window) might remain undisclosed or vary based on the specific deployment (self-hostable), Dots TTS achieves highly competitive results against comparable models in the audio-speech space. Independent evaluations highlight its robustness and efficiency.
+---
 
-## Intended Use & Limitations
+## 📊 Model Variants & Checkpoints
 
-Dots TTS is intended for academic research and specialized development. While highly capable, it should be used responsibly with an understanding that text, audio models can exhibit biases or hallucinate in out-of-distribution scenarios. The model is released under the Other/Custom license.
+| Checkpoint Name | Purpose & Performance |
+| :--- | :--- |
+| **`dots.tts-soar`** | **Recommended Default.** Refined via Self-Corrective Alignment for highest fidelity and speaker similarity. |
+| **`dots.tts-mf`** | **Real-Time Streaming.** Distilled with MeanFlow for ultra-fast generation (54ms first-packet latency). |
+| **`dots.tts-base`** | **Base Foundation Model.** Pretrained 2B checkpoint for fine-tuning. |
 
-## About Xiaohongshu (Rednote HiLab)
+---
 
-Xiaohongshu (Rednote HiLab) is a leading institution in artificial intelligence research, dedicated to pushing the boundaries of machine learning and open science.
+## 🚀 Quickstart & Code Usage
+
+```bash
+pip install dots.tts
+```
+
+```python
+from dots_tts.runtime import DotsTtsRuntime
+import soundfile as sf
+
+# Load pre-trained model (e.g. dots.tts-soar)
+runtime = DotsTtsRuntime.from_pretrained("rednote-hilab/dots.tts-soar")
+
+# Generate speech from text and prompt audio
+audio = runtime.synthesize(
+    text="Welcome to the future of continuous space text-to-speech synthesis.",
+    prompt_audio="reference_voice.wav",
+    prompt_text="Transcript of reference voice sample."
+)
+
+# Export audio file at 48kHz
+sf.write("output.wav", audio, samplerate=48000)
+print("Speech synthesis complete: output.wav")
+```
+
+---
+
+## 🔗 Paper & Resources
+- [Official Project Page & Demos](https://rednote-hilab.github.io/dots.tts-demo/)
+- [arXiv Paper (arXiv:2606.07080)](https://arxiv.org/abs/2606.07080)
+- [Paper PDF Download](https://arxiv.org/pdf/2606.07080.pdf)
+- [GitHub Repository](https://github.com/rednote-hilab/dots.tts)
+- [Hugging Face Model Collection](https://huggingface.co/collections/rednote-hilab/dotstts)
