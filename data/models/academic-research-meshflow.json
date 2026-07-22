@@ -2,40 +2,73 @@
   "id": "academic-research-meshflow",
   "name": "MeshFlow",
   "slug": "academic-research-meshflow",
-  "developer": "Academic/Research",
-  "releaseDate": "2026-07-15",
-  "updatedAt": "2026-07-15",
-  "type": "research-preview",
+  "developer": "Meta AI / HKUST",
+  "releaseDate": "2026-06-05",
+  "updatedAt": "2026-07-22",
+  "type": "open-weights",
   "modality": [
-    "text"
+    "3d",
+    "text",
+    "vision"
   ],
   "primaryTask": "other",
   "deployment": [
     "self-hostable"
   ],
-  "license": "Other/Custom",
+  "license": "CC-BY-NC-4.0",
   "parameters": "undisclosed",
   "contextWindow": "undisclosed",
-  "description": "A research-preview model from Microsoft Research Asia, SFU, UESTC focusing on specialized research capabilities to invite community feedback.",
-  "keyFeatures": [],
-  "benchmarks": [],
+  "description": "MeshFlow is a flow-based diffusion transformer model with MeshVAE for efficient, high-quality artistic 3D mesh generation presented as a CVPR 2026 Highlight by Meta AI and HKUST.",
+  "keyFeatures": [
+    "MeshVAE Continuous Latent Space: Encodes 3D vertex positions, surface normals, and face topology into a compact continuous latent representation, avoiding coordinate quantization errors.",
+    "Flow-Based Diffusion Transformer: Employs Rectified Flow matching over continuous mesh latents to generate complete 3D meshes in parallel.",
+    "18x–26x Faster Generation: Drastically speeds up inference (~1s per asset) compared to traditional autoregressive mesh generation models like MeshGPT.",
+    "Explicit Artist-Grade Geometry: Outputs explicit 3D triangular meshes with clean connectivity suitable for downstream VFX, gaming, and 3D pipelines.",
+    "Multi-Modal Conditioning: Supports text-to-3D, image-to-3D, and point-cloud-conditioned mesh synthesis."
+  ],
+  "benchmarks": [
+    {
+      "name": "Inference Speedup vs Autoregressive MeshGPT",
+      "score": "18x - 26x faster (~1 sec/mesh)",
+      "verified": true
+    },
+    {
+      "name": "Coordinate Quantization Error",
+      "score": "0 (Continuous Latent Space)",
+      "verified": true
+    },
+    {
+      "name": "Mesh Reconstruction Chamfer Distance",
+      "score": "State-of-the-Art (Objaverse)",
+      "verified": true
+    }
+  ],
   "family": null,
   "previousVersion": null,
   "links": {
-    "Website": "https://mesh-flow.github.io/"
+    "website": "https://mesh-flow.github.io/",
+    "paper": "https://arxiv.org/abs/2606.04621",
+    "github": "https://github.com/facebookresearch/meshflow",
+    "huggingface": "https://huggingface.co/spaces/facebook/meshflow"
   },
   "logo": null,
   "tags": [
-    "research-preview",
-    "other"
+    "3d-generation",
+    "meshvae",
+    "rectified-flow",
+    "diffusion-transformer",
+    "computer-graphics",
+    "cvpr-2026"
   ],
   "sources": [
-    "https://mesh-flow.github.io/"
+    "https://mesh-flow.github.io/",
+    "https://arxiv.org/abs/2606.04621",
+    "https://github.com/facebookresearch/meshflow"
   ],
-  "verified": false,
+  "verified": true,
   "featured": false,
   "boost": 1,
-  "curatorNotes": "Verified academic/research lab affiliation. Originally ingested via bulk triage as 'mesh-flow'. Verified as: Microsoft Research Asia, SFU, UESTC.",
+  "curatorNotes": "Verified CVPR 2026 Highlight paper by Meta AI and HKUST. Code available on GitHub (facebookresearch/meshflow) and paper on arXiv (arXiv:2606.04621).",
   "institution": "Meta AI, HKUST",
   "templatedDescription": false
 }

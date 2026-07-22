@@ -3,39 +3,71 @@
   "name": "Flash GRPO",
   "slug": "academic-research-flash-grpo",
   "developer": "Academic/Research",
-  "releaseDate": "2026-07-15",
-  "updatedAt": "2026-07-15",
+  "releaseDate": "2026-05-20",
+  "updatedAt": "2026-07-22",
   "type": "research-preview",
   "modality": [
-    "text"
+    "text",
+    "video"
   ],
-  "primaryTask": "other",
+  "primaryTask": "video-generation",
   "deployment": [
     "self-hostable"
   ],
-  "license": "Other/Custom",
-  "parameters": "undisclosed",
+  "license": "Apache-2.0",
+  "parameters": "1.3B-14B",
   "contextWindow": "undisclosed",
-  "description": "Developed from Zhejiang University Flash GRPO is a research preview model exploring new techniques in specialized research.",
-  "keyFeatures": [],
-  "benchmarks": [],
+  "description": "Flash-GRPO is an efficient one-step policy optimization alignment framework for video diffusion models developed by Zhejiang University. It solves standard GRPO computational bottlenecks via Iso-Temporal Grouping and Temporal Gradient Rectification, achieving 6x training acceleration.",
+  "keyFeatures": [
+    "One-Step Policy Optimization: Replaces full-trajectory sampling with single-timestep updates to drastically reduce GPU hours",
+    "Iso-Temporal Grouping: Eliminates timestep-confounded variance by enforcing prompt-wise temporal consistency across candidate groups",
+    "Temporal Gradient Rectification: Neutralizes time-dependent gradient scaling factors to stabilize magnitudes across timesteps",
+    "High Scalability: Proven effectiveness on video diffusion backbones ranging from 1.3B to 14B parameters (Wan2.1, CogVideoX, HunyuanVideo)",
+    "6x Training Acceleration: Aligns Wan2.1-1.3B on an 8-GPU node in approximately 1 day with SOTA preference alignment quality"
+  ],
+  "benchmarks": [
+    {
+      "name": "VBench Overall Alignment Quality",
+      "score": "State-of-the-Art",
+      "verified": true
+    },
+    {
+      "name": "Training Efficiency vs Full-Trajectory GRPO",
+      "score": "6x Acceleration",
+      "verified": true
+    },
+    {
+      "name": "Wan2.1-1.3B Training Wall-Clock Time (8-GPU Node)",
+      "score": "~26 Hours",
+      "verified": true
+    }
+  ],
   "family": null,
   "previousVersion": null,
   "links": {
-    "Website": "https://shredded-pork.github.io/Flash-GRPO.github.io/"
+    "website": "https://shredded-pork.github.io/Flash-GRPO.github.io/",
+    "paper": "https://arxiv.org/abs/2605.15980",
+    "github": "https://github.com/Shredded-Pork/Flash-GRPO",
+    "huggingface": "https://huggingface.co/papers/2605.15980"
   },
   "logo": null,
   "tags": [
     "research-preview",
-    "other"
+    "video-generation",
+    "reinforcement-learning",
+    "diffusion-alignment",
+    "grpo",
+    "icml-2026"
   ],
   "sources": [
-    "https://shredded-pork.github.io/Flash-GRPO.github.io/"
+    "https://shredded-pork.github.io/Flash-GRPO.github.io/",
+    "https://arxiv.org/abs/2605.15980",
+    "https://github.com/Shredded-Pork/Flash-GRPO"
   ],
-  "verified": false,
-  "featured": false,
+  "verified": true,
+  "featured": true,
   "boost": 1,
-  "curatorNotes": "Verified academic/research lab affiliation. Originally ingested via bulk triage as 'shredded-pork'. Verified as: Zhejiang University.",
+  "curatorNotes": "Verified academic paper (ICML 2026 / arXiv:2605.15980) from Zhejiang University with official GitHub repository (Shredded-Pork/Flash-GRPO) and project page.",
   "institution": "Zhejiang University",
   "templatedDescription": false
 }

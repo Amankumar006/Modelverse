@@ -1,36 +1,51 @@
-# i1
+# i1: A Simple and Fully Open Recipe for Strong Text-to-Image Models
 
 ## Model Overview
-The i1 model is a 3-billion-parameter text-to-image diffusion model developed by researchers at Princeton University. Designed as a "fully open" recipe for text-to-image generation, i1 distinguishes itself from many state-of-the-art proprietary models by providing public access to its model weights, training code, and data. It is built on a Multi-Modal Diffusion Transformer (MMDiT) backbone and incorporates advanced design features like a large text encoder adapter, long skip connections, and a combination of sinusoidal and Rotary Positional Embedding (RoPE).
+**i1** is a 3-billion-parameter open-source text-to-image diffusion model developed by researchers at **ZLab, Princeton University**. Introduced in June 2026 (*arXiv:2606.11289*), i1 addresses the lack of transparency in modern generative vision models by providing a completely open recipe: open model weights (1B and 3B variants), full training and inference code in PyTorch and JAX, data processing pipelines, and a massive 160M+ dataset of synthetically annotated image-caption pairs (`i1-captions`).
 
-## Capabilities
-- **Text-to-Image Generation:** Produces high-quality, 1024-resolution images from textual descriptions.
-- **Open Architecture:** Fully transparent modeling and data choices, allowing researchers to study and modify the model easily.
-- **Optimized Transformer Backbone:** Utilizes an MMDiT architecture tailored for efficient and high-fidelity visual generation.
-- **Robust Positional Embeddings:** Combines sinusoidal and RoPE positional embeddings to better capture spatial relationships and complex compositions.
+Developed through more than 300 systematic ablation experiments across 700,000+ TPU v6e compute hours, i1 demonstrates how principled choices in model architecture, text adapters, and dataset curation can achieve performance competitive with top-tier open-weight models at 1024x1024 resolution.
 
-## Example Use Cases
-- **Academic Research:** Serving as a fully open baseline for researchers developing new diffusion models, sampling algorithms, or fine-tuning techniques.
-- **Creative Content Generation:** Generating illustrations, concept art, and visual assets based on user prompts.
-- **Educational Purposes:** Providing a transparent, end-to-end example of a modern, large-scale text-to-image model for students and educators in AI.
-- **Custom Model Development:** Acting as a strong foundation model that developers can fine-tune for specific domains, styles, or tasks without the restrictions of closed models.
+## Key Technical Features & Architecture
+- **Diffusion Transformer Backbone:** Employs an XL/2-sized LightningDiT cross-attention backbone with Query-Key (QK) normalization and long skip connections for high-fidelity spatial generation.
+- **Text Conditioning Adapter:** Integrates a T5-Gemma-2B text encoder, leveraging a larger adapter design to significantly boost prompt understanding and fine-grained text adherence.
+- **Visual VAE:** Incorporates the FLUX.2 VAE for high-density latent encoding and decoding of 1024x1024 image resolution.
+- **Synthetic Caption Pipeline:** Utilizes `i1-captions`, curated from 12 open datasets and re-captioned with detailed synthetic descriptions using Qwen3-VL-30B-A3B.
+- **Dual PyTorch & JAX Implementations:** Includes full source code for training and inference across both JAX (TPU-optimized) and PyTorch (GPU-optimized) frameworks.
 
 ## Performance & Benchmarks
-Developed after more than 300 controlled experiments and over 700,000 TPU v6e hours of evaluation, i1 is highly competitive with leading open-weight models at the 1024-resolution mark. It significantly outperforms existing fully open models across a variety of industry-standard benchmarks, including:
-- GenEval
-- DPG-Bench
-- PRISM
-- CVTG-2K
-- LongText-Bench
+i1 substantially outpaces prior fully open-source baselines and achieves competitive alignment and visual quality against leading open-weight models across multiple standard benchmarks:
+- **GenEval:** Evaluates compositional fidelity, object attributes, and spatial relationships.
+- **DPG-Bench:** Measures compliance with complex multi-sentence prompts.
+- **PRISM:** Assesses general visual quality, alignment, and aesthetic appeal.
+- **CVTG-2K:** Tests in-image visual text generation performance.
+- **LongText-Bench:** Evaluates adherence to extended, detailed descriptions.
 
-## Intended Use & Limitations
-**Intended Use:**
-The i1 model is intended for research, education, and open-source development. It is designed to foster transparency, collaboration, and innovation in the field of generative AI by providing a strong, fully open baseline.
+## Quickstart & Usage
 
-**Limitations:**
-- As a text-to-image model, it may struggle with highly complex prompts involving multiple subjects with precise spatial relationships, or rendering highly legible text within images.
-- Like all generative models, it may inherit biases present in its open training data, potentially leading to stereotypical or unrepresentative outputs.
-- Running and fine-tuning a 3-billion-parameter model requires substantial GPU resources.
+### 1. Environment Setup
+```bash
+conda create -n i1_infer python=3.11 -y
+conda activate i1_infer
 
-## About Princeton University
-Princeton University is a prestigious Ivy League research university located in Princeton, New Jersey. The research team behind i1 is affiliated with Princeton's computer science and AI labs, which are dedicated to advancing the frontiers of machine learning, computer vision, and artificial intelligence with a strong emphasis on open science, transparency, and rigorous methodological evaluation.
+# Install dependencies
+python -m pip install torch==2.6.0 --index-url https://download.pytorch.org/whl/cu124
+python -m pip install numpy==1.26.4 pillow tqdm transformers==4.57.1 diffusers==0.35.1 accelerate safetensors sentencepiece
+```
+
+### 2. PyTorch Inference CLI
+```bash
+git clone https://github.com/zlab-princeton/i1
+cd i1/torch_inference
+
+# Generate image from prompt
+python generate.py \
+  --prompt "A serene mountain lake at sunrise, highly detailed, realistic oil painting style"
+```
+
+## Official Links & Resources
+- **Project Page / Website:** [zlab-princeton.github.io/i1](https://zlab-princeton.github.io/i1/)
+- **arXiv Preprint:** [arXiv:2606.11289](https://arxiv.org/abs/2606.11289)
+- **Paper PDF:** [Download PDF](https://arxiv.org/pdf/2606.11289)
+- **GitHub Repository:** [zlab-princeton/i1](https://github.com/zlab-princeton/i1)
+- **Hugging Face Model Checkpoints:** [zlab-princeton/i1-3B](https://huggingface.co/zlab-princeton/i1-3B)
+- **Hugging Face Dataset:** [zlab-princeton/i1-captions](https://huggingface.co/datasets/zlab-princeton/i1-captions)

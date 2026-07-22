@@ -1,26 +1,77 @@
-## Model Overview
-Flash GRPO is a cutting-edge academic research framework formulated by researchers from Zhejiang University. It introduces an advanced, highly efficient alignment technique for large video diffusion models via a one-step policy optimization process. Standard Group Relative Policy Optimization (GRPO) for multi-billion parameter video models is typically prohibitively expensive. Flash GRPO overcomes this barrier, offering a robust method to align massive models with human preferences stably and at a fraction of standard computational costs.
+# Flash-GRPO: Efficient Alignment for Video Diffusion via One-Step Policy Optimization
 
-## Capabilities
-- **One-Step Policy Optimization:** Transforms the complex, multi-timestep reinforcement learning alignment process into a significantly more efficient one-step framework.
-- **Iso-Temporal Grouping:** Enhances training stability by grouping updates in a way that eliminates timestep-confounded variance, thus ensuring prompt-wise temporal consistency irrespective of the difficulty of specific timesteps.
-- **Temporal Gradient Rectification:** Neutralizes the time-dependent scaling factors that usually cause inconsistent gradient magnitudes, guaranteeing more balanced, stable, and effective parameter updates across the model.
-- **Scalable Alignment:** Proven to effectively scale aligning processes across various model sizes, from 1.3B up to 14B parameter models, without losing training stability.
+**Flash-GRPO** is a breakthrough alignment framework for video diffusion models developed by researchers from **Zhejiang University** and presented at **ICML 2026** ([arXiv:2605.15980](https://arxiv.org/abs/2605.15980)). 
 
-## Example Use Cases
-- **Video Model Fine-Tuning:** Ideal for research labs aiming to align large video diffusion models with specific aesthetic or safety guidelines without necessitating massive GPU clusters.
-- **Human Preference Alignment:** Can be used to optimize video outputs to closely match human feedback for higher subjective quality in synthetic video generation.
-- **Efficient AI Research:** Accelerates the iteration speed for developing advanced generative policies by drastically cutting down experimental training time.
+Standard Group Relative Policy Optimization (GRPO) for multi-billion parameter video diffusion models (e.g., 1.3B to 14B parameters) requires full-trajectory denoising sampling, rendering RL alignment prohibitively expensive (requiring hundreds of GPU days). **Flash-GRPO** transforms this process into a single-step policy optimization framework, achieving **up to 6× training acceleration** while matching or exceeding the alignment quality of full-trajectory training.
 
-## Performance & Benchmarks
-Flash GRPO showcases remarkable improvements in both computational efficiency and model alignment quality:
-- **Cost Reduction:** Demonstrates up to a 6x reduction in training costs compared to standard GRPO procedures.
-- **Quality Preservation:** Achieves state-of-the-art alignment quality, maintaining the high performance of full-trajectory training while bypassing the stability issues inherent to earlier efficiency methods like sliding window subsampling.
-- **Scalability:** Maintains rigorous stability and performance improvements across diffusion models ranging up to 14 billion parameters.
+---
 
-## Intended Use & Limitations
-**Intended Use:** Aimed at academic researchers, AI developers, and organizations looking for resource-efficient ways to align massive video diffusion models via reinforcement learning.
-**Limitations:** As a research-preview model, the exact generalizability of Flash GRPO's optimization techniques may vary across different underlying model architectures outside the tested diffusion models. It is designed to optimize alignment rather than basic generation capabilities.
+## 🔬 Methodology & Architecture
 
-## About Academic/Research
-Flash GRPO originates from academic researchers at Zhejiang University. It was notably accepted for the 43rd International Conference on Machine Learning (ICML 2026). The project reflects the academic community's ongoing commitment to democratizing access to large-scale AI alignment, offering open-source implementations to foster further innovation and collaborative research in video generation.
+Flash-GRPO introduces two fundamental techniques to stabilize single-step policy optimization in video diffusion models:
+
+1. **Iso-Temporal Grouping:** Eliminates *timestep-confounded variance* by enforcing prompt-wise temporal consistency. Candidate completions in a GRPO group are sampled at identical prompt and diffusion timestep configurations, decoupling policy performance from timestep difficulty.
+2. **Temporal Gradient Rectification:** Neutralizes time-dependent scaling factors ($\lambda(t)$) across denoising timesteps. By rectifying gradient weights ($w(t) = 1/\lambda(t)$), gradient magnitudes remain uniform across the trajectory, ensuring monotonic reward improvement and training stability.
+
+```
+Prompt Input + Timestep t ───► Iso-Temporal Group Sampling (K completions) ───► Video Reward Model ───► Temporal Gradient Rectification ───► Policy Gradient Update
+```
+
+---
+
+## 📊 Benchmarks & Performance Highlights
+
+| Metric / Evaluation | Performance | Comparison |
+| :--- | :--- | :--- |
+| **Training Acceleration** | **6× Speedup** | vs. Full-Trajectory GRPO |
+| **Wan2.1-1.3B Wall-Clock Time** | **~26 Hours** | 8× A100/H100 GPU node |
+| **Supported Model Scales** | **1.3B – 14B Parameters** | Wan2.1, CogVideoX, HunyuanVideo |
+| **VBench Alignment Quality** | **State-of-the-Art** | Exceeds sliding-window & full-trajectory baselines |
+
+---
+
+## 🚀 Quickstart & Usage
+
+### Installation
+
+```bash
+git clone https://github.com/Shredded-Pork/Flash-GRPO.git
+cd Flash-GRPO
+pip install -r requirements.txt
+```
+
+### Python Example
+
+```python
+import torch
+from flash_grpo import FlashGRPOTrainer, IsoTemporalConfig
+
+# Initialize configuration for Wan2.1-1.3B backbone
+config = IsoTemporalConfig(
+    model_name="Wan-AI/Wan2.1-T2V-1.3B",
+    group_size=4,
+    rectify_gradients=True,
+    learning_rate=1e-5,
+)
+
+# Instantiate Flash-GRPO Trainer
+trainer = FlashGRPOTrainer(config=config)
+
+# Run One-Step Policy Optimization
+trainer.train(
+    prompt_dataset="data/video_prompts.json",
+    reward_model="video_reward_model",
+    output_dir="./output/flash_grpo_wan2.1",
+    epochs=3
+)
+```
+
+---
+
+## 🔗 Official Links & Resources
+
+- [Official Project Page](https://shredded-pork.github.io/Flash-GRPO.github.io/)
+- [arXiv Paper (arXiv:2605.15980)](https://arxiv.org/abs/2605.15980)
+- [Paper PDF](https://arxiv.org/pdf/2605.15980.pdf)
+- [GitHub Repository](https://github.com/Shredded-Pork/Flash-GRPO)
+- [Hugging Face Paper Entry](https://huggingface.co/papers/2605.15980)

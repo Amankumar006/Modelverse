@@ -1,25 +1,75 @@
-# MeshFlow
+# MeshFlow: Efficient Artistic Mesh Generation via MeshVAE and Flow-based Diffusion Transformer
 
-## Model Overview
-**MeshFlow** is a cutting-edge research model born out of a collaboration between **Microsoft Research Asia (MSRA)**, **Simon Fraser University (SFU)**, and the **University of Electronic Science and Technology of China (UESTC)**, with contributions from Meta AI and HKUST. Released on July 15, 2026, MeshFlow represents a significant leap in specialized computer vision, graphics, and generative AI. It encompasses advanced diffusion-based frameworks for artistic mesh generation as well as robust motion-based methods for estimating sparse motion fields at mesh vertices. 
+**MeshFlow** is a state-of-the-art 3D generative model introduced as a **CVPR 2026 Highlight** by researchers from **Meta AI** and **HKUST** (Weiyu Li, Antoine Toisoul, Tom Monnier, Roman Shapovalov, Rakesh Ranjan, Ping Tan, and Andrea Vedaldi). 
 
-## Capabilities
-MeshFlow offers a versatile suite of capabilities bridging motion analysis and generative 3D graphics:
-*   **Generative Artistic Mesh Creation:** Utilizes Flow-based Diffusion Transformers and MeshVAE architectures to generate high-quality, complex 3D meshes from text or conditional inputs.
-*   **Motion-Based Video Stabilization:** Estimates sparse motion fields directly at mesh vertices, providing a highly efficient, non-parametric warping approach to stabilize shaky video footage.
-*   **Event Camera Processing:** Integrates seamlessly with advanced sensor inputs, such as event cameras, for high-speed motion tracking and scene reconstruction.
+MeshFlow addresses the fundamental limitations of prior Auto-Regressive (AR) 3D mesh generators—such as slow token-by-token sequence generation and quantization artifacts from discretizing vertex coordinates—by establishing a continuous latent space representation and leveraging parallel flow matching diffusion transformers.
 
-## Example Use Cases
-*   **3D Asset Generation for Gaming & VFX:** Rapidly prototyping and generating artistic 3D models and meshes for virtual environments, significantly reducing manual modeling time.
-*   **Advanced Video Processing:** Post-production video stabilization for cinematic footage or user-generated content, smoothing out complex camera motions without introducing artifacts.
-*   **Augmented & Virtual Reality:** Real-time mesh deformation and generation for dynamic, interactive AR/VR experiences.
-*   **Computational Photography:** Enhancing mobile camera software with robust stabilization and depth-aware mesh estimations.
+---
 
-## Performance & Benchmarks
-MeshFlow has been showcased at top-tier conferences like CVPR 2026, demonstrating state-of-the-art performance in both its generative and motion-estimation modalities. Its Flow-based Diffusion Transformers achieve unprecedented detail in mesh topology generation, while its motion field estimation algorithms run efficiently enough for practical video stabilization tasks, outperforming traditional parametric warping techniques in both speed and visual fidelity.
+## 🔬 Architecture & Methodology
 
-## Intended Use & Limitations
-MeshFlow is deployed as a self-hostable research preview to invite community feedback, experimentation, and further development. It is intended for researchers and developers in computer graphics and vision. Given its cutting-edge nature, users may find that generating extremely complex or non-manifold meshes requires careful parameter tuning, and real-time inference for high-resolution video stabilization may require substantial GPU acceleration.
+MeshFlow operates via a two-stage architecture:
 
-## About Microsoft Research Asia, SFU, & UESTC
-This model is the result of a powerful academic-industry partnership. **Microsoft Research Asia (MSRA)** is a premier basic research facility in the Asia-Pacific region, known for foundational breakthroughs in AI and computer vision. **Simon Fraser University (SFU)** and the **University of Electronic Science and Technology of China (UESTC)** provide deep academic expertise in computational graphics, visual computing, and algorithm design, creating a collaborative environment that drives forward the frontiers of 3D vision and generative AI.
+1. **MeshVAE (Variational Autoencoder)**:
+   - Learns a compact continuous latent space for complex 3D triangular meshes.
+   - Encodes continuous 3D vertex positions, surface normals, and face connectivity without requiring coordinate discretization or quantization.
+   - Optimized with graph contrastive losses and topological regularization to ensure clean manifold mesh reconstruction.
+
+2. **Flow-Based Diffusion Transformer**:
+   - Built on Rectified Flow formulation over continuous MeshVAE latents.
+   - Replaces slow sequential AR token prediction with parallel generation of all mesh vertices and faces simultaneously.
+   - Conditioned on text prompts, reference images, or sparse point clouds via cross-attention mechanisms.
+
+```
+Input (Text / Image / Point Cloud) ──► Latent Condition Encoder ──► Flow-based DiT ──► Continuous Mesh Latent ──► MeshVAE Decoder ──► 3D Triangular Mesh (.obj / .ply)
+```
+
+---
+
+## ⚡ Key Features & Benchmarks
+
+- **18× – 26× Faster Inference**: Generates artist-grade 3D meshes in ~1 second per asset on modern GPUs, drastically outperforming autoregressive baseline models like MeshGPT.
+- **Zero Coordinate Quantization**: Operates in continuous space, eliminating vertex snapping and staircase artifacts common in discrete coordinate models.
+- **Explicit Mesh Output**: Outputs native 3D triangular meshes with clean connectivity and explicit vertices, ready for game engines (Unreal/Unity) and VFX suites (Blender/Maya).
+- **Flexible Conditioning**: Supports text-to-3D, image-to-3D, and point-cloud-to-3D generation pipelines.
+
+### Benchmark Performance
+
+| Metric / Benchmark | MeshFlow (Flow-DiT) | Autoregressive Baselines (e.g. MeshGPT) |
+|---|---|---|
+| **Inference Time per Mesh** | **~1.0 s** | ~18 - 26 s |
+| **Generation Mechanism** | Parallel Continuous Flow | Sequential Discrete Tokens |
+| **Quantization Artifacts** | None (Continuous Space) | Present (Grid Discretization) |
+| **Chamfer Distance (Objaverse)** | **State-of-the-Art** | Baseline |
+
+---
+
+## 🚀 Quickstart & Usage
+
+```bash
+# Clone official MeshFlow repository
+git clone https://github.com/facebookresearch/meshflow.git
+cd meshflow
+
+# Create Conda environment & install dependencies
+conda create -n meshflow python=3.10 -y
+conda activate meshflow
+pip install torch torchvision --index-url https://download.pytorch.org/whl/cu121
+pip install -r requirements.txt
+
+# Inference: Text-to-3D Mesh Generation
+python sample.py \
+  --config configs/meshflow_t23d.yaml \
+  --prompt "An artistic wooden chair with ornate carving" \
+  --output_dir ./outputs/
+```
+
+---
+
+## 🔗 Official Links & Resources
+
+- [Official Project Page](https://mesh-flow.github.io/)
+- [arXiv Paper (arXiv:2606.04621)](https://arxiv.org/abs/2606.04621)
+- [Paper PDF Download](https://arxiv.org/pdf/2606.04621)
+- [GitHub Repository (facebookresearch/meshflow)](https://github.com/facebookresearch/meshflow)
+- [Hugging Face Space Demo](https://huggingface.co/spaces/facebook/meshflow)

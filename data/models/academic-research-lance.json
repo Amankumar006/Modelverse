@@ -3,39 +3,70 @@
   "name": "Lance",
   "slug": "academic-research-lance",
   "developer": "Academic/Research",
-  "releaseDate": "2026-07-15",
-  "updatedAt": "2026-07-15",
+  "releaseDate": "2026-05-24",
+  "updatedAt": "2026-07-22",
   "type": "research-preview",
   "modality": [
-    "text"
+    "text",
+    "image",
+    "video"
   ],
-  "primaryTask": "other",
+  "primaryTask": "multimodal-general",
   "deployment": [
     "self-hostable"
   ],
-  "license": "Other/Custom",
-  "parameters": "undisclosed",
+  "license": "Apache-2.0",
+  "parameters": "3B active",
   "contextWindow": "undisclosed",
-  "description": "A research-preview model from ByteDance focusing on specialized research capabilities to invite community feedback.",
-  "keyFeatures": [],
-  "benchmarks": [],
+  "description": "Lance is a lightweight, 3B-active-parameter native unified multimodal model developed by ByteDance. It handles image and video understanding, generation, and editing within a single dual-stream Mixture-of-Experts (MoE) architecture trained via multi-task synergy.",
+  "keyFeatures": [
+    "Native Unified Multimodal Framework: Single model for image/video understanding, generation, and cross-modal editing",
+    "Dual-Stream Mixture-of-Experts (MoE): Decouples high-level semantic reasoning pathways from visual generative synthesis with 3B active parameters",
+    "Modality-Aware Rotary Positional Encoding (MaPE): Manages heterogeneous semantic and 3D causal VAE latent tokens without cross-modal positional interference",
+    "Staged Multi-Task Training Recipe: Multi-stage training (CT1-CT3) balancing performance across diverse understanding and generation tasks",
+    "Efficient Hardware Budget: Trained from scratch using under 128 GPUs, operating at ~20% compute cost of traditional dense unified models"
+  ],
+  "benchmarks": [
+    {
+      "name": "MVBench Overall Score",
+      "score": "62.0",
+      "verified": true
+    },
+    {
+      "name": "VBench Video Generation Quality",
+      "score": "68.7",
+      "verified": true
+    }
+  ],
   "family": null,
   "previousVersion": null,
   "links": {
-    "Website": "https://lance-project.github.io/"
+    "website": "https://lance-project.github.io/",
+    "paper": "https://arxiv.org/abs/2605.18678",
+    "github": "https://github.com/bytedance/Lance",
+    "huggingface": "https://huggingface.co/bytedance-research/Lance"
   },
   "logo": null,
   "tags": [
     "research-preview",
-    "other"
+    "multimodal",
+    "unified-model",
+    "video-generation",
+    "image-generation",
+    "video-understanding",
+    "moe",
+    "bytedance"
   ],
   "sources": [
-    "https://lance-project.github.io/"
+    "https://lance-project.github.io/",
+    "https://arxiv.org/abs/2605.18678",
+    "https://github.com/bytedance/Lance",
+    "https://huggingface.co/bytedance-research/Lance"
   ],
-  "verified": false,
-  "featured": false,
+  "verified": true,
+  "featured": true,
   "boost": 1,
-  "curatorNotes": "Verified academic/research lab affiliation. Originally ingested via bulk triage as 'lance-project'. Verified as: ByteDance.",
+  "curatorNotes": "Verified academic research paper and open-source model from ByteDance. Paper published on arXiv (2605.18678), codebase released under Apache-2.0 license on GitHub, and model weights hosted on Hugging Face.",
   "institution": "ByteDance",
   "templatedDescription": false
 }

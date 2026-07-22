@@ -3,39 +3,64 @@
   "name": "L2P",
   "slug": "academic-research-l2p",
   "developer": "Academic/Research",
-  "releaseDate": "2026-07-15",
-  "updatedAt": "2026-07-15",
+  "releaseDate": "2026-05-15",
+  "updatedAt": "2026-07-22",
   "type": "research-preview",
   "modality": [
-    "text"
+    "text",
+    "image"
   ],
-  "primaryTask": "other",
+  "primaryTask": "image-generation",
   "deployment": [
     "self-hostable"
   ],
   "license": "Other/Custom",
   "parameters": "undisclosed",
   "contextWindow": "undisclosed",
-  "description": "An experimental specialized research research preview named L2P, published by Nanjing University to showcase novel methods.",
-  "keyFeatures": [],
-  "benchmarks": [],
-  "family": null,
+  "description": "L2P (Latent-to-Pixel) is an efficient transfer paradigm for pixel-space diffusion models that discards VAEs and utilizes large-patch tokenization to achieve native 4K/8K/10K ultra-high resolution image generation.",
+  "keyFeatures": [
+    "VAE-Free Architecture: Replaces traditional VAEs with large-patch tokenization to eliminate memory bottlenecks and compression artifacts",
+    "Generative Prior Transfer: Freezes pre-trained LDM intermediate layers and trains shallow layers with a Detailer Head to map latent priors to pixel space",
+    "Synthetic Training Corpus: Efficiently converges using LDM-generated synthetic data without requiring real-world image datasets",
+    "Native 4K/8K/10K Resolution: Direct pixel generation supporting ultra-high resolution synthesis with minimal computational overhead"
+  ],
+  "benchmarks": [
+    {
+      "name": "GenEval",
+      "score": "93.0%",
+      "verified": true
+    },
+    {
+      "name": "DPG-Bench",
+      "score": "On par with source LDMs",
+      "verified": true
+    }
+  ],
+  "family": "l2p",
   "previousVersion": null,
   "links": {
-    "Website": "https://nju-pcalab.github.io/projects/L2P/"
+    "website": "https://nju-pcalab.github.io/projects/L2P/",
+    "paper": "https://arxiv.org/abs/2605.12013",
+    "github": "https://github.com/TencentYoutuResearch/T2I-L2P",
+    "huggingface": "https://huggingface.co/zhen-nan/L2P"
   },
   "logo": null,
   "tags": [
     "research-preview",
-    "other"
+    "diffusion",
+    "pixel-generation",
+    "vae-free",
+    "image-synthesis"
   ],
   "sources": [
-    "https://nju-pcalab.github.io/projects/L2P/"
+    "https://nju-pcalab.github.io/projects/L2P/",
+    "https://arxiv.org/abs/2605.12013",
+    "https://github.com/TencentYoutuResearch/T2I-L2P"
   ],
-  "verified": false,
+  "verified": true,
   "featured": false,
   "boost": 1,
-  "curatorNotes": "Verified academic/research lab affiliation.",
-  "institution": "Nanjing University",
+  "curatorNotes": "Verified research project by Nanjing University (NJU-PCALab) and Tencent Youtu Lab.",
+  "institution": "Nanjing University & Tencent Youtu Lab",
   "templatedDescription": false
 }

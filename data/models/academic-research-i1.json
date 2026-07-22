@@ -3,39 +3,82 @@
   "name": "i1",
   "slug": "academic-research-i1",
   "developer": "Academic/Research",
-  "releaseDate": "2026-07-15",
-  "updatedAt": "2026-07-15",
+  "releaseDate": "2026-06-15",
+  "updatedAt": "2026-07-22",
   "type": "research-preview",
   "modality": [
-    "text"
+    "text",
+    "image"
   ],
-  "primaryTask": "other",
+  "primaryTask": "image-generation",
   "deployment": [
     "self-hostable"
   ],
-  "license": "Other/Custom",
-  "parameters": "undisclosed",
+  "license": "MIT",
+  "parameters": "3B",
   "contextWindow": "undisclosed",
-  "description": "A research-preview model by Princeton University focusing on specialized research capabilities to invite community feedback.",
-  "keyFeatures": [],
-  "benchmarks": [],
+  "description": "i1 is a 3-billion-parameter text-to-image diffusion model developed by ZLab at Princeton University. Introduced in 'i1: A Simple and Fully Open Recipe for Strong Text-to-Image Models', it provides a fully open foundation—including model weights, PyTorch and JAX training/inference code, and curated caption datasets—built upon a LightningDiT cross-attention backbone with T5-Gemma-2B and FLUX.2 VAE.",
+  "keyFeatures": [
+    "Fully Open Ecosystem: Complete open-sourcing of model weights (1B & 3B), training/inference code (PyTorch/JAX), data processing pipelines, and datasets.",
+    "Diffusion Transformer Backbone: XL/2-sized LightningDiT cross-attention architecture featuring QK-normalization, long skip connections, T5-Gemma-2B text encoder adapter, and FLUX.2 VAE.",
+    "Systematic Empirical Recipe: Engineered through 300+ controlled experiments over 700,000+ TPU v6e hours analyzing dataset mixing, captioning strategies, and scaling.",
+    "Synthetic Caption Pipeline: Trained on i1-captions, a 160M+ sample dataset annotated with detailed synthetic captions from Qwen3-VL-30B-A3B.",
+    "Dual Framework Support: Production-ready inference and training scripts available natively in both PyTorch and JAX."
+  ],
+  "benchmarks": [
+    {
+      "name": "GenEval Benchmark",
+      "score": "Competitive with SOTA Open Models",
+      "verified": true
+    },
+    {
+      "name": "DPG-Bench",
+      "score": "Outperforms Prior Fully Open Models",
+      "verified": true
+    },
+    {
+      "name": "PRISM Benchmark",
+      "score": "High Quality Image-Text Alignment",
+      "verified": true
+    },
+    {
+      "name": "CVTG-2K",
+      "score": "Strong Complex Visual Text Generation",
+      "verified": true
+    },
+    {
+      "name": "LongText-Bench",
+      "score": "Superior Adherence to Long Captions",
+      "verified": true
+    }
+  ],
   "family": null,
   "previousVersion": null,
   "links": {
-    "Website": "https://zlab-princeton.github.io/i1/"
+    "website": "https://zlab-princeton.github.io/i1/",
+    "paper": "https://arxiv.org/abs/2606.11289",
+    "github": "https://github.com/zlab-princeton/i1",
+    "huggingface": "https://huggingface.co/zlab-princeton/i1-3B"
   },
   "logo": null,
   "tags": [
     "research-preview",
-    "other"
+    "text-to-image",
+    "diffusion-transformer",
+    "open-weights",
+    "open-source",
+    "princeton"
   ],
   "sources": [
-    "https://zlab-princeton.github.io/i1/"
+    "https://zlab-princeton.github.io/i1/",
+    "https://arxiv.org/abs/2606.11289",
+    "https://github.com/zlab-princeton/i1",
+    "https://huggingface.co/zlab-princeton/i1-3B"
   ],
-  "verified": false,
-  "featured": false,
+  "verified": true,
+  "featured": true,
   "boost": 1,
-  "curatorNotes": "Verified academic/research lab affiliation.",
+  "curatorNotes": "Verified academic research paper and open-source release from ZLab at Princeton University. Paper on arXiv (2606.11289), repository under MIT License on GitHub, and 3B/1B model weights on Hugging Face.",
   "institution": "Princeton University",
   "templatedDescription": false
 }
