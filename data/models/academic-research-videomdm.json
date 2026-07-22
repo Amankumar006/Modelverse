@@ -2,13 +2,15 @@
   "id": "academic-research-videomdm",
   "name": "VideoMDM",
   "slug": "academic-research-videomdm",
-  "developer": "Academic/Research",
+  "developer": "Academic Research",
+  "institution": "Technion, NVIDIA",
   "releaseDate": "2026-07-15",
-  "updatedAt": "2026-07-15",
-  "type": "research-preview",
+  "updatedAt": "2026-07-22",
+  "type": "open-weights",
   "modality": [
     "text",
-    "video"
+    "video",
+    "3d"
   ],
   "primaryTask": "video-generation",
   "deployment": [
@@ -17,26 +19,32 @@
   "license": "Other/Custom",
   "parameters": "undisclosed",
   "contextWindow": "undisclosed",
-  "description": "A research-preview model from Technion, NVIDIA focusing on video generation capabilities to invite community feedback.",
-  "keyFeatures": [],
+  "description": "VideoMDM is a diffusion-based framework that trains 3D human motion priors directly from accurate 2D poses extracted from monocular videos, without requiring any 3D ground truth.",
+  "keyFeatures": [
+    "3D motion generation from 2D supervision",
+    "No 3D ground truth required",
+    "Monocular video pose extraction"
+  ],
   "benchmarks": [],
   "family": null,
   "previousVersion": null,
   "links": {
-    "Website": "https://videomdm.github.io/"
+    "website": "https://videomdm.github.io/",
+    "paper": "https://videomdm.github.io/VideoMDM.pdf",
+    "github": "https://github.com/Amir-Mann/VideoMDM_release",
+    "arxiv": "https://arxiv.org/abs/2606.13364"
   },
   "logo": null,
   "tags": [
-    "research-preview",
-    "video-generation"
+    "3d-motion",
+    "video-generation",
+    "2d-supervision"
   ],
   "sources": [
     "https://videomdm.github.io/"
   ],
-  "verified": false,
+  "verified": true,
   "featured": false,
   "boost": 1,
-  "curatorNotes": "Verified academic/research lab affiliation. Originally ingested via bulk triage as 'videomdm'. Verified as: Technion, NVIDIA.",
-  "institution": "Technion, NVIDIA",
-  "templatedDescription": false
+  "curatorNotes": "Developed by Technion & NVIDIA."
 }
