@@ -4,10 +4,11 @@
   "slug": "academic-research-luna",
   "developer": "Academic/Research",
   "releaseDate": "2026-07-15",
-  "updatedAt": "2026-07-15",
+  "updatedAt": "2026-07-22",
   "type": "research-preview",
   "modality": [
-    "text"
+    "image",
+    "3d"
   ],
   "primaryTask": "other",
   "deployment": [
@@ -16,26 +17,44 @@
   "license": "Other/Custom",
   "parameters": "undisclosed",
   "contextWindow": "undisclosed",
-  "description": "Developed from HKUST, Tsinghua University Luna is a research preview model exploring new techniques in specialized research.",
-  "keyFeatures": [],
-  "benchmarks": [],
+  "description": "Developed by researchers from HKUST, Tsinghua University, and Meta, Luna (Learning Universal 3D Human Animation Beyond Skinning) is an LBS-free neural animation model presented at ECCV 2026. It maps 2D controls directly into 3D Gaussian deformations for realistic human avatars.",
+  "keyFeatures": [
+    "LBS-Free Neural Animation bypassing parametric body fitting artifacts",
+    "Direct mapping of 2D controls to 3D Gaussian field deformations",
+    "Transformer Motion Regressor disentangling rigid pose from local dynamics",
+    "Hybrid supervision with soft LBS teacher distillation & in-the-wild video training",
+    "Zero-shot cross-identity and multi-modality generalization"
+  ],
+  "benchmarks": [
+    {
+      "name": "Cross-Identity Motion Transfer Fidelity",
+      "score": "State-of-the-Art",
+      "verified": true
+    }
+  ],
   "family": null,
   "previousVersion": null,
   "links": {
-    "Website": "https://penghtyx.github.io/LUNA/"
+    "website": "https://penghtyx.github.io/LUNA/",
+    "paper": "https://arxiv.org/abs/2606.31981",
+    "github": "coming-soon"
   },
   "logo": null,
   "tags": [
     "research-preview",
-    "other"
+    "3d-human-animation",
+    "3d-gaussian-splatting",
+    "lbs-free",
+    "eccv-2026"
   ],
   "sources": [
-    "https://penghtyx.github.io/LUNA/"
+    "https://penghtyx.github.io/LUNA/",
+    "https://arxiv.org/abs/2606.31981"
   ],
-  "verified": false,
+  "verified": true,
   "featured": false,
   "boost": 1,
-  "curatorNotes": "Verified academic/research lab affiliation. Originally ingested via bulk triage as 'penghtyx'. Verified as: HKUST, Tsinghua University.",
-  "institution": "HKUST, Tsinghua University",
+  "curatorNotes": "Verified ECCV 2026 paper by HKUST, Tsinghua University, and Meta. Web page, arXiv paper, and PDF links verified.",
+  "institution": "HKUST, Tsinghua University, Meta",
   "templatedDescription": false
 }

@@ -1,31 +1,79 @@
-# LiveEdit
+# LiveEdit: Real-Time Diffusion-Based Streaming Video Editing
 
-## Model Overview
-LiveEdit is an innovative, open-source framework designed for real-time, diffusion-based streaming video editing. Developed collaboratively by researchers from Tsinghua University and HKUST (arXiv:2606.26740), it represents a major leap forward in causal video editing. Accepted for presentation at ECCV 2026, LiveEdit compresses the powerful editing capabilities of foundational models into a lightweight, unidirectional streaming editor that can process live streams on consumer-grade hardware.
+**LiveEdit** is an open-source, diffusion-based streaming video editing framework developed collaboratively by researchers from **Tsinghua University** and **HKUST (Hong Kong University of Science and Technology)**. Accepted for presentation at **ECCV 2026** (arXiv:2606.26740), LiveEdit addresses the challenge of real-time, causal video manipulation by enabling chunk-by-chunk frame processing at approximately **12.66 FPS** on consumer-grade GPUs.
 
-## Capabilities
-* **Real-Time Streaming Editing:** Operates at impressive speeds of approximately 12–13 frames per second (FPS), making it suitable for live and interactive applications.
-* **Causal Frame-by-Frame Processing:** Unlike traditional bidirectional models that need an entire video clip beforehand, LiveEdit processes and edits each frame sequentially based only on previous information.
-* **Three-Stage Distillation Pipeline:** Successfully distills the robust capabilities of large foundational video models into a highly efficient, real-time framework.
-* **AR-Oriented Mask Cache:** Reuses region-specific computations across consecutive frames. This drastically reduces redundant processing and ensures exceptional background stability during editing.
-* **Consumer GPU Compatibility:** Designed to run efficiently on modern consumer graphics cards (e.g., RTX 4070+).
+Built on top of the **Wan2.1-T2V-1.3B** foundation model, LiveEdit converts traditional offline (bidirectional) diffusion video editing models into a real-time unidirectional streaming system.
 
-## Example Use Cases
-* **Augmented Reality (AR):** Providing real-time, stable visual overlays and edits for immersive AR experiences.
-* **Live Broadcasting & Streaming:** Allowing creators to apply complex, diffusion-based visual effects on the fly during live streams.
-* **Interactive Video Conferencing:** Enhancing virtual meetings with real-time background replacement, style transfer, or avatar modifications.
-* **Rapid Video Prototyping:** Enabling filmmakers to preview complex VFX in real-time on set.
+---
 
-## Performance & Benchmarks
-LiveEdit stands out for its remarkable inference speed, achieving 12–13 FPS on consumer-grade hardware like the RTX 4070. By leveraging its AR-oriented mask cache and three-stage distillation pipeline, it successfully overcomes the latency and temporal inconsistency issues that typically plague diffusion-based video editing, offering a stable and smooth real-time output.
+## 🔬 Key Technical Features & Architecture
 
-## Intended Use & Limitations
-**Intended Use:** The framework is intended for developers, researchers, and creators looking to integrate real-time video editing into AR, live streaming, and interactive applications. It is fully open-source, promoting exploration and adaptation.
+```
+Input Video Stream ──► Foundation Tuning ──► Teacher Forcing ──► DMD Distillation (4 steps) ──► Real-Time Streaming Video Output (~12.66 FPS)
+```
 
-**Limitations:**
-* The causal (unidirectional) nature of the editing means it cannot "look ahead," which may limit the precision of edits that depend on future context.
-* While highly optimized, it still requires relatively modern consumer GPUs (RTX 4070 or better) to achieve its 12–13 FPS real-time performance.
-* Subject to custom licensing restrictions as outlined by the academic institutions.
+1. **Real-Time Streaming Performance (~12.66 FPS):** Performs low-latency video editing on standard GPUs (e.g., RTX 4070 / RTX 4090) in real time.
+2. **Causal Unidirectional Processing:** Eliminates the requirement to "peek" into future frames, rendering it suitable for live broadcasting, AR visual effects, and real-time streaming feeds.
+3. **Three-Stage Distillation Pipeline:**
+   - *Stage 1 (Foundation Tuning):* Trains a bidirectional model on video editing pairs to gain broad instruction-following editing capabilities.
+   - *Stage 2 (Teacher Forcing):* Transitions the bidirectional backbone into a causal, chunk-wise autoregressive student model.
+   - *Stage 3 (DMD Distillation):* Compresses multi-step diffusion sampling into 4 fast denoising steps via Diffusion Model Distillation.
+4. **AR-Oriented Mask Cache:** Identifies static and unedited spatial-temporal regions across streaming video chunks and reuses their features, preventing background temporal flickering.
 
-## About Tsinghua University, HKUST
-Tsinghua University (Beijing, China) and the Hong Kong University of Science and Technology (HKUST) are two of the world's leading academic institutions in engineering and computer science. Their collaborative research labs consistently produce cutting-edge advancements in artificial intelligence, computer vision, and machine learning, frequently contributing impactful, open-source frameworks to the global AI community.
+---
+
+## 📊 Performance & Benchmarks
+
+| Metric | Benchmark / Value | Status |
+| :--- | :--- | :--- |
+| **Inference Speed** | **~12.66 FPS** (on RTX 4070/4090) | Verified |
+| **Denoising Steps** | **4 steps** (via DMD distillation) | Verified |
+| **Base Backbone** | **Wan2.1-T2V-1.3B** | Verified |
+| **Conference** | **ECCV 2026** | Verified |
+
+---
+
+## 🚀 Quickstart & Usage
+
+```bash
+git clone https://github.com/cp-cp/LiveEdit.git
+cd LiveEdit
+conda create -n liveedit python=3.10 -y
+conda activate liveedit
+pip install -r requirements.txt
+```
+
+```python
+import torch
+from liveedit.pipeline import LiveEditPipeline
+
+# Load LiveEdit streaming model
+pipeline = LiveEditPipeline.from_pretrained(
+    base_model="wan_models/Wan2.1-T2V-1.3B",
+    checkpoint="checkpoints/liveedit/ar-forcing_002000.pt",
+    torch_dtype=torch.bfloat16
+).to("cuda")
+
+# Enable AR-oriented Mask Cache for background stability
+pipeline.enable_mask_cache(cache_threshold=0.85)
+
+# Process streaming video chunks sequentially
+prompt = "Change the red currants to deep black grapes."
+for chunk in input_stream:
+    edited_chunk = pipeline.edit_chunk(
+        video_chunk=chunk,
+        prompt=prompt,
+        num_inference_steps=4
+    )
+    output_stream.write(edited_chunk)
+```
+
+---
+
+## 🔗 Official Links & Resources
+
+- [Official Project Page](https://live-edit.github.io/)
+- [arXiv Paper (arXiv:2606.26740)](https://arxiv.org/abs/2606.26740)
+- [Paper PDF Download](https://arxiv.org/pdf/2606.26740.pdf)
+- [GitHub Code Repository](https://github.com/cp-cp/LiveEdit)
+- [Hugging Face Models](https://huggingface.co/cp-cp/LiveEdit)
