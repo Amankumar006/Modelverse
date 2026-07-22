@@ -1,28 +1,31 @@
-# Nemotron 3 Ultra
+# NVIDIA Nemotron 3 Ultra: Open Frontier LLM for Agentic Reasoning
 
 ## Model Overview
-Nemotron 3 Ultra is an open-weights, frontier-reasoning model developed by NVIDIA, designed for complex agentic workflows, long-context analysis, and high-stakes reasoning. As the most capable model in the Nemotron 3 family, it utilizes a Hybrid Transformer-Mamba MoE (Mixture-of-Experts) architecture with LatentMoE, offering exceptional accuracy and efficiency. Boasting 550 billion total parameters (with 55 billion active during inference), it is engineered to be a powerhouse for advanced AI orchestration.
+**NVIDIA Nemotron 3 Ultra** is a flagship open-weight frontier large language model family developed by **NVIDIA**. It is engineered specifically for agentic AI workloads, long-context understanding, multi-step complex reasoning, automated coding, and tool calling.
 
-## Capabilities
-* **Hybrid Transformer-Mamba MoE:** Combines the strengths of Transformers and Mamba architectures, leveraging LatentMoE for optimized routing and processing.
-* **Massive Context Window:** Supports an expansive context window of up to 1 million tokens, allowing for deep repository-level research and extensive document analysis.
-* **Configurable Reasoning:** Features inference-time reasoning (via an `enable_thinking` flag) allowing the model to "think" before responding to complex prompts.
-* **Multi-Token Prediction (MTP):** Integrates MTP layers to accelerate inference speeds without compromising output quality.
-* **Optimized Pretraining:** Pretrained using NVFP4 to maximize memory efficiency and inference speed on NVIDIA's hardware ecosystem.
+The family includes the **Nemotron 3 Ultra 550B** (a hybrid Transformer-Mamba LatentMoE model with 55B active parameters per token and up to 1M token context) and **Llama-3.1-Nemotron-Ultra-253B-v1** (a dense 253B model optimized for single-node 8xH100/B200 enterprise deployment).
 
-## Example Use Cases
-* **Agentic Workflows:** Serving as the orchestrator for multi-step, autonomous agent workflows requiring long-term planning and tool use.
-* **Deep Codebase Research:** Synthesizing and debugging information across massive code repositories within a single prompt due to its 1M token context window.
-* **Complex Data Analysis:** Processing and reasoning over large datasets, financial reports, or legal documents to extract insights and summaries.
-* **High-Stakes Reasoning:** Tackling intricate logic problems, mathematical proofs, and strategic planning scenarios that require dedicated thinking time.
+---
+
+## Key Features
+- **Hybrid LatentMoE & Mamba-2 Architecture:** Combines Mamba-2 state space model layers with Latent Mixture-of-Experts (550B total / 55B active parameters) to maximize throughput and long-sequence processing.
+- **Dual-Mode System:** Features configurable low-latency chat (reasoning off) and extended Chain-of-Thought (reasoning on) modes controlled via prompt parameters.
+- **Ultra-Long Context Window:** Supports up to 1,000,000 (1M) tokens context window (550B MoE) and 128,000 (128K) tokens (253B Dense).
+- **Native NVFP4 Quantization:** Native NVFP4 4-bit floating-point quantization enables single-node enterprise inference with up to 5x throughput speedups.
+- **Agentic Post-Training:** Multi-environment RL post-training tailored for function calling (BFCL), complex multi-turn execution, automated coding (SWE-bench), and RAG.
+
+---
+
+## Verified Project Links
+- **Developer Blog:** [https://developer.nvidia.com/blog/nvidia-releases-nemotron-ultra](https://developer.nvidia.com/blog/nvidia-releases-nemotron-ultra)
+- **Technical Report (arXiv):** [https://arxiv.org/abs/2512.20856](https://arxiv.org/abs/2512.20856)
+- **GitHub Repository:** [https://github.com/NVIDIA/NeMo](https://github.com/NVIDIA/NeMo)
+- **Hugging Face Model:** [https://huggingface.co/nvidia/Llama-3_1-Nemotron-Ultra-253B-v1](https://huggingface.co/nvidia/Llama-3_1-Nemotron-Ultra-253B-v1)
+
+---
 
 ## Performance & Benchmarks
-* **Scale:** 550B total parameters with 55B active parameters per token, balancing immense capacity with computational efficiency.
-* **Speed:** Offers up to 5x faster inference and significantly lower operational costs compared to previous generations for comparable agentic workloads.
-* **Context Capacity:** Flawlessly handles up to 1,000,000 tokens for long-context tasks.
-
-## Intended Use & Limitations
-Nemotron 3 Ultra is intended for enterprise and research environments requiring state-of-the-art reasoning and agentic orchestration. It is released under the OpenMDW License Agreement (v1.1), providing open access to weights, data, and training recipes. While highly optimized, running the full 550B model requires substantial computational resources, though community efforts like GGUF formats assist in broader deployability. 
-
-## About NVIDIA
-NVIDIA is at the forefront of artificial intelligence and accelerated computing. By developing both the cutting-edge hardware and the sophisticated foundation models that run on them, NVIDIA empowers developers, researchers, and enterprises to solve the world's most complex challenges.
+- **MMLU-Pro (550B MoE):** 86.8%
+- **SWE-bench Verified (550B MoE):** 70.7%
+- **MATH-500 (253B Reasoning On):** 97.0%
+- **BFCL v2 Tool Calling (253B):** 74.1%

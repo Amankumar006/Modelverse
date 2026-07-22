@@ -3,38 +3,68 @@
   "name": "Cosmos 3",
   "slug": "nvidia-cosmos-3",
   "developer": "NVIDIA",
-  "releaseDate": "2026-07-15",
-  "updatedAt": "2026-07-15",
-  "type": "research-preview",
+  "releaseDate": "2026-05-31",
+  "updatedAt": "2026-07-22",
+  "type": "open-weights",
   "modality": [
-    "text"
+    "text",
+    "image",
+    "video",
+    "audio",
+    "multimodal"
   ],
   "primaryTask": "other",
   "deployment": [
     "self-hostable"
   ],
   "license": "Other/Custom",
-  "parameters": "undisclosed",
+  "parameters": "4B - 64B",
   "contextWindow": "undisclosed",
-  "description": "An experimental specialized research research preview named Cosmos 3, published by NVIDIA to showcase novel methods.",
-  "keyFeatures": [],
-  "benchmarks": [],
-  "family": null,
+  "description": "NVIDIA Cosmos 3 is an open-source frontier foundation model platform engineered for Physical AI. Built on a Mixture-of-Transformers (MoT) architecture with a two-tower design, Cosmos 3 unifies an autoregressive Reasoner with a diffusion Generator to allow embodied agents to perceive, reason about, simulate, and act in the physical world.",
+  "keyFeatures": [
+    "Unified Omnimodal MoT Architecture: Integrates autoregressive Reasoner and diffusion Generator for text, image, video, audio, and action tokens",
+    "First-Class Action Generation: Outputs precise numerical robot control tokens (joint trajectories, end-effector poses) directly",
+    "Scalable Deployment Tiering: Edge-optimized (Edge 4B/8B for Jetson) up to datacenter foundation models (Super 32B/64B for Hopper/Blackwell)",
+    "Synthetic Data Generation (SDG): Physics-aware video/world simulation tools (SDG-PhyxSim, SDG-RobotSim) for robot policy rollouts",
+    "Open & Enterprise Infrastructure: Released under OpenMDW-1.1 license with PyTorch, NIM microservices, and vLLM/SGLang support"
+  ],
+  "benchmarks": [
+    {
+      "name": "RoboArena Robotic Manipulation Elo",
+      "score": "1881 Elo (#1 open policy model)",
+      "verified": true
+    },
+    {
+      "name": "VANTAGE-Bench Visual Analytics",
+      "score": "63.01%",
+      "verified": true
+    }
+  ],
+  "family": "Cosmos",
   "previousVersion": null,
   "links": {
-    "Website": "https://developer.nvidia.com/blog/develop-physical-ai-reasoning-world-and-action-models-with-nvidia-cosmos-3/"
+    "website": "https://developer.nvidia.com/blog/develop-physical-ai-reasoning-world-and-action-models-with-nvidia-cosmos-3/",
+    "paper": "https://arxiv.org/abs/2606.02800",
+    "github": "https://github.com/nvidia-cosmos",
+    "huggingface": "https://huggingface.co/collections/nvidia/cosmos3"
   },
-  "logo": null,
+  "logo": "/logos/nvidia.svg",
   "tags": [
-    "research-preview",
-    "other"
+    "physical-ai",
+    "world-model",
+    "robotics",
+    "nvidia",
+    "mot-architecture"
   ],
   "sources": [
-    "https://developer.nvidia.com/blog/develop-physical-ai-reasoning-world-and-action-models-with-nvidia-cosmos-3/"
+    "https://developer.nvidia.com/blog/develop-physical-ai-reasoning-world-and-action-models-with-nvidia-cosmos-3/",
+    "https://arxiv.org/abs/2606.02800",
+    "https://github.com/nvidia-cosmos"
   ],
-  "verified": false,
-  "featured": false,
+  "verified": true,
+  "featured": true,
   "boost": 1,
-  "curatorNotes": "Ingested research preview via bulk triage. Affiliation: NVIDIA. Traction signal: Initial release.",
-  "templatedDescription": true
+  "curatorNotes": "Verified paper arXiv:2606.02800 and open-weights collection from NVIDIA Research.",
+  "institution": "NVIDIA",
+  "templatedDescription": false
 }

@@ -3,38 +3,60 @@
   "name": "PiD",
   "slug": "nvidia-pid",
   "developer": "NVIDIA",
-  "releaseDate": "2026-07-15",
-  "updatedAt": "2026-07-15",
-  "type": "research-preview",
+  "releaseDate": "2026-05-22",
+  "updatedAt": "2026-07-22",
+  "type": "open-weights",
   "modality": [
-    "text"
+    "image"
   ],
-  "primaryTask": "other",
+  "primaryTask": "image-generation",
   "deployment": [
     "self-hostable"
   ],
-  "license": "Other/Custom",
+  "license": "Apache-2.0",
   "parameters": "undisclosed",
   "contextWindow": "undisclosed",
-  "description": "An experimental specialized research research preview named PiD, published by NVIDIA to showcase novel methods.",
-  "keyFeatures": [],
-  "benchmarks": [],
+  "description": "PiD (Pixel Diffusion Decoder) is a generative model and decoding paradigm developed by NVIDIA Spatial Intelligence Lab (SIL). It reformulates latent-to-pixel decoding as a conditional pixel-space diffusion process, replacing traditional VAE decoders to unify decoding and 4x/8x spatial super-resolution into a fast 4-step distilled diffusion process.",
+  "keyFeatures": [
+    "Unified latent decoding and 4x/8x spatial super-resolution directly in pixel space",
+    "Sigma-aware adapter enabling early termination of latent diffusion models",
+    "Fast 4-step distilled inference via DMD2 achieving <1s decoding at 2048x2048 resolution",
+    "Universal drop-in replacement compatible with standard VAE, SigLIP, and DINOv2 latents",
+    "High visual fidelity and sharp detail synthesis avoiding blurriness of traditional VAE decoders"
+  ],
+  "benchmarks": [
+    {
+      "name": "Decoding Latency (512x512 -> 2048x2048)",
+      "score": "211.2 ms (GB200) / <1.0 s (RTX 5090)",
+      "verified": true
+    }
+  ],
   "family": null,
   "previousVersion": null,
   "links": {
-    "Website": "https://research.nvidia.com/labs/sil/pid/"
+    "website": "https://research.nvidia.com/labs/sil/projects/pid/",
+    "paper": "https://arxiv.org/abs/2605.23902",
+    "github": "https://github.com/nv-tlabs/PiD",
+    "huggingface": "https://huggingface.co/nvidia/PiD"
   },
-  "logo": null,
+  "logo": "/logos/nvidia.svg",
   "tags": [
-    "research-preview",
-    "other"
+    "pixel-decoder",
+    "super-resolution",
+    "diffusion",
+    "nvidia",
+    "sil-lab"
   ],
   "sources": [
-    "https://research.nvidia.com/labs/sil/pid/"
+    "https://research.nvidia.com/labs/sil/projects/pid/",
+    "https://arxiv.org/abs/2605.23902",
+    "https://github.com/nv-tlabs/PiD",
+    "https://huggingface.co/nvidia/PiD"
   ],
-  "verified": false,
+  "verified": true,
   "featured": false,
   "boost": 1,
-  "curatorNotes": "Ingested research preview via bulk triage. Affiliation: NVIDIA. Traction signal: Initial release.",
-  "templatedDescription": true
+  "curatorNotes": "Verified paper arXiv:2605.23902 and open-source implementation from NVIDIA SIL.",
+  "institution": "NVIDIA Spatial Intelligence Lab (SIL)",
+  "templatedDescription": false
 }

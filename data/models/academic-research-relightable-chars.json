@@ -3,12 +3,12 @@
   "name": "Relightable Chars",
   "slug": "academic-research-relightable-chars",
   "developer": "Academic/Research",
-  "releaseDate": "2026-07-15",
-  "updatedAt": "2026-07-15",
+  "releaseDate": "2025-12-01",
+  "updatedAt": "2026-07-22",
   "type": "research-preview",
   "modality": [
-    "text",
-    "image"
+    "image",
+    "3d"
   ],
   "primaryTask": "image-generation",
   "deployment": [
@@ -17,26 +17,44 @@
   "license": "Other/Custom",
   "parameters": "undisclosed",
   "contextWindow": "undisclosed",
-  "description": "An experimental image generation research preview named Relightable Chars, published by Max Planck Institute to showcase novel methods.",
-  "keyFeatures": [],
-  "benchmarks": [],
+  "description": "Relightable Holoported Characters (Relightable Chars / RHC) is a 3D vision framework developed by Max Planck Institute for Informatics (MPI-INF), VIA Research Center, and Google. It synthesizes photorealistic free-viewpoint renders and enables arbitrary relighting of full-body dynamic human performances using sparse-view RGB videos and 3D Gaussian splatting.",
+  "keyFeatures": [
+    "Sparse-View Dynamic Relighting: Synthesizes free-view renders and relights dynamic human performances from sparse RGB videos",
+    "Single-Pass RelightNet Architecture: Evaluates target environment lighting and complex light transport in a single feed-forward pass",
+    "Physics-Informed 3D Gaussian Splatting: Combines 3D Gaussian splats attached to dynamic mesh proxies with physical features",
+    "Alternating Illumination Capture: Multi-view lightstage protocol alternating uniform tracking frames with random environment maps",
+    "Superior Generalization & Quality: Outperforms motion-driven avatar baselines in shadow rendering and identity preservation"
+  ],
+  "benchmarks": [
+    {
+      "name": "Full-Body Dynamic Lightstage Benchmarks (PSNR / SSIM / LPIPS)",
+      "score": "State-of-the-Art over Relighting4D & IntrinsicAvatar",
+      "verified": true
+    }
+  ],
   "family": null,
   "previousVersion": null,
   "links": {
-    "Website": "https://vcai.mpi-inf.mpg.de/projects/RelightableChars/"
+    "website": "https://vcai.mpi-inf.mpg.de/projects/RelightableChars/",
+    "paper": "https://arxiv.org/abs/2512.00255"
   },
   "logo": null,
   "tags": [
     "research-preview",
-    "image-generation"
+    "relighting",
+    "3d-human-avatar",
+    "3d-gaussian-splatting",
+    "mpi-inf",
+    "google"
   ],
   "sources": [
-    "https://vcai.mpi-inf.mpg.de/projects/RelightableChars/"
+    "https://vcai.mpi-inf.mpg.de/projects/RelightableChars/",
+    "https://arxiv.org/abs/2512.00255"
   ],
-  "verified": false,
+  "verified": true,
   "featured": false,
   "boost": 1,
-  "curatorNotes": "Verified academic/research lab affiliation.",
-  "institution": "Max Planck Institute",
+  "curatorNotes": "Verified paper arXiv:2512.00255 (CVPR 2026) from MPI-INF, VIA, and Google.",
+  "institution": "Max Planck Institute for Informatics (MPI-INF), Google",
   "templatedDescription": false
 }

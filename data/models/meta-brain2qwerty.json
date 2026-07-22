@@ -1,40 +1,79 @@
 {
   "id": "meta-brain2qwerty",
-  "name": "Brain2qwerty",
+  "name": "Brain2Qwerty",
   "slug": "meta-brain2qwerty",
   "developer": "Meta",
-  "releaseDate": "2026-07-15",
-  "updatedAt": "2026-07-15",
-  "type": "research-preview",
+  "releaseDate": "2025-02-24",
+  "updatedAt": "2026-07-22",
+  "type": "open-weights",
   "modality": [
+    "other",
     "text"
   ],
   "primaryTask": "other",
   "deployment": [
     "self-hostable"
   ],
-  "license": "Other/Custom",
+  "license": "CC-BY-NC-4.0",
   "parameters": "undisclosed",
   "contextWindow": "undisclosed",
-  "description": "An experimental specialized research research preview named Brain2qwerty, published by Meta to showcase novel methods.",
-  "keyFeatures": [],
-  "benchmarks": [],
+  "description": "Brain2Qwerty is a non-invasive Brain-Computer Interface (BCI) deep learning system developed by Meta AI (FAIR) in collaboration with the Basque Center on Cognition, Brain and Language (BCBL). It decodes text directly from non-invasive neural recordings—specifically Magnetoencephalography (MEG) and Electroencephalography (EEG)—captured while participants type on a QWERTY keyboard.",
+  "keyFeatures": [
+    "Non-Invasive BCI: Decodes text directly from scalp neural recordings (MEG/EEG) without surgical electrode implantation",
+    "3-Stage Deep Learning Pipeline: Integrates 1D/2D convolutional signal encoders, Transformer temporal sequence decoders, and LLM contextual post-processing",
+    "Multi-Modality Support (MEG vs EEG): Operates on both Magnetoencephalography and Electroencephalography data, showing higher performance with MEG",
+    "Open-Source Code & Dataset: Training pipelines are available via GitHub under CC BY-NC 4.0 license alongside benchmark datasets on Hugging Face",
+    "Zero-Shot Generalization: Capable of accurately decoding novel, unseen sentences outside the training set for top-performing subjects"
+  ],
+  "benchmarks": [
+    {
+      "name": "Character Error Rate (CER) - MEG Average",
+      "score": "32%",
+      "verified": true
+    },
+    {
+      "name": "Character Error Rate (CER) - MEG Best Subject",
+      "score": "19%",
+      "verified": true
+    },
+    {
+      "name": "Word Error Rate (WER) - Brain2Qwerty v2 Average",
+      "score": "39% (61% Word Accuracy)",
+      "verified": true
+    },
+    {
+      "name": "Word Error Rate (WER) - Brain2Qwerty v2 Best Subject",
+      "score": "22% (78% Word Accuracy)",
+      "verified": true
+    }
+  ],
   "family": null,
   "previousVersion": null,
   "links": {
-    "Website": "https://ai.meta.com/blog/brain2qwerty-brain-ai-human-communication/"
+    "website": "https://ai.meta.com/research/publications/brain2qwerty-decoding-speech-from-brain-signals/",
+    "paper": "https://arxiv.org/abs/2502.17480",
+    "github": "https://github.com/facebookresearch/brain2qwerty",
+    "huggingface": "https://huggingface.co/papers/2502.17480"
   },
-  "logo": null,
+  "logo": "/logos/meta.svg",
   "tags": [
-    "research-preview",
-    "other"
+    "bci",
+    "brain-computer-interface",
+    "meg",
+    "eeg",
+    "meta-ai",
+    "fair",
+    "neural-decoding"
   ],
   "sources": [
-    "https://ai.meta.com/blog/brain2qwerty-brain-ai-human-communication/"
+    "https://ai.meta.com/research/publications/brain2qwerty-decoding-speech-from-brain-signals/",
+    "https://arxiv.org/abs/2502.17480",
+    "https://github.com/facebookresearch/brain2qwerty"
   ],
-  "verified": false,
-  "featured": false,
+  "verified": true,
+  "featured": true,
   "boost": 1,
-  "curatorNotes": "Ingested research preview via bulk triage. Affiliation: Meta. Traction signal: Initial release.",
-  "templatedDescription": true
+  "curatorNotes": "Verified paper arXiv:2502.17480 and open-source implementation from Meta AI (FAIR) and BCBL.",
+  "institution": "Meta AI (FAIR) & BCBL",
+  "templatedDescription": false
 }

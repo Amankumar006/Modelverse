@@ -1,26 +1,29 @@
-# CHORD
+# CHORD: Contact Wrench Guidance from Human Demonstration
 
 ## Model Overview
-Developed by NVIDIA, CHORD is a specialized research preview model exploring new techniques in robotics and specialized research. It focuses on enabling robots to learn dexterous manipulation skills from human demonstrations. Rather than being a general-purpose language or chat AI model, CHORD is a dedicated robotics approach that improves how AI agents learn physical tasks by emphasizing physical forces and interactions with objects.
+**CHORD** (**Contact Wrench Guidance from Human Demonstration**) is a framework developed by the **NVIDIA Isaac team** and **NVIDIA GEAR Lab** (Xinghao Zhu, Linxi "Jim" Fan, Yuke Zhu, Danfei Xu, et al.).
 
-## Capabilities
-- **Robotic Skill Re-creation:** Enables robots to replicate human manipulation skills by focusing on "hold" (physical forces and object interactions) instead of merely mimicking exact finger positions.
-- **Skill Transfer:** Can translate human movements into "push" and "twist" commands, facilitating skill transfer across varied robotic hands (e.g., using a five-fingered human demonstration to train a robot with a three-fingered claw).
-- **Physical Task Adaptation:** Emphasizes contact-focused demonstrations, allowing robust adaptation in dynamic physical environments.
+It enables robots to learn long-horizon, dexterous, bimanual, and whole-body manipulation skills from human video demonstrations. Instead of directly mimicking human joint kinematics, CHORD introduces an **object-centric contact wrench space representation** (measuring forces and torques induced on objects) as a dense reward signal in reinforcement learning within **NVIDIA Isaac Lab**.
 
-## Example Use Cases
-- **Dexterous Manipulation:** Training robotic hands to handle complex, precise tasks with varying object shapes and weights.
-- **Whole-Body Manipulation:** Translating human coordination into full-body robotic commands in simulated or real-world setups.
-- **Cross-Form Factor Robotics:** Porting manipulation skills demonstrated by human hands into morphologically distinct robotic end-effectors, like grippers or specialized claws.
+---
+
+## Key Features
+- **Object-Centric Contact Wrench Representation:** Maps human/robot interactions to induced forces and torques, enabling morphology-invariant policy transfer.
+- **Video-to-Data Ingestion Pipeline:** Reconstructs 3D scene meshes, 6-DoF object poses, and contact dynamics directly from RGB human videos.
+- **Dense Reinforcement Learning Guidance:** Uses contact wrench matching as a dense reward signal to accelerate RL training.
+- **Large-Scale Simulation Benchmark:** Accompanied by a benchmark suite of 4,739 bimanual dexterous manipulation tasks in NVIDIA Isaac Lab.
+- **Cross-Embodiment Generalization:** Transfers policies from hand-only demonstrations to humanoid whole-body systems (Sharpa, Unitree G1).
+
+---
+
+## Verified Project Links
+- **Project Website:** [https://nvidia-isaac.github.io/video_to_data/chord/](https://nvidia-isaac.github.io/video_to_data/chord/)
+- **arXiv Paper:** [https://arxiv.org/abs/2607.00033](https://arxiv.org/abs/2607.00033)
+- **GitHub Repository:** [https://github.com/nvidia-isaac/video_to_data](https://github.com/nvidia-isaac/video_to_data)
+- **Hugging Face:** [https://huggingface.co/nvidia](https://huggingface.co/nvidia)
+
+---
 
 ## Performance & Benchmarks
-- Demonstrates high success rates in complex manipulation tasks.
-- Effectively handles both two-handed simulation tasks and whole-body manipulation.
-- Capable of successful zero-shot or few-shot transfer to physical, real-world robots from human demonstrations.
-
-## Intended Use & Limitations
-- **Intended Use:** Robotics research, physical AI development, and industrial automation where dexterous manipulation is required.
-- **Limitations:** CHORD is a highly specialized model, not intended for text generation, conversational AI, or general-purpose tasks. Its capabilities are constrained strictly to the domain of robotic physical manipulation.
-
-## About NVIDIA
-NVIDIA is a pioneer in GPU computing, artificial intelligence, and robotics. With platforms like NVIDIA Isaac and cutting-edge research in Physical AI, NVIDIA continues to push the boundaries of how AI agents perceive, reason, and interact with the physical world.
+- **Average Task Success Rate:** 82.12% across 1,831 evaluated simulation tasks.
+- **Whole-Body Generalization:** 90.77% success rate transferring hand demonstrations to humanoid whole-body tasks.

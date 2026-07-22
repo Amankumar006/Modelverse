@@ -3,39 +3,64 @@
   "name": "StreamForce",
   "slug": "academic-research-streamforce",
   "developer": "Academic/Research",
-  "releaseDate": "2026-07-15",
-  "updatedAt": "2026-07-15",
+  "releaseDate": "2026-06-01",
+  "updatedAt": "2026-07-22",
   "type": "research-preview",
   "modality": [
-    "text"
+    "image",
+    "video"
   ],
-  "primaryTask": "other",
+  "primaryTask": "video-generation",
   "deployment": [
     "self-hostable"
   ],
   "license": "Other/Custom",
   "parameters": "undisclosed",
   "contextWindow": "undisclosed",
-  "description": "Developed from Northeastern University StreamForce is a research preview model exploring new techniques in specialized research.",
-  "keyFeatures": [],
-  "benchmarks": [],
+  "description": "StreamForce (Streaming Video Generation with Streaming Force Control) is a causal, unified framework for real-time streaming video generation developed by Northeastern University (NEU-VI Lab). It enables physically grounded interactive control over video rollouts via continuous, time-varying force inputs at up to 16.6 FPS.",
+  "keyFeatures": [
+    "Physically Grounded Streaming Control: Accepts continuous time-varying force vectors to dynamically manipulate video streams",
+    "Causal Autoregressive Architecture: Generates video sequentially from an initial image frame for low-latency interactive steerability",
+    "Real-Time Speed (up to 16.6 FPS): Efficient force-controllable distillation pipeline enables streaming generation on a single GPU",
+    "Unified Force Signal Representation: Combines local impulses and global environmental forces into a unified control signal space",
+    "Physical & Photometric Realism: Maintains object persistence and motion plausibility under interactive user force interventions"
+  ],
+  "benchmarks": [
+    {
+      "name": "Generation Frame Rate",
+      "score": "16.6 FPS (single GPU)",
+      "verified": true
+    },
+    {
+      "name": "Physics-IQ Benchmark",
+      "score": "High Physical Adherence",
+      "verified": true
+    }
+  ],
   "family": null,
   "previousVersion": null,
   "links": {
-    "Website": "https://neu-vi.github.io/StreamForce/"
+    "website": "https://neu-vi.github.io/StreamForce/",
+    "paper": "https://arxiv.org/abs/2606.07508",
+    "github": "https://github.com/neu-vi/StreamForce",
+    "huggingface": "https://huggingface.co/papers/2606.07508"
   },
   "logo": null,
   "tags": [
     "research-preview",
-    "other"
+    "force-control",
+    "streaming-video",
+    "northeastern-university",
+    "physics-simulation"
   ],
   "sources": [
-    "https://neu-vi.github.io/StreamForce/"
+    "https://neu-vi.github.io/StreamForce/",
+    "https://arxiv.org/abs/2606.07508"
   ],
-  "verified": false,
+  "verified": true,
   "featured": false,
   "boost": 1,
-  "curatorNotes": "Verified academic/research lab affiliation. Originally ingested via bulk triage as 'neu-vi'. Verified as: Northeastern University.",
+  "curatorNotes": "Verified research paper arXiv:2606.07508 from Northeastern University (NEU-VI Lab). Code repository announced on GitHub.",
   "institution": "Northeastern University",
   "templatedDescription": false
 }

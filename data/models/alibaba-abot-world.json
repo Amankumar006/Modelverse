@@ -4,39 +4,61 @@
   "slug": "abot-world",
   "developer": "Alibaba",
   "releaseDate": "2026-07-09",
-  "updatedAt": "2026-07-09",
+  "updatedAt": "2026-07-22",
   "type": "open-weights",
   "modality": [
     "video",
-    "multimodal"
+    "multimodal",
+    "3d"
   ],
   "primaryTask": "video-generation",
   "deployment": [
     "self-hostable"
   ],
-  "license": "Apache 2.0",
+  "license": "Apache-2.0",
   "parameters": "5B",
   "contextWindow": "undisclosed",
-  "description": "A real-time interactive world simulator that turns a single desktop GPU into an infinite action-conditioned world generator. It allows users to continuously explore and interact with the environment rather than passively watching pre-rendered video.",
+  "description": "ABot-World is a real-time interactive world simulator developed by Alibaba AMAP CV Lab. Built around a 5-billion parameter causal video world model (ABot-World-0-5B-LF) fine-tuned from Wan2.2-TI2V-5B, it enables open-ended, action-conditioned video generation running in real time at 720p resolution @ 16 FPS on a single NVIDIA RTX 5090 GPU.",
   "keyFeatures": [
-    "Runs at 720p and 16 FPS on a single RTX 5090",
-    "Supports infinite world rollout without scene lock-in",
-    "Operates with 1.2s latency and a 19GB GPU memory footprint"
+    "Infinite Interactive Rollout via LongForcing student-teacher distillation (over 1 hour continuous rollout without scene lock-in or drift)",
+    "High-Performance Consumer Hardware Execution (720p@16FPS, ~1.2s latency, ~19GB VRAM on RTX 5090)",
+    "5B Parameter Causal Architecture fine-tuned from Wan2.2-TI2V-5B",
+    "Real-time Closed-Loop Action Control (keyboard control for camera, roaming, and interactions)",
+    "Unified Video & 3DGS Synthesis (combines video generation with 3D Gaussian Splatting for explorable 3D scenes)"
   ],
-  "benchmarks": [],
+  "benchmarks": [
+    {
+      "name": "WorldRoamBench Action Controllability & Memory",
+      "score": "State-of-the-Art Interactive Rollout",
+      "verified": true
+    }
+  ],
   "family": null,
   "previousVersion": null,
   "links": {
-    "github": "https://github.com/amap-cvlab"
+    "website": "https://abot-world.amap.com/plaza",
+    "paper": "https://arxiv.org/abs/2607.19191",
+    "github": "https://github.com/amap-cvlab/ABot-World",
+    "huggingface": "https://huggingface.co/acvlab/ABot-World-0-5B-LF"
   },
   "logo": "/logos/alibaba.svg",
   "tags": [
     "real-time",
-    "world-model"
+    "world-model",
+    "video-generation",
+    "action-conditioned",
+    "alibaba"
   ],
   "sources": [
-    "https://modelscope.ai/models/amap_cvlab/ABot-World-0-5B-LF/summary"
+    "https://abot-world.amap.com/plaza",
+    "https://arxiv.org/abs/2607.19191",
+    "https://github.com/amap-cvlab/ABot-World",
+    "https://huggingface.co/acvlab/ABot-World-0-5B-LF"
   ],
   "verified": true,
-  "curatorNotes": ""
+  "featured": true,
+  "boost": 1,
+  "curatorNotes": "Verified paper arXiv:2607.19191 and open-source project from Alibaba AMAP CV Lab.",
+  "institution": "Alibaba AMAP CV Lab",
+  "templatedDescription": false
 }

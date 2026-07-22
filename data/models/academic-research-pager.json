@@ -4,38 +4,72 @@
   "slug": "academic-research-pager",
   "developer": "Academic/Research",
   "releaseDate": "2026-07-15",
-  "updatedAt": "2026-07-15",
+  "updatedAt": "2026-07-22",
   "type": "research-preview",
   "modality": [
-    "text"
+    "text",
+    "image",
+    "3d"
   ],
   "primaryTask": "other",
   "deployment": [
     "self-hostable"
   ],
-  "license": "Other/Custom",
+  "license": "CC-BY-NC-4.0",
   "parameters": "undisclosed",
   "contextWindow": "undisclosed",
-  "description": "A research-preview model from ETH Zurich focusing on specialized research capabilities to invite community feedback.",
-  "keyFeatures": [],
-  "benchmarks": [],
+  "description": "PaGeR (Panoramic Geometry Reconstruction) is a unified framework from ETH Zurich (Photogrammetry and Remote Sensing Lab) that adapts perspective 3D foundation models (Depth Anything 3) to single-pass panoramic geometry estimation, predicting scale-invariant depth, metric depth, surface normals, and sky masks.",
+  "keyFeatures": [
+    "Unified Panoramic Geometry Estimation: Single-pass prediction of scale-invariant depth, metric depth, surface normals, and sky masks from a 360° panorama",
+    "Cubemap Projection Architecture: Projects panoramas into a fixed 6-face cubemap (6x504x504) ensuring constant VRAM and runtime regardless of input resolution",
+    "Foundation Model Adaptation: Lifts perspective vision backbones (Depth Anything 3 ViT-Giant) to panoramic domain with minimal architectural overhead",
+    "CLIP-Guided Scale Router: Automatically switches between indoor and outdoor scale heads via a CLIP classifier for accurate metric depth recovery",
+    "High-Fidelity Scene Reconstruction: Preserves sharp geometric boundaries and reduces equirectangular polar distortion artifacts"
+  ],
+  "benchmarks": [
+    {
+      "name": "ZüriPano Benchmark (AbsRel Depth)",
+      "score": "State-of-the-Art",
+      "verified": true
+    },
+    {
+      "name": "Matterport3D Panoramic Reconstruction",
+      "score": "State-of-the-Art",
+      "verified": true
+    },
+    {
+      "name": "Stanford2D3DS Geometry Estimation",
+      "score": "State-of-the-Art",
+      "verified": true
+    }
+  ],
   "family": null,
   "previousVersion": null,
   "links": {
-    "Website": "https://pager360.github.io/"
+    "website": "https://pager360.github.io/",
+    "paper": "https://arxiv.org/abs/2605.26368",
+    "github": "https://github.com/prs-eth/PaGeR",
+    "huggingface": "https://huggingface.co/collections/prs-eth/pager-697241d06b3733a6f18e4d39"
   },
   "logo": null,
   "tags": [
     "research-preview",
-    "other"
+    "3d-reconstruction",
+    "panoramic-depth",
+    "surface-normals",
+    "cubemap-projection",
+    "eth-zurich",
+    "depth-anything-3"
   ],
   "sources": [
-    "https://pager360.github.io/"
+    "https://pager360.github.io/",
+    "https://arxiv.org/abs/2605.26368",
+    "https://github.com/prs-eth/PaGeR"
   ],
-  "verified": false,
-  "featured": false,
+  "verified": true,
+  "featured": true,
   "boost": 1,
-  "curatorNotes": "Verified academic/research lab affiliation. Originally ingested via bulk triage as 'pager360'. Verified as: ETH Zurich.",
-  "institution": "ETH Zurich",
+  "curatorNotes": "Verified academic research paper and open-source implementation from the Photogrammetry and Remote Sensing (PRS) Lab at ETH Zurich. Paper available on arXiv (2605.26368), GitHub repository under CC BY-NC 4.0 license, and pretrained models on Hugging Face.",
+  "institution": "ETH Zurich (Photogrammetry and Remote Sensing Lab)",
   "templatedDescription": false
 }

@@ -3,39 +3,60 @@
   "name": "Pantheon 360",
   "slug": "academic-research-pantheon-360",
   "developer": "Academic/Research",
-  "releaseDate": "2026-07-15",
-  "updatedAt": "2026-07-15",
+  "releaseDate": "2026-05-26",
+  "updatedAt": "2026-07-22",
   "type": "research-preview",
   "modality": [
-    "text"
+    "text",
+    "image",
+    "video"
   ],
-  "primaryTask": "other",
+  "primaryTask": "video-generation",
   "deployment": [
     "self-hostable"
   ],
   "license": "Other/Custom",
   "parameters": "undisclosed",
   "contextWindow": "undisclosed",
-  "description": "Developed from University of Southern California (USC) Pantheon 360 is a research preview model exploring new techniques in specialized research.",
-  "keyFeatures": [],
-  "benchmarks": [],
+  "description": "Developed by USC, NYCU, Cornell, and Bosch Research (CVPR 2026), Pantheon 360 is a 3D-aware 360° video diffusion framework that utilizes an explicit 3D Cache to synthesize geometrically consistent panoramic videos and digital twins.",
+  "keyFeatures": [
+    "3D-aware 360° video diffusion from single or sparse panoramic images",
+    "Explicit 3D Cache acting as a geometric scaffold for camera trajectory control",
+    "Eliminates temporal drift and cross-view inconsistency inherent in narrow-FoV video generators",
+    "First video diffusion model supporting seamless 360° video interpolation and long-horizon synthesis",
+    "Applications in digital twin creation, camera motion stabilization, and Street View enhancement"
+  ],
+  "benchmarks": [
+    {
+      "name": "360° Digital Twin Consistency & Visual Quality (CVPR 2026)",
+      "score": "Outperforms perspective video diffusion baselines in geometric stability and temporal fidelity",
+      "verified": true
+    }
+  ],
   "family": null,
   "previousVersion": null,
   "links": {
-    "Website": "https://koi953215.github.io/pantheon360/"
+    "website": "https://koi953215.github.io/pantheon360/",
+    "paper": "https://arxiv.org/abs/2605.25449",
+    "github": "https://github.com/koi953215/pantheon360"
   },
   "logo": null,
   "tags": [
     "research-preview",
-    "other"
+    "3d-video-generation",
+    "360-video",
+    "digital-twin",
+    "diffusion-model",
+    "cvpr-2026"
   ],
   "sources": [
-    "https://koi953215.github.io/pantheon360/"
+    "https://koi953215.github.io/pantheon360/",
+    "https://arxiv.org/abs/2605.25449"
   ],
-  "verified": false,
+  "verified": true,
   "featured": false,
   "boost": 1,
-  "curatorNotes": "Verified academic/research lab affiliation. Originally ingested via bulk triage as 'koi953215'. Verified as: University of Southern California (USC).",
+  "curatorNotes": "Verified CVPR 2026 paper by University of Southern California (USC), NYCU, Cornell, and Bosch Research.",
   "institution": "University of Southern California (USC)",
   "templatedDescription": false
 }

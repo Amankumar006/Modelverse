@@ -1,23 +1,29 @@
+# OmniDreams: Action-Conditioned Closed-Loop World Model
+
 ## Model Overview
-NVIDIA OmniDreams is a groundbreaking action-conditioned generative world model designed for real-time, closed-loop autonomous vehicle (AV) simulation. Developed as part of the NVIDIA Cosmos world foundation model ecosystem, OmniDreams transforms how driving policies are tested by autoregressively generating photorealistic, multi-camera video streams in real time. It responds dynamically to vehicle control inputs such as steering, throttle, and braking, providing an immersive, unpredictable environment that mirrors real-world driving.
+**OmniDreams** (NVIDIA Cosmos-Dreams) is an action-conditioned real-time generative world model developed by **NVIDIA Spatial Intelligence Lab (SIL)** (Sanja Fidler, Amlan Kar, et al.).
 
-## Capabilities
-*   **Real-Time Video Generation:** Synthesizes high-fidelity, multi-camera video on the fly, eliminating the restrictions of pre-recorded sensor data.
-*   **Action Conditioning:** Reacts accurately and instantly to driving policy actions (steering, acceleration, braking) to simulate closed-loop scenarios.
-*   **Contextual Inputs:** Conditions video generation on an initial real-world RGB frame, text prompts detailing the driving context, and per-frame coarse HD maps and trajectory poses.
-*   **Complex Scenario Simulation:** Capable of synthesizing novel, unobserved edge cases, extreme weather conditions, and unpredictable traffic behaviors.
+It autoregressively synthesizes photorealistic multi-camera video sensor observations in real time based on simulator states and driving actions (steering, throttle, braking). Mid-trained and post-trained from NVIDIA Cosmos diffusion models on 21,000+ hours of driving data, OmniDreams enables testing autonomous vehicle policies in rare, safety-critical edge cases.
 
-## Example Use Cases
-*   **Autonomous Vehicle Validation:** Testing and refining AV driving policies within safe, hyper-realistic, and infinitely variable virtual environments.
-*   **Edge-Case Discovery:** Generating rare or dangerous scenarios (e.g., sudden pedestrian crossings, severe storms) that are difficult or unsafe to capture in the real world.
-*   **Closed-Loop Evaluation:** Integrating with simulation frameworks like NVIDIA AlpaSim to validate reasoning and planning models (such as Alpamayo) in real-time continuous feedback loops.
+---
+
+## Key Features
+- **Real-Time Action-Conditioned Generation:** Autoregressively generates multi-camera video observations conditioned on ego-vehicle driving actions.
+- **Closed-Loop Interactive Simulation:** Functions as a reactive digital twin environment for testing autonomous vehicle policies.
+- **Cosmos Foundation Architecture:** Mid-trained and post-trained from NVIDIA Cosmos diffusion models on 21,000+ hours of driving data.
+- **Long-Tail & Edge Case Synthesis:** Simulates extreme weather, night scenes, low visibility, and unexpected pedestrian behaviors.
+- **High Evaluation Fidelity & Efficiency:** Serves as a faithful proxy that matches high-fidelity simulators (NuRec) with 1/5th the parameters of previous policy models.
+
+---
+
+## Verified Project Links
+- **Project Website:** [https://research.nvidia.com/labs/sil/omnidreams/](https://research.nvidia.com/labs/sil/omnidreams/)
+- **arXiv Paper:** [https://arxiv.org/abs/2606.03159](https://arxiv.org/abs/2606.03159)
+- **GitHub Repository:** [https://github.com/nv-tlabs/omni-dreams](https://github.com/nv-tlabs/omni-dreams)
+- **Hugging Face Model:** [https://huggingface.co/nvidia/omni-dreams-models](https://huggingface.co/nvidia/omni-dreams-models)
+
+---
 
 ## Performance & Benchmarks
-While specific parameter counts and context window details remain undisclosed, OmniDreams demonstrates exceptional performance in real-time generative capabilities. It operates effectively at the frame rates required for closed-loop AV simulation, maintaining temporal consistency and photorealism across multiple camera views simultaneously. Its autoregressive architecture ensures that dynamic scene changes and vehicle physics are rendered seamlessly.
-
-## Intended Use & Limitations
-**Intended Use:** OmniDreams is primarily intended for research and development within the autonomous vehicle industry, specifically for simulation, policy training, and safety validation of self-driving systems.
-**Limitations:** As a generative world model, it may occasionally introduce visual artifacts or physically implausible occurrences (hallucinations) over extended generation sequences. It is designed as a simulation aid rather than a perfect replica of physics, and reliance on it for final safety certification should be paired with real-world testing.
-
-## About NVIDIA
-NVIDIA is a pioneer in accelerated computing and artificial intelligence. From inventing the GPU to driving the modern AI revolution, NVIDIA provides the computational backbone for the world's most advanced technologies. Through continuous research and ecosystems like Omniverse and Cosmos, NVIDIA empowers industries to build intelligent, simulated, and physically accurate virtual worlds.
+- **NuRec Policy Evaluation:** Outperformed Alpamayo 1.5 using 1/5th total parameters.
+- **MinMax Harmonic Mean (MMHM):** Evaluates image quality, text/action alignment, and temporal consistency in closed-loop settings.

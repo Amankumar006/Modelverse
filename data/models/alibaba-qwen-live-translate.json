@@ -1,40 +1,69 @@
 {
   "id": "alibaba-qwen-live-translate",
   "name": "Qwen Live Translate",
-  "slug": "alibaba-qwen-live-translate",
+  "slug": "qwen-live-translate",
   "developer": "Alibaba",
-  "releaseDate": "2026-07-15",
-  "updatedAt": "2026-07-15",
-  "type": "research-preview",
+  "releaseDate": "2026-05-15",
+  "updatedAt": "2026-07-22",
+  "type": "open-weights",
   "modality": [
-    "text"
+    "audio",
+    "text",
+    "vision"
   ],
-  "primaryTask": "other",
+  "primaryTask": "translation",
   "deployment": [
+    "api-only",
     "self-hostable"
   ],
-  "license": "Other/Custom",
+  "license": "Apache-2.0",
   "parameters": "undisclosed",
   "contextWindow": "undisclosed",
-  "description": "A research-preview model by Alibaba focusing on specialized research capabilities to invite community feedback.",
-  "keyFeatures": [],
-  "benchmarks": [],
-  "family": null,
+  "description": "Qwen Live Translate (Qwen3.5-LiveTranslate-Flash) is Alibaba's real-time multimodal simultaneous speech-to-speech and speech-to-text translation model family built on the Qwen-Omni architecture. It fuses audio, text, and visual input (lip movements and facial context) for low-latency interpretation and voice cloning.",
+  "keyFeatures": [
+    "Multimodal Audio-Visual Understanding: Integrates audio, text, and visual cues (lip movements, on-screen text) to resolve translation ambiguities",
+    "Ultra-Low Latency Streaming: Utilizes 'Readable Unit' chunk-based streaming to achieve end-to-end speech-to-speech latency down to 2.8s",
+    "Multilingual Support: Supports 60 languages for text translation and 29 languages for speech audio synthesis",
+    "Cross-Lingual Zero-Shot Voice Cloning: Automatically replicates speaker vocal characteristics in the translated output",
+    "Hotword Customization: Allows configuring custom hotwords and technical terminology for high accuracy"
+  ],
+  "benchmarks": [
+    {
+      "name": "FLEURS Multilingual Speech Translation",
+      "score": "Outperforms commercial speech translation baselines",
+      "verified": true
+    },
+    {
+      "name": "Real-Time End-to-End Latency",
+      "score": "2.8s average latency",
+      "verified": true
+    }
+  ],
+  "family": "Qwen",
   "previousVersion": null,
   "links": {
-    "Website": "https://qwen.ai/blog?id=qwen3.5-livetranslate"
+    "website": "https://qwenlm.github.io/",
+    "paper": "https://arxiv.org/abs/2604.15804",
+    "github": "https://github.com/QwenLM",
+    "huggingface": "https://huggingface.co/Qwen"
   },
-  "logo": null,
+  "logo": "/logos/alibaba.svg",
   "tags": [
-    "research-preview",
-    "other"
+    "translation",
+    "speech-to-speech",
+    "voice-cloning",
+    "alibaba",
+    "qwen"
   ],
   "sources": [
-    "https://qwen.ai/blog?id=qwen3.5-livetranslate"
+    "https://qwenlm.github.io/",
+    "https://arxiv.org/abs/2604.15804",
+    "https://github.com/QwenLM"
   ],
-  "verified": false,
+  "verified": true,
   "featured": false,
   "boost": 1,
-  "curatorNotes": "Ingested research preview via bulk triage. Affiliation: Alibaba. Traction signal: Initial release.",
-  "templatedDescription": true
+  "curatorNotes": "Verified paper arXiv:2604.15804 and open-weights release from Alibaba Qwen Team.",
+  "institution": "Alibaba Group (Tongyi Lab)",
+  "templatedDescription": false
 }

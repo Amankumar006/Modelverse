@@ -3,9 +3,9 @@
   "name": "WavTTS",
   "slug": "academic-research-wavtts",
   "developer": "Academic/Research",
-  "releaseDate": "2026-07-15",
-  "updatedAt": "2026-07-15",
-  "type": "research-preview",
+  "releaseDate": "2026-06-01",
+  "updatedAt": "2026-07-22",
+  "type": "open-weights",
   "modality": [
     "text",
     "audio"
@@ -14,30 +14,57 @@
   "deployment": [
     "self-hostable"
   ],
-  "license": "Other/Custom",
+  "license": "MIT",
   "parameters": "undisclosed",
   "contextWindow": "undisclosed",
-  "description": "Developed from Shanghai Jiao Tong University (SJTU), ByteDance WavTTS is a research preview model exploring new techniques in audio and speech.",
-  "keyFeatures": [],
-  "benchmarks": [],
+  "description": "WavTTS is an end-to-end zero-shot text-to-speech framework developed by Shanghai Jiao Tong University (SJTU) and ByteDance Seed. It generates speech directly in raw waveform space using flow matching and Diffusion Transformers (DiT), bypassing intermediate mel-spectrogram or neural codec token representations.",
+  "keyFeatures": [
+    "Direct raw waveform modeling via flow matching and Diffusion Transformers (DiT)",
+    "Non-overlapping waveform patchification for long audio sequence processing",
+    "Multi-scale mel-spectrogram supervision for perceptual training guidance",
+    "Zero-shot voice cloning with short reference audio prompts",
+    "Built upon the F5-TTS architecture framework"
+  ],
+  "benchmarks": [
+    {
+      "name": "LibriSpeech-PC Word Error Rate (WER)",
+      "score": "1.50% - 2.02%",
+      "verified": true
+    },
+    {
+      "name": "UTMOS (Speech Naturalness)",
+      "score": "4.36",
+      "verified": true
+    }
+  ],
   "family": null,
   "previousVersion": null,
   "links": {
-    "Website": "https://wavtts.github.io/"
+    "website": "https://wavtts.github.io/",
+    "paper": "https://arxiv.org/abs/2606.03455",
+    "github": "https://github.com/cwx-worst-one/WavTTS",
+    "huggingface": "https://huggingface.co/worstchan/WavTTS"
   },
   "logo": null,
   "tags": [
     "research-preview",
-    "audio-speech"
+    "tts",
+    "text-to-speech",
+    "zero-shot",
+    "audio-generation",
+    "sjtu",
+    "bytedance"
   ],
   "sources": [
-    "https://wavtts.github.io/"
+    "https://wavtts.github.io/",
+    "https://arxiv.org/abs/2606.03455",
+    "https://github.com/cwx-worst-one/WavTTS",
+    "https://huggingface.co/worstchan/WavTTS"
   ],
-  "verified": false,
+  "verified": true,
   "featured": false,
   "boost": 1,
-  "curatorNotes": "Verified academic/research lab affiliation. Originally ingested via bulk triage as 'wavtts'. Verified as: Shanghai Jiao Tong University (SJTU), ByteDance.",
-  "institution": "Shanghai Jiao Tong University (SJTU), ByteDance",
-  "templatedDescription": false,
-  "url": "https://huggingface.co/papers/2606.03455"
+  "curatorNotes": "Verified paper arXiv:2606.03455 and open-source project from SJTU and ByteDance Seed.",
+  "institution": "Shanghai Jiao Tong University (SJTU), ByteDance Seed",
+  "templatedDescription": false
 }

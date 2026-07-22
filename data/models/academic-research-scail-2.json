@@ -3,39 +3,61 @@
   "name": "SCAIL 2",
   "slug": "academic-research-scail-2",
   "developer": "Academic/Research",
-  "releaseDate": "2026-07-15",
-  "updatedAt": "2026-07-15",
-  "type": "research-preview",
+  "releaseDate": "2026-06-09",
+  "updatedAt": "2026-07-22",
+  "type": "open-weights",
   "modality": [
-    "text"
+    "image",
+    "video"
   ],
-  "primaryTask": "other",
+  "primaryTask": "video-generation",
   "deployment": [
     "self-hostable"
   ],
-  "license": "Other/Custom",
+  "license": "Apache-2.0",
   "parameters": "undisclosed",
   "contextWindow": "undisclosed",
-  "description": "An experimental specialized research research preview named SCAIL 2, published from Tsinghua University (KEG Group) to showcase novel methods.",
-  "keyFeatures": [],
-  "benchmarks": [],
+  "description": "SCAIL 2 is an open-source end-to-end framework for controlled character animation and video-to-video motion transfer developed by Tsinghua University (KEG Group) and Z.ai. It performs motion transfer directly from driving video to reference character without relying on intermediate representations like 3D skeletons, OpenPose maps, or depth maps.",
+  "keyFeatures": [
+    "End-to-End Motion Transfer Architecture: Bypasses traditional pose skeleton/depth map extraction, enabling motion transfer onto arbitrary character styles",
+    "Unified In-Context Mask & Mode-Specific RoPE Conditioning: Uses in-context mask conditioning and spatial/temporal RoPE to unify single-character and multi-character interaction",
+    "MotionPair-60K Dataset: Trained on 60,000 synthetic motion transfer pairs constructed via reverse-driving pipeline",
+    "Bias-Aware Direct Preference Optimization (DPO): Mitigates synthetic distribution bias, improving fine details in fingers and facial expressions",
+    "Emergent Zero-Shot Generalization & ComfyUI Support: Strong zero-shot generalization to non-humanoid/animal animation and native ComfyUI integration"
+  ],
+  "benchmarks": [
+    {
+      "name": "Studio-Bench Cross-Identity Motion Transfer",
+      "score": ">70% Win-rate over skeleton-based baselines",
+      "verified": true
+    }
+  ],
   "family": null,
   "previousVersion": null,
   "links": {
-    "Website": "https://teal024.github.io/SCAIL-2/"
+    "website": "https://teal024.github.io/SCAIL-2/",
+    "paper": "https://arxiv.org/abs/2606.10804",
+    "github": "https://github.com/zai-org/SCAIL-2",
+    "huggingface": "https://huggingface.co/zai-org/SCAIL-2"
   },
   "logo": null,
   "tags": [
     "research-preview",
-    "other"
+    "character-animation",
+    "motion-transfer",
+    "tsinghua-university",
+    "z-ai",
+    "comfyui"
   ],
   "sources": [
-    "https://teal024.github.io/SCAIL-2/"
+    "https://teal024.github.io/SCAIL-2/",
+    "https://arxiv.org/abs/2606.10804",
+    "https://github.com/zai-org/SCAIL-2"
   ],
-  "verified": false,
+  "verified": true,
   "featured": false,
   "boost": 1,
-  "curatorNotes": "Verified academic/research lab affiliation. Originally ingested via bulk triage as 'teal024'. Verified as: Tsinghua University (KEG Group).",
+  "curatorNotes": "Verified paper arXiv:2606.10804 and open-source project from Tsinghua University KEG Group and Z.ai.",
   "institution": "Tsinghua University (KEG Group)",
   "templatedDescription": false
 }

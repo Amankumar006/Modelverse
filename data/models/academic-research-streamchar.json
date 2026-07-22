@@ -2,40 +2,72 @@
   "id": "academic-research-streamchar",
   "name": "StreamChar",
   "slug": "academic-research-streamchar",
-  "developer": "Academic/Research",
-  "releaseDate": "2026-07-15",
-  "updatedAt": "2026-07-15",
+  "developer": "Alibaba",
+  "releaseDate": "2026-05-25",
+  "updatedAt": "2026-07-22",
   "type": "research-preview",
   "modality": [
-    "text"
+    "text",
+    "audio",
+    "video"
   ],
-  "primaryTask": "other",
+  "primaryTask": "video-generation",
   "deployment": [
     "self-hostable"
   ],
   "license": "Other/Custom",
   "parameters": "undisclosed",
   "contextWindow": "undisclosed",
-  "description": "A research-preview model from Alibaba Tongyi (HumanAIGC Team) focusing on specialized research capabilities to invite community feedback.",
-  "keyFeatures": [],
-  "benchmarks": [],
+  "description": "StreamChar is a real-time, long-horizon streaming framework for generating synchronized audio and video of talking characters from text transcripts developed by Alibaba Tongyi Lab (HumanAIGC Team). It decouples long-horizon orchestration from short-window audio-video denoising using a Joint Audio-Video Diffusion Transformer (DiT).",
+  "keyFeatures": [
+    "Decoupled Orchestration Architecture: Separates global semantic planning (LLM orchestrator) from local short-window audio-video DiT",
+    "Progress-Aware Pointer: Maps transcript text directly to continuous audio and video generation, preventing speech-text drift",
+    "Sink-Chunk Memory Mechanism: Employs persistent visual anchors ('sink chunks') to eliminate identity and quality drift",
+    "Two-Stage Decoupled Distillation: Combines DMD step-compression with online chunk rollout fine-tuning for low latency",
+    "Real-Time Single-GPU Streaming: Continuous streaming inference on a single NVIDIA H100 GPU (1.34s latency per 33-frame chunk)"
+  ],
+  "benchmarks": [
+    {
+      "name": "FID (Fréchet Inception Distance)",
+      "score": "17.99",
+      "verified": true
+    },
+    {
+      "name": "Word Error Rate (WER)",
+      "score": "3.54%",
+      "verified": true
+    },
+    {
+      "name": "VBench Dynamic Score",
+      "score": "1.0",
+      "verified": true
+    }
+  ],
   "family": null,
   "previousVersion": null,
   "links": {
-    "Website": "https://humanaigc.github.io/StreamChar/"
+    "website": "https://humanaigc.github.io/StreamChar_page/",
+    "paper": "https://arxiv.org/abs/2605.25659",
+    "github": "https://github.com/HumanAIGC/StreamChar",
+    "huggingface": "https://huggingface.co/papers/2605.25659"
   },
   "logo": null,
   "tags": [
     "research-preview",
-    "other"
+    "talking-character",
+    "streaming-video",
+    "dit",
+    "alibaba",
+    "humanaigc"
   ],
   "sources": [
-    "https://humanaigc.github.io/StreamChar/"
+    "https://humanaigc.github.io/StreamChar_page/",
+    "https://arxiv.org/abs/2605.25659"
   ],
-  "verified": false,
+  "verified": true,
   "featured": false,
   "boost": 1,
-  "curatorNotes": "Verified academic/research lab affiliation. Originally ingested via bulk triage as 'humanaigc'. Verified as: Alibaba Tongyi (HumanAIGC Team).",
-  "institution": "Alibaba Tongyi (HumanAIGC)",
+  "curatorNotes": "Verified research paper arXiv:2605.25659 from Alibaba Tongyi Lab (HumanAIGC Team). Code repository announced on GitHub.",
+  "institution": "Alibaba Tongyi Lab (HumanAIGC Team)",
   "templatedDescription": false
 }

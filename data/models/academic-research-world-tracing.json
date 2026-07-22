@@ -3,39 +3,62 @@
   "name": "World Tracing",
   "slug": "academic-research-world-tracing",
   "developer": "Academic/Research",
-  "releaseDate": "2026-07-15",
-  "updatedAt": "2026-07-15",
-  "type": "research-preview",
+  "releaseDate": "2026-06-15",
+  "updatedAt": "2026-07-22",
+  "type": "open-weights",
   "modality": [
-    "text"
+    "image",
+    "video",
+    "3d"
   ],
   "primaryTask": "other",
   "deployment": [
     "self-hostable"
   ],
-  "license": "Other/Custom",
+  "license": "CC-BY-NC-ND-4.0",
   "parameters": "undisclosed",
   "contextWindow": "undisclosed",
-  "description": "Developed from UIUC World Tracing is a research preview model exploring new techniques in specialized research.",
-  "keyFeatures": [],
-  "benchmarks": [],
+  "description": "World Tracing is a generative 3D geometry representation framework developed by World Labs and UIUC (Hao Zhang, Mohamed El Banani, et al.). Given a single 2D image or short video clip, World Tracing predicts an ordered stack of 3D points along camera rays for every pixel, capturing both visible surfaces and occluded geometry behind them.",
+  "keyFeatures": [
+    "Multilayer Pixel-Aligned Geometry: Predicts an ordered stack of 3D points per pixel, maintaining 1:1 alignment while modeling occluded surfaces",
+    "WT-DiT Architecture: Flow-Matching Diffusion Transformer treating geometry layers as coupled denoising tokens with global attention",
+    "Unified Multi-Domain Support: Features specialized variants for single objects (WT-O), indoor/outdoor scenes (WT-S), and dynamic videos",
+    "Zero-Shot Downstream Integration: Enables text-guided 3D editing, novel-view video synthesis, and mesh generation (TRELLIS)",
+    "Faithfulness & Completeness Balance: Preserves high-precision visible surface depth accuracy while generating complete 3D structures"
+  ],
+  "benchmarks": [
+    {
+      "name": "3D-FRONT Indoor Scene Reconstruction",
+      "score": "State-of-the-Art Visible & Occluded Depth Accuracy",
+      "verified": true
+    }
+  ],
   "family": null,
   "previousVersion": null,
   "links": {
-    "Website": "https://haoz19.github.io/world-tracing/"
+    "website": "https://haoz19.github.io/world-tracing-page/",
+    "paper": "https://arxiv.org/abs/2606.13652",
+    "github": "https://github.com/haoz19/world-tracing",
+    "huggingface": "https://huggingface.co/spaces/haoz19/world-tracing-demo"
   },
   "logo": null,
   "tags": [
     "research-preview",
-    "other"
+    "3d-reconstruction",
+    "point-cloud",
+    "world-labs",
+    "uiuc",
+    "occluded-geometry"
   ],
   "sources": [
-    "https://haoz19.github.io/world-tracing/"
+    "https://haoz19.github.io/world-tracing-page/",
+    "https://arxiv.org/abs/2606.13652",
+    "https://github.com/haoz19/world-tracing"
   ],
-  "verified": false,
-  "featured": false,
+  "verified": true,
+  "featured": true,
   "boost": 1,
-  "curatorNotes": "Verified academic/research lab affiliation. Originally ingested via bulk triage as 'haoz19'. Verified as: UIUC.",
+  "curatorNotes": "Verified paper arXiv:2606.13652 and open-source project from World Labs and UIUC.",
   "institution": "World Labs, UIUC",
   "templatedDescription": false
 }

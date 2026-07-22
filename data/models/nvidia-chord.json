@@ -3,38 +3,65 @@
   "name": "CHORD",
   "slug": "nvidia-chord",
   "developer": "NVIDIA",
-  "releaseDate": "2026-07-15",
-  "updatedAt": "2026-07-15",
-  "type": "research-preview",
+  "releaseDate": "2026-07-01",
+  "updatedAt": "2026-07-22",
+  "type": "open-weights",
   "modality": [
-    "text"
+    "video",
+    "multimodal"
   ],
   "primaryTask": "other",
   "deployment": [
     "self-hostable"
   ],
-  "license": "Other/Custom",
+  "license": "CC-BY-4.0",
   "parameters": "undisclosed",
   "contextWindow": "undisclosed",
-  "description": "Developed by NVIDIA, CHORD is a research preview model exploring new techniques in specialized research.",
-  "keyFeatures": [],
-  "benchmarks": [],
+  "description": "CHORD (Contact Wrench Guidance from Human Demonstration) is a framework by NVIDIA Isaac Team and GEAR Lab for learning long-horizon dexterous and whole-body robotic manipulation from human demonstrations using object-centric contact wrench space guidance in reinforcement learning.",
+  "keyFeatures": [
+    "Object-centric contact wrench space representation mapping human/robot interactions to forces and torques",
+    "Video-to-data pipeline extracting 3D scene geometry, 6-DoF object poses, and contact points from video",
+    "Dense reinforcement learning reward formulation based on contact wrench similarity",
+    "Large-scale simulation benchmark containing 4,739 bimanual dexterous manipulation tasks in Isaac Lab",
+    "Morphology-invariant cross-embodiment generalization to whole-body humanoid robots and real-world hardware"
+  ],
+  "benchmarks": [
+    {
+      "name": "CHORD Simulation Benchmark (1,831 tasks)",
+      "score": "82.12% average success rate",
+      "verified": true
+    },
+    {
+      "name": "Whole-Body Humanoid Generalization",
+      "score": "90.77% success rate",
+      "verified": true
+    }
+  ],
   "family": null,
   "previousVersion": null,
   "links": {
-    "Website": "https://nvidia-isaac.github.io/video_to_data/chord/"
+    "website": "https://nvidia-isaac.github.io/video_to_data/chord/",
+    "paper": "https://arxiv.org/abs/2607.00033",
+    "github": "https://github.com/nvidia-isaac/video_to_data",
+    "huggingface": "https://huggingface.co/nvidia"
   },
-  "logo": null,
+  "logo": "/logos/nvidia.svg",
   "tags": [
-    "research-preview",
-    "other"
+    "robotics",
+    "dexterous-manipulation",
+    "isaac-lab",
+    "nvidia",
+    "gear-lab"
   ],
   "sources": [
-    "https://nvidia-isaac.github.io/video_to_data/chord/"
+    "https://nvidia-isaac.github.io/video_to_data/chord/",
+    "https://arxiv.org/abs/2607.00033",
+    "https://github.com/nvidia-isaac/video_to_data"
   ],
-  "verified": false,
+  "verified": true,
   "featured": false,
   "boost": 1,
-  "curatorNotes": "Ingested research preview via bulk triage. Affiliation: NVIDIA. Traction signal: Initial release.",
-  "templatedDescription": true
+  "curatorNotes": "Verified paper arXiv:2607.00033 and open-source project from NVIDIA Isaac Team and GEAR Lab.",
+  "institution": "NVIDIA (NVIDIA Isaac Team & GEAR Lab)",
+  "templatedDescription": false
 }

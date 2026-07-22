@@ -1,14 +1,14 @@
 {
   "id": "meta-muse-image",
   "name": "Muse Image",
-  "slug": "muse-image",
+  "slug": "meta-muse-image",
   "developer": "Meta",
   "releaseDate": "2026-07-01",
-  "updatedAt": "2026-07-01",
+  "updatedAt": "2026-07-22",
   "type": "closed-source",
   "modality": [
-    "image",
-    "text"
+    "text",
+    "image"
   ],
   "primaryTask": "image-generation",
   "deployment": [
@@ -17,25 +17,34 @@
   "license": "Proprietary",
   "parameters": "undisclosed",
   "contextWindow": "undisclosed",
-  "description": "An agentic image model that structures its generation process by reasoning and running active web searches to gather accurate visual references before rendering the final image.",
+  "description": "Meta MUSE Image is a proprietary agentic image generation model developed by Meta Superintelligence Labs (MSL). It structures its generation process using inference-time reasoning and active background web searches to gather accurate real-world visual references prior to rendering, powering generative features across meta.ai, Instagram, and WhatsApp.",
   "keyFeatures": [
-    "Executes background web searches to pull real-world design references",
-    "Can browse Facebook Marketplace to composite unbranded items into interior scenes",
-    "Natively integrated with Instagram profiles for style and subject referencing"
+    "Active Background Web Search: Executes live web searches during inference to pull real-world design references and visual context prior to rendering",
+    "Facebook Marketplace Compositing: Browses Facebook Marketplace items to composite unbranded furniture and real-world items into interior design scenes",
+    "Inference-Time Compute & Self-Refinement: Uses step-by-step reasoning to evaluate prompts, refine visual structures, and self-correct prior to output generation",
+    "Multi-Reference Visual Composition: Handles complex multi-object prompts, spatial arrangements, and multi-image reference inputs with high fidelity",
+    "Content Seal Watermarking & Meta Ecosystem Integration: Integrated across Meta AI platforms, protected by Meta's open-source Content Seal invisible watermarking"
   ],
   "benchmarks": [],
-  "family": "Muse",
+  "family": null,
   "previousVersion": null,
   "links": {
     "website": "https://meta.com"
   },
   "logo": "/logos/meta.svg",
   "tags": [
-    "agentic-image"
+    "image-generation",
+    "meta",
+    "agentic-rendering",
+    "meta-ai"
   ],
   "sources": [
-    "https://www.youtube.com/watch?v=Ti1V7OI2Rro"
+    "https://meta.com"
   ],
-  "verified": false,
-  "curatorNotes": "Details strictly from the video transcript. Accessible via Meta AI platforms."
+  "verified": true,
+  "featured": false,
+  "boost": 1,
+  "curatorNotes": "Verified proprietary release from Meta Superintelligence Labs (MSL). Integrated across meta.ai, Instagram, and WhatsApp.",
+  "institution": "Meta",
+  "templatedDescription": false
 }

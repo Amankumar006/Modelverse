@@ -3,40 +3,60 @@
   "name": "PhysiFormer",
   "slug": "academic-research-physiformer",
   "developer": "Academic/Research",
-  "releaseDate": "2026-07-15",
-  "updatedAt": "2026-07-15",
-  "type": "research-preview",
+  "releaseDate": "2026-06-25",
+  "updatedAt": "2026-07-22",
+  "type": "open-weights",
   "modality": [
-    "text",
+    "3d",
     "video"
   ],
-  "primaryTask": "video-generation",
+  "primaryTask": "other",
   "deployment": [
     "self-hostable"
   ],
-  "license": "Other/Custom",
+  "license": "CC-BY-NC-ND-4.0",
   "parameters": "undisclosed",
   "contextWindow": "undisclosed",
-  "description": "An experimental video generation research preview named PhysiFormer, published from University of Oxford (VGG) to showcase novel methods.",
-  "keyFeatures": [],
-  "benchmarks": [],
+  "description": "PhysiFormer is a diffusion transformer model developed by Visual Geometry Group (VGG), University of Oxford to simulate physically plausible 3D object dynamics directly in 3D world coordinates. Conditioned on initial 3D vertex positions, velocities, and material type descriptors, it treats full-horizon 3D trajectory prediction as a single denoising process.",
+  "keyFeatures": [
+    "World-Space Mesh Trajectory Diffusion: Casts 3D vertex trajectory prediction into a single denoising diffusion process directly in 3D world coordinates",
+    "Material & Velocity Conditioning: Conditioned on per-vertex initial positions, velocities, and material properties (rigid or elastic mechanics)",
+    "Factorized Spatio-Temporal-Object Attention: Enables permutation-invariant multi-object reasoning without explicit object encoding",
+    "Generalization Across Geometries & Materials: Trained on 100,000+ simulated trajectories, generalizing to unseen 3D geometries and mixed-material interactions",
+    "Constant-Time Rollout: Avoids error accumulation typical of autoregressive Euler-marching models by sampling full trajectories in a single step"
+  ],
+  "benchmarks": [
+    {
+      "name": "Trajectory Accuracy & Rigidity Preservation",
+      "score": "Outperforms autoregressive baselines in 3D trajectory MSE and momentum conservation",
+      "verified": true
+    }
+  ],
   "family": null,
   "previousVersion": null,
   "links": {
-    "Website": "https://yimingc9.github.io/physiformer/"
+    "website": "https://yimingc9.github.io/physiformer/",
+    "paper": "https://arxiv.org/abs/2606.27364",
+    "github": "https://github.com/yimingc9/PhysiFormer",
+    "huggingface": "https://huggingface.co/yslan/PhysiFormer"
   },
   "logo": null,
   "tags": [
     "research-preview",
-    "video-generation"
+    "3d-physics-simulation",
+    "oxford-vgg",
+    "mesh-trajectories",
+    "diffusion-transformer"
   ],
   "sources": [
-    "https://yimingc9.github.io/physiformer/"
+    "https://yimingc9.github.io/physiformer/",
+    "https://arxiv.org/abs/2606.27364",
+    "https://github.com/yimingc9/PhysiFormer"
   ],
-  "verified": false,
+  "verified": true,
   "featured": false,
   "boost": 1,
-  "curatorNotes": "Verified academic/research lab affiliation. Originally ingested via bulk triage as 'yimingc9'. Verified as: University of Oxford (VGG).",
+  "curatorNotes": "Verified paper arXiv:2606.27364 and open-source project from University of Oxford VGG.",
   "institution": "University of Oxford (VGG)",
   "templatedDescription": false
 }

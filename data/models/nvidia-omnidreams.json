@@ -3,38 +3,60 @@
   "name": "OmniDreams",
   "slug": "nvidia-omnidreams",
   "developer": "NVIDIA",
-  "releaseDate": "2026-07-15",
-  "updatedAt": "2026-07-15",
-  "type": "research-preview",
+  "releaseDate": "2026-06-01",
+  "updatedAt": "2026-07-22",
+  "type": "open-weights",
   "modality": [
-    "text"
+    "video",
+    "multimodal"
   ],
-  "primaryTask": "other",
+  "primaryTask": "video-generation",
   "deployment": [
     "self-hostable"
   ],
-  "license": "Other/Custom",
+  "license": "Apache-2.0",
   "parameters": "undisclosed",
   "contextWindow": "undisclosed",
-  "description": "A research-preview model by NVIDIA focusing on specialized research capabilities to invite community feedback.",
-  "keyFeatures": [],
-  "benchmarks": [],
-  "family": null,
+  "description": "OmniDreams (NVIDIA Cosmos-Dreams) is an action-conditioned real-time generative world model developed by NVIDIA Spatial Intelligence Lab (SIL). It autoregressively synthesizes multi-camera photorealistic video observations conditioned on driving actions and simulator states for closed-loop autonomous vehicle simulation.",
+  "keyFeatures": [
+    "Real-Time Action-Conditioned Generation: Autoregressively generates multi-camera video observations conditioned on ego driving actions in real-time",
+    "Closed-Loop Interactive Simulation: Functions as a reactive virtual environment for end-to-end testing of autonomous vehicle policies",
+    "Cosmos Foundation Model Architecture: Mid-trained and post-trained from NVIDIA Cosmos diffusion models on 21,000+ hours of driving data",
+    "Long-Tail & Edge Case Synthesis: Simulates rare, safety-critical scenarios like adverse weather, low light, and unpredictable agent behaviors",
+    "High Evaluation Fidelity & Efficiency: Acts as a faithful proxy for real-world/reconstruction simulators, outperforming larger policy models with 1/5th parameter size"
+  ],
+  "benchmarks": [
+    {
+      "name": "NuRec Policy Evaluation",
+      "score": "Surpassed Alpamayo 1.5 with 1/5th parameters",
+      "verified": true
+    }
+  ],
+  "family": "Cosmos",
   "previousVersion": null,
   "links": {
-    "Website": "https://research.nvidia.com/labs/sil/omnidreams/"
+    "website": "https://research.nvidia.com/labs/sil/omnidreams/",
+    "paper": "https://arxiv.org/abs/2606.03159",
+    "github": "https://github.com/nv-tlabs/omni-dreams",
+    "huggingface": "https://huggingface.co/nvidia/omni-dreams-models"
   },
-  "logo": null,
+  "logo": "/logos/nvidia.svg",
   "tags": [
-    "research-preview",
-    "other"
+    "autonomous-vehicles",
+    "world-model",
+    "cosmos",
+    "nvidia",
+    "sil-lab"
   ],
   "sources": [
-    "https://research.nvidia.com/labs/sil/omnidreams/"
+    "https://research.nvidia.com/labs/sil/omnidreams/",
+    "https://arxiv.org/abs/2606.03159",
+    "https://github.com/nv-tlabs/omni-dreams"
   ],
-  "verified": false,
+  "verified": true,
   "featured": false,
   "boost": 1,
-  "curatorNotes": "Ingested research preview via bulk triage. Affiliation: NVIDIA. Traction signal: Initial release.",
-  "templatedDescription": true
+  "curatorNotes": "Verified paper arXiv:2606.03159 and open-source project from NVIDIA SIL.",
+  "institution": "NVIDIA Spatial Intelligence Lab (SIL)",
+  "templatedDescription": false
 }

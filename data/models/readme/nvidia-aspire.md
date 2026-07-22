@@ -1,27 +1,29 @@
-# ASPIRE
+# ASPIRE: Agentic Skill Programming through Iterative Robot Exploration
 
 ## Model Overview
-ASPIRE is a self-improving robotics framework developed by NVIDIA in collaboration with researchers from top universities. It moves beyond traditional, rigid robot programming by functioning as a continual learning system that enables robots to autonomously write, execute, and refine their own control programs. The system leverages the reasoning capabilities of frontier large language models to perform autonomous debugging and code refinement loops.
+**ASPIRE** (**Agentic Skill Programming through Iterative Robot Exploration**) is a continual learning framework for robotics developed by **NVIDIA GEAR Lab** (Generalist Embodied Agent Research) in collaboration with researchers from UMich, UIUC, UC Berkeley, and CMU (Runyu Lu, Linxi "Jim" Fan, Guanzhi Wang, et al.).
 
-## Capabilities
-- **Autonomous Skill Programming:** Treats robot tasks as programs, generating executable code for robotic actions.
-- **Iterative Debugging:** If a task fails, the framework analyzes multimodal execution traces (perception, planning, motion data) to diagnose the specific cause of failure.
-- **Self-Improvement:** Generates fixes, validates them through re-execution, and stores successful repairs in a reusable skill library.
-- **Zero-Shot Transfer:** Accumulates transferable knowledge, enabling robots to solve new or long-horizon tasks without needing to be programmed from scratch.
+Operating on a **code-as-policy** paradigm, ASPIRE enables robot agents to autonomously generate, test, debug, and refine executable Python control programs. When encountering execution failures, its closed-loop execution engine collects fine-grained multimodal execution traces to localize root causes, synthesize code patches, and distill successful repairs into an expanding skill library.
 
-## Example Use Cases
-- **Advanced Manufacturing:** Deploying robots that can adapt on-the-fly to new assembly tasks or recover from unexpected errors on the factory floor.
-- **Household Robotics:** Enabling domestic robots to learn and refine complex, multi-step chores through trial and error.
-- **Robotics Research:** Serving as a foundational framework for researchers developing agentic, continual-learning robotic systems.
+---
+
+## Key Features
+- **Code-as-Policy Paradigm:** Translates high-level task goals into structured Python control programs for interpretable, modular robot behaviors.
+- **Closed-Loop Execution Engine:** Exposes per-primitive execution traces (spatial perception, grasp candidates, trajectory data, contact dynamics) to diagnose and validate code repairs.
+- **Continually Expanding Skill Library:** Automatically extracts and indexes validated failure fixes into a persistent library of reusable skills.
+- **Evolutionary Search:** Systematically generates and debugs task sequences and control programs beyond simple trajectory tuning.
+- **Zero-Shot Long-Horizon Generalization:** Enables robots to adapt rapidly to unseen manipulation and household tasks without updating model weights.
+
+---
+
+## Verified Project Links
+- **Project Website:** [https://research.nvidia.com/labs/gear/aspire/](https://research.nvidia.com/labs/gear/aspire/)
+- **arXiv Paper:** [https://arxiv.org/abs/2607.00272](https://arxiv.org/abs/2607.00272)
+- **Hugging Face:** [https://huggingface.co/papers/2607.00272](https://huggingface.co/papers/2607.00272)
+
+---
 
 ## Performance & Benchmarks
-ASPIRE has demonstrated significant improvements in robotic task completion, particularly on challenging long-horizon benchmarks:
-- **LIBERO-Pro Benchmark:** Reached scores of up to 77 points.
-- **Zero-Shot Success Rate:** Achieved a 31% zero-shot success rate on previously unseen long-horizon tasks, proving its ability to effectively transfer learned knowledge to new environments.
-
-## Intended Use & Limitations
-- **Intended Use:** A self-hostable, experimental framework intended for robotics researchers and developers exploring agentic control and continual learning.
-It is not currently intended for plug-and-play commercial deployment.
-
-## About NVIDIA
-NVIDIA is a pioneer in accelerated computing and artificial intelligence. Known for its powerful GPUs that fuel the AI revolution, NVIDIA also conducts cutting-edge research in robotics, computer graphics, and autonomous systems through initiatives like NVIDIA Research and the GEAR lab.
+- **LIBERO-Pro (Object Perturbations):** +77 percentage points success rate improvement over baselines (CaP-Agent, OpenVLA, π0).
+- **Robosuite (Bimanual Handover):** Success rate increased from 20% to 92% (+72 percentage points).
+- **BEHAVIOR-1K (Nav & Pick up Radio):** Success rate increased from 56% to 88% (+32 percentage points).

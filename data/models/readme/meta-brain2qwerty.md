@@ -1,26 +1,31 @@
-# Brain2qwerty
-
-It is not a finalized consumer product and serves primarily to showcase novel methods in non-invasive brain-computer interfaces.
+# Brain2Qwerty: Non-Invasive Brain-to-Text Decoding
 
 ## Model Overview
-It is a non-invasive brain-computer interface (BCI) designed to decode typed sentences directly from brain activity. Unlike surgical implants, Brain2qwerty utilizes magnetoencephalography (MEG) and electroencephalography (EEG) to capture neural signals through a specialized scanner while a user imagines typing. It then uses a hierarchical deep learning architecture—comprising an Encoder, an Aligner, and a Large Language Model (LLM)—to translate those noisy signals into coherent text in real-time.
+**Brain2Qwerty** is a non-invasive Brain-Computer Interface (BCI) deep learning system developed by **Meta AI (FAIR)** in collaboration with the **Basque Center on Cognition, Brain and Language (BCBL)**. It decodes text directly from non-invasive neural recordings—specifically Magnetoencephalography (MEG) and Electroencephalography (EEG)—captured while participants type on a QWERTY keyboard.
 
-## Capabilities
-*   **Non-Invasive Neural Decoding:** Reconstructs intended text from brain signals without requiring invasive surgical implants or electrodes.
-*   **Real-Time Generation:** Version 2 can generate sentences in real-time without needing the precise timing of individual imagined keypresses.
-*   **Hierarchical Architecture:** Uses a sophisticated pipeline to clean noisy neural data, align it with linguistic structures, and output text via a standard LLM.
-*   **AI-Optimized Training:** The training pipeline for v2 was notably optimized using autonomous AI coding agents, showcasing advanced AI-assisted research workflows.
+By combining temporal signal convolution, Transformer-based sequence decoding, and language model contextual post-processing, Brain2Qwerty reconstructs coherent text from non-invasive scalp signals without requiring surgical implants.
 
-## Example Use Cases
-*   **Assistive Technology:** The primary goal is to restore communication for individuals with neurodegenerative conditions (like ALS), locked-in syndrome, or severe brain injuries who cannot speak or move.
-*   **Neuroscience Research:** Provides a framework (alongside open-sourced tools like NeuralSet and NeuralBench) for researchers to study brain activity and improve non-invasive BCI technology.
+---
 
-## Performance & Benchmarks
-In its latest iteration (v2), Brain2qwerty achieved an average word accuracy of approximately 61%. Notably, the best-performing participants in the study reached up to 78% accuracy when decoding imagined typing. While still trailing the accuracy of invasive surgical implants, this represents a major milestone in narrowing the performance gap for non-invasive BCIs.
+## Key Features
+- **Non-Invasive BCI:** Decodes text directly from scalp neural recordings (MEG/EEG) without surgical electrode implantation.
+- **3-Stage Deep Learning Pipeline:** Integrates 1D/2D convolutional signal encoders, Transformer temporal sequence decoders, and LLM contextual post-processing.
+- **Multi-Modality Support (MEG vs EEG):** Operates on both Magnetoencephalography and Electroencephalography data.
+- **Open-Source Code & Dataset:** Training pipelines are available via GitHub (`facebookresearch/brain2qwerty`) under CC BY-NC 4.0 license alongside benchmark datasets.
+- **Zero-Shot Generalization:** Capable of accurately decoding novel, unseen sentences outside the training set for top-performing subjects.
 
-## Intended Use & Limitations
-Meta has open-sourced the training code to accelerate global research.
-*   **Limitations:** The technology is not currently viable for everyday consumer use. It relies on massive, highly specialized, and expensive MEG scanner hardware to read the brain signals accurately. The decoding accuracy, while impressive for a non-invasive tool, is still imperfect and highly dependent on the individual participant's neural signal clarity.
+---
 
-## About Meta
-**Meta** (formerly Facebook) is a global technology conglomerate that heavily invests in artificial intelligence through its Fundamental AI Research lab (FAIR). Through projects like Brain2qwerty and the broader "Digital Brain" initiative, Meta is focused on pushing the boundaries of AI in neuroscience, open-sourcing foundational models and frameworks to drive innovation in medical research and human-computer interaction.
+## Verified Project Links
+- **Project Website:** [https://ai.meta.com/research/publications/brain2qwerty-decoding-speech-from-brain-signals/](https://ai.meta.com/research/publications/brain2qwerty-decoding-speech-from-brain-signals/)
+- **arXiv Paper:** [https://arxiv.org/abs/2502.17480](https://arxiv.org/abs/2502.17480)
+- **GitHub Repository:** [https://github.com/facebookresearch/brain2qwerty](https://github.com/facebookresearch/brain2qwerty)
+- **Hugging Face:** [https://huggingface.co/papers/2502.17480](https://huggingface.co/papers/2502.17480)
+
+---
+
+## Benchmarks & Results
+- **Character Error Rate (CER) - MEG Average:** 32% across 35 healthy volunteers.
+- **Character Error Rate (CER) - MEG Best Subject:** 19% top participant accuracy on novel test sentences.
+- **Word Error Rate (WER) - Brain2Qwerty v2 Average:** 39% WER (61% Word Accuracy) across 22,000 sentences.
+- **Word Error Rate (WER) - Brain2Qwerty v2 Best Subject:** 22% WER (78% Word Accuracy).
