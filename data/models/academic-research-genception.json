@@ -28,7 +28,8 @@
   "family": null,
   "previousVersion": null,
   "links": {
-    "Project": "https://genception.github.io/"
+    "website": "https://genception.github.io/",
+    "github": "https://github.com/genception/GenCeption"
   },
   "logo": null,
   "tags": [

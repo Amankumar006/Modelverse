@@ -25,7 +25,9 @@
   "family": null,
   "previousVersion": null,
   "links": {
-    "Project": "https://lhchen.top/Motion4Motion/"
+    "website": "https://lhchen.top/Motion4Motion/",
+    "paper": "https://lhchen.top/Motion4Motion/static/m4m_paper.pdf",
+    "github": "https://github.com/lhchen7/Motion4Motion"
   },
   "logo": null,
   "tags": [
