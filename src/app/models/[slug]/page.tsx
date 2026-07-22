@@ -130,7 +130,12 @@ export default async function ModelDetailPage({
     const readmePath = path.join(process.cwd(), "data", "models", "readme", `${slug}.md`);
     markdownContent = await fs.readFile(readmePath, "utf-8");
   } catch (err) {
-    // silently ignore
+    try {
+      const readmePathId = path.join(process.cwd(), "data", "models", "readme", `${model.id}.md`);
+      markdownContent = await fs.readFile(readmePathId, "utf-8");
+    } catch (err2) {
+      // silently ignore
+    }
   }
 
   const allEntries = getAllModelEntries();
@@ -299,27 +304,9 @@ export default async function ModelDetailPage({
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 mt-10">
           {/* Main Info Columns (left) */}
           <div className="lg:col-span-8 space-y-10">
-            {/* Key Features Header Badges */}
-            {model.keyFeatures && model.keyFeatures.length > 0 && (
-              <section className="space-y-4">
-                <h2 className="text-xs font-bold uppercase tracking-widest text-gray-400/60">Key Features</h2>
-                <ul className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  {model.keyFeatures.map((feat, idx) => (
-                    <li
-                      key={idx}
-                      className="flex items-start gap-3 text-sm sm:text-base text-gray-300 bg-white/5 border border-white/10 p-4 rounded-xl hover:border-white/20 transition-colors"
-                    >
-                      <Sparkles size={16} className="text-[#4ADE80] shrink-0 mt-0.5" />
-                      <span>{feat}</span>
-                    </li>
-                  ))}
-                </ul>
-              </section>
-            )}
-
             {/* Markdown Documentation or Fallback Description & Benchmarks */}
             {markdownContent ? (
-              <section className="pt-4 pb-8 border-b border-white/10 mb-8">
+              <section className="pt-2 pb-6 border-b border-white/10 mb-6">
                 <MarkdownRenderer content={markdownContent} />
               </section>
             ) : (
@@ -369,6 +356,37 @@ export default async function ModelDetailPage({
                   </section>
                 )}
               </>
+            )}
+
+            {/* Key Features Section */}
+            {model.keyFeatures && model.keyFeatures.length > 0 && (
+              <section className="space-y-4">
+                <div className="flex items-center gap-2">
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#4ADE80]" />
+                  <h2 className="text-xs font-bold uppercase tracking-widest text-gray-400">Key Features</h2>
+                </div>
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                  {model.keyFeatures.map((feat, idx) => (
+                    <div
+                      key={idx}
+                      className="group relative p-4 rounded-2xl bg-gradient-to-b from-white/[0.07] to-white/[0.02] border border-white/10 hover:border-[#4ADE80]/40 transition-all duration-300 hover:shadow-[0_0_25px_rgba(74,222,128,0.08)] flex flex-col justify-between"
+                    >
+                      <div className="flex items-start gap-3">
+                        <div className="p-2 rounded-xl bg-[#4ADE80]/10 border border-[#4ADE80]/20 text-[#4ADE80] shrink-0 group-hover:scale-110 transition-transform duration-300">
+                          <Sparkles size={16} />
+                        </div>
+                        <p className="text-sm font-medium text-gray-200 group-hover:text-white transition-colors leading-snug mt-0.5">
+                          {feat}
+                        </p>
+                      </div>
+                      <div className="mt-3 flex items-center justify-between text-[10px] font-mono text-gray-400/60 pt-2 border-t border-white/5">
+                        <span>Feature {String(idx + 1).padStart(2, "0")}</span>
+                        <span className="opacity-0 group-hover:opacity-100 text-[#4ADE80] transition-opacity duration-300">✦</span>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </section>
             )}
 
             {/* Related Models Strip */}
@@ -555,6 +573,25 @@ export default async function ModelDetailPage({
                     else if (key === 'github') displayName = 'GitHub Repository';
                     else if (key === 'paper') displayName = 'Research Paper';
                     else if (key === 'website') displayName = 'Official Website';
+
+                    const isComingSoon = url === "coming-soon" || url.toLowerCase().includes("coming-soon");
+
+                    if (isComingSoon) {
+                      return (
+                        <div
+                          key={key}
+                          className="flex items-center justify-between p-3 rounded-xl bg-white/5 border border-white/10 text-xs font-semibold text-gray-400/60 select-none"
+                        >
+                          <span className="flex items-center gap-2">
+                            <Icon size={13} className="text-gray-400/50" />
+                            {displayName}
+                          </span>
+                          <span className="text-[10px] font-sans font-medium text-amber-400/90 bg-amber-500/10 border border-amber-500/20 px-2 py-0.5 rounded-full">
+                            Coming Soon
+                          </span>
+                        </div>
+                      );
+                    }
 
                     return (
                       <a
