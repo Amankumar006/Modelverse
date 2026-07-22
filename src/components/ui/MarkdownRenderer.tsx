@@ -11,6 +11,42 @@ interface TableData {
   rows: string[][];
 }
 
+function splitMarkdownBlocks(content: string): string[] {
+  const lines = content.split("\n");
+  const blocks: string[] = [];
+  let currentBlock: string[] = [];
+  let inCodeBlock = false;
+
+  for (let i = 0; i < lines.length; i++) {
+    const line = lines[i];
+    const trimmed = line.trim();
+
+    if (trimmed.startsWith("```")) {
+      inCodeBlock = !inCodeBlock;
+      currentBlock.push(line);
+      continue;
+    }
+
+    if (inCodeBlock) {
+      currentBlock.push(line);
+      continue;
+    }
+
+    if (trimmed === "" && currentBlock.length > 0) {
+      blocks.push(currentBlock.join("\n"));
+      currentBlock = [];
+    } else if (trimmed !== "") {
+      currentBlock.push(line);
+    }
+  }
+
+  if (currentBlock.length > 0) {
+    blocks.push(currentBlock.join("\n"));
+  }
+
+  return blocks;
+}
+
 function isTableBlock(block: string): boolean {
   const lines = block.trim().split("\n");
   if (lines.length < 2) return false;
@@ -33,7 +69,6 @@ function parseTableBlock(block: string): TableData {
     .map((s) => s.trim());
 
   const rows: string[][] = [];
-  // Skip line 0 (header) and line 1 (separator)
   for (let i = 2; i < lines.length; i++) {
     const line = lines[i].trim();
     if (line.startsWith("|")) {
@@ -49,8 +84,7 @@ function parseTableBlock(block: string): TableData {
 }
 
 export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
-  // Split markdown by double line breaks to isolate table blocks from paragraph text
-  const blocks = content.split(/\n\s*\n/);
+  const blocks = splitMarkdownBlocks(content);
 
   return (
     <div className="prose prose-invert max-w-none prose-headings:font-display prose-headings:font-semibold prose-a:text-[#4ADE80] hover:prose-a:text-[#38bdf8] prose-a:no-underline hover:prose-a:underline">
