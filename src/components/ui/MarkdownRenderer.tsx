@@ -1,6 +1,5 @@
 import React from "react";
 import ReactMarkdown from "react-markdown";
-import remarkGfm from "remark-gfm";
 import CodeBlock from "./CodeBlock";
 
 interface MarkdownRendererProps {
@@ -11,9 +10,8 @@ export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
   return (
     <div className="prose prose-invert max-w-none prose-headings:font-display prose-headings:font-semibold prose-a:text-[#4ADE80] hover:prose-a:text-[#38bdf8] prose-a:no-underline hover:prose-a:underline">
       <ReactMarkdown
-        remarkPlugins={[remarkGfm]}
         components={{
-          // Styled GFM Table
+          // Styled Table (if HTML/MD table elements rendered)
           table({ children }) {
             return (
               <div className="my-8 overflow-x-auto rounded-2xl border border-white/10 bg-white/5 shadow-xl">
@@ -68,7 +66,6 @@ export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
           },
 
           pre({ children }) {
-            // Un-nest pre container since CodeBlock handles framing
             return <>{children}</>;
           },
 
@@ -128,7 +125,7 @@ export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
             return <ul className="list-disc list-inside space-y-2 my-4 text-gray-300">{children}</ul>;
           },
           ol({ children }) {
-            return <ol className="list-decimal list-inside space-y-2 my-4 text-gray-300">{children}</ol>;
+            return <ol className="list-decimal list-inside space-y-2 my-4 text-gray-300">{ol => children}</ol>;
           },
           li({ children }) {
             return <li className="text-gray-300 leading-relaxed">{children}</li>;
