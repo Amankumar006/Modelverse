@@ -125,7 +125,7 @@ export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
             return <ul className="list-disc list-inside space-y-2 my-4 text-gray-300">{children}</ul>;
           },
           ol({ children }) {
-            return <ol className="list-decimal list-inside space-y-2 my-4 text-gray-300">{ol => children}</ol>;
+            return <ol className="list-decimal list-inside space-y-2 my-4 text-gray-300">{children}</ol>;
           },
           li({ children }) {
             return <li className="text-gray-300 leading-relaxed">{children}</li>;
