@@ -1,25 +1,91 @@
-# NAVA
+# NAVA: Native Audio-Visual Alignment for Generation
 
-## Model Overview
-NAVA (Native Audio-Visual Alignment) is a highly specialized multimodal generation framework developed by Baidu ERNIE Research. Operating at 6.3 billion parameters, it is designed specifically to tackle one of the most prominent challenges in AI video generation: the natural and precise synchronization between audio and visuals. By directly addressing the misalignment often seen in lip movements or physical object impacts, NAVA delivers a more immersive and realistic multimedia generation experience.
+**NAVA** (Native Audio-Visual Alignment for Generation) is a 6.3-billion parameter multimodal foundation model developed by **Baidu ERNIE Research**. It synthesizes temporally synchronized and semantically coherent 720p video alongside full stereo audio directly from text or image prompts in a single unified generation pass.
 
-## Capabilities
-- **Audio-Visual Synchronization:** NAVA excels at naturally aligning generated sound with the corresponding visual elements in a video.
-- **Lip-Sync Generation:** Capable of generating accurate lip movements that perfectly match spoken audio tracks.
-- **Physical Impact Alignment:** Accurately synchronizes the sound of physical interactions (e.g., footsteps, object collisions) with the visual moment of impact.
-- **Multimodal Understanding:** Seamlessly integrates and processes both audio and visual modalities to create cohesive outputs.
+Traditional multimodal video models typically employ either "dual-tower" designs (generating video and audio independently before attempting post-hoc alignment) or "unified tri-modal" architectures (mixing text, audio, and visual representations across all transformer layers). NAVA introduces an **Align-then-Fuse MMDiT** (Multi-Modal Diffusion Transformer) architecture that establishes dedicated audio-video alignment in a joint interaction space before applying external conditioning cues.
 
-## Example Use Cases
-- **AI Video Production:** Generating highly realistic videos where character speech matches their lip movements flawlessly.
-- **Automated Foley and Sound Design:** Automatically generating synchronized sound effects for animated or synthetic videos.
-- **Virtual Avatars:** Enhancing the realism of virtual assistants and avatars in customer service or gaming by providing perfect lip-syncing.
-- **Film Dubbing:** Automating the adaptation of visual lip movements to match dubbed audio tracks in different languages.
+---
 
-## Performance & Benchmarks
-Operating with 6.3 billion parameters, NAVA sets a new standard for audio-visual alignment in generative models. It demonstrates superior performance in qualitative and quantitative evaluations measuring the temporal synchronization of audio and visual cues compared to previous generation methods, achieving unprecedented precision in lip-sync and impact sound timing.
+## 🔬 Architecture & Key Innovations
 
-## Intended Use & Limitations
-NAVA is intended for researchers and developers focusing on multimodal generative AI, video production, and virtual reality. While it excels in alignment, its performance may vary with extremely complex or chaotic visual scenes where multiple sound sources overlap. It is recommended to use the model on well-defined subjects for the best synchronization results.
+- **Align-then-Fuse MMDiT:** Separates cross-modal temporal alignment from global semantic conditioning. Fine-grained audio-visual correspondence is learned in a primary interaction space prior to joint denoising.
+- **Timbre-in-Context Conditioning:** Enables controllable speech identity by associating reference audio WAV clips with specific text speech spans, preserving multi-speaker timbre characteristics.
+- **Native Stereo Audio-Video Generation:** Directly generates high-definition 720p video paired with stereo audio without requiring post-hoc vocoder fitting, visual warping, or secondary lip-sync models.
+- **Controllability & Flexibility:** Features natural language camera control (motion, pacing, shot composition) and supports multiple aspect ratios.
+- **High Parameter Efficiency:** With 6.3B parameters, NAVA outperforms much larger pipelines while requiring only ~1 minute to generate clips on an 8-GPU node.
 
-## About Baidu ERNIE Research
-Baidu ERNIE Research is a leading artificial intelligence research group dedicated to advancing the frontiers of deep learning and large-scale pre-trained models. Known for their ERNIE (Enhanced Representation through Knowledge Integration) series, the lab focuses on natural language processing, computer vision, and multimodal AI, consistently contributing state-of-the-art frameworks to the global AI community.
+```
+Text Prompt + Reference Audio ───► T5 Text / Audio Encoder ───► Align-then-Fuse MMDiT ───► Audio/Video VAE Decoders ───► Synchronized 720p Video + Stereo Audio
+```
+
+---
+
+## 📊 Benchmarks & Performance
+
+| Evaluation Metric / Benchmark | NAVA (6.3B) Performance |
+| :--- | :--- |
+| **Verse-Bench (Audio-Visual Sync C/D)** | **State-of-the-Art** (Superior synchronization over open-source baselines) |
+| **Video Visual Quality & Realism** | **Top Open-Source Tier** |
+| **Seed-TTS Voice Similarity** | **High Fidelity Multi-Speaker Cloning** |
+| **Generation Speed (8x GPU setup)** | **~60 seconds for 720p clip** |
+
+---
+
+## 🚀 Quickstart & Code Usage
+
+### Installation
+
+```bash
+git clone https://github.com/ernie-research/NAVA
+cd NAVA
+
+pip install torch torchvision torchaudio diffusers transformers accelerate safetensors einops scipy PyYAML tqdm sentencepiece
+pip install flash-attn --no-build-isolation
+```
+
+### Running Inference
+
+```bash
+# Text-to-Audio-Video Generation
+bash scripts/inference.sh
+
+# Image-to-Audio-Video with Timbre Control
+bash scripts/inference_timbre.sh
+```
+
+### Python API Usage
+
+```python
+import torch
+from nava.pipeline import NAVAPipeline
+
+# Load NAVA model weights from Hugging Face / local directory
+pipeline = NAVAPipeline.from_pretrained(
+    "ernie-research/NAVA",
+    torch_dtype=torch.bfloat16
+).to("cuda")
+
+# Generate synchronized 720p video and stereo audio
+output = pipeline(
+    prompt="A news anchor speaking passionately in a modern studio setting with background ambient music",
+    audio_prompt="reference_timbre.wav",
+    speech_span="in a modern studio setting",
+    num_inference_steps=50,
+    guidance_scale=7.5
+)
+
+# Save generated video and audio outputs
+output.save_video("output_synchronized.mp4")
+output.save_audio("output_audio.wav")
+print("NAVA audio-visual generation completed successfully.")
+```
+
+---
+
+## 🔗 Verified Resources & Links
+
+- **Project Website & Demos:** [ernie-research.github.io/NAVA](https://ernie-research.github.io/NAVA/)
+- **arXiv Research Paper:** [arXiv:2605.30073](https://arxiv.org/abs/2605.30073)
+- **Paper PDF:** [Download PDF](https://arxiv.org/pdf/2605.30073.pdf)
+- **GitHub Repository:** [ernie-research/NAVA](https://github.com/ernie-research/NAVA)
+- **Hugging Face Model Page:** [ernie-research/NAVA](https://huggingface.co/ernie-research/NAVA)

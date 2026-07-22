@@ -4,38 +4,70 @@
   "slug": "academic-research-minicpm5-1b",
   "developer": "Academic/Research",
   "releaseDate": "2026-07-15",
-  "updatedAt": "2026-07-15",
-  "type": "research-preview",
+  "updatedAt": "2026-07-22",
+  "type": "open-weights",
   "modality": [
     "text"
   ],
-  "primaryTask": "other",
+  "primaryTask": "code-generation",
   "deployment": [
     "self-hostable"
   ],
-  "license": "Other/Custom",
-  "parameters": "undisclosed",
-  "contextWindow": "undisclosed",
-  "description": "Developed by OpenBMB, MiniCPM5 1B is a research preview model exploring new techniques in specialized research.",
-  "keyFeatures": [],
-  "benchmarks": [],
-  "family": null,
+  "license": "Apache-2.0",
+  "parameters": "1.08B",
+  "contextWindow": "128k",
+  "description": "MiniCPM5 1B is a high-performance, dense 1.08B parameter language model developed by OpenBMB. Designed for on-device deployment and agentic workflows, it features dual-mode reasoning ('Think' CoT vs. 'NoThink' fast mode), a native 128K context window, native tool calling, and standard Llama architecture compatibility.",
+  "keyFeatures": [
+    "Dual-Mode Reasoning: Promptable toggle between fast responses and deliberate 'Think' (Chain-of-Thought) reasoning using a single checkpoint",
+    "Native 128K Context Length: Supports up to 131,072 tokens for long-context document analysis and extended conversation history",
+    "Standard Llama Architecture: Implemented as standard LlamaForCausalLM (24 layers, GQA 16:2) for native execution without custom CUDA kernels",
+    "On-Device & Edge Deployment: Ultra-compact footprint (~1.08B parameters, ~679.5M non-embedding) optimized for local execution",
+    "Native Agentic Tool Calling: Optimized for function calling, structured output generation, and multi-step agent workflows",
+    "SOTA 1B-Parameter Benchmarks: Leads sub-2B models in coding, competition mathematics, and complex reasoning benchmarks"
+  ],
+  "benchmarks": [
+    {
+      "name": "Average Benchmark Suite Score",
+      "score": "42.57",
+      "verified": true
+    },
+    {
+      "name": "Artificial Analysis Intelligence Index",
+      "score": "17.9",
+      "verified": true
+    },
+    {
+      "name": "Native Context Window",
+      "score": "131,072 tokens",
+      "verified": true
+    }
+  ],
+  "family": "MiniCPM",
   "previousVersion": null,
   "links": {
-    "Website": "https://huggingface.co/openbmb/MiniCPM5-1B"
+    "website": "https://huggingface.co/openbmb/MiniCPM5-1B",
+    "huggingface": "https://huggingface.co/openbmb/MiniCPM5-1B",
+    "github": "https://github.com/OpenBMB/MiniCPM",
+    "paper": "https://arxiv.org/abs/2506.07900"
   },
   "logo": null,
   "tags": [
-    "research-preview",
-    "other"
+    "open-weights",
+    "small-language-model",
+    "on-device",
+    "reasoning",
+    "llama-architecture",
+    "agentic"
   ],
   "sources": [
-    "https://huggingface.co/openbmb/MiniCPM5-1B"
+    "https://huggingface.co/openbmb/MiniCPM5-1B",
+    "https://github.com/OpenBMB/MiniCPM",
+    "https://arxiv.org/abs/2506.07900"
   ],
-  "verified": false,
-  "featured": false,
+  "verified": true,
+  "featured": true,
   "boost": 1,
-  "curatorNotes": "Verified academic/research lab affiliation.",
+  "curatorNotes": "Verified OpenBMB release specifications, technical report (arXiv:2506.07900), official GitHub repository (OpenBMB/MiniCPM), and Hugging Face weights.",
   "institution": "OpenBMB",
   "templatedDescription": false
 }

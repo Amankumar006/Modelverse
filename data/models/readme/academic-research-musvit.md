@@ -1,27 +1,75 @@
-## Model Overview
+# MuSViT: Music Score Vision Transformer Foundation Model
 
-**MusViT** is an advanced academic research model developed by University of Alicante. Released in 2026-07-15, it represents a significant step forward in the field of text AI models, specifically designed for other. A research-preview model by University of Alicante focusing on specialized research capabilities to invite community feedback.
+**MuSViT** (Music Score Vision Transformer) is the first domain-specific foundation vision model designed explicitly for **Optical Music Recognition (OMR)** and symbolic sheet music representation. Developed by the Pattern Recognition and Artificial Intelligence Group (**PRAIG**) at the University of Alicante and accepted at **ECCV 2026**.
 
-## Capabilities
+Standard general-purpose vision foundation models (like DINOv2 or CLIP) are optimized for natural images and frequently struggle to capture the complex, fine-grained 2D spatial layouts of sheet music—such as staff line alignments, notehead pitches, and polyphonic symbols. **MuSViT** addresses this gap by utilizing a Vision Transformer backbone with 2D sinusoidal positional encodings, pre-trained via Masked Autoencoders (MAE) on **9.7 million sheet music pages** from the International Music Score Library Project (IMSLP).
 
-*   **Advanced Processing:** MusViT utilizes state-of-the-art architectures to process text inputs efficiently.
-*   **Specialized Domain Knowledge:** Optimized for tasks related to other, providing high accuracy and reliability.
-*   **Robust Generalization:** Demonstrated ability to perform zero-shot and few-shot tasks on challenging datasets.
+---
 
-## Example Use Cases
+## 🔬 Architecture & Methodology
 
-*   **Academic Research:** Assisting researchers in complex data analysis and experimentation.
-*   **Enterprise Integration:** Acting as a foundational component for enterprise tools relying on text data.
-*   **Creative Automation:** Streamlining workflows that require nuanced understanding of text.
+- **Vision Transformer Backbone:** Built on a ViT-Base architecture (12 Transformer layers, 768 projection dimensions, 16x16 patch size, ~86M parameters).
+- **2D Sinusoidal Positional Encodings:** Replaces standard 1D positional encodings with explicit 2D sinusoidal encodings to capture both horizontal temporal progression and vertical pitch relationships across staves.
+- **Two-Stage Curriculum Pre-training:**
+  1. *Warm-up Phase:* Pre-trained on synthetic typeset scores (DeepScoresV2) to initialize baseline feature representations and prevent dimensional collapse.
+  2. *Scale Phase:* Masked Autoencoder (MAE) self-supervised training across 9.7M real-world scanned pages from IMSLP.
+- **Task-Agnostic Feature Embeddings:** Outputs high-dimensional embeddings suitable for linear probing, fine-tuning, or zero-shot feature extraction across diverse downstream music recognition tasks.
 
-## Performance & Benchmarks
+```
+Sheet Music Image (1024x1024) ──► 16x16 Patching + 2D Positional Enc ──► 12-Layer ViT MAE Encoder ──► [1, 4097, 768] Embeddings
+```
 
-While specific benchmark figures (such as parameter count or context window) might remain undisclosed or vary based on the specific deployment (self-hostable), MusViT achieves highly competitive results against comparable models in the other space. Independent evaluations highlight its robustness and efficiency.
+---
 
-## Intended Use & Limitations
+## 🎯 Downstream Applications & Benchmarks
 
-MusViT is intended for academic research and specialized development. While highly capable, it should be used responsibly with an understanding that text models can exhibit biases or hallucinate in out-of-distribution scenarios. The model is released under the Other/Custom license.
+| Downstream Task | Performance & Comparison |
+| :--- | :--- |
+| **Full-Page & Staff OMR** | Significantly outperforms general vision backbones (DINOv2/v3, ViT-Base) on symbolic music transcription. |
+| **Music Symbol Detection** | Achieves top accuracy in detecting clefs, key signatures, noteheads, and rests. |
+| **Score Difficulty Classification** | Superior linear-probe accuracy when categorizing score complexity across classical repertoires. |
 
-## About University of Alicante
+---
 
-University of Alicante is a leading institution in artificial intelligence research, dedicated to pushing the boundaries of machine learning and open science.
+## 🚀 Quickstart Usage
+
+MuSViT can be loaded directly via the Hugging Face `transformers` library:
+
+```python
+import torch
+from transformers import ViTModel
+from PIL import Image
+from torchvision import transforms as T
+
+# 1. Load the pre-trained MuSViT foundation model
+model = ViTModel.from_pretrained('PRAIG/musvit', trust_remote_code=True)
+model.eval()
+
+# 2. Preprocess input sheet music (Resize or Pad to 1024x1024)
+image_path = 'sheet_music_sample.png'
+image = Image.open(image_path).convert("RGB")
+
+transform = T.Compose([
+    T.Resize([1024, 1024]),
+    T.ToTensor()
+])
+
+input_tensor = transform(image).unsqueeze(0)  # Shape: [1, 3, 1024, 1024]
+
+# 3. Extract feature representations
+with torch.no_grad():
+    outputs = model(input_tensor)
+    embeddings = outputs.last_hidden_state  # Shape: [1, 4097, 768]
+
+print("Successfully extracted MuSViT embeddings:", embeddings.shape)
+```
+
+---
+
+## 🔗 Official Links & Resources
+
+- [Official Project Webpage](https://grfia.dlsi.ua.es/musvit/)
+- [arXiv Paper (arXiv:2606.31811)](https://arxiv.org/abs/2606.31811)
+- [Paper PDF Download](https://arxiv.org/pdf/2606.31811)
+- [GitHub Code Repository](https://github.com/OMR-PRAIG-UA-ES/MuSViT)
+- [Hugging Face Model Card (`PRAIG/musvit`)](https://huggingface.co/PRAIG/musvit)

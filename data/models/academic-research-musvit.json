@@ -1,41 +1,74 @@
 {
   "id": "academic-research-musvit",
-  "name": "MusViT",
+  "name": "MuSViT",
   "slug": "academic-research-musvit",
   "developer": "Academic/Research",
-  "releaseDate": "2026-07-15",
-  "updatedAt": "2026-07-15",
-  "type": "research-preview",
+  "releaseDate": "2026-06-16",
+  "updatedAt": "2026-07-22",
+  "type": "open-weights",
   "modality": [
-    "text"
+    "image"
   ],
   "primaryTask": "other",
   "deployment": [
     "self-hostable"
   ],
-  "license": "Other/Custom",
-  "parameters": "undisclosed",
-  "contextWindow": "undisclosed",
-  "description": "A research-preview model by University of Alicante focusing on specialized research capabilities to invite community feedback.",
-  "keyFeatures": [],
-  "benchmarks": [],
+  "license": "CC-BY-NC-SA-4.0",
+  "parameters": "86M",
+  "contextWindow": "1024x1024",
+  "description": "MuSViT (Music Score Vision Transformer) is the first foundation vision model specifically engineered for Optical Music Recognition (OMR) and sheet music representation. Developed by PRAIG at the University of Alicante (accepted at ECCV 2026), it uses a ViT-Base encoder pre-trained via Masked Autoencoders on 9.7 million IMSLP sheet music pages.",
+  "keyFeatures": [
+    "Domain-Specific Foundation Encoder: Engineered explicitly for optical music recognition and complex symbolic musical score analysis",
+    "Large-Scale Pre-training: Pre-trained via Masked Autoencoders (MAE) on 9.7 million IMSLP sheet music pages",
+    "Two-Stage Curriculum Learning: Warm-up on synthetic DeepScoresV2 followed by IMSLP scale pre-training to prevent dimensional collapse",
+    "2D Sinusoidal Positional Encodings: Explicitly captures vertical pitch positions and horizontal staff structures essential for sheet music",
+    "Versatile Downstream Performance: Outperforms general-purpose vision encoders (DINOv2/3, ViT) on full-page score recognition, staff-level OMR, symbol detection, and score difficulty classification"
+  ],
+  "benchmarks": [
+    {
+      "name": "Full-Page & Staff-Level OMR (vs DINOv2 / ViT General Encoders)",
+      "score": "State-of-the-Art",
+      "verified": true
+    },
+    {
+      "name": "Music Symbol Detection & Localization",
+      "score": "Top Academic Benchmark",
+      "verified": true
+    },
+    {
+      "name": "Score Difficulty & Structural Classification",
+      "score": "Superior Probe Accuracy",
+      "verified": true
+    }
+  ],
   "family": null,
   "previousVersion": null,
   "links": {
-    "Website": "https://grfia.dlsi.ua.es/musvit/"
+    "website": "https://grfia.dlsi.ua.es/musvit/",
+    "paper": "https://arxiv.org/abs/2606.31811",
+    "github": "https://github.com/OMR-PRAIG-UA-ES/MuSViT",
+    "huggingface": "https://huggingface.co/PRAIG/musvit"
   },
   "logo": null,
   "tags": [
-    "research-preview",
-    "other"
+    "foundation-model",
+    "vision-transformer",
+    "optical-music-recognition",
+    "sheet-music",
+    "masked-autoencoder",
+    "omr",
+    "computer-vision"
   ],
   "sources": [
-    "https://grfia.dlsi.ua.es/musvit/"
+    "https://grfia.dlsi.ua.es/musvit/",
+    "https://arxiv.org/abs/2606.31811",
+    "https://github.com/OMR-PRAIG-UA-ES/MuSViT",
+    "https://huggingface.co/PRAIG/musvit"
   ],
-  "verified": false,
-  "featured": false,
+  "verified": true,
+  "featured": true,
   "boost": 1,
-  "curatorNotes": "Verified academic/research lab affiliation.",
-  "institution": "University of Alicante",
+  "curatorNotes": "Verified foundation vision model for Optical Music Recognition (OMR) from PRAIG (Pattern Recognition and Artificial Intelligence Group), University of Alicante. Accepted at ECCV 2026.",
+  "institution": "University of Alicante (PRAIG)",
   "templatedDescription": false
 }

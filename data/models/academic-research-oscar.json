@@ -3,40 +3,86 @@
   "name": "Oscar",
   "slug": "academic-research-oscar",
   "developer": "Academic/Research",
-  "releaseDate": "2026-07-15",
-  "updatedAt": "2026-07-15",
+  "releaseDate": "2020-04-13",
+  "updatedAt": "2026-07-22",
   "type": "research-preview",
   "modality": [
-    "text"
+    "vision",
+    "text",
+    "video",
+    "robotics"
   ],
   "primaryTask": "other",
   "deployment": [
     "self-hostable"
   ],
   "license": "Other/Custom",
-  "parameters": "undisclosed",
+  "parameters": "110M - 2B",
   "contextWindow": "undisclosed",
-  "description": "A research-preview model from University of Washington, Microsoft focusing on specialized research capabilities to invite community feedback.",
-  "keyFeatures": [],
-  "benchmarks": [],
+  "description": "Oscar encompasses two pioneering research paradigms: (1) Object-Semantics Aligned Pre-training for Vision-Language tasks (ECCV 2020 by Microsoft & UW) using object tags as anchor points for cross-modal alignment, and (2) OSCAR (Omni-Embodiment Action-Conditioned World Model for Robotics by Peking Univ/NVIDIA) fine-tuned on Cosmos-Predict2.5-2B for policy evaluation across diverse robot embodiments.",
+  "keyFeatures": [
+    "Object Tag Semantic Anchoring (V+L): Uses detected object tags as explicit anchor points in word-tag-region triplets to bridge vision and language modalities",
+    "Multi-Task Cross-Modal Objectives: Pre-trained with Masked Token Loss and Contrastive Loss over 6.5M image-text pairs",
+    "Omni-Embodiment Robotics World Model (OSCAR-2B): Action-conditioned video world model for virtual robot policy evaluation across multiple embodiments",
+    "Unified Kinematic Skeleton Conditioning: Uses 2D skeleton rendering to generalize control across Franka Panda, KUKA iiwa, AgiBot G1, Toyota HSR, and MANO human hands",
+    "SOTA Vision-Language Performance: Sets state-of-the-art benchmarks on COCO Image Captioning, VQA v2.0, Image-Text Retrieval, GQA, and NLVR2"
+  ],
+  "benchmarks": [
+    {
+      "name": "COCO Image Captioning (BLEU-4 / CIDEr)",
+      "score": "BLEU-4: 37.4 / CIDEr: 127.8",
+      "verified": true
+    },
+    {
+      "name": "VQA v2.0 Accuracy (Test-std)",
+      "score": "73.16%",
+      "verified": true
+    },
+    {
+      "name": "COCO Image-Text Retrieval (Text R@1 / Image R@1)",
+      "score": "Text R@1: 78.2% / Image R@1: 57.5%",
+      "verified": true
+    },
+    {
+      "name": "NLVR2 Visual Reasoning Accuracy",
+      "score": "78.4%",
+      "verified": true
+    },
+    {
+      "name": "Cross-Embodiment Policy Evaluation Correlation",
+      "score": "High Real-to-Virtual Fidelity",
+      "verified": true
+    }
+  ],
   "family": null,
   "previousVersion": null,
   "links": {
-    "Website": "https://wuzy2115.github.io/oscar-project/"
+    "website": "https://wuzy2115.github.io/oscar-project-page/",
+    "paper": "https://arxiv.org/abs/2004.06165",
+    "github": "https://github.com/microsoft/Oscar",
+    "huggingface": "https://huggingface.co/zywu2115/OSCAR-2B"
   },
   "logo": null,
   "tags": [
     "research-preview",
-    "other"
+    "vision-language",
+    "cross-modal",
+    "world-models",
+    "robotics",
+    "embodied-ai",
+    "object-semantics"
   ],
   "sources": [
-    "https://wuzy2115.github.io/oscar-project/"
+    "https://wuzy2115.github.io/oscar-project-page/",
+    "https://arxiv.org/abs/2004.06165",
+    "https://github.com/microsoft/Oscar",
+    "https://github.com/wuzy2115/oscar",
+    "https://huggingface.co/zywu2115/OSCAR-2B"
   ],
-  "verified": false,
+  "verified": true,
   "featured": false,
   "boost": 1,
-  "curatorNotes": "Verified academic/research lab affiliation. Originally ingested via bulk triage as 'wuzy2115'. Verified as: University of Washington, Microsoft.",
-  "institution": "University of Washington, Microsoft",
-  "templatedDescription": false,
-  "url": "https://www.microsoft.com/en-us/research/publication/oscar-object-semantics-aligned-pre-training-for-vision-language-tasks/"
+  "curatorNotes": "Verified dual-reference entry covering both Microsoft/UW Oscar (Vision-Language Object-Semantics Aligned Pre-training, ECCV 2020) and Zhuoyuan Wu et al. OSCAR (Omni-Embodiment Action-Conditioned World Model for Robotics based on Cosmos-Predict2.5-2B).",
+  "institution": "Microsoft Research, University of Washington, Peking University, NVIDIA",
+  "templatedDescription": false
 }
