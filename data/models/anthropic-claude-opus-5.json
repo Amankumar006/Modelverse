@@ -1,0 +1,83 @@
+{
+  "id": "anthropic-claude-opus-5",
+  "name": "Claude Opus 5",
+  "slug": "anthropic-claude-opus-5",
+  "developer": "Anthropic",
+  "releaseDate": "2026-07-24",
+  "updatedAt": "2026-07-25",
+  "type": "api-only",
+  "modality": [
+    "text",
+    "image",
+    "code"
+  ],
+  "primaryTask": "chat-reasoning",
+  "deployment": [
+    "api-only"
+  ],
+  "license": "Proprietary",
+  "parameters": "undisclosed",
+  "contextWindow": "200K tokens",
+  "description": "Claude Opus 5 is a step-change improvement for the Opus tier, designed for long-running agents, scientific research, and complex professional work. It delivers near Fable 5 intelligence at Opus speed and half the cost of its predecessor.",
+  "keyFeatures": [
+    "Near Fable 5 intelligence at half the cost of Opus 4.8",
+    "Stronger at verifying work and iterating carefully for agentic workflows",
+    "Significant improvements in software engineering and scientific research",
+    "Capable of producing much stronger visual outputs via interactive artifacts"
+  ],
+  "benchmarks": [
+    {
+      "name": "Frontier-Bench v0.1",
+      "score": "State-of-the-art",
+      "verified": false
+    },
+    {
+      "name": "ARC-AGI 3",
+      "score": "3x next-best model",
+      "verified": false
+    },
+    {
+      "name": "OSWorld 2.0",
+      "score": "Highest performance at given cost",
+      "verified": false
+    },
+    {
+      "name": "Zapier AutomationBench",
+      "score": "1.5x next-best model",
+      "verified": false
+    }
+  ],
+  "family": "Claude 5",
+  "tier": "Opus",
+  "previousVersion": "anthropic-claude-opus-4-8",
+  "links": {
+    "website": "https://www.anthropic.com",
+    "blogPost": "https://www.anthropic.com/news/claude-opus-5"
+  },
+  "logo": "/public/logos/anthropic.png",
+  "images": [
+    "https://www.anthropic.com/_next/image?url=https%3A%2F%2Fwww-cdn.anthropic.com%2Fimages%2F4zrzovbb%2Fwebsite%2Fa8fb4f77a9fe240e6f27f3bdc47a137f3c74a29d-2600x2578.png&w=3840&q=75",
+    "https://www.anthropic.com/_next/image?url=https%3A%2F%2Fwww-cdn.anthropic.com%2Fimages%2F4zrzovbb%2Fwebsite%2F7530b1086992936d7e9d5796a892d1e8fa063253-3840x2160.png&w=3840&q=75",
+    "https://www.anthropic.com/_next/image?url=https%3A%2F%2Fwww-cdn.anthropic.com%2Fimages%2F4zrzovbb%2Fwebsite%2F1af9dbd742e3812be4bf66903740188fb8fd2e33-3840x2160.png&w=3840&q=75",
+    "https://www.anthropic.com/_next/image?url=https%3A%2F%2Fwww-cdn.anthropic.com%2Fimages%2F4zrzovbb%2Fwebsite%2F08499ed7c3c2b6416700fa47c70d36dff5eb8461-3840x2160.png&w=3840&q=75",
+    "https://www.anthropic.com/_next/image?url=https%3A%2F%2Fwww-cdn.anthropic.com%2Fimages%2F4zrzovbb%2Fwebsite%2Fb5e071ba6a9ce5628b4662f05484d1806a9fdc94-3840x2160.png&w=3840&q=75",
+    "https://www.anthropic.com/_next/image?url=https%3A%2F%2Fwww-cdn.anthropic.com%2Fimages%2F4zrzovbb%2Fwebsite%2F8c0870bfca0dfac1d81a20e0ebac7eb3eff6d554-3840x2160.png&w=3840&q=75",
+    "https://www.anthropic.com/_next/image?url=https%3A%2F%2Fwww-cdn.anthropic.com%2Fimages%2F4zrzovbb%2Fwebsite%2F44fac8bd76238d8c09305ec7fe1511670d45c6d6-3840x2160.png&w=3840&q=75",
+    "https://www.anthropic.com/_next/image?url=https%3A%2F%2Fwww-cdn.anthropic.com%2Fimages%2F4zrzovbb%2Fwebsite%2F368a6a6ae23e72deac37566b9d0166d062e7dde1-3840x2160.png&w=3840&q=75",
+    "https://www.anthropic.com/_next/image?url=https%3A%2F%2Fwww-cdn.anthropic.com%2Fimages%2F4zrzovbb%2Fwebsite%2Fc7c726c5588b69c944dcc205bd1ba7ebdf8c2259-3840x2160.png&w=3840&q=75",
+    "https://www.anthropic.com/_next/image?url=https%3A%2F%2Fwww-cdn.anthropic.com%2Fimages%2F4zrzovbb%2Fwebsite%2F8ac95d8d4d6e68b6f5fdf04a09206defc877513e-3840x2160.png&w=3840&q=75",
+    "https://www.anthropic.com/_next/image?url=https%3A%2F%2Fwww-cdn.anthropic.com%2Fimages%2F4zrzovbb%2Fwebsite%2F76d4af96516ffca2aceb4c1d0b0a83e2720d874b-3840x2160.png&w=3840&q=75",
+    "https://www.anthropic.com/_next/image?url=https%3A%2F%2Fwww-cdn.anthropic.com%2Fimages%2F4zrzovbb%2Fwebsite%2Fb22d18a4d2003401f96f866effd9a40b5518c4c5-3840x2160.png&w=3840&q=75"
+  ],
+  "tags": [
+    "agentic",
+    "coding",
+    "scientific-research"
+  ],
+  "sources": [
+    "https://www.anthropic.com/news/claude-opus-5",
+    "https://www-cdn.anthropic.com/c5fbac3f0b1280a933ebd26d3cb8bb9f5bdeaf48/Claude%20Opus%205%20System%20Card.pdf"
+  ],
+  "verified": false,
+  "curatorNotes": "Context window assumed 200K based on previous generation."
+}

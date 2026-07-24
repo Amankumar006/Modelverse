@@ -5,6 +5,13 @@
     "slug": "bonsai-27b",
     "developer": "PrismML",
     "releaseDate": "2026-07-14",
-    "type": "open-weights"
+  },
+  {
+    "id": "anthropic-claude-opus-5",
+    "name": "Claude Opus 5",
+    "slug": "anthropic-claude-opus-5",
+    "developer": "Anthropic",
+    "releaseDate": "2026-07-24",
+    "type": "api-only"
   }
 ]

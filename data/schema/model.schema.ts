@@ -69,6 +69,7 @@ export const ModelSchema = z.object({
   pricingLastVerified: z.string().regex(/^\d{4}-\d{2}-\d{2}$/).optional(),
   links: z.record(z.string(), z.string()),
   logo: z.string().nullable(),
+  images: z.array(z.string()).optional(),
   // Namespaced tags: "arxiv:2401.xxxxx" (paper), "base:<model-id>" (lineage,
   // in addition to the structured `previousVersion`/`family` fields).
   // Unnamespaced tags are free descriptive terms (e.g. "long-context",
