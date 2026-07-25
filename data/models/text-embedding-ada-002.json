@@ -3,7 +3,7 @@
   "name": "text-embedding-ada-002",
   "slug": "text-embedding-ada-002",
   "developer": "OpenAI",
-  "releaseDate": "2026-07-14",
+  "releaseDate": "2022-12-15",
   "updatedAt": "2026-07-14",
   "type": "api-only",
   "modality": [

@@ -25,7 +25,7 @@ function generateEmailDigest() {
     console.error("Git diff error:", e.message);
   }
 
-  // Fallback: If no git diff, read models added in last 24h
+  // Fallback: If no git diff, load the 5 newest models by releaseDate / updatedAt
   const newModels = [];
   for (const file of addedFiles) {
     try {
@@ -37,8 +37,21 @@ function generateEmailDigest() {
     } catch (err) {}
   }
 
+  // Fallback for manual test runs (workflow_dispatch)
   if (newModels.length === 0) {
-    console.log("No new models detected for email digest.");
+    console.log("No git diff models found. Gathering top 5 newest models for digest...");
+    try {
+      const allFiles = fs.readdirSync(path.join(process.cwd(), "data", "models")).filter(f => f.endsWith(".json") && !f.endsWith("_index.json") && !f.endsWith("models-archive.json"));
+      const allData = allFiles.map(f => JSON.parse(fs.readFileSync(path.join(process.cwd(), "data", "models", f), "utf-8")));
+      allData.sort((a, b) => new Date(b.updatedAt || b.releaseDate).getTime() - new Date(a.updatedAt || a.releaseDate).getTime());
+      newModels.push(...allData.slice(0, 5));
+    } catch (e) {
+      console.error("Fallback error:", e.message);
+    }
+  }
+
+  if (newModels.length === 0) {
+    console.log("No models detected for email digest.");
     if (process.env.GITHUB_ENV) {
       fs.appendFileSync(process.env.GITHUB_ENV, "NEW_MODELS_PUSHED=false\n");
     }

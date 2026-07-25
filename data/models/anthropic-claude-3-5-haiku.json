@@ -13,7 +13,7 @@
   "license": "Proprietary",
   "parameters": "undisclosed",
   "contextWindow": "200K tokens",
-  "releaseDate": "2024-10-22",
+  "releaseDate": "2024-11-04",
   "description": "A rapid, highly efficient model that matched or exceeded the performance of the original Claude 3 Opus on many tasks at a fraction of the cost.",
   "keyFeatures": [
     "High performance-to-cost ratio"

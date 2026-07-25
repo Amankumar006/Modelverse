@@ -45,36 +45,76 @@ export default function Home() {
   const developers = getAllDevelopers();
   
   const allModels = getAllModelEntries();
-  const earliestModel = allModels.length > 0 ? allModels[allModels.length - 1] : null;
+  const todayStr = new Date().toISOString().split("T")[0];
+  const priorityDevs = ["Anthropic", "Google DeepMind", "OpenAI", "Meta", "Mistral AI", "xAI", "Cohere", "DeepSeek", "Alibaba"];
+
+  const validModels = allModels.filter((m) => m.releaseDate <= todayStr && m.verified);
+  const latestModels: ModelEntry[] = [];
+  const seenDevs = new Set<string>();
+
+  for (const model of validModels) {
+    if (latestModels.length >= 4) break;
+    if (priorityDevs.includes(model.developer) && !seenDevs.has(model.developer)) {
+      latestModels.push(model);
+      seenDevs.add(model.developer);
+    }
+  }
+
+  if (latestModels.length < 4) {
+    for (const model of validModels) {
+      if (latestModels.length >= 4) break;
+      if (!latestModels.some((m) => m.slug === model.slug)) {
+        latestModels.push(model);
+      }
+    }
+  }
 
   return (
     <main className="bg-[#0C120F] text-[#E2E8E4] selection:bg-[#4ADE80] selection:text-[#0C120F]">
       {/* ── Hero Section ───────────────────────────────────── */}
       <HeroSection />
 
-      {/* ── Earliest Model Section ────────────────────── */}
-      {earliestModel && (
+      {/* ── Latest Models Section ────────────────────── */}
+      {latestModels.length > 0 && (
         <section className="bg-[#0C120F] text-[#E2E8E4] px-4 sm:px-6 md:px-10 lg:px-14 py-12 md:py-16 border-t border-[#243629]">
-          <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+          <div className="max-w-7xl mx-auto flex flex-col gap-8">
             <div>
               <div className="flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.22em] text-[#8C9E91] mb-3">
                 <Sparkle size={12} className="text-[#4ADE80]" strokeWidth={1.5} />
-                <span>Earliest Tracked Release</span>
+                <span>Latest Tracked Releases</span>
               </div>
               <h2 className="text-2xl md:text-3xl font-normal text-white" style={{ fontFamily: "var(--font-display, ui-sans-serif, system-ui, sans-serif)" }}>
-                {earliestModel.name}
+                Newest Additions
               </h2>
               <p className="text-sm text-[#8C9E91] mt-2 max-w-2xl leading-[1.6]">
-                Released on {new Date(earliestModel.releaseDate).toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" })} by {earliestModel.developer}. This marks the earliest model currently tracked in the Modelverse database.
+                These are the most recent foundation models tracked in the Modelverse database, representing the cutting edge of AI.
               </p>
             </div>
-            <Link
-              href={`/models/${earliestModel.slug}`}
-              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-semibold hover:bg-[#1A261D] border border-[#243629] hover:border-[#334D3A] transition-all cursor-pointer text-[#F0FDF4] shrink-0"
-            >
-              View Model Details
-              <ArrowRight size={14} />
-            </Link>
+            
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-5">
+              {latestModels.map(model => (
+                <div key={model.slug} className="rounded-2xl border border-[#243629] relative overflow-hidden bg-[#121A15] p-5 flex flex-col justify-between hover:border-[#334D3A] transition-colors group">
+                  <div>
+                    <h3 className="text-lg font-semibold text-white group-hover:text-[#4ADE80] transition-colors">{model.name}</h3>
+                    <p className="text-xs text-[#8C9E91] mt-1">{model.developer}</p>
+                  </div>
+                  <div className="mt-6 flex items-center justify-between">
+                    <span className="text-[11px] font-mono text-[#5A6E60]">
+                      {new Date(model.releaseDate).toLocaleDateString("en-US", { year: "numeric", month: "short", day: "numeric" })}
+                    </span>
+                    <Link
+                      href={`/models/${model.slug}`}
+                      className="text-[#4ADE80] opacity-0 group-hover:opacity-100 transition-opacity"
+                    >
+                      <ArrowUpRight size={18} />
+                    </Link>
+                  </div>
+                  <Link href={`/models/${model.slug}`} className="absolute inset-0 z-10">
+                    <span className="sr-only">View {model.name}</span>
+                  </Link>
+                </div>
+              ))}
+            </div>
           </div>
         </section>
       )}
