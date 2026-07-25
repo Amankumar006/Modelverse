@@ -1,6 +1,7 @@
 import fs from "fs/promises";
 import path from "path";
 import MarkdownRenderer from "@/components/ui/MarkdownRenderer";
+import CopyableTable from "@/components/ui/CopyableTable";
 
 import type { Metadata } from "next";
 import Link from "next/link";
@@ -346,7 +347,7 @@ export default async function ModelDetailPage({
                 {model.benchmarks && model.benchmarks.length > 0 && (
                   <section className="space-y-4">
                     <h2 className="text-sm font-bold uppercase tracking-widest text-[#9CA3AF]">Benchmarks</h2>
-                    <div className="border border-white/10 rounded-xl overflow-x-auto bg-white/5 scrollbar-thin">
+                    <CopyableTable title="Benchmark Scores">
                       <table className="w-full text-left border-collapse text-sm min-w-[300px]">
                         <thead>
                           <tr className="border-b border-white/10 bg-white/5 text-[#E5E7EB] font-medium">
@@ -377,7 +378,7 @@ export default async function ModelDetailPage({
                           ))}
                         </tbody>
                       </table>
-                    </div>
+                    </CopyableTable>
                   </section>
                 )}
               </>

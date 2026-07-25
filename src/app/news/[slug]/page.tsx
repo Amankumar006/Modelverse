@@ -11,6 +11,8 @@ import ConfidenceBadge from "@/components/news/ConfidenceBadge";
 import BenchmarkTabs from "@/components/news/BenchmarkTabs";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
+import CodeBlock from "@/components/ui/CodeBlock";
+import CopyableTable from "@/components/ui/CopyableTable";
 interface ArticlePageProps {
   params: Promise<{
     slug: string;
@@ -230,7 +232,44 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
           {article.slug === 'claude-opus-5-detailed-guide' && (
             <BenchmarkTabs />
           )}
-          <ReactMarkdown remarkPlugins={[remarkGfm]}>{article.body}</ReactMarkdown>
+          <ReactMarkdown
+            remarkPlugins={[remarkGfm]}
+            components={{
+              table({ children }) {
+                return (
+                  <CopyableTable title="Specification Matrix">
+                    <table className="w-full text-left border-collapse text-xs sm:text-sm">
+                      {children}
+                    </table>
+                  </CopyableTable>
+                );
+              },
+              code({ className, children, ...props }) {
+                const match = /language-(\w+)/.exec(className || "");
+                const isInline = !match && !String(children).includes("\n");
+
+                if (isInline) {
+                  return (
+                    <code className="bg-[#1A261D] text-[#4ADE80] px-1.5 py-0.5 rounded font-mono text-xs border border-[#243629]" {...props}>
+                      {children}
+                    </code>
+                  );
+                }
+
+                return (
+                  <CodeBlock
+                    language={match ? match[1] : "bash"}
+                    code={String(children).replace(/\n$/, "")}
+                  />
+                );
+              },
+              pre({ children }) {
+                return <>{children}</>;
+              }
+            }}
+          >
+            {article.body}
+          </ReactMarkdown>
 
           {/* Tags */}
           {article.tags && article.tags.length > 0 && (

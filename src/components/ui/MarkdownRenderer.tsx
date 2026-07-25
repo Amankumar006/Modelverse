@@ -1,6 +1,7 @@
 import React from "react";
 import ReactMarkdown from "react-markdown";
 import CodeBlock from "./CodeBlock";
+import CopyableTable from "./CopyableTable";
 
 interface MarkdownRendererProps {
   content: string;
@@ -95,10 +96,7 @@ export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
         if (isTableBlock(trimmed)) {
           const { headers, rows } = parseTableBlock(trimmed);
           return (
-            <div
-              key={bIdx}
-              className="my-8 overflow-x-auto rounded-2xl border border-white/10 bg-white/5 shadow-xl"
-            >
+            <CopyableTable key={bIdx} title="Specification Table">
               <table className="w-full text-left border-collapse text-xs sm:text-sm">
                 <thead className="bg-white/10 border-b border-white/10 text-white font-semibold uppercase tracking-wider text-[11px]">
                   <tr>
@@ -121,7 +119,7 @@ export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
                   ))}
                 </tbody>
               </table>
-            </div>
+            </CopyableTable>
           );
         }
 
