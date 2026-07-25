@@ -1,0 +1,44 @@
+{
+  "id": "empero-ai-qwythos-9b-claude-mythos-5-1m-gguf",
+  "name": "Qwythos-9B-Claude-Mythos-5-1M-GGUF",
+  "slug": "qwythos-9b-claude-mythos-5-1m-gguf",
+  "developer": "empero-ai",
+  "releaseDate": "2026-07-25",
+  "updatedAt": "2026-07-25",
+  "type": "open-weights",
+  "modality": [
+    "text"
+  ],
+  "primaryTask": "multimodal-general",
+  "deployment": [
+    "self-hostable"
+  ],
+  "license": "Other/Custom",
+  "parameters": "undisclosed",
+  "contextWindow": "unknown",
+  "description": "Qwythos-9B-Claude-Mythos-5-1M-GGUF is a trending open-weight AI model developed by empero-ai, featuring high community adoption on Hugging Face (2455 likes, 1906539 downloads).",
+  "keyFeatures": [
+    "Trending open-weight release by empero-ai",
+    "Community favorite on Hugging Face with 2455 likes",
+    "Supports self-hosted inference and deployment"
+  ],
+  "benchmarks": [],
+  "family": null,
+  "previousVersion": null,
+  "links": {
+    "huggingface": "https://huggingface.co/empero-ai/Qwythos-9B-Claude-Mythos-5-1M-GGUF"
+  },
+  "logo": null,
+  "tags": [
+    "open-weights",
+    "trending",
+    "huggingface"
+  ],
+  "sources": [
+    "https://huggingface.co/empero-ai/Qwythos-9B-Claude-Mythos-5-1M-GGUF"
+  ],
+  "verified": false,
+  "featured": false,
+  "boost": 1,
+  "curatorNotes": "Automated ingestion draft from Hugging Face Trending on 2026-07-25. Needs human verification."
+}

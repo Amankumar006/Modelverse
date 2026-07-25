@@ -1,0 +1,44 @@
+{
+  "id": "baidu-unlimited-ocr",
+  "name": "Unlimited-OCR",
+  "slug": "unlimited-ocr",
+  "developer": "baidu",
+  "releaseDate": "2026-07-25",
+  "updatedAt": "2026-07-25",
+  "type": "open-weights",
+  "modality": [
+    "text"
+  ],
+  "primaryTask": "multimodal-general",
+  "deployment": [
+    "self-hostable"
+  ],
+  "license": "Other/Custom",
+  "parameters": "undisclosed",
+  "contextWindow": "unknown",
+  "description": "Unlimited-OCR is a trending open-weight AI model developed by baidu, featuring high community adoption on Hugging Face (3024 likes, 2500391 downloads).",
+  "keyFeatures": [
+    "Trending open-weight release by baidu",
+    "Community favorite on Hugging Face with 3024 likes",
+    "Supports self-hosted inference and deployment"
+  ],
+  "benchmarks": [],
+  "family": null,
+  "previousVersion": null,
+  "links": {
+    "huggingface": "https://huggingface.co/baidu/Unlimited-OCR"
+  },
+  "logo": null,
+  "tags": [
+    "open-weights",
+    "trending",
+    "huggingface"
+  ],
+  "sources": [
+    "https://huggingface.co/baidu/Unlimited-OCR"
+  ],
+  "verified": false,
+  "featured": false,
+  "boost": 1,
+  "curatorNotes": "Automated ingestion draft from Hugging Face Trending on 2026-07-25. Needs human verification."
+}

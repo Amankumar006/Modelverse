@@ -1,0 +1,56 @@
+name: Daily Model Ingestion Pipeline
+
+on:
+  schedule:
+    # Runs daily at 00:00 UTC
+    - cron: '0 0 * * *'
+  workflow_dispatch:
+
+jobs:
+  ingest:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run Ingestion Pipeline
+        run: node scripts/ingest-trending-models.js
+
+      - name: Compile and Validate Models Index
+        run: node scripts/compile-models.js
+
+      - name: Create Pull Request for New Model Drafts
+        uses: peter-evans/create-pull-request@v6
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: "feat(ingestion): Add new AI model drafts and update search index"
+          branch: "automated/daily-model-ingestion"
+          delete-branch: true
+          title: "🤖 Daily Model Ingestion Drafts"
+          body: |
+            ## 🤖 Automated Daily Model Ingestion
+            
+            This automated Pull Request contains new trending AI models detected from Hugging Face Hub, arXiv papers, and Tier A AI Lab feeds.
+            
+            ### Actions Taken:
+            - Generated draft model JSONs conforming to Modelverse schema.
+            - Created markdown Readme templates.
+            - Re-compiled `models-archive.json` and `search-index.json`.
+            
+            Please review the draft files before merging into `main`.
+          labels: |
+            automated-ingestion
+            model-draft

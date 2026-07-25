@@ -1,0 +1,44 @@
+{
+  "id": "openbmb-minicpm-robotmanip",
+  "name": "MiniCPM-RobotManip",
+  "slug": "minicpm-robotmanip",
+  "developer": "openbmb",
+  "releaseDate": "2026-07-25",
+  "updatedAt": "2026-07-25",
+  "type": "open-weights",
+  "modality": [
+    "text"
+  ],
+  "primaryTask": "multimodal-general",
+  "deployment": [
+    "self-hostable"
+  ],
+  "license": "Other/Custom",
+  "parameters": "undisclosed",
+  "contextWindow": "unknown",
+  "description": "MiniCPM-RobotManip is a trending open-weight AI model developed by openbmb, featuring high community adoption on Hugging Face (173 likes, 559 downloads).",
+  "keyFeatures": [
+    "Trending open-weight release by openbmb",
+    "Community favorite on Hugging Face with 173 likes",
+    "Supports self-hosted inference and deployment"
+  ],
+  "benchmarks": [],
+  "family": null,
+  "previousVersion": null,
+  "links": {
+    "huggingface": "https://huggingface.co/openbmb/MiniCPM-RobotManip"
+  },
+  "logo": null,
+  "tags": [
+    "open-weights",
+    "trending",
+    "huggingface"
+  ],
+  "sources": [
+    "https://huggingface.co/openbmb/MiniCPM-RobotManip"
+  ],
+  "verified": false,
+  "featured": false,
+  "boost": 1,
+  "curatorNotes": "Automated ingestion draft from Hugging Face Trending on 2026-07-25. Needs human verification."
+}

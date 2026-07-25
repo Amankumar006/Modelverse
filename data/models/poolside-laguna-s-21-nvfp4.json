@@ -1,0 +1,44 @@
+{
+  "id": "poolside-laguna-s-21-nvfp4",
+  "name": "Laguna-S-2.1-NVFP4",
+  "slug": "laguna-s-21-nvfp4",
+  "developer": "poolside",
+  "releaseDate": "2026-07-25",
+  "updatedAt": "2026-07-25",
+  "type": "open-weights",
+  "modality": [
+    "text"
+  ],
+  "primaryTask": "multimodal-general",
+  "deployment": [
+    "self-hostable"
+  ],
+  "license": "Other/Custom",
+  "parameters": "undisclosed",
+  "contextWindow": "unknown",
+  "description": "Laguna-S-2.1-NVFP4 is a trending open-weight AI model developed by poolside, featuring high community adoption on Hugging Face (130 likes, 89186 downloads).",
+  "keyFeatures": [
+    "Trending open-weight release by poolside",
+    "Community favorite on Hugging Face with 130 likes",
+    "Supports self-hosted inference and deployment"
+  ],
+  "benchmarks": [],
+  "family": null,
+  "previousVersion": null,
+  "links": {
+    "huggingface": "https://huggingface.co/poolside/Laguna-S-2.1-NVFP4"
+  },
+  "logo": null,
+  "tags": [
+    "open-weights",
+    "trending",
+    "huggingface"
+  ],
+  "sources": [
+    "https://huggingface.co/poolside/Laguna-S-2.1-NVFP4"
+  ],
+  "verified": false,
+  "featured": false,
+  "boost": 1,
+  "curatorNotes": "Automated ingestion draft from Hugging Face Trending on 2026-07-25. Needs human verification."
+}

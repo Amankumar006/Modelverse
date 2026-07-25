@@ -1,0 +1,44 @@
+{
+  "id": "hauhaucs-qwen36-35b-a3b-uncensored-hauhaucs-aggressive",
+  "name": "Qwen3.6-35B-A3B-Uncensored-HauhauCS-Aggressive",
+  "slug": "qwen36-35b-a3b-uncensored-hauhaucs-aggressive",
+  "developer": "HauhauCS",
+  "releaseDate": "2026-07-25",
+  "updatedAt": "2026-07-25",
+  "type": "open-weights",
+  "modality": [
+    "text"
+  ],
+  "primaryTask": "multimodal-general",
+  "deployment": [
+    "self-hostable"
+  ],
+  "license": "Other/Custom",
+  "parameters": "undisclosed",
+  "contextWindow": "unknown",
+  "description": "Qwen3.6-35B-A3B-Uncensored-HauhauCS-Aggressive is a trending open-weight AI model developed by HauhauCS, featuring high community adoption on Hugging Face (3071 likes, 2057103 downloads).",
+  "keyFeatures": [
+    "Trending open-weight release by HauhauCS",
+    "Community favorite on Hugging Face with 3071 likes",
+    "Supports self-hosted inference and deployment"
+  ],
+  "benchmarks": [],
+  "family": null,
+  "previousVersion": null,
+  "links": {
+    "huggingface": "https://huggingface.co/HauhauCS/Qwen3.6-35B-A3B-Uncensored-HauhauCS-Aggressive"
+  },
+  "logo": null,
+  "tags": [
+    "open-weights",
+    "trending",
+    "huggingface"
+  ],
+  "sources": [
+    "https://huggingface.co/HauhauCS/Qwen3.6-35B-A3B-Uncensored-HauhauCS-Aggressive"
+  ],
+  "verified": false,
+  "featured": false,
+  "boost": 1,
+  "curatorNotes": "Automated ingestion draft from Hugging Face Trending on 2026-07-25. Needs human verification."
+}
