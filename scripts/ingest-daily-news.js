@@ -12,6 +12,11 @@ const MAX_AGE_HOURS = 48;           // Only process articles from last 48h
 
 // ─── Poster images rotation by lab/source ───────────────────────────
 const POSTER_IMAGES = {
+  "Hugging Face": [
+    "/images/news/news_featured.jpg",
+    "/images/news/news_review.jpg",
+    "/images/news/diffusers_cover.jpg",
+  ],
   "OpenAI": [
     "/images/news/news_featured.jpg",
     "/images/news/news_short.jpg",
@@ -22,6 +27,10 @@ const POSTER_IMAGES = {
     "/images/news/alphaevolve_cover.jpg",
     "/images/news/diffusiongemma_cover.jpg",
     "/images/news/medgemma_cover.jpg",
+  ],
+  "TechCrunch AI": [
+    "/images/news/news_short.jpg",
+    "/images/news/news_featured.jpg",
   ],
   "default": [
     "/images/news/news_short.jpg",
@@ -67,29 +76,48 @@ function slugify(text) {
     .slice(0, 80); // Prevent absurdly long slugs
 }
 
+function decodeHtmlEntities(str) {
+  if (!str) return '';
+  return str
+    .replace(/&amp;/g, '&')
+    .replace(/&lt;/g, '<')
+    .replace(/&gt;/g, '>')
+    .replace(/&quot;/g, '"')
+    .replace(/&#039;/g, "'")
+    .replace(/&#8217;/g, "'")
+    .replace(/&#8216;/g, "'")
+    .replace(/&#8220;/g, '"')
+    .replace(/&#8221;/g, '"')
+    .replace(/&#8211;/g, '-')
+    .replace(/&#8212;/g, '—');
+}
+
 function parseRss(xmlText) {
   const items = [];
-  const itemRegex = /<item>([\s\S]*?)<\/item>/g;
+  const itemRegex = /<(?:item|entry)>([\s\S]*?)<\/(?:item|entry)>/g;
   let match;
   while ((match = itemRegex.exec(xmlText)) !== null) {
     const itemContent = match[1];
     const titleMatch = /<title>([\s\S]*?)<\/title>/.exec(itemContent);
-    const linkMatch = /<link>([\s\S]*?)<\/link>/.exec(itemContent);
-    const descMatch = /<description>([\s\S]*?)<\/description>/.exec(itemContent);
-    const pubDateMatch = /<pubDate>([\s\S]*?)<\/pubDate>/.exec(itemContent) || /<dc:date>([\s\S]*?)<\/dc:date>/.exec(itemContent);
+    const linkMatch = /<link[^>]*href="([^"]+)"/.exec(itemContent) || /<link>([\s\S]*?)<\/link>/.exec(itemContent);
+    const descMatch = /<description>([\s\S]*?)<\/description>/.exec(itemContent) || /<summary>([\s\S]*?)<\/summary>/.exec(itemContent) || /<content[\s\S]*?>([\s\S]*?)<\/content>/.exec(itemContent);
+    const pubDateMatch = /<pubDate>([\s\S]*?)<\/pubDate>/.exec(itemContent) || /<published>([\s\S]*?)<\/published>/.exec(itemContent) || /<updated>([\s\S]*?)<\/updated>/.exec(itemContent) || /<dc:date>([\s\S]*?)<\/dc:date>/.exec(itemContent);
     
     if (titleMatch && linkMatch) {
-      const cleanTitle = titleMatch[1].replace(/<!\[CDATA\[([\s\S]*?)\]\]>/g, '$1').replace(/&amp;/g, '&').trim();
-      const cleanDesc = descMatch ? descMatch[1].replace(/<!\[CDATA\[([\s\S]*?)\]\]>/g, '$1').replace(/<[^>]+>/g, '').replace(/&amp;/g, '&').trim() : cleanTitle;
+      const rawTitle = decodeHtmlEntities(titleMatch[1].replace(/<!\[CDATA\[([\s\S]*?)\]\]>/g, '$1').trim());
+      const rawLink = linkMatch[1] ? linkMatch[1].replace(/<!\[CDATA\[([\s\S]*?)\]\]>/g, '$1').trim() : '';
+      const cleanDesc = decodeHtmlEntities(descMatch ? descMatch[1].replace(/<!\[CDATA\[([\s\S]*?)\]\]>/g, '$1').replace(/<[^>]+>/g, '').trim() : rawTitle);
       const rawDate = pubDateMatch ? pubDateMatch[1].trim() : null;
       
-      items.push({
-        title: cleanTitle,
-        link: linkMatch[1].replace(/<!\[CDATA\[([\s\S]*?)\]\]>/g, '$1').trim(),
-        description: cleanDesc.slice(0, 500), // Cap description length
-        pubDate: rawDate,
-        parsedDate: rawDate ? new Date(rawDate) : null
-      });
+      if (rawTitle && rawLink) {
+        items.push({
+          title: rawTitle,
+          link: rawLink,
+          description: cleanDesc.slice(0, 500),
+          pubDate: rawDate,
+          parsedDate: rawDate ? new Date(rawDate) : null
+        });
+      }
     }
   }
   return items;
@@ -102,7 +130,6 @@ function filterRecentArticles(items, maxAgeHours) {
   
   return items.filter(item => {
     if (!item.parsedDate || isNaN(item.parsedDate.getTime())) {
-      // If no valid date, include it but mark as uncertain
       console.log(`  ⚠️  No valid date for "${item.title.slice(0, 50)}..." — including as fallback`);
       return true;
     }
@@ -131,29 +158,53 @@ async function runDailyNewsIngestion() {
   const createdNews = [];
 
   const allCandidates = [];
+
+  // 1. Fetch Hugging Face Blog RSS
+  try {
+    const hfXml = await getHttps("https://huggingface.co/blog/feed.xml");
+    const allItems = parseRss(hfXml);
+    console.log(`  🤗 Hugging Face RSS: ${allItems.length} total items`);
+    const recent = filterRecentArticles(allItems, MAX_AGE_HOURS);
+    console.log(`  🤗 Hugging Face RSS: ${recent.length} items within ${MAX_AGE_HOURS}h window`);
+    recent.forEach((item) => allCandidates.push({ ...item, lab: "Hugging Face" }));
+  } catch (e) {
+    console.error("  ❌ Failed fetching Hugging Face feed:", e.message);
+  }
   
-  // Fetch OpenAI RSS
+  // 2. Fetch OpenAI RSS
   try {
     const openaiXml = await getHttps("https://openai.com/news/rss.xml");
     const allItems = parseRss(openaiXml);
-    console.log(`  OpenAI RSS: ${allItems.length} total items`);
+    console.log(`  🟢 OpenAI RSS: ${allItems.length} total items`);
     const recent = filterRecentArticles(allItems, MAX_AGE_HOURS);
-    console.log(`  OpenAI RSS: ${recent.length} items within ${MAX_AGE_HOURS}h window`);
+    console.log(`  🟢 OpenAI RSS: ${recent.length} items within ${MAX_AGE_HOURS}h window`);
     recent.forEach((item) => allCandidates.push({ ...item, lab: "OpenAI" }));
   } catch (e) {
     console.error("  ❌ Failed fetching OpenAI feed:", e.message);
   }
 
-  // Fetch DeepMind RSS
+  // 3. Fetch DeepMind RSS
   try {
     const deepmindXml = await getHttps("https://deepmind.google/blog/rss.xml");
     const allItems = parseRss(deepmindXml);
-    console.log(`  DeepMind RSS: ${allItems.length} total items`);
+    console.log(`  🔴 DeepMind RSS: ${allItems.length} total items`);
     const recent = filterRecentArticles(allItems, MAX_AGE_HOURS);
-    console.log(`  DeepMind RSS: ${recent.length} items within ${MAX_AGE_HOURS}h window`);
+    console.log(`  🔴 DeepMind RSS: ${recent.length} items within ${MAX_AGE_HOURS}h window`);
     recent.forEach((item) => allCandidates.push({ ...item, lab: "Google DeepMind" }));
   } catch (e) {
     console.error("  ❌ Failed fetching DeepMind feed:", e.message);
+  }
+
+  // 4. Fetch TechCrunch AI RSS
+  try {
+    const tcXml = await getHttps("https://techcrunch.com/category/artificial-intelligence/feed/");
+    const allItems = parseRss(tcXml);
+    console.log(`  ⚡ TechCrunch AI RSS: ${allItems.length} total items`);
+    const recent = filterRecentArticles(allItems, MAX_AGE_HOURS);
+    console.log(`  ⚡ TechCrunch AI RSS: ${recent.length} items within ${MAX_AGE_HOURS}h window`);
+    recent.forEach((item) => allCandidates.push({ ...item, lab: "TechCrunch AI" }));
+  } catch (e) {
+    console.error("  ❌ Failed fetching TechCrunch feed:", e.message);
   }
 
   // Sort by date (newest first) and cap

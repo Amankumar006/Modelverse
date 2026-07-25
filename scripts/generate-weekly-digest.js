@@ -59,7 +59,7 @@ function generateWeeklyDigest() {
     readTime: "4 min read",
     excerpt: `Complete weekly digest of ${weeklyModels.length} newly released AI models featuring specs, parent companies, primary tasks, and key features.`,
     body: articleBody,
-    coverImage: "/images/news/weekly-recap-gemma-4-claude-5.jpg",
+    coverImage: "/images/news/news_weekly.jpg",
     status: "published",
     confidenceLevel: "confirmed",
     externalSources: ["https://www.themodelverse.in"],

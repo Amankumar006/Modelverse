@@ -1,5 +1,27 @@
 [
   {
+    "id": "i-tried-out-openai8217s-new-ai-keypad-which-will-be-fun-for-some-coders-and-slig",
+    "slug": "i-tried-out-openai8217s-new-ai-keypad-which-will-be-fun-for-some-coders-and-slig",
+    "title": "I tried out OpenAI&#8217;s new AI keypad — which will be fun for some coders and slightly mystifying to everyone else",
+    "category": "short-news",
+    "publishDate": "2026-07-25",
+    "author": "TechCrunch AI / Modelverse Editorial",
+    "readTime": "2 min read",
+    "excerpt": "OpenAI's fancy new AI keypad will be a lot of fun for some, while many others are probably not going to touch it.",
+    "coverImage": "/images/news/news_short.jpg",
+    "status": "published",
+    "confidenceLevel": "confirmed",
+    "externalSources": [
+      "https://techcrunch.com/2026/07/24/i-tried-out-openais-new-ai-keypad-which-will-be-fun-for-coders-and-slightly-mystifying-to-everyone-else/"
+    ],
+    "relatedModels": [],
+    "tags": [
+      "ai-news",
+      "breaking",
+      "techcrunch-ai"
+    ]
+  },
+  {
     "id": "weekly-model-recap-2026-07-25",
     "slug": "weekly-model-recap-2026-07-25",
     "title": "Weekly Model Recap: 27 Frontier & Open-Weight Releases (2026-07-25)",
@@ -8,7 +30,7 @@
     "author": "Modelverse Editorial Team",
     "readTime": "4 min read",
     "excerpt": "Complete weekly digest of 27 newly released AI models featuring specs, parent companies, primary tasks, and key features.",
-    "coverImage": "/images/news/weekly-recap-gemma-4-claude-5.jpg",
+    "coverImage": "/images/news/news_weekly.jpg",
     "status": "published",
     "confidenceLevel": "confirmed",
     "externalSources": [
@@ -27,6 +49,204 @@
       "ai-roundup"
     ],
     "issueNumber": 4
+  },
+  {
+    "id": "ai-communism-rogue-models-and-the-why-kimi-k3-spooked-wall-street",
+    "slug": "ai-communism-rogue-models-and-the-why-kimi-k3-spooked-wall-street",
+    "title": "‘AI communism’, rogue models, and the why Kimi K3 spooked Wall Street",
+    "category": "short-news",
+    "publishDate": "2026-07-24",
+    "author": "TechCrunch AI / Modelverse Editorial",
+    "readTime": "2 min read",
+    "excerpt": "Chinese AI lab Moonshot&#8217;s&#160;open model Kimi went viral this week&#160;for reasons that had less to do with the model itself and more to do with&#160;how the U.S. AI indust...",
+    "coverImage": "/images/news/news_featured.jpg",
+    "status": "published",
+    "confidenceLevel": "confirmed",
+    "externalSources": [
+      "https://techcrunch.com/podcast/ai-communism-rogue-models-and-the-why-kimi-k3-spooked-wall-street/"
+    ],
+    "relatedModels": [],
+    "tags": [
+      "ai-news",
+      "breaking",
+      "techcrunch-ai"
+    ]
+  },
+  {
+    "id": "anthropic-launches-opus-5",
+    "slug": "anthropic-launches-opus-5",
+    "title": "Anthropic launches Opus 5",
+    "category": "short-news",
+    "publishDate": "2026-07-24",
+    "author": "TechCrunch AI / Modelverse Editorial",
+    "readTime": "2 min read",
+    "excerpt": "Opus 5 will be both cheaper and less restrictive than Fable, likely making it preferable in most use cases.",
+    "coverImage": "/images/news/news_featured.jpg",
+    "status": "published",
+    "confidenceLevel": "confirmed",
+    "externalSources": [
+      "https://techcrunch.com/2026/07/24/anthropic-launches-opus-5/"
+    ],
+    "relatedModels": [],
+    "tags": [
+      "ai-news",
+      "breaking",
+      "techcrunch-ai"
+    ]
+  },
+  {
+    "id": "as-us-weighs-response-to-chinese-ai-industry-urges-against-broad-open-weight-res",
+    "slug": "as-us-weighs-response-to-chinese-ai-industry-urges-against-broad-open-weight-res",
+    "title": "As US weighs response to Chinese AI, industry urges against broad open-weight restrictions",
+    "category": "short-news",
+    "publishDate": "2026-07-24",
+    "author": "TechCrunch AI / Modelverse Editorial",
+    "readTime": "2 min read",
+    "excerpt": "AI companies, including Nvidia and Mistral, urge policymakers to avoid broad restrictions on open-weight AI models as Washington debates responses to Chinese AI and alleged model d...",
+    "coverImage": "/images/news/news_short.jpg",
+    "status": "published",
+    "confidenceLevel": "confirmed",
+    "externalSources": [
+      "https://techcrunch.com/2026/07/24/as-us-weighs-response-to-chinese-ai-industry-urges-against-broad-open-weight-restrictions/"
+    ],
+    "relatedModels": [],
+    "tags": [
+      "ai-news",
+      "breaking",
+      "techcrunch-ai"
+    ]
+  },
+  {
+    "id": "blueskys-ai-assistant-attie-expands-into-an-open-social-research-tool",
+    "slug": "blueskys-ai-assistant-attie-expands-into-an-open-social-research-tool",
+    "title": "Bluesky’s AI assistant Attie expands into an open social research tool",
+    "category": "short-news",
+    "publishDate": "2026-07-24",
+    "author": "TechCrunch AI / Modelverse Editorial",
+    "readTime": "2 min read",
+    "excerpt": "Users can now ask Attie questions about news, trends, and conversations on Bluesky and other apps on the AT Protocol.",
+    "coverImage": "/images/news/news_featured.jpg",
+    "status": "published",
+    "confidenceLevel": "confirmed",
+    "externalSources": [
+      "https://techcrunch.com/2026/07/24/blueskys-ai-assistant-attie-expands-into-an-open-social-research-tool/"
+    ],
+    "relatedModels": [],
+    "tags": [
+      "ai-news",
+      "breaking",
+      "techcrunch-ai"
+    ]
+  },
+  {
+    "id": "how-ai-guardrails-are-impeding-the-work-of-offensive-cybersecurity-researchers",
+    "slug": "how-ai-guardrails-are-impeding-the-work-of-offensive-cybersecurity-researchers",
+    "title": "How AI guardrails are impeding the work of offensive cybersecurity researchers",
+    "category": "short-news",
+    "publishDate": "2026-07-24",
+    "author": "TechCrunch AI / Modelverse Editorial",
+    "readTime": "2 min read",
+    "excerpt": "We spoke with several cybersecurity researchers, who look for unknown vulnerabilities and develop tools to exploit them, about how OpenAI’s and Anthropic’s guardrails affect their ...",
+    "coverImage": "/images/news/news_featured.jpg",
+    "status": "published",
+    "confidenceLevel": "confirmed",
+    "externalSources": [
+      "https://techcrunch.com/2026/07/23/how-ai-guardrails-are-impeding-the-work-of-offensive-cybersecurity-researchers/"
+    ],
+    "relatedModels": [],
+    "tags": [
+      "ai-news",
+      "breaking",
+      "techcrunch-ai"
+    ]
+  },
+  {
+    "id": "midjourney-acquired-the-astrology-app-co-star",
+    "slug": "midjourney-acquired-the-astrology-app-co-star",
+    "title": "Midjourney acquired the astrology app Co-Star",
+    "category": "short-news",
+    "publishDate": "2026-07-24",
+    "author": "TechCrunch AI / Modelverse Editorial",
+    "readTime": "2 min read",
+    "excerpt": "The AI lab Midjourney continues to expand its purview beyond image and video generation.",
+    "coverImage": "/images/news/news_short.jpg",
+    "status": "published",
+    "confidenceLevel": "confirmed",
+    "externalSources": [
+      "https://techcrunch.com/2026/07/24/midjourney-acquired-the-astrology-app-co-star/"
+    ],
+    "relatedModels": [],
+    "tags": [
+      "ai-news",
+      "breaking",
+      "techcrunch-ai"
+    ]
+  },
+  {
+    "id": "openai8217s-new-voice-mode-makes-it-to-the-chatgpt-desktop-app",
+    "slug": "openai8217s-new-voice-mode-makes-it-to-the-chatgpt-desktop-app",
+    "title": "OpenAI&#8217;s new voice mode makes it to the ChatGPT desktop app",
+    "category": "short-news",
+    "publishDate": "2026-07-24",
+    "author": "TechCrunch AI / Modelverse Editorial",
+    "readTime": "2 min read",
+    "excerpt": "ChatGPT Voice on desktop can work with both ChatGPT Work and Codex to complete tasks and control agents.",
+    "coverImage": "/images/news/news_short.jpg",
+    "status": "published",
+    "confidenceLevel": "confirmed",
+    "externalSources": [
+      "https://techcrunch.com/2026/07/24/openais-new-voice-mode-makes-it-to-the-chatgpt-desktop-app/"
+    ],
+    "relatedModels": [],
+    "tags": [
+      "ai-news",
+      "breaking",
+      "techcrunch-ai"
+    ]
+  },
+  {
+    "id": "prentis-new-ai-lab-co-founded-by-reid-hoffman-mark-pincus-in-talks-to-raise-100m",
+    "slug": "prentis-new-ai-lab-co-founded-by-reid-hoffman-mark-pincus-in-talks-to-raise-100m",
+    "title": "Prentis, new AI lab co-founded by Reid Hoffman, Mark Pincus in talks to raise $100M",
+    "category": "short-news",
+    "publishDate": "2026-07-24",
+    "author": "TechCrunch AI / Modelverse Editorial",
+    "readTime": "2 min read",
+    "excerpt": "The neolab is betting that automating routine computer tasks will soon outpace coding as AI's biggest use case.",
+    "coverImage": "/images/news/news_featured.jpg",
+    "status": "published",
+    "confidenceLevel": "confirmed",
+    "externalSources": [
+      "https://techcrunch.com/2026/07/24/prentis-new-ai-lab-co-founded-by-reid-hoffman-mark-pincus-in-talks-to-raise-100m/"
+    ],
+    "relatedModels": [],
+    "tags": [
+      "ai-news",
+      "breaking",
+      "techcrunch-ai"
+    ]
+  },
+  {
+    "id": "why-cognition-bought-poke-ai-personality-is-becoming-a-competitive-advantage",
+    "slug": "why-cognition-bought-poke-ai-personality-is-becoming-a-competitive-advantage",
+    "title": "Why Cognition bought Poke: AI personality is becoming a competitive advantage",
+    "category": "short-news",
+    "publishDate": "2026-07-24",
+    "author": "TechCrunch AI / Modelverse Editorial",
+    "readTime": "2 min read",
+    "excerpt": "The acquisition brings Poke’s conversational style and interaction model to Cognition’s coding agent Devin, reflecting a growing belief that how AI assistants interact with users i...",
+    "coverImage": "/images/news/news_short.jpg",
+    "status": "published",
+    "confidenceLevel": "confirmed",
+    "externalSources": [
+      "https://techcrunch.com/2026/07/24/why-cognition-bought-poke-ai-personality-is-becoming-a-competitive-advantage/"
+    ],
+    "relatedModels": [],
+    "tags": [
+      "ai-news",
+      "breaking",
+      "techcrunch-ai"
+    ]
   },
   {
     "id": "kimi-k3-full-review",
