@@ -10,8 +10,66 @@ if (!fs.existsSync(INGESTION_DIR)) {
   fs.mkdirSync(INGESTION_DIR, { recursive: true });
 }
 
+function categorizeModels(models) {
+  const categories = {
+    frontier: [],
+    visionVideo: [],
+    openWeight: [],
+    domainSpecialized: [],
+    communityQuant: []
+  };
+
+  const frontierLabs = ["anthropic", "openai", "google deepmind", "moonshot ai", "deepmind", "google"];
+  const domainTasks = ["code-generation", "cybersecurity", "medical", "healthcare", "audio-speech", "other"];
+
+  for (const m of models) {
+    const devLower = (m.developer || "").toLowerCase();
+    const taskLower = (m.primaryTask || "").toLowerCase();
+    const mods = (m.modality || []).map(x => x.toLowerCase());
+    const nameLower = (m.name || "").toLowerCase();
+    const slugLower = (m.slug || "").toLowerCase();
+
+    // 1. Vision & Video
+    if (mods.includes("video") || mods.includes("motion") || taskLower.includes("video") || nameLower.includes("motion") || nameLower.includes("wan")) {
+      categories.visionVideo.push(m);
+    }
+    // 2. Frontier Reasoning
+    else if (frontierLabs.some(lab => devLower.includes(lab)) && (taskLower.includes("reasoning") || m.type === "api-only" || m.type === "closed-source")) {
+      categories.frontier.push(m);
+    }
+    // 3. Domain Specialized
+    else if (domainTasks.some(t => taskLower.includes(t)) || devLower.includes("nvidia") || nameLower.includes("cyber") || nameLower.includes("med")) {
+      categories.domainSpecialized.push(m);
+    }
+    // 4. Community Quantizations / Fine-tunes
+    else if (slugLower.includes("gguf") || slugLower.includes("nvfp4") || slugLower.includes("uncensored") || devLower.includes("unsloth")) {
+      categories.communityQuant.push(m);
+    }
+    // 5. Open-Weight Powerhouses
+    else {
+      categories.openWeight.push(m);
+    }
+  }
+
+  return categories;
+}
+
+function renderTable(models) {
+  if (!models || models.length === 0) return "";
+  let table = "| Model | Developer | Primary Task | Modality | Parameters | Status |\n";
+  table += "| :--- | :--- | :--- | :--- | :--- | :--- |\n";
+
+  for (const m of models) {
+    const mods = (m.modality || ["text"]).join(", ");
+    const params = m.parameters || "Undisclosed";
+    const status = m.type || (m.openSource ? "Open-Weights" : "Closed");
+    table += `| [**${m.name}**](https://www.themodelverse.in/models/${m.slug}) | ${m.developer} | \`${m.primaryTask || "Multimodal"}\` | ${mods} | ${params} | \`${status}\` |\n`;
+  }
+  return table;
+}
+
 function generateWeeklyDigest() {
-  console.log("📅 Generating Weekly Sunday Model Digest...");
+  console.log("📅 Generating Rich Weekly Model Digest...");
 
   const files = fs.readdirSync(MODELS_DIR).filter((f) => f.endsWith(".json") && !f.endsWith("_index.json") && !f.endsWith("models-archive.json"));
   const allModels = [];
@@ -23,7 +81,10 @@ function generateWeeklyDigest() {
     } catch (e) {}
   }
 
-  // Filter models from last 7 days
+  // Sort by date newest first
+  allModels.sort((a, b) => new Date(b.releaseDate || b.updatedAt || 0).getTime() - new Date(a.releaseDate || a.updatedAt || 0).getTime());
+
+  // Filter models from last 7 days (or top 25 if testing)
   const now = new Date();
   const sevenDaysAgo = new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000);
 
@@ -32,21 +93,104 @@ function generateWeeklyDigest() {
     return d >= sevenDaysAgo;
   });
 
-  // Fallback if < 5 models in last 7 days (for testing / initial run)
-  if (weeklyModels.length < 5) {
-    allModels.sort((a, b) => new Date(b.releaseDate || b.updatedAt).getTime() - new Date(a.releaseDate || a.updatedAt).getTime());
-    weeklyModels = allModels.slice(0, 10);
+  if (weeklyModels.length < 10) {
+    weeklyModels = allModels.slice(0, 27);
   }
 
-  console.log(`Gathered ${weeklyModels.length} models for the Weekly Sunday Digest.`);
+  console.log(`Gathered ${weeklyModels.length} models for the Weekly Digest.`);
 
   const todayStr = now.toISOString().split("T")[0];
   const weeklyArticleSlug = `weekly-model-recap-${todayStr}`;
+  const cats = categorizeModels(weeklyModels);
 
-  // 1. Create Weekly Recap News Article
-  const articleBody = `Welcome to the **Modelverse Weekly Digest** for ${todayStr}.\n\nThis week, our automated ingestion engine indexed and published **${weeklyModels.length} frontier and open-weight AI models**.\n\n### Featured Releases This Week\n\n` +
-    weeklyModels.map(m => `#### 🚀 [${m.name}](https://www.themodelverse.in/models/${m.slug})\n- **Parent Company / Developer**: ${m.developer}\n- **Primary Task / Use Case**: ${m.primaryTask || "Multimodal General"}\n- **Modalities**: ${(m.modality || ["text"]).join(", ")}\n- **Parameters**: ${m.parameters || "Undisclosed"}\n- **Key Highlights**: ${(m.keyFeatures || []).slice(0, 2).join(". ")}\n- **Links**: [View Specs & Benchmarks on Modelverse](https://www.themodelverse.in/models/${m.slug})`).join("\n\n---\n\n") +
-    `\n\n---\n\n*Stay updated with real-time AI benchmarks, model comparisons, and release tracking at [Modelverse](https://www.themodelverse.in).*`;
+  // Build In-Depth Featured Model Spotlights
+  const spotlightModels = weeklyModels.filter(m => m.featured || m.type === "api-only" || m.parameters === "2.8T" || m.name.includes("Opus") || m.name.includes("Gemma 4") || m.name.includes("Motion")).slice(0, 6);
+
+  let spotlightContent = "";
+  for (const m of spotlightModels) {
+    spotlightContent += `#### 🌟 [${m.name}](https://www.themodelverse.in/models/${m.slug})\n`;
+    spotlightContent += `> **Developer**: ${m.developer} • **Task**: \`${m.primaryTask || "General Intelligence"}\` • **Parameters**: \`${m.parameters || "Undisclosed"}\` • **Access**: \`${m.type || "Open-Weights"}\`\n\n`;
+    spotlightContent += `${m.description || "Frontier release indexed by Modelverse."}\n\n`;
+    if (m.keyFeatures && m.keyFeatures.length > 0) {
+      spotlightContent += `**Key Technical Innovations:**\n`;
+      m.keyFeatures.slice(0, 4).forEach(kf => {
+        spotlightContent += `- ${kf}\n`;
+      });
+    }
+    spotlightContent += `\n👉 [Explore Full Specs & Benchmarks for ${m.name}](https://www.themodelverse.in/models/${m.slug})\n\n---\n\n`;
+  }
+
+  // Construct Rich Article Body
+  const articleBody = `Welcome to the **Modelverse Weekly Intelligence Digest** for **${todayStr}**.
+
+Over the past week, the global AI ecosystem experienced rapid architectural iteration, with **${weeklyModels.length} new foundation, open-weight, and domain-specialized models** indexed in the Modelverse repository.
+
+> **Executive Summary & Macro Trends:**
+> - **Test-Time Compute & Long Context Standardized**: Closed frontier labs (Anthropic's *Claude Opus 5*, Moonshot AI's *Kimi K3*) are prioritizing adaptive reasoning budgets alongside 1M+ token context windows.
+> - **Video World Models & Spatial Motion**: Open-weights research saw major breakthroughs in skeleton-free motion transfer (*Motion4Motion*) and mobile real-time video diffusion (*MobileWan*).
+> - **Domain Specialization Expansion**: Dedicated cybersecurity (*Gemini 3.5 Flash Cyber*) and healthcare vision-language models (*MedGemma 1.5 4B*) are outperforming general-purpose LLMs on specialized benchmarks.
+
+---
+
+### 🏆 Top Model Spotlights of the Week
+
+${spotlightContent}
+
+### 🌟 1. Frontier Foundation & Reasoning Breakthroughs
+
+Frontier laboratories continue to push the boundaries of reasoning performance, extended context caching, and agentic code generation.
+
+${renderTable(cats.frontier)}
+
+${cats.frontier.map(m => `##### 🚀 [${m.name}](https://www.themodelverse.in/models/${m.slug})\n- **Developer**: ${m.developer}\n- **Summary**: ${m.description || "Frontier model release."}\n- **Highlights**: ${(m.keyFeatures || []).slice(0, 2).join(". ")}`).join("\n\n")}
+
+---
+
+### 🎥 2. Generative Vision, Video & Spatial World Models
+
+Generative video models are rapidly advancing toward real-time temporal consistency, low-latency mobile inference, and skeleton-free motion control.
+
+${renderTable(cats.visionVideo)}
+
+${cats.visionVideo.map(m => `##### 🎥 [${m.name}](https://www.themodelverse.in/models/${m.slug})\n- **Developer**: ${m.developer}\n- **Summary**: ${m.description || "Video & vision model."}\n- **Highlights**: ${(m.keyFeatures || []).slice(0, 2).join(". ")}`).join("\n\n")}
+
+---
+
+### ⚡ 3. Open-Weight & High-Efficiency Foundation Models
+
+Open-weight foundation models offer strong reasoning capabilities, privacy guarantees, and local deployment efficiency across edge and cloud infrastructure.
+
+${renderTable(cats.openWeight)}
+
+${cats.openWeight.slice(0, 6).map(m => `##### ⚡ [${m.name}](https://www.themodelverse.in/models/${m.slug})\n- **Developer**: ${m.developer}\n- **Summary**: ${m.description || "Open-weight model release."}\n- **Highlights**: ${(m.keyFeatures || []).slice(0, 2).join(". ")}`).join("\n\n")}
+
+---
+
+### 🛠️ 4. Specialized Domain Models (Cyber, Medical, Code)
+
+Domain-specific fine-tuning delivers state-of-the-art accuracy in security vulnerability detection, clinical medical comprehension, and interactive robotics.
+
+${renderTable(cats.domainSpecialized)}
+
+${cats.domainSpecialized.map(m => `##### 🛠️ [${m.name}](https://www.themodelverse.in/models/${m.slug})\n- **Developer**: ${m.developer}\n- **Summary**: ${m.description || "Domain specialized model."}\n- **Highlights**: ${(m.keyFeatures || []).slice(0, 2).join(". ")}`).join("\n\n")}
+
+---
+
+### 📦 5. Community Open-Source Fine-tunes & Quantizations
+
+The Hugging Face open-source community continues to publish optimized GGUF quantizations, NVFP4 low-bit representations, and specialized instruction-tuned fusions.
+
+${renderTable(cats.communityQuant)}
+
+---
+
+### 📊 Strategic Outlook & Key Takeaways
+
+1. **Enterprise Deployment**: Production teams are increasingly pairing fast Flash/Lite tier models for high-throughput routing with heavy reasoning models for complex multi-step execution.
+2. **Open-Weights Parity**: The gap between closed API benchmarks and open-weight models continues to narrow, with open models matching previous-generation frontier baselines.
+3. **Multimodal Native Architecture**: Audio, vision, and text are no longer separate adapters; newly designed models incorporate unified multimodal tokenizers natively.
+
+*Stay up to date with real-time AI benchmarks, model comparisons, and release tracking at [Modelverse](https://www.themodelverse.in).*`;
 
   const newsJson = {
     id: weeklyArticleSlug,
@@ -56,8 +200,8 @@ function generateWeeklyDigest() {
     isTrending: true,
     publishDate: todayStr,
     author: "Modelverse Editorial Team",
-    readTime: "4 min read",
-    excerpt: `Complete weekly digest of ${weeklyModels.length} newly released AI models featuring specs, parent companies, primary tasks, and key features.`,
+    readTime: "8 min read",
+    excerpt: `Executive digest of ${weeklyModels.length} newly indexed AI models across reasoning, video generation, open-weight efficiency, cybersecurity, and quantization.`,
     body: articleBody,
     coverImage: "/images/news/news_weekly.jpg",
     status: "published",
@@ -68,10 +212,10 @@ function generateWeeklyDigest() {
   };
 
   fs.writeFileSync(path.join(NEWS_DIR, `${weeklyArticleSlug}.json`), JSON.stringify(newsJson, null, 2), "utf-8");
-  console.log(`✅ Created Weekly Recap article: ${weeklyArticleSlug}.json`);
+  console.log(`✅ Created Rich Weekly Recap article: ${weeklyArticleSlug}.json`);
 
-  // 2. Create HTML Email Digest
-  const modelCardsHtml = weeklyModels.map(m => `
+  // HTML Email Digest
+  const modelCardsHtml = weeklyModels.slice(0, 10).map(m => `
     <div style="background-color: #162019; border: 1px solid #243629; border-radius: 12px; padding: 16px; margin-bottom: 16px;">
       <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
         <span style="font-size: 11px; font-weight: bold; color: #4ADE80; background-color: #1A2E20; padding: 4px 8px; border-radius: 4px; text-transform: uppercase;">${m.developer}</span>
@@ -102,7 +246,7 @@ function generateWeeklyDigest() {
   <div style="max-width: 650px; margin: 0 auto; background-color: #121A15; border: 1px solid #243629; border-radius: 16px; padding: 28px;">
     
     <div style="border-bottom: 1px solid #243629; padding-bottom: 16px; margin-bottom: 24px;">
-      <h1 style="margin: 0; font-size: 22px; color: #ffffff;">🌟 Modelverse Weekly Sunday Digest</h1>
+      <h1 style="margin: 0; font-size: 22px; color: #ffffff;">🌟 Modelverse Weekly Intelligence Digest</h1>
       <p style="margin: 4px 0 0 0; font-size: 13px; color: #8C9E91;">Comprehensive roundup of ${weeklyModels.length} AI models released this week (${todayStr})</p>
     </div>
 

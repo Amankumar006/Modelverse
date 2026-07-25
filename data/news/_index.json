@@ -28,12 +28,12 @@
   {
     "id": "weekly-model-recap-2026-07-25",
     "slug": "weekly-model-recap-2026-07-25",
-    "title": "Weekly Model Recap: 27 Frontier & Open-Weight Releases (2026-07-25)",
+    "title": "Weekly Model Recap: 15 Frontier & Open-Weight Releases (2026-07-25)",
     "category": "weekly-news",
     "publishDate": "2026-07-25",
     "author": "Modelverse Editorial Team",
-    "readTime": "4 min read",
-    "excerpt": "Complete weekly digest of 27 newly released AI models featuring specs, parent companies, primary tasks, and key features.",
+    "readTime": "8 min read",
+    "excerpt": "Executive digest of 15 newly indexed AI models across reasoning, video generation, open-weight efficiency, cybersecurity, and quantization.",
     "coverImage": "/images/news/news_weekly.jpg",
     "status": "published",
     "confidenceLevel": "confirmed",
@@ -43,7 +43,9 @@
     "relatedModels": [
       "motion4motion",
       "moonshot-ai-kimi-k3",
-      "anthropic-claude-opus-5"
+      "anthropic-claude-opus-5",
+      "kat-coder-v25-dev",
+      "ardy"
     ],
     "tags": [
       "weekly-digest",
