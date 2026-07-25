@@ -31,6 +31,58 @@ body {
 }
 
 /* ------------------------------------------------------------------ */
+/*  Typography & Reading Contrast Overrides                            */
+/* ------------------------------------------------------------------ */
+.prose {
+  font-size: 1.0625rem; /* 17px base */
+  line-height: 1.85;
+  color: #F3F4F6;
+}
+
+.prose p {
+  margin-top: 1.6em;
+  margin-bottom: 1.6em;
+  color: #E5E7EB;
+}
+
+.prose h1, .prose h2, .prose h3, .prose h4 {
+  color: #FFFFFF;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+.prose h3 {
+  font-size: 1.35rem;
+  margin-top: 2.2em;
+  margin-bottom: 0.8em;
+  color: #F9FAFB;
+}
+
+.prose a {
+  color: #4ADE80;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  font-weight: 500;
+}
+
+.prose a:hover {
+  color: #22C55E;
+}
+
+.prose strong {
+  color: #FFFFFF;
+  font-weight: 600;
+}
+
+.prose code {
+  color: #4ADE80;
+  background-color: #1A261D;
+  padding: 0.2em 0.4em;
+  border-radius: 0.25rem;
+  font-size: 0.875em;
+}
+
+/* ------------------------------------------------------------------ */
 /*  Hero entrance animations (page-load only, not scroll-linked)       */
 /* ------------------------------------------------------------------ */
 @keyframes heroReveal {

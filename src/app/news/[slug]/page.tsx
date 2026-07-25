@@ -170,18 +170,18 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
             {article.title}
           </h1>
 
-          <div className="flex flex-wrap items-center gap-6 text-xs sm:text-sm text-[#5A6E60] border-y border-[#243629] py-4">
-            <span className="font-semibold text-[#8C9E91] uppercase">
+          <div className="flex flex-wrap items-center gap-6 text-xs sm:text-sm text-[#9CA3AF] border-y border-[#243629] py-4">
+            <span className="font-semibold text-[#E2E8E4] uppercase">
               By {article.author}
             </span>
-            <span className="hidden sm:inline">|</span>
-            <span className="flex items-center gap-1">
-              <Calendar size={14} />
+            <span className="hidden sm:inline text-[#334D3A]">|</span>
+            <span className="flex items-center gap-1.5 text-[#A3B8AA]">
+              <Calendar size={14} className="text-[#4ADE80]" />
               {formatNewsDate(article.publishDate)}
             </span>
-            <span>·</span>
-            <span className="flex items-center gap-1">
-              <Clock size={14} />
+            <span className="text-[#334D3A]">·</span>
+            <span className="flex items-center gap-1.5 text-[#A3B8AA]">
+              <Clock size={14} className="text-[#4ADE80]" />
               {article.readTime}
             </span>
           </div>
@@ -190,7 +190,7 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
 
       {/* Featured Cover Image */}
       <div className="max-w-[1400px] mx-auto px-0 sm:px-8 lg:px-12 mb-16">
-        <div suppressHydrationWarning className="relative h-[300px] sm:h-[500px] lg:h-[700px] w-full bg-[#0C120F] sm:rounded-3xl overflow-hidden shadow-sm">
+        <div suppressHydrationWarning className="relative h-[300px] sm:h-[500px] lg:h-[650px] w-full bg-[#0C120F] sm:rounded-3xl overflow-hidden shadow-sm border border-[#243629]">
           <Image
             src={article.coverImage}
             alt={article.title}
@@ -203,8 +203,8 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
 
       {/* Article Body Grid */}
       <div className="max-w-[1400px] mx-auto px-6 sm:px-8 lg:px-12 grid grid-cols-1 lg:grid-cols-[1fr_350px] xl:grid-cols-[1fr_400px] gap-12 lg:gap-20">
-        {/* Main Content */}
-        <article className="prose prose-invert prose-emerald max-w-none text-[#E2E8E4] prose-img:rounded-xl prose-img:max-w-full prose-img:h-auto prose-img:w-full prose-img:mx-auto">
+        {/* Main Content (Ergonomic 720px max reading width) */}
+        <article className="prose prose-invert prose-emerald max-w-[720px] text-[#F3F4F6] prose-p:text-[#E5E7EB] prose-p:leading-[1.85] prose-p:text-[17px] md:prose-p:text-[18px] prose-headings:text-white prose-img:rounded-xl prose-img:max-w-full prose-img:h-auto prose-img:w-full prose-img:mx-auto">
           {article.slug === 'claude-opus-5-detailed-guide' && (
             <BenchmarkTabs />
           )}
@@ -216,9 +216,9 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
               {article.tags.map(tag => (
                 <span
                   key={tag}
-                  className="inline-flex items-center gap-1 text-[10px] sm:text-xs font-medium text-[#8C9E91] bg-[#1A261D] px-2.5 py-1 rounded-full"
+                  className="inline-flex items-center gap-1 text-[10px] sm:text-xs font-medium text-[#E2E8E4] bg-[#1A261D] px-3 py-1 rounded-full border border-[#243629]"
                 >
-                  <Tag size={10} />
+                  <Tag size={11} className="text-[#4ADE80]" />
                   {tag}
                 </span>
               ))}
@@ -228,16 +228,16 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
           {/* External Sources */}
           {article.externalSources && article.externalSources.length > 0 && (
             <div className="mt-8 pt-8 border-t border-[#243629]">
-              <h3 className="text-[10px] font-bold uppercase tracking-widest text-[#5A6E60] mb-3">External Sources</h3>
-              <ul className="space-y-1.5">
+              <h3 className="text-xs font-bold uppercase tracking-widest text-[#9CA3AF] mb-3">External Sources</h3>
+              <ul className="space-y-2">
                 {article.externalSources.map((src, idx) => (
                   <li key={idx} className="flex items-center gap-2">
-                    <span className="text-[10px] text-[#5A6E60] select-none">[{idx + 1}]</span>
+                    <span className="text-xs text-[#9CA3AF] select-none font-mono">[{idx + 1}]</span>
                     <a
                       href={src}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-xs text-[#8C9E91] font-mono truncate hover:text-[#4ADE80] hover:underline transition-colors max-w-full"
+                      className="text-xs sm:text-sm text-[#4ADE80] font-mono truncate hover:underline transition-colors max-w-full"
                     >
                       {src}
                     </a>
