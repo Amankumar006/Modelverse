@@ -329,7 +329,7 @@ export default function Home() {
                         <span className="text-[9px] font-bold uppercase tracking-wider text-[#4ADE80]">
                           {article.author.split("/")[0].trim()}
                         </span>
-                        <span className="text-[9px] font-mono text-[#5A6E60]">
+                        <span className="text-[10px] font-mono text-[#9CA3AF]">
                           {new Date(article.publishDate).toLocaleDateString("en-US", { month: "short", day: "numeric" })}
                         </span>
                       </div>
@@ -338,8 +338,8 @@ export default function Home() {
                         {article.title}
                       </h4>
 
-                      <div className="flex items-center gap-2 mt-1 text-[10px] text-[#5A6E60]">
-                        <span className="flex items-center gap-1"><Clock size={10} /> {article.readTime}</span>
+                      <div className="flex items-center gap-2 mt-1 text-[10px] text-[#9CA3AF]">
+                        <span className="flex items-center gap-1.5 text-[#A3B8AA]"><Clock size={11} className="text-[#4ADE80]" /> {article.readTime}</span>
                       </div>
                     </div>
 

@@ -42,7 +42,9 @@ body {
 .prose p {
   margin-top: 1.6em;
   margin-bottom: 1.6em;
-  color: #E5E7EB;
+  color: #F3F4F6;
+  font-weight: 400;
+  letter-spacing: -0.01em;
 }
 
 .prose h1, .prose h2, .prose h3, .prose h4 {
@@ -51,9 +53,16 @@ body {
   letter-spacing: -0.02em;
 }
 
+.prose h2 {
+  font-size: 1.65rem;
+  margin-top: 2.2em;
+  margin-bottom: 0.9em;
+  color: #FFFFFF;
+}
+
 .prose h3 {
   font-size: 1.35rem;
-  margin-top: 2.2em;
+  margin-top: 2em;
   margin-bottom: 0.8em;
   color: #F9FAFB;
 }
@@ -61,7 +70,7 @@ body {
 .prose a {
   color: #4ADE80;
   text-decoration: underline;
-  text-underline-offset: 3px;
+  text-underline-offset: 4px;
   font-weight: 500;
 }
 
@@ -72,6 +81,31 @@ body {
 .prose strong {
   color: #FFFFFF;
   font-weight: 600;
+}
+
+.prose ul, .prose ol {
+  color: #F3F4F6;
+  padding-left: 1.25em;
+  margin-top: 1.25em;
+  margin-bottom: 1.25em;
+}
+
+.prose li {
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+  line-height: 1.75;
+  color: #F3F4F6;
+}
+
+.prose blockquote {
+  border-left: 3px solid #4ADE80;
+  color: #E5E7EB;
+  font-style: italic;
+  background: #121A15;
+  padding: 1rem 1.25rem;
+  border-radius: 0.5rem;
+  margin-top: 1.6em;
+  margin-bottom: 1.6em;
 }
 
 .prose code {
