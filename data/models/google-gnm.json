@@ -1,43 +1,49 @@
 {
   "id": "google-gnm",
-  "name": "Google Navigation Model (GNM Head)",
+  "name": "GNM (Generative aNthropometric Model)",
   "slug": "google-gnm",
   "developer": "Google",
-  "releaseDate": "2026-07-22",
+  "releaseDate": "2026-03-23",
   "updatedAt": "2026-07-22",
   "type": "open-weights",
   "modality": [
-    "image"
+    "image",
+    "3d"
   ],
   "primaryTask": "other",
   "deployment": [
     "self-hostable"
   ],
-  "license": "Other/Custom",
+  "license": "Apache-2.0",
   "parameters": "undisclosed",
   "contextWindow": "unknown",
-  "description": "GNM is an open ecosystem of parametric human models and perception stacks, starting with GNM Head by Google.",
+  "description": "GNM (Generative aNthropometric Model) is Google's open ecosystem of state-of-the-art parametric statistical human models and associated perception stacks. Pronounced like 'genome' (/ˈdʒiː.noʊm/), GNM strives to be the most accurate and complete 3D parametric human model. The initial open-source release starts with GNM Head — a high-fidelity statistical 3D model of the human head with fine-grained, disentangled control over identity, expressions, and head pose, including controllable internal anatomy (eyeballs, teeth, tongue). Multi-framework support: NumPy, JAX, PyTorch, and TensorFlow.",
   "keyFeatures": [
-    "Parametric human models",
-    "Perception stacks"
+    "GNM Head: High-fidelity statistical 3D model of the human head with disentangled control over identity, expressions, and head pose",
+    "Internal Anatomy Control: Includes controllable eyeballs, teeth, and tongue for full face/head animation",
+    "Multi-Framework Support: Compatible with NumPy, JAX, PyTorch, and TensorFlow backends",
+    "Semantic Parameter Sampling: Supports semantically meaningful parameter sampling for human appearance generation",
+    "Open Ecosystem: Permissive Apache 2.0 license suitable for both non-commercial and commercial applications"
   ],
   "benchmarks": [],
-  "family": null,
+  "family": "GNM",
   "previousVersion": null,
   "links": {
     "github": "https://github.com/google/GNM"
   },
-  "logo": null,
+  "logo": "/logos/google.svg",
   "tags": [
     "3d-reconstruction",
     "parametric-model",
+    "human-avatar",
+    "face-modeling",
     "perception"
   ],
   "sources": [
     "https://github.com/google/GNM"
   ],
-  "verified": false,
+  "verified": true,
   "featured": false,
   "boost": 1,
-  "curatorNotes": ""
+  "curatorNotes": "Open-source release by Google. GNM Head is the first package — a high-fidelity parametric 3D head model. Apache-2.0 license for commercial and non-commercial use. Roadmap includes full body models."
 }

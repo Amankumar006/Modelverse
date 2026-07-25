@@ -34,7 +34,12 @@ import {
   GitCompare,
   Terminal,
   Link2,
+  Sliders,
+  GitFork,
+  ShieldCheck,
+  Cpu,
 } from "lucide-react";
+import ModelLogo from "@/components/ui/ModelLogo";
 
 export const dynamic = "force-static";
 
@@ -261,11 +266,12 @@ export default async function ModelDetailPage({
                 <h1
                   className="text-3xl sm:text-4xl font-bold tracking-tight text-white leading-none flex items-center gap-3"
                 >
-                  {model.logo && (
-                    <div className="relative w-8 h-8 rounded-full overflow-hidden shrink-0 border border-white/10">
-                      <Image src={model.logo} alt={model.name} fill className="object-cover" />
-                    </div>
-                  )}
+                  <ModelLogo
+                    logo={model.logo}
+                    name={model.name}
+                    developer={model.developer}
+                    size="lg"
+                  />
                   {model.name}
                   {model.featured && (
                     <span className="text-[10px] font-bold uppercase tracking-wider text-[#4ADE80] bg-[#4ADE80]/10 border border-[#4ADE80]/20 px-2 py-0.5 rounded-full shrink-0">
@@ -455,49 +461,59 @@ export default async function ModelDetailPage({
           {/* Sidebar Specs & Relationships Columns (right) */}
           <div className="lg:col-span-4 space-y-6 lg:sticky lg:top-8 h-fit">
             {/* Specs Card */}
-            <section className="p-5 rounded-2xl bg-white/5 border border-white/10 space-y-6 text-left">
-              <h2 className="text-[10px] font-bold uppercase tracking-widest text-gray-400/80">Model Specs</h2>
-
-              {/* Params */}
-              <div className="space-y-1">
-                <p className="text-[10px] text-gray-400 uppercase tracking-wider font-semibold">Parameters</p>
-                <p className="text-xs text-white font-mono">
-                  {model.parameters === "undisclosed" ? "undisclosed" : model.parameters}
-                </p>
+            <section className="p-5.5 rounded-2xl bg-gradient-to-b from-white/[0.06] to-white/[0.02] border border-white/10 backdrop-blur-md space-y-5 text-left shadow-xl">
+              <div className="flex items-center justify-between pb-3 border-b border-white/10">
+                <div className="flex items-center gap-2">
+                  <Sliders size={15} className="text-[#4ADE80]" />
+                  <h2 className="text-xs font-bold uppercase tracking-widest text-gray-300">Model Specs</h2>
+                </div>
+                <span className="text-[10px] font-mono text-gray-400/60 bg-white/5 border border-white/10 px-2 py-0.5 rounded-md">
+                  {model.type}
+                </span>
               </div>
 
-              {/* Context window */}
-              <div className="space-y-1">
-                <p className="text-[10px] text-gray-400 uppercase tracking-wider font-semibold">Context Window</p>
-                <p className="text-xs text-white font-mono">
-                  {model.contextWindow}
-                </p>
-              </div>
-
-              {/* Tier */}
-              {model.tier && (
+              <div className="grid grid-cols-2 gap-4">
+                {/* Params */}
                 <div className="space-y-1">
-                  <p className="text-[10px] text-gray-400 uppercase tracking-wider font-semibold">Tier</p>
-                  <p className="text-xs text-white font-mono">
-                    {model.tier}
+                  <p className="text-[10px] text-gray-400 uppercase tracking-wider font-semibold">Parameters</p>
+                  <p className="text-xs text-white font-mono font-medium">
+                    {model.parameters === "undisclosed" ? "Undisclosed" : model.parameters}
                   </p>
                 </div>
-              )}
 
-              {/* License */}
-              <div className="space-y-1">
-                <p className="text-[10px] text-gray-400 uppercase tracking-wider font-semibold">License</p>
-                <p className="text-xs text-white font-mono truncate" title={model.license}>
-                  {model.license}
-                </p>
+                {/* Context window */}
+                <div className="space-y-1">
+                  <p className="text-[10px] text-gray-400 uppercase tracking-wider font-semibold">Context Window</p>
+                  <p className="text-xs text-white font-mono font-medium">
+                    {model.contextWindow}
+                  </p>
+                </div>
+
+                {/* Tier */}
+                {model.tier && (
+                  <div className="space-y-1">
+                    <p className="text-[10px] text-gray-400 uppercase tracking-wider font-semibold">Tier</p>
+                    <p className="text-xs text-white font-mono font-medium">
+                      {model.tier}
+                    </p>
+                  </div>
+                )}
+
+                {/* License */}
+                <div className="space-y-1 col-span-2 sm:col-span-1">
+                  <p className="text-[10px] text-gray-400 uppercase tracking-wider font-semibold">License</p>
+                  <p className="text-xs text-white font-mono font-medium truncate" title={model.license}>
+                    {model.license}
+                  </p>
+                </div>
               </div>
 
               {/* Deployments */}
-              <div className="space-y-1">
+              <div className="space-y-1.5 pt-3 border-t border-white/10">
                 <p className="text-[10px] text-gray-400 uppercase tracking-wider font-semibold">Deployment</p>
                 <div className="flex flex-wrap gap-1.5 mt-1">
                   {model.deployment.map((dep) => (
-                    <span key={dep} className="text-[9px] uppercase tracking-wide bg-white/5 text-gray-400 border border-white/10 px-2 py-0.5 rounded">
+                    <span key={dep} className="text-[10px] font-semibold uppercase tracking-wider bg-[#4ADE80]/10 text-[#4ADE80] border border-[#4ADE80]/20 px-2.5 py-0.5 rounded-full">
                       {dep}
                     </span>
                   ))}
@@ -506,7 +522,7 @@ export default async function ModelDetailPage({
 
               {/* Cost Tiers */}
               {model.costTiers && model.costTiers.length > 0 && (
-                <div className="space-y-2 pt-4 border-t border-white/10">
+                <div className="space-y-2 pt-3 border-t border-white/10">
                   <p className="text-[10px] text-gray-400 uppercase tracking-wider font-semibold">Cost Tiers</p>
                   <div className="flex flex-wrap gap-2 mt-1">
                     {model.costTiers.map((tier) => (
@@ -518,7 +534,6 @@ export default async function ModelDetailPage({
                           <div className="absolute left-1/2 -translate-x-1/2 bottom-full mb-2 hidden group-hover/tier:block z-30 w-56 p-3 bg-[#121A15] border border-white/10 text-[10px] text-gray-400 leading-relaxed rounded-xl shadow-xl font-sans text-center">
                             {tier.description}
                             <div className="absolute top-full left-1/2 -translate-x-1/2 border-8 border-transparent border-t-white" />
-                            <div className="absolute top-full left-1/2 -translate-x-1/2 border-8 border-transparent border-t-black/10 -z-10" style={{ transform: 'translateX(-50%) translateY(1px)' }} />
                           </div>
                         )}
                       </div>
@@ -529,16 +544,16 @@ export default async function ModelDetailPage({
 
               {/* Pricing */}
               {model.pricing && model.pricing.length > 0 && (
-                <div className="space-y-2 pt-4 border-t border-white/10">
+                <div className="space-y-2 pt-3 border-t border-white/10">
                   <p className="text-[10px] text-gray-400 uppercase tracking-wider font-semibold">Pricing</p>
                   <ul className="space-y-1.5 mt-1">
                     {model.pricing.map((price, idx) => (
-                      <li key={idx} className="text-xs text-white flex items-center justify-between border-b border-black/5 pb-1.5 last:border-0 last:pb-0">
+                      <li key={idx} className="text-xs text-white flex items-center justify-between border-b border-white/5 pb-1.5 last:border-0 last:pb-0">
                         <span className="text-gray-400">
                           {price.tier ? <span className="font-semibold mr-1">{price.tier}:</span> : null}
                           {price.unit}
                         </span>
-                        <span className="font-mono font-medium">
+                        <span className="font-mono font-medium text-[#4ADE80]">
                           {price.currency !== "USD" ? `${price.currency} ` : "$"}{price.amount}
                         </span>
                       </li>
@@ -555,17 +570,21 @@ export default async function ModelDetailPage({
 
             {/* Links Section */}
             {model.links && Object.keys(model.links).length > 0 && (
-              <section className="p-5 rounded-2xl bg-white/5 border border-white/10 space-y-3.5 text-left">
-                <h2 className="text-[10px] font-bold uppercase tracking-widest text-gray-400/80">Links</h2>
+              <section className="p-5.5 rounded-2xl bg-gradient-to-b from-white/[0.06] to-white/[0.02] border border-white/10 backdrop-blur-md space-y-4 text-left shadow-xl">
+                <div className="flex items-center gap-2 pb-3 border-b border-white/10">
+                  <Globe size={15} className="text-[#4ADE80]" />
+                  <h2 className="text-xs font-bold uppercase tracking-widest text-gray-300">Resources & Links</h2>
+                </div>
                 <div className="flex flex-col gap-2">
                   {Object.entries(model.links).map(([key, url]) => {
                     let Icon = ExternalLink;
                     const lowerKey = key.toLowerCase();
                     if (lowerKey.includes('github') || lowerKey.includes('repo')) Icon = Terminal;
                     else if (lowerKey.includes('hugging') || lowerKey.includes('weights')) Icon = Layers;
-                    else if (lowerKey.includes('paper') || lowerKey.includes('arxiv') || lowerKey.includes('api') || lowerKey.includes('doc')) Icon = FileText;
+                    else if (lowerKey.includes('paper') || lowerKey.includes('arxiv') || lowerKey.includes('doc')) Icon = FileText;
                     else if (lowerKey.includes('site') || lowerKey.includes('official') || lowerKey === 'website') Icon = Globe;
                     else if (lowerKey.includes('blog') || lowerKey.includes('post')) Icon = Link2;
+                    else if (lowerKey === 'api') Icon = Terminal;
 
                     let displayName = key;
                     if (key === 'blogPost') displayName = 'Developer Blog';
@@ -573,6 +592,7 @@ export default async function ModelDetailPage({
                     else if (key === 'github') displayName = 'GitHub Repository';
                     else if (key === 'paper') displayName = 'Research Paper';
                     else if (key === 'website') displayName = 'Official Website';
+                    else if (key.toLowerCase() === 'api') displayName = 'API & Playground';
 
                     const isComingSoon = url === "coming-soon" || url.toLowerCase().includes("coming-soon");
 
@@ -580,13 +600,13 @@ export default async function ModelDetailPage({
                       return (
                         <div
                           key={key}
-                          className="flex items-center justify-between p-3 rounded-xl bg-white/5 border border-white/10 text-xs font-semibold text-gray-400/60 select-none"
+                          className="flex items-center justify-between p-3 rounded-xl bg-white/[0.02] border border-white/10 text-xs font-semibold text-gray-500 select-none"
                         >
-                          <span className="flex items-center gap-2">
-                            <Icon size={13} className="text-gray-400/50" />
+                          <span className="flex items-center gap-2.5">
+                            <Icon size={14} className="text-gray-500" />
                             {displayName}
                           </span>
-                          <span className="text-[10px] font-sans font-medium text-amber-400/90 bg-amber-500/10 border border-amber-500/20 px-2 py-0.5 rounded-full">
+                          <span className="text-[10px] font-sans font-semibold text-amber-400/90 bg-amber-500/10 border border-amber-500/20 px-2 py-0.5 rounded-full">
                             Coming Soon
                           </span>
                         </div>
@@ -599,13 +619,13 @@ export default async function ModelDetailPage({
                         href={url}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="flex items-center justify-between p-3 rounded-xl bg-[#121A15] hover:bg-white/5 border border-white/10 text-xs font-semibold text-gray-400 hover:text-white transition-colors group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#4ADE80]/50"
+                        className="flex items-center justify-between p-3 rounded-xl bg-white/[0.03] hover:bg-white/[0.08] border border-white/10 hover:border-[#4ADE80]/40 text-xs font-semibold text-gray-300 hover:text-white transition-all duration-200 group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#4ADE80]/50 shadow-sm"
                       >
-                        <span className="flex items-center gap-2">
-                          <Icon size={13} className="text-black/40" />
+                        <span className="flex items-center gap-2.5">
+                          <Icon size={14} className="text-[#4ADE80] group-hover:scale-110 transition-transform" />
                           {displayName}
                         </span>
-                        <ExternalLink size={12} className="text-black/25 group-hover:text-black/60 transition-colors" />
+                        <ExternalLink size={13} className="text-gray-400 group-hover:text-[#4ADE80] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" />
                       </a>
                     );
                   })}
@@ -615,40 +635,44 @@ export default async function ModelDetailPage({
 
             {/* Lineage & Family Section */}
             {(model.family || prevVersionModel) && (
-              <section className="p-5 rounded-2xl bg-white/5 border border-white/10 space-y-3.5 text-left">
-                <h2 className="text-[10px] font-bold uppercase tracking-widest text-gray-400/80">Lineage</h2>
+              <section className="p-5.5 rounded-2xl bg-gradient-to-b from-white/[0.06] to-white/[0.02] border border-white/10 backdrop-blur-md space-y-4 text-left shadow-xl">
+                <div className="flex items-center gap-2 pb-3 border-b border-white/10">
+                  <GitFork size={15} className="text-[#4ADE80]" />
+                  <h2 className="text-xs font-bold uppercase tracking-widest text-gray-300">Lineage</h2>
+                </div>
                 
                 {/* Family line */}
                 {model.family && (
-                  <div className="space-y-1">
-                    <p className="text-[10px] text-gray-400 font-medium">Part of the {model.family} family</p>
+                  <div className="space-y-1.5">
+                    <p className="text-[10px] text-gray-400 uppercase tracking-wider font-semibold">Model Family</p>
+                    <p className="text-xs text-gray-300 font-medium">Part of the <span className="text-white font-semibold">{model.family}</span> family</p>
                     {familyMembers.length > 0 ? (
                       <div className="flex flex-wrap gap-1.5 pt-1">
                         {familyMembers.map((member) => (
                           <Link
                             key={member.id}
                             href={`/models/${member.slug}`}
-                            className="text-xs text-[#4ADE80] hover:text-[#e85a28] hover:underline"
+                            className="text-xs text-[#4ADE80] hover:underline bg-[#4ADE80]/10 border border-[#4ADE80]/20 px-2.5 py-1 rounded-lg transition-colors font-medium"
                           >
                             {member.name}
                           </Link>
                         ))}
                       </div>
                     ) : (
-                      <p className="text-xs text-gray-400">Only release in this line currently tracked.</p>
+                      <p className="text-[11px] text-gray-400/80 italic">Only release in this line currently tracked.</p>
                     )}
                   </div>
                 )}
 
                 {/* Previous version link */}
                 {prevVersionModel && (
-                  <div className="space-y-1.5 pt-2 border-t border-white/10">
-                    <p className="text-[10px] text-gray-400 font-medium">Predecessor</p>
+                  <div className="space-y-1.5 pt-3 border-t border-white/10">
+                    <p className="text-[10px] text-gray-400 uppercase tracking-wider font-semibold">Predecessor</p>
                     <Link
                       href={`/models/${prevVersionModel.slug}`}
-                      className="inline-flex items-center gap-1.5 text-xs text-[#4ADE80] hover:text-[#e85a28] hover:underline group"
+                      className="inline-flex items-center gap-2 text-xs font-semibold text-[#4ADE80] hover:text-emerald-300 hover:underline group bg-[#4ADE80]/10 border border-[#4ADE80]/20 px-3 py-1.5 rounded-xl transition-all"
                     >
-                      <GitCompare size={12} className="shrink-0" />
+                      <GitCompare size={13} className="shrink-0 group-hover:rotate-12 transition-transform" />
                       {prevVersionModel.name}
                     </Link>
                   </div>
@@ -658,24 +682,31 @@ export default async function ModelDetailPage({
 
             {/* Curator Notes */}
             {model.curatorNotes && (
-              <section className="p-5 rounded-2xl bg-amber-500/5 border border-amber-500/15 space-y-2 text-left">
-                <h3 className="text-[10px] font-bold uppercase tracking-widest text-amber-500/80">Curator Notes</h3>
-                <p className="text-[11px] text-amber-500/80 leading-relaxed">
+              <section className="p-5.5 rounded-2xl bg-gradient-to-br from-amber-500/10 via-amber-500/[0.04] to-transparent border border-amber-500/20 space-y-2.5 text-left shadow-lg">
+                <div className="flex items-center gap-2">
+                  <ShieldCheck size={15} className="text-amber-400" />
+                  <h3 className="text-xs font-bold uppercase tracking-widest text-amber-400">Curator Notes</h3>
+                </div>
+                <p className="text-xs text-amber-200/90 leading-relaxed font-sans">
                   {model.curatorNotes}
                 </p>
               </section>
             )}
 
             {/* Compare CTA Box */}
-            <section className="p-5 rounded-2xl bg-[#4ADE80]/5 border border-[#4ADE80]/15 space-y-3 text-left">
-              <h3 className="text-xs font-semibold text-white">Compare Specs</h3>
-              <p className="text-[11px] text-gray-400 leading-relaxed">
-                Compare the parameters, context windows, and benchmarks of this model against others side-by-side.
+            <section className="p-5.5 rounded-2xl bg-gradient-to-b from-[#121A15] via-[#0E1511] to-[#0A0F0C] border border-[#4ADE80]/30 shadow-[0_0_30px_rgba(74,222,128,0.07)] space-y-3.5 text-left">
+              <div className="flex items-center gap-2">
+                <GitCompare size={16} className="text-[#4ADE80]" />
+                <h3 className="text-sm font-bold text-white tracking-tight">Compare Specs</h3>
+              </div>
+              <p className="text-xs text-gray-400 leading-relaxed">
+                Compare parameters, context windows, modalities, and benchmark scores of this model side-by-side with others.
               </p>
               <Link
                 href={`/compare?models=${model.slug}`}
-                className="w-full py-2.5 bg-[#4ADE80] hover:bg-[#e85a28] text-white rounded-xl text-xs font-bold transition-all flex items-center justify-center hover:scale-[1.02] active:scale-95"
+                className="w-full py-3 bg-[#4ADE80] hover:bg-[#38c96e] text-[#0C120F] rounded-xl text-xs font-bold transition-all duration-200 flex items-center justify-center gap-2 shadow-lg shadow-[#4ADE80]/25 hover:shadow-[#4ADE80]/40 active:scale-[0.98]"
               >
+                <GitCompare size={14} />
                 Compare Model
               </Link>
             </section>

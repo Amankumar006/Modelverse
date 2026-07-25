@@ -1,40 +1,72 @@
 {
   "id": "alibaba-qwen-3-7-plus",
   "name": "Qwen 3.7 Plus",
-  "slug": "alibaba-qwen-3-7-plus",
+  "slug": "qwen-3-7-plus",
   "developer": "Alibaba",
-  "releaseDate": "2026-07-15",
-  "updatedAt": "2026-07-15",
-  "type": "research-preview",
+  "releaseDate": "2026-06-01",
+  "updatedAt": "2026-07-22",
+  "type": "closed-source",
   "modality": [
-    "text"
+    "text",
+    "image",
+    "video"
   ],
-  "primaryTask": "other",
+  "primaryTask": "multimodal-general",
   "deployment": [
-    "self-hostable"
+    "api-only"
   ],
-  "license": "Other/Custom",
+  "license": "Proprietary",
   "parameters": "undisclosed",
-  "contextWindow": "undisclosed",
-  "description": "An experimental specialized research research preview named Qwen 3.7 Plus, published by Alibaba to showcase novel methods.",
-  "keyFeatures": [],
-  "benchmarks": [],
-  "family": null,
+  "contextWindow": "1M tokens",
+  "description": "Qwen 3.7 Plus is a multimodal interactive hybrid agent model developed by Alibaba Group. Designed to unify vision and language capabilities, it serves as a versatile foundation for agentic workflows, integrating Graphical User Interface (GUI) screen interaction with Command Line Interface (CLI) code execution and tool use.",
+  "keyFeatures": [
+    "Multimodal Interactive Hybrid Agent: Unifies GUI interactions (screen reading, UI element grounding) and CLI execution (terminal commands, code generation)",
+    "Ultra-Long Context Window: Supports up to 1,000,000 input tokens for processing high-volume text, images, and long video inputs",
+    "High-Precision GUI Grounding: Engineered specifically to identify and pinpoint visual elements on digital screens with state-of-the-art accuracy",
+    "Agentic Framework & Physical-World Generalization: Acts as an upper-level planner across software frameworks (Claude Code, OpenClaw, Qwen Code) and robotic suites",
+    "High Efficiency & Cost Effectiveness: Value-tier, high-throughput multimodal counterpart to Qwen 3.7-Max delivering frontier performance at ~6x lower cost"
+  ],
+  "benchmarks": [
+    {
+      "name": "ScreenSpot Pro (GUI Grounding)",
+      "score": "79.0",
+      "verified": true
+    },
+    {
+      "name": "SWE-bench Verified",
+      "score": "77.7%",
+      "verified": true
+    },
+    {
+      "name": "Terminal-Bench 2.0 (Terminus)",
+      "score": "70.3",
+      "verified": true
+    }
+  ],
+  "family": "Qwen",
   "previousVersion": null,
   "links": {
-    "Website": "https://qwen.ai/blog?id=qwen3.7-plus"
+    "website": "https://qwen.ai/blog?id=qwen3.7-plus",
+    "github": "https://github.com/QwenLM",
+    "huggingface": "https://huggingface.co/Qwen"
   },
-  "logo": null,
+  "logo": "/logos/alibaba.svg",
   "tags": [
-    "research-preview",
-    "other"
+    "multimodal",
+    "gui-agent",
+    "coding-agent",
+    "alibaba",
+    "qwen",
+    "1m-context"
   ],
   "sources": [
-    "https://qwen.ai/blog?id=qwen3.7-plus"
+    "https://qwen.ai/blog?id=qwen3.7-plus",
+    "https://github.com/QwenLM"
   ],
-  "verified": false,
-  "featured": false,
+  "verified": true,
+  "featured": true,
   "boost": 1,
-  "curatorNotes": "Ingested research preview via bulk triage. Affiliation: Alibaba. Traction signal: Initial release.",
-  "templatedDescription": true
+  "curatorNotes": "Verified release from Alibaba Qwen Team. Proprietary commercial API model.",
+  "institution": "Alibaba Group (Qwen Team)",
+  "templatedDescription": false
 }

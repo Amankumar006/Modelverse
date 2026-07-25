@@ -1,40 +1,59 @@
 {
   "id": "google-deepmind-co-scientist",
-  "name": "Co-scientist",
-  "slug": "google-deepmind-co-scientist",
+  "name": "Co-Scientist",
+  "slug": "co-scientist",
   "developer": "Google DeepMind",
-  "releaseDate": "2026-07-15",
-  "updatedAt": "2026-07-15",
-  "type": "research-preview",
+  "releaseDate": "2025-02-18",
+  "updatedAt": "2026-07-22",
+  "type": "closed-source",
   "modality": [
-    "text"
+    "text",
+    "multimodal"
   ],
   "primaryTask": "other",
   "deployment": [
-    "self-hostable"
+    "api-only"
   ],
-  "license": "Other/Custom",
+  "license": "Proprietary",
   "parameters": "undisclosed",
   "contextWindow": "undisclosed",
-  "description": "An experimental specialized research research preview named Co-scientist, published by Google DeepMind to showcase novel methods.",
-  "keyFeatures": [],
-  "benchmarks": [],
+  "description": "Co-Scientist (AI Co-Scientist) is a Gemini 2.0-powered multi-agent AI system developed by Google DeepMind and Google Research. Designed to act as a virtual scientific collaborator, it generates, debates, evolves, and ranks novel research hypotheses with citation grounding across biomedical and physical sciences.",
+  "keyFeatures": [
+    "Multi-Agent Architecture & Specialized Scientific Roles: Coalition of specialized agents (Supervisor, Generation, Peer Review, Ranking, Evolution)",
+    "Elo Tournament System for Hypothesis Ranking: Automated pairwise idea tournament using Elo ratings to systematically evaluate scientific hypotheses",
+    "Test-Time Compute Scaling: Asynchronous task execution framework scaling compute during inference for iterative long-horizon refinement",
+    "Biomedical & Experimental Validation: Formulates actionable hypotheses validated by laboratory testing (drug repurposing for AML, bacterial evolution)",
+    "Citation Grounding & Interactive Collaboration: Clickable citations to literature databases integrated into scientist workflows"
+  ],
+  "benchmarks": [
+    {
+      "name": "GPQA Scientific Reasoning Correlation",
+      "score": "Strong positive correlation with test-time compute",
+      "verified": true
+    }
+  ],
   "family": null,
   "previousVersion": null,
   "links": {
-    "Website": "https://deepmind.google/blog/co-scientist-accelerating-scientific-discovery/"
+    "website": "https://labs.google/science",
+    "paper": "https://arxiv.org/abs/2502.18864"
   },
-  "logo": null,
+  "logo": "/logos/google.svg",
   "tags": [
-    "research-preview",
-    "other"
+    "deepmind",
+    "scientific-discovery",
+    "multi-agent",
+    "hypothesis-generation",
+    "biomedical"
   ],
   "sources": [
-    "https://deepmind.google/blog/co-scientist-accelerating-scientific-discovery/"
+    "https://arxiv.org/abs/2502.18864",
+    "https://blog.google/technology/ai/google-gemini-ai-co-scientist/"
   ],
-  "verified": false,
-  "featured": false,
+  "verified": true,
+  "featured": true,
   "boost": 1,
-  "curatorNotes": "Ingested research preview via bulk triage. Affiliation: Google DeepMind. Traction signal: Initial release.",
-  "templatedDescription": true
+  "curatorNotes": "Verified paper arXiv:2502.18864 (Nature 2026) and platform preview from Google DeepMind.",
+  "institution": "Google DeepMind",
+  "templatedDescription": false
 }

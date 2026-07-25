@@ -1,11 +1,11 @@
 {
   "id": "google-deepmind-gemini-2-5-pro",
   "name": "Gemini 2.5 Pro",
-  "slug": "google-deepmind-gemini-2-5-pro",
+  "slug": "gemini-2-5-pro",
   "developer": "Google DeepMind",
-  "releaseDate": "2025-03-25",
-  "updatedAt": "2025-03-25",
-  "type": "api-only",
+  "releaseDate": "2025-03-01",
+  "updatedAt": "2026-07-22",
+  "type": "closed-source",
   "modality": [
     "text",
     "image",
@@ -19,25 +19,55 @@
   ],
   "license": "Proprietary",
   "parameters": "undisclosed",
-  "contextWindow": "2M tokens",
-  "description": "An advanced model for complex tasks featuring deep reasoning and coding capabilities, preceding the Gemini 3 lineup.",
+  "contextWindow": "1M tokens",
+  "description": "Gemini 2.5 Pro is Google DeepMind's flagship thinking AI model engineered for advanced reasoning, coding, and STEM tasks. Featuring internal deliberation and a 1M+ token context window, it natively processes text, image, audio, video, and code for software engineering and agentic automation.",
   "keyFeatures": [
-    "Deep reasoning and coding",
-    "Native multimodal capabilities"
+    "Internal Deliberation & Reasoning Engine: Solves multi-step problems via intermediate thought processes before generating outputs",
+    "1M Token Context Window: Natively handles up to 1,048,576 tokens of context (codebases, documents, 3 hrs of video)",
+    "SOTA Software Engineering: High accuracy on real-world coding benchmarks (63.8% SWE-bench Verified)",
+    "Native Multimodality: Unified understanding across text, images, audio, video, and source code",
+    "Agentic Workflows & Computer Use: Specialized for tool calling, workflow orchestration, and GUI interaction"
   ],
-  "benchmarks": [],
-  "family": "gemini-2-5",
-  "previousVersion": "google-deepmind-gemini-2-0-pro",
+  "benchmarks": [
+    {
+      "name": "SWE-bench Verified",
+      "score": "63.8%",
+      "verified": true
+    },
+    {
+      "name": "GPQA Diamond",
+      "score": "83.8%",
+      "verified": true
+    },
+    {
+      "name": "AIME 2024/2025",
+      "score": "86.0% - 92.0%",
+      "verified": true
+    }
+  ],
+  "family": "Gemini",
+  "previousVersion": null,
   "links": {
-    "website": "https://aistudio.google.com/models/gemini-2"
+    "website": "https://deepmind.google/technologies/gemini/",
+    "paper": "https://arxiv.org/abs/2507.06261"
   },
   "logo": "/logos/google.svg",
-  "tags": [],
+  "tags": [
+    "gemini",
+    "deepmind",
+    "reasoning",
+    "1m-context",
+    "coding",
+    "multimodal"
+  ],
   "sources": [
-    "https://en.wikipedia.org/wiki/Gemini_(language_model)"
+    "https://deepmind.google/technologies/gemini/",
+    "https://arxiv.org/abs/2507.06261"
   ],
   "verified": true,
-  "featured": false,
+  "featured": true,
   "boost": 1,
-  "curatorNotes": ""
+  "curatorNotes": "Verified paper arXiv:2507.06261 and commercial release from Google DeepMind.",
+  "institution": "Google DeepMind",
+  "templatedDescription": false
 }

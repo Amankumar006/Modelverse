@@ -1,19 +1,29 @@
-# AlphaEvolve
+# AlphaEvolve: Evolutionary AI Coding Agent for Algorithm Discovery
 
 ## Model Overview
-AlphaEvolve is an autonomous AI evolutionary coding agent developed by Google DeepMind. Unveiled in May 2025 and later deployed commercially via Google Cloud's Gemini Enterprise Agent Platform (in 2026), AlphaEvolve uses an evolutionary search loop powered by ensembles of Gemini models. It iteratively generates, evaluates, and optimizes code to discover highly efficient algorithmic structures, acting as a general-purpose system for complex scientific and engineering problems.## Capabilities
-The model operates on an evolutionary pipeline where Gemini LLMs generate variants of existing algorithms, which are then tested by automated evaluators. The best-performing algorithms are selected as "parents" for the next generation. This automated execution, evaluation, and mutation loop allows AlphaEvolve to discover novel solutions with reduced human intervention and minimal hallucinations. It famously discovered a procedure to multiply 4x4 complex-valued matrices in 48 scalar multiplications, breaking a record held since Strassen's algorithm 56 years prior.
+**AlphaEvolve** is an evolutionary AI coding agent developed by **Google DeepMind** (published May 2025).
 
-## Example Use Cases
-- **Algorithm Optimization:** Refining and discovering new algorithms for complex mathematical challenges, such as the Traveling Salesman Problem and matrix multiplication.
-- **Infrastructure Efficiency:** Optimizing the design of next-generation TPUs, cache replacement policies, and database performance (e.g., Google Spanner).
-- **Scientific Discovery:** Applying evolutionary coding to fields like DNA sequencing, drug discovery, power grid stabilization, and disaster prediction.
+Operating as an iterative "discovery engine", AlphaEvolve takes a seed program (with designated code sections to optimize) and a deterministic evaluator script. It orchestrates a multi-LLM pipeline using Gemini models—employing Gemini Flash for fast code mutation generation and Gemini Pro for deep code refactoring—guided by evolutionary selection strategies to discover superior algorithms.
+
+---
+
+## Key Features
+- **Evolutionary Code Optimization Loop:** Integrates LLMs into an evolutionary search architecture that iteratively mutates candidate code and evaluates performance.
+- **Multi-Model Gemini Pipeline:** Pairs Gemini Flash for broad exploration of the search space with Gemini Pro for targeted algorithmic enhancements.
+- **Evaluator-Guided Verification:** Driven by programmatically defined client-side evaluator scripts that test code correctness, efficiency, and resource utilization.
+- **Production-Scale Real-World Application:** Applied across Google's internal computing stack to optimize silicon designs, database heuristics, and fleet scheduling.
+- **Scientific & Mathematical Discovery:** Capable of producing non-obvious mathematical shortcuts and lower bounds exceeding long-standing benchmarks.
+
+---
+
+## Verified Project Links
+- **Official Blog Post:** [Google DeepMind Blog](https://deepmind.google/discover/blog/alphaevolve-a-gemini-powered-coding-agent-for-designing-advanced-algorithms)
+- **arXiv Paper:** [https://arxiv.org/abs/2506.13131](https://arxiv.org/abs/2506.13131)
+- **GitHub Results:** [https://github.com/google-deepmind/alphaevolve_results](https://github.com/google-deepmind/alphaevolve_results)
+
+---
 
 ## Performance & Benchmarks
-While traditional LLM benchmark numbers are largely undisclosed, AlphaEvolve's performance is measured by its real-world algorithmic discoveries. Its ability to solve long-standing math problems and improve Google's own core infrastructure demonstrates its frontier capabilities in algorithmic optimization.
-
-## Intended Use & Limitations
-AlphaEvolve is intended for enterprise and scientific use, specifically targeting complex algorithm discovery and infrastructure optimization. Because it relies on extensive iterative execution and evaluation loops, it requires significant compute resources and automated testing environments. 
-
-## About Google DeepMind
-Google DeepMind is a premier AI research laboratory composed of the merged Google Brain and DeepMind teams. They are renowned for their pioneering work in artificial general intelligence, reinforcement learning, and deploying transformative AI systems across science, engineering, and infrastructure.
+- **4×4 Complex Matrix Multiplication:** Discovered a procedure in 48 scalar multiplications, breaking Strassen's 56-year-old benchmark record.
+- **Google Spanner Compaction:** Reduced write amplification in LSM-trees by 20%.
+- **Data Center Job Scheduling:** Recovered 0.7% of stranded compute capacity across Google's global data center fleet.

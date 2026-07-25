@@ -1,10 +1,10 @@
 {
   "id": "alibaba-qwen2.5-72b-instruct",
-  "name": "Qwen2.5 72B Instruct",
-  "slug": "qwen2-5-72b-instruct",
+  "name": "Qwen 2.5 72B Instruct",
+  "slug": "qwen-2-5-72b-instruct",
   "developer": "Alibaba",
   "releaseDate": "2024-09-19",
-  "updatedAt": "2024-09-19",
+  "updatedAt": "2026-07-22",
   "type": "open-weights",
   "modality": [
     "text"
@@ -16,18 +16,24 @@
   ],
   "license": "Other/Custom",
   "parameters": "72.7B",
-  "contextWindow": "128K",
-  "description": "Alibaba's flagship open-weights model in the Qwen2.5 series, demonstrating state-of-the-art capabilities in coding, mathematics, and general knowledge reasoning.",
+  "contextWindow": "128K tokens",
+  "description": "Qwen2.5-72B-Instruct is the flagship 72.7-billion parameter instruction-tuned language model in Alibaba's Qwen2.5 series. Pre-trained on 18 trillion tokens, it delivers massive improvements in instruction following, coding, mathematical reasoning, multilingual understanding, and structured data generation.",
   "keyFeatures": [
-    "Supports 128K context window with 8K generation",
-    "Exceptional coding and mathematical reasoning",
-    "Multilingual support across 29+ languages",
-    "Grouped-Query Attention (GQA) for fast inference"
+    "Massive Pre-training Scale: 72.7 billion parameters trained on 18 trillion high-quality tokens",
+    "Long Context Support: Native support for input contexts up to 131,072 (128K) tokens and generation up to 8,192 tokens",
+    "Multilingual Versatility: Full comprehension and response capabilities across 29+ languages",
+    "Frontier Code & Math Reasoning: SOTA open-weights performance on competitive coding, math, Program-of-Thought, and tool-integrated reasoning",
+    "Structured Data & Instruction Alignment: Specialized fine-tuning for structured output generation (JSON, tables) and strict system instruction adherence"
   ],
   "benchmarks": [
     {
-      "name": "MMLU-Pro",
-      "score": "71.1%",
+      "name": "MMLU",
+      "score": "86.1%",
+      "verified": true
+    },
+    {
+      "name": "HumanEval Pass@1",
+      "score": "86.6%",
       "verified": true
     },
     {
@@ -36,25 +42,38 @@
       "verified": true
     },
     {
-      "name": "HumanEval",
-      "score": "86.6%",
+      "name": "MATH",
+      "score": "83.1%",
       "verified": true
     }
   ],
   "family": "Qwen",
-  "previousVersion": "qwen2-72b-instruct",
+  "previousVersion": null,
   "links": {
-    "website": "https://qwenlm.github.io/blog/qwen2.5/"
+    "website": "https://qwenlm.github.io/blog/qwen2.5/",
+    "paper": "https://arxiv.org/abs/2412.15115",
+    "github": "https://github.com/QwenLM/Qwen2.5",
+    "huggingface": "https://huggingface.co/Qwen/Qwen2.5-72B-Instruct"
   },
   "logo": "/logos/alibaba.svg",
   "tags": [
+    "llm",
+    "qwen",
+    "alibaba",
     "open-weights",
-    "flagship",
-    "long-context"
+    "128k-context",
+    "coding",
+    "math"
   ],
   "sources": [
-    "https://qwenlm.github.io/blog/qwen2.5/"
+    "https://qwenlm.github.io/blog/qwen2.5/",
+    "https://arxiv.org/abs/2412.15115",
+    "https://github.com/QwenLM/Qwen2.5"
   ],
   "verified": true,
-  "curatorNotes": "Governed by the Qwen License Agreement, permitting commercial use up to certain user thresholds."
+  "featured": true,
+  "boost": 1,
+  "curatorNotes": "Verified paper arXiv:2412.15115 and open-weights release from Alibaba Qwen Team.",
+  "institution": "Alibaba Cloud / Qwen Team",
+  "templatedDescription": false
 }

@@ -1,10 +1,10 @@
 {
   "id": "dall-e-2",
-  "name": "DALL·E 2",
+  "name": "DALL-E 2",
   "slug": "dall-e-2",
   "developer": "OpenAI",
-  "releaseDate": "2026-07-14",
-  "updatedAt": "2026-07-14",
+  "releaseDate": "2022-04-06",
+  "updatedAt": "2026-07-22",
   "type": "closed-source",
   "modality": [
     "text",
@@ -15,23 +15,46 @@
     "api-only"
   ],
   "license": "Proprietary",
-  "parameters": "Unknown",
-  "contextWindow": "Unknown",
-  "description": "Our first image generation model",
-  "keyFeatures": [],
-  "benchmarks": [],
-  "family": "dall-e",
+  "parameters": "3.5B",
+  "contextWindow": "undisclosed",
+  "description": "DALL-E 2 (unCLIP) is a 3.5 billion parameter text-conditional image generation model developed by OpenAI. It uses a two-stage unCLIP architecture: a prior model converting text prompts to CLIP image embeddings, followed by a diffusion decoder and super-resolution cascade (64x64 -> 256x256 -> 1024x1024).",
+  "keyFeatures": [
+    "Hierarchical two-stage unCLIP architecture using CLIP latents",
+    "Language-guided image editing and inpainting/outpainting",
+    "Image variation generation from visual input",
+    "Conceptual interpolation between images in CLIP latent space",
+    "High-resolution 1024x1024 image synthesis via cascading diffusion models"
+  ],
+  "benchmarks": [
+    {
+      "name": "MS-COCO 256x256 Zero-Shot FID",
+      "score": "10.39 (outperforms GLIDE 12.24)",
+      "verified": true
+    }
+  ],
+  "family": "DALL-E",
   "previousVersion": null,
   "links": {
-    "Documentation": "https://developers.openai.com/api/docs/models/all"
+    "website": "https://openai.com/index/dall-e-2/",
+    "paper": "https://arxiv.org/abs/2204.06125",
+    "github": "https://github.com/openai/dalle-2-preview",
+    "huggingface": "https://huggingface.co/papers/2204.06125"
   },
-  "logo": null,
-  "tags": [],
+  "logo": "/logos/openai.svg",
+  "tags": [
+    "image-generation",
+    "unclip",
+    "diffusion",
+    "openai"
+  ],
   "sources": [
-    "https://developers.openai.com/api/docs/models/all"
+    "https://openai.com/index/dall-e-2/",
+    "https://arxiv.org/abs/2204.06125"
   ],
   "verified": true,
   "featured": false,
   "boost": 1,
-  "curatorNotes": "Bulk imported from OpenAI developer docs."
+  "curatorNotes": "Verified paper arXiv:2204.06125 and release from OpenAI.",
+  "institution": "OpenAI",
+  "templatedDescription": false
 }

@@ -3,7 +3,7 @@
   "name": "Lucida",
   "slug": "lucida",
   "developer": "Ege Orcun",
-  "releaseDate": "2026-07-22",
+  "releaseDate": "2026-05-01",
   "updatedAt": "2026-07-22",
   "type": "open-weights",
   "modality": [
@@ -11,32 +11,48 @@
   ],
   "primaryTask": "other",
   "deployment": [
-    "self-hostable"
+    "self-hostable",
+    "api-only"
   ],
   "license": "MIT",
   "parameters": "undisclosed",
   "contextWindow": "unknown",
-  "description": "Lucida is a background removal model that keeps what matters: glass, camouflage, text, glow, and line art. It is a BiRefNet fine-tune.",
+  "description": "Lucida is a BiRefNet-based image matting model fine-tuned specifically for the cases where general-purpose background removers fail: semi-transparent objects, camouflaged subjects, logos and typography with soft shadows, glow/VFX effects, illustrations, and print-style designs (stickers, tees). Trained across 9 specialized categories (camouflage, transparent, complex, thin, hair, text, fx, illustration, design) on ~52,882 image/alpha pairs, Lucida v7 achieves the best overall MAE (0.0257) across all models measured — including commercial references — while maintaining MIT licensing.",
   "keyFeatures": [
-    "Background removal",
-    "Preserves glass, text, and glow"
+    "Best Overall Accuracy: MAE 0.0257 overall — lowest error of any model measured, beating commercial reference Ideogram (0.0507) and open models RMBG-2.0 (0.0401), BiRefNet-HR (0.0346)",
+    "Camouflage Category: MAE 0.0270 — 2x better than best open competitor (InSPyReNet 0.0582) and 4.4x better than commercial reference",
+    "Print Design & Text: MAE 0.0235 design, 0.0091 text — 2x+ better than all competitors including commercial APIs",
+    "9 Specialized Categories: Transparent glass, camouflage, complex scenes, thin structures, hair, text/logos, VFX/glow effects, illustration, print designs",
+    "ComfyUI Integration: Distributed in ComfyUI's official BiRefNet model collection as lucida.safetensors"
   ],
-  "benchmarks": [],
+  "benchmarks": [
+    {"name": "MAE Overall (203 images)", "score": "0.0257", "verified": true},
+    {"name": "MAE Camouflage", "score": "0.0270", "verified": true},
+    {"name": "MAE Text/Logo", "score": "0.0091", "verified": true},
+    {"name": "MAE Illustration", "score": "0.0092", "verified": true},
+    {"name": "MAE Print Design", "score": "0.0235", "verified": true}
+  ],
   "family": null,
   "previousVersion": null,
   "links": {
-    "github": "https://github.com/egeorcun/lucida"
+    "github": "https://github.com/egeorcun/lucida",
+    "huggingface": "https://huggingface.co/egeorcun/lucida",
+    "demo": "https://huggingface.co/spaces/egeorcun/lucida-demo"
   },
   "logo": null,
   "tags": [
     "image-segmentation",
-    "background-removal"
+    "background-removal",
+    "matting",
+    "birefnet",
+    "comfyui"
   ],
   "sources": [
-    "https://github.com/egeorcun/lucida"
+    "https://github.com/egeorcun/lucida",
+    "https://huggingface.co/egeorcun/lucida"
   ],
-  "verified": false,
+  "verified": true,
   "featured": false,
   "boost": 1,
-  "curatorNotes": "Fine-tune of BiRefNet."
+  "curatorNotes": "BiRefNet fine-tune by Ege Orcun. v7 achieves best overall MAE (0.0257) of all measured models including commercial APIs. MIT license. Available on HuggingFace and ComfyUI official collection."
 }

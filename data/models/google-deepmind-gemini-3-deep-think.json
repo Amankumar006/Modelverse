@@ -1,14 +1,17 @@
 {
   "id": "google-deepmind-gemini-3-deep-think",
   "name": "Gemini 3 Deep Think",
-  "slug": "google-deepmind-gemini-3-deep-think",
+  "slug": "gemini-3-deep-think",
   "developer": "Google DeepMind",
-  "releaseDate": "2025-12-03",
-  "updatedAt": "2025-12-03",
-  "type": "api-only",
+  "releaseDate": "2025-11-15",
+  "updatedAt": "2026-07-22",
+  "type": "closed-source",
   "modality": [
     "text",
-    "code"
+    "code",
+    "image",
+    "video",
+    "audio"
   ],
   "primaryTask": "chat-reasoning",
   "deployment": [
@@ -16,27 +19,58 @@
   ],
   "license": "Proprietary",
   "parameters": "undisclosed",
-  "contextWindow": "undisclosed",
-  "description": "A specialized reasoning model optimized for highly complex mathematical and logical problems.",
+  "contextWindow": "1M tokens",
+  "description": "Gemini 3 Deep Think is an inference-time compute-scaling reasoning mode integrated within Google DeepMind's Gemini 3 model family. It generates internal step-by-step reasoning chains, evaluates parallel hypothesis paths, and performs self-verification to solve complex multi-step problems in mathematics, physics, materials science, and software engineering.",
   "keyFeatures": [
-    "Extended thinking capabilities",
-    "Math and logic optimization"
+    "Inference-Time Compute Scaling: Dynamically allocates test-time compute for extended internal reasoning and self-verification",
+    "Parallel Hypothesis Search: Explores multiple candidate solution trees concurrently to avoid local optima in multi-step problems",
+    "Configurable Thinking Depth: Allows tuning of reasoning depth, cost, and latency via API parameters like thinking_level",
+    "Agentic Workflows & Tool Integration: Seamlessly combines search synthesis, code execution, and tool usage with minimized hallucinations",
+    "High-Rigor Scientific Capabilities: Excels at complex domain tasks including Olympiad-level mathematics, physics, and materials science"
   ],
-  "benchmarks": [],
-  "family": "gemini-3",
+  "benchmarks": [
+    {
+      "name": "ARC-AGI-2",
+      "score": "84.6%",
+      "verified": true
+    },
+    {
+      "name": "Humanity's Last Exam (HLE)",
+      "score": "48.4% (no tools)",
+      "verified": true
+    },
+    {
+      "name": "Codeforces",
+      "score": "3455 Elo (Grandmaster)",
+      "verified": true
+    },
+    {
+      "name": "GPQA Diamond",
+      "score": "93.8%",
+      "verified": true
+    }
+  ],
+  "family": "Gemini",
   "previousVersion": null,
   "links": {
-    "website": "https://aistudio.google.com/models/gemini-3"
+    "website": "https://deepmind.google/technologies/gemini/"
   },
   "logo": "/logos/google.svg",
   "tags": [
-    "extended-thinking"
+    "gemini",
+    "deepmind",
+    "reasoning",
+    "inference-time-compute",
+    "codeforces"
   ],
   "sources": [
-    "https://en.wikipedia.org/wiki/Gemini_(language_model)"
+    "https://deepmind.google/technologies/gemini/",
+    "https://blog.google/technology/ai/"
   ],
   "verified": true,
-  "featured": false,
+  "featured": true,
   "boost": 1,
-  "curatorNotes": ""
+  "curatorNotes": "Verified release from Google DeepMind. Specialized inference-time compute scaling mode.",
+  "institution": "Google DeepMind",
+  "templatedDescription": false
 }

@@ -3,11 +3,12 @@
   "name": "LiTo",
   "slug": "apple-lito",
   "developer": "Apple",
-  "releaseDate": "2026-07-15",
-  "updatedAt": "2026-07-15",
+  "releaseDate": "2025-03-14",
+  "updatedAt": "2026-07-22",
   "type": "research-preview",
   "modality": [
-    "text"
+    "image",
+    "3d"
   ],
   "primaryTask": "other",
   "deployment": [
@@ -15,26 +16,38 @@
   ],
   "license": "Other/Custom",
   "parameters": "undisclosed",
-  "contextWindow": "undisclosed",
-  "description": "A research-preview model by Apple focusing on specialized research capabilities to invite community feedback.",
-  "keyFeatures": [],
+  "contextWindow": "unknown",
+  "description": "LiTo (Surface Light Field Tokenization) is a 3D latent representation developed by Apple Research that jointly captures object geometry and view-dependent appearance. Built upon this unified representation, a latent flow matching model enables high-quality image-to-3D generation from a single input image, bridging neural rendering and generative modeling.",
+  "keyFeatures": [
+    "Unified 3D Latent Representation: Simultaneously encodes surface geometry and view-dependent appearance (surface light fields) into a compact latent code",
+    "Image-to-3D Generation: Single-image feed-forward reconstruction of full 3D objects using latent flow matching",
+    "Surface Light Field Tokenization: Tokenizes view-dependent radiance on the object surface for efficient and disentangled modeling",
+    "Latent Flow Matching: Uses flow matching in the LiTo latent space for high-quality, diverse 3D generation",
+    "ICLR 2026 Paper: Peer-reviewed research published at the International Conference on Learning Representations 2026"
+  ],
   "benchmarks": [],
   "family": null,
   "previousVersion": null,
   "links": {
-    "Website": "https://apple.github.io/ml-lito/"
+    "website": "https://apple.github.io/ml-lito/",
+    "paper": "https://machinelearning.apple.com/research/lito",
+    "arxiv": "https://arxiv.org/abs/2603.11047",
+    "github": "https://github.com/apple/ml-lito"
   },
-  "logo": null,
+  "logo": "/logos/apple.svg",
   "tags": [
-    "research-preview",
-    "other"
+    "3d-generation",
+    "neural-rendering",
+    "image-to-3d",
+    "surface-light-field",
+    "flow-matching"
   ],
   "sources": [
-    "https://apple.github.io/ml-lito/"
+    "https://apple.github.io/ml-lito/",
+    "https://arxiv.org/abs/2603.11047"
   ],
-  "verified": false,
+  "verified": true,
   "featured": false,
   "boost": 1,
-  "curatorNotes": "Ingested research preview via bulk triage. Affiliation: Apple. Traction signal: Initial release.",
-  "templatedDescription": true
+  "curatorNotes": "ICLR 2026 paper by Jen-Hao Rick Chang, Xiaoming Zhao, Dorian Chan, Oncel Tuzel from Apple."
 }

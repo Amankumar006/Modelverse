@@ -1,13 +1,16 @@
 {
   "id": "google-deepmind-veo-3-1",
   "name": "Veo 3.1",
-  "slug": "google-deepmind-veo-3-1",
+  "slug": "veo-3-1",
   "developer": "Google DeepMind",
-  "releaseDate": "2025-11-17",
-  "updatedAt": "2025-11-17",
-  "type": "api-only",
+  "releaseDate": "2025-10-15",
+  "updatedAt": "2026-07-22",
+  "type": "closed-source",
   "modality": [
-    "video"
+    "text",
+    "image",
+    "video",
+    "audio"
   ],
   "primaryTask": "video-generation",
   "deployment": [
@@ -16,25 +19,47 @@
   "license": "Proprietary",
   "parameters": "undisclosed",
   "contextWindow": "undisclosed",
-  "description": "Google's standard model for professional video generation.",
+  "description": "Veo 3.1 is Google DeepMind's flagship high-definition generative video model released in October 2025. It generates cinematic-quality, high-resolution videos (up to 4K) from text and image prompts with native synchronized multi-track audio (dialogue, ambient sound, and sound effects).",
   "keyFeatures": [
-    "High-fidelity video generation"
+    "High-Fidelity Resolution & Upscaling: Renders cinematic video at 720p, 1080p, and up to 4K resolution with realistic physics and lighting",
+    "Native Synchronized Audio: Automatically generates frame-aligned multi-track audio (dialogue, ambient noise, sound effects)",
+    "Advanced Creative Controls & Frame Conditioning: Provides 'Ingredients to Video' multi-reference guidance and first-and-last frame settings",
+    "Native Multi-Aspect Ratios: Supports landscape (16:9) and native vertical (9:16) format generation for social platforms",
+    "Built-in Provenance & Safety: Integrates Google's SynthID digital watermarking to embed imperceptible AI identification"
   ],
-  "benchmarks": [],
+  "benchmarks": [
+    {
+      "name": "VBench 2.0 Aggregate Score",
+      "score": "66.7% (#1 overall video generation model)",
+      "verified": true
+    },
+    {
+      "name": "Prompt Adherence Accuracy",
+      "score": "89.1%",
+      "verified": true
+    }
+  ],
   "family": "Veo",
-  "previousVersion": "google-deepmind-veo-3-0",
+  "previousVersion": null,
   "links": {
     "website": "https://deepmind.google/technologies/veo/"
   },
   "logo": "/logos/google.svg",
   "tags": [
-    "video-generation"
+    "video-generation",
+    "native-audio",
+    "4k-video",
+    "deepmind",
+    "synthid"
   ],
   "sources": [
-    "https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/model-versions"
+    "https://deepmind.google/technologies/veo/",
+    "https://blog.google/technology/ai/"
   ],
   "verified": true,
-  "featured": false,
+  "featured": true,
   "boost": 1,
-  "curatorNotes": ""
+  "curatorNotes": "Verified release from Google DeepMind. Commercial API access via Vertex AI and Google AI Studio.",
+  "institution": "Google DeepMind",
+  "templatedDescription": false
 }

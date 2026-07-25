@@ -55,6 +55,9 @@ export const metadata: Metadata = {
     description:
       "From frontier closed-source releases to open-weight breakthroughs, Modelverse tracks every model as it ships.",
   },
+  verification: {
+    google: "google0be0f65316fe589f",
+  },
 };
 
 /* ------------------------------------------------------------------ */

@@ -3,7 +3,7 @@
   "name": "Motion4Motion",
   "slug": "motion4motion",
   "developer": "Tsinghua University & StepFun",
-  "releaseDate": "2026-07-22",
+  "releaseDate": "2026-07-27",
   "updatedAt": "2026-07-22",
   "type": "research-preview",
   "modality": [
@@ -16,10 +16,13 @@
   "license": "Other/Custom",
   "parameters": "undisclosed",
   "contextWindow": "unknown",
-  "description": "Motion4Motion is a training-free framework for cross-subject motion transfer via Transferring Positional Encoding (TransPE).",
+  "description": "Motion4Motion is a training-free framework for cross-subject motion transfer presented at SIGGRAPH 2026. Unlike prior skeleton-based approaches that only work for human-like characters with predefined skeleton topologies, Motion4Motion steps out of the skeleton framework entirely. It models the motion flow of a subject in a video rather than its skeleton, enabling motion transfer across entirely different species (e.g., human-to-animal) at inference time without any task-specific training or fine-tuning.",
   "keyFeatures": [
-    "Skeleton-free motion transfer",
-    "Training-free framework"
+    "Training-Free: No fine-tuning or task-specific training required — runs at inference time on any video pair",
+    "Skeleton-Free Motion Transfer: Models subject motion flow instead of skeleton topology, enabling transfer across different species and body types",
+    "Cross-Species Transfer: Works across diverse morphologies — human, animal, and non-human character motion transfer",
+    "TransPE (Transferring Positional Encoding): Novel technique for mapping motion patterns between subjects at different spatial scales",
+    "SIGGRAPH 2026: Peer-reviewed research at ACM SIGGRAPH 2026 Conference Papers"
   ],
   "benchmarks": [],
   "family": null,
@@ -27,18 +30,21 @@
   "links": {
     "website": "https://lhchen.top/Motion4Motion/",
     "paper": "https://lhchen.top/Motion4Motion/static/m4m_paper.pdf",
-    "github": "coming-soon"
+    "video": "https://www.youtube.com/watch?v=-rcL7cQhiyc"
   },
   "logo": null,
   "tags": [
     "motion-transfer",
-    "video-generation"
+    "video-generation",
+    "skeleton-free",
+    "cross-species",
+    "siggraph-2026"
   ],
   "sources": [
     "https://lhchen.top/Motion4Motion/"
   ],
-  "verified": false,
+  "verified": true,
   "featured": false,
   "boost": 1,
-  "curatorNotes": "SIGGRAPH 2026 Conference Paper."
+  "curatorNotes": "SIGGRAPH 2026 paper by Ling-Hao Chen (Tsinghua), Zixin Yin (HKUST), Duomin Wang, Xianfang Zeng, Gang Yu (StepFun). Training-free cross-species motion transfer."
 }

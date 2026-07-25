@@ -1,11 +1,11 @@
 {
   "id": "google-deepmind-alphaevolve",
   "name": "AlphaEvolve",
-  "slug": "google-deepmind-alphaevolve",
+  "slug": "alphaevolve",
   "developer": "Google DeepMind",
-  "releaseDate": "2025-05-06",
-  "updatedAt": "2026-07-15",
-  "type": "research-preview",
+  "releaseDate": "2025-05-14",
+  "updatedAt": "2026-07-22",
+  "type": "closed-source",
   "modality": [
     "text",
     "code"
@@ -17,31 +17,48 @@
   "license": "Proprietary",
   "parameters": "undisclosed",
   "contextWindow": "undisclosed",
-  "description": "An autonomous AI evolutionary coding agent developed by Google DeepMind. AlphaEvolve utilizes an evolutionary search loop powered by ensembles of Gemini models to iteratively generate, evaluate, and optimize code to discover high-efficiency algorithmic structures.",
+  "description": "AlphaEvolve is an evolutionary AI coding agent developed by Google DeepMind designed for autonomous algorithm discovery and computational optimization. Operating as an iterative discovery engine, AlphaEvolve mutates candidate code, evaluates performance via client-side evaluators, and refines algorithms using Gemini Flash and Gemini Pro.",
   "keyFeatures": [
-    "Evolutionary loop that optimizes entire algorithms through iterative mutations",
-    "Integrates automated execution and evaluation scoring locally",
-    "Discovered novel algorithms, including a 48 scalar multiplication method for 4x4 matrix multiplication",
-    "Commercially accessible via Google Cloud's Gemini Enterprise Agent Platform"
+    "Evolutionary Code Optimization Loop: Integrates LLMs into an evolutionary search architecture that iteratively mutates candidate code",
+    "Multi-Model Gemini Pipeline: Pairs Gemini Flash for broad exploration with Gemini Pro for targeted algorithmic reasoning",
+    "Evaluator-Guided Verification: Driven by client-side evaluator scripts testing code correctness, efficiency, and resource utilization",
+    "Production-Scale Application: Applied across Google's stack to optimize silicon designs, database heuristics, and fleet scheduling",
+    "Scientific & Mathematical Discovery: Produces non-obvious mathematical shortcuts and lower bounds exceeding long-standing benchmarks"
   ],
-  "benchmarks": [],
+  "benchmarks": [
+    {
+      "name": "4x4 Complex Matrix Multiplication",
+      "score": "48 scalar multiplications (broke 56-year Strassen benchmark record)",
+      "verified": true
+    },
+    {
+      "name": "Google Spanner LSM-Tree Write Amplification",
+      "score": "20% reduction in write amplification",
+      "verified": true
+    }
+  ],
   "family": null,
   "previousVersion": null,
   "links": {
-    "Website": "https://deepmind.google/blog/alphaevolve-impact/"
+    "website": "https://deepmind.google/discover/blog/alphaevolve-a-gemini-powered-coding-agent-for-designing-advanced-algorithms",
+    "paper": "https://arxiv.org/abs/2506.13131",
+    "github": "https://github.com/google-deepmind/alphaevolve_results"
   },
-  "logo": null,
+  "logo": "/logos/google.svg",
   "tags": [
-    "agentic",
-    "evolutionary",
-    "algorithm-optimization",
-    "coding-agent"
+    "deepmind",
+    "code-generation",
+    "evolutionary-search",
+    "algorithm-discovery"
   ],
   "sources": [
-    "https://deepmind.google/blog/alphaevolve-impact/"
+    "https://deepmind.google/discover/blog/alphaevolve-a-gemini-powered-coding-agent-for-designing-advanced-algorithms",
+    "https://arxiv.org/abs/2506.13131"
   ],
   "verified": true,
-  "featured": false,
+  "featured": true,
   "boost": 1,
-  "curatorNotes": "Registered AlphaEvolve as an autonomous algorithm discovery agent. Initially unveiled in May 2025, commercial deployment on Google Cloud announced in 2026."
+  "curatorNotes": "Verified paper arXiv:2506.13131 and blog post from Google DeepMind.",
+  "institution": "Google DeepMind",
+  "templatedDescription": false
 }

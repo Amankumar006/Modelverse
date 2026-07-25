@@ -1,47 +1,74 @@
 {
   "id": "google-deepmind-medgemma-1-5-4b",
   "name": "MedGemma 1.5 4B",
-  "slug": "google-deepmind-medgemma-1-5-4b",
+  "slug": "medgemma-1-5-4b",
   "developer": "Google DeepMind",
-  "releaseDate": "2026-01-13",
-  "updatedAt": "2026-01-13",
+  "releaseDate": "2026-01-15",
+  "updatedAt": "2026-07-22",
   "type": "open-weights",
   "modality": [
     "text",
-    "image"
+    "image",
+    "3d"
   ],
   "primaryTask": "multimodal-general",
   "deployment": [
     "self-hostable"
   ],
-  "license": "Gemma Terms of Use",
+  "license": "Other/Custom",
   "parameters": "4B",
-  "contextWindow": "8k",
-  "description": "A fine-tuned multimodal open-weights variant of Google's Gemma 3/Gemma 3.5 architecture, optimized specifically for medical and healthcare AI applications. MedGemma 1.5 features advanced support for high-dimensional medical imaging analysis including 3D CT/MRI scans, histopathology Whole Slide Images (WSI), and EHR report generation.",
+  "contextWindow": "128K tokens",
+  "description": "MedGemma 1.5 4B is an open-weight multimodal vision-language model developed by Google DeepMind and Google Research as part of the Health AI Developer Foundations (HAI-DEF) program. Built on Gemma 3 and integrating MedSigLIP, it natively processes 2D/3D radiology scans and histopathology slides.",
   "keyFeatures": [
-    "Fine-tuned specifically for healthcare domain terminology and reasoning",
-    "Support for high-dimensional medical imaging (CT scans, MRI scans, and longitudinal X-rays)",
-    "Anatomical localization and Whole Slide Image (WSI) parsing for histopathology",
-    "Generates structured medical reports from clinical image data"
+    "High-Dimensional Medical Imaging Support: Native processing of 3D volumetric CT/MRI scans, whole-slide histopathology, and 2D clinical modalities",
+    "Longitudinal Visual Reasoning: Analyzes sequential medical images (prior vs current X-rays) to track disease progression and anatomical landmarks",
+    "Clinical Record Processing: Extracts structured FHIR and SOAP data from unstructured physician notes and lab reports",
+    "MedSigLIP Integration: Powered by MedSigLIP, a medically-tuned SigLIP vision encoder",
+    "On-Device Deployment: Compact 4B parameter footprint optimized for low-latency inference on local workstations and Apple Silicon (MLX)"
   ],
-  "benchmarks": [],
-  "family": null,
+  "benchmarks": [
+    {
+      "name": "MedQA (USMLE 4-option)",
+      "score": "64.4%",
+      "verified": true
+    },
+    {
+      "name": "MedMCQA",
+      "score": "55.7%",
+      "verified": true
+    },
+    {
+      "name": "PubMedQA",
+      "score": "73.4%",
+      "verified": true
+    }
+  ],
+  "family": "Gemma",
   "previousVersion": null,
   "links": {
-    "Website": "https://deepmind.google/blog/medgemma-our-most-capable-open-models-for-health-ai-development/"
+    "website": "https://research.google",
+    "paper": "https://arxiv.org/abs/2604.05081",
+    "github": "https://github.com/Google-Health/medgemma",
+    "huggingface": "https://huggingface.co/google/medgemma-1.5-4b-it"
   },
-  "logo": null,
+  "logo": "/logos/google.svg",
   "tags": [
-    "medical",
-    "healthcare",
-    "multimodal",
-    "open-weights"
+    "medical-ai",
+    "gemma",
+    "deepmind",
+    "open-weights",
+    "vlm",
+    "radiology",
+    "pathology"
   ],
   "sources": [
-    "https://deepmind.google/blog/medgemma-our-most-capable-open-models-for-health-ai-development/"
+    "https://arxiv.org/abs/2604.05081",
+    "https://huggingface.co/google/medgemma-1.5-4b-it"
   ],
   "verified": true,
   "featured": false,
   "boost": 1,
-  "curatorNotes": "Registered MedGemma 1.5 4B variant released on Jan 13, 2026. Highly capable open weights medical multimodal assistant."
+  "curatorNotes": "Verified paper arXiv:2604.05081 and HuggingFace release from Google DeepMind and Google Health.",
+  "institution": "Google DeepMind / Google Research",
+  "templatedDescription": false
 }

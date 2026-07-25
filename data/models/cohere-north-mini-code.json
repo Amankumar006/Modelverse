@@ -4,34 +4,61 @@
   "slug": "cohere-north-mini-code",
   "developer": "Cohere",
   "releaseDate": "2026-06-09",
-  "updatedAt": "2026-06-09",
+  "updatedAt": "2026-07-22",
   "type": "open-weights",
-  "modality": ["text"],
+  "modality": [
+    "text"
+  ],
   "primaryTask": "code-generation",
-  "deployment": ["self-hostable"],
-  "license": "Apache 2.0",
+  "deployment": [
+    "self-hostable"
+  ],
+  "license": "Apache-2.0",
   "parameters": "30B (3B active)",
   "contextWindow": "256K tokens",
-  "description": "Cohere's open-weights sparse Mixture-of-Experts coding model, optimized for agentic software engineering tasks and low-latency edge deployment.",
+  "description": "North Mini Code is a specialized 30B total parameter, sparse Mixture-of-Experts (MoE) coding model with ~3B active parameters per token developed by Cohere and Cohere Labs. Designed for agentic software engineering and developer workflows, it achieves near-30B-scale reasoning with the compute overhead of a 3B parameter model.",
   "keyFeatures": [
-    "Sparse MoE with 128 experts (8 active per token)",
-    "Post-trained across multiple SWE environments and harnesses",
-    "Optimized for local deployment on a single GPU (FP8/FP4)"
+    "Sparse MoE Architecture: 30B total parameters across 128 experts with 8 active per token (~3B active parameters) for low latency",
+    "Hybrid Attention Design: Interleaves sliding-window attention and global attention in a 3:1 ratio",
+    "Extended Context Capability: Features a 256K token context window with up to 64K output token generation capability",
+    "Agentic Optimization: Post-trained via two-stage SFT and RLVR for multi-file repo changes, terminal execution, and OpenCode/SWE-Agent scaffolds",
+    "Open Weights & Deployability: Released under Apache 2.0 license, enabling local execution and FP8 quantized single-GPU deployment"
   ],
-  "benchmarks": [],
-  "family": "cohere-north-mini-code",
+  "benchmarks": [
+    {
+      "name": "SWE-bench Verified",
+      "score": "67.6% (pass@1) / 80.2% (pass@10)",
+      "verified": true
+    },
+    {
+      "name": "HumanEval",
+      "score": "50.0%",
+      "verified": true
+    }
+  ],
+  "family": "North",
   "previousVersion": null,
   "links": {
-    "website": "https://cohere.com/blog/north-mini-code"
+    "website": "https://cohere.com/blog/north-mini-code",
+    "github": "https://github.com/cohere-ai",
+    "huggingface": "https://huggingface.co/CohereLabs/North-Mini-Code-1.0"
   },
   "logo": "/logos/cohere.svg",
-  "tags": ["moe", "coding-agent", "low-latency"],
-  "sources": [
-    "https://cohere.com/blog/north-mini-code"
+  "tags": [
+    "moe",
+    "coding-agent",
+    "low-latency",
+    "cohere",
+    "apache-2.0"
   ],
-  "verified": false,
+  "sources": [
+    "https://cohere.com/blog/north-mini-code",
+    "https://huggingface.co/CohereLabs/North-Mini-Code-1.0"
+  ],
+  "verified": true,
   "featured": false,
   "boost": 1,
-  "curatorNotes": "First model in Cohere's North series. Specifically designed to automate repository-level coding actions.",
+  "curatorNotes": "Verified release from Cohere and Cohere Labs. Released under Apache 2.0 license.",
+  "institution": "Cohere / Cohere Labs",
   "templatedDescription": false
 }
