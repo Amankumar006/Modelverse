@@ -319,14 +319,14 @@ export default async function ModelDetailPage({
               <>
                 {/* Description */}
                 <section className="space-y-3">
-                  <h2 className="text-xs font-bold uppercase tracking-widest text-[#9CA3AF]">Description</h2>
-                  <p className="text-[#F3F4F6] leading-relaxed text-base sm:text-lg">{model.description}</p>
+                  <h2 className="text-sm font-bold uppercase tracking-widest text-[#9CA3AF]">Description</h2>
+                  <p className="text-[#F3F4F6] leading-relaxed text-lg sm:text-xl md:text-2xl font-normal">{model.description}</p>
                 </section>
 
                 {/* Benchmark Images */}
                 {model.images && model.images.length > 0 && (
                   <section className="space-y-4 pt-2">
-                    <h2 className="text-xs font-bold uppercase tracking-widest text-[#9CA3AF]">Benchmark Images</h2>
+                    <h2 className="text-sm font-bold uppercase tracking-widest text-[#9CA3AF]">Benchmark Images</h2>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                       {model.images.map((imgUrl, idx) => (
                         <div key={idx} className="relative rounded-xl overflow-hidden border border-white/10 bg-white/5 aspect-video">
@@ -345,29 +345,29 @@ export default async function ModelDetailPage({
                 {/* Benchmarks Table */}
                 {model.benchmarks && model.benchmarks.length > 0 && (
                   <section className="space-y-4">
-                    <h2 className="text-xs font-bold uppercase tracking-widest text-[#9CA3AF]">Benchmarks</h2>
+                    <h2 className="text-sm font-bold uppercase tracking-widest text-[#9CA3AF]">Benchmarks</h2>
                     <div className="border border-white/10 rounded-xl overflow-x-auto bg-white/5 scrollbar-thin">
-                      <table className="w-full text-left border-collapse text-xs min-w-[300px]">
+                      <table className="w-full text-left border-collapse text-sm min-w-[300px]">
                         <thead>
                           <tr className="border-b border-white/10 bg-white/5 text-[#E5E7EB] font-medium">
-                            <th className="p-3.5">Benchmark</th>
-                            <th className="p-3.5 text-right">Score</th>
-                            <th className="p-3.5 text-center">Status</th>
+                            <th className="p-4">Benchmark</th>
+                            <th className="p-4 text-right">Score</th>
+                            <th className="p-4 text-center">Status</th>
                           </tr>
                         </thead>
                         <tbody className="divide-y divide-white/10">
                           {model.benchmarks.map((bench, idx) => (
                             <tr key={idx} className="hover:bg-white/5 transition-colors">
-                              <td className="p-3.5 text-white font-medium">{bench.name}</td>
-                              <td className="p-3.5 text-right text-white font-semibold tabular-nums">{bench.score}</td>
-                              <td className="p-3.5 text-center">
+                              <td className="p-4 text-white font-medium text-base">{bench.name}</td>
+                              <td className="p-4 text-right text-white font-bold text-base tabular-nums">{bench.score}</td>
+                              <td className="p-4 text-center">
                                 {bench.verified ? (
-                                  <span className="inline-flex items-center gap-1.5 text-xs text-[#4ADE80] font-medium">
+                                  <span className="inline-flex items-center gap-1.5 text-sm text-[#4ADE80] font-medium">
                                     <span className="w-1.5 h-1.5 rounded-full bg-[#4ADE80]" />
                                     Verified
                                   </span>
                                 ) : (
-                                  <span className="inline-flex items-center gap-1.5 text-xs text-[#9CA3AF] font-medium" title="Self-reported score">
+                                  <span className="inline-flex items-center gap-1.5 text-sm text-[#9CA3AF] font-medium" title="Self-reported score">
                                     <span className="w-1.5 h-1.5 rounded-full bg-white/30" />
                                     Self-Reported
                                   </span>
@@ -387,24 +387,24 @@ export default async function ModelDetailPage({
             {model.keyFeatures && model.keyFeatures.length > 0 && (
               <section className="space-y-4">
                 <div className="flex items-center gap-2">
-                  <span className="w-1.5 h-1.5 rounded-full bg-[#4ADE80]" />
-                  <h2 className="text-xs font-bold uppercase tracking-widest text-[#9CA3AF]">Key Features</h2>
+                  <span className="w-2 h-2 rounded-full bg-[#4ADE80]" />
+                  <h2 className="text-sm font-bold uppercase tracking-widest text-[#9CA3AF]">Key Features</h2>
                 </div>
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                   {model.keyFeatures.map((feat, idx) => (
                     <div
                       key={idx}
-                      className="group relative p-4 rounded-2xl bg-gradient-to-b from-white/[0.07] to-white/[0.02] border border-white/10 hover:border-[#4ADE80]/40 transition-all duration-300 hover:shadow-[0_0_25px_rgba(74,222,128,0.08)] flex flex-col justify-between"
+                      className="group relative p-5 rounded-2xl bg-gradient-to-b from-white/[0.07] to-white/[0.02] border border-white/10 hover:border-[#4ADE80]/40 transition-all duration-300 hover:shadow-[0_0_25px_rgba(74,222,128,0.08)] flex flex-col justify-between"
                     >
                       <div className="flex items-start gap-3">
-                        <div className="p-2 rounded-xl bg-[#4ADE80]/10 border border-[#4ADE80]/20 text-[#4ADE80] shrink-0 group-hover:scale-110 transition-transform duration-300">
-                          <Sparkles size={16} />
+                        <div className="p-2.5 rounded-xl bg-[#4ADE80]/10 border border-[#4ADE80]/20 text-[#4ADE80] shrink-0 group-hover:scale-110 transition-transform duration-300">
+                          <Sparkles size={18} />
                         </div>
-                        <p className="text-sm font-medium text-[#F3F4F6] group-hover:text-white transition-colors leading-relaxed mt-0.5">
+                        <p className="text-base sm:text-lg font-medium text-[#F3F4F6] group-hover:text-white transition-colors leading-relaxed mt-0.5">
                           {feat}
                         </p>
                       </div>
-                      <div className="mt-3 flex items-center justify-between text-[11px] font-mono text-[#9CA3AF] pt-2 border-t border-white/10">
+                      <div className="mt-4 flex items-center justify-between text-xs font-mono text-[#9CA3AF] pt-3 border-t border-white/10">
                         <span>Feature {String(idx + 1).padStart(2, "0")}</span>
                         <span className="opacity-0 group-hover:opacity-100 text-[#4ADE80] transition-opacity duration-300">✦</span>
                       </div>

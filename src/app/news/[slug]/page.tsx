@@ -203,8 +203,8 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
 
       {/* Article Body Grid */}
       <div className="max-w-[1400px] mx-auto px-6 sm:px-8 lg:px-12 grid grid-cols-1 lg:grid-cols-[1fr_350px] xl:grid-cols-[1fr_400px] gap-12 lg:gap-20">
-        {/* Main Content (Ergonomic 720px max reading width) */}
-        <article className="prose prose-invert prose-emerald max-w-[720px] text-[#F3F4F6] prose-p:text-[#E5E7EB] prose-p:leading-[1.85] prose-p:text-[17px] md:prose-p:text-[18px] prose-headings:text-white prose-img:rounded-xl prose-img:max-w-full prose-img:h-auto prose-img:w-full prose-img:mx-auto">
+        {/* Main Content (Ergonomic 760px reading width & 20px font scale) */}
+        <article className="prose prose-invert prose-emerald max-w-[760px] text-[#F3F4F6] prose-p:text-[#F3F4F6] prose-p:leading-[1.88] prose-p:text-[19px] md:prose-p:text-[21px] prose-headings:text-white prose-img:rounded-xl prose-img:max-w-full prose-img:h-auto prose-img:w-full prose-img:mx-auto">
           {article.slug === 'claude-opus-5-detailed-guide' && (
             <BenchmarkTabs />
           )}

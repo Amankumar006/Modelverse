@@ -34,17 +34,19 @@ body {
 /*  Typography & Reading Contrast Overrides                            */
 /* ------------------------------------------------------------------ */
 .prose {
-  font-size: 1.0625rem; /* 17px base */
+  font-size: 1.25rem; /* 20px base */
   line-height: 1.85;
   color: #F3F4F6;
 }
 
 .prose p {
-  margin-top: 1.6em;
-  margin-bottom: 1.6em;
+  margin-top: 1.7em;
+  margin-bottom: 1.7em;
   color: #F3F4F6;
+  font-size: 1.25rem; /* 20px */
   font-weight: 400;
   letter-spacing: -0.01em;
+  line-height: 1.85;
 }
 
 .prose h1, .prose h2, .prose h3, .prose h4 {
@@ -54,14 +56,14 @@ body {
 }
 
 .prose h2 {
-  font-size: 1.65rem;
+  font-size: 1.85rem; /* 29.6px */
   margin-top: 2.2em;
   margin-bottom: 0.9em;
   color: #FFFFFF;
 }
 
 .prose h3 {
-  font-size: 1.35rem;
+  font-size: 1.5rem; /* 24px */
   margin-top: 2em;
   margin-bottom: 0.8em;
   color: #F9FAFB;
