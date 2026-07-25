@@ -12,6 +12,11 @@ const MAX_AGE_HOURS = 48;           // Only process articles from last 48h
 
 // ─── Poster images rotation by lab/source ───────────────────────────
 const POSTER_IMAGES = {
+  "Anthropic": [
+    "/images/news/news_featured.jpg",
+    "/images/news/claude-opus-5.jpg",
+    "/images/news/anthropic_rupee_pricing_cover.jpg",
+  ],
   "Hugging Face": [
     "/images/news/news_featured.jpg",
     "/images/news/news_review.jpg",
@@ -28,6 +33,10 @@ const POSTER_IMAGES = {
     "/images/news/diffusiongemma_cover.jpg",
     "/images/news/medgemma_cover.jpg",
   ],
+  "NVIDIA": [
+    "/images/news/news_featured.jpg",
+    "/images/news/news_short.jpg",
+  ],
   "TechCrunch AI": [
     "/images/news/news_short.jpg",
     "/images/news/news_featured.jpg",
@@ -42,6 +51,33 @@ const POSTER_IMAGES = {
 function getPosterImage(lab, index) {
   const pool = POSTER_IMAGES[lab] || POSTER_IMAGES["default"];
   return pool[index % pool.length];
+}
+
+async function fetchAnthropicNews() {
+  try {
+    const html = await getHttps("https://www.anthropic.com/news");
+    const articleRegex = /href="(\/news\/([^"]+))"/g;
+    let match;
+    const items = [];
+    const seen = new Set();
+    while ((match = articleRegex.exec(html)) !== null) {
+      const slug = match[2];
+      if (!seen.has(slug) && slug !== "rss.xml" && !slug.includes("page")) {
+        seen.add(slug);
+        const title = slug.split("-").map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(" ");
+        items.push({
+          title: title,
+          link: `https://www.anthropic.com/news/${slug}`,
+          description: `Official announcement from Anthropic: ${title}`,
+          pubDate: new Date().toISOString(),
+          parsedDate: new Date()
+        });
+      }
+    }
+    return items;
+  } catch(e) {
+    return [];
+  }
 }
 
 if (!fs.existsSync(INGESTION_DIR)) {
@@ -159,7 +195,16 @@ async function runDailyNewsIngestion() {
 
   const allCandidates = [];
 
-  // 1. Fetch Hugging Face Blog RSS
+  // 1. Fetch Anthropic Official News
+  try {
+    const anthropicItems = await fetchAnthropicNews();
+    console.log(`  🟧 Anthropic Official: ${anthropicItems.length} items`);
+    anthropicItems.forEach((item) => allCandidates.push({ ...item, lab: "Anthropic" }));
+  } catch (e) {
+    console.error("  ❌ Failed fetching Anthropic feed:", e.message);
+  }
+
+  // 2. Fetch Hugging Face Blog RSS
   try {
     const hfXml = await getHttps("https://huggingface.co/blog/feed.xml");
     const allItems = parseRss(hfXml);
@@ -171,7 +216,7 @@ async function runDailyNewsIngestion() {
     console.error("  ❌ Failed fetching Hugging Face feed:", e.message);
   }
   
-  // 2. Fetch OpenAI RSS
+  // 3. Fetch OpenAI RSS
   try {
     const openaiXml = await getHttps("https://openai.com/news/rss.xml");
     const allItems = parseRss(openaiXml);
@@ -183,7 +228,7 @@ async function runDailyNewsIngestion() {
     console.error("  ❌ Failed fetching OpenAI feed:", e.message);
   }
 
-  // 3. Fetch DeepMind RSS
+  // 4. Fetch DeepMind RSS
   try {
     const deepmindXml = await getHttps("https://deepmind.google/blog/rss.xml");
     const allItems = parseRss(deepmindXml);
@@ -195,7 +240,19 @@ async function runDailyNewsIngestion() {
     console.error("  ❌ Failed fetching DeepMind feed:", e.message);
   }
 
-  // 4. Fetch TechCrunch AI RSS
+  // 5. Fetch NVIDIA AI Blog RSS
+  try {
+    const nvidiaXml = await getHttps("https://blogs.nvidia.com/feed/");
+    const allItems = parseRss(nvidiaXml);
+    console.log(`  💚 NVIDIA AI RSS: ${allItems.length} total items`);
+    const recent = filterRecentArticles(allItems, MAX_AGE_HOURS);
+    console.log(`  💚 NVIDIA AI RSS: ${recent.length} items within ${MAX_AGE_HOURS}h window`);
+    recent.forEach((item) => allCandidates.push({ ...item, lab: "NVIDIA" }));
+  } catch (e) {
+    console.error("  ❌ Failed fetching NVIDIA feed:", e.message);
+  }
+
+  // 6. Fetch TechCrunch AI RSS
   try {
     const tcXml = await getHttps("https://techcrunch.com/category/artificial-intelligence/feed/");
     const allItems = parseRss(tcXml);

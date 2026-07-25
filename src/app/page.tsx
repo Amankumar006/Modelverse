@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import HeroSection from "@/components/hero/HeroSection";
 import DeveloperMarquee from "@/components/home/DeveloperMarquee";
 import { getRecentModels, getModelCount, getAllDevelopers, SITE_URL, getModelBySlug, getAllModelEntries } from "@/lib/models";
+import { getAllArticles } from "@/lib/news";
 import Link from "next/link";
 import {
   ArrowRight,
@@ -14,6 +16,8 @@ import {
   GitCompare,
   ShieldCheck,
   CheckCircle2,
+  Newspaper,
+  Clock,
 } from "lucide-react";
 import { getTrendingModels } from "@/lib/trending";
 import type { ModelEntry } from "@/lib/models";
@@ -49,6 +53,9 @@ export default function Home() {
   const trendingModels = getTrendingModels(3);
   const modelCount = getModelCount();
   const developers = getAllDevelopers();
+  const latestArticles = getAllArticles().slice(0, 4);
+  const featuredArticle = latestArticles[0];
+  const subArticles = latestArticles.slice(1, 4);
   
   const allModels = getAllModelEntries();
   const todayStr = new Date().toISOString().split("T")[0];
@@ -213,6 +220,137 @@ export default function Home() {
               </div>
             </div>
 
+          </div>
+        </section>
+      )}
+
+      {/* ── Latest AI News & Editorial Analysis Section ────────────── */}
+      {latestArticles.length > 0 && (
+        <section className="bg-[#090E0C] text-[#E2E8E4] px-4 sm:px-6 md:px-10 lg:px-14 py-12 md:py-16 border-t border-[#243629]">
+          <div className="max-w-7xl mx-auto flex flex-col gap-8">
+            
+            {/* Section Header */}
+            <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
+              <div>
+                <div className="flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.22em] text-[#4ADE80] mb-2.5">
+                  <Newspaper size={13} strokeWidth={2} />
+                  <span>Real-time Intelligence Digest</span>
+                </div>
+                <h2 className="text-2xl sm:text-3xl md:text-4xl font-normal text-white" style={{ fontFamily: "var(--font-display, ui-sans-serif, system-ui, sans-serif)" }}>
+                  Latest AI News & Analysis
+                </h2>
+                <p className="text-sm text-[#8C9E91] mt-2 max-w-xl leading-[1.6]">
+                  Real-time updates from Anthropic, OpenAI, DeepMind, Hugging Face, NVIDIA, and top AI labs.
+                </p>
+              </div>
+
+              <Link
+                href="/news"
+                className="inline-flex items-center gap-2 text-xs font-semibold text-[#4ADE80] hover:text-[#22c55e] transition-colors uppercase tracking-wider group shrink-0"
+              >
+                View All AI News & Weekly Digests
+                <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
+              </Link>
+            </div>
+
+            {/* Grid: 1 Big Featured Story + 3 Side Stories */}
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
+              
+              {/* Main Featured Article (Left - 7 cols) */}
+              {featuredArticle && (
+                <div className="lg:col-span-7 group relative rounded-2xl border border-[#243629] bg-[#121A15] overflow-hidden hover:border-[#334D3A] transition-all flex flex-col justify-between">
+                  <div className="relative aspect-[16/9] w-full overflow-hidden bg-[#0C120F]">
+                    <Image
+                      src={featuredArticle.coverImage}
+                      alt={featuredArticle.title}
+                      fill
+                      className="object-cover group-hover:scale-105 transition-transform duration-500"
+                      sizes="(max-width: 1024px) 100vw, 58vw"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#121A15] via-[#121A15]/40 to-transparent" />
+                    
+                    <div className="absolute top-4 left-4 flex items-center gap-2">
+                      <span className="px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider bg-[#4ADE80] text-[#0C120F]">
+                        {featuredArticle.category.replace("-", " ")}
+                      </span>
+                      <span className="px-2.5 py-1 rounded-full text-[10px] font-semibold uppercase tracking-wider bg-[#0C120F]/80 text-[#8C9E91] backdrop-blur-sm border border-[#243629]">
+                        {featuredArticle.author.split("/")[0].trim()}
+                      </span>
+                    </div>
+                  </div>
+
+                  <div className="p-6 md:p-8 flex flex-col justify-between flex-1 -mt-6 relative z-10">
+                    <div>
+                      <h3 className="text-xl md:text-2xl font-semibold text-white group-hover:text-[#4ADE80] transition-colors tracking-tight leading-snug">
+                        {featuredArticle.title}
+                      </h3>
+                      <p className="text-xs md:text-sm text-[#8C9E91] mt-3 line-clamp-3 leading-[1.6]">
+                        {featuredArticle.excerpt}
+                      </p>
+                    </div>
+
+                    <div className="mt-6 pt-4 border-t border-[#243629] flex items-center justify-between text-xs text-[#5A6E60]">
+                      <div className="flex items-center gap-3">
+                        <span className="font-mono">{new Date(featuredArticle.publishDate).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" })}</span>
+                        <span>•</span>
+                        <span className="flex items-center gap-1"><Clock size={12} /> {featuredArticle.readTime}</span>
+                      </div>
+                      <span className="text-[#4ADE80] font-semibold group-hover:underline flex items-center gap-1">
+                        Read Story <ArrowUpRight size={14} />
+                      </span>
+                    </div>
+                  </div>
+
+                  <Link href={`/news/${featuredArticle.slug}`} className="absolute inset-0 z-20">
+                    <span className="sr-only">Read {featuredArticle.title}</span>
+                  </Link>
+                </div>
+              )}
+
+              {/* Side News List (Right - 5 cols) */}
+              <div className="lg:col-span-5 flex flex-col gap-4">
+                {subArticles.map((article) => (
+                  <div
+                    key={article.slug}
+                    className="group relative rounded-xl border border-[#243629] bg-[#121A15] p-4 hover:border-[#334D3A] hover:bg-[#15211B] transition-all flex gap-4 items-center"
+                  >
+                    <div className="relative h-20 w-24 rounded-lg overflow-hidden shrink-0 bg-[#0C120F] border border-[#243629]">
+                      <Image
+                        src={article.coverImage}
+                        alt={article.title}
+                        fill
+                        className="object-cover group-hover:scale-105 transition-transform duration-300"
+                        sizes="96px"
+                      />
+                    </div>
+
+                    <div className="flex-1 min-w-0 flex flex-col justify-between py-0.5">
+                      <div className="flex items-center gap-2 mb-1">
+                        <span className="text-[9px] font-bold uppercase tracking-wider text-[#4ADE80]">
+                          {article.author.split("/")[0].trim()}
+                        </span>
+                        <span className="text-[9px] font-mono text-[#5A6E60]">
+                          {new Date(article.publishDate).toLocaleDateString("en-US", { month: "short", day: "numeric" })}
+                        </span>
+                      </div>
+
+                      <h4 className="text-xs md:text-sm font-semibold text-white group-hover:text-[#4ADE80] transition-colors line-clamp-2 leading-snug tracking-tight">
+                        {article.title}
+                      </h4>
+
+                      <div className="flex items-center gap-2 mt-1 text-[10px] text-[#5A6E60]">
+                        <span className="flex items-center gap-1"><Clock size={10} /> {article.readTime}</span>
+                      </div>
+                    </div>
+
+                    <Link href={`/news/${article.slug}`} className="absolute inset-0 z-10">
+                      <span className="sr-only">Read {article.title}</span>
+                    </Link>
+                  </div>
+                ))}
+              </div>
+
+            </div>
           </div>
         </section>
       )}
