@@ -56,7 +56,7 @@ function categorizeModels(models) {
 
 function renderTable(models) {
   if (!models || models.length === 0) return "";
-  let table = "| Model | Developer | Primary Task | Modality | Parameters | Status |\n";
+  let table = "\n\n| Model | Developer | Primary Task | Modality | Parameters | Status |\n";
   table += "| :--- | :--- | :--- | :--- | :--- | :--- |\n";
 
   for (const m of models) {
@@ -65,7 +65,7 @@ function renderTable(models) {
     const status = m.type || (m.openSource ? "Open-Weights" : "Closed");
     table += `| [**${m.name}**](https://www.themodelverse.in/models/${m.slug}) | ${m.developer} | \`${m.primaryTask || "Multimodal"}\` | ${mods} | ${params} | \`${status}\` |\n`;
   }
-  return table;
+  return table + "\n\n";
 }
 
 function generateWeeklyDigest() {

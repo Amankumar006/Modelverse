@@ -10,6 +10,7 @@ import { notFound } from "next/navigation";
 import ConfidenceBadge from "@/components/news/ConfidenceBadge";
 import BenchmarkTabs from "@/components/news/BenchmarkTabs";
 import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 interface ArticlePageProps {
   params: Promise<{
     slug: string;
@@ -229,7 +230,7 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
           {article.slug === 'claude-opus-5-detailed-guide' && (
             <BenchmarkTabs />
           )}
-          <ReactMarkdown>{article.body}</ReactMarkdown>
+          <ReactMarkdown remarkPlugins={[remarkGfm]}>{article.body}</ReactMarkdown>
 
           {/* Tags */}
           {article.tags && article.tags.length > 0 && (
