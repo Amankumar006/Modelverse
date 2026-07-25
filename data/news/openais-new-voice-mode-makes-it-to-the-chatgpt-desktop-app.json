@@ -15,7 +15,11 @@
   "externalSources": [
     "https://techcrunch.com/2026/07/24/openais-new-voice-mode-makes-it-to-the-chatgpt-desktop-app/"
   ],
-  "relatedModels": [],
+  "relatedModels": [
+    "codex-mini",
+    "gpt-live",
+    "gen-3-alpha"
+  ],
   "tags": [
     "ai-news",
     "breaking",

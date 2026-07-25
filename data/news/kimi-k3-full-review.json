@@ -19,7 +19,9 @@
     "https://www.kimi.com/?chat_enter_method=new_chat"
   ],
   "relatedModels": [
-    "moonshot-ai-kimi-k3"
+    "moonshot-ai-kimi-k3",
+    "high3",
+    "gen-3-alpha"
   ],
   "tags": [
     "kimi-k3",

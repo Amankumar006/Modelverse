@@ -15,7 +15,9 @@
     "https://deepmind.google/blog/vaultgemma-the-worlds-most-capable-differentially-private-llm/"
   ],
   "relatedModels": [
-    "google-deepmind-vaultgemma-1b"
+    "reve-2-1",
+    "high3",
+    "google-deepmind-gemma-4-31b-dense"
   ],
   "tags": [
     "privacy",

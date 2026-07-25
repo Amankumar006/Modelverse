@@ -14,7 +14,11 @@
     "externalSources": [
       "https://techcrunch.com/2026/07/24/i-tried-out-openais-new-ai-keypad-which-will-be-fun-for-coders-and-slightly-mystifying-to-everyone-else/"
     ],
-    "relatedModels": [],
+    "relatedModels": [
+      "wan-dancer",
+      "codex-mini",
+      "gpt-live"
+    ],
     "tags": [
       "ai-news",
       "breaking",
@@ -38,10 +42,8 @@
     ],
     "relatedModels": [
       "motion4motion",
-      "anthropic-claude-opus-5",
-      "unlimited-ocr",
-      "krea2-identity-edit",
-      "qwen36-27b-fable-fusion-711-uncensored-heretic-nm-dau-neo-max-mtp-gguf"
+      "moonshot-ai-kimi-k3",
+      "anthropic-claude-opus-5"
     ],
     "tags": [
       "weekly-digest",
@@ -65,7 +67,11 @@
     "externalSources": [
       "https://techcrunch.com/podcast/ai-communism-rogue-models-and-the-why-kimi-k3-spooked-wall-street/"
     ],
-    "relatedModels": [],
+    "relatedModels": [
+      "moonshot-ai-kimi-k3",
+      "wan-dancer",
+      "academic-research-lance"
+    ],
     "tags": [
       "ai-news",
       "breaking",
@@ -87,7 +93,10 @@
     "externalSources": [
       "https://techcrunch.com/2026/07/24/anthropic-launches-opus-5/"
     ],
-    "relatedModels": [],
+    "relatedModels": [
+      "reve-2-1",
+      "gen-3-alpha"
+    ],
     "tags": [
       "ai-news",
       "breaking",
@@ -109,7 +118,11 @@
     "externalSources": [
       "https://techcrunch.com/2026/07/24/as-us-weighs-response-to-chinese-ai-industry-urges-against-broad-open-weight-restrictions/"
     ],
-    "relatedModels": [],
+    "relatedModels": [
+      "moonshot-ai-kimi-k3",
+      "thinking-machines-inkling",
+      "inkling"
+    ],
     "tags": [
       "ai-news",
       "breaking",
@@ -131,7 +144,11 @@
     "externalSources": [
       "https://techcrunch.com/2026/07/24/blueskys-ai-assistant-attie-expands-into-an-open-social-research-tool/"
     ],
-    "relatedModels": [],
+    "relatedModels": [
+      "wan-dancer",
+      "gemini-3-5-flash-cyber",
+      "gemini-3-6-flash"
+    ],
     "tags": [
       "ai-news",
       "breaking",
@@ -153,7 +170,10 @@
     "externalSources": [
       "https://techcrunch.com/2026/07/23/how-ai-guardrails-are-impeding-the-work-of-offensive-cybersecurity-researchers/"
     ],
-    "relatedModels": [],
+    "relatedModels": [
+      "reve-2-1",
+      "gen-3-alpha"
+    ],
     "tags": [
       "ai-news",
       "breaking",
@@ -175,7 +195,11 @@
     "externalSources": [
       "https://techcrunch.com/2026/07/24/midjourney-acquired-the-astrology-app-co-star/"
     ],
-    "relatedModels": [],
+    "relatedModels": [
+      "academic-research-scope",
+      "gen-3-alpha",
+      "midjourney-v6"
+    ],
     "tags": [
       "ai-news",
       "breaking",
@@ -197,7 +221,11 @@
     "externalSources": [
       "https://techcrunch.com/2026/07/24/openais-new-voice-mode-makes-it-to-the-chatgpt-desktop-app/"
     ],
-    "relatedModels": [],
+    "relatedModels": [
+      "codex-mini",
+      "gpt-live",
+      "gen-3-alpha"
+    ],
     "tags": [
       "ai-news",
       "breaking",
@@ -219,7 +247,11 @@
     "externalSources": [
       "https://techcrunch.com/2026/07/24/prentis-new-ai-lab-co-founded-by-reid-hoffman-mark-pincus-in-talks-to-raise-100m/"
     ],
-    "relatedModels": [],
+    "relatedModels": [
+      "gpt-5-4",
+      "gpt-5-chat",
+      "gpt-5"
+    ],
     "tags": [
       "ai-news",
       "breaking",
@@ -241,7 +273,10 @@
     "externalSources": [
       "https://techcrunch.com/2026/07/24/why-cognition-bought-poke-ai-personality-is-becoming-a-competitive-advantage/"
     ],
-    "relatedModels": [],
+    "relatedModels": [
+      "wan-dancer",
+      "gen-3-alpha"
+    ],
     "tags": [
       "ai-news",
       "breaking",
@@ -266,7 +301,9 @@
       "https://www.kimi.com/?chat_enter_method=new_chat"
     ],
     "relatedModels": [
-      "moonshot-ai-kimi-k3"
+      "moonshot-ai-kimi-k3",
+      "high3",
+      "gen-3-alpha"
     ],
     "tags": [
       "kimi-k3",
@@ -293,7 +330,9 @@
       "https://www.kimi.com/?chat_enter_method=new_chat"
     ],
     "relatedModels": [
-      "moonshot-ai-kimi-k3"
+      "moonshot-ai-kimi-k3",
+      "codex-mini",
+      "reve-2-1"
     ],
     "tags": [
       "kimi",
@@ -319,7 +358,8 @@
     ],
     "relatedModels": [
       "openai-gpt-red",
-      "openai-gpt-5.6"
+      "gpt-5-chat",
+      "gpt-5"
     ],
     "tags": [
       "openai",
@@ -346,7 +386,9 @@
       "https://www.analyticsinsight.net/news/anthropic-introduces-india-pricing-for-claude-ai-plans-pro-subscription-fees-revealed"
     ],
     "relatedModels": [
-      "anthropic-claude-sonnet-5"
+      "gpt-live",
+      "gemini-3-5-flash-cyber",
+      "gemini-3-6-flash"
     ]
   },
   {
@@ -365,7 +407,9 @@
       "https://deepmind.google/blog/alphaevolve-impact/"
     ],
     "relatedModels": [
-      "google-deepmind-alphaevolve"
+      "wan-dancer",
+      "high3",
+      "google-deepmind-gemma-4-31b-dense"
     ],
     "tags": [
       "google",
@@ -390,7 +434,9 @@
       "https://www.youtube.com/watch?v=eiQgljOrkWU"
     ],
     "relatedModels": [
-      "gpt-5-6"
+      "codex-mini",
+      "gpt-5-chat",
+      "gpt-5"
     ]
   },
   {
@@ -406,8 +452,8 @@
     "status": "published",
     "confidenceLevel": "confirmed",
     "relatedModels": [
-      "google-deepmind-gemini-3-deep-think",
-      "openai-gpt-4o"
+      "google-gnm",
+      "gen-3-alpha"
     ],
     "tags": [
       "alignment",
@@ -429,8 +475,9 @@
     "status": "published",
     "confidenceLevel": "confirmed",
     "relatedModels": [
-      "google-deepmind-gemma-4-31b-dense",
-      "anthropic-claude-sonnet-5"
+      "anthropic-claude-opus-5",
+      "anthropic-claude-sonnet-5",
+      "anthropic-claude-fable-5"
     ],
     "tags": [
       "gemma",
@@ -452,6 +499,8 @@
     "status": "published",
     "confidenceLevel": "confirmed",
     "relatedModels": [
+      "high3",
+      "nvidia-pid",
       "google-deepmind-gemma-4-31b-dense"
     ],
     "tags": [
@@ -478,8 +527,9 @@
       "https://ai.google.dev/gemini-api/docs/whats-new-gemini-3.5"
     ],
     "relatedModels": [
-      "google-deepmind-gemini-3-5-flash",
-      "google-deepmind-gemini-3-1-pro"
+      "gemini-3-5-flash-cyber",
+      "gemini-3-5-flash-lite",
+      "gemini-3-6-flash"
     ],
     "tags": [
       "gemini",
@@ -503,6 +553,8 @@
       "https://deepmind.google/blog/diffusiongemma-4x-faster-text-generation/"
     ],
     "relatedModels": [
+      "reve-2-1",
+      "high3",
       "google-deepmind-diffusiongemma"
     ],
     "tags": [
@@ -528,7 +580,9 @@
       "https://deepmind.google/blog/medgemma-our-most-capable-open-models-for-health-ai-development/"
     ],
     "relatedModels": [
-      "google-deepmind-medgemma-1-5-4b"
+      "high3",
+      "google-deepmind-gemma-4-31b-dense",
+      "medgemma-1-5-4b"
     ],
     "tags": [
       "medgemma",
@@ -553,7 +607,9 @@
       "https://deepmind.google/blog/vaultgemma-the-worlds-most-capable-differentially-private-llm/"
     ],
     "relatedModels": [
-      "google-deepmind-vaultgemma-1b"
+      "reve-2-1",
+      "high3",
+      "google-deepmind-gemma-4-31b-dense"
     ],
     "tags": [
       "privacy",

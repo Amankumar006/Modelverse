@@ -4,7 +4,7 @@ import Image from "next/image";
 import Navbar from "@/components/layout/Navbar";
 import NewsBreadcrumb from "@/components/news/NewsBreadcrumb";
 import { getArticleBySlug, getAllArticles, getCategoryLabel } from "@/lib/news";
-import { getModelBySlug, SITE_URL } from "@/lib/models";
+import { getModelBySlug, getAllModelEntries, SITE_URL } from "@/lib/models";
 import { Clock, Calendar, ArrowRight, ArrowLeft, Tag } from "lucide-react";
 import { notFound } from "next/navigation";
 import ConfidenceBadge from "@/components/news/ConfidenceBadge";
@@ -76,10 +76,31 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
     notFound();
   }
 
-  // Get full models details for related links
-  const relatedModelsData = (article.relatedModels || [])
+  // Get full models details for related links, with auto-matching fallback
+  let relatedModelsData = (article.relatedModels || [])
     .map(slug => getModelBySlug(slug))
     .filter((model): model is NonNullable<typeof model> => !!model);
+
+  if (relatedModelsData.length < 2) {
+    const allModels = getAllModelEntries();
+    const textToMatch = `${article.title} ${article.body}`.toLowerCase();
+    const existingSlugs = new Set(relatedModelsData.map(m => m.slug));
+
+    const matched = allModels.filter(m => {
+      if (existingSlugs.has(m.slug)) return false;
+      const nameLower = m.name.toLowerCase();
+      if (nameLower.length >= 3 && textToMatch.includes(nameLower)) return true;
+      if (m.family && m.family.length >= 3 && textToMatch.includes(m.family.toLowerCase())) return true;
+      return false;
+    });
+
+    const combined = [...relatedModelsData, ...matched];
+    if (combined.length < 2) {
+      const featuredFallback = allModels.filter(m => m.featured && !existingSlugs.has(m.slug));
+      combined.push(...featuredFallback);
+    }
+    relatedModelsData = combined.slice(0, 3);
+  }
 
   const jsonLd = {
     "@context": "https://schema.org",

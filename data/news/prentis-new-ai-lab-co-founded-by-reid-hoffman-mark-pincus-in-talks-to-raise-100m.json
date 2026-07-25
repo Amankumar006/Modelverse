@@ -15,7 +15,11 @@
   "externalSources": [
     "https://techcrunch.com/2026/07/24/prentis-new-ai-lab-co-founded-by-reid-hoffman-mark-pincus-in-talks-to-raise-100m/"
   ],
-  "relatedModels": [],
+  "relatedModels": [
+    "gpt-5-4",
+    "gpt-5-chat",
+    "gpt-5"
+  ],
   "tags": [
     "ai-news",
     "breaking",

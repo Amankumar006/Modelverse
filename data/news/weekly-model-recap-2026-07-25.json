@@ -17,10 +17,8 @@
   ],
   "relatedModels": [
     "motion4motion",
-    "anthropic-claude-opus-5",
-    "unlimited-ocr",
-    "krea2-identity-edit",
-    "qwen36-27b-fable-fusion-711-uncensored-heretic-nm-dau-neo-max-mtp-gguf"
+    "moonshot-ai-kimi-k3",
+    "anthropic-claude-opus-5"
   ],
   "tags": [
     "weekly-digest",

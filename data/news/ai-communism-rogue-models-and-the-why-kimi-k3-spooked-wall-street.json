@@ -15,7 +15,11 @@
   "externalSources": [
     "https://techcrunch.com/podcast/ai-communism-rogue-models-and-the-why-kimi-k3-spooked-wall-street/"
   ],
-  "relatedModels": [],
+  "relatedModels": [
+    "moonshot-ai-kimi-k3",
+    "wan-dancer",
+    "academic-research-lance"
+  ],
   "tags": [
     "ai-news",
     "breaking",

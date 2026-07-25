@@ -10,8 +10,9 @@
   "body": "The AI ecosystem continues to move at a relentless pace. This week saw two major updates from Google DeepMind and Anthropic.\n\n### Gemma 4 (31B Dense)\nGoogle DeepMind shocked the open-weights community by dropping **Gemma 4**, a 31-billion parameter dense model. Initial benchmarks show strong parity with closed frontier models in coding proficiency and math solving. It features:\n- 128k context window\n- Native tool-calling capabilities\n- Permissive commercial license terms\n\n### Claude 5 Sonnet Previews\nAnthropic quietely updated its API documentation, adding references to an upcoming **Claude 5 Sonnet** release. Select enterprise accounts have reportedly been granted early access to developer sandboxes. We expect the public rollout to showcase major advances in low-latency agentic loops and vision-based browser control.\n\nStay tuned as we continue to track and verify these releases.",
   "coverImage": "/images/news/issue_1_cover.jpg",
   "relatedModels": [
-    "google-deepmind-gemma-4-31b-dense",
-    "anthropic-claude-sonnet-5"
+    "anthropic-claude-opus-5",
+    "anthropic-claude-sonnet-5",
+    "anthropic-claude-fable-5"
   ],
   "tags": [
     "gemma",

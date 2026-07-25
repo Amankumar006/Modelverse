@@ -15,7 +15,10 @@
   "externalSources": [
     "https://techcrunch.com/2026/07/24/why-cognition-bought-poke-ai-personality-is-becoming-a-competitive-advantage/"
   ],
-  "relatedModels": [],
+  "relatedModels": [
+    "wan-dancer",
+    "gen-3-alpha"
+  ],
   "tags": [
     "ai-news",
     "breaking",

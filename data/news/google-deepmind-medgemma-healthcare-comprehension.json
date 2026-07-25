@@ -15,7 +15,9 @@
     "https://deepmind.google/blog/medgemma-our-most-capable-open-models-for-health-ai-development/"
   ],
   "relatedModels": [
-    "google-deepmind-medgemma-1-5-4b"
+    "high3",
+    "google-deepmind-gemma-4-31b-dense",
+    "medgemma-1-5-4b"
   ],
   "tags": [
     "medgemma",

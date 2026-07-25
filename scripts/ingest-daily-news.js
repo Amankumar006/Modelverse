@@ -48,6 +48,45 @@ const POSTER_IMAGES = {
   ]
 };
 
+// ─── Automated Model Linking ──────────────────────────────────────────
+function getModelList() {
+  const modelsPath = path.join(process.cwd(), "src", "lib", "models-archive.json");
+  if (fs.existsSync(modelsPath)) {
+    try {
+      return JSON.parse(fs.readFileSync(modelsPath, "utf-8"));
+    } catch(e) {}
+  }
+  return [];
+}
+
+const ALL_MODELS = getModelList();
+
+function detectRelatedModelSlugs(title, body, lab) {
+  const textToMatch = `${title} ${body}`.toLowerCase();
+  const matched = [];
+
+  for (const m of ALL_MODELS) {
+    if (matched.length >= 3) break;
+    const nameLower = m.name.toLowerCase();
+    if (nameLower.length >= 3 && textToMatch.includes(nameLower)) {
+      matched.push(m.slug);
+    } else if (m.family && m.family.length >= 3 && textToMatch.includes(m.family.toLowerCase())) {
+      matched.push(m.slug);
+    }
+  }
+
+  // Fallback if no specific model named: pick top model by lab
+  if (matched.length === 0 && lab) {
+    const labLower = lab.toLowerCase();
+    const labModels = ALL_MODELS.filter(m => m.developer.toLowerCase().includes(labLower) || labLower.includes(m.developer.toLowerCase()));
+    if (labModels.length > 0) {
+      matched.push(labModels[0].slug);
+    }
+  }
+
+  return [...new Set(matched)].slice(0, 3);
+}
+
 function getPosterImage(lab, index) {
   const pool = POSTER_IMAGES[lab] || POSTER_IMAGES["default"];
   return pool[index % pool.length];
@@ -366,7 +405,7 @@ async function extractFullArticleBody(url, fallbackDesc, lab) {
       status: "published",
       confidenceLevel: "confirmed",
       externalSources: [candidate.link],
-      relatedModels: [],
+      relatedModels: detectRelatedModelSlugs(candidate.title, bodyContent, candidate.lab),
       tags: ["ai-news", "breaking", slugify(candidate.lab)]
     };
 
