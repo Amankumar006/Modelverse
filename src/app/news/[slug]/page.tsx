@@ -8,6 +8,7 @@ import { getModelBySlug, SITE_URL } from "@/lib/models";
 import { Clock, Calendar, ArrowRight, ArrowLeft, Tag } from "lucide-react";
 import { notFound } from "next/navigation";
 import ConfidenceBadge from "@/components/news/ConfidenceBadge";
+import BenchmarkTabs from "@/components/news/BenchmarkTabs";
 import ReactMarkdown from "react-markdown";
 interface ArticlePageProps {
   params: Promise<{
@@ -204,6 +205,9 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
       <div className="max-w-[1400px] mx-auto px-6 sm:px-8 lg:px-12 grid grid-cols-1 lg:grid-cols-[1fr_350px] xl:grid-cols-[1fr_400px] gap-12 lg:gap-20">
         {/* Main Content */}
         <article className="prose prose-invert prose-emerald max-w-none text-[#E2E8E4] prose-img:rounded-xl prose-img:max-w-full prose-img:h-auto prose-img:w-full prose-img:mx-auto">
+          {article.slug === 'claude-opus-5-detailed-guide' && (
+            <BenchmarkTabs />
+          )}
           <ReactMarkdown>{article.body}</ReactMarkdown>
 
           {/* Tags */}

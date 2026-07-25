@@ -292,14 +292,15 @@ export default function TimelineContainer({ initialModels }: TimelineContainerPr
       <style dangerouslySetInnerHTML={{
         __html: `
         :root {
-          --wheel-radius: 55vw;
-          --wheel-left: calc(27.3vw - var(--wheel-radius));
-          --wheel-top: 55.1vh;
-          --content-left: calc(27.3vw + 18vw);
+          --wheel-radius: 40vw;
+          --wheel-left: -25vw;
+          --wheel-top: 50%;
+          --content-left: calc(15vw + 5vw);
         }
         @media (min-width: 768px) {
           :root {
             --wheel-radius: 42vw;
+            --wheel-left: -15vw;
             --content-left: calc(27.3vw + 20vw);
           }
         }
@@ -442,7 +443,7 @@ export default function TimelineContainer({ initialModels }: TimelineContainerPr
             >
               {/* Giant Index Number */}
               <div
-                className="text-8xl md:text-[11rem] font-bold text-[#1f1f21] leading-none select-none tracking-tighter shrink-0"
+                className="text-7xl md:text-[11rem] font-bold text-[#1f1f21] leading-none select-none tracking-tighter shrink-0"
                 style={{
                   fontFamily: "var(--font-display, ui-sans-serif, system-ui, sans-serif)",
                 }}

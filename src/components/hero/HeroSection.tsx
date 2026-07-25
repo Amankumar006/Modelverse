@@ -73,10 +73,10 @@ export default function HeroSection() {
           
           {/* Headings */}
           <h1 className="flex flex-col items-center justify-center text-[#E2E8E4] mb-6 sm:mb-8 tracking-tight font-normal" style={{ fontFamily: "var(--font-serif)", lineHeight: "1.08" }}>
-            <span className="text-5xl sm:text-7xl md:text-8xl lg:text-9xl uppercase block">
+            <span className="text-4xl sm:text-7xl md:text-8xl lg:text-9xl uppercase block">
               <StaggeredFade text="BEYOND THE" />
             </span>
-            <span className="text-5xl sm:text-7xl md:text-8xl lg:text-9xl uppercase block">
+            <span className="text-4xl sm:text-7xl md:text-8xl lg:text-9xl uppercase block">
               <StaggeredFade text="NOISE" />
             </span>
           </h1>
@@ -101,7 +101,7 @@ export default function HeroSection() {
               href="/models"
               className="liquid-glass rounded-full text-[#E2E8E4] uppercase tracking-[0.18em] sm:tracking-[0.2em] px-7 sm:px-10 py-3.5 sm:py-4 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#4ADE80] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0C120F] inline-flex items-center justify-center transition-all"
             >
-              Explore Catalog
+              Explore Models
             </Link>
           </motion.div>
 

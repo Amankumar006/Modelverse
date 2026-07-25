@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import HeroSection from "@/components/hero/HeroSection";
 import DeveloperMarquee from "@/components/home/DeveloperMarquee";
 import { getRecentModels, getModelCount, getAllDevelopers, SITE_URL, getModelBySlug, getAllModelEntries } from "@/lib/models";
-import FrontierShowcase from "@/components/home/FrontierShowcase";
 import Link from "next/link";
 import {
   ArrowRight,
@@ -45,64 +44,40 @@ export default function Home() {
   const modelCount = getModelCount();
   const developers = getAllDevelopers();
   
-  // Fetch entries for the horizontal showcase pulling top models per key developer
   const allModels = getAllModelEntries();
-  const byDeveloper = new Map<string, ModelEntry[]>();
-  for (const m of allModels) {
-    if (!byDeveloper.has(m.developer)) {
-      byDeveloper.set(m.developer, []);
-    }
-    byDeveloper.get(m.developer)!.push(m);
-  }
-
-  const showcaseModels: ModelEntry[] = [];
-  const priorityDevs = ["OpenAI", "Anthropic", "Google DeepMind", "Meta", "Mistral AI", "Cohere", "xAI"];
-  
-  for (const dev of priorityDevs) {
-    if (byDeveloper.has(dev) && byDeveloper.get(dev)!.length > 0) {
-      // Pick the most recent/featured model for this developer
-      // For OpenAI, explicitly prefer gpt-4o if available, else first
-      // For Anthropic, explicitly prefer claude-3-5-sonnet if available, else first
-      let best = byDeveloper.get(dev)![0];
-      if (dev === "OpenAI") {
-        best = byDeveloper.get(dev)!.find(m => m.slug.includes("gpt-4o")) || best;
-      } else if (dev === "Anthropic") {
-        best = byDeveloper.get(dev)!.find(m => m.slug.includes("claude-3-5-sonnet")) || best;
-      }
-      showcaseModels.push(best);
-    }
-  }
-  
-  // Fill the rest up to 6 with other developers
-  for (const [dev, models] of byDeveloper.entries()) {
-    if (showcaseModels.length >= 6) break;
-    if (!priorityDevs.includes(dev) && models.length > 0) {
-      showcaseModels.push(models[0]);
-    }
-  }
-  
-  // Fallback if we still don't have 6 (e.g. only 2 developers exist)
-  if (showcaseModels.length < 6) {
-    const showcaseSlugs = new Set(showcaseModels.map(m => m.slug));
-    for (const m of getTrendingModels(10)) {
-      if (showcaseModels.length >= 6) break;
-      if (!showcaseSlugs.has(m.slug)) {
-        const fullModel = getModelBySlug(m.slug);
-        if (fullModel) {
-          showcaseModels.push(fullModel);
-          showcaseSlugs.add(m.slug);
-        }
-      }
-    }
-  }
+  const earliestModel = allModels.length > 0 ? allModels[allModels.length - 1] : null;
 
   return (
     <main className="bg-[#0C120F] text-[#E2E8E4] selection:bg-[#4ADE80] selection:text-[#0C120F]">
       {/* ── Hero Section ───────────────────────────────────── */}
       <HeroSection />
 
-      {/* ── Frontier Horizontal Showcase ────────────────────── */}
-      <FrontierShowcase models={showcaseModels} />
+      {/* ── Earliest Model Section ────────────────────── */}
+      {earliestModel && (
+        <section className="bg-[#0C120F] text-[#E2E8E4] px-4 sm:px-6 md:px-10 lg:px-14 py-12 md:py-16 border-t border-[#243629]">
+          <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+            <div>
+              <div className="flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.22em] text-[#8C9E91] mb-3">
+                <Sparkle size={12} className="text-[#4ADE80]" strokeWidth={1.5} />
+                <span>Earliest Tracked Release</span>
+              </div>
+              <h2 className="text-2xl md:text-3xl font-normal text-white" style={{ fontFamily: "var(--font-display, ui-sans-serif, system-ui, sans-serif)" }}>
+                {earliestModel.name}
+              </h2>
+              <p className="text-sm text-[#8C9E91] mt-2 max-w-2xl leading-[1.6]">
+                Released on {new Date(earliestModel.releaseDate).toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" })} by {earliestModel.developer}. This marks the earliest model currently tracked in the Modelverse database.
+              </p>
+            </div>
+            <Link
+              href={`/models/${earliestModel.slug}`}
+              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-semibold hover:bg-[#1A261D] border border-[#243629] hover:border-[#334D3A] transition-all cursor-pointer text-[#F0FDF4] shrink-0"
+            >
+              View Model Details
+              <ArrowRight size={14} />
+            </Link>
+          </div>
+        </section>
+      )}
 
       {/* ── Portfolio Bento-Grid Features Section ───────────── */}
       <section className="bg-[#0C120F] text-[#E2E8E4] px-4 sm:px-6 md:px-10 lg:px-14 py-6 sm:py-8 md:py-10 lg:h-screen flex flex-col justify-between border-t border-[#243629] relative z-10 antialiased">

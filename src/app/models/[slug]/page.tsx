@@ -346,8 +346,8 @@ export default async function ModelDetailPage({
                 {model.benchmarks && model.benchmarks.length > 0 && (
                   <section className="space-y-4">
                     <h2 className="text-[10px] font-bold uppercase tracking-widest text-gray-400/60">Benchmarks</h2>
-                    <div className="border border-white/10 rounded-xl overflow-hidden bg-white/5">
-                      <table className="w-full text-left border-collapse text-xs">
+                    <div className="border border-white/10 rounded-xl overflow-x-auto bg-white/5 scrollbar-thin">
+                      <table className="w-full text-left border-collapse text-xs min-w-[300px]">
                         <thead>
                           <tr className="border-b border-white/10 bg-white/5 text-gray-400 font-medium">
                             <th className="p-3">Benchmark</th>

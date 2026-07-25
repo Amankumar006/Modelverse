@@ -152,7 +152,7 @@ export default async function NewsPage({ searchParams }: NewsPageProps) {
               </div>
 
               {/* Content Block */}
-              <div className="p-8 sm:p-12 lg:p-16 flex flex-col justify-between relative z-20 pointer-events-none">
+              <div className="p-6 sm:p-12 lg:p-16 flex flex-col justify-between relative z-20 pointer-events-none">
                 <div>
                   {/* Category Label */}
                   <div className="flex items-center gap-2 mb-6 pointer-events-auto">

@@ -174,12 +174,14 @@ export default function Navbar({ theme = "light" }: { theme?: "light" | "dark" }
 
         {/* CTA & Mobile Hamburger */}
         <div className="flex items-center gap-2 shrink-0">
-          <Link
-            href="/models"
-            className={`text-sm font-medium px-6 py-2.5 rounded-full hover:scale-[1.03] active:scale-[0.98] transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black focus-visible:ring-offset-2 flex items-center justify-center ${theme === 'dark' ? 'bg-[#4ADE80] text-[#0C120F] hover:bg-[#22c55e]' : 'bg-[#000000] text-[#FFFFFF] hover:bg-black/90'}`}
-          >
-            Browse Catalog
-          </Link>
+          {pathname !== "/models" && (
+            <Link
+              href="/models"
+              className={`text-sm font-medium px-6 py-2.5 rounded-full hover:scale-[1.03] active:scale-[0.98] transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black focus-visible:ring-offset-2 flex items-center justify-center ${theme === 'dark' ? 'bg-[#4ADE80] text-[#0C120F] hover:bg-[#22c55e]' : 'bg-[#000000] text-[#FFFFFF] hover:bg-black/90'}`}
+            >
+              Explore Models
+            </Link>
+          )}
 
           {/* Mobile menu trigger */}
           <button
@@ -260,6 +262,7 @@ export default function Navbar({ theme = "light" }: { theme?: "light" | "dark" }
             >
               Home
             </Link>
+
             <Link
               href="/models"
               onClick={() => setMobileMenuOpen(false)}

@@ -101,7 +101,7 @@ export default function FrontierShowcase({ models }: { models: ModelEntry[] }) {
                 {model.name}
               </h3>
               
-              <div className="grid grid-cols-2 gap-4 border-t border-[#243629] pt-5">
+              <div className="flex flex-col sm:grid sm:grid-cols-2 gap-4 border-t border-[#243629] pt-5">
                 <div>
                   <p className="text-[10px] uppercase tracking-wider text-[#5A6E60] font-semibold mb-1">Parameters</p>
                   <p className="text-sm font-mono text-[#E2E8E4] truncate">{model.parameters === "undisclosed" ? "Undisclosed" : model.parameters}</p>

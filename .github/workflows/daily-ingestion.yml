@@ -28,8 +28,25 @@ jobs:
       - name: Run Ingestion Pipeline
         run: node scripts/ingest-trending-models.js
 
+      - name: Generate Email Digest
+        run: node scripts/generate-email-digest.js
+
       - name: Compile and Validate Models Index
         run: node scripts/compile-models.js
+
+      - name: Send Gmail Digest Notification
+        if: env.NEW_MODELS_PUSHED == 'true'
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: smtp.gmail.com
+          server_port: 465
+          secure: true
+          username: 006amanraj@gmail.com
+          password: ${{ secrets.GMAIL_APP_PASSWORD }}
+          subject: 🤖 [Modelverse] ${{ env.NEW_MODELS_COUNT }} New AI Models Auto-Published!
+          to: 006amanraj@gmail.com
+          from: Modelverse Ingestion Bot <006amanraj@gmail.com>
+          html_body: file://data/ingestion/latest-digest.html
 
       - name: Commit and Push New Published Models
         run: |
