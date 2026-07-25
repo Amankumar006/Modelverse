@@ -10,6 +10,13 @@ const nextConfig: NextConfig = {
       { source: '/models/computer-use', destination: '/models/openai-computer-using-agent', permanent: true },
     ];
   },
+  images: {
+    remotePatterns: [
+      { protocol: 'https', hostname: 'www.anthropic.com' },
+      { protocol: 'https', hostname: 'www-cdn.anthropic.com' },
+      { protocol: 'https', hostname: 'mintcdn.com' },
+      { protocol: 'https', hostname: 'kimi-file.moonshot.cn' },
+    ],
+  },
 };
-
 export default nextConfig;

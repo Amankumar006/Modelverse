@@ -22,7 +22,9 @@
       "prompting",
       "guide",
       "anthropic"
-    ]
+    ],
+    "isFeatured": true,
+    "isTrending": true
   },
   {
     "id": "kimi-k3-full-review",
@@ -49,7 +51,9 @@
       "model-review",
       "open-weights",
       "architecture"
-    ]
+    ],
+    "isFeatured": true,
+    "isTrending": true
   },
   {
     "id": "kimi-k3-release-short",
@@ -76,7 +80,9 @@
       "open-source",
       "kimi-k3",
       "moonshot-ai"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "post-8",
@@ -103,6 +109,8 @@
       "red-teaming",
       "weekly-recap"
     ],
+    "isFeatured": false,
+    "isTrending": false,
     "issueNumber": 3
   },
   {
@@ -123,7 +131,9 @@
     ],
     "relatedModels": [
       "anthropic-claude-sonnet-5"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "post-9",
@@ -148,7 +158,9 @@
       "deepmind",
       "alphaevolve",
       "agentic"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": false
   },
   {
     "id": "openai-codex-chatgpt-sol-updates",
@@ -167,7 +179,9 @@
     ],
     "relatedModels": [
       "gpt-5-6"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": false
   },
   {
     "id": "featured-1",
@@ -190,6 +204,8 @@
       "safety",
       "rlhf"
     ],
+    "isFeatured": false,
+    "isTrending": false,
     "issueNumber": 2
   },
   {
@@ -213,6 +229,8 @@
       "claude",
       "open-weights"
     ],
+    "isFeatured": false,
+    "isTrending": false,
     "issueNumber": 1
   },
   {
@@ -234,7 +252,9 @@
       "hardware",
       "on-device",
       "npu"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": false
   },
   {
     "id": "post-3",
@@ -261,7 +281,9 @@
       "gemini",
       "benchmarks",
       "speed"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": false
   },
   {
     "id": "post-7",
@@ -286,7 +308,9 @@
       "google",
       "diffusion",
       "open-source"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "post-10",
@@ -311,7 +335,9 @@
       "medical",
       "healthcare",
       "open-weights"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": false
   },
   {
     "id": "post-11",
@@ -336,6 +362,8 @@
       "vaultgemma",
       "gemma",
       "open-weights"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": false
   }
 ]
