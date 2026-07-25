@@ -196,11 +196,11 @@ export default function Home() {
 
               <div className="flex flex-wrap items-center gap-2">
                 {[
-                  { label: "Reasoning & Math", href: "/models?search=reasoning" },
-                  { label: "Code Generation", href: "/models?search=code" },
-                  { label: "Multimodal & Vision", href: "/models?search=vision" },
+                  { label: "Reasoning & Math", href: "/models?task=chat-reasoning" },
+                  { label: "Code Generation", href: "/models?task=code-generation" },
+                  { label: "Multimodal & Vision", href: "/models?task=multimodal-general" },
                   { label: "Open Weights", href: "/models?type=open-weights" },
-                  { label: "Audio & Speech", href: "/models?search=audio" },
+                  { label: "Audio & Speech", href: "/models?task=audio-speech" },
                 ].map((tag) => (
                   <Link
                     key={tag.label}

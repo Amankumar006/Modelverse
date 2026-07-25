@@ -13,6 +13,10 @@
     "google-deepmind-gemma-4-31b-dense",
     "anthropic-claude-sonnet-5"
   ],
-  "tags": ["gemma", "claude", "open-weights"],
+  "tags": [
+    "gemma",
+    "claude",
+    "open-weights"
+  ],
   "status": "published"
 }

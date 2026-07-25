@@ -12,10 +12,7 @@ const nextConfig: NextConfig = {
   },
   images: {
     remotePatterns: [
-      { protocol: 'https', hostname: 'www.anthropic.com' },
-      { protocol: 'https', hostname: 'www-cdn.anthropic.com' },
-      { protocol: 'https', hostname: 'mintcdn.com' },
-      { protocol: 'https', hostname: 'kimi-file.moonshot.cn' },
+      { protocol: 'https', hostname: '**' },
     ],
   },
 };

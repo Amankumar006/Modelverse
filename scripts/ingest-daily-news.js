@@ -217,6 +217,23 @@ async function runDailyNewsIngestion() {
   const candidates = allCandidates.slice(0, MAX_ARTICLES_PER_RUN);
   console.log(`\n  📋 Processing ${candidates.length} candidates (capped from ${allCandidates.length})`);
 
+async function extractOgImage(url) {
+  if (!url) return null;
+  try {
+    const html = await getHttps(url);
+    const ogMatch = /<meta[^>]+property="og:image"[^>]+content="([^"]+)"/i.exec(html) ||
+                    /<meta[^>]+content="([^"]+)"[^>]+property="og:image"/i.exec(html) ||
+                    /<meta[^>]+name="twitter:image"[^>]+content="([^"]+)"/i.exec(html) ||
+                    /<meta[^>]+content="([^"]+)"[^>]+name="twitter:image"/i.exec(html);
+    if (ogMatch && ogMatch[1]) {
+      let imgUrl = ogMatch[1].replace(/&amp;/g, "&").trim();
+      if (imgUrl.startsWith("//")) imgUrl = "https:" + imgUrl;
+      return imgUrl;
+    }
+  } catch(e) {}
+  return null;
+}
+
   const todayStr = new Date().toISOString().split("T")[0];
   let posterIndex = 0;
 
@@ -232,6 +249,12 @@ async function runDailyNewsIngestion() {
       ? candidate.parsedDate.toISOString().split("T")[0]
       : todayStr;
 
+    // Extract real OG cover image from original article page, fallback to rotated lab poster
+    let coverImage = await extractOgImage(candidate.link);
+    if (!coverImage) {
+      coverImage = getPosterImage(candidate.lab, posterIndex);
+    }
+
     const newsJson = {
       id: newsSlug,
       slug: newsSlug,
@@ -243,7 +266,7 @@ async function runDailyNewsIngestion() {
       readTime: "2 min read",
       excerpt: candidate.description.slice(0, 180) + (candidate.description.length > 180 ? "..." : ""),
       body: `${candidate.description}\n\n### Official Announcement\nRead the full update directly from the official source at [${candidate.lab} News](${candidate.link}).\n\nStay tuned to [Modelverse](https://www.themodelverse.in) for real-time model analysis and benchmark coverage.`,
-      coverImage: getPosterImage(candidate.lab, posterIndex),
+      coverImage: coverImage,
       status: "published",
       confidenceLevel: "confirmed",
       externalSources: [candidate.link],
@@ -255,7 +278,7 @@ async function runDailyNewsIngestion() {
     existingSlugs.add(newsSlug);
     createdNews.push(newsJson);
     posterIndex++;
-    console.log(`  ✅ Published: ${candidate.title.slice(0, 70)}`);
+    console.log(`  ✅ Published (${coverImage.includes('http') ? 'OG Image' : 'Fallback'}): ${candidate.title.slice(0, 60)}`);
   }
 
   // Generate Email Digest

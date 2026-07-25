@@ -13,6 +13,10 @@
     "google-deepmind-gemini-3-deep-think",
     "openai-gpt-4o"
   ],
-  "tags": ["alignment", "safety", "rlhf"],
+  "tags": [
+    "alignment",
+    "safety",
+    "rlhf"
+  ],
   "status": "published"
 }

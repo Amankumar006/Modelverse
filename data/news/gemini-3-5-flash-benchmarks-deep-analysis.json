@@ -20,5 +20,9 @@
     "google-deepmind-gemini-3-5-flash",
     "google-deepmind-gemini-3-1-pro"
   ],
-  "tags": ["gemini", "benchmarks", "speed"]
+  "tags": [
+    "gemini",
+    "benchmarks",
+    "speed"
+  ]
 }

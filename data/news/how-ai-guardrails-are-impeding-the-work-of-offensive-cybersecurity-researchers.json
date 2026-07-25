@@ -9,7 +9,7 @@
   "readTime": "2 min read",
   "excerpt": "We spoke with several cybersecurity researchers, who look for unknown vulnerabilities and develop tools to exploit them, about how OpenAI’s and Anthropic’s guardrails affect their ...",
   "body": "We spoke with several cybersecurity researchers, who look for unknown vulnerabilities and develop tools to exploit them, about how OpenAI’s and Anthropic’s guardrails affect their work.\n\n### Official Announcement\nRead the full update directly from the official source at [TechCrunch AI News](https://techcrunch.com/2026/07/23/how-ai-guardrails-are-impeding-the-work-of-offensive-cybersecurity-researchers/).\n\nStay tuned to [Modelverse](https://www.themodelverse.in) for real-time model analysis and benchmark coverage.",
-  "coverImage": "/images/news/news_featured.jpg",
+  "coverImage": "https://techcrunch.com/wp-content/uploads/2026/06/claude-mythos-logo.jpg?resize=1200,800",
   "status": "published",
   "confidenceLevel": "confirmed",
   "externalSources": [

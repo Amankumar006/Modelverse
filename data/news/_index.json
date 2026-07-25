@@ -1,14 +1,14 @@
 [
   {
-    "id": "i-tried-out-openai8217s-new-ai-keypad-which-will-be-fun-for-some-coders-and-slig",
-    "slug": "i-tried-out-openai8217s-new-ai-keypad-which-will-be-fun-for-some-coders-and-slig",
-    "title": "I tried out OpenAI&#8217;s new AI keypad — which will be fun for some coders and slightly mystifying to everyone else",
+    "id": "i-tried-out-openais-new-ai-keypad-which-will-be-fun-for-some-coders-and-slig",
+    "slug": "i-tried-out-openais-new-ai-keypad-which-will-be-fun-for-some-coders-and-slig",
+    "title": "I tried out OpenAI’s new AI keypad — which will be fun for some coders and slightly mystifying to everyone else",
     "category": "short-news",
     "publishDate": "2026-07-25",
     "author": "TechCrunch AI / Modelverse Editorial",
     "readTime": "2 min read",
     "excerpt": "OpenAI's fancy new AI keypad will be a lot of fun for some, while many others are probably not going to touch it.",
-    "coverImage": "/images/news/news_short.jpg",
+    "coverImage": "https://techcrunch.com/wp-content/uploads/2026/07/Micro.webp?resize=1200,800",
     "status": "published",
     "confidenceLevel": "confirmed",
     "externalSources": [
@@ -58,8 +58,8 @@
     "publishDate": "2026-07-24",
     "author": "TechCrunch AI / Modelverse Editorial",
     "readTime": "2 min read",
-    "excerpt": "Chinese AI lab Moonshot&#8217;s&#160;open model Kimi went viral this week&#160;for reasons that had less to do with the model itself and more to do with&#160;how the U.S. AI indust...",
-    "coverImage": "/images/news/news_featured.jpg",
+    "excerpt": "Chinese AI lab Moonshot’s open model Kimi went viral this week for reasons that had less to do with the model itself and more to do with how the U.S. AI indust...",
+    "coverImage": "https://techcrunch.com/wp-content/uploads/2026/07/GettyImages-2286500505.jpg?resize=1200,800",
     "status": "published",
     "confidenceLevel": "confirmed",
     "externalSources": [
@@ -81,7 +81,7 @@
     "author": "TechCrunch AI / Modelverse Editorial",
     "readTime": "2 min read",
     "excerpt": "Opus 5 will be both cheaper and less restrictive than Fable, likely making it preferable in most use cases.",
-    "coverImage": "/images/news/news_featured.jpg",
+    "coverImage": "https://techcrunch.com/wp-content/uploads/2026/07/Screenshot-2026-07-24-at-12.47.38-PM.jpg?w=1166",
     "status": "published",
     "confidenceLevel": "confirmed",
     "externalSources": [
@@ -103,7 +103,7 @@
     "author": "TechCrunch AI / Modelverse Editorial",
     "readTime": "2 min read",
     "excerpt": "AI companies, including Nvidia and Mistral, urge policymakers to avoid broad restrictions on open-weight AI models as Washington debates responses to Chinese AI and alleged model d...",
-    "coverImage": "/images/news/news_short.jpg",
+    "coverImage": "https://techcrunch.com/wp-content/uploads/2025/03/GettyImages-2205211212-1.jpg?resize=1200,800",
     "status": "published",
     "confidenceLevel": "confirmed",
     "externalSources": [
@@ -125,7 +125,7 @@
     "author": "TechCrunch AI / Modelverse Editorial",
     "readTime": "2 min read",
     "excerpt": "Users can now ask Attie questions about news, trends, and conversations on Bluesky and other apps on the AT Protocol.",
-    "coverImage": "/images/news/news_featured.jpg",
+    "coverImage": "https://techcrunch.com/wp-content/uploads/2026/07/attie-logo.webp?w=1200",
     "status": "published",
     "confidenceLevel": "confirmed",
     "externalSources": [
@@ -147,7 +147,7 @@
     "author": "TechCrunch AI / Modelverse Editorial",
     "readTime": "2 min read",
     "excerpt": "We spoke with several cybersecurity researchers, who look for unknown vulnerabilities and develop tools to exploit them, about how OpenAI’s and Anthropic’s guardrails affect their ...",
-    "coverImage": "/images/news/news_featured.jpg",
+    "coverImage": "https://techcrunch.com/wp-content/uploads/2026/06/claude-mythos-logo.jpg?resize=1200,800",
     "status": "published",
     "confidenceLevel": "confirmed",
     "externalSources": [
@@ -169,7 +169,7 @@
     "author": "TechCrunch AI / Modelverse Editorial",
     "readTime": "2 min read",
     "excerpt": "The AI lab Midjourney continues to expand its purview beyond image and video generation.",
-    "coverImage": "/images/news/news_short.jpg",
+    "coverImage": "https://techcrunch.com/wp-content/uploads/2026/07/GettyImages-149418827.jpg?resize=1200,837",
     "status": "published",
     "confidenceLevel": "confirmed",
     "externalSources": [
@@ -183,15 +183,15 @@
     ]
   },
   {
-    "id": "openai8217s-new-voice-mode-makes-it-to-the-chatgpt-desktop-app",
-    "slug": "openai8217s-new-voice-mode-makes-it-to-the-chatgpt-desktop-app",
-    "title": "OpenAI&#8217;s new voice mode makes it to the ChatGPT desktop app",
+    "id": "openais-new-voice-mode-makes-it-to-the-chatgpt-desktop-app",
+    "slug": "openais-new-voice-mode-makes-it-to-the-chatgpt-desktop-app",
+    "title": "OpenAI’s new voice mode makes it to the ChatGPT desktop app",
     "category": "short-news",
     "publishDate": "2026-07-24",
     "author": "TechCrunch AI / Modelverse Editorial",
     "readTime": "2 min read",
     "excerpt": "ChatGPT Voice on desktop can work with both ChatGPT Work and Codex to complete tasks and control agents.",
-    "coverImage": "/images/news/news_short.jpg",
+    "coverImage": "https://techcrunch.com/wp-content/uploads/2026/05/openai-logo-code-background.jpg?resize=1200,798",
     "status": "published",
     "confidenceLevel": "confirmed",
     "externalSources": [
@@ -213,7 +213,7 @@
     "author": "TechCrunch AI / Modelverse Editorial",
     "readTime": "2 min read",
     "excerpt": "The neolab is betting that automating routine computer tasks will soon outpace coding as AI's biggest use case.",
-    "coverImage": "/images/news/news_featured.jpg",
+    "coverImage": "https://techcrunch.com/wp-content/uploads/2024/11/GettyImages-1258942056.jpg?resize=1200,799",
     "status": "published",
     "confidenceLevel": "confirmed",
     "externalSources": [
@@ -235,7 +235,7 @@
     "author": "TechCrunch AI / Modelverse Editorial",
     "readTime": "2 min read",
     "excerpt": "The acquisition brings Poke’s conversational style and interaction model to Cognition’s coding agent Devin, reflecting a growing belief that how AI assistants interact with users i...",
-    "coverImage": "/images/news/news_short.jpg",
+    "coverImage": "https://techcrunch.com/wp-content/uploads/2026/04/Poke-at-3.56.23-PM.jpg?resize=1200,610",
     "status": "published",
     "confidenceLevel": "confirmed",
     "externalSources": [
@@ -257,7 +257,7 @@
     "author": "Modelverse Editorial",
     "readTime": "8 min read",
     "excerpt": "An in-depth review of Kimi K3, examining its hybrid KDA architecture, long-horizon coding capabilities, visual reasoning, API features, and how it handles a 1M-token context efficiently.",
-    "coverImage": "/images/news/kimi_k3_review_cover.jpg",
+    "coverImage": "https://platform.kimi.ai/og.png?v=1",
     "status": "published",
     "confidenceLevel": "confirmed",
     "externalSources": [
@@ -284,7 +284,7 @@
     "author": "Modelverse Editorial",
     "readTime": "3 min read",
     "excerpt": "Kimi K3 is a new open-source model with 2.8 trillion parameters, built on KDA and featuring a 1M-token context window with automatic caching.",
-    "coverImage": "/images/news/kimi_k3_news_cover.jpg",
+    "coverImage": "https://platform.kimi.ai/og.png?v=1",
     "status": "published",
     "confidenceLevel": "confirmed",
     "externalSources": [
@@ -338,7 +338,7 @@
     "author": "Modelverse Editorial",
     "readTime": "2 min read",
     "excerpt": "Anthropic has reportedly begun rolling out localized Indian Rupee (INR) subscription plans for Claude Pro, Max, and Team tiers in India, its second-largest market.",
-    "coverImage": "/images/news/anthropic_rupee_pricing_cover.jpg",
+    "coverImage": "https://techcrunch.com/wp-content/uploads/2026/04/GettyImages-2269811684.jpg?w=1024",
     "status": "published",
     "confidenceLevel": "reported",
     "externalSources": [
@@ -383,7 +383,7 @@
     "author": "Modelverse Editorial",
     "readTime": "2 min read",
     "excerpt": "OpenAI has integrated Codex directly into ChatGPT, alongside launching the new GPT-5.6 Sol frontier model featuring an Ultra mode, computer/browser use, and publishing with Sites.",
-    "coverImage": "/images/news/openai_sol_codex_updates_cover.jpg",
+    "coverImage": "https://i.ytimg.com/vi/eiQgljOrkWU/maxresdefault.jpg",
     "status": "published",
     "confidenceLevel": "confirmed",
     "externalSources": [
@@ -496,7 +496,7 @@
     "author": "Modelverse Editorial",
     "readTime": "3 min read",
     "excerpt": "Google DeepMind has introduced DiffusionGemma, an experimental 26B open model exploring text diffusion. By generating entire blocks of 256 tokens simultaneously, it achieves up to 4x faster text generation speeds on GPUs.",
-    "coverImage": "/images/news/diffusiongemma_cover.jpg",
+    "coverImage": "https://storage.googleapis.com/gweb-uniblog-publish-prod/images/Diffusion_Gemma_Social.width-1300.png",
     "status": "published",
     "confidenceLevel": "confirmed",
     "externalSources": [
@@ -521,7 +521,7 @@
     "author": "Modelverse Editorial",
     "readTime": "3 min read",
     "excerpt": "Google DeepMind has introduced MedGemma 1.5 4B, an open-weights multimodal assistant optimized for high-dimensional medical imaging (CT, MRI, X-Ray) and clinical QA.",
-    "coverImage": "/images/news/medgemma_cover.jpg",
+    "coverImage": "https://storage.googleapis.com/gweb-research2023-media/images/HO_previewImage1.width-800.format-jpeg.jpg",
     "status": "published",
     "confidenceLevel": "confirmed",
     "externalSources": [
@@ -546,7 +546,7 @@
     "author": "Modelverse Editorial",
     "readTime": "3 min read",
     "excerpt": "Google DeepMind has released VaultGemma 1B, a lightweight open model trained from scratch using differential privacy to mathematically prevent training data leakage.",
-    "coverImage": "/images/news/vaultgemma_cover.jpg",
+    "coverImage": "https://storage.googleapis.com/gweb-research2023-media/images/HO_previewImage1.width-800.format-jpeg.jpg",
     "status": "published",
     "confidenceLevel": "confirmed",
     "externalSources": [

@@ -234,13 +234,23 @@ function ModelCatalogContent({
   const parseQueryList = (key: string): string[] => {
     const val = initialSearchParams?.[key];
     if (!val) return [];
-    if (Array.isArray(val)) return val.flatMap((v) => v.split(","));
-    return val.split(",");
+    const rawList = Array.isArray(val) ? val.flatMap((v) => v.split(",")) : val.split(",");
+
+    const aliases: Record<string, string> = {
+      "reasoning": "chat-reasoning",
+      "code": "code-generation",
+      "vision": "multimodal-general",
+      "image": "image-generation",
+      "video": "video-generation",
+      "audio": "audio-speech",
+    };
+
+    return rawList.map((v) => aliases[v] || v);
   };
 
   // State initialization hydrated from Server Search Params
   const [filters, setFilters] = useState<FiltersState>({
-    q: (initialSearchParams?.q as string) || "",
+    q: (initialSearchParams?.q as string) || (initialSearchParams?.search as string) || "",
     type: parseQueryList("type"),
     task: parseQueryList("task"),
     modality: parseQueryList("modality"),

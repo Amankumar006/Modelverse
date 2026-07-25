@@ -12,6 +12,10 @@
   "relatedModels": [
     "google-deepmind-gemma-4-31b-dense"
   ],
-  "tags": ["hardware", "on-device", "npu"],
+  "tags": [
+    "hardware",
+    "on-device",
+    "npu"
+  ],
   "status": "published"
 }
