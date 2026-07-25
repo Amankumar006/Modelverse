@@ -12,7 +12,24 @@ interface NewsBreadcrumbProps {
   };
 }
 
+function decodeEntities(str: string): string {
+  if (!str) return "";
+  return str
+    .replace(/&#8217;/g, "’")
+    .replace(/&#8220;/g, "“")
+    .replace(/&#8221;/g, "”")
+    .replace(/&#8230;/g, "…")
+    .replace(/&#160;/g, " ")
+    .replace(/&#039;/g, "'")
+    .replace(/&amp;/g, "&")
+    .replace(/&lt;/g, "<")
+    .replace(/&gt;/g, ">")
+    .replace(/&quot;/g, '"');
+}
+
 export default function NewsBreadcrumb({ category, article }: NewsBreadcrumbProps) {
+  const title = article ? decodeEntities(article.title) : "";
+
   return (
     <nav aria-label="Breadcrumb" className="flex flex-wrap items-center gap-1.5 text-xs sm:text-sm text-[#8C9E91] mb-8 sm:mb-12">
       <Link href="/" className="hover:text-[#4ADE80] transition-colors">
@@ -47,8 +64,8 @@ export default function NewsBreadcrumb({ category, article }: NewsBreadcrumbProp
       {article && (
         <>
           <ChevronRight size={12} className="text-[#5A6E60] shrink-0" />
-          <span className="text-[#E2E8E4] truncate max-w-[200px] sm:max-w-md font-medium" title={article.title}>
-            {article.title}
+          <span className="text-[#E2E8E4] truncate max-w-[200px] sm:max-w-md font-medium" title={title}>
+            {title}
           </span>
         </>
       )}
