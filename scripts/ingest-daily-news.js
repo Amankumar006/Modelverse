@@ -234,6 +234,40 @@ async function extractOgImage(url) {
   return null;
 }
 
+async function extractFullArticleBody(url, fallbackDesc, lab) {
+  if (!url) {
+    return `${fallbackDesc}\n\n### Official Announcement\nRead the full update directly from the official source at [${lab} News](${url}).\n\nStay tuned to [Modelverse](https://www.themodelverse.in) for real-time model analysis and benchmark coverage.`;
+  }
+  try {
+    const html = await getHttps(url);
+    const paragraphs = [];
+    const pRegex = /<p[^>]*>([\s\S]*?)<\/p>/gi;
+    let match;
+
+    while ((match = pRegex.exec(html)) !== null) {
+      let text = match[1].replace(/<[^>]+>/g, "").replace(/\s+/g, " ").trim();
+      text = decodeHtmlEntities(text);
+
+      if (
+        text.length > 50 &&
+        !text.toLowerCase().includes("subscribe") &&
+        !text.toLowerCase().includes("cookie policy") &&
+        !text.toLowerCase().includes("all rights reserved") &&
+        !text.toLowerCase().includes("terms of service") &&
+        !text.toLowerCase().includes("privacy policy")
+      ) {
+        paragraphs.push(text);
+      }
+    }
+
+    if (paragraphs.length >= 2) {
+      return paragraphs.slice(0, 8).join("\n\n") + `\n\n### Official Announcement\nRead the full update directly from the official source at [${lab} News](${url}).\n\nStay tuned to [Modelverse](https://www.themodelverse.in) for real-time model analysis and benchmark coverage.`;
+    }
+  } catch(e) {}
+
+  return `${fallbackDesc}\n\n### Official Announcement\nRead the full update directly from the official source at [${lab} News](${url}).\n\nStay tuned to [Modelverse](https://www.themodelverse.in) for real-time model analysis and benchmark coverage.`;
+}
+
   const todayStr = new Date().toISOString().split("T")[0];
   let posterIndex = 0;
 
@@ -255,6 +289,11 @@ async function extractOgImage(url) {
       coverImage = getPosterImage(candidate.lab, posterIndex);
     }
 
+    // Extract full article paragraphs
+    const bodyContent = await extractFullArticleBody(candidate.link, candidate.description, candidate.lab);
+    const wordCount = bodyContent.split(/\s+/).length;
+    const readTimeMinutes = Math.max(2, Math.ceil(wordCount / 200));
+
     const newsJson = {
       id: newsSlug,
       slug: newsSlug,
@@ -263,9 +302,9 @@ async function extractOgImage(url) {
       isTrending: true,
       publishDate: articleDate,
       author: `${candidate.lab} / Modelverse Editorial`,
-      readTime: "2 min read",
+      readTime: `${readTimeMinutes} min read`,
       excerpt: candidate.description.slice(0, 180) + (candidate.description.length > 180 ? "..." : ""),
-      body: `${candidate.description}\n\n### Official Announcement\nRead the full update directly from the official source at [${candidate.lab} News](${candidate.link}).\n\nStay tuned to [Modelverse](https://www.themodelverse.in) for real-time model analysis and benchmark coverage.`,
+      body: bodyContent,
       coverImage: coverImage,
       status: "published",
       confidenceLevel: "confirmed",
@@ -278,7 +317,7 @@ async function extractOgImage(url) {
     existingSlugs.add(newsSlug);
     createdNews.push(newsJson);
     posterIndex++;
-    console.log(`  ✅ Published (${coverImage.includes('http') ? 'OG Image' : 'Fallback'}): ${candidate.title.slice(0, 60)}`);
+    console.log(`  ✅ Published (${readTimeMinutes} min read): ${candidate.title.slice(0, 60)}`);
   }
 
   // Generate Email Digest
