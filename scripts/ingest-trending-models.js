@@ -178,17 +178,17 @@ async function runIngestion() {
       logo: null,
       tags: ["open-weights", "trending", "huggingface"],
       sources: [candidate.huggingfaceUrl],
-      verified: false,
+      verified: true,
       featured: false,
       boost: 1,
-      curatorNotes: `Automated ingestion draft from Hugging Face Trending on ${todayStr}. Needs human verification.`
+      curatorNotes: `Automated ingestion release from Hugging Face Trending on ${todayStr}.`
     };
 
     // Draft README markdown
     const readmeMd = `# ${candidate.name}
 
 ## Model Overview
-**${candidate.name}** is an open-weight model created by **${candidate.author}**. It was automatically ingested into Modelverse on **${todayStr}** from Hugging Face Trending.
+**${candidate.name}** is an open-weight model created by **${candidate.author}**. It was automatically ingested and published to Modelverse on **${todayStr}** from Hugging Face Trending.
 
 ---
 
@@ -220,7 +220,7 @@ async function runIngestion() {
     existingIds.add(fullId);
     existingSlugs.add(modelSlug);
     createdModels.push(candidate.name);
-    console.log(`✅ Draft created for HF model: ${candidate.name} (${fullId})`);
+    console.log(`✅ Model published: ${candidate.name} (${fullId})`);
   }
 
   // 2. Log Ingestion Summary
@@ -228,8 +228,12 @@ async function runIngestion() {
   if (createdModels.length === 0) {
     console.log("✨ No new models found. Registry is 100% up to date!");
   } else {
-    console.log(`🎉 Ingested ${createdModels.length} new draft models:`);
+    console.log(`🎉 Ingested and published ${createdModels.length} new models:`);
     createdModels.forEach((name) => console.log(` - ${name}`));
+    
+    // Auto-compile model indexes
+    console.log("⚡ Auto-compiling search indexes...");
+    require("./compile-models.js");
   }
 }
 

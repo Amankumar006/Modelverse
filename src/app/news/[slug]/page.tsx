@@ -203,7 +203,7 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
       {/* Article Body Grid */}
       <div className="max-w-[1400px] mx-auto px-6 sm:px-8 lg:px-12 grid grid-cols-1 lg:grid-cols-[1fr_350px] xl:grid-cols-[1fr_400px] gap-12 lg:gap-20">
         {/* Main Content */}
-        <article className="prose prose-invert prose-emerald max-w-none text-[#E2E8E4]">
+        <article className="prose prose-invert prose-emerald max-w-none text-[#E2E8E4] prose-img:rounded-xl prose-img:max-w-full prose-img:h-auto prose-img:w-full prose-img:mx-auto">
           <ReactMarkdown>{article.body}</ReactMarkdown>
 
           {/* Tags */}

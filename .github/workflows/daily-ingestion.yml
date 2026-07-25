@@ -1,4 +1,4 @@
-name: Daily Model Ingestion Pipeline
+name: Daily Model Ingestion & Auto-Publish Pipeline
 
 on:
   schedule:
@@ -7,11 +7,10 @@ on:
   workflow_dispatch:
 
 jobs:
-  ingest:
+  ingest-and-publish:
     runs-on: ubuntu-latest
     permissions:
       contents: write
-      pull-requests: write
 
     steps:
       - name: Checkout repository
@@ -32,25 +31,14 @@ jobs:
       - name: Compile and Validate Models Index
         run: node scripts/compile-models.js
 
-      - name: Create Pull Request for New Model Drafts
-        uses: peter-evans/create-pull-request@v6
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          commit-message: "feat(ingestion): Add new AI model drafts and update search index"
-          branch: "automated/daily-model-ingestion"
-          delete-branch: true
-          title: "🤖 Daily Model Ingestion Drafts"
-          body: |
-            ## 🤖 Automated Daily Model Ingestion
-            
-            This automated Pull Request contains new trending AI models detected from Hugging Face Hub, arXiv papers, and Tier A AI Lab feeds.
-            
-            ### Actions Taken:
-            - Generated draft model JSONs conforming to Modelverse schema.
-            - Created markdown Readme templates.
-            - Re-compiled `models-archive.json` and `search-index.json`.
-            
-            Please review the draft files before merging into `main`.
-          labels: |
-            automated-ingestion
-            model-draft
+      - name: Commit and Push New Published Models
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add .
+          if ! git diff --staged --quiet; then
+            git commit -m "feat(ingestion): auto-publish new daily AI model releases [skip ci]"
+            git push origin main
+          else
+            echo "No new models discovered today."
+          fi
