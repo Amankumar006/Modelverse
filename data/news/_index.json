@@ -1,5 +1,181 @@
 [
   {
+    "id": "anthropic-economic-index-connector",
+    "slug": "anthropic-economic-index-connector",
+    "title": "Anthropic Economic Index Connector",
+    "category": "short-news",
+    "publishDate": "2026-07-25",
+    "author": "Anthropic / Modelverse Editorial",
+    "readTime": "2 min read",
+    "excerpt": "Official announcement from Anthropic: Anthropic Economic Index Connector",
+    "coverImage": "https://www.anthropic.com/api/opengraph-illustration?name=Hand%20NodeBook&backgroundColor=coral",
+    "status": "published",
+    "confidenceLevel": "confirmed",
+    "externalSources": [
+      "https://www.anthropic.com/news/anthropic-economic-index-connector"
+    ],
+    "relatedModels": [],
+    "tags": [
+      "ai-news",
+      "breaking",
+      "anthropic"
+    ]
+  },
+  {
+    "id": "canadian-ai-research",
+    "slug": "canadian-ai-research",
+    "title": "Canadian Ai Research",
+    "category": "short-news",
+    "publishDate": "2026-07-25",
+    "author": "Anthropic / Modelverse Editorial",
+    "readTime": "3 min read",
+    "excerpt": "Official announcement from Anthropic: Canadian Ai Research",
+    "coverImage": "https://www.anthropic.com/api/opengraph-illustration?name=Node%20Globe&backgroundColor=cactus",
+    "status": "published",
+    "confidenceLevel": "confirmed",
+    "externalSources": [
+      "https://www.anthropic.com/news/canadian-ai-research"
+    ],
+    "relatedModels": [],
+    "tags": [
+      "ai-news",
+      "breaking",
+      "anthropic"
+    ]
+  },
+  {
+    "id": "claude-for-teachers",
+    "slug": "claude-for-teachers",
+    "title": "Claude For Teachers",
+    "category": "short-news",
+    "publishDate": "2026-07-25",
+    "author": "Anthropic / Modelverse Editorial",
+    "readTime": "2 min read",
+    "excerpt": "Official announcement from Anthropic: Claude For Teachers",
+    "coverImage": "https://cdn.sanity.io/images/4zrzovbb/website/6d4a0d28992ade92d6fa63646fd9c9d318245c6c-2400x1260.jpg",
+    "status": "published",
+    "confidenceLevel": "confirmed",
+    "externalSources": [
+      "https://www.anthropic.com/news/claude-for-teachers"
+    ],
+    "relatedModels": [],
+    "tags": [
+      "ai-news",
+      "breaking",
+      "anthropic"
+    ]
+  },
+  {
+    "id": "claude-opus-5",
+    "slug": "claude-opus-5",
+    "title": "Claude Opus 5",
+    "category": "short-news",
+    "publishDate": "2026-07-25",
+    "author": "Anthropic / Modelverse Editorial",
+    "readTime": "2 min read",
+    "excerpt": "Official announcement from Anthropic: Claude Opus 5",
+    "coverImage": "https://cdn.sanity.io/images/4zrzovbb/website/54b7ab1d2c2521f83ae5d2da5f9d99321c370d24-2880x1620.png",
+    "status": "published",
+    "confidenceLevel": "confirmed",
+    "externalSources": [
+      "https://www.anthropic.com/news/claude-opus-5"
+    ],
+    "relatedModels": [],
+    "tags": [
+      "ai-news",
+      "breaking",
+      "anthropic"
+    ]
+  },
+  {
+    "id": "claude-sonnet-5",
+    "slug": "claude-sonnet-5",
+    "title": "Claude Sonnet 5",
+    "category": "short-news",
+    "publishDate": "2026-07-25",
+    "author": "Anthropic / Modelverse Editorial",
+    "readTime": "6 min read",
+    "excerpt": "Official announcement from Anthropic: Claude Sonnet 5",
+    "coverImage": "https://cdn.sanity.io/images/4zrzovbb/website/2039cc549c023bc855671308211d20d3382828a9-2880x1620.jpg",
+    "status": "published",
+    "confidenceLevel": "confirmed",
+    "externalSources": [
+      "https://www.anthropic.com/news/claude-sonnet-5"
+    ],
+    "relatedModels": [],
+    "tags": [
+      "ai-news",
+      "breaking",
+      "anthropic"
+    ]
+  },
+  {
+    "id": "donation-public-first-action",
+    "slug": "donation-public-first-action",
+    "title": "Donation Public First Action",
+    "category": "short-news",
+    "publishDate": "2026-07-25",
+    "author": "Anthropic / Modelverse Editorial",
+    "readTime": "3 min read",
+    "excerpt": "Official announcement from Anthropic: Donation Public First Action",
+    "coverImage": "https://www.anthropic.com/api/opengraph-illustration?name=Hand%20Stack&backgroundColor=oat",
+    "status": "published",
+    "confidenceLevel": "confirmed",
+    "externalSources": [
+      "https://www.anthropic.com/news/donation-public-first-action"
+    ],
+    "relatedModels": [],
+    "tags": [
+      "ai-news",
+      "breaking",
+      "anthropic"
+    ]
+  },
+  {
+    "id": "economic-futures-research-fund-agenda",
+    "slug": "economic-futures-research-fund-agenda",
+    "title": "Economic Futures Research Fund Agenda",
+    "category": "short-news",
+    "publishDate": "2026-07-25",
+    "author": "Anthropic / Modelverse Editorial",
+    "readTime": "4 min read",
+    "excerpt": "Official announcement from Anthropic: Economic Futures Research Fund Agenda",
+    "coverImage": "https://cdn.sanity.io/images/4zrzovbb/website/303a79341c6210020de254eaabc259548d27ba58-1200x630.jpg",
+    "status": "published",
+    "confidenceLevel": "confirmed",
+    "externalSources": [
+      "https://www.anthropic.com/news/economic-futures-research-fund-agenda"
+    ],
+    "relatedModels": [],
+    "tags": [
+      "ai-news",
+      "breaking",
+      "anthropic"
+    ]
+  },
+  {
+    "id": "hard-questions",
+    "slug": "hard-questions",
+    "title": "Hard Questions",
+    "category": "short-news",
+    "publishDate": "2026-07-25",
+    "author": "Anthropic / Modelverse Editorial",
+    "readTime": "2 min read",
+    "excerpt": "Official announcement from Anthropic: Hard Questions",
+    "coverImage": "https://cdn.sanity.io/images/4zrzovbb/website/b3ddb82292e92030f4677d004bf0d7d795be7bd1-1200x630.jpg",
+    "status": "published",
+    "confidenceLevel": "confirmed",
+    "externalSources": [
+      "https://www.anthropic.com/news/hard-questions"
+    ],
+    "relatedModels": [],
+    "tags": [
+      "ai-news",
+      "breaking",
+      "anthropic"
+    ]
+  },
+  {
     "id": "i-tried-out-openais-new-ai-keypad-which-will-be-fun-for-some-coders-and-slightly",
     "slug": "i-tried-out-openais-new-ai-keypad-which-will-be-fun-for-some-coders-and-slightly",
     "title": "I tried out OpenAI's new AI keypad — which will be fun for some coders and slightly mystifying to everyone else",
@@ -19,6 +195,50 @@
       "ai-news",
       "breaking",
       "techcrunch-ai"
+    ]
+  },
+  {
+    "id": "rare-disease-research-grants",
+    "slug": "rare-disease-research-grants",
+    "title": "Rare Disease Research Grants",
+    "category": "short-news",
+    "publishDate": "2026-07-25",
+    "author": "Anthropic / Modelverse Editorial",
+    "readTime": "4 min read",
+    "excerpt": "Official announcement from Anthropic: Rare Disease Research Grants",
+    "coverImage": "https://www.anthropic.com/api/opengraph-illustration?name=Hand%20NodeShield&backgroundColor=heather",
+    "status": "published",
+    "confidenceLevel": "confirmed",
+    "externalSources": [
+      "https://www.anthropic.com/news/rare-disease-research-grants"
+    ],
+    "relatedModels": [],
+    "tags": [
+      "ai-news",
+      "breaking",
+      "anthropic"
+    ]
+  },
+  {
+    "id": "redeploying-fable-5",
+    "slug": "redeploying-fable-5",
+    "title": "Redeploying Fable 5",
+    "category": "short-news",
+    "publishDate": "2026-07-25",
+    "author": "Anthropic / Modelverse Editorial",
+    "readTime": "2 min read",
+    "excerpt": "Official announcement from Anthropic: Redeploying Fable 5",
+    "coverImage": "https://cdn.sanity.io/images/4zrzovbb/website/6d4a0d28992ade92d6fa63646fd9c9d318245c6c-2400x1260.jpg",
+    "status": "published",
+    "confidenceLevel": "confirmed",
+    "externalSources": [
+      "https://www.anthropic.com/news/redeploying-fable-5"
+    ],
+    "relatedModels": [],
+    "tags": [
+      "ai-news",
+      "breaking",
+      "anthropic"
     ]
   },
   {
