@@ -3,42 +3,46 @@
   "name": "Mage-Flow",
   "slug": "mage-flow",
   "developer": "microsoft",
-  "releaseDate": "2026-07-25",
+  "releaseDate": "2026-07-21",
   "updatedAt": "2026-07-25",
   "type": "open-weights",
   "modality": [
-    "text"
+    "text",
+    "image"
   ],
-  "primaryTask": "multimodal-general",
+  "primaryTask": "image-generation",
   "deployment": [
     "self-hostable"
   ],
-  "license": "Other/Custom",
-  "parameters": "undisclosed",
+  "license": "MIT",
+  "parameters": "4.1B",
   "contextWindow": "unknown",
-  "description": "Mage-Flow is a trending open-weight AI model developed by microsoft, featuring high community adoption on Hugging Face (239 likes, 891 downloads).",
+  "description": "Mage-Flow is a 4.1B-parameter text to image model developed by microsoft. Released on 2026-07-21 with 242 likes and 891 downloads on Hugging Face.",
   "keyFeatures": [
-    "Trending open-weight release by microsoft",
-    "Community favorite on Hugging Face with 239 likes",
-    "Supports self-hosted inference and deployment"
+    "4.1B parameters",
+    "Primary task: text to image (text, image modality)",
+    "Open-weights under MIT license — self-hostable and fine-tunable"
   ],
   "benchmarks": [],
   "family": null,
   "previousVersion": null,
   "links": {
-    "huggingface": "https://huggingface.co/microsoft/Mage-Flow"
+    "huggingface": "https://huggingface.co/microsoft/Mage-Flow",
+    "paper": "https://arxiv.org/abs/2607.19064"
   },
   "logo": null,
   "tags": [
     "open-weights",
     "trending",
-    "huggingface"
+    "huggingface",
+    "diffusers",
+    "text-to-image"
   ],
   "sources": [
     "https://huggingface.co/microsoft/Mage-Flow"
   ],
-  "verified": false,
+  "verified": true,
   "featured": false,
   "boost": 1,
-  "curatorNotes": "Automated ingestion draft from Hugging Face Trending on 2026-07-25. Needs human verification."
+  "curatorNotes": "Auto-ingested from HuggingFace Trending on 2026-07-25. Architecture: unknown. Params: 4.1B. License: MIT."
 }

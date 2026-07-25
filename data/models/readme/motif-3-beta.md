@@ -1,15 +1,39 @@
 # Motif-3-Beta
 
 ## Model Overview
-**Motif-3-Beta** is an open-weight model created by **Motif-Technologies**. It was automatically ingested into Modelverse on **2026-07-25** from Hugging Face Trending.
+**Motif-3-Beta** is a **314.8B-parameter** Mixture-of-Experts text generation model developed by **Motif-Technologies**. Built on the `MotifForCausalLM` architecture. Supports en, ko. Released on **2026-07-20**.
+
+---
+
+## 📊 Quick Specs
+
+| Specification | Value |
+|:---|:---|
+| **Parameters** | 314.8B |
+| **Architecture** | MotifForCausalLM |
+| **Task** | text generation |
+| **Modality** | text |
+| **License** | Other/Custom |
+| **Framework** | transformers |
+| **MoE** | Yes |
+| **Languages** | en, ko |
 
 ---
 
 ## ✨ Key Features
 
-- **Trending Release**: Fast growing open-weight model on Hugging Face
-- **Community Adoption**: 185 likes and 2108 downloads
-- **Self-Hostable**: Available for local deployment and fine-tuning
+- 314.8B parameters with sparse MoE architecture for efficient inference
+- Built on MotifForCausalLM architecture (transformers)
+- Primary task: text generation (text modality)
+- Language support: en, ko
+- Open-weights under Other/Custom license — self-hostable and fine-tunable
+
+---
+
+## 📈 Community Adoption
+
+- **186 likes** on Hugging Face
+- **2,108 downloads** on Hugging Face
 
 ---
 
@@ -17,7 +41,8 @@
 
 - **Hugging Face Hub**: [Motif-3-Beta on Hugging Face](https://huggingface.co/Motif-Technologies/Motif-3-Beta)
 
+
 ---
 
 ## 📜 License & Access
-**Open-Weights** — See repository for specific license details.
+**Other/Custom** — Open-weights model available for download, fine-tuning, and self-hosted deployment.

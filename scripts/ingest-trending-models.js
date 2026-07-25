@@ -5,7 +5,6 @@ const https = require("https");
 const MODELS_DIR = path.join(process.cwd(), "data", "models");
 const README_DIR = path.join(process.cwd(), "data", "models", "readme");
 const INGESTION_DIR = path.join(process.cwd(), "data", "ingestion");
-const SEEN_POSTS_PATH = path.join(INGESTION_DIR, "seen-posts.json");
 
 if (!fs.existsSync(INGESTION_DIR)) {
   fs.mkdirSync(INGESTION_DIR, { recursive: true });
@@ -19,7 +18,7 @@ function getHttps(url) {
       res.on("end", () => resolve(data));
     });
     req.on("error", reject);
-    req.setTimeout(10000, () => {
+    req.setTimeout(15000, () => {
       req.destroy();
       reject(new Error(`Timeout fetching ${url}`));
     });
@@ -38,28 +37,121 @@ function slugify(text) {
     .replace(/-+$/, "");
 }
 
-function parseRss(xmlText) {
-  const items = [];
-  const itemRegex = /<item>([\s\S]*?)<\/item>/g;
-  let match;
-  while ((match = itemRegex.exec(xmlText)) !== null) {
-    const itemContent = match[1];
-    const titleMatch = /<title>([\s\S]*?)<\/title>/.exec(itemContent);
-    const linkMatch = /<link>([\s\S]*?)<\/link>/.exec(itemContent);
-    const pubDateMatch = /<pubDate>([\s\S]*?)<\/pubDate>/.exec(itemContent) || /<dc:date>([\s\S]*?)<\/dc:date>/.exec(itemContent);
-    
-    if (titleMatch && linkMatch) {
-      items.push({
-        title: titleMatch[1].replace(/<!\[CDATA\[([\s\S]*?)\]\]>/g, '$1').trim(),
-        link: linkMatch[1].replace(/<!\[CDATA\[([\s\S]*?)\]\]>/g, '$1').trim(),
-        pubDate: pubDateMatch ? pubDateMatch[1].trim() : new Date().toISOString()
-      });
-    }
-  }
-  return items;
+// ─── Rich metadata extraction helpers ───────────────────────────────
+
+const PIPELINE_TO_TASK = {
+  "text-generation": "chat-reasoning",
+  "text2text-generation": "chat-reasoning",
+  "text-classification": "other",
+  "token-classification": "other",
+  "question-answering": "chat-reasoning",
+  "summarization": "chat-reasoning",
+  "translation": "translation",
+  "fill-mask": "other",
+  "conversational": "chat-reasoning",
+  "image-classification": "other",
+  "object-detection": "other",
+  "image-segmentation": "other",
+  "image-text-to-text": "multimodal-general",
+  "visual-question-answering": "multimodal-general",
+  "image-to-text": "multimodal-general",
+  "text-to-image": "image-generation",
+  "text-to-video": "video-generation",
+  "text-to-audio": "audio-speech",
+  "text-to-speech": "audio-speech",
+  "automatic-speech-recognition": "audio-speech",
+  "audio-classification": "audio-speech",
+  "audio-text-to-text": "audio-speech",
+  "feature-extraction": "embedding",
+  "sentence-similarity": "embedding",
+  "zero-shot-classification": "chat-reasoning",
+  "reinforcement-learning": "agentic",
+  "robotics": "agentic",
+  "depth-estimation": "other",
+  "video-classification": "other",
+};
+
+const PIPELINE_TO_MODALITY = {
+  "text-generation": ["text"],
+  "text2text-generation": ["text"],
+  "text-classification": ["text"],
+  "conversational": ["text"],
+  "image-text-to-text": ["text", "image"],
+  "visual-question-answering": ["text", "image"],
+  "image-to-text": ["text", "image"],
+  "text-to-image": ["text", "image"],
+  "text-to-video": ["text", "video"],
+  "text-to-audio": ["text", "audio"],
+  "text-to-speech": ["text", "audio"],
+  "automatic-speech-recognition": ["audio", "text"],
+  "audio-classification": ["audio"],
+  "audio-text-to-text": ["text", "audio"],
+  "video-classification": ["video"],
+  "depth-estimation": ["image"],
+  "image-classification": ["image"],
+  "object-detection": ["image"],
+  "image-segmentation": ["image"],
+};
+
+function formatParams(total) {
+  if (!total || total <= 0) return "undisclosed";
+  if (total >= 1e12) return `${(total / 1e12).toFixed(1)}T`;
+  if (total >= 1e9) return `${(total / 1e9).toFixed(1)}B`;
+  if (total >= 1e6) return `${(total / 1e6).toFixed(0)}M`;
+  return `${total}`;
 }
 
-// Get existing model slugs & IDs
+function extractLicense(tags, cardData) {
+  if (cardData && cardData.license) return cardData.license.toUpperCase();
+  for (const tag of tags) {
+    if (tag.startsWith("license:")) return tag.replace("license:", "").toUpperCase();
+  }
+  return "Other/Custom";
+}
+
+function extractArxiv(tags) {
+  for (const tag of tags) {
+    if (tag.startsWith("arxiv:")) return `https://arxiv.org/abs/${tag.replace("arxiv:", "")}`;
+  }
+  return null;
+}
+
+function extractArchitecture(config) {
+  if (config && config.architectures && config.architectures.length > 0) {
+    return config.architectures[0];
+  }
+  if (config && config.model_type) return config.model_type;
+  return null;
+}
+
+function extractLanguages(cardData, tags) {
+  if (cardData && cardData.language) {
+    const langs = Array.isArray(cardData.language) ? cardData.language : [cardData.language];
+    return langs.join(", ");
+  }
+  const langTags = tags.filter(t => t === "en" || t === "zh" || t === "ja" || t === "ko" || t === "multilingual" || t === "de" || t === "fr" || t === "es");
+  return langTags.length > 0 ? langTags.join(", ") : null;
+}
+
+function isMoE(tags, config) {
+  if (tags.includes("moe")) return true;
+  if (config && config.num_experts_per_tok) return true;
+  return false;
+}
+
+// ─── Fetch full model details from HuggingFace API ──────────────────
+
+async function fetchModelDetails(hfId) {
+  try {
+    const raw = await getHttps(`https://huggingface.co/api/models/${hfId}`);
+    return JSON.parse(raw);
+  } catch (e) {
+    return null;
+  }
+}
+
+// ─── Existing ID detection ──────────────────────────────────────────
+
 function getExistingIds() {
   const files = fs.readdirSync(MODELS_DIR).filter((f) => f.endsWith(".json"));
   const ids = new Set();
@@ -75,163 +167,187 @@ function getExistingIds() {
   return { ids, slugs };
 }
 
-async function fetchHuggingFaceTrending() {
-  console.log("🔍 Ingesting HuggingFace Trending models...");
-  try {
-    const jsonStr = await getHttps("https://huggingface.co/api/models?limit=20");
-    const models = JSON.parse(jsonStr);
-    if (!Array.isArray(models)) {
-      return [];
-    }
-    return models.map((m) => {
-      const parts = m.id.split("/");
-      const author = parts[0] || "Other";
-      const modelName = parts[1] || m.id;
-      return {
-        id: m.id,
-        author: author,
-        name: modelName,
-        huggingfaceUrl: `https://huggingface.co/${m.id}`,
-        likes: m.likes || 0,
-        downloads: m.downloads || 0,
-        source: "HuggingFace Trending"
-      };
-    });
-  } catch (err) {
-    console.error("❌ Failed fetching HuggingFace trending:", err.message);
-    return [];
-  }
-}
-
-async function fetchLabFeeds() {
-  console.log("🔍 Ingesting AI Lab Feeds (OpenAI & Google DeepMind)...");
-  const candidates = [];
-  
-  try {
-    const openaiXml = await getHttps("https://openai.com/news/rss.xml");
-    const items = parseRss(openaiXml);
-    items.forEach((item) => {
-      candidates.push({ ...item, lab: "OpenAI" });
-    });
-  } catch (e) {
-    console.error("Failed fetching OpenAI feed:", e.message);
-  }
-
-  try {
-    const deepmindXml = await getHttps("https://deepmind.google/blog/rss.xml");
-    const items = parseRss(deepmindXml);
-    items.forEach((item) => {
-      candidates.push({ ...item, lab: "Google DeepMind" });
-    });
-  } catch (e) {
-    console.error("Failed fetching DeepMind feed:", e.message);
-  }
-
-  return candidates;
-}
+// ─── Main ingestion ─────────────────────────────────────────────────
 
 async function runIngestion() {
   console.log("🚀 Starting Daily Ingestion Pipeline...");
   const { ids: existingIds, slugs: existingSlugs } = getExistingIds();
   const createdModels = [];
 
-  // 1. Process Hugging Face Trending
-  const hfCandidates = await fetchHuggingFaceTrending();
-  for (const candidate of hfCandidates) {
-    const devSlug = slugify(candidate.author);
-    const modelSlug = slugify(candidate.name);
+  // 1. Fetch trending model list
+  console.log("🔍 Fetching HuggingFace Trending models...");
+  let trendingList = [];
+  try {
+    const jsonStr = await getHttps("https://huggingface.co/api/models?limit=20");
+    trendingList = JSON.parse(jsonStr);
+    if (!Array.isArray(trendingList)) trendingList = [];
+  } catch (err) {
+    console.error("❌ Failed fetching HuggingFace trending:", err.message);
+  }
+
+  // 2. For each trending model, fetch full details and build rich entries
+  for (const listItem of trendingList) {
+    const parts = listItem.id.split("/");
+    const author = parts[0] || "Other";
+    const modelName = parts[1] || listItem.id;
+    const devSlug = slugify(author);
+    const modelSlug = slugify(modelName);
     const fullId = `${devSlug}-${modelSlug}`;
 
-    if (existingIds.has(fullId) || existingSlugs.has(modelSlug)) {
-      continue;
-    }
+    if (existingIds.has(fullId) || existingSlugs.has(modelSlug)) continue;
 
+    // Fetch rich details from individual model endpoint
+    console.log(`  📡 Fetching details for ${listItem.id}...`);
+    const detail = await fetchModelDetails(listItem.id);
+    const tags = (detail && detail.tags) || listItem.tags || [];
+    const config = detail && detail.config;
+    const cardData = detail && detail.cardData;
+    const safetensors = detail && detail.safetensors;
+
+    // Extract rich metadata
+    const pipelineTag = (detail && detail.pipeline_tag) || listItem.pipeline_tag || "text-generation";
+    const primaryTask = PIPELINE_TO_TASK[pipelineTag] || "multimodal-general";
+    const modality = PIPELINE_TO_MODALITY[pipelineTag] || ["text"];
+    const license = extractLicense(tags, cardData);
+    const arxivUrl = extractArxiv(tags);
+    const architecture = extractArchitecture(config);
+    const languages = extractLanguages(cardData, tags);
+    const moe = isMoE(tags, config);
+    const libraryName = (detail && detail.library_name) || listItem.library_name || null;
+
+    // Parameter count
+    const totalParams = safetensors && safetensors.total ? safetensors.total : (safetensors && safetensors.parameters ? Object.values(safetensors.parameters)[0] : null);
+    const paramStr = formatParams(totalParams);
+
+    // Release date
+    const releaseDate = (detail && detail.createdAt) ? detail.createdAt.split("T")[0] : new Date().toISOString().split("T")[0];
     const todayStr = new Date().toISOString().split("T")[0];
-    
-    // Draft model JSON schema
+
+    // Downloads / Likes
+    const downloads = (detail && detail.downloads) || listItem.downloads || 0;
+    const likes = (detail && detail.likes) || listItem.likes || 0;
+
+    // Build rich description
+    const descParts = [];
+    descParts.push(`${modelName} is a ${paramStr}-parameter ${moe ? "Mixture-of-Experts (MoE) " : ""}${pipelineTag.replace(/-/g, " ")} model developed by ${author}.`);
+    if (architecture) descParts.push(`Built on the ${architecture} architecture${libraryName ? ` using ${libraryName}` : ""}.`);
+    if (languages) descParts.push(`Supports ${languages} language(s).`);
+    descParts.push(`Released on ${releaseDate} with ${likes.toLocaleString()} likes and ${downloads.toLocaleString()} downloads on Hugging Face.`);
+    const description = descParts.join(" ");
+
+    // Build rich key features
+    const keyFeatures = [];
+    keyFeatures.push(`${paramStr} parameters${moe ? " with sparse MoE architecture for efficient inference" : ""}`);
+    if (architecture) keyFeatures.push(`Built on ${architecture} architecture${libraryName ? ` (${libraryName})` : ""}`);
+    keyFeatures.push(`Primary task: ${pipelineTag.replace(/-/g, " ")} (${modality.join(", ")} modality)`);
+    if (languages) keyFeatures.push(`Language support: ${languages}`);
+    keyFeatures.push(`Open-weights under ${license} license — self-hostable and fine-tunable`);
+    if (downloads > 100000) keyFeatures.push(`High adoption: ${downloads.toLocaleString()} downloads on Hugging Face`);
+
+    // Build links
+    const links = { huggingface: `https://huggingface.co/${listItem.id}` };
+    if (arxivUrl) links.paper = arxivUrl;
+
+    // Build tags
+    const modelTags = ["open-weights", "trending", "huggingface"];
+    if (moe) modelTags.push("moe");
+    if (libraryName) modelTags.push(libraryName);
+    if (pipelineTag) modelTags.push(pipelineTag);
+
     const newModelJson = {
       id: fullId,
-      name: candidate.name,
+      name: modelName,
       slug: modelSlug,
-      developer: candidate.author,
-      releaseDate: todayStr,
+      developer: author,
+      releaseDate,
       updatedAt: todayStr,
       type: "open-weights",
-      modality: ["text"],
-      primaryTask: "multimodal-general",
+      modality,
+      primaryTask,
       deployment: ["self-hostable"],
-      license: "Other/Custom",
-      parameters: "undisclosed",
+      license,
+      parameters: paramStr,
       contextWindow: "unknown",
-      description: `${candidate.name} is a trending open-weight AI model developed by ${candidate.author}, featuring high community adoption on Hugging Face (${candidate.likes} likes, ${candidate.downloads} downloads).`,
-      keyFeatures: [
-        `Trending open-weight release by ${candidate.author}`,
-        `Community favorite on Hugging Face with ${candidate.likes} likes`,
-        `Supports self-hosted inference and deployment`
-      ],
+      description,
+      keyFeatures,
       benchmarks: [],
       family: null,
       previousVersion: null,
-      links: {
-        huggingface: candidate.huggingfaceUrl
-      },
+      links,
       logo: null,
-      tags: ["open-weights", "trending", "huggingface"],
-      sources: [candidate.huggingfaceUrl],
+      tags: modelTags,
+      sources: [`https://huggingface.co/${listItem.id}`],
       verified: true,
       featured: false,
       boost: 1,
-      curatorNotes: `Automated ingestion release from Hugging Face Trending on ${todayStr}.`
+      curatorNotes: `Auto-ingested from HuggingFace Trending on ${todayStr}. Architecture: ${architecture || "unknown"}. Params: ${paramStr}. License: ${license}.`
     };
 
-    // Draft README markdown
-    const readmeMd = `# ${candidate.name}
+    // Build rich README
+    const readmeMd = `# ${modelName}
 
 ## Model Overview
-**${candidate.name}** is an open-weight model created by **${candidate.author}**. It was automatically ingested and published to Modelverse on **${todayStr}** from Hugging Face Trending.
+**${modelName}** is a **${paramStr}-parameter** ${moe ? "Mixture-of-Experts " : ""}${pipelineTag.replace(/-/g, " ")} model developed by **${author}**.${architecture ? ` Built on the \`${architecture}\` architecture.` : ""}${languages ? ` Supports ${languages}.` : ""} Released on **${releaseDate}**.
+
+---
+
+## 📊 Quick Specs
+
+| Specification | Value |
+|:---|:---|
+| **Parameters** | ${paramStr} |
+| **Architecture** | ${architecture || "—"} |
+| **Task** | ${pipelineTag.replace(/-/g, " ")} |
+| **Modality** | ${modality.join(", ")} |
+| **License** | ${license} |
+| **Framework** | ${libraryName || "—"} |
+| **MoE** | ${moe ? "Yes" : "No"} |
+| **Languages** | ${languages || "—"} |
 
 ---
 
 ## ✨ Key Features
 
-- **Trending Release**: Fast growing open-weight model on Hugging Face
-- **Community Adoption**: ${candidate.likes} likes and ${candidate.downloads} downloads
-- **Self-Hostable**: Available for local deployment and fine-tuning
+${keyFeatures.map(f => `- ${f}`).join("\n")}
+
+---
+
+## 📈 Community Adoption
+
+- **${likes.toLocaleString()} likes** on Hugging Face
+- **${downloads.toLocaleString()} downloads** on Hugging Face
 
 ---
 
 ## 🔗 Resources
 
-- **Hugging Face Hub**: [${candidate.name} on Hugging Face](${candidate.huggingfaceUrl})
+- **Hugging Face Hub**: [${modelName} on Hugging Face](https://huggingface.co/${listItem.id})
+${arxivUrl ? `- **Paper**: [arXiv](${arxivUrl})` : ""}
 
 ---
 
 ## 📜 License & Access
-**Open-Weights** — See repository for specific license details.
+**${license}** — Open-weights model available for download, fine-tuning, and self-hosted deployment.
 `;
 
     // Save JSON & README
-    const jsonPath = path.join(MODELS_DIR, `${fullId}.json`);
-    const readmePath = path.join(README_DIR, `${modelSlug}.md`);
-
-    fs.writeFileSync(jsonPath, JSON.stringify(newModelJson, null, 2), "utf-8");
-    fs.writeFileSync(readmePath, readmeMd, "utf-8");
+    fs.writeFileSync(path.join(MODELS_DIR, `${fullId}.json`), JSON.stringify(newModelJson, null, 2), "utf-8");
+    fs.writeFileSync(path.join(README_DIR, `${modelSlug}.md`), readmeMd, "utf-8");
 
     existingIds.add(fullId);
     existingSlugs.add(modelSlug);
-    createdModels.push(candidate.name);
-    console.log(`✅ Model published: ${candidate.name} (${fullId})`);
+    createdModels.push(modelName);
+    console.log(`✅ Published: ${modelName} — ${paramStr} params, ${pipelineTag}, ${license}`);
   }
 
-  // 2. Log Ingestion Summary
+  // 3. Summary
   console.log("\n📊 Ingestion Summary:");
   if (createdModels.length === 0) {
     console.log("✨ No new models found. Registry is 100% up to date!");
   } else {
     console.log(`🎉 Ingested and published ${createdModels.length} new models:`);
     createdModels.forEach((name) => console.log(` - ${name}`));
-    
-    // Auto-compile model indexes
+
     console.log("⚡ Auto-compiling search indexes...");
     require("./compile-models.js");
   }

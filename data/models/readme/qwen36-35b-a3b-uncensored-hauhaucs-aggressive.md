@@ -1,15 +1,39 @@
 # Qwen3.6-35B-A3B-Uncensored-HauhauCS-Aggressive
 
 ## Model Overview
-**Qwen3.6-35B-A3B-Uncensored-HauhauCS-Aggressive** is an open-weight model created by **HauhauCS**. It was automatically ingested into Modelverse on **2026-07-25** from Hugging Face Trending.
+**Qwen3.6-35B-A3B-Uncensored-HauhauCS-Aggressive** is a **undisclosed-parameter** Mixture-of-Experts image text to text model developed by **HauhauCS**. Supports en, zh, multilingual. Released on **2026-04-17**.
+
+---
+
+## 📊 Quick Specs
+
+| Specification | Value |
+|:---|:---|
+| **Parameters** | undisclosed |
+| **Architecture** | — |
+| **Task** | image text to text |
+| **Modality** | text, image |
+| **License** | APACHE-2.0 |
+| **Framework** | — |
+| **MoE** | Yes |
+| **Languages** | en, zh, multilingual |
 
 ---
 
 ## ✨ Key Features
 
-- **Trending Release**: Fast growing open-weight model on Hugging Face
-- **Community Adoption**: 3071 likes and 2057103 downloads
-- **Self-Hostable**: Available for local deployment and fine-tuning
+- undisclosed parameters with sparse MoE architecture for efficient inference
+- Primary task: image text to text (text, image modality)
+- Language support: en, zh, multilingual
+- Open-weights under APACHE-2.0 license — self-hostable and fine-tunable
+- High adoption: 2,057,103 downloads on Hugging Face
+
+---
+
+## 📈 Community Adoption
+
+- **3,073 likes** on Hugging Face
+- **2,057,103 downloads** on Hugging Face
 
 ---
 
@@ -17,7 +41,8 @@
 
 - **Hugging Face Hub**: [Qwen3.6-35B-A3B-Uncensored-HauhauCS-Aggressive on Hugging Face](https://huggingface.co/HauhauCS/Qwen3.6-35B-A3B-Uncensored-HauhauCS-Aggressive)
 
+
 ---
 
 ## 📜 License & Access
-**Open-Weights** — See repository for specific license details.
+**APACHE-2.0** — Open-weights model available for download, fine-tuning, and self-hosted deployment.

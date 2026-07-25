@@ -1,15 +1,39 @@
 # Qwen3.6-27B-Fable-Fusion-711-Uncensored-Heretic-NM-DAU-NEO-MAX-MTP-GGUF
 
 ## Model Overview
-**Qwen3.6-27B-Fable-Fusion-711-Uncensored-Heretic-NM-DAU-NEO-MAX-MTP-GGUF** is an open-weight model created by **DavidAU**. It was automatically ingested into Modelverse on **2026-07-25** from Hugging Face Trending.
+**Qwen3.6-27B-Fable-Fusion-711-Uncensored-Heretic-NM-DAU-NEO-MAX-MTP-GGUF** is a **undisclosed-parameter** image text to text model developed by **DavidAU**. Supports en, zh. Released on **2026-07-17**.
+
+---
+
+## 📊 Quick Specs
+
+| Specification | Value |
+|:---|:---|
+| **Parameters** | undisclosed |
+| **Architecture** | — |
+| **Task** | image text to text |
+| **Modality** | text, image |
+| **License** | APACHE-2.0 |
+| **Framework** | — |
+| **MoE** | No |
+| **Languages** | en, zh |
 
 ---
 
 ## ✨ Key Features
 
-- **Trending Release**: Fast growing open-weight model on Hugging Face
-- **Community Adoption**: 493 likes and 407421 downloads
-- **Self-Hostable**: Available for local deployment and fine-tuning
+- undisclosed parameters
+- Primary task: image text to text (text, image modality)
+- Language support: en, zh
+- Open-weights under APACHE-2.0 license — self-hostable and fine-tunable
+- High adoption: 407,421 downloads on Hugging Face
+
+---
+
+## 📈 Community Adoption
+
+- **496 likes** on Hugging Face
+- **407,421 downloads** on Hugging Face
 
 ---
 
@@ -17,7 +41,8 @@
 
 - **Hugging Face Hub**: [Qwen3.6-27B-Fable-Fusion-711-Uncensored-Heretic-NM-DAU-NEO-MAX-MTP-GGUF on Hugging Face](https://huggingface.co/DavidAU/Qwen3.6-27B-Fable-Fusion-711-Uncensored-Heretic-NM-DAU-NEO-MAX-MTP-GGUF)
 
+
 ---
 
 ## 📜 License & Access
-**Open-Weights** — See repository for specific license details.
+**APACHE-2.0** — Open-weights model available for download, fine-tuning, and self-hosted deployment.

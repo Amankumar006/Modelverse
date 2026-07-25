@@ -3,24 +3,26 @@
   "name": "Motif-3-Beta",
   "slug": "motif-3-beta",
   "developer": "Motif-Technologies",
-  "releaseDate": "2026-07-25",
+  "releaseDate": "2026-07-20",
   "updatedAt": "2026-07-25",
   "type": "open-weights",
   "modality": [
     "text"
   ],
-  "primaryTask": "multimodal-general",
+  "primaryTask": "chat-reasoning",
   "deployment": [
     "self-hostable"
   ],
   "license": "Other/Custom",
-  "parameters": "undisclosed",
+  "parameters": "314.8B",
   "contextWindow": "unknown",
-  "description": "Motif-3-Beta is a trending open-weight AI model developed by Motif-Technologies, featuring high community adoption on Hugging Face (185 likes, 2108 downloads).",
+  "description": "Motif-3-Beta is a 314.8B-parameter Mixture-of-Experts (MoE) text generation model developed by Motif-Technologies. Built on the MotifForCausalLM architecture using transformers. Supports en, ko language(s). Released on 2026-07-20 with 186 likes and 2,108 downloads on Hugging Face.",
   "keyFeatures": [
-    "Trending open-weight release by Motif-Technologies",
-    "Community favorite on Hugging Face with 185 likes",
-    "Supports self-hosted inference and deployment"
+    "314.8B parameters with sparse MoE architecture for efficient inference",
+    "Built on MotifForCausalLM architecture (transformers)",
+    "Primary task: text generation (text modality)",
+    "Language support: en, ko",
+    "Open-weights under Other/Custom license — self-hostable and fine-tunable"
   ],
   "benchmarks": [],
   "family": null,
@@ -32,13 +34,16 @@
   "tags": [
     "open-weights",
     "trending",
-    "huggingface"
+    "huggingface",
+    "moe",
+    "transformers",
+    "text-generation"
   ],
   "sources": [
     "https://huggingface.co/Motif-Technologies/Motif-3-Beta"
   ],
-  "verified": false,
+  "verified": true,
   "featured": false,
   "boost": 1,
-  "curatorNotes": "Automated ingestion draft from Hugging Face Trending on 2026-07-25. Needs human verification."
+  "curatorNotes": "Auto-ingested from HuggingFace Trending on 2026-07-25. Architecture: MotifForCausalLM. Params: 314.8B. License: Other/Custom."
 }

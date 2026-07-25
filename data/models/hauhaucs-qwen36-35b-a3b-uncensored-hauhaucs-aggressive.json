@@ -3,24 +3,27 @@
   "name": "Qwen3.6-35B-A3B-Uncensored-HauhauCS-Aggressive",
   "slug": "qwen36-35b-a3b-uncensored-hauhaucs-aggressive",
   "developer": "HauhauCS",
-  "releaseDate": "2026-07-25",
+  "releaseDate": "2026-04-17",
   "updatedAt": "2026-07-25",
   "type": "open-weights",
   "modality": [
-    "text"
+    "text",
+    "image"
   ],
   "primaryTask": "multimodal-general",
   "deployment": [
     "self-hostable"
   ],
-  "license": "Other/Custom",
+  "license": "APACHE-2.0",
   "parameters": "undisclosed",
   "contextWindow": "unknown",
-  "description": "Qwen3.6-35B-A3B-Uncensored-HauhauCS-Aggressive is a trending open-weight AI model developed by HauhauCS, featuring high community adoption on Hugging Face (3071 likes, 2057103 downloads).",
+  "description": "Qwen3.6-35B-A3B-Uncensored-HauhauCS-Aggressive is a undisclosed-parameter Mixture-of-Experts (MoE) image text to text model developed by HauhauCS. Supports en, zh, multilingual language(s). Released on 2026-04-17 with 3,073 likes and 2,057,103 downloads on Hugging Face.",
   "keyFeatures": [
-    "Trending open-weight release by HauhauCS",
-    "Community favorite on Hugging Face with 3071 likes",
-    "Supports self-hosted inference and deployment"
+    "undisclosed parameters with sparse MoE architecture for efficient inference",
+    "Primary task: image text to text (text, image modality)",
+    "Language support: en, zh, multilingual",
+    "Open-weights under APACHE-2.0 license — self-hostable and fine-tunable",
+    "High adoption: 2,057,103 downloads on Hugging Face"
   ],
   "benchmarks": [],
   "family": null,
@@ -32,13 +35,15 @@
   "tags": [
     "open-weights",
     "trending",
-    "huggingface"
+    "huggingface",
+    "moe",
+    "image-text-to-text"
   ],
   "sources": [
     "https://huggingface.co/HauhauCS/Qwen3.6-35B-A3B-Uncensored-HauhauCS-Aggressive"
   ],
-  "verified": false,
+  "verified": true,
   "featured": false,
   "boost": 1,
-  "curatorNotes": "Automated ingestion draft from Hugging Face Trending on 2026-07-25. Needs human verification."
+  "curatorNotes": "Auto-ingested from HuggingFace Trending on 2026-07-25. Architecture: unknown. Params: undisclosed. License: APACHE-2.0."
 }

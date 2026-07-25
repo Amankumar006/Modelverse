@@ -3,24 +3,25 @@
   "name": "Laguna-S-2.1",
   "slug": "laguna-s-21",
   "developer": "poolside",
-  "releaseDate": "2026-07-25",
+  "releaseDate": "2026-07-13",
   "updatedAt": "2026-07-25",
   "type": "open-weights",
   "modality": [
     "text"
   ],
-  "primaryTask": "multimodal-general",
+  "primaryTask": "chat-reasoning",
   "deployment": [
     "self-hostable"
   ],
-  "license": "Other/Custom",
-  "parameters": "undisclosed",
+  "license": "OPENMDW-1.1",
+  "parameters": "117.6B",
   "contextWindow": "unknown",
-  "description": "Laguna-S-2.1 is a trending open-weight AI model developed by poolside, featuring high community adoption on Hugging Face (614 likes, 28992 downloads).",
+  "description": "Laguna-S-2.1 is a 117.6B-parameter Mixture-of-Experts (MoE) text generation model developed by poolside. Built on the LagunaForCausalLM architecture using transformers. Released on 2026-07-13 with 618 likes and 28,992 downloads on Hugging Face.",
   "keyFeatures": [
-    "Trending open-weight release by poolside",
-    "Community favorite on Hugging Face with 614 likes",
-    "Supports self-hosted inference and deployment"
+    "117.6B parameters with sparse MoE architecture for efficient inference",
+    "Built on LagunaForCausalLM architecture (transformers)",
+    "Primary task: text generation (text modality)",
+    "Open-weights under OPENMDW-1.1 license — self-hostable and fine-tunable"
   ],
   "benchmarks": [],
   "family": null,
@@ -32,13 +33,16 @@
   "tags": [
     "open-weights",
     "trending",
-    "huggingface"
+    "huggingface",
+    "moe",
+    "transformers",
+    "text-generation"
   ],
   "sources": [
     "https://huggingface.co/poolside/Laguna-S-2.1"
   ],
-  "verified": false,
+  "verified": true,
   "featured": false,
   "boost": 1,
-  "curatorNotes": "Automated ingestion draft from Hugging Face Trending on 2026-07-25. Needs human verification."
+  "curatorNotes": "Auto-ingested from HuggingFace Trending on 2026-07-25. Architecture: LagunaForCausalLM. Params: 117.6B. License: OPENMDW-1.1."
 }

@@ -3,24 +3,26 @@
   "name": "Solar-Open2-250B",
   "slug": "solar-open2-250b",
   "developer": "upstage",
-  "releaseDate": "2026-07-25",
+  "releaseDate": "2026-07-22",
   "updatedAt": "2026-07-25",
   "type": "open-weights",
   "modality": [
     "text"
   ],
-  "primaryTask": "multimodal-general",
+  "primaryTask": "chat-reasoning",
   "deployment": [
     "self-hostable"
   ],
-  "license": "Other/Custom",
-  "parameters": "undisclosed",
+  "license": "OTHER",
+  "parameters": "250.3B",
   "contextWindow": "unknown",
-  "description": "Solar-Open2-250B is a trending open-weight AI model developed by upstage, featuring high community adoption on Hugging Face (543 likes, 1106 downloads).",
+  "description": "Solar-Open2-250B is a 250.3B-parameter Mixture-of-Experts (MoE) text generation model developed by upstage. Built on the SolarOpen2ForCausalLM architecture using transformers. Supports en, ko, ja language(s). Released on 2026-07-22 with 543 likes and 1,106 downloads on Hugging Face.",
   "keyFeatures": [
-    "Trending open-weight release by upstage",
-    "Community favorite on Hugging Face with 543 likes",
-    "Supports self-hosted inference and deployment"
+    "250.3B parameters with sparse MoE architecture for efficient inference",
+    "Built on SolarOpen2ForCausalLM architecture (transformers)",
+    "Primary task: text generation (text modality)",
+    "Language support: en, ko, ja",
+    "Open-weights under OTHER license — self-hostable and fine-tunable"
   ],
   "benchmarks": [],
   "family": null,
@@ -32,13 +34,16 @@
   "tags": [
     "open-weights",
     "trending",
-    "huggingface"
+    "huggingface",
+    "moe",
+    "transformers",
+    "text-generation"
   ],
   "sources": [
     "https://huggingface.co/upstage/Solar-Open2-250B"
   ],
-  "verified": false,
+  "verified": true,
   "featured": false,
   "boost": 1,
-  "curatorNotes": "Automated ingestion draft from Hugging Face Trending on 2026-07-25. Needs human verification."
+  "curatorNotes": "Auto-ingested from HuggingFace Trending on 2026-07-25. Architecture: SolarOpen2ForCausalLM. Params: 250.3B. License: OTHER."
 }

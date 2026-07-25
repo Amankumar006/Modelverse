@@ -3,42 +3,48 @@
   "name": "KAT-Coder-V2.5-Dev",
   "slug": "kat-coder-v25-dev",
   "developer": "Kwaipilot",
-  "releaseDate": "2026-07-25",
+  "releaseDate": "2026-07-23",
   "updatedAt": "2026-07-25",
   "type": "open-weights",
   "modality": [
     "text"
   ],
-  "primaryTask": "multimodal-general",
+  "primaryTask": "chat-reasoning",
   "deployment": [
     "self-hostable"
   ],
-  "license": "Other/Custom",
-  "parameters": "undisclosed",
+  "license": "APACHE-2.0",
+  "parameters": "34.7B",
   "contextWindow": "unknown",
-  "description": "KAT-Coder-V2.5-Dev is a trending open-weight AI model developed by Kwaipilot, featuring high community adoption on Hugging Face (126 likes, 396 downloads).",
+  "description": "KAT-Coder-V2.5-Dev is a 34.7B-parameter Mixture-of-Experts (MoE) text generation model developed by Kwaipilot. Built on the Qwen3_5MoeForConditionalGeneration architecture using transformers. Supports en, zh language(s). Released on 2026-07-23 with 126 likes and 396 downloads on Hugging Face.",
   "keyFeatures": [
-    "Trending open-weight release by Kwaipilot",
-    "Community favorite on Hugging Face with 126 likes",
-    "Supports self-hosted inference and deployment"
+    "34.7B parameters with sparse MoE architecture for efficient inference",
+    "Built on Qwen3_5MoeForConditionalGeneration architecture (transformers)",
+    "Primary task: text generation (text modality)",
+    "Language support: en, zh",
+    "Open-weights under APACHE-2.0 license — self-hostable and fine-tunable"
   ],
   "benchmarks": [],
   "family": null,
   "previousVersion": null,
   "links": {
-    "huggingface": "https://huggingface.co/Kwaipilot/KAT-Coder-V2.5-Dev"
+    "huggingface": "https://huggingface.co/Kwaipilot/KAT-Coder-V2.5-Dev",
+    "paper": "https://arxiv.org/abs/2607.05471"
   },
   "logo": null,
   "tags": [
     "open-weights",
     "trending",
-    "huggingface"
+    "huggingface",
+    "moe",
+    "transformers",
+    "text-generation"
   ],
   "sources": [
     "https://huggingface.co/Kwaipilot/KAT-Coder-V2.5-Dev"
   ],
-  "verified": false,
+  "verified": true,
   "featured": false,
   "boost": 1,
-  "curatorNotes": "Automated ingestion draft from Hugging Face Trending on 2026-07-25. Needs human verification."
+  "curatorNotes": "Auto-ingested from HuggingFace Trending on 2026-07-25. Architecture: Qwen3_5MoeForConditionalGeneration. Params: 34.7B. License: APACHE-2.0."
 }

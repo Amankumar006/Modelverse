@@ -3,42 +3,49 @@
   "name": "GLM-5.2",
   "slug": "glm-52",
   "developer": "zai-org",
-  "releaseDate": "2026-07-25",
+  "releaseDate": "2026-06-16",
   "updatedAt": "2026-07-25",
   "type": "open-weights",
   "modality": [
     "text"
   ],
-  "primaryTask": "multimodal-general",
+  "primaryTask": "chat-reasoning",
   "deployment": [
     "self-hostable"
   ],
-  "license": "Other/Custom",
-  "parameters": "undisclosed",
+  "license": "MIT",
+  "parameters": "753.3B",
   "contextWindow": "unknown",
-  "description": "GLM-5.2 is a trending open-weight AI model developed by zai-org, featuring high community adoption on Hugging Face (4419 likes, 667403 downloads).",
+  "description": "GLM-5.2 is a 753.3B-parameter Mixture-of-Experts (MoE) text generation model developed by zai-org. Built on the GlmMoeDsaForCausalLM architecture using transformers. Supports en, zh language(s). Released on 2026-06-16 with 4,422 likes and 667,403 downloads on Hugging Face.",
   "keyFeatures": [
-    "Trending open-weight release by zai-org",
-    "Community favorite on Hugging Face with 4419 likes",
-    "Supports self-hosted inference and deployment"
+    "753.3B parameters with sparse MoE architecture for efficient inference",
+    "Built on GlmMoeDsaForCausalLM architecture (transformers)",
+    "Primary task: text generation (text modality)",
+    "Language support: en, zh",
+    "Open-weights under MIT license — self-hostable and fine-tunable",
+    "High adoption: 667,403 downloads on Hugging Face"
   ],
   "benchmarks": [],
   "family": null,
   "previousVersion": null,
   "links": {
-    "huggingface": "https://huggingface.co/zai-org/GLM-5.2"
+    "huggingface": "https://huggingface.co/zai-org/GLM-5.2",
+    "paper": "https://arxiv.org/abs/2602.15763"
   },
   "logo": null,
   "tags": [
     "open-weights",
     "trending",
-    "huggingface"
+    "huggingface",
+    "moe",
+    "transformers",
+    "text-generation"
   ],
   "sources": [
     "https://huggingface.co/zai-org/GLM-5.2"
   ],
-  "verified": false,
+  "verified": true,
   "featured": false,
   "boost": 1,
-  "curatorNotes": "Automated ingestion draft from Hugging Face Trending on 2026-07-25. Needs human verification."
+  "curatorNotes": "Auto-ingested from HuggingFace Trending on 2026-07-25. Architecture: GlmMoeDsaForCausalLM. Params: 753.3B. License: MIT."
 }

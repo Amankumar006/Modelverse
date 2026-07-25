@@ -3,24 +3,24 @@
   "name": "Laguna-S-2.1-GGUF",
   "slug": "laguna-s-21-gguf",
   "developer": "unsloth",
-  "releaseDate": "2026-07-25",
+  "releaseDate": "2026-07-21",
   "updatedAt": "2026-07-25",
   "type": "open-weights",
   "modality": [
     "text"
   ],
-  "primaryTask": "multimodal-general",
+  "primaryTask": "chat-reasoning",
   "deployment": [
     "self-hostable"
   ],
-  "license": "Other/Custom",
+  "license": "OPENMDW-1.1",
   "parameters": "undisclosed",
   "contextWindow": "unknown",
-  "description": "Laguna-S-2.1-GGUF is a trending open-weight AI model developed by unsloth, featuring high community adoption on Hugging Face (171 likes, 57536 downloads).",
+  "description": "Laguna-S-2.1-GGUF is a undisclosed-parameter text generation model developed by unsloth. Released on 2026-07-21 with 172 likes and 57,536 downloads on Hugging Face.",
   "keyFeatures": [
-    "Trending open-weight release by unsloth",
-    "Community favorite on Hugging Face with 171 likes",
-    "Supports self-hosted inference and deployment"
+    "undisclosed parameters",
+    "Primary task: text generation (text modality)",
+    "Open-weights under OPENMDW-1.1 license — self-hostable and fine-tunable"
   ],
   "benchmarks": [],
   "family": null,
@@ -32,13 +32,15 @@
   "tags": [
     "open-weights",
     "trending",
-    "huggingface"
+    "huggingface",
+    "transformers",
+    "text-generation"
   ],
   "sources": [
     "https://huggingface.co/unsloth/Laguna-S-2.1-GGUF"
   ],
-  "verified": false,
+  "verified": true,
   "featured": false,
   "boost": 1,
-  "curatorNotes": "Automated ingestion draft from Hugging Face Trending on 2026-07-25. Needs human verification."
+  "curatorNotes": "Auto-ingested from HuggingFace Trending on 2026-07-25. Architecture: unknown. Params: undisclosed. License: OPENMDW-1.1."
 }

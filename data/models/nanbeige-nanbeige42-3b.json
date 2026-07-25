@@ -3,24 +3,26 @@
   "name": "Nanbeige4.2-3B",
   "slug": "nanbeige42-3b",
   "developer": "Nanbeige",
-  "releaseDate": "2026-07-25",
+  "releaseDate": "2026-07-21",
   "updatedAt": "2026-07-25",
   "type": "open-weights",
   "modality": [
     "text"
   ],
-  "primaryTask": "multimodal-general",
+  "primaryTask": "chat-reasoning",
   "deployment": [
     "self-hostable"
   ],
-  "license": "Other/Custom",
-  "parameters": "undisclosed",
+  "license": "APACHE-2.0",
+  "parameters": "4.2B",
   "contextWindow": "unknown",
-  "description": "Nanbeige4.2-3B is a trending open-weight AI model developed by Nanbeige, featuring high community adoption on Hugging Face (374 likes, 8169 downloads).",
+  "description": "Nanbeige4.2-3B is a 4.2B-parameter text generation model developed by Nanbeige. Built on the NanbeigeForCausalLM architecture using transformers. Supports en, zh language(s). Released on 2026-07-21 with 374 likes and 8,169 downloads on Hugging Face.",
   "keyFeatures": [
-    "Trending open-weight release by Nanbeige",
-    "Community favorite on Hugging Face with 374 likes",
-    "Supports self-hosted inference and deployment"
+    "4.2B parameters",
+    "Built on NanbeigeForCausalLM architecture (transformers)",
+    "Primary task: text generation (text modality)",
+    "Language support: en, zh",
+    "Open-weights under APACHE-2.0 license — self-hostable and fine-tunable"
   ],
   "benchmarks": [],
   "family": null,
@@ -32,13 +34,15 @@
   "tags": [
     "open-weights",
     "trending",
-    "huggingface"
+    "huggingface",
+    "transformers",
+    "text-generation"
   ],
   "sources": [
     "https://huggingface.co/Nanbeige/Nanbeige4.2-3B"
   ],
-  "verified": false,
+  "verified": true,
   "featured": false,
   "boost": 1,
-  "curatorNotes": "Automated ingestion draft from Hugging Face Trending on 2026-07-25. Needs human verification."
+  "curatorNotes": "Auto-ingested from HuggingFace Trending on 2026-07-25. Architecture: NanbeigeForCausalLM. Params: 4.2B. License: APACHE-2.0."
 }

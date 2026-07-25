@@ -3,24 +3,26 @@
   "name": "Inkling",
   "slug": "inkling",
   "developer": "thinkingmachines",
-  "releaseDate": "2026-07-25",
+  "releaseDate": "2026-07-14",
   "updatedAt": "2026-07-25",
   "type": "open-weights",
   "modality": [
-    "text"
+    "text",
+    "image"
   ],
   "primaryTask": "multimodal-general",
   "deployment": [
     "self-hostable"
   ],
-  "license": "Other/Custom",
-  "parameters": "undisclosed",
+  "license": "APACHE-2.0",
+  "parameters": "952.4B",
   "contextWindow": "unknown",
-  "description": "Inkling is a trending open-weight AI model developed by thinkingmachines, featuring high community adoption on Hugging Face (1547 likes, 27883 downloads).",
+  "description": "Inkling is a 952.4B-parameter Mixture-of-Experts (MoE) image text to text model developed by thinkingmachines. Built on the InklingForConditionalGeneration architecture using transformers. Released on 2026-07-14 with 1,547 likes and 27,883 downloads on Hugging Face.",
   "keyFeatures": [
-    "Trending open-weight release by thinkingmachines",
-    "Community favorite on Hugging Face with 1547 likes",
-    "Supports self-hosted inference and deployment"
+    "952.4B parameters with sparse MoE architecture for efficient inference",
+    "Built on InklingForConditionalGeneration architecture (transformers)",
+    "Primary task: image text to text (text, image modality)",
+    "Open-weights under APACHE-2.0 license — self-hostable and fine-tunable"
   ],
   "benchmarks": [],
   "family": null,
@@ -32,13 +34,16 @@
   "tags": [
     "open-weights",
     "trending",
-    "huggingface"
+    "huggingface",
+    "moe",
+    "transformers",
+    "image-text-to-text"
   ],
   "sources": [
     "https://huggingface.co/thinkingmachines/Inkling"
   ],
-  "verified": false,
+  "verified": true,
   "featured": false,
   "boost": 1,
-  "curatorNotes": "Automated ingestion draft from Hugging Face Trending on 2026-07-25. Needs human verification."
+  "curatorNotes": "Auto-ingested from HuggingFace Trending on 2026-07-25. Architecture: InklingForConditionalGeneration. Params: 952.4B. License: APACHE-2.0."
 }

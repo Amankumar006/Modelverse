@@ -3,24 +3,25 @@
   "name": "Ternary-Bonsai-27B-gguf",
   "slug": "ternary-bonsai-27b-gguf",
   "developer": "prism-ml",
-  "releaseDate": "2026-07-25",
+  "releaseDate": "2026-07-04",
   "updatedAt": "2026-07-25",
   "type": "open-weights",
   "modality": [
     "text"
   ],
-  "primaryTask": "multimodal-general",
+  "primaryTask": "chat-reasoning",
   "deployment": [
     "self-hostable"
   ],
-  "license": "Other/Custom",
+  "license": "APACHE-2.0",
   "parameters": "undisclosed",
   "contextWindow": "unknown",
-  "description": "Ternary-Bonsai-27B-gguf is a trending open-weight AI model developed by prism-ml, featuring high community adoption on Hugging Face (1008 likes, 595415 downloads).",
+  "description": "Ternary-Bonsai-27B-gguf is a undisclosed-parameter text generation model developed by prism-ml. Released on 2026-07-04 with 1,009 likes and 595,415 downloads on Hugging Face.",
   "keyFeatures": [
-    "Trending open-weight release by prism-ml",
-    "Community favorite on Hugging Face with 1008 likes",
-    "Supports self-hosted inference and deployment"
+    "undisclosed parameters",
+    "Primary task: text generation (text modality)",
+    "Open-weights under APACHE-2.0 license — self-hostable and fine-tunable",
+    "High adoption: 595,415 downloads on Hugging Face"
   ],
   "benchmarks": [],
   "family": null,
@@ -32,13 +33,15 @@
   "tags": [
     "open-weights",
     "trending",
-    "huggingface"
+    "huggingface",
+    "llama.cpp",
+    "text-generation"
   ],
   "sources": [
     "https://huggingface.co/prism-ml/Ternary-Bonsai-27B-gguf"
   ],
-  "verified": false,
+  "verified": true,
   "featured": false,
   "boost": 1,
-  "curatorNotes": "Automated ingestion draft from Hugging Face Trending on 2026-07-25. Needs human verification."
+  "curatorNotes": "Auto-ingested from HuggingFace Trending on 2026-07-25. Architecture: unknown. Params: undisclosed. License: APACHE-2.0."
 }

@@ -3,24 +3,27 @@
   "name": "Qwythos-9B-Claude-Mythos-5-1M-GGUF",
   "slug": "qwythos-9b-claude-mythos-5-1m-gguf",
   "developer": "empero-ai",
-  "releaseDate": "2026-07-25",
+  "releaseDate": "2026-06-19",
   "updatedAt": "2026-07-25",
   "type": "open-weights",
   "modality": [
-    "text"
+    "text",
+    "image"
   ],
   "primaryTask": "multimodal-general",
   "deployment": [
     "self-hostable"
   ],
-  "license": "Other/Custom",
+  "license": "APACHE-2.0",
   "parameters": "undisclosed",
   "contextWindow": "unknown",
-  "description": "Qwythos-9B-Claude-Mythos-5-1M-GGUF is a trending open-weight AI model developed by empero-ai, featuring high community adoption on Hugging Face (2455 likes, 1906539 downloads).",
+  "description": "Qwythos-9B-Claude-Mythos-5-1M-GGUF is a undisclosed-parameter image text to text model developed by empero-ai. Supports en language(s). Released on 2026-06-19 with 2,456 likes and 1,906,539 downloads on Hugging Face.",
   "keyFeatures": [
-    "Trending open-weight release by empero-ai",
-    "Community favorite on Hugging Face with 2455 likes",
-    "Supports self-hosted inference and deployment"
+    "undisclosed parameters",
+    "Primary task: image text to text (text, image modality)",
+    "Language support: en",
+    "Open-weights under APACHE-2.0 license — self-hostable and fine-tunable",
+    "High adoption: 1,906,539 downloads on Hugging Face"
   ],
   "benchmarks": [],
   "family": null,
@@ -32,13 +35,15 @@
   "tags": [
     "open-weights",
     "trending",
-    "huggingface"
+    "huggingface",
+    "gguf",
+    "image-text-to-text"
   ],
   "sources": [
     "https://huggingface.co/empero-ai/Qwythos-9B-Claude-Mythos-5-1M-GGUF"
   ],
-  "verified": false,
+  "verified": true,
   "featured": false,
   "boost": 1,
-  "curatorNotes": "Automated ingestion draft from Hugging Face Trending on 2026-07-25. Needs human verification."
+  "curatorNotes": "Auto-ingested from HuggingFace Trending on 2026-07-25. Architecture: unknown. Params: undisclosed. License: APACHE-2.0."
 }

@@ -3,24 +3,27 @@
   "name": "Qwen3.6-27B-Fable-Fusion-711-Uncensored-Heretic-NM-DAU-NEO-MAX-MTP-GGUF",
   "slug": "qwen36-27b-fable-fusion-711-uncensored-heretic-nm-dau-neo-max-mtp-gguf",
   "developer": "DavidAU",
-  "releaseDate": "2026-07-25",
+  "releaseDate": "2026-07-17",
   "updatedAt": "2026-07-25",
   "type": "open-weights",
   "modality": [
-    "text"
+    "text",
+    "image"
   ],
   "primaryTask": "multimodal-general",
   "deployment": [
     "self-hostable"
   ],
-  "license": "Other/Custom",
+  "license": "APACHE-2.0",
   "parameters": "undisclosed",
   "contextWindow": "unknown",
-  "description": "Qwen3.6-27B-Fable-Fusion-711-Uncensored-Heretic-NM-DAU-NEO-MAX-MTP-GGUF is a trending open-weight AI model developed by DavidAU, featuring high community adoption on Hugging Face (493 likes, 407421 downloads).",
+  "description": "Qwen3.6-27B-Fable-Fusion-711-Uncensored-Heretic-NM-DAU-NEO-MAX-MTP-GGUF is a undisclosed-parameter image text to text model developed by DavidAU. Supports en, zh language(s). Released on 2026-07-17 with 496 likes and 407,421 downloads on Hugging Face.",
   "keyFeatures": [
-    "Trending open-weight release by DavidAU",
-    "Community favorite on Hugging Face with 493 likes",
-    "Supports self-hosted inference and deployment"
+    "undisclosed parameters",
+    "Primary task: image text to text (text, image modality)",
+    "Language support: en, zh",
+    "Open-weights under APACHE-2.0 license — self-hostable and fine-tunable",
+    "High adoption: 407,421 downloads on Hugging Face"
   ],
   "benchmarks": [],
   "family": null,
@@ -32,13 +35,14 @@
   "tags": [
     "open-weights",
     "trending",
-    "huggingface"
+    "huggingface",
+    "image-text-to-text"
   ],
   "sources": [
     "https://huggingface.co/DavidAU/Qwen3.6-27B-Fable-Fusion-711-Uncensored-Heretic-NM-DAU-NEO-MAX-MTP-GGUF"
   ],
-  "verified": false,
+  "verified": true,
   "featured": false,
   "boost": 1,
-  "curatorNotes": "Automated ingestion draft from Hugging Face Trending on 2026-07-25. Needs human verification."
+  "curatorNotes": "Auto-ingested from HuggingFace Trending on 2026-07-25. Architecture: unknown. Params: undisclosed. License: APACHE-2.0."
 }

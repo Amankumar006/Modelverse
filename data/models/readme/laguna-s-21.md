@@ -1,15 +1,38 @@
 # Laguna-S-2.1
 
 ## Model Overview
-**Laguna-S-2.1** is an open-weight model created by **poolside**. It was automatically ingested into Modelverse on **2026-07-25** from Hugging Face Trending.
+**Laguna-S-2.1** is a **117.6B-parameter** Mixture-of-Experts text generation model developed by **poolside**. Built on the `LagunaForCausalLM` architecture. Released on **2026-07-13**.
+
+---
+
+## 📊 Quick Specs
+
+| Specification | Value |
+|:---|:---|
+| **Parameters** | 117.6B |
+| **Architecture** | LagunaForCausalLM |
+| **Task** | text generation |
+| **Modality** | text |
+| **License** | OPENMDW-1.1 |
+| **Framework** | transformers |
+| **MoE** | Yes |
+| **Languages** | — |
 
 ---
 
 ## ✨ Key Features
 
-- **Trending Release**: Fast growing open-weight model on Hugging Face
-- **Community Adoption**: 614 likes and 28992 downloads
-- **Self-Hostable**: Available for local deployment and fine-tuning
+- 117.6B parameters with sparse MoE architecture for efficient inference
+- Built on LagunaForCausalLM architecture (transformers)
+- Primary task: text generation (text modality)
+- Open-weights under OPENMDW-1.1 license — self-hostable and fine-tunable
+
+---
+
+## 📈 Community Adoption
+
+- **618 likes** on Hugging Face
+- **28,992 downloads** on Hugging Face
 
 ---
 
@@ -17,7 +40,8 @@
 
 - **Hugging Face Hub**: [Laguna-S-2.1 on Hugging Face](https://huggingface.co/poolside/Laguna-S-2.1)
 
+
 ---
 
 ## 📜 License & Access
-**Open-Weights** — See repository for specific license details.
+**OPENMDW-1.1** — Open-weights model available for download, fine-tuning, and self-hosted deployment.
