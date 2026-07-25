@@ -37,7 +37,7 @@ jobs:
           secure: true
           username: 006amanraj@gmail.com
           password: ${{ secrets.GMAIL_APP_PASSWORD }}
-          subject: 🌟 [Modelverse] Weekly Sunday Digest: ${{ env.WEEKLY_MODELS_COUNT }} AI Model Releases!
+          subject: '🌟 [Modelverse] Weekly Sunday Digest: ${{ env.WEEKLY_MODELS_COUNT }} AI Model Releases!'
           to: 006amanraj@gmail.com
           from: Modelverse Digest Bot <006amanraj@gmail.com>
           html_body: file://data/ingestion/weekly-digest.html
