@@ -4,7 +4,7 @@
   "slug": "academic-research-mamma",
   "developer": "Academic/Research",
   "releaseDate": "2026-07-15",
-  "updatedAt": "2026-07-22",
+  "updatedAt": "2026-07-25",
   "type": "research-preview",
   "modality": [
     "vision",
@@ -64,7 +64,7 @@
   "verified": true,
   "featured": false,
   "boost": 1,
-  "curatorNotes": "Verified CVPR 2026 Oral paper by Max Planck Institute for Intelligent Systems (MPI-IS) and Carnegie Mellon University (CMU). Paper published on arXiv (arXiv:2506.13040) with official open-source codebase at github.com/cuevhv/mamma.",
+  "curatorNotes": "Partially enriched via migration on 2026-07-25. Manual review recommended.",
   "institution": "Max Planck Institute for Intelligent Systems, Carnegie Mellon University",
   "templatedDescription": false
 }

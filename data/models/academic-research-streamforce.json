@@ -4,7 +4,7 @@
   "slug": "academic-research-streamforce",
   "developer": "Academic/Research",
   "releaseDate": "2026-06-01",
-  "updatedAt": "2026-07-22",
+  "updatedAt": "2026-07-25",
   "type": "research-preview",
   "modality": [
     "image",
@@ -60,7 +60,7 @@
   "verified": true,
   "featured": false,
   "boost": 1,
-  "curatorNotes": "Verified research paper arXiv:2606.07508 from Northeastern University (NEU-VI Lab). Code repository announced on GitHub.",
+  "curatorNotes": "Partially enriched via migration on 2026-07-25. Manual review recommended.",
   "institution": "Northeastern University",
   "templatedDescription": false
 }

@@ -4,11 +4,15 @@
   "slug": "zhipu-ai-glm-5-2",
   "developer": "Zhipu AI",
   "releaseDate": "2026-07-15",
-  "updatedAt": "2026-07-15",
+  "updatedAt": "2026-07-25",
   "type": "research-preview",
-  "modality": ["text"],
+  "modality": [
+    "text"
+  ],
   "primaryTask": "chat-reasoning",
-  "deployment": ["self-hostable"],
+  "deployment": [
+    "self-hostable"
+  ],
   "license": "Other/Custom",
   "parameters": "undisclosed",
   "contextWindow": "undisclosed",
@@ -33,6 +37,6 @@
   "verified": false,
   "featured": false,
   "boost": 1,
-  "curatorNotes": "Ingested research preview via bulk triage. Affiliation: Zhipu AI. Traction signal: Initial release.",
+  "curatorNotes": "Partially enriched via migration on 2026-07-25. Manual review recommended.",
   "templatedDescription": true
 }

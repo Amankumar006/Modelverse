@@ -4,7 +4,7 @@
   "slug": "academic-research-streamchar",
   "developer": "Alibaba",
   "releaseDate": "2026-05-25",
-  "updatedAt": "2026-07-22",
+  "updatedAt": "2026-07-25",
   "type": "research-preview",
   "modality": [
     "text",
@@ -67,7 +67,7 @@
   "verified": true,
   "featured": false,
   "boost": 1,
-  "curatorNotes": "Verified research paper arXiv:2605.25659 from Alibaba Tongyi Lab (HumanAIGC Team). Code repository announced on GitHub.",
+  "curatorNotes": "Partially enriched via migration on 2026-07-25. Manual review recommended.",
   "institution": "Alibaba Tongyi Lab (HumanAIGC Team)",
   "templatedDescription": false
 }

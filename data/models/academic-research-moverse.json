@@ -3,30 +3,25 @@
   "name": "MoVerse",
   "slug": "academic-research-moverse",
   "developer": "Academic/Research",
-  "releaseDate": "2026-06-16",
-  "updatedAt": "2026-07-22",
+  "releaseDate": "2026-07-14",
+  "updatedAt": "2026-07-25",
   "type": "research-preview",
   "modality": [
     "text",
-    "image",
-    "video",
-    "3d"
+    "video"
   ],
   "primaryTask": "video-generation",
   "deployment": [
     "self-hostable"
   ],
-  "license": "Other/Custom",
+  "license": "APACHE-2.0",
   "parameters": "undisclosed",
   "contextWindow": "undisclosed",
-  "description": "MoVerse is a real-time video world modeling framework that constructs interactively navigable 3D worlds from a single narrow-field-of-view (NFOV) image using a Panoramic Gaussian Scaffold.",
+  "description": "MoVerse is a undisclosed-parameter text to video model developed by Academic/Research. Released on 2026-07-14 with 0 likes and 0 downloads on Hugging Face.",
   "keyFeatures": [
-    "Single-Image 360° Panoramic World Construction",
-    "Topology-Aware Latent Diffusion (Stage I)",
-    "Panoramic 3D Gaussian Scaffold (Stage II)",
-    "Causal Autoregressive Video Refinement (Stage III)",
-    "Real-Time Free-Roaming at 8 FPS on Single RTX 4090",
-    "Decoupled Spatial Memory and Camera Observation Rendering"
+    "undisclosed parameters",
+    "Primary task: text to video (text, video modality)",
+    "Open-weights under APACHE-2.0 license — self-hostable and fine-tunable"
   ],
   "benchmarks": [
     {
@@ -55,7 +50,8 @@
     "3d-gaussian-splatting",
     "video-generation",
     "panoramic-generation",
-    "real-time-rendering"
+    "real-time-rendering",
+    "text-to-video"
   ],
   "sources": [
     "https://orange-3dv-team.github.io/MoVerse/",
@@ -66,7 +62,7 @@
   "verified": true,
   "featured": false,
   "boost": 1,
-  "curatorNotes": "Verified academic/research lab affiliation: Alibaba (Youku Moku-Lab), SCUT, Columbia University. Paper published June 2026 (arXiv:2606.13376).",
+  "curatorNotes": "Enriched via migration on 2026-07-25. Architecture: unknown. Params: undisclosed. License: APACHE-2.0.",
   "institution": "Alibaba (Youku Moku-Lab), SCUT, Columbia University",
   "templatedDescription": false
 }

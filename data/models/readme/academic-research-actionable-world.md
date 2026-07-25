@@ -1,47 +1,41 @@
-# WorldString: Actionable World Representation
+# Actionable World
 
-**WorldString** (commonly known as **Actionable World**) is a foundational neural architecture designed for physical world modeling. Developed through a collaboration between researchers from **Tsinghua University (IEI Lab)**, **UC San Diego (UCSD)**, **CalTech**, and **NVIDIA**, WorldString acts as an interactive digital twin. Rather than focusing solely on passive video generation or static 3D scene reconstruction, WorldString explicitly represents real-world objects as **actionable entities** with dynamic physical states—spanning articulated, skinned, and soft/deformable categories.
-
----
-
-## 🔬 Core Capabilities & Architecture
-
-- **Direct Physical Stream Learning**: Processes 3D point clouds and RGB-D video streams directly without requiring hand-coded parametric CAD models.
-- **Unified Representation across Object Types**:
-  - **Articulable Objects**: Handles robotic hands, arms, doors, and jointed assemblies (e.g., XHand, Unitree Go2, Unitree H1).
-  - **Skinning Objects**: Models humans and biological structures with skeletal hierarchies.
-  - **Soft / Deformable Objects**: Captures dynamic states of cloth, ropes, and flexible materials.
-- **Keypoint & Canonical Embedding Space**: Bridges rigid kinematics and non-rigid deformations into a shared, compact state representation.
-- **Fully Differentiable Architecture**: Enables seamless end-to-end integration with neural dynamics simulators and reinforcement learning / policy learning algorithms.
-
-```
-Input State Encoder (Point Cloud / RGB-D) ───► Canonical Keypoint Tokenizer ───► Neural Point Cloud Renderer ───► Physics Simulator Alignment
-```
+## Model Overview
+**Actionable World** is a **undisclosed-parameter** model developed by **Academic/Research**.
+Released on **2026-07-15**.
 
 ---
 
-## 🚀 Quickstart & Installation
+## 📊 Quick Specs
 
-```bash
-# Clone the repository
-git clone https://github.com/MaureenZOU/worldstring.git
-cd worldstring
-
-# Create Conda environment & install dependencies
-conda create -n worldstring python=3.11 -y
-conda activate worldstring
-pip install torch torchvision --index-url https://download.pytorch.org/whl/cu121
-pip install gradio numpy scipy pyyaml open3d pybullet mujoco trimesh
-
-# Launch interactive Gradio visualization demo
-python app.py
-```
+| Specification | Value |
+|:---|:---|
+| **Parameters** | undisclosed |
+| **Task** | other |
+| **Modality** | 3d, vision |
+| **License** | Other/Custom |
+| **Type** | research-preview |
 
 ---
 
-## 🔗 Official Links & Resources
-- [Official Website](https://worldstring-iei.github.io/)
-- [arXiv Paper (arXiv:2605.18743)](https://arxiv.org/abs/2605.18743)
-- [Paper PDF Download](https://arxiv.org/pdf/2605.18743)
-- [GitHub Repository](https://github.com/MaureenZOU/worldstring)
-- [Hugging Face Dataset (Tera-AI/STRIDE)](https://huggingface.co/datasets/Tera-AI/STRIDE)
+## ✨ Key Features
+
+- Neural Digital Twin: Models physical object state manifolds directly from point clouds or RGB-D video streams
+- Multi-Category Support: Handles articulated objects (robot hands/arms), skinned objects (humanoids), and soft/deformable materials
+- Keypoint & Canonical Embedding Space: Unifies rigid kinematics and non-rigid deformations into a shared neural representation
+- Fully Differentiable Architecture: Facilitates end-to-end integration with downstream policy learning and neural dynamics simulators
+- Lightweight & Consumer-Hardware Ready: Efficient representation capable of running and training on single consumer GPUs (e.g., RTX 3090)
+
+---
+
+## 🔗 Resources
+
+- **Hugging Face**: [Actionable World](https://huggingface.co/datasets/Tera-AI/STRIDE)
+- **GitHub**: [Repository](https://github.com/MaureenZOU/worldstring)
+- **Paper**: [arXiv](https://arxiv.org/abs/2605.18743)
+- **Website**: [Project Page](https://worldstring-iei.github.io/)
+
+---
+
+## 📜 License & Access
+**Other/Custom** — See repository for specific license details.

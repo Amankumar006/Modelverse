@@ -4,7 +4,7 @@
   "slug": "unitree-g1",
   "developer": "Other",
   "releaseDate": "2024-05-13",
-  "updatedAt": "2024-05-13",
+  "updatedAt": "2026-07-25",
   "type": "open-weights",
   "modality": [
     "multimodal"
@@ -37,5 +37,5 @@
     "https://www.unitree.com/g1"
   ],
   "verified": true,
-  "curatorNotes": "Handled as \"open-weights/open-source ecosystem\" due to Unitree's open SDK for robotics developers. Original release was in 2024, but featured in the 2026 news cycle for its novel teleoperated surgical application by UCSD."
+  "curatorNotes": "Partially enriched via migration on 2026-07-25. Manual review recommended."
 }

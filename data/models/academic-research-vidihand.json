@@ -4,7 +4,7 @@
   "slug": "academic-research-vidihand",
   "developer": "Academic/Research",
   "releaseDate": "2026-06-29",
-  "updatedAt": "2026-07-22",
+  "updatedAt": "2026-07-25",
   "type": "open-weights",
   "modality": [
     "video",
@@ -62,7 +62,7 @@
   "verified": true,
   "featured": false,
   "boost": 1,
-  "curatorNotes": "Verified paper arXiv:2606.30308 and open-source project from NTU and SJTU.",
+  "curatorNotes": "Partially enriched via migration on 2026-07-25. Manual review recommended.",
   "institution": "NTU, Shanghai Jiao Tong University (SJTU)",
   "templatedDescription": false
 }

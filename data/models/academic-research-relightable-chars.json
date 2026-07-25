@@ -4,7 +4,7 @@
   "slug": "academic-research-relightable-chars",
   "developer": "Academic/Research",
   "releaseDate": "2025-12-01",
-  "updatedAt": "2026-07-22",
+  "updatedAt": "2026-07-25",
   "type": "research-preview",
   "modality": [
     "image",
@@ -54,7 +54,7 @@
   "verified": true,
   "featured": false,
   "boost": 1,
-  "curatorNotes": "Verified paper arXiv:2512.00255 (CVPR 2026) from MPI-INF, VIA, and Google.",
+  "curatorNotes": "Partially enriched via migration on 2026-07-25. Manual review recommended.",
   "institution": "Max Planck Institute for Informatics (MPI-INF), Google",
   "templatedDescription": false
 }

@@ -4,7 +4,7 @@
   "slug": "muscriptor",
   "developer": "Mirelo AI",
   "releaseDate": "2026-07-09",
-  "updatedAt": "2026-07-22",
+  "updatedAt": "2026-07-25",
   "type": "open-weights",
   "modality": [
     "audio"
@@ -43,5 +43,5 @@
   "verified": false,
   "featured": false,
   "boost": 1,
-  "curatorNotes": "Used 'other' for primaryTask since music transcription/audio-to-midi isn't in default tasks."
+  "curatorNotes": "Partially enriched via migration on 2026-07-25. Manual review recommended."
 }

@@ -4,7 +4,7 @@
   "slug": "proxypose",
   "developer": "Other",
   "releaseDate": "2026-07-01",
-  "updatedAt": "2026-07-01",
+  "updatedAt": "2026-07-25",
   "type": "open-weights",
   "modality": [
     "video"
@@ -37,5 +37,5 @@
     "https://arxiv.org/html/2607.06555v1"
   ],
   "verified": true,
-  "curatorNotes": "Release date estimated based on the ArXiv publication date."
+  "curatorNotes": "Partially enriched via migration on 2026-07-25. Manual review recommended."
 }

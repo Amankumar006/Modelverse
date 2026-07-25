@@ -1,49 +1,41 @@
-# LiTo: Surface Light Field Tokenization
+# LiTo
 
 ## Model Overview
-**LiTo** (Surface Light Field Tokenization) is a 3D latent representation developed by **Apple Research** (Jen-Hao Rick Chang, Xiaoming Zhao, Dorian Chan, Oncel Tuzel) that jointly captures object geometry and view-dependent surface appearance. LiTo bridges neural rendering and generative modeling by tokenizing view-dependent radiance on object surfaces into a compact, unified latent space from which a flow matching model can generate high-quality 3D objects from a single image input. Published at **ICLR 2026**.
+**LiTo** is a **undisclosed-parameter** model developed by **Apple**.
+Released on **2025-03-14**.
 
 ---
 
-## 🔬 Technical Approach
+## 📊 Quick Specs
 
-LiTo introduces a novel 3D latent representation that encodes both:
-- **Surface Geometry**: The 3D shape and mesh structure of objects
-- **View-Dependent Appearance**: Surface light fields capturing how appearance changes with viewing angle (reflections, specularity, translucency)
-
-Built upon this unified representation, a **latent flow matching model** enables image-to-3D generation by learning to generate LiTo latent codes conditioned on a single input image.
+| Specification | Value |
+|:---|:---|
+| **Parameters** | undisclosed |
+| **Task** | other |
+| **Modality** | image, 3d |
+| **License** | Other/Custom |
+| **Type** | research-preview |
 
 ---
 
 ## ✨ Key Features
 
-| Feature | Description |
-|:---|:---|
-| **Surface Light Field Tokenization** | Tokenizes view-dependent radiance on object surfaces for efficient latent encoding |
-| **Unified Geometry + Appearance** | Single latent code captures both shape and view-dependent appearance jointly |
-| **Image-to-3D Generation** | Feed-forward 3D object reconstruction from a single RGB image |
-| **Latent Flow Matching** | Uses continuous normalizing flows for high-quality, diverse 3D generation |
-| **ICLR 2026** | Peer-reviewed research at International Conference on Learning Representations 2026 |
+- Unified 3D Latent Representation: Simultaneously encodes surface geometry and view-dependent appearance (surface light fields) into a compact latent code
+- Image-to-3D Generation: Single-image feed-forward reconstruction of full 3D objects using latent flow matching
+- Surface Light Field Tokenization: Tokenizes view-dependent radiance on the object surface for efficient and disentangled modeling
+- Latent Flow Matching: Uses flow matching in the LiTo latent space for high-quality, diverse 3D generation
+- ICLR 2026 Paper: Peer-reviewed research published at the International Conference on Learning Representations 2026
 
 ---
 
 ## 🔗 Resources
 
-| Resource | Link |
-|:---|:---|
-| **Project Page** | [apple.github.io/ml-lito](https://apple.github.io/ml-lito/) |
-| **Paper (Apple ML)** | [machinelearning.apple.com/research/lito](https://machinelearning.apple.com/research/lito) |
-| **arXiv** | [arxiv.org/abs/2603.11047](https://arxiv.org/abs/2603.11047) |
-| **GitHub Code** | [github.com/apple/ml-lito](https://github.com/apple/ml-lito) |
+
+- **GitHub**: [Repository](https://github.com/apple/ml-lito)
+- **Paper**: [arXiv](https://machinelearning.apple.com/research/lito)
+- **Website**: [Project Page](https://apple.github.io/ml-lito/)
 
 ---
 
-## 👥 Authors & Institution
-
-Developed by the **Apple Machine Learning Research** team:
-- Jen-Hao Rick Chang* (equal contribution)
-- Xiaoming Zhao* (equal contribution)
-- Dorian Chan
-- Oncel Tuzel
-
-**Institution**: Apple
+## 📜 License & Access
+**Other/Custom** — See repository for specific license details.

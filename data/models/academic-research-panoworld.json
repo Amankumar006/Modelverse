@@ -4,7 +4,7 @@
   "slug": "academic-research-panoworld",
   "developer": "Academic/Research",
   "releaseDate": "2026-05-26",
-  "updatedAt": "2026-07-22",
+  "updatedAt": "2026-07-25",
   "type": "research-preview",
   "modality": [
     "3d",
@@ -68,7 +68,7 @@
   "verified": true,
   "featured": false,
   "boost": 1,
-  "curatorNotes": "Verified research project by Ke Holdings Inc. (Beike). Paper published on arXiv (2605.17916) with open-source PanoWorld-LRM inference code on GitHub and interactive VR Tour demo on Hugging Face.",
+  "curatorNotes": "Partially enriched via migration on 2026-07-25. Manual review recommended.",
   "institution": "Ke Holdings Inc. (Beike)",
   "templatedDescription": false
 }

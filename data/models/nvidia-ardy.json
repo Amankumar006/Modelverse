@@ -4,7 +4,7 @@
   "slug": "ardy",
   "developer": "NVIDIA",
   "releaseDate": "2026-07-22",
-  "updatedAt": "2026-07-22",
+  "updatedAt": "2026-07-25",
   "type": "open-weights",
   "modality": [
     "text",
@@ -44,5 +44,5 @@
   "verified": false,
   "featured": false,
   "boost": 1,
-  "curatorNotes": "Modality includes 'motion' which might need checking against schema. 'other' task used as motion generation is not a default."
+  "curatorNotes": "Partially enriched via migration on 2026-07-25. Manual review recommended."
 }

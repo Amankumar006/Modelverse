@@ -4,7 +4,7 @@
   "slug": "academic-research-pantheon-360",
   "developer": "Academic/Research",
   "releaseDate": "2026-05-26",
-  "updatedAt": "2026-07-22",
+  "updatedAt": "2026-07-25",
   "type": "research-preview",
   "modality": [
     "text",
@@ -56,7 +56,7 @@
   "verified": true,
   "featured": false,
   "boost": 1,
-  "curatorNotes": "Verified CVPR 2026 paper by University of Southern California (USC), NYCU, Cornell, and Bosch Research.",
+  "curatorNotes": "Partially enriched via migration on 2026-07-25. Manual review recommended.",
   "institution": "University of Southern California (USC)",
   "templatedDescription": false
 }

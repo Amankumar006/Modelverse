@@ -4,7 +4,7 @@
   "slug": "mobilewan",
   "developer": "Qualcomm",
   "releaseDate": "2026-07-22",
-  "updatedAt": "2026-07-22",
+  "updatedAt": "2026-07-25",
   "type": "research-preview",
   "modality": [
     "text",
@@ -39,5 +39,5 @@
   "verified": false,
   "featured": false,
   "boost": 1,
-  "curatorNotes": "Need more specific information about model architecture and parameters."
+  "curatorNotes": "Partially enriched via migration on 2026-07-25. Manual review recommended."
 }

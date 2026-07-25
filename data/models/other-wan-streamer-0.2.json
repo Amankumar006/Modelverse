@@ -4,7 +4,7 @@
   "slug": "wan-streamer-0-2",
   "developer": "Other",
   "releaseDate": "2026-07-01",
-  "updatedAt": "2026-07-01",
+  "updatedAt": "2026-07-25",
   "type": "research-preview",
   "modality": [
     "video",
@@ -37,5 +37,5 @@
     "https://huggingface.co/papers/2607.04443"
   ],
   "verified": false,
-  "curatorNotes": "Only a technical paper is currently released according to the transcript."
+  "curatorNotes": "Partially enriched via migration on 2026-07-25. Manual review recommended."
 }

@@ -4,7 +4,7 @@
   "slug": "pixworld",
   "developer": "Other",
   "releaseDate": "2026-07-01",
-  "updatedAt": "2026-07-01",
+  "updatedAt": "2026-07-25",
   "type": "open-source",
   "modality": [
     "video",
@@ -37,5 +37,5 @@
     "https://github.com/SensenGao/PixWorld"
   ],
   "verified": false,
-  "curatorNotes": "Details strictly from the video transcript; exact release date estimated. Transcribed as \"Pixorld\"."
+  "curatorNotes": "Partially enriched via migration on 2026-07-25. Manual review recommended."
 }

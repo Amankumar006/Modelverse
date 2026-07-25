@@ -4,7 +4,7 @@
   "slug": "google-deepmind-magenta-realtime",
   "developer": "Google DeepMind",
   "releaseDate": "2026-07-15",
-  "updatedAt": "2026-07-15",
+  "updatedAt": "2026-07-25",
   "type": "research-preview",
   "modality": [
     "text"
@@ -35,6 +35,6 @@
   "verified": false,
   "featured": false,
   "boost": 1,
-  "curatorNotes": "Ingested research preview via bulk triage. Affiliation: Google DeepMind. Traction signal: Initial release.",
+  "curatorNotes": "Partially enriched via migration on 2026-07-25. Manual review recommended.",
   "templatedDescription": true
 }

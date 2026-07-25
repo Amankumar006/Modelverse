@@ -4,7 +4,7 @@
   "slug": "other-step-3-7-flash",
   "developer": "Other",
   "releaseDate": "2026-07-15",
-  "updatedAt": "2026-07-15",
+  "updatedAt": "2026-07-25",
   "type": "research-preview",
   "modality": [
     "text"
@@ -35,7 +35,7 @@
   "verified": false,
   "featured": false,
   "boost": 1,
-  "curatorNotes": "Ingested research preview via bulk triage. Affiliation: StepFun. Traction signal: Initial release.",
+  "curatorNotes": "Partially enriched via migration on 2026-07-25. Manual review recommended.",
   "institution": "StepFun",
   "templatedDescription": true
 }

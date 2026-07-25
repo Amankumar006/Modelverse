@@ -1,8 +1,8 @@
-# GLM 5.2
+# MobileWan
 
 ## Model Overview
-**GLM 5.2** is a **undisclosed-parameter** model developed by **Zhipu AI**.
-Released on **2026-07-15**.
+**MobileWan** is a **undisclosed-parameter** model developed by **Qualcomm**.
+Released on **2026-07-22**.
 
 ---
 
@@ -11,8 +11,8 @@ Released on **2026-07-15**.
 | Specification | Value |
 |:---|:---|
 | **Parameters** | undisclosed |
-| **Task** | chat-reasoning |
-| **Modality** | text |
+| **Task** | video-generation |
+| **Modality** | text, video |
 | **License** | Other/Custom |
 | **Type** | research-preview |
 
@@ -20,7 +20,8 @@ Released on **2026-07-15**.
 
 ## ✨ Key Features
 
-
+- On-device video generation
+- Mobile-optimized diffusion model
 
 ---
 

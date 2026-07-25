@@ -3,28 +3,24 @@
   "name": "CubePart",
   "slug": "academic-research-cubepart",
   "developer": "Roblox Research",
-  "releaseDate": "2026-05-15",
-  "updatedAt": "2026-07-22",
+  "releaseDate": "2026-05-27",
+  "updatedAt": "2026-07-25",
   "type": "open-weights",
   "modality": [
-    "text",
-    "3d"
+    "text"
   ],
   "primaryTask": "other",
   "deployment": [
     "self-hostable"
   ],
-  "license": "Other/Custom",
+  "license": "OPENRAIL",
   "parameters": "undisclosed",
   "contextWindow": "undisclosed",
-  "description": "CubePart is an open-vocabulary, part-controllable 3D generative framework developed by Roblox, CMU, and Stanford (SIGGRAPH 2026). It synthesizes game-ready 3D objects decomposed into distinct, semantically labeled meshes matching a user-defined parts schema.",
+  "description": "CubePart is a undisclosed-parameter text to 3d model developed by Roblox Research. Released on 2026-05-27 with 19 likes and 0 downloads on Hugging Face.",
   "keyFeatures": [
-    "Open-Vocabulary Part-Controllable 3D Mesh Generation",
-    "Two-Stage Generative Pipeline (MM-DiT Global Denoiser + Part-Level Decoder)",
-    "Parts Schema Control Signal (e.g. [body, wheels, doors, engine])",
-    "Game-Ready Modular Asset Output for Roblox Studio, Unity, and Unreal",
-    "Single-Mesh Semantic Part Decomposition Capabilities",
-    "Built on VecSet Latent Shape Representation & Qwen-VL Conditioning"
+    "undisclosed parameters",
+    "Primary task: text to 3d (text modality)",
+    "Open-weights under OPENRAIL license — self-hostable and fine-tunable"
   ],
   "benchmarks": [
     {
@@ -48,7 +44,8 @@
     "mesh-generation",
     "open-weights",
     "diffusion-transformer",
-    "roblox"
+    "roblox",
+    "text-to-3d"
   ],
   "sources": [
     "https://cubepart.github.io/",
@@ -59,7 +56,7 @@
   "verified": true,
   "featured": false,
   "boost": 1,
-  "curatorNotes": "Verified lab affiliation: Roblox Research, Carnegie Mellon University, and Stanford University. Presented at SIGGRAPH 2026. Code published in Roblox/cube repository and weights on HuggingFace under Roblox/cubepart.",
+  "curatorNotes": "Enriched via migration on 2026-07-25. Architecture: unknown. Params: undisclosed. License: OPENRAIL.",
   "institution": "Roblox / CMU / Stanford",
   "templatedDescription": false
 }

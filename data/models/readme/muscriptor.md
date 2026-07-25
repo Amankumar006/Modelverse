@@ -1,8 +1,8 @@
-# Step 3.7 Flash
+# MuScriptor
 
 ## Model Overview
-**Step 3.7 Flash** is a **undisclosed-parameter** model developed by **Other**.
-Released on **2026-07-15**.
+**MuScriptor** is a **undisclosed-parameter** model developed by **Mirelo AI**.
+Released on **2026-07-09**.
 
 ---
 
@@ -12,15 +12,17 @@ Released on **2026-07-15**.
 |:---|:---|
 | **Parameters** | undisclosed |
 | **Task** | other |
-| **Modality** | text |
+| **Modality** | audio |
 | **License** | Other/Custom |
-| **Type** | research-preview |
+| **Type** | open-weights |
 
 ---
 
 ## ✨ Key Features
 
-
+- Automatic instrument detection
+- Separate MIDI track per instrument
+- Trained on synthetic and real music audio
 
 ---
 

@@ -4,7 +4,7 @@
   "slug": "apple-lito",
   "developer": "Apple",
   "releaseDate": "2025-03-14",
-  "updatedAt": "2026-07-22",
+  "updatedAt": "2026-07-25",
   "type": "research-preview",
   "modality": [
     "image",
@@ -49,5 +49,5 @@
   "verified": true,
   "featured": false,
   "boost": 1,
-  "curatorNotes": "ICLR 2026 paper by Jen-Hao Rick Chang, Xiaoming Zhao, Dorian Chan, Oncel Tuzel from Apple."
+  "curatorNotes": "Partially enriched via migration on 2026-07-25. Manual review recommended."
 }

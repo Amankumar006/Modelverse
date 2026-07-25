@@ -4,7 +4,7 @@
   "slug": "academic-research-arbor",
   "developer": "Academic/Research",
   "releaseDate": "2026-06-15",
-  "updatedAt": "2026-07-22",
+  "updatedAt": "2026-07-25",
   "type": "research-preview",
   "modality": [
     "text"
@@ -60,7 +60,7 @@
   "verified": true,
   "featured": false,
   "boost": 1,
-  "curatorNotes": "Verified academic research framework from RUC-NLPIR (Gaoling School of AI, Renmin University of China) in collaboration with Microsoft Research.",
+  "curatorNotes": "Partially enriched via migration on 2026-07-25. Manual review recommended.",
   "institution": "Renmin University of China",
   "templatedDescription": false
 }

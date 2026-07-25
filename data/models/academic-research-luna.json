@@ -4,7 +4,7 @@
   "slug": "academic-research-luna",
   "developer": "Academic/Research",
   "releaseDate": "2026-07-15",
-  "updatedAt": "2026-07-22",
+  "updatedAt": "2026-07-25",
   "type": "research-preview",
   "modality": [
     "image",
@@ -54,7 +54,7 @@
   "verified": true,
   "featured": false,
   "boost": 1,
-  "curatorNotes": "Verified ECCV 2026 paper by HKUST, Tsinghua University, and Meta. Web page, arXiv paper, and PDF links verified.",
+  "curatorNotes": "Partially enriched via migration on 2026-07-25. Manual review recommended.",
   "institution": "HKUST, Tsinghua University, Meta",
   "templatedDescription": false
 }

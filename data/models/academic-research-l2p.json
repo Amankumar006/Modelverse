@@ -3,26 +3,24 @@
   "name": "L2P",
   "slug": "academic-research-l2p",
   "developer": "Academic/Research",
-  "releaseDate": "2026-05-15",
-  "updatedAt": "2026-07-22",
+  "releaseDate": "2026-05-03",
+  "updatedAt": "2026-07-25",
   "type": "research-preview",
   "modality": [
-    "text",
-    "image"
+    "text"
   ],
-  "primaryTask": "image-generation",
+  "primaryTask": "chat-reasoning",
   "deployment": [
     "self-hostable"
   ],
-  "license": "Other/Custom",
+  "license": "APACHE-2.0",
   "parameters": "undisclosed",
   "contextWindow": "undisclosed",
-  "description": "L2P (Latent-to-Pixel) is an efficient transfer paradigm for pixel-space diffusion models that discards VAEs and utilizes large-patch tokenization to achieve native 4K/8K/10K ultra-high resolution image generation.",
+  "description": "L2P is a undisclosed-parameter text generation model developed by Academic/Research. Released on 2026-05-03 with 86 likes and 0 downloads on Hugging Face.",
   "keyFeatures": [
-    "VAE-Free Architecture: Replaces traditional VAEs with large-patch tokenization to eliminate memory bottlenecks and compression artifacts",
-    "Generative Prior Transfer: Freezes pre-trained LDM intermediate layers and trains shallow layers with a Detailer Head to map latent priors to pixel space",
-    "Synthetic Training Corpus: Efficiently converges using LDM-generated synthetic data without requiring real-world image datasets",
-    "Native 4K/8K/10K Resolution: Direct pixel generation supporting ultra-high resolution synthesis with minimal computational overhead"
+    "undisclosed parameters",
+    "Primary task: text generation (text modality)",
+    "Open-weights under APACHE-2.0 license — self-hostable and fine-tunable"
   ],
   "benchmarks": [
     {
@@ -50,7 +48,8 @@
     "diffusion",
     "pixel-generation",
     "vae-free",
-    "image-synthesis"
+    "image-synthesis",
+    "text-generation"
   ],
   "sources": [
     "https://nju-pcalab.github.io/projects/L2P/",
@@ -60,7 +59,7 @@
   "verified": true,
   "featured": false,
   "boost": 1,
-  "curatorNotes": "Verified research project by Nanjing University (NJU-PCALab) and Tencent Youtu Lab.",
+  "curatorNotes": "Enriched via migration on 2026-07-25. Architecture: unknown. Params: undisclosed. License: APACHE-2.0.",
   "institution": "Nanjing University & Tencent Youtu Lab",
   "templatedDescription": false
 }

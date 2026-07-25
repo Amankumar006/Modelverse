@@ -4,7 +4,7 @@
   "slug": "academic-research-surflo",
   "developer": "Academic/Research",
   "releaseDate": "2026-06-11",
-  "updatedAt": "2026-07-22",
+  "updatedAt": "2026-07-25",
   "type": "open-weights",
   "modality": [
     "image",
@@ -62,7 +62,7 @@
   "verified": true,
   "featured": false,
   "boost": 1,
-  "curatorNotes": "Verified paper arXiv:2606.13644 and open-source project from École Polytechnique, Kyoto University, Kyutai, and UC Berkeley.",
+  "curatorNotes": "Partially enriched via migration on 2026-07-25. Manual review recommended.",
   "institution": "École Polytechnique, Kyoto University, Kyutai, UC Berkeley",
   "templatedDescription": false
 }

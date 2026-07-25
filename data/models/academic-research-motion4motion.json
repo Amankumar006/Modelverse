@@ -4,7 +4,7 @@
   "slug": "motion4motion",
   "developer": "Tsinghua University & StepFun",
   "releaseDate": "2026-07-25",
-  "updatedAt": "2026-07-22",
+  "updatedAt": "2026-07-25",
   "type": "research-preview",
   "modality": [
     "video"
@@ -46,5 +46,5 @@
   "verified": true,
   "featured": false,
   "boost": 1,
-  "curatorNotes": "SIGGRAPH 2026 paper by Ling-Hao Chen (Tsinghua), Zixin Yin (HKUST), Duomin Wang, Xianfang Zeng, Gang Yu (StepFun). Training-free cross-species motion transfer."
+  "curatorNotes": "Partially enriched via migration on 2026-07-25. Manual review recommended."
 }

@@ -4,7 +4,7 @@
   "slug": "academic-research-actionable-world",
   "developer": "Academic/Research",
   "releaseDate": "2026-07-15",
-  "updatedAt": "2026-07-22",
+  "updatedAt": "2026-07-25",
   "type": "research-preview",
   "modality": [
     "3d",
@@ -62,7 +62,7 @@
   "verified": true,
   "featured": false,
   "boost": 1,
-  "curatorNotes": "Verified academic research collaboration between Tsinghua University (IEI Lab), UCSD, CalTech, and NVIDIA. Paper published on arXiv (arXiv:2605.18743) with open-source code on GitHub.",
+  "curatorNotes": "Partially enriched via migration on 2026-07-25. Manual review recommended.",
   "institution": "Tsinghua University, UCSD, CalTech, NVIDIA",
   "templatedDescription": false
 }

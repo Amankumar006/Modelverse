@@ -4,7 +4,7 @@
   "slug": "nvidia-aspire",
   "developer": "NVIDIA",
   "releaseDate": "2026-07-01",
-  "updatedAt": "2026-07-22",
+  "updatedAt": "2026-07-25",
   "type": "open-weights",
   "modality": [
     "text",
@@ -60,7 +60,7 @@
   "verified": true,
   "featured": false,
   "boost": 1,
-  "curatorNotes": "Verified paper arXiv:2607.00272 and project from NVIDIA GEAR Lab.",
+  "curatorNotes": "Partially enriched via migration on 2026-07-25. Manual review recommended.",
   "institution": "NVIDIA GEAR Lab",
   "templatedDescription": false
 }

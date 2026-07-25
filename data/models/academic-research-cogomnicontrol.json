@@ -4,7 +4,7 @@
   "slug": "academic-research-cogomnicontrol",
   "developer": "Academic/Research",
   "releaseDate": "2026-05-19",
-  "updatedAt": "2026-07-22",
+  "updatedAt": "2026-07-25",
   "type": "research-preview",
   "modality": [
     "text",
@@ -64,7 +64,7 @@
   "verified": true,
   "featured": false,
   "boost": 1,
-  "curatorNotes": "Verified academic research from University of Macau (UM-Lab). Published on arXiv (arXiv:2605.19995) in May 2026 with project page at um-lab.github.io/CogOmniControl.",
+  "curatorNotes": "Partially enriched via migration on 2026-07-25. Manual review recommended.",
   "institution": "University of Macau",
   "templatedDescription": false
 }

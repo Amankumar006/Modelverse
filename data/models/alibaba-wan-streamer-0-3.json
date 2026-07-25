@@ -4,7 +4,7 @@
   "slug": "wan-streamer-0-3",
   "developer": "Alibaba Group",
   "releaseDate": "2026-07-16",
-  "updatedAt": "2026-07-22",
+  "updatedAt": "2026-07-25",
   "type": "research-preview",
   "modality": [
     "text",
@@ -42,5 +42,5 @@
   "verified": false,
   "featured": false,
   "boost": 1,
-  "curatorNotes": ""
+  "curatorNotes": "Partially enriched via migration on 2026-07-25. Manual review recommended."
 }

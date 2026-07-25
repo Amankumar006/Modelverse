@@ -4,7 +4,7 @@
   "slug": "academic-research-anchorworld",
   "developer": "Academic/Research",
   "releaseDate": "2026-06-05",
-  "updatedAt": "2026-07-22",
+  "updatedAt": "2026-07-25",
   "type": "research-preview",
   "modality": [
     "text",
@@ -62,7 +62,7 @@
   "verified": true,
   "featured": false,
   "boost": 1,
-  "curatorNotes": "Verified academic/research lab affiliation: Tsinghua University, HUST, Kuaishou (Kling Team). Paper published June 2026 (arXiv:2606.07326).",
+  "curatorNotes": "Partially enriched via migration on 2026-07-25. Manual review recommended.",
   "institution": "Tsinghua University, HUST, Kuaishou (Kling Team)",
   "templatedDescription": false
 }
