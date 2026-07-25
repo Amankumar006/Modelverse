@@ -1,0 +1,24 @@
+{
+  "id": "gpt-51-instant-and-gpt-51-thinking-system-card-addendum",
+  "slug": "gpt-51-instant-and-gpt-51-thinking-system-card-addendum",
+  "title": "GPT-5.1 Instant and GPT-5.1 Thinking System Card Addendum",
+  "category": "short-news",
+  "isTrending": true,
+  "publishDate": "2026-07-25",
+  "author": "OpenAI / Modelverse Editorial",
+  "readTime": "2 min read",
+  "excerpt": "This GPT-5 system card addendum provides updated safety metrics for GPT-5.1 Instant and Thinking, including new evaluations for mental health and emotional reliance....",
+  "body": "This GPT-5 system card addendum provides updated safety metrics for GPT-5.1 Instant and Thinking, including new evaluations for mental health and emotional reliance.\n\n### Official Announcement\nRead the full update directly from the official source at [OpenAI News](https://openai.com/index/gpt-5-system-card-addendum-gpt-5-1).\n\nStay tuned to [Modelverse](https://www.themodelverse.in) for real-time model analysis and benchmark coverage.",
+  "coverImage": "/images/news/claude-opus-5.jpg",
+  "status": "published",
+  "confidenceLevel": "confirmed",
+  "externalSources": [
+    "https://openai.com/index/gpt-5-system-card-addendum-gpt-5-1"
+  ],
+  "relatedModels": [],
+  "tags": [
+    "ai-news",
+    "breaking",
+    "openai"
+  ]
+}

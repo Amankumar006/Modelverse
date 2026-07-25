@@ -1,0 +1,24 @@
+{
+  "id": "accelerating-discovery-of-liver-disease-mechanisms",
+  "slug": "accelerating-discovery-of-liver-disease-mechanisms",
+  "title": "Accelerating discovery of liver disease mechanisms",
+  "category": "short-news",
+  "isTrending": true,
+  "publishDate": "2026-07-25",
+  "author": "Google DeepMind / Modelverse Editorial",
+  "readTime": "2 min read",
+  "excerpt": "Filippo Menolascina uses Co-Scientist to identify new liver disease treatments and explain why existing drugs only help certain patients....",
+  "body": "Filippo Menolascina uses Co-Scientist to identify new liver disease treatments and explain why existing drugs only help certain patients.\n\n### Official Announcement\nRead the full update directly from the official source at [Google DeepMind News](https://deepmind.google/blog/accelerating-discovery-of-liver-disease-mechanisms/).\n\nStay tuned to [Modelverse](https://www.themodelverse.in) for real-time model analysis and benchmark coverage.",
+  "coverImage": "/images/news/claude-opus-5.jpg",
+  "status": "published",
+  "confidenceLevel": "confirmed",
+  "externalSources": [
+    "https://deepmind.google/blog/accelerating-discovery-of-liver-disease-mechanisms/"
+  ],
+  "relatedModels": [],
+  "tags": [
+    "ai-news",
+    "breaking",
+    "google-deepmind"
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "id": "summarizing-books-with-human-feedback",
+  "slug": "summarizing-books-with-human-feedback",
+  "title": "Summarizing books with human feedback",
+  "category": "short-news",
+  "isTrending": true,
+  "publishDate": "2026-07-25",
+  "author": "OpenAI / Modelverse Editorial",
+  "readTime": "2 min read",
+  "excerpt": "Scaling human oversight of AI systems for tasks that are difficult to evaluate....",
+  "body": "Scaling human oversight of AI systems for tasks that are difficult to evaluate.\n\n### Official Announcement\nRead the full update directly from the official source at [OpenAI News](https://openai.com/index/summarizing-books).\n\nStay tuned to [Modelverse](https://www.themodelverse.in) for real-time model analysis and benchmark coverage.",
+  "coverImage": "/images/news/claude-opus-5.jpg",
+  "status": "published",
+  "confidenceLevel": "confirmed",
+  "externalSources": [
+    "https://openai.com/index/summarizing-books"
+  ],
+  "relatedModels": [],
+  "tags": [
+    "ai-news",
+    "breaking",
+    "openai"
+  ]
+}

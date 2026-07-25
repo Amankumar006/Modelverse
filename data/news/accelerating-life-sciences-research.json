@@ -1,0 +1,24 @@
+{
+  "id": "accelerating-life-sciences-research",
+  "slug": "accelerating-life-sciences-research",
+  "title": "Accelerating life sciences research",
+  "category": "short-news",
+  "isTrending": true,
+  "publishDate": "2026-07-25",
+  "author": "OpenAI / Modelverse Editorial",
+  "readTime": "2 min read",
+  "excerpt": "Discover how a specialized AI model, GPT-4b micro, helped OpenAI and Retro Bio engineer more effective proteins for stem cell therapy and longevity research....",
+  "body": "Discover how a specialized AI model, GPT-4b micro, helped OpenAI and Retro Bio engineer more effective proteins for stem cell therapy and longevity research.\n\n### Official Announcement\nRead the full update directly from the official source at [OpenAI News](https://openai.com/index/accelerating-life-sciences-research-with-retro-biosciences).\n\nStay tuned to [Modelverse](https://www.themodelverse.in) for real-time model analysis and benchmark coverage.",
+  "coverImage": "/images/news/claude-opus-5.jpg",
+  "status": "published",
+  "confidenceLevel": "confirmed",
+  "externalSources": [
+    "https://openai.com/index/accelerating-life-sciences-research-with-retro-biosciences"
+  ],
+  "relatedModels": [],
+  "tags": [
+    "ai-news",
+    "breaking",
+    "openai"
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "id": "introducing-gemini-35-flash-cyber",
+  "slug": "introducing-gemini-35-flash-cyber",
+  "title": "Introducing Gemini 3.5 Flash Cyber",
+  "category": "short-news",
+  "isTrending": true,
+  "publishDate": "2026-07-25",
+  "author": "Google DeepMind / Modelverse Editorial",
+  "readTime": "2 min read",
+  "excerpt": "Google introduces Gemini 3.5 Flash Cyber, a lightweight cybersecurity model to find and patch vulnerabilities....",
+  "body": "Google introduces Gemini 3.5 Flash Cyber, a lightweight cybersecurity model to find and patch vulnerabilities.\n\n### Official Announcement\nRead the full update directly from the official source at [Google DeepMind News](https://deepmind.google/blog/introducing-gemini-3-5-flash-cyber/).\n\nStay tuned to [Modelverse](https://www.themodelverse.in) for real-time model analysis and benchmark coverage.",
+  "coverImage": "/images/news/claude-opus-5.jpg",
+  "status": "published",
+  "confidenceLevel": "confirmed",
+  "externalSources": [
+    "https://deepmind.google/blog/introducing-gemini-3-5-flash-cyber/"
+  ],
+  "relatedModels": [],
+  "tags": [
+    "ai-news",
+    "breaking",
+    "google-deepmind"
+  ]
+}

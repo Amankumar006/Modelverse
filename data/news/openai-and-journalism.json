@@ -1,0 +1,24 @@
+{
+  "id": "openai-and-journalism",
+  "slug": "openai-and-journalism",
+  "title": "OpenAI and journalism",
+  "category": "short-news",
+  "isTrending": true,
+  "publishDate": "2026-07-25",
+  "author": "OpenAI / Modelverse Editorial",
+  "readTime": "2 min read",
+  "excerpt": "We support journalism, partner with news organizations, and believe The New York Times lawsuit is without merit....",
+  "body": "We support journalism, partner with news organizations, and believe The New York Times lawsuit is without merit.\n\n### Official Announcement\nRead the full update directly from the official source at [OpenAI News](https://openai.com/index/openai-and-journalism).\n\nStay tuned to [Modelverse](https://www.themodelverse.in) for real-time model analysis and benchmark coverage.",
+  "coverImage": "/images/news/claude-opus-5.jpg",
+  "status": "published",
+  "confidenceLevel": "confirmed",
+  "externalSources": [
+    "https://openai.com/index/openai-and-journalism"
+  ],
+  "relatedModels": [],
+  "tags": [
+    "ai-news",
+    "breaking",
+    "openai"
+  ]
+}

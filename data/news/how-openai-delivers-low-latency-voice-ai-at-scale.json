@@ -1,0 +1,24 @@
+{
+  "id": "how-openai-delivers-low-latency-voice-ai-at-scale",
+  "slug": "how-openai-delivers-low-latency-voice-ai-at-scale",
+  "title": "How OpenAI delivers low-latency voice AI at scale",
+  "category": "short-news",
+  "isTrending": true,
+  "publishDate": "2026-07-25",
+  "author": "OpenAI / Modelverse Editorial",
+  "readTime": "2 min read",
+  "excerpt": "How OpenAI rebuilt its WebRTC stack to power real-time Voice AI with low latency, global scale, and seamless conversational turn-taking....",
+  "body": "How OpenAI rebuilt its WebRTC stack to power real-time Voice AI with low latency, global scale, and seamless conversational turn-taking.\n\n### Official Announcement\nRead the full update directly from the official source at [OpenAI News](https://openai.com/index/delivering-low-latency-voice-ai-at-scale).\n\nStay tuned to [Modelverse](https://www.themodelverse.in) for real-time model analysis and benchmark coverage.",
+  "coverImage": "/images/news/claude-opus-5.jpg",
+  "status": "published",
+  "confidenceLevel": "confirmed",
+  "externalSources": [
+    "https://openai.com/index/delivering-low-latency-voice-ai-at-scale"
+  ],
+  "relatedModels": [],
+  "tags": [
+    "ai-news",
+    "breaking",
+    "openai"
+  ]
+}

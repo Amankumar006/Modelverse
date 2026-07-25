@@ -1,0 +1,24 @@
+{
+  "id": "sima-2-an-agent-that-plays-reasons-and-learns-with-you-in-virtual-3d-worlds",
+  "slug": "sima-2-an-agent-that-plays-reasons-and-learns-with-you-in-virtual-3d-worlds",
+  "title": "SIMA 2: An Agent that Plays, Reasons, and Learns With You in Virtual 3D Worlds",
+  "category": "short-news",
+  "isTrending": true,
+  "publishDate": "2026-07-25",
+  "author": "Google DeepMind / Modelverse Editorial",
+  "readTime": "2 min read",
+  "excerpt": "Introducing SIMA 2, a Gemini-powered AI agent that can think, understand, and take actions in interactive environments....",
+  "body": "Introducing SIMA 2, a Gemini-powered AI agent that can think, understand, and take actions in interactive environments.\n\n### Official Announcement\nRead the full update directly from the official source at [Google DeepMind News](https://deepmind.google/blog/sima-2-an-agent-that-plays-reasons-and-learns-with-you-in-virtual-3d-worlds/).\n\nStay tuned to [Modelverse](https://www.themodelverse.in) for real-time model analysis and benchmark coverage.",
+  "coverImage": "/images/news/claude-opus-5.jpg",
+  "status": "published",
+  "confidenceLevel": "confirmed",
+  "externalSources": [
+    "https://deepmind.google/blog/sima-2-an-agent-that-plays-reasons-and-learns-with-you-in-virtual-3d-worlds/"
+  ],
+  "relatedModels": [],
+  "tags": [
+    "ai-news",
+    "breaking",
+    "google-deepmind"
+  ]
+}

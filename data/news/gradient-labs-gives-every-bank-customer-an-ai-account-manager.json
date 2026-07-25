@@ -1,0 +1,24 @@
+{
+  "id": "gradient-labs-gives-every-bank-customer-an-ai-account-manager",
+  "slug": "gradient-labs-gives-every-bank-customer-an-ai-account-manager",
+  "title": "Gradient Labs gives every bank customer an AI account manager",
+  "category": "short-news",
+  "isTrending": true,
+  "publishDate": "2026-07-25",
+  "author": "OpenAI / Modelverse Editorial",
+  "readTime": "2 min read",
+  "excerpt": "Gradient Labs uses GPT-4.1 and GPT-5.4 mini and nano to power AI agents that automate banking support workflows with low latency and high reliability....",
+  "body": "Gradient Labs uses GPT-4.1 and GPT-5.4 mini and nano to power AI agents that automate banking support workflows with low latency and high reliability.\n\n### Official Announcement\nRead the full update directly from the official source at [OpenAI News](https://openai.com/index/gradient-labs).\n\nStay tuned to [Modelverse](https://www.themodelverse.in) for real-time model analysis and benchmark coverage.",
+  "coverImage": "/images/news/claude-opus-5.jpg",
+  "status": "published",
+  "confidenceLevel": "confirmed",
+  "externalSources": [
+    "https://openai.com/index/gradient-labs"
+  ],
+  "relatedModels": [],
+  "tags": [
+    "ai-news",
+    "breaking",
+    "openai"
+  ]
+}

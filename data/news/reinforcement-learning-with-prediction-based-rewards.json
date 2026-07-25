@@ -1,0 +1,24 @@
+{
+  "id": "reinforcement-learning-with-prediction-based-rewards",
+  "slug": "reinforcement-learning-with-prediction-based-rewards",
+  "title": "Reinforcement learning with prediction-based rewards",
+  "category": "short-news",
+  "isTrending": true,
+  "publishDate": "2026-07-25",
+  "author": "OpenAI / Modelverse Editorial",
+  "readTime": "2 min read",
+  "excerpt": "We’ve developed Random Network Distillation (RND), a prediction-based method for encouraging reinforcement learning agents to explore their environments through curiosity, which fo...",
+  "body": "We’ve developed Random Network Distillation (RND), a prediction-based method for encouraging reinforcement learning agents to explore their environments through curiosity, which for the first time exceeds average human performance on Montezuma’s Revenge.\n\n### Official Announcement\nRead the full update directly from the official source at [OpenAI News](https://openai.com/index/reinforcement-learning-with-prediction-based-rewards).\n\nStay tuned to [Modelverse](https://www.themodelverse.in) for real-time model analysis and benchmark coverage.",
+  "coverImage": "/images/news/claude-opus-5.jpg",
+  "status": "published",
+  "confidenceLevel": "confirmed",
+  "externalSources": [
+    "https://openai.com/index/reinforcement-learning-with-prediction-based-rewards"
+  ],
+  "relatedModels": [],
+  "tags": [
+    "ai-news",
+    "breaking",
+    "openai"
+  ]
+}

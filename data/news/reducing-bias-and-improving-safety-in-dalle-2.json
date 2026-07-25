@@ -1,0 +1,24 @@
+{
+  "id": "reducing-bias-and-improving-safety-in-dalle-2",
+  "slug": "reducing-bias-and-improving-safety-in-dalle-2",
+  "title": "Reducing bias and improving safety in DALL·E 2",
+  "category": "short-news",
+  "isTrending": true,
+  "publishDate": "2026-07-25",
+  "author": "OpenAI / Modelverse Editorial",
+  "readTime": "2 min read",
+  "excerpt": "Today, we are implementing a new technique so that DALL·E generates images of people that more accurately reflect the diversity of the world’s population....",
+  "body": "Today, we are implementing a new technique so that DALL·E generates images of people that more accurately reflect the diversity of the world’s population.\n\n### Official Announcement\nRead the full update directly from the official source at [OpenAI News](https://openai.com/index/reducing-bias-and-improving-safety-in-dall-e-2).\n\nStay tuned to [Modelverse](https://www.themodelverse.in) for real-time model analysis and benchmark coverage.",
+  "coverImage": "/images/news/claude-opus-5.jpg",
+  "status": "published",
+  "confidenceLevel": "confirmed",
+  "externalSources": [
+    "https://openai.com/index/reducing-bias-and-improving-safety-in-dall-e-2"
+  ],
+  "relatedModels": [],
+  "tags": [
+    "ai-news",
+    "breaking",
+    "openai"
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "id": "building-ai-powered-apps-for-business",
+  "slug": "building-ai-powered-apps-for-business",
+  "title": "Building AI-powered apps for business",
+  "category": "short-news",
+  "isTrending": true,
+  "publishDate": "2026-07-25",
+  "author": "OpenAI / Modelverse Editorial",
+  "readTime": "2 min read",
+  "excerpt": "Retool uses GPT-4 to give businesses a fast, secure way to build AI-powered apps....",
+  "body": "Retool uses GPT-4 to give businesses a fast, secure way to build AI-powered apps.\n\n### Official Announcement\nRead the full update directly from the official source at [OpenAI News](https://openai.com/index/retool).\n\nStay tuned to [Modelverse](https://www.themodelverse.in) for real-time model analysis and benchmark coverage.",
+  "coverImage": "/images/news/claude-opus-5.jpg",
+  "status": "published",
+  "confidenceLevel": "confirmed",
+  "externalSources": [
+    "https://openai.com/index/retool"
+  ],
+  "relatedModels": [],
+  "tags": [
+    "ai-news",
+    "breaking",
+    "openai"
+  ]
+}

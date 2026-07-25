@@ -1,0 +1,24 @@
+{
+  "id": "gemini-25-flash-lite-is-now-ready-for-scaled-production-use",
+  "slug": "gemini-25-flash-lite-is-now-ready-for-scaled-production-use",
+  "title": "Gemini 2.5 Flash-Lite is now ready for scaled production use",
+  "category": "short-news",
+  "isTrending": true,
+  "publishDate": "2026-07-25",
+  "author": "Google DeepMind / Modelverse Editorial",
+  "readTime": "2 min read",
+  "excerpt": "Gemini 2.5 Flash-Lite, previously in preview, is now stable and generally available. This cost-efficient model provides high quality in a small size, and includes 2.5 family featur...",
+  "body": "Gemini 2.5 Flash-Lite, previously in preview, is now stable and generally available. This cost-efficient model provides high quality in a small size, and includes 2.5 family features like a 1 million-token context window and multimodality.\n\n### Official Announcement\nRead the full update directly from the official source at [Google DeepMind News](https://deepmind.google/blog/gemini-25-flash-lite-is-now-ready-for-scaled-production-use/).\n\nStay tuned to [Modelverse](https://www.themodelverse.in) for real-time model analysis and benchmark coverage.",
+  "coverImage": "/images/news/claude-opus-5.jpg",
+  "status": "published",
+  "confidenceLevel": "confirmed",
+  "externalSources": [
+    "https://deepmind.google/blog/gemini-25-flash-lite-is-now-ready-for-scaled-production-use/"
+  ],
+  "relatedModels": [],
+  "tags": [
+    "ai-news",
+    "breaking",
+    "google-deepmind"
+  ]
+}

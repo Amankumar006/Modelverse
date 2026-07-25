@@ -1,0 +1,24 @@
+{
+  "id": "spam-detection-in-the-physical-world",
+  "slug": "spam-detection-in-the-physical-world",
+  "title": "Spam detection in the physical world",
+  "category": "short-news",
+  "isTrending": true,
+  "publishDate": "2026-07-25",
+  "author": "OpenAI / Modelverse Editorial",
+  "readTime": "2 min read",
+  "excerpt": "We’ve created the world’s first Spam-detecting AI trained entirely in simulation and deployed on a physical robot....",
+  "body": "We’ve created the world’s first Spam-detecting AI trained entirely in simulation and deployed on a physical robot.\n\n### Official Announcement\nRead the full update directly from the official source at [OpenAI News](https://openai.com/index/spam-detection-in-the-physical-world).\n\nStay tuned to [Modelverse](https://www.themodelverse.in) for real-time model analysis and benchmark coverage.",
+  "coverImage": "/images/news/claude-opus-5.jpg",
+  "status": "published",
+  "confidenceLevel": "confirmed",
+  "externalSources": [
+    "https://openai.com/index/spam-detection-in-the-physical-world"
+  ],
+  "relatedModels": [],
+  "tags": [
+    "ai-news",
+    "breaking",
+    "openai"
+  ]
+}

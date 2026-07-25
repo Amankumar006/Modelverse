@@ -1,0 +1,55 @@
+name: Daily Short News Ingestion & Publishing Pipeline
+
+on:
+  schedule:
+    # Runs daily at 08:00 UTC (13:30 IST)
+    - cron: '0 8 * * *'
+  workflow_dispatch:
+
+jobs:
+  ingest-and-publish-news:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run Daily News Ingestion
+        run: node scripts/ingest-daily-news.js
+
+      - name: Send Gmail News Digest
+        if: env.NEW_NEWS_PUSHED == 'true'
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: smtp.gmail.com
+          server_port: 465
+          secure: true
+          username: 006amanraj@gmail.com
+          password: ${{ secrets.GMAIL_APP_PASSWORD }}
+          subject: 📰 [Modelverse] Breaking AI News Auto-Published!
+          to: 006amanraj@gmail.com
+          from: Modelverse News Bot <006amanraj@gmail.com>
+          html_body: file://data/ingestion/latest-news-digest.html
+
+      - name: Commit and Push New Articles
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add .
+          if ! git diff --staged --quiet; then
+            git commit -m "feat(news): auto-publish daily AI news articles [skip ci]"
+            git push origin main
+          else
+            echo "No new news articles to publish today."
+          fi

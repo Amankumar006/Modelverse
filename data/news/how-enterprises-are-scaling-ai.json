@@ -1,0 +1,24 @@
+{
+  "id": "how-enterprises-are-scaling-ai",
+  "slug": "how-enterprises-are-scaling-ai",
+  "title": "How enterprises are scaling AI",
+  "category": "short-news",
+  "isTrending": true,
+  "publishDate": "2026-07-25",
+  "author": "OpenAI / Modelverse Editorial",
+  "readTime": "2 min read",
+  "excerpt": "How enterprises scale AI: from early experiments to compounding impact through trust, governance, workflow design, and quality at scale....",
+  "body": "How enterprises scale AI: from early experiments to compounding impact through trust, governance, workflow design, and quality at scale.\n\n### Official Announcement\nRead the full update directly from the official source at [OpenAI News](https://openai.com/business/guides-and-resources/how-enterprises-are-scaling-ai).\n\nStay tuned to [Modelverse](https://www.themodelverse.in) for real-time model analysis and benchmark coverage.",
+  "coverImage": "/images/news/claude-opus-5.jpg",
+  "status": "published",
+  "confidenceLevel": "confirmed",
+  "externalSources": [
+    "https://openai.com/business/guides-and-resources/how-enterprises-are-scaling-ai"
+  ],
+  "relatedModels": [],
+  "tags": [
+    "ai-news",
+    "breaking",
+    "openai"
+  ]
+}

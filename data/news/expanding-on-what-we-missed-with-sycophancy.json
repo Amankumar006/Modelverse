@@ -1,0 +1,24 @@
+{
+  "id": "expanding-on-what-we-missed-with-sycophancy",
+  "slug": "expanding-on-what-we-missed-with-sycophancy",
+  "title": "Expanding on what we missed with sycophancy",
+  "category": "short-news",
+  "isTrending": true,
+  "publishDate": "2026-07-25",
+  "author": "OpenAI / Modelverse Editorial",
+  "readTime": "2 min read",
+  "excerpt": "A deeper dive on our findings, what went wrong, and future changes we’re making....",
+  "body": "A deeper dive on our findings, what went wrong, and future changes we’re making.\n\n### Official Announcement\nRead the full update directly from the official source at [OpenAI News](https://openai.com/index/expanding-on-sycophancy).\n\nStay tuned to [Modelverse](https://www.themodelverse.in) for real-time model analysis and benchmark coverage.",
+  "coverImage": "/images/news/claude-opus-5.jpg",
+  "status": "published",
+  "confidenceLevel": "confirmed",
+  "externalSources": [
+    "https://openai.com/index/expanding-on-sycophancy"
+  ],
+  "relatedModels": [],
+  "tags": [
+    "ai-news",
+    "breaking",
+    "openai"
+  ]
+}

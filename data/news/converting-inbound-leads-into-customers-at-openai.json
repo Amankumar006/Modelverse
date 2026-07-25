@@ -1,0 +1,24 @@
+{
+  "id": "converting-inbound-leads-into-customers-at-openai",
+  "slug": "converting-inbound-leads-into-customers-at-openai",
+  "title": "Converting inbound leads into customers at OpenAI",
+  "category": "short-news",
+  "isTrending": true,
+  "publishDate": "2026-07-25",
+  "author": "OpenAI / Modelverse Editorial",
+  "readTime": "2 min read",
+  "excerpt": "Learn how OpenAI used AI to deliver personalized answers at scale, converting inbound leads into customers....",
+  "body": "Learn how OpenAI used AI to deliver personalized answers at scale, converting inbound leads into customers.\n\n### Official Announcement\nRead the full update directly from the official source at [OpenAI News](https://openai.com/index/openai-inbound-sales-assistant).\n\nStay tuned to [Modelverse](https://www.themodelverse.in) for real-time model analysis and benchmark coverage.",
+  "coverImage": "/images/news/claude-opus-5.jpg",
+  "status": "published",
+  "confidenceLevel": "confirmed",
+  "externalSources": [
+    "https://openai.com/index/openai-inbound-sales-assistant"
+  ],
+  "relatedModels": [],
+  "tags": [
+    "ai-news",
+    "breaking",
+    "openai"
+  ]
+}

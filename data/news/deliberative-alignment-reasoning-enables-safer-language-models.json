@@ -1,0 +1,24 @@
+{
+  "id": "deliberative-alignment-reasoning-enables-safer-language-models",
+  "slug": "deliberative-alignment-reasoning-enables-safer-language-models",
+  "title": "Deliberative alignment: reasoning enables safer language models",
+  "category": "short-news",
+  "isTrending": true,
+  "publishDate": "2026-07-25",
+  "author": "OpenAI / Modelverse Editorial",
+  "readTime": "2 min read",
+  "excerpt": "Deliberative alignment: reasoning enables safer language models\nIntroducing our new alignment strategy for o1 models, which are directly taught safety specifications and how to rea...",
+  "body": "Deliberative alignment: reasoning enables safer language models\nIntroducing our new alignment strategy for o1 models, which are directly taught safety specifications and how to reason over them.\n\n### Official Announcement\nRead the full update directly from the official source at [OpenAI News](https://openai.com/index/deliberative-alignment).\n\nStay tuned to [Modelverse](https://www.themodelverse.in) for real-time model analysis and benchmark coverage.",
+  "coverImage": "/images/news/claude-opus-5.jpg",
+  "status": "published",
+  "confidenceLevel": "confirmed",
+  "externalSources": [
+    "https://openai.com/index/deliberative-alignment"
+  ],
+  "relatedModels": [],
+  "tags": [
+    "ai-news",
+    "breaking",
+    "openai"
+  ]
+}

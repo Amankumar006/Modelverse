@@ -1,0 +1,24 @@
+{
+  "id": "work-smarter-with-your-company-knowledge-in-chatgpt",
+  "slug": "work-smarter-with-your-company-knowledge-in-chatgpt",
+  "title": "Work smarter with your company knowledge in ChatGPT",
+  "category": "short-news",
+  "isTrending": true,
+  "publishDate": "2026-07-25",
+  "author": "OpenAI / Modelverse Editorial",
+  "readTime": "2 min read",
+  "excerpt": "Company knowledge brings context from your apps into ChatGPT for answers specific to your business, with clear citations, security, privacy, and admin controls. Available now for B...",
+  "body": "Company knowledge brings context from your apps into ChatGPT for answers specific to your business, with clear citations, security, privacy, and admin controls. Available now for Business, Enterprise, and Edu users.\n\n### Official Announcement\nRead the full update directly from the official source at [OpenAI News](https://openai.com/index/introducing-company-knowledge).\n\nStay tuned to [Modelverse](https://www.themodelverse.in) for real-time model analysis and benchmark coverage.",
+  "coverImage": "/images/news/claude-opus-5.jpg",
+  "status": "published",
+  "confidenceLevel": "confirmed",
+  "externalSources": [
+    "https://openai.com/index/introducing-company-knowledge"
+  ],
+  "relatedModels": [],
+  "tags": [
+    "ai-news",
+    "breaking",
+    "openai"
+  ]
+}

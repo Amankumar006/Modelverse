@@ -1,0 +1,24 @@
+{
+  "id": "report-from-the-self-organizing-conference",
+  "slug": "report-from-the-self-organizing-conference",
+  "title": "Report from the self-organizing conference",
+  "category": "short-news",
+  "isTrending": true,
+  "publishDate": "2026-07-25",
+  "author": "OpenAI / Modelverse Editorial",
+  "readTime": "2 min read",
+  "excerpt": "Last week we hosted over a hundred and fifty AI practitioners in our offices for our first self-organizing conference on machine learning....",
+  "body": "Last week we hosted over a hundred and fifty AI practitioners in our offices for our first self-organizing conference on machine learning.\n\n### Official Announcement\nRead the full update directly from the official source at [OpenAI News](https://openai.com/index/report-from-the-self-organizing-conference).\n\nStay tuned to [Modelverse](https://www.themodelverse.in) for real-time model analysis and benchmark coverage.",
+  "coverImage": "/images/news/claude-opus-5.jpg",
+  "status": "published",
+  "confidenceLevel": "confirmed",
+  "externalSources": [
+    "https://openai.com/index/report-from-the-self-organizing-conference"
+  ],
+  "relatedModels": [],
+  "tags": [
+    "ai-news",
+    "breaking",
+    "openai"
+  ]
+}

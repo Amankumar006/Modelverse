@@ -1,0 +1,24 @@
+{
+  "id": "how-we-built-owl-the-new-architecture-behind-our-chatgpt-based-browser-atlas",
+  "slug": "how-we-built-owl-the-new-architecture-behind-our-chatgpt-based-browser-atlas",
+  "title": "How we built OWL, the new architecture behind our ChatGPT-based browser, Atlas",
+  "category": "short-news",
+  "isTrending": true,
+  "publishDate": "2026-07-25",
+  "author": "OpenAI / Modelverse Editorial",
+  "readTime": "2 min read",
+  "excerpt": "A deep dive into OWL, the new architecture powering ChatGPT Atlas—decoupling Chromium, enabling fast startup, rich UI, and agentic browsing with ChatGPT....",
+  "body": "A deep dive into OWL, the new architecture powering ChatGPT Atlas—decoupling Chromium, enabling fast startup, rich UI, and agentic browsing with ChatGPT.\n\n### Official Announcement\nRead the full update directly from the official source at [OpenAI News](https://openai.com/index/building-chatgpt-atlas).\n\nStay tuned to [Modelverse](https://www.themodelverse.in) for real-time model analysis and benchmark coverage.",
+  "coverImage": "/images/news/claude-opus-5.jpg",
+  "status": "published",
+  "confidenceLevel": "confirmed",
+  "externalSources": [
+    "https://openai.com/index/building-chatgpt-atlas"
+  ],
+  "relatedModels": [],
+  "tags": [
+    "ai-news",
+    "breaking",
+    "openai"
+  ]
+}

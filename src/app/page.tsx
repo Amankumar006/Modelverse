@@ -8,6 +8,12 @@ import {
   Sparkle,
   ArrowUpRight,
   Flame,
+  Cpu,
+  Layers,
+  Zap,
+  GitCompare,
+  ShieldCheck,
+  CheckCircle2,
 } from "lucide-react";
 import { getTrendingModels } from "@/lib/trending";
 import type { ModelEntry } from "@/lib/models";
@@ -74,47 +80,139 @@ export default function Home() {
       {/* ── Hero Section ───────────────────────────────────── */}
       <HeroSection />
 
-      {/* ── Latest Models Section ────────────────────── */}
+      {/* ── Latest Models Section (Detailed & Professional) ────────────────────── */}
       {latestModels.length > 0 && (
         <section className="bg-[#0C120F] text-[#E2E8E4] px-4 sm:px-6 md:px-10 lg:px-14 py-12 md:py-16 border-t border-[#243629]">
-          <div className="max-w-7xl mx-auto flex flex-col gap-8">
-            <div>
-              <div className="flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.22em] text-[#8C9E91] mb-3">
-                <Sparkle size={12} className="text-[#4ADE80]" strokeWidth={1.5} />
-                <span>Latest Tracked Releases</span>
+          <div className="max-w-7xl mx-auto flex flex-col gap-10">
+            
+            {/* Header */}
+            <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
+              <div>
+                <div className="flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.22em] text-[#4ADE80] mb-3">
+                  <Sparkle size={12} strokeWidth={2} />
+                  <span>Frontier Intelligence Index</span>
+                </div>
+                <h2 className="text-2xl sm:text-3xl md:text-4xl font-normal text-white" style={{ fontFamily: "var(--font-display, ui-sans-serif, system-ui, sans-serif)" }}>
+                  Latest Tracked Releases
+                </h2>
+                <p className="text-sm text-[#8C9E91] mt-2 max-w-2xl leading-[1.6]">
+                  Fact-checked specifications, context windows, and deployment parameters for the newest foundation releases.
+                </p>
               </div>
-              <h2 className="text-2xl md:text-3xl font-normal text-white" style={{ fontFamily: "var(--font-display, ui-sans-serif, system-ui, sans-serif)" }}>
-                Newest Additions
-              </h2>
-              <p className="text-sm text-[#8C9E91] mt-2 max-w-2xl leading-[1.6]">
-                These are the most recent foundation models tracked in the Modelverse database, representing the cutting edge of AI.
-              </p>
+
+              <Link
+                href="/models"
+                className="inline-flex items-center gap-2 text-xs font-semibold text-[#4ADE80] hover:text-[#22c55e] transition-colors uppercase tracking-wider group shrink-0"
+              >
+                Explore All {modelCount}+ Models 
+                <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
+              </Link>
             </div>
             
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-5">
-              {latestModels.map(model => (
-                <div key={model.slug} className="rounded-2xl border border-[#243629] relative overflow-hidden bg-[#121A15] p-5 flex flex-col justify-between hover:border-[#334D3A] transition-colors group">
-                  <div>
-                    <h3 className="text-lg font-semibold text-white group-hover:text-[#4ADE80] transition-colors">{model.name}</h3>
-                    <p className="text-xs text-[#8C9E91] mt-1">{model.developer}</p>
-                  </div>
-                  <div className="mt-6 flex items-center justify-between">
-                    <span className="text-[11px] font-mono text-[#5A6E60]">
-                      {new Date(model.releaseDate).toLocaleDateString("en-US", { year: "numeric", month: "short", day: "numeric" })}
-                    </span>
-                    <Link
-                      href={`/models/${model.slug}`}
-                      className="text-[#4ADE80] opacity-0 group-hover:opacity-100 transition-opacity"
-                    >
-                      <ArrowUpRight size={18} />
+            {/* Rich Model Cards Grid */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
+              {latestModels.map(model => {
+                const formattedDate = new Date(model.releaseDate).toLocaleDateString("en-US", {
+                  month: "short",
+                  day: "numeric",
+                  year: "numeric"
+                });
+
+                return (
+                  <div 
+                    key={model.slug} 
+                    className="rounded-2xl border border-[#243629] relative overflow-hidden bg-[#121A15] p-5 md:p-6 flex flex-col justify-between hover:border-[#334D3A] hover:bg-[#15211B] transition-all group shadow-sm"
+                  >
+                    <div>
+                      {/* Top Badges Row */}
+                      <div className="flex items-center justify-between gap-2 mb-3">
+                        <span className="text-[10px] font-semibold uppercase tracking-wider text-[#8C9E91] truncate">
+                          {model.developer}
+                        </span>
+                        <span className={`text-[10px] font-semibold px-2 py-0.5 rounded-full uppercase tracking-wider ${
+                          model.type === "open-source" || model.type === "open-weights"
+                            ? "bg-[#4ADE80]/10 text-[#4ADE80] border border-[#4ADE80]/20"
+                            : "bg-[#1A261D] text-[#8C9E91] border border-[#243629]"
+                        }`}>
+                          {model.type}
+                        </span>
+                      </div>
+
+                      {/* Model Title */}
+                      <h3 className="text-lg font-semibold text-white group-hover:text-[#4ADE80] transition-colors tracking-tight">
+                        {model.name}
+                      </h3>
+
+                      {/* Brief Description */}
+                      <p className="text-xs text-[#8C9E91] mt-2.5 line-clamp-2 leading-[1.5]">
+                        {model.description}
+                      </p>
+
+                      {/* Metadata Chips */}
+                      <div className="mt-4 pt-4 border-t border-[#243629]/60 flex flex-wrap gap-2">
+                        {model.contextWindow && (
+                          <div className="inline-flex items-center gap-1 text-[11px] font-mono text-[#E2E8E4] bg-[#0C120F] px-2.5 py-1 rounded-md border border-[#243629]">
+                            <Cpu size={10} className="text-[#4ADE80]" />
+                            <span>{model.contextWindow}</span>
+                          </div>
+                        )}
+                        {model.primaryTask && (
+                          <div className="inline-flex items-center gap-1 text-[11px] font-mono text-[#8C9E91] bg-[#0C120F] px-2.5 py-1 rounded-md border border-[#243629]">
+                            <Layers size={10} />
+                            <span className="capitalize">{model.primaryTask.replace("-", " ")}</span>
+                          </div>
+                        )}
+                      </div>
+                    </div>
+
+                    {/* Bottom Footer Row */}
+                    <div className="mt-6 pt-4 border-t border-[#243629] flex items-center justify-between">
+                      <div className="flex items-center gap-1.5 text-[11px] font-mono text-[#5A6E60]">
+                        <ShieldCheck size={12} className="text-[#4ADE80]" />
+                        <span>{formattedDate}</span>
+                      </div>
+
+                      <div className="flex items-center gap-1 text-xs font-semibold text-[#4ADE80] group-hover:underline">
+                        <span>Details</span>
+                        <ArrowUpRight size={14} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                      </div>
+                    </div>
+
+                    <Link href={`/models/${model.slug}`} className="absolute inset-0 z-10">
+                      <span className="sr-only">View full details for {model.name}</span>
                     </Link>
                   </div>
-                  <Link href={`/models/${model.slug}`} className="absolute inset-0 z-10">
-                    <span className="sr-only">View {model.name}</span>
-                  </Link>
-                </div>
-              ))}
+                );
+              })}
             </div>
+
+            {/* Quick Domain Navigation Bar */}
+            <div className="mt-4 p-4 md:p-5 rounded-2xl border border-[#243629] bg-[#121A15]/80 flex flex-col md:flex-row items-center justify-between gap-4">
+              <div className="flex items-center gap-2 text-xs text-[#8C9E91]">
+                <Zap size={14} className="text-[#4ADE80]" />
+                <span className="font-semibold text-white">Quick Filters:</span>
+                <span>Browse catalog by capabilities & modalities</span>
+              </div>
+
+              <div className="flex flex-wrap items-center gap-2">
+                {[
+                  { label: "Reasoning & Math", href: "/models?search=reasoning" },
+                  { label: "Code Generation", href: "/models?search=code" },
+                  { label: "Multimodal & Vision", href: "/models?search=vision" },
+                  { label: "Open Weights", href: "/models?type=open-weights" },
+                  { label: "Audio & Speech", href: "/models?search=audio" },
+                ].map((tag) => (
+                  <Link
+                    key={tag.label}
+                    href={tag.href}
+                    className="text-[11px] font-medium text-[#E2E8E4] hover:text-[#4ADE80] bg-[#0C120F] hover:bg-[#1A261D] border border-[#243629] hover:border-[#334D3A] px-3 py-1.5 rounded-full transition-all cursor-pointer"
+                  >
+                    {tag.label}
+                  </Link>
+                ))}
+              </div>
+            </div>
+
           </div>
         </section>
       )}

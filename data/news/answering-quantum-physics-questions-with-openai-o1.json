@@ -1,0 +1,24 @@
+{
+  "id": "answering-quantum-physics-questions-with-openai-o1",
+  "slug": "answering-quantum-physics-questions-with-openai-o1",
+  "title": "Answering quantum physics questions with OpenAI o1",
+  "category": "short-news",
+  "isTrending": true,
+  "publishDate": "2026-07-25",
+  "author": "OpenAI / Modelverse Editorial",
+  "readTime": "2 min read",
+  "excerpt": "Quantum physicist Mario Krenn uses OpenAI o1 to help answer life's biggest questions....",
+  "body": "Quantum physicist Mario Krenn uses OpenAI o1 to help answer life's biggest questions.\n\n### Official Announcement\nRead the full update directly from the official source at [OpenAI News](https://openai.com/index/o1-quantum-physics).\n\nStay tuned to [Modelverse](https://www.themodelverse.in) for real-time model analysis and benchmark coverage.",
+  "coverImage": "/images/news/claude-opus-5.jpg",
+  "status": "published",
+  "confidenceLevel": "confirmed",
+  "externalSources": [
+    "https://openai.com/index/o1-quantum-physics"
+  ],
+  "relatedModels": [],
+  "tags": [
+    "ai-news",
+    "breaking",
+    "openai"
+  ]
+}

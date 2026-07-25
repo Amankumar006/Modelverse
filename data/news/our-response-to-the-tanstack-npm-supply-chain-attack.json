@@ -1,0 +1,24 @@
+{
+  "id": "our-response-to-the-tanstack-npm-supply-chain-attack",
+  "slug": "our-response-to-the-tanstack-npm-supply-chain-attack",
+  "title": "Our response to the TanStack npm supply chain attack",
+  "category": "short-news",
+  "isTrending": true,
+  "publishDate": "2026-07-25",
+  "author": "OpenAI / Modelverse Editorial",
+  "readTime": "2 min read",
+  "excerpt": "OpenAI details its response to the TanStack “Mini Shai-Hulud” supply chain attack, outlines protections taken to secure systems and signing certificates, and explains why macOS use...",
+  "body": "OpenAI details its response to the TanStack “Mini Shai-Hulud” supply chain attack, outlines protections taken to secure systems and signing certificates, and explains why macOS users must update OpenAI apps by June 12, 2026. Learn what happened, what was affected, and how OpenAI is strengthening defenses against evolving software supply chain threats.\n\n### Official Announcement\nRead the full update directly from the official source at [OpenAI News](https://openai.com/index/our-response-to-the-tanstack-npm-supply-chain-attack).\n\nStay tuned to [Modelverse](https://www.themodelverse.in) for real-time model analysis and benchmark coverage.",
+  "coverImage": "/images/news/claude-opus-5.jpg",
+  "status": "published",
+  "confidenceLevel": "confirmed",
+  "externalSources": [
+    "https://openai.com/index/our-response-to-the-tanstack-npm-supply-chain-attack"
+  ],
+  "relatedModels": [],
+  "tags": [
+    "ai-news",
+    "breaking",
+    "openai"
+  ]
+}

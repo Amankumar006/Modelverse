@@ -1,0 +1,24 @@
+{
+  "id": "chatgpt-sites",
+  "slug": "chatgpt-sites",
+  "title": "ChatGPT Sites",
+  "category": "short-news",
+  "isTrending": true,
+  "publishDate": "2026-07-25",
+  "author": "OpenAI / Modelverse Editorial",
+  "readTime": "2 min read",
+  "excerpt": "Create that kind of lightweight website or app with Codex....",
+  "body": "Create that kind of lightweight website or app with Codex.\n\n### Official Announcement\nRead the full update directly from the official source at [OpenAI News](https://openai.com/academy/chatgpt-sites).\n\nStay tuned to [Modelverse](https://www.themodelverse.in) for real-time model analysis and benchmark coverage.",
+  "coverImage": "/images/news/claude-opus-5.jpg",
+  "status": "published",
+  "confidenceLevel": "confirmed",
+  "externalSources": [
+    "https://openai.com/academy/chatgpt-sites"
+  ],
+  "relatedModels": [],
+  "tags": [
+    "ai-news",
+    "breaking",
+    "openai"
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "id": "gpt-35-turbo-fine-tuning-and-api-updates",
+  "slug": "gpt-35-turbo-fine-tuning-and-api-updates",
+  "title": "GPT-3.5 Turbo fine-tuning and API updates",
+  "category": "short-news",
+  "isTrending": true,
+  "publishDate": "2026-07-25",
+  "author": "OpenAI / Modelverse Editorial",
+  "readTime": "2 min read",
+  "excerpt": "Developers can now bring their own data to customize GPT-3.5 Turbo for their use cases....",
+  "body": "Developers can now bring their own data to customize GPT-3.5 Turbo for their use cases.\n\n### Official Announcement\nRead the full update directly from the official source at [OpenAI News](https://openai.com/index/gpt-3-5-turbo-fine-tuning-and-api-updates).\n\nStay tuned to [Modelverse](https://www.themodelverse.in) for real-time model analysis and benchmark coverage.",
+  "coverImage": "/images/news/claude-opus-5.jpg",
+  "status": "published",
+  "confidenceLevel": "confirmed",
+  "externalSources": [
+    "https://openai.com/index/gpt-3-5-turbo-fine-tuning-and-api-updates"
+  ],
+  "relatedModels": [],
+  "tags": [
+    "ai-news",
+    "breaking",
+    "openai"
+  ]
+}

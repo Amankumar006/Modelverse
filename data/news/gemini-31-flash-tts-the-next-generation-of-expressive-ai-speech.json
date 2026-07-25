@@ -1,0 +1,24 @@
+{
+  "id": "gemini-31-flash-tts-the-next-generation-of-expressive-ai-speech",
+  "slug": "gemini-31-flash-tts-the-next-generation-of-expressive-ai-speech",
+  "title": "Gemini 3.1 Flash TTS: the next generation of expressive AI speech",
+  "category": "short-news",
+  "isTrending": true,
+  "publishDate": "2026-07-25",
+  "author": "Google DeepMind / Modelverse Editorial",
+  "readTime": "2 min read",
+  "excerpt": "Our newest audio model introduces granular audio tags that give you precise control to direct AI speech for expressive audio generation....",
+  "body": "Our newest audio model introduces granular audio tags that give you precise control to direct AI speech for expressive audio generation.\n\n### Official Announcement\nRead the full update directly from the official source at [Google DeepMind News](https://deepmind.google/blog/gemini-3-1-flash-tts-the-next-generation-of-expressive-ai-speech/).\n\nStay tuned to [Modelverse](https://www.themodelverse.in) for real-time model analysis and benchmark coverage.",
+  "coverImage": "/images/news/claude-opus-5.jpg",
+  "status": "published",
+  "confidenceLevel": "confirmed",
+  "externalSources": [
+    "https://deepmind.google/blog/gemini-3-1-flash-tts-the-next-generation-of-expressive-ai-speech/"
+  ],
+  "relatedModels": [],
+  "tags": [
+    "ai-news",
+    "breaking",
+    "google-deepmind"
+  ]
+}

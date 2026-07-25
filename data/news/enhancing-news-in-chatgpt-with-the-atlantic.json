@@ -1,0 +1,24 @@
+{
+  "id": "enhancing-news-in-chatgpt-with-the-atlantic",
+  "slug": "enhancing-news-in-chatgpt-with-the-atlantic",
+  "title": "Enhancing news in ChatGPT with The Atlantic",
+  "category": "short-news",
+  "isTrending": true,
+  "publishDate": "2026-07-25",
+  "author": "OpenAI / Modelverse Editorial",
+  "readTime": "2 min read",
+  "excerpt": "The Atlantic is announcing a strategic content and product partnership with OpenAI, which positions The Atlantic as a premium news source within OpenAI. The Atlantic’s articles wil...",
+  "body": "The Atlantic is announcing a strategic content and product partnership with OpenAI, which positions The Atlantic as a premium news source within OpenAI. The Atlantic’s articles will be discoverable within OpenAI’s products, including ChatGPT, and as a partner, The Atlantic will help to shape how news is surfaced and presented in future real-time discovery products.\n\n### Official Announcement\nRead the full update directly from the official source at [OpenAI News](https://openai.com/index/enhancing-news-in-chatgpt-with-the-atlantic).\n\nStay tuned to [Modelverse](https://www.themodelverse.in) for real-time model analysis and benchmark coverage.",
+  "coverImage": "/images/news/claude-opus-5.jpg",
+  "status": "published",
+  "confidenceLevel": "confirmed",
+  "externalSources": [
+    "https://openai.com/index/enhancing-news-in-chatgpt-with-the-atlantic"
+  ],
+  "relatedModels": [],
+  "tags": [
+    "ai-news",
+    "breaking",
+    "openai"
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "id": "attacking-machine-learning-with-adversarial-examples",
+  "slug": "attacking-machine-learning-with-adversarial-examples",
+  "title": "Attacking machine learning with adversarial examples",
+  "category": "short-news",
+  "isTrending": true,
+  "publishDate": "2026-07-25",
+  "author": "OpenAI / Modelverse Editorial",
+  "readTime": "2 min read",
+  "excerpt": "Adversarial examples are inputs to machine learning models that an attacker has intentionally designed to cause the model to make a mistake; they’re like optical illusions for mach...",
+  "body": "Adversarial examples are inputs to machine learning models that an attacker has intentionally designed to cause the model to make a mistake; they’re like optical illusions for machines. In this post we’ll show how adversarial examples work across different mediums, and will discuss why securing systems against them can be difficult.\n\n### Official Announcement\nRead the full update directly from the official source at [OpenAI News](https://openai.com/index/attacking-machine-learning-with-adversarial-examples).\n\nStay tuned to [Modelverse](https://www.themodelverse.in) for real-time model analysis and benchmark coverage.",
+  "coverImage": "/images/news/claude-opus-5.jpg",
+  "status": "published",
+  "confidenceLevel": "confirmed",
+  "externalSources": [
+    "https://openai.com/index/attacking-machine-learning-with-adversarial-examples"
+  ],
+  "relatedModels": [],
+  "tags": [
+    "ai-news",
+    "breaking",
+    "openai"
+  ]
+}

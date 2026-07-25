@@ -1,0 +1,24 @@
+{
+  "id": "why-we-no-longer-evaluate-swe-bench-verified",
+  "slug": "why-we-no-longer-evaluate-swe-bench-verified",
+  "title": "Why we no longer evaluate SWE-bench Verified",
+  "category": "short-news",
+  "isTrending": true,
+  "publishDate": "2026-07-25",
+  "author": "OpenAI / Modelverse Editorial",
+  "readTime": "2 min read",
+  "excerpt": "SWE-bench Verified is increasingly contaminated and mismeasures frontier coding progress. Our analysis shows flawed tests and training leakage. We recommend SWE-bench Pro....",
+  "body": "SWE-bench Verified is increasingly contaminated and mismeasures frontier coding progress. Our analysis shows flawed tests and training leakage. We recommend SWE-bench Pro.\n\n### Official Announcement\nRead the full update directly from the official source at [OpenAI News](https://openai.com/index/why-we-no-longer-evaluate-swe-bench-verified).\n\nStay tuned to [Modelverse](https://www.themodelverse.in) for real-time model analysis and benchmark coverage.",
+  "coverImage": "/images/news/claude-opus-5.jpg",
+  "status": "published",
+  "confidenceLevel": "confirmed",
+  "externalSources": [
+    "https://openai.com/index/why-we-no-longer-evaluate-swe-bench-verified"
+  ],
+  "relatedModels": [],
+  "tags": [
+    "ai-news",
+    "breaking",
+    "openai"
+  ]
+}

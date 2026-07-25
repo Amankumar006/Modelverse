@@ -1,0 +1,24 @@
+{
+  "id": "first-look-at-gpt-5",
+  "slug": "first-look-at-gpt-5",
+  "title": "First look at GPT-5",
+  "category": "short-news",
+  "isTrending": true,
+  "publishDate": "2026-07-25",
+  "author": "OpenAI / Modelverse Editorial",
+  "readTime": "2 min read",
+  "excerpt": "See how a group of leading developers use GPT-5 for the first time....",
+  "body": "See how a group of leading developers use GPT-5 for the first time.\n\n### Official Announcement\nRead the full update directly from the official source at [OpenAI News](https://openai.com/index/gpt-5-first-look).\n\nStay tuned to [Modelverse](https://www.themodelverse.in) for real-time model analysis and benchmark coverage.",
+  "coverImage": "/images/news/claude-opus-5.jpg",
+  "status": "published",
+  "confidenceLevel": "confirmed",
+  "externalSources": [
+    "https://openai.com/index/gpt-5-first-look"
+  ],
+  "relatedModels": [],
+  "tags": [
+    "ai-news",
+    "breaking",
+    "openai"
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "id": "building-a-safe-effective-sandbox-to-enable-codex-on-windows",
+  "slug": "building-a-safe-effective-sandbox-to-enable-codex-on-windows",
+  "title": "Building a safe, effective sandbox to enable Codex on Windows",
+  "category": "short-news",
+  "isTrending": true,
+  "publishDate": "2026-07-25",
+  "author": "OpenAI / Modelverse Editorial",
+  "readTime": "2 min read",
+  "excerpt": "Learn how OpenAI built a safe, effective sandbox to enable Codex on Windows with controlled file access and network limits....",
+  "body": "Learn how OpenAI built a safe, effective sandbox to enable Codex on Windows with controlled file access and network limits.\n\n### Official Announcement\nRead the full update directly from the official source at [OpenAI News](https://openai.com/index/building-codex-windows-sandbox).\n\nStay tuned to [Modelverse](https://www.themodelverse.in) for real-time model analysis and benchmark coverage.",
+  "coverImage": "/images/news/claude-opus-5.jpg",
+  "status": "published",
+  "confidenceLevel": "confirmed",
+  "externalSources": [
+    "https://openai.com/index/building-codex-windows-sandbox"
+  ],
+  "relatedModels": [],
+  "tags": [
+    "ai-news",
+    "breaking",
+    "openai"
+  ]
+}

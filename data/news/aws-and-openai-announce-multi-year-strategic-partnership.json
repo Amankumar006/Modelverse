@@ -1,0 +1,24 @@
+{
+  "id": "aws-and-openai-announce-multi-year-strategic-partnership",
+  "slug": "aws-and-openai-announce-multi-year-strategic-partnership",
+  "title": "AWS and OpenAI announce multi-year strategic partnership",
+  "category": "short-news",
+  "isTrending": true,
+  "publishDate": "2026-07-25",
+  "author": "OpenAI / Modelverse Editorial",
+  "readTime": "2 min read",
+  "excerpt": "OpenAI and AWS have entered a multi-year, $38 billion partnership to scale advanced AI workloads. AWS will provide world-class infrastructure and compute capacity to power OpenAI’s...",
+  "body": "OpenAI and AWS have entered a multi-year, $38 billion partnership to scale advanced AI workloads. AWS will provide world-class infrastructure and compute capacity to power OpenAI’s next generation of models.\n\n### Official Announcement\nRead the full update directly from the official source at [OpenAI News](https://openai.com/index/aws-and-openai-partnership).\n\nStay tuned to [Modelverse](https://www.themodelverse.in) for real-time model analysis and benchmark coverage.",
+  "coverImage": "/images/news/claude-opus-5.jpg",
+  "status": "published",
+  "confidenceLevel": "confirmed",
+  "externalSources": [
+    "https://openai.com/index/aws-and-openai-partnership"
+  ],
+  "relatedModels": [],
+  "tags": [
+    "ai-news",
+    "breaking",
+    "openai"
+  ]
+}

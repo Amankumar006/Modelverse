@@ -1,0 +1,24 @@
+{
+  "id": "pacific-northwest-national-laboratory-and-openai-partner-to-accelerate-federal-permitting",
+  "slug": "pacific-northwest-national-laboratory-and-openai-partner-to-accelerate-federal-permitting",
+  "title": "Pacific Northwest National Laboratory and OpenAI partner to accelerate federal permitting",
+  "category": "short-news",
+  "isTrending": true,
+  "publishDate": "2026-07-25",
+  "author": "OpenAI / Modelverse Editorial",
+  "readTime": "2 min read",
+  "excerpt": "OpenAI and Pacific Northwest National Laboratory introduce DraftNEPABench, a new benchmark evaluating how AI coding agents can accelerate federal permitting—showing potential to re...",
+  "body": "OpenAI and Pacific Northwest National Laboratory introduce DraftNEPABench, a new benchmark evaluating how AI coding agents can accelerate federal permitting—showing potential to reduce NEPA drafting time by up to 15% and modernize infrastructure reviews.\n\n### Official Announcement\nRead the full update directly from the official source at [OpenAI News](https://openai.com/index/pacific-northwest-national-laboratory).\n\nStay tuned to [Modelverse](https://www.themodelverse.in) for real-time model analysis and benchmark coverage.",
+  "coverImage": "/images/news/claude-opus-5.jpg",
+  "status": "published",
+  "confidenceLevel": "confirmed",
+  "externalSources": [
+    "https://openai.com/index/pacific-northwest-national-laboratory"
+  ],
+  "relatedModels": [],
+  "tags": [
+    "ai-news",
+    "breaking",
+    "openai"
+  ]
+}

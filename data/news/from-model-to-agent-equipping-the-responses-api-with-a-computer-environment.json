@@ -1,0 +1,24 @@
+{
+  "id": "from-model-to-agent-equipping-the-responses-api-with-a-computer-environment",
+  "slug": "from-model-to-agent-equipping-the-responses-api-with-a-computer-environment",
+  "title": "From model to agent: Equipping the Responses API with a computer environment",
+  "category": "short-news",
+  "isTrending": true,
+  "publishDate": "2026-07-25",
+  "author": "OpenAI / Modelverse Editorial",
+  "readTime": "2 min read",
+  "excerpt": "How OpenAI built an agent runtime using the Responses API, shell tool, and hosted containers to run secure, scalable agents with files, tools, and state....",
+  "body": "How OpenAI built an agent runtime using the Responses API, shell tool, and hosted containers to run secure, scalable agents with files, tools, and state.\n\n### Official Announcement\nRead the full update directly from the official source at [OpenAI News](https://openai.com/index/equip-responses-api-computer-environment).\n\nStay tuned to [Modelverse](https://www.themodelverse.in) for real-time model analysis and benchmark coverage.",
+  "coverImage": "/images/news/claude-opus-5.jpg",
+  "status": "published",
+  "confidenceLevel": "confirmed",
+  "externalSources": [
+    "https://openai.com/index/equip-responses-api-computer-environment"
+  ],
+  "relatedModels": [],
+  "tags": [
+    "ai-news",
+    "breaking",
+    "openai"
+  ]
+}

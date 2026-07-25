@@ -1,0 +1,24 @@
+{
+  "id": "introducing-lockdown-mode-and-elevated-risk-labels-in-chatgpt",
+  "slug": "introducing-lockdown-mode-and-elevated-risk-labels-in-chatgpt",
+  "title": "Introducing Lockdown Mode and Elevated Risk labels in ChatGPT",
+  "category": "short-news",
+  "isTrending": true,
+  "publishDate": "2026-07-25",
+  "author": "OpenAI / Modelverse Editorial",
+  "readTime": "2 min read",
+  "excerpt": "Introducing Lockdown Mode and Elevated Risk labels in ChatGPT to help organizations defend against prompt injection and AI-driven data exfiltration....",
+  "body": "Introducing Lockdown Mode and Elevated Risk labels in ChatGPT to help organizations defend against prompt injection and AI-driven data exfiltration.\n\n### Official Announcement\nRead the full update directly from the official source at [OpenAI News](https://openai.com/index/introducing-lockdown-mode-and-elevated-risk-labels-in-chatgpt).\n\nStay tuned to [Modelverse](https://www.themodelverse.in) for real-time model analysis and benchmark coverage.",
+  "coverImage": "/images/news/claude-opus-5.jpg",
+  "status": "published",
+  "confidenceLevel": "confirmed",
+  "externalSources": [
+    "https://openai.com/index/introducing-lockdown-mode-and-elevated-risk-labels-in-chatgpt"
+  ],
+  "relatedModels": [],
+  "tags": [
+    "ai-news",
+    "breaking",
+    "openai"
+  ]
+}

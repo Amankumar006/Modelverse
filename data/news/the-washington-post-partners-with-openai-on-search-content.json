@@ -1,0 +1,24 @@
+{
+  "id": "the-washington-post-partners-with-openai-on-search-content",
+  "slug": "the-washington-post-partners-with-openai-on-search-content",
+  "title": "The Washington Post partners with OpenAI on search content",
+  "category": "short-news",
+  "isTrending": true,
+  "publishDate": "2026-07-25",
+  "author": "OpenAI / Modelverse Editorial",
+  "readTime": "2 min read",
+  "excerpt": "The Washington Post is partnering with with OpenAI to integrate news into ChatGPT, providing users with summaries, quotes, and direct links to original reporting....",
+  "body": "The Washington Post is partnering with with OpenAI to integrate news into ChatGPT, providing users with summaries, quotes, and direct links to original reporting.\n\n### Official Announcement\nRead the full update directly from the official source at [OpenAI News](https://openai.com/global-affairs/the-washington-post-partners-with-openai).\n\nStay tuned to [Modelverse](https://www.themodelverse.in) for real-time model analysis and benchmark coverage.",
+  "coverImage": "/images/news/claude-opus-5.jpg",
+  "status": "published",
+  "confidenceLevel": "confirmed",
+  "externalSources": [
+    "https://openai.com/global-affairs/the-washington-post-partners-with-openai"
+  ],
+  "relatedModels": [],
+  "tags": [
+    "ai-news",
+    "breaking",
+    "openai"
+  ]
+}

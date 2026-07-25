@@ -1,0 +1,24 @@
+{
+  "id": "language-models-can-explain-neurons-in-language-models",
+  "slug": "language-models-can-explain-neurons-in-language-models",
+  "title": "Language models can explain neurons in language models",
+  "category": "short-news",
+  "isTrending": true,
+  "publishDate": "2026-07-25",
+  "author": "OpenAI / Modelverse Editorial",
+  "readTime": "2 min read",
+  "excerpt": "We use GPT-4 to automatically write explanations for the behavior of neurons in large language models and to score those explanations. We release a dataset of these (imperfect) exp...",
+  "body": "We use GPT-4 to automatically write explanations for the behavior of neurons in large language models and to score those explanations. We release a dataset of these (imperfect) explanations and scores for every neuron in GPT-2.\n\n### Official Announcement\nRead the full update directly from the official source at [OpenAI News](https://openai.com/index/language-models-can-explain-neurons-in-language-models).\n\nStay tuned to [Modelverse](https://www.themodelverse.in) for real-time model analysis and benchmark coverage.",
+  "coverImage": "/images/news/claude-opus-5.jpg",
+  "status": "published",
+  "confidenceLevel": "confirmed",
+  "externalSources": [
+    "https://openai.com/index/language-models-can-explain-neurons-in-language-models"
+  ],
+  "relatedModels": [],
+  "tags": [
+    "ai-news",
+    "breaking",
+    "openai"
+  ]
+}

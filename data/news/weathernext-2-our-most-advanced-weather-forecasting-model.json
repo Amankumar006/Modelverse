@@ -1,0 +1,24 @@
+{
+  "id": "weathernext-2-our-most-advanced-weather-forecasting-model",
+  "slug": "weathernext-2-our-most-advanced-weather-forecasting-model",
+  "title": "WeatherNext 2: Our most advanced weather forecasting model",
+  "category": "short-news",
+  "isTrending": true,
+  "publishDate": "2026-07-25",
+  "author": "Google DeepMind / Modelverse Editorial",
+  "readTime": "2 min read",
+  "excerpt": "The new AI model delivers more efficient, more accurate and higher-resolution global weather predictions....",
+  "body": "The new AI model delivers more efficient, more accurate and higher-resolution global weather predictions.\n\n### Official Announcement\nRead the full update directly from the official source at [Google DeepMind News](https://deepmind.google/blog/weathernext-2-our-most-advanced-weather-forecasting-model/).\n\nStay tuned to [Modelverse](https://www.themodelverse.in) for real-time model analysis and benchmark coverage.",
+  "coverImage": "/images/news/claude-opus-5.jpg",
+  "status": "published",
+  "confidenceLevel": "confirmed",
+  "externalSources": [
+    "https://deepmind.google/blog/weathernext-2-our-most-advanced-weather-forecasting-model/"
+  ],
+  "relatedModels": [],
+  "tags": [
+    "ai-news",
+    "breaking",
+    "google-deepmind"
+  ]
+}

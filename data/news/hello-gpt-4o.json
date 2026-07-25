@@ -1,0 +1,24 @@
+{
+  "id": "hello-gpt-4o",
+  "slug": "hello-gpt-4o",
+  "title": "Hello GPT-4o",
+  "category": "short-news",
+  "isTrending": true,
+  "publishDate": "2026-07-25",
+  "author": "OpenAI / Modelverse Editorial",
+  "readTime": "2 min read",
+  "excerpt": "We’re announcing GPT-4 Omni, our new flagship model which can reason across audio, vision, and text in real time....",
+  "body": "We’re announcing GPT-4 Omni, our new flagship model which can reason across audio, vision, and text in real time.\n\n### Official Announcement\nRead the full update directly from the official source at [OpenAI News](https://openai.com/index/hello-gpt-4o).\n\nStay tuned to [Modelverse](https://www.themodelverse.in) for real-time model analysis and benchmark coverage.",
+  "coverImage": "/images/news/claude-opus-5.jpg",
+  "status": "published",
+  "confidenceLevel": "confirmed",
+  "externalSources": [
+    "https://openai.com/index/hello-gpt-4o"
+  ],
+  "relatedModels": [],
+  "tags": [
+    "ai-news",
+    "breaking",
+    "openai"
+  ]
+}

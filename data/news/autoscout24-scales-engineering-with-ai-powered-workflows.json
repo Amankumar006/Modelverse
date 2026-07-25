@@ -1,0 +1,24 @@
+{
+  "id": "autoscout24-scales-engineering-with-ai-powered-workflows",
+  "slug": "autoscout24-scales-engineering-with-ai-powered-workflows",
+  "title": "AutoScout24 scales engineering with AI-powered workflows",
+  "category": "short-news",
+  "isTrending": true,
+  "publishDate": "2026-07-25",
+  "author": "OpenAI / Modelverse Editorial",
+  "readTime": "2 min read",
+  "excerpt": "Learn how AutoScout24 Group uses Codex and ChatGPT to speed development cycles, improve code quality, and expand AI adoption....",
+  "body": "Learn how AutoScout24 Group uses Codex and ChatGPT to speed development cycles, improve code quality, and expand AI adoption.\n\n### Official Announcement\nRead the full update directly from the official source at [OpenAI News](https://openai.com/index/autoscout24).\n\nStay tuned to [Modelverse](https://www.themodelverse.in) for real-time model analysis and benchmark coverage.",
+  "coverImage": "/images/news/claude-opus-5.jpg",
+  "status": "published",
+  "confidenceLevel": "confirmed",
+  "externalSources": [
+    "https://openai.com/index/autoscout24"
+  ],
+  "relatedModels": [],
+  "tags": [
+    "ai-news",
+    "breaking",
+    "openai"
+  ]
+}

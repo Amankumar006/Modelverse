@@ -1,0 +1,24 @@
+{
+  "id": "dalle-3-system-card",
+  "slug": "dalle-3-system-card",
+  "title": "DALL·E 3 system card",
+  "category": "short-news",
+  "isTrending": true,
+  "publishDate": "2026-07-25",
+  "author": "OpenAI / Modelverse Editorial",
+  "readTime": "2 min read",
+  "excerpt": "DALL·E 3 system card...",
+  "body": "DALL·E 3 system card\n\n### Official Announcement\nRead the full update directly from the official source at [OpenAI News](https://openai.com/index/dall-e-3-system-card).\n\nStay tuned to [Modelverse](https://www.themodelverse.in) for real-time model analysis and benchmark coverage.",
+  "coverImage": "/images/news/claude-opus-5.jpg",
+  "status": "published",
+  "confidenceLevel": "confirmed",
+  "externalSources": [
+    "https://openai.com/index/dall-e-3-system-card"
+  ],
+  "relatedModels": [],
+  "tags": [
+    "ai-news",
+    "breaking",
+    "openai"
+  ]
+}

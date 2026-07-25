@@ -1,0 +1,24 @@
+{
+  "id": "lessons-learned-on-language-model-safety-and-misuse",
+  "slug": "lessons-learned-on-language-model-safety-and-misuse",
+  "title": "Lessons learned on language model safety and misuse",
+  "category": "short-news",
+  "isTrending": true,
+  "publishDate": "2026-07-25",
+  "author": "OpenAI / Modelverse Editorial",
+  "readTime": "2 min read",
+  "excerpt": "We describe our latest thinking in the hope of helping other AI developers address safety and misuse of deployed models....",
+  "body": "We describe our latest thinking in the hope of helping other AI developers address safety and misuse of deployed models.\n\n### Official Announcement\nRead the full update directly from the official source at [OpenAI News](https://openai.com/index/language-model-safety-and-misuse).\n\nStay tuned to [Modelverse](https://www.themodelverse.in) for real-time model analysis and benchmark coverage.",
+  "coverImage": "/images/news/claude-opus-5.jpg",
+  "status": "published",
+  "confidenceLevel": "confirmed",
+  "externalSources": [
+    "https://openai.com/index/language-model-safety-and-misuse"
+  ],
+  "relatedModels": [],
+  "tags": [
+    "ai-news",
+    "breaking",
+    "openai"
+  ]
+}

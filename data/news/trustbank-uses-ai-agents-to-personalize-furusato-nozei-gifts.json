@@ -1,0 +1,24 @@
+{
+  "id": "trustbank-uses-ai-agents-to-personalize-furusato-nozei-gifts",
+  "slug": "trustbank-uses-ai-agents-to-personalize-furusato-nozei-gifts",
+  "title": "TRUSTBANK uses AI agents to personalize Furusato Nozei gifts",
+  "category": "short-news",
+  "isTrending": true,
+  "publishDate": "2026-07-25",
+  "author": "OpenAI / Modelverse Editorial",
+  "readTime": "2 min read",
+  "excerpt": "TRUSTBANK partnered with Recursive to build Choice AI using OpenAI models, enabling personalized conversational recommendations that simplify Furusato Nozei gift discovery....",
+  "body": "TRUSTBANK partnered with Recursive to build Choice AI using OpenAI models, enabling personalized conversational recommendations that simplify Furusato Nozei gift discovery.\n\n### Official Announcement\nRead the full update directly from the official source at [OpenAI News](https://openai.com/index/trustbank).\n\nStay tuned to [Modelverse](https://www.themodelverse.in) for real-time model analysis and benchmark coverage.",
+  "coverImage": "/images/news/claude-opus-5.jpg",
+  "status": "published",
+  "confidenceLevel": "confirmed",
+  "externalSources": [
+    "https://openai.com/index/trustbank"
+  ],
+  "relatedModels": [],
+  "tags": [
+    "ai-news",
+    "breaking",
+    "openai"
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "id": "openai-five-finals",
+  "slug": "openai-five-finals",
+  "title": "OpenAI Five Finals",
+  "category": "short-news",
+  "isTrending": true,
+  "publishDate": "2026-07-25",
+  "author": "OpenAI / Modelverse Editorial",
+  "readTime": "2 min read",
+  "excerpt": "We’ll be holding our final live event for OpenAI Five at 11:30am PT on April 13....",
+  "body": "We’ll be holding our final live event for OpenAI Five at 11:30am PT on April 13.\n\n### Official Announcement\nRead the full update directly from the official source at [OpenAI News](https://openai.com/index/openai-five-finals).\n\nStay tuned to [Modelverse](https://www.themodelverse.in) for real-time model analysis and benchmark coverage.",
+  "coverImage": "/images/news/claude-opus-5.jpg",
+  "status": "published",
+  "confidenceLevel": "confirmed",
+  "externalSources": [
+    "https://openai.com/index/openai-five-finals"
+  ],
+  "relatedModels": [],
+  "tags": [
+    "ai-news",
+    "breaking",
+    "openai"
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "id": "organizational-update-from-openai",
+  "slug": "organizational-update-from-openai",
+  "title": "Organizational update from OpenAI",
+  "category": "short-news",
+  "isTrending": true,
+  "publishDate": "2026-07-25",
+  "author": "OpenAI / Modelverse Editorial",
+  "readTime": "2 min read",
+  "excerpt": "It’s been a year of dramatic change and growth at OpenAI....",
+  "body": "It’s been a year of dramatic change and growth at OpenAI.\n\n### Official Announcement\nRead the full update directly from the official source at [OpenAI News](https://openai.com/index/organizational-update).\n\nStay tuned to [Modelverse](https://www.themodelverse.in) for real-time model analysis and benchmark coverage.",
+  "coverImage": "/images/news/claude-opus-5.jpg",
+  "status": "published",
+  "confidenceLevel": "confirmed",
+  "externalSources": [
+    "https://openai.com/index/organizational-update"
+  ],
+  "relatedModels": [],
+  "tags": [
+    "ai-news",
+    "breaking",
+    "openai"
+  ]
+}

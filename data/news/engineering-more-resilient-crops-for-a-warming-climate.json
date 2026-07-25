@@ -1,0 +1,24 @@
+{
+  "id": "engineering-more-resilient-crops-for-a-warming-climate",
+  "slug": "engineering-more-resilient-crops-for-a-warming-climate",
+  "title": "Engineering more resilient crops for a warming climate",
+  "category": "short-news",
+  "isTrending": true,
+  "publishDate": "2026-07-25",
+  "author": "Google DeepMind / Modelverse Editorial",
+  "readTime": "2 min read",
+  "excerpt": "Scientists are using AlphaFold to strengthen a photosynthesis enzyme for resilient, heat-tolerant crops....",
+  "body": "Scientists are using AlphaFold to strengthen a photosynthesis enzyme for resilient, heat-tolerant crops.\n\n### Official Announcement\nRead the full update directly from the official source at [Google DeepMind News](https://deepmind.google/blog/engineering-more-resilient-crops-for-a-warming-climate/).\n\nStay tuned to [Modelverse](https://www.themodelverse.in) for real-time model analysis and benchmark coverage.",
+  "coverImage": "/images/news/claude-opus-5.jpg",
+  "status": "published",
+  "confidenceLevel": "confirmed",
+  "externalSources": [
+    "https://deepmind.google/blog/engineering-more-resilient-crops-for-a-warming-climate/"
+  ],
+  "relatedModels": [],
+  "tags": [
+    "ai-news",
+    "breaking",
+    "google-deepmind"
+  ]
+}

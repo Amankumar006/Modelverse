@@ -1,0 +1,24 @@
+{
+  "id": "fine-tuning-gpt-3-to-scale-video-creation",
+  "slug": "fine-tuning-gpt-3-to-scale-video-creation",
+  "title": "Fine-tuning GPT-3 to scale video creation",
+  "category": "short-news",
+  "isTrending": true,
+  "publishDate": "2026-07-25",
+  "author": "OpenAI / Modelverse Editorial",
+  "readTime": "2 min read",
+  "excerpt": "Fine-tuning GPT-3 to power and scale done-for-you video creation....",
+  "body": "Fine-tuning GPT-3 to power and scale done-for-you video creation.\n\n### Official Announcement\nRead the full update directly from the official source at [OpenAI News](https://openai.com/index/waymark).\n\nStay tuned to [Modelverse](https://www.themodelverse.in) for real-time model analysis and benchmark coverage.",
+  "coverImage": "/images/news/claude-opus-5.jpg",
+  "status": "published",
+  "confidenceLevel": "confirmed",
+  "externalSources": [
+    "https://openai.com/index/waymark"
+  ],
+  "relatedModels": [],
+  "tags": [
+    "ai-news",
+    "breaking",
+    "openai"
+  ]
+}

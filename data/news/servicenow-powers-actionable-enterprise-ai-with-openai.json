@@ -1,0 +1,24 @@
+{
+  "id": "servicenow-powers-actionable-enterprise-ai-with-openai",
+  "slug": "servicenow-powers-actionable-enterprise-ai-with-openai",
+  "title": "ServiceNow powers actionable enterprise AI with OpenAI",
+  "category": "short-news",
+  "isTrending": true,
+  "publishDate": "2026-07-25",
+  "author": "OpenAI / Modelverse Editorial",
+  "readTime": "2 min read",
+  "excerpt": "ServiceNow expands access to OpenAI frontier models to power AI-driven enterprise workflows, summarization, search, and voice across the ServiceNow Platform....",
+  "body": "ServiceNow expands access to OpenAI frontier models to power AI-driven enterprise workflows, summarization, search, and voice across the ServiceNow Platform.\n\n### Official Announcement\nRead the full update directly from the official source at [OpenAI News](https://openai.com/index/servicenow-powers-actionable-enterprise-ai-with-openai).\n\nStay tuned to [Modelverse](https://www.themodelverse.in) for real-time model analysis and benchmark coverage.",
+  "coverImage": "/images/news/claude-opus-5.jpg",
+  "status": "published",
+  "confidenceLevel": "confirmed",
+  "externalSources": [
+    "https://openai.com/index/servicenow-powers-actionable-enterprise-ai-with-openai"
+  ],
+  "relatedModels": [],
+  "tags": [
+    "ai-news",
+    "breaking",
+    "openai"
+  ]
+}

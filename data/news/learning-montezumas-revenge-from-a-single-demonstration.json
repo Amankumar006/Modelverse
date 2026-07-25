@@ -1,0 +1,24 @@
+{
+  "id": "learning-montezumas-revenge-from-a-single-demonstration",
+  "slug": "learning-montezumas-revenge-from-a-single-demonstration",
+  "title": "Learning Montezuma’s Revenge from a single demonstration",
+  "category": "short-news",
+  "isTrending": true,
+  "publishDate": "2026-07-25",
+  "author": "OpenAI / Modelverse Editorial",
+  "readTime": "2 min read",
+  "excerpt": "We’ve trained an agent to achieve a high score of 74,500 on Montezuma’s Revenge from a single human demonstration, better than any previously published result. Our algorithm is sim...",
+  "body": "We’ve trained an agent to achieve a high score of 74,500 on Montezuma’s Revenge from a single human demonstration, better than any previously published result. Our algorithm is simple: the agent plays a sequence of games starting from carefully chosen states from the demonstration, and learns from them by optimizing the game score using PPO, the same reinforcement learning algorithm that underpins OpenAI Five.\n\n### Official Announcement\nRead the full update directly from the official source at [OpenAI News](https://openai.com/index/learning-montezumas-revenge-from-a-single-demonstration).\n\nStay tuned to [Modelverse](https://www.themodelverse.in) for real-time model analysis and benchmark coverage.",
+  "coverImage": "/images/news/claude-opus-5.jpg",
+  "status": "published",
+  "confidenceLevel": "confirmed",
+  "externalSources": [
+    "https://openai.com/index/learning-montezumas-revenge-from-a-single-demonstration"
+  ],
+  "relatedModels": [],
+  "tags": [
+    "ai-news",
+    "breaking",
+    "openai"
+  ]
+}

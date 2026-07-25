@@ -1,0 +1,24 @@
+{
+  "id": "prompt-caching-in-the-api",
+  "slug": "prompt-caching-in-the-api",
+  "title": "Prompt Caching in the API",
+  "category": "short-news",
+  "isTrending": true,
+  "publishDate": "2026-07-25",
+  "author": "OpenAI / Modelverse Editorial",
+  "readTime": "2 min read",
+  "excerpt": "Offering automatic discounts on inputs that the model has recently seen...",
+  "body": "Offering automatic discounts on inputs that the model has recently seen\n\n### Official Announcement\nRead the full update directly from the official source at [OpenAI News](https://openai.com/index/api-prompt-caching).\n\nStay tuned to [Modelverse](https://www.themodelverse.in) for real-time model analysis and benchmark coverage.",
+  "coverImage": "/images/news/claude-opus-5.jpg",
+  "status": "published",
+  "confidenceLevel": "confirmed",
+  "externalSources": [
+    "https://openai.com/index/api-prompt-caching"
+  ],
+  "relatedModels": [],
+  "tags": [
+    "ai-news",
+    "breaking",
+    "openai"
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "id": "designing-ai-agents-to-resist-prompt-injection",
+  "slug": "designing-ai-agents-to-resist-prompt-injection",
+  "title": "Designing AI agents to resist prompt injection",
+  "category": "short-news",
+  "isTrending": true,
+  "publishDate": "2026-07-25",
+  "author": "OpenAI / Modelverse Editorial",
+  "readTime": "2 min read",
+  "excerpt": "How ChatGPT defends against prompt injection and social engineering by constraining risky actions and protecting sensitive data in agent workflows....",
+  "body": "How ChatGPT defends against prompt injection and social engineering by constraining risky actions and protecting sensitive data in agent workflows.\n\n### Official Announcement\nRead the full update directly from the official source at [OpenAI News](https://openai.com/index/designing-agents-to-resist-prompt-injection).\n\nStay tuned to [Modelverse](https://www.themodelverse.in) for real-time model analysis and benchmark coverage.",
+  "coverImage": "/images/news/claude-opus-5.jpg",
+  "status": "published",
+  "confidenceLevel": "confirmed",
+  "externalSources": [
+    "https://openai.com/index/designing-agents-to-resist-prompt-injection"
+  ],
+  "relatedModels": [],
+  "tags": [
+    "ai-news",
+    "breaking",
+    "openai"
+  ]
+}

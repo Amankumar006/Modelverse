@@ -1,0 +1,24 @@
+{
+  "id": "upgrading-the-moderation-api-with-our-new-multimodal-moderation-model",
+  "slug": "upgrading-the-moderation-api-with-our-new-multimodal-moderation-model",
+  "title": "Upgrading the Moderation API with our new multimodal moderation model",
+  "category": "short-news",
+  "isTrending": true,
+  "publishDate": "2026-07-25",
+  "author": "OpenAI / Modelverse Editorial",
+  "readTime": "2 min read",
+  "excerpt": "We’re introducing a new model built on GPT-4o that is more accurate at detecting harmful text and images, enabling developers to build more robust moderation systems....",
+  "body": "We’re introducing a new model built on GPT-4o that is more accurate at detecting harmful text and images, enabling developers to build more robust moderation systems.\n\n### Official Announcement\nRead the full update directly from the official source at [OpenAI News](https://openai.com/index/upgrading-the-moderation-api-with-our-new-multimodal-moderation-model).\n\nStay tuned to [Modelverse](https://www.themodelverse.in) for real-time model analysis and benchmark coverage.",
+  "coverImage": "/images/news/claude-opus-5.jpg",
+  "status": "published",
+  "confidenceLevel": "confirmed",
+  "externalSources": [
+    "https://openai.com/index/upgrading-the-moderation-api-with-our-new-multimodal-moderation-model"
+  ],
+  "relatedModels": [],
+  "tags": [
+    "ai-news",
+    "breaking",
+    "openai"
+  ]
+}

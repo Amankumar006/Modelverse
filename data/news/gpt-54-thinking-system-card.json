@@ -1,0 +1,24 @@
+{
+  "id": "gpt-54-thinking-system-card",
+  "slug": "gpt-54-thinking-system-card",
+  "title": "GPT-5.4 Thinking System Card",
+  "category": "short-news",
+  "isTrending": true,
+  "publishDate": "2026-07-25",
+  "author": "OpenAI / Modelverse Editorial",
+  "readTime": "2 min read",
+  "excerpt": "GPT-5.4 Thinking System Card...",
+  "body": "GPT-5.4 Thinking System Card\n\n### Official Announcement\nRead the full update directly from the official source at [OpenAI News](https://openai.com/index/gpt-5-4-thinking-system-card).\n\nStay tuned to [Modelverse](https://www.themodelverse.in) for real-time model analysis and benchmark coverage.",
+  "coverImage": "/images/news/claude-opus-5.jpg",
+  "status": "published",
+  "confidenceLevel": "confirmed",
+  "externalSources": [
+    "https://openai.com/index/gpt-5-4-thinking-system-card"
+  ],
+  "relatedModels": [],
+  "tags": [
+    "ai-news",
+    "breaking",
+    "openai"
+  ]
+}

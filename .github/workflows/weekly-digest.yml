@@ -1,0 +1,55 @@
+name: Weekly Sunday Model Digest Pipeline
+
+on:
+  schedule:
+    # Runs every Sunday at 09:00 UTC (14:30 IST)
+    - cron: '0 9 * * 0'
+  workflow_dispatch:
+
+jobs:
+  weekly-digest-and-publish:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Generate Weekly Sunday Digest
+        run: node scripts/generate-weekly-digest.js
+
+      - name: Send Weekly Gmail Digest Notification
+        if: env.HAS_WEEKLY_DIGEST == 'true'
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: smtp.gmail.com
+          server_port: 465
+          secure: true
+          username: 006amanraj@gmail.com
+          password: ${{ secrets.GMAIL_APP_PASSWORD }}
+          subject: 🌟 [Modelverse] Weekly Sunday Digest: ${env.WEEKLY_MODELS_COUNT} AI Model Releases!
+          to: 006amanraj@gmail.com
+          from: Modelverse Digest Bot <006amanraj@gmail.com>
+          html_body: file://data/ingestion/weekly-digest.html
+
+      - name: Commit and Push Weekly Digest Article
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add .
+          if ! git diff --staged --quiet; then
+            git commit -m "feat(digest): publish Weekly Sunday Model Recap article [skip ci]"
+            git push origin main
+          else
+            echo "No weekly digest updates to commit."
+          fi

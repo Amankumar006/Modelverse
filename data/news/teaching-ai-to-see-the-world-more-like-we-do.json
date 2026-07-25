@@ -1,0 +1,24 @@
+{
+  "id": "teaching-ai-to-see-the-world-more-like-we-do",
+  "slug": "teaching-ai-to-see-the-world-more-like-we-do",
+  "title": "Teaching AI to see the world more like we do",
+  "category": "short-news",
+  "isTrending": true,
+  "publishDate": "2026-07-25",
+  "author": "Google DeepMind / Modelverse Editorial",
+  "readTime": "2 min read",
+  "excerpt": "Our new paper analyzes the important ways AI systems organize the visual world differently from humans....",
+  "body": "Our new paper analyzes the important ways AI systems organize the visual world differently from humans.\n\n### Official Announcement\nRead the full update directly from the official source at [Google DeepMind News](https://deepmind.google/blog/teaching-ai-to-see-the-world-more-like-we-do/).\n\nStay tuned to [Modelverse](https://www.themodelverse.in) for real-time model analysis and benchmark coverage.",
+  "coverImage": "/images/news/claude-opus-5.jpg",
+  "status": "published",
+  "confidenceLevel": "confirmed",
+  "externalSources": [
+    "https://deepmind.google/blog/teaching-ai-to-see-the-world-more-like-we-do/"
+  ],
+  "relatedModels": [],
+  "tags": [
+    "ai-news",
+    "breaking",
+    "google-deepmind"
+  ]
+}

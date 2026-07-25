@@ -1,0 +1,24 @@
+{
+  "id": "rl-fast-reinforcement-learning-via-slow-reinforcement-learning",
+  "slug": "rl-fast-reinforcement-learning-via-slow-reinforcement-learning",
+  "title": "RL²: Fast reinforcement learning via slow reinforcement learning",
+  "category": "short-news",
+  "isTrending": true,
+  "publishDate": "2026-07-25",
+  "author": "OpenAI / Modelverse Editorial",
+  "readTime": "2 min read",
+  "excerpt": "RL²: Fast reinforcement learning via slow reinforcement learning...",
+  "body": "RL²: Fast reinforcement learning via slow reinforcement learning\n\n### Official Announcement\nRead the full update directly from the official source at [OpenAI News](https://openai.com/index/rl2).\n\nStay tuned to [Modelverse](https://www.themodelverse.in) for real-time model analysis and benchmark coverage.",
+  "coverImage": "/images/news/claude-opus-5.jpg",
+  "status": "published",
+  "confidenceLevel": "confirmed",
+  "externalSources": [
+    "https://openai.com/index/rl2"
+  ],
+  "relatedModels": [],
+  "tags": [
+    "ai-news",
+    "breaking",
+    "openai"
+  ]
+}

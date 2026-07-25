@@ -1,0 +1,24 @@
+{
+  "id": "spring-update",
+  "slug": "spring-update",
+  "title": "Spring Update",
+  "category": "short-news",
+  "isTrending": true,
+  "publishDate": "2026-07-25",
+  "author": "OpenAI / Modelverse Editorial",
+  "readTime": "2 min read",
+  "excerpt": "Introducing GPT-4o and making more capabilities available for free in ChatGPT....",
+  "body": "Introducing GPT-4o and making more capabilities available for free in ChatGPT.\n\n### Official Announcement\nRead the full update directly from the official source at [OpenAI News](https://openai.com/index/spring-update).\n\nStay tuned to [Modelverse](https://www.themodelverse.in) for real-time model analysis and benchmark coverage.",
+  "coverImage": "/images/news/claude-opus-5.jpg",
+  "status": "published",
+  "confidenceLevel": "confirmed",
+  "externalSources": [
+    "https://openai.com/index/spring-update"
+  ],
+  "relatedModels": [],
+  "tags": [
+    "ai-news",
+    "breaking",
+    "openai"
+  ]
+}

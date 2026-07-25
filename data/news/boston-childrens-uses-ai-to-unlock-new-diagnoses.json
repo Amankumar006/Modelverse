@@ -1,0 +1,24 @@
+{
+  "id": "boston-childrens-uses-ai-to-unlock-new-diagnoses",
+  "slug": "boston-childrens-uses-ai-to-unlock-new-diagnoses",
+  "title": "Boston Children’s uses AI to unlock new diagnoses",
+  "category": "short-news",
+  "isTrending": true,
+  "publishDate": "2026-07-25",
+  "author": "OpenAI / Modelverse Editorial",
+  "readTime": "2 min read",
+  "excerpt": "Boston Children’s Hospital uses OpenAI technology to improve patient care, reduce operational burden, and help diagnose more than 40 rare disease cases....",
+  "body": "Boston Children’s Hospital uses OpenAI technology to improve patient care, reduce operational burden, and help diagnose more than 40 rare disease cases.\n\n### Official Announcement\nRead the full update directly from the official source at [OpenAI News](https://openai.com/index/boston-childrens-hospital).\n\nStay tuned to [Modelverse](https://www.themodelverse.in) for real-time model analysis and benchmark coverage.",
+  "coverImage": "/images/news/claude-opus-5.jpg",
+  "status": "published",
+  "confidenceLevel": "confirmed",
+  "externalSources": [
+    "https://openai.com/index/boston-childrens-hospital"
+  ],
+  "relatedModels": [],
+  "tags": [
+    "ai-news",
+    "breaking",
+    "openai"
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "id": "introducing-chatgpt-and-whisper-apis",
+  "slug": "introducing-chatgpt-and-whisper-apis",
+  "title": "Introducing ChatGPT and Whisper APIs",
+  "category": "short-news",
+  "isTrending": true,
+  "publishDate": "2026-07-25",
+  "author": "OpenAI / Modelverse Editorial",
+  "readTime": "2 min read",
+  "excerpt": "Introducing ChatGPT and Whisper APIs...",
+  "body": "Introducing ChatGPT and Whisper APIs\n\n### Official Announcement\nRead the full update directly from the official source at [OpenAI News](https://openai.com/index/introducing-chatgpt-and-whisper-apis).\n\nStay tuned to [Modelverse](https://www.themodelverse.in) for real-time model analysis and benchmark coverage.",
+  "coverImage": "/images/news/claude-opus-5.jpg",
+  "status": "published",
+  "confidenceLevel": "confirmed",
+  "externalSources": [
+    "https://openai.com/index/introducing-chatgpt-and-whisper-apis"
+  ],
+  "relatedModels": [],
+  "tags": [
+    "ai-news",
+    "breaking",
+    "openai"
+  ]
+}

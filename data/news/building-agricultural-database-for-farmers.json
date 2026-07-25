@@ -1,0 +1,24 @@
+{
+  "id": "building-agricultural-database-for-farmers",
+  "slug": "building-agricultural-database-for-farmers",
+  "title": "Building agricultural database for farmers",
+  "category": "short-news",
+  "isTrending": true,
+  "publishDate": "2026-07-25",
+  "author": "OpenAI / Modelverse Editorial",
+  "readTime": "2 min read",
+  "excerpt": "Digital Green uses OpenAI to increase farmer income....",
+  "body": "Digital Green uses OpenAI to increase farmer income.\n\n### Official Announcement\nRead the full update directly from the official source at [OpenAI News](https://openai.com/index/digital-green).\n\nStay tuned to [Modelverse](https://www.themodelverse.in) for real-time model analysis and benchmark coverage.",
+  "coverImage": "/images/news/claude-opus-5.jpg",
+  "status": "published",
+  "confidenceLevel": "confirmed",
+  "externalSources": [
+    "https://openai.com/index/digital-green"
+  ],
+  "relatedModels": [],
+  "tags": [
+    "ai-news",
+    "breaking",
+    "openai"
+  ]
+}

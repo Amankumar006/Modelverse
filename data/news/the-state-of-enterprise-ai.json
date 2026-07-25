@@ -1,0 +1,24 @@
+{
+  "id": "the-state-of-enterprise-ai",
+  "slug": "the-state-of-enterprise-ai",
+  "title": "The state of enterprise AI",
+  "category": "short-news",
+  "isTrending": true,
+  "publishDate": "2026-07-25",
+  "author": "OpenAI / Modelverse Editorial",
+  "readTime": "2 min read",
+  "excerpt": "A data-driven look at enterprise AI adoption, showing how organizations move from experimentation to real productivity gains and new capabilities....",
+  "body": "A data-driven look at enterprise AI adoption, showing how organizations move from experimentation to real productivity gains and new capabilities.\n\n### Official Announcement\nRead the full update directly from the official source at [OpenAI News](https://openai.com/business/guides-and-resources/the-state-of-enterprise-ai-2025-report).\n\nStay tuned to [Modelverse](https://www.themodelverse.in) for real-time model analysis and benchmark coverage.",
+  "coverImage": "/images/news/claude-opus-5.jpg",
+  "status": "published",
+  "confidenceLevel": "confirmed",
+  "externalSources": [
+    "https://openai.com/business/guides-and-resources/the-state-of-enterprise-ai-2025-report"
+  ],
+  "relatedModels": [],
+  "tags": [
+    "ai-news",
+    "breaking",
+    "openai"
+  ]
+}

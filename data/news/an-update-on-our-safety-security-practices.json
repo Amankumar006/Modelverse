@@ -1,0 +1,24 @@
+{
+  "id": "an-update-on-our-safety-security-practices",
+  "slug": "an-update-on-our-safety-security-practices",
+  "title": "An update on our safety & security practices",
+  "category": "short-news",
+  "isTrending": true,
+  "publishDate": "2026-07-25",
+  "author": "OpenAI / Modelverse Editorial",
+  "readTime": "2 min read",
+  "excerpt": "An update on our safety & security practices...",
+  "body": "An update on our safety & security practices\n\n### Official Announcement\nRead the full update directly from the official source at [OpenAI News](https://openai.com/index/update-on-safety-and-security-practices).\n\nStay tuned to [Modelverse](https://www.themodelverse.in) for real-time model analysis and benchmark coverage.",
+  "coverImage": "/images/news/claude-opus-5.jpg",
+  "status": "published",
+  "confidenceLevel": "confirmed",
+  "externalSources": [
+    "https://openai.com/index/update-on-safety-and-security-practices"
+  ],
+  "relatedModels": [],
+  "tags": [
+    "ai-news",
+    "breaking",
+    "openai"
+  ]
+}

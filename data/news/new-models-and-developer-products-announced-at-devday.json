@@ -1,0 +1,24 @@
+{
+  "id": "new-models-and-developer-products-announced-at-devday",
+  "slug": "new-models-and-developer-products-announced-at-devday",
+  "title": "New models and developer products announced at DevDay",
+  "category": "short-news",
+  "isTrending": true,
+  "publishDate": "2026-07-25",
+  "author": "OpenAI / Modelverse Editorial",
+  "readTime": "2 min read",
+  "excerpt": "GPT-4 Turbo with 128K context and lower prices, the new Assistants API, GPT-4 Turbo with Vision, DALL·E 3 API, and more....",
+  "body": "GPT-4 Turbo with 128K context and lower prices, the new Assistants API, GPT-4 Turbo with Vision, DALL·E 3 API, and more.\n\n### Official Announcement\nRead the full update directly from the official source at [OpenAI News](https://openai.com/index/new-models-and-developer-products-announced-at-devday).\n\nStay tuned to [Modelverse](https://www.themodelverse.in) for real-time model analysis and benchmark coverage.",
+  "coverImage": "/images/news/claude-opus-5.jpg",
+  "status": "published",
+  "confidenceLevel": "confirmed",
+  "externalSources": [
+    "https://openai.com/index/new-models-and-developer-products-announced-at-devday"
+  ],
+  "relatedModels": [],
+  "tags": [
+    "ai-news",
+    "breaking",
+    "openai"
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "id": "making-it-easier-to-understand-how-content-was-created-and-edited",
+  "slug": "making-it-easier-to-understand-how-content-was-created-and-edited",
+  "title": "Making it easier to understand how content was created and edited",
+  "category": "short-news",
+  "isTrending": true,
+  "publishDate": "2026-07-25",
+  "author": "Google DeepMind / Modelverse Editorial",
+  "readTime": "2 min read",
+  "excerpt": "We're expanding our tools to help you understand how content was created and edited across the web....",
+  "body": "We're expanding our tools to help you understand how content was created and edited across the web.\n\n### Official Announcement\nRead the full update directly from the official source at [Google DeepMind News](https://deepmind.google/blog/making-it-easier-to-understand-how-content-was-created-and-edited/).\n\nStay tuned to [Modelverse](https://www.themodelverse.in) for real-time model analysis and benchmark coverage.",
+  "coverImage": "/images/news/claude-opus-5.jpg",
+  "status": "published",
+  "confidenceLevel": "confirmed",
+  "externalSources": [
+    "https://deepmind.google/blog/making-it-easier-to-understand-how-content-was-created-and-edited/"
+  ],
+  "relatedModels": [],
+  "tags": [
+    "ai-news",
+    "breaking",
+    "google-deepmind"
+  ]
+}

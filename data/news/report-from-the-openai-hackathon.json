@@ -1,0 +1,24 @@
+{
+  "id": "report-from-the-openai-hackathon",
+  "slug": "report-from-the-openai-hackathon",
+  "title": "Report from the OpenAI hackathon",
+  "category": "short-news",
+  "isTrending": true,
+  "publishDate": "2026-07-25",
+  "author": "OpenAI / Modelverse Editorial",
+  "readTime": "2 min read",
+  "excerpt": "On March 3rd, we hosted our first hackathon with 100 members of the artificial intelligence community....",
+  "body": "On March 3rd, we hosted our first hackathon with 100 members of the artificial intelligence community.\n\n### Official Announcement\nRead the full update directly from the official source at [OpenAI News](https://openai.com/index/hackathon-follow-up).\n\nStay tuned to [Modelverse](https://www.themodelverse.in) for real-time model analysis and benchmark coverage.",
+  "coverImage": "/images/news/claude-opus-5.jpg",
+  "status": "published",
+  "confidenceLevel": "confirmed",
+  "externalSources": [
+    "https://openai.com/index/hackathon-follow-up"
+  ],
+  "relatedModels": [],
+  "tags": [
+    "ai-news",
+    "breaking",
+    "openai"
+  ]
+}

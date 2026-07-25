@@ -1,0 +1,24 @@
+{
+  "id": "introducing-openai-o3-and-o4-mini",
+  "slug": "introducing-openai-o3-and-o4-mini",
+  "title": "Introducing OpenAI o3 and o4-mini",
+  "category": "short-news",
+  "isTrending": true,
+  "publishDate": "2026-07-25",
+  "author": "OpenAI / Modelverse Editorial",
+  "readTime": "2 min read",
+  "excerpt": "Our smartest and most capable models to date with full tool access...",
+  "body": "Our smartest and most capable models to date with full tool access\n\n### Official Announcement\nRead the full update directly from the official source at [OpenAI News](https://openai.com/index/introducing-o3-and-o4-mini).\n\nStay tuned to [Modelverse](https://www.themodelverse.in) for real-time model analysis and benchmark coverage.",
+  "coverImage": "/images/news/claude-opus-5.jpg",
+  "status": "published",
+  "confidenceLevel": "confirmed",
+  "externalSources": [
+    "https://openai.com/index/introducing-o3-and-o4-mini"
+  ],
+  "relatedModels": [],
+  "tags": [
+    "ai-news",
+    "breaking",
+    "openai"
+  ]
+}

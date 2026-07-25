@@ -1,0 +1,24 @@
+{
+  "id": "dalle-creating-images-from-text",
+  "slug": "dalle-creating-images-from-text",
+  "title": "DALL·E: Creating images from text",
+  "category": "short-news",
+  "isTrending": true,
+  "publishDate": "2026-07-25",
+  "author": "OpenAI / Modelverse Editorial",
+  "readTime": "2 min read",
+  "excerpt": "We’ve trained a neural network called DALL·E that creates images from text captions for a wide range of concepts expressible in natural language....",
+  "body": "We’ve trained a neural network called DALL·E that creates images from text captions for a wide range of concepts expressible in natural language.\n\n### Official Announcement\nRead the full update directly from the official source at [OpenAI News](https://openai.com/index/dall-e).\n\nStay tuned to [Modelverse](https://www.themodelverse.in) for real-time model analysis and benchmark coverage.",
+  "coverImage": "/images/news/claude-opus-5.jpg",
+  "status": "published",
+  "confidenceLevel": "confirmed",
+  "externalSources": [
+    "https://openai.com/index/dall-e"
+  ],
+  "relatedModels": [],
+  "tags": [
+    "ai-news",
+    "breaking",
+    "openai"
+  ]
+}

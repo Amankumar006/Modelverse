@@ -1,0 +1,24 @@
+{
+  "id": "personalizing-chatgpt",
+  "slug": "personalizing-chatgpt",
+  "title": "Personalizing ChatGPT",
+  "category": "short-news",
+  "isTrending": true,
+  "publishDate": "2026-07-25",
+  "author": "OpenAI / Modelverse Editorial",
+  "readTime": "2 min read",
+  "excerpt": "Learn how to personalize ChatGPT using custom instructions and memory to get more relevant, consistent, and tailored responses....",
+  "body": "Learn how to personalize ChatGPT using custom instructions and memory to get more relevant, consistent, and tailored responses.\n\n### Official Announcement\nRead the full update directly from the official source at [OpenAI News](https://openai.com/academy/personalization).\n\nStay tuned to [Modelverse](https://www.themodelverse.in) for real-time model analysis and benchmark coverage.",
+  "coverImage": "/images/news/claude-opus-5.jpg",
+  "status": "published",
+  "confidenceLevel": "confirmed",
+  "externalSources": [
+    "https://openai.com/academy/personalization"
+  ],
+  "relatedModels": [],
+  "tags": [
+    "ai-news",
+    "breaking",
+    "openai"
+  ]
+}

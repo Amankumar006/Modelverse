@@ -1,0 +1,24 @@
+{
+  "id": "rox-goes-all-in-on-openai",
+  "slug": "rox-goes-all-in-on-openai",
+  "title": "Rox goes “all in” on OpenAI",
+  "category": "short-news",
+  "isTrending": true,
+  "publishDate": "2026-07-25",
+  "author": "OpenAI / Modelverse Editorial",
+  "readTime": "2 min read",
+  "excerpt": "By combining commercial experience and deep LLM expertise with OpenAI’s models, Rox makes every seller a top 1% seller....",
+  "body": "By combining commercial experience and deep LLM expertise with OpenAI’s models, Rox makes every seller a top 1% seller.\n\n### Official Announcement\nRead the full update directly from the official source at [OpenAI News](https://openai.com/index/rox).\n\nStay tuned to [Modelverse](https://www.themodelverse.in) for real-time model analysis and benchmark coverage.",
+  "coverImage": "/images/news/claude-opus-5.jpg",
+  "status": "published",
+  "confidenceLevel": "confirmed",
+  "externalSources": [
+    "https://openai.com/index/rox"
+  ],
+  "relatedModels": [],
+  "tags": [
+    "ai-news",
+    "breaking",
+    "openai"
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "id": "transfer-of-adversarial-robustness-between-perturbation-types",
+  "slug": "transfer-of-adversarial-robustness-between-perturbation-types",
+  "title": "Transfer of adversarial robustness between perturbation types",
+  "category": "short-news",
+  "isTrending": true,
+  "publishDate": "2026-07-25",
+  "author": "OpenAI / Modelverse Editorial",
+  "readTime": "2 min read",
+  "excerpt": "Transfer of adversarial robustness between perturbation types...",
+  "body": "Transfer of adversarial robustness between perturbation types\n\n### Official Announcement\nRead the full update directly from the official source at [OpenAI News](https://openai.com/index/transfer-of-adversarial-robustness-between-perturbation-types).\n\nStay tuned to [Modelverse](https://www.themodelverse.in) for real-time model analysis and benchmark coverage.",
+  "coverImage": "/images/news/claude-opus-5.jpg",
+  "status": "published",
+  "confidenceLevel": "confirmed",
+  "externalSources": [
+    "https://openai.com/index/transfer-of-adversarial-robustness-between-perturbation-types"
+  ],
+  "relatedModels": [],
+  "tags": [
+    "ai-news",
+    "breaking",
+    "openai"
+  ]
+}

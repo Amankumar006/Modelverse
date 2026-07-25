@@ -1,0 +1,24 @@
+{
+  "id": "openai-robotics-symposium-2019",
+  "slug": "openai-robotics-symposium-2019",
+  "title": "OpenAI Robotics Symposium 2019",
+  "category": "short-news",
+  "isTrending": true,
+  "publishDate": "2026-07-25",
+  "author": "OpenAI / Modelverse Editorial",
+  "readTime": "2 min read",
+  "excerpt": "We hosted the first OpenAI Robotics Symposium on April 27, 2019....",
+  "body": "We hosted the first OpenAI Robotics Symposium on April 27, 2019.\n\n### Official Announcement\nRead the full update directly from the official source at [OpenAI News](https://openai.com/index/symposium-2019).\n\nStay tuned to [Modelverse](https://www.themodelverse.in) for real-time model analysis and benchmark coverage.",
+  "coverImage": "/images/news/claude-opus-5.jpg",
+  "status": "published",
+  "confidenceLevel": "confirmed",
+  "externalSources": [
+    "https://openai.com/index/symposium-2019"
+  ],
+  "relatedModels": [],
+  "tags": [
+    "ai-news",
+    "breaking",
+    "openai"
+  ]
+}

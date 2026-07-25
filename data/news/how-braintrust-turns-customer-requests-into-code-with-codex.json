@@ -1,0 +1,24 @@
+{
+  "id": "how-braintrust-turns-customer-requests-into-code-with-codex",
+  "slug": "how-braintrust-turns-customer-requests-into-code-with-codex",
+  "title": "How Braintrust turns customer requests into code with Codex",
+  "category": "short-news",
+  "isTrending": true,
+  "publishDate": "2026-07-25",
+  "author": "OpenAI / Modelverse Editorial",
+  "readTime": "2 min read",
+  "excerpt": "How Braintrust engineers use Codex with GPT-5.5 to run experiments and code faster....",
+  "body": "How Braintrust engineers use Codex with GPT-5.5 to run experiments and code faster.\n\n### Official Announcement\nRead the full update directly from the official source at [OpenAI News](https://openai.com/index/braintrust).\n\nStay tuned to [Modelverse](https://www.themodelverse.in) for real-time model analysis and benchmark coverage.",
+  "coverImage": "/images/news/claude-opus-5.jpg",
+  "status": "published",
+  "confidenceLevel": "confirmed",
+  "externalSources": [
+    "https://openai.com/index/braintrust"
+  ],
+  "relatedModels": [],
+  "tags": [
+    "ai-news",
+    "breaking",
+    "openai"
+  ]
+}
