@@ -15,7 +15,11 @@
   "externalSources": [
     "https://techcrunch.com/2026/07/24/blueskys-ai-assistant-attie-expands-into-an-open-social-research-tool/"
   ],
-  "relatedModels": [],
+  "relatedModels": [
+    "wan-dancer",
+    "gemini-3-5-flash-cyber",
+    "gemini-3-6-flash"
+  ],
   "tags": [
     "ai-news",
     "breaking",

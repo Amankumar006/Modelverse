@@ -1,63 +1,40 @@
 ---
 name: add-model-entry
-description: Adds a single new AI model (open-source, closed-source, API-only, or research-preview) to the site's dataset as a validated JSON entry. Use this whenever the user wants to add, register, or document a specific released AI model, or hands over structured details about one model to be entered into the catalog.
+description: Use when adding a new AI model to the Modelverse directory, or updating an existing model's data (license, benchmarks, provider info, release date). Covers the JSON schema, sources requirement, and index update.
 ---
 
-# Add Model Entry
+# Add / Update a Model Entry
 
-## When to use this skill
-- The user gives you details about one specific AI model release and wants
-  it added to the site.
-- The `extract-from-youtube` skill has produced a draft entry that needs to
-  be finalized and written to disk.
+## When to use this
+Any task like "add [model name] to the directory," "update the license on [model],"
+"add benchmark scores for [model]."
 
-## How to use it
+## Steps
 
-1. **Check for duplicates.** Search `/data/models/*.json` for the same
-   `name`/`developer`/`family` before creating a new file. If it already
-   exists, ask the user whether this is a correction/update or a genuinely
-   different version, per the data-integrity rule. Before creating a new
-   entry, check scope-policy.md — if the model is a fine-tune/quantization/minor
-   point release of an existing entry, flag this to the user instead of
-   proceeding automatically.
+1. **Branch first.** `feature/add-<model-slug>` or `fix/update-<model-slug>`.
+2. **Research the model** from primary sources where possible: official model card,
+   provider blog/announcement, official GitHub repo, or academic paper. Avoid
+   secondary aggregators as the sole source when a primary one exists.
+3. **Create/edit the JSON file** at `data/models/<model-slug>.json`, validated
+   against the project's Zod schema. Required shape includes (check the current
+   schema file for the authoritative list — don't hardcode from memory):
+   - identity: name, provider, slug
+   - modality, license, parameter count (if disclosed)
+   - `sources: []` — every non-obvious field should trace to at least one source
+     entry with a URL
+   - `verified: false` on any field you couldn't confirm from a source
+4. **Update the index file(s)** so the new entry surfaces in listing/search/filter.
+5. **Logo asset (optional):** if adding one, follow the existing naming/sizing
+   convention in the logos directory — check a recent entry for the pattern rather
+   than assuming dimensions.
+6. **Validate:** run the project's Zod validation script if one exists (check
+   `scripts/`) before committing.
+7. **Commit:** `feat(models): add <Model Name> entry` or `fix(models): update
+   <Model Name> license info`.
+8. **Open PR**, one model per PR, per the data-integrity and git-branching rules.
 
-2. **Gather required fields.** At minimum: `name`, `developer`,
-   `releaseDate`, `type`, `modality`, `primaryTask`, `deployment`, `description`,
-   at least one entry in `sources`. If the user hasn't given you enough to fill
-   required fields, ask — don't guess factual details (see data-integrity rule).
-   It's fine to guess/derive non-factual fields like `slug` and `id`.
-
-3. **Derive `id` and `slug`** as kebab-case from `developer` + `name`
-   (e.g. "Mistral AI" + "Mixtral 8x22B" -> `mistral-mixtral-8x22b`).
-
-4. **Validate.** Write the entry, then run:
-   ```
-   npx tsx scripts/validate-model.ts data/models/<id>.json
-   ```
-   (see `references/validate-model.ts` for the script if it doesn't exist
-   yet — create it under `/scripts` once, then reuse it.) Fix any schema
-   errors before proceeding.
-
-5. **Write the file** to `/data/models/<id>.json`, pretty-printed, 2-space
-   indent, following the field order in `data/schema/model.schema.ts`.
-
-6. **Update the index.** Append `{ id, name, slug, developer, releaseDate,
-   type }` to `/data/models/_index.json` (create it if missing) so list/grid
-   views don't need to read every file to render a table.
-
-7. **Report back** with a short summary: what was added, what fields are
-   `verified: false` and why, and a diff-style preview of the JSON.
-
-## Field notes
-- `parameters`: use "undisclosed" rather than omitting the field for
-  closed-source models — it's informative that it's unknown.
-- `releaseDate`: if only a month is known, use the 1st of that month and
-  note the imprecision in `curatorNotes`.
-- `description`: If a custom description cannot be authored and you must use a templated description (e.g. for batch research-previews), set `"templatedDescription": true` in the JSON entry, and rotate/vary the description text using one of the predefined description templates to avoid repeating boilerplate.
-- **Family and Lineage Guidelines**:
-  - **Avoid Over-broad Families**: Never pool all models from a developer under a single brand-level family (e.g., do not put all Kimi models in `"Kimi"` or all Claude models in `"Claude"`).
-  - **Split by Task**: Models with different `primaryTask` or `modality` belong to different family branches (e.g., `gpt-5-codex` is a separate family from `gpt-5`, and `kimi-k2-7-code` is separate from `kimi-k2-6`).
-  - **Linear Chaining Rules**: Only chain models via `previousVersion` if they share the same task and represent a direct version upgrade within the same branch. If the task changes, start a new branch with `previousVersion: null`.
-- **First-class Developers**:
-  - Do not default to `developer: "Other"` for recurring commercial labs (such as Moonshot AI, Liquid AI, Zhipu AI, etc.). First add them to `data/schema/developers.ts` so they get proper navigation, filters, and page rendering.
-- Full field reference: `references/model-entry-example.json`.
+## Common mistakes to avoid
+- Filling in a plausible parameter count or license without a source — mark
+  `verified: false` instead.
+- Bundling multiple model entries in one PR.
+- Skipping the index update (entry exists but never renders anywhere).

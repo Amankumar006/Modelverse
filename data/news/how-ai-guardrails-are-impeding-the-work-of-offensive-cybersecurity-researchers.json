@@ -15,7 +15,10 @@
   "externalSources": [
     "https://techcrunch.com/2026/07/23/how-ai-guardrails-are-impeding-the-work-of-offensive-cybersecurity-researchers/"
   ],
-  "relatedModels": [],
+  "relatedModels": [
+    "reve-2-1",
+    "gen-3-alpha"
+  ],
   "tags": [
     "ai-news",
     "breaking",

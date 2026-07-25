@@ -1,6 +1,8 @@
 import React from "react";
 import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 import CodeBlock from "./CodeBlock";
+import CopyableTable from "./CopyableTable";
 
 interface MarkdownRendererProps {
   content: string;
@@ -95,10 +97,7 @@ export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
         if (isTableBlock(trimmed)) {
           const { headers, rows } = parseTableBlock(trimmed);
           return (
-            <div
-              key={bIdx}
-              className="my-8 overflow-x-auto rounded-2xl border border-white/10 bg-white/5 shadow-xl"
-            >
+            <CopyableTable key={bIdx} title="Specification Table">
               <table className="w-full text-left border-collapse text-xs sm:text-sm">
                 <thead className="bg-white/10 border-b border-white/10 text-white font-semibold uppercase tracking-wider text-[11px]">
                   <tr>
@@ -121,13 +120,14 @@ export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
                   ))}
                 </tbody>
               </table>
-            </div>
+            </CopyableTable>
           );
         }
 
         return (
           <ReactMarkdown
             key={bIdx}
+            remarkPlugins={[remarkGfm]}
             components={{
               // Code blocks & inline code
               code({ className, children, ...props }) {
@@ -137,7 +137,7 @@ export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
                 if (isInline) {
                   return (
                     <code
-                      className="bg-white/10 text-[#4ADE80] px-1.5 py-0.5 rounded font-mono text-xs border border-white/10 font-medium"
+                      className="bg-[#1A261D] text-[#4ADE80] px-2 py-0.5 rounded-md font-mono text-sm border border-[#243629] font-medium"
                       {...props}
                     >
                       {children}
@@ -160,7 +160,7 @@ export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
               // Callout / Blockquote
               blockquote({ children }) {
                 return (
-                  <blockquote className="my-6 p-4 rounded-xl bg-[#4ADE80]/5 border-l-4 border-[#4ADE80] text-gray-300 text-sm leading-relaxed not-italic font-normal shadow-sm">
+                  <blockquote className="my-8 p-5 rounded-2xl bg-[#121A15] border-l-4 border-[#4ADE80] border-y border-r border-[#243629] text-[#E2E8E4] text-base sm:text-lg leading-relaxed not-italic font-normal shadow-sm">
                     {children}
                   </blockquote>
                 );
@@ -170,14 +170,14 @@ export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
               img({ src, alt }) {
                 return (
                   <figure className="my-8 text-center">
-                    <div className="inline-block rounded-2xl border border-white/10 overflow-hidden shadow-2xl bg-black/40 p-1">
+                    <div className="inline-block rounded-2xl border border-[#243629] overflow-hidden shadow-2xl bg-[#0C120F] p-1">
                       <img
                         src={src}
                         alt={alt || "Illustration"}
-                        className="max-w-full h-auto rounded-xl object-cover max-h-[500px] mx-auto"
+                        className="max-w-full h-auto rounded-xl object-cover max-h-[550px] mx-auto"
                       />
                     </div>
-                    {alt && <figcaption className="text-xs text-gray-400 mt-2 font-medium">{alt}</figcaption>}
+                    {alt && <figcaption className="text-xs text-[#9CA3AF] mt-2 font-medium">{alt}</figcaption>}
                   </figure>
                 );
               },
@@ -185,21 +185,21 @@ export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
               // Headings
               h1({ children }) {
                 return (
-                  <h1 className="text-3xl font-bold tracking-tight text-white mt-10 mb-4 pb-2 border-b border-white/10 flex items-center gap-2">
+                  <h1 className="text-3xl sm:text-4xl font-bold tracking-tight text-[#F0FDF4] mt-10 mb-5 pb-3 border-b border-[#243629] flex items-center gap-2">
                     {children}
                   </h1>
                 );
               },
               h2({ children }) {
                 return (
-                  <h2 className="text-2xl font-bold tracking-tight text-white mt-8 mb-4 flex items-center gap-2">
+                  <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-white mt-10 mb-4 pb-2 border-b border-[#243629]/60 flex items-center gap-2">
                     {children}
                   </h2>
                 );
               },
               h3({ children }) {
                 return (
-                  <h3 className="text-lg font-semibold text-[#4ADE80] mt-6 mb-3">
+                  <h3 className="text-xl font-semibold text-[#4ADE80] mt-8 mb-3">
                     {children}
                   </h3>
                 );
@@ -207,16 +207,16 @@ export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
 
               // Paragraphs & Lists
               p({ children }) {
-                return <p className="text-gray-300 text-base leading-relaxed my-4">{children}</p>;
+                return <p className="text-[#F3F4F6] text-lg sm:text-[19px] leading-[1.85] my-5 font-normal">{children}</p>;
               },
               ul({ children }) {
-                return <ul className="list-disc list-inside space-y-2 my-4 text-gray-300">{children}</ul>;
+                return <ul className="list-disc list-outside ml-6 space-y-3 my-5 text-[#F3F4F6] text-base sm:text-lg leading-[1.8]">{children}</ul>;
               },
               ol({ children }) {
-                return <ol className="list-decimal list-inside space-y-2 my-4 text-gray-300">{children}</ol>;
+                return <ol className="list-decimal list-outside ml-6 space-y-3 my-5 text-[#F3F4F6] text-base sm:text-lg leading-[1.8]">{children}</ol>;
               },
               li({ children }) {
-                return <li className="text-gray-300 leading-relaxed">{children}</li>;
+                return <li className="text-[#F3F4F6] text-base sm:text-lg leading-[1.8] pl-1">{children}</li>;
               },
             }}
           >

@@ -16,6 +16,8 @@
     "https://deepmind.google/blog/diffusiongemma-4x-faster-text-generation/"
   ],
   "relatedModels": [
+    "reve-2-1",
+    "high3",
     "google-deepmind-diffusiongemma"
   ],
   "tags": [

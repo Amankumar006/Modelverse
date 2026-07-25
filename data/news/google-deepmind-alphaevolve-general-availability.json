@@ -15,7 +15,9 @@
     "https://deepmind.google/blog/alphaevolve-impact/"
   ],
   "relatedModels": [
-    "google-deepmind-alphaevolve"
+    "wan-dancer",
+    "high3",
+    "google-deepmind-gemma-4-31b-dense"
   ],
   "tags": [
     "google",

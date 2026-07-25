@@ -18,7 +18,9 @@
     "https://www.kimi.com/?chat_enter_method=new_chat"
   ],
   "relatedModels": [
-    "moonshot-ai-kimi-k3"
+    "moonshot-ai-kimi-k3",
+    "codex-mini",
+    "reve-2-1"
   ],
   "tags": [
     "kimi",

@@ -8,6 +8,7 @@ import { ModelEntry } from "@/lib/models";
 import { X, Plus, Search, ChevronDown, Activity, Calendar, Server, Tag, Shield, FileCode2 } from "lucide-react";
 import TypeBadge from "@/components/ui/TypeBadge";
 import ModalityTag from "@/components/ui/ModalityTag";
+import CopyableTable from "@/components/ui/CopyableTable";
 
 interface CompareClientProps {
   initialModels: ModelEntry[];
@@ -175,7 +176,7 @@ export default function CompareClient({ initialModels, allModels }: CompareClien
       </div>
 
       {/* Comparison Table */}
-      <div className="overflow-x-auto pb-6">
+      <CopyableTable title="Model Comparison Matrix">
         <table className="w-full min-w-[800px] border-collapse">
           <thead>
             <tr>
@@ -245,33 +246,24 @@ export default function CompareClient({ initialModels, allModels }: CompareClien
 
             {/* Parameters */}
             <tr>
-              <td className="p-4 text-sm font-medium text-gray-400 flex items-center gap-2"><Server size={16} /> Parameters</td>
+              <td className="p-4 text-sm font-semibold text-gray-300 bg-white/[0.02]">Parameters</td>
               {models.map((model) => (
-                <td key={model.id} className="p-4 text-sm font-semibold text-white">{model.parameters}</td>
+                <td key={model.id} className="p-4 text-sm text-white font-mono font-medium">
+                  {model.parameters || "Undisclosed"}
+                </td>
               ))}
               {Array.from({ length: 4 - models.length }).map((_, i) => (
                 <td key={`empty-p-${i}`} className="p-4 bg-white/[0.02] border-r border-white/5 border-dashed last:border-r-0"></td>
               ))}
             </tr>
 
-            {/* Context Window */}
-            <tr>
-              <td className="p-4 text-sm font-medium text-gray-400 flex items-center gap-2"><FileCode2 size={16} /> Context Window</td>
-              {models.map((model) => (
-                <td key={model.id} className="p-4 text-sm font-semibold text-white">{model.contextWindow}</td>
-              ))}
-              {Array.from({ length: 4 - models.length }).map((_, i) => (
-                <td key={`empty-c-${i}`} className="p-4 bg-white/[0.02] border-r border-white/5 border-dashed last:border-r-0"></td>
-              ))}
-            </tr>
-
             {/* Modalities */}
             <tr>
-              <td className="p-4 text-sm font-medium text-gray-400 align-top">Modalities</td>
+              <td className="p-4 text-sm font-semibold text-gray-300 bg-white/[0.02]">Modalities</td>
               {models.map((model) => (
-                <td key={model.id} className="p-4 align-top">
-                  <div className="flex flex-wrap gap-1.5">
-                    {model.modality.map((m) => (
+                <td key={model.id} className="p-4 align-middle">
+                  <div className="flex flex-wrap gap-1">
+                    {model.modality?.map((m) => (
                       <ModalityTag key={m} modality={m} />
                     ))}
                   </div>
@@ -282,31 +274,60 @@ export default function CompareClient({ initialModels, allModels }: CompareClien
               ))}
             </tr>
 
-            {/* Benchmarks Section Header */}
-            {allBenchmarkNames.length > 0 && (
-              <tr>
-                <td colSpan={5} className="p-4 pt-8 pb-4">
-                  <h3 className="text-lg font-bold text-white border-b border-white/10 pb-2 flex items-center gap-2">
-                    <Activity size={20} className="text-[#4ADE80]" />
-                    Benchmarks
-                  </h3>
+            {/* Context Window */}
+            <tr>
+              <td className="p-4 text-sm font-semibold text-gray-300 bg-white/[0.02]">Context Window</td>
+              {models.map((model) => (
+                <td key={model.id} className="p-4 text-sm text-white font-mono font-medium">
+                  {model.contextWindow || "Unknown"}
                 </td>
-              </tr>
-            )}
+              ))}
+              {Array.from({ length: 4 - models.length }).map((_, i) => (
+                <td key={`empty-c-${i}`} className="p-4 bg-white/[0.02] border-r border-white/5 border-dashed last:border-r-0"></td>
+              ))}
+            </tr>
 
-            {/* Benchmarks Rows */}
-            {allBenchmarkNames.map((benchmarkName) => (
-              <tr key={benchmarkName}>
-                <td className="p-4 text-sm font-medium text-gray-400">{benchmarkName}</td>
+            {/* Primary Task */}
+            <tr>
+              <td className="p-4 text-sm font-semibold text-gray-300 bg-white/[0.02]">Primary Task</td>
+              {models.map((model) => (
+                <td key={model.id} className="p-4 text-sm text-gray-200 capitalize">
+                  {model.primaryTask?.replace("-", " ") || "General"}
+                </td>
+              ))}
+              {Array.from({ length: 4 - models.length }).map((_, i) => (
+                <td key={`empty-task-${i}`} className="p-4 bg-white/[0.02] border-r border-white/5 border-dashed last:border-r-0"></td>
+              ))}
+            </tr>
+
+            {/* Release Date */}
+            <tr>
+              <td className="p-4 text-sm font-semibold text-gray-300 bg-white/[0.02]">Release Date</td>
+              {models.map((model) => (
+                <td key={model.id} className="p-4 text-sm text-gray-400 font-mono">
+                  {model.releaseDate || "N/A"}
+                </td>
+              ))}
+              {Array.from({ length: 4 - models.length }).map((_, i) => (
+                <td key={`empty-r-${i}`} className="p-4 bg-white/[0.02] border-r border-white/5 border-dashed last:border-r-0"></td>
+              ))}
+            </tr>
+
+            {/* Benchmarks Comparison */}
+            {allBenchmarkNames.map((benchName) => (
+              <tr key={benchName}>
+                <td className="p-4 text-sm font-semibold text-[#4ADE80] bg-white/[0.02]">{benchName}</td>
                 {models.map((model) => {
-                  const bench = model.benchmarks.find((b) => b.name === benchmarkName);
+                  const bench = model.benchmarks?.find((b) => b.name === benchName);
                   return (
                     <td key={model.id} className="p-4">
                       {bench ? (
-                        <div className="flex items-center gap-2">
-                          <span className="text-sm font-bold text-white">{bench.score}</span>
+                        <div className="flex items-baseline gap-2">
+                          <span className="text-base font-bold text-white font-mono">{bench.score}</span>
                           {bench.verified && (
-                            <span className="w-1.5 h-1.5 rounded-full bg-green-500" title="Verified by Modelverse" />
+                            <span className="text-[10px] text-[#4ADE80] bg-[#4ADE80]/10 px-1.5 py-0.5 rounded font-mono">
+                              Verified
+                            </span>
                           )}
                         </div>
                       ) : (
@@ -315,14 +336,11 @@ export default function CompareClient({ initialModels, allModels }: CompareClien
                     </td>
                   );
                 })}
-                {Array.from({ length: 4 - models.length }).map((_, i) => (
-                  <td key={`empty-b-${i}`} className="p-4 bg-white/[0.02] border-r border-white/5 border-dashed last:border-r-0"></td>
-                ))}
               </tr>
             ))}
           </tbody>
         </table>
-      </div>
+      </CopyableTable>
     </div>
   );
 }

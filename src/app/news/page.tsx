@@ -127,7 +127,7 @@ export default async function NewsPage({ searchParams }: NewsPageProps) {
         {topNews ? (
           <div className="space-y-6">
             <div className="flex items-center justify-between border-b border-[#243629] pb-4">
-              <h2 className="text-xs font-bold uppercase tracking-wider text-[#5A6E60]">Top News</h2>
+              <h2 className="text-xs font-bold uppercase tracking-wider text-[#9CA3AF]">Top News</h2>
               <span className="text-xs font-bold uppercase tracking-wider text-[#4ADE80]">Featured Article</span>
             </div>
             <div
@@ -171,25 +171,25 @@ export default async function NewsPage({ searchParams }: NewsPageProps) {
                   </h3>
 
                   {/* Description */}
-                  <p className="text-sm sm:text-base text-[#8C9E91] leading-relaxed mb-8">
+                  <p className="text-sm sm:text-base text-[#E5E7EB] leading-relaxed mb-8">
                     {topNews.excerpt}
                   </p>
                 </div>
 
                 {/* Footer */}
                 <div className="flex items-center justify-between pt-6 border-t border-[#243629]">
-                  <div className="flex items-center gap-4 text-xs text-[#5A6E60]">
-                    <span className="flex items-center gap-1">
-                      <Clock size={12} />
+                  <div className="flex items-center gap-4 text-xs text-[#9CA3AF]">
+                    <span className="flex items-center gap-1.5 text-[#A3B8AA]">
+                      <Clock size={13} className="text-[#4ADE80]" />
                       {topNews.readTime}
                     </span>
-                    <span>·</span>
-                    <span className="flex items-center gap-1">
-                      <Calendar size={12} />
+                    <span className="text-[#334D3A]">·</span>
+                    <span className="flex items-center gap-1.5 text-[#A3B8AA]">
+                      <Calendar size={13} className="text-[#4ADE80]" />
                       {formatNewsDate(topNews.publishDate)}
                     </span>
                   </div>
-                  <span className="text-xs font-semibold text-[#7A8A7F] tracking-wider uppercase inline-flex items-center gap-1">
+                  <span className="text-xs font-semibold text-[#A3B8AA] tracking-wider uppercase inline-flex items-center gap-1">
                     by {topNews.author}
                   </span>
                 </div>

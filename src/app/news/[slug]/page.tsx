@@ -4,12 +4,15 @@ import Image from "next/image";
 import Navbar from "@/components/layout/Navbar";
 import NewsBreadcrumb from "@/components/news/NewsBreadcrumb";
 import { getArticleBySlug, getAllArticles, getCategoryLabel } from "@/lib/news";
-import { getModelBySlug, SITE_URL } from "@/lib/models";
+import { getModelBySlug, getAllModelEntries, SITE_URL } from "@/lib/models";
 import { Clock, Calendar, ArrowRight, ArrowLeft, Tag } from "lucide-react";
 import { notFound } from "next/navigation";
 import ConfidenceBadge from "@/components/news/ConfidenceBadge";
 import BenchmarkTabs from "@/components/news/BenchmarkTabs";
 import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
+import CodeBlock from "@/components/ui/CodeBlock";
+import CopyableTable from "@/components/ui/CopyableTable";
 interface ArticlePageProps {
   params: Promise<{
     slug: string;
@@ -76,10 +79,31 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
     notFound();
   }
 
-  // Get full models details for related links
-  const relatedModelsData = (article.relatedModels || [])
+  // Get full models details for related links, with auto-matching fallback
+  let relatedModelsData = (article.relatedModels || [])
     .map(slug => getModelBySlug(slug))
     .filter((model): model is NonNullable<typeof model> => !!model);
+
+  if (relatedModelsData.length < 2) {
+    const allModels = getAllModelEntries();
+    const textToMatch = `${article.title} ${article.body}`.toLowerCase();
+    const existingSlugs = new Set(relatedModelsData.map(m => m.slug));
+
+    const matched = allModels.filter(m => {
+      if (existingSlugs.has(m.slug)) return false;
+      const nameLower = m.name.toLowerCase();
+      if (nameLower.length >= 3 && textToMatch.includes(nameLower)) return true;
+      if (m.family && m.family.length >= 3 && textToMatch.includes(m.family.toLowerCase())) return true;
+      return false;
+    });
+
+    const combined = [...relatedModelsData, ...matched];
+    if (combined.length < 2) {
+      const featuredFallback = allModels.filter(m => m.featured && !existingSlugs.has(m.slug));
+      combined.push(...featuredFallback);
+    }
+    relatedModelsData = combined.slice(0, 3);
+  }
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -170,18 +194,18 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
             {article.title}
           </h1>
 
-          <div className="flex flex-wrap items-center gap-6 text-xs sm:text-sm text-[#5A6E60] border-y border-[#243629] py-4">
-            <span className="font-semibold text-[#8C9E91] uppercase">
+          <div className="flex flex-wrap items-center gap-6 text-xs sm:text-sm text-[#9CA3AF] border-y border-[#243629] py-4">
+            <span className="font-semibold text-[#E2E8E4] uppercase">
               By {article.author}
             </span>
-            <span className="hidden sm:inline">|</span>
-            <span className="flex items-center gap-1">
-              <Calendar size={14} />
+            <span className="hidden sm:inline text-[#334D3A]">|</span>
+            <span className="flex items-center gap-1.5 text-[#A3B8AA]">
+              <Calendar size={14} className="text-[#4ADE80]" />
               {formatNewsDate(article.publishDate)}
             </span>
-            <span>·</span>
-            <span className="flex items-center gap-1">
-              <Clock size={14} />
+            <span className="text-[#334D3A]">·</span>
+            <span className="flex items-center gap-1.5 text-[#A3B8AA]">
+              <Clock size={14} className="text-[#4ADE80]" />
               {article.readTime}
             </span>
           </div>
@@ -190,7 +214,7 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
 
       {/* Featured Cover Image */}
       <div className="max-w-[1400px] mx-auto px-0 sm:px-8 lg:px-12 mb-16">
-        <div suppressHydrationWarning className="relative h-[300px] sm:h-[500px] lg:h-[700px] w-full bg-[#0C120F] sm:rounded-3xl overflow-hidden shadow-sm">
+        <div suppressHydrationWarning className="relative h-[300px] sm:h-[500px] lg:h-[650px] w-full bg-[#0C120F] sm:rounded-3xl overflow-hidden shadow-sm border border-[#243629]">
           <Image
             src={article.coverImage}
             alt={article.title}
@@ -203,12 +227,49 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
 
       {/* Article Body Grid */}
       <div className="max-w-[1400px] mx-auto px-6 sm:px-8 lg:px-12 grid grid-cols-1 lg:grid-cols-[1fr_350px] xl:grid-cols-[1fr_400px] gap-12 lg:gap-20">
-        {/* Main Content */}
-        <article className="prose prose-invert prose-emerald max-w-none text-[#E2E8E4] prose-img:rounded-xl prose-img:max-w-full prose-img:h-auto prose-img:w-full prose-img:mx-auto">
+        {/* Main Content (Ergonomic 760px reading width & 20px font scale) */}
+        <article className="prose prose-invert prose-emerald max-w-[760px] text-[#F3F4F6] prose-p:text-[#F3F4F6] prose-p:leading-[1.88] prose-p:text-[19px] md:prose-p:text-[21px] prose-headings:text-white prose-img:rounded-xl prose-img:max-w-full prose-img:h-auto prose-img:w-full prose-img:mx-auto">
           {article.slug === 'claude-opus-5-detailed-guide' && (
             <BenchmarkTabs />
           )}
-          <ReactMarkdown>{article.body}</ReactMarkdown>
+          <ReactMarkdown
+            remarkPlugins={[remarkGfm]}
+            components={{
+              table({ children }) {
+                return (
+                  <CopyableTable title="Specification Matrix">
+                    <table className="w-full text-left border-collapse text-xs sm:text-sm">
+                      {children}
+                    </table>
+                  </CopyableTable>
+                );
+              },
+              code({ className, children, ...props }) {
+                const match = /language-(\w+)/.exec(className || "");
+                const isInline = !match && !String(children).includes("\n");
+
+                if (isInline) {
+                  return (
+                    <code className="bg-[#1A261D] text-[#4ADE80] px-1.5 py-0.5 rounded font-mono text-xs border border-[#243629]" {...props}>
+                      {children}
+                    </code>
+                  );
+                }
+
+                return (
+                  <CodeBlock
+                    language={match ? match[1] : "bash"}
+                    code={String(children).replace(/\n$/, "")}
+                  />
+                );
+              },
+              pre({ children }) {
+                return <>{children}</>;
+              }
+            }}
+          >
+            {article.body}
+          </ReactMarkdown>
 
           {/* Tags */}
           {article.tags && article.tags.length > 0 && (
@@ -216,9 +277,9 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
               {article.tags.map(tag => (
                 <span
                   key={tag}
-                  className="inline-flex items-center gap-1 text-[10px] sm:text-xs font-medium text-[#8C9E91] bg-[#1A261D] px-2.5 py-1 rounded-full"
+                  className="inline-flex items-center gap-1 text-[10px] sm:text-xs font-medium text-[#E2E8E4] bg-[#1A261D] px-3 py-1 rounded-full border border-[#243629]"
                 >
-                  <Tag size={10} />
+                  <Tag size={11} className="text-[#4ADE80]" />
                   {tag}
                 </span>
               ))}
@@ -228,16 +289,16 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
           {/* External Sources */}
           {article.externalSources && article.externalSources.length > 0 && (
             <div className="mt-8 pt-8 border-t border-[#243629]">
-              <h3 className="text-[10px] font-bold uppercase tracking-widest text-[#5A6E60] mb-3">External Sources</h3>
-              <ul className="space-y-1.5">
+              <h3 className="text-xs font-bold uppercase tracking-widest text-[#9CA3AF] mb-3">External Sources</h3>
+              <ul className="space-y-2">
                 {article.externalSources.map((src, idx) => (
                   <li key={idx} className="flex items-center gap-2">
-                    <span className="text-[10px] text-[#5A6E60] select-none">[{idx + 1}]</span>
+                    <span className="text-xs text-[#9CA3AF] select-none font-mono">[{idx + 1}]</span>
                     <a
                       href={src}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-xs text-[#8C9E91] font-mono truncate hover:text-[#4ADE80] hover:underline transition-colors max-w-full"
+                      className="text-xs sm:text-sm text-[#4ADE80] font-mono truncate hover:underline transition-colors max-w-full"
                     >
                       {src}
                     </a>

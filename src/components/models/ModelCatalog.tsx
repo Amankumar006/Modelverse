@@ -142,7 +142,7 @@ function FacetGroupFilter<T>({
 
   return (
     <div className="space-y-3">
-      <h4 className="text-[10px] font-bold text-gray-400/50 uppercase tracking-widest border-b border-white/5 pb-1.5">
+      <h4 className="text-xs font-bold text-[#9CA3AF] uppercase tracking-widest border-b border-white/10 pb-2">
         {title}
       </h4>
       {showSearch && (
@@ -152,14 +152,14 @@ function FacetGroupFilter<T>({
             placeholder={`Search ${title.toLowerCase()}...`}
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full bg-[#121A15] border border-white/10 rounded-lg px-2.5 py-1 text-[11px] text-white placeholder:text-gray-400/60 focus:outline-none focus:border-white/20 focus:ring-1 focus:ring-black/10 transition-colors"
+            className="w-full bg-[#121A15] border border-white/20 rounded-lg px-2.5 py-1 text-xs text-white placeholder:text-[#9CA3AF] focus:outline-none focus:border-[#4ADE80] focus:ring-1 focus:ring-[#4ADE80]/30 transition-colors"
           />
           {searchQuery && (
             <button
               onClick={() => setSearchQuery("")}
-              className="absolute right-2 top-1/2 -translate-y-1/2 text-gray-400/60 hover:text-white p-0.5"
+              className="absolute right-2 top-1/2 -translate-y-1/2 text-[#9CA3AF] hover:text-white p-0.5"
             >
-              <X size={10} />
+              <X size={12} />
             </button>
           )}
         </div>
@@ -175,12 +175,12 @@ function FacetGroupFilter<T>({
           return (
             <label
               key={val}
-              className={`flex items-center justify-between text-xs cursor-pointer py-0.5 rounded transition-colors ${
+              className={`flex items-center justify-between text-xs cursor-pointer py-1 px-1.5 rounded transition-colors ${
                 isChecked
-                  ? "text-[#4ADE80]"
+                  ? "text-[#4ADE80] font-medium bg-[#1A261D]"
                   : isDisabled
-                  ? "text-gray-400/40 cursor-not-allowed"
-                  : "text-gray-400 hover:text-white"
+                  ? "text-white/30 cursor-not-allowed"
+                  : "text-[#E5E7EB] hover:text-white hover:bg-white/5"
               }`}
             >
               <div className="flex items-center gap-2 min-w-0">
@@ -189,13 +189,13 @@ function FacetGroupFilter<T>({
                   checked={isChecked}
                   disabled={isDisabled}
                   onChange={() => onToggle(val)}
-                  className="h-3.5 w-3.5 rounded border border-white/20 bg-transparent text-[#4ADE80] focus:ring-offset-white focus:ring-1 focus:ring-[#4ADE80]/50 accent-[#4ADE80] cursor-pointer disabled:cursor-not-allowed"
+                  className="h-3.5 w-3.5 rounded border border-white/30 bg-transparent text-[#4ADE80] focus:ring-offset-white focus:ring-1 focus:ring-[#4ADE80]/50 accent-[#4ADE80] cursor-pointer disabled:cursor-not-allowed"
                 />
                 <span className="truncate pr-1">{label}</span>
               </div>
               <span
-                className={`text-[10px] tabular-nums font-mono ${
-                  isChecked ? "text-[#4ADE80]" : "text-gray-400/40"
+                className={`text-[11px] tabular-nums font-mono ${
+                  isChecked ? "text-[#4ADE80]" : "text-[#9CA3AF]"
                 }`}
               >
                 {count}
@@ -204,7 +204,7 @@ function FacetGroupFilter<T>({
           );
         })}
         {filteredOptions.length === 0 && (
-          <p className="text-[11px] text-gray-400/50 py-1 italic">
+          <p className="text-xs text-[#9CA3AF] py-1 italic">
             No matching {title.toLowerCase()}
           </p>
         )}

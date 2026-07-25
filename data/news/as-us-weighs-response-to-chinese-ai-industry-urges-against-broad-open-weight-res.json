@@ -15,7 +15,11 @@
   "externalSources": [
     "https://techcrunch.com/2026/07/24/as-us-weighs-response-to-chinese-ai-industry-urges-against-broad-open-weight-restrictions/"
   ],
-  "relatedModels": [],
+  "relatedModels": [
+    "moonshot-ai-kimi-k3",
+    "thinking-machines-inkling",
+    "inkling"
+  ],
   "tags": [
     "ai-news",
     "breaking",

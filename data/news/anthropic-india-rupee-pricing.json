@@ -17,6 +17,8 @@
     "https://www.analyticsinsight.net/news/anthropic-introduces-india-pricing-for-claude-ai-plans-pro-subscription-fees-revealed"
   ],
   "relatedModels": [
-    "anthropic-claude-sonnet-5"
+    "gpt-live",
+    "gemini-3-5-flash-cyber",
+    "gemini-3-6-flash"
   ]
 }

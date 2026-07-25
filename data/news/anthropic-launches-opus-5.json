@@ -15,7 +15,10 @@
   "externalSources": [
     "https://techcrunch.com/2026/07/24/anthropic-launches-opus-5/"
   ],
-  "relatedModels": [],
+  "relatedModels": [
+    "reve-2-1",
+    "gen-3-alpha"
+  ],
   "tags": [
     "ai-news",
     "breaking",

@@ -15,7 +15,11 @@
   "externalSources": [
     "https://techcrunch.com/2026/07/24/i-tried-out-openais-new-ai-keypad-which-will-be-fun-for-coders-and-slightly-mystifying-to-everyone-else/"
   ],
-  "relatedModels": [],
+  "relatedModels": [
+    "wan-dancer",
+    "codex-mini",
+    "gpt-live"
+  ],
   "tags": [
     "ai-news",
     "breaking",

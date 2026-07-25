@@ -190,12 +190,18 @@
     "externalSources": [
       "https://techcrunch.com/2026/07/24/i-tried-out-openais-new-ai-keypad-which-will-be-fun-for-coders-and-slightly-mystifying-to-everyone-else/"
     ],
-    "relatedModels": [],
+    "relatedModels": [
+      "wan-dancer",
+      "codex-mini",
+      "gpt-live"
+    ],
     "tags": [
       "ai-news",
       "breaking",
       "techcrunch-ai"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "rare-disease-research-grants",
@@ -244,12 +250,12 @@
   {
     "id": "weekly-model-recap-2026-07-25",
     "slug": "weekly-model-recap-2026-07-25",
-    "title": "Weekly Model Recap: 27 Frontier & Open-Weight Releases (2026-07-25)",
+    "title": "Weekly Model Recap: 15 Frontier & Open-Weight Releases (2026-07-25)",
     "category": "weekly-news",
     "publishDate": "2026-07-25",
     "author": "Modelverse Editorial Team",
-    "readTime": "4 min read",
-    "excerpt": "Complete weekly digest of 27 newly released AI models featuring specs, parent companies, primary tasks, and key features.",
+    "readTime": "8 min read",
+    "excerpt": "Executive digest of 15 newly indexed AI models across reasoning, video generation, open-weight efficiency, cybersecurity, and quantization.",
     "coverImage": "/images/news/news_weekly.jpg",
     "status": "published",
     "confidenceLevel": "confirmed",
@@ -258,16 +264,18 @@
     ],
     "relatedModels": [
       "motion4motion",
+      "moonshot-ai-kimi-k3",
       "anthropic-claude-opus-5",
-      "unlimited-ocr",
-      "krea2-identity-edit",
-      "qwen36-27b-fable-fusion-711-uncensored-heretic-nm-dau-neo-max-mtp-gguf"
+      "kat-coder-v25-dev",
+      "ardy"
     ],
     "tags": [
       "weekly-digest",
       "model-releases",
       "ai-roundup"
     ],
+    "isFeatured": false,
+    "isTrending": true,
     "issueNumber": 4
   },
   {
@@ -285,12 +293,18 @@
     "externalSources": [
       "https://techcrunch.com/podcast/ai-communism-rogue-models-and-the-why-kimi-k3-spooked-wall-street/"
     ],
-    "relatedModels": [],
+    "relatedModels": [
+      "moonshot-ai-kimi-k3",
+      "wan-dancer",
+      "academic-research-lance"
+    ],
     "tags": [
       "ai-news",
       "breaking",
       "techcrunch-ai"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "anthropic-launches-opus-5",
@@ -307,12 +321,17 @@
     "externalSources": [
       "https://techcrunch.com/2026/07/24/anthropic-launches-opus-5/"
     ],
-    "relatedModels": [],
+    "relatedModels": [
+      "reve-2-1",
+      "gen-3-alpha"
+    ],
     "tags": [
       "ai-news",
       "breaking",
       "techcrunch-ai"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "as-us-weighs-response-to-chinese-ai-industry-urges-against-broad-open-weight-res",
@@ -329,12 +348,18 @@
     "externalSources": [
       "https://techcrunch.com/2026/07/24/as-us-weighs-response-to-chinese-ai-industry-urges-against-broad-open-weight-restrictions/"
     ],
-    "relatedModels": [],
+    "relatedModels": [
+      "moonshot-ai-kimi-k3",
+      "thinking-machines-inkling",
+      "inkling"
+    ],
     "tags": [
       "ai-news",
       "breaking",
       "techcrunch-ai"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "blueskys-ai-assistant-attie-expands-into-an-open-social-research-tool",
@@ -351,12 +376,18 @@
     "externalSources": [
       "https://techcrunch.com/2026/07/24/blueskys-ai-assistant-attie-expands-into-an-open-social-research-tool/"
     ],
-    "relatedModels": [],
+    "relatedModels": [
+      "wan-dancer",
+      "gemini-3-5-flash-cyber",
+      "gemini-3-6-flash"
+    ],
     "tags": [
       "ai-news",
       "breaking",
       "techcrunch-ai"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "how-ai-guardrails-are-impeding-the-work-of-offensive-cybersecurity-researchers",
@@ -373,12 +404,17 @@
     "externalSources": [
       "https://techcrunch.com/2026/07/23/how-ai-guardrails-are-impeding-the-work-of-offensive-cybersecurity-researchers/"
     ],
-    "relatedModels": [],
+    "relatedModels": [
+      "reve-2-1",
+      "gen-3-alpha"
+    ],
     "tags": [
       "ai-news",
       "breaking",
       "techcrunch-ai"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "midjourney-acquired-the-astrology-app-co-star",
@@ -395,12 +431,18 @@
     "externalSources": [
       "https://techcrunch.com/2026/07/24/midjourney-acquired-the-astrology-app-co-star/"
     ],
-    "relatedModels": [],
+    "relatedModels": [
+      "academic-research-scope",
+      "gen-3-alpha",
+      "midjourney-v6"
+    ],
     "tags": [
       "ai-news",
       "breaking",
       "techcrunch-ai"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "openais-new-voice-mode-makes-it-to-the-chatgpt-desktop-app",
@@ -417,12 +459,18 @@
     "externalSources": [
       "https://techcrunch.com/2026/07/24/openais-new-voice-mode-makes-it-to-the-chatgpt-desktop-app/"
     ],
-    "relatedModels": [],
+    "relatedModels": [
+      "codex-mini",
+      "gpt-live",
+      "gen-3-alpha"
+    ],
     "tags": [
       "ai-news",
       "breaking",
       "techcrunch-ai"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "prentis-new-ai-lab-co-founded-by-reid-hoffman-mark-pincus-in-talks-to-raise-100m",
@@ -439,12 +487,18 @@
     "externalSources": [
       "https://techcrunch.com/2026/07/24/prentis-new-ai-lab-co-founded-by-reid-hoffman-mark-pincus-in-talks-to-raise-100m/"
     ],
-    "relatedModels": [],
+    "relatedModels": [
+      "gpt-5-4",
+      "gpt-5-chat",
+      "gpt-5"
+    ],
     "tags": [
       "ai-news",
       "breaking",
       "techcrunch-ai"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "why-cognition-bought-poke-ai-personality-is-becoming-a-competitive-advantage",
@@ -461,12 +515,17 @@
     "externalSources": [
       "https://techcrunch.com/2026/07/24/why-cognition-bought-poke-ai-personality-is-becoming-a-competitive-advantage/"
     ],
-    "relatedModels": [],
+    "relatedModels": [
+      "wan-dancer",
+      "gen-3-alpha"
+    ],
     "tags": [
       "ai-news",
       "breaking",
       "techcrunch-ai"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "kimi-k3-full-review",
@@ -486,14 +545,18 @@
       "https://www.kimi.com/?chat_enter_method=new_chat"
     ],
     "relatedModels": [
-      "moonshot-ai-kimi-k3"
+      "moonshot-ai-kimi-k3",
+      "high3",
+      "gen-3-alpha"
     ],
     "tags": [
       "kimi-k3",
       "model-review",
       "open-weights",
       "architecture"
-    ]
+    ],
+    "isFeatured": true,
+    "isTrending": true
   },
   {
     "id": "kimi-k3-release-short",
@@ -513,14 +576,18 @@
       "https://www.kimi.com/?chat_enter_method=new_chat"
     ],
     "relatedModels": [
-      "moonshot-ai-kimi-k3"
+      "moonshot-ai-kimi-k3",
+      "codex-mini",
+      "reve-2-1"
     ],
     "tags": [
       "kimi",
       "open-source",
       "kimi-k3",
       "moonshot-ai"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "post-8",
@@ -539,7 +606,8 @@
     ],
     "relatedModels": [
       "openai-gpt-red",
-      "openai-gpt-5.6"
+      "gpt-5-chat",
+      "gpt-5"
     ],
     "tags": [
       "openai",
@@ -547,6 +615,8 @@
       "red-teaming",
       "weekly-recap"
     ],
+    "isFeatured": false,
+    "isTrending": false,
     "issueNumber": 3
   },
   {
@@ -566,8 +636,12 @@
       "https://www.analyticsinsight.net/news/anthropic-introduces-india-pricing-for-claude-ai-plans-pro-subscription-fees-revealed"
     ],
     "relatedModels": [
-      "anthropic-claude-sonnet-5"
-    ]
+      "gpt-live",
+      "gemini-3-5-flash-cyber",
+      "gemini-3-6-flash"
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "post-9",
@@ -585,14 +659,18 @@
       "https://deepmind.google/blog/alphaevolve-impact/"
     ],
     "relatedModels": [
-      "google-deepmind-alphaevolve"
+      "wan-dancer",
+      "high3",
+      "google-deepmind-gemma-4-31b-dense"
     ],
     "tags": [
       "google",
       "deepmind",
       "alphaevolve",
       "agentic"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": false
   },
   {
     "id": "openai-codex-chatgpt-sol-updates",
@@ -610,8 +688,12 @@
       "https://www.youtube.com/watch?v=eiQgljOrkWU"
     ],
     "relatedModels": [
-      "gpt-5-6"
-    ]
+      "codex-mini",
+      "gpt-5-chat",
+      "gpt-5"
+    ],
+    "isFeatured": false,
+    "isTrending": false
   },
   {
     "id": "featured-1",
@@ -626,14 +708,16 @@
     "status": "published",
     "confidenceLevel": "confirmed",
     "relatedModels": [
-      "google-deepmind-gemini-3-deep-think",
-      "openai-gpt-4o"
+      "google-gnm",
+      "gen-3-alpha"
     ],
     "tags": [
       "alignment",
       "safety",
       "rlhf"
     ],
+    "isFeatured": false,
+    "isTrending": false,
     "issueNumber": 2
   },
   {
@@ -649,14 +733,17 @@
     "status": "published",
     "confidenceLevel": "confirmed",
     "relatedModels": [
-      "google-deepmind-gemma-4-31b-dense",
-      "anthropic-claude-sonnet-5"
+      "anthropic-claude-opus-5",
+      "anthropic-claude-sonnet-5",
+      "anthropic-claude-fable-5"
     ],
     "tags": [
       "gemma",
       "claude",
       "open-weights"
     ],
+    "isFeatured": false,
+    "isTrending": false,
     "issueNumber": 1
   },
   {
@@ -672,13 +759,17 @@
     "status": "published",
     "confidenceLevel": "confirmed",
     "relatedModels": [
+      "high3",
+      "nvidia-pid",
       "google-deepmind-gemma-4-31b-dense"
     ],
     "tags": [
       "hardware",
       "on-device",
       "npu"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": false
   },
   {
     "id": "post-3",
@@ -698,14 +789,17 @@
       "https://ai.google.dev/gemini-api/docs/whats-new-gemini-3.5"
     ],
     "relatedModels": [
-      "google-deepmind-gemini-3-5-flash",
-      "google-deepmind-gemini-3-1-pro"
+      "gemini-3-5-flash-cyber",
+      "gemini-3-5-flash-lite",
+      "gemini-3-6-flash"
     ],
     "tags": [
       "gemini",
       "benchmarks",
       "speed"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": false
   },
   {
     "id": "post-7",
@@ -723,6 +817,8 @@
       "https://deepmind.google/blog/diffusiongemma-4x-faster-text-generation/"
     ],
     "relatedModels": [
+      "reve-2-1",
+      "high3",
       "google-deepmind-diffusiongemma"
     ],
     "tags": [
@@ -730,7 +826,9 @@
       "google",
       "diffusion",
       "open-source"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "post-10",
@@ -748,14 +846,18 @@
       "https://deepmind.google/blog/medgemma-our-most-capable-open-models-for-health-ai-development/"
     ],
     "relatedModels": [
-      "google-deepmind-medgemma-1-5-4b"
+      "high3",
+      "google-deepmind-gemma-4-31b-dense",
+      "medgemma-1-5-4b"
     ],
     "tags": [
       "medgemma",
       "medical",
       "healthcare",
       "open-weights"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": false
   },
   {
     "id": "post-11",
@@ -773,13 +875,17 @@
       "https://deepmind.google/blog/vaultgemma-the-worlds-most-capable-differentially-private-llm/"
     ],
     "relatedModels": [
-      "google-deepmind-vaultgemma-1b"
+      "reve-2-1",
+      "high3",
+      "google-deepmind-gemma-4-31b-dense"
     ],
     "tags": [
       "privacy",
       "vaultgemma",
       "gemma",
       "open-weights"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": false
   }
 ]
