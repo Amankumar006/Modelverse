@@ -2,6 +2,7 @@ import fs from "fs/promises";
 import path from "path";
 import MarkdownRenderer from "@/components/ui/MarkdownRenderer";
 import CopyableTable from "@/components/ui/CopyableTable";
+import BenchmarkTabs from "@/components/news/BenchmarkTabs";
 
 import type { Metadata } from "next";
 import Link from "next/link";
@@ -379,6 +380,16 @@ export default async function ModelDetailPage({
                         </tbody>
                       </table>
                     </CopyableTable>
+
+                    {/* Official Benchmark Charts / Images for Claude Opus 5 */}
+                    {model.slug === "anthropic-claude-opus-5" && (
+                      <div className="mt-8 pt-4">
+                        <h3 className="text-xs font-bold uppercase tracking-widest text-[#4ADE80] mb-2">
+                          Official Visual Benchmark Charts
+                        </h3>
+                        <BenchmarkTabs />
+                      </div>
+                    )}
                   </section>
                 )}
               </>

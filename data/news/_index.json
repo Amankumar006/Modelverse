@@ -23,7 +23,9 @@
       "ai-news",
       "breaking",
       "techcrunch-ai"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "weekly-model-recap-2026-07-25",
@@ -52,6 +54,8 @@
       "model-releases",
       "ai-roundup"
     ],
+    "isFeatured": false,
+    "isTrending": true,
     "issueNumber": 4
   },
   {
@@ -78,7 +82,9 @@
       "ai-news",
       "breaking",
       "techcrunch-ai"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "anthropic-launches-opus-5",
@@ -103,7 +109,9 @@
       "ai-news",
       "breaking",
       "techcrunch-ai"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "as-us-weighs-response-to-chinese-ai-industry-urges-against-broad-open-weight-res",
@@ -129,7 +137,9 @@
       "ai-news",
       "breaking",
       "techcrunch-ai"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "blueskys-ai-assistant-attie-expands-into-an-open-social-research-tool",
@@ -155,7 +165,9 @@
       "ai-news",
       "breaking",
       "techcrunch-ai"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "how-ai-guardrails-are-impeding-the-work-of-offensive-cybersecurity-researchers",
@@ -180,7 +192,9 @@
       "ai-news",
       "breaking",
       "techcrunch-ai"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "midjourney-acquired-the-astrology-app-co-star",
@@ -206,7 +220,9 @@
       "ai-news",
       "breaking",
       "techcrunch-ai"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "openais-new-voice-mode-makes-it-to-the-chatgpt-desktop-app",
@@ -232,7 +248,9 @@
       "ai-news",
       "breaking",
       "techcrunch-ai"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "prentis-new-ai-lab-co-founded-by-reid-hoffman-mark-pincus-in-talks-to-raise-100m",
@@ -258,7 +276,9 @@
       "ai-news",
       "breaking",
       "techcrunch-ai"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "why-cognition-bought-poke-ai-personality-is-becoming-a-competitive-advantage",
@@ -283,7 +303,9 @@
       "ai-news",
       "breaking",
       "techcrunch-ai"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "kimi-k3-full-review",
@@ -312,7 +334,9 @@
       "model-review",
       "open-weights",
       "architecture"
-    ]
+    ],
+    "isFeatured": true,
+    "isTrending": true
   },
   {
     "id": "kimi-k3-release-short",
@@ -341,7 +365,9 @@
       "open-source",
       "kimi-k3",
       "moonshot-ai"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "post-8",
@@ -369,6 +395,8 @@
       "red-teaming",
       "weekly-recap"
     ],
+    "isFeatured": false,
+    "isTrending": false,
     "issueNumber": 3
   },
   {
@@ -391,7 +419,9 @@
       "gpt-live",
       "gemini-3-5-flash-cyber",
       "gemini-3-6-flash"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "post-9",
@@ -418,7 +448,9 @@
       "deepmind",
       "alphaevolve",
       "agentic"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": false
   },
   {
     "id": "openai-codex-chatgpt-sol-updates",
@@ -439,7 +471,9 @@
       "codex-mini",
       "gpt-5-chat",
       "gpt-5"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": false
   },
   {
     "id": "featured-1",
@@ -462,6 +496,8 @@
       "safety",
       "rlhf"
     ],
+    "isFeatured": false,
+    "isTrending": false,
     "issueNumber": 2
   },
   {
@@ -486,6 +522,8 @@
       "claude",
       "open-weights"
     ],
+    "isFeatured": false,
+    "isTrending": false,
     "issueNumber": 1
   },
   {
@@ -509,7 +547,9 @@
       "hardware",
       "on-device",
       "npu"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": false
   },
   {
     "id": "post-3",
@@ -537,7 +577,9 @@
       "gemini",
       "benchmarks",
       "speed"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": false
   },
   {
     "id": "post-7",
@@ -564,7 +606,9 @@
       "google",
       "diffusion",
       "open-source"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "post-10",
@@ -591,7 +635,9 @@
       "medical",
       "healthcare",
       "open-weights"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": false
   },
   {
     "id": "post-11",
@@ -618,6 +664,8 @@
       "vaultgemma",
       "gemma",
       "open-weights"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": false
   }
 ]
