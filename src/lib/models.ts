@@ -41,6 +41,7 @@ export interface ModelEntry extends ModelIndex {
   previousVersion: string | null;
   links: Record<string, string>;
   logo: string | null;
+  images?: string[];
   tags: string[];
   sources: string[];
   verified: boolean;
@@ -213,4 +214,4 @@ export function getDeveloperCounts(): { developer: string; count: number }[] {
 /* ------------------------------------------------------------------ */
 
 /** Base URL for canonical links and OG images. */
-export const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://modelverse-ai.vercel.app";
+export const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://www.themodelverse.in";

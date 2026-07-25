@@ -323,6 +323,25 @@ export default async function ModelDetailPage({
                   <p className="text-gray-300 leading-relaxed text-base sm:text-lg">{model.description}</p>
                 </section>
 
+                {/* Benchmark Images */}
+                {model.images && model.images.length > 0 && (
+                  <section className="space-y-4 pt-2">
+                    <h2 className="text-[10px] font-bold uppercase tracking-widest text-gray-400/60">Benchmark Images</h2>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                      {model.images.map((imgUrl, idx) => (
+                        <div key={idx} className="relative rounded-xl overflow-hidden border border-white/10 bg-white/5 aspect-video">
+                          <img
+                            src={imgUrl}
+                            alt={`${model.name} benchmark ${idx + 1}`}
+                            className="w-full h-full object-cover"
+                            loading="lazy"
+                          />
+                        </div>
+                      ))}
+                    </div>
+                  </section>
+                )}
+
                 {/* Benchmarks Table */}
                 {model.benchmarks && model.benchmarks.length > 0 && (
                   <section className="space-y-4">

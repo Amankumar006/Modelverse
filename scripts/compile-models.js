@@ -61,6 +61,7 @@ const ModelSchema = z.object({
   pricingLastVerified: z.string().regex(/^\d{4}-\d{2}-\d{2}$/).optional(),
   links: z.record(z.string(), z.string()),
   logo: z.string().nullable(),
+  images: z.array(z.string()).optional(),
   tags: z.array(z.string()),
   sources: z.array(z.string()).min(1),
   verified: z.boolean(),
