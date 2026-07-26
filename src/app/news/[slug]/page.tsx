@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
 import Navbar from "@/components/layout/Navbar";
-import NewsBreadcrumb from "@/components/news/NewsBreadcrumb";
 import { getArticleBySlug, getAllArticles, getCategoryLabel } from "@/lib/news";
 import { getModelBySlug, getAllModelEntries, SITE_URL } from "@/lib/models";
 import { Clock, Calendar, ArrowRight, ArrowLeft, Tag } from "lucide-react";
@@ -13,6 +12,7 @@ import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import CodeBlock from "@/components/ui/CodeBlock";
 import CopyableTable from "@/components/ui/CopyableTable";
+
 interface ArticlePageProps {
   params: Promise<{
     slug: string;
@@ -69,8 +69,6 @@ function formatNewsDate(dateStr: string): string {
   });
 }
 
-// Markdown is now handled by react-markdown and @tailwindcss/typography
-
 export default async function ArticlePage({ params }: ArticlePageProps) {
   const resolvedParams = await params;
   const article = getArticleBySlug(resolvedParams.slug);
@@ -79,17 +77,22 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
     notFound();
   }
 
-  // Get full models details for related links, with auto-matching fallback
+  const allArticles = getAllArticles();
+  const relatedArticles = allArticles
+    .filter((a) => a.slug !== article.slug)
+    .slice(0, 3);
+
+  // Get full models details for related links
   let relatedModelsData = (article.relatedModels || [])
-    .map(slug => getModelBySlug(slug))
+    .map((slug) => getModelBySlug(slug))
     .filter((model): model is NonNullable<typeof model> => !!model);
 
   if (relatedModelsData.length < 2) {
     const allModels = getAllModelEntries();
     const textToMatch = `${article.title} ${article.body}`.toLowerCase();
-    const existingSlugs = new Set(relatedModelsData.map(m => m.slug));
+    const existingSlugs = new Set(relatedModelsData.map((m) => m.slug));
 
-    const matched = allModels.filter(m => {
+    const matched = allModels.filter((m) => {
       if (existingSlugs.has(m.slug)) return false;
       const nameLower = m.name.toLowerCase();
       if (nameLower.length >= 3 && textToMatch.includes(nameLower)) return true;
@@ -99,7 +102,7 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
 
     const combined = [...relatedModelsData, ...matched];
     if (combined.length < 2) {
-      const featuredFallback = allModels.filter(m => m.featured && !existingSlugs.has(m.slug));
+      const featuredFallback = allModels.filter((m) => m.featured && !existingSlugs.has(m.slug));
       combined.push(...featuredFallback);
     }
     relatedModelsData = combined.slice(0, 3);
@@ -125,14 +128,15 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
       "name": "Modelverse",
       "logo": {
         "@type": "ImageObject",
-        "url": `${SITE_URL}/logo-light.png`
+        "url": `${SITE_URL}/logo.svg`
       }
     },
     "description": article.excerpt
   };
 
   return (
-    <main className="min-h-screen bg-[#0C120F] text-[#E2E8E4] selection:bg-[#4ADE80] selection:text-[#0C120F] pb-24 font-sans antialiased relative">
+    <main className="min-h-screen bg-[#FAF8F5] text-[#191919] selection:bg-[#E5DCD0] selection:text-[#191919] font-sans antialiased relative">
+      {/* Site Header */}
       <Navbar theme="dark" />
 
       {/* Inject JSON-LD */}
@@ -141,80 +145,47 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
 
-      <div className="max-w-[1400px] mx-auto px-6 sm:px-8 lg:px-12 pt-16 sm:pt-24">
-        {/* Breadcrumb */}
-        <NewsBreadcrumb category={{ slug: article.category }} article={{ title: article.title }} />
-
-        {/* Back Link */}
+      {/* Anthropic Blog Top Header Navigation */}
+      <div className="max-w-[840px] mx-auto px-6 pt-10 sm:pt-14">
         <Link
           href="/news"
-          className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#5A6E60] hover:text-[#E2E8E4] transition-colors mb-8"
+          className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#666666] hover:text-[#191919] transition-colors mb-8"
         >
-          <ArrowLeft size={14} /> Back to News
+          <ArrowLeft size={14} /> Back to Newsroom
         </Link>
 
-        {/* Article Header */}
-        <header className="mb-12">
-          {/* Issue Number or Category Pill */}
-          {article.category === "weekly-news" ? (
-            <div className="flex flex-col gap-2 mb-6">
-              <div className="flex items-center gap-2">
-                <span className="text-xs font-bold text-[#5A6E60] uppercase tracking-widest">
-                  Issue {article.issueNumber}
-                </span>
-                <ConfidenceBadge confidence={article.confidenceLevel} />
-              </div>
-              <Link
-                href={`/news/category/${article.category}`}
-                className="self-start inline-flex items-center px-3 py-1 rounded-full bg-[#1A261D] border border-[#243629] hover:bg-[#2C4032] transition-all"
-              >
-                <span className="text-[10px] font-bold text-[#8C9E91] uppercase tracking-widest">
-                  {getCategoryLabel(article.category)}
-                </span>
-              </Link>
-            </div>
-          ) : (
-            <div className="flex items-center gap-2.5 mb-6">
-              <Link
-                href={`/news/category/${article.category}`}
-                className="inline-flex items-center px-3 py-1 rounded-full bg-[#1A261D] border border-[#243629] hover:bg-[#2C4032] transition-all"
-              >
-                <span className="text-[10px] font-bold text-[#8C9E91] uppercase tracking-widest">
-                  {getCategoryLabel(article.category)}
-                </span>
-              </Link>
-              <ConfidenceBadge confidence={article.confidenceLevel} />
-            </div>
-          )}
-
-          <h1
-            className="text-3xl sm:text-4xl md:text-5xl font-light text-[#F0FDF4] tracking-tight leading-tight mb-6"
-            style={{ fontFamily: "var(--font-display, 'Instrument Serif', serif)" }}
+        {/* Article Meta Badges */}
+        <div className="flex items-center gap-3 mb-6">
+          <Link
+            href={`/news?category=${article.category}`}
+            className="inline-flex items-center px-3 py-1 rounded-full bg-[#EFECE6] border border-[#E0DCD5] text-[11px] font-mono font-semibold uppercase tracking-wider text-[#191919] hover:bg-[#E5E0D6] transition-colors"
           >
-            {article.title}
-          </h1>
+            {article.category === "weekly-news" ? `Issue ${article.issueNumber}` : getCategoryLabel(article.category)}
+          </Link>
+          <ConfidenceBadge confidence={article.confidenceLevel} />
+        </div>
 
-          <div className="flex flex-wrap items-center gap-6 text-xs sm:text-sm text-[#9CA3AF] border-y border-[#243629] py-4">
-            <span className="font-semibold text-[#E2E8E4] uppercase">
-              By {article.author}
-            </span>
-            <span className="hidden sm:inline text-[#334D3A]">|</span>
-            <span className="flex items-center gap-1.5 text-[#A3B8AA]">
-              <Calendar size={14} className="text-[#4ADE80]" />
-              {formatNewsDate(article.publishDate)}
-            </span>
-            <span className="text-[#334D3A]">·</span>
-            <span className="flex items-center gap-1.5 text-[#A3B8AA]">
-              <Clock size={14} className="text-[#4ADE80]" />
-              {article.readTime}
-            </span>
-          </div>
-        </header>
+        {/* Anthropic Article Title */}
+        <h1
+          className="text-3xl sm:text-4xl md:text-5xl font-normal text-[#191919] tracking-tight leading-[1.2] mb-6"
+          style={{ fontFamily: "var(--font-display, 'Instrument Serif', Georgia, serif)" }}
+        >
+          {article.title}
+        </h1>
+
+        {/* Author & Date Metadata */}
+        <div className="flex flex-wrap items-center gap-4 text-xs text-[#666666] pb-8 border-b border-[#E0DCD5] font-mono">
+          <span>By {article.author}</span>
+          <span>·</span>
+          <span>{formatNewsDate(article.publishDate)}</span>
+          <span>·</span>
+          <span>{article.readTime}</span>
+        </div>
       </div>
 
       {/* Featured Cover Image */}
-      <div className="max-w-[1400px] mx-auto px-0 sm:px-8 lg:px-12 mb-16">
-        <div suppressHydrationWarning className="relative h-[300px] sm:h-[500px] lg:h-[650px] w-full bg-[#0C120F] sm:rounded-3xl overflow-hidden shadow-sm border border-[#243629]">
+      <div className="max-w-[1040px] mx-auto px-4 sm:px-6 my-10">
+        <div className="relative h-[280px] sm:h-[450px] lg:h-[540px] w-full bg-[#EFECE6] rounded-2xl overflow-hidden shadow-sm border border-[#E0DCD5]">
           <Image
             src={article.coverImage}
             alt={article.title}
@@ -225,20 +196,22 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
         </div>
       </div>
 
-      {/* Article Body Grid */}
-      <div className="max-w-[1400px] mx-auto px-6 sm:px-8 lg:px-12 grid grid-cols-1 lg:grid-cols-[1fr_350px] xl:grid-cols-[1fr_400px] gap-12 lg:gap-20">
-        {/* Main Content (Ergonomic 760px reading width & 20px font scale) */}
-        <article className="prose prose-invert prose-emerald max-w-[760px] text-[#F3F4F6] prose-p:text-[#F3F4F6] prose-p:leading-[1.88] prose-p:text-[19px] md:prose-p:text-[21px] prose-headings:text-white prose-img:rounded-xl prose-img:max-w-full prose-img:h-auto prose-img:w-full prose-img:mx-auto">
-          {article.slug === 'claude-opus-5-detailed-guide' && (
-            <BenchmarkTabs />
-          )}
+      {/* Ergonomic 840px Article Reading Canvas (Anthropic Style) */}
+      <article className="max-w-[840px] mx-auto px-6 py-4">
+        {/* Render Interactive Benchmark Tabs for Claude Opus / Vision Articles */}
+        {(article.slug === "claude-opus-5-detailed-guide" || article.body.includes("Benchmark")) && (
+          <BenchmarkTabs />
+        )}
+
+        {/* Prose Content */}
+        <div className="prose prose-slate max-w-none text-[#2D2D2D] leading-[1.88] text-base sm:text-lg font-serif prose-headings:font-serif prose-headings:font-normal prose-headings:text-[#191919] prose-h2:text-2xl sm:prose-h2:text-3xl prose-h2:mt-10 prose-h2:mb-4 prose-h3:text-xl prose-h3:mt-8 prose-h3:mb-3 prose-p:mb-6 prose-a:text-[#191919] prose-a:underline prose-a:font-medium hover:prose-a:text-[#D97757] prose-li:my-1 prose-strong:text-[#191919] prose-strong:font-semibold">
           <ReactMarkdown
             remarkPlugins={[remarkGfm]}
             components={{
               table({ children }) {
                 return (
                   <CopyableTable title="Specification Matrix">
-                    <table className="w-full text-left border-collapse text-xs sm:text-sm">
+                    <table className="w-full text-left border-collapse text-xs sm:text-sm font-sans">
                       {children}
                     </table>
                   </CopyableTable>
@@ -250,7 +223,7 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
 
                 if (isInline) {
                   return (
-                    <code className="bg-[#1A261D] text-[#4ADE80] px-1.5 py-0.5 rounded font-mono text-xs border border-[#243629]" {...props}>
+                    <code className="bg-[#EFECE6] text-[#191919] px-1.5 py-0.5 rounded font-mono text-xs border border-[#E0DCD5]" {...props}>
                       {children}
                     </code>
                   );
@@ -270,87 +243,90 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
           >
             {article.body}
           </ReactMarkdown>
+        </div>
 
-          {/* Tags */}
-          {article.tags && article.tags.length > 0 && (
-            <div className="flex flex-wrap gap-2 mt-12 pt-8 border-t border-[#243629]">
-              {article.tags.map(tag => (
-                <span
-                  key={tag}
-                  className="inline-flex items-center gap-1 text-[10px] sm:text-xs font-medium text-[#E2E8E4] bg-[#1A261D] px-3 py-1 rounded-full border border-[#243629]"
-                >
-                  <Tag size={11} className="text-[#4ADE80]" />
-                  {tag}
-                </span>
-              ))}
-            </div>
-          )}
+        {/* Tags */}
+        {article.tags && article.tags.length > 0 && (
+          <div className="flex flex-wrap gap-2 mt-12 pt-8 border-t border-[#E0DCD5]">
+            {article.tags.map((tag) => (
+              <span
+                key={tag}
+                className="inline-flex items-center gap-1 text-xs font-mono text-[#555555] bg-[#EFECE6] px-3 py-1 rounded-full border border-[#E0DCD5]"
+              >
+                <Tag size={11} className="text-[#191919]" />
+                {tag}
+              </span>
+            ))}
+          </div>
+        )}
 
-          {/* External Sources */}
-          {article.externalSources && article.externalSources.length > 0 && (
-            <div className="mt-8 pt-8 border-t border-[#243629]">
-              <h3 className="text-xs font-bold uppercase tracking-widest text-[#9CA3AF] mb-3">External Sources</h3>
-              <ul className="space-y-2">
-                {article.externalSources.map((src, idx) => (
-                  <li key={idx} className="flex items-center gap-2">
-                    <span className="text-xs text-[#9CA3AF] select-none font-mono">[{idx + 1}]</span>
-                    <a
-                      href={src}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-xs sm:text-sm text-[#4ADE80] font-mono truncate hover:underline transition-colors max-w-full"
-                    >
-                      {src}
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          )}
-        </article>
-
-        {/* Sidebar: Related Models & Internal Links */}
-        <aside className="space-y-8">
-          {relatedModelsData.length > 0 && (
-            <div className="bg-[#121A15] rounded-3xl p-6 sm:p-8 border border-[#243629]">
-              <h4 className="text-xs font-bold uppercase tracking-wider text-[#5A6E60] mb-6">
-                Related Models
-              </h4>
-              <div className="space-y-4">
-                {relatedModelsData.map((model) => (
-                  <Link
-                    key={model.id}
-                    href={`/models/${model.slug}`}
-                    className="group block p-4 bg-[#0C120F] rounded-2xl border border-[#243629] hover:border-[#334D3A] hover:shadow-[0_0_20px_rgba(74,222,128,0.05)] transition-all"
+        {/* External Sources Footnote Section */}
+        {article.externalSources && article.externalSources.length > 0 && (
+          <div className="mt-10 pt-8 border-t border-[#E0DCD5]">
+            <h3
+              className="text-lg font-normal text-[#191919] mb-3"
+              style={{ fontFamily: "var(--font-display, 'Instrument Serif', Georgia, serif)" }}
+            >
+              Footnotes & Primary References
+            </h3>
+            <ul className="space-y-2 text-xs font-mono text-[#666666]">
+              {article.externalSources.map((src, idx) => (
+                <li key={idx} className="flex items-start gap-2">
+                  <span className="shrink-0 select-none">[{idx + 1}]</span>
+                  <a
+                    href={src}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-[#191919] hover:underline truncate"
                   >
-                    <span className="text-[9px] font-bold uppercase tracking-widest text-[#4ADE80] block mb-1">
-                      {model.developer}
-                    </span>
-                    <h5 className="text-sm font-semibold text-[#F0FDF4] group-hover:text-[#4ADE80] transition-colors truncate mb-1">
-                      {model.name}
-                    </h5>
-                    <p className="text-[10px] text-[#8C9E91] truncate mb-3">
-                      {model.primaryTask}
-                    </p>
-                    <span className="text-[10px] font-semibold text-[#E2E8E4] flex items-center gap-0.5 group-hover:text-[#4ADE80]">
-                      View Model <ArrowRight size={10} className="group-hover:translate-x-0.5 transition-transform" />
-                    </span>
-                  </Link>
-                ))}
+                    {src}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
+      </article>
+
+      {/* Anthropic Style Related Content Section */}
+      <div className="max-w-[1040px] mx-auto px-6 mt-20 pt-16 border-t border-[#E0DCD5]">
+        <h2
+          className="text-2xl sm:text-3xl font-normal text-[#191919] mb-8"
+          style={{ fontFamily: "var(--font-display, 'Instrument Serif', Georgia, serif)" }}
+        >
+          Related content
+        </h2>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {relatedArticles.map((rel) => (
+            <div key={rel.id} className="group flex flex-col justify-between">
+              <div>
+                <h3 className="font-semibold text-[#191919] text-base mb-2 group-hover:text-[#D97757] transition-colors leading-snug">
+                  <Link href={`/news/${rel.slug}`}>{rel.title}</Link>
+                </h3>
+                <p className="text-xs text-[#666666] leading-relaxed line-clamp-3 mb-4">
+                  {rel.excerpt}
+                </p>
               </div>
+
+              <Link
+                href={`/news/${rel.slug}`}
+                className="text-xs font-semibold text-[#191919] group-hover:underline flex items-center gap-1 transition-colors mt-auto"
+              >
+                <span>Read article</span>
+                <ArrowRight size={12} className="group-hover:translate-x-1 transition-transform" />
+              </Link>
             </div>
-          )}
-        </aside>
+          ))}
+        </div>
       </div>
 
       {/* Styled Footer Frame */}
-      <div className="max-w-[1400px] mx-auto px-6 sm:px-8 lg:px-12 mt-24">
-        <div className="border-t border-[#243629] pt-8 flex justify-between items-center text-xs text-[#5A6E60] font-light">
-          <span>© 2026 Modelverse®. All rights reserved.</span>
-          <span className="uppercase tracking-widest text-[9px] font-bold text-[#3A4D39]">
-            Modelverse Newsroom
-          </span>
-        </div>
+      <div className="max-w-[1040px] mx-auto px-6 mt-20 pb-12 border-t border-[#E0DCD5] pt-8 flex justify-between items-center text-xs text-[#777777] font-mono">
+        <span>© 2026 Modelverse®. All rights reserved.</span>
+        <span className="uppercase text-[10px] font-semibold text-[#666666]">
+          Modelverse Newsroom
+        </span>
       </div>
     </main>
   );
