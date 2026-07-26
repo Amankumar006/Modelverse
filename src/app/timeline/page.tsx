@@ -25,23 +25,15 @@ export default function TimelinePage() {
   const models = getAllModelEntries(); // Already sorted newest-first by library
 
   return (
-    <main className="min-h-screen bg-[#0C120F] text-gray-100 selection:bg-[#4ADE80] selection:text-white pb-24 relative">
-      {/* ── Top Hero Background Image ── */}
-      <div className="absolute top-0 left-0 w-full h-[60vh] z-0 pointer-events-none select-none">
-        <img 
-          src="/images/timeline-dial-bg.jpg" 
-          alt="" 
-          className="w-full h-full object-cover object-[center_30%] opacity-40 mix-blend-screen"
-        />
-        {/* Seamless blend into the black background */}
-        <div className="absolute inset-0 bg-gradient-to-b from-[#0C120F]/20 via-[#0C120F]/60 to-[#0C120F] pointer-events-none" />
-      </div>
+    <main className="min-h-screen bg-[#141414] text-[#E4E4E7] selection:bg-[#DA7756] selection:text-white pb-24 relative font-sans">
+      {/* ── Top Hero Background Gradient ── */}
+      <div className="absolute top-0 left-0 w-full h-[40vh] z-0 pointer-events-none select-none bg-gradient-to-b from-[#1C1C1E]/60 to-[#141414]" />
 
       {/* ── Fixed Minimal Nav Back Link ─────────────────────── */}
       <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 pt-8">
         <Link
           href="/"
-          className="inline-flex items-center gap-1 text-sm text-white/40 hover:text-white/80 transition-colors group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/50 focus-visible:ring-offset-2 focus-visible:ring-offset-black rounded-lg px-2 py-1"
+          className="inline-flex items-center gap-1 text-sm text-gray-400 hover:text-white transition-colors group focus-visible:outline-none rounded-lg px-2 py-1"
         >
           <ChevronLeft size={16} className="transition-transform group-hover:-translate-x-0.5" />
           Back to Home
@@ -49,14 +41,9 @@ export default function TimelinePage() {
       </div>
 
       {/* ── Content Container ───────────────────────────────── */}
-      <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 mt-10">
-        <div className="border-b border-white/[0.06] pb-8 mb-12">
-          <h1
-            className="text-4xl sm:text-5xl font-bold tracking-tight text-white"
-            style={{
-              fontFamily: "var(--font-display, ui-sans-serif, system-ui, sans-serif)",
-            }}
-          >
+      <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 mt-6">
+        <div className="border-b border-[#27272A] pb-8 mb-12">
+          <h1 className="text-4xl sm:text-5xl font-serif font-normal tracking-tight text-[#F4F4F5]">
             Release Timeline
           </h1>
           <p className="mt-2 text-sm text-white/50 max-w-xl">

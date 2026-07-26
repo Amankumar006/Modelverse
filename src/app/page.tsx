@@ -83,13 +83,13 @@ export default function Home() {
   }
 
   return (
-    <main className="bg-[#0C120F] text-[#E2E8E4] selection:bg-[#4ADE80] selection:text-[#0C120F]">
+    <main className="bg-[#141414] text-[#E4E4E7] selection:bg-[#DA7756] selection:text-white">
       {/* ── Hero Section ───────────────────────────────────── */}
       <HeroSection />
 
       {/* ── Latest Models Section (Detailed & Professional) ────────────────────── */}
       {latestModels.length > 0 && (
-        <section className="bg-[#0C120F] text-[#E2E8E4] px-4 sm:px-6 md:px-10 lg:px-14 py-12 md:py-16 border-t border-[#243629]">
+        <section className="bg-[#141414] text-[#E4E4E7] px-4 sm:px-6 md:px-10 lg:px-14 py-12 md:py-16 border-t border-[#27272A]">
           <div className="max-w-7xl mx-auto flex flex-col gap-10">
             
             {/* Header */}
