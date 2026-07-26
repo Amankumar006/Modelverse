@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect, useRef } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import Fuse from "fuse.js";
@@ -13,7 +13,28 @@ export default function Navbar({ theme = "dark" }: { theme?: "light" | "dark" })
   const [searchResults, setSearchResults] = useState<Array<{ id: string; name: string; slug: string; developer: string; type: string }>>([]);
   const [searchFocused, setSearchFocused] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const searchInputRef = useRef<HTMLInputElement>(null);
   const pathname = usePathname();
+
+  // Register global Cmd+K / Ctrl+K keyboard shortcut
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (
+        (e.key === "k" && (e.metaKey || e.ctrlKey)) ||
+        (e.key === "/" && document.activeElement?.tagName !== "INPUT" && document.activeElement?.tagName !== "TEXTAREA")
+      ) {
+        e.preventDefault();
+        searchInputRef.current?.focus();
+        setSearchFocused(true);
+      } else if (e.key === "Escape") {
+        searchInputRef.current?.blur();
+        setSearchFocused(false);
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, []);
 
   const getLinkClasses = (path: string) => {
     const isActive = path === "/" ? pathname === "/" : pathname?.startsWith(path);
@@ -97,6 +118,7 @@ export default function Navbar({ theme = "dark" }: { theme?: "light" | "dark" })
           <div className="relative flex items-center rounded-lg px-3 py-1.5 w-56 focus-within:w-64 transition-all duration-200 border bg-[#1C1C1E] border-[#2E2E2E] focus-within:border-[#DA7756]">
             <Search size={14} className="mr-2 text-gray-500 shrink-0" />
             <input
+              ref={searchInputRef}
               type="text"
               placeholder="Search docs & models..."
               value={searchQuery}
