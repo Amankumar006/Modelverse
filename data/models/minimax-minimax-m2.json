@@ -15,14 +15,19 @@
     "self-hostable",
     "api-only"
   ],
-  "license": "Other/Custom",
-  "parameters": "undisclosed",
+  "license": "other",
+  "parameters": "228.7B",
   "contextWindow": "197K tokens",
   "description": "Efficient open MiniMax model built for coding agents and tool-heavy workflows",
+  "descriptionDraft": "MiniMax-M2 is a text-generation model from MiniMax hosted on Hugging Face (MiniMaxAI/MiniMax-M2).",
   "keyFeatures": [
     "Max Output: 128K tokens",
     "Native reasoning capability",
     "Tool / function calling support"
+  ],
+  "keyFeaturesDraft": [
+    "Pipeline: text-generation",
+    "HF Tags: transformers, safetensors, minimax_m2, text-generation"
   ],
   "benchmarks": [
     {
@@ -56,9 +61,11 @@
     "open-weights"
   ],
   "sources": [
-    "https://github.com/anomalyco/models.dev"
+    "https://github.com/anomalyco/models.dev",
+    "https://huggingface.co/api/models/MiniMaxAI/MiniMax-M2"
   ],
   "verified": false,
+  "needsReview": true,
   "featured": false,
   "boost": 1,
   "curatorNotes": "Skeleton entry imported from models.dev backfill (2026-07-26). Needs manual enrichment and primary-source verification."
