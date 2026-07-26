@@ -16,8 +16,8 @@ export default function BenchmarkTabs() {
   const currentTab = tabs.find((t) => t.id === activeTab);
 
   return (
-    <div className="my-10 w-full bg-[#F7F5F0] rounded-2xl p-6 sm:p-8 border border-[#E5E2DB] shadow-sm">
-      {/* Anthropic Style Benchmark Filter Tabs */}
+    <div className="my-10 w-full bg-[#1C1C1E] rounded-2xl p-6 sm:p-8 border border-[#282828] shadow-2xl">
+      {/* Benchmark Filter Tabs */}
       <div className="flex flex-wrap items-center justify-center gap-2 mb-6">
         {tabs.map((tab) => (
           <button
@@ -25,8 +25,8 @@ export default function BenchmarkTabs() {
             onClick={() => setActiveTab(tab.id)}
             className={`px-4 py-1.5 rounded-full text-xs font-mono transition-all border ${
               activeTab === tab.id
-                ? "bg-[#191919] text-white border-[#191919] font-medium shadow-sm"
-                : "bg-white text-[#555555] border-[#E0DCD5] hover:border-[#191919] hover:text-[#191919]"
+                ? "bg-[#242426] text-emerald-400 border-emerald-500/40 font-semibold shadow-sm"
+                : "bg-[#141414] text-[#90908F] border-[#282828] hover:border-[#333333] hover:text-white"
             }`}
           >
             {tab.label}
@@ -34,8 +34,8 @@ export default function BenchmarkTabs() {
         ))}
       </div>
       
-      {/* Visual Chart Card */}
-      <div className="relative w-full rounded-xl overflow-hidden bg-white p-4 border border-[#E0DCD5] shadow-xs">
+      {/* Visual Chart Container */}
+      <div className="relative w-full rounded-xl overflow-hidden bg-[#141414] p-4 border border-[#282828] shadow-inner">
         <div className="relative w-full aspect-[4/3] sm:aspect-[16/9]">
           <Image
             src={currentTab?.url || ""}
@@ -47,7 +47,7 @@ export default function BenchmarkTabs() {
           />
         </div>
       </div>
-      <p className="text-[11px] text-[#777777] italic text-center mt-3 font-serif">
+      <p className="text-xs text-[#90908F] font-mono italic text-center mt-3">
         {currentTab?.label}: Performance vs. cost-effectiveness by effort level setting.
       </p>
     </div>
