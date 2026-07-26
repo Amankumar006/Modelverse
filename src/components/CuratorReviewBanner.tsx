@@ -41,7 +41,7 @@ export default function CuratorReviewBanner({ model }: { model: ModelProps }) {
       const res = await fetch("/api/models/verify", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ slug: model.slug, promoteDraft }),
+        body: JSON.stringify({ slug: model.slug, id: model.id, promoteDraft }),
       });
 
       const data = await res.json();

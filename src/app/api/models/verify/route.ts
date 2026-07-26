@@ -7,21 +7,54 @@ import { execSync } from "child_process";
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
-    const { slug, promoteDraft } = body;
+    const { slug, id, promoteDraft } = body;
 
-    if (!slug || typeof slug !== "string") {
+    const targetSlug = slug || id;
+
+    if (!targetSlug || typeof targetSlug !== "string") {
       return NextResponse.json(
-        { error: "Missing or invalid 'slug' parameter." },
+        { error: "Missing or invalid 'slug' or 'id' parameter." },
         { status: 400 }
       );
     }
 
-    const modelPath = path.join(process.cwd(), "data", "models", `${slug}.json`);
+    const modelsDir = path.join(process.cwd(), "data", "models");
+    let modelPath = path.join(modelsDir, `${targetSlug}.json`);
+
+    // Flexible fallback search across all json files in data/models
     if (!fs.existsSync(modelPath)) {
-      return NextResponse.json(
-        { error: `Model file for slug '${slug}' not found.` },
-        { status: 404 }
+      const files = fs.readdirSync(modelsDir).filter(
+        (f) => f.endsWith(".json") && f !== "_index.json"
       );
+
+      let foundPath: string | null = null;
+      for (const file of files) {
+        try {
+          const filePath = path.join(modelsDir, file);
+          const raw = fs.readFileSync(filePath, "utf-8");
+          const parsed = JSON.parse(raw);
+          if (
+            parsed.slug === slug ||
+            parsed.id === id ||
+            parsed.slug === targetSlug ||
+            parsed.id === targetSlug
+          ) {
+            foundPath = filePath;
+            break;
+          }
+        } catch {
+          // ignore parse errors for bad temp files
+        }
+      }
+
+      if (foundPath) {
+        modelPath = foundPath;
+      } else {
+        return NextResponse.json(
+          { error: `Model file for slug '${targetSlug}' not found.` },
+          { status: 404 }
+        );
+      }
     }
 
     const rawData = fs.readFileSync(modelPath, "utf-8");
@@ -52,7 +85,8 @@ export async function POST(req: NextRequest) {
         cwd: process.cwd(),
         encoding: "utf-8",
       });
-      revalidatePath(`/models/${slug}`);
+      if (model.slug) revalidatePath(`/models/${model.slug}`);
+      if (targetSlug) revalidatePath(`/models/${targetSlug}`);
       revalidatePath("/models");
       revalidatePath("/");
     } catch (compileErr) {
@@ -61,7 +95,7 @@ export async function POST(req: NextRequest) {
 
     return NextResponse.json({
       success: true,
-      message: `Model '${model.name}' (${slug}) marked as verified.`,
+      message: `Model '${model.name}' (${model.slug || targetSlug}) marked as verified.`,
       model,
     });
   } catch (err: any) {
