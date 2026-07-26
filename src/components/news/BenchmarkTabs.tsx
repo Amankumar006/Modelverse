@@ -25,7 +25,7 @@ export default function BenchmarkTabs() {
             onClick={() => setActiveTab(tab.id)}
             className={`px-4 py-1.5 rounded-full text-xs font-mono transition-all border ${
               activeTab === tab.id
-                ? "bg-[#242426] text-emerald-400 border-emerald-500/40 font-medium shadow-sm"
+                ? "bg-[#242426] text-emerald-400 border-emerald-500/40 font-semibold shadow-sm"
                 : "bg-[#141414] text-[#90908F] border-[#282828] hover:border-[#333333] hover:text-white"
             }`}
           >
@@ -34,8 +34,8 @@ export default function BenchmarkTabs() {
         ))}
       </div>
       
-      {/* Visual Chart Card */}
-      <div className="relative w-full rounded-xl overflow-hidden bg-[#141414] p-4 border border-[#282828] shadow-xs">
+      {/* Visual Chart Container */}
+      <div className="relative w-full rounded-xl overflow-hidden bg-[#141414] p-4 border border-[#282828] shadow-inner">
         <div className="relative w-full aspect-[4/3] sm:aspect-[16/9]">
           <Image
             src={currentTab?.url || ""}
@@ -47,7 +47,7 @@ export default function BenchmarkTabs() {
           />
         </div>
       </div>
-      <p className="text-xs text-[#90908F] italic text-center mt-3 font-sans">
+      <p className="text-xs text-[#90908F] font-mono italic text-center mt-3">
         {currentTab?.label}: Performance vs. cost-effectiveness by effort level setting.
       </p>
     </div>

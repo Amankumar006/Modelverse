@@ -136,7 +136,7 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
 
   return (
     <main className="min-h-screen bg-[#141414] text-[#E1E1E0] selection:bg-emerald-500 selection:text-black font-sans antialiased relative">
-      {/* Site Header */}
+      {/* Site Navigation */}
       <Navbar theme="dark" />
 
       {/* Inject JSON-LD */}
@@ -145,7 +145,7 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
 
-      {/* Article Top Header Navigation */}
+      {/* Article Header Container */}
       <div className="max-w-[840px] mx-auto px-6 pt-10 sm:pt-14">
         <Link
           href="/news"
@@ -154,18 +154,18 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
           <ArrowLeft size={14} /> Back to Newsroom
         </Link>
 
-        {/* Article Meta Badges */}
+        {/* Article Category & Confidence Badges */}
         <div className="flex items-center gap-3 mb-6">
           <Link
             href={`/news?category=${article.category}`}
-            className="inline-flex items-center px-3 py-1 rounded-full bg-[#242426] border border-[#333333] text-[11px] font-mono font-semibold uppercase tracking-wider text-emerald-400 hover:border-emerald-500/50 transition-colors"
+            className="inline-flex items-center px-3 py-1 rounded-full bg-[#242426] border border-[#333333] text-[11px] font-mono font-semibold uppercase tracking-wider text-emerald-400 hover:border-emerald-500/40 transition-colors"
           >
             {article.category === "weekly-news" ? `Issue ${article.issueNumber}` : getCategoryLabel(article.category)}
           </Link>
           <ConfidenceBadge confidence={article.confidenceLevel} />
         </div>
 
-        {/* Article Title */}
+        {/* High-Contrast Article Title */}
         <h1
           className="text-3xl sm:text-4xl md:text-5xl font-normal text-white tracking-tight leading-[1.2] mb-6"
           style={{ fontFamily: "var(--font-display, 'Instrument Serif', Georgia, serif)" }}
@@ -173,9 +173,9 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
           {article.title}
         </h1>
 
-        {/* Author & Date Metadata */}
-        <div className="flex flex-wrap items-center gap-4 text-xs text-[#90908F] pb-8 border-b border-[#282828] font-mono">
-          <span className="text-[#E1E1E0]">By {article.author}</span>
+        {/* Metadata Line */}
+        <div className="flex flex-wrap items-center gap-4 text-xs font-mono text-[#90908F] pb-8 border-b border-[#282828]">
+          <span className="text-[#E1E1E0] font-semibold">By {article.author}</span>
           <span>·</span>
           <span>{formatNewsDate(article.publishDate)}</span>
           <span>·</span>
@@ -199,15 +199,15 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
         </div>
       </div>
 
-      {/* Ergonomic 840px Article Reading Canvas (High-Contrast Dark Theme) */}
+      {/* Ergonomic 840px Article Reading Canvas (High Contrast Dark Theme) */}
       <article className="max-w-[840px] mx-auto px-6 py-4">
         {/* Render Interactive Benchmark Tabs for Claude Opus / Vision Articles */}
         {(article.slug === "claude-opus-5-detailed-guide" || article.body.includes("Benchmark")) && (
           <BenchmarkTabs />
         )}
 
-        {/* High-Contrast Markdown Content */}
-        <div className="prose prose-invert prose-emerald max-w-none text-[#E1E1E0] leading-[1.88] text-base sm:text-lg font-sans prose-headings:font-serif prose-headings:font-normal prose-headings:text-white prose-h2:text-2xl sm:prose-h2:text-3xl prose-h2:mt-10 prose-h2:mb-4 prose-h3:text-xl prose-h3:mt-8 prose-h3:mb-3 prose-p:mb-6 prose-p:text-[#D4D4D8] prose-a:text-emerald-400 prose-a:underline prose-a:font-medium hover:prose-a:text-emerald-300 prose-li:my-1 prose-li:text-[#D4D4D8] prose-strong:text-white prose-strong:font-semibold">
+        {/* High-Contrast Markdown Body */}
+        <div className="prose prose-invert prose-emerald max-w-none text-[#E1E1E0] leading-[1.85] text-base sm:text-lg font-sans prose-p:text-[#E1E1E0] prose-p:mb-6 prose-headings:font-serif prose-headings:font-normal prose-headings:text-white prose-h2:text-2xl sm:prose-h2:text-3xl prose-h2:mt-10 prose-h2:mb-4 prose-h3:text-xl prose-h3:mt-8 prose-h3:mb-3 prose-a:text-[#4ADE80] prose-a:underline hover:prose-a:text-emerald-300 prose-li:my-1.5 prose-strong:text-white prose-strong:font-semibold">
           <ReactMarkdown
             remarkPlugins={[remarkGfm]}
             components={{
@@ -267,7 +267,7 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
         {article.externalSources && article.externalSources.length > 0 && (
           <div className="mt-10 pt-8 border-t border-[#282828]">
             <h3
-              className="text-lg font-normal text-white mb-3"
+              className="text-xl font-normal text-white mb-3"
               style={{ fontFamily: "var(--font-display, 'Instrument Serif', Georgia, serif)" }}
             >
               Footnotes & Primary References
@@ -300,11 +300,17 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
           Related content
         </h2>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {relatedArticles.map((rel) => (
-            <div key={rel.id} className="group flex flex-col justify-between p-5 rounded-2xl bg-[#1C1C1E] border border-[#282828] hover:border-emerald-500/40 transition-all">
+            <div
+              key={rel.id}
+              className="group p-5 bg-[#1C1C1E] border border-[#282828] rounded-2xl hover:border-emerald-500/40 transition-all flex flex-col justify-between"
+            >
               <div>
-                <h3 className="font-semibold text-white text-base mb-2 group-hover:text-emerald-400 transition-colors leading-snug">
+                <h3
+                  className="font-normal text-white text-lg mb-2 group-hover:text-emerald-400 transition-colors leading-snug"
+                  style={{ fontFamily: "var(--font-display, 'Instrument Serif', Georgia, serif)" }}
+                >
                   <Link href={`/news/${rel.slug}`}>{rel.title}</Link>
                 </h3>
                 <p className="text-xs text-[#90908F] leading-relaxed line-clamp-3 mb-4">
@@ -324,7 +330,7 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
         </div>
       </div>
 
-      {/* Styled Footer Frame */}
+      {/* Footer Frame */}
       <div className="max-w-[1040px] mx-auto px-6 mt-20 pb-12 border-t border-[#282828] pt-8 flex justify-between items-center text-xs text-[#90908F] font-mono">
         <span>© 2026 Modelverse®. All rights reserved.</span>
         <span className="uppercase text-[10px] font-semibold text-[#90908F]">
