@@ -1,0 +1,84 @@
+{
+  "id": "xai-grok-4.3",
+  "name": "Grok 4.3",
+  "slug": "xai-grok-4.3",
+  "developer": "xAI",
+  "releaseDate": "2026-04-17",
+  "updatedAt": "2026-07-26",
+  "type": "api-only",
+  "status": "active",
+  "modality": [
+    "text",
+    "image",
+    "pdf"
+  ],
+  "primaryTask": "chat-reasoning",
+  "deployment": [
+    "api-only"
+  ],
+  "license": "Proprietary",
+  "parameters": "undisclosed",
+  "contextWindow": "1M tokens",
+  "description": "xAI's default Grok for chat, coding, agentic tools, and lower hallucination risk",
+  "keyFeatures": [
+    "Max Output: 30K tokens",
+    "Native reasoning capability",
+    "Tool / function calling support"
+  ],
+  "benchmarks": [
+    {
+      "name": "Artificial Analysis Intelligence Index",
+      "score": "53 (index score)",
+      "verified": false
+    },
+    {
+      "name": "GDPval-AA",
+      "score": "1500 (Elo)",
+      "verified": false
+    },
+    {
+      "name": "τ²-Bench Telecom",
+      "score": "98%",
+      "verified": false
+    },
+    {
+      "name": "IFBench",
+      "score": "81 (accuracy)",
+      "verified": false
+    }
+  ],
+  "family": "grok",
+  "previousVersion": null,
+  "pricing": [
+    {
+      "unit": "1M input tokens",
+      "amount": 1.25,
+      "currency": "USD"
+    },
+    {
+      "unit": "1M output tokens",
+      "amount": 2.5,
+      "currency": "USD"
+    },
+    {
+      "unit": "1M cache read tokens",
+      "amount": 0.2,
+      "currency": "USD"
+    }
+  ],
+  "pricingLastVerified": "2026-07-26",
+  "links": {},
+  "logo": "/logos/xai.svg",
+  "tags": [
+    "reasoning",
+    "tool-calling",
+    "structured-output"
+  ],
+  "sources": [
+    "https://github.com/anomalyco/models.dev"
+  ],
+  "verified": false,
+  "featured": false,
+  "boost": 1,
+  "curatorNotes": "Skeleton entry imported from models.dev backfill (2026-07-26). Needs manual enrichment and primary-source verification."
+}
