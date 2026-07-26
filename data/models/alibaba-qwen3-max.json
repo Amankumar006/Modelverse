@@ -1,0 +1,74 @@
+{
+  "id": "alibaba-qwen3-max",
+  "name": "Qwen3 Max",
+  "slug": "alibaba-qwen3-max",
+  "developer": "Alibaba",
+  "releaseDate": "2025-09-23",
+  "updatedAt": "2026-07-26",
+  "type": "api-only",
+  "status": "active",
+  "modality": [
+    "text"
+  ],
+  "primaryTask": "chat-reasoning",
+  "deployment": [
+    "api-only"
+  ],
+  "license": "Proprietary",
+  "parameters": "undisclosed",
+  "contextWindow": "262K tokens",
+  "description": "Flagship Qwen3 model for coding agents, complex reasoning, and tool use",
+  "keyFeatures": [
+    "Max Output: 66K tokens",
+    "Tool / function calling support"
+  ],
+  "benchmarks": [
+    {
+      "name": "Artificial Analysis Coding Index",
+      "score": "26.4 (index)",
+      "verified": false
+    },
+    {
+      "name": "SciCode",
+      "score": "38.3%",
+      "verified": false
+    },
+    {
+      "name": "Terminal-Bench Hard",
+      "score": "20.5%",
+      "verified": false
+    }
+  ],
+  "family": "qwen",
+  "previousVersion": null,
+  "pricing": [
+    {
+      "unit": "1M input tokens",
+      "amount": 1.2,
+      "currency": "USD"
+    },
+    {
+      "unit": "1M output tokens",
+      "amount": 6,
+      "currency": "USD"
+    },
+    {
+      "unit": "1M cache read tokens",
+      "amount": 0.24,
+      "currency": "USD"
+    }
+  ],
+  "pricingLastVerified": "2026-07-26",
+  "links": {},
+  "logo": "/logos/alibaba.svg",
+  "tags": [
+    "tool-calling"
+  ],
+  "sources": [
+    "https://github.com/anomalyco/models.dev"
+  ],
+  "verified": false,
+  "featured": false,
+  "boost": 1,
+  "curatorNotes": "Skeleton entry imported from models.dev backfill (2026-07-26). Needs manual enrichment and primary-source verification."
+}

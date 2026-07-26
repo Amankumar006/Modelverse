@@ -1,0 +1,69 @@
+{
+  "id": "alibaba-qwen3.5-27b",
+  "name": "Qwen3.5 27B",
+  "slug": "alibaba-qwen3.5-27b",
+  "developer": "Alibaba",
+  "releaseDate": "2026-02-23",
+  "updatedAt": "2026-07-26",
+  "type": "open-weights",
+  "status": "active",
+  "modality": [
+    "text",
+    "image",
+    "video",
+    "audio"
+  ],
+  "primaryTask": "chat-reasoning",
+  "deployment": [
+    "self-hostable",
+    "api-only"
+  ],
+  "license": "Other/Custom",
+  "parameters": "undisclosed",
+  "contextWindow": "262K tokens",
+  "description": "Qwen vision-language model for visual reasoning, documents, and agent tasks",
+  "keyFeatures": [
+    "Max Output: 66K tokens",
+    "Native reasoning capability",
+    "Tool / function calling support"
+  ],
+  "benchmarks": [
+    {
+      "name": "SWE-Bench Verified",
+      "score": "72.4%",
+      "verified": false
+    }
+  ],
+  "family": "qwen",
+  "previousVersion": null,
+  "pricing": [
+    {
+      "unit": "1M input tokens",
+      "amount": 0.27,
+      "currency": "USD"
+    },
+    {
+      "unit": "1M output tokens",
+      "amount": 2.16,
+      "currency": "USD"
+    }
+  ],
+  "pricingLastVerified": "2026-07-26",
+  "links": {
+    "Hugging Face": "https://huggingface.co/Qwen/Qwen3.5-27B"
+  },
+  "logo": "/logos/alibaba.svg",
+  "tags": [
+    "reasoning",
+    "tool-calling",
+    "structured-output",
+    "open-weights"
+  ],
+  "sources": [
+    "https://github.com/anomalyco/models.dev"
+  ],
+  "verified": false,
+  "featured": false,
+  "boost": 1,
+  "curatorNotes": "Skeleton entry imported from models.dev backfill (2026-07-26). Needs manual enrichment and primary-source verification."
+}

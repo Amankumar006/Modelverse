@@ -1,0 +1,61 @@
+{
+  "id": "alibaba-qwen3-vl-plus",
+  "name": "Qwen3-VL Plus",
+  "slug": "alibaba-qwen3-vl-plus",
+  "developer": "Alibaba",
+  "releaseDate": "2025-09-23",
+  "updatedAt": "2026-07-26",
+  "type": "api-only",
+  "status": "active",
+  "modality": [
+    "text",
+    "image"
+  ],
+  "primaryTask": "chat-reasoning",
+  "deployment": [
+    "api-only"
+  ],
+  "license": "Proprietary",
+  "parameters": "undisclosed",
+  "contextWindow": "262K tokens",
+  "description": "Qwen vision-language model for visual reasoning, documents, and agent tasks",
+  "keyFeatures": [
+    "Max Output: 33K tokens",
+    "Native reasoning capability",
+    "Tool / function calling support"
+  ],
+  "benchmarks": [],
+  "family": "qwen",
+  "previousVersion": null,
+  "pricing": [
+    {
+      "unit": "1M input tokens",
+      "amount": 0.2,
+      "currency": "USD"
+    },
+    {
+      "unit": "1M output tokens",
+      "amount": 1.6,
+      "currency": "USD"
+    },
+    {
+      "unit": "1M cache read tokens",
+      "amount": 0.04,
+      "currency": "USD"
+    }
+  ],
+  "pricingLastVerified": "2026-07-26",
+  "links": {},
+  "logo": "/logos/alibaba.svg",
+  "tags": [
+    "reasoning",
+    "tool-calling"
+  ],
+  "sources": [
+    "https://github.com/anomalyco/models.dev"
+  ],
+  "verified": false,
+  "featured": false,
+  "boost": 1,
+  "curatorNotes": "Skeleton entry imported from models.dev backfill (2026-07-26). Needs manual enrichment and primary-source verification."
+}
