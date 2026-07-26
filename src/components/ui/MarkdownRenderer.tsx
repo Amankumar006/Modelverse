@@ -98,19 +98,19 @@ export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
           const { headers, rows } = parseTableBlock(trimmed);
           return (
             <CopyableTable key={bIdx} title="Specification Table">
-              <table className="w-full text-left border-collapse text-xs sm:text-sm">
-                <thead className="bg-white/10 border-b border-white/10 text-white font-semibold uppercase tracking-wider text-[11px]">
+              <table className="w-full min-w-full text-left border-collapse text-xs sm:text-sm">
+                <thead className="bg-[#16221B] border-b border-[#243629] text-[#4ADE80] font-semibold uppercase tracking-wider text-[11px]">
                   <tr>
                     {headers.map((h, hIdx) => (
-                      <th key={hIdx} className="p-3.5 text-white font-bold">
+                      <th key={hIdx} className="p-3.5 text-[#4ADE80] font-bold text-left">
                         <ReactMarkdown components={{ p: "span" }}>{h}</ReactMarkdown>
                       </th>
                     ))}
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-white/10 bg-[#0C120F]">
+                <tbody className="divide-y divide-[#243629] bg-[#0C120F]">
                   {rows.map((row, rIdx) => (
-                    <tr key={rIdx} className="hover:bg-white/5 transition-colors">
+                    <tr key={rIdx} className="hover:bg-[#15211B] transition-colors">
                       {row.map((cell, cIdx) => (
                         <td key={cIdx} className="p-3.5 text-gray-300 leading-normal">
                           <ReactMarkdown components={{ p: "span" }}>{cell}</ReactMarkdown>
