@@ -56,7 +56,7 @@ export default function Navbar({ theme = "dark" }: { theme?: "light" | "dark" })
 
   return (
     <header className="sticky top-0 z-50 w-full bg-[#141414]/95 backdrop-blur-md border-b border-[#282828]">
-      <nav className="flex justify-between items-center px-4 sm:px-8 py-3 max-w-7xl mx-auto gap-4">
+      <nav className="flex justify-between items-center px-4 sm:px-6 lg:px-10 2xl:px-12 py-3 max-w-[1600px] mx-auto gap-4">
         {/* Custom Neural Constellation Modelverse SVG Logo */}
         <Link
           href="/"
