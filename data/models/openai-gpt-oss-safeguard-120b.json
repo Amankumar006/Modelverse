@@ -15,14 +15,19 @@
     "self-hostable",
     "api-only"
   ],
-  "license": "Other/Custom",
-  "parameters": "undisclosed",
+  "license": "apache-2.0",
+  "parameters": "120.4B",
   "contextWindow": "131K tokens",
   "description": "Safety model for policy screening, moderation, and risk-aware routing workflows",
+  "descriptionDraft": "GPT OSS Safeguard 120B is a text-generation model from OpenAI hosted on Hugging Face (openai/gpt-oss-safeguard-120b).",
   "keyFeatures": [
     "Max Output: 33K tokens",
     "Native reasoning capability",
     "Tool / function calling support"
+  ],
+  "keyFeaturesDraft": [
+    "Pipeline: text-generation",
+    "HF Tags: transformers, safetensors, gpt_oss, text-generation"
   ],
   "benchmarks": [],
   "family": "gpt-oss",
@@ -51,9 +56,11 @@
     "open-weights"
   ],
   "sources": [
-    "https://github.com/anomalyco/models.dev"
+    "https://github.com/anomalyco/models.dev",
+    "https://huggingface.co/api/models/openai/gpt-oss-safeguard-120b"
   ],
   "verified": false,
+  "needsReview": true,
   "featured": false,
   "boost": 1,
   "curatorNotes": "Skeleton entry imported from models.dev backfill (2026-07-26). Needs manual enrichment and primary-source verification."
