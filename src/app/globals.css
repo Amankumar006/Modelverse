@@ -33,10 +33,18 @@ body {
 /* ------------------------------------------------------------------ */
 /*  Typography & Reading Contrast Overrides                            */
 /* ------------------------------------------------------------------ */
+.font-serif-display {
+  font-family: "Instrument Serif", serif;
+}
+
+.bg-claude-dark {
+  background-color: #181816;
+}
+
 .prose {
-  font-size: 1.25rem; /* 20px base */
-  line-height: 1.85;
-  color: #F3F4F6;
+  font-size: 1.125rem; /* 18px base */
+  line-height: 1.75;
+  color: #B4B2A9;
 }
 
 .prose p {
