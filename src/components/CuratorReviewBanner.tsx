@@ -137,8 +137,12 @@ export default function CuratorReviewBanner({ model }: { model: ModelProps }) {
       </div>
 
       {errorMsg && (
-        <div className="mt-4 p-3 rounded-lg bg-red-500/10 border border-red-500/30 text-red-400 text-xs">
-          {errorMsg}
+        <div className="mt-4 p-3.5 rounded-xl bg-amber-500/10 border border-amber-500/30 text-amber-300 text-xs flex items-start gap-2.5">
+          <span className="shrink-0 text-base select-none">🔒</span>
+          <div className="leading-relaxed">
+            <span className="font-semibold block mb-0.5">Read-Only Production Deployment</span>
+            <span>{errorMsg}</span>
+          </div>
         </div>
       )}
 

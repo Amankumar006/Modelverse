@@ -76,28 +76,42 @@ export async function POST(req: NextRequest) {
       }
     }
 
-    // Write back updated model file
-    fs.writeFileSync(modelPath, JSON.stringify(model, null, 2) + "\n", "utf-8");
-
-    // Re-compile model catalog archives
+    // Try writing back updated model file (handles EROFS in serverless environments)
     try {
-      execSync("node scripts/compile-models.js", {
-        cwd: process.cwd(),
-        encoding: "utf-8",
-      });
-      if (model.slug) revalidatePath(`/models/${model.slug}`);
-      if (targetSlug) revalidatePath(`/models/${targetSlug}`);
-      revalidatePath("/models");
-      revalidatePath("/");
-    } catch (compileErr) {
-      console.error("Failed to recompile models archive:", compileErr);
-    }
+      fs.writeFileSync(modelPath, JSON.stringify(model, null, 2) + "\n", "utf-8");
 
-    return NextResponse.json({
-      success: true,
-      message: `Model '${model.name}' (${model.slug || targetSlug}) marked as verified.`,
-      model,
-    });
+      // Re-compile model catalog archives if filesystem is writeable
+      try {
+        execSync("node scripts/compile-models.js", {
+          cwd: process.cwd(),
+          encoding: "utf-8",
+        });
+        if (model.slug) revalidatePath(`/models/${model.slug}`);
+        if (targetSlug) revalidatePath(`/models/${targetSlug}`);
+        revalidatePath("/models");
+        revalidatePath("/");
+      } catch (compileErr) {
+        console.error("Failed to recompile models archive:", compileErr);
+      }
+
+      return NextResponse.json({
+        success: true,
+        message: `Model '${model.name}' (${model.slug || targetSlug}) marked as verified.`,
+        model,
+      });
+    } catch (writeErr: any) {
+      if (writeErr.code === "EROFS" || writeErr.message?.includes("read-only file system")) {
+        return NextResponse.json(
+          {
+            error: `Production deployment filesystem is read-only (EROFS). Direct disk writes are restricted on serverless environments. Please verify and promote '${model.name}' in your local development environment or via Git PR.`,
+            isReadOnly: true,
+            model,
+          },
+          { status: 403 }
+        );
+      }
+      throw writeErr;
+    }
   } catch (err: any) {
     console.error("Error verifying model:", err);
     return NextResponse.json(
