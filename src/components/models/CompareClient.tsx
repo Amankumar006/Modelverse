@@ -9,6 +9,7 @@ import { X, Plus, Search, ChevronDown, Activity, Calendar, Server, Tag, Shield, 
 import TypeBadge from "@/components/ui/TypeBadge";
 import ModalityTag from "@/components/ui/ModalityTag";
 import CopyableTable from "@/components/ui/CopyableTable";
+import VisionBenchmarkChart from "./VisionBenchmarkChart";
 
 interface CompareClientProps {
   initialModels: ModelEntry[];
@@ -174,6 +175,9 @@ export default function CompareClient({ initialModels, allModels }: CompareClien
           )}
         </div>
       </div>
+
+      {/* Interactive Vision Benchmark & Latency Chart */}
+      <VisionBenchmarkChart />
 
       {/* Comparison Table */}
       <CopyableTable title="Model Comparison Matrix">
