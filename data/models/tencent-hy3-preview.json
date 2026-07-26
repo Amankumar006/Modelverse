@@ -15,14 +15,19 @@
     "self-hostable",
     "api-only"
   ],
-  "license": "Other/Custom",
-  "parameters": "undisclosed",
+  "license": "other",
+  "parameters": "298.8B",
   "contextWindow": "256K tokens",
   "description": "Tencent Hy reasoning model for coding, instruction following, and agent tasks",
+  "descriptionDraft": "Hy3 preview is a text-generation model from Tencent hosted on Hugging Face (tencent/Hy3-preview).",
   "keyFeatures": [
     "Max Output: 64K tokens",
     "Native reasoning capability",
     "Tool / function calling support"
+  ],
+  "keyFeaturesDraft": [
+    "Pipeline: text-generation",
+    "HF Tags: transformers, safetensors, hy_v3, text-generation"
   ],
   "benchmarks": [
     {
@@ -61,9 +66,11 @@
     "open-weights"
   ],
   "sources": [
-    "https://github.com/anomalyco/models.dev"
+    "https://github.com/anomalyco/models.dev",
+    "https://huggingface.co/api/models/tencent/Hy3-preview"
   ],
   "verified": false,
+  "needsReview": true,
   "featured": false,
   "boost": 1,
   "curatorNotes": "Skeleton entry imported from models.dev backfill (2026-07-26). Needs manual enrichment and primary-source verification."
