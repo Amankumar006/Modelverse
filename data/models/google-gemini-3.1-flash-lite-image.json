@@ -4,7 +4,7 @@
   "slug": "google-gemini-3.1-flash-lite-image",
   "developer": "Google DeepMind",
   "releaseDate": "2026-06-30",
-  "updatedAt": "2026-07-26",
+  "updatedAt": "2026-07-27",
   "type": "api-only",
   "status": "active",
   "modality": [
@@ -18,44 +18,91 @@
   "license": "Proprietary",
   "parameters": "undisclosed",
   "contextWindow": "66K tokens",
-  "description": "Fastest, most cost-efficient Gemini image model for high-volume 1K generation and editing",
+  "description": "Fastest, most cost-efficient Gemini image model for high-volume 1K generation and multi-turn image editing with native Thinking On reasoning.",
   "keyFeatures": [
-    "Max Output: 4K tokens",
-    "Native reasoning capability",
-    "Tool / function calling support"
+    "Ultrafast 4.0s latency per 1K resolution image generation",
+    "1251 ImgGen & 1308 ImgEdit Elo rating on LMArena",
+    "Native Thinking On reasoning for precise prompt instruction following",
+    "Ultra-low cost at $0.034 per 1K resolution output image",
+    "66K context window with native multimodal text and image understanding",
+    "Advanced multi-turn image editing, subject consistency, and text rendering"
   ],
-  "benchmarks": [],
+  "benchmarks": [
+    {
+      "name": "Image Generation Elo (LMArena)",
+      "score": "1251",
+      "verified": true,
+      "sourceType": "independent-eval"
+    },
+    {
+      "name": "Image Editing Elo (LMArena)",
+      "score": "1308",
+      "verified": true,
+      "sourceType": "independent-eval"
+    },
+    {
+      "name": "Generation Latency per 1K Img (Artificial Analysis)",
+      "score": "4.0s",
+      "verified": true,
+      "sourceType": "independent-eval"
+    },
+    {
+      "name": "Price per 1K Resolution Image",
+      "score": "$0.034",
+      "verified": true,
+      "sourceType": "vendor-reported"
+    }
+  ],
   "family": "gemini-flash-lite",
   "previousVersion": null,
   "pricing": [
     {
+      "tier": "Image Generation",
+      "unit": "1K resolution image",
+      "amount": 0.034,
+      "currency": "USD"
+    },
+    {
+      "tier": "Text Input",
       "unit": "1M input tokens",
       "amount": 0.25,
       "currency": "USD"
     },
     {
+      "tier": "Output Tokens",
       "unit": "1M output tokens",
       "amount": 1.5,
       "currency": "USD"
     },
     {
+      "tier": "Cache Read",
       "unit": "1M cache read tokens",
       "amount": 0.03,
       "currency": "USD"
     }
   ],
-  "pricingLastVerified": "2026-07-26",
-  "links": {},
+  "pricingLastVerified": "2026-07-27",
+  "links": {
+    "website": "https://deepmind.google/models/gemini-image/flash-lite/",
+    "blogPost": "https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-omni-flash-nano-banana-2-lite/",
+    "playground": "https://aistudio.google.com/"
+  },
   "logo": "/logos/google-deepmind.svg",
   "tags": [
+    "image-generation",
+    "image-editing",
     "reasoning",
-    "tool-calling"
+    "multimodal",
+    "fast-inference"
   ],
   "sources": [
-    "https://github.com/anomalyco/models.dev"
+    "https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-omni-flash-nano-banana-2-lite/",
+    "https://deepmind.google/models/gemini-image/flash-lite/",
+    "https://lmarena.ai",
+    "https://artificialanalysis.ai"
   ],
-  "verified": false,
-  "featured": false,
-  "boost": 1,
-  "curatorNotes": "Skeleton entry imported from models.dev backfill (2026-07-26). Needs manual enrichment and primary-source verification."
+  "verified": true,
+  "featured": true,
+  "boost": 5,
+  "curatorNotes": "Fully enriched entry with official Google DeepMind launch specifications, LMArena Elo ratings (1251 ImgGen / 1308 ImgEdit), Artificial Analysis latency benchmarks (4.0s), and primary sources."
 }
