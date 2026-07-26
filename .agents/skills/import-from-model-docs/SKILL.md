@@ -27,7 +27,7 @@ confirmation — it does not write directly to `data/models/*.json`.
 ### Needs verification before use
 | Lab | Likely location |
 |---|---|
-| Meta AI | Check `ai.meta.com` or `llama.com` for an equivalent "models" docs page — not yet confirmed to exist in this format. |
+| Meta AI | Check `ai.https://ai.https://ai.meta.com/blog/introducing-muse-image-muse-video-msl//blog/introducing-muse-image-muse-video-msl/` or `llama.com` for an equivalent "models" docs page — not yet confirmed to exist in this format. |
 | Mistral | Check `docs.mistral.ai` for an equivalent models-list page — not yet confirmed. |
 
 Do not assume these two mirror the OpenAI/Anthropic/Google pattern without

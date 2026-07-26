@@ -20,7 +20,7 @@
 
 | Resource | Link |
 |:---|:---|
-| **Meta AI** | [meta.com](https://meta.com) |
+| **Meta AI** | [https://ai.https://ai.meta.com/blog/introducing-muse-image-muse-video-msl//blog/introducing-muse-image-muse-video-msl/] |
 
 ---
 

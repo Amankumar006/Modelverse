@@ -53,7 +53,7 @@
   "institution": "Meta AI (FAIR) & BCBL",
   "previousVersion": null,
   "links": {
-    "website": "https://ai.meta.com/research/publications/brain2qwerty-decoding-speech-from-brain-signals/",
+    "website": "https://ai.https://ai.https://ai.meta.com/blog/introducing-muse-image-muse-video-msl//blog/introducing-muse-image-muse-video-msl//research/publications/brain2qwerty-decoding-speech-from-brain-signals/",
     "paper": "https://arxiv.org/abs/2502.17480",
     "github": "https://github.com/facebookresearch/brain2qwerty",
     "huggingface": "https://huggingface.co/papers/2502.17480"
@@ -69,7 +69,7 @@
     "neural-decoding"
   ],
   "sources": [
-    "https://ai.meta.com/research/publications/brain2qwerty-decoding-speech-from-brain-signals/",
+    "https://ai.https://ai.https://ai.meta.com/blog/introducing-muse-image-muse-video-msl//blog/introducing-muse-image-muse-video-msl//research/publications/brain2qwerty-decoding-speech-from-brain-signals/",
     "https://arxiv.org/abs/2502.17480",
     "https://github.com/facebookresearch/brain2qwerty"
   ],

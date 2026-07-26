@@ -17,4 +17,4 @@ Unlike traditional text-to-image models that render directly from a prompt, MUSE
 ---
 
 ## Verified Project Links
-- **Official Portal:** [https://meta.com](https://meta.com) / [https://meta.ai](https://meta.ai)
+- **Official Portal:** [https://https://ai.https://ai.meta.com/blog/introducing-muse-image-muse-video-msl//blog/introducing-muse-image-muse-video-msl/](https://https://ai.https://ai.meta.com/blog/introducing-muse-image-muse-video-msl//blog/introducing-muse-image-muse-video-msl/) / [https://meta.ai](https://meta.ai)
