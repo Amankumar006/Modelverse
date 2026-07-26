@@ -72,7 +72,7 @@ export default function ModelDetailTabs({
             onClick={() => setActiveTab(t.key)}
             className={`-mb-px border-b-2 pb-3 text-sm font-medium transition-colors ${
               activeTab === t.key
-                ? "border-[#D97757] text-white font-semibold"
+                ? "border-emerald-400 text-white font-semibold"
                 : "border-transparent text-[#90908F] hover:text-[#E1E1E0]"
             }`}
           >

@@ -121,7 +121,7 @@ function TrustNote({ model }: { model: ModelEntry }) {
   if (model.verified && !hasVendorReported) return null;
 
   return (
-    <div className="border-l-2 border-[#D97757] pl-3 text-sm text-[#90908F] space-y-0.5">
+    <div className="border-l-2 border-emerald-400 pl-3 text-sm text-[#90908F] space-y-0.5">
       {!model.verified && (
         <p>Specifications on this page are provisional — not yet confirmed against a primary source.</p>
       )}
@@ -271,7 +271,7 @@ export default async function ModelDetailPage({
                     href={`/models/${m.slug}`}
                     className={`flex items-center justify-between px-2.5 py-1.5 rounded-lg text-xs transition-colors ${
                       m.slug === model.slug
-                        ? "bg-[#242426] text-white font-medium border-l-2 border-[#D97757]"
+                        ? "bg-[#242426] text-white font-medium border-l-2 border-emerald-400"
                         : "text-[#90908F] hover:text-white hover:bg-[#1E1E1E]"
                     }`}
                   >
@@ -458,7 +458,7 @@ export default async function ModelDetailPage({
                   <Link
                     key={m.slug}
                     href={`/models/${m.slug}`}
-                    className="text-xs font-mono bg-[#242426] text-gray-300 border border-[#333333] px-2 py-0.5 rounded hover:text-white hover:border-[#D97757] transition-colors"
+                    className="text-xs font-mono bg-[#242426] text-gray-300 border border-[#333333] px-2 py-0.5 rounded hover:text-white hover:border-emerald-400 transition-colors"
                   >
                     {m.name}
                   </Link>
