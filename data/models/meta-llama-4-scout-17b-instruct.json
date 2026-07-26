@@ -1,0 +1,58 @@
+{
+  "id": "meta-llama-4-scout-17b-instruct",
+  "name": "Llama 4 Scout 17B Instruct",
+  "slug": "meta-llama-4-scout-17b-instruct",
+  "developer": "Meta",
+  "releaseDate": "2025-04-05",
+  "updatedAt": "2026-07-26",
+  "type": "open-weights",
+  "status": "active",
+  "modality": [
+    "text",
+    "image"
+  ],
+  "primaryTask": "multimodal-general",
+  "deployment": [
+    "self-hostable",
+    "api-only"
+  ],
+  "license": "Other/Custom",
+  "parameters": "undisclosed",
+  "contextWindow": "3.5M tokens",
+  "description": "Open Llama with long-context vision for efficient multimodal agents",
+  "keyFeatures": [
+    "Max Output: 16K tokens",
+    "Tool / function calling support"
+  ],
+  "benchmarks": [],
+  "family": "llama",
+  "previousVersion": null,
+  "pricing": [
+    {
+      "unit": "1M input tokens",
+      "amount": 0.18,
+      "currency": "USD"
+    },
+    {
+      "unit": "1M output tokens",
+      "amount": 0.59,
+      "currency": "USD"
+    }
+  ],
+  "pricingLastVerified": "2026-07-26",
+  "links": {
+    "Hugging Face": "https://huggingface.co/meta-llama/Llama-4-Scout-17B-16E-Instruct"
+  },
+  "logo": "/logos/meta.svg",
+  "tags": [
+    "tool-calling",
+    "open-weights"
+  ],
+  "sources": [
+    "https://github.com/anomalyco/models.dev"
+  ],
+  "verified": false,
+  "featured": false,
+  "boost": 1,
+  "curatorNotes": "Skeleton entry imported from models.dev backfill (2026-07-26). Needs manual enrichment and primary-source verification."
+}

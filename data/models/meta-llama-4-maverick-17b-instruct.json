@@ -1,0 +1,69 @@
+{
+  "id": "meta-llama-4-maverick-17b-instruct",
+  "name": "Llama 4 Maverick 17B Instruct",
+  "slug": "meta-llama-4-maverick-17b-instruct",
+  "developer": "Meta",
+  "releaseDate": "2025-04-05",
+  "updatedAt": "2026-07-26",
+  "type": "open-weights",
+  "status": "active",
+  "modality": [
+    "text",
+    "image"
+  ],
+  "primaryTask": "multimodal-general",
+  "deployment": [
+    "self-hostable",
+    "api-only"
+  ],
+  "license": "Other/Custom",
+  "parameters": "undisclosed",
+  "contextWindow": "1M tokens",
+  "description": "Open multimodal Llama for strong reasoning with efficient everyday serving",
+  "keyFeatures": [
+    "Max Output: 16K tokens",
+    "Tool / function calling support"
+  ],
+  "benchmarks": [
+    {
+      "name": "Aider Polyglot",
+      "score": "15.6%",
+      "verified": false
+    },
+    {
+      "name": "SWE-Bench Pro",
+      "score": "5.24 (resolve rate)",
+      "verified": false
+    }
+  ],
+  "family": "llama",
+  "previousVersion": null,
+  "pricing": [
+    {
+      "unit": "1M input tokens",
+      "amount": 0.27,
+      "currency": "USD"
+    },
+    {
+      "unit": "1M output tokens",
+      "amount": 0.85,
+      "currency": "USD"
+    }
+  ],
+  "pricingLastVerified": "2026-07-26",
+  "links": {
+    "Hugging Face": "https://huggingface.co/meta-llama/Llama-4-Maverick-17B-128E-Instruct"
+  },
+  "logo": "/logos/meta.svg",
+  "tags": [
+    "tool-calling",
+    "open-weights"
+  ],
+  "sources": [
+    "https://github.com/anomalyco/models.dev"
+  ],
+  "verified": false,
+  "featured": false,
+  "boost": 1,
+  "curatorNotes": "Skeleton entry imported from models.dev backfill (2026-07-26). Needs manual enrichment and primary-source verification."
+}
