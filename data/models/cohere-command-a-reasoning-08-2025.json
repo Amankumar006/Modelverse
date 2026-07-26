@@ -1,0 +1,59 @@
+{
+  "id": "cohere-command-a-reasoning-08-2025",
+  "name": "Command A Reasoning",
+  "slug": "cohere-command-a-reasoning-08-2025",
+  "developer": "Cohere",
+  "releaseDate": "2025-08-21",
+  "updatedAt": "2026-07-26",
+  "type": "open-weights",
+  "status": "active",
+  "modality": [
+    "text"
+  ],
+  "primaryTask": "chat-reasoning",
+  "deployment": [
+    "self-hostable",
+    "api-only"
+  ],
+  "license": "Other/Custom",
+  "parameters": "undisclosed",
+  "contextWindow": "256K tokens",
+  "description": "Cohere reasoning model for multilingual enterprise agents, tools, and complex workflows",
+  "keyFeatures": [
+    "Max Output: 32K tokens",
+    "Native reasoning capability",
+    "Tool / function calling support"
+  ],
+  "benchmarks": [],
+  "family": "command-a",
+  "previousVersion": null,
+  "pricing": [
+    {
+      "unit": "1M input tokens",
+      "amount": 2.5,
+      "currency": "USD"
+    },
+    {
+      "unit": "1M output tokens",
+      "amount": 10,
+      "currency": "USD"
+    }
+  ],
+  "pricingLastVerified": "2026-07-26",
+  "links": {
+    "Hugging Face": "https://huggingface.co/CohereLabs/c4ai-command-a-reasoning-08-2025"
+  },
+  "logo": "/logos/cohere.svg",
+  "tags": [
+    "reasoning",
+    "tool-calling",
+    "open-weights"
+  ],
+  "sources": [
+    "https://github.com/anomalyco/models.dev"
+  ],
+  "verified": false,
+  "featured": false,
+  "boost": 1,
+  "curatorNotes": "Skeleton entry imported from models.dev backfill (2026-07-26). Needs manual enrichment and primary-source verification."
+}

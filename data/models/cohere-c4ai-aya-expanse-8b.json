@@ -1,0 +1,42 @@
+{
+  "id": "cohere-c4ai-aya-expanse-8b",
+  "name": "Aya Expanse 8B",
+  "slug": "cohere-c4ai-aya-expanse-8b",
+  "developer": "Cohere",
+  "releaseDate": "2024-10-24",
+  "updatedAt": "2026-07-26",
+  "type": "open-weights",
+  "status": "active",
+  "modality": [
+    "text"
+  ],
+  "primaryTask": "chat-reasoning",
+  "deployment": [
+    "self-hostable",
+    "api-only"
+  ],
+  "license": "CC-BY-NC-4.0",
+  "parameters": "undisclosed",
+  "contextWindow": "8K tokens",
+  "description": "Compact open multilingual model optimized for generation across 23 languages",
+  "keyFeatures": [
+    "Max Output: 4K tokens"
+  ],
+  "benchmarks": [],
+  "family": null,
+  "previousVersion": null,
+  "links": {
+    "Hugging Face": "https://huggingface.co/CohereLabs/aya-expanse-8b"
+  },
+  "logo": "/logos/cohere.svg",
+  "tags": [
+    "open-weights"
+  ],
+  "sources": [
+    "https://github.com/anomalyco/models.dev"
+  ],
+  "verified": false,
+  "featured": false,
+  "boost": 1,
+  "curatorNotes": "Skeleton entry imported from models.dev backfill (2026-07-26). Needs manual enrichment and primary-source verification."
+}
