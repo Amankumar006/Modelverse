@@ -18,14 +18,19 @@
     "self-hostable",
     "api-only"
   ],
-  "license": "Other/Custom",
-  "parameters": "undisclosed",
+  "license": "apache-2.0",
+  "parameters": "403.4B",
   "contextWindow": "262K tokens",
   "description": "Large open Qwen multimodal MoE for visual agents and long technical tasks",
+  "descriptionDraft": "Qwen3.5 397B-A17B is a image-text-to-text model from Alibaba hosted on Hugging Face (Qwen/Qwen3.5-397B-A17B).",
   "keyFeatures": [
     "Max Output: 66K tokens",
     "Native reasoning capability",
     "Tool / function calling support"
+  ],
+  "keyFeaturesDraft": [
+    "Pipeline: image-text-to-text",
+    "HF Tags: transformers, safetensors, qwen3_5_moe, image-text-to-text"
   ],
   "benchmarks": [
     {
@@ -65,9 +70,11 @@
     "open-weights"
   ],
   "sources": [
-    "https://github.com/anomalyco/models.dev"
+    "https://github.com/anomalyco/models.dev",
+    "https://huggingface.co/api/models/Qwen/Qwen3.5-397B-A17B"
   ],
   "verified": false,
+  "needsReview": true,
   "featured": false,
   "boost": 1,
   "curatorNotes": "Skeleton entry imported from models.dev backfill (2026-07-26). Needs manual enrichment and primary-source verification."

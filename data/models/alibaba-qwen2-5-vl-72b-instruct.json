@@ -16,13 +16,18 @@
     "self-hostable",
     "api-only"
   ],
-  "license": "Other/Custom",
-  "parameters": "undisclosed",
+  "license": "other",
+  "parameters": "73.4B",
   "contextWindow": "131K tokens",
   "description": "Qwen vision-language model for visual reasoning, documents, and agent tasks",
+  "descriptionDraft": "Qwen2.5-VL 72B Instruct is a image-text-to-text model from Alibaba hosted on Hugging Face (Qwen/Qwen2.5-VL-72B-Instruct).",
   "keyFeatures": [
     "Max Output: 8K tokens",
     "Tool / function calling support"
+  ],
+  "keyFeaturesDraft": [
+    "Pipeline: image-text-to-text",
+    "HF Tags: transformers, safetensors, qwen2_5_vl, image-text-to-text"
   ],
   "benchmarks": [],
   "family": "qwen",
@@ -49,9 +54,11 @@
     "open-weights"
   ],
   "sources": [
-    "https://github.com/anomalyco/models.dev"
+    "https://github.com/anomalyco/models.dev",
+    "https://huggingface.co/api/models/Qwen/Qwen2.5-VL-72B-Instruct"
   ],
   "verified": false,
+  "needsReview": true,
   "featured": false,
   "boost": 1,
   "curatorNotes": "Skeleton entry imported from models.dev backfill (2026-07-26). Needs manual enrichment and primary-source verification."

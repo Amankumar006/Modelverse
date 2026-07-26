@@ -15,13 +15,18 @@
     "self-hostable",
     "api-only"
   ],
-  "license": "Other/Custom",
-  "parameters": "undisclosed",
+  "license": "apache-2.0",
+  "parameters": "81.3B",
   "contextWindow": "131K tokens",
   "description": "Qwen instruction model for multilingual chat, reasoning, and tool use",
+  "descriptionDraft": "Qwen3-Next 80B-A3B Instruct is a text-generation model from Alibaba hosted on Hugging Face (Qwen/Qwen3-Next-80B-A3B-Instruct).",
   "keyFeatures": [
     "Max Output: 33K tokens",
     "Tool / function calling support"
+  ],
+  "keyFeaturesDraft": [
+    "Pipeline: text-generation",
+    "HF Tags: transformers, safetensors, qwen3_next, text-generation"
   ],
   "benchmarks": [],
   "family": "qwen",
@@ -48,9 +53,11 @@
     "open-weights"
   ],
   "sources": [
-    "https://github.com/anomalyco/models.dev"
+    "https://github.com/anomalyco/models.dev",
+    "https://huggingface.co/api/models/Qwen/Qwen3-Next-80B-A3B-Instruct"
   ],
   "verified": false,
+  "needsReview": true,
   "featured": false,
   "boost": 1,
   "curatorNotes": "Skeleton entry imported from models.dev backfill (2026-07-26). Needs manual enrichment and primary-source verification."

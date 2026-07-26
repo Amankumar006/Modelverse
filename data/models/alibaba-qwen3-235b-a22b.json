@@ -15,14 +15,19 @@
     "self-hostable",
     "api-only"
   ],
-  "license": "Other/Custom",
-  "parameters": "undisclosed",
+  "license": "apache-2.0",
+  "parameters": "235.1B",
   "contextWindow": "131K tokens",
   "description": "Large open Qwen MoE for multilingual reasoning, coding, and tool use",
+  "descriptionDraft": "Qwen3 235B-A22B is a text-generation model from Alibaba hosted on Hugging Face (Qwen/Qwen3-235B-A22B).",
   "keyFeatures": [
     "Max Output: 16K tokens",
     "Native reasoning capability",
     "Tool / function calling support"
+  ],
+  "keyFeaturesDraft": [
+    "Pipeline: text-generation",
+    "HF Tags: transformers, safetensors, qwen3_moe, text-generation"
   ],
   "benchmarks": [
     {
@@ -61,9 +66,11 @@
     "open-weights"
   ],
   "sources": [
-    "https://github.com/anomalyco/models.dev"
+    "https://github.com/anomalyco/models.dev",
+    "https://huggingface.co/api/models/Qwen/Qwen3-235B-A22B"
   ],
   "verified": false,
+  "needsReview": true,
   "featured": false,
   "boost": 1,
   "curatorNotes": "Skeleton entry imported from models.dev backfill (2026-07-26). Needs manual enrichment and primary-source verification."
