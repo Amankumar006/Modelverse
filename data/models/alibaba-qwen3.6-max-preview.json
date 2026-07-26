@@ -1,0 +1,55 @@
+{
+  "id": "alibaba-qwen3.6-max-preview",
+  "name": "Qwen3.6 Max Preview",
+  "slug": "alibaba-qwen3.6-max-preview",
+  "developer": "Alibaba",
+  "releaseDate": "2026-04-20",
+  "updatedAt": "2026-07-26",
+  "type": "api-only",
+  "status": "active",
+  "modality": [
+    "text"
+  ],
+  "primaryTask": "chat-reasoning",
+  "deployment": [
+    "api-only"
+  ],
+  "license": "Proprietary",
+  "parameters": "undisclosed",
+  "contextWindow": "262K tokens",
+  "description": "Flagship Qwen model for complex reasoning, coding, and agentic workflows",
+  "keyFeatures": [
+    "Max Output: 66K tokens",
+    "Native reasoning capability",
+    "Tool / function calling support"
+  ],
+  "benchmarks": [],
+  "family": "qwen",
+  "previousVersion": null,
+  "pricing": [
+    {
+      "unit": "1M input tokens",
+      "amount": 1.3,
+      "currency": "USD"
+    },
+    {
+      "unit": "1M output tokens",
+      "amount": 7.8,
+      "currency": "USD"
+    }
+  ],
+  "pricingLastVerified": "2026-07-26",
+  "links": {},
+  "logo": "/logos/alibaba.svg",
+  "tags": [
+    "reasoning",
+    "tool-calling"
+  ],
+  "sources": [
+    "https://github.com/anomalyco/models.dev"
+  ],
+  "verified": false,
+  "featured": false,
+  "boost": 1,
+  "curatorNotes": "Skeleton entry imported from models.dev backfill (2026-07-26). Needs manual enrichment and primary-source verification."
+}

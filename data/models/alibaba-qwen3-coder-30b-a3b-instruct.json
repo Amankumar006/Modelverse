@@ -1,0 +1,73 @@
+{
+  "id": "alibaba-qwen3-coder-30b-a3b-instruct",
+  "name": "Qwen3-Coder 30B-A3B Instruct",
+  "slug": "alibaba-qwen3-coder-30b-a3b-instruct",
+  "developer": "Alibaba",
+  "releaseDate": "2025-04-01",
+  "updatedAt": "2026-07-26",
+  "type": "open-weights",
+  "status": "active",
+  "modality": [
+    "text"
+  ],
+  "primaryTask": "chat-reasoning",
+  "deployment": [
+    "self-hostable",
+    "api-only"
+  ],
+  "license": "Other/Custom",
+  "parameters": "undisclosed",
+  "contextWindow": "262K tokens",
+  "description": "Smaller Qwen coder for efficient local agents and repo-level fixes",
+  "keyFeatures": [
+    "Max Output: 66K tokens",
+    "Tool / function calling support"
+  ],
+  "benchmarks": [
+    {
+      "name": "Artificial Analysis Coding Index",
+      "score": "19.4 (index)",
+      "verified": false
+    },
+    {
+      "name": "SciCode",
+      "score": "27.8%",
+      "verified": false
+    },
+    {
+      "name": "Terminal-Bench Hard",
+      "score": "15.2%",
+      "verified": false
+    }
+  ],
+  "family": "qwen",
+  "previousVersion": null,
+  "pricing": [
+    {
+      "unit": "1M input tokens",
+      "amount": 0.1,
+      "currency": "USD"
+    },
+    {
+      "unit": "1M output tokens",
+      "amount": 0.4,
+      "currency": "USD"
+    }
+  ],
+  "pricingLastVerified": "2026-07-26",
+  "links": {
+    "Hugging Face": "https://huggingface.co/Qwen/Qwen3-Coder-30B-A3B-Instruct"
+  },
+  "logo": "/logos/alibaba.svg",
+  "tags": [
+    "tool-calling",
+    "open-weights"
+  ],
+  "sources": [
+    "https://github.com/anomalyco/models.dev"
+  ],
+  "verified": false,
+  "featured": false,
+  "boost": 1,
+  "curatorNotes": "Skeleton entry imported from models.dev backfill (2026-07-26). Needs manual enrichment and primary-source verification."
+}
