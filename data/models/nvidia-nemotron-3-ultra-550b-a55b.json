@@ -1,0 +1,118 @@
+{
+  "id": "nvidia-nemotron-3-ultra-550b-a55b",
+  "name": "Nemotron 3 Ultra 550B A55B",
+  "slug": "nvidia-nemotron-3-ultra-550b-a55b",
+  "developer": "NVIDIA",
+  "releaseDate": "2026-06-04",
+  "updatedAt": "2026-07-26",
+  "type": "open-weights",
+  "status": "active",
+  "modality": [
+    "text"
+  ],
+  "primaryTask": "chat-reasoning",
+  "deployment": [
+    "self-hostable",
+    "api-only"
+  ],
+  "license": "Other/Custom",
+  "parameters": "undisclosed",
+  "contextWindow": "1M tokens",
+  "description": "Largest Nemotron 3 model for maximum open-weight reasoning and agent accuracy",
+  "keyFeatures": [
+    "Max Output: 128K tokens",
+    "Native reasoning capability",
+    "Tool / function calling support"
+  ],
+  "benchmarks": [
+    {
+      "name": "SWE-Bench Verified",
+      "score": "70.7%",
+      "verified": false
+    },
+    {
+      "name": "SWE-Bench Multilingual",
+      "score": "67.7 (resolve rate)",
+      "verified": false
+    },
+    {
+      "name": "Terminal-Bench",
+      "score": "56.4%",
+      "verified": false
+    },
+    {
+      "name": "GPQA",
+      "score": "87 (accuracy)",
+      "verified": false
+    },
+    {
+      "name": "Humanity's Last Exam",
+      "score": "26.7 (accuracy)",
+      "verified": false
+    },
+    {
+      "name": "Humanity's Last Exam",
+      "score": "37.4 (accuracy)",
+      "verified": false
+    },
+    {
+      "name": "LiveCodeBench",
+      "score": "89 (pass@1)",
+      "verified": false
+    },
+    {
+      "name": "MMLU-Pro",
+      "score": "86.8 (accuracy)",
+      "verified": false
+    },
+    {
+      "name": "BrowseComp",
+      "score": "44.4 (accuracy)",
+      "verified": false
+    },
+    {
+      "name": "IFBench",
+      "score": "81.7 (accuracy)",
+      "verified": false
+    },
+    {
+      "name": "GDPval",
+      "score": "46.7 (wins or ties)",
+      "verified": false
+    }
+  ],
+  "family": "nemotron",
+  "previousVersion": null,
+  "pricing": [
+    {
+      "unit": "1M input tokens",
+      "amount": 0.5,
+      "currency": "USD"
+    },
+    {
+      "unit": "1M output tokens",
+      "amount": 2.5,
+      "currency": "USD"
+    },
+    {
+      "unit": "1M cache read tokens",
+      "amount": 0.15,
+      "currency": "USD"
+    }
+  ],
+  "pricingLastVerified": "2026-07-26",
+  "links": {},
+  "logo": "/logos/nvidia.svg",
+  "tags": [
+    "reasoning",
+    "tool-calling",
+    "open-weights"
+  ],
+  "sources": [
+    "https://github.com/anomalyco/models.dev"
+  ],
+  "verified": false,
+  "featured": false,
+  "boost": 1,
+  "curatorNotes": "Skeleton entry imported from models.dev backfill (2026-07-26). Needs manual enrichment and primary-source verification."
+}

@@ -1,0 +1,55 @@
+{
+  "id": "nvidia-nemotron-content-safety-reasoning-4b",
+  "name": "Nemotron Content Safety Reasoning 4B",
+  "slug": "nvidia-nemotron-content-safety-reasoning-4b",
+  "developer": "NVIDIA",
+  "releaseDate": "2026-01-22",
+  "updatedAt": "2026-07-26",
+  "type": "open-weights",
+  "status": "active",
+  "modality": [
+    "text"
+  ],
+  "primaryTask": "chat-reasoning",
+  "deployment": [
+    "self-hostable",
+    "api-only"
+  ],
+  "license": "Other/Custom",
+  "parameters": "undisclosed",
+  "contextWindow": "128K tokens",
+  "description": "Safety model for policy screening, moderation, and risk-aware routing workflows",
+  "keyFeatures": [
+    "Max Output: 4K tokens",
+    "Native reasoning capability"
+  ],
+  "benchmarks": [],
+  "family": "nemotron",
+  "previousVersion": null,
+  "pricing": [
+    {
+      "unit": "1M input tokens",
+      "amount": 0,
+      "currency": "USD"
+    },
+    {
+      "unit": "1M output tokens",
+      "amount": 0,
+      "currency": "USD"
+    }
+  ],
+  "pricingLastVerified": "2026-07-26",
+  "links": {},
+  "logo": "/logos/nvidia.svg",
+  "tags": [
+    "reasoning",
+    "open-weights"
+  ],
+  "sources": [
+    "https://github.com/anomalyco/models.dev"
+  ],
+  "verified": false,
+  "featured": false,
+  "boost": 1,
+  "curatorNotes": "Skeleton entry imported from models.dev backfill (2026-07-26). Needs manual enrichment and primary-source verification."
+}

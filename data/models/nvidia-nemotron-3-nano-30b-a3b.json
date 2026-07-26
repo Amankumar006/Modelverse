@@ -1,0 +1,57 @@
+{
+  "id": "nvidia-nemotron-3-nano-30b-a3b",
+  "name": "Nemotron 3 Nano 30B A3B",
+  "slug": "nvidia-nemotron-3-nano-30b-a3b",
+  "developer": "NVIDIA",
+  "releaseDate": "2025-12-15",
+  "updatedAt": "2026-07-26",
+  "type": "open-weights",
+  "status": "active",
+  "modality": [
+    "text"
+  ],
+  "primaryTask": "chat-reasoning",
+  "deployment": [
+    "self-hostable",
+    "api-only"
+  ],
+  "license": "Other/Custom",
+  "parameters": "undisclosed",
+  "contextWindow": "262K tokens",
+  "description": "Small Nemotron 3 MoE for efficient coding, math, and long-context agents",
+  "keyFeatures": [
+    "Max Output: 262K tokens",
+    "Native reasoning capability",
+    "Tool / function calling support"
+  ],
+  "benchmarks": [],
+  "family": "nemotron",
+  "previousVersion": null,
+  "pricing": [
+    {
+      "unit": "1M input tokens",
+      "amount": 0,
+      "currency": "USD"
+    },
+    {
+      "unit": "1M output tokens",
+      "amount": 0,
+      "currency": "USD"
+    }
+  ],
+  "pricingLastVerified": "2026-07-26",
+  "links": {},
+  "logo": "/logos/nvidia.svg",
+  "tags": [
+    "reasoning",
+    "tool-calling",
+    "open-weights"
+  ],
+  "sources": [
+    "https://github.com/anomalyco/models.dev"
+  ],
+  "verified": false,
+  "featured": false,
+  "boost": 1,
+  "curatorNotes": "Skeleton entry imported from models.dev backfill (2026-07-26). Needs manual enrichment and primary-source verification."
+}
