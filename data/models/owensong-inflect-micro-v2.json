@@ -1,0 +1,48 @@
+{
+  "id": "owensong-inflect-micro-v2",
+  "name": "Inflect-Micro-v2",
+  "slug": "inflect-micro-v2",
+  "developer": "owensong",
+  "releaseDate": "2026-06-25",
+  "updatedAt": "2026-07-26",
+  "type": "open-weights",
+  "status": "active",
+  "modality": [
+    "text",
+    "audio"
+  ],
+  "primaryTask": "audio-speech",
+  "deployment": [
+    "self-hostable"
+  ],
+  "license": "APACHE-2.0",
+  "parameters": "undisclosed",
+  "contextWindow": "unknown",
+  "description": "Inflect-Micro-v2 is a undisclosed-parameter text to speech model developed by owensong. Supports en language(s). Released on 2026-06-25 with 142 likes and 298 downloads on Hugging Face.",
+  "keyFeatures": [
+    "undisclosed parameters",
+    "Primary task: text to speech (text, audio modality)",
+    "Language support: en",
+    "Open-weights under APACHE-2.0 license — self-hostable and fine-tunable"
+  ],
+  "benchmarks": [],
+  "family": null,
+  "previousVersion": null,
+  "links": {
+    "huggingface": "https://huggingface.co/owensong/Inflect-Micro-v2"
+  },
+  "logo": null,
+  "tags": [
+    "open-weights",
+    "trending",
+    "huggingface",
+    "text-to-speech"
+  ],
+  "sources": [
+    "https://huggingface.co/owensong/Inflect-Micro-v2"
+  ],
+  "verified": true,
+  "featured": false,
+  "boost": 1,
+  "curatorNotes": "Auto-ingested from HuggingFace Trending on 2026-07-26. Architecture: unknown. Params: undisclosed. License: APACHE-2.0."
+}
