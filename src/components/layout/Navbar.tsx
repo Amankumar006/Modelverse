@@ -5,7 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import Fuse from "fuse.js";
 import modelIndexData from "@/lib/search-index.json";
-import Image from "next/image";
+import ModelverseLogo from "@/components/ui/ModelverseLogo";
 import { Search, X, Menu } from "lucide-react";
 
 export default function Navbar({ theme = "dark" }: { theme?: "light" | "dark" }) {
@@ -57,19 +57,13 @@ export default function Navbar({ theme = "dark" }: { theme?: "light" | "dark" })
   return (
     <header className="sticky top-0 z-50 w-full bg-[#141414]/95 backdrop-blur-md border-b border-[#282828]">
       <nav className="flex justify-between items-center px-4 sm:px-8 py-3 max-w-7xl mx-auto gap-4">
-        {/* Original Modelverse Brand Logo */}
+        {/* Custom Neural Constellation Modelverse SVG Logo */}
         <Link
           href="/"
           className="flex items-center gap-2.5 text-xl font-medium tracking-tight text-white hover:opacity-90 transition-opacity shrink-0"
           style={{ fontFamily: "var(--font-display, 'Instrument Serif', Georgia, serif)" }}
         >
-          <Image
-            src="/logo.jpg"
-            alt="Modelverse Logo"
-            width={28}
-            height={28}
-            className="rounded-md object-cover border border-white/10"
-          />
+          <ModelverseLogo size={26} />
           <span className="text-xl font-normal">Modelverse</span>
           <span className="text-[11px] font-sans text-gray-400 font-medium px-2 py-0.5 rounded-full bg-[#242426] border border-[#333333]">
             Platform Docs
