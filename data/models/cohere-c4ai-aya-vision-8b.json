@@ -17,11 +17,16 @@
     "api-only"
   ],
   "license": "CC-BY-NC-4.0",
-  "parameters": "undisclosed",
+  "parameters": "8.6B",
   "contextWindow": "16K tokens",
   "description": "Compact open multilingual vision model for OCR and visual question answering",
+  "descriptionDraft": "Aya Vision 8B is a image-text-to-text model from Cohere hosted on Hugging Face (CohereLabs/aya-vision-8b).",
   "keyFeatures": [
     "Max Output: 4K tokens"
+  ],
+  "keyFeaturesDraft": [
+    "Pipeline: image-text-to-text",
+    "HF Tags: transformers, safetensors, aya_vision, image-text-to-text"
   ],
   "benchmarks": [],
   "family": null,
@@ -34,9 +39,11 @@
     "open-weights"
   ],
   "sources": [
-    "https://github.com/anomalyco/models.dev"
+    "https://github.com/anomalyco/models.dev",
+    "https://huggingface.co/api/models/CohereLabs/aya-vision-8b"
   ],
   "verified": false,
+  "needsReview": true,
   "featured": false,
   "boost": 1,
   "curatorNotes": "Skeleton entry imported from models.dev backfill (2026-07-26). Needs manual enrichment and primary-source verification."

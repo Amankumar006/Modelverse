@@ -15,13 +15,18 @@
     "self-hostable",
     "api-only"
   ],
-  "license": "Other/Custom",
-  "parameters": "undisclosed",
+  "license": "cc-by-nc-4.0",
+  "parameters": "111.1B",
   "contextWindow": "256K tokens",
   "description": "Cohere command model for multilingual enterprise agents, tools, and chat",
+  "descriptionDraft": "Command A is a text-generation model from Cohere hosted on Hugging Face (CohereLabs/c4ai-command-a-03-2025).",
   "keyFeatures": [
     "Max Output: 8K tokens",
     "Tool / function calling support"
+  ],
+  "keyFeaturesDraft": [
+    "Pipeline: text-generation",
+    "HF Tags: transformers, safetensors, cohere2, text-generation"
   ],
   "benchmarks": [
     {
@@ -54,9 +59,11 @@
     "open-weights"
   ],
   "sources": [
-    "https://github.com/anomalyco/models.dev"
+    "https://github.com/anomalyco/models.dev",
+    "https://huggingface.co/api/models/CohereLabs/c4ai-command-a-03-2025"
   ],
   "verified": false,
+  "needsReview": true,
   "featured": false,
   "boost": 1,
   "curatorNotes": "Skeleton entry imported from models.dev backfill (2026-07-26). Needs manual enrichment and primary-source verification."

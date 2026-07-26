@@ -15,13 +15,18 @@
     "self-hostable",
     "api-only"
   ],
-  "license": "Other/Custom",
-  "parameters": "undisclosed",
+  "license": "cc-by-nc-4.0",
+  "parameters": "8.0B",
   "contextWindow": "128K tokens",
   "description": "Cohere retrieval model for long-context chat and enterprise RAG workflows",
+  "descriptionDraft": "Command R7B is a text-generation model from Cohere hosted on Hugging Face (CohereLabs/c4ai-command-r7b-12-2024).",
   "keyFeatures": [
     "Max Output: 4K tokens",
     "Tool / function calling support"
+  ],
+  "keyFeaturesDraft": [
+    "Pipeline: text-generation",
+    "HF Tags: transformers, safetensors, cohere2, text-generation"
   ],
   "benchmarks": [],
   "family": "command-r",
@@ -48,9 +53,11 @@
     "open-weights"
   ],
   "sources": [
-    "https://github.com/anomalyco/models.dev"
+    "https://github.com/anomalyco/models.dev",
+    "https://huggingface.co/api/models/CohereLabs/c4ai-command-r7b-12-2024"
   ],
   "verified": false,
+  "needsReview": true,
   "featured": false,
   "boost": 1,
   "curatorNotes": "Skeleton entry imported from models.dev backfill (2026-07-26). Needs manual enrichment and primary-source verification."

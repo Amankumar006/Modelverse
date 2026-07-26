@@ -16,11 +16,16 @@
     "api-only"
   ],
   "license": "CC-BY-NC-4.0",
-  "parameters": "undisclosed",
+  "parameters": "8.0B",
   "contextWindow": "8K tokens",
   "description": "Compact open multilingual model optimized for generation across 23 languages",
+  "descriptionDraft": "Aya Expanse 8B is a text-generation model from Cohere hosted on Hugging Face (CohereLabs/aya-expanse-8b).",
   "keyFeatures": [
     "Max Output: 4K tokens"
+  ],
+  "keyFeaturesDraft": [
+    "Pipeline: text-generation",
+    "HF Tags: transformers, safetensors, cohere, text-generation"
   ],
   "benchmarks": [],
   "family": null,
@@ -33,9 +38,11 @@
     "open-weights"
   ],
   "sources": [
-    "https://github.com/anomalyco/models.dev"
+    "https://github.com/anomalyco/models.dev",
+    "https://huggingface.co/api/models/CohereLabs/aya-expanse-8b"
   ],
   "verified": false,
+  "needsReview": true,
   "featured": false,
   "boost": 1,
   "curatorNotes": "Skeleton entry imported from models.dev backfill (2026-07-26). Needs manual enrichment and primary-source verification."
