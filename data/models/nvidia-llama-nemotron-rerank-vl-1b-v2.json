@@ -1,0 +1,54 @@
+{
+  "id": "nvidia-llama-nemotron-rerank-vl-1b-v2",
+  "name": "Llama Nemotron Rerank VL 1B v2",
+  "slug": "nvidia-llama-nemotron-rerank-vl-1b-v2",
+  "developer": "NVIDIA",
+  "releaseDate": "2026-03-31",
+  "updatedAt": "2026-07-26",
+  "type": "open-weights",
+  "status": "active",
+  "modality": [
+    "text",
+    "image"
+  ],
+  "primaryTask": "multimodal-general",
+  "deployment": [
+    "self-hostable",
+    "api-only"
+  ],
+  "license": "Other/Custom",
+  "parameters": "undisclosed",
+  "contextWindow": "128K tokens",
+  "description": "Reranking model for improving retrieval quality in search and recommendation systems",
+  "keyFeatures": [
+    "Max Output: 4K tokens"
+  ],
+  "benchmarks": [],
+  "family": "nemotron",
+  "previousVersion": null,
+  "pricing": [
+    {
+      "unit": "1M input tokens",
+      "amount": 0,
+      "currency": "USD"
+    },
+    {
+      "unit": "1M output tokens",
+      "amount": 0,
+      "currency": "USD"
+    }
+  ],
+  "pricingLastVerified": "2026-07-26",
+  "links": {},
+  "logo": "/logos/nvidia.svg",
+  "tags": [
+    "open-weights"
+  ],
+  "sources": [
+    "https://github.com/anomalyco/models.dev"
+  ],
+  "verified": false,
+  "featured": false,
+  "boost": 1,
+  "curatorNotes": "Skeleton entry imported from models.dev backfill (2026-07-26). Needs manual enrichment and primary-source verification."
+}

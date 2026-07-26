@@ -1,0 +1,60 @@
+{
+  "id": "nvidia-nemotron-3-nano-omni-30b-a3b-reasoning",
+  "name": "Nemotron 3 Nano Omni 30B A3B Reasoning",
+  "slug": "nvidia-nemotron-3-nano-omni-30b-a3b-reasoning",
+  "developer": "NVIDIA",
+  "releaseDate": "2026-04-28",
+  "updatedAt": "2026-07-26",
+  "type": "open-weights",
+  "status": "active",
+  "modality": [
+    "text",
+    "image",
+    "video",
+    "audio"
+  ],
+  "primaryTask": "chat-reasoning",
+  "deployment": [
+    "self-hostable",
+    "api-only"
+  ],
+  "license": "Other/Custom",
+  "parameters": "undisclosed",
+  "contextWindow": "256K tokens",
+  "description": "Open Nemotron omni model combining reasoning with text, vision, and audio",
+  "keyFeatures": [
+    "Max Output: 66K tokens",
+    "Native reasoning capability",
+    "Tool / function calling support"
+  ],
+  "benchmarks": [],
+  "family": "nemotron",
+  "previousVersion": null,
+  "pricing": [
+    {
+      "unit": "1M input tokens",
+      "amount": 0,
+      "currency": "USD"
+    },
+    {
+      "unit": "1M output tokens",
+      "amount": 0,
+      "currency": "USD"
+    }
+  ],
+  "pricingLastVerified": "2026-07-26",
+  "links": {},
+  "logo": "/logos/nvidia.svg",
+  "tags": [
+    "reasoning",
+    "tool-calling",
+    "open-weights"
+  ],
+  "sources": [
+    "https://github.com/anomalyco/models.dev"
+  ],
+  "verified": false,
+  "featured": false,
+  "boost": 1,
+  "curatorNotes": "Skeleton entry imported from models.dev backfill (2026-07-26). Needs manual enrichment and primary-source verification."
+}
