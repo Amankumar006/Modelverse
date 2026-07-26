@@ -1,0 +1,61 @@
+{
+  "id": "google-gemma-4-26b-a4b-it",
+  "name": "Gemma 4 26B A4B IT",
+  "slug": "google-gemma-4-26b-a4b-it",
+  "developer": "Google DeepMind",
+  "releaseDate": "2026-04-02",
+  "updatedAt": "2026-07-26",
+  "type": "open-weights",
+  "status": "active",
+  "modality": [
+    "text",
+    "image"
+  ],
+  "primaryTask": "chat-reasoning",
+  "deployment": [
+    "self-hostable",
+    "api-only"
+  ],
+  "license": "Other/Custom",
+  "parameters": "undisclosed",
+  "contextWindow": "262K tokens",
+  "description": "Open Gemma instruction model for efficient chat and self-hosted deployments",
+  "keyFeatures": [
+    "Max Output: 33K tokens",
+    "Native reasoning capability",
+    "Tool / function calling support"
+  ],
+  "benchmarks": [],
+  "family": "gemma",
+  "previousVersion": null,
+  "pricing": [
+    {
+      "unit": "1M input tokens",
+      "amount": 0.13,
+      "currency": "USD"
+    },
+    {
+      "unit": "1M output tokens",
+      "amount": 0.4,
+      "currency": "USD"
+    }
+  ],
+  "pricingLastVerified": "2026-07-26",
+  "links": {
+    "Hugging Face": "https://huggingface.co/google/gemma-4-26B-A4B-it"
+  },
+  "logo": "/logos/google-deepmind.svg",
+  "tags": [
+    "reasoning",
+    "tool-calling",
+    "structured-output",
+    "open-weights"
+  ],
+  "sources": [
+    "https://github.com/anomalyco/models.dev"
+  ],
+  "verified": false,
+  "featured": false,
+  "boost": 1,
+  "curatorNotes": "Skeleton entry imported from models.dev backfill (2026-07-26). Needs manual enrichment and primary-source verification."
+}

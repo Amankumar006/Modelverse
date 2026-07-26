@@ -1,0 +1,65 @@
+{
+  "id": "google-gemini-flash-latest",
+  "name": "Gemini Flash Latest",
+  "slug": "google-gemini-flash-latest",
+  "developer": "Google DeepMind",
+  "releaseDate": "2026-05-19",
+  "updatedAt": "2026-07-26",
+  "type": "api-only",
+  "status": "active",
+  "modality": [
+    "text",
+    "image",
+    "video",
+    "audio",
+    "pdf"
+  ],
+  "primaryTask": "chat-reasoning",
+  "deployment": [
+    "api-only"
+  ],
+  "license": "Proprietary",
+  "parameters": "undisclosed",
+  "contextWindow": "1.0M tokens",
+  "description": "Fast Gemini model balancing multimodal reasoning, tool use, and cost",
+  "keyFeatures": [
+    "Max Output: 66K tokens",
+    "Native reasoning capability",
+    "Tool / function calling support"
+  ],
+  "benchmarks": [],
+  "family": "gemini-flash",
+  "previousVersion": null,
+  "pricing": [
+    {
+      "unit": "1M input tokens",
+      "amount": 1.5,
+      "currency": "USD"
+    },
+    {
+      "unit": "1M output tokens",
+      "amount": 9,
+      "currency": "USD"
+    },
+    {
+      "unit": "1M cache read tokens",
+      "amount": 0.15,
+      "currency": "USD"
+    }
+  ],
+  "pricingLastVerified": "2026-07-26",
+  "links": {},
+  "logo": "/logos/google-deepmind.svg",
+  "tags": [
+    "reasoning",
+    "tool-calling",
+    "structured-output"
+  ],
+  "sources": [
+    "https://github.com/anomalyco/models.dev"
+  ],
+  "verified": false,
+  "featured": false,
+  "boost": 1,
+  "curatorNotes": "Skeleton entry imported from models.dev backfill (2026-07-26). Needs manual enrichment and primary-source verification."
+}

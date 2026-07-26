@@ -1,0 +1,59 @@
+{
+  "id": "google-gemini-robotics-er-1.6-preview",
+  "name": "Gemini Robotics-ER 1.6 Preview",
+  "slug": "google-gemini-robotics-er-1.6-preview",
+  "developer": "Google DeepMind",
+  "releaseDate": "2026-04-14",
+  "updatedAt": "2026-07-26",
+  "type": "api-only",
+  "status": "active",
+  "modality": [
+    "text",
+    "image",
+    "video",
+    "audio"
+  ],
+  "primaryTask": "chat-reasoning",
+  "deployment": [
+    "api-only"
+  ],
+  "license": "Proprietary",
+  "parameters": "undisclosed",
+  "contextWindow": "131K tokens",
+  "description": "Vision-language model for embodied reasoning: spatial understanding, task planning, and physical-world agentic robotics",
+  "keyFeatures": [
+    "Max Output: 66K tokens",
+    "Native reasoning capability",
+    "Tool / function calling support"
+  ],
+  "benchmarks": [],
+  "family": "gemini",
+  "previousVersion": null,
+  "pricing": [
+    {
+      "unit": "1M input tokens",
+      "amount": 1,
+      "currency": "USD"
+    },
+    {
+      "unit": "1M output tokens",
+      "amount": 5,
+      "currency": "USD"
+    }
+  ],
+  "pricingLastVerified": "2026-07-26",
+  "links": {},
+  "logo": "/logos/google-deepmind.svg",
+  "tags": [
+    "reasoning",
+    "tool-calling",
+    "structured-output"
+  ],
+  "sources": [
+    "https://github.com/anomalyco/models.dev"
+  ],
+  "verified": false,
+  "featured": false,
+  "boost": 1,
+  "curatorNotes": "Skeleton entry imported from models.dev backfill (2026-07-26). Needs manual enrichment and primary-source verification."
+}
