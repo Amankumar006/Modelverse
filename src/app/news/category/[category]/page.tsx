@@ -3,8 +3,8 @@ import Link from "next/link";
 import Image from "next/image";
 import Navbar from "@/components/layout/Navbar";
 import NewsBreadcrumb from "@/components/news/NewsBreadcrumb";
-import { getArticlesByCategory, getCategoryLabel, getAllArticles } from "@/lib/news";
-import { Clock, Calendar, ArrowRight } from "lucide-react";
+import { getArticlesByCategory, getCategoryLabel } from "@/lib/news";
+import { Clock, ArrowRight } from "lucide-react";
 import { SITE_URL } from "@/lib/models";
 import { notFound } from "next/navigation";
 import ConfidenceBadge from "@/components/news/ConfidenceBadge";
@@ -48,15 +48,6 @@ export async function generateMetadata({ params }: CategoryPageProps): Promise<M
   };
 }
 
-function formatNewsDate(dateStr: string): string {
-  const dateObj = new Date(dateStr);
-  return dateObj.toLocaleDateString("en-US", {
-    month: "short",
-    day: "numeric",
-    year: "numeric",
-  });
-}
-
 export default async function CategoryPage({ params }: CategoryPageProps) {
   const resolvedParams = await params;
   const category = resolvedParams.category as NewsCategoryType;
@@ -68,73 +59,74 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
   const label = getCategoryLabel(category);
 
   return (
-    <main className="min-h-screen bg-[#0C120F] text-[#E2E8E4] selection:bg-[#4ADE80] selection:text-[#0C120F] pb-24 font-sans antialiased relative">
+    <main className="min-h-screen bg-[#141414] text-[#E1E1E0] selection:bg-emerald-500 selection:text-black pb-24 font-sans antialiased relative">
       <Navbar theme="dark" />
 
       {/* Header Container */}
-      <div className="max-w-6xl mx-auto px-6 sm:px-8 lg:px-12 pt-16 sm:pt-24 text-left">
+      <div className="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-10 2xl:px-12 pt-10 sm:pt-14 text-left">
         <NewsBreadcrumb category={{ slug: category }} />
 
         {/* Category Label Title */}
         <h1
-          className="text-4xl sm:text-5xl md:text-6xl font-light text-[#F0FDF4] tracking-tight leading-tight mb-4"
-          style={{ fontFamily: "var(--font-display, 'Instrument Serif', serif)" }}
+          className="text-4xl sm:text-5xl md:text-6xl font-normal text-white tracking-tight leading-tight mb-3 mt-4"
+          style={{ fontFamily: "var(--font-display, 'Instrument Serif', Georgia, serif)" }}
         >
-          {label}
+          {label} Archives
         </h1>
-        <p className="text-sm sm:text-base text-[#8C9E91] max-w-2xl mb-16">
-          Showing all articles filed under the <span className="font-semibold text-[#E2E8E4]">{label}</span> category, listed newest to oldest.
+        <p className="text-xs sm:text-sm text-[#90908F] max-w-2xl mb-12">
+          Showing all articles filed under the <span className="font-semibold text-white">{label}</span> category, listed newest to oldest.
         </p>
       </div>
 
       {/* Main Grid Container */}
-      <div className="max-w-6xl mx-auto px-6 sm:px-8 lg:px-12">
+      <div className="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-10 2xl:px-12">
         {posts.length === 0 ? (
-          <p className="text-sm text-[#5A6E60] py-12">No articles found in this category.</p>
+          <p className="text-sm text-[#90908F] py-12">No articles found in this category.</p>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-6">
             {posts.map((post) => (
               <Link
                 key={post.id}
                 href={`/news/${post.slug}`}
-                className="group bg-[#121A15] rounded-3xl border border-[#243629] hover:border-[#334D3A] hover:shadow-[0_0_20px_rgba(74,222,128,0.05)] transition-all duration-300 overflow-hidden flex flex-col justify-between"
+                className="group bg-[#1C1C1E] rounded-2xl border border-[#282828] hover:border-emerald-500/40 shadow-xl transition-all duration-300 overflow-hidden flex flex-col justify-between"
               >
                 <div>
                   {/* Image Container */}
-                  <div className="relative h-[200px] w-full bg-[#0C120F] overflow-hidden">
+                  <div className="relative h-[200px] w-full bg-[#141414] overflow-hidden">
                     <Image
                       src={post.coverImage}
                       alt={post.title}
                       fill
-                      className="object-cover transition-transform duration-700 group-hover:scale-102"
+                      className="object-cover transition-transform duration-700 group-hover:scale-102 opacity-90"
                     />
-                    <div className="absolute top-4 left-4 z-10">
+                    <div className="absolute top-3 left-3 z-10">
                       <ConfidenceBadge confidence={post.confidenceLevel} />
                     </div>
                   </div>
 
                   {/* Content */}
-                  <div className="p-6 sm:p-8">
-                    <h3 className="text-lg sm:text-xl font-semibold tracking-tight text-[#F0FDF4] group-hover:text-[#4ADE80] transition-colors mb-3 leading-snug">
+                  <div className="p-5">
+                    <h3
+                      className="text-lg font-normal text-white group-hover:text-emerald-400 transition-colors mb-2 line-clamp-2 leading-snug"
+                      style={{ fontFamily: "var(--font-display, 'Instrument Serif', Georgia, serif)" }}
+                    >
                       {post.title}
                     </h3>
-                    <p className="text-xs sm:text-sm text-[#8C9E91] leading-relaxed line-clamp-3">
+                    <p className="text-xs text-[#90908F] leading-relaxed line-clamp-3">
                       {post.excerpt}
                     </p>
                   </div>
                 </div>
 
                 {/* Card Footer */}
-                <div className="px-6 sm:px-8 pb-6 sm:pb-8">
-                  <div className="pt-4 border-t border-[#243629] flex items-center justify-between text-[11px] text-[#5A6E60]">
-                    <span className="flex items-center gap-1">
-                      <Clock size={11} />
-                      {post.readTime}
-                    </span>
-                    <span className="font-semibold text-[#A3B8AA] flex items-center gap-1 group-hover:text-[#4ADE80] transition-colors">
-                      Read Article <ArrowRight size={10} className="group-hover:translate-x-0.5 transition-transform" />
-                    </span>
-                  </div>
+                <div className="px-5 pb-5 pt-3 border-t border-[#282828] flex items-center justify-between text-xs text-[#90908F]">
+                  <span className="flex items-center gap-1 font-mono text-[11px]">
+                    <Clock size={11} className="text-emerald-400" />
+                    {post.readTime}
+                  </span>
+                  <span className="font-semibold text-emerald-400 flex items-center gap-1 group-hover:translate-x-0.5 transition-transform text-xs">
+                    Read <ArrowRight size={11} />
+                  </span>
                 </div>
               </Link>
             ))}
@@ -142,11 +134,11 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
         )}
       </div>
 
-      {/* Styled Footer Frame */}
-      <div className="max-w-6xl mx-auto px-6 sm:px-8 lg:px-12 mt-24">
-        <div className="border-t border-[#243629] pt-8 flex justify-between items-center text-xs text-[#5A6E60] font-light">
+      {/* Footer Frame */}
+      <div className="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-10 2xl:px-12 mt-24">
+        <div className="border-t border-[#282828] pt-8 flex justify-between items-center text-xs text-[#90908F] font-mono">
           <span>© 2026 Modelverse®. All rights reserved.</span>
-          <span className="uppercase tracking-widest text-[9px] font-bold text-[#3A4D39]">
+          <span className="uppercase text-[10px] font-semibold text-[#90908F]">
             Modelverse Newsroom
           </span>
         </div>
