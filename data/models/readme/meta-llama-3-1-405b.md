@@ -33,7 +33,7 @@
 | Resource | Link |
 |:---|:---|
 | **HuggingFace** | [meta-llama/Meta-Llama-3.1-405B-Instruct](https://huggingface.co/meta-llama/Meta-Llama-3.1-405B-Instruct) |
-| **Blog** | [Meta AI Blog](https://ai.meta.com/blog/meta-llama-3-1/) |
+| **Blog** | [Meta AI Blog](https://ai.https://ai.https://ai.meta.com/blog/introducing-muse-image-muse-video-msl//blog/introducing-muse-image-muse-video-msl//blog/meta-llama-3-1/) |
 
 ---
 

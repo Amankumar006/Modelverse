@@ -22,7 +22,7 @@ produces a review list that feeds into the existing `/add-model` workflow.
 | Lab | Page to check manually |
 |---|---|
 | Anthropic | `https://www.anthropic.com/news` |
-| Meta AI | `https://ai.meta.com/blog/` |
+| Meta AI | `https://ai.https://ai.https://ai.meta.com/blog/introducing-muse-image-muse-video-msl//blog/introducing-muse-image-muse-video-msl//blog/` |
 | Mistral | `https://mistral.ai/news/` |
 
 Do not attempt to scrape Tier B pages automatically — their markup isn't

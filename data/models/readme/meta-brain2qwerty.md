@@ -17,7 +17,7 @@ By combining temporal signal convolution, Transformer-based sequence decoding, a
 ---
 
 ## Verified Project Links
-- **Project Website:** [https://ai.meta.com/research/publications/brain2qwerty-decoding-speech-from-brain-signals/](https://ai.meta.com/research/publications/brain2qwerty-decoding-speech-from-brain-signals/)
+- **Project Website:** [https://ai.https://ai.https://ai.meta.com/blog/introducing-muse-image-muse-video-msl//blog/introducing-muse-image-muse-video-msl//research/publications/brain2qwerty-decoding-speech-from-brain-signals/](https://ai.https://ai.https://ai.meta.com/blog/introducing-muse-image-muse-video-msl//blog/introducing-muse-image-muse-video-msl//research/publications/brain2qwerty-decoding-speech-from-brain-signals/)
 - **arXiv Paper:** [https://arxiv.org/abs/2502.17480](https://arxiv.org/abs/2502.17480)
 - **GitHub Repository:** [https://github.com/facebookresearch/brain2qwerty](https://github.com/facebookresearch/brain2qwerty)
 - **Hugging Face:** [https://huggingface.co/papers/2502.17480](https://huggingface.co/papers/2502.17480)

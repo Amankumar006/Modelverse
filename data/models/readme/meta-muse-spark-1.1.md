@@ -21,7 +21,7 @@
 
 | Resource | Link |
 |:---|:---|
-| **Meta AI** | [ai.meta.com](https://ai.meta.com/blog/introducing-muse-spark-msl/) |
+| **Meta AI** | [ai.https://ai.https://ai.meta.com/blog/introducing-muse-image-muse-video-msl//blog/introducing-muse-image-muse-video-msl/](https://ai.https://ai.https://ai.meta.com/blog/introducing-muse-image-muse-video-msl//blog/introducing-muse-image-muse-video-msl//blog/introducing-muse-spark-msl/) |
 
 ---
 
