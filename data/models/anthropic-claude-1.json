@@ -2,6 +2,7 @@
   "name": "Claude 1",
   "developer": "Anthropic",
   "type": "api-only",
+  "status": "sunset",
   "modality": [
     "text"
   ],
@@ -25,14 +26,15 @@
   "github": "",
   "blogPost": "",
   "sources": [
-    "https://hidekazu-konishi.com/entry/anthropic_claude_model_release_timeline.html"
+    "https://hidekazu-konishi.com/entry/anthropic_claude_model_release_timeline.html",
+    "https://docs.anthropic.com/en/docs/resources/model-deprecations"
   ],
   "logo": "/public/logos/anthropic.png",
   "tags": [
     "constitutional-ai"
   ],
   "verified": true,
-  "curatorNotes": "",
+  "curatorNotes": "Sunset on November 6, 2024 per official Anthropic model deprecations documentation.",
   "id": "anthropic-claude-1",
   "slug": "anthropic-claude-1",
   "updatedAt": "2026-07-14",

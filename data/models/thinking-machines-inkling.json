@@ -6,9 +6,16 @@
   "releaseDate": "2026-07-15",
   "updatedAt": "2026-07-15",
   "type": "open-weights",
-  "modality": ["text", "image", "audio"],
+  "status": "active",
+  "modality": [
+    "text",
+    "image",
+    "audio"
+  ],
   "primaryTask": "multimodal-general",
-  "deployment": ["self-hostable"],
+  "deployment": [
+    "self-hostable"
+  ],
   "license": "Other/Custom",
   "parameters": "975B (41B active)",
   "contextWindow": "1000K tokens",
@@ -25,7 +32,11 @@
     "website": "https://thinkingmachines.ai/news/introducing-inkling/"
   },
   "logo": null,
-  "tags": ["moe", "multimodal", "tinker"],
+  "tags": [
+    "moe",
+    "multimodal",
+    "tinker"
+  ],
   "sources": [
     "https://thinkingmachines.ai/news/introducing-inkling/"
   ],

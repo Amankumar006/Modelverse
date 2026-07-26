@@ -1,6 +1,7 @@
 import Link from "next/link";
 import type { ModelIndex, ModelEntry } from "@/lib/models";
 import TypeBadge from "@/components/ui/TypeBadge";
+import StatusBadge from "@/components/ui/StatusBadge";
 import { ArrowUpRight } from "lucide-react";
 
 function truncateAtWordBoundary(text: string, maxLength: number): string {
@@ -84,9 +85,10 @@ export default function ModelCard({
           {model.developer}
         </p>
 
-        {/* Type badge */}
-        <div className="flex justify-end sm:justify-start">
+        {/* Type badge & Status badge */}
+        <div className="flex justify-end sm:justify-start items-center gap-1.5">
           <TypeBadge type={model.type} />
+          <StatusBadge status={model.status} vendorApiStatus={model.vendorApiStatus} />
         </div>
 
         {/* Date */}
@@ -160,6 +162,8 @@ export default function ModelCard({
               return typeMap[model.type] || model.type;
             })()}
           </span>
+          
+          <StatusBadge status={model.status} vendorApiStatus={model.vendorApiStatus} />
           
           <span className="text-gray-600">•</span>
           

@@ -6,6 +6,7 @@
   "releaseDate": "2026-07-14",
   "updatedAt": "2026-07-14",
   "type": "closed-source",
+  "status": "active",
   "modality": [
     "text",
     "video"
@@ -21,7 +22,7 @@
   "keyFeatures": [],
   "benchmarks": [],
   "family": "sora",
-  "previousVersion": null,
+  "previousVersion": "openai-sora",
   "links": {
     "Documentation": "https://developers.openai.com/api/docs/models/all"
   },

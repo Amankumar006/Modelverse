@@ -6,6 +6,7 @@
   "releaseDate": "2024-12-12",
   "updatedAt": "2024-12-12",
   "type": "open-weights",
+  "status": "active",
   "modality": [
     "text"
   ],

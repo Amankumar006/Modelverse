@@ -12,6 +12,8 @@ export interface ModelIndex {
   developer: string;
   releaseDate: string;
   type: "open-source" | "open-weights" | "closed-source" | "api-only" | "research-preview";
+  status: "active" | "deprecated" | "sunset";
+  vendorApiStatus?: "active" | "deprecated" | "sunset";
   featured: boolean;
   boost: number;
   family: string | null;
@@ -48,6 +50,7 @@ export interface ModelEntry extends ModelIndex {
   featured: boolean;
   boost: number;
   curatorNotes: string;
+  vendorApiStatus?: "active" | "deprecated" | "sunset";
   costTiers?: { id: string; label: string; description?: string }[];
   pricing?: { tier?: string; unit: string; amount: number; currency: string; notes?: string }[];
   pricingLastVerified?: string;
@@ -80,6 +83,7 @@ function loadDevEntries(): ModelEntry[] {
     releaseDate: z.string(),
     updatedAt: z.string(),
     type: z.string(),
+    status: z.enum(["active", "deprecated", "sunset"]).default("active"),
     modality: z.array(z.string()),
     primaryTask: z.string(),
     deployment: z.array(z.string()),
@@ -104,7 +108,8 @@ function loadDevEntries(): ModelEntry[] {
     verified: z.boolean(),
     featured: z.boolean().default(false),
     boost: z.number().default(1),
-    curatorNotes: z.string().default("")
+    curatorNotes: z.string().default(""),
+    vendorApiStatus: z.enum(["active", "deprecated", "sunset"]).optional()
   });
 
   for (const file of files) {
@@ -158,6 +163,8 @@ export function getAllModels(): ModelIndex[] {
     developer: e.developer,
     releaseDate: e.releaseDate,
     type: e.type,
+    status: e.status,
+    vendorApiStatus: e.vendorApiStatus,
     featured: e.featured,
     boost: e.boost,
     family: e.family,

@@ -6,9 +6,14 @@
   "releaseDate": "2025-07-28",
   "updatedAt": "2025-07-28",
   "type": "open-weights",
-  "modality": ["text"],
+  "status": "active",
+  "modality": [
+    "text"
+  ],
   "primaryTask": "chat-reasoning",
-  "deployment": ["self-hostable"],
+  "deployment": [
+    "self-hostable"
+  ],
   "license": "MIT",
   "parameters": "355B (32B active)",
   "contextWindow": "128K tokens",
@@ -25,7 +30,11 @@
     "website": "https://z.ai"
   },
   "logo": null,
-  "tags": ["moe", "reasoning", "thinking"],
+  "tags": [
+    "moe",
+    "reasoning",
+    "thinking"
+  ],
   "sources": [
     "https://z.ai/blog/glm-4.5"
   ],

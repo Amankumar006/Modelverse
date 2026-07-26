@@ -6,6 +6,7 @@
   "releaseDate": "2024-05-13",
   "updatedAt": "2026-07-25",
   "type": "open-weights",
+  "status": "active",
   "modality": [
     "multimodal"
   ],

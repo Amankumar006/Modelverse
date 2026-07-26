@@ -6,6 +6,7 @@
   "releaseDate": "2026-02-19",
   "updatedAt": "2026-02-19",
   "type": "api-only",
+  "status": "active",
   "modality": [
     "text",
     "image",

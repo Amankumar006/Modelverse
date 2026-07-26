@@ -6,6 +6,8 @@
   "releaseDate": "2024-06-12",
   "updatedAt": "2024-06-12",
   "type": "open-weights",
+  "status": "active",
+  "vendorApiStatus": "deprecated",
   "modality": [
     "image"
   ],
@@ -32,7 +34,8 @@
     "diffusion"
   ],
   "sources": [
-    "https://stability.ai/news/stable-diffusion-3"
+    "https://stability.ai/news/stable-diffusion-3",
+    "https://stability.ai"
   ],
   "verified": true,
   "curatorNotes": "",

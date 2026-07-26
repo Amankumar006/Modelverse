@@ -7,9 +7,15 @@
   "releaseDate": "2025-12-15",
   "updatedAt": "2025-12-15",
   "type": "closed-source",
-  "modality": ["text", "image"],
+  "status": "active",
+  "modality": [
+    "text",
+    "image"
+  ],
   "primaryTask": "agentic",
-  "deployment": ["api-only"],
+  "deployment": [
+    "api-only"
+  ],
   "license": "Proprietary",
   "parameters": "undisclosed",
   "contextWindow": "undisclosed",
@@ -26,7 +32,11 @@
     "website": "https://manus.im"
   },
   "logo": null,
-  "tags": ["agentic", "action-engine", "wide-research"],
+  "tags": [
+    "agentic",
+    "action-engine",
+    "wide-research"
+  ],
   "sources": [
     "https://manus.im/blog"
   ],

@@ -50,3 +50,13 @@ it should flag the conflict rather than silently pick one.
 - Prefer small, reviewable diffs over sweeping rewrites.
 - When uncertain about a fact (exact param count, license terms, release
   date), mark the field `"verified": false` in the entry rather than guessing.
+- Raw JSON files under `/data/models` are the source of truth — every field must be explicitly written on disk. Do not rely on schema defaults (e.g. Zod `.default()`) to silently paper over missing values in data files.
+- Never guess or infer `status` changes (`deprecated` / `sunset`) from memory. Any model status change requires an official primary source (provider announcement, API changelog), with the URL added to the model's `sources[]` array.
+- When adding a new model that sets `previousVersion` pointing to an existing predecessor, flag the predecessor for status triage review rather than auto-updating it.
+- Never declare an audit "100% complete" or state that "all models have been checked" unless every individual entry has been verified against all primary channels (including standalone help articles, blog announcements, and API deprecation tables). Always communicate the exact scope and boundaries of what was checked.
+- When auditing model status, check ALL of the following channels per vendor (not just the central deprecation table):
+  1. Central deprecation/lifecycle tables (e.g., platform.openai.com/docs/deprecations)
+  2. Standalone blog posts, help articles, and press releases (e.g., help.openai.com notices)
+  3. API changelog entries
+  4. For open-weight models: HuggingFace model card badges/tags AND the vendor's API deprecation page — a model's weights being downloadable doesn't mean the vendor hasn't deprecated it
+- For open-weight models where the vendor's API is deprecated but weights remain available: keep `status: "active"` (weights are the source of truth for availability) and set `vendorApiStatus: "deprecated"` or `"sunset"` with the vendor deprecation source in `sources[]`.

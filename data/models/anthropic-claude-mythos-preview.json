@@ -2,6 +2,7 @@
   "name": "Claude Mythos Preview",
   "developer": "Anthropic",
   "type": "closed-source",
+  "status": "active",
   "modality": [
     "text",
     "image",

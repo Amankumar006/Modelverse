@@ -2,6 +2,7 @@
   "name": "Claude Mythos 5",
   "developer": "Anthropic",
   "type": "closed-source",
+  "status": "active",
   "modality": [
     "text",
     "image",

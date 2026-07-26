@@ -2,6 +2,7 @@
   "name": "Claude 3 Sonnet",
   "developer": "Anthropic",
   "type": "api-only",
+  "status": "sunset",
   "modality": [
     "text",
     "image"
@@ -26,12 +27,13 @@
   "github": "",
   "blogPost": "",
   "sources": [
-    "https://hidekazu-konishi.com/entry/anthropic_claude_model_release_timeline.html"
+    "https://hidekazu-konishi.com/entry/anthropic_claude_model_release_timeline.html",
+    "https://docs.anthropic.com/en/docs/resources/model-deprecations"
   ],
   "logo": "/public/logos/anthropic.png",
   "tags": [],
   "verified": true,
-  "curatorNotes": "",
+  "curatorNotes": "Sunset on July 21, 2025 per official Anthropic model deprecations documentation.",
   "id": "anthropic-claude-3-sonnet",
   "slug": "anthropic-claude-3-sonnet",
   "updatedAt": "2026-07-14",

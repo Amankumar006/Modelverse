@@ -6,9 +6,16 @@
   "releaseDate": "2026-06-01",
   "updatedAt": "2026-06-01",
   "type": "open-weights",
-  "modality": ["text", "image", "video"],
+  "status": "active",
+  "modality": [
+    "text",
+    "image",
+    "video"
+  ],
   "primaryTask": "multimodal-general",
-  "deployment": ["self-hostable"],
+  "deployment": [
+    "self-hostable"
+  ],
   "license": "Other/Custom",
   "parameters": "428B (23B active)",
   "contextWindow": "1000K tokens",
@@ -25,7 +32,11 @@
     "website": "https://platform.minimax.io/docs/guides/models-intro"
   },
   "logo": null,
-  "tags": ["moe", "sparse-attention", "multimodal"],
+  "tags": [
+    "moe",
+    "sparse-attention",
+    "multimodal"
+  ],
   "sources": [
     "https://platform.minimax.io/docs/guides/models-intro"
   ],

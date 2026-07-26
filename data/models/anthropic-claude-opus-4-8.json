@@ -2,6 +2,7 @@
   "name": "Claude Opus 4.8",
   "developer": "Anthropic",
   "type": "api-only",
+  "status": "active",
   "modality": [
     "text",
     "image",

@@ -6,9 +6,15 @@
   "releaseDate": "2026-01-05",
   "updatedAt": "2026-01-05",
   "type": "open-weights",
-  "modality": ["text"],
+  "status": "active",
+  "modality": [
+    "text"
+  ],
   "primaryTask": "chat-reasoning",
-  "deployment": ["self-hostable", "on-device"],
+  "deployment": [
+    "self-hostable",
+    "on-device"
+  ],
   "license": "Other/Custom",
   "parameters": "1.2B",
   "contextWindow": "33K tokens",
@@ -25,15 +31,35 @@
     "website": "https://www.liquid.ai/blog/introducing-lfm2-5-the-next-generation-of-on-device-ai"
   },
   "logo": null,
-  "tags": ["liquid-neural-networks", "edge-ai", "on-device"],
+  "tags": [
+    "liquid-neural-networks",
+    "edge-ai",
+    "on-device"
+  ],
   "sources": [
     "https://www.liquid.ai/blog/introducing-lfm2-5-the-next-generation-of-on-device-ai"
   ],
   "costTiers": [
-    { "id": "230m", "label": "LFM 2.5-230M", "description": "Ultra-lightweight edge model" },
-    { "id": "350m", "label": "LFM 2.5-350M", "description": "Edge model optimized for tool use" },
-    { "id": "1.2b", "label": "LFM 2.5-1.2B", "description": "Standard edge model" },
-    { "id": "8b-a1b", "label": "LFM 2.5-8B-A1B", "description": "Flagship MoE model (1.5B active)" }
+    {
+      "id": "230m",
+      "label": "LFM 2.5-230M",
+      "description": "Ultra-lightweight edge model"
+    },
+    {
+      "id": "350m",
+      "label": "LFM 2.5-350M",
+      "description": "Edge model optimized for tool use"
+    },
+    {
+      "id": "1.2b",
+      "label": "LFM 2.5-1.2B",
+      "description": "Standard edge model"
+    },
+    {
+      "id": "8b-a1b",
+      "label": "LFM 2.5-8B-A1B",
+      "description": "Flagship MoE model (1.5B active)"
+    }
   ],
   "verified": false,
   "featured": false,

@@ -6,9 +6,14 @@
   "releaseDate": "2026-06-12",
   "updatedAt": "2026-06-12",
   "type": "open-weights",
-  "modality": ["text"],
+  "status": "active",
+  "modality": [
+    "text"
+  ],
   "primaryTask": "code-generation",
-  "deployment": ["self-hostable"],
+  "deployment": [
+    "self-hostable"
+  ],
   "license": "Other/Custom",
   "parameters": "1T (32B active)",
   "contextWindow": "256K tokens",
@@ -25,7 +30,11 @@
     "website": "https://www.kimi.com/ai-models/kimi-k2-6"
   },
   "logo": null,
-  "tags": ["moe", "code-agent", "copilot"],
+  "tags": [
+    "moe",
+    "code-agent",
+    "copilot"
+  ],
   "sources": [
     "https://www.kimi.com/ai-models/kimi-k2-6"
   ],

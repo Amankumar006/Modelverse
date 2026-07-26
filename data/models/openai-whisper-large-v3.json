@@ -6,6 +6,7 @@
   "releaseDate": "2023-11-06",
   "updatedAt": "2023-11-06",
   "type": "open-weights",
+  "status": "active",
   "modality": [
     "audio"
   ],

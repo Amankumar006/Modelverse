@@ -32,6 +32,8 @@ const ModelSchema = z.object({
   releaseDate: z.string().regex(/^\d{4}-\d{2}-\d{2}$/),
   updatedAt: z.string().regex(/^\d{4}-\d{2}-\d{2}$/),
   type: z.enum(["open-source", "open-weights", "closed-source", "api-only", "research-preview"]),
+  status: z.enum(["active", "deprecated", "sunset"]).default("active"),
+  vendorApiStatus: z.enum(["active", "deprecated", "sunset"]).optional(),
   modality: z.array(z.string()).min(1),
   primaryTask: PrimaryTaskEnum,
   deployment: z.array(DeploymentEnum).min(1),
