@@ -22,6 +22,7 @@ import ModalityTag from "@/components/ui/ModalityTag";
 import Breadcrumb from "@/components/models/Breadcrumb";
 import ClientBackButton from "@/components/ui/ClientBackButton";
 import Navbar from "@/components/layout/Navbar";
+import CuratorReviewBanner from "@/components/CuratorReviewBanner";
 import {
   ChevronRight,
   Globe,
@@ -259,6 +260,8 @@ export default async function ModelDetailPage({
           fallbackHref={model.family ? `/models/family/${model.family}` : `/models/developer/${encodeURIComponent(model.developer)}`}
           fallbackLabel={model.family ? model.family : model.developer}
         />
+
+        <CuratorReviewBanner model={model} />
 
         {/* ── Flat Header ─────────────────────────────────────── */}
         <div className="pb-6 border-b border-white/10 mb-8 mt-4">
