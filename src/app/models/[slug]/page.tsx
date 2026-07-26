@@ -134,15 +134,20 @@ export default async function ModelDetailPage({
   // Fetch static lists
   
   let markdownContent: string | null = null;
-  try {
-    const readmePath = path.join(process.cwd(), "data", "models", "readme", `${slug}.md`);
-    markdownContent = await fs.readFile(readmePath, "utf-8");
-  } catch (err) {
+  const candidateNames = Array.from(new Set([
+    `${slug}.md`,
+    `${model.id}.md`,
+    slug.includes("-") ? `${slug.split("-").slice(1).join("-")}.md` : null,
+    slug.includes("-") ? `${slug.split("-").slice(2).join("-")}.md` : null,
+  ].filter(Boolean))) as string[];
+
+  for (const cand of candidateNames) {
     try {
-      const readmePathId = path.join(process.cwd(), "data", "models", "readme", `${model.id}.md`);
-      markdownContent = await fs.readFile(readmePathId, "utf-8");
-    } catch (err2) {
-      // silently ignore
+      const readmePath = path.join(process.cwd(), "data", "models", "readme", cand);
+      markdownContent = await fs.readFile(readmePath, "utf-8");
+      if (markdownContent && markdownContent.trim().length > 0) break;
+    } catch {
+      // try next candidate
     }
   }
 

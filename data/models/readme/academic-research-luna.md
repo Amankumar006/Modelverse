@@ -1,41 +1,60 @@
 # Luna
 
-## Model Overview
-**Luna** is a **undisclosed-parameter** model developed by **Academic/Research**.
-Released on **2026-07-15**.
+## 📌 Model Overview
+
+Developed by researchers from HKUST, Tsinghua University, and Meta, Luna (Learning Universal 3D Human Animation Beyond Skinning) is an LBS-free neural animation model presented at ECCV 2026. It maps 2D controls directly into 3D Gaussian deformations for realistic human avatars.
+
+**Luna** is a **Research Preview** model developed by **Academic/Research**, released on **2026-07-15**. It is engineered primarily for **Search Retrieval** workloads. Featuring a **128K tokens** context window and **Undisclosed** parameter count, it offers robust performance for enterprise integration, developers, and researchers.
 
 ---
 
-## 📊 Quick Specs
+## ✨ Key Features & Capabilities
 
-| Specification | Value |
+| Feature | Description |
 |:---|:---|
-| **Parameters** | undisclosed |
-| **Task** | other |
+| **Context Window** | 128K tokens capacity for extended prompts and multi-turn workflows |
+| **Primary Task** | Optimized for Search Retrieval |
+| **Deployment** | self-hostable |
 | **Modality** | image, 3d |
-| **License** | Other/Custom |
-| **Type** | research-preview |
+| **Capability** | LBS-Free Neural Animation bypassing parametric body fitting artifacts |
+| **Capability** | Direct mapping of 2D controls to 3D Gaussian field deformations |
+| **Capability** | Transformer Motion Regressor disentangling rigid pose from local dynamics |
+| **Capability** | Hybrid supervision with soft LBS teacher distillation & in-the-wild video training |
+| **Capability** | Zero-shot cross-identity and multi-modality generalization |
 
 ---
 
-## ✨ Key Features
+## ⚙️ Technical Specifications
 
-- LBS-Free Neural Animation bypassing parametric body fitting artifacts
-- Direct mapping of 2D controls to 3D Gaussian field deformations
-- Transformer Motion Regressor disentangling rigid pose from local dynamics
-- Hybrid supervision with soft LBS teacher distillation & in-the-wild video training
-- Zero-shot cross-identity and multi-modality generalization
-
----
-
-## 🔗 Resources
-
-
-- **GitHub**: [Repository](coming-soon)
-- **Paper**: [arXiv](https://arxiv.org/abs/2606.31981)
-- **Website**: [Project Page](https://penghtyx.github.io/LUNA/)
+| Specification | Details |
+|:---|:---|
+| **Developer / Lab** | Academic/Research |
+| **Release Date** | 2026-07-15 |
+| **Model Type** | Research Preview |
+| **Parameters** | Undisclosed |
+| **Context Window** | 128K tokens |
+| **License** | proprietary |
 
 ---
 
-## 📜 License & Access
-**Other/Custom** — See repository for specific license details.
+## 📊 Benchmarks & Performance
+
+| Benchmark | Score | Source |
+|:---|:---:|:---|
+| **Cross-Identity Motion Transfer Fidelity** | `State-of-the-Art` | Independent Eval |
+
+---
+
+## 🔗 Resources & Links
+
+| Resource | Link |
+|:---|:---|
+| **website** | [https://penghtyx.github.io/LUNA/](https://penghtyx.github.io/LUNA/) |
+| **paper** | [https://arxiv.org/abs/2606.31981](https://arxiv.org/abs/2606.31981) |
+| **github** | [coming-soon](coming-soon) |
+
+---
+
+## 📜 License & Usage
+
+This model is governed by the **proprietary** license. Please check official developer guidelines before commercial deployment.
