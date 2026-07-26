@@ -135,7 +135,7 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
   };
 
   return (
-    <main className="min-h-screen bg-[#FAF8F5] text-[#191919] selection:bg-[#E5DCD0] selection:text-[#191919] font-sans antialiased relative">
+    <main className="min-h-screen bg-[#141414] text-[#E1E1E0] selection:bg-emerald-500 selection:text-black font-sans antialiased relative">
       {/* Site Header */}
       <Navbar theme="dark" />
 
@@ -145,11 +145,11 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
 
-      {/* Anthropic Blog Top Header Navigation */}
+      {/* Article Top Header Navigation */}
       <div className="max-w-[840px] mx-auto px-6 pt-10 sm:pt-14">
         <Link
           href="/news"
-          className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#666666] hover:text-[#191919] transition-colors mb-8"
+          className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#90908F] hover:text-white transition-colors mb-8"
         >
           <ArrowLeft size={14} /> Back to Newsroom
         </Link>
@@ -158,34 +158,37 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
         <div className="flex items-center gap-3 mb-6">
           <Link
             href={`/news?category=${article.category}`}
-            className="inline-flex items-center px-3 py-1 rounded-full bg-[#EFECE6] border border-[#E0DCD5] text-[11px] font-mono font-semibold uppercase tracking-wider text-[#191919] hover:bg-[#E5E0D6] transition-colors"
+            className="inline-flex items-center px-3 py-1 rounded-full bg-[#242426] border border-[#333333] text-[11px] font-mono font-semibold uppercase tracking-wider text-emerald-400 hover:border-emerald-500/50 transition-colors"
           >
             {article.category === "weekly-news" ? `Issue ${article.issueNumber}` : getCategoryLabel(article.category)}
           </Link>
           <ConfidenceBadge confidence={article.confidenceLevel} />
         </div>
 
-        {/* Anthropic Article Title */}
+        {/* Article Title */}
         <h1
-          className="text-3xl sm:text-4xl md:text-5xl font-normal text-[#191919] tracking-tight leading-[1.2] mb-6"
+          className="text-3xl sm:text-4xl md:text-5xl font-normal text-white tracking-tight leading-[1.2] mb-6"
           style={{ fontFamily: "var(--font-display, 'Instrument Serif', Georgia, serif)" }}
         >
           {article.title}
         </h1>
 
         {/* Author & Date Metadata */}
-        <div className="flex flex-wrap items-center gap-4 text-xs text-[#666666] pb-8 border-b border-[#E0DCD5] font-mono">
-          <span>By {article.author}</span>
+        <div className="flex flex-wrap items-center gap-4 text-xs text-[#90908F] pb-8 border-b border-[#282828] font-mono">
+          <span className="text-[#E1E1E0]">By {article.author}</span>
           <span>·</span>
           <span>{formatNewsDate(article.publishDate)}</span>
           <span>·</span>
-          <span>{article.readTime}</span>
+          <span className="flex items-center gap-1 text-emerald-400">
+            <Clock size={12} />
+            {article.readTime}
+          </span>
         </div>
       </div>
 
       {/* Featured Cover Image */}
       <div className="max-w-[1040px] mx-auto px-4 sm:px-6 my-10">
-        <div className="relative h-[280px] sm:h-[450px] lg:h-[540px] w-full bg-[#EFECE6] rounded-2xl overflow-hidden shadow-sm border border-[#E0DCD5]">
+        <div className="relative h-[280px] sm:h-[450px] lg:h-[540px] w-full bg-[#1C1C1E] rounded-2xl overflow-hidden shadow-2xl border border-[#282828]">
           <Image
             src={article.coverImage}
             alt={article.title}
@@ -196,15 +199,15 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
         </div>
       </div>
 
-      {/* Ergonomic 840px Article Reading Canvas (Anthropic Style) */}
+      {/* Ergonomic 840px Article Reading Canvas (High-Contrast Dark Theme) */}
       <article className="max-w-[840px] mx-auto px-6 py-4">
         {/* Render Interactive Benchmark Tabs for Claude Opus / Vision Articles */}
         {(article.slug === "claude-opus-5-detailed-guide" || article.body.includes("Benchmark")) && (
           <BenchmarkTabs />
         )}
 
-        {/* Prose Content */}
-        <div className="prose prose-slate max-w-none text-[#2D2D2D] leading-[1.88] text-base sm:text-lg font-serif prose-headings:font-serif prose-headings:font-normal prose-headings:text-[#191919] prose-h2:text-2xl sm:prose-h2:text-3xl prose-h2:mt-10 prose-h2:mb-4 prose-h3:text-xl prose-h3:mt-8 prose-h3:mb-3 prose-p:mb-6 prose-a:text-[#191919] prose-a:underline prose-a:font-medium hover:prose-a:text-[#D97757] prose-li:my-1 prose-strong:text-[#191919] prose-strong:font-semibold">
+        {/* High-Contrast Markdown Content */}
+        <div className="prose prose-invert prose-emerald max-w-none text-[#E1E1E0] leading-[1.88] text-base sm:text-lg font-sans prose-headings:font-serif prose-headings:font-normal prose-headings:text-white prose-h2:text-2xl sm:prose-h2:text-3xl prose-h2:mt-10 prose-h2:mb-4 prose-h3:text-xl prose-h3:mt-8 prose-h3:mb-3 prose-p:mb-6 prose-p:text-[#D4D4D8] prose-a:text-emerald-400 prose-a:underline prose-a:font-medium hover:prose-a:text-emerald-300 prose-li:my-1 prose-li:text-[#D4D4D8] prose-strong:text-white prose-strong:font-semibold">
           <ReactMarkdown
             remarkPlugins={[remarkGfm]}
             components={{
@@ -223,7 +226,7 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
 
                 if (isInline) {
                   return (
-                    <code className="bg-[#EFECE6] text-[#191919] px-1.5 py-0.5 rounded font-mono text-xs border border-[#E0DCD5]" {...props}>
+                    <code className="bg-[#242426] text-emerald-400 px-1.5 py-0.5 rounded font-mono text-xs border border-[#333333]" {...props}>
                       {children}
                     </code>
                   );
@@ -247,13 +250,13 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
 
         {/* Tags */}
         {article.tags && article.tags.length > 0 && (
-          <div className="flex flex-wrap gap-2 mt-12 pt-8 border-t border-[#E0DCD5]">
+          <div className="flex flex-wrap gap-2 mt-12 pt-8 border-t border-[#282828]">
             {article.tags.map((tag) => (
               <span
                 key={tag}
-                className="inline-flex items-center gap-1 text-xs font-mono text-[#555555] bg-[#EFECE6] px-3 py-1 rounded-full border border-[#E0DCD5]"
+                className="inline-flex items-center gap-1 text-xs font-mono text-[#E1E1E0] bg-[#242426] px-3 py-1 rounded-full border border-[#333333]"
               >
-                <Tag size={11} className="text-[#191919]" />
+                <Tag size={11} className="text-emerald-400" />
                 {tag}
               </span>
             ))}
@@ -262,22 +265,22 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
 
         {/* External Sources Footnote Section */}
         {article.externalSources && article.externalSources.length > 0 && (
-          <div className="mt-10 pt-8 border-t border-[#E0DCD5]">
+          <div className="mt-10 pt-8 border-t border-[#282828]">
             <h3
-              className="text-lg font-normal text-[#191919] mb-3"
+              className="text-lg font-normal text-white mb-3"
               style={{ fontFamily: "var(--font-display, 'Instrument Serif', Georgia, serif)" }}
             >
               Footnotes & Primary References
             </h3>
-            <ul className="space-y-2 text-xs font-mono text-[#666666]">
+            <ul className="space-y-2 text-xs font-mono text-[#90908F]">
               {article.externalSources.map((src, idx) => (
                 <li key={idx} className="flex items-start gap-2">
-                  <span className="shrink-0 select-none">[{idx + 1}]</span>
+                  <span className="shrink-0 select-none text-emerald-400">[{idx + 1}]</span>
                   <a
                     href={src}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-[#191919] hover:underline truncate"
+                    className="text-[#E1E1E0] hover:text-emerald-400 hover:underline truncate"
                   >
                     {src}
                   </a>
@@ -288,10 +291,10 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
         )}
       </article>
 
-      {/* Anthropic Style Related Content Section */}
-      <div className="max-w-[1040px] mx-auto px-6 mt-20 pt-16 border-t border-[#E0DCD5]">
+      {/* Related Content Section */}
+      <div className="max-w-[1040px] mx-auto px-6 mt-20 pt-16 border-t border-[#282828]">
         <h2
-          className="text-2xl sm:text-3xl font-normal text-[#191919] mb-8"
+          className="text-2xl sm:text-3xl font-normal text-white mb-8"
           style={{ fontFamily: "var(--font-display, 'Instrument Serif', Georgia, serif)" }}
         >
           Related content
@@ -299,19 +302,19 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {relatedArticles.map((rel) => (
-            <div key={rel.id} className="group flex flex-col justify-between">
+            <div key={rel.id} className="group flex flex-col justify-between p-5 rounded-2xl bg-[#1C1C1E] border border-[#282828] hover:border-emerald-500/40 transition-all">
               <div>
-                <h3 className="font-semibold text-[#191919] text-base mb-2 group-hover:text-[#D97757] transition-colors leading-snug">
+                <h3 className="font-semibold text-white text-base mb-2 group-hover:text-emerald-400 transition-colors leading-snug">
                   <Link href={`/news/${rel.slug}`}>{rel.title}</Link>
                 </h3>
-                <p className="text-xs text-[#666666] leading-relaxed line-clamp-3 mb-4">
+                <p className="text-xs text-[#90908F] leading-relaxed line-clamp-3 mb-4">
                   {rel.excerpt}
                 </p>
               </div>
 
               <Link
                 href={`/news/${rel.slug}`}
-                className="text-xs font-semibold text-[#191919] group-hover:underline flex items-center gap-1 transition-colors mt-auto"
+                className="text-xs font-semibold text-emerald-400 group-hover:underline flex items-center gap-1 transition-colors mt-auto"
               >
                 <span>Read article</span>
                 <ArrowRight size={12} className="group-hover:translate-x-1 transition-transform" />
@@ -322,9 +325,9 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
       </div>
 
       {/* Styled Footer Frame */}
-      <div className="max-w-[1040px] mx-auto px-6 mt-20 pb-12 border-t border-[#E0DCD5] pt-8 flex justify-between items-center text-xs text-[#777777] font-mono">
+      <div className="max-w-[1040px] mx-auto px-6 mt-20 pb-12 border-t border-[#282828] pt-8 flex justify-between items-center text-xs text-[#90908F] font-mono">
         <span>© 2026 Modelverse®. All rights reserved.</span>
-        <span className="uppercase text-[10px] font-semibold text-[#666666]">
+        <span className="uppercase text-[10px] font-semibold text-[#90908F]">
           Modelverse Newsroom
         </span>
       </div>
