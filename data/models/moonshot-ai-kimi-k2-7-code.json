@@ -18,7 +18,9 @@
   "parameters": "1T (32B active)",
   "contextWindow": "256K tokens",
   "description": "Moonshot AI's open-weights Mixture-of-Experts model optimized for software engineering, reducing thinking token usage and improving code generation efficiency.",
+  "templatedDescription": false,
   "keyFeatures": [
+    "Max Output: 262K tokens",
     "~30% reduction in thinking token overhead compared to K2.6",
     "Optimized SWE-bench performance for code planning and patch generation",
     "Integrated directly as a local backend option for GitHub Copilot"
@@ -26,21 +28,39 @@
   "benchmarks": [],
   "family": "kimi-code",
   "previousVersion": null,
+  "pricing": [
+    {
+      "unit": "1M input tokens",
+      "amount": 0.75,
+      "currency": "USD"
+    },
+    {
+      "unit": "1M output tokens",
+      "amount": 3.5,
+      "currency": "USD"
+    },
+    {
+      "unit": "1M cache read tokens",
+      "amount": 0.15,
+      "currency": "USD"
+    }
+  ],
+  "pricingLastVerified": "2026-07-26",
   "links": {
     "website": "https://www.kimi.com/ai-models/kimi-k2-6"
   },
-  "logo": null,
+  "logo": "/logos/moonshot.svg",
   "tags": [
     "moe",
     "code-agent",
     "copilot"
   ],
   "sources": [
-    "https://www.kimi.com/ai-models/kimi-k2-6"
+    "https://www.kimi.com/ai-models/kimi-k2-6",
+    "https://github.com/anomalyco/models.dev"
   ],
   "verified": false,
   "featured": false,
   "boost": 1,
-  "curatorNotes": "The software engineering specialist in the Kimi family. Focuses on reasoning token efficiency and has native HighSpeed variants.",
-  "templatedDescription": false
+  "curatorNotes": "The software engineering specialist in the Kimi family. Focuses on reasoning token efficiency and has native HighSpeed variants."
 }

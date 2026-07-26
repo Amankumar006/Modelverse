@@ -18,28 +18,44 @@
   "parameters": "Unknown",
   "contextWindow": "Unknown",
   "description": "An older high-intelligence GPT model",
-  "keyFeatures": [],
+  "keyFeatures": [
+    "Max Output: 4K tokens"
+  ],
   "benchmarks": [],
   "family": "gpt-4-turbo",
   "previousVersion": null,
-  "links": {
-    "Documentation": "https://developers.openai.com/api/docs/models/all"
-  },
-  "logo": null,
-  "tags": [],
-  "sources": [
-    "https://developers.openai.com/api/docs/models/all",
-    "https://platform.openai.com/docs/deprecations"
-  ],
-  "verified": true,
-  "featured": false,
-  "boost": 1,
-  "curatorNotes": "Deprecated with shutdown date set for October 23, 2026 per official OpenAI deprecations documentation.",
   "costTiers": [
     {
       "id": "gpt-4-turbo-preview",
       "label": "GPT-4 Turbo Preview",
       "description": "An older fast GPT model"
     }
-  ]
+  ],
+  "pricing": [
+    {
+      "unit": "1M input tokens",
+      "amount": 9,
+      "currency": "USD"
+    },
+    {
+      "unit": "1M output tokens",
+      "amount": 27,
+      "currency": "USD"
+    }
+  ],
+  "pricingLastVerified": "2026-07-26",
+  "links": {
+    "Documentation": "https://developers.openai.com/api/docs/models/all"
+  },
+  "logo": "/logos/openai.svg",
+  "tags": [],
+  "sources": [
+    "https://developers.openai.com/api/docs/models/all",
+    "https://platform.openai.com/docs/deprecations",
+    "https://github.com/anomalyco/models.dev"
+  ],
+  "verified": true,
+  "featured": false,
+  "boost": 1,
+  "curatorNotes": "Deprecated with shutdown date set for October 23, 2026 per official OpenAI deprecations documentation."
 }

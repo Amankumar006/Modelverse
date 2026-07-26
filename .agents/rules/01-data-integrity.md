@@ -22,3 +22,4 @@ These are non-negotiable for any change under `data/models/`.
    itself (not just adding data that fits the existing schema), treat it as a
    breaking-change candidate: check what existing entries would fail validation,
    and call that out before making the change.
+6. **One-Time External Imports:** `models.dev` was used for a one-time backfill on 2026-07-26 (source citation: https://github.com/anomalyco/models.dev) — it is NOT a live data source, and no ongoing sync pipeline exists. All imported entries carry `verified: false` and must be verified against primary sources before being marked verified.

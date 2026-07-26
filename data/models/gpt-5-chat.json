@@ -18,17 +18,38 @@
   "parameters": "Unknown",
   "contextWindow": "Unknown",
   "description": "GPT-5 model used in ChatGPT",
-  "keyFeatures": [],
+  "keyFeatures": [
+    "Max Output: 128K tokens"
+  ],
   "benchmarks": [],
   "family": "gpt-5",
   "previousVersion": null,
+  "pricing": [
+    {
+      "unit": "1M input tokens",
+      "amount": 1.25,
+      "currency": "USD"
+    },
+    {
+      "unit": "1M output tokens",
+      "amount": 10,
+      "currency": "USD"
+    },
+    {
+      "unit": "1M cache read tokens",
+      "amount": 0.125,
+      "currency": "USD"
+    }
+  ],
+  "pricingLastVerified": "2026-07-26",
   "links": {
     "Documentation": "https://developers.openai.com/api/docs/models/all"
   },
-  "logo": null,
+  "logo": "/logos/openai.svg",
   "tags": [],
   "sources": [
-    "https://developers.openai.com/api/docs/models/all"
+    "https://developers.openai.com/api/docs/models/all",
+    "https://github.com/anomalyco/models.dev"
   ],
   "verified": true,
   "featured": false,

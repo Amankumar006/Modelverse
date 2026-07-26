@@ -26,10 +26,11 @@
   "links": {
     "Documentation": "https://developers.openai.com/api/docs/models/all"
   },
-  "logo": null,
+  "logo": "/logos/openai.svg",
   "tags": [],
   "sources": [
-    "https://developers.openai.com/api/docs/models/all"
+    "https://developers.openai.com/api/docs/models/all",
+    "https://github.com/anomalyco/models.dev"
   ],
   "verified": true,
   "featured": false,

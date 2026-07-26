@@ -1,6 +1,10 @@
 {
+  "id": "anthropic-claude-opus-4-1",
   "name": "Claude Opus 4.1",
+  "slug": "anthropic-claude-opus-4-1",
   "developer": "Anthropic",
+  "releaseDate": "2025-08-05",
+  "updatedAt": "2026-07-14",
   "type": "api-only",
   "status": "active",
   "modality": [
@@ -15,34 +19,44 @@
   "license": "Proprietary",
   "parameters": "undisclosed",
   "contextWindow": "200K tokens",
-  "releaseDate": "2025-08-05",
   "description": "Built for sustained reasoning, multistep workflows, and long structured problem-solving. Implemented new safety protocols to terminate persistently abusive conversations.",
   "keyFeatures": [
+    "Max Output: 32K tokens",
     "Sustained multi-step problem solving",
     "Enhanced safety interventions"
   ],
   "benchmarks": [],
   "family": "Claude 4.1",
-  "website": "https://www.anthropic.com",
-  "paper": "",
-  "huggingFace": "",
-  "github": "",
-  "blogPost": "",
-  "sources": [
-    "https://en.wikipedia.org/wiki/Claude_(AI)"
-  ],
-  "logo": "/public/logos/anthropic.png",
-  "tags": [],
-  "verified": true,
-  "curatorNotes": "",
-  "id": "anthropic-claude-opus-4-1",
-  "slug": "anthropic-claude-opus-4-1",
-  "updatedAt": "2026-07-14",
-  "featured": false,
-  "boost": 1,
-  "costTiers": [],
   "tier": "Opus",
   "previousVersion": "anthropic-claude-opus-4",
-  "nextVersion": "anthropic-claude-opus-4-5",
-  "links": {}
+  "costTiers": [],
+  "pricing": [
+    {
+      "unit": "1M input tokens",
+      "amount": 15,
+      "currency": "USD"
+    },
+    {
+      "unit": "1M output tokens",
+      "amount": 75,
+      "currency": "USD"
+    },
+    {
+      "unit": "1M cache read tokens",
+      "amount": 1.5,
+      "currency": "USD"
+    }
+  ],
+  "pricingLastVerified": "2026-07-26",
+  "links": {},
+  "logo": "/public/logos/anthropic.png",
+  "tags": [],
+  "sources": [
+    "https://en.wikipedia.org/wiki/Claude_(AI)",
+    "https://github.com/anomalyco/models.dev"
+  ],
+  "verified": true,
+  "featured": false,
+  "boost": 1,
+  "curatorNotes": ""
 }

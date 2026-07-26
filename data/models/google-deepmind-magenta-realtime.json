@@ -18,6 +18,7 @@
   "parameters": "undisclosed",
   "contextWindow": "undisclosed",
   "description": "An experimental agentic workflow research preview named Magenta Realtime, published by Google DeepMind to showcase novel methods.",
+  "templatedDescription": true,
   "keyFeatures": [],
   "benchmarks": [],
   "family": null,
@@ -25,17 +26,17 @@
   "links": {
     "Website": "https://magenta.withgoogle.com/magenta-realtime-2"
   },
-  "logo": null,
+  "logo": "/logos/google-deepmind.svg",
   "tags": [
     "research-preview",
     "agentic"
   ],
   "sources": [
-    "https://magenta.withgoogle.com/magenta-realtime-2"
+    "https://magenta.withgoogle.com/magenta-realtime-2",
+    "https://github.com/anomalyco/models.dev"
   ],
   "verified": false,
   "featured": false,
   "boost": 1,
-  "curatorNotes": "Partially enriched via migration on 2026-07-25. Manual review recommended.",
-  "templatedDescription": true
+  "curatorNotes": "Partially enriched via migration on 2026-07-25. Manual review recommended."
 }

@@ -18,6 +18,7 @@
   "parameters": "undisclosed",
   "contextWindow": "undisclosed",
   "description": "An experimental specialized research research preview named MAI Thinking, published by Microsoft to showcase novel methods.",
+  "templatedDescription": true,
   "keyFeatures": [],
   "benchmarks": [],
   "family": null,
@@ -25,17 +26,17 @@
   "links": {
     "Website": "https://microsoft.ai/news/introducing-mai-thinking/"
   },
-  "logo": null,
+  "logo": "/logos/microsoft.svg",
   "tags": [
     "research-preview",
     "other"
   ],
   "sources": [
-    "https://microsoft.ai/news/introducing-mai-thinking/"
+    "https://microsoft.ai/news/introducing-mai-thinking/",
+    "https://github.com/anomalyco/models.dev"
   ],
   "verified": false,
   "featured": false,
   "boost": 1,
-  "curatorNotes": "Partially enriched via migration on 2026-07-25. Manual review recommended.",
-  "templatedDescription": true
+  "curatorNotes": "Partially enriched via migration on 2026-07-25. Manual review recommended."
 }

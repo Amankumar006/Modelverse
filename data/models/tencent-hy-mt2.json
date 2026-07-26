@@ -18,6 +18,7 @@
   "parameters": "undisclosed",
   "contextWindow": "undisclosed",
   "description": "A research-preview model by Tencent focusing on specialized research capabilities to invite community feedback.",
+  "templatedDescription": true,
   "keyFeatures": [],
   "benchmarks": [],
   "family": null,
@@ -25,17 +26,17 @@
   "links": {
     "Website": "https://huggingface.co/tencent/Hy-MT2"
   },
-  "logo": null,
+  "logo": "/logos/tencent.svg",
   "tags": [
     "research-preview",
     "other"
   ],
   "sources": [
-    "https://huggingface.co/tencent/Hy-MT2"
+    "https://huggingface.co/tencent/Hy-MT2",
+    "https://github.com/anomalyco/models.dev"
   ],
   "verified": false,
   "featured": false,
   "boost": 1,
-  "curatorNotes": "Partially enriched via migration on 2026-07-25. Manual review recommended.",
-  "templatedDescription": true
+  "curatorNotes": "Partially enriched via migration on 2026-07-25. Manual review recommended."
 }

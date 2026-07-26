@@ -11,11 +11,16 @@
     "text",
     "code"
   ],
+  "primaryTask": "chat-reasoning",
+  "deployment": [
+    "api-only"
+  ],
   "license": "Proprietary",
   "parameters": "104B",
   "contextWindow": "128K",
   "description": "Cohere's most capable generation model optimized for enterprise RAG workflows and multilingual tasks, with strong performance on complex reasoning while maintaining efficiency for large-scale production deployments.",
   "keyFeatures": [
+    "Max Output: 4K tokens",
     "Optimized for RAG workflows",
     "Strong multilingual support (10+ languages)",
     "128K context window",
@@ -24,6 +29,19 @@
   "benchmarks": [],
   "family": "Command",
   "previousVersion": null,
+  "pricing": [
+    {
+      "unit": "1M input tokens",
+      "amount": 0.15,
+      "currency": "USD"
+    },
+    {
+      "unit": "1M output tokens",
+      "amount": 0.6,
+      "currency": "USD"
+    }
+  ],
+  "pricingLastVerified": "2026-07-26",
   "links": {
     "website": "https://cohere.com/blog/command-r-plus-microsoft-azure"
   },
@@ -35,12 +53,11 @@
   ],
   "sources": [
     "https://cohere.com/blog/command-r-plus-microsoft-azure",
-    "https://docs.cohere.com/docs/deprecations"
+    "https://docs.cohere.com/docs/deprecations",
+    "https://github.com/anomalyco/models.dev"
   ],
   "verified": true,
-  "curatorNotes": "",
-  "primaryTask": "chat-reasoning",
-  "deployment": [
-    "api-only"
-  ]
+  "featured": false,
+  "boost": 1,
+  "curatorNotes": ""
 }

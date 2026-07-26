@@ -18,6 +18,7 @@
   "parameters": "undisclosed",
   "contextWindow": "undisclosed",
   "description": "Developed by Alibaba, Qwen 3.7 is a research preview model exploring new techniques in specialized research.",
+  "templatedDescription": true,
   "keyFeatures": [],
   "benchmarks": [],
   "family": null,
@@ -25,17 +26,17 @@
   "links": {
     "Website": "https://qwen.ai/blog?id=qwen3.7"
   },
-  "logo": null,
+  "logo": "/logos/alibaba.svg",
   "tags": [
     "research-preview",
     "other"
   ],
   "sources": [
-    "https://qwen.ai/blog?id=qwen3.7"
+    "https://qwen.ai/blog?id=qwen3.7",
+    "https://github.com/anomalyco/models.dev"
   ],
   "verified": false,
   "featured": false,
   "boost": 1,
-  "curatorNotes": "Partially enriched via migration on 2026-07-25. Manual review recommended.",
-  "templatedDescription": true
+  "curatorNotes": "Partially enriched via migration on 2026-07-25. Manual review recommended."
 }

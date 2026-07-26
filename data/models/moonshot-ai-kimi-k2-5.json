@@ -19,7 +19,9 @@
   "parameters": "1T (32B active)",
   "contextWindow": "256K tokens",
   "description": "Moonshot AI's open-weights Mixture-of-Experts multimodal model, introducing Agent Swarm orchestration and visual agentic intelligence.",
+  "templatedDescription": false,
   "keyFeatures": [
+    "Max Output: 262K tokens",
     "Mixture-of-Experts architecture with ~1T parameters and 32B active per token",
     "Incorporates MoonViT 400M parameter vision encoder for native multimodality",
     "Agent Swarm architecture for task decomposition and multi-agent coordination"
@@ -27,21 +29,34 @@
   "benchmarks": [],
   "family": "kimi-agentic-multimodal",
   "previousVersion": null,
+  "pricing": [
+    {
+      "unit": "1M input tokens",
+      "amount": 0.3,
+      "currency": "USD"
+    },
+    {
+      "unit": "1M output tokens",
+      "amount": 1.9,
+      "currency": "USD"
+    }
+  ],
+  "pricingLastVerified": "2026-07-26",
   "links": {
     "website": "https://www.kimi.com"
   },
-  "logo": null,
+  "logo": "/logos/moonshot.svg",
   "tags": [
     "moe",
     "agent-swarm",
     "multimodal"
   ],
   "sources": [
-    "https://www.kimi.com/ai-models/kimi-k2-6"
+    "https://www.kimi.com/ai-models/kimi-k2-6",
+    "https://github.com/anomalyco/models.dev"
   ],
   "verified": false,
   "featured": false,
   "boost": 1,
-  "curatorNotes": "The base foundation for Moonshot's Kimi K2 series, establishing the Agent Swarm paradigm.",
-  "templatedDescription": false
+  "curatorNotes": "The base foundation for Moonshot's Kimi K2 series, establishing the Agent Swarm paradigm."
 }

@@ -21,6 +21,7 @@
   "contextWindow": "1M tokens",
   "description": "For complex agentic coding and enterprise work. Claude Opus 5 is a step-change improvement over Claude Opus 4.8, with the largest gains in deep reasoning, agentic and long-horizon tasks, and test-time compute scaling.",
   "keyFeatures": [
+    "Max Output: 128K tokens",
     "1M token context window (default and maximum)",
     "Thinking on by default with adjustable effort levels (low to max)",
     "Mid-conversation tool changes while preserving prompt cache",
@@ -103,8 +104,11 @@
   ],
   "sources": [
     "https://www.anthropic.com/news/claude-opus-5",
-    "https://www-cdn.anthropic.com/c5fbac3f0b1280a933ebd26d3cb8bb9f5bdeaf48/Claude%20Opus%205%20System%20Card.pdf"
+    "https://www-cdn.anthropic.com/c5fbac3f0b1280a933ebd26d3cb8bb9f5bdeaf48/Claude%20Opus%205%20System%20Card.pdf",
+    "https://github.com/anomalyco/models.dev"
   ],
   "verified": true,
+  "featured": false,
+  "boost": 1,
   "curatorNotes": ""
 }

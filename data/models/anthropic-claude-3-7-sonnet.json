@@ -1,6 +1,10 @@
 {
+  "id": "anthropic-claude-3-7-sonnet",
   "name": "Claude 3.7 Sonnet",
+  "slug": "anthropic-claude-3-7-sonnet",
   "developer": "Anthropic",
+  "releaseDate": "2025-02-24",
+  "updatedAt": "2026-07-14",
   "type": "api-only",
   "status": "active",
   "modality": [
@@ -15,9 +19,9 @@
   "license": "Proprietary",
   "parameters": "undisclosed",
   "contextWindow": "200K tokens",
-  "releaseDate": "2025-02-24",
   "description": "Anthropic's first hybrid reasoning model. It functions as both an ordinary LLM and an extended reasoning model, giving API users strict control over \"thinking token\" budgets for advanced math and science.",
   "keyFeatures": [
+    "Max Output: 64K tokens",
     "Visible, controllable extended thinking",
     "Advanced agentic software engineering"
   ],
@@ -29,29 +33,34 @@
     }
   ],
   "family": "Claude 3.7",
-  "website": "https://www.anthropic.com/news/claude-3-7-sonnet",
-  "paper": "",
-  "huggingFace": "",
-  "github": "",
-  "blogPost": "https://www.anthropic.com/news/claude-3-7-sonnet",
-  "sources": [
-    "https://www.anthropic.com/news/claude-3-7-sonnet"
+  "tier": "Sonnet",
+  "previousVersion": "anthropic-claude-3-5-sonnet-new",
+  "costTiers": [],
+  "pricing": [
+    {
+      "unit": "1M input tokens",
+      "amount": 3,
+      "currency": "USD"
+    },
+    {
+      "unit": "1M output tokens",
+      "amount": 15,
+      "currency": "USD"
+    }
   ],
+  "pricingLastVerified": "2026-07-26",
+  "links": {},
   "logo": "/public/logos/anthropic.png",
   "tags": [
     "hybrid-reasoning",
     "extended-thinking"
   ],
+  "sources": [
+    "https://www.anthropic.com/news/claude-3-7-sonnet",
+    "https://github.com/anomalyco/models.dev"
+  ],
   "verified": true,
-  "curatorNotes": "",
-  "id": "anthropic-claude-3-7-sonnet",
-  "slug": "anthropic-claude-3-7-sonnet",
-  "updatedAt": "2026-07-14",
   "featured": false,
   "boost": 1,
-  "costTiers": [],
-  "tier": "Sonnet",
-  "previousVersion": "anthropic-claude-3-5-sonnet-new",
-  "nextVersion": "anthropic-claude-sonnet-4",
-  "links": {}
+  "curatorNotes": ""
 }

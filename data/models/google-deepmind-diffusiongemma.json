@@ -43,7 +43,7 @@
     "Website": "https://deepmind.google/blog/diffusiongemma-4x-faster-text-generation/",
     "Fine-tuning (Unsloth)": "https://unsloth.ai/docs/models/diffusiongemma"
   },
-  "logo": null,
+  "logo": "/logos/google-deepmind.svg",
   "tags": [
     "diffusion",
     "text-diffusion",
@@ -51,7 +51,8 @@
     "open-weights"
   ],
   "sources": [
-    "https://deepmind.google/blog/diffusiongemma-4x-faster-text-generation/"
+    "https://deepmind.google/blog/diffusiongemma-4x-faster-text-generation/",
+    "https://github.com/anomalyco/models.dev"
   ],
   "verified": true,
   "featured": true,
