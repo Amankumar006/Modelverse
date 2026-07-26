@@ -1,0 +1,104 @@
+{
+  "id": "sakana-fugu",
+  "name": "Fugu",
+  "slug": "sakana-fugu",
+  "developer": "Sakana AI",
+  "releaseDate": "2026-06-15",
+  "updatedAt": "2026-07-26",
+  "type": "api-only",
+  "status": "active",
+  "modality": [
+    "text",
+    "image"
+  ],
+  "primaryTask": "chat-reasoning",
+  "deployment": [
+    "api-only"
+  ],
+  "license": "Proprietary",
+  "parameters": "undisclosed",
+  "contextWindow": "1M tokens",
+  "description": "Multi-agent model for routing expert agents across complex analytical tasks",
+  "keyFeatures": [
+    "Native reasoning capability",
+    "Tool / function calling support"
+  ],
+  "benchmarks": [
+    {
+      "name": "SWE Bench Pro",
+      "score": "59 (score)",
+      "verified": false
+    },
+    {
+      "name": "Terminal Bench 2.1",
+      "score": "80.2 (score)",
+      "verified": false
+    },
+    {
+      "name": "LiveCodeBench",
+      "score": "92.9 (score)",
+      "verified": false
+    },
+    {
+      "name": "LiveCodeBench Pro",
+      "score": "87.8 (score)",
+      "verified": false
+    },
+    {
+      "name": "Humanity’s Last Exam",
+      "score": "47.2 (score)",
+      "verified": false
+    },
+    {
+      "name": "CharXiv Reasoning",
+      "score": "85.1 (score)",
+      "verified": false
+    },
+    {
+      "name": "GPQA Diamond",
+      "score": "95.5 (score)",
+      "verified": false
+    },
+    {
+      "name": "SciCode",
+      "score": "60.1 (score)",
+      "verified": false
+    },
+    {
+      "name": "τ3 Banking",
+      "score": "21.7 (score)",
+      "verified": false
+    },
+    {
+      "name": "Long Context Reasoning",
+      "score": "74.7 (score)",
+      "verified": false
+    },
+    {
+      "name": "MRCRv2",
+      "score": "86.6 (score)",
+      "verified": false
+    },
+    {
+      "name": "CTI-REALM",
+      "score": "67.5 (score)",
+      "verified": false
+    }
+  ],
+  "family": "fugu",
+  "previousVersion": null,
+  "links": {},
+  "logo": "/logos/sakana.svg",
+  "tags": [
+    "reasoning",
+    "tool-calling",
+    "structured-output"
+  ],
+  "sources": [
+    "https://github.com/anomalyco/models.dev"
+  ],
+  "verified": false,
+  "featured": false,
+  "boost": 1,
+  "curatorNotes": "Skeleton entry imported from models.dev backfill (2026-07-26). Needs manual enrichment and primary-source verification."
+}
