@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
+import { AlertTriangle, Check, CheckCircle2, Lock, ExternalLink } from "lucide-react";
 
 interface ModelProps {
   id: string;
@@ -62,16 +63,14 @@ export default function CuratorReviewBanner({ model }: { model: ModelProps }) {
 
   if (verifiedSuccess) {
     return (
-      <div className="mb-6 p-4 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 flex items-center justify-between animate-fadeIn">
+      <div className="mb-6 p-4 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-300 flex items-center justify-between animate-fadeIn">
         <div className="flex items-center gap-3">
-          <svg className="w-5 h-5 text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-          </svg>
-          <span className="font-semibold text-sm">
-            Model "{model.name}" has been successfully verified and saved!
+          <CheckCircle2 size={18} className="text-emerald-400" />
+          <span className="font-semibold text-xs">
+            Model &quot;{model.name}&quot; has been successfully verified and saved!
           </span>
         </div>
-        <span className="text-xs text-emerald-400/70">Reloading page...</span>
+        <span className="text-xs text-emerald-400/70 font-mono">Reloading...</span>
       </div>
     );
   }
@@ -80,45 +79,51 @@ export default function CuratorReviewBanner({ model }: { model: ModelProps }) {
   const hasDraftFeatures = Boolean(model.keyFeaturesDraft && model.keyFeaturesDraft.length > 0);
 
   return (
-    <div className="mb-8 rounded-2xl bg-[#0F1713] border border-amber-500/30 p-6 shadow-xl relative overflow-hidden">
+    <div className="mb-8 rounded-2xl bg-[#1C1C1E] border border-[#282828] p-6 shadow-2xl relative overflow-hidden">
+      {/* Terracotta Top Accent Bar */}
+      <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#D97757] via-[#F59E0B] to-[#D97757]" />
+
       {/* Top Banner Warning Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-5 border-b border-white/10">
-        <div className="flex items-start gap-3">
-          <div className="p-2 rounded-lg bg-amber-500/10 text-amber-400 shrink-0">
-            <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
-            </svg>
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-5 border-b border-[#282828]">
+        <div className="flex items-start gap-3.5">
+          <div className="p-2.5 rounded-xl bg-[#242426] text-[#F59E0B] border border-[#F59E0B]/20 shrink-0 mt-0.5">
+            <AlertTriangle size={18} />
           </div>
           <div>
-            <div className="flex items-center gap-2">
-              <h3 className="text-base font-bold text-white">Curator Review Mode</h3>
-              <span className="text-[10px] uppercase font-bold tracking-wider px-2.5 py-0.5 rounded-full bg-amber-500/20 text-amber-300 border border-amber-500/30">
+            <div className="flex items-center gap-2.5">
+              <h3
+                className="text-xl font-normal text-white"
+                style={{ fontFamily: "var(--font-display, 'Instrument Serif', Georgia, serif)" }}
+              >
+                Curator Review Mode
+              </h3>
+              <span className="text-[10px] uppercase font-mono font-semibold tracking-wider px-2.5 py-0.5 rounded-full bg-[#242426] text-[#F59E0B] border border-[#F59E0B]/30">
                 Needs Verification
               </span>
             </div>
-            <p className="text-xs text-white/70 mt-1">
-              This model was auto-enriched or backfilled. Review draft prose and sources below before promoting to verified status.
+            <p className="text-xs text-[#90908F] mt-1 leading-relaxed max-w-xl">
+              This model entry was auto-enriched or backfilled. Review proposed draft prose and primary sources below before promoting to verified status.
             </p>
           </div>
         </div>
 
-        {/* Primary Approve Buttons */}
+        {/* Primary Approve Action Buttons */}
         <div className="flex items-center gap-3 shrink-0">
           <button
             onClick={() => handleVerify(false)}
             disabled={loading}
-            className="px-4 py-2 text-xs font-semibold text-white/80 bg-white/5 hover:bg-white/10 rounded-xl border border-white/10 transition-colors disabled:opacity-50"
+            className="px-4 py-2 text-xs font-medium text-[#90908F] hover:text-white bg-[#242426] hover:bg-[#2A2A2D] rounded-xl border border-[#333333] transition-all active:scale-95 disabled:opacity-50"
           >
             Approve As-Is
           </button>
           <button
             onClick={() => handleVerify(true)}
             disabled={loading}
-            className="px-4 py-2 text-xs font-bold text-black bg-emerald-400 hover:bg-emerald-300 rounded-xl transition-all shadow-lg shadow-emerald-500/20 flex items-center gap-2 disabled:opacity-50"
+            className="px-4 py-2 text-xs font-semibold text-white bg-[#D97757] hover:bg-[#E88868] active:scale-95 rounded-xl transition-all shadow-lg shadow-[#D97757]/20 flex items-center gap-2 disabled:opacity-50"
           >
             {loading ? (
               <>
-                <svg className="animate-spin h-4 w-4 text-black" viewBox="0 0 24 24" fill="none">
+                <svg className="animate-spin h-3.5 w-3.5 text-white" viewBox="0 0 24 24" fill="none">
                   <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
                   <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
                 </svg>
@@ -126,9 +131,7 @@ export default function CuratorReviewBanner({ model }: { model: ModelProps }) {
               </>
             ) : (
               <>
-                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
-                </svg>
+                <Check size={14} />
                 <span>Approve & Promote Draft</span>
               </>
             )}
@@ -136,12 +139,13 @@ export default function CuratorReviewBanner({ model }: { model: ModelProps }) {
         </div>
       </div>
 
+      {/* Error & Read-Only Alert Box */}
       {errorMsg && (
-        <div className="mt-4 p-3.5 rounded-xl bg-amber-500/10 border border-amber-500/30 text-amber-300 text-xs flex items-start gap-2.5">
-          <span className="shrink-0 text-base select-none">🔒</span>
+        <div className="mt-4 p-3.5 rounded-xl bg-[#242426] border border-amber-500/30 text-amber-300 text-xs flex items-start gap-3">
+          <Lock size={16} className="shrink-0 text-amber-400 mt-0.5" />
           <div className="leading-relaxed">
-            <span className="font-semibold block mb-0.5">Read-Only Production Deployment</span>
-            <span>{errorMsg}</span>
+            <span className="font-semibold block mb-0.5 text-white">Read-Only Serverless Environment</span>
+            <span className="text-[#90908F]">{errorMsg}</span>
           </div>
         </div>
       )}
@@ -150,26 +154,26 @@ export default function CuratorReviewBanner({ model }: { model: ModelProps }) {
       {(hasDraftDescription || hasDraftFeatures) && (
         <div className="mt-5">
           <div className="flex items-center justify-between mb-3">
-            <span className="text-xs font-semibold text-white/60 uppercase tracking-wider">
+            <span className="text-xs font-semibold text-[#90908F] uppercase tracking-wider">
               Draft Metadata Preview
             </span>
-            <div className="flex items-center bg-white/5 rounded-lg p-0.5 border border-white/10">
+            <div className="flex items-center bg-[#141414] rounded-lg p-0.5 border border-[#282828]">
               <button
                 onClick={() => setViewingDraft(true)}
-                className={`px-3 py-1 text-xs font-semibold rounded-md transition-all ${
+                className={`px-3 py-1 text-xs font-medium rounded-md transition-all ${
                   viewingDraft
-                    ? "bg-emerald-500/20 text-emerald-300 border border-emerald-500/30"
-                    : "text-white/60 hover:text-white"
+                    ? "bg-[#242426] text-white border border-[#333333] font-semibold"
+                    : "text-[#90908F] hover:text-white"
                 }`}
               >
                 Draft Prose
               </button>
               <button
                 onClick={() => setViewingDraft(false)}
-                className={`px-3 py-1 text-xs font-semibold rounded-md transition-all ${
+                className={`px-3 py-1 text-xs font-medium rounded-md transition-all ${
                   !viewingDraft
-                    ? "bg-white/10 text-white border border-white/20"
-                    : "text-white/60 hover:text-white"
+                    ? "bg-[#242426] text-white border border-[#333333] font-semibold"
+                    : "text-[#90908F] hover:text-white"
                 }`}
               >
                 Live Production Specs
@@ -177,27 +181,30 @@ export default function CuratorReviewBanner({ model }: { model: ModelProps }) {
             </div>
           </div>
 
-          <div className="p-4 rounded-xl bg-black/40 border border-white/10">
+          <div className="p-4 rounded-xl bg-[#141414] border border-[#282828]">
             {viewingDraft ? (
               <div className="space-y-3">
                 {hasDraftDescription && (
                   <div>
-                    <span className="text-[11px] font-semibold text-emerald-400/80 uppercase tracking-wider block mb-1">
+                    <span className="text-[11px] font-semibold text-[#D97757] uppercase tracking-wider block mb-1">
                       Proposed Description Draft
                     </span>
-                    <p className="text-sm text-white/90 leading-relaxed font-sans">
+                    <p className="text-sm text-[#E1E1E0] leading-relaxed font-sans">
                       {model.descriptionDraft}
                     </p>
                   </div>
                 )}
                 {hasDraftFeatures && (
-                  <div className="pt-2 border-t border-white/5">
-                    <span className="text-[11px] font-semibold text-emerald-400/80 uppercase tracking-wider block mb-2">
+                  <div className="pt-3 border-t border-[#282828]">
+                    <span className="text-[11px] font-semibold text-[#D97757] uppercase tracking-wider block mb-2">
                       Proposed Key Features
                     </span>
-                    <ul className="list-disc list-inside text-xs text-white/80 space-y-1">
+                    <ul className="space-y-1 text-xs text-[#E1E1E0]">
                       {model.keyFeaturesDraft?.map((feat, idx) => (
-                        <li key={idx}>{feat}</li>
+                        <li key={idx} className="flex items-start gap-2">
+                          <span className="text-[#90908F]">—</span>
+                          <span>{feat}</span>
+                        </li>
                       ))}
                     </ul>
                   </div>
@@ -206,21 +213,24 @@ export default function CuratorReviewBanner({ model }: { model: ModelProps }) {
             ) : (
               <div className="space-y-3">
                 <div>
-                  <span className="text-[11px] font-semibold text-white/50 uppercase tracking-wider block mb-1">
+                  <span className="text-[11px] font-semibold text-[#90908F] uppercase tracking-wider block mb-1">
                     Current Live Description
                   </span>
-                  <p className="text-sm text-white/80 leading-relaxed font-sans">
+                  <p className="text-sm text-[#E1E1E0] leading-relaxed font-sans">
                     {model.description}
                   </p>
                 </div>
                 {model.keyFeatures.length > 0 && (
-                  <div className="pt-2 border-t border-white/5">
-                    <span className="text-[11px] font-semibold text-white/50 uppercase tracking-wider block mb-2">
+                  <div className="pt-3 border-t border-[#282828]">
+                    <span className="text-[11px] font-semibold text-[#90908F] uppercase tracking-wider block mb-2">
                       Current Live Key Features
                     </span>
-                    <ul className="list-disc list-inside text-xs text-white/70 space-y-1">
+                    <ul className="space-y-1 text-xs text-[#E1E1E0]">
                       {model.keyFeatures.map((feat, idx) => (
-                        <li key={idx}>{feat}</li>
+                        <li key={idx} className="flex items-start gap-2">
+                          <span className="text-[#90908F]">—</span>
+                          <span>{feat}</span>
+                        </li>
                       ))}
                     </ul>
                   </div>
@@ -233,17 +243,18 @@ export default function CuratorReviewBanner({ model }: { model: ModelProps }) {
 
       {/* Sources Inspector */}
       {model.sources && model.sources.length > 0 && (
-        <div className="mt-4 pt-4 border-t border-white/10 flex flex-wrap items-center gap-2">
-          <span className="text-xs text-white/50 font-medium">Data Sources:</span>
+        <div className="mt-4 pt-4 border-t border-[#282828] flex flex-wrap items-center gap-2">
+          <span className="text-xs text-[#90908F] font-medium">Data Sources:</span>
           {model.sources.map((src, idx) => (
             <a
               key={idx}
               href={src}
               target="_blank"
               rel="noreferrer"
-              className="text-[11px] text-emerald-400/90 hover:text-emerald-300 bg-emerald-500/10 hover:bg-emerald-500/20 px-2.5 py-1 rounded-md border border-emerald-500/20 transition-all truncate max-w-xs"
+              className="text-xs font-mono text-[#E1E1E0] bg-[#242426] hover:border-[#D97757] px-2.5 py-1 rounded-md border border-[#333333] transition-all flex items-center gap-1 truncate max-w-xs"
             >
-              {src.replace(/^https?:\/\//, "")}
+              <span className="truncate">{src.replace(/^https?:\/\//, "")}</span>
+              <ExternalLink size={10} className="text-[#90908F] shrink-0" />
             </a>
           ))}
         </div>
