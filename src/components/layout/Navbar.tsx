@@ -2,7 +2,7 @@
 
 import { useState, useMemo, useEffect, useRef } from "react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import Fuse from "fuse.js";
 import modelIndexData from "@/lib/search-index.json";
 import ModelverseLogo from "@/components/ui/ModelverseLogo";
@@ -12,9 +12,12 @@ export default function Navbar({ theme = "dark" }: { theme?: "light" | "dark" })
   const [searchQuery, setSearchQuery] = useState("");
   const [searchResults, setSearchResults] = useState<Array<{ id: string; name: string; slug: string; developer: string; type: string }>>([]);
   const [searchFocused, setSearchFocused] = useState(false);
+  const [selectedIndex, setSelectedIndex] = useState<number>(-1);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
   const searchInputRef = useRef<HTMLInputElement>(null);
   const pathname = usePathname();
+  const router = useRouter();
 
   // Register global Cmd+K / Ctrl+K keyboard shortcut
   useEffect(() => {
@@ -29,6 +32,7 @@ export default function Navbar({ theme = "dark" }: { theme?: "light" | "dark" })
       } else if (e.key === "Escape") {
         searchInputRef.current?.blur();
         setSearchFocused(false);
+        setSelectedIndex(-1);
       }
     };
 
@@ -62,6 +66,7 @@ export default function Navbar({ theme = "dark" }: { theme?: "light" | "dark" })
 
   const handleSearch = (query: string) => {
     setSearchQuery(query);
+    setSelectedIndex(-1);
     if (!query.trim()) {
       setSearchResults([]);
     } else {
@@ -73,6 +78,42 @@ export default function Navbar({ theme = "dark" }: { theme?: "light" | "dark" })
   const clearSearch = () => {
     setSearchQuery("");
     setSearchResults([]);
+    setSelectedIndex(-1);
+  };
+
+  // Input Keyboard Navigation Handlers (Enter, ArrowUp, ArrowDown, Escape)
+  const handleInputKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (!searchFocused || searchResults.length === 0) {
+      if (e.key === "Enter" && searchQuery.trim()) {
+        e.preventDefault();
+        router.push(`/models?q=${encodeURIComponent(searchQuery)}`);
+        setSearchFocused(false);
+      }
+      return;
+    }
+
+    if (e.key === "ArrowDown") {
+      e.preventDefault();
+      setSelectedIndex((prev) => (prev + 1 < searchResults.length ? prev + 1 : 0));
+    } else if (e.key === "ArrowUp") {
+      e.preventDefault();
+      setSelectedIndex((prev) => (prev > 0 ? prev - 1 : searchResults.length - 1));
+    } else if (e.key === "Enter") {
+      e.preventDefault();
+      if (selectedIndex >= 0 && searchResults[selectedIndex]) {
+        router.push(`/models/${searchResults[selectedIndex].slug}`);
+      } else if (searchResults.length > 0) {
+        router.push(`/models/${searchResults[0].slug}`);
+      } else {
+        router.push(`/models?q=${encodeURIComponent(searchQuery)}`);
+      }
+      setSearchFocused(false);
+      setSelectedIndex(-1);
+    } else if (e.key === "Escape") {
+      setSearchFocused(false);
+      setSelectedIndex(-1);
+      searchInputRef.current?.blur();
+    }
   };
 
   return (
@@ -123,6 +164,7 @@ export default function Navbar({ theme = "dark" }: { theme?: "light" | "dark" })
               placeholder="Search docs & models..."
               value={searchQuery}
               onChange={(e) => handleSearch(e.target.value)}
+              onKeyDown={handleInputKeyDown}
               onFocus={() => setSearchFocused(true)}
               onBlur={() => setTimeout(() => setSearchFocused(false), 200)}
               className="bg-transparent text-xs focus:outline-none w-full font-sans text-white placeholder:text-gray-500"
@@ -141,14 +183,19 @@ export default function Navbar({ theme = "dark" }: { theme?: "light" | "dark" })
             )}
           </div>
 
-          {/* Search Dropdown Results */}
+          {/* Search Dropdown Results with Keyboard Highlight */}
           {searchFocused && searchQuery && (
             <div className="absolute top-full right-0 mt-2 w-80 bg-[#1C1C1E] border border-[#2E2E2E] rounded-xl p-2 shadow-2xl z-50 flex flex-col text-left">
-              {searchResults.map((model) => (
+              {searchResults.map((model, index) => (
                 <Link
                   key={model.id}
                   href={`/models/${model.slug}`}
-                  className="flex items-center justify-between p-2.5 rounded-lg hover:bg-[#28282A] transition-colors"
+                  onMouseEnter={() => setSelectedIndex(index)}
+                  className={`flex items-center justify-between p-2.5 rounded-lg transition-colors ${
+                    index === selectedIndex
+                      ? "bg-[#28282A] text-white border-l-2 border-[#DA7756]"
+                      : "hover:bg-[#28282A]"
+                  }`}
                 >
                   <div className="min-w-0 pr-2">
                     <p className="text-xs font-medium text-white truncate">{model.name}</p>
@@ -198,6 +245,12 @@ export default function Navbar({ theme = "dark" }: { theme?: "light" | "dark" })
               placeholder="Search..."
               value={searchQuery}
               onChange={(e) => handleSearch(e.target.value)}
+              onKeyDown={(e) => {
+                if (e.key === "Enter" && searchQuery.trim()) {
+                  router.push(`/models?q=${encodeURIComponent(searchQuery)}`);
+                  setMobileMenuOpen(false);
+                }
+              }}
               className="bg-transparent text-sm focus:outline-none w-full text-white placeholder:text-gray-500"
             />
           </div>
