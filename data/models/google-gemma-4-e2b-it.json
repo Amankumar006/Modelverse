@@ -17,14 +17,19 @@
     "self-hostable",
     "api-only"
   ],
-  "license": "Other/Custom",
-  "parameters": "undisclosed",
+  "license": "apache-2.0",
+  "parameters": "5.1B",
   "contextWindow": "131K tokens",
   "description": "Open Gemma instruction model for efficient chat and self-hosted deployments",
+  "descriptionDraft": "Gemma 4 E2B IT is a any-to-any model from Google DeepMind hosted on Hugging Face (google/gemma-4-E2B-it).",
   "keyFeatures": [
     "Max Output: 8K tokens",
     "Native reasoning capability",
     "Tool / function calling support"
+  ],
+  "keyFeaturesDraft": [
+    "Pipeline: any-to-any",
+    "HF Tags: transformers, safetensors, gemma4, image-text-to-text"
   ],
   "benchmarks": [],
   "family": "gemma",
@@ -58,9 +63,11 @@
     "open-weights"
   ],
   "sources": [
-    "https://github.com/anomalyco/models.dev"
+    "https://github.com/anomalyco/models.dev",
+    "https://huggingface.co/api/models/google/gemma-4-E2B-it"
   ],
   "verified": false,
+  "needsReview": true,
   "featured": false,
   "boost": 1,
   "curatorNotes": "Skeleton entry imported from models.dev backfill (2026-07-26). Needs manual enrichment and primary-source verification."

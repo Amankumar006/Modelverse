@@ -16,14 +16,19 @@
     "self-hostable",
     "api-only"
   ],
-  "license": "Other/Custom",
-  "parameters": "undisclosed",
+  "license": "apache-2.0",
+  "parameters": "32.7B",
   "contextWindow": "262K tokens",
   "description": "Largest Gemma 4 instruction model for open, self-hosted chat and reasoning",
+  "descriptionDraft": "Gemma 4 31B IT is a image-text-to-text model from Google DeepMind hosted on Hugging Face (google/gemma-4-31B-it).",
   "keyFeatures": [
     "Max Output: 33K tokens",
     "Native reasoning capability",
     "Tool / function calling support"
+  ],
+  "keyFeaturesDraft": [
+    "Pipeline: image-text-to-text",
+    "HF Tags: transformers, safetensors, gemma4, image-text-to-text"
   ],
   "benchmarks": [],
   "family": "gemma",
@@ -52,9 +57,11 @@
     "open-weights"
   ],
   "sources": [
-    "https://github.com/anomalyco/models.dev"
+    "https://github.com/anomalyco/models.dev",
+    "https://huggingface.co/api/models/google/gemma-4-31B-it"
   ],
   "verified": false,
+  "needsReview": true,
   "featured": false,
   "boost": 1,
   "curatorNotes": "Skeleton entry imported from models.dev backfill (2026-07-26). Needs manual enrichment and primary-source verification."
