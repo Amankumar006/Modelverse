@@ -1,0 +1,85 @@
+{
+  "id": "minimax-minimax-m2.5",
+  "name": "MiniMax-M2.5",
+  "slug": "minimax-minimax-m2.5",
+  "developer": "MiniMax",
+  "releaseDate": "2026-02-12",
+  "updatedAt": "2026-07-26",
+  "type": "open-weights",
+  "status": "active",
+  "modality": [
+    "text"
+  ],
+  "primaryTask": "chat-reasoning",
+  "deployment": [
+    "self-hostable",
+    "api-only"
+  ],
+  "license": "Other/Custom",
+  "parameters": "undisclosed",
+  "contextWindow": "205K tokens",
+  "description": "Prior MiniMax coding model for agent workflows, office edits, and automation",
+  "keyFeatures": [
+    "Max Output: 131K tokens",
+    "Native reasoning capability",
+    "Tool / function calling support"
+  ],
+  "benchmarks": [
+    {
+      "name": "SWE-Bench Verified",
+      "score": "75.8%",
+      "verified": false
+    },
+    {
+      "name": "SWE-Atlas Codebase QnA",
+      "score": "10.3 (score)",
+      "verified": false
+    },
+    {
+      "name": "SWE-Atlas Refactoring",
+      "score": "19.52 (score)",
+      "verified": false
+    },
+    {
+      "name": "SWE-Atlas Test Writing",
+      "score": "18.6 (score)",
+      "verified": false
+    }
+  ],
+  "family": "minimax",
+  "previousVersion": null,
+  "pricing": [
+    {
+      "unit": "1M input tokens",
+      "amount": 0,
+      "currency": "USD"
+    },
+    {
+      "unit": "1M output tokens",
+      "amount": 0,
+      "currency": "USD"
+    },
+    {
+      "unit": "1M cache read tokens",
+      "amount": 0,
+      "currency": "USD"
+    }
+  ],
+  "pricingLastVerified": "2026-07-26",
+  "links": {
+    "Hugging Face": "https://huggingface.co/MiniMaxAI/MiniMax-M2.5"
+  },
+  "logo": "/logos/minimax.svg",
+  "tags": [
+    "reasoning",
+    "tool-calling",
+    "open-weights"
+  ],
+  "sources": [
+    "https://github.com/anomalyco/models.dev"
+  ],
+  "verified": false,
+  "featured": false,
+  "boost": 1,
+  "curatorNotes": "Skeleton entry imported from models.dev backfill (2026-07-26). Needs manual enrichment and primary-source verification."
+}
