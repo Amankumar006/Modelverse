@@ -45,3 +45,7 @@ src/lib/search-index.json
 src/lib/models-archive.json
 src/lib/news-archive.json
 src/lib/news-index.json
+
+# Import cache & temporary logs
+scripts/.import-cache/
+*.log
