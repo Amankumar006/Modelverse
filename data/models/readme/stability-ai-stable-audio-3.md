@@ -1,37 +1,48 @@
 # Stable Audio 3
 
-## Model Overview
-**Stable Audio 3** is a **undisclosed-parameter** model developed by **Stability AI**.
-Released on **2026-07-15**.
+## 📌 Model Overview
+
+Stable Audio 3 is a model developed by Stability AI, released on 2026-07-15. It is engineered for speech recognition, audio synthesis, and voice interaction with a 128K tokens context window.
+
+**Stable Audio 3** is a **Research Preview** model developed by **Stability AI**, released on **2026-07-15**. It is engineered primarily for **Audio Speech** workloads. Featuring a **128K tokens** context window and **Undisclosed** parameter count, it offers robust performance for enterprise integration, developers, and researchers.
 
 ---
 
-## 📊 Quick Specs
+## ✨ Key Features & Capabilities
 
-| Specification | Value |
+| Feature | Description |
 |:---|:---|
-| **Parameters** | undisclosed |
-| **Task** | audio-speech |
+| **Context Window** | 128K tokens capacity for extended prompts and multi-turn workflows |
+| **Primary Task** | Optimized for Audio Speech |
+| **Deployment** | self-hostable |
 | **Modality** | text, audio |
-| **License** | Other/Custom |
-| **Type** | research-preview |
+| **Capability** | 128K tokens context window |
+| **Capability** | API-accessible managed endpoint |
+| **Capability** | Tool & function calling support |
 
 ---
 
-## ✨ Key Features
+## ⚙️ Technical Specifications
 
-
-
----
-
-## 🔗 Resources
-
-
-
-
-
+| Specification | Details |
+|:---|:---|
+| **Developer / Lab** | Stability AI |
+| **Release Date** | 2026-07-15 |
+| **Model Type** | Research Preview |
+| **Parameters** | Undisclosed |
+| **Context Window** | 128K tokens |
+| **License** | proprietary |
 
 ---
 
-## 📜 License & Access
-**Other/Custom** — See repository for specific license details.
+## 🔗 Resources & Links
+
+| Resource | Link |
+|:---|:---|
+| **Website** | [https://stability.ai/news-updates/meeting-stable-audio-3](https://stability.ai/news-updates/meeting-stable-audio-3) |
+
+---
+
+## 📜 License & Usage
+
+This model is governed by the **proprietary** license. Please check official developer guidelines before commercial deployment.

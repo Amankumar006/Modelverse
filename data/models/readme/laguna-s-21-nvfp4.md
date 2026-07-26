@@ -1,47 +1,49 @@
 # Laguna-S-2.1-NVFP4
 
-## Model Overview
-**Laguna-S-2.1-NVFP4** is a **67.9B-parameter** Mixture-of-Experts text generation model developed by **poolside**. Built on the `LagunaForCausalLM` architecture. Released on **2026-07-02**.
+## 📌 Model Overview
+
+Laguna-S-2.1-NVFP4 is a 67.9B-parameter Mixture-of-Experts (MoE) text generation model developed by poolside. Built on the LagunaForCausalLM architecture using vllm. Released on 2026-07-02 with 130 likes and 89,186 downloads on Hugging Face.
+
+**Laguna-S-2.1-NVFP4** is a **Open Weights** model developed by **poolside**, released on **2026-07-02**. It is engineered primarily for **Chat Reasoning** workloads. Featuring a **unknown** context window and **67.9B** parameter count, it offers robust performance for enterprise integration, developers, and researchers.
 
 ---
 
-## 📊 Quick Specs
+## ✨ Key Features & Capabilities
 
-| Specification | Value |
+| Feature | Description |
 |:---|:---|
-| **Parameters** | 67.9B |
-| **Architecture** | LagunaForCausalLM |
-| **Task** | text generation |
+| **Context Window** | unknown capacity for extended prompts and multi-turn workflows |
+| **Primary Task** | Optimized for Chat Reasoning |
+| **Deployment** | self-hostable |
 | **Modality** | text |
+| **Capability** | 67.9B parameters with sparse MoE architecture for efficient inference |
+| **Capability** | Built on LagunaForCausalLM architecture (vllm) |
+| **Primary task** | Primary task: text generation (text modality) |
+| **Capability** | Open-weights under OPENMDW-1.1 license — self-hostable and fine-tunable |
+
+---
+
+## ⚙️ Technical Specifications
+
+| Specification | Details |
+|:---|:---|
+| **Developer / Lab** | poolside |
+| **Release Date** | 2026-07-02 |
+| **Model Type** | Open Weights |
+| **Parameters** | 67.9B |
+| **Context Window** | unknown |
 | **License** | OPENMDW-1.1 |
-| **Framework** | vllm |
-| **MoE** | Yes |
-| **Languages** | — |
 
 ---
 
-## ✨ Key Features
+## 🔗 Resources & Links
 
-- 67.9B parameters with sparse MoE architecture for efficient inference
-- Built on LagunaForCausalLM architecture (vllm)
-- Primary task: text generation (text modality)
-- Open-weights under OPENMDW-1.1 license — self-hostable and fine-tunable
-
----
-
-## 📈 Community Adoption
-
-- **130 likes** on Hugging Face
-- **89,186 downloads** on Hugging Face
+| Resource | Link |
+|:---|:---|
+| **huggingface** | [https://huggingface.co/poolside/Laguna-S-2.1-NVFP4](https://huggingface.co/poolside/Laguna-S-2.1-NVFP4) |
 
 ---
 
-## 🔗 Resources
+## 📜 License & Usage
 
-- **Hugging Face Hub**: [Laguna-S-2.1-NVFP4 on Hugging Face](https://huggingface.co/poolside/Laguna-S-2.1-NVFP4)
-
-
----
-
-## 📜 License & Access
-**OPENMDW-1.1** — Open-weights model available for download, fine-tuning, and self-hosted deployment.
+This model is governed by the **OPENMDW-1.1** license. Please check official developer guidelines before commercial deployment.

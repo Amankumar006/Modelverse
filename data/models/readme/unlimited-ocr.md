@@ -1,49 +1,52 @@
 # Unlimited-OCR
 
-## Model Overview
-**Unlimited-OCR** is a **3.3B-parameter** Mixture-of-Experts image text to text model developed by **baidu**. Built on the `UnlimitedOCRForCausalLM` architecture. Supports multilingual. Released on **2026-06-19**.
+## 📌 Model Overview
+
+Unlimited-OCR is a 3.3B-parameter Mixture-of-Experts (MoE) image text to text model developed by baidu. Built on the UnlimitedOCRForCausalLM architecture using transformers. Supports multilingual language(s). Released on 2026-06-19 with 3,029 likes and 2,500,391 downloads on Hugging Face.
+
+**Unlimited-OCR** is a **Open Weights** model developed by **baidu**, released on **2026-06-19**. It is engineered primarily for **Multimodal General** workloads. Featuring a **unknown** context window and **3.3B** parameter count, it offers robust performance for enterprise integration, developers, and researchers.
 
 ---
 
-## 📊 Quick Specs
+## ✨ Key Features & Capabilities
 
-| Specification | Value |
+| Feature | Description |
 |:---|:---|
-| **Parameters** | 3.3B |
-| **Architecture** | UnlimitedOCRForCausalLM |
-| **Task** | image text to text |
+| **Context Window** | unknown capacity for extended prompts and multi-turn workflows |
+| **Primary Task** | Optimized for Multimodal General |
+| **Deployment** | self-hostable |
 | **Modality** | text, image |
+| **Capability** | 3.3B parameters with sparse MoE architecture for efficient inference |
+| **Capability** | Built on UnlimitedOCRForCausalLM architecture (transformers) |
+| **Primary task** | Primary task: image text to text (text, image modality) |
+| **Language support** | Language support: multilingual |
+| **Capability** | Open-weights under MIT license — self-hostable and fine-tunable |
+| **High adoption** | High adoption: 2,500,391 downloads on Hugging Face |
+
+---
+
+## ⚙️ Technical Specifications
+
+| Specification | Details |
+|:---|:---|
+| **Developer / Lab** | baidu |
+| **Release Date** | 2026-06-19 |
+| **Model Type** | Open Weights |
+| **Parameters** | 3.3B |
+| **Context Window** | unknown |
 | **License** | MIT |
-| **Framework** | transformers |
-| **MoE** | Yes |
-| **Languages** | multilingual |
 
 ---
 
-## ✨ Key Features
+## 🔗 Resources & Links
 
-- 3.3B parameters with sparse MoE architecture for efficient inference
-- Built on UnlimitedOCRForCausalLM architecture (transformers)
-- Primary task: image text to text (text, image modality)
-- Language support: multilingual
-- Open-weights under MIT license — self-hostable and fine-tunable
-- High adoption: 2,500,391 downloads on Hugging Face
+| Resource | Link |
+|:---|:---|
+| **huggingface** | [https://huggingface.co/baidu/Unlimited-OCR](https://huggingface.co/baidu/Unlimited-OCR) |
+| **paper** | [https://arxiv.org/abs/2606.23050](https://arxiv.org/abs/2606.23050) |
 
 ---
 
-## 📈 Community Adoption
+## 📜 License & Usage
 
-- **3,029 likes** on Hugging Face
-- **2,500,391 downloads** on Hugging Face
-
----
-
-## 🔗 Resources
-
-- **Hugging Face Hub**: [Unlimited-OCR on Hugging Face](https://huggingface.co/baidu/Unlimited-OCR)
-- **Paper**: [arXiv](https://arxiv.org/abs/2606.23050)
-
----
-
-## 📜 License & Access
-**MIT** — Open-weights model available for download, fine-tuning, and self-hosted deployment.
+This model is governed by the **MIT** license. Please check official developer guidelines before commercial deployment.
