@@ -1,0 +1,70 @@
+{
+  "id": "mistral-mistral-medium-2505",
+  "name": "Mistral Medium 3",
+  "slug": "mistral-mistral-medium-2505",
+  "developer": "Mistral AI",
+  "releaseDate": "2025-05-07",
+  "updatedAt": "2026-07-26",
+  "type": "api-only",
+  "status": "active",
+  "modality": [
+    "text",
+    "image"
+  ],
+  "primaryTask": "multimodal-general",
+  "deployment": [
+    "api-only"
+  ],
+  "license": "Proprietary",
+  "parameters": "undisclosed",
+  "contextWindow": "131K tokens",
+  "description": "Mistral model for multilingual chat, reasoning, and tool-assisted workflows",
+  "keyFeatures": [
+    "Max Output: 131K tokens",
+    "Tool / function calling support"
+  ],
+  "benchmarks": [
+    {
+      "name": "Artificial Analysis Coding Index",
+      "score": "13.6 (index)",
+      "verified": false
+    },
+    {
+      "name": "SciCode",
+      "score": "33.1%",
+      "verified": false
+    },
+    {
+      "name": "Terminal-Bench Hard",
+      "score": "3.8%",
+      "verified": false
+    }
+  ],
+  "family": "mistral-medium",
+  "previousVersion": null,
+  "pricing": [
+    {
+      "unit": "1M input tokens",
+      "amount": 0.4,
+      "currency": "USD"
+    },
+    {
+      "unit": "1M output tokens",
+      "amount": 2,
+      "currency": "USD"
+    }
+  ],
+  "pricingLastVerified": "2026-07-26",
+  "links": {},
+  "logo": "/logos/mistral.svg",
+  "tags": [
+    "tool-calling"
+  ],
+  "sources": [
+    "https://github.com/anomalyco/models.dev"
+  ],
+  "verified": false,
+  "featured": false,
+  "boost": 1,
+  "curatorNotes": "Skeleton entry imported from models.dev backfill (2026-07-26). Needs manual enrichment and primary-source verification."
+}

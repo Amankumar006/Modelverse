@@ -1,0 +1,55 @@
+{
+  "id": "mistral-magistral-medium-latest",
+  "name": "Magistral Medium (latest)",
+  "slug": "mistral-magistral-medium-latest",
+  "developer": "Mistral AI",
+  "releaseDate": "2025-03-17",
+  "updatedAt": "2026-07-26",
+  "type": "api-only",
+  "status": "active",
+  "modality": [
+    "text"
+  ],
+  "primaryTask": "chat-reasoning",
+  "deployment": [
+    "api-only"
+  ],
+  "license": "Proprietary",
+  "parameters": "undisclosed",
+  "contextWindow": "128K tokens",
+  "description": "Mistral reasoning model for transparent analysis, math, and complex decisions",
+  "keyFeatures": [
+    "Max Output: 16K tokens",
+    "Native reasoning capability",
+    "Tool / function calling support"
+  ],
+  "benchmarks": [],
+  "family": "magistral-medium",
+  "previousVersion": null,
+  "pricing": [
+    {
+      "unit": "1M input tokens",
+      "amount": 2,
+      "currency": "USD"
+    },
+    {
+      "unit": "1M output tokens",
+      "amount": 5,
+      "currency": "USD"
+    }
+  ],
+  "pricingLastVerified": "2026-07-26",
+  "links": {},
+  "logo": "/logos/mistral.svg",
+  "tags": [
+    "reasoning",
+    "tool-calling"
+  ],
+  "sources": [
+    "https://github.com/anomalyco/models.dev"
+  ],
+  "verified": false,
+  "featured": false,
+  "boost": 1,
+  "curatorNotes": "Skeleton entry imported from models.dev backfill (2026-07-26). Needs manual enrichment and primary-source verification."
+}

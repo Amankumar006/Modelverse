@@ -1,0 +1,58 @@
+{
+  "id": "mistral-pixtral-12b",
+  "name": "Pixtral 12B",
+  "slug": "mistral-pixtral-12b",
+  "developer": "Mistral AI",
+  "releaseDate": "2024-09-01",
+  "updatedAt": "2026-07-26",
+  "type": "open-weights",
+  "status": "active",
+  "modality": [
+    "text",
+    "image"
+  ],
+  "primaryTask": "multimodal-general",
+  "deployment": [
+    "self-hostable",
+    "api-only"
+  ],
+  "license": "Other/Custom",
+  "parameters": "undisclosed",
+  "contextWindow": "128K tokens",
+  "description": "Mistral vision-language model for image understanding and multimodal chat",
+  "keyFeatures": [
+    "Max Output: 128K tokens",
+    "Tool / function calling support"
+  ],
+  "benchmarks": [],
+  "family": "pixtral",
+  "previousVersion": null,
+  "pricing": [
+    {
+      "unit": "1M input tokens",
+      "amount": 0.15,
+      "currency": "USD"
+    },
+    {
+      "unit": "1M output tokens",
+      "amount": 0.15,
+      "currency": "USD"
+    }
+  ],
+  "pricingLastVerified": "2026-07-26",
+  "links": {
+    "Hugging Face": "https://huggingface.co/mistralai/Pixtral-12B-2409"
+  },
+  "logo": "/logos/mistral.svg",
+  "tags": [
+    "tool-calling",
+    "open-weights"
+  ],
+  "sources": [
+    "https://github.com/anomalyco/models.dev"
+  ],
+  "verified": false,
+  "featured": false,
+  "boost": 1,
+  "curatorNotes": "Skeleton entry imported from models.dev backfill (2026-07-26). Needs manual enrichment and primary-source verification."
+}

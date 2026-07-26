@@ -1,0 +1,58 @@
+{
+  "id": "mistral-mistral-large-latest",
+  "name": "Mistral Large (latest)",
+  "slug": "mistral-mistral-large-latest",
+  "developer": "Mistral AI",
+  "releaseDate": "2024-11-01",
+  "updatedAt": "2026-07-26",
+  "type": "open-weights",
+  "status": "active",
+  "modality": [
+    "text",
+    "image"
+  ],
+  "primaryTask": "multimodal-general",
+  "deployment": [
+    "self-hostable",
+    "api-only"
+  ],
+  "license": "Other/Custom",
+  "parameters": "undisclosed",
+  "contextWindow": "262K tokens",
+  "description": "Flagship Mistral model for advanced reasoning, coding, and multilingual work",
+  "keyFeatures": [
+    "Max Output: 262K tokens",
+    "Tool / function calling support"
+  ],
+  "benchmarks": [],
+  "family": "mistral-large",
+  "previousVersion": null,
+  "pricing": [
+    {
+      "unit": "1M input tokens",
+      "amount": 0.5,
+      "currency": "USD"
+    },
+    {
+      "unit": "1M output tokens",
+      "amount": 1.5,
+      "currency": "USD"
+    }
+  ],
+  "pricingLastVerified": "2026-07-26",
+  "links": {
+    "Hugging Face": "https://huggingface.co/mistralai/Mistral-Large-3-675B-Instruct-2512"
+  },
+  "logo": "/logos/mistral.svg",
+  "tags": [
+    "tool-calling",
+    "open-weights"
+  ],
+  "sources": [
+    "https://github.com/anomalyco/models.dev"
+  ],
+  "verified": false,
+  "featured": false,
+  "boost": 1,
+  "curatorNotes": "Skeleton entry imported from models.dev backfill (2026-07-26). Needs manual enrichment and primary-source verification."
+}

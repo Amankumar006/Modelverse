@@ -1,0 +1,63 @@
+{
+  "id": "mistral-devstral-small-2507",
+  "name": "Devstral Small",
+  "slug": "mistral-devstral-small-2507",
+  "developer": "Mistral AI",
+  "releaseDate": "2025-07-10",
+  "updatedAt": "2026-07-26",
+  "type": "open-weights",
+  "status": "active",
+  "modality": [
+    "text"
+  ],
+  "primaryTask": "chat-reasoning",
+  "deployment": [
+    "self-hostable",
+    "api-only"
+  ],
+  "license": "Other/Custom",
+  "parameters": "undisclosed",
+  "contextWindow": "128K tokens",
+  "description": "Mistral coding agent model for repository tasks and software engineering workflows",
+  "keyFeatures": [
+    "Max Output: 128K tokens",
+    "Tool / function calling support"
+  ],
+  "benchmarks": [
+    {
+      "name": "SWE-Bench Verified",
+      "score": "53.6%",
+      "verified": false
+    }
+  ],
+  "family": "devstral",
+  "previousVersion": null,
+  "pricing": [
+    {
+      "unit": "1M input tokens",
+      "amount": 0.1,
+      "currency": "USD"
+    },
+    {
+      "unit": "1M output tokens",
+      "amount": 0.3,
+      "currency": "USD"
+    }
+  ],
+  "pricingLastVerified": "2026-07-26",
+  "links": {
+    "Hugging Face": "https://huggingface.co/mistralai/Devstral-Small-2507"
+  },
+  "logo": "/logos/mistral.svg",
+  "tags": [
+    "tool-calling",
+    "open-weights"
+  ],
+  "sources": [
+    "https://github.com/anomalyco/models.dev"
+  ],
+  "verified": false,
+  "featured": false,
+  "boost": 1,
+  "curatorNotes": "Skeleton entry imported from models.dev backfill (2026-07-26). Needs manual enrichment and primary-source verification."
+}

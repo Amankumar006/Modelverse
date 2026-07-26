@@ -1,0 +1,57 @@
+{
+  "id": "mistral-devstral-medium-latest",
+  "name": "Devstral 2 (latest)",
+  "slug": "mistral-devstral-medium-latest",
+  "developer": "Mistral AI",
+  "releaseDate": "2025-12-02",
+  "updatedAt": "2026-07-26",
+  "type": "open-weights",
+  "status": "active",
+  "modality": [
+    "text"
+  ],
+  "primaryTask": "chat-reasoning",
+  "deployment": [
+    "self-hostable",
+    "api-only"
+  ],
+  "license": "Other/Custom",
+  "parameters": "undisclosed",
+  "contextWindow": "262K tokens",
+  "description": "Mistral coding agent model for repository tasks and software engineering workflows",
+  "keyFeatures": [
+    "Max Output: 262K tokens",
+    "Tool / function calling support"
+  ],
+  "benchmarks": [],
+  "family": "devstral",
+  "previousVersion": null,
+  "pricing": [
+    {
+      "unit": "1M input tokens",
+      "amount": 0.4,
+      "currency": "USD"
+    },
+    {
+      "unit": "1M output tokens",
+      "amount": 2,
+      "currency": "USD"
+    }
+  ],
+  "pricingLastVerified": "2026-07-26",
+  "links": {
+    "Hugging Face": "https://huggingface.co/mistralai/Devstral-2-123B-Instruct-2512"
+  },
+  "logo": "/logos/mistral.svg",
+  "tags": [
+    "tool-calling",
+    "open-weights"
+  ],
+  "sources": [
+    "https://github.com/anomalyco/models.dev"
+  ],
+  "verified": false,
+  "featured": false,
+  "boost": 1,
+  "curatorNotes": "Skeleton entry imported from models.dev backfill (2026-07-26). Needs manual enrichment and primary-source verification."
+}
