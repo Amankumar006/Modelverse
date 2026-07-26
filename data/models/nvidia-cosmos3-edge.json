@@ -1,0 +1,49 @@
+{
+  "id": "nvidia-cosmos3-edge",
+  "name": "Cosmos3-Edge",
+  "slug": "cosmos3-edge",
+  "developer": "nvidia",
+  "releaseDate": "2026-07-01",
+  "updatedAt": "2026-07-26",
+  "type": "open-weights",
+  "status": "active",
+  "modality": [
+    "text"
+  ],
+  "primaryTask": "chat-reasoning",
+  "deployment": [
+    "self-hostable"
+  ],
+  "license": "OTHER",
+  "parameters": "3.9B",
+  "contextWindow": "unknown",
+  "description": "Cosmos3-Edge is a 3.9B-parameter text generation model developed by nvidia. Built on the Cosmos3EdgeForConditionalGeneration architecture using cosmos. Released on 2026-07-01 with 122 likes and 31,759 downloads on Hugging Face.",
+  "keyFeatures": [
+    "3.9B parameters",
+    "Built on Cosmos3EdgeForConditionalGeneration architecture (cosmos)",
+    "Primary task: text generation (text modality)",
+    "Open-weights under OTHER license — self-hostable and fine-tunable"
+  ],
+  "benchmarks": [],
+  "family": null,
+  "previousVersion": null,
+  "links": {
+    "huggingface": "https://huggingface.co/nvidia/Cosmos3-Edge",
+    "paper": "https://arxiv.org/abs/2405.14867"
+  },
+  "logo": null,
+  "tags": [
+    "open-weights",
+    "trending",
+    "huggingface",
+    "cosmos",
+    "text-generation"
+  ],
+  "sources": [
+    "https://huggingface.co/nvidia/Cosmos3-Edge"
+  ],
+  "verified": true,
+  "featured": false,
+  "boost": 1,
+  "curatorNotes": "Auto-ingested from HuggingFace Trending on 2026-07-26. Architecture: Cosmos3EdgeForConditionalGeneration. Params: 3.9B. License: OTHER."
+}
