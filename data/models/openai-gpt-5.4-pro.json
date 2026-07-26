@@ -1,0 +1,112 @@
+{
+  "id": "openai-gpt-5.4-pro",
+  "name": "GPT-5.4 Pro",
+  "slug": "openai-gpt-5.4-pro",
+  "developer": "OpenAI",
+  "releaseDate": "2026-03-05",
+  "updatedAt": "2026-07-26",
+  "type": "api-only",
+  "status": "active",
+  "modality": [
+    "text",
+    "image"
+  ],
+  "primaryTask": "chat-reasoning",
+  "deployment": [
+    "api-only"
+  ],
+  "license": "Proprietary",
+  "parameters": "undisclosed",
+  "contextWindow": "1.1M tokens",
+  "description": "More exact GPT-5.4 tier for demanding professional reasoning and agent tasks",
+  "keyFeatures": [
+    "Max Output: 128K tokens",
+    "Native reasoning capability",
+    "Tool / function calling support"
+  ],
+  "benchmarks": [
+    {
+      "name": "GPQA Diamond",
+      "score": "94.4 (accuracy)",
+      "verified": false
+    },
+    {
+      "name": "Humanity's Last Exam",
+      "score": "42.7 (accuracy)",
+      "verified": false
+    },
+    {
+      "name": "Humanity's Last Exam",
+      "score": "58.7 (accuracy)",
+      "verified": false
+    },
+    {
+      "name": "BrowseComp",
+      "score": "89.3 (accuracy)",
+      "verified": false
+    },
+    {
+      "name": "GDPval",
+      "score": "82 (wins or ties)",
+      "verified": false
+    },
+    {
+      "name": "FrontierMath",
+      "score": "50 (accuracy)",
+      "verified": false
+    },
+    {
+      "name": "FrontierMath",
+      "score": "38 (accuracy)",
+      "verified": false
+    },
+    {
+      "name": "ARC-AGI-1",
+      "score": "94.5 (accuracy)",
+      "verified": false
+    },
+    {
+      "name": "ARC-AGI-2",
+      "score": "83.3 (accuracy)",
+      "verified": false
+    },
+    {
+      "name": "FinanceAgent",
+      "score": "61.5 (accuracy)",
+      "verified": false
+    },
+    {
+      "name": "GeneBench",
+      "score": "25.6 (accuracy)",
+      "verified": false
+    }
+  ],
+  "family": "gpt-pro",
+  "previousVersion": null,
+  "pricing": [
+    {
+      "unit": "1M input tokens",
+      "amount": 27,
+      "currency": "USD"
+    },
+    {
+      "unit": "1M output tokens",
+      "amount": 160,
+      "currency": "USD"
+    }
+  ],
+  "pricingLastVerified": "2026-07-26",
+  "links": {},
+  "logo": "/logos/openai.svg",
+  "tags": [
+    "reasoning",
+    "tool-calling"
+  ],
+  "sources": [
+    "https://github.com/anomalyco/models.dev"
+  ],
+  "verified": false,
+  "featured": false,
+  "boost": 1,
+  "curatorNotes": "Skeleton entry imported from models.dev backfill (2026-07-26). Needs manual enrichment and primary-source verification."
+}

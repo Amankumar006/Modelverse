@@ -1,0 +1,72 @@
+{
+  "id": "openai-gpt-4o-mini",
+  "name": "GPT-4o mini",
+  "slug": "openai-gpt-4o-mini",
+  "developer": "OpenAI",
+  "releaseDate": "2024-07-18",
+  "updatedAt": "2026-07-26",
+  "type": "api-only",
+  "status": "active",
+  "modality": [
+    "text",
+    "image",
+    "pdf"
+  ],
+  "primaryTask": "multimodal-general",
+  "deployment": [
+    "api-only"
+  ],
+  "license": "Proprietary",
+  "parameters": "undisclosed",
+  "contextWindow": "128K tokens",
+  "description": "Small omni GPT for cheap multimodal assistance and production-scale traffic",
+  "keyFeatures": [
+    "Max Output: 16K tokens",
+    "Tool / function calling support"
+  ],
+  "benchmarks": [
+    {
+      "name": "Aider Polyglot",
+      "score": "3.6%",
+      "verified": false
+    },
+    {
+      "name": "SciCode",
+      "score": "22.9%",
+      "verified": false
+    }
+  ],
+  "family": "gpt-mini",
+  "previousVersion": null,
+  "pricing": [
+    {
+      "unit": "1M input tokens",
+      "amount": 0.15,
+      "currency": "USD"
+    },
+    {
+      "unit": "1M output tokens",
+      "amount": 0.6,
+      "currency": "USD"
+    },
+    {
+      "unit": "1M cache read tokens",
+      "amount": 0.075,
+      "currency": "USD"
+    }
+  ],
+  "pricingLastVerified": "2026-07-26",
+  "links": {},
+  "logo": "/logos/openai.svg",
+  "tags": [
+    "tool-calling",
+    "structured-output"
+  ],
+  "sources": [
+    "https://github.com/anomalyco/models.dev"
+  ],
+  "verified": false,
+  "featured": false,
+  "boost": 1,
+  "curatorNotes": "Skeleton entry imported from models.dev backfill (2026-07-26). Needs manual enrichment and primary-source verification."
+}

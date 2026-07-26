@@ -1,0 +1,63 @@
+{
+  "id": "openai-o3-pro",
+  "name": "o3-pro",
+  "slug": "openai-o3-pro",
+  "developer": "OpenAI",
+  "releaseDate": "2025-06-10",
+  "updatedAt": "2026-07-26",
+  "type": "api-only",
+  "status": "active",
+  "modality": [
+    "text",
+    "image"
+  ],
+  "primaryTask": "chat-reasoning",
+  "deployment": [
+    "api-only"
+  ],
+  "license": "Proprietary",
+  "parameters": "undisclosed",
+  "contextWindow": "200K tokens",
+  "description": "High-effort o3 tier for difficult technical reasoning and careful answers",
+  "keyFeatures": [
+    "Max Output: 100K tokens",
+    "Native reasoning capability",
+    "Tool / function calling support"
+  ],
+  "benchmarks": [
+    {
+      "name": "Aider Polyglot",
+      "score": "84.9%",
+      "verified": false
+    }
+  ],
+  "family": "o-pro",
+  "previousVersion": null,
+  "pricing": [
+    {
+      "unit": "1M input tokens",
+      "amount": 18,
+      "currency": "USD"
+    },
+    {
+      "unit": "1M output tokens",
+      "amount": 72,
+      "currency": "USD"
+    }
+  ],
+  "pricingLastVerified": "2026-07-26",
+  "links": {},
+  "logo": "/logos/openai.svg",
+  "tags": [
+    "reasoning",
+    "tool-calling",
+    "structured-output"
+  ],
+  "sources": [
+    "https://github.com/anomalyco/models.dev"
+  ],
+  "verified": false,
+  "featured": false,
+  "boost": 1,
+  "curatorNotes": "Skeleton entry imported from models.dev backfill (2026-07-26). Needs manual enrichment and primary-source verification."
+}
