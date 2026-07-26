@@ -219,15 +219,13 @@ body {
 /* ── Markdown Table Custom Styling ─────────────────────── */
 .prose table {
   width: 100%;
-  border-collapse: separate;
-  border-spacing: 0;
-  margin-top: 1.75em;
-  margin-bottom: 1.75em;
-  border-radius: 0.75rem;
-  overflow-x: auto;
-  display: block;
-  border: 1px solid #243629;
-  background-color: #121A15;
+  min-width: 100%;
+  border-collapse: collapse;
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+  background-color: transparent;
+  border: none;
+  display: table;
 }
 
 .prose th {
