@@ -4,7 +4,7 @@
   "slug": "bonsai-27b-gguf",
   "developer": "prism-ml",
   "releaseDate": "2026-07-04",
-  "updatedAt": "2026-07-25",
+  "updatedAt": "2026-07-26",
   "type": "open-weights",
   "status": "active",
   "modality": [
@@ -15,7 +15,7 @@
     "self-hostable"
   ],
   "license": "APACHE-2.0",
-  "parameters": "undisclosed",
+  "parameters": "27B",
   "contextWindow": "unknown",
   "description": "Bonsai-27B-gguf is a undisclosed-parameter text generation model developed by prism-ml. Released on 2026-07-04 with 632 likes and 2,028,115 downloads on Hugging Face.",
   "keyFeatures": [
@@ -41,7 +41,8 @@
   "sources": [
     "https://huggingface.co/prism-ml/Bonsai-27B-gguf"
   ],
-  "verified": true,
+  "verified": false,
+  "needsReview": true,
   "featured": false,
   "boost": 1,
   "curatorNotes": "Auto-ingested from HuggingFace Trending on 2026-07-25. Architecture: unknown. Params: undisclosed. License: APACHE-2.0."

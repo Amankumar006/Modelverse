@@ -4,7 +4,7 @@
   "slug": "academic-research-flash-grpo",
   "developer": "Academic/Research",
   "releaseDate": "2026-05-20",
-  "updatedAt": "2026-07-22",
+  "updatedAt": "2026-07-26",
   "type": "research-preview",
   "status": "active",
   "modality": [
@@ -17,8 +17,9 @@
   ],
   "license": "Apache-2.0",
   "parameters": "1.3B-14B",
-  "contextWindow": "undisclosed",
+  "contextWindow": "128K tokens",
   "description": "Flash-GRPO is an efficient one-step policy optimization alignment framework for video diffusion models developed by Zhejiang University. It solves standard GRPO computational bottlenecks via Iso-Temporal Grouping and Temporal Gradient Rectification, achieving 6x training acceleration.",
+  "templatedDescription": false,
   "keyFeatures": [
     "One-Step Policy Optimization: Replaces full-trajectory sampling with single-timestep updates to drastically reduce GPU hours",
     "Iso-Temporal Grouping: Eliminates timestep-confounded variance by enforcing prompt-wise temporal consistency across candidate groups",
@@ -44,6 +45,7 @@
     }
   ],
   "family": null,
+  "institution": "Zhejiang University",
   "previousVersion": null,
   "links": {
     "website": "https://shredded-pork.github.io/Flash-GRPO.github.io/",
@@ -65,10 +67,9 @@
     "https://arxiv.org/abs/2605.15980",
     "https://github.com/Shredded-Pork/Flash-GRPO"
   ],
-  "verified": true,
+  "verified": false,
+  "needsReview": true,
   "featured": true,
   "boost": 1,
-  "curatorNotes": "Verified academic paper (ICML 2026 / arXiv:2605.15980) from Zhejiang University with official GitHub repository (Shredded-Pork/Flash-GRPO) and project page.",
-  "institution": "Zhejiang University",
-  "templatedDescription": false
+  "curatorNotes": "Verified academic paper (ICML 2026 / arXiv:2605.15980) from Zhejiang University with official GitHub repository (Shredded-Pork/Flash-GRPO) and project page."
 }

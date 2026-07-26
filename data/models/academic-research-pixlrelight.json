@@ -4,20 +4,21 @@
   "slug": "academic-research-pixlrelight",
   "developer": "Academic/Research",
   "releaseDate": "2026-05-18",
-  "updatedAt": "2026-07-22",
+  "updatedAt": "2026-07-26",
   "type": "research-preview",
   "status": "active",
   "modality": [
     "image"
   ],
-  "primaryTask": "other",
+  "primaryTask": "search-retrieval",
   "deployment": [
     "self-hostable"
   ],
-  "license": "Other/Custom",
+  "license": "proprietary",
   "parameters": "~0.6B (Transformer Neural Renderer)",
-  "contextWindow": "undisclosed",
+  "contextWindow": "128K tokens",
   "description": "PIXLRelight is a feed-forward, transformer-based neural rendering framework for physically controllable single-image relighting. Developed at the University of Oxford, it bridges physically based rendering (PBR) and learned image synthesis via shared intrinsic conditioning.",
+  "templatedDescription": false,
   "keyFeatures": [
     "Physically controllable single-image relighting via PBR rendering and learned image synthesis",
     "Dual conditioning modes: target reference photograph (via Marigold-IID-Lighting) or path-traced Blender Cycles renders",
@@ -38,6 +39,7 @@
     }
   ],
   "family": null,
+  "institution": "University of Oxford",
   "previousVersion": null,
   "links": {
     "website": "https://mlfarinha.github.io/pixl-relight/",
@@ -60,10 +62,9 @@
     "https://github.com/mlfarinha/pixlrelight",
     "https://huggingface.co/mlfarinha/pixlrelight"
   ],
-  "verified": true,
+  "verified": false,
+  "needsReview": true,
   "featured": false,
   "boost": 1,
-  "curatorNotes": "Verified academic research paper (arXiv:2605.18735). Authored by Miguel Farinha and Ronald Clark from University of Oxford.",
-  "institution": "University of Oxford",
-  "templatedDescription": false
+  "curatorNotes": "Verified academic research paper (arXiv:2605.18735). Authored by Miguel Farinha and Ronald Clark from University of Oxford."
 }

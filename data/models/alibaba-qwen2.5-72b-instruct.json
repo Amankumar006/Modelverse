@@ -4,7 +4,7 @@
   "slug": "qwen-2-5-72b-instruct",
   "developer": "Alibaba",
   "releaseDate": "2024-09-19",
-  "updatedAt": "2026-07-22",
+  "updatedAt": "2026-07-26",
   "type": "open-weights",
   "status": "active",
   "modality": [
@@ -15,10 +15,11 @@
     "self-hostable",
     "api-only"
   ],
-  "license": "Other/Custom",
+  "license": "Apache-2.0",
   "parameters": "72.7B",
   "contextWindow": "128K tokens",
   "description": "Qwen2.5-72B-Instruct is the flagship 72.7-billion parameter instruction-tuned language model in Alibaba's Qwen2.5 series. Pre-trained on 18 trillion tokens, it delivers massive improvements in instruction following, coding, mathematical reasoning, multilingual understanding, and structured data generation.",
+  "templatedDescription": false,
   "keyFeatures": [
     "Massive Pre-training Scale: 72.7 billion parameters trained on 18 trillion high-quality tokens",
     "Long Context Support: Native support for input contexts up to 131,072 (128K) tokens and generation up to 8,192 tokens",
@@ -49,6 +50,7 @@
     }
   ],
   "family": "Qwen",
+  "institution": "Alibaba Cloud / Qwen Team",
   "previousVersion": null,
   "links": {
     "website": "https://qwenlm.github.io/blog/qwen2.5/",
@@ -71,10 +73,9 @@
     "https://arxiv.org/abs/2412.15115",
     "https://github.com/QwenLM/Qwen2.5"
   ],
-  "verified": true,
+  "verified": false,
+  "needsReview": true,
   "featured": true,
   "boost": 1,
-  "curatorNotes": "Verified paper arXiv:2412.15115 and open-weights release from Alibaba Qwen Team.",
-  "institution": "Alibaba Cloud / Qwen Team",
-  "templatedDescription": false
+  "curatorNotes": "Verified paper arXiv:2412.15115 and open-weights release from Alibaba Qwen Team."
 }

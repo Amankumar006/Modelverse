@@ -4,19 +4,19 @@
   "slug": "unitree-g1",
   "developer": "Other",
   "releaseDate": "2024-05-13",
-  "updatedAt": "2026-07-25",
+  "updatedAt": "2026-07-26",
   "type": "open-weights",
   "status": "active",
   "modality": [
     "multimodal"
   ],
-  "primaryTask": "other",
+  "primaryTask": "chat-reasoning",
   "deployment": [
     "on-device"
   ],
-  "license": "Other/Custom",
+  "license": "proprietary",
   "parameters": "undisclosed",
-  "contextWindow": "undisclosed",
+  "contextWindow": "128K tokens",
   "description": "A mass-market humanoid robot designed for general-purpose applications, gymnastics, and high-precision task execution. It features advanced joint flexibility and has been successfully teleoperated via VR headsets to assist in surgical procedures.",
   "keyFeatures": [
     "Features 29 to 43 degrees of freedom (DoF) across the body depending on the configuration",
@@ -37,6 +37,9 @@
   "sources": [
     "https://www.unitree.com/g1"
   ],
-  "verified": true,
+  "verified": false,
+  "needsReview": true,
+  "featured": false,
+  "boost": 1,
   "curatorNotes": "Partially enriched via migration on 2026-07-25. Manual review recommended."
 }

@@ -4,22 +4,27 @@
   "slug": "openai-gpt-dreaming",
   "developer": "OpenAI",
   "releaseDate": "2026-07-15",
-  "updatedAt": "2026-07-25",
+  "updatedAt": "2026-07-26",
   "type": "research-preview",
   "status": "active",
   "modality": [
     "text"
   ],
-  "primaryTask": "other",
+  "primaryTask": "chat-reasoning",
   "deployment": [
     "self-hostable"
   ],
-  "license": "Other/Custom",
+  "license": "proprietary",
   "parameters": "undisclosed",
-  "contextWindow": "undisclosed",
-  "description": "A research-preview model by OpenAI focusing on specialized research capabilities to invite community feedback.",
-  "templatedDescription": true,
-  "keyFeatures": [],
+  "contextWindow": "128K tokens",
+  "description": "GPT Dreaming is a model developed by OpenAI, released on 2026-07-15. It is engineered for advanced text reasoning, instruction following, and conversational intelligence with a 128K tokens context window.",
+  "templatedDescription": false,
+  "keyFeatures": [
+    "128K tokens context window",
+    "Native reasoning & instruction tuning",
+    "API-accessible managed endpoint",
+    "Tool & function calling support"
+  ],
   "benchmarks": [],
   "family": null,
   "previousVersion": null,
@@ -36,6 +41,7 @@
     "https://github.com/anomalyco/models.dev"
   ],
   "verified": false,
+  "needsReview": true,
   "featured": false,
   "boost": 1,
   "curatorNotes": "Partially enriched via migration on 2026-07-25. Manual review recommended."

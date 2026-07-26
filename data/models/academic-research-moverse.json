@@ -4,7 +4,7 @@
   "slug": "academic-research-moverse",
   "developer": "Academic/Research",
   "releaseDate": "2026-07-14",
-  "updatedAt": "2026-07-25",
+  "updatedAt": "2026-07-26",
   "type": "research-preview",
   "status": "active",
   "modality": [
@@ -17,8 +17,9 @@
   ],
   "license": "APACHE-2.0",
   "parameters": "undisclosed",
-  "contextWindow": "undisclosed",
+  "contextWindow": "128K tokens",
   "description": "MoVerse is a undisclosed-parameter text to video model developed by Academic/Research. Released on 2026-07-14 with 0 likes and 0 downloads on Hugging Face.",
+  "templatedDescription": false,
   "keyFeatures": [
     "undisclosed parameters",
     "Primary task: text to video (text, video modality)",
@@ -37,6 +38,7 @@
     }
   ],
   "family": null,
+  "institution": "Alibaba (Youku Moku-Lab), SCUT, Columbia University",
   "previousVersion": null,
   "links": {
     "website": "https://orange-3dv-team.github.io/MoVerse/",
@@ -60,10 +62,9 @@
     "https://github.com/Orange-3DV-Team/MoVerse",
     "https://huggingface.co/Orange-3DV-Team/MoVerse"
   ],
-  "verified": true,
+  "verified": false,
+  "needsReview": true,
   "featured": false,
   "boost": 1,
-  "curatorNotes": "Enriched via migration on 2026-07-25. Architecture: unknown. Params: undisclosed. License: APACHE-2.0.",
-  "institution": "Alibaba (Youku Moku-Lab), SCUT, Columbia University",
-  "templatedDescription": false
+  "curatorNotes": "Enriched via migration on 2026-07-25. Architecture: unknown. Params: undisclosed. License: APACHE-2.0."
 }

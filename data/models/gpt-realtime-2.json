@@ -4,7 +4,7 @@
   "slug": "gpt-realtime-2",
   "developer": "OpenAI",
   "releaseDate": "2026-07-14",
-  "updatedAt": "2026-07-14",
+  "updatedAt": "2026-07-26",
   "type": "api-only",
   "status": "active",
   "modality": [
@@ -18,7 +18,11 @@
   "parameters": "Unknown",
   "contextWindow": "Unknown",
   "description": "Reasoning model with tool use",
-  "keyFeatures": [],
+  "keyFeatures": [
+    "Unknown context window",
+    "API-accessible managed endpoint",
+    "Tool & function calling support"
+  ],
   "benchmarks": [],
   "family": "gpt-realtime",
   "previousVersion": null,
@@ -31,7 +35,8 @@
     "https://developers.openai.com/api/docs/models/all",
     "https://github.com/anomalyco/models.dev"
   ],
-  "verified": true,
+  "verified": false,
+  "needsReview": true,
   "featured": false,
   "boost": 1,
   "curatorNotes": "Bulk imported from OpenAI developer docs."

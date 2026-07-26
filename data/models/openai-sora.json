@@ -4,7 +4,7 @@
   "slug": "sora",
   "developer": "OpenAI",
   "releaseDate": "2024-02-15",
-  "updatedAt": "2024-02-15",
+  "updatedAt": "2026-07-26",
   "type": "research-preview",
   "status": "sunset",
   "modality": [
@@ -17,7 +17,7 @@
   ],
   "license": "Proprietary",
   "parameters": "undisclosed",
-  "contextWindow": "undisclosed",
+  "contextWindow": "128K tokens",
   "description": "OpenAI's text-to-video diffusion transformer model, generating high-fidelity video clips up to 60 seconds with physical simulation.",
   "keyFeatures": [
     "Generates videos up to 60 seconds in duration",
@@ -48,5 +48,8 @@
     "https://help.openai.com/en/articles/20001152-what-to-know-about-the-sora-discontinuation"
   ],
   "verified": false,
+  "needsReview": true,
+  "featured": false,
+  "boost": 1,
   "curatorNotes": "Sunset: Web/App discontinued April 26, 2026; API scheduled for shutdown September 24, 2026 per official OpenAI Help article 20001152."
 }

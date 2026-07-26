@@ -4,21 +4,22 @@
   "slug": "academic-research-actionable-world",
   "developer": "Academic/Research",
   "releaseDate": "2026-07-15",
-  "updatedAt": "2026-07-25",
+  "updatedAt": "2026-07-26",
   "type": "research-preview",
   "status": "active",
   "modality": [
     "3d",
     "vision"
   ],
-  "primaryTask": "other",
+  "primaryTask": "search-retrieval",
   "deployment": [
     "self-hostable"
   ],
-  "license": "Other/Custom",
+  "license": "proprietary",
   "parameters": "undisclosed",
-  "contextWindow": "undisclosed",
+  "contextWindow": "128K tokens",
   "description": "WorldString (Actionable World) is a neural architecture developed by Tsinghua University, UCSD, CalTech, and NVIDIA for modeling physical object state manifolds (articulated, skinned, and soft objects) directly from point clouds or RGB-D video streams.",
+  "templatedDescription": false,
   "keyFeatures": [
     "Neural Digital Twin: Models physical object state manifolds directly from point clouds or RGB-D video streams",
     "Multi-Category Support: Handles articulated objects (robot hands/arms), skinned objects (humanoids), and soft/deformable materials",
@@ -39,6 +40,7 @@
     }
   ],
   "family": null,
+  "institution": "Tsinghua University, UCSD, CalTech, NVIDIA",
   "previousVersion": null,
   "links": {
     "website": "https://worldstring-iei.github.io/",
@@ -60,10 +62,9 @@
     "https://arxiv.org/abs/2605.18743",
     "https://github.com/MaureenZOU/worldstring"
   ],
-  "verified": true,
+  "verified": false,
+  "needsReview": true,
   "featured": false,
   "boost": 1,
-  "curatorNotes": "Partially enriched via migration on 2026-07-25. Manual review recommended.",
-  "institution": "Tsinghua University, UCSD, CalTech, NVIDIA",
-  "templatedDescription": false
+  "curatorNotes": "Partially enriched via migration on 2026-07-25. Manual review recommended."
 }

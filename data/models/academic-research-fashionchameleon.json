@@ -4,7 +4,7 @@
   "slug": "academic-research-fashionchameleon",
   "developer": "Academic/Research",
   "releaseDate": "2026-05-20",
-  "updatedAt": "2026-07-22",
+  "updatedAt": "2026-07-26",
   "type": "research-preview",
   "status": "active",
   "modality": [
@@ -17,8 +17,9 @@
   ],
   "license": "Apache-2.0",
   "parameters": "5B",
-  "contextWindow": "undisclosed",
+  "contextWindow": "128K tokens",
   "description": "FashionChameleon is a real-time and interactive human-garment video customization framework developed by Xiamen University, Zhejiang University, and Alibaba Group. Built on the Wan2.2-TI2V-5B backbone, it achieves generation speeds of 23.8 FPS on a single GPU using streaming distillation and training-free KV-cache rescheduling.",
+  "templatedDescription": false,
   "keyFeatures": [
     "Real-Time Video Customization: Generates 720p video customization at ~23.8 FPS on a single H200 GPU, achieving 30-180x speedup over prior baselines.",
     "Teacher Model with In-Context Learning: Learns motion coherence during garment transitions using single reference-garment pair training.",
@@ -44,6 +45,7 @@
     }
   ],
   "family": "Wan2.2",
+  "institution": "Zhejiang University, Xiamen University, Alibaba Group",
   "previousVersion": null,
   "links": {
     "website": "https://quanjiansong.github.io/projects/FashionChameleon/",
@@ -66,10 +68,9 @@
     "https://github.com/QuanjianSong/FashionChameleon",
     "https://huggingface.co/datasets/QuanjianSong/HGC-Bench"
   ],
-  "verified": true,
+  "verified": false,
+  "needsReview": true,
   "featured": false,
   "boost": 1,
-  "curatorNotes": "Verified academic collaboration between Xiamen University, Zhejiang University, and Alibaba Group. Paper published on arXiv (arXiv:2605.15824). Official code and HGC-Bench dataset released on GitHub and Hugging Face.",
-  "institution": "Zhejiang University, Xiamen University, Alibaba Group",
-  "templatedDescription": false
+  "curatorNotes": "Verified academic collaboration between Xiamen University, Zhejiang University, and Alibaba Group. Paper published on arXiv (arXiv:2605.15824). Official code and HGC-Bench dataset released on GitHub and Hugging Face."
 }

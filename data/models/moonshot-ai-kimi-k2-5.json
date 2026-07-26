@@ -4,7 +4,7 @@
   "slug": "moonshot-ai-kimi-k2-5",
   "developer": "Moonshot AI",
   "releaseDate": "2026-01-27",
-  "updatedAt": "2026-01-27",
+  "updatedAt": "2026-07-26",
   "type": "open-weights",
   "status": "active",
   "modality": [
@@ -15,7 +15,7 @@
   "deployment": [
     "self-hostable"
   ],
-  "license": "Other/Custom",
+  "license": "proprietary",
   "parameters": "1T (32B active)",
   "contextWindow": "256K tokens",
   "description": "Moonshot AI's open-weights Mixture-of-Experts multimodal model, introducing Agent Swarm orchestration and visual agentic intelligence.",
@@ -56,6 +56,7 @@
     "https://github.com/anomalyco/models.dev"
   ],
   "verified": false,
+  "needsReview": true,
   "featured": false,
   "boost": 1,
   "curatorNotes": "The base foundation for Moonshot's Kimi K2 series, establishing the Agent Swarm paradigm."

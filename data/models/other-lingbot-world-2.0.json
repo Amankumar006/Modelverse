@@ -4,7 +4,7 @@
   "slug": "lingbot-world-2-0",
   "developer": "Other",
   "releaseDate": "2026-07-09",
-  "updatedAt": "2026-07-09",
+  "updatedAt": "2026-07-26",
   "type": "open-weights",
   "status": "active",
   "modality": [
@@ -17,7 +17,7 @@
   ],
   "license": "Apache 2.0",
   "parameters": "undisclosed",
-  "contextWindow": "undisclosed",
+  "contextWindow": "128K tokens",
   "description": "An interactive world model that supports continuous, hour-long real-time generation. It features a native dual-agent mechanism that allows for dynamically evolving environments responding to real-time user inputs without scene collapse.",
   "keyFeatures": [
     "Continuous hour-long generation at 720p/60fps with zero quality drift",
@@ -38,6 +38,9 @@
   "sources": [
     "https://mediaconnect.com/robbyant-unveils-lingbot-world-2-0-pioneering-hour-long-real-time-generation-in-world-models"
   ],
-  "verified": true,
+  "verified": false,
+  "needsReview": true,
+  "featured": false,
+  "boost": 1,
   "curatorNotes": "Developed by Robbyant (Ant Group)."
 }

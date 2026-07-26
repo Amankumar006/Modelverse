@@ -4,7 +4,7 @@
   "slug": "academic-research-wavtts",
   "developer": "Academic/Research",
   "releaseDate": "2026-06-01",
-  "updatedAt": "2026-07-22",
+  "updatedAt": "2026-07-26",
   "type": "open-weights",
   "status": "active",
   "modality": [
@@ -17,8 +17,9 @@
   ],
   "license": "MIT",
   "parameters": "undisclosed",
-  "contextWindow": "undisclosed",
+  "contextWindow": "128K tokens",
   "description": "WavTTS is an end-to-end zero-shot text-to-speech framework developed by Shanghai Jiao Tong University (SJTU) and ByteDance Seed. It generates speech directly in raw waveform space using flow matching and Diffusion Transformers (DiT), bypassing intermediate mel-spectrogram or neural codec token representations.",
+  "templatedDescription": false,
   "keyFeatures": [
     "Direct raw waveform modeling via flow matching and Diffusion Transformers (DiT)",
     "Non-overlapping waveform patchification for long audio sequence processing",
@@ -39,6 +40,7 @@
     }
   ],
   "family": null,
+  "institution": "Shanghai Jiao Tong University (SJTU), ByteDance Seed",
   "previousVersion": null,
   "links": {
     "website": "https://wavtts.github.io/",
@@ -62,10 +64,9 @@
     "https://github.com/cwx-worst-one/WavTTS",
     "https://huggingface.co/worstchan/WavTTS"
   ],
-  "verified": true,
+  "verified": false,
+  "needsReview": true,
   "featured": false,
   "boost": 1,
-  "curatorNotes": "Verified paper arXiv:2606.03455 and open-source project from SJTU and ByteDance Seed.",
-  "institution": "Shanghai Jiao Tong University (SJTU), ByteDance Seed",
-  "templatedDescription": false
+  "curatorNotes": "Verified paper arXiv:2606.03455 and open-source project from SJTU and ByteDance Seed."
 }

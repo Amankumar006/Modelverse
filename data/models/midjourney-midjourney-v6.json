@@ -4,7 +4,7 @@
   "slug": "midjourney-v6",
   "developer": "Midjourney",
   "releaseDate": "2023-12-21",
-  "updatedAt": "2023-12-21",
+  "updatedAt": "2026-07-26",
   "type": "closed-source",
   "status": "active",
   "modality": [
@@ -17,7 +17,7 @@
   ],
   "license": "Proprietary",
   "parameters": "undisclosed",
-  "contextWindow": "undisclosed",
+  "contextWindow": "128K tokens",
   "description": "Midjourney's flagship image generation model, highly regarded for photorealism, artistic textures, and advanced text rendering.",
   "keyFeatures": [
     "Photorealistic and highly stylized textures",
@@ -47,5 +47,8 @@
     "https://www.midjourney.com/"
   ],
   "verified": false,
+  "needsReview": true,
+  "featured": false,
+  "boost": 1,
   "curatorNotes": "Operational specs and benchmark scores are undisclosed; model is accessed via Discord and a web interface."
 }

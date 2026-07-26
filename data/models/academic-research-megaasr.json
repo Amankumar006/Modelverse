@@ -4,7 +4,7 @@
   "slug": "academic-research-megaasr",
   "developer": "Academic/Research",
   "releaseDate": "2026-05-19",
-  "updatedAt": "2026-07-22",
+  "updatedAt": "2026-07-26",
   "type": "research-preview",
   "status": "active",
   "modality": [
@@ -17,8 +17,9 @@
   ],
   "license": "Apache-2.0",
   "parameters": "1.7B",
-  "contextWindow": "undisclosed",
+  "contextWindow": "128K tokens",
   "description": "MegaASR is a 1.7B foundation model for robust 'in-the-wild' speech recognition, developed by Tsinghua University, NTU, NUS, and Shanghai AI Lab. Built on Qwen3-ASR, it utilizes progressive acoustic-to-semantic SFT (A2S-SFT) and dual-granularity policy optimization (DG-WGPO) trained on 2.6M simulated samples.",
+  "templatedDescription": false,
   "keyFeatures": [
     "Qwen3-ASR-1.7B Foundation Architecture: Uses Qwen3-ASR as base with custom acoustic adaptation modules",
     "Voices-in-the-Wild-2M Dataset: Trained on 2.6M samples covering 7 atomic acoustic conditions and 54 compound environmental scenarios",
@@ -44,6 +45,7 @@
     }
   ],
   "family": null,
+  "institution": "Tsinghua University, NTU, NUS, Shanghai AI Lab",
   "previousVersion": null,
   "links": {
     "website": "https://xzf-thu.github.io/Mega-ASR/",
@@ -67,10 +69,9 @@
     "https://github.com/xzf-thu/Mega-ASR",
     "https://huggingface.co/zhifeixie/Mega-ASR"
   ],
-  "verified": true,
+  "verified": false,
+  "needsReview": true,
   "featured": true,
   "boost": 1,
-  "curatorNotes": "Verified research paper and open-source project from Tsinghua University (xzf-thu) in collaboration with NTU, NUS, and Shanghai AI Lab. Paper published on arXiv (2605.19833).",
-  "institution": "Tsinghua University, NTU, NUS, Shanghai AI Lab",
-  "templatedDescription": false
+  "curatorNotes": "Verified research paper and open-source project from Tsinghua University (xzf-thu) in collaboration with NTU, NUS, and Shanghai AI Lab. Paper published on arXiv (2605.19833)."
 }

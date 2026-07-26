@@ -4,7 +4,7 @@
   "slug": "minimax-m3",
   "developer": "MiniMax",
   "releaseDate": "2026-06-01",
-  "updatedAt": "2026-06-01",
+  "updatedAt": "2026-07-26",
   "type": "open-weights",
   "status": "active",
   "modality": [
@@ -16,7 +16,7 @@
   "deployment": [
     "self-hostable"
   ],
-  "license": "Other/Custom",
+  "license": "proprietary",
   "parameters": "428B (23B active)",
   "contextWindow": "1000K tokens",
   "description": "MiniMax's open-weights Mixture-of-Experts multimodal model, using MiniMax Sparse Attention (MSA) to enable low-latency long-context reasoning up to 1 million tokens.",
@@ -62,6 +62,7 @@
     "https://github.com/anomalyco/models.dev"
   ],
   "verified": false,
+  "needsReview": true,
   "featured": false,
   "boost": 1,
   "curatorNotes": " Shanghai-based MiniMax's flagship MoE model, highly regarded for agentic code planning and 1M context window scaling."

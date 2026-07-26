@@ -4,7 +4,7 @@
   "slug": "wan-streamer-0-2",
   "developer": "Other",
   "releaseDate": "2026-07-01",
-  "updatedAt": "2026-07-25",
+  "updatedAt": "2026-07-26",
   "type": "research-preview",
   "status": "active",
   "modality": [
@@ -15,9 +15,9 @@
   "deployment": [
     "self-hostable"
   ],
-  "license": "Other/Custom",
+  "license": "proprietary",
   "parameters": "undisclosed",
-  "contextWindow": "undisclosed",
+  "contextWindow": "128K tokens",
   "description": "A real-time character simulation framework allowing users to converse with generated avatars—including humans, animals, or fictional characters—with highly responsive audio-visual sync.",
   "keyFeatures": [
     "Outputs at 640px resolution on the long edge",
@@ -38,5 +38,8 @@
     "https://huggingface.co/papers/2607.04443"
   ],
   "verified": false,
+  "needsReview": true,
+  "featured": false,
+  "boost": 1,
   "curatorNotes": "Partially enriched via migration on 2026-07-25. Manual review recommended."
 }

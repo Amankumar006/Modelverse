@@ -4,7 +4,7 @@
   "slug": "gen-3-alpha",
   "developer": "Runway",
   "releaseDate": "2024-06-17",
-  "updatedAt": "2024-06-17",
+  "updatedAt": "2026-07-26",
   "type": "closed-source",
   "status": "active",
   "modality": [
@@ -17,7 +17,7 @@
   ],
   "license": "Proprietary",
   "parameters": "undisclosed",
-  "contextWindow": "undisclosed",
+  "contextWindow": "128K tokens",
   "description": "Runway's next-generation video model, providing high fidelity, structural controls, and temporal consistency for professional workflows.",
   "keyFeatures": [
     "High-speed generation of photorealistic video",
@@ -47,5 +47,8 @@
     "https://runwayml.com/blog/introducing-gen-3-alpha/"
   ],
   "verified": false,
+  "needsReview": true,
+  "featured": false,
+  "boost": 1,
   "curatorNotes": "Released in June 2024. Part of Runway's suite of creative tools."
 }

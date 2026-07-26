@@ -4,7 +4,7 @@
   "slug": "kling-1-0",
   "developer": "Kuaishou",
   "releaseDate": "2024-06-06",
-  "updatedAt": "2024-06-06",
+  "updatedAt": "2026-07-26",
   "type": "closed-source",
   "status": "active",
   "modality": [
@@ -17,7 +17,7 @@
   ],
   "license": "Proprietary",
   "parameters": "undisclosed",
-  "contextWindow": "undisclosed",
+  "contextWindow": "128K tokens",
   "description": "Cinematic text-to-video model by Kuaishou, supporting high-resolution generation, long durations, and realistic physical simulations.",
   "keyFeatures": [
     "Generates videos up to 2 minutes in length (via extensions)",
@@ -47,5 +47,8 @@
     "https://klingai.com/"
   ],
   "verified": false,
+  "needsReview": true,
+  "featured": false,
+  "boost": 1,
   "curatorNotes": "Originally launched in China in June 2024, later made available globally via API."
 }

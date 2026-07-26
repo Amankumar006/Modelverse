@@ -4,7 +4,7 @@
   "slug": "academic-research-oscar",
   "developer": "Academic/Research",
   "releaseDate": "2020-04-13",
-  "updatedAt": "2026-07-22",
+  "updatedAt": "2026-07-26",
   "type": "research-preview",
   "status": "active",
   "modality": [
@@ -13,14 +13,15 @@
     "video",
     "robotics"
   ],
-  "primaryTask": "other",
+  "primaryTask": "search-retrieval",
   "deployment": [
     "self-hostable"
   ],
-  "license": "Other/Custom",
+  "license": "proprietary",
   "parameters": "110M - 2B",
-  "contextWindow": "undisclosed",
+  "contextWindow": "128K tokens",
   "description": "Oscar encompasses two pioneering research paradigms: (1) Object-Semantics Aligned Pre-training for Vision-Language tasks (ECCV 2020 by Microsoft & UW) using object tags as anchor points for cross-modal alignment, and (2) OSCAR (Omni-Embodiment Action-Conditioned World Model for Robotics by Peking Univ/NVIDIA) fine-tuned on Cosmos-Predict2.5-2B for policy evaluation across diverse robot embodiments.",
+  "templatedDescription": false,
   "keyFeatures": [
     "Object Tag Semantic Anchoring (V+L): Uses detected object tags as explicit anchor points in word-tag-region triplets to bridge vision and language modalities",
     "Multi-Task Cross-Modal Objectives: Pre-trained with Masked Token Loss and Contrastive Loss over 6.5M image-text pairs",
@@ -56,6 +57,7 @@
     }
   ],
   "family": null,
+  "institution": "Microsoft Research, University of Washington, Peking University, NVIDIA",
   "previousVersion": null,
   "links": {
     "website": "https://wuzy2115.github.io/oscar-project-page/",
@@ -80,10 +82,9 @@
     "https://github.com/wuzy2115/oscar",
     "https://huggingface.co/zywu2115/OSCAR-2B"
   ],
-  "verified": true,
+  "verified": false,
+  "needsReview": true,
   "featured": false,
   "boost": 1,
-  "curatorNotes": "Verified dual-reference entry covering both Microsoft/UW Oscar (Vision-Language Object-Semantics Aligned Pre-training, ECCV 2020) and Zhuoyuan Wu et al. OSCAR (Omni-Embodiment Action-Conditioned World Model for Robotics based on Cosmos-Predict2.5-2B).",
-  "institution": "Microsoft Research, University of Washington, Peking University, NVIDIA",
-  "templatedDescription": false
+  "curatorNotes": "Verified dual-reference entry covering both Microsoft/UW Oscar (Vision-Language Object-Semantics Aligned Pre-training, ECCV 2020) and Zhuoyuan Wu et al. OSCAR (Omni-Embodiment Action-Conditioned World Model for Robotics based on Cosmos-Predict2.5-2B)."
 }

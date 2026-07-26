@@ -4,7 +4,7 @@
   "slug": "academic-research-lance",
   "developer": "Academic/Research",
   "releaseDate": "2026-05-24",
-  "updatedAt": "2026-07-22",
+  "updatedAt": "2026-07-26",
   "type": "research-preview",
   "status": "active",
   "modality": [
@@ -18,8 +18,9 @@
   ],
   "license": "Apache-2.0",
   "parameters": "3B active",
-  "contextWindow": "undisclosed",
+  "contextWindow": "128K tokens",
   "description": "Lance is a lightweight, 3B-active-parameter native unified multimodal model developed by ByteDance. It handles image and video understanding, generation, and editing within a single dual-stream Mixture-of-Experts (MoE) architecture trained via multi-task synergy.",
+  "templatedDescription": false,
   "keyFeatures": [
     "Native Unified Multimodal Framework: Single model for image/video understanding, generation, and cross-modal editing",
     "Dual-Stream Mixture-of-Experts (MoE): Decouples high-level semantic reasoning pathways from visual generative synthesis with 3B active parameters",
@@ -40,6 +41,7 @@
     }
   ],
   "family": null,
+  "institution": "ByteDance",
   "previousVersion": null,
   "links": {
     "website": "https://lance-project.github.io/",
@@ -64,10 +66,9 @@
     "https://github.com/bytedance/Lance",
     "https://huggingface.co/bytedance-research/Lance"
   ],
-  "verified": true,
+  "verified": false,
+  "needsReview": true,
   "featured": true,
   "boost": 1,
-  "curatorNotes": "Verified academic research paper and open-source model from ByteDance. Paper published on arXiv (2605.18678), codebase released under Apache-2.0 license on GitHub, and model weights hosted on Hugging Face.",
-  "institution": "ByteDance",
-  "templatedDescription": false
+  "curatorNotes": "Verified academic research paper and open-source model from ByteDance. Paper published on arXiv (2605.18678), codebase released under Apache-2.0 license on GitHub, and model weights hosted on Hugging Face."
 }

@@ -4,7 +4,7 @@
   "slug": "mira",
   "developer": "Other",
   "releaseDate": "2026-07-01",
-  "updatedAt": "2026-07-01",
+  "updatedAt": "2026-07-26",
   "type": "research-preview",
   "status": "active",
   "modality": [
@@ -15,9 +15,9 @@
   "deployment": [
     "api-only"
   ],
-  "license": "Other/Custom",
+  "license": "proprietary",
   "parameters": "5B",
-  "contextWindow": "undisclosed",
+  "contextWindow": "128K tokens",
   "description": "A real-time multiplayer simulation model that acts entirely as a video generator responding to live user key presses, bypassing pre-designed game engines to render physics and collisions on the fly.",
   "keyFeatures": [
     "Trained on 10,000 hours of standard gameplay data",
@@ -39,5 +39,8 @@
     "https://mira-wm.com/blog-post/"
   ],
   "verified": false,
+  "needsReview": true,
+  "featured": false,
+  "boost": 1,
   "curatorNotes": "Details strictly from the video transcript."
 }

@@ -15,7 +15,7 @@
     "self-hostable",
     "api-only"
   ],
-  "license": "Other/Custom",
+  "license": "proprietary",
   "parameters": "undisclosed",
   "contextWindow": "197K tokens",
   "description": "Efficient open MiniMax model built for coding agents and tool-heavy workflows",
@@ -59,6 +59,7 @@
     "https://github.com/anomalyco/models.dev"
   ],
   "verified": false,
+  "needsReview": true,
   "featured": false,
   "boost": 1,
   "curatorNotes": "Skeleton entry imported from models.dev backfill (2026-07-26). Needs manual enrichment and primary-source verification."

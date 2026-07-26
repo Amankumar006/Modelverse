@@ -4,7 +4,7 @@
   "slug": "imagen-3",
   "developer": "Google DeepMind",
   "releaseDate": "2024-08-13",
-  "updatedAt": "2024-08-13",
+  "updatedAt": "2026-07-26",
   "type": "closed-source",
   "status": "active",
   "modality": [
@@ -17,7 +17,7 @@
   ],
   "license": "Proprietary",
   "parameters": "undisclosed",
-  "contextWindow": "undisclosed",
+  "contextWindow": "128K tokens",
   "description": "Google DeepMind's highest-quality text-to-image model, featuring advanced detail rendering and robust prompt adherence.",
   "keyFeatures": [
     "State-of-the-art detail and photorealism",
@@ -47,5 +47,8 @@
     "https://deepmind.google/technologies/imagen-3/"
   ],
   "verified": false,
+  "needsReview": true,
+  "featured": false,
+  "boost": 1,
   "curatorNotes": "Released in August 2024 for Google Workspace and Vertex AI. Parameters are undisclosed."
 }

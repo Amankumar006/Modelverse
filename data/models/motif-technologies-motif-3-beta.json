@@ -4,7 +4,7 @@
   "slug": "motif-3-beta",
   "developer": "Motif-Technologies",
   "releaseDate": "2026-07-20",
-  "updatedAt": "2026-07-25",
+  "updatedAt": "2026-07-26",
   "type": "open-weights",
   "status": "active",
   "modality": [
@@ -14,7 +14,7 @@
   "deployment": [
     "self-hostable"
   ],
-  "license": "Other/Custom",
+  "license": "proprietary",
   "parameters": "314.8B",
   "contextWindow": "unknown",
   "description": "Motif-3-Beta is a 314.8B-parameter Mixture-of-Experts (MoE) text generation model developed by Motif-Technologies. Built on the MotifForCausalLM architecture using transformers. Supports en, ko language(s). Released on 2026-07-20 with 186 likes and 2,108 downloads on Hugging Face.",
@@ -43,7 +43,8 @@
   "sources": [
     "https://huggingface.co/Motif-Technologies/Motif-3-Beta"
   ],
-  "verified": true,
+  "verified": false,
+  "needsReview": true,
   "featured": false,
   "boost": 1,
   "curatorNotes": "Auto-ingested from HuggingFace Trending on 2026-07-25. Architecture: MotifForCausalLM. Params: 314.8B. License: Other/Custom."

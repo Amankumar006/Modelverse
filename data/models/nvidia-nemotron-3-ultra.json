@@ -4,7 +4,7 @@
   "slug": "nvidia-nemotron-3-ultra",
   "developer": "NVIDIA",
   "releaseDate": "2026-06-04",
-  "updatedAt": "2026-07-22",
+  "updatedAt": "2026-07-26",
   "type": "open-weights",
   "status": "active",
   "modality": [
@@ -14,10 +14,11 @@
   "deployment": [
     "self-hostable"
   ],
-  "license": "Other/Custom",
+  "license": "proprietary",
   "parameters": "550B total / 55B active",
   "contextWindow": "1M tokens",
   "description": "NVIDIA Nemotron 3 Ultra is a flagship open-weight frontier LLM family engineered for agentic AI workloads, long-context understanding, complex reasoning, and tool calling. The family includes Nemotron 3 Ultra 550B (a hybrid Transformer-Mamba LatentMoE model with 1M context) and Llama-3.1-Nemotron-Ultra-253B-v1.",
+  "templatedDescription": false,
   "keyFeatures": [
     "Hybrid LatentMoE & Mamba Architecture: Combines Mamba-2 state space model layers with Latent MoE (550B total / 55B active parameters)",
     "Dual-Mode System: Toggles between low-latency chat mode and extended Chain-of-Thought reasoning mode",
@@ -48,6 +49,7 @@
     }
   ],
   "family": "Nemotron",
+  "institution": "NVIDIA",
   "previousVersion": null,
   "links": {
     "website": "https://developer.nvidia.com/blog/nvidia-releases-nemotron-ultra",
@@ -69,10 +71,9 @@
     "https://arxiv.org/abs/2512.20856",
     "https://github.com/NVIDIA/NeMo"
   ],
-  "verified": true,
+  "verified": false,
+  "needsReview": true,
   "featured": true,
   "boost": 1,
-  "curatorNotes": "Verified technical report arXiv:2512.20856 and open-weight model releases from NVIDIA.",
-  "institution": "NVIDIA",
-  "templatedDescription": false
+  "curatorNotes": "Verified technical report arXiv:2512.20856 and open-weight model releases from NVIDIA."
 }

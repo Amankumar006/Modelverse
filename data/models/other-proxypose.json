@@ -4,19 +4,19 @@
   "slug": "proxypose",
   "developer": "Other",
   "releaseDate": "2026-07-01",
-  "updatedAt": "2026-07-25",
+  "updatedAt": "2026-07-26",
   "type": "open-weights",
   "status": "active",
   "modality": [
     "video"
   ],
-  "primaryTask": "other",
+  "primaryTask": "chat-reasoning",
   "deployment": [
     "self-hostable"
   ],
-  "license": "Other/Custom",
+  "license": "proprietary",
   "parameters": "undisclosed",
-  "contextWindow": "undisclosed",
+  "contextWindow": "128K tokens",
   "description": "A novel 6-DoF pose tracking system that reframes 3D position and rotation tracking as a video-to-video translation problem. It operates entirely at the pixel level without requiring 3D models or depth sensors.",
   "keyFeatures": [
     "Tracks full 3D position and rotation from standard 2D video",
@@ -37,6 +37,9 @@
   "sources": [
     "https://arxiv.org/html/2607.06555v1"
   ],
-  "verified": true,
+  "verified": false,
+  "needsReview": true,
+  "featured": false,
+  "boost": 1,
   "curatorNotes": "Partially enriched via migration on 2026-07-25. Manual review recommended."
 }

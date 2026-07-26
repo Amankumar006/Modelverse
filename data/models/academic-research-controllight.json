@@ -4,20 +4,21 @@
   "slug": "academic-research-controllight",
   "developer": "Academic/Research",
   "releaseDate": "2026-05-15",
-  "updatedAt": "2026-07-22",
+  "updatedAt": "2026-07-26",
   "type": "research-preview",
   "status": "active",
   "modality": [
     "image"
   ],
-  "primaryTask": "other",
+  "primaryTask": "search-retrieval",
   "deployment": [
     "self-hostable"
   ],
-  "license": "Other/Custom",
+  "license": "proprietary",
   "parameters": "9B (FLUX.2-klein Base) + LoRA",
-  "contextWindow": "undisclosed",
+  "contextWindow": "128K tokens",
   "description": "ControlLight is a controllable, consistent, and generalizable low-light image enhancement framework built as a LoRA on FLUX.2-klein-9B. It enables continuous illumination adjustment while preserving scene structure and fine-grained visual details.",
+  "templatedDescription": false,
   "keyFeatures": [
     "Controllable illumination strength via continuous scaling factor alpha (0.0 to 1.0)",
     "Built on FLUX.2-klein-9B architecture using Low-Rank Adaptation (LoRA)",
@@ -38,6 +39,7 @@
     }
   ],
   "family": null,
+  "institution": "Sony Computer Science Laboratories",
   "previousVersion": null,
   "links": {
     "website": "https://yfyang007.github.io/ControlLight/",
@@ -59,10 +61,9 @@
     "https://arxiv.org/abs/2605.25569",
     "https://github.com/yfyang007/ControlLight"
   ],
-  "verified": true,
+  "verified": false,
+  "needsReview": true,
   "featured": false,
   "boost": 1,
-  "curatorNotes": "Verified academic/research paper (arXiv:2605.25569). Authored by Yufeng Yang et al.",
-  "institution": "Sony Computer Science Laboratories",
-  "templatedDescription": false
+  "curatorNotes": "Verified academic/research paper (arXiv:2605.25569). Authored by Yufeng Yang et al."
 }

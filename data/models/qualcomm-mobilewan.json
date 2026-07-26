@@ -4,7 +4,7 @@
   "slug": "mobilewan",
   "developer": "Qualcomm",
   "releaseDate": "2026-07-22",
-  "updatedAt": "2026-07-25",
+  "updatedAt": "2026-07-26",
   "type": "research-preview",
   "status": "active",
   "modality": [
@@ -15,7 +15,7 @@
   "deployment": [
     "on-device"
   ],
-  "license": "Other/Custom",
+  "license": "proprietary",
   "parameters": "undisclosed",
   "contextWindow": "unknown",
   "description": "MobileWan is a mobile video diffusion model developed by Qualcomm AI Research that aims to close the quality gap for on-device video generation.",
@@ -38,6 +38,7 @@
     "https://qualcomm-ai-research.github.io/MobileWan/"
   ],
   "verified": false,
+  "needsReview": true,
   "featured": false,
   "boost": 1,
   "curatorNotes": "Partially enriched via migration on 2026-07-25. Manual review recommended."

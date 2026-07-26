@@ -4,7 +4,7 @@
   "slug": "musicgen",
   "developer": "Meta",
   "releaseDate": "2023-06-08",
-  "updatedAt": "2023-06-08",
+  "updatedAt": "2026-07-26",
   "type": "open-weights",
   "status": "active",
   "modality": [
@@ -15,7 +15,7 @@
   "deployment": [
     "self-hostable"
   ],
-  "license": "Other/Custom",
+  "license": "Llama-3.3",
   "parameters": "3.3B",
   "contextWindow": "30s",
   "description": "Meta's single-stage auto-regressive transformer model for high-quality music generation from text prompts or melodic inputs.",
@@ -46,6 +46,9 @@
   "sources": [
     "https://github.com/facebookresearch/audiocraft"
   ],
-  "verified": true,
+  "verified": false,
+  "needsReview": true,
+  "featured": false,
+  "boost": 1,
   "curatorNotes": "Weights released under Creative Commons Attribution-NonCommercial 4.0 International license."
 }

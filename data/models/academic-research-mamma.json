@@ -4,7 +4,7 @@
   "slug": "academic-research-mamma",
   "developer": "Academic/Research",
   "releaseDate": "2026-07-15",
-  "updatedAt": "2026-07-25",
+  "updatedAt": "2026-07-26",
   "type": "research-preview",
   "status": "active",
   "modality": [
@@ -12,14 +12,15 @@
     "3d",
     "video"
   ],
-  "primaryTask": "other",
+  "primaryTask": "search-retrieval",
   "deployment": [
     "self-hostable"
   ],
-  "license": "Other/Custom",
+  "license": "proprietary",
   "parameters": "undisclosed",
-  "contextWindow": "undisclosed",
+  "contextWindow": "128K tokens",
   "description": "MAMMA (Markerless Accurate Multi-person Motion Acquisition) is a state-of-the-art markerless multi-view human motion capture framework developed by MPI-IS and CMU (CVPR 2026 Oral). Powered by MammaNet (a ViT-Base transformer predicting 512 contact-aware and visibility-aware surface landmarks), it accurately fits SMPL-X body models to complex multi-person physical interactions.",
+  "templatedDescription": false,
   "keyFeatures": [
     "MammaNet Transformer Architecture: Employs a ViT-Base backbone to decode 512 dense surface landmarks with pixel coordinates, uncertainty, and visibility estimation",
     "Contact-Aware & Visibility Heads: Jointly predicts person-to-person and person-to-floor contact probabilities to constrain 3D multi-person pose optimization",
@@ -41,6 +42,7 @@
     }
   ],
   "family": null,
+  "institution": "Max Planck Institute for Intelligent Systems, Carnegie Mellon University",
   "previousVersion": null,
   "links": {
     "website": "https://mamma.is.tue.mpg.de/",
@@ -62,10 +64,9 @@
     "https://arxiv.org/abs/2506.13040",
     "https://github.com/cuevhv/mamma"
   ],
-  "verified": true,
+  "verified": false,
+  "needsReview": true,
   "featured": false,
   "boost": 1,
-  "curatorNotes": "Partially enriched via migration on 2026-07-25. Manual review recommended.",
-  "institution": "Max Planck Institute for Intelligent Systems, Carnegie Mellon University",
-  "templatedDescription": false
+  "curatorNotes": "Partially enriched via migration on 2026-07-25. Manual review recommended."
 }

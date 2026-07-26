@@ -4,7 +4,7 @@
   "slug": "sefi-image",
   "developer": "Other",
   "releaseDate": "2026-06-01",
-  "updatedAt": "2026-06-01",
+  "updatedAt": "2026-07-26",
   "type": "open-weights",
   "status": "active",
   "modality": [
@@ -15,9 +15,9 @@
   "deployment": [
     "self-hostable"
   ],
-  "license": "Other/Custom",
+  "license": "proprietary",
   "parameters": "1B, 2B, 5B",
-  "contextWindow": "undisclosed",
+  "contextWindow": "128K tokens",
   "description": "A text-to-image foundation model built on Semantic-First Diffusion, a paradigm that separates semantic layout streams from texture detail streams to improve generation quality while drastically reducing training compute requirements.",
   "keyFeatures": [
     "Separates high-level layout processing from visual texture detailing",
@@ -36,6 +36,9 @@
   "sources": [
     "https://huggingface.co/SeFi-Image/SeFi-Image-1B-turbo"
   ],
-  "verified": true,
+  "verified": false,
+  "needsReview": true,
+  "featured": false,
+  "boost": 1,
   "curatorNotes": "Uses a custom non-commercial license. Release date estimated from ArXiv publication."
 }

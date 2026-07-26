@@ -4,7 +4,7 @@
   "slug": "academic-research-nava",
   "developer": "Academic/Research",
   "releaseDate": "2026-05-15",
-  "updatedAt": "2026-07-22",
+  "updatedAt": "2026-07-26",
   "type": "research-preview",
   "status": "active",
   "modality": [
@@ -19,8 +19,9 @@
   ],
   "license": "Apache-2.0",
   "parameters": "6.3B",
-  "contextWindow": "undisclosed",
+  "contextWindow": "128K tokens",
   "description": "NAVA (Native Audio-Visual Alignment for Generation) is a 6.3-billion parameter multimodal diffusion model developed by Baidu ERNIE Research. Utilizing an Align-then-Fuse MMDiT architecture, NAVA generates temporally synchronized and semantically coherent 720p video and stereo audio natively in a single unified pass.",
+  "templatedDescription": false,
   "keyFeatures": [
     "Align-then-Fuse MMDiT Architecture: Establishes fine-grained audio-video correspondence in a dedicated alignment space before joint denoising",
     "Timbre-in-Context Conditioning: Binds reference WAV audio files to text speech spans for precise multi-speaker voice identity control",
@@ -41,6 +42,7 @@
     }
   ],
   "family": null,
+  "institution": "Baidu ERNIE Research",
   "previousVersion": null,
   "links": {
     "website": "https://ernie-research.github.io/NAVA/",
@@ -63,10 +65,9 @@
     "https://arxiv.org/abs/2605.30073",
     "https://github.com/ernie-research/NAVA"
   ],
-  "verified": true,
+  "verified": false,
+  "needsReview": true,
   "featured": true,
   "boost": 1,
-  "curatorNotes": "Verified open-source research model from Baidu ERNIE Research. Paper published on arXiv (2605.30073), GitHub repository under ernie-research/NAVA, and model weights on Hugging Face.",
-  "institution": "Baidu ERNIE Research",
-  "templatedDescription": false
+  "curatorNotes": "Verified open-source research model from Baidu ERNIE Research. Paper published on arXiv (2605.30073), GitHub repository under ernie-research/NAVA, and model weights on Hugging Face."
 }

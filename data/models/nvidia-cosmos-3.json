@@ -4,7 +4,7 @@
   "slug": "nvidia-cosmos-3",
   "developer": "NVIDIA",
   "releaseDate": "2026-05-31",
-  "updatedAt": "2026-07-22",
+  "updatedAt": "2026-07-26",
   "type": "open-weights",
   "status": "active",
   "modality": [
@@ -14,14 +14,15 @@
     "audio",
     "multimodal"
   ],
-  "primaryTask": "other",
+  "primaryTask": "chat-reasoning",
   "deployment": [
     "self-hostable"
   ],
-  "license": "Other/Custom",
+  "license": "proprietary",
   "parameters": "4B - 64B",
-  "contextWindow": "undisclosed",
+  "contextWindow": "128K tokens",
   "description": "NVIDIA Cosmos 3 is an open-source frontier foundation model platform engineered for Physical AI. Built on a Mixture-of-Transformers (MoT) architecture with a two-tower design, Cosmos 3 unifies an autoregressive Reasoner with a diffusion Generator to allow embodied agents to perceive, reason about, simulate, and act in the physical world.",
+  "templatedDescription": false,
   "keyFeatures": [
     "Unified Omnimodal MoT Architecture: Integrates autoregressive Reasoner and diffusion Generator for text, image, video, audio, and action tokens",
     "First-Class Action Generation: Outputs precise numerical robot control tokens (joint trajectories, end-effector poses) directly",
@@ -42,6 +43,7 @@
     }
   ],
   "family": "Cosmos",
+  "institution": "NVIDIA",
   "previousVersion": null,
   "links": {
     "website": "https://developer.nvidia.com/blog/develop-physical-ai-reasoning-world-and-action-models-with-nvidia-cosmos-3/",
@@ -62,10 +64,9 @@
     "https://arxiv.org/abs/2606.02800",
     "https://github.com/nvidia-cosmos"
   ],
-  "verified": true,
+  "verified": false,
+  "needsReview": true,
   "featured": true,
   "boost": 1,
-  "curatorNotes": "Verified paper arXiv:2606.02800 and open-weights collection from NVIDIA Research.",
-  "institution": "NVIDIA",
-  "templatedDescription": false
+  "curatorNotes": "Verified paper arXiv:2606.02800 and open-weights collection from NVIDIA Research."
 }

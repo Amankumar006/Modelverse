@@ -4,7 +4,7 @@
   "slug": "moonshot-ai-kimi-k2-6",
   "developer": "Moonshot AI",
   "releaseDate": "2026-04-20",
-  "updatedAt": "2026-04-20",
+  "updatedAt": "2026-07-26",
   "type": "open-weights",
   "status": "active",
   "modality": [
@@ -15,7 +15,7 @@
   "deployment": [
     "self-hostable"
   ],
-  "license": "Other/Custom",
+  "license": "proprietary",
   "parameters": "1T (32B active)",
   "contextWindow": "256K tokens",
   "description": "Moonshot AI's open-weights Mixture-of-Experts model with enhanced long-horizon coding capabilities and multi-agent orchestration for complex workflows.",
@@ -56,6 +56,7 @@
     "https://github.com/anomalyco/models.dev"
   ],
   "verified": false,
+  "needsReview": true,
   "featured": false,
   "boost": 1,
   "curatorNotes": "Moonshot's version 2.6 focusing on large-scale agentic swarms (up to 300 agents) and prolonged reasoning runs."

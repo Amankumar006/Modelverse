@@ -4,7 +4,7 @@
   "slug": "academic-research-rdm",
   "developer": "Academic/Research",
   "releaseDate": "2026-07-15",
-  "updatedAt": "2026-07-22",
+  "updatedAt": "2026-07-26",
   "type": "research-preview",
   "status": "active",
   "modality": [
@@ -17,8 +17,9 @@
   ],
   "license": "Apache-2.0",
   "parameters": "4B / 9B (FLUX.2 Klein base)",
-  "contextWindow": "undisclosed",
+  "contextWindow": "128K tokens",
   "description": "Representation Distribution Matching (RDM / iRDM) is a paradigm for training state-of-the-art one-step visual generation models developed by EPFL (VITA Lab), Valeo.ai, and Sorbonne Université. It matches feature distributions between generated and reference images using Maximum Mean Discrepancy (MMD) with Nyström estimation across a battery of frozen pretrained encoders.",
+  "templatedDescription": false,
   "keyFeatures": [
     "Representation Distribution Matching (RDM): Matches feature distributions of generated images to real image distributions using frozen pretrained visual encoders.",
     "Improved RDM (iRDM): Scalable objective combining within-batch repulsion with Nyström landmark estimation for efficient attraction to reference embeddings.",
@@ -49,6 +50,7 @@
     }
   ],
   "family": null,
+  "institution": "EPFL (VITA Lab), Valeo.ai, Sorbonne Université",
   "previousVersion": null,
   "links": {
     "website": "https://alan-lanfeng.github.io/rdm/",
@@ -73,10 +75,9 @@
     "https://github.com/vita-epfl/RDM",
     "https://huggingface.co/epfl-vita/flux2-klein-1step-rdm"
   ],
-  "verified": true,
+  "verified": false,
+  "needsReview": true,
   "featured": true,
   "boost": 1,
-  "curatorNotes": "Verified paper arXiv:2607.02375 and open-source project from EPFL (VITA Lab), Valeo.ai, and Sorbonne Université. Project page hosted at alan-lanfeng.github.io/rdm/, GitHub at vita-epfl/RDM, Hugging Face model and demo space available.",
-  "institution": "EPFL (VITA Lab), Valeo.ai, Sorbonne Université",
-  "templatedDescription": false
+  "curatorNotes": "Verified paper arXiv:2607.02375 and open-source project from EPFL (VITA Lab), Valeo.ai, and Sorbonne Université. Project page hosted at alan-lanfeng.github.io/rdm/, GitHub at vita-epfl/RDM, Hugging Face model and demo space available."
 }

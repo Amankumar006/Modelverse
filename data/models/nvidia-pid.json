@@ -4,7 +4,7 @@
   "slug": "nvidia-pid",
   "developer": "NVIDIA",
   "releaseDate": "2026-05-22",
-  "updatedAt": "2026-07-22",
+  "updatedAt": "2026-07-26",
   "type": "open-weights",
   "status": "active",
   "modality": [
@@ -16,8 +16,9 @@
   ],
   "license": "Apache-2.0",
   "parameters": "undisclosed",
-  "contextWindow": "undisclosed",
+  "contextWindow": "128K tokens",
   "description": "PiD (Pixel Diffusion Decoder) is a generative model and decoding paradigm developed by NVIDIA Spatial Intelligence Lab (SIL). It reformulates latent-to-pixel decoding as a conditional pixel-space diffusion process, replacing traditional VAE decoders to unify decoding and 4x/8x spatial super-resolution into a fast 4-step distilled diffusion process.",
+  "templatedDescription": false,
   "keyFeatures": [
     "Unified latent decoding and 4x/8x spatial super-resolution directly in pixel space",
     "Sigma-aware adapter enabling early termination of latent diffusion models",
@@ -33,6 +34,7 @@
     }
   ],
   "family": null,
+  "institution": "NVIDIA Spatial Intelligence Lab (SIL)",
   "previousVersion": null,
   "links": {
     "website": "https://research.nvidia.com/labs/sil/projects/pid/",
@@ -54,10 +56,9 @@
     "https://github.com/nv-tlabs/PiD",
     "https://huggingface.co/nvidia/PiD"
   ],
-  "verified": true,
+  "verified": false,
+  "needsReview": true,
   "featured": false,
   "boost": 1,
-  "curatorNotes": "Verified paper arXiv:2605.23902 and open-source implementation from NVIDIA SIL.",
-  "institution": "NVIDIA Spatial Intelligence Lab (SIL)",
-  "templatedDescription": false
+  "curatorNotes": "Verified paper arXiv:2605.23902 and open-source implementation from NVIDIA SIL."
 }

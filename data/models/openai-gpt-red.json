@@ -4,7 +4,7 @@
   "slug": "openai-gpt-red",
   "developer": "OpenAI",
   "releaseDate": "2026-07-15",
-  "updatedAt": "2026-07-15",
+  "updatedAt": "2026-07-26",
   "type": "research-preview",
   "status": "active",
   "modality": [
@@ -16,7 +16,7 @@
   ],
   "license": "Proprietary",
   "parameters": "undisclosed",
-  "contextWindow": "undisclosed",
+  "contextWindow": "128K tokens",
   "description": "An automated AI red-teaming system developed by OpenAI, trained via self-play reinforcement learning to simulate prompt injection attacks and discover vulnerabilities in language models prior to deployment.",
   "keyFeatures": [
     "Automated adversarial red-teaming simulation at scale",
@@ -40,7 +40,8 @@
   "sources": [
     "https://openai.com/index/unlocking-self-improvement-gpt-red"
   ],
-  "verified": true,
+  "verified": false,
+  "needsReview": true,
   "featured": false,
   "boost": 1,
   "curatorNotes": "Registered GPT-Red as an internal-use automated red-teaming system/research preview announced on 2026-07-15. Not a downloadable model or developer API."

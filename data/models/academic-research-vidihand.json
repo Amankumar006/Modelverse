@@ -4,21 +4,22 @@
   "slug": "academic-research-vidihand",
   "developer": "Academic/Research",
   "releaseDate": "2026-06-29",
-  "updatedAt": "2026-07-25",
+  "updatedAt": "2026-07-26",
   "type": "open-weights",
   "status": "active",
   "modality": [
     "video",
     "3d"
   ],
-  "primaryTask": "other",
+  "primaryTask": "search-retrieval",
   "deployment": [
     "self-hostable"
   ],
-  "license": "Other/Custom",
+  "license": "proprietary",
   "parameters": "undisclosed",
-  "contextWindow": "undisclosed",
+  "contextWindow": "128K tokens",
   "description": "VidiHand is a generative 4D hand motion reconstruction model developed by Nanyang Technological University (NTU) and Shanghai Jiao Tong University (SJTU). It recovers metric-scale 3D/4D two-hand pose trajectories from monocular egocentric video by fine-tuning internet-scale video diffusion models (Wan2.1-VACE) without needing external hand detectors or test-time optimization.",
+  "templatedDescription": false,
   "keyFeatures": [
     "Detector-Free Full-Frame Processing without localized cropping or hand detectors",
     "Leverages Internet-Scale Pretrained Video Diffusion Models (Wan2.1-VACE)",
@@ -39,6 +40,7 @@
     }
   ],
   "family": null,
+  "institution": "NTU, Shanghai Jiao Tong University (SJTU)",
   "previousVersion": null,
   "links": {
     "website": "https://vidihand.github.io/",
@@ -60,10 +62,9 @@
     "https://arxiv.org/abs/2606.30308",
     "https://github.com/NTUYWANG103/ViDiHand"
   ],
-  "verified": true,
+  "verified": false,
+  "needsReview": true,
   "featured": false,
   "boost": 1,
-  "curatorNotes": "Partially enriched via migration on 2026-07-25. Manual review recommended.",
-  "institution": "NTU, Shanghai Jiao Tong University (SJTU)",
-  "templatedDescription": false
+  "curatorNotes": "Partially enriched via migration on 2026-07-25. Manual review recommended."
 }

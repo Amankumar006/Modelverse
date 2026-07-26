@@ -15,7 +15,7 @@
     "self-hostable",
     "api-only"
   ],
-  "license": "Other/Custom",
+  "license": "MIT",
   "parameters": "undisclosed",
   "contextWindow": "1M tokens",
   "description": "Open MoE flagship with million-token context for coding and long agent runs",
@@ -85,6 +85,7 @@
     "https://github.com/anomalyco/models.dev"
   ],
   "verified": false,
+  "needsReview": true,
   "featured": false,
   "boost": 1,
   "curatorNotes": "Skeleton entry imported from models.dev backfill (2026-07-26). Needs manual enrichment and primary-source verification."

@@ -4,7 +4,7 @@
   "slug": "academic-research-meshflow",
   "developer": "Meta AI / HKUST",
   "releaseDate": "2026-06-05",
-  "updatedAt": "2026-07-22",
+  "updatedAt": "2026-07-26",
   "type": "open-weights",
   "status": "active",
   "modality": [
@@ -12,14 +12,15 @@
     "text",
     "vision"
   ],
-  "primaryTask": "other",
+  "primaryTask": "search-retrieval",
   "deployment": [
     "self-hostable"
   ],
   "license": "CC-BY-NC-4.0",
   "parameters": "undisclosed",
-  "contextWindow": "undisclosed",
+  "contextWindow": "128K tokens",
   "description": "MeshFlow is a flow-based diffusion transformer model with MeshVAE for efficient, high-quality artistic 3D mesh generation presented as a CVPR 2026 Highlight by Meta AI and HKUST.",
+  "templatedDescription": false,
   "keyFeatures": [
     "MeshVAE Continuous Latent Space: Encodes 3D vertex positions, surface normals, and face topology into a compact continuous latent representation, avoiding coordinate quantization errors.",
     "Flow-Based Diffusion Transformer: Employs Rectified Flow matching over continuous mesh latents to generate complete 3D meshes in parallel.",
@@ -45,6 +46,7 @@
     }
   ],
   "family": null,
+  "institution": "Meta AI, HKUST",
   "previousVersion": null,
   "links": {
     "website": "https://mesh-flow.github.io/",
@@ -66,10 +68,9 @@
     "https://arxiv.org/abs/2606.04621",
     "https://github.com/facebookresearch/meshflow"
   ],
-  "verified": true,
+  "verified": false,
+  "needsReview": true,
   "featured": false,
   "boost": 1,
-  "curatorNotes": "Verified CVPR 2026 Highlight paper by Meta AI and HKUST. Code available on GitHub (facebookresearch/meshflow) and paper on arXiv (arXiv:2606.04621).",
-  "institution": "Meta AI, HKUST",
-  "templatedDescription": false
+  "curatorNotes": "Verified CVPR 2026 Highlight paper by Meta AI and HKUST. Code available on GitHub (facebookresearch/meshflow) and paper on arXiv (arXiv:2606.04621)."
 }

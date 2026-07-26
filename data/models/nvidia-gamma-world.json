@@ -4,7 +4,7 @@
   "slug": "nvidia-gamma-world",
   "developer": "NVIDIA",
   "releaseDate": "2026-05-15",
-  "updatedAt": "2026-07-22",
+  "updatedAt": "2026-07-26",
   "type": "open-weights",
   "status": "active",
   "modality": [
@@ -17,8 +17,9 @@
   ],
   "license": "Apache-2.0",
   "parameters": "undisclosed",
-  "contextWindow": "undisclosed",
+  "contextWindow": "128K tokens",
   "description": "Gamma-World (γ-World) is a generative multi-agent world model developed by NVIDIA Spatial Intelligence Lab (SIL) and Toronto AI Lab. Unlike single-agent world models, Gamma-World models complex multi-agent environments where multiple independently controlled agents interact in real-time at 24 FPS with zero-shot generalization from 2 to 4+ agents.",
+  "templatedDescription": false,
   "keyFeatures": [
     "Simplex Rotary Agent Encoding (SRAE): Parameter-free extension of RoPE mapping agents to simplex vertices for permutation-equivalent identities",
     "Sparse Hub Attention: Routes cross-agent communication through learnable hub tokens, reducing attention complexity from O(N²) to O(N)",
@@ -44,6 +45,7 @@
     }
   ],
   "family": null,
+  "institution": "NVIDIA Spatial Intelligence Lab (SIL)",
   "previousVersion": null,
   "links": {
     "website": "https://research.nvidia.com/labs/sil/projects/gamma-world/",
@@ -64,10 +66,9 @@
     "https://arxiv.org/abs/2605.28816",
     "https://github.com/nv-tlabs/Gamma-World"
   ],
-  "verified": true,
+  "verified": false,
+  "needsReview": true,
   "featured": true,
   "boost": 1,
-  "curatorNotes": "Verified paper arXiv:2605.28816 and open-source release from NVIDIA SIL.",
-  "institution": "NVIDIA Spatial Intelligence Lab (SIL)",
-  "templatedDescription": false
+  "curatorNotes": "Verified paper arXiv:2605.28816 and open-source release from NVIDIA SIL."
 }

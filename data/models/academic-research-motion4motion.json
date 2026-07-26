@@ -4,7 +4,7 @@
   "slug": "motion4motion",
   "developer": "Tsinghua University & StepFun",
   "releaseDate": "2026-07-25",
-  "updatedAt": "2026-07-25",
+  "updatedAt": "2026-07-26",
   "type": "research-preview",
   "status": "active",
   "modality": [
@@ -14,7 +14,7 @@
   "deployment": [
     "self-hostable"
   ],
-  "license": "Other/Custom",
+  "license": "proprietary",
   "parameters": "undisclosed",
   "contextWindow": "unknown",
   "description": "Motion4Motion is a training-free framework for cross-subject motion transfer presented at SIGGRAPH 2026. Unlike prior skeleton-based approaches that only work for human-like characters with predefined skeleton topologies, Motion4Motion steps out of the skeleton framework entirely. It models the motion flow of a subject in a video rather than its skeleton, enabling motion transfer across entirely different species (e.g., human-to-animal) at inference time without any task-specific training or fine-tuning.",
@@ -44,7 +44,8 @@
   "sources": [
     "https://lhchen.top/Motion4Motion/"
   ],
-  "verified": true,
+  "verified": false,
+  "needsReview": true,
   "featured": false,
   "boost": 1,
   "curatorNotes": "Partially enriched via migration on 2026-07-25. Manual review recommended."

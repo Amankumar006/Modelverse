@@ -4,7 +4,7 @@
   "slug": "wan-dancer",
   "developer": "Alibaba Group (Tongyi Lab)",
   "releaseDate": "2026-07-14",
-  "updatedAt": "2026-07-22",
+  "updatedAt": "2026-07-26",
   "type": "open-weights",
   "status": "active",
   "modality": [
@@ -16,7 +16,7 @@
     "self-hostable",
     "api-only"
   ],
-  "license": "Other/Custom",
+  "license": "Apache-2.0",
   "parameters": "14B",
   "contextWindow": "unknown",
   "description": "Wan-Dancer is a hierarchical framework for minute-scale coherent music-to-dance video generation developed by Tongyi Lab at Alibaba Group. Given a reference character image and music audio, Wan-Dancer generates long-duration (minute-scale), high-quality, rhythmically synchronized dance videos with global structural coherence and temporal continuity across multiple dance genres including Chinese Classical, K-pop, Street, Tap, and Latin styles.",
@@ -48,7 +48,8 @@
     "https://humanaigc.github.io/wan-dancer-project/",
     "https://arxiv.org/abs/2607.09581"
   ],
-  "verified": true,
+  "verified": false,
+  "needsReview": true,
   "featured": false,
   "boost": 1,
   "curatorNotes": "14B parameter open-weights model by Tongyi Lab (Alibaba). Authors: Mingyang Huang, Peng Zhang, Li Hu et al. Supports Chinese Classical, K-pop, Street, Tap, Latin dance genres."

@@ -4,7 +4,7 @@
   "slug": "academic-research-scope",
   "developer": "Academic/Research",
   "releaseDate": "2026-05-22",
-  "updatedAt": "2026-07-22",
+  "updatedAt": "2026-07-26",
   "type": "open-weights",
   "status": "active",
   "modality": [
@@ -17,8 +17,9 @@
   ],
   "license": "Apache-2.0",
   "parameters": "undisclosed",
-  "contextWindow": "undisclosed",
+  "contextWindow": "128K tokens",
   "description": "SCOPE (Simulating Cross-game Operations in Playable Environments) is an interactive real-time FPS world model developed by University of Chinese Academy of Sciences (UCAS). It incorporates a Spatial Action Decoupling module into video diffusion transformer blocks (Wan2.2) to achieve per-pixel temporal action conditioning, separating localized weapon/HUD effects from global environment rendering.",
+  "templatedDescription": false,
   "keyFeatures": [
     "Spatial Action Decoupling Module for per-pixel temporal action conditioning without segmentation labels",
     "10-DoF Hybrid Action Space supporting 4 continuous control axes and 6 binary action buttons",
@@ -44,6 +45,7 @@
     }
   ],
   "family": null,
+  "institution": "University of Chinese Academy of Sciences (UCAS)",
   "previousVersion": null,
   "links": {
     "website": "https://z2tong.github.io/SCOPE/",
@@ -65,10 +67,9 @@
     "https://arxiv.org/abs/2605.23345",
     "https://github.com/z2tong/SCOPE"
   ],
-  "verified": true,
+  "verified": false,
+  "needsReview": true,
   "featured": false,
   "boost": 1,
-  "curatorNotes": "Verified paper arXiv:2605.23345 and open-source release from University of Chinese Academy of Sciences (UCAS).",
-  "institution": "University of Chinese Academy of Sciences (UCAS)",
-  "templatedDescription": false
+  "curatorNotes": "Verified paper arXiv:2605.23345 and open-source release from University of Chinese Academy of Sciences (UCAS)."
 }

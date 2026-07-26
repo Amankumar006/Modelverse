@@ -4,7 +4,7 @@
   "slug": "academic-research-streamforce",
   "developer": "Academic/Research",
   "releaseDate": "2026-06-01",
-  "updatedAt": "2026-07-25",
+  "updatedAt": "2026-07-26",
   "type": "research-preview",
   "status": "active",
   "modality": [
@@ -15,10 +15,11 @@
   "deployment": [
     "self-hostable"
   ],
-  "license": "Other/Custom",
+  "license": "proprietary",
   "parameters": "undisclosed",
-  "contextWindow": "undisclosed",
+  "contextWindow": "128K tokens",
   "description": "StreamForce (Streaming Video Generation with Streaming Force Control) is a causal, unified framework for real-time streaming video generation developed by Northeastern University (NEU-VI Lab). It enables physically grounded interactive control over video rollouts via continuous, time-varying force inputs at up to 16.6 FPS.",
+  "templatedDescription": false,
   "keyFeatures": [
     "Physically Grounded Streaming Control: Accepts continuous time-varying force vectors to dynamically manipulate video streams",
     "Causal Autoregressive Architecture: Generates video sequentially from an initial image frame for low-latency interactive steerability",
@@ -39,6 +40,7 @@
     }
   ],
   "family": null,
+  "institution": "Northeastern University",
   "previousVersion": null,
   "links": {
     "website": "https://neu-vi.github.io/StreamForce/",
@@ -58,10 +60,9 @@
     "https://neu-vi.github.io/StreamForce/",
     "https://arxiv.org/abs/2606.07508"
   ],
-  "verified": true,
+  "verified": false,
+  "needsReview": true,
   "featured": false,
   "boost": 1,
-  "curatorNotes": "Partially enriched via migration on 2026-07-25. Manual review recommended.",
-  "institution": "Northeastern University",
-  "templatedDescription": false
+  "curatorNotes": "Partially enriched via migration on 2026-07-25. Manual review recommended."
 }

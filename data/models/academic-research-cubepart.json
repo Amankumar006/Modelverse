@@ -4,20 +4,21 @@
   "slug": "academic-research-cubepart",
   "developer": "Roblox Research",
   "releaseDate": "2026-05-27",
-  "updatedAt": "2026-07-25",
+  "updatedAt": "2026-07-26",
   "type": "open-weights",
   "status": "active",
   "modality": [
     "text"
   ],
-  "primaryTask": "other",
+  "primaryTask": "search-retrieval",
   "deployment": [
     "self-hostable"
   ],
   "license": "OPENRAIL",
   "parameters": "undisclosed",
-  "contextWindow": "undisclosed",
+  "contextWindow": "128K tokens",
   "description": "CubePart is a undisclosed-parameter text to 3d model developed by Roblox Research. Released on 2026-05-27 with 19 likes and 0 downloads on Hugging Face.",
+  "templatedDescription": false,
   "keyFeatures": [
     "undisclosed parameters",
     "Primary task: text to 3d (text modality)",
@@ -31,6 +32,7 @@
     }
   ],
   "family": null,
+  "institution": "Roblox / CMU / Stanford",
   "previousVersion": null,
   "links": {
     "website": "https://cubepart.github.io/",
@@ -54,10 +56,9 @@
     "https://github.com/Roblox/cube",
     "https://huggingface.co/Roblox/cubepart"
   ],
-  "verified": true,
+  "verified": false,
+  "needsReview": true,
   "featured": false,
   "boost": 1,
-  "curatorNotes": "Enriched via migration on 2026-07-25. Architecture: unknown. Params: undisclosed. License: OPENRAIL.",
-  "institution": "Roblox / CMU / Stanford",
-  "templatedDescription": false
+  "curatorNotes": "Enriched via migration on 2026-07-25. Architecture: unknown. Params: undisclosed. License: OPENRAIL."
 }

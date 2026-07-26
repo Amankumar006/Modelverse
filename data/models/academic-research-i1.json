@@ -4,7 +4,7 @@
   "slug": "academic-research-i1",
   "developer": "Academic/Research",
   "releaseDate": "2026-06-15",
-  "updatedAt": "2026-07-22",
+  "updatedAt": "2026-07-26",
   "type": "research-preview",
   "status": "active",
   "modality": [
@@ -17,8 +17,9 @@
   ],
   "license": "MIT",
   "parameters": "3B",
-  "contextWindow": "undisclosed",
+  "contextWindow": "128K tokens",
   "description": "i1 is a 3-billion-parameter text-to-image diffusion model developed by ZLab at Princeton University. Introduced in 'i1: A Simple and Fully Open Recipe for Strong Text-to-Image Models', it provides a fully open foundation—including model weights, PyTorch and JAX training/inference code, and curated caption datasets—built upon a LightningDiT cross-attention backbone with T5-Gemma-2B and FLUX.2 VAE.",
+  "templatedDescription": false,
   "keyFeatures": [
     "Fully Open Ecosystem: Complete open-sourcing of model weights (1B & 3B), training/inference code (PyTorch/JAX), data processing pipelines, and datasets.",
     "Diffusion Transformer Backbone: XL/2-sized LightningDiT cross-attention architecture featuring QK-normalization, long skip connections, T5-Gemma-2B text encoder adapter, and FLUX.2 VAE.",
@@ -54,6 +55,7 @@
     }
   ],
   "family": null,
+  "institution": "Princeton University",
   "previousVersion": null,
   "links": {
     "website": "https://zlab-princeton.github.io/i1/",
@@ -76,10 +78,9 @@
     "https://github.com/zlab-princeton/i1",
     "https://huggingface.co/zlab-princeton/i1-3B"
   ],
-  "verified": true,
+  "verified": false,
+  "needsReview": true,
   "featured": true,
   "boost": 1,
-  "curatorNotes": "Verified academic research paper and open-source release from ZLab at Princeton University. Paper on arXiv (2606.11289), repository under MIT License on GitHub, and 3B/1B model weights on Hugging Face.",
-  "institution": "Princeton University",
-  "templatedDescription": false
+  "curatorNotes": "Verified academic research paper and open-source release from ZLab at Princeton University. Paper on arXiv (2606.11289), repository under MIT License on GitHub, and 3B/1B model weights on Hugging Face."
 }

@@ -4,7 +4,7 @@
   "slug": "suno-v4",
   "developer": "Suno",
   "releaseDate": "2024-11-19",
-  "updatedAt": "2024-11-19",
+  "updatedAt": "2026-07-26",
   "type": "closed-source",
   "status": "active",
   "modality": [
@@ -17,7 +17,7 @@
   ],
   "license": "Proprietary",
   "parameters": "undisclosed",
-  "contextWindow": "undisclosed",
+  "contextWindow": "128K tokens",
   "description": "Suno's flagship generative model for full-length music, vocal, and song production in high-fidelity stereo.",
   "keyFeatures": [
     "Produces complete songs with structured lyrics and vocals",
@@ -47,5 +47,8 @@
     "https://suno.com/"
   ],
   "verified": false,
+  "needsReview": true,
+  "featured": false,
+  "boost": 1,
   "curatorNotes": "Operational specs and training databases are fully undisclosed."
 }

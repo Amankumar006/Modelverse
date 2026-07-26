@@ -4,7 +4,7 @@
   "slug": "abot-world",
   "developer": "Alibaba",
   "releaseDate": "2026-07-09",
-  "updatedAt": "2026-07-22",
+  "updatedAt": "2026-07-26",
   "type": "open-weights",
   "status": "active",
   "modality": [
@@ -18,8 +18,9 @@
   ],
   "license": "Apache-2.0",
   "parameters": "5B",
-  "contextWindow": "undisclosed",
+  "contextWindow": "128K tokens",
   "description": "ABot-World is a real-time interactive world simulator developed by Alibaba AMAP CV Lab. Built around a 5-billion parameter causal video world model (ABot-World-0-5B-LF) fine-tuned from Wan2.2-TI2V-5B, it enables open-ended, action-conditioned video generation running in real time at 720p resolution @ 16 FPS on a single NVIDIA RTX 5090 GPU.",
+  "templatedDescription": false,
   "keyFeatures": [
     "Infinite Interactive Rollout via LongForcing student-teacher distillation (over 1 hour continuous rollout without scene lock-in or drift)",
     "High-Performance Consumer Hardware Execution (720p@16FPS, ~1.2s latency, ~19GB VRAM on RTX 5090)",
@@ -35,6 +36,7 @@
     }
   ],
   "family": null,
+  "institution": "Alibaba AMAP CV Lab",
   "previousVersion": null,
   "links": {
     "website": "https://abot-world.amap.com/plaza",
@@ -56,10 +58,9 @@
     "https://github.com/amap-cvlab/ABot-World",
     "https://huggingface.co/acvlab/ABot-World-0-5B-LF"
   ],
-  "verified": true,
+  "verified": false,
+  "needsReview": true,
   "featured": true,
   "boost": 1,
-  "curatorNotes": "Verified paper arXiv:2607.19191 and open-source project from Alibaba AMAP CV Lab.",
-  "institution": "Alibaba AMAP CV Lab",
-  "templatedDescription": false
+  "curatorNotes": "Verified paper arXiv:2607.19191 and open-source project from Alibaba AMAP CV Lab."
 }

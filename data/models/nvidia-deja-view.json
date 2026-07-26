@@ -4,7 +4,7 @@
   "slug": "nvidia-deja-view",
   "developer": "NVIDIA",
   "releaseDate": "2026-05-15",
-  "updatedAt": "2026-07-22",
+  "updatedAt": "2026-07-26",
   "type": "open-weights",
   "status": "active",
   "modality": [
@@ -12,14 +12,15 @@
     "video",
     "3d"
   ],
-  "primaryTask": "other",
+  "primaryTask": "chat-reasoning",
   "deployment": [
     "self-hostable"
   ],
-  "license": "Other/Custom",
+  "license": "proprietary",
   "parameters": "~117M",
-  "contextWindow": "undisclosed",
+  "contextWindow": "128K tokens",
   "description": "Déjà View (DVLT - Déjà View Looping Transformer) is a parameter-efficient model for multi-view 3D reconstruction developed by NVIDIA Dynamic Vision and Learning (DVL) group, ETH Zürich, and U of Toronto. Employing a single weight-tied transformer block recurrently over K refinement steps, DVLT jointly predicts per-pixel depth, ray maps, and camera parameters at ~117M parameters.",
+  "templatedDescription": false,
   "keyFeatures": [
     "Weight-Tied Looping Transformer Block: Uses a single shared transformer block recurrently over K refinement steps",
     "Inference-Time Compute Knob (K): Dynamically adjust the number of refinement steps during inference to balance latency and accuracy",
@@ -35,6 +36,7 @@
     }
   ],
   "family": null,
+  "institution": "NVIDIA DVL Group, ETH Zürich, U of Toronto",
   "previousVersion": null,
   "links": {
     "website": "https://research.nvidia.com/labs/dvl/projects/dvlt/",
@@ -55,10 +57,9 @@
     "https://arxiv.org/abs/2605.30215",
     "https://github.com/nv-tlabs/dvlt"
   ],
-  "verified": true,
+  "verified": false,
+  "needsReview": true,
   "featured": false,
   "boost": 1,
-  "curatorNotes": "Verified paper arXiv:2605.30215 and open-source project from NVIDIA DVL group.",
-  "institution": "NVIDIA DVL Group, ETH Zürich, U of Toronto",
-  "templatedDescription": false
+  "curatorNotes": "Verified paper arXiv:2605.30215 and open-source project from NVIDIA DVL group."
 }
