@@ -4,7 +4,7 @@
   "slug": "genception",
   "developer": "Academic Research",
   "releaseDate": "2026-06-01",
-  "updatedAt": "2026-07-25",
+  "updatedAt": "2026-07-26",
   "type": "research-preview",
   "status": "active",
   "modality": [
@@ -16,7 +16,7 @@
   "deployment": [
     "self-hostable"
   ],
-  "license": "Other/Custom",
+  "license": "proprietary",
   "parameters": "undisclosed",
   "contextWindow": "unknown",
   "description": "GenCeption repurposes a text-to-video generative diffusion model into a unified, feed-forward general-purpose vision learner steered by text instructions. Rather than training task-specific vision models, GenCeption demonstrates that a single model built on video generative pretraining can perform depth estimation, surface normal prediction, pose estimation, semantic segmentation, keypoint detection, and 4D grounding — all from the same weights — achieving SOTA performance across multiple tasks without task-specific fine-tuning.",
@@ -44,7 +44,8 @@
   "sources": [
     "https://genception.github.io/"
   ],
-  "verified": true,
+  "verified": false,
+  "needsReview": true,
   "featured": false,
   "boost": 1,
   "curatorNotes": "Partially enriched via migration on 2026-07-25. Manual review recommended."

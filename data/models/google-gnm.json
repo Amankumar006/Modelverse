@@ -4,14 +4,14 @@
   "slug": "google-gnm",
   "developer": "Google",
   "releaseDate": "2026-03-23",
-  "updatedAt": "2026-07-22",
+  "updatedAt": "2026-07-26",
   "type": "open-weights",
   "status": "active",
   "modality": [
     "image",
     "3d"
   ],
-  "primaryTask": "other",
+  "primaryTask": "chat-reasoning",
   "deployment": [
     "self-hostable"
   ],
@@ -43,7 +43,8 @@
   "sources": [
     "https://github.com/google/GNM"
   ],
-  "verified": true,
+  "verified": false,
+  "needsReview": true,
   "featured": false,
   "boost": 1,
   "curatorNotes": "Open-source release by Google. GNM Head is the first package — a high-fidelity parametric 3D head model. Apache-2.0 license for commercial and non-commercial use. Roadmap includes full body models."

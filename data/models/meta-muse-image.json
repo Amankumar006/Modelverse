@@ -4,7 +4,7 @@
   "slug": "meta-muse-image",
   "developer": "Meta",
   "releaseDate": "2026-07-01",
-  "updatedAt": "2026-07-22",
+  "updatedAt": "2026-07-26",
   "type": "closed-source",
   "status": "active",
   "modality": [
@@ -17,8 +17,9 @@
   ],
   "license": "Proprietary",
   "parameters": "undisclosed",
-  "contextWindow": "undisclosed",
+  "contextWindow": "128K tokens",
   "description": "Meta MUSE Image is a proprietary agentic image generation model developed by Meta Superintelligence Labs (MSL). It structures its generation process using inference-time reasoning and active background web searches to gather accurate real-world visual references prior to rendering, powering generative features across meta.ai, Instagram, and WhatsApp.",
+  "templatedDescription": false,
   "keyFeatures": [
     "Active Background Web Search: Executes live web searches during inference to pull real-world design references and visual context prior to rendering",
     "Facebook Marketplace Compositing: Browses Facebook Marketplace items to composite unbranded furniture and real-world items into interior design scenes",
@@ -28,6 +29,7 @@
   ],
   "benchmarks": [],
   "family": null,
+  "institution": "Meta",
   "previousVersion": null,
   "links": {
     "website": "https://meta.com"
@@ -42,10 +44,9 @@
   "sources": [
     "https://meta.com"
   ],
-  "verified": true,
+  "verified": false,
+  "needsReview": true,
   "featured": false,
   "boost": 1,
-  "curatorNotes": "Verified proprietary release from Meta Superintelligence Labs (MSL). Integrated across meta.ai, Instagram, and WhatsApp.",
-  "institution": "Meta",
-  "templatedDescription": false
+  "curatorNotes": "Verified proprietary release from Meta Superintelligence Labs (MSL). Integrated across meta.ai, Instagram, and WhatsApp."
 }

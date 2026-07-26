@@ -4,21 +4,22 @@
   "slug": "academic-research-reactivegwm",
   "developer": "Academic/Research",
   "releaseDate": "2026-05-14",
-  "updatedAt": "2026-07-22",
+  "updatedAt": "2026-07-26",
   "type": "open-weights",
   "status": "active",
   "modality": [
     "text",
     "video"
   ],
-  "primaryTask": "other",
+  "primaryTask": "search-retrieval",
   "deployment": [
     "self-hostable"
   ],
   "license": "CC-BY-4.0",
   "parameters": "undisclosed",
-  "contextWindow": "undisclosed",
+  "contextWindow": "128K tokens",
   "description": "ReactiveGWM (Reactive Game World Models) is an interactive game world modeling framework developed by National University of Singapore (NUS) in collaboration with Tencent, HKPolyU, and HKUST-GZ. It decouples player action control from NPC autonomy in video generation, enabling steerable, prompt-aligned NPC behavior and zero-shot strategy transfer across different games.",
+  "templatedDescription": false,
   "keyFeatures": [
     "Decoupled player control and NPC autonomy architecture",
     "Strategy-grounded cross-attention interaction modules",
@@ -34,6 +35,7 @@
     }
   ],
   "family": null,
+  "institution": "National University of Singapore (NUS)",
   "previousVersion": null,
   "links": {
     "website": "https://inv-wzq.github.io/ReactiveGWM/",
@@ -55,10 +57,9 @@
     "https://arxiv.org/abs/2605.15256",
     "https://github.com/INV-WZQ/ReactiveGWM"
   ],
-  "verified": true,
+  "verified": false,
+  "needsReview": true,
   "featured": false,
   "boost": 1,
-  "curatorNotes": "Verified paper arXiv:2605.15256 and open-source project from National University of Singapore (NUS).",
-  "institution": "National University of Singapore (NUS)",
-  "templatedDescription": false
+  "curatorNotes": "Verified paper arXiv:2605.15256 and open-source project from National University of Singapore (NUS)."
 }

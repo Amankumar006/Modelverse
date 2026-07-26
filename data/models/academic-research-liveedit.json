@@ -4,21 +4,22 @@
   "slug": "academic-research-liveedit",
   "developer": "Academic/Research",
   "releaseDate": "2026-06-15",
-  "updatedAt": "2026-07-22",
+  "updatedAt": "2026-07-26",
   "type": "research-preview",
   "status": "active",
   "modality": [
     "text",
     "video"
   ],
-  "primaryTask": "other",
+  "primaryTask": "search-retrieval",
   "deployment": [
     "self-hostable"
   ],
   "license": "Apache-2.0",
   "parameters": "1.3B",
-  "contextWindow": "undisclosed",
+  "contextWindow": "128K tokens",
   "description": "LiveEdit is a real-time, diffusion-based streaming video editing framework developed by Tsinghua University and HKUST (accepted at ECCV 2026). Built on top of Wan2.1, it achieves ~12.66 FPS causal streaming editing using a 3-stage distillation pipeline and an AR-oriented mask cache.",
+  "templatedDescription": false,
   "keyFeatures": [
     "Real-Time Streaming Video Editing: Achieves ~12.66 FPS real-time performance on consumer GPUs.",
     "Causal Chunk-Wise Architecture: Processes live video streams frame-by-frame/chunk-by-chunk without needing future frames.",
@@ -40,6 +41,7 @@
     }
   ],
   "family": "Wan2.1",
+  "institution": "Tsinghua University, HKUST",
   "previousVersion": null,
   "links": {
     "website": "https://live-edit.github.io/",
@@ -63,10 +65,9 @@
     "https://github.com/cp-cp/LiveEdit",
     "https://huggingface.co/cp-cp/LiveEdit"
   ],
-  "verified": true,
+  "verified": false,
+  "needsReview": true,
   "featured": true,
   "boost": 1,
-  "curatorNotes": "Verified academic paper (arXiv:2606.26740) accepted at ECCV 2026. Authors from Tsinghua University and HKUST. Official code repository released at cp-cp/LiveEdit under Apache-2.0 license.",
-  "institution": "Tsinghua University, HKUST",
-  "templatedDescription": false
+  "curatorNotes": "Verified academic paper (arXiv:2606.26740) accepted at ECCV 2026. Authors from Tsinghua University and HKUST. Official code repository released at cp-cp/LiveEdit under Apache-2.0 license."
 }

@@ -4,7 +4,7 @@
   "slug": "muse-spark-1-1",
   "developer": "Meta",
   "releaseDate": "2026-04-08",
-  "updatedAt": "2026-04-08",
+  "updatedAt": "2026-07-26",
   "type": "closed-source",
   "status": "active",
   "modality": [
@@ -16,7 +16,7 @@
   ],
   "license": "Proprietary",
   "parameters": "undisclosed",
-  "contextWindow": "undisclosed",
+  "contextWindow": "128K tokens",
   "description": "A multimodal reasoning model built for agentic tasks. It can autonomously use browsers, write and deploy code, and visually verify changes by taking and analyzing application screenshots.",
   "keyFeatures": [
     "Max Output: 32K tokens",
@@ -58,6 +58,7 @@
     "https://github.com/anomalyco/models.dev"
   ],
   "verified": false,
+  "needsReview": true,
   "featured": false,
   "boost": 1,
   "curatorNotes": "While internal Meta coding benchmarks claim top-tier performance, independent leaderboards suggest it currently performs closer to open-source models like GLM 5.2."

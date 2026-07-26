@@ -4,7 +4,7 @@
   "slug": "qwythos-9b-claude-mythos-5-1m-gguf",
   "developer": "empero-ai",
   "releaseDate": "2026-06-19",
-  "updatedAt": "2026-07-25",
+  "updatedAt": "2026-07-26",
   "type": "open-weights",
   "status": "active",
   "modality": [
@@ -16,7 +16,7 @@
     "self-hostable"
   ],
   "license": "APACHE-2.0",
-  "parameters": "undisclosed",
+  "parameters": "9B",
   "contextWindow": "unknown",
   "description": "Qwythos-9B-Claude-Mythos-5-1M-GGUF is a undisclosed-parameter image text to text model developed by empero-ai. Supports en language(s). Released on 2026-06-19 with 2,456 likes and 1,906,539 downloads on Hugging Face.",
   "keyFeatures": [
@@ -43,7 +43,8 @@
   "sources": [
     "https://huggingface.co/empero-ai/Qwythos-9B-Claude-Mythos-5-1M-GGUF"
   ],
-  "verified": true,
+  "verified": false,
+  "needsReview": true,
   "featured": false,
   "boost": 1,
   "curatorNotes": "Auto-ingested from HuggingFace Trending on 2026-07-25. Architecture: unknown. Params: undisclosed. License: APACHE-2.0."

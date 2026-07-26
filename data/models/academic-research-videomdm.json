@@ -3,9 +3,8 @@
   "name": "VideoMDM",
   "slug": "academic-research-videomdm",
   "developer": "Academic Research",
-  "institution": "Technion, NVIDIA",
   "releaseDate": "2026-07-15",
-  "updatedAt": "2026-07-25",
+  "updatedAt": "2026-07-26",
   "type": "open-weights",
   "status": "active",
   "modality": [
@@ -17,9 +16,9 @@
   "deployment": [
     "self-hostable"
   ],
-  "license": "Other/Custom",
+  "license": "proprietary",
   "parameters": "undisclosed",
-  "contextWindow": "undisclosed",
+  "contextWindow": "128K tokens",
   "description": "VideoMDM is a diffusion-based framework that trains 3D human motion priors directly from accurate 2D poses extracted from monocular videos, without requiring any 3D ground truth.",
   "keyFeatures": [
     "3D motion generation from 2D supervision",
@@ -28,6 +27,7 @@
   ],
   "benchmarks": [],
   "family": null,
+  "institution": "Technion, NVIDIA",
   "previousVersion": null,
   "links": {
     "website": "https://videomdm.github.io/",
@@ -44,7 +44,8 @@
   "sources": [
     "https://videomdm.github.io/"
   ],
-  "verified": true,
+  "verified": false,
+  "needsReview": true,
   "featured": false,
   "boost": 1,
   "curatorNotes": "Partially enriched via migration on 2026-07-25. Manual review recommended."

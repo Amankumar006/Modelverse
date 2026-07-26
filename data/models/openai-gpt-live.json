@@ -4,7 +4,7 @@
   "slug": "gpt-live",
   "developer": "OpenAI",
   "releaseDate": "2026-07-01",
-  "updatedAt": "2026-07-01",
+  "updatedAt": "2026-07-26",
   "type": "closed-source",
   "status": "active",
   "modality": [
@@ -17,7 +17,7 @@
   ],
   "license": "Proprietary",
   "parameters": "undisclosed",
-  "contextWindow": "undisclosed",
+  "contextWindow": "128K tokens",
   "description": "OpenAI's latest real-time voice interface designed to enable natural, flowing conversation. It supports dynamic interruptions, background task delegation to stronger frontier models, and can generate contextual visual responses in the UI.",
   "keyFeatures": [
     "Supports natural conversational interruptions and pauses",
@@ -38,5 +38,8 @@
     "https://www.youtube.com/watch?v=Ti1V7OI2Rro"
   ],
   "verified": false,
+  "needsReview": true,
+  "featured": false,
+  "boost": 1,
   "curatorNotes": "Details and specs extracted strictly from the video transcript. Release date estimated based on the context of the news roundup."
 }

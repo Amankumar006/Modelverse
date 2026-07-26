@@ -4,21 +4,22 @@
   "slug": "meta-brain2qwerty",
   "developer": "Meta",
   "releaseDate": "2025-02-24",
-  "updatedAt": "2026-07-22",
+  "updatedAt": "2026-07-26",
   "type": "open-weights",
   "status": "active",
   "modality": [
     "other",
     "text"
   ],
-  "primaryTask": "other",
+  "primaryTask": "chat-reasoning",
   "deployment": [
     "self-hostable"
   ],
   "license": "CC-BY-NC-4.0",
   "parameters": "undisclosed",
-  "contextWindow": "undisclosed",
+  "contextWindow": "128K tokens",
   "description": "Brain2Qwerty is a non-invasive Brain-Computer Interface (BCI) deep learning system developed by Meta AI (FAIR) in collaboration with the Basque Center on Cognition, Brain and Language (BCBL). It decodes text directly from non-invasive neural recordings—specifically Magnetoencephalography (MEG) and Electroencephalography (EEG)—captured while participants type on a QWERTY keyboard.",
+  "templatedDescription": false,
   "keyFeatures": [
     "Non-Invasive BCI: Decodes text directly from scalp neural recordings (MEG/EEG) without surgical electrode implantation",
     "3-Stage Deep Learning Pipeline: Integrates 1D/2D convolutional signal encoders, Transformer temporal sequence decoders, and LLM contextual post-processing",
@@ -49,6 +50,7 @@
     }
   ],
   "family": null,
+  "institution": "Meta AI (FAIR) & BCBL",
   "previousVersion": null,
   "links": {
     "website": "https://ai.meta.com/research/publications/brain2qwerty-decoding-speech-from-brain-signals/",
@@ -71,10 +73,9 @@
     "https://arxiv.org/abs/2502.17480",
     "https://github.com/facebookresearch/brain2qwerty"
   ],
-  "verified": true,
+  "verified": false,
+  "needsReview": true,
   "featured": true,
   "boost": 1,
-  "curatorNotes": "Verified paper arXiv:2502.17480 and open-source implementation from Meta AI (FAIR) and BCBL.",
-  "institution": "Meta AI (FAIR) & BCBL",
-  "templatedDescription": false
+  "curatorNotes": "Verified paper arXiv:2502.17480 and open-source implementation from Meta AI (FAIR) and BCBL."
 }

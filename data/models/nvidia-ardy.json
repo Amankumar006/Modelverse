@@ -4,18 +4,18 @@
   "slug": "ardy",
   "developer": "NVIDIA",
   "releaseDate": "2026-07-22",
-  "updatedAt": "2026-07-25",
+  "updatedAt": "2026-07-26",
   "type": "open-weights",
   "status": "active",
   "modality": [
     "text",
     "motion"
   ],
-  "primaryTask": "other",
+  "primaryTask": "chat-reasoning",
   "deployment": [
     "self-hostable"
   ],
-  "license": "Other/Custom",
+  "license": "proprietary",
   "parameters": "undisclosed",
   "contextWindow": "unknown",
   "description": "ARDY is an autoregressive diffusion model for interactive human motion generation with online text prompting and flexible kinematic constraints.",
@@ -44,6 +44,7 @@
     "https://github.com/anomalyco/models.dev"
   ],
   "verified": false,
+  "needsReview": true,
   "featured": false,
   "boost": 1,
   "curatorNotes": "Partially enriched via migration on 2026-07-25. Manual review recommended."

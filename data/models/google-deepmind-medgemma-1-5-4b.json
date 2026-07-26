@@ -4,7 +4,7 @@
   "slug": "medgemma-1-5-4b",
   "developer": "Google DeepMind",
   "releaseDate": "2026-01-15",
-  "updatedAt": "2026-07-22",
+  "updatedAt": "2026-07-26",
   "type": "open-weights",
   "status": "active",
   "modality": [
@@ -16,10 +16,11 @@
   "deployment": [
     "self-hostable"
   ],
-  "license": "Other/Custom",
+  "license": "proprietary",
   "parameters": "4B",
   "contextWindow": "128K tokens",
   "description": "MedGemma 1.5 4B is an open-weight multimodal vision-language model developed by Google DeepMind and Google Research as part of the Health AI Developer Foundations (HAI-DEF) program. Built on Gemma 3 and integrating MedSigLIP, it natively processes 2D/3D radiology scans and histopathology slides.",
+  "templatedDescription": false,
   "keyFeatures": [
     "High-Dimensional Medical Imaging Support: Native processing of 3D volumetric CT/MRI scans, whole-slide histopathology, and 2D clinical modalities",
     "Longitudinal Visual Reasoning: Analyzes sequential medical images (prior vs current X-rays) to track disease progression and anatomical landmarks",
@@ -45,6 +46,7 @@
     }
   ],
   "family": "Gemma",
+  "institution": "Google DeepMind / Google Research",
   "previousVersion": null,
   "links": {
     "website": "https://research.google",
@@ -66,10 +68,9 @@
     "https://arxiv.org/abs/2604.05081",
     "https://huggingface.co/google/medgemma-1.5-4b-it"
   ],
-  "verified": true,
+  "verified": false,
+  "needsReview": true,
   "featured": false,
   "boost": 1,
-  "curatorNotes": "Verified paper arXiv:2604.05081 and HuggingFace release from Google DeepMind and Google Health.",
-  "institution": "Google DeepMind / Google Research",
-  "templatedDescription": false
+  "curatorNotes": "Verified paper arXiv:2604.05081 and HuggingFace release from Google DeepMind and Google Health."
 }

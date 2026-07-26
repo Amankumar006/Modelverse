@@ -20,7 +20,11 @@
   "parameters": "undisclosed",
   "contextWindow": "1K tokens",
   "description": "Video model for image-to-video generation, editing, and extension workflows",
-  "keyFeatures": [],
+  "keyFeatures": [
+    "1K tokens context window",
+    "API-accessible managed endpoint",
+    "Tool & function calling support"
+  ],
   "benchmarks": [],
   "family": "grok",
   "previousVersion": null,
@@ -31,6 +35,7 @@
     "https://github.com/anomalyco/models.dev"
   ],
   "verified": false,
+  "needsReview": true,
   "featured": false,
   "boost": 1,
   "curatorNotes": "Skeleton entry imported from models.dev backfill (2026-07-26). Needs manual enrichment and primary-source verification."

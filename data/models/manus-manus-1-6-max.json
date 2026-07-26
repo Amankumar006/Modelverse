@@ -3,9 +3,8 @@
   "name": "Manus 1.6 Max",
   "slug": "manus-1-6-max",
   "developer": "Other",
-  "institution": "Butterfly Effect",
   "releaseDate": "2025-12-15",
-  "updatedAt": "2025-12-15",
+  "updatedAt": "2026-07-26",
   "type": "closed-source",
   "status": "active",
   "modality": [
@@ -18,8 +17,9 @@
   ],
   "license": "Proprietary",
   "parameters": "undisclosed",
-  "contextWindow": "undisclosed",
+  "contextWindow": "128K tokens",
   "description": "Butterfly Effect's flagship autonomous agent and action engine, featuring wide parallel research, visual chain-of-thought, and end-to-end full-stack web and mobile development.",
+  "templatedDescription": false,
   "keyFeatures": [
     "Wide Research parallel processing system-level search engine",
     "Mobile Development capabilities for compiling and deploying mobile applications",
@@ -27,6 +27,7 @@
   ],
   "benchmarks": [],
   "family": "Manus",
+  "institution": "Butterfly Effect",
   "previousVersion": null,
   "links": {
     "website": "https://manus.im"
@@ -41,8 +42,8 @@
     "https://manus.im/blog"
   ],
   "verified": false,
+  "needsReview": true,
   "featured": false,
   "boost": 1,
-  "curatorNotes": "Released alongside Manus 1.6 Lite. Features system-level virtualization and cloud sandboxes for full-stack code execution.",
-  "templatedDescription": false
+  "curatorNotes": "Released alongside Manus 1.6 Lite. Features system-level virtualization and cloud sandboxes for full-stack code execution."
 }

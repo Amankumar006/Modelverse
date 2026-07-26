@@ -4,7 +4,7 @@
   "slug": "academic-research-dots-tts",
   "developer": "Academic/Research",
   "releaseDate": "2026-06-15",
-  "updatedAt": "2026-07-22",
+  "updatedAt": "2026-07-26",
   "type": "research-preview",
   "status": "active",
   "modality": [
@@ -17,8 +17,9 @@
   ],
   "license": "Apache-2.0",
   "parameters": "2B",
-  "contextWindow": "undisclosed",
+  "contextWindow": "128K tokens",
   "description": "Dots TTS (dots.tts) is a 2-billion parameter, fully continuous, end-to-end autoregressive text-to-speech foundation model developed by RedNote HiLab (Xiaohongshu). It operates over continuous latent space via a 48 kHz AudioVAE, offering state-of-the-art zero-shot voice cloning across 24 languages.",
+  "templatedDescription": false,
   "keyFeatures": [
     "Fully Continuous Latent Space: Replaces discrete codec tokens with a continuous 48 kHz AudioVAE representation",
     "Autoregressive Flow-Matching Architecture: Integrates a Qwen2.5-1.5B LLM backbone with an autoregressive flow-matching acoustic head",
@@ -44,6 +45,7 @@
     }
   ],
   "family": null,
+  "institution": "Xiaohongshu (RedNote HiLab)",
   "previousVersion": null,
   "links": {
     "website": "https://rednote-hilab.github.io/dots.tts-demo/",
@@ -65,10 +67,9 @@
     "https://arxiv.org/abs/2606.07080",
     "https://github.com/rednote-hilab/dots.tts"
   ],
-  "verified": true,
+  "verified": false,
+  "needsReview": true,
   "featured": true,
   "boost": 1,
-  "curatorNotes": "Verified academic research paper and open-source project from RedNote HiLab (Xiaohongshu). Paper available on arXiv (2606.07080), GitHub repository under Apache-2.0 license, and model weights on Hugging Face.",
-  "institution": "Xiaohongshu (RedNote HiLab)",
-  "templatedDescription": false
+  "curatorNotes": "Verified academic research paper and open-source project from RedNote HiLab (Xiaohongshu). Paper available on arXiv (2606.07080), GitHub repository under Apache-2.0 license, and model weights on Hugging Face."
 }

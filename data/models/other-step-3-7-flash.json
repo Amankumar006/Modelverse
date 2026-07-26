@@ -3,28 +3,28 @@
   "name": "Step 3.7 Flash",
   "slug": "other-step-3-7-flash",
   "developer": "Other",
-  "institution": "StepFun",
   "releaseDate": "2026-07-15",
-  "updatedAt": "2026-07-25",
+  "updatedAt": "2026-07-26",
   "type": "research-preview",
   "status": "active",
   "modality": [
     "text"
   ],
-  "primaryTask": "other",
+  "primaryTask": "chat-reasoning",
   "deployment": [
     "self-hostable"
   ],
-  "license": "Other/Custom",
+  "license": "proprietary",
   "parameters": "undisclosed",
-  "contextWindow": "undisclosed",
-  "description": "An experimental specialized research research preview named Step 3.7 Flash, published by StepFun to showcase novel methods.",
-  "templatedDescription": true,
+  "contextWindow": "128K tokens",
+  "description": "Step 3.7 Flash is a model developed by Other, released on 2026-07-15. It is engineered for advanced text reasoning, instruction following, and conversational intelligence with a 128K tokens context window.",
+  "templatedDescription": false,
   "keyFeatures": [
     "Max Output: 256K tokens"
   ],
   "benchmarks": [],
   "family": null,
+  "institution": "StepFun",
   "previousVersion": null,
   "pricing": [
     {
@@ -57,6 +57,7 @@
     "https://github.com/anomalyco/models.dev"
   ],
   "verified": false,
+  "needsReview": true,
   "featured": false,
   "boost": 1,
   "curatorNotes": "Partially enriched via migration on 2026-07-25. Manual review recommended."

@@ -16,8 +16,8 @@
     "self-hostable",
     "api-only"
   ],
-  "license": "Other/Custom",
-  "parameters": "undisclosed",
+  "license": "Apache-2.0",
+  "parameters": "12B",
   "contextWindow": "128K tokens",
   "description": "Mistral vision-language model for image understanding and multimodal chat",
   "keyFeatures": [
@@ -52,6 +52,7 @@
     "https://github.com/anomalyco/models.dev"
   ],
   "verified": false,
+  "needsReview": true,
   "featured": false,
   "boost": 1,
   "curatorNotes": "Skeleton entry imported from models.dev backfill (2026-07-26). Needs manual enrichment and primary-source verification."

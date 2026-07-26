@@ -4,7 +4,7 @@
   "slug": "pixworld",
   "developer": "Other",
   "releaseDate": "2026-07-01",
-  "updatedAt": "2026-07-25",
+  "updatedAt": "2026-07-26",
   "type": "open-source",
   "status": "active",
   "modality": [
@@ -15,9 +15,9 @@
   "deployment": [
     "self-hostable"
   ],
-  "license": "Other/Custom",
+  "license": "proprietary",
   "parameters": "undisclosed",
-  "contextWindow": "undisclosed",
+  "contextWindow": "128K tokens",
   "description": "A 3D scene generator that reconstructs fully consistent 3D environments directly in pixel space from one or multiple reference images, avoiding the visual artifacts often caused by latent-space generation.",
   "keyFeatures": [
     "Generates 3D scenes in pixel space rather than latent space",
@@ -38,5 +38,8 @@
     "https://github.com/SensenGao/PixWorld"
   ],
   "verified": false,
+  "needsReview": true,
+  "featured": false,
+  "boost": 1,
   "curatorNotes": "Partially enriched via migration on 2026-07-25. Manual review recommended."
 }

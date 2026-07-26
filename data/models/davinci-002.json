@@ -4,7 +4,7 @@
   "slug": "davinci-002",
   "developer": "OpenAI",
   "releaseDate": "2023-08-22",
-  "updatedAt": "2026-07-14",
+  "updatedAt": "2026-07-26",
   "type": "closed-source",
   "status": "deprecated",
   "modality": [
@@ -18,7 +18,12 @@
   "parameters": "Unknown",
   "contextWindow": "Unknown",
   "description": "Replacement for the GPT-3 curie and davinci base models",
-  "keyFeatures": [],
+  "keyFeatures": [
+    "Unknown context window",
+    "Native reasoning & instruction tuning",
+    "API-accessible managed endpoint",
+    "Tool & function calling support"
+  ],
   "benchmarks": [],
   "family": "gpt-3-base",
   "previousVersion": null,
@@ -39,7 +44,8 @@
     "https://platform.openai.com/docs/deprecations",
     "https://github.com/anomalyco/models.dev"
   ],
-  "verified": true,
+  "verified": false,
+  "needsReview": true,
   "featured": false,
   "boost": 1,
   "curatorNotes": "Deprecated with shutdown date set for September 28, 2026 per official OpenAI deprecations documentation."

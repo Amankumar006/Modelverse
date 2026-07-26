@@ -4,7 +4,7 @@
   "slug": "liquid-ai-lfm-2-5-1-2b",
   "developer": "Liquid AI",
   "releaseDate": "2026-01-05",
-  "updatedAt": "2026-01-05",
+  "updatedAt": "2026-07-26",
   "type": "open-weights",
   "status": "active",
   "modality": [
@@ -15,10 +15,11 @@
     "self-hostable",
     "on-device"
   ],
-  "license": "Other/Custom",
+  "license": "proprietary",
   "parameters": "1.2B",
   "contextWindow": "33K tokens",
   "description": "Liquid AI's device-optimized hybrid model utilizing Liquid Neural Networks, designed for local edge AI agent deployment.",
+  "templatedDescription": false,
   "keyFeatures": [
     "Liquid Neural Network (LNN) hybrid architecture with gated short convolution blocks",
     "Extended pretraining on 28T tokens and scaled RL post-training",
@@ -27,18 +28,6 @@
   "benchmarks": [],
   "family": "liquid-ai-lfm-2-5",
   "previousVersion": null,
-  "links": {
-    "website": "https://www.liquid.ai/blog/introducing-lfm2-5-the-next-generation-of-on-device-ai"
-  },
-  "logo": null,
-  "tags": [
-    "liquid-neural-networks",
-    "edge-ai",
-    "on-device"
-  ],
-  "sources": [
-    "https://www.liquid.ai/blog/introducing-lfm2-5-the-next-generation-of-on-device-ai"
-  ],
   "costTiers": [
     {
       "id": "230m",
@@ -61,9 +50,21 @@
       "description": "Flagship MoE model (1.5B active)"
     }
   ],
+  "links": {
+    "website": "https://www.liquid.ai/blog/introducing-lfm2-5-the-next-generation-of-on-device-ai"
+  },
+  "logo": null,
+  "tags": [
+    "liquid-neural-networks",
+    "edge-ai",
+    "on-device"
+  ],
+  "sources": [
+    "https://www.liquid.ai/blog/introducing-lfm2-5-the-next-generation-of-on-device-ai"
+  ],
   "verified": false,
+  "needsReview": true,
   "featured": false,
   "boost": 1,
-  "curatorNotes": "Liquid's LFM 2.5 family incorporates Liquid Neural Networks (LNN) to achieve high performance on low-compute edge devices.",
-  "templatedDescription": false
+  "curatorNotes": "Liquid's LFM 2.5 family incorporates Liquid Neural Networks (LNN) to achieve high performance on low-compute edge devices."
 }

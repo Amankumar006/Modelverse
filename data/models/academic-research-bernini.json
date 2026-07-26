@@ -4,7 +4,7 @@
   "slug": "academic-research-bernini",
   "developer": "ByteDance Research",
   "releaseDate": "2026-05-24",
-  "updatedAt": "2026-07-22",
+  "updatedAt": "2026-07-26",
   "type": "open-weights",
   "status": "active",
   "modality": [
@@ -18,8 +18,9 @@
   ],
   "license": "Apache-2.0",
   "parameters": "14B (DiT Renderer) + 7B (MLLM Planner)",
-  "contextWindow": "undisclosed",
+  "contextWindow": "128K tokens",
   "description": "Bernini is a unified framework for video generation and editing developed by ByteDance Research. It decouples high-level semantic planning (Qwen2.5-VL-7B MLLM) from pixel rendering (Wan2.2-A14B DiT), delivering state-of-the-art instruction-following video generation and editing with minimal spatial-temporal drift.",
+  "templatedDescription": false,
   "keyFeatures": [
     "Decoupled Planner-Renderer Architecture (MLLM + DiT)",
     "Latent Semantic Planning in ViT Embedding Space",
@@ -46,6 +47,7 @@
     }
   ],
   "family": null,
+  "institution": "ByteDance Research",
   "previousVersion": null,
   "links": {
     "website": "https://bernini-ai.github.io/",
@@ -66,10 +68,9 @@
     "https://arxiv.org/abs/2605.22344",
     "https://github.com/bytedance/Bernini"
   ],
-  "verified": true,
+  "verified": false,
+  "needsReview": true,
   "featured": false,
   "boost": 1,
-  "curatorNotes": "Verified lab affiliation: ByteDance Research. Paper released May 2026. Code and model weights published on GitHub and HuggingFace under Apache 2.0.",
-  "institution": "ByteDance Research",
-  "templatedDescription": false
+  "curatorNotes": "Verified lab affiliation: ByteDance Research. Paper released May 2026. Code and model weights published on GitHub and HuggingFace under Apache 2.0."
 }

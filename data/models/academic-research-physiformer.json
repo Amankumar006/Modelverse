@@ -4,21 +4,22 @@
   "slug": "academic-research-physiformer",
   "developer": "Academic/Research",
   "releaseDate": "2026-06-25",
-  "updatedAt": "2026-07-22",
+  "updatedAt": "2026-07-26",
   "type": "open-weights",
   "status": "active",
   "modality": [
     "3d",
     "video"
   ],
-  "primaryTask": "other",
+  "primaryTask": "search-retrieval",
   "deployment": [
     "self-hostable"
   ],
   "license": "CC-BY-NC-ND-4.0",
   "parameters": "undisclosed",
-  "contextWindow": "undisclosed",
+  "contextWindow": "128K tokens",
   "description": "PhysiFormer is a diffusion transformer model developed by Visual Geometry Group (VGG), University of Oxford to simulate physically plausible 3D object dynamics directly in 3D world coordinates. Conditioned on initial 3D vertex positions, velocities, and material type descriptors, it treats full-horizon 3D trajectory prediction as a single denoising process.",
+  "templatedDescription": false,
   "keyFeatures": [
     "World-Space Mesh Trajectory Diffusion: Casts 3D vertex trajectory prediction into a single denoising diffusion process directly in 3D world coordinates",
     "Material & Velocity Conditioning: Conditioned on per-vertex initial positions, velocities, and material properties (rigid or elastic mechanics)",
@@ -34,6 +35,7 @@
     }
   ],
   "family": null,
+  "institution": "University of Oxford (VGG)",
   "previousVersion": null,
   "links": {
     "website": "https://yimingc9.github.io/physiformer/",
@@ -54,10 +56,9 @@
     "https://arxiv.org/abs/2606.27364",
     "https://github.com/yimingc9/PhysiFormer"
   ],
-  "verified": true,
+  "verified": false,
+  "needsReview": true,
   "featured": false,
   "boost": 1,
-  "curatorNotes": "Verified paper arXiv:2606.27364 and open-source project from University of Oxford VGG.",
-  "institution": "University of Oxford (VGG)",
-  "templatedDescription": false
+  "curatorNotes": "Verified paper arXiv:2606.27364 and open-source project from University of Oxford VGG."
 }

@@ -4,21 +4,22 @@
   "slug": "academic-research-luna",
   "developer": "Academic/Research",
   "releaseDate": "2026-07-15",
-  "updatedAt": "2026-07-25",
+  "updatedAt": "2026-07-26",
   "type": "research-preview",
   "status": "active",
   "modality": [
     "image",
     "3d"
   ],
-  "primaryTask": "other",
+  "primaryTask": "search-retrieval",
   "deployment": [
     "self-hostable"
   ],
-  "license": "Other/Custom",
+  "license": "proprietary",
   "parameters": "undisclosed",
-  "contextWindow": "undisclosed",
+  "contextWindow": "128K tokens",
   "description": "Developed by researchers from HKUST, Tsinghua University, and Meta, Luna (Learning Universal 3D Human Animation Beyond Skinning) is an LBS-free neural animation model presented at ECCV 2026. It maps 2D controls directly into 3D Gaussian deformations for realistic human avatars.",
+  "templatedDescription": false,
   "keyFeatures": [
     "LBS-Free Neural Animation bypassing parametric body fitting artifacts",
     "Direct mapping of 2D controls to 3D Gaussian field deformations",
@@ -34,6 +35,7 @@
     }
   ],
   "family": null,
+  "institution": "HKUST, Tsinghua University, Meta",
   "previousVersion": null,
   "links": {
     "website": "https://penghtyx.github.io/LUNA/",
@@ -52,10 +54,9 @@
     "https://penghtyx.github.io/LUNA/",
     "https://arxiv.org/abs/2606.31981"
   ],
-  "verified": true,
+  "verified": false,
+  "needsReview": true,
   "featured": false,
   "boost": 1,
-  "curatorNotes": "Partially enriched via migration on 2026-07-25. Manual review recommended.",
-  "institution": "HKUST, Tsinghua University, Meta",
-  "templatedDescription": false
+  "curatorNotes": "Partially enriched via migration on 2026-07-25. Manual review recommended."
 }

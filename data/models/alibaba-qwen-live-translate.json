@@ -4,7 +4,7 @@
   "slug": "qwen-live-translate",
   "developer": "Alibaba",
   "releaseDate": "2026-05-15",
-  "updatedAt": "2026-07-22",
+  "updatedAt": "2026-07-26",
   "type": "open-weights",
   "status": "active",
   "modality": [
@@ -19,8 +19,9 @@
   ],
   "license": "Apache-2.0",
   "parameters": "undisclosed",
-  "contextWindow": "undisclosed",
+  "contextWindow": "1.0M tokens",
   "description": "Qwen Live Translate (Qwen3.5-LiveTranslate-Flash) is Alibaba's real-time multimodal simultaneous speech-to-speech and speech-to-text translation model family built on the Qwen-Omni architecture. It fuses audio, text, and visual input (lip movements and facial context) for low-latency interpretation and voice cloning.",
+  "templatedDescription": false,
   "keyFeatures": [
     "Multimodal Audio-Visual Understanding: Integrates audio, text, and visual cues (lip movements, on-screen text) to resolve translation ambiguities",
     "Ultra-Low Latency Streaming: Utilizes 'Readable Unit' chunk-based streaming to achieve end-to-end speech-to-speech latency down to 2.8s",
@@ -41,6 +42,7 @@
     }
   ],
   "family": "Qwen",
+  "institution": "Alibaba Group (Tongyi Lab)",
   "previousVersion": null,
   "links": {
     "website": "https://qwenlm.github.io/",
@@ -61,10 +63,9 @@
     "https://arxiv.org/abs/2604.15804",
     "https://github.com/QwenLM"
   ],
-  "verified": true,
+  "verified": false,
+  "needsReview": true,
   "featured": false,
   "boost": 1,
-  "curatorNotes": "Verified paper arXiv:2604.15804 and open-weights release from Alibaba Qwen Team.",
-  "institution": "Alibaba Group (Tongyi Lab)",
-  "templatedDescription": false
+  "curatorNotes": "Verified paper arXiv:2604.15804 and open-weights release from Alibaba Qwen Team."
 }

@@ -4,7 +4,7 @@
   "slug": "academic-research-scail-2",
   "developer": "Academic/Research",
   "releaseDate": "2026-06-09",
-  "updatedAt": "2026-07-22",
+  "updatedAt": "2026-07-26",
   "type": "open-weights",
   "status": "active",
   "modality": [
@@ -17,8 +17,9 @@
   ],
   "license": "Apache-2.0",
   "parameters": "undisclosed",
-  "contextWindow": "undisclosed",
+  "contextWindow": "128K tokens",
   "description": "SCAIL 2 is an open-source end-to-end framework for controlled character animation and video-to-video motion transfer developed by Tsinghua University (KEG Group) and Z.ai. It performs motion transfer directly from driving video to reference character without relying on intermediate representations like 3D skeletons, OpenPose maps, or depth maps.",
+  "templatedDescription": false,
   "keyFeatures": [
     "End-to-End Motion Transfer Architecture: Bypasses traditional pose skeleton/depth map extraction, enabling motion transfer onto arbitrary character styles",
     "Unified In-Context Mask & Mode-Specific RoPE Conditioning: Uses in-context mask conditioning and spatial/temporal RoPE to unify single-character and multi-character interaction",
@@ -34,6 +35,7 @@
     }
   ],
   "family": null,
+  "institution": "Tsinghua University (KEG Group)",
   "previousVersion": null,
   "links": {
     "website": "https://teal024.github.io/SCAIL-2/",
@@ -55,10 +57,9 @@
     "https://arxiv.org/abs/2606.10804",
     "https://github.com/zai-org/SCAIL-2"
   ],
-  "verified": true,
+  "verified": false,
+  "needsReview": true,
   "featured": false,
   "boost": 1,
-  "curatorNotes": "Verified paper arXiv:2606.10804 and open-source project from Tsinghua University KEG Group and Z.ai.",
-  "institution": "Tsinghua University (KEG Group)",
-  "templatedDescription": false
+  "curatorNotes": "Verified paper arXiv:2606.10804 and open-source project from Tsinghua University KEG Group and Z.ai."
 }

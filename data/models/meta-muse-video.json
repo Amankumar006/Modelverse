@@ -4,7 +4,7 @@
   "slug": "muse-video",
   "developer": "Meta",
   "releaseDate": "2026-07-01",
-  "updatedAt": "2026-07-01",
+  "updatedAt": "2026-07-26",
   "type": "research-preview",
   "status": "active",
   "modality": [
@@ -17,7 +17,7 @@
   ],
   "license": "Proprietary",
   "parameters": "undisclosed",
-  "contextWindow": "undisclosed",
+  "contextWindow": "128K tokens",
   "description": "Meta's previewed video generation model showcasing complex physical comprehension and natively integrated audio.",
   "keyFeatures": [
     "Audio generation is natively baked into the video rendering process",
@@ -35,5 +35,8 @@
     "https://www.youtube.com/watch?v=Ti1V7OI2Rro"
   ],
   "verified": false,
+  "needsReview": true,
+  "featured": false,
+  "boost": 1,
   "curatorNotes": "Currently in preview mode with no API availability or technical specifics disclosed in the transcript."
 }

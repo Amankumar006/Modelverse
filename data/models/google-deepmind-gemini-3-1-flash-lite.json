@@ -4,7 +4,7 @@
   "slug": "google-deepmind-gemini-3-1-flash-lite",
   "developer": "Google DeepMind",
   "releaseDate": "2026-03-03",
-  "updatedAt": "2026-03-03",
+  "updatedAt": "2026-07-26",
   "type": "api-only",
   "status": "active",
   "modality": [
@@ -20,7 +20,7 @@
   ],
   "license": "Proprietary",
   "parameters": "undisclosed",
-  "contextWindow": "undisclosed",
+  "contextWindow": "1.0M tokens",
   "description": "An extremely cost-effective model designed for high-frequency everyday tasks and bulk API queries, rivaling larger models.",
   "keyFeatures": [
     "Max Output: 66K tokens",
@@ -55,7 +55,8 @@
     "https://en.wikipedia.org/wiki/Gemini_(language_model)",
     "https://github.com/anomalyco/models.dev"
   ],
-  "verified": true,
+  "verified": false,
+  "needsReview": true,
   "featured": false,
   "boost": 1,
   "curatorNotes": ""

@@ -15,8 +15,8 @@
     "self-hostable",
     "api-only"
   ],
-  "license": "Other/Custom",
-  "parameters": "undisclosed",
+  "license": "Apache-2.0",
+  "parameters": "30B",
   "contextWindow": "262K tokens",
   "description": "Smaller Qwen coder for efficient local agents and repo-level fixes",
   "keyFeatures": [
@@ -67,6 +67,7 @@
     "https://github.com/anomalyco/models.dev"
   ],
   "verified": false,
+  "needsReview": true,
   "featured": false,
   "boost": 1,
   "curatorNotes": "Skeleton entry imported from models.dev backfill (2026-07-26). Needs manual enrichment and primary-source verification."

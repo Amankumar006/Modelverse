@@ -4,18 +4,18 @@
   "slug": "muscriptor",
   "developer": "Mirelo AI",
   "releaseDate": "2026-07-09",
-  "updatedAt": "2026-07-25",
+  "updatedAt": "2026-07-26",
   "type": "open-weights",
   "status": "active",
   "modality": [
     "audio"
   ],
-  "primaryTask": "other",
+  "primaryTask": "chat-reasoning",
   "deployment": [
     "api-only",
     "self-hostable"
   ],
-  "license": "Other/Custom",
+  "license": "proprietary",
   "parameters": "undisclosed",
   "contextWindow": "unknown",
   "description": "MuScriptor is an open-weights multi-instrument audio-to-MIDI model developed by Mirelo AI and Kyutai.",
@@ -42,6 +42,7 @@
     "https://mirelo.ai/blog/turning-audio-to-midi"
   ],
   "verified": false,
+  "needsReview": true,
   "featured": false,
   "boost": 1,
   "curatorNotes": "Partially enriched via migration on 2026-07-25. Manual review recommended."

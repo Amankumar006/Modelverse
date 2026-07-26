@@ -4,13 +4,13 @@
   "slug": "lucida",
   "developer": "Ege Orcun",
   "releaseDate": "2026-05-01",
-  "updatedAt": "2026-07-22",
+  "updatedAt": "2026-07-26",
   "type": "open-weights",
   "status": "active",
   "modality": [
     "image"
   ],
-  "primaryTask": "other",
+  "primaryTask": "chat-reasoning",
   "deployment": [
     "self-hostable",
     "api-only"
@@ -72,7 +72,8 @@
     "https://github.com/egeorcun/lucida",
     "https://huggingface.co/egeorcun/lucida"
   ],
-  "verified": true,
+  "verified": false,
+  "needsReview": true,
   "featured": false,
   "boost": 1,
   "curatorNotes": "BiRefNet fine-tune by Ege Orcun. v7 achieves best overall MAE (0.0257) of all measured models including commercial APIs. MIT license. Available on HuggingFace and ComfyUI official collection."

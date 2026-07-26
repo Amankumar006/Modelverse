@@ -16,7 +16,7 @@
     "api-only"
   ],
   "license": "CC-BY-NC-4.0",
-  "parameters": "undisclosed",
+  "parameters": "32B",
   "contextWindow": "128K tokens",
   "description": "Open multilingual model optimized for generation across 23 languages",
   "keyFeatures": [
@@ -36,6 +36,7 @@
     "https://github.com/anomalyco/models.dev"
   ],
   "verified": false,
+  "needsReview": true,
   "featured": false,
   "boost": 1,
   "curatorNotes": "Skeleton entry imported from models.dev backfill (2026-07-26). Needs manual enrichment and primary-source verification."

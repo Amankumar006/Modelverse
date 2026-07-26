@@ -4,7 +4,7 @@
   "slug": "seedream-5-pro",
   "developer": "ByteDance",
   "releaseDate": "2026-07-08",
-  "updatedAt": "2026-07-22",
+  "updatedAt": "2026-07-26",
   "type": "closed-source",
   "status": "active",
   "modality": [
@@ -17,8 +17,9 @@
   ],
   "license": "Proprietary",
   "parameters": "undisclosed",
-  "contextWindow": "undisclosed",
+  "contextWindow": "128K tokens",
   "description": "Seedream 5.0 Pro is ByteDance's flagship multimodal image generation and interactive precision editing model. Designed for professional creative workflows, it features native layer separation, interactive grounded editing, high-density multilingual typography, and multi-reference consistency up to 4K resolution.",
+  "templatedDescription": false,
   "keyFeatures": [
     "Native Layered & Interactive Local Editing: Point selection, lasso selection, sketch guidance, and material swapping without altering unselected regions",
     "High-Density Multilingual Typography: Advanced layout and text rendering optimized for infographics across 10-14 languages",
@@ -39,6 +40,7 @@
     }
   ],
   "family": "Seedream",
+  "institution": "ByteDance (Seed Research Team)",
   "previousVersion": null,
   "links": {
     "website": "https://www.bytedance.com",
@@ -57,10 +59,9 @@
     "https://www.bytedance.com",
     "https://github.com/ByteDance-Seed"
   ],
-  "verified": true,
+  "verified": false,
+  "needsReview": true,
   "featured": true,
   "boost": 1,
-  "curatorNotes": "Verified release from ByteDance Seed Research Team. Commercial API access via BytePlus ModelArk.",
-  "institution": "ByteDance (Seed Research Team)",
-  "templatedDescription": false
+  "curatorNotes": "Verified release from ByteDance Seed Research Team. Commercial API access via BytePlus ModelArk."
 }

@@ -16,8 +16,8 @@
     "self-hostable",
     "api-only"
   ],
-  "license": "Other/Custom",
-  "parameters": "undisclosed",
+  "license": "Llama-3.3",
+  "parameters": "17B",
   "contextWindow": "3.5M tokens",
   "description": "Open Llama with long-context vision for efficient multimodal agents",
   "keyFeatures": [
@@ -52,6 +52,7 @@
     "https://github.com/anomalyco/models.dev"
   ],
   "verified": false,
+  "needsReview": true,
   "featured": false,
   "boost": 1,
   "curatorNotes": "Skeleton entry imported from models.dev backfill (2026-07-26). Needs manual enrichment and primary-source verification."

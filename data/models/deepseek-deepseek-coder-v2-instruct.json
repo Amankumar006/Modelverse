@@ -4,7 +4,7 @@
   "slug": "deepseek-coder-v2-instruct",
   "developer": "DeepSeek",
   "releaseDate": "2024-06-17",
-  "updatedAt": "2024-06-17",
+  "updatedAt": "2026-07-26",
   "type": "open-weights",
   "status": "active",
   "modality": [
@@ -15,7 +15,7 @@
     "self-hostable",
     "api-only"
   ],
-  "license": "Other/Custom",
+  "license": "MIT",
   "parameters": "236B MoE (21B active)",
   "contextWindow": "128K",
   "description": "An open Mixture-of-Experts coding model by DeepSeek that matches or exceeds GPT-4 Turbo in competitive programming and code reasoning.",
@@ -46,6 +46,9 @@
   "sources": [
     "https://github.com/deepseek-ai/DeepSeek-Coder-V2"
   ],
-  "verified": true,
+  "verified": false,
+  "needsReview": true,
+  "featured": false,
+  "boost": 1,
   "curatorNotes": "Governed by the DeepSeek Model License Agreement. Highly competitive coding MoE."
 }

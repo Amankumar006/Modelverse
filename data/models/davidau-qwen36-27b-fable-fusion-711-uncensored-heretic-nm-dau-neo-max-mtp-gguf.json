@@ -4,7 +4,7 @@
   "slug": "qwen36-27b-fable-fusion-711-uncensored-heretic-nm-dau-neo-max-mtp-gguf",
   "developer": "DavidAU",
   "releaseDate": "2026-07-17",
-  "updatedAt": "2026-07-25",
+  "updatedAt": "2026-07-26",
   "type": "open-weights",
   "status": "active",
   "modality": [
@@ -16,7 +16,7 @@
     "self-hostable"
   ],
   "license": "APACHE-2.0",
-  "parameters": "undisclosed",
+  "parameters": "27B",
   "contextWindow": "unknown",
   "description": "Qwen3.6-27B-Fable-Fusion-711-Uncensored-Heretic-NM-DAU-NEO-MAX-MTP-GGUF is a undisclosed-parameter image text to text model developed by DavidAU. Supports en, zh language(s). Released on 2026-07-17 with 496 likes and 407,421 downloads on Hugging Face.",
   "keyFeatures": [
@@ -42,7 +42,8 @@
   "sources": [
     "https://huggingface.co/DavidAU/Qwen3.6-27B-Fable-Fusion-711-Uncensored-Heretic-NM-DAU-NEO-MAX-MTP-GGUF"
   ],
-  "verified": true,
+  "verified": false,
+  "needsReview": true,
   "featured": false,
   "boost": 1,
   "curatorNotes": "Auto-ingested from HuggingFace Trending on 2026-07-25. Architecture: unknown. Params: undisclosed. License: APACHE-2.0."

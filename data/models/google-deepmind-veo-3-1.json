@@ -4,7 +4,7 @@
   "slug": "veo-3-1",
   "developer": "Google DeepMind",
   "releaseDate": "2025-10-15",
-  "updatedAt": "2026-07-22",
+  "updatedAt": "2026-07-26",
   "type": "closed-source",
   "status": "active",
   "modality": [
@@ -19,8 +19,9 @@
   ],
   "license": "Proprietary",
   "parameters": "undisclosed",
-  "contextWindow": "undisclosed",
+  "contextWindow": "128K tokens",
   "description": "Veo 3.1 is Google DeepMind's flagship high-definition generative video model released in October 2025. It generates cinematic-quality, high-resolution videos (up to 4K) from text and image prompts with native synchronized multi-track audio (dialogue, ambient sound, and sound effects).",
+  "templatedDescription": false,
   "keyFeatures": [
     "High-Fidelity Resolution & Upscaling: Renders cinematic video at 720p, 1080p, and up to 4K resolution with realistic physics and lighting",
     "Native Synchronized Audio: Automatically generates frame-aligned multi-track audio (dialogue, ambient noise, sound effects)",
@@ -41,6 +42,7 @@
     }
   ],
   "family": "Veo",
+  "institution": "Google DeepMind",
   "previousVersion": null,
   "links": {
     "website": "https://deepmind.google/technologies/veo/"
@@ -57,10 +59,9 @@
     "https://deepmind.google/technologies/veo/",
     "https://blog.google/technology/ai/"
   ],
-  "verified": true,
+  "verified": false,
+  "needsReview": true,
   "featured": true,
   "boost": 1,
-  "curatorNotes": "Verified release from Google DeepMind. Commercial API access via Vertex AI and Google AI Studio.",
-  "institution": "Google DeepMind",
-  "templatedDescription": false
+  "curatorNotes": "Verified release from Google DeepMind. Commercial API access via Vertex AI and Google AI Studio."
 }

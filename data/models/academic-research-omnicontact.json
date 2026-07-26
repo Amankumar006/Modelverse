@@ -4,21 +4,22 @@
   "slug": "academic-research-omnicontact",
   "developer": "Academic/Research",
   "releaseDate": "2026-06-24",
-  "updatedAt": "2026-07-22",
+  "updatedAt": "2026-07-26",
   "type": "research-preview",
   "status": "active",
   "modality": [
     "vision",
     "robotics"
   ],
-  "primaryTask": "other",
+  "primaryTask": "multimodal-general",
   "deployment": [
     "self-hostable"
   ],
   "license": "Apache-2.0",
   "parameters": "undisclosed",
-  "contextWindow": "undisclosed",
+  "contextWindow": "128K tokens",
   "description": "OmniContact is a hierarchical framework for generalizable humanoid loco-manipulation developed by Noitom Robotics and HKUST. Centered on 'Contact Flow' (CF) representations, it combines high-level reference synthesis (CF-Gen) with 50Hz closed-loop tracking (CF-Track) to enable long-horizon meta-skill chaining, autonomous failure recovery, and real-time execution across tasks like carrying, pushing, sliding, and relocating.",
+  "templatedDescription": false,
   "keyFeatures": [
     "Contact Flow Interface: Unifies body trajectories and binary contact signals into a compact representation for seamlessly chaining meta-skills.",
     "CF-Gen Module: High-level planner that heuristically generates task-space contact-flow references for long-horizon task execution.",
@@ -49,6 +50,7 @@
     }
   ],
   "family": null,
+  "institution": "Noitom Robotics, HKUST",
   "previousVersion": null,
   "links": {
     "website": "https://omnicontact.github.io/",
@@ -71,10 +73,9 @@
     "https://github.com/Ingrid789/OmniContact_sim2sim",
     "https://huggingface.co/datasets/lightcone02/OmniContact-Dataset"
   ],
-  "verified": true,
+  "verified": false,
+  "needsReview": true,
   "featured": false,
   "boost": 1,
-  "curatorNotes": "Verified academic collaboration between Noitom Robotics and HKUST. Paper published on arXiv (arXiv:2606.26201). Official sim2sim codebase on GitHub and dataset on Hugging Face.",
-  "institution": "Noitom Robotics, HKUST",
-  "templatedDescription": false
+  "curatorNotes": "Verified academic collaboration between Noitom Robotics and HKUST. Paper published on arXiv (arXiv:2606.26201). Official sim2sim codebase on GitHub and dataset on Hugging Face."
 }

@@ -4,7 +4,7 @@
   "slug": "academic-research-anchorworld",
   "developer": "Academic/Research",
   "releaseDate": "2026-06-05",
-  "updatedAt": "2026-07-25",
+  "updatedAt": "2026-07-26",
   "type": "research-preview",
   "status": "active",
   "modality": [
@@ -16,10 +16,11 @@
   "deployment": [
     "self-hostable"
   ],
-  "license": "Other/Custom",
+  "license": "proprietary",
   "parameters": "undisclosed",
-  "contextWindow": "undisclosed",
+  "contextWindow": "128K tokens",
   "description": "AnchorWorld is an embodied egocentric world simulation framework that enables interactive, 3D motion-driven video generation with view-based evolution customization via spatial anchor views.",
+  "templatedDescription": false,
   "keyFeatures": [
     "Embodied 3D Human Motion Control (SMPL-X)",
     "Hybrid-View Exogenous Training Supervision",
@@ -40,6 +41,7 @@
     }
   ],
   "family": null,
+  "institution": "Tsinghua University, HUST, Kuaishou (Kling Team)",
   "previousVersion": null,
   "links": {
     "website": "https://yuli0103.github.io/AnchorWorld/",
@@ -60,10 +62,9 @@
     "https://arxiv.org/abs/2606.07326",
     "https://huggingface.co/datasets/lyabc/anchorworld-dataset"
   ],
-  "verified": true,
+  "verified": false,
+  "needsReview": true,
   "featured": false,
   "boost": 1,
-  "curatorNotes": "Partially enriched via migration on 2026-07-25. Manual review recommended.",
-  "institution": "Tsinghua University, HUST, Kuaishou (Kling Team)",
-  "templatedDescription": false
+  "curatorNotes": "Partially enriched via migration on 2026-07-25. Manual review recommended."
 }

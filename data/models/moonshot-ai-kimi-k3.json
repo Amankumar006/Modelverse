@@ -4,7 +4,7 @@
   "slug": "moonshot-ai-kimi-k3",
   "developer": "Moonshot AI",
   "releaseDate": "2026-07-25",
-  "updatedAt": "2026-07-17",
+  "updatedAt": "2026-07-26",
   "type": "open-source",
   "status": "active",
   "modality": [
@@ -17,7 +17,7 @@
     "api-only",
     "self-hostable"
   ],
-  "license": "Other/Custom",
+  "license": "proprietary",
   "parameters": "2.8T",
   "contextWindow": "1M",
   "description": "Kimi K3 is Kimi's flagship 2.8T open-source model built on Kimi Delta Attention (KDA) and Attention Residuals. It features native visual understanding for images and video, a 1M-token context window with automatic caching, and an always-on thinking mode designed for frontier intelligence scenarios like long-horizon coding and knowledge work.",
@@ -68,7 +68,8 @@
     "https://platform.kimi.ai/docs/llms.txt",
     "https://github.com/anomalyco/models.dev"
   ],
-  "verified": true,
+  "verified": false,
+  "needsReview": true,
   "featured": false,
   "boost": 1,
   "curatorNotes": ""

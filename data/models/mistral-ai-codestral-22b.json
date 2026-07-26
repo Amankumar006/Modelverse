@@ -4,7 +4,7 @@
   "slug": "codestral-22b",
   "developer": "Mistral AI",
   "releaseDate": "2024-05-29",
-  "updatedAt": "2024-05-29",
+  "updatedAt": "2026-07-26",
   "type": "open-weights",
   "status": "active",
   "vendorApiStatus": "deprecated",
@@ -16,7 +16,7 @@
     "self-hostable",
     "api-only"
   ],
-  "license": "Other/Custom",
+  "license": "Apache-2.0",
   "parameters": "22B",
   "contextWindow": "32K",
   "description": "Mistral AI's specialized open-weights model optimized for code generation, supporting over 80 programming languages.",
@@ -47,6 +47,9 @@
     "https://mistral.ai/news/codestral/",
     "https://docs.mistral.ai"
   ],
-  "verified": true,
+  "verified": false,
+  "needsReview": true,
+  "featured": false,
+  "boost": 1,
   "curatorNotes": "Released under the Mistral Non-Production License (MNPL) for research and non-commercial testing."
 }

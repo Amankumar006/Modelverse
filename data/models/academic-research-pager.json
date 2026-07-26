@@ -4,7 +4,7 @@
   "slug": "academic-research-pager",
   "developer": "Academic/Research",
   "releaseDate": "2026-07-15",
-  "updatedAt": "2026-07-22",
+  "updatedAt": "2026-07-26",
   "type": "research-preview",
   "status": "active",
   "modality": [
@@ -12,14 +12,15 @@
     "image",
     "3d"
   ],
-  "primaryTask": "other",
+  "primaryTask": "search-retrieval",
   "deployment": [
     "self-hostable"
   ],
   "license": "CC-BY-NC-4.0",
   "parameters": "undisclosed",
-  "contextWindow": "undisclosed",
+  "contextWindow": "128K tokens",
   "description": "PaGeR (Panoramic Geometry Reconstruction) is a unified framework from ETH Zurich (Photogrammetry and Remote Sensing Lab) that adapts perspective 3D foundation models (Depth Anything 3) to single-pass panoramic geometry estimation, predicting scale-invariant depth, metric depth, surface normals, and sky masks.",
+  "templatedDescription": false,
   "keyFeatures": [
     "Unified Panoramic Geometry Estimation: Single-pass prediction of scale-invariant depth, metric depth, surface normals, and sky masks from a 360° panorama",
     "Cubemap Projection Architecture: Projects panoramas into a fixed 6-face cubemap (6x504x504) ensuring constant VRAM and runtime regardless of input resolution",
@@ -45,6 +46,7 @@
     }
   ],
   "family": null,
+  "institution": "ETH Zurich (Photogrammetry and Remote Sensing Lab)",
   "previousVersion": null,
   "links": {
     "website": "https://pager360.github.io/",
@@ -67,10 +69,9 @@
     "https://arxiv.org/abs/2605.26368",
     "https://github.com/prs-eth/PaGeR"
   ],
-  "verified": true,
+  "verified": false,
+  "needsReview": true,
   "featured": true,
   "boost": 1,
-  "curatorNotes": "Verified academic research paper and open-source implementation from the Photogrammetry and Remote Sensing (PRS) Lab at ETH Zurich. Paper available on arXiv (2605.26368), GitHub repository under CC BY-NC 4.0 license, and pretrained models on Hugging Face.",
-  "institution": "ETH Zurich (Photogrammetry and Remote Sensing Lab)",
-  "templatedDescription": false
+  "curatorNotes": "Verified academic research paper and open-source implementation from the Photogrammetry and Remote Sensing (PRS) Lab at ETH Zurich. Paper available on arXiv (2605.26368), GitHub repository under CC BY-NC 4.0 license, and pretrained models on Hugging Face."
 }

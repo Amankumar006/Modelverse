@@ -4,7 +4,7 @@
   "slug": "wan-streamer-0-3",
   "developer": "Alibaba Group",
   "releaseDate": "2026-07-16",
-  "updatedAt": "2026-07-25",
+  "updatedAt": "2026-07-26",
   "type": "research-preview",
   "status": "active",
   "modality": [
@@ -16,7 +16,7 @@
   "deployment": [
     "api-only"
   ],
-  "license": "Other/Custom",
+  "license": "Apache-2.0",
   "parameters": "undisclosed",
   "contextWindow": "unknown",
   "description": "Wan Streamer v0.3 learns video as a persistent world plus the events that unfold inside it, bringing free-form behavior to real-time audio-visual interaction.",
@@ -41,6 +41,7 @@
     "https://wan-streamer.com/v0.3/"
   ],
   "verified": false,
+  "needsReview": true,
   "featured": false,
   "boost": 1,
   "curatorNotes": "Partially enriched via migration on 2026-07-25. Manual review recommended."

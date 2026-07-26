@@ -4,7 +4,7 @@
   "slug": "moonshot-ai-kimi-k2-7-code",
   "developer": "Moonshot AI",
   "releaseDate": "2026-06-12",
-  "updatedAt": "2026-06-12",
+  "updatedAt": "2026-07-26",
   "type": "open-weights",
   "status": "active",
   "modality": [
@@ -14,7 +14,7 @@
   "deployment": [
     "self-hostable"
   ],
-  "license": "Other/Custom",
+  "license": "proprietary",
   "parameters": "1T (32B active)",
   "contextWindow": "256K tokens",
   "description": "Moonshot AI's open-weights Mixture-of-Experts model optimized for software engineering, reducing thinking token usage and improving code generation efficiency.",
@@ -60,6 +60,7 @@
     "https://github.com/anomalyco/models.dev"
   ],
   "verified": false,
+  "needsReview": true,
   "featured": false,
   "boost": 1,
   "curatorNotes": "The software engineering specialist in the Kimi family. Focuses on reasoning token efficiency and has native HighSpeed variants."

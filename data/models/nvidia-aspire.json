@@ -4,7 +4,7 @@
   "slug": "nvidia-aspire",
   "developer": "NVIDIA",
   "releaseDate": "2026-07-01",
-  "updatedAt": "2026-07-25",
+  "updatedAt": "2026-07-26",
   "type": "open-weights",
   "status": "active",
   "modality": [
@@ -12,14 +12,15 @@
     "image",
     "multimodal"
   ],
-  "primaryTask": "other",
+  "primaryTask": "chat-reasoning",
   "deployment": [
     "self-hostable"
   ],
-  "license": "Other/Custom",
+  "license": "proprietary",
   "parameters": "undisclosed",
-  "contextWindow": "undisclosed",
+  "contextWindow": "128K tokens",
   "description": "ASPIRE (Agentic Skill Programming through Iterative Robot Exploration) is a continual learning framework for robotics developed by NVIDIA GEAR Lab in collaboration with UMich, UIUC, UC Berkeley, and CMU. Using a code-as-policy approach, ASPIRE enables robot agents to autonomously generate, test, debug, and refine executable Python control programs.",
+  "templatedDescription": false,
   "keyFeatures": [
     "Code-as-Policy Paradigm: Translates task goals into executable Python control programs for interpretable, modular robot behaviors",
     "Closed-Loop Execution Engine: Exposes per-primitive execution traces (perception, grasp candidates, trajectory data, contact dynamics) for failure diagnosis",
@@ -40,6 +41,7 @@
     }
   ],
   "family": null,
+  "institution": "NVIDIA GEAR Lab",
   "previousVersion": null,
   "links": {
     "website": "https://research.nvidia.com/labs/gear/aspire/",
@@ -58,10 +60,9 @@
     "https://research.nvidia.com/labs/gear/aspire/",
     "https://arxiv.org/abs/2607.00272"
   ],
-  "verified": true,
+  "verified": false,
+  "needsReview": true,
   "featured": false,
   "boost": 1,
-  "curatorNotes": "Partially enriched via migration on 2026-07-25. Manual review recommended.",
-  "institution": "NVIDIA GEAR Lab",
-  "templatedDescription": false
+  "curatorNotes": "Partially enriched via migration on 2026-07-25. Manual review recommended."
 }

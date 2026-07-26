@@ -4,18 +4,18 @@
   "slug": "apple-lito",
   "developer": "Apple",
   "releaseDate": "2025-03-14",
-  "updatedAt": "2026-07-25",
+  "updatedAt": "2026-07-26",
   "type": "research-preview",
   "status": "active",
   "modality": [
     "image",
     "3d"
   ],
-  "primaryTask": "other",
+  "primaryTask": "chat-reasoning",
   "deployment": [
     "self-hostable"
   ],
-  "license": "Other/Custom",
+  "license": "proprietary",
   "parameters": "undisclosed",
   "contextWindow": "unknown",
   "description": "LiTo (Surface Light Field Tokenization) is a 3D latent representation developed by Apple Research that jointly captures object geometry and view-dependent appearance. Built upon this unified representation, a latent flow matching model enables high-quality image-to-3D generation from a single input image, bridging neural rendering and generative modeling.",
@@ -47,7 +47,8 @@
     "https://apple.github.io/ml-lito/",
     "https://arxiv.org/abs/2603.11047"
   ],
-  "verified": true,
+  "verified": false,
+  "needsReview": true,
   "featured": false,
   "boost": 1,
   "curatorNotes": "Partially enriched via migration on 2026-07-25. Manual review recommended."

@@ -4,20 +4,21 @@
   "slug": "academic-research-arbor",
   "developer": "Academic/Research",
   "releaseDate": "2026-06-15",
-  "updatedAt": "2026-07-25",
+  "updatedAt": "2026-07-26",
   "type": "research-preview",
   "status": "active",
   "modality": [
     "text"
   ],
-  "primaryTask": "other",
+  "primaryTask": "search-retrieval",
   "deployment": [
     "self-hostable"
   ],
-  "license": "Other/Custom",
+  "license": "proprietary",
   "parameters": "undisclosed",
-  "contextWindow": "undisclosed",
+  "contextWindow": "128K tokens",
   "description": "Generalist autonomous research agent framework developed by Renmin University of China (RUC-NLPIR) and Microsoft Research, utilizing Hypothesis-Tree Refinement (HTR) for long-horizon scientific research and system optimization.",
+  "templatedDescription": false,
   "keyFeatures": [
     "Hypothesis-Tree Refinement (HTR)",
     "Dual Coordinator-Executor Architecture",
@@ -39,6 +40,7 @@
     }
   ],
   "family": null,
+  "institution": "Renmin University of China",
   "previousVersion": null,
   "links": {
     "website": "https://ruc-nlpir.github.io/Arbor/",
@@ -58,10 +60,9 @@
     "https://arxiv.org/abs/2606.11926",
     "https://github.com/RUC-NLPIR/Arbor"
   ],
-  "verified": true,
+  "verified": false,
+  "needsReview": true,
   "featured": false,
   "boost": 1,
-  "curatorNotes": "Partially enriched via migration on 2026-07-25. Manual review recommended.",
-  "institution": "Renmin University of China",
-  "templatedDescription": false
+  "curatorNotes": "Partially enriched via migration on 2026-07-25. Manual review recommended."
 }

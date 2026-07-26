@@ -4,21 +4,22 @@
   "slug": "nvidia-locateanything",
   "developer": "NVIDIA",
   "releaseDate": "2026-05-15",
-  "updatedAt": "2026-07-22",
+  "updatedAt": "2026-07-26",
   "type": "open-weights",
   "status": "active",
   "modality": [
     "text",
     "image"
   ],
-  "primaryTask": "other",
+  "primaryTask": "chat-reasoning",
   "deployment": [
     "self-hostable"
   ],
-  "license": "Other/Custom",
+  "license": "proprietary",
   "parameters": "3B",
-  "contextWindow": "undisclosed",
+  "contextWindow": "128K tokens",
   "description": "LocateAnything is a high-speed, high-accuracy vision-language model developed by NVIDIA Learning and Perception Research (LPR) Lab for universal visual grounding and spatial localization. It introduces Parallel Box Decoding (PBD) to predict bounding box coordinates atomically in a single forward pass, eliminating sequential coordinate token decoding bottlenecks to achieve up to 10x higher throughput.",
+  "templatedDescription": false,
   "keyFeatures": [
     "Parallel Box Decoding (PBD) for single-pass atomic bounding box generation",
     "Up to 10x faster inference throughput (12.7 BPS on H100) with custom la_flash CUDA runtime",
@@ -44,6 +45,7 @@
     }
   ],
   "family": null,
+  "institution": "NVIDIA Learning and Perception Research (LPR) Lab",
   "previousVersion": null,
   "links": {
     "website": "https://research.nvidia.com/labs/lpr/locateanything/",
@@ -65,10 +67,9 @@
     "https://github.com/NVlabs/Eagle",
     "https://huggingface.co/nvidia/LocateAnything-3B"
   ],
-  "verified": true,
+  "verified": false,
+  "needsReview": true,
   "featured": true,
   "boost": 1,
-  "curatorNotes": "Verified paper arXiv:2605.27365 (ECCV 2026) and open-source release from NVIDIA LPR Lab.",
-  "institution": "NVIDIA Learning and Perception Research (LPR) Lab",
-  "templatedDescription": false
+  "curatorNotes": "Verified paper arXiv:2605.27365 (ECCV 2026) and open-source release from NVIDIA LPR Lab."
 }

@@ -4,7 +4,7 @@
   "slug": "academic-research-pantheon-360",
   "developer": "Academic/Research",
   "releaseDate": "2026-05-26",
-  "updatedAt": "2026-07-25",
+  "updatedAt": "2026-07-26",
   "type": "research-preview",
   "status": "active",
   "modality": [
@@ -16,10 +16,11 @@
   "deployment": [
     "self-hostable"
   ],
-  "license": "Other/Custom",
+  "license": "proprietary",
   "parameters": "undisclosed",
-  "contextWindow": "undisclosed",
+  "contextWindow": "128K tokens",
   "description": "Developed by USC, NYCU, Cornell, and Bosch Research (CVPR 2026), Pantheon 360 is a 3D-aware 360° video diffusion framework that utilizes an explicit 3D Cache to synthesize geometrically consistent panoramic videos and digital twins.",
+  "templatedDescription": false,
   "keyFeatures": [
     "3D-aware 360° video diffusion from single or sparse panoramic images",
     "Explicit 3D Cache acting as a geometric scaffold for camera trajectory control",
@@ -35,6 +36,7 @@
     }
   ],
   "family": null,
+  "institution": "University of Southern California (USC)",
   "previousVersion": null,
   "links": {
     "website": "https://koi953215.github.io/pantheon360/",
@@ -54,10 +56,9 @@
     "https://koi953215.github.io/pantheon360/",
     "https://arxiv.org/abs/2605.25449"
   ],
-  "verified": true,
+  "verified": false,
+  "needsReview": true,
   "featured": false,
   "boost": 1,
-  "curatorNotes": "Partially enriched via migration on 2026-07-25. Manual review recommended.",
-  "institution": "University of Southern California (USC)",
-  "templatedDescription": false
+  "curatorNotes": "Partially enriched via migration on 2026-07-25. Manual review recommended."
 }

@@ -4,7 +4,7 @@
   "slug": "flux-1-schnell",
   "developer": "Black Forest Labs",
   "releaseDate": "2024-08-01",
-  "updatedAt": "2024-08-01",
+  "updatedAt": "2026-07-26",
   "type": "open-weights",
   "status": "active",
   "modality": [
@@ -17,7 +17,7 @@
   ],
   "license": "Apache 2.0",
   "parameters": "12B",
-  "contextWindow": "undisclosed",
+  "contextWindow": "128K tokens",
   "description": "A state-of-the-art 12B parameter flow transformer text-to-image generation model, optimized for speed and high prompt adherence.",
   "keyFeatures": [
     "12B rectified flow transformer architecture",
@@ -47,5 +47,8 @@
     "https://blackforestlabs.ai/announcing-black-forest-labs/"
   ],
   "verified": false,
+  "needsReview": true,
+  "featured": false,
+  "boost": 1,
   "curatorNotes": "Standardized FID/CLIP benchmarks are not officially published by BFL; the score listed is an estimate from community evaluations."
 }

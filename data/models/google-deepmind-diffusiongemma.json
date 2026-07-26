@@ -4,13 +4,13 @@
   "slug": "google-deepmind-diffusiongemma",
   "developer": "Google DeepMind",
   "releaseDate": "2026-06-10",
-  "updatedAt": "2026-06-10",
+  "updatedAt": "2026-07-26",
   "type": "research-preview",
   "status": "active",
   "modality": [
     "text"
   ],
-  "primaryTask": "other",
+  "primaryTask": "chat-reasoning",
   "deployment": [
     "self-hostable"
   ],
@@ -54,7 +54,8 @@
     "https://deepmind.google/blog/diffusiongemma-4x-faster-text-generation/",
     "https://github.com/anomalyco/models.dev"
   ],
-  "verified": true,
+  "verified": false,
+  "needsReview": true,
   "featured": true,
   "boost": 2,
   "curatorNotes": "Verified DiffusionGemma. Release date: 2026-06-10. Apache 2.0 open weights. MoE parameter count: 26B total (3.8B active). Parallel block decoder technique."

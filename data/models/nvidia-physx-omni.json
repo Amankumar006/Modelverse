@@ -4,7 +4,7 @@
   "slug": "nvidia-physx-omni",
   "developer": "NVIDIA",
   "releaseDate": "2026-05-20",
-  "updatedAt": "2026-07-22",
+  "updatedAt": "2026-07-26",
   "type": "open-weights",
   "status": "active",
   "modality": [
@@ -12,14 +12,15 @@
     "image",
     "3d"
   ],
-  "primaryTask": "other",
+  "primaryTask": "multimodal-general",
   "deployment": [
     "self-hostable"
   ],
-  "license": "Other/Custom",
+  "license": "proprietary",
   "parameters": "7B (Qwen2.5-VL base)",
-  "contextWindow": "undisclosed",
+  "contextWindow": "128K tokens",
   "description": "PhysX Omni is a unified generative framework developed by S-Lab, NTU in collaboration with ACE Robotics and NVIDIA. It creates simulation-ready 3D assets (rigid, deformable, articulated) with complete physical attributes (scale, mass, material stiffness, joint kinematics) directly from images or text for physics simulators like MuJoCo and Isaac Sim.",
+  "templatedDescription": false,
   "keyFeatures": [
     "Unified Multi-Category Object Generation: Generates rigid, deformable, and articulated physical 3D objects in a single architecture",
     "Simulation-Ready Asset Export: Directly produces USD, URDF, and XML formats with complete physical and kinematic annotations",
@@ -40,6 +41,7 @@
     }
   ],
   "family": null,
+  "institution": "S-Lab, NTU & ACE Robotics",
   "previousVersion": null,
   "links": {
     "website": "https://physx-omni.github.io/",
@@ -60,10 +62,9 @@
     "https://arxiv.org/abs/2605.21572",
     "https://github.com/physx-omni/PhysX-Omni"
   ],
-  "verified": true,
+  "verified": false,
+  "needsReview": true,
   "featured": false,
   "boost": 1,
-  "curatorNotes": "Verified paper arXiv:2605.21572 and open-source project from NTU S-Lab and ACE Robotics.",
-  "institution": "S-Lab, NTU & ACE Robotics",
-  "templatedDescription": false
+  "curatorNotes": "Verified paper arXiv:2605.21572 and open-source project from NTU S-Lab and ACE Robotics."
 }

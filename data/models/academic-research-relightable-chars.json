@@ -4,7 +4,7 @@
   "slug": "academic-research-relightable-chars",
   "developer": "Academic/Research",
   "releaseDate": "2025-12-01",
-  "updatedAt": "2026-07-25",
+  "updatedAt": "2026-07-26",
   "type": "research-preview",
   "status": "active",
   "modality": [
@@ -15,10 +15,11 @@
   "deployment": [
     "self-hostable"
   ],
-  "license": "Other/Custom",
+  "license": "proprietary",
   "parameters": "undisclosed",
-  "contextWindow": "undisclosed",
+  "contextWindow": "128K tokens",
   "description": "Relightable Holoported Characters (Relightable Chars / RHC) is a 3D vision framework developed by Max Planck Institute for Informatics (MPI-INF), VIA Research Center, and Google. It synthesizes photorealistic free-viewpoint renders and enables arbitrary relighting of full-body dynamic human performances using sparse-view RGB videos and 3D Gaussian splatting.",
+  "templatedDescription": false,
   "keyFeatures": [
     "Sparse-View Dynamic Relighting: Synthesizes free-view renders and relights dynamic human performances from sparse RGB videos",
     "Single-Pass RelightNet Architecture: Evaluates target environment lighting and complex light transport in a single feed-forward pass",
@@ -34,6 +35,7 @@
     }
   ],
   "family": null,
+  "institution": "Max Planck Institute for Informatics (MPI-INF), Google",
   "previousVersion": null,
   "links": {
     "website": "https://vcai.mpi-inf.mpg.de/projects/RelightableChars/",
@@ -52,10 +54,9 @@
     "https://vcai.mpi-inf.mpg.de/projects/RelightableChars/",
     "https://arxiv.org/abs/2512.00255"
   ],
-  "verified": true,
+  "verified": false,
+  "needsReview": true,
   "featured": false,
   "boost": 1,
-  "curatorNotes": "Partially enriched via migration on 2026-07-25. Manual review recommended.",
-  "institution": "Max Planck Institute for Informatics (MPI-INF), Google",
-  "templatedDescription": false
+  "curatorNotes": "Partially enriched via migration on 2026-07-25. Manual review recommended."
 }
