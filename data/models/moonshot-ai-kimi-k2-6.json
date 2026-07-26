@@ -6,9 +6,15 @@
   "releaseDate": "2026-04-20",
   "updatedAt": "2026-04-20",
   "type": "open-weights",
-  "modality": ["text", "image"],
+  "status": "active",
+  "modality": [
+    "text",
+    "image"
+  ],
   "primaryTask": "agentic",
-  "deployment": ["self-hostable"],
+  "deployment": [
+    "self-hostable"
+  ],
   "license": "Other/Custom",
   "parameters": "1T (32B active)",
   "contextWindow": "256K tokens",
@@ -25,7 +31,11 @@
     "website": "https://www.kimi.com/ai-models/kimi-k2-6"
   },
   "logo": null,
-  "tags": ["moe", "long-horizon", "agentic-coding"],
+  "tags": [
+    "moe",
+    "long-horizon",
+    "agentic-coding"
+  ],
   "sources": [
     "https://www.kimi.com/ai-models/kimi-k2-6"
   ],

@@ -6,6 +6,7 @@
   "releaseDate": "2025-01-23",
   "updatedAt": "2025-01-23",
   "type": "closed-source",
+  "status": "active",
   "modality": [
     "text",
     "image"

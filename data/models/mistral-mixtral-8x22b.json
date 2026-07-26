@@ -6,6 +6,8 @@
   "releaseDate": "2024-04-17",
   "updatedAt": "2024-04-17",
   "type": "open-weights",
+  "status": "active",
+  "vendorApiStatus": "sunset",
   "modality": [
     "text",
     "code"
@@ -41,7 +43,8 @@
   ],
   "sources": [
     "https://mistral.ai/news/mixtral-8x22b/",
-    "https://huggingface.co/mistralai/Mixtral-8x22B-v0.1"
+    "https://huggingface.co/mistralai/Mixtral-8x22B-v0.1",
+    "https://docs.mistral.ai"
   ],
   "verified": true,
   "curatorNotes": "",

@@ -6,6 +6,7 @@
   "releaseDate": "2024-02-15",
   "updatedAt": "2024-02-15",
   "type": "research-preview",
+  "status": "sunset",
   "modality": [
     "text",
     "video"
@@ -43,8 +44,9 @@
     "closed-source"
   ],
   "sources": [
-    "https://openai.com/sora"
+    "https://openai.com/sora",
+    "https://help.openai.com/en/articles/20001152-what-to-know-about-the-sora-discontinuation"
   ],
   "verified": false,
-  "curatorNotes": "Announced as a research preview on Feb 15, 2024. Operates as closed source."
+  "curatorNotes": "Sunset: Web/App discontinued April 26, 2026; API scheduled for shutdown September 24, 2026 per official OpenAI Help article 20001152."
 }

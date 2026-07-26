@@ -6,6 +6,7 @@
   "releaseDate": "2026-07-16",
   "updatedAt": "2026-07-25",
   "type": "research-preview",
+  "status": "active",
   "modality": [
     "text",
     "audio",

@@ -262,6 +262,7 @@ async function runIngestion() {
       releaseDate,
       updatedAt: todayStr,
       type: "open-weights",
+      status: "active",
       modality,
       primaryTask,
       deployment: ["self-hostable"],

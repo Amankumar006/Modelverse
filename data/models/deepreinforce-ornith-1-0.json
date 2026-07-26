@@ -7,9 +7,15 @@
   "releaseDate": "2026-06-25",
   "updatedAt": "2026-06-25",
   "type": "open-weights",
-  "modality": ["text"],
+  "status": "active",
+  "modality": [
+    "text"
+  ],
   "primaryTask": "code-generation",
-  "deployment": ["self-hostable", "on-device"],
+  "deployment": [
+    "self-hostable",
+    "on-device"
+  ],
   "license": "MIT",
   "parameters": "9B to 397B",
   "contextWindow": "256K tokens",
@@ -26,7 +32,11 @@
     "website": "https://deep-reinforce.com/ornith_1_0.html"
   },
   "logo": null,
-  "tags": ["agentic-coding", "self-scaffolding", "moe"],
+  "tags": [
+    "agentic-coding",
+    "self-scaffolding",
+    "moe"
+  ],
   "sources": [
     "https://deep-reinforce.com/ornith_1_0.html",
     "https://ollama.com/library/ornith",

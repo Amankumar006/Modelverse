@@ -6,6 +6,8 @@
   "releaseDate": "2024-05-29",
   "updatedAt": "2024-05-29",
   "type": "open-weights",
+  "status": "active",
+  "vendorApiStatus": "deprecated",
   "modality": [
     "text"
   ],
@@ -42,7 +44,8 @@
     "open-weights"
   ],
   "sources": [
-    "https://mistral.ai/news/codestral/"
+    "https://mistral.ai/news/codestral/",
+    "https://docs.mistral.ai"
   ],
   "verified": true,
   "curatorNotes": "Released under the Mistral Non-Production License (MNPL) for research and non-commercial testing."

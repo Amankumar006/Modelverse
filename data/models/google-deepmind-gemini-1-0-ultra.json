@@ -6,6 +6,7 @@
   "releaseDate": "2024-02-08",
   "updatedAt": "2024-02-08",
   "type": "api-only",
+  "status": "sunset",
   "modality": [
     "text",
     "image",
@@ -33,7 +34,8 @@
   "logo": "/logos/google.svg",
   "tags": [],
   "sources": [
-    "https://en.wikipedia.org/wiki/Gemini_(language_model)"
+    "https://en.wikipedia.org/wiki/Gemini_(language_model)",
+    "https://ai.google.dev/gemini-api/docs/deprecations"
   ],
   "verified": true,
   "featured": false,

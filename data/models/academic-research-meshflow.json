@@ -6,6 +6,7 @@
   "releaseDate": "2026-06-05",
   "updatedAt": "2026-07-22",
   "type": "open-weights",
+  "status": "active",
   "modality": [
     "3d",
     "text",

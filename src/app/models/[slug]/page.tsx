@@ -17,6 +17,7 @@ import {
 } from "@/lib/models";
 import JsonLd from "@/components/JsonLd";
 import TypeBadge from "@/components/ui/TypeBadge";
+import StatusBadge from "@/components/ui/StatusBadge";
 import ModalityTag from "@/components/ui/ModalityTag";
 import Breadcrumb from "@/components/models/Breadcrumb";
 import ClientBackButton from "@/components/ui/ClientBackButton";
@@ -285,6 +286,7 @@ export default async function ModelDetailPage({
 
               <div className="flex flex-wrap items-center gap-2">
                 <TypeBadge type={model.type} />
+                <StatusBadge status={model.status} vendorApiStatus={model.vendorApiStatus} />
                 <TaskBadge task={model.primaryTask} />
                 
                 {model.modality.map((mod) => (

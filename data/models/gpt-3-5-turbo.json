@@ -6,6 +6,7 @@
   "releaseDate": "2023-03-01",
   "updatedAt": "2026-07-14",
   "type": "closed-source",
+  "status": "deprecated",
   "modality": [
     "text"
   ],
@@ -27,10 +28,11 @@
   "logo": null,
   "tags": [],
   "sources": [
-    "https://developers.openai.com/api/docs/models/all"
+    "https://developers.openai.com/api/docs/models/all",
+    "https://platform.openai.com/docs/deprecations"
   ],
   "verified": true,
   "featured": false,
   "boost": 1,
-  "curatorNotes": "Bulk imported from OpenAI developer docs."
+  "curatorNotes": "Deprecated with shutdown date set for October 23, 2026 per official OpenAI deprecations documentation."
 }

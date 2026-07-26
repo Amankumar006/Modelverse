@@ -2,6 +2,7 @@
   "name": "Claude 3.5 Sonnet (new)",
   "developer": "Anthropic",
   "type": "api-only",
+  "status": "active",
   "modality": [
     "text",
     "image",

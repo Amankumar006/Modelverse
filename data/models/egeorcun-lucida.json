@@ -6,6 +6,7 @@
   "releaseDate": "2026-05-01",
   "updatedAt": "2026-07-22",
   "type": "open-weights",
+  "status": "active",
   "modality": [
     "image"
   ],
@@ -26,11 +27,31 @@
     "ComfyUI Integration: Distributed in ComfyUI's official BiRefNet model collection as lucida.safetensors"
   ],
   "benchmarks": [
-    {"name": "MAE Overall (203 images)", "score": "0.0257", "verified": true},
-    {"name": "MAE Camouflage", "score": "0.0270", "verified": true},
-    {"name": "MAE Text/Logo", "score": "0.0091", "verified": true},
-    {"name": "MAE Illustration", "score": "0.0092", "verified": true},
-    {"name": "MAE Print Design", "score": "0.0235", "verified": true}
+    {
+      "name": "MAE Overall (203 images)",
+      "score": "0.0257",
+      "verified": true
+    },
+    {
+      "name": "MAE Camouflage",
+      "score": "0.0270",
+      "verified": true
+    },
+    {
+      "name": "MAE Text/Logo",
+      "score": "0.0091",
+      "verified": true
+    },
+    {
+      "name": "MAE Illustration",
+      "score": "0.0092",
+      "verified": true
+    },
+    {
+      "name": "MAE Print Design",
+      "score": "0.0235",
+      "verified": true
+    }
   ],
   "family": null,
   "previousVersion": null,

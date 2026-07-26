@@ -6,6 +6,7 @@
   "releaseDate": "2020-04-13",
   "updatedAt": "2026-07-22",
   "type": "research-preview",
+  "status": "active",
   "modality": [
     "vision",
     "text",

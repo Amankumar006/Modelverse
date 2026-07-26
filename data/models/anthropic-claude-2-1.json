@@ -2,6 +2,7 @@
   "name": "Claude 2.1",
   "developer": "Anthropic",
   "type": "api-only",
+  "status": "active",
   "modality": [
     "text"
   ],

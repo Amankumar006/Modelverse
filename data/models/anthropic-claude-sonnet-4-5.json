@@ -2,6 +2,7 @@
   "name": "Claude Sonnet 4.5",
   "developer": "Anthropic",
   "type": "api-only",
+  "status": "active",
   "modality": [
     "text",
     "image",

@@ -6,9 +6,14 @@
   "releaseDate": "2026-07-06",
   "updatedAt": "2026-07-06",
   "type": "open-weights",
-  "modality": ["text"],
+  "status": "active",
+  "modality": [
+    "text"
+  ],
   "primaryTask": "chat-reasoning",
-  "deployment": ["self-hostable"],
+  "deployment": [
+    "self-hostable"
+  ],
   "license": "Apache 2.0",
   "parameters": "295B (21B active)",
   "contextWindow": "256K tokens",
@@ -25,7 +30,11 @@
     "website": "https://hy.tencent.com/research/hy3"
   },
   "logo": "/logos/tencent.svg",
-  "tags": ["moe", "reasoning", "open-weights"],
+  "tags": [
+    "moe",
+    "reasoning",
+    "open-weights"
+  ],
   "sources": [
     "https://hy.tencent.com/research/hy3"
   ],
