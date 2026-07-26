@@ -63,7 +63,7 @@ export default function CuratorReviewBanner({ model }: { model: ModelProps }) {
 
   if (verifiedSuccess) {
     return (
-      <div className="mb-6 p-4 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-300 flex items-center justify-between animate-fadeIn">
+      <div className="mb-6 p-4 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 flex items-center justify-between animate-fadeIn">
         <div className="flex items-center gap-3">
           <CheckCircle2 size={18} className="text-emerald-400" />
           <span className="font-semibold text-xs">
@@ -80,13 +80,13 @@ export default function CuratorReviewBanner({ model }: { model: ModelProps }) {
 
   return (
     <div className="mb-8 rounded-2xl bg-[#1C1C1E] border border-[#282828] p-6 shadow-2xl relative overflow-hidden">
-      {/* Terracotta Top Accent Bar */}
-      <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#D97757] via-[#F59E0B] to-[#D97757]" />
+      {/* Website Emerald Theme Top Accent Bar */}
+      <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-emerald-500 via-emerald-400 to-emerald-500" />
 
       {/* Top Banner Warning Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-5 border-b border-[#282828]">
         <div className="flex items-start gap-3.5">
-          <div className="p-2.5 rounded-xl bg-[#242426] text-[#F59E0B] border border-[#F59E0B]/20 shrink-0 mt-0.5">
+          <div className="p-2.5 rounded-xl bg-[#242426] text-amber-400 border border-amber-500/20 shrink-0 mt-0.5">
             <AlertTriangle size={18} />
           </div>
           <div>
@@ -97,7 +97,7 @@ export default function CuratorReviewBanner({ model }: { model: ModelProps }) {
               >
                 Curator Review Mode
               </h3>
-              <span className="text-[10px] uppercase font-mono font-semibold tracking-wider px-2.5 py-0.5 rounded-full bg-[#242426] text-[#F59E0B] border border-[#F59E0B]/30">
+              <span className="text-[10px] uppercase font-mono font-semibold tracking-wider px-2.5 py-0.5 rounded-full bg-[#242426] text-amber-400 border border-amber-500/30">
                 Needs Verification
               </span>
             </div>
@@ -107,23 +107,23 @@ export default function CuratorReviewBanner({ model }: { model: ModelProps }) {
           </div>
         </div>
 
-        {/* Primary Approve Action Buttons */}
+        {/* Primary Approve Action Buttons (Website Emerald Theme) */}
         <div className="flex items-center gap-3 shrink-0">
           <button
             onClick={() => handleVerify(false)}
             disabled={loading}
-            className="px-4 py-2 text-xs font-medium text-[#90908F] hover:text-white bg-[#242426] hover:bg-[#2A2A2D] rounded-xl border border-[#333333] transition-all active:scale-95 disabled:opacity-50"
+            className="px-4 py-2 text-xs font-medium text-[#E1E1E0] hover:text-white bg-[#242426] hover:bg-[#2A2A2D] rounded-xl border border-[#333333] transition-all active:scale-95 disabled:opacity-50"
           >
             Approve As-Is
           </button>
           <button
             onClick={() => handleVerify(true)}
             disabled={loading}
-            className="px-4 py-2 text-xs font-semibold text-white bg-[#D97757] hover:bg-[#E88868] active:scale-95 rounded-xl transition-all shadow-lg shadow-[#D97757]/20 flex items-center gap-2 disabled:opacity-50"
+            className="px-4 py-2 text-xs font-bold text-black bg-emerald-400 hover:bg-emerald-300 active:scale-95 rounded-xl transition-all shadow-lg shadow-emerald-500/20 flex items-center gap-2 disabled:opacity-50"
           >
             {loading ? (
               <>
-                <svg className="animate-spin h-3.5 w-3.5 text-white" viewBox="0 0 24 24" fill="none">
+                <svg className="animate-spin h-3.5 w-3.5 text-black" viewBox="0 0 24 24" fill="none">
                   <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
                   <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
                 </svg>
@@ -131,7 +131,7 @@ export default function CuratorReviewBanner({ model }: { model: ModelProps }) {
               </>
             ) : (
               <>
-                <Check size={14} />
+                <Check size={14} strokeWidth={2.5} />
                 <span>Approve & Promote Draft</span>
               </>
             )}
@@ -162,7 +162,7 @@ export default function CuratorReviewBanner({ model }: { model: ModelProps }) {
                 onClick={() => setViewingDraft(true)}
                 className={`px-3 py-1 text-xs font-medium rounded-md transition-all ${
                   viewingDraft
-                    ? "bg-[#242426] text-white border border-[#333333] font-semibold"
+                    ? "bg-[#242426] text-emerald-400 border border-emerald-500/30 font-semibold"
                     : "text-[#90908F] hover:text-white"
                 }`}
               >
@@ -186,7 +186,7 @@ export default function CuratorReviewBanner({ model }: { model: ModelProps }) {
               <div className="space-y-3">
                 {hasDraftDescription && (
                   <div>
-                    <span className="text-[11px] font-semibold text-[#D97757] uppercase tracking-wider block mb-1">
+                    <span className="text-[11px] font-semibold text-emerald-400 uppercase tracking-wider block mb-1">
                       Proposed Description Draft
                     </span>
                     <p className="text-sm text-[#E1E1E0] leading-relaxed font-sans">
@@ -196,13 +196,13 @@ export default function CuratorReviewBanner({ model }: { model: ModelProps }) {
                 )}
                 {hasDraftFeatures && (
                   <div className="pt-3 border-t border-[#282828]">
-                    <span className="text-[11px] font-semibold text-[#D97757] uppercase tracking-wider block mb-2">
+                    <span className="text-[11px] font-semibold text-emerald-400 uppercase tracking-wider block mb-2">
                       Proposed Key Features
                     </span>
                     <ul className="space-y-1 text-xs text-[#E1E1E0]">
                       {model.keyFeaturesDraft?.map((feat, idx) => (
                         <li key={idx} className="flex items-start gap-2">
-                          <span className="text-[#90908F]">—</span>
+                          <span className="text-emerald-500">—</span>
                           <span>{feat}</span>
                         </li>
                       ))}
@@ -251,7 +251,7 @@ export default function CuratorReviewBanner({ model }: { model: ModelProps }) {
               href={src}
               target="_blank"
               rel="noreferrer"
-              className="text-xs font-mono text-[#E1E1E0] bg-[#242426] hover:border-[#D97757] px-2.5 py-1 rounded-md border border-[#333333] transition-all flex items-center gap-1 truncate max-w-xs"
+              className="text-xs font-mono text-[#E1E1E0] bg-[#242426] hover:border-emerald-500/50 hover:text-emerald-400 px-2.5 py-1 rounded-md border border-[#333333] transition-all flex items-center gap-1 truncate max-w-xs"
             >
               <span className="truncate">{src.replace(/^https?:\/\//, "")}</span>
               <ExternalLink size={10} className="text-[#90908F] shrink-0" />

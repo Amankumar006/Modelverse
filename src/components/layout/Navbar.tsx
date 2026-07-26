@@ -156,7 +156,7 @@ export default function Navbar({ theme = "dark" }: { theme?: "light" | "dark" })
 
         {/* Desktop Search Input with ⌘K Badge */}
         <div className="hidden md:block relative shrink-0">
-          <div className="relative flex items-center rounded-lg px-3 py-1.5 w-56 focus-within:w-64 transition-all duration-200 border bg-[#1C1C1E] border-[#2E2E2E] focus-within:border-[#DA7756]">
+          <div className="relative flex items-center rounded-lg px-3 py-1.5 w-56 focus-within:w-64 transition-all duration-200 border bg-[#1C1C1E] border-[#2E2E2E] focus-within:border-emerald-500">
             <Search size={14} className="mr-2 text-gray-500 shrink-0" />
             <input
               ref={searchInputRef}
@@ -193,7 +193,7 @@ export default function Navbar({ theme = "dark" }: { theme?: "light" | "dark" })
                   onMouseEnter={() => setSelectedIndex(index)}
                   className={`flex items-center justify-between p-2.5 rounded-lg transition-colors ${
                     index === selectedIndex
-                      ? "bg-[#28282A] text-white border-l-2 border-[#DA7756]"
+                      ? "bg-[#28282A] text-white border-l-2 border-emerald-400"
                       : "hover:bg-[#28282A]"
                   }`}
                 >
@@ -214,7 +214,7 @@ export default function Navbar({ theme = "dark" }: { theme?: "light" | "dark" })
               {searchResults.length > 0 && (
                 <Link
                   href={`/models?q=${encodeURIComponent(searchQuery)}`}
-                  className="border-t border-[#2E2E2E] mt-1 pt-2 pb-1 text-center text-xs font-semibold text-[#DA7756] hover:underline"
+                  className="border-t border-[#2E2E2E] mt-1 pt-2 pb-1 text-center text-xs font-semibold text-emerald-400 hover:underline"
                 >
                   See all results &rarr;
                 </Link>
