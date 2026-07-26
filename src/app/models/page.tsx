@@ -131,8 +131,7 @@ export default async function BrowsePage({ searchParams }: PageProps) {
   const developers = getAllDevelopers();
 
   return (
-    <main className="min-h-screen bg-[#141414] text-[#E4E4E7] selection:bg-[#DA7756] selection:text-white pb-24 relative font-sans">
-      
+    <main className="min-h-screen bg-[#141414] text-[#E4E4E7] selection:bg-[#D97757] selection:text-white pb-24 relative font-sans overflow-x-hidden max-w-full">
       {/* ── Top Hero Background Gradient ── */}
       <div className="absolute top-0 left-0 w-full h-[40vh] z-0 pointer-events-none select-none bg-gradient-to-b from-[#1C1C1E]/60 to-[#141414]" />
 
@@ -140,29 +139,21 @@ export default async function BrowsePage({ searchParams }: PageProps) {
         <Navbar theme="dark" />
       </div>
 
-      {/* ── Fixed Minimal Nav Back Link ─────────────────────── */}
-      <div className="relative z-10 w-full px-4 sm:px-6 lg:px-8 2xl:px-12 pt-8">
-        <Link
-          href="/"
-          className="inline-flex items-center gap-1 text-sm text-gray-400 hover:text-white transition-colors group focus-visible:outline-none rounded-lg px-2 py-1"
-        >
-          <ChevronLeft size={16} className="transition-transform group-hover:-translate-x-0.5" />
-          Back to Home
-        </Link>
-      </div>
-
       {/* ── Content Container ───────────────────────────────── */}
-      <div className="relative z-10 w-full px-4 sm:px-6 lg:px-8 2xl:px-12 mt-6">
-        <div className="border-b border-[#27272A] pb-8 mb-8">
-          <h1 className="text-4xl sm:text-5xl font-serif font-normal tracking-tight text-[#F4F4F5]">
+      <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8">
+        <div className="border-b border-[#282828] pb-6 mb-8">
+          <h1
+            className="text-4xl sm:text-5xl font-normal tracking-tight text-white"
+            style={{ fontFamily: "var(--font-display, 'Instrument Serif', Georgia, serif)" }}
+          >
             Models overview
           </h1>
-          <p className="mt-2.5 text-base text-[#A1A1AA] max-w-2xl leading-relaxed">
+          <p className="mt-2 text-sm sm:text-base text-[#90908F] max-w-2xl leading-relaxed">
             Discover, filter, and compare performance specs across open-weights and commercial AI models in the catalog.
           </p>
         </div>
 
-        {/* Catalog component (dense table + client filters) */}
+        {/* Catalog component */}
         <ModelCatalog models={models} developers={developers} initialSearchParams={resolvedSearchParams} />
       </div>
     </main>

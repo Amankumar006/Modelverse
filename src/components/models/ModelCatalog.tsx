@@ -44,10 +44,6 @@ const SORT_OPTIONS = [
   { key: "developer-asc", label: "Developer A–Z" },
 ];
 
-/* ------------------------------------------------------------------ */
-/*  Faceted Filter & Search Calculations                              */
-/* ------------------------------------------------------------------ */
-
 interface FiltersState {
   q: string;
   type: string[];
@@ -64,7 +60,6 @@ function filterModels(
   excludeKey?: keyof FiltersState
 ): ModelEntry[] {
   return models.filter((model) => {
-    // 1. Search Query
     if (excludeKey !== "q" && filters.q) {
       const q = filters.q.toLowerCase();
       const match =
@@ -73,33 +68,27 @@ function filterModels(
       if (!match) return false;
     }
 
-    // 2. Type Filter
     if (excludeKey !== "type" && filters.type.length > 0) {
       if (!filters.type.includes(model.type)) return false;
     }
 
-    // 3. Task Filter
     if (excludeKey !== "task" && filters.task.length > 0) {
       if (!filters.task.includes(model.primaryTask)) return false;
     }
 
-    // 4. Modality Filter
     if (excludeKey !== "modality" && filters.modality.length > 0) {
       const intersect = model.modality.some((m) => filters.modality.includes(m));
       if (!intersect) return false;
     }
 
-    // 5. Developer Filter
     if (excludeKey !== "developer" && filters.developer.length > 0) {
       if (!filters.developer.includes(model.developer)) return false;
     }
 
-    // 6. License Filter
     if (excludeKey !== "license" && filters.license.length > 0) {
       if (!filters.license.includes(model.license)) return false;
     }
 
-    // 7. Deployment Filter
     if (excludeKey !== "deployment" && filters.deployment.length > 0) {
       const intersect = model.deployment.some((d) => filters.deployment.includes(d));
       if (!intersect) return false;
@@ -127,7 +116,6 @@ function FacetGroupFilter<T>({
   onToggle: (val: string) => void;
 }) {
   const [searchQuery, setSearchQuery] = useState("");
-
   const showSearch = options.length > 10;
 
   const filteredOptions = useMemo(() => {
@@ -141,8 +129,8 @@ function FacetGroupFilter<T>({
   }, [options, searchQuery, valFn, labelFn]);
 
   return (
-    <div className="space-y-3">
-      <h4 className="text-xs font-bold text-[#9CA3AF] uppercase tracking-widest border-b border-white/10 pb-2">
+    <div className="space-y-2.5">
+      <h4 className="text-xs font-semibold text-[#90908F] uppercase tracking-wider border-b border-[#282828] pb-1.5">
         {title}
       </h4>
       {showSearch && (
@@ -152,19 +140,19 @@ function FacetGroupFilter<T>({
             placeholder={`Search ${title.toLowerCase()}...`}
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full bg-[#121A15] border border-white/20 rounded-lg px-2.5 py-1 text-xs text-white placeholder:text-[#9CA3AF] focus:outline-none focus:border-[#4ADE80] focus:ring-1 focus:ring-[#4ADE80]/30 transition-colors"
+            className="w-full bg-[#1C1C1E] border border-[#282828] rounded-md px-2.5 py-1 text-xs text-white placeholder:text-[#90908F] focus:outline-none focus:border-[#D97757] transition-colors"
           />
           {searchQuery && (
             <button
               onClick={() => setSearchQuery("")}
-              className="absolute right-2 top-1/2 -translate-y-1/2 text-[#9CA3AF] hover:text-white p-0.5"
+              className="absolute right-2 top-1/2 -translate-y-1/2 text-[#90908F] hover:text-white p-0.5"
             >
               <X size={12} />
             </button>
           )}
         </div>
       )}
-      <div className="space-y-1.5 flex flex-col max-h-48 overflow-y-auto pr-1 select-none scrollbar-thin">
+      <div className="space-y-1 flex flex-col max-h-44 overflow-y-auto pr-1 select-none no-scrollbar">
         {filteredOptions.map((opt) => {
           const val = valFn(opt);
           const label = labelFn(opt);
@@ -175,27 +163,27 @@ function FacetGroupFilter<T>({
           return (
             <label
               key={val}
-              className={`flex items-center justify-between text-xs cursor-pointer py-1 px-1.5 rounded transition-colors ${
+              className={`flex items-center justify-between text-xs cursor-pointer py-1 px-2 rounded transition-colors ${
                 isChecked
-                  ? "text-[#4ADE80] font-medium bg-[#1A261D]"
+                  ? "text-white font-medium bg-[#242426]"
                   : isDisabled
-                  ? "text-white/30 cursor-not-allowed"
-                  : "text-[#E5E7EB] hover:text-white hover:bg-white/5"
+                  ? "text-gray-600 cursor-not-allowed"
+                  : "text-[#90908F] hover:text-white hover:bg-[#1E1E1E]"
               }`}
             >
-              <div className="flex items-center gap-2 min-w-0">
+              <div className="flex items-center gap-2 min-w-0 pr-1">
                 <input
                   type="checkbox"
                   checked={isChecked}
                   disabled={isDisabled}
                   onChange={() => onToggle(val)}
-                  className="h-3.5 w-3.5 rounded border border-white/30 bg-transparent text-[#4ADE80] focus:ring-offset-white focus:ring-1 focus:ring-[#4ADE80]/50 accent-[#4ADE80] cursor-pointer disabled:cursor-not-allowed"
+                  className="h-3.5 w-3.5 rounded border border-[#333333] bg-[#1C1C1E] text-[#D97757] focus:ring-0 accent-[#D97757] cursor-pointer disabled:cursor-not-allowed shrink-0"
                 />
-                <span className="truncate pr-1">{label}</span>
+                <span className="truncate">{label}</span>
               </div>
               <span
-                className={`text-[11px] tabular-nums font-mono ${
-                  isChecked ? "text-[#4ADE80]" : "text-[#9CA3AF]"
+                className={`text-[10px] tabular-nums font-mono px-1.5 py-0.2 rounded ${
+                  isChecked ? "bg-[#2E2E2E] text-white" : "text-[#90908F]"
                 }`}
               >
                 {count}
@@ -203,24 +191,15 @@ function FacetGroupFilter<T>({
             </label>
           );
         })}
-        {filteredOptions.length === 0 && (
-          <p className="text-xs text-[#9CA3AF] py-1 italic">
-            No matching {title.toLowerCase()}
-          </p>
-        )}
       </div>
     </div>
   );
 }
 
-/* ------------------------------------------------------------------ */
-/*  ModelCatalogContent client workspace                              */
-/* ------------------------------------------------------------------ */
-
 function ModelCatalogContent({
   models,
   developers,
-  initialSearchParams,
+  initialSearchParams = {},
   hideDeveloperPrefix = false,
 }: {
   models: ModelEntry[];
@@ -230,82 +209,87 @@ function ModelCatalogContent({
 }) {
   const router = useRouter();
 
-  // Helper to parse query arrays on load
-  const parseQueryList = (key: string): string[] => {
-    const val = initialSearchParams?.[key];
-    if (!val) return [];
-    const rawList = Array.isArray(val) ? val.flatMap((v) => v.split(",")) : val.split(",");
-
-    const aliases: Record<string, string> = {
-      "reasoning": "chat-reasoning",
-      "code": "code-generation",
-      "vision": "multimodal-general",
-      "image": "image-generation",
-      "video": "video-generation",
-      "audio": "audio-speech",
-    };
-
-    return rawList.map((v) => aliases[v] || v);
+  const parseParamArray = (param?: string | string[]) => {
+    if (!param) return [];
+    if (Array.isArray(param)) return param;
+    return param.split(",").filter(Boolean);
   };
 
-  // State initialization hydrated from Server Search Params
   const [filters, setFilters] = useState<FiltersState>({
-    q: (initialSearchParams?.q as string) || (initialSearchParams?.search as string) || "",
-    type: parseQueryList("type"),
-    task: parseQueryList("task"),
-    modality: parseQueryList("modality"),
-    developer: parseQueryList("developer"),
-    license: parseQueryList("license"),
-    deployment: parseQueryList("deployment"),
+    q: (initialSearchParams.q as string) || "",
+    type: parseParamArray(initialSearchParams.type),
+    task: parseParamArray(initialSearchParams.task),
+    modality: parseParamArray(initialSearchParams.modality),
+    developer: parseParamArray(initialSearchParams.developer),
+    license: parseParamArray(initialSearchParams.license),
+    deployment: parseParamArray(initialSearchParams.deployment),
   });
 
   const [sortKey, setSortKey] = useState<string>(
-    (initialSearchParams?.sort as string) || "newest"
+    (initialSearchParams.sort as string) || "newest"
   );
-
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
 
-  // Dynamic facet value lists harvested from actual data entries
   const dynamicOptions = useMemo(() => {
-    const licenses = [...new Set(models.map((m) => m.license))].sort();
-    const modalities = [...new Set(models.flatMap((m) => m.modality))].sort();
-    return { licenses, modalities };
+    const modalities = new Set<string>();
+    const licenses = new Set<string>();
+    for (const m of models) {
+      m.modality.forEach((mod) => modalities.add(mod));
+      if (m.license && m.license !== "Other/Custom") licenses.add(m.license);
+    }
+    return {
+      modalities: Array.from(modalities).sort(),
+      licenses: Array.from(licenses).sort(),
+    };
   }, [models]);
 
-  // Compute live option counts for each facet given currently-applied sibling criteria
   const facetCounts = useMemo(() => {
-    const getCounts = (
-      key: keyof FiltersState,
+    const calculateCounts = (
       options: string[],
-      matchFn: (model: ModelEntry, opt: string) => boolean
+      key: keyof FiltersState,
+      modelValFn: (m: ModelEntry) => string | string[]
     ) => {
-      const modelsFiltered = filterModels(models, filters, key);
+      const filtered = filterModels(models, filters, key);
       const counts: Record<string, number> = {};
-      for (const opt of options) {
-        counts[opt] = modelsFiltered.filter((m) => matchFn(m, opt)).length;
+      options.forEach((opt) => (counts[opt] = 0));
+      for (const m of filtered) {
+        const val = modelValFn(m);
+        if (Array.isArray(val)) {
+          val.forEach((v) => {
+            if (counts[v] !== undefined) counts[v]++;
+          });
+        } else {
+          if (counts[val] !== undefined) counts[val]++;
+        }
       }
       return counts;
     };
 
     return {
-      type: getCounts("type", TYPE_OPTIONS.map((o) => o.value), (m, opt) => m.type === opt),
-      task: getCounts("task", TASK_OPTIONS.map((o) => o.value), (m, opt) => m.primaryTask === opt),
-      modality: getCounts("modality", dynamicOptions.modalities, (m, opt) => m.modality.includes(opt)),
-      developer: getCounts("developer", developers, (m, opt) => m.developer === opt),
-      license: getCounts("license", dynamicOptions.licenses, (m, opt) => m.license === opt),
-      deployment: getCounts(
-        "deployment",
+      type: calculateCounts(
+        TYPE_OPTIONS.map((o) => o.value),
+        "type",
+        (m) => m.type
+      ),
+      task: calculateCounts(
+        TASK_OPTIONS.map((o) => o.value),
+        "task",
+        (m) => m.primaryTask
+      ),
+      modality: calculateCounts(dynamicOptions.modalities, "modality", (m) => m.modality),
+      developer: calculateCounts(developers, "developer", (m) => m.developer),
+      license: calculateCounts(dynamicOptions.licenses, "license", (m) => m.license),
+      deployment: calculateCounts(
         DEPLOYMENT_OPTIONS.map((o) => o.value),
-        (m, opt) => m.deployment.includes(opt as any)
+        "deployment",
+        (m) => m.deployment
       ),
     };
   }, [models, filters, dynamicOptions, developers]);
 
-  // Calculate matching models with all active parameters applied
   const filtered = useMemo(() => {
     let result = filterModels(models, filters);
 
-    // Apply sorting
     switch (sortKey) {
       case "newest":
         result.sort(
@@ -344,9 +328,7 @@ function ModelCatalogContent({
     const finalItems: CatalogItem[] = [];
     const seenFamilies = new Set<string>();
 
-    // Only group families if we aren't applying filters that might exclude members of that family.
-    // Developer is safe because families belong entirely to one developer.
-    const shouldGroup = 
+    const shouldGroup =
       filters.q === "" &&
       filters.type.length === 0 &&
       filters.task.length === 0 &&
@@ -359,7 +341,7 @@ function ModelCatalogContent({
         if (!seenFamilies.has(model.family)) {
           seenFamilies.add(model.family);
           const allVariants = models.filter((m) => m.family === model.family);
-          
+
           if (allVariants.length === 1) {
             finalItems.push({ type: "standalone", model: allVariants[0] });
           } else {
@@ -391,7 +373,6 @@ function ModelCatalogContent({
     filters.license.length > 0 ||
     filters.deployment.length > 0;
 
-  // Sync state parameters to query parameters
   const updateUrl = (updatedFilters: FiltersState, updatedSort: string) => {
     const params = new URLSearchParams();
 
@@ -444,56 +425,8 @@ function ModelCatalogContent({
     updateUrl(blankFilters, sortKey);
   };
 
-  // Compile active pills
-  const activeChips = useMemo(() => {
-    const chips: { key: keyof Omit<FiltersState, "q">; val: string; label: string }[] = [];
-
-    const addChips = (key: keyof Omit<FiltersState, "q">, labelMap?: Record<string, string>) => {
-      for (const val of filters[key]) {
-        const label = labelMap?.[val] || val;
-        chips.push({ key, val, label });
-      }
-    };
-
-    const taskLabels: Record<string, string> = {
-      "chat-reasoning": "Chat & Reasoning",
-      "code-generation": "Coding",
-      "image-generation": "Image Gen",
-      "video-generation": "Video Gen",
-      "audio-speech": "Audio & Speech",
-      "embedding": "Embedding",
-      "agentic": "Agentic",
-      "multimodal-general": "Multimodal",
-      "translation": "Translation",
-      "search-retrieval": "Search & RAG",
-      "other": "Specialized",
-    };
-
-    const typeLabels: Record<string, string> = {
-      "open-weights": "Open Weights",
-      "closed-source": "Closed Source",
-      "api-only": "API Only",
-      "research-preview": "Research Preview",
-    };
-
-    const deploymentLabels: Record<string, string> = {
-      "api-only": "API Only",
-      "self-hostable": "Self-Hostable",
-      "on-device": "On-Device",
-    };
-
-    addChips("type", typeLabels);
-    addChips("task", taskLabels);
-    addChips("modality");
-    addChips("developer");
-    addChips("license");
-    addChips("deployment", deploymentLabels);
-
-    return chips;
-  }, [filters]);
-
   const renderSidebar = () => (
-    <div className="space-y-8">
+    <div className="space-y-6">
       <FacetGroupFilter
         title="Type"
         options={TYPE_OPTIONS}
@@ -554,15 +487,15 @@ function ModelCatalogContent({
   );
 
   return (
-    <div className="flex flex-col md:flex-row gap-8 items-start relative">
-      {/* ── Desktop Sidebar Facets (z-10) ────────────────────── */}
-      <aside className="hidden md:block w-64 shrink-0 space-y-6 sticky top-6 max-h-[calc(100vh-4rem)] overflow-y-auto pr-2 scrollbar-thin">
-        <div className="flex items-center justify-between">
-          <span className="text-xs font-bold uppercase tracking-widest text-gray-400">Filters</span>
+    <div className="flex flex-col lg:flex-row gap-8 items-start relative w-full max-w-full overflow-hidden">
+      {/* ── Desktop Sidebar Facets ───────────────────────────── */}
+      <aside className="hidden lg:block w-64 shrink-0 space-y-5 sticky top-16 max-h-[calc(100vh-5rem)] overflow-y-auto pr-2 no-scrollbar border-r border-[#282828]">
+        <div className="flex items-center justify-between pr-2">
+          <span className="text-xs font-semibold uppercase tracking-wider text-[#90908F]">Filters</span>
           {hasActiveFilters && (
             <button
               onClick={clearAllFilters}
-              className="text-[10px] text-[#4ADE80] hover:text-[#e85a28] hover:underline"
+              className="text-xs text-[#D97757] hover:underline font-medium"
             >
               Clear All
             </button>
@@ -572,18 +505,17 @@ function ModelCatalogContent({
       </aside>
 
       {/* ── Main Catalog Workspace ───────────────────────────── */}
-      <div className="flex-1 w-full space-y-6">
-        {/* Top-level Interactive Filter Bars */}
-        <div className="space-y-3 border-b border-white/10 pb-5">
-          {/* Primary Task Pills */}
-          <div className="flex items-center gap-2 overflow-x-auto pb-1 no-scrollbar">
-            <span className="text-[11px] font-bold uppercase tracking-wider text-emerald-400 shrink-0 mr-1">Task:</span>
+      <div className="flex-1 min-w-0 w-full space-y-6">
+        {/* Horizontal Filter Task & Type Bar */}
+        <div className="space-y-3 border-b border-[#282828] pb-5">
+          <div className="flex items-center gap-2 overflow-x-auto pb-1 no-scrollbar w-full">
+            <span className="text-xs font-semibold uppercase tracking-wider text-[#90908F] shrink-0 mr-1">Task:</span>
             <button
-              onClick={() => setFilters(f => ({ ...f, task: [] }))}
-              className={`px-3.5 py-1 rounded-full text-xs font-semibold tracking-wide transition-all whitespace-nowrap ${
+              onClick={() => setFilters((f) => ({ ...f, task: [] }))}
+              className={`px-3 py-1 rounded-full text-xs font-medium transition-colors whitespace-nowrap ${
                 filters.task.length === 0
-                  ? "bg-emerald-500/20 text-emerald-300 border border-emerald-500/30"
-                  : "bg-white/5 text-white/60 hover:bg-white/10 hover:text-white border border-white/10"
+                  ? "bg-white text-[#141414] font-semibold"
+                  : "bg-[#242426] text-[#90908F] hover:text-white border border-[#333333]"
               }`}
             >
               All Tasks ({models.length})
@@ -602,14 +534,14 @@ function ModelCatalogContent({
                       return { ...f, task: newTasks };
                     });
                   }}
-                  className={`px-3.5 py-1 rounded-full text-xs font-semibold tracking-wide transition-all whitespace-nowrap flex items-center gap-1.5 ${
+                  className={`px-3 py-1 rounded-full text-xs font-medium transition-colors whitespace-nowrap flex items-center gap-1.5 ${
                     isActive
-                      ? "bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 shadow-md shadow-emerald-500/10"
-                      : "bg-white/5 text-white/60 hover:bg-white/10 hover:text-white border border-white/10"
+                      ? "bg-white text-[#141414] font-semibold"
+                      : "bg-[#242426] text-[#90908F] hover:text-white border border-[#333333]"
                   }`}
                 >
                   <span>{opt.label}</span>
-                  <span className={`text-[10px] px-1.5 py-0.2 rounded-full font-mono ${isActive ? "bg-emerald-500/30 text-emerald-200" : "bg-white/10 text-white/50"}`}>
+                  <span className={`text-[10px] px-1.5 py-0.2 rounded-full font-mono ${isActive ? "bg-black/20 text-[#141414]" : "bg-[#1E1E1E] text-gray-400"}`}>
                     {count}
                   </span>
                 </button>
@@ -617,15 +549,14 @@ function ModelCatalogContent({
             })}
           </div>
 
-          {/* Model Type Pills */}
-          <div className="flex items-center gap-2 overflow-x-auto pb-1 no-scrollbar">
-            <span className="text-[11px] font-bold uppercase tracking-wider text-emerald-400 shrink-0 mr-1">Type:</span>
+          <div className="flex items-center gap-2 overflow-x-auto pb-1 no-scrollbar w-full">
+            <span className="text-xs font-semibold uppercase tracking-wider text-[#90908F] shrink-0 mr-1">Type:</span>
             <button
-              onClick={() => setFilters(f => ({ ...f, type: [] }))}
-              className={`px-3 py-1 rounded-full text-xs font-semibold tracking-wide transition-all whitespace-nowrap ${
+              onClick={() => setFilters((f) => ({ ...f, type: [] }))}
+              className={`px-3 py-1 rounded-full text-xs font-medium transition-colors whitespace-nowrap ${
                 filters.type.length === 0
-                  ? "bg-white/20 text-white border border-white/30"
-                  : "bg-white/5 text-white/60 hover:bg-white/10 hover:text-white border border-white/10"
+                  ? "bg-white text-[#141414] font-semibold"
+                  : "bg-[#242426] text-[#90908F] hover:text-white border border-[#333333]"
               }`}
             >
               All Types
@@ -644,14 +575,14 @@ function ModelCatalogContent({
                       return { ...f, type: newType };
                     });
                   }}
-                  className={`px-3 py-1 rounded-full text-xs font-semibold tracking-wide transition-all whitespace-nowrap flex items-center gap-1.5 ${
+                  className={`px-3 py-1 rounded-full text-xs font-medium transition-colors whitespace-nowrap flex items-center gap-1.5 ${
                     isActive
-                      ? "bg-white/20 text-white border border-white/30"
-                      : "bg-white/5 text-white/60 hover:bg-white/10 hover:text-white border border-white/10"
+                      ? "bg-white text-[#141414] font-semibold"
+                      : "bg-[#242426] text-[#90908F] hover:text-white border border-[#333333]"
                   }`}
                 >
                   <span>{opt.label}</span>
-                  <span className={`text-[10px] px-1.5 py-0.2 rounded-full font-mono ${isActive ? "bg-white/30 text-white" : "bg-white/10 text-white/50"}`}>
+                  <span className={`text-[10px] px-1.5 py-0.2 rounded-full font-mono ${isActive ? "bg-black/20 text-[#141414]" : "bg-[#1E1E1E] text-gray-400"}`}>
                     {count}
                   </span>
                 </button>
@@ -660,92 +591,68 @@ function ModelCatalogContent({
           </div>
         </div>
 
-        {/* Controls Panel */}
-        <div className="flex flex-col sm:flex-row gap-4 items-stretch sm:items-center justify-between border-b border-white/10 pb-4">
-          {/* Search inputs */}
+        {/* Search Input & Controls Bar */}
+        <div className="flex flex-col sm:flex-row gap-4 items-stretch sm:items-center justify-between border-b border-[#282828] pb-4">
           <div className="relative flex-1 max-w-md">
-            <Search size={16} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-400/50" />
+            <Search size={15} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-[#90908F]" />
             <input
               type="text"
               placeholder="Search by name or developer..."
               value={filters.q}
               onChange={(e) => handleSearchChange(e.target.value)}
-              className="w-full bg-[#121A15] border border-white/10 rounded-full pl-10 pr-4 py-2 text-sm text-white placeholder:text-gray-400 focus:outline-none focus:border-white/20 transition-colors"
+              className="w-full bg-[#1C1C1E] border border-[#282828] rounded-lg pl-10 pr-4 py-2 text-xs text-white placeholder:text-[#90908F] focus:outline-none focus:border-[#D97757] transition-colors font-sans"
             />
+            {filters.q && (
+              <button
+                onClick={() => handleSearchChange("")}
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-[#90908F] hover:text-white"
+              >
+                <X size={14} />
+              </button>
+            )}
           </div>
 
           <div className="flex items-center gap-3 justify-between sm:justify-start">
-            {/* Mobile Filters Toggle Button */}
             <button
               onClick={() => setMobileFiltersOpen(true)}
-              className="md:hidden flex items-center gap-2 px-4 py-2 border border-white/10 rounded-full text-xs font-medium text-gray-400 hover:text-white bg-[#121A15]/5"
+              className="lg:hidden flex items-center gap-2 px-3 py-1.5 border border-[#282828] rounded-lg text-xs font-medium text-[#90908F] hover:text-white bg-[#1C1C1E]"
             >
               <SlidersHorizontal size={14} />
               Filters
-              {activeChips.length > 0 && (
-                <span className="h-4 w-4 bg-[#4ADE80] text-white text-[9px] rounded-full flex items-center justify-center font-bold">
-                  {activeChips.length}
-                </span>
-              )}
             </button>
 
-            {/* Sort & Count */}
             <div className="flex items-center gap-2">
-              <span className="text-xs text-gray-400/50 whitespace-nowrap hidden sm:block">Sort By</span>
+              <span className="text-xs text-[#90908F] whitespace-nowrap hidden sm:block">Sort By</span>
               <div className="relative">
                 <select
                   value={sortKey}
                   onChange={(e) => handleSortChange(e.target.value)}
-                  className="bg-[#121A15] border border-white/10 rounded-full px-4 py-2 pr-8 text-xs font-medium text-gray-400 focus:outline-none focus:border-white/20 appearance-none cursor-pointer"
+                  className="bg-[#1C1C1E] border border-[#282828] rounded-lg px-3 py-1.5 pr-8 text-xs font-medium text-[#E1E1E0] focus:outline-none focus:border-[#D97757] appearance-none cursor-pointer"
                 >
                   {SORT_OPTIONS.map((opt) => (
-                    <option key={opt.key} value={opt.key} className="bg-[#121A15] text-white">
+                    <option key={opt.key} value={opt.key} className="bg-[#1C1C1E] text-white">
                       {opt.label}
                     </option>
                   ))}
                 </select>
-                <ArrowUpDown size={12} className="absolute right-3.5 top-1/2 -translate-y-1/2 text-gray-400/50 pointer-events-none" />
+                <ArrowUpDown size={12} className="absolute right-2.5 top-1/2 -translate-y-1/2 text-[#90908F] pointer-events-none" />
               </div>
             </div>
           </div>
         </div>
 
+        {/* Results Counter */}
         <div className="flex flex-wrap items-center gap-3 justify-between">
-          <p className="text-xs text-gray-400">
+          <p className="text-xs text-[#90908F]">
             Showing <span className="text-white font-medium">{groupedItems.length}</span> cards (from {filtered.length} matching models)
           </p>
-
-          {activeChips.length > 0 && (
-            <div className="flex flex-wrap items-center gap-2">
-              {activeChips.map((chip) => (
-                <span
-                  key={`${chip.key}-${chip.val}`}
-                  className="inline-flex items-center gap-1.5 text-[10px] font-semibold bg-[#4ADE80]/10 border border-[#4ADE80]/15 text-[#4ADE80] px-2.5 py-1 rounded-full shrink-0"
-                >
-                  {chip.label}
-                  <button
-                    onClick={() => toggleFilter(chip.key, chip.val)}
-                    className="hover:bg-[#4ADE80]/20 rounded-full p-0.5 transition-colors"
-                  >
-                    <X size={10} />
-                  </button>
-                </span>
-              ))}
-              <button
-                onClick={clearAllFilters}
-                className="text-[10px] font-semibold text-gray-400 hover:text-white transition-colors ml-1"
-              >
-                Clear all
-              </button>
-            </div>
-          )}
         </div>
 
-        {/* ── Results Cards Grid ────────────────────────────── */}
-        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-4 auto-rows-fr">
+        {/* Results Model Cards Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 auto-rows-fr">
           {groupedItems.map((item) => {
             const model = item.type === "family" ? item.primaryModel : item.model;
-            const featuredClass = model.featured ? "md:col-span-2 xl:col-span-2 row-span-2" : "";
+            const featuredClass = model.featured ? "md:col-span-2 row-span-2" : "";
 
             if (item.type === "family") {
               return (
@@ -762,10 +669,10 @@ function ModelCatalogContent({
             }
             return (
               <div key={item.model.id} className={featuredClass}>
-                <ModelCard 
-                  model={item.model} 
-                  variant="single" 
-                  isFeatured={model.featured} 
+                <ModelCard
+                  model={item.model}
+                  variant="single"
+                  isFeatured={model.featured}
                   hideDeveloperPrefix={hideDeveloperPrefix}
                 />
               </div>
@@ -774,13 +681,13 @@ function ModelCatalogContent({
         </div>
 
         {groupedItems.length === 0 && (
-          <div className="py-24 text-center flex flex-col items-center justify-center border border-white/5 bg-[#121A15]/[0.02] rounded-3xl p-8">
-            <p className="text-gray-400 text-sm">
-              No models match these filters yet — try removing one
+          <div className="py-20 text-center flex flex-col items-center justify-center border border-[#282828] bg-[#1C1C1E] rounded-xl p-8">
+            <p className="text-[#90908F] text-xs">
+              No models match these filters yet — try removing a filter
             </p>
             <button
               onClick={clearAllFilters}
-              className="mt-4 bg-[#4ADE80] hover:bg-[#e85a28] text-white text-xs font-semibold px-6 py-2.5 rounded-full hover:scale-[1.03] active:scale-95 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#4ADE80]/50 focus-visible:ring-offset-2 focus-visible:ring-offset-white"
+              className="mt-4 bg-[#D97757] text-white text-xs font-semibold px-5 py-2 rounded-lg hover:bg-opacity-90 transition-colors"
             >
               Clear filters
             </button>
@@ -788,51 +695,18 @@ function ModelCatalogContent({
         )}
       </div>
 
-      {/* ── Mobile Filters Bottom Drawer (z-50) ──────────────── */}
+      {/* Mobile Drawer */}
       {mobileFiltersOpen && (
-        <div className="fixed inset-0 z-50 md:hidden flex flex-col justify-end bg-[#121A15]/50 backdrop-blur-sm">
+        <div className="fixed inset-0 z-50 lg:hidden flex flex-col justify-end bg-black/70 backdrop-blur-sm">
           <div className="absolute inset-0" onClick={() => setMobileFiltersOpen(false)} />
-
-          <div className="relative w-full max-h-[85vh] bg-[#121A15] border-t border-white/10 rounded-t-3xl flex flex-col z-10">
-            {/* Drag Handle Bar Accent */}
-            <div className="h-1.5 w-12 bg-white/20 rounded-full mx-auto my-3 shrink-0" />
-
-            {/* Header */}
-            <div className="flex items-center justify-between px-6 pb-4 border-b border-white/10">
-              <span className="text-xs font-bold uppercase tracking-wider text-gray-400">Filters</span>
-              <button
-                onClick={() => setMobileFiltersOpen(false)}
-                className="p-1.5 hover:bg-[#121A15]/5 rounded-full text-gray-400 hover:text-white transition-colors"
-              >
+          <div className="relative w-full max-h-[85vh] bg-[#141414] border-t border-[#282828] rounded-t-2xl flex flex-col z-10 p-5">
+            <div className="flex items-center justify-between pb-3 border-b border-[#282828]">
+              <span className="text-xs font-bold uppercase tracking-wider text-[#90908F]">Filters</span>
+              <button onClick={() => setMobileFiltersOpen(false)} className="p-1 text-gray-400 hover:text-white">
                 <X size={18} />
               </button>
             </div>
-
-            {/* Facet Groups */}
-            <div className="overflow-y-auto p-6 space-y-6 flex-1 scrollbar-thin">
-              {renderSidebar()}
-            </div>
-
-            {/* Bottom Actions Row */}
-            <div className="p-4 border-t border-white/10 bg-[#121A15] flex gap-3 shrink-0">
-              {hasActiveFilters && (
-                <button
-                  onClick={() => {
-                    clearAllFilters();
-                    setMobileFiltersOpen(false);
-                  }}
-                  className="flex-1 py-3.5 border border-white/10 hover:border-white/20 text-gray-400 hover:text-white rounded-2xl text-xs font-semibold transition-colors"
-                >
-                  Clear All
-                </button>
-              )}
-              <button
-                onClick={() => setMobileFiltersOpen(false)}
-                className="flex-1 py-3.5 bg-[#4ADE80] hover:bg-[#e85a28] text-white rounded-2xl text-xs font-semibold transition-colors"
-              >
-                View {filtered.length} Results
-              </button>
-            </div>
+            <div className="overflow-y-auto py-4 space-y-6 flex-1">{renderSidebar()}</div>
           </div>
         </div>
       )}
@@ -847,7 +721,7 @@ export default function ModelCatalog(props: {
   hideDeveloperPrefix?: boolean;
 }) {
   return (
-    <Suspense fallback={<div className="text-white/40 text-sm py-20 text-center">Loading catalog...</div>}>
+    <Suspense fallback={<div className="text-gray-400 text-xs py-20 text-center">Loading catalog...</div>}>
       <ModelCatalogContent {...props} />
     </Suspense>
   );
