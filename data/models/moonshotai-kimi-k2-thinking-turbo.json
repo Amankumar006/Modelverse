@@ -1,0 +1,64 @@
+{
+  "id": "moonshotai-kimi-k2-thinking-turbo",
+  "name": "Kimi K2 Thinking Turbo",
+  "slug": "moonshotai-kimi-k2-thinking-turbo",
+  "developer": "Moonshot AI",
+  "releaseDate": "2025-11-06",
+  "updatedAt": "2026-07-26",
+  "type": "open-weights",
+  "status": "active",
+  "modality": [
+    "text"
+  ],
+  "primaryTask": "chat-reasoning",
+  "deployment": [
+    "self-hostable",
+    "api-only"
+  ],
+  "license": "Other/Custom",
+  "parameters": "undisclosed",
+  "contextWindow": "262K tokens",
+  "description": "Kimi reasoning model for long-horizon research, planning, and tool use",
+  "keyFeatures": [
+    "Max Output: 262K tokens",
+    "Native reasoning capability",
+    "Tool / function calling support"
+  ],
+  "benchmarks": [],
+  "family": "kimi-thinking",
+  "previousVersion": null,
+  "pricing": [
+    {
+      "unit": "1M input tokens",
+      "amount": 1.15,
+      "currency": "USD"
+    },
+    {
+      "unit": "1M output tokens",
+      "amount": 8,
+      "currency": "USD"
+    },
+    {
+      "unit": "1M cache read tokens",
+      "amount": 0.15,
+      "currency": "USD"
+    }
+  ],
+  "pricingLastVerified": "2026-07-26",
+  "links": {
+    "Hugging Face": "https://huggingface.co/moonshotai/Kimi-K2-Thinking"
+  },
+  "logo": "/logos/moonshot.svg",
+  "tags": [
+    "reasoning",
+    "tool-calling",
+    "open-weights"
+  ],
+  "sources": [
+    "https://github.com/anomalyco/models.dev"
+  ],
+  "verified": false,
+  "featured": false,
+  "boost": 1,
+  "curatorNotes": "Skeleton entry imported from models.dev backfill (2026-07-26). Needs manual enrichment and primary-source verification."
+}

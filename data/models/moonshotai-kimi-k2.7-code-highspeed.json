@@ -1,0 +1,67 @@
+{
+  "id": "moonshotai-kimi-k2.7-code-highspeed",
+  "name": "Kimi K2.7 Code Highspeed",
+  "slug": "moonshotai-kimi-k2.7-code-highspeed",
+  "developer": "Moonshot AI",
+  "releaseDate": "2026-06-12",
+  "updatedAt": "2026-07-26",
+  "type": "open-weights",
+  "status": "active",
+  "modality": [
+    "text",
+    "image",
+    "video"
+  ],
+  "primaryTask": "chat-reasoning",
+  "deployment": [
+    "self-hostable",
+    "api-only"
+  ],
+  "license": "Other/Custom",
+  "parameters": "undisclosed",
+  "contextWindow": "262K tokens",
+  "description": "Lower-latency Kimi Code variant for interactive edits and coding-agent loops",
+  "keyFeatures": [
+    "Max Output: 262K tokens",
+    "Native reasoning capability",
+    "Tool / function calling support"
+  ],
+  "benchmarks": [],
+  "family": "kimi-k2",
+  "previousVersion": null,
+  "pricing": [
+    {
+      "unit": "1M input tokens",
+      "amount": 1.9,
+      "currency": "USD"
+    },
+    {
+      "unit": "1M output tokens",
+      "amount": 8,
+      "currency": "USD"
+    },
+    {
+      "unit": "1M cache read tokens",
+      "amount": 0.38,
+      "currency": "USD"
+    }
+  ],
+  "pricingLastVerified": "2026-07-26",
+  "links": {
+    "Hugging Face": "https://huggingface.co/moonshotai/Kimi-K2.7-Code"
+  },
+  "logo": "/logos/moonshot.svg",
+  "tags": [
+    "reasoning",
+    "tool-calling",
+    "structured-output",
+    "open-weights"
+  ],
+  "sources": [
+    "https://github.com/anomalyco/models.dev"
+  ],
+  "verified": false,
+  "featured": false,
+  "boost": 1,
+  "curatorNotes": "Skeleton entry imported from models.dev backfill (2026-07-26). Needs manual enrichment and primary-source verification."
+}
