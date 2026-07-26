@@ -56,18 +56,15 @@ export default function Navbar({ theme = "light" }: { theme?: "light" | "dark" }
   };
 
   return (
-    <header className="relative z-50 w-full">
-      <nav className="flex justify-between items-center px-8 py-6 max-w-7xl mx-auto gap-4">
+    <header className="sticky top-0 z-50 w-full bg-[#141414]/90 backdrop-blur-md border-b border-[#27272A]">
+      <nav className="flex justify-between items-center px-6 py-3.5 max-w-7xl mx-auto gap-4">
         {/* Logo */}
         <Link
           href="/"
-          className={`flex items-center gap-3 text-3xl tracking-tight font-normal hover:opacity-80 transition-opacity focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black focus-visible:ring-offset-2 rounded-lg shrink-0 ${theme === 'dark' ? 'text-[#F0FDF4]' : 'text-[#000000]'}`}
-          style={{
-            fontFamily: "var(--font-display, 'Instrument Serif', serif)",
-          }}
+          className="flex items-center gap-2.5 text-2xl tracking-tight font-serif text-[#F4F4F5] hover:opacity-80 transition-opacity rounded-lg shrink-0"
         >
-          <Image src="/logo.jpg" alt="Modelverse Logo" width={40} height={40} className="rounded-full object-cover" />
-          <span>Modelverse<sup className="text-sm font-sans select-none">®</sup></span>
+          <Image src="/logo.jpg" alt="Modelverse Logo" width={32} height={32} className="rounded-md object-cover" />
+          <span>Modelverse <span className="text-xs font-sans text-[#A1A1AA] font-normal border border-[#3F3F46] px-1.5 py-0.5 rounded">Docs</span></span>
         </Link>
 
         {/* Menu Items (desktop) */}

@@ -77,11 +77,11 @@ export default async function NewsPage({ searchParams }: NewsPageProps) {
   const archivePosts = remainingPosts.slice((currentPage - 1) * pageSize, currentPage * pageSize);
 
   return (
-    <main className="min-h-screen bg-[#0C120F] text-[#E2E8E4] selection:bg-[#4ADE80] selection:text-[#0C120F] pb-24 font-sans antialiased relative">
+    <main className="min-h-screen bg-[#141414] text-[#E4E4E7] selection:bg-[#DA7756] selection:text-white pb-24 font-sans antialiased relative">
       <Navbar theme="dark" />
 
       {/* Hero Header */}
-      <div className="max-w-6xl mx-auto px-6 sm:px-8 lg:px-12 pt-16 sm:pt-24 text-center">
+      <div className="max-w-6xl mx-auto px-6 sm:px-8 lg:px-12 pt-12 sm:pt-16 text-center">
         {/* Category Pill */}
         <div className="inline-flex items-center px-3 py-1 rounded-full bg-[#1A261D] border border-[#243629] mb-6">
           <span className="text-[10px] font-bold text-[#8C9E91] uppercase tracking-widest">
