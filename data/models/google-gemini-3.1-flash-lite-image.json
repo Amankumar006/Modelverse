@@ -1,0 +1,61 @@
+{
+  "id": "google-gemini-3.1-flash-lite-image",
+  "name": "Nano Banana 2 Lite",
+  "slug": "google-gemini-3.1-flash-lite-image",
+  "developer": "Google DeepMind",
+  "releaseDate": "2026-06-30",
+  "updatedAt": "2026-07-26",
+  "type": "api-only",
+  "status": "active",
+  "modality": [
+    "text",
+    "image"
+  ],
+  "primaryTask": "image-generation",
+  "deployment": [
+    "api-only"
+  ],
+  "license": "Proprietary",
+  "parameters": "undisclosed",
+  "contextWindow": "66K tokens",
+  "description": "Fastest, most cost-efficient Gemini image model for high-volume 1K generation and editing",
+  "keyFeatures": [
+    "Max Output: 4K tokens",
+    "Native reasoning capability",
+    "Tool / function calling support"
+  ],
+  "benchmarks": [],
+  "family": "gemini-flash-lite",
+  "previousVersion": null,
+  "pricing": [
+    {
+      "unit": "1M input tokens",
+      "amount": 0.25,
+      "currency": "USD"
+    },
+    {
+      "unit": "1M output tokens",
+      "amount": 1.5,
+      "currency": "USD"
+    },
+    {
+      "unit": "1M cache read tokens",
+      "amount": 0.03,
+      "currency": "USD"
+    }
+  ],
+  "pricingLastVerified": "2026-07-26",
+  "links": {},
+  "logo": "/logos/google-deepmind.svg",
+  "tags": [
+    "reasoning",
+    "tool-calling"
+  ],
+  "sources": [
+    "https://github.com/anomalyco/models.dev"
+  ],
+  "verified": false,
+  "featured": false,
+  "boost": 1,
+  "curatorNotes": "Skeleton entry imported from models.dev backfill (2026-07-26). Needs manual enrichment and primary-source verification."
+}
