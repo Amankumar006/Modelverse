@@ -140,7 +140,7 @@ export default async function BrowsePage({ searchParams }: PageProps) {
       </div>
 
       {/* ── Content Container ───────────────────────────────── */}
-      <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8">
+      <div className="relative z-10 w-full max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-10 2xl:px-12 pt-8">
         <div className="border-b border-[#282828] pb-6 mb-8">
           <h1
             className="text-4xl sm:text-5xl font-normal tracking-tight text-white"
