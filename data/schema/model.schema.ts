@@ -26,6 +26,7 @@ export const BenchmarkSchema = z.object({
   name: z.string(),
   score: z.string(),
   verified: z.boolean(),
+  sourceType: z.enum(["vendor-reported", "independent-eval"]).optional(),
 });
 
 export const ModelStatusEnum = z.enum(["active", "deprecated", "sunset"]);
@@ -50,8 +51,10 @@ export const ModelSchema = z.object({
   parameters: z.string(),
   contextWindow: z.string(),
   description: z.string(),
+  descriptionDraft: z.string().optional(),
   templatedDescription: z.boolean().optional(),
   keyFeatures: z.array(z.string()),
+  keyFeaturesDraft: z.array(z.string()).optional(),
   benchmarks: z.array(BenchmarkSchema),
   // family: the generation-level identifier shared by every variant of one release
   // (e.g. "gpt-5.6" shared by chat, codex, realtime). Convention: lowercase, hyphenated, matches the primary base entry's slug.
@@ -85,6 +88,7 @@ export const ModelSchema = z.object({
   tags: z.array(z.string()),
   sources: z.array(z.string()).min(1),
   verified: z.boolean(),
+  needsReview: z.boolean().optional(),
   featured: z.boolean().default(false),
   boost: z.number().min(1).max(5).default(1),
   // curatorNotes: internal-only notes for curation triage, deliberately omitted from any client-facing rendering

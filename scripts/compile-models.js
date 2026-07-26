@@ -21,7 +21,8 @@ const DeploymentEnum = z.enum(["api-only", "self-hostable", "on-device"]);
 const BenchmarkSchema = z.object({
   name: z.string(),
   score: z.string(),
-  verified: z.boolean()
+  verified: z.boolean(),
+  sourceType: z.enum(["vendor-reported", "independent-eval"]).optional()
 });
 
 const ModelSchema = z.object({
@@ -41,8 +42,10 @@ const ModelSchema = z.object({
   parameters: z.string(),
   contextWindow: z.string(),
   description: z.string(),
+  descriptionDraft: z.string().optional(),
   templatedDescription: z.boolean().optional(),
   keyFeatures: z.array(z.string()),
+  keyFeaturesDraft: z.array(z.string()).optional(),
   benchmarks: z.array(BenchmarkSchema),
   family: z.string().nullable(),
   tier: z.string().optional(),
@@ -67,6 +70,7 @@ const ModelSchema = z.object({
   tags: z.array(z.string()),
   sources: z.array(z.string()).min(1),
   verified: z.boolean(),
+  needsReview: z.boolean().optional(),
   featured: z.boolean().default(false),
   boost: z.number().min(1).max(5).default(1),
   // curatorNotes is intentionally internal-only; not exposed in search indexes or route types

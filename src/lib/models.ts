@@ -25,6 +25,7 @@ export interface Benchmark {
   name: string;
   score: string;
   verified: boolean;
+  sourceType?: "vendor-reported" | "independent-eval";
 }
 
 /** Full model entry. */
@@ -37,7 +38,9 @@ export interface ModelEntry extends ModelIndex {
   parameters: string;
   contextWindow: string;
   description: string;
+  descriptionDraft?: string;
   keyFeatures: string[];
+  keyFeaturesDraft?: string[];
   benchmarks: Benchmark[];
   family: string | null;
   previousVersion: string | null;
@@ -47,6 +50,7 @@ export interface ModelEntry extends ModelIndex {
   tags: string[];
   sources: string[];
   verified: boolean;
+  needsReview?: boolean;
   featured: boolean;
   boost: number;
   curatorNotes: string;
