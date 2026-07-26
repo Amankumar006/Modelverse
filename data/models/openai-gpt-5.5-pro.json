@@ -1,0 +1,94 @@
+{
+  "id": "openai-gpt-5.5-pro",
+  "name": "GPT-5.5 Pro",
+  "slug": "openai-gpt-5.5-pro",
+  "developer": "OpenAI",
+  "releaseDate": "2026-04-23",
+  "updatedAt": "2026-07-26",
+  "type": "api-only",
+  "status": "active",
+  "modality": [
+    "text",
+    "image",
+    "pdf"
+  ],
+  "primaryTask": "chat-reasoning",
+  "deployment": [
+    "api-only"
+  ],
+  "license": "Proprietary",
+  "parameters": "undisclosed",
+  "contextWindow": "1.1M tokens",
+  "description": "Highest-accuracy GPT-5.5 tier for slower, precision-heavy reasoning and coding",
+  "keyFeatures": [
+    "Max Output: 128K tokens",
+    "Native reasoning capability",
+    "Tool / function calling support"
+  ],
+  "benchmarks": [
+    {
+      "name": "BrowseComp",
+      "score": "90.1 (accuracy)",
+      "verified": false
+    },
+    {
+      "name": "Humanity's Last Exam",
+      "score": "43.1 (accuracy)",
+      "verified": false
+    },
+    {
+      "name": "Humanity's Last Exam",
+      "score": "57.2 (accuracy)",
+      "verified": false
+    },
+    {
+      "name": "FrontierMath",
+      "score": "52.4 (accuracy)",
+      "verified": false
+    },
+    {
+      "name": "FrontierMath",
+      "score": "39.6 (accuracy)",
+      "verified": false
+    },
+    {
+      "name": "GDPval",
+      "score": "82.3 (wins or ties)",
+      "verified": false
+    },
+    {
+      "name": "GeneBench",
+      "score": "33.2 (accuracy)",
+      "verified": false
+    }
+  ],
+  "family": "gpt-pro",
+  "previousVersion": null,
+  "pricing": [
+    {
+      "unit": "1M input tokens",
+      "amount": 30,
+      "currency": "USD"
+    },
+    {
+      "unit": "1M output tokens",
+      "amount": 180,
+      "currency": "USD"
+    }
+  ],
+  "pricingLastVerified": "2026-07-26",
+  "links": {},
+  "logo": "/logos/openai.svg",
+  "tags": [
+    "reasoning",
+    "tool-calling",
+    "structured-output"
+  ],
+  "sources": [
+    "https://github.com/anomalyco/models.dev"
+  ],
+  "verified": false,
+  "featured": false,
+  "boost": 1,
+  "curatorNotes": "Skeleton entry imported from models.dev backfill (2026-07-26). Needs manual enrichment and primary-source verification."
+}
