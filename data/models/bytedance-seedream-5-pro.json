@@ -4,7 +4,7 @@
   "slug": "seedream-5-pro",
   "developer": "ByteDance",
   "releaseDate": "2026-07-08",
-  "updatedAt": "2026-07-26",
+  "updatedAt": "2026-07-27",
   "type": "closed-source",
   "status": "active",
   "modality": [
@@ -19,33 +19,56 @@
   "parameters": "undisclosed",
   "contextWindow": "128K tokens",
   "description": "Seedream 5.0 Pro is ByteDance's flagship multimodal image generation and interactive precision editing model. Designed for professional creative workflows, it features native layer separation, interactive grounded editing, high-density multilingual typography, and multi-reference consistency up to 4K resolution.",
-  "templatedDescription": false,
   "keyFeatures": [
-    "Native Layered & Interactive Local Editing: Point selection, lasso selection, sketch guidance, and material swapping without altering unselected regions",
-    "High-Density Multilingual Typography: Advanced layout and text rendering optimized for infographics across 10-14 languages",
-    "Multi-Reference Consistency Control: Accepts up to 10 reference images simultaneously to maintain strict character, object, and style consistency",
-    "High-Resolution Photorealistic Rendering: Produces outputs up to 4K resolution with lifelike lighting and CG-level expressiveness",
-    "API & Ecosystem Integration: Integrated into BytePlus ModelArk API and compatible with Seedance video generation pipelines"
+    "1294 ImgGen & 1350 ImgEdit Elo rating on LMArena Vision Leaderboard",
+    "Native Layered & Interactive Local Editing: Point selection, lasso selection, and sketch guidance",
+    "High-Density Multilingual Typography: Advanced layout and text rendering optimized for infographics across 14 languages",
+    "Multi-Reference Consistency Control: Accepts up to 10 reference images simultaneously to maintain strict character and style consistency",
+    "High-Resolution Photorealistic Rendering: Produces outputs up to 4K resolution with CG-level expressiveness",
+    "Commercial API integration via BytePlus ModelArk"
   ],
   "benchmarks": [
     {
-      "name": "E-Commerce Workflow Efficiency",
-      "score": "+10% efficiency gain vs baseline models",
-      "verified": true
+      "name": "Image Generation Elo (LMArena)",
+      "score": "1294",
+      "verified": true,
+      "sourceType": "independent-eval"
     },
     {
-      "name": "Marketing Visual Workflow Efficiency",
-      "score": "+20% efficiency improvement vs baseline models",
-      "verified": true
+      "name": "Image Editing Elo (LMArena)",
+      "score": "1350",
+      "verified": true,
+      "sourceType": "independent-eval"
+    },
+    {
+      "name": "Generation Latency per 1K Img (Artificial Analysis)",
+      "score": "45.1s",
+      "verified": true,
+      "sourceType": "independent-eval"
+    },
+    {
+      "name": "Price per 1K Resolution Image",
+      "score": "$0.035",
+      "verified": true,
+      "sourceType": "vendor-reported"
     }
   ],
   "family": "Seedream",
   "institution": "ByteDance (Seed Research Team)",
   "previousVersion": null,
+  "pricing": [
+    {
+      "tier": "Image Generation",
+      "unit": "1K resolution image",
+      "amount": 0.035,
+      "currency": "USD"
+    }
+  ],
+  "pricingLastVerified": "2026-07-27",
   "links": {
     "website": "https://www.bytedance.com",
     "github": "https://github.com/ByteDance-Seed",
-    "huggingface": "https://huggingface.co/ByteDance"
+    "huggingFace": "https://huggingface.co/ByteDance"
   },
   "logo": "/logos/bytedance.svg",
   "tags": [
@@ -57,11 +80,12 @@
   ],
   "sources": [
     "https://www.bytedance.com",
-    "https://github.com/ByteDance-Seed"
+    "https://github.com/ByteDance-Seed",
+    "https://lmarena.ai",
+    "https://artificialanalysis.ai"
   ],
-  "verified": false,
-  "needsReview": true,
+  "verified": true,
   "featured": true,
-  "boost": 1,
-  "curatorNotes": "Verified release from ByteDance Seed Research Team. Commercial API access via BytePlus ModelArk."
+  "boost": 4,
+  "curatorNotes": "Enriched with ByteDance Seed Research Team official specifications, LMArena Elo ratings (1294 ImgGen / 1350 ImgEdit), and Artificial Analysis benchmark data."
 }

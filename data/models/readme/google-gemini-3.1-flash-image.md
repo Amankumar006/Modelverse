@@ -1,23 +1,34 @@
-# Nano Banana 2
+# Nano Banana 2 (Gemini 3.1 Flash Image)
 
 ## 📌 Model Overview
 
-Image model for prompt-driven generation, editing, and visual design workflows
+**Nano Banana 2** (Gemini 3.1 Flash Image) is Google DeepMind's flagship Flash vision model designed for advanced prompt-driven 1K image generation, deep image editing, and real-time visual design workflows.
 
-**Nano Banana 2** is a **Api Only** model developed by **Google DeepMind**, released on **2026-05-28**. It is designed primarily for **Image Generation** workloads. Featuring a **131K tokens** context window and **Undisclosed** parameter count, it offers robust performance for enterprise integration, developers, and researchers.
+It combines native **Thinking On** reasoning with **Google Search Grounding** to ensure high-fidelity composition adherence, accurate spatial typography, and real-world factual consistency.
 
 ---
 
 ## ✨ Key Features & Capabilities
 
-| Feature | Description |
+| Feature | Details |
 |:---|:---|
-| **Context Window** | 131K tokens capacity for extended prompts and multi-turn workflows |
-| **Primary Task** | Optimized for Image Generation |
-| **Deployment** | api-only |
-| **Modality** | text, image, video, pdf |
-| **Max Output** | Max Output: 33K tokens |
-| **Native reasoning capability** | Native reasoning capability |
+| **Top-Tier Quality** | **1270 Image Gen Elo** & **1387 Image Edit Elo** on LMArena Vision Leaderboard |
+| **Search Grounding** | Native integration with Google Search for real-time visual knowledge & factual accuracy |
+| **Thinking On Reasoning** | Deep multi-step reasoning before rendering complex prompt instructions |
+| **Extended Context Window** | **131K tokens** input capacity supporting long document, PDF, and video prompts |
+| **Multi-Turn Precision Editing** | High-fidelity character, object, and style preservation across continuous editing sessions |
+
+---
+
+## 📊 Benchmark Comparisons (LMArena & Artificial Analysis)
+
+| Model Name | ImgGen Elo | ImgEdit Elo | 1K Image Latency | Price / 1K Img |
+|:---|:---:|:---:|:---:|:---:|
+| **Nano Banana 2** | **1270** | **1387** | **20.0s** | **$0.067+** |
+| **Nano Banana 2 Lite** | 1251 | 1308 | 4.0s | $0.034 |
+| **Nano Banana** | 1151 | 1295 | 7.0s | $0.039 |
+| **Grok Imagine Image** | 1174 | 1329 | 6.4s | $0.020 |
+| **Seedream v5 Lite** | 1132 | 1294 | 45.1s | $0.035 |
 
 ---
 
@@ -27,24 +38,18 @@ Image model for prompt-driven generation, editing, and visual design workflows
 |:---|:---|
 | **Developer / Lab** | Google DeepMind |
 | **Release Date** | 2026-05-28 |
-| **Model Type** | Api Only |
-| **Parameters** | Undisclosed |
+| **Model Type** | API Only |
+| **Primary Task** | Image Generation & Editing |
+| **Input Modality** | Text, Image, Video, PDF |
+| **Output Modality** | Image, Text |
 | **Context Window** | 131K tokens |
 | **License** | Proprietary |
-| **Model Family** | gemini-flash |
 
 ---
 
-## 💰 Pricing
+## 🔗 Official Primary Sources
 
-| Tier / Unit | Rate (USD) |
-|:---|:---:|
-| **1M input tokens** | `$0.5` |
-| **1M output tokens** | `$3` |
-| **1M cache read tokens** | `$0.05` |
-
----
-
-## 📜 License & Usage
-
-This model is governed by the **Proprietary** license. Please check official developer guidelines before commercial deployment.
+- [Google Blog Launch Announcement](https://blog.google/innovation-and-ai/models-and-research/gemini-models/)
+- [DeepMind Gemini Image Product Page](https://deepmind.google/models/gemini-image/)
+- [LMArena Vision Leaderboard](https://lmarena.ai)
+- [Artificial Analysis Image Benchmarks](https://artificialanalysis.ai)
