@@ -1,0 +1,59 @@
+{
+  "id": "minimax-minimax-m2.7-highspeed",
+  "name": "MiniMax-M2.7-highspeed",
+  "slug": "minimax-minimax-m2.7-highspeed",
+  "developer": "MiniMax",
+  "releaseDate": "2026-03-18",
+  "updatedAt": "2026-07-26",
+  "type": "open-weights",
+  "status": "active",
+  "modality": [
+    "text"
+  ],
+  "primaryTask": "chat-reasoning",
+  "deployment": [
+    "self-hostable",
+    "api-only"
+  ],
+  "license": "Other/Custom",
+  "parameters": "undisclosed",
+  "contextWindow": "205K tokens",
+  "description": "Low-latency M2.7 variant for interactive coding plans and agent loops",
+  "keyFeatures": [
+    "Max Output: 131K tokens",
+    "Native reasoning capability",
+    "Tool / function calling support"
+  ],
+  "benchmarks": [],
+  "family": "minimax",
+  "previousVersion": null,
+  "pricing": [
+    {
+      "unit": "1M input tokens",
+      "amount": 0.6,
+      "currency": "USD"
+    },
+    {
+      "unit": "1M output tokens",
+      "amount": 4.8,
+      "currency": "USD"
+    }
+  ],
+  "pricingLastVerified": "2026-07-26",
+  "links": {
+    "Hugging Face": "https://huggingface.co/MiniMaxAI/MiniMax-M2.7"
+  },
+  "logo": "/logos/minimax.svg",
+  "tags": [
+    "reasoning",
+    "tool-calling",
+    "open-weights"
+  ],
+  "sources": [
+    "https://github.com/anomalyco/models.dev"
+  ],
+  "verified": false,
+  "featured": false,
+  "boost": 1,
+  "curatorNotes": "Skeleton entry imported from models.dev backfill (2026-07-26). Needs manual enrichment and primary-source verification."
+}
