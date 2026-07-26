@@ -51,8 +51,8 @@ export default function CuratorReviewBanner({ model }: { model: ModelProps }) {
 
       setVerifiedSuccess(true);
       setTimeout(() => {
-        router.refresh();
-      }, 1000);
+        window.location.reload();
+      }, 800);
     } catch (err: any) {
       setErrorMsg(err.message || "An error occurred during verification");
     } finally {
