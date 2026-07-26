@@ -1,0 +1,48 @@
+{
+  "id": "anthropic-claude-3-5-sonnet-20241022",
+  "name": "Claude Sonnet 3.5 v2",
+  "slug": "anthropic-claude-3-5-sonnet-20241022",
+  "developer": "Anthropic",
+  "releaseDate": "2024-10-22",
+  "updatedAt": "2026-07-26",
+  "type": "api-only",
+  "status": "active",
+  "modality": [
+    "text",
+    "image",
+    "pdf"
+  ],
+  "primaryTask": "multimodal-general",
+  "deployment": [
+    "api-only"
+  ],
+  "license": "Proprietary",
+  "parameters": "undisclosed",
+  "contextWindow": "200K tokens",
+  "description": "Balanced Claude model for coding, analysis, agent workflows, and cost control",
+  "keyFeatures": [
+    "Max Output: 8K tokens",
+    "Tool / function calling support"
+  ],
+  "benchmarks": [
+    {
+      "name": "Aider Polyglot",
+      "score": "51.6%",
+      "verified": false
+    }
+  ],
+  "family": "claude-sonnet",
+  "previousVersion": null,
+  "links": {},
+  "logo": "/public/logos/anthropic.png",
+  "tags": [
+    "tool-calling"
+  ],
+  "sources": [
+    "https://github.com/anomalyco/models.dev"
+  ],
+  "verified": false,
+  "featured": false,
+  "boost": 1,
+  "curatorNotes": "Skeleton entry imported from models.dev backfill (2026-07-26). Needs manual enrichment and primary-source verification."
+}
