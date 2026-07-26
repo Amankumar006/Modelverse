@@ -18,22 +18,12 @@
   "parameters": "Unknown",
   "contextWindow": "Unknown",
   "description": "A version of GPT-5.1 optimized for agentic coding in Codex.",
-  "keyFeatures": [],
+  "keyFeatures": [
+    "Max Output: 128K tokens"
+  ],
   "benchmarks": [],
   "family": null,
   "previousVersion": null,
-  "links": {
-    "Documentation": "https://developers.openai.com/api/docs/models/all"
-  },
-  "logo": null,
-  "tags": [],
-  "sources": [
-    "https://developers.openai.com/api/docs/models/all"
-  ],
-  "verified": true,
-  "featured": false,
-  "boost": 1,
-  "curatorNotes": "Bulk imported from OpenAI developer docs.",
   "costTiers": [
     {
       "id": "gpt-5.1-codex-max",
@@ -45,5 +35,36 @@
       "label": "GPT-5.1-Codex mini",
       "description": "Smaller, more cost-effective, less-capable version of GPT-5.1-Codex"
     }
-  ]
+  ],
+  "pricing": [
+    {
+      "unit": "1M input tokens",
+      "amount": 1.1,
+      "currency": "USD"
+    },
+    {
+      "unit": "1M output tokens",
+      "amount": 9,
+      "currency": "USD"
+    },
+    {
+      "unit": "1M cache read tokens",
+      "amount": 0.11,
+      "currency": "USD"
+    }
+  ],
+  "pricingLastVerified": "2026-07-26",
+  "links": {
+    "Documentation": "https://developers.openai.com/api/docs/models/all"
+  },
+  "logo": "/logos/openai.svg",
+  "tags": [],
+  "sources": [
+    "https://developers.openai.com/api/docs/models/all",
+    "https://github.com/anomalyco/models.dev"
+  ],
+  "verified": true,
+  "featured": false,
+  "boost": 1,
+  "curatorNotes": "Bulk imported from OpenAI developer docs."
 }

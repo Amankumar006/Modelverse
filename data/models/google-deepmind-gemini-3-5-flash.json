@@ -23,12 +23,31 @@
   "contextWindow": "1M tokens",
   "description": "Google's most intelligent model for sustained frontier performance on agentic and coding tasks, optimized for fast agent loops and multi-step workflows.",
   "keyFeatures": [
+    "Max Output: 66K tokens",
     "Frontier intelligence built for speed",
     "Optimized for autonomous agent loops"
   ],
   "benchmarks": [],
   "family": "gemini-3-5",
   "previousVersion": "google-deepmind-gemini-3-flash",
+  "pricing": [
+    {
+      "unit": "1M input tokens",
+      "amount": 1.5152,
+      "currency": "USD"
+    },
+    {
+      "unit": "1M output tokens",
+      "amount": 9.0909,
+      "currency": "USD"
+    },
+    {
+      "unit": "1M cache read tokens",
+      "amount": 0.1515,
+      "currency": "USD"
+    }
+  ],
+  "pricingLastVerified": "2026-07-26",
   "links": {
     "website": "https://aistudio.google.com/models/gemini-3"
   },
@@ -40,7 +59,8 @@
   ],
   "sources": [
     "https://en.wikipedia.org/wiki/Gemini_(language_model)",
-    "https://www.moin.ai/en/chatbot-wiki/google-gemini"
+    "https://www.moin.ai/en/chatbot-wiki/google-gemini",
+    "https://github.com/anomalyco/models.dev"
   ],
   "verified": true,
   "featured": false,

@@ -1,6 +1,10 @@
 {
+  "id": "anthropic-claude-sonnet-5",
   "name": "Claude Sonnet 5",
+  "slug": "anthropic-claude-sonnet-5",
   "developer": "Anthropic",
+  "releaseDate": "2026-06-30",
+  "updatedAt": "2026-07-14",
   "type": "api-only",
   "status": "active",
   "modality": [
@@ -15,37 +19,48 @@
   "license": "Proprietary",
   "parameters": "undisclosed",
   "contextWindow": "1M tokens",
-  "releaseDate": "2026-06-30",
   "description": "Built specifically as an execution layer for multi-step software engineering work. It handles sustained coding, browser tool use, and debugging autonomously at speeds matching previous Opus models.",
   "keyFeatures": [
+    "Max Output: 128K tokens",
     "1M token context window",
     "Native browser and terminal tool use",
     "Adaptive thinking enabled by default"
   ],
   "benchmarks": [],
   "family": "Claude 5",
-  "website": "https://www.anthropic.com/news/claude-sonnet-5",
-  "paper": "",
-  "huggingFace": "",
-  "github": "",
-  "blogPost": "https://www.anthropic.com/news/claude-sonnet-5",
-  "sources": [
-    "https://www.anthropic.com/news/claude-sonnet-5"
+  "tier": "Sonnet",
+  "previousVersion": "anthropic-claude-sonnet-4-6",
+  "costTiers": [],
+  "pricing": [
+    {
+      "unit": "1M input tokens",
+      "amount": 2,
+      "currency": "USD"
+    },
+    {
+      "unit": "1M output tokens",
+      "amount": 10,
+      "currency": "USD"
+    },
+    {
+      "unit": "1M cache read tokens",
+      "amount": 0.2,
+      "currency": "USD"
+    }
   ],
+  "pricingLastVerified": "2026-07-26",
+  "links": {},
   "logo": "/public/logos/anthropic.png",
   "tags": [
     "agentic-tooling",
     "code-generation"
   ],
+  "sources": [
+    "https://www.anthropic.com/news/claude-sonnet-5",
+    "https://github.com/anomalyco/models.dev"
+  ],
   "verified": true,
-  "curatorNotes": "",
-  "id": "anthropic-claude-sonnet-5",
-  "slug": "anthropic-claude-sonnet-5",
-  "updatedAt": "2026-07-14",
   "featured": false,
   "boost": 1,
-  "costTiers": [],
-  "tier": "Sonnet",
-  "previousVersion": "anthropic-claude-sonnet-4-6",
-  "links": {}
+  "curatorNotes": ""
 }

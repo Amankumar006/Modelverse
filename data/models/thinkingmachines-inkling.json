@@ -28,6 +28,19 @@
   "benchmarks": [],
   "family": null,
   "previousVersion": null,
+  "pricing": [
+    {
+      "unit": "1M input tokens",
+      "amount": 1,
+      "currency": "USD"
+    },
+    {
+      "unit": "1M output tokens",
+      "amount": 4.05,
+      "currency": "USD"
+    }
+  ],
+  "pricingLastVerified": "2026-07-26",
   "links": {
     "huggingface": "https://huggingface.co/thinkingmachines/Inkling"
   },
@@ -41,7 +54,8 @@
     "image-text-to-text"
   ],
   "sources": [
-    "https://huggingface.co/thinkingmachines/Inkling"
+    "https://huggingface.co/thinkingmachines/Inkling",
+    "https://github.com/anomalyco/models.dev"
   ],
   "verified": true,
   "featured": false,

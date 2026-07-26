@@ -18,7 +18,9 @@
   "parameters": "295B (21B active)",
   "contextWindow": "256K tokens",
   "description": "Tencent's flagship open-weights Mixture-of-Experts reasoning model, utilizing hybrid thinking and active chain-of-thought configuration.",
+  "templatedDescription": false,
   "keyFeatures": [
+    "Max Output: 64K tokens",
     "Mixture-of-Experts architecture with 192 experts (top-8 activated)",
     "Configurable 'reasoning_effort' parameter for controlling chain-of-thought depth",
     "High efficiency with 3.8B Multi-Token Prediction (MTP) layer"
@@ -26,6 +28,24 @@
   "benchmarks": [],
   "family": "tencent-hy3",
   "previousVersion": null,
+  "pricing": [
+    {
+      "unit": "1M input tokens",
+      "amount": 0.16,
+      "currency": "USD"
+    },
+    {
+      "unit": "1M output tokens",
+      "amount": 0.64,
+      "currency": "USD"
+    },
+    {
+      "unit": "1M cache read tokens",
+      "amount": 0.04,
+      "currency": "USD"
+    }
+  ],
+  "pricingLastVerified": "2026-07-26",
   "links": {
     "website": "https://hy.tencent.com/research/hy3"
   },
@@ -36,11 +56,11 @@
     "open-weights"
   ],
   "sources": [
-    "https://hy.tencent.com/research/hy3"
+    "https://hy.tencent.com/research/hy3",
+    "https://github.com/anomalyco/models.dev"
   ],
   "verified": false,
   "featured": false,
   "boost": 1,
-  "curatorNotes": "Hunyuan 3 flagship open-weights model, featuring advanced hybrid reasoning capabilities and SWE-bench performance.",
-  "templatedDescription": false
+  "curatorNotes": "Hunyuan 3 flagship open-weights model, featuring advanced hybrid reasoning capabilities and SWE-bench performance."
 }

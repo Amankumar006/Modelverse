@@ -30,7 +30,7 @@
   "links": {
     "Website": "https://deepmind.google/blog/vaultgemma-the-worlds-most-capable-differentially-private-llm/"
   },
-  "logo": null,
+  "logo": "/logos/google-deepmind.svg",
   "tags": [
     "privacy",
     "differential-privacy",
@@ -38,7 +38,8 @@
     "open-weights"
   ],
   "sources": [
-    "https://deepmind.google/blog/vaultgemma-the-worlds-most-capable-differentially-private-llm/"
+    "https://deepmind.google/blog/vaultgemma-the-worlds-most-capable-differentially-private-llm/",
+    "https://github.com/anomalyco/models.dev"
   ],
   "verified": true,
   "featured": false,

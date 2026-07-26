@@ -18,18 +18,34 @@
   "parameters": "Unknown",
   "contextWindow": "Unknown",
   "description": "An older high-intelligence GPT model",
-  "keyFeatures": [],
+  "keyFeatures": [
+    "Max Output: 8K tokens"
+  ],
   "benchmarks": [],
   "family": "gpt-4",
   "previousVersion": null,
+  "pricing": [
+    {
+      "unit": "1M input tokens",
+      "amount": 30,
+      "currency": "USD"
+    },
+    {
+      "unit": "1M output tokens",
+      "amount": 60,
+      "currency": "USD"
+    }
+  ],
+  "pricingLastVerified": "2026-07-26",
   "links": {
     "Documentation": "https://developers.openai.com/api/docs/models/all"
   },
-  "logo": null,
+  "logo": "/logos/openai.svg",
   "tags": [],
   "sources": [
     "https://developers.openai.com/api/docs/models/all",
-    "https://platform.openai.com/docs/deprecations"
+    "https://platform.openai.com/docs/deprecations",
+    "https://github.com/anomalyco/models.dev"
   ],
   "verified": true,
   "featured": false,

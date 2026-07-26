@@ -1,6 +1,10 @@
 {
+  "id": "anthropic-claude-sonnet-4",
   "name": "Claude Sonnet 4",
+  "slug": "anthropic-claude-sonnet-4",
   "developer": "Anthropic",
+  "releaseDate": "2025-05-22",
+  "updatedAt": "2026-07-14",
   "type": "api-only",
   "status": "active",
   "modality": [
@@ -15,33 +19,25 @@
   "license": "Proprietary",
   "parameters": "undisclosed",
   "contextWindow": "200K tokens",
-  "releaseDate": "2025-05-22",
   "description": "The first of the generation 4 models targeting fast responses and general-purpose tasks with reliable, everyday reasoning.",
   "keyFeatures": [
+    "Max Output: 64K tokens",
     "Broad knowledge retrieval"
   ],
   "benchmarks": [],
   "family": "Claude 4",
-  "website": "https://www.anthropic.com",
-  "paper": "",
-  "huggingFace": "",
-  "github": "",
-  "blogPost": "",
-  "sources": [
-    "https://en.wikipedia.org/wiki/Claude_(AI)"
-  ],
-  "logo": "/public/logos/anthropic.png",
-  "tags": [],
-  "verified": true,
-  "curatorNotes": "",
-  "id": "anthropic-claude-sonnet-4",
-  "slug": "anthropic-claude-sonnet-4",
-  "updatedAt": "2026-07-14",
-  "featured": false,
-  "boost": 1,
-  "costTiers": [],
   "tier": "Sonnet",
   "previousVersion": "anthropic-claude-3-7-sonnet",
-  "nextVersion": "anthropic-claude-sonnet-4-5",
-  "links": {}
+  "costTiers": [],
+  "links": {},
+  "logo": "/public/logos/anthropic.png",
+  "tags": [],
+  "sources": [
+    "https://en.wikipedia.org/wiki/Claude_(AI)",
+    "https://github.com/anomalyco/models.dev"
+  ],
+  "verified": true,
+  "featured": false,
+  "boost": 1,
+  "curatorNotes": ""
 }

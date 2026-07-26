@@ -33,14 +33,15 @@
     "Code": "https://github.com/nv-tlabs/ardy",
     "Weights": "https://huggingface.co/collections/nvidia/ardy"
   },
-  "logo": null,
+  "logo": "/logos/nvidia.svg",
   "tags": [
     "motion-generation",
     "diffusion",
     "autoregressive"
   ],
   "sources": [
-    "https://research.nvidia.com/labs/sil/projects/ardy/"
+    "https://research.nvidia.com/labs/sil/projects/ardy/",
+    "https://github.com/anomalyco/models.dev"
   ],
   "verified": false,
   "featured": false,

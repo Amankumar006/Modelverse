@@ -1,6 +1,10 @@
 {
+  "id": "anthropic-claude-opus-4-5",
   "name": "Claude Opus 4.5",
+  "slug": "anthropic-claude-opus-4-5",
   "developer": "Anthropic",
+  "releaseDate": "2025-11-24",
+  "updatedAt": "2026-07-14",
   "type": "api-only",
   "status": "active",
   "modality": [
@@ -15,34 +19,44 @@
   "license": "Proprietary",
   "parameters": "undisclosed",
   "contextWindow": "1M tokens",
-  "releaseDate": "2025-11-24",
   "description": "An update focusing heavily on coding, workplace tasks, and producing spreadsheets. It introduced the \"Infinite Chats\" feature to handle context window limits.",
   "keyFeatures": [
+    "Max Output: 64K tokens",
     "Infinite Chats implementation",
     "Advanced workplace and spreadsheet generation"
   ],
   "benchmarks": [],
   "family": "Claude 4.5",
-  "website": "https://www.anthropic.com",
-  "paper": "",
-  "huggingFace": "",
-  "github": "",
-  "blogPost": "",
-  "sources": [
-    "https://en.wikipedia.org/wiki/Claude_(AI)"
-  ],
-  "logo": "/public/logos/anthropic.png",
-  "tags": [],
-  "verified": true,
-  "curatorNotes": "",
-  "id": "anthropic-claude-opus-4-5",
-  "slug": "anthropic-claude-opus-4-5",
-  "updatedAt": "2026-07-14",
-  "featured": false,
-  "boost": 1,
-  "costTiers": [],
   "tier": "Opus",
   "previousVersion": "anthropic-claude-opus-4-1",
-  "nextVersion": "anthropic-claude-opus-4-6",
-  "links": {}
+  "costTiers": [],
+  "pricing": [
+    {
+      "unit": "1M input tokens",
+      "amount": 5,
+      "currency": "USD"
+    },
+    {
+      "unit": "1M output tokens",
+      "amount": 25,
+      "currency": "USD"
+    },
+    {
+      "unit": "1M cache read tokens",
+      "amount": 0.5,
+      "currency": "USD"
+    }
+  ],
+  "pricingLastVerified": "2026-07-26",
+  "links": {},
+  "logo": "/public/logos/anthropic.png",
+  "tags": [],
+  "sources": [
+    "https://en.wikipedia.org/wiki/Claude_(AI)",
+    "https://github.com/anomalyco/models.dev"
+  ],
+  "verified": true,
+  "featured": false,
+  "boost": 1,
+  "curatorNotes": ""
 }

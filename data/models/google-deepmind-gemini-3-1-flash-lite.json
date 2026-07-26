@@ -23,12 +23,26 @@
   "contextWindow": "undisclosed",
   "description": "An extremely cost-effective model designed for high-frequency everyday tasks and bulk API queries, rivaling larger models.",
   "keyFeatures": [
+    "Max Output: 66K tokens",
     "Ultra-low latency",
     "Optimized for high-volume tasks"
   ],
   "benchmarks": [],
   "family": null,
   "previousVersion": "google-deepmind-gemini-2-5-flash-lite",
+  "pricing": [
+    {
+      "unit": "1M input tokens",
+      "amount": 0.25,
+      "currency": "USD"
+    },
+    {
+      "unit": "1M output tokens",
+      "amount": 1.5,
+      "currency": "USD"
+    }
+  ],
+  "pricingLastVerified": "2026-07-26",
   "links": {
     "website": "https://aistudio.google.com/models/gemini-3"
   },
@@ -38,7 +52,8 @@
     "fast"
   ],
   "sources": [
-    "https://en.wikipedia.org/wiki/Gemini_(language_model)"
+    "https://en.wikipedia.org/wiki/Gemini_(language_model)",
+    "https://github.com/anomalyco/models.dev"
   ],
   "verified": true,
   "featured": false,

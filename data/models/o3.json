@@ -18,22 +18,12 @@
   "parameters": "Unknown",
   "contextWindow": "Unknown",
   "description": "Reasoning model for complex tasks, succeeded by GPT-5",
-  "keyFeatures": [],
+  "keyFeatures": [
+    "Max Output: 100K tokens"
+  ],
   "benchmarks": [],
   "family": "o3",
   "previousVersion": null,
-  "links": {
-    "Documentation": "https://developers.openai.com/api/docs/models/all"
-  },
-  "logo": null,
-  "tags": [],
-  "sources": [
-    "https://developers.openai.com/api/docs/models/all"
-  ],
-  "verified": true,
-  "featured": false,
-  "boost": 1,
-  "curatorNotes": "Bulk imported from OpenAI developer docs.",
   "costTiers": [
     {
       "id": "o3-pro",
@@ -45,5 +35,36 @@
       "label": "o3-mini",
       "description": "A small model alternative to o3"
     }
-  ]
+  ],
+  "pricing": [
+    {
+      "unit": "1M input tokens",
+      "amount": 1.8,
+      "currency": "USD"
+    },
+    {
+      "unit": "1M output tokens",
+      "amount": 7.2,
+      "currency": "USD"
+    },
+    {
+      "unit": "1M cache read tokens",
+      "amount": 0.45,
+      "currency": "USD"
+    }
+  ],
+  "pricingLastVerified": "2026-07-26",
+  "links": {
+    "Documentation": "https://developers.openai.com/api/docs/models/all"
+  },
+  "logo": "/logos/openai.svg",
+  "tags": [],
+  "sources": [
+    "https://developers.openai.com/api/docs/models/all",
+    "https://github.com/anomalyco/models.dev"
+  ],
+  "verified": true,
+  "featured": false,
+  "boost": 1,
+  "curatorNotes": "Bulk imported from OpenAI developer docs."
 }

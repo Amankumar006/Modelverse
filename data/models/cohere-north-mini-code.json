@@ -3,6 +3,7 @@
   "name": "North Mini Code",
   "slug": "cohere-north-mini-code",
   "developer": "Cohere",
+  "institution": "Cohere / Cohere Labs",
   "releaseDate": "2026-06-09",
   "updatedAt": "2026-07-22",
   "type": "open-weights",
@@ -18,7 +19,9 @@
   "parameters": "30B (3B active)",
   "contextWindow": "256K tokens",
   "description": "North Mini Code is a specialized 30B total parameter, sparse Mixture-of-Experts (MoE) coding model with ~3B active parameters per token developed by Cohere and Cohere Labs. Designed for agentic software engineering and developer workflows, it achieves near-30B-scale reasoning with the compute overhead of a 3B parameter model.",
+  "templatedDescription": false,
   "keyFeatures": [
+    "Max Output: 64K tokens",
     "Sparse MoE Architecture: 30B total parameters across 128 experts with 8 active per token (~3B active parameters) for low latency",
     "Hybrid Attention Design: Interleaves sliding-window attention and global attention in a 3:1 ratio",
     "Extended Context Capability: Features a 256K token context window with up to 64K output token generation capability",
@@ -39,6 +42,19 @@
   ],
   "family": "North",
   "previousVersion": null,
+  "pricing": [
+    {
+      "unit": "1M input tokens",
+      "amount": 0,
+      "currency": "USD"
+    },
+    {
+      "unit": "1M output tokens",
+      "amount": 0,
+      "currency": "USD"
+    }
+  ],
+  "pricingLastVerified": "2026-07-26",
   "links": {
     "website": "https://cohere.com/blog/north-mini-code",
     "github": "https://github.com/cohere-ai",
@@ -54,12 +70,11 @@
   ],
   "sources": [
     "https://cohere.com/blog/north-mini-code",
-    "https://huggingface.co/CohereLabs/North-Mini-Code-1.0"
+    "https://huggingface.co/CohereLabs/North-Mini-Code-1.0",
+    "https://github.com/anomalyco/models.dev"
   ],
   "verified": true,
   "featured": false,
   "boost": 1,
-  "curatorNotes": "Verified release from Cohere and Cohere Labs. Released under Apache 2.0 license.",
-  "institution": "Cohere / Cohere Labs",
-  "templatedDescription": false
+  "curatorNotes": "Verified release from Cohere and Cohere Labs. Released under Apache 2.0 license."
 }

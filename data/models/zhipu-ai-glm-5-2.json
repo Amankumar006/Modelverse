@@ -18,10 +18,31 @@
   "parameters": "undisclosed",
   "contextWindow": "undisclosed",
   "description": "An experimental specialized research research preview named GLM 5.2, published by Zhipu AI to showcase novel methods.",
-  "keyFeatures": [],
+  "templatedDescription": true,
+  "keyFeatures": [
+    "Max Output: 131K tokens"
+  ],
   "benchmarks": [],
   "family": "glm-5-2",
   "previousVersion": "zhipu-ai-glm-4-5",
+  "pricing": [
+    {
+      "unit": "1M input tokens",
+      "amount": 1.4,
+      "currency": "USD"
+    },
+    {
+      "unit": "1M output tokens",
+      "amount": 4.4,
+      "currency": "USD"
+    },
+    {
+      "unit": "1M cache read tokens",
+      "amount": 0.26,
+      "currency": "USD"
+    }
+  ],
+  "pricingLastVerified": "2026-07-26",
   "links": {
     "Website": "https://go.sjv.io/NG007K"
   },
@@ -33,11 +54,11 @@
   "sources": [
     "https://go.sjv.io/NG007K",
     "https://docs.z.ai/guides/llm/glm-5.2",
-    "https://z.ai/blog/glm-5.2"
+    "https://z.ai/blog/glm-5.2",
+    "https://github.com/anomalyco/models.dev"
   ],
   "verified": false,
   "featured": false,
   "boost": 1,
-  "curatorNotes": "Partially enriched via migration on 2026-07-25. Manual review recommended.",
-  "templatedDescription": true
+  "curatorNotes": "Partially enriched via migration on 2026-07-25. Manual review recommended."
 }

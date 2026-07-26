@@ -1,6 +1,10 @@
 {
+  "id": "anthropic-claude-opus-4-8",
   "name": "Claude Opus 4.8",
+  "slug": "anthropic-claude-opus-4-8",
   "developer": "Anthropic",
+  "releaseDate": "2026-05-28",
+  "updatedAt": "2026-07-14",
   "type": "api-only",
   "status": "active",
   "modality": [
@@ -15,32 +19,43 @@
   "license": "Proprietary",
   "parameters": "undisclosed",
   "contextWindow": "1M tokens",
-  "releaseDate": "2026-05-28",
   "description": "A flagship update to the Opus 4 lineage that served as the primary frontier model prior to the release of Fable 5. Highly effective at complex reasoning and deep technical analysis.",
   "keyFeatures": [
+    "Max Output: 128K tokens",
     "Deep sustained reasoning capabilities"
   ],
   "benchmarks": [],
   "family": "Claude 4.8",
-  "website": "https://www.anthropic.com",
-  "paper": "",
-  "huggingFace": "",
-  "github": "",
-  "blogPost": "",
-  "sources": [
-    "https://en.wikipedia.org/wiki/Claude_(AI)"
-  ],
-  "logo": "/public/logos/anthropic.png",
-  "tags": [],
-  "verified": true,
-  "curatorNotes": "",
-  "id": "anthropic-claude-opus-4-8",
-  "slug": "anthropic-claude-opus-4-8",
-  "updatedAt": "2026-07-14",
-  "featured": false,
-  "boost": 1,
-  "costTiers": [],
   "tier": "Opus",
   "previousVersion": "anthropic-claude-opus-4-7",
-  "links": {}
+  "costTiers": [],
+  "pricing": [
+    {
+      "unit": "1M input tokens",
+      "amount": 5,
+      "currency": "USD"
+    },
+    {
+      "unit": "1M output tokens",
+      "amount": 25,
+      "currency": "USD"
+    },
+    {
+      "unit": "1M cache read tokens",
+      "amount": 0.5,
+      "currency": "USD"
+    }
+  ],
+  "pricingLastVerified": "2026-07-26",
+  "links": {},
+  "logo": "/public/logos/anthropic.png",
+  "tags": [],
+  "sources": [
+    "https://en.wikipedia.org/wiki/Claude_(AI)",
+    "https://github.com/anomalyco/models.dev"
+  ],
+  "verified": true,
+  "featured": false,
+  "boost": 1,
+  "curatorNotes": ""
 }

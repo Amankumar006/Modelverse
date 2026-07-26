@@ -23,23 +23,24 @@
   "benchmarks": [],
   "family": "sora",
   "previousVersion": "openai-sora",
-  "links": {
-    "Documentation": "https://developers.openai.com/api/docs/models/all"
-  },
-  "logo": null,
-  "tags": [],
-  "sources": [
-    "https://developers.openai.com/api/docs/models/all"
-  ],
-  "verified": true,
-  "featured": false,
-  "boost": 1,
-  "curatorNotes": "Bulk imported from OpenAI developer docs.",
   "costTiers": [
     {
       "id": "sora-2-pro",
       "label": "Sora 2 Pro",
       "description": "Most advanced synced-audio video generation"
     }
-  ]
+  ],
+  "links": {
+    "Documentation": "https://developers.openai.com/api/docs/models/all"
+  },
+  "logo": "/logos/openai.svg",
+  "tags": [],
+  "sources": [
+    "https://developers.openai.com/api/docs/models/all",
+    "https://github.com/anomalyco/models.dev"
+  ],
+  "verified": true,
+  "featured": false,
+  "boost": 1,
+  "curatorNotes": "Bulk imported from OpenAI developer docs."
 }

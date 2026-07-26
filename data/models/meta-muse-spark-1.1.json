@@ -19,6 +19,7 @@
   "contextWindow": "undisclosed",
   "description": "A multimodal reasoning model built for agentic tasks. It can autonomously use browsers, write and deploy code, and visually verify changes by taking and analyzing application screenshots.",
   "keyFeatures": [
+    "Max Output: 32K tokens",
     "Multimodal debugging by correlating application screenshots directly with source code",
     "Agentic browser control for automating web tasks (e.g., social media messaging)",
     "Long-horizon planning for autonomous execution"
@@ -26,6 +27,24 @@
   "benchmarks": [],
   "family": "Muse Spark",
   "previousVersion": null,
+  "pricing": [
+    {
+      "unit": "1M input tokens",
+      "amount": 1.25,
+      "currency": "USD"
+    },
+    {
+      "unit": "1M output tokens",
+      "amount": 4.25,
+      "currency": "USD"
+    },
+    {
+      "unit": "1M cache read tokens",
+      "amount": 0.15,
+      "currency": "USD"
+    }
+  ],
+  "pricingLastVerified": "2026-07-26",
   "links": {
     "website": "https://meta.com"
   },
@@ -35,8 +54,11 @@
   ],
   "sources": [
     "https://www.youtube.com/watch?v=Ti1V7OI2Rro",
-    "https://ai.meta.com/blog/introducing-muse-spark-msl/"
+    "https://ai.meta.com/blog/introducing-muse-spark-msl/",
+    "https://github.com/anomalyco/models.dev"
   ],
   "verified": false,
+  "featured": false,
+  "boost": 1,
   "curatorNotes": "While internal Meta coding benchmarks claim top-tier performance, independent leaderboards suggest it currently performs closer to open-source models like GLM 5.2."
 }

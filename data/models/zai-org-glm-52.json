@@ -19,6 +19,7 @@
   "contextWindow": "unknown",
   "description": "GLM-5.2 is a 753.3B-parameter Mixture-of-Experts (MoE) text generation model developed by zai-org. Built on the GlmMoeDsaForCausalLM architecture using transformers. Supports en, zh language(s). Released on 2026-06-16 with 4,422 likes and 667,403 downloads on Hugging Face.",
   "keyFeatures": [
+    "Max Output: 131K tokens",
     "753.3B parameters with sparse MoE architecture for efficient inference",
     "Built on GlmMoeDsaForCausalLM architecture (transformers)",
     "Primary task: text generation (text modality)",
@@ -29,6 +30,24 @@
   "benchmarks": [],
   "family": null,
   "previousVersion": null,
+  "pricing": [
+    {
+      "unit": "1M input tokens",
+      "amount": 1.4,
+      "currency": "USD"
+    },
+    {
+      "unit": "1M output tokens",
+      "amount": 4.4,
+      "currency": "USD"
+    },
+    {
+      "unit": "1M cache read tokens",
+      "amount": 0.26,
+      "currency": "USD"
+    }
+  ],
+  "pricingLastVerified": "2026-07-26",
   "links": {
     "huggingface": "https://huggingface.co/zai-org/GLM-5.2",
     "paper": "https://arxiv.org/abs/2602.15763"
@@ -43,7 +62,8 @@
     "text-generation"
   ],
   "sources": [
-    "https://huggingface.co/zai-org/GLM-5.2"
+    "https://huggingface.co/zai-org/GLM-5.2",
+    "https://github.com/anomalyco/models.dev"
   ],
   "verified": true,
   "featured": false,

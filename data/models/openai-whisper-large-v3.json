@@ -20,6 +20,7 @@
   "contextWindow": "30s",
   "description": "OpenAI's third-generation multilingual speech recognition and translation model, trained on extensive audio datasets.",
   "keyFeatures": [
+    "Max Output: 4K tokens",
     "Supports speech-to-text transcription and translation",
     "Trained on 1M hours of weakly labeled audio data",
     "Highly accurate across 99+ languages",
@@ -34,6 +35,19 @@
   ],
   "family": "whisper",
   "previousVersion": "whisper-large-v2",
+  "pricing": [
+    {
+      "unit": "1M input tokens",
+      "amount": 0,
+      "currency": "USD"
+    },
+    {
+      "unit": "1M output tokens",
+      "amount": 0,
+      "currency": "USD"
+    }
+  ],
+  "pricingLastVerified": "2026-07-26",
   "links": {
     "website": "https://github.com/openai/whisper"
   },
@@ -44,8 +58,11 @@
     "open-source"
   ],
   "sources": [
-    "https://github.com/openai/whisper"
+    "https://github.com/openai/whisper",
+    "https://github.com/anomalyco/models.dev"
   ],
   "verified": true,
+  "featured": false,
+  "boost": 1,
   "curatorNotes": "Released during OpenAI DevDay. Uses 128 mel frequency bins and processes audio in 30-second sliding windows."
 }

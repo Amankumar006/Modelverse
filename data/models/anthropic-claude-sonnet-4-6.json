@@ -1,6 +1,10 @@
 {
+  "id": "anthropic-claude-sonnet-4-6",
   "name": "Claude Sonnet 4.6",
+  "slug": "anthropic-claude-sonnet-4-6",
   "developer": "Anthropic",
+  "releaseDate": "2026-02-17",
+  "updatedAt": "2026-07-14",
   "type": "api-only",
   "status": "active",
   "modality": [
@@ -15,33 +19,43 @@
   "license": "Proprietary",
   "parameters": "undisclosed",
   "contextWindow": "1M tokens",
-  "releaseDate": "2026-02-17",
   "description": "A frontier-level model optimized for professional work at scale, specifically focusing on coding workflows and agent tooling.",
   "keyFeatures": [
+    "Max Output: 64K tokens",
     "Scaled professional work capabilities"
   ],
   "benchmarks": [],
   "family": "Claude 4.6",
-  "website": "https://www.anthropic.com",
-  "paper": "",
-  "huggingFace": "",
-  "github": "",
-  "blogPost": "",
-  "sources": [
-    "https://en.wikipedia.org/wiki/Claude_(AI)"
-  ],
-  "logo": "/public/logos/anthropic.png",
-  "tags": [],
-  "verified": true,
-  "curatorNotes": "",
-  "id": "anthropic-claude-sonnet-4-6",
-  "slug": "anthropic-claude-sonnet-4-6",
-  "updatedAt": "2026-07-14",
-  "featured": false,
-  "boost": 1,
-  "costTiers": [],
   "tier": "Sonnet",
   "previousVersion": "anthropic-claude-sonnet-4-5",
-  "nextVersion": "anthropic-claude-sonnet-5",
-  "links": {}
+  "costTiers": [],
+  "pricing": [
+    {
+      "unit": "1M input tokens",
+      "amount": 3,
+      "currency": "USD"
+    },
+    {
+      "unit": "1M output tokens",
+      "amount": 15,
+      "currency": "USD"
+    },
+    {
+      "unit": "1M cache read tokens",
+      "amount": 0.3,
+      "currency": "USD"
+    }
+  ],
+  "pricingLastVerified": "2026-07-26",
+  "links": {},
+  "logo": "/public/logos/anthropic.png",
+  "tags": [],
+  "sources": [
+    "https://en.wikipedia.org/wiki/Claude_(AI)",
+    "https://github.com/anomalyco/models.dev"
+  ],
+  "verified": true,
+  "featured": false,
+  "boost": 1,
+  "curatorNotes": ""
 }
