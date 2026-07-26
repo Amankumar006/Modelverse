@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { revalidatePath } from "next/cache";
 import fs from "fs";
 import path from "path";
 import { execSync } from "child_process";
@@ -51,6 +52,9 @@ export async function POST(req: NextRequest) {
         cwd: process.cwd(),
         encoding: "utf-8",
       });
+      revalidatePath(`/models/${slug}`);
+      revalidatePath("/models");
+      revalidatePath("/");
     } catch (compileErr) {
       console.error("Failed to recompile models archive:", compileErr);
     }
