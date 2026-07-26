@@ -16,7 +16,7 @@
     "self-hostable",
     "api-only"
   ],
-  "license": "Other/Custom",
+  "license": "other",
   "parameters": "undisclosed",
   "contextWindow": "128K tokens",
   "description": "Mistral's larger vision model for document-heavy image understanding and chat",
@@ -49,9 +49,11 @@
     "open-weights"
   ],
   "sources": [
-    "https://github.com/anomalyco/models.dev"
+    "https://github.com/anomalyco/models.dev",
+    "https://huggingface.co/api/models/mistralai/Pixtral-Large-Instruct-2411"
   ],
   "verified": false,
+  "needsReview": true,
   "featured": false,
   "boost": 1,
   "curatorNotes": "Skeleton entry imported from models.dev backfill (2026-07-26). Needs manual enrichment and primary-source verification."

@@ -15,8 +15,8 @@
     "self-hostable",
     "api-only"
   ],
-  "license": "Other/Custom",
-  "parameters": "undisclosed",
+  "license": "other",
+  "parameters": "125.0B",
   "contextWindow": "262K tokens",
   "description": "Mistral's coding-agent model for repository work, terminal tasks, and software fixes",
   "keyFeatures": [
@@ -64,9 +64,11 @@
     "open-weights"
   ],
   "sources": [
-    "https://github.com/anomalyco/models.dev"
+    "https://github.com/anomalyco/models.dev",
+    "https://huggingface.co/api/models/mistralai/Devstral-2-123B-Instruct-2512"
   ],
   "verified": false,
+  "needsReview": true,
   "featured": false,
   "boost": 1,
   "curatorNotes": "Skeleton entry imported from models.dev backfill (2026-07-26). Needs manual enrichment and primary-source verification."
