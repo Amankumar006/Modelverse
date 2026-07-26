@@ -27,8 +27,10 @@ export default function CuratorReviewBanner({ model }: { model: ModelProps }) {
   const [verifiedSuccess, setVerifiedSuccess] = useState(false);
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
 
-  // Show if needs review or explicitly forced via ?curate=true
-  const shouldShow = model.needsReview === true || model.verified === false || curateMode;
+  // In production builds, hide curator controls by default so site visitors see a clean interface.
+  // Curator Review Banner is active during local development (`npm run dev`) or when ?curate=true is appended.
+  const isProduction = process.env.NODE_ENV === "production";
+  const shouldShow = (model.needsReview === true || model.verified === false || curateMode) && (!isProduction || curateMode);
 
   if (!shouldShow && !verifiedSuccess) {
     return null;
@@ -107,44 +109,65 @@ export default function CuratorReviewBanner({ model }: { model: ModelProps }) {
           </div>
         </div>
 
-        {/* Primary Approve Action Buttons (Website Emerald Theme) */}
-        <div className="flex items-center gap-3 shrink-0">
-          <button
-            onClick={() => handleVerify(false)}
-            disabled={loading}
-            className="px-4 py-2 text-xs font-medium text-[#E1E1E0] hover:text-white bg-[#242426] hover:bg-[#2A2A2D] rounded-xl border border-[#333333] transition-all active:scale-95 disabled:opacity-50"
-          >
-            Approve As-Is
-          </button>
-          <button
-            onClick={() => handleVerify(true)}
-            disabled={loading}
-            className="px-4 py-2 text-xs font-bold text-black bg-emerald-400 hover:bg-emerald-300 active:scale-95 rounded-xl transition-all shadow-lg shadow-emerald-500/20 flex items-center gap-2 disabled:opacity-50"
-          >
-            {loading ? (
-              <>
-                <svg className="animate-spin h-3.5 w-3.5 text-black" viewBox="0 0 24 24" fill="none">
-                  <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
-                  <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
-                </svg>
-                <span>Saving...</span>
-              </>
-            ) : (
-              <>
-                <Check size={14} strokeWidth={2.5} />
-                <span>Approve & Promote Draft</span>
-              </>
-            )}
-          </button>
-        </div>
+        {/* Primary Approve Action Buttons */}
+        {!isProduction && (
+          <div className="flex items-center gap-3 shrink-0">
+            <button
+              onClick={() => handleVerify(false)}
+              disabled={loading}
+              className="px-4 py-2 text-xs font-medium text-[#E1E1E0] hover:text-white bg-[#242426] hover:bg-[#2A2A2D] rounded-xl border border-[#333333] transition-all active:scale-95 disabled:opacity-50"
+            >
+              Approve As-Is
+            </button>
+            <button
+              onClick={() => handleVerify(true)}
+              disabled={loading}
+              className="px-4 py-2 text-xs font-bold text-black bg-emerald-400 hover:bg-emerald-300 active:scale-95 rounded-xl transition-all shadow-lg shadow-emerald-500/20 flex items-center gap-2 disabled:opacity-50"
+            >
+              {loading ? (
+                <>
+                  <svg className="animate-spin h-3.5 w-3.5 text-black" viewBox="0 0 24 24" fill="none">
+                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
+                  </svg>
+                  <span>Saving...</span>
+                </>
+              ) : (
+                <>
+                  <Check size={14} strokeWidth={2.5} />
+                  <span>Approve & Promote Draft</span>
+                </>
+              )}
+            </button>
+          </div>
+        )}
       </div>
 
-      {/* Error & Read-Only Alert Box */}
+      {/* Production Read-Only Link Bar */}
+      {isProduction && (
+        <div className="mt-4 p-3.5 rounded-xl bg-[#242426] border border-[#333333] text-xs flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-[#90908F]">
+          <div className="flex items-center gap-2">
+            <Lock size={14} className="text-amber-400 shrink-0" />
+            <span>Production deployment is read-only. Edit JSON in GitHub to verify this model.</span>
+          </div>
+          <a
+            href={`https://github.com/Amankumar006/Modelverse/blob/main/data/models/${model.id || model.slug}.json`}
+            target="_blank"
+            rel="noreferrer"
+            className="px-3 py-1.5 bg-emerald-500/10 text-emerald-400 hover:bg-emerald-500/20 border border-emerald-500/30 rounded-lg font-mono text-xs flex items-center gap-1.5 shrink-0 transition-colors"
+          >
+            <span>Edit on GitHub</span>
+            <ExternalLink size={12} />
+          </a>
+        </div>
+      )}
+
+      {/* Error Alert Box */}
       {errorMsg && (
         <div className="mt-4 p-3.5 rounded-xl bg-[#242426] border border-amber-500/30 text-amber-300 text-xs flex items-start gap-3">
           <Lock size={16} className="shrink-0 text-amber-400 mt-0.5" />
           <div className="leading-relaxed">
-            <span className="font-semibold block mb-0.5 text-white">Read-Only Serverless Environment</span>
+            <span className="font-semibold block mb-0.5 text-white">Verification Notice</span>
             <span className="text-[#90908F]">{errorMsg}</span>
           </div>
         </div>
