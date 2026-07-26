@@ -63,8 +63,8 @@ export default function Navbar({ theme = "dark" }: { theme?: "light" | "dark" })
           className="flex items-center gap-2.5 text-xl font-medium tracking-tight text-white hover:opacity-90 transition-opacity shrink-0"
           style={{ fontFamily: "var(--font-display, 'Instrument Serif', Georgia, serif)" }}
         >
-          <ModelverseLogo size={26} />
-          <span className="text-xl font-normal">Modelverse</span>
+          <ModelverseLogo size={34} />
+          <span className="text-xl sm:text-2xl font-normal">Modelverse</span>
           <span className="text-[11px] font-sans text-gray-400 font-medium px-2 py-0.5 rounded-full bg-[#242426] border border-[#333333]">
             Platform Docs
           </span>
