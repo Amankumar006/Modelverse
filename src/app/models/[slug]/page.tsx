@@ -23,6 +23,7 @@ import Breadcrumb from "@/components/models/Breadcrumb";
 import ClientBackButton from "@/components/ui/ClientBackButton";
 import Navbar from "@/components/layout/Navbar";
 import CuratorReviewBanner from "@/components/CuratorReviewBanner";
+import ModelDetailTabs from "@/components/models/ModelDetailTabs";
 import {
   ChevronRight,
   Globe,
@@ -322,78 +323,8 @@ export default async function ModelDetailPage({
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 mt-10">
           {/* Main Info Columns (left) */}
           <div className="lg:col-span-8 space-y-10">
-            {/* Markdown Documentation or Fallback Description & Benchmarks */}
-            {markdownContent ? (
-              <section className="pt-2 pb-6 border-b border-[#243629] mb-6">
-                <MarkdownRenderer content={markdownContent} />
-              </section>
-            ) : (
-              <>
-                {/* Description */}
-                <section className="space-y-3">
-                  <h2 className="text-xs font-bold uppercase tracking-widest text-[#9CA3AF]">Description</h2>
-                  <p className="text-[#F3F4F6] leading-relaxed text-lg sm:text-xl md:text-2xl font-normal">{model.description}</p>
-                </section>
-
-                {/* Benchmark Images */}
-                {model.images && model.images.length > 0 && (
-                  <section className="space-y-4 pt-2">
-                    <h2 className="text-xs font-bold uppercase tracking-widest text-[#9CA3AF]">Benchmark Images</h2>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                      {model.images.map((imgUrl, idx) => (
-                        <div key={idx} className="relative rounded-xl overflow-hidden border border-[#243629] bg-[#0C120F] aspect-video">
-                          <img
-                            src={imgUrl}
-                            alt={`${model.name} benchmark ${idx + 1}`}
-                            className="w-full h-full object-cover"
-                            loading="lazy"
-                          />
-                        </div>
-                      ))}
-                    </div>
-                  </section>
-                )}
-
-                {/* Benchmarks Table */}
-                {model.benchmarks && model.benchmarks.length > 0 && (
-                  <section className="space-y-4">
-                    <h2 className="text-xs font-bold uppercase tracking-widest text-[#9CA3AF]">Benchmarks</h2>
-                    <CopyableTable title="Benchmark Scores">
-                      <table className="w-full text-left border-collapse text-sm min-w-[300px]">
-                        <thead>
-                          <tr className="border-b border-[#243629] bg-[#1A261D] text-[#E5E7EB] font-medium">
-                            <th className="p-4">Benchmark</th>
-                            <th className="p-4 text-right">Score</th>
-                            <th className="p-4 text-center">Status</th>
-                          </tr>
-                        </thead>
-                        <tbody className="divide-y divide-[#243629]">
-                          {model.benchmarks.map((bench, idx) => (
-                            <tr key={idx} className="hover:bg-[#15211B] transition-colors">
-                              <td className="p-4 text-white font-medium text-base">{bench.name}</td>
-                              <td className="p-4 text-right text-white font-bold text-base tabular-nums">{bench.score}</td>
-                              <td className="p-4 text-center">
-                                {bench.verified ? (
-                                  <span className="inline-flex items-center gap-1.5 text-sm text-[#4ADE80] font-medium">
-                                    <span className="w-1.5 h-1.5 rounded-full bg-[#4ADE80]" />
-                                    Verified
-                                  </span>
-                                ) : (
-                                  <span className="inline-flex items-center gap-1.5 text-sm text-[#9CA3AF] font-medium" title="Self-reported score">
-                                    <span className="w-1.5 h-1.5 rounded-full bg-white/30" />
-                                    Self-Reported
-                                  </span>
-                                )}
-                              </td>
-                            </tr>
-                          ))}
-                        </tbody>
-                      </table>
-                    </CopyableTable>
-                  </section>
-                )}
-              </>
-            )}
+            {/* Model Detail Tabs Component */}
+            <ModelDetailTabs model={model} markdownContent={markdownContent} />
 
             {/* Official Visual Benchmark Charts / Images for Claude Opus 5 */}
             {model.slug === "anthropic-claude-opus-5" && (

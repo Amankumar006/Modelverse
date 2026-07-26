@@ -573,41 +573,91 @@ function ModelCatalogContent({
 
       {/* ── Main Catalog Workspace ───────────────────────────── */}
       <div className="flex-1 w-full space-y-6">
-        {/* Top-level Pill Tabs for Type */}
-        <div className="flex flex-wrap items-center gap-2 border-b border-white/10 pb-4">
-          <button
-            onClick={() => setFilters(f => ({ ...f, type: [] }))}
-            className={`px-4 py-1.5 rounded-full text-xs font-semibold tracking-wide transition-colors ${
-              filters.type.length === 0
-                ? "bg-[#121A15]/5 text-white"
-                : "bg-[#121A15]/[0.04] text-gray-400 hover:bg-[#121A15]/[0.08] hover:text-white"
-            }`}
-          >
-            All
-          </button>
-          {TYPE_OPTIONS.map((opt) => {
-            const isActive = filters.type.includes(opt.value);
-            return (
-              <button
-                key={opt.value}
-                onClick={() => {
-                  setFilters((f) => {
-                    const newType = isActive
-                      ? f.type.filter((t) => t !== opt.value)
-                      : [...f.type, opt.value];
-                    return { ...f, type: newType };
-                  });
-                }}
-                className={`px-4 py-1.5 rounded-full text-xs font-semibold tracking-wide transition-colors ${
-                  isActive
-                    ? "bg-[#121A15]/5 text-white"
-                    : "bg-[#121A15]/[0.04] text-gray-400 hover:bg-[#121A15]/[0.08] hover:text-white"
-                }`}
-              >
-                {opt.label}
-              </button>
-            );
-          })}
+        {/* Top-level Interactive Filter Bars */}
+        <div className="space-y-3 border-b border-white/10 pb-5">
+          {/* Primary Task Pills */}
+          <div className="flex items-center gap-2 overflow-x-auto pb-1 no-scrollbar">
+            <span className="text-[11px] font-bold uppercase tracking-wider text-emerald-400 shrink-0 mr-1">Task:</span>
+            <button
+              onClick={() => setFilters(f => ({ ...f, task: [] }))}
+              className={`px-3.5 py-1 rounded-full text-xs font-semibold tracking-wide transition-all whitespace-nowrap ${
+                filters.task.length === 0
+                  ? "bg-emerald-500/20 text-emerald-300 border border-emerald-500/30"
+                  : "bg-white/5 text-white/60 hover:bg-white/10 hover:text-white border border-white/10"
+              }`}
+            >
+              All Tasks ({models.length})
+            </button>
+            {TASK_OPTIONS.map((opt) => {
+              const isActive = filters.task.includes(opt.value);
+              const count = facetCounts.task[opt.value] || 0;
+              return (
+                <button
+                  key={opt.value}
+                  onClick={() => {
+                    setFilters((f) => {
+                      const newTasks = isActive
+                        ? f.task.filter((t) => t !== opt.value)
+                        : [...f.task, opt.value];
+                      return { ...f, task: newTasks };
+                    });
+                  }}
+                  className={`px-3.5 py-1 rounded-full text-xs font-semibold tracking-wide transition-all whitespace-nowrap flex items-center gap-1.5 ${
+                    isActive
+                      ? "bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 shadow-md shadow-emerald-500/10"
+                      : "bg-white/5 text-white/60 hover:bg-white/10 hover:text-white border border-white/10"
+                  }`}
+                >
+                  <span>{opt.label}</span>
+                  <span className={`text-[10px] px-1.5 py-0.2 rounded-full font-mono ${isActive ? "bg-emerald-500/30 text-emerald-200" : "bg-white/10 text-white/50"}`}>
+                    {count}
+                  </span>
+                </button>
+              );
+            })}
+          </div>
+
+          {/* Model Type Pills */}
+          <div className="flex items-center gap-2 overflow-x-auto pb-1 no-scrollbar">
+            <span className="text-[11px] font-bold uppercase tracking-wider text-emerald-400 shrink-0 mr-1">Type:</span>
+            <button
+              onClick={() => setFilters(f => ({ ...f, type: [] }))}
+              className={`px-3 py-1 rounded-full text-xs font-semibold tracking-wide transition-all whitespace-nowrap ${
+                filters.type.length === 0
+                  ? "bg-white/20 text-white border border-white/30"
+                  : "bg-white/5 text-white/60 hover:bg-white/10 hover:text-white border border-white/10"
+              }`}
+            >
+              All Types
+            </button>
+            {TYPE_OPTIONS.map((opt) => {
+              const isActive = filters.type.includes(opt.value);
+              const count = facetCounts.type[opt.value] || 0;
+              return (
+                <button
+                  key={opt.value}
+                  onClick={() => {
+                    setFilters((f) => {
+                      const newType = isActive
+                        ? f.type.filter((t) => t !== opt.value)
+                        : [...f.type, opt.value];
+                      return { ...f, type: newType };
+                    });
+                  }}
+                  className={`px-3 py-1 rounded-full text-xs font-semibold tracking-wide transition-all whitespace-nowrap flex items-center gap-1.5 ${
+                    isActive
+                      ? "bg-white/20 text-white border border-white/30"
+                      : "bg-white/5 text-white/60 hover:bg-white/10 hover:text-white border border-white/10"
+                  }`}
+                >
+                  <span>{opt.label}</span>
+                  <span className={`text-[10px] px-1.5 py-0.2 rounded-full font-mono ${isActive ? "bg-white/30 text-white" : "bg-white/10 text-white/50"}`}>
+                    {count}
+                  </span>
+                </button>
+              );
+            })}
+          </div>
         </div>
 
         {/* Controls Panel */}
