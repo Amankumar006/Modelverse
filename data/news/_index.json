@@ -1,5 +1,34 @@
 [
   {
+    "id": "weekly-model-recap-2026-07-26",
+    "slug": "weekly-model-recap-2026-07-26",
+    "title": "Weekly Model Recap: 15 Frontier & Open-Weight Releases (2026-07-26)",
+    "category": "weekly-news",
+    "publishDate": "2026-07-26",
+    "author": "Modelverse Editorial Team",
+    "readTime": "8 min read",
+    "excerpt": "Executive digest of 15 newly indexed AI models across reasoning, video generation, open-weight efficiency, cybersecurity, and quantization.",
+    "coverImage": "/images/news/news_weekly.jpg",
+    "status": "published",
+    "confidenceLevel": "confirmed",
+    "externalSources": [
+      "https://www.themodelverse.in"
+    ],
+    "relatedModels": [
+      "motion4motion",
+      "moonshot-ai-kimi-k3",
+      "anthropic-claude-opus-5",
+      "kat-coder-v25-dev",
+      "ardy"
+    ],
+    "tags": [
+      "weekly-digest",
+      "model-releases",
+      "ai-roundup"
+    ],
+    "issueNumber": 5
+  },
+  {
     "id": "anthropic-economic-index-connector",
     "slug": "anthropic-economic-index-connector",
     "title": "Anthropic Economic Index Connector",
