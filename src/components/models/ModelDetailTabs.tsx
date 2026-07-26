@@ -4,6 +4,7 @@ import { useState } from "react";
 import type { ModelEntry } from "@/lib/models";
 import MarkdownRenderer from "@/components/ui/MarkdownRenderer";
 import { ArrowUpRight } from "lucide-react";
+import VisionBenchmarkChart from "./VisionBenchmarkChart";
 
 interface ModelDetailTabsProps {
   model: ModelEntry;
@@ -177,6 +178,13 @@ export default function ModelDetailTabs({
                 <Empty>No benchmark data recorded yet.</Empty>
               )}
             </section>
+
+            {/* Vision Model Interactive Comparison Chart */}
+            {(model.modality.includes("image") || model.primaryTask.includes("image")) && (
+              <section className="pt-4 border-t border-[#282828]">
+                <VisionBenchmarkChart />
+              </section>
+            )}
 
             <section>
               <h3 className="mb-2 text-xs uppercase tracking-wider font-semibold text-[#90908F]">Pricing</h3>
