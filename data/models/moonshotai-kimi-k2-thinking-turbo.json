@@ -15,14 +15,19 @@
     "self-hostable",
     "api-only"
   ],
-  "license": "Other/Custom",
-  "parameters": "undisclosed",
+  "license": "other",
+  "parameters": "1.1T",
   "contextWindow": "262K tokens",
   "description": "Kimi reasoning model for long-horizon research, planning, and tool use",
+  "descriptionDraft": "Kimi K2 Thinking Turbo is a text-generation model from Moonshot AI hosted on Hugging Face (moonshotai/Kimi-K2-Thinking).",
   "keyFeatures": [
     "Max Output: 262K tokens",
     "Native reasoning capability",
     "Tool / function calling support"
+  ],
+  "keyFeaturesDraft": [
+    "Pipeline: text-generation",
+    "HF Tags: transformers, safetensors, kimi_k2, text-generation"
   ],
   "benchmarks": [],
   "family": "kimi-thinking",
@@ -55,9 +60,11 @@
     "open-weights"
   ],
   "sources": [
-    "https://github.com/anomalyco/models.dev"
+    "https://github.com/anomalyco/models.dev",
+    "https://huggingface.co/api/models/moonshotai/Kimi-K2-Thinking"
   ],
   "verified": false,
+  "needsReview": true,
   "featured": false,
   "boost": 1,
   "curatorNotes": "Skeleton entry imported from models.dev backfill (2026-07-26). Needs manual enrichment and primary-source verification."
