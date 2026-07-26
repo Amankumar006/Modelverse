@@ -3,19 +3,19 @@ import Link from "next/link";
 import Image from "next/image";
 import Navbar from "@/components/layout/Navbar";
 import { getAllArticles, getCategoryLabel } from "@/lib/news";
-import { Clock, Calendar, ArrowRight } from "lucide-react";
+import { Clock, Calendar, ArrowRight, Sparkles, Filter } from "lucide-react";
 import { SITE_URL } from "@/lib/models";
 import ConfidenceBadge from "@/components/news/ConfidenceBadge";
 
 export const metadata: Metadata = {
-  title: "AI Intelligence News & Analysis — Modelverse",
-  description: "Practical reads, weekly recaps, and deep-dive model reviews from the Modelverse editorial team.",
+  title: "AI News & Research Announcements — Modelverse",
+  description: "Deep-dive model reviews, benchmark breakdowns, and weekly research recaps from the Modelverse team.",
   alternates: {
     canonical: `${SITE_URL}/news`,
   },
   openGraph: {
-    title: "AI Intelligence News & Analysis — Modelverse",
-    description: "Practical reads, weekly recaps, and deep-dive model reviews from the Modelverse editorial team.",
+    title: "AI News & Research Announcements — Modelverse",
+    description: "Deep-dive model reviews, benchmark breakdowns, and weekly research recaps from the Modelverse team.",
     url: `${SITE_URL}/news`,
   },
 };
@@ -30,239 +30,213 @@ function formatNewsDate(dateStr: string): string {
 }
 
 interface NewsPageProps {
-  searchParams: Promise<{ page?: string }>;
+  searchParams: Promise<{ category?: string; page?: string }>;
 }
 
 export default async function NewsPage({ searchParams }: NewsPageProps) {
-  const resolvedSearchParams = await searchParams;
-  const posts = getAllArticles();
-  
-  if (posts.length === 0) {
+  const resolvedParams = await searchParams;
+  const activeCategory = resolvedParams.category || "all";
+  const allArticles = getAllArticles();
+
+  if (allArticles.length === 0) {
     return (
-      <main className="min-h-screen bg-[#0C120F] text-[#E2E8E4] pb-24 font-sans antialiased relative">
+      <main className="min-h-screen bg-[#141414] text-[#E4E4E7] font-sans antialiased relative">
         <Navbar theme="dark" />
         <div className="max-w-6xl mx-auto px-6 pt-24 text-center">
-          <p className="text-sm text-[#5A6E60]">No news articles found. Add some data files in data/news/ to populate.</p>
+          <p className="text-sm text-[#90908F]">No news articles published yet.</p>
         </div>
       </main>
     );
   }
 
-  // Top News (Hero)
-  let topNews = posts.find(p => p.isFeatured);
-  if (!topNews) {
-    topNews = posts[0];
-  }
+  // Filter articles based on active category
+  const filteredArticles = activeCategory === "all"
+    ? allArticles
+    : allArticles.filter((a) => a.category === activeCategory);
 
-  // Remove topNews from the pool so it doesn't appear twice
-  const remainingPosts = posts.filter(p => p.id !== topNews?.id);
+  // Top Featured News Article
+  const featuredArticle = allArticles.find((p) => p.isFeatured) || allArticles[0];
 
-  // Trending Coverage (Grid)
-  const trendingNews = remainingPosts.filter(p => p.isTrending).slice(0, 3);
-  if (trendingNews.length < 3) {
-    // Fill the rest with the newest articles
-    const otherRecent = remainingPosts
-      .filter(p => !p.isTrending)
-      .slice(0, 3 - trendingNews.length);
-    trendingNews.push(...otherRecent);
-  }
+  // Article Pool (excluding featured hero when viewing "all")
+  const poolArticles = activeCategory === "all"
+    ? filteredArticles.filter((p) => p.id !== featuredArticle.id)
+    : filteredArticles;
 
-  // Section 2: Recent Issues (Weekly News)
-  const recentIssues = remainingPosts.filter(p => p.category === "weekly-news").slice(0, 4);
+  // Categories list with counts
+  const categoryTabs = [
+    { value: "all", label: "All Announcements", count: allArticles.length },
+    { value: "weekly-news", label: "Weekly News", count: allArticles.filter((a) => a.category === "weekly-news").length },
+    { value: "model-review", label: "Model Reviews", count: allArticles.filter((a) => a.category === "model-review").length },
+    { value: "short-news", label: "Short News", count: allArticles.filter((a) => a.category === "short-news").length },
+    { value: "other", label: "Research & Analysis", count: allArticles.filter((a) => a.category === "other").length },
+  ];
 
-  // Section 4: Archive (Cronological grid of all remaining articles, paginated)
-  const pageSize = 6;
-  const totalPages = Math.ceil(remainingPosts.length / pageSize) || 1;
-  const currentPage = Math.max(1, Math.min(totalPages, parseInt(resolvedSearchParams.page || "1", 10) || 1));
-  const archivePosts = remainingPosts.slice((currentPage - 1) * pageSize, currentPage * pageSize);
+  // Pagination
+  const pageSize = 8;
+  const totalPages = Math.ceil(poolArticles.length / pageSize) || 1;
+  const currentPage = Math.max(1, Math.min(totalPages, parseInt(resolvedParams.page || "1", 10) || 1));
+  const paginatedArticles = poolArticles.slice((currentPage - 1) * pageSize, currentPage * pageSize);
 
   return (
-    <main className="min-h-screen bg-[#141414] text-[#E4E4E7] selection:bg-[#DA7756] selection:text-white pb-24 font-sans antialiased relative">
+    <main className="min-h-screen bg-[#141414] text-[#E1E1E0] selection:bg-emerald-500 selection:text-black pb-24 font-sans antialiased relative">
       <Navbar theme="dark" />
 
-      {/* Hero Header */}
-      <div className="max-w-6xl mx-auto px-6 sm:px-8 lg:px-12 pt-12 sm:pt-16 text-center">
-        {/* Category Pill */}
-        <div className="inline-flex items-center px-3 py-1 rounded-full bg-[#1A261D] border border-[#243629] mb-6">
-          <span className="text-[10px] font-bold text-[#8C9E91] uppercase tracking-widest">
-            News & Editorial
-          </span>
-        </div>
-
-        <h1
-          className="text-4xl sm:text-5xl md:text-6xl font-light text-[#F0FDF4] tracking-tight leading-tight max-w-3xl mx-auto mb-16 sm:mb-20"
-          style={{ fontFamily: "var(--font-display, 'Instrument Serif', serif)" }}
-        >
-          Practical reads to help you move <span className="italic text-[#7A8A7F]">faster.</span>
-        </h1>
-      </div>
-
-      {/* Browse by Category Tiles */}
-      <div className="max-w-6xl mx-auto px-6 sm:px-8 lg:px-12 mb-12">
-        <div className="flex flex-wrap justify-center gap-2">
-          {[
-            { value: "weekly-news", label: "Weekly News" },
-            { value: "short-news", label: "Short News" },
-            { value: "model-review", label: "Model Reviews" },
-            { value: "other", label: "Other" }
-          ].map((cat) => (
-            <Link
-              key={cat.value}
-              href={`/news/category/${cat.value}`}
-              className="inline-flex items-center gap-2 bg-[#1A261D] hover:bg-[#243629] text-xs font-semibold text-[#8C9E91] hover:text-[#F0FDF4] px-3.5 py-1.5 rounded-full transition-colors"
-            >
-              <span>{cat.label}</span>
-              <span className="bg-[#0C120F]/50 text-[#5A6E60] px-1.5 py-0.5 rounded-full text-[9px] font-mono border border-[#243629]">
-                {posts.filter((p) => p.category === cat.value).length}
+      {/* Claude Announcement Header */}
+      <div className="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-10 2xl:px-12 pt-10 sm:pt-14 pb-8">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-[#282828] pb-10">
+          <div>
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#242426] border border-[#333333] mb-4">
+              <Sparkles size={12} className="text-emerald-400" />
+              <span className="text-[11px] font-mono font-semibold uppercase tracking-wider text-emerald-400">
+                Modelverse Newsroom
               </span>
-            </Link>
-          ))}
+            </div>
+            <h1
+              className="text-4xl sm:text-5xl md:text-6xl font-normal text-white tracking-tight"
+              style={{ fontFamily: "var(--font-display, 'Instrument Serif', Georgia, serif)" }}
+            >
+              News & Research Announcements
+            </h1>
+            <p className="text-sm sm:text-base text-[#90908F] max-w-2xl mt-3 leading-relaxed">
+              Deep-dive model reviews, benchmark breakdowns, and weekly AI research announcements curated by the Modelverse team.
+            </p>
+          </div>
+
+          {/* Total Articles Counter */}
+          <div className="text-right shrink-0">
+            <span className="text-xs text-[#90908F] font-mono block">Published Coverage</span>
+            <span className="text-3xl font-normal text-white font-serif">{allArticles.length} Articles</span>
+          </div>
         </div>
       </div>
 
-      {/* Main Grid Container */}
-      <div className="max-w-6xl mx-auto px-6 sm:px-8 lg:px-12 space-y-16">
-        
-        {/* ── 1. Top News (Hero Treatment) ──────────────── */}
-        {topNews ? (
-          <div className="space-y-6">
-            <div className="flex items-center justify-between border-b border-[#243629] pb-4">
-              <h2 className="text-xs font-bold uppercase tracking-wider text-[#9CA3AF]">Top News</h2>
-              <span className="text-xs font-bold uppercase tracking-wider text-[#4ADE80]">Featured Article</span>
-            </div>
-            <div
-              className="group relative bg-[#121A15] rounded-3xl border border-[#243629] hover:border-[#334D3A] transition-all duration-300 overflow-hidden grid grid-cols-1 lg:grid-cols-2 z-0"
-            >
+      {/* Category Filter Pills (Claude Blog Style) */}
+      <div className="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-10 2xl:px-12 mb-10">
+        <div className="flex items-center gap-2 overflow-x-auto pb-2 scrollbar-none">
+          <div className="flex items-center gap-1.5 text-xs text-[#90908F] pr-2 shrink-0">
+            <Filter size={13} />
+            <span>Category:</span>
+          </div>
+          {categoryTabs.map((tab) => {
+            const isActive = activeCategory === tab.value;
+            return (
               <Link
-                href={`/news/${topNews.slug}`}
+                key={tab.value}
+                href={tab.value === "all" ? "/news" : `/news?category=${tab.value}`}
+                className={`px-3.5 py-1.5 rounded-full text-xs font-medium transition-all shrink-0 flex items-center gap-2 border ${
+                  isActive
+                    ? "bg-[#242426] text-white border-emerald-500/40 shadow-sm"
+                    : "bg-[#1C1C1E] text-[#90908F] hover:text-white border-[#282828] hover:border-[#333333]"
+                }`}
+              >
+                <span>{tab.label}</span>
+                <span
+                  className={`text-[10px] font-mono px-1.5 py-0.2 rounded-full ${
+                    isActive ? "bg-emerald-500/20 text-emerald-400" : "bg-[#242426] text-[#90908F]"
+                  }`}
+                >
+                  {tab.count}
+                </span>
+              </Link>
+            );
+          })}
+        </div>
+      </div>
+
+      {/* Main Content Area */}
+      <div className="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-10 2xl:px-12 space-y-16">
+        
+        {/* Featured Hero Article (Shown when viewing All Articles) */}
+        {activeCategory === "all" && featuredArticle && (
+          <div className="space-y-4">
+            <div className="flex items-center justify-between">
+              <span className="text-xs uppercase font-mono tracking-wider text-[#90908F]">
+                Featured Announcement
+              </span>
+              <span className="text-xs font-mono text-emerald-400 bg-emerald-500/10 px-2.5 py-0.5 rounded-full border border-emerald-500/30">
+                Top Pick
+              </span>
+            </div>
+
+            <div className="group relative bg-[#1C1C1E] rounded-2xl border border-[#282828] hover:border-emerald-500/40 transition-all duration-300 overflow-hidden grid grid-cols-1 lg:grid-cols-2 shadow-2xl">
+              <Link
+                href={`/news/${featuredArticle.slug}`}
                 className="absolute inset-0 z-10"
-                aria-label={`Read ${topNews.title}`}
+                aria-label={`Read ${featuredArticle.title}`}
               />
 
-              {/* Image Container */}
-              <div className="relative h-[250px] sm:h-[350px] lg:h-full min-h-[350px] bg-[#0C120F]">
+              {/* Cover Image Container */}
+              <div className="relative h-[260px] sm:h-[360px] lg:h-full min-h-[340px] bg-[#141414] overflow-hidden">
                 <Image
-                  src={topNews.coverImage}
-                  alt={topNews.title}
+                  src={featuredArticle.coverImage}
+                  alt={featuredArticle.title}
                   fill
                   priority
                   className="object-cover transition-transform duration-700 group-hover:scale-102 opacity-90"
                 />
-                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-[#121A15]/50 to-[#121A15] pointer-events-none hidden lg:block" />
+                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-[#1C1C1E]/40 to-[#1C1C1E] pointer-events-none hidden lg:block" />
               </div>
 
-              {/* Content Block */}
-              <div className="p-6 sm:p-12 lg:p-16 flex flex-col justify-between relative z-20 pointer-events-none">
+              {/* Content Body */}
+              <div className="p-6 sm:p-10 lg:p-12 flex flex-col justify-between relative z-20 pointer-events-none">
                 <div>
-                  {/* Category Label */}
-                  <div className="flex items-center gap-2 mb-6 pointer-events-auto">
-                    <Link
-                      href={`/news/category/${topNews.category}`}
-                      className="inline-block text-[10px] font-bold uppercase tracking-wider text-[#0C120F] px-2.5 py-1 rounded bg-[#E2E8E4] shadow-sm hover:bg-[#4ADE80] transition-colors relative z-30"
-                    >
-                      {topNews.category === "weekly-news" ? `Issue ${topNews.issueNumber}` : getCategoryLabel(topNews.category)}
-                    </Link>
-                    <ConfidenceBadge confidence={topNews.confidenceLevel} />
+                  <div className="flex items-center gap-2.5 mb-5 pointer-events-auto">
+                    <span className="text-[10px] font-mono uppercase font-semibold tracking-wider text-emerald-400 bg-[#242426] px-2.5 py-1 rounded-md border border-[#333333]">
+                      {featuredArticle.category === "weekly-news" ? `Issue ${featuredArticle.issueNumber}` : getCategoryLabel(featuredArticle.category)}
+                    </span>
+                    <ConfidenceBadge confidence={featuredArticle.confidenceLevel} />
                   </div>
 
-                  {/* Title */}
-                  <h3 className="text-3xl sm:text-4xl font-semibold tracking-tight text-[#F0FDF4] mb-4 group-hover:text-[#4ADE80] transition-colors leading-snug">
-                    {topNews.title}
-                  </h3>
+                  <h2
+                    className="text-2xl sm:text-3xl lg:text-4xl font-normal text-white mb-4 group-hover:text-emerald-400 transition-colors leading-snug"
+                    style={{ fontFamily: "var(--font-display, 'Instrument Serif', Georgia, serif)" }}
+                  >
+                    {featuredArticle.title}
+                  </h2>
 
-                  {/* Description */}
-                  <p className="text-sm sm:text-base text-[#E5E7EB] leading-relaxed mb-8">
-                    {topNews.excerpt}
+                  <p className="text-sm text-[#90908F] leading-relaxed mb-6 line-clamp-3">
+                    {featuredArticle.excerpt}
                   </p>
                 </div>
 
-                {/* Footer */}
-                <div className="flex items-center justify-between pt-6 border-t border-[#243629]">
-                  <div className="flex items-center gap-4 text-xs text-[#9CA3AF]">
-                    <span className="flex items-center gap-1.5 text-[#A3B8AA]">
-                      <Clock size={13} className="text-[#4ADE80]" />
-                      {topNews.readTime}
+                <div className="pt-6 border-t border-[#282828] flex items-center justify-between text-xs text-[#90908F]">
+                  <div className="flex items-center gap-3">
+                    <span className="flex items-center gap-1.5 font-mono text-[#E1E1E0]">
+                      <Clock size={12} className="text-emerald-400" />
+                      {featuredArticle.readTime}
                     </span>
-                    <span className="text-[#334D3A]">·</span>
-                    <span className="flex items-center gap-1.5 text-[#A3B8AA]">
-                      <Calendar size={13} className="text-[#4ADE80]" />
-                      {formatNewsDate(topNews.publishDate)}
+                    <span>·</span>
+                    <span className="flex items-center gap-1.5 font-mono">
+                      <Calendar size={12} className="text-emerald-400" />
+                      {formatNewsDate(featuredArticle.publishDate)}
                     </span>
                   </div>
-                  <span className="text-xs font-semibold text-[#A3B8AA] tracking-wider uppercase inline-flex items-center gap-1">
-                    by {topNews.author}
+                  <span className="font-semibold text-emerald-400 flex items-center gap-1 group-hover:translate-x-1 transition-transform">
+                    Read Article <ArrowRight size={13} />
                   </span>
                 </div>
               </div>
             </div>
           </div>
-        ) : (
-          <div className="text-center py-12 bg-[#121A15] rounded-3xl border border-[#243629]">
-            <p className="text-sm text-[#5A6E60]">No articles published yet.</p>
-          </div>
         )}
 
-        {/* ── 2. Recent Issues (Grid) ───────────────────────── */}
-        {recentIssues.length > 0 && (
-          <div className="space-y-6 pt-4">
-            <div className="border-b border-[#243629] pb-4">
-              <h2 className="text-xs font-bold uppercase tracking-wider text-[#5A6E60]">Recent Issues</h2>
-            </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-              {recentIssues.map((issue) => (
-                <div
-                  key={issue.id}
-                  className="group relative bg-[#121A15] rounded-3xl border border-[#243629] hover:border-[#334D3A] hover:shadow-[0_0_20px_rgba(74,222,128,0.05)] transition-all duration-300 overflow-hidden flex flex-col justify-between z-0"
-                >
-                  <Link
-                    href={`/news/${issue.slug}`}
-                    className="absolute inset-0 z-10"
-                    aria-label={`Read ${issue.title}`}
-                  />
-                  <div>
-                    <div className="relative h-[160px] w-full bg-[#0C120F] overflow-hidden">
-                      <Image
-                        src={issue.coverImage}
-                        alt={issue.title}
-                        fill
-                        className="object-cover transition-transform duration-700 group-hover:scale-102 opacity-90"
-                      />
-                      <Link
-                        href={`/news/category/weekly-news`}
-                        className="absolute top-4 left-4 text-[9px] font-bold uppercase tracking-wider text-[#0C120F] px-2.5 py-1 rounded-full bg-[#E2E8E4] shadow-sm z-30 hover:bg-[#4ADE80] transition-colors"
-                      >
-                        Issue {issue.issueNumber}
-                      </Link>
-                      <div className="absolute top-4 right-4 z-20">
-                        <ConfidenceBadge confidence={issue.confidenceLevel} />
-                      </div>
-                    </div>
-                    <div className="p-6 relative z-20 pointer-events-none">
-                      <h3 className="text-base font-semibold tracking-tight text-[#F0FDF4] group-hover:text-[#4ADE80] transition-colors mb-2 line-clamp-2 leading-snug">
-                        {issue.title}
-                      </h3>
-                      <p className="text-xs text-[#5A6E60]">
-                        {formatNewsDate(issue.publishDate)}
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
+        {/* Article Grid (Claude Blog Topology) */}
+        <div className="space-y-6">
+          <div className="flex items-center justify-between border-b border-[#282828] pb-4">
+            <h2 className="text-xs uppercase font-mono tracking-wider text-[#90908F]">
+              {activeCategory === "all" ? "All News Coverage" : `${getCategoryLabel(activeCategory as any)} Articles`}
+            </h2>
+            <span className="text-xs font-mono text-[#90908F]">
+              Showing {paginatedArticles.length} of {poolArticles.length}
+            </span>
           </div>
-        )}
 
-        {/* ── 3. Trending (Short News & Reviews) ────────────── */}
-        {trendingNews.length > 0 && (
-          <div className="space-y-6 pt-4">
-            <div className="border-b border-[#243629] pb-4">
-              <h2 className="text-xs font-bold uppercase tracking-wider text-[#5A6E60]">Trending Coverage</h2>
-            </div>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
-              {trendingNews.map((post) => (
+          {paginatedArticles.length > 0 ? (
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-6">
+              {paginatedArticles.map((post) => (
                 <div
                   key={post.id}
-                  className="group relative bg-[#121A15] rounded-3xl border border-[#243629] hover:border-[#334D3A] hover:shadow-[0_0_20px_rgba(74,222,128,0.05)] transition-all duration-300 overflow-hidden flex flex-col justify-between z-0"
+                  className="group relative bg-[#1C1C1E] rounded-2xl border border-[#282828] hover:border-emerald-500/40 shadow-xl transition-all duration-300 overflow-hidden flex flex-col justify-between"
                 >
                   <Link
                     href={`/news/${post.slug}`}
@@ -270,138 +244,79 @@ export default async function NewsPage({ searchParams }: NewsPageProps) {
                     aria-label={`Read ${post.title}`}
                   />
                   <div>
-                    <div className="relative h-[180px] w-full bg-[#0C120F] overflow-hidden">
+                    {/* Media Cover Image */}
+                    <div className="relative h-[200px] w-full bg-[#141414] overflow-hidden">
                       <Image
                         src={post.coverImage}
                         alt={post.title}
                         fill
                         className="object-cover transition-transform duration-700 group-hover:scale-102 opacity-90"
                       />
-                      <Link
-                        href={`/news/category/${post.category}`}
-                        className="absolute top-4 right-4 text-[9px] font-bold uppercase tracking-wider text-[#E2E8E4] px-2.5 py-1 rounded-full bg-[#0C120F]/80 backdrop-blur-sm shadow-sm z-30 hover:bg-[#4ADE80] hover:text-[#0C120F] transition-colors"
-                      >
-                        {getCategoryLabel(post.category)}
-                      </Link>
-                      <div className="absolute top-4 left-4 z-20">
+                      <div className="absolute top-3 right-3 z-20">
+                        <span className="text-[10px] font-mono font-semibold uppercase tracking-wider text-emerald-400 bg-[#1C1C1E]/90 backdrop-blur-md px-2.5 py-1 rounded-md border border-[#333333]">
+                          {post.category === "weekly-news" ? `Issue ${post.issueNumber}` : getCategoryLabel(post.category)}
+                        </span>
+                      </div>
+                      <div className="absolute top-3 left-3 z-20">
                         <ConfidenceBadge confidence={post.confidenceLevel} />
                       </div>
                     </div>
-                    <div className="p-6 relative z-20 pointer-events-none">
-                      <h3 className="text-lg font-semibold tracking-tight text-[#F0FDF4] group-hover:text-[#4ADE80] transition-colors mb-3 leading-snug">
+
+                    {/* Content Section */}
+                    <div className="p-5">
+                      <h3
+                        className="text-lg font-normal text-white group-hover:text-emerald-400 transition-colors mb-2.5 line-clamp-2 leading-snug"
+                        style={{ fontFamily: "var(--font-display, 'Instrument Serif', Georgia, serif)" }}
+                      >
                         {post.title}
                       </h3>
-                      <p className="text-xs text-[#8C9E91] leading-relaxed line-clamp-3">
+                      <p className="text-xs text-[#90908F] leading-relaxed line-clamp-3">
                         {post.excerpt}
                       </p>
                     </div>
                   </div>
-                  <div className="px-6 pb-6 relative z-20 pointer-events-none">
-                    <div className="pt-4 border-t border-[#243629] flex items-center justify-between text-[11px] text-[#5A6E60]">
-                      <span className="flex items-center gap-1">
-                        <Clock size={11} />
-                        {post.readTime}
-                      </span>
-                      <span className="font-semibold text-[#8C9E91] flex items-center gap-1 group-hover:text-[#4ADE80] transition-colors">
-                        Read Article <ArrowRight size={10} className="group-hover:translate-x-0.5 transition-transform" />
-                      </span>
-                    </div>
+
+                  {/* Footer Meta */}
+                  <div className="px-5 pb-5 pt-3 border-t border-[#282828] flex items-center justify-between text-xs text-[#90908F]">
+                    <span className="flex items-center gap-1 font-mono text-[11px]">
+                      <Clock size={11} className="text-emerald-400" />
+                      {post.readTime}
+                    </span>
+                    <span className="font-semibold text-emerald-400 flex items-center gap-1 group-hover:translate-x-0.5 transition-transform text-xs">
+                      Read <ArrowRight size={11} />
+                    </span>
                   </div>
                 </div>
               ))}
             </div>
-          </div>
-        )}
-
-        {/* ── 4. The Archive (All articles, paginated) ───────── */}
-        <div className="space-y-6 pt-4">
-          <div className="border-b border-[#243629] pb-4">
-            <h2 className="text-xs font-bold uppercase tracking-wider text-[#5A6E60]">The Full Archive</h2>
-          </div>
-          
-          {archivePosts.length > 0 ? (
-            <div className="space-y-12">
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
-                {archivePosts.map((post) => (
-                  <div
-                    key={post.id}
-                    className="group relative bg-[#121A15] rounded-3xl border border-[#243629] hover:border-[#334D3A] hover:shadow-[0_0_20px_rgba(74,222,128,0.05)] transition-all duration-300 overflow-hidden flex flex-col justify-between z-0"
-                  >
-                    <Link
-                      href={`/news/${post.slug}`}
-                      className="absolute inset-0 z-10"
-                      aria-label={`Read ${post.title}`}
-                    />
-                    <div>
-                      <div className="relative h-[180px] w-full bg-[#0C120F] overflow-hidden">
-                        <Image
-                          src={post.coverImage}
-                          alt={post.title}
-                          fill
-                          className="object-cover transition-transform duration-700 group-hover:scale-102 opacity-90"
-                        />
-                        <Link
-                          href={`/news/category/${post.category}`}
-                          className="absolute top-4 right-4 text-[9px] font-bold uppercase tracking-wider text-[#E2E8E4] px-2.5 py-1 rounded-full bg-[#0C120F]/80 backdrop-blur-sm shadow-sm z-30 hover:bg-[#4ADE80] hover:text-[#0C120F] transition-colors"
-                        >
-                          {post.category === "weekly-news" ? `Issue ${post.issueNumber}` : getCategoryLabel(post.category)}
-                        </Link>
-                        <div className="absolute top-4 left-4 z-20">
-                          <ConfidenceBadge confidence={post.confidenceLevel} />
-                        </div>
-                      </div>
-                      <div className="p-6 relative z-20 pointer-events-none">
-                        <h3 className="text-lg font-semibold tracking-tight text-[#F0FDF4] group-hover:text-[#4ADE80] transition-colors mb-3 leading-snug">
-                          {post.title}
-                        </h3>
-                        <p className="text-xs text-[#8C9E91] leading-relaxed line-clamp-3">
-                          {post.excerpt}
-                        </p>
-                      </div>
-                    </div>
-                    <div className="px-6 pb-6 relative z-20 pointer-events-none">
-                      <div className="pt-4 border-t border-[#243629] flex items-center justify-between text-[11px] text-[#5A6E60]">
-                        <span className="flex items-center gap-1">
-                          <Clock size={11} />
-                          {post.readTime}
-                        </span>
-                        <span className="font-semibold text-[#8C9E91] flex items-center gap-1 group-hover:text-[#4ADE80] transition-colors">
-                          Read Article <ArrowRight size={10} className="group-hover:translate-x-0.5 transition-transform" />
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-
-              {/* Pagination Controls */}
-              {totalPages > 1 && (
-                <div className="flex items-center justify-center gap-4 pt-8 border-t border-[#243629]">
-                  <Link
-                    href={`/news?page=${currentPage - 1}`}
-                    className={`px-4 py-2 rounded-xl border border-[#243629] text-xs font-semibold hover:bg-[#1A261D] hover:text-[#F0FDF4] transition-colors flex items-center gap-1 ${
-                      currentPage <= 1 ? "pointer-events-none opacity-40" : ""
-                    }`}
-                  >
-                    ← Previous
-                  </Link>
-                  <span className="text-xs text-[#5A6E60]">
-                    Page {currentPage} of {totalPages}
-                  </span>
-                  <Link
-                    href={`/news?page=${currentPage + 1}`}
-                    className={`px-4 py-2 rounded-xl border border-[#243629] text-xs font-semibold hover:bg-[#1A261D] hover:text-[#F0FDF4] transition-colors flex items-center gap-1 ${
-                      currentPage >= totalPages ? "pointer-events-none opacity-40" : ""
-                    }`}
-                  >
-                    Next →
-                  </Link>
-                </div>
-              )}
-            </div>
           ) : (
-             <div className="text-center py-12 bg-[#121A15] rounded-3xl border border-[#243629]">
-              <p className="text-sm text-[#5A6E60]">No archive entries found.</p>
+            <div className="text-center py-16 bg-[#1C1C1E] rounded-2xl border border-[#282828]">
+              <p className="text-sm text-[#90908F]">No articles found under this category filter.</p>
+            </div>
+          )}
+
+          {/* Pagination Controls */}
+          {totalPages > 1 && (
+            <div className="flex items-center justify-center gap-4 pt-8 border-t border-[#282828]">
+              <Link
+                href={`/news?category=${activeCategory}&page=${currentPage - 1}`}
+                className={`px-4 py-2 rounded-xl border border-[#333333] bg-[#1C1C1E] text-xs font-semibold hover:border-emerald-500/50 hover:text-white transition-colors flex items-center gap-1 ${
+                  currentPage <= 1 ? "pointer-events-none opacity-40" : ""
+                }`}
+              >
+                ← Previous
+              </Link>
+              <span className="text-xs text-[#90908F] font-mono">
+                Page {currentPage} of {totalPages}
+              </span>
+              <Link
+                href={`/news?category=${activeCategory}&page=${currentPage + 1}`}
+                className={`px-4 py-2 rounded-xl border border-[#333333] bg-[#1C1C1E] text-xs font-semibold hover:border-emerald-500/50 hover:text-white transition-colors flex items-center gap-1 ${
+                  currentPage >= totalPages ? "pointer-events-none opacity-40" : ""
+                }`}
+              >
+                Next →
+              </Link>
             </div>
           )}
         </div>
@@ -409,10 +324,10 @@ export default async function NewsPage({ searchParams }: NewsPageProps) {
       </div>
 
       {/* Styled Footer Frame */}
-      <div className="max-w-6xl mx-auto px-6 sm:px-8 lg:px-12 mt-24">
-        <div className="border-t border-[#243629] pt-8 flex justify-between items-center text-xs text-[#5A6E60] font-light">
+      <div className="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-10 2xl:px-12 mt-24">
+        <div className="border-t border-[#282828] pt-8 flex justify-between items-center text-xs text-[#90908F]">
           <span>© 2026 Modelverse®. All rights reserved.</span>
-          <span className="uppercase tracking-widest text-[9px] font-bold text-[#3A4D39]">
+          <span className="uppercase font-mono text-[10px] font-semibold text-[#90908F]">
             Modelverse Newsroom
           </span>
         </div>
