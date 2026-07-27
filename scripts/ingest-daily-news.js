@@ -132,19 +132,42 @@ if (!fs.existsSync(INGESTION_DIR)) {
   fs.mkdirSync(INGESTION_DIR, { recursive: true });
 }
 
-function getHttps(url) {
-  return new Promise((resolve, reject) => {
-    const req = https.get(url, { headers: { "User-Agent": "Modelverse-Ingestion-Bot/1.0" } }, (res) => {
-      let data = "";
-      res.on("data", (chunk) => (data += chunk));
-      res.on("end", () => resolve(data));
-    });
-    req.on("error", reject);
-    req.setTimeout(15000, () => {
-      req.destroy();
-      reject(new Error(`Timeout fetching ${url}`));
-    });
-  });
+async function getHttps(url, retries = 3, backoff = 2000) {
+  for (let attempt = 1; attempt <= retries; attempt++) {
+    try {
+      return await new Promise((resolve, reject) => {
+        const req = https.get(url, { headers: { "User-Agent": "Modelverse-Ingestion-Bot/1.1" } }, (res) => {
+          if (res.statusCode >= 300 && res.statusCode < 400 && res.headers.location) {
+            // Handle redirect (1 hop)
+            const redirectUrl = new URL(res.headers.location, url).href;
+            const redirReq = https.get(redirectUrl, { headers: { "User-Agent": "Modelverse-Ingestion-Bot/1.1" } }, (redirRes) => {
+              let data = "";
+              redirRes.on("data", (chunk) => (data += chunk));
+              redirRes.on("end", () => resolve(data));
+            });
+            redirReq.on("error", reject);
+            return;
+          }
+          if (res.statusCode >= 400 && res.statusCode !== 404) {
+            // Reject on 5xx or 403, etc., but let 404s pass through or fail gracefully
+            return reject(new Error(`HTTP status ${res.statusCode}`));
+          }
+          let data = "";
+          res.on("data", (chunk) => (data += chunk));
+          res.on("end", () => resolve(data));
+        });
+        req.on("error", reject);
+        req.setTimeout(15000, () => {
+          req.destroy();
+          reject(new Error(`Timeout fetching ${url}`));
+        });
+      });
+    } catch (e) {
+      if (attempt === retries) throw e;
+      console.log(`      ⚠️ Network issue (${e.message}). Retrying in ${backoff * attempt}ms...`);
+      await new Promise(r => setTimeout(r, backoff * attempt));
+    }
+  }
 }
 
 function slugify(text) {
@@ -177,34 +200,39 @@ function decodeHtmlEntities(str) {
 }
 
 function parseRss(xmlText) {
-  const items = [];
-  const itemRegex = /<(?:item|entry)>([\s\S]*?)<\/(?:item|entry)>/g;
-  let match;
-  while ((match = itemRegex.exec(xmlText)) !== null) {
-    const itemContent = match[1];
-    const titleMatch = /<title>([\s\S]*?)<\/title>/.exec(itemContent);
-    const linkMatch = /<link[^>]*href="([^"]+)"/.exec(itemContent) || /<link>([\s\S]*?)<\/link>/.exec(itemContent);
-    const descMatch = /<description>([\s\S]*?)<\/description>/.exec(itemContent) || /<summary>([\s\S]*?)<\/summary>/.exec(itemContent) || /<content[\s\S]*?>([\s\S]*?)<\/content>/.exec(itemContent);
-    const pubDateMatch = /<pubDate>([\s\S]*?)<\/pubDate>/.exec(itemContent) || /<published>([\s\S]*?)<\/published>/.exec(itemContent) || /<updated>([\s\S]*?)<\/updated>/.exec(itemContent) || /<dc:date>([\s\S]*?)<\/dc:date>/.exec(itemContent);
-    
-    if (titleMatch && linkMatch) {
-      const rawTitle = decodeHtmlEntities(titleMatch[1].replace(/<!\[CDATA\[([\s\S]*?)\]\]>/g, '$1').trim());
-      const rawLink = linkMatch[1] ? linkMatch[1].replace(/<!\[CDATA\[([\s\S]*?)\]\]>/g, '$1').trim() : '';
-      const cleanDesc = decodeHtmlEntities(descMatch ? descMatch[1].replace(/<!\[CDATA\[([\s\S]*?)\]\]>/g, '$1').replace(/<[^>]+>/g, '').trim() : rawTitle);
-      const rawDate = pubDateMatch ? pubDateMatch[1].trim() : null;
+  try {
+    const items = [];
+    const itemRegex = /<(?:item|entry)>([\s\S]*?)<\/(?:item|entry)>/g;
+    let match;
+    while ((match = itemRegex.exec(xmlText)) !== null) {
+      const itemContent = match[1];
+      const titleMatch = /<title>([\s\S]*?)<\/title>/.exec(itemContent);
+      const linkMatch = /<link[^>]*href="([^"]+)"/.exec(itemContent) || /<link>([\s\S]*?)<\/link>/.exec(itemContent);
+      const descMatch = /<description>([\s\S]*?)<\/description>/.exec(itemContent) || /<summary>([\s\S]*?)<\/summary>/.exec(itemContent) || /<content[\s\S]*?>([\s\S]*?)<\/content>/.exec(itemContent);
+      const pubDateMatch = /<pubDate>([\s\S]*?)<\/pubDate>/.exec(itemContent) || /<published>([\s\S]*?)<\/published>/.exec(itemContent) || /<updated>([\s\S]*?)<\/updated>/.exec(itemContent) || /<dc:date>([\s\S]*?)<\/dc:date>/.exec(itemContent);
       
-      if (rawTitle && rawLink) {
-        items.push({
-          title: rawTitle,
-          link: rawLink,
-          description: cleanDesc.slice(0, 500),
-          pubDate: rawDate,
-          parsedDate: rawDate ? new Date(rawDate) : null
-        });
+      if (titleMatch && linkMatch) {
+        const rawTitle = decodeHtmlEntities(titleMatch[1].replace(/<!\[CDATA\[([\s\S]*?)\]\]>/g, '$1').trim());
+        const rawLink = linkMatch[1] ? linkMatch[1].replace(/<!\[CDATA\[([\s\S]*?)\]\]>/g, '$1').trim() : '';
+        const cleanDesc = decodeHtmlEntities(descMatch ? descMatch[1].replace(/<!\[CDATA\[([\s\S]*?)\]\]>/g, '$1').replace(/<[^>]+>/g, '').trim() : rawTitle);
+        const rawDate = pubDateMatch ? pubDateMatch[1].trim() : null;
+        
+        if (rawTitle && rawLink) {
+          items.push({
+            title: rawTitle,
+            link: rawLink,
+            description: cleanDesc.slice(0, 500),
+            pubDate: rawDate,
+            parsedDate: rawDate ? new Date(rawDate) : null
+          });
+        }
       }
     }
+    return items;
+  } catch (e) {
+    console.error(`  ⚠️ XML Parse Error: ${e.message}`);
+    return [];
   }
-  return items;
 }
 
 // ─── Date filtering: only keep recent articles ──────────────────────
@@ -422,7 +450,15 @@ async function extractFullArticleBody(url, fallbackDesc, lab) {
   let posterIndex = 0;
 
   for (const candidate of candidates) {
+    if (!candidate.title || !candidate.link) {
+      console.log(`  ⚠️  Skipping malformed candidate: missing title or link`);
+      continue;
+    }
     const newsSlug = slugify(candidate.title);
+    if (!newsSlug) {
+      console.log(`  ⚠️  Skipping malformed candidate: unable to generate slug for "${candidate.title.slice(0,30)}"`);
+      continue;
+    }
     if (existingSlugs.has(newsSlug)) {
       console.log(`  ⏭️  Skipping (exists): ${candidate.title.slice(0, 60)}...`);
       continue;
@@ -510,6 +546,10 @@ async function extractFullArticleBody(url, fallbackDesc, lab) {
     console.log("✨ No new articles found in the last " + MAX_AGE_HOURS + " hours.");
     if (process.env.GITHUB_ENV) {
       fs.appendFileSync(process.env.GITHUB_ENV, "NEW_NEWS_PUSHED=false\n");
+    }
+    if (allCandidates.length === 0) {
+      console.error("🚨 CRITICAL ERROR: All feeds failed to fetch or parsed zero items. Failing pipeline to trigger alert.");
+      process.exit(1);
     }
   } else {
     console.log(`🎉 Published ${createdNews.length} new articles:`);

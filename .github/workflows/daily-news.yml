@@ -53,3 +53,23 @@ jobs:
           else
             echo "No new news articles to publish today."
           fi
+
+      - name: Send Failure Alert Email
+        if: failure()
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: smtp.gmail.com
+          server_port: 465
+          secure: true
+          username: 006amanraj@gmail.com
+          password: ${{ secrets.GMAIL_APP_PASSWORD }}
+          subject: 🚨 [Modelverse] Urgent: News Pipeline Failed!
+          to: 006amanraj@gmail.com
+          from: Modelverse Alerts <006amanraj@gmail.com>
+          body: |
+            The Modelverse Daily News ingestion pipeline has encountered a fatal error and failed to complete.
+            
+            All feeds may be down, or the script encountered a fatal parsing error.
+            Please check the GitHub Actions logs immediately:
+            https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
+

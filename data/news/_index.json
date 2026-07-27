@@ -66,6 +66,32 @@
     ]
   },
   {
+    "id": "nvidia-cosmos-h-dreams-bringing-real-time-generative-simulation-to-surgical-robo",
+    "slug": "nvidia-cosmos-h-dreams-bringing-real-time-generative-simulation-to-surgical-robo",
+    "title": "NVIDIA Cosmos-H-Dreams: Bringing Real-Time Generative Simulation to Surgical Robotics",
+    "category": "short-news",
+    "publishDate": "2026-07-27",
+    "author": "Hugging Face / Modelverse Editorial",
+    "readTime": "4 min read",
+    "excerpt": "NVIDIA Cosmos-H-Dreams: Bringing Real-Time Generative Simulation to Surgical Robotics",
+    "coverImage": "https://cdn-uploads.huggingface.co/production/uploads/68c1279544f671330c604f4c/Cj0RZwvOSUhFGFEFKgyDw.png",
+    "status": "published",
+    "confidenceLevel": "confirmed",
+    "externalSources": [
+      "https://huggingface.co/blog/nvidia/cosmos-h-dreams"
+    ],
+    "relatedModels": [
+      "microsoft-mai-code-1-flash",
+      "nvidia-omnidreams",
+      "nvidia-cosmos-3"
+    ],
+    "tags": [
+      "ai-news",
+      "breaking",
+      "hugging-face"
+    ]
+  },
+  {
     "id": "nvidia-harnesses-vera-cpu-to-speed-up-design-of-next-generation-cpus-and-gpus",
     "slug": "nvidia-harnesses-vera-cpu-to-speed-up-design-of-next-generation-cpus-and-gpus",
     "title": "NVIDIA Harnesses Vera CPU to Speed Up Design of Next-Generation CPUs and GPUs",
