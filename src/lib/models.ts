@@ -119,13 +119,17 @@ function loadDevEntries(): ModelEntry[] {
   });
 
   for (const file of files) {
-    const raw = JSON.parse(fs.readFileSync(path.join(DATA_DIR, file), "utf-8"));
-    const result = ModelSchema.safeParse(raw);
-    if (!result.success) {
-      console.warn(`[DEV] Validation failed for ${file}, skipping.`);
-      continue;
+    try {
+      const raw = JSON.parse(fs.readFileSync(path.join(DATA_DIR, file), "utf-8"));
+      const result = ModelSchema.safeParse(raw);
+      if (!result.success) {
+        console.warn(`[DEV] Validation failed for ${file}, skipping.`);
+        continue;
+      }
+      entries.push(result.data);
+    } catch (err: any) {
+      console.error(`[DEV] Failed to parse model file ${file}:`, err.message);
     }
-    entries.push(result.data);
   }
 
   entries.sort((a, b) => new Date(b.releaseDate).getTime() - new Date(a.releaseDate).getTime());

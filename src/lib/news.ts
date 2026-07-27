@@ -41,11 +41,14 @@ function loadDevNewsIndex(): NewsArticleIndexEntry[] {
   });
 
   for (const file of files) {
-    const raw = JSON.parse(fs.readFileSync(path.join(newsDir, file), "utf-8"));
-    const result = NewsPostSchema.safeParse(raw);
-    if (!result.success) continue;
-    
-    rawEntries.push(result.data);
+    try {
+      const raw = JSON.parse(fs.readFileSync(path.join(newsDir, file), "utf-8"));
+      const result = NewsPostSchema.safeParse(raw);
+      if (!result.success) continue;
+      rawEntries.push(result.data);
+    } catch (err: any) {
+      console.error(`[DEV] Failed to parse news file ${file}:`, err.message);
+    }
   }
 
   // Filter out draft entries - only compile published articles
@@ -116,10 +119,14 @@ function loadDevArticleBySlug(slug: string): NewsArticle | null {
 
   const rawEntries: any[] = [];
   for (const file of files) {
-    const raw = JSON.parse(fs.readFileSync(path.join(newsDir, file), "utf-8"));
-    const result = NewsPostSchema.safeParse(raw);
-    if (result.success) {
-      rawEntries.push(result.data);
+    try {
+      const raw = JSON.parse(fs.readFileSync(path.join(newsDir, file), "utf-8"));
+      const result = NewsPostSchema.safeParse(raw);
+      if (result.success) {
+        rawEntries.push(result.data);
+      }
+    } catch (err: any) {
+      console.error(`[DEV] Failed to parse news file ${file}:`, err.message);
     }
   }
 
