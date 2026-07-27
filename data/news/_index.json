@@ -116,13 +116,35 @@
     "category": "short-news",
     "publishDate": "2026-07-26",
     "author": "MarkTechPost / Modelverse Editorial",
-    "readTime": "10 min read",
+    "readTime": "3 min read",
     "excerpt": "Black Forest Labs (BFL) has released FLUX 3, a multimodal foundation model that learns from images, videos and audio inside a single architecture. It is also the first FLUX model t...",
     "coverImage": "https://www.marktechpost.com/wp-content/uploads/2026/07/blog6171-7.png",
     "status": "published",
     "confidenceLevel": "confirmed",
     "externalSources": [
       "https://www.marktechpost.com/2026/07/26/black-forest-labs-releases-flux-3-a-multimodal-flow-model-for-image-video-audio-and-robot-action-prediction/"
+    ],
+    "relatedModels": [],
+    "tags": [
+      "ai-news",
+      "breaking",
+      "marktechpost"
+    ]
+  },
+  {
+    "id": "fairchem-v2-uma-for-multidomain-atomistic-simulation-across-molecules-catalysts-",
+    "slug": "fairchem-v2-uma-for-multidomain-atomistic-simulation-across-molecules-catalysts-",
+    "title": "FAIRChem v2 UMA for Multidomain Atomistic Simulation across Molecules, Catalysts, Materials, Vibrations, and Molecular Dynamics",
+    "category": "short-news",
+    "publishDate": "2026-07-26",
+    "author": "MarkTechPost / Modelverse Editorial",
+    "readTime": "10 min read",
+    "excerpt": "In this tutorial, we explore FAIRChem v2 and the UMA universal machine-learning interatomic potential as a unified framework for atomistic simulation across molecular chemistry, ca...",
+    "coverImage": "https://www.marktechpost.com/wp-content/uploads/2026/07/blog6171-4.png",
+    "status": "published",
+    "confidenceLevel": "confirmed",
+    "externalSources": [
+      "https://www.marktechpost.com/2026/07/26/fairchem-v2-uma-for-multidomain-atomistic-simulation-across-molecules-catalysts-materials-vibrations-and-molecular-dynamics/"
     ],
     "relatedModels": [],
     "tags": [
@@ -160,7 +182,7 @@
     "category": "short-news",
     "publishDate": "2026-07-26",
     "author": "MarkTechPost / Modelverse Editorial",
-    "readTime": "10 min read",
+    "readTime": "3 min read",
     "excerpt": "Most agents that learn from video need to know what action produced each frame. Induction Labs is arguing that this requirement is the bottleneck. Last week, they released imaginat...",
     "coverImage": "https://www.marktechpost.com/wp-content/uploads/2026/07/blog6171-5.png",
     "status": "published",
@@ -182,7 +204,7 @@
     "category": "short-news",
     "publishDate": "2026-07-26",
     "author": "MarkTechPost / Modelverse Editorial",
-    "readTime": "10 min read",
+    "readTime": "3 min read",
     "excerpt": "The KwaiKAT Team at Kuaishou has published the KAT-Coder-V2.5 technical report, arguing that agentic coding capability is bottlenecked by training infrastructure rather than model ...",
     "coverImage": "https://www.marktechpost.com/wp-content/uploads/2026/07/blog6171-6.png",
     "status": "published",
@@ -217,6 +239,50 @@
       "ai-news",
       "breaking",
       "techcrunch-ai"
+    ]
+  },
+  {
+    "id": "mondaycom-is-the-latest-tech-company-to-blame-ai-for-layoffs-here-are-20-others",
+    "slug": "mondaycom-is-the-latest-tech-company-to-blame-ai-for-layoffs-here-are-20-others",
+    "title": "Monday.com is the latest tech company to blame AI for layoffs — here are 20 others",
+    "category": "short-news",
+    "publishDate": "2026-07-26",
+    "author": "TechCrunch AI / Modelverse Editorial",
+    "readTime": "4 min read",
+    "excerpt": "A running look — in reverse chronological order — at the bigger tech companies that have announced significant layoffs this year with AI as a stated factor.",
+    "coverImage": "https://techcrunch.com/wp-content/uploads/2026/07/robot-at-desk.png?resize=1200,800",
+    "status": "published",
+    "confidenceLevel": "confirmed",
+    "externalSources": [
+      "https://techcrunch.com/2026/07/25/the-running-list-major-tech-layoffs-in-2026-where-employers-cited-ai/"
+    ],
+    "relatedModels": [],
+    "tags": [
+      "ai-news",
+      "breaking",
+      "techcrunch-ai"
+    ]
+  },
+  {
+    "id": "sakana-ai-releases-fugu-cyber-an-orchestration-model-reporting-869-on-cybergym-a",
+    "slug": "sakana-ai-releases-fugu-cyber-an-orchestration-model-reporting-869-on-cybergym-a",
+    "title": "Sakana AI Releases Fugu-Cyber: An Orchestration Model Reporting 86.9% on CyberGym and 72.1% on CTI-REALM",
+    "category": "short-news",
+    "publishDate": "2026-07-26",
+    "author": "MarkTechPost / Modelverse Editorial",
+    "readTime": "3 min read",
+    "excerpt": "Sakana AI has released Fugu-Cyber, a security-tuned endpoint on its Fugu orchestration model. It reports 86.9% on CyberGym and 72.1% on CTI-REALM, edging past GPT-5.5-Cyber and Cla...",
+    "coverImage": "https://www.marktechpost.com/wp-content/uploads/2026/07/blog6171-3.png",
+    "status": "published",
+    "confidenceLevel": "confirmed",
+    "externalSources": [
+      "https://www.marktechpost.com/2026/07/25/sakana-ai-releases-fugu-cyber-orchestration-model-cybergym-cti-realm/"
+    ],
+    "relatedModels": [],
+    "tags": [
+      "ai-news",
+      "breaking",
+      "marktechpost"
     ]
   },
   {
@@ -359,6 +425,28 @@
     ]
   },
   {
+    "id": "designing-high-performance-gpu-kernels-with-tilelang-tensor-core-gemm-fused-soft",
+    "slug": "designing-high-performance-gpu-kernels-with-tilelang-tensor-core-gemm-fused-soft",
+    "title": "Designing High-Performance GPU Kernels with TileLang: Tensor-Core GEMM, Fused Softmax, FlashAttention, and Autotuning",
+    "category": "short-news",
+    "publishDate": "2026-07-25",
+    "author": "MarkTechPost / Modelverse Editorial",
+    "readTime": "17 min read",
+    "excerpt": "Explore TileLang, a high-level Python domain-specific language that simplifies the design of high-performance GPU kernels. This tutorial provides a step-by-step approach to impleme...",
+    "coverImage": "https://www.marktechpost.com/wp-content/uploads/2026/07/blog6171-1.png",
+    "status": "published",
+    "confidenceLevel": "confirmed",
+    "externalSources": [
+      "https://www.marktechpost.com/2026/07/25/designing-high-performance-gpu-kernels-with-tilelang-tensor-core-gemm-fused-softmax-flashattention-and-autotuning/"
+    ],
+    "relatedModels": [],
+    "tags": [
+      "ai-news",
+      "breaking",
+      "marktechpost"
+    ]
+  },
+  {
     "id": "donation-public-first-action",
     "slug": "donation-public-first-action",
     "title": "Donation Public First Action",
@@ -444,6 +532,72 @@
       "codex-mini",
       "gpt-live"
     ],
+    "tags": [
+      "ai-news",
+      "breaking",
+      "techcrunch-ai"
+    ]
+  },
+  {
+    "id": "librarians-are-hosting-viral-avoiding-ai-workshops-for-people-who-are-fed-up-wit",
+    "slug": "librarians-are-hosting-viral-avoiding-ai-workshops-for-people-who-are-fed-up-wit",
+    "title": "Librarians are hosting viral 'Avoiding AI' workshops for people who are fed up with Big Tech",
+    "category": "short-news",
+    "publishDate": "2026-07-25",
+    "author": "TechCrunch AI / Modelverse Editorial",
+    "readTime": "2 min read",
+    "excerpt": "At libraries around the country, \"Avoiding AI\" workshops have elicited unprecedented demand.",
+    "coverImage": "https://techcrunch.com/wp-content/uploads/2026/07/GettyImages-1609818039.jpg?resize=1200,814",
+    "status": "published",
+    "confidenceLevel": "confirmed",
+    "externalSources": [
+      "https://techcrunch.com/2026/07/25/librarians-are-hosting-viral-avoiding-ai-workshops-for-people-who-are-fed-up-with-big-tech/"
+    ],
+    "relatedModels": [],
+    "tags": [
+      "ai-news",
+      "breaking",
+      "techcrunch-ai"
+    ]
+  },
+  {
+    "id": "meet-open-dreamer-a-jaxflax-reproduction-of-the-dreamer-4-world-model-pipeline-w",
+    "slug": "meet-open-dreamer-a-jaxflax-reproduction-of-the-dreamer-4-world-model-pipeline-w",
+    "title": "Meet Open Dreamer: A JAX/Flax Reproduction of the Dreamer 4 World Model Pipeline, With the Full Training Recipe Published",
+    "category": "short-news",
+    "publishDate": "2026-07-25",
+    "author": "MarkTechPost / Modelverse Editorial",
+    "readTime": "3 min read",
+    "excerpt": "A small group of AI researchers (Reactor) have released Open Dreamer, an open implementation of the Dreamer 4 world-model pipeline written in JAX and Flax NNX. What actually shippe...",
+    "coverImage": "https://www.marktechpost.com/wp-content/uploads/2026/07/blog6171-2.png",
+    "status": "published",
+    "confidenceLevel": "confirmed",
+    "externalSources": [
+      "https://www.marktechpost.com/2026/07/25/meet-open-dreamer-a-jax-flax-reproduction-of-the-dreamer-4-world-model-pipeline-with-the-full-training-recipe-published/"
+    ],
+    "relatedModels": [],
+    "tags": [
+      "ai-news",
+      "breaking",
+      "marktechpost"
+    ]
+  },
+  {
+    "id": "one-fallen-power-line-exposed-a-growing-ai-data-center-problem-heres-how-to-fix-",
+    "slug": "one-fallen-power-line-exposed-a-growing-ai-data-center-problem-heres-how-to-fix-",
+    "title": "One fallen power line exposed a growing AI data center problem. Here's how to fix it.",
+    "category": "short-news",
+    "publishDate": "2026-07-25",
+    "author": "TechCrunch AI / Modelverse Editorial",
+    "readTime": "3 min read",
+    "excerpt": "A close call in Northern Virginia revealed just how poorly data centers respond to grid disruptions. Here's how to fix the problem.",
+    "coverImage": "https://techcrunch.com/wp-content/uploads/2024/12/Energy-sector-Getty.jpg?resize=1200,801",
+    "status": "published",
+    "confidenceLevel": "confirmed",
+    "externalSources": [
+      "https://techcrunch.com/2026/07/25/one-fallen-power-line-exposed-a-growing-ai-data-center-problem-heres-how-to-fix-it/"
+    ],
+    "relatedModels": [],
     "tags": [
       "ai-news",
       "breaking",
