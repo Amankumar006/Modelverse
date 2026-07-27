@@ -1,5 +1,225 @@
 [
   {
+    "id": "are-brain-waves-the-next-unlock-for-physical-ai",
+    "slug": "are-brain-waves-the-next-unlock-for-physical-ai",
+    "title": "Are brain waves the next unlock for physical AI?",
+    "category": "short-news",
+    "publishDate": "2026-07-27",
+    "author": "TechCrunch AI / Modelverse Editorial",
+    "readTime": "3 min read",
+    "excerpt": "Forget YouTube videos—frontier physical AI models need multiple camera angles, dense annotation, and soon, brain wave readings.",
+    "coverImage": "https://techcrunch.com/wp-content/uploads/2026/07/IMG_5583-rotated.jpg?resize=900,1200",
+    "status": "published",
+    "confidenceLevel": "confirmed",
+    "externalSources": [
+      "https://techcrunch.com/2026/07/26/are-brain-waves-the-next-unlock-for-physical-ai/"
+    ],
+    "relatedModels": [],
+    "tags": [
+      "ai-news",
+      "breaking",
+      "techcrunch-ai"
+    ]
+  },
+  {
+    "id": "ben-bernanke",
+    "slug": "ben-bernanke",
+    "title": "Ben Bernanke",
+    "category": "short-news",
+    "publishDate": "2026-07-27",
+    "author": "Anthropic / Modelverse Editorial",
+    "readTime": "3 min read",
+    "excerpt": "Official announcement from Anthropic: Ben Bernanke",
+    "coverImage": "https://cdn.sanity.io/images/4zrzovbb/website/6d4a0d28992ade92d6fa63646fd9c9d318245c6c-2400x1260.jpg",
+    "status": "published",
+    "confidenceLevel": "confirmed",
+    "externalSources": [
+      "https://www.anthropic.com/news/ben-bernanke"
+    ],
+    "relatedModels": [],
+    "tags": [
+      "ai-news",
+      "breaking",
+      "anthropic"
+    ]
+  },
+  {
+    "id": "industry-leaders-unite-in-open-secure-ai-alliance-for-ai-safety-and-security",
+    "slug": "industry-leaders-unite-in-open-secure-ai-alliance-for-ai-safety-and-security",
+    "title": "Industry Leaders Unite in Open Secure AI Alliance for AI Safety and Security",
+    "category": "short-news",
+    "publishDate": "2026-07-27",
+    "author": "NVIDIA / Modelverse Editorial",
+    "readTime": "2 min read",
+    "excerpt": "Open source software is a critical pillar of the global economy. It underpins cloud computing, financial services, manufacturing, telecommunications, government and internet servic...",
+    "coverImage": "https://blogs.nvidia.com/wp-content/uploads/2026/07/osaia-logo-garden_press-kit_1920x1080_V4.png",
+    "status": "published",
+    "confidenceLevel": "confirmed",
+    "externalSources": [
+      "https://blogs.nvidia.com/blog/open-secure-ai-alliance/"
+    ],
+    "relatedModels": [],
+    "tags": [
+      "ai-news",
+      "breaking",
+      "nvidia"
+    ]
+  },
+  {
+    "id": "nvidia-harnesses-vera-cpu-to-speed-up-design-of-next-generation-cpus-and-gpus",
+    "slug": "nvidia-harnesses-vera-cpu-to-speed-up-design-of-next-generation-cpus-and-gpus",
+    "title": "NVIDIA Harnesses Vera CPU to Speed Up Design of Next-Generation CPUs and GPUs",
+    "category": "short-news",
+    "publishDate": "2026-07-27",
+    "author": "NVIDIA / Modelverse Editorial",
+    "readTime": "2 min read",
+    "excerpt": "The complexity of modern chip design continues to grow as engineering teams work to develop increasingly sophisticated CPUs, GPUs and AI systems. To help meet that challenge, NVIDI...",
+    "coverImage": "https://blogs.nvidia.com/wp-content/uploads/2026/07/cpu-corp-blog-vera-superchip-1280x680-4939150.jpg",
+    "status": "published",
+    "confidenceLevel": "confirmed",
+    "externalSources": [
+      "https://blogs.nvidia.com/blog/vera-cpu-eda/"
+    ],
+    "relatedModels": [],
+    "tags": [
+      "ai-news",
+      "breaking",
+      "nvidia"
+    ]
+  },
+  {
+    "id": "ust-claude",
+    "slug": "ust-claude",
+    "title": "Ust Claude",
+    "category": "short-news",
+    "publishDate": "2026-07-27",
+    "author": "Anthropic / Modelverse Editorial",
+    "readTime": "3 min read",
+    "excerpt": "Official announcement from Anthropic: Ust Claude",
+    "coverImage": "https://www.anthropic.com/api/opengraph-illustration?name=Hand%20Build&backgroundColor=coral",
+    "status": "published",
+    "confidenceLevel": "confirmed",
+    "externalSources": [
+      "https://www.anthropic.com/news/ust-claude"
+    ],
+    "relatedModels": [],
+    "tags": [
+      "ai-news",
+      "breaking",
+      "anthropic"
+    ]
+  },
+  {
+    "id": "black-forest-labs-releases-flux-3-a-multimodal-flow-model-for-image-video-audio-",
+    "slug": "black-forest-labs-releases-flux-3-a-multimodal-flow-model-for-image-video-audio-",
+    "title": "Black Forest Labs Releases FLUX 3: A Multimodal Flow Model for Image, Video, Audio and Robot Action Prediction",
+    "category": "short-news",
+    "publishDate": "2026-07-26",
+    "author": "MarkTechPost / Modelverse Editorial",
+    "readTime": "10 min read",
+    "excerpt": "Black Forest Labs (BFL) has released FLUX 3, a multimodal foundation model that learns from images, videos and audio inside a single architecture. It is also the first FLUX model t...",
+    "coverImage": "https://www.marktechpost.com/wp-content/uploads/2026/07/blog6171-7.png",
+    "status": "published",
+    "confidenceLevel": "confirmed",
+    "externalSources": [
+      "https://www.marktechpost.com/2026/07/26/black-forest-labs-releases-flux-3-a-multimodal-flow-model-for-image-video-audio-and-robot-action-prediction/"
+    ],
+    "relatedModels": [],
+    "tags": [
+      "ai-news",
+      "breaking",
+      "marktechpost"
+    ]
+  },
+  {
+    "id": "hugging-face-ceo-calls-for-radical-transparency-after-unprecedented-openai-hack",
+    "slug": "hugging-face-ceo-calls-for-radical-transparency-after-unprecedented-openai-hack",
+    "title": "Hugging Face CEO calls for ‘radical transparency’ after ‘unprecedented’ OpenAI hack",
+    "category": "short-news",
+    "publishDate": "2026-07-26",
+    "author": "TechCrunch AI / Modelverse Editorial",
+    "readTime": "2 min read",
+    "excerpt": "\"The first autonomous agent cyberattack is an unprecedented event. It deserves an unprecedented response!\"",
+    "coverImage": "https://techcrunch.com/wp-content/uploads/2026/07/hugging-face-openai-logos-split-screen.jpg?resize=1200,799",
+    "status": "published",
+    "confidenceLevel": "confirmed",
+    "externalSources": [
+      "https://techcrunch.com/2026/07/26/hugging-face-ceo-calls-for-radical-transparency-after-unprecedented-openai-hack/"
+    ],
+    "relatedModels": [],
+    "tags": [
+      "ai-news",
+      "breaking",
+      "techcrunch-ai"
+    ]
+  },
+  {
+    "id": "induction-labs-photon-1-simulates-desktops-plays-checkers-and-models-billiard-ph",
+    "slug": "induction-labs-photon-1-simulates-desktops-plays-checkers-and-models-billiard-ph",
+    "title": "Induction Labs Photon-1 Simulates Desktops, Plays Checkers, and Models Billiard Physics From One Pretraining Run",
+    "category": "short-news",
+    "publishDate": "2026-07-26",
+    "author": "MarkTechPost / Modelverse Editorial",
+    "readTime": "10 min read",
+    "excerpt": "Most agents that learn from video need to know what action produced each frame. Induction Labs is arguing that this requirement is the bottleneck. Last week, they released imaginat...",
+    "coverImage": "https://www.marktechpost.com/wp-content/uploads/2026/07/blog6171-5.png",
+    "status": "published",
+    "confidenceLevel": "confirmed",
+    "externalSources": [
+      "https://www.marktechpost.com/2026/07/26/induction-labs-photon-1-simulates-desktops-plays-checkers-and-models-billiard-physics-from-one-pretraining-run/"
+    ],
+    "relatedModels": [],
+    "tags": [
+      "ai-news",
+      "breaking",
+      "marktechpost"
+    ]
+  },
+  {
+    "id": "kwaikat-team-releases-kat-coder-v25-an-agentic-coding-model-trained-on-100000-ve",
+    "slug": "kwaikat-team-releases-kat-coder-v25-an-agentic-coding-model-trained-on-100000-ve",
+    "title": "KwaiKAT Team Releases KAT-Coder-V2.5: An Agentic Coding Model Trained on 100,000+ Verifiable Repository Environments",
+    "category": "short-news",
+    "publishDate": "2026-07-26",
+    "author": "MarkTechPost / Modelverse Editorial",
+    "readTime": "10 min read",
+    "excerpt": "The KwaiKAT Team at Kuaishou has published the KAT-Coder-V2.5 technical report, arguing that agentic coding capability is bottlenecked by training infrastructure rather than model ...",
+    "coverImage": "https://www.marktechpost.com/wp-content/uploads/2026/07/blog6171-6.png",
+    "status": "published",
+    "confidenceLevel": "confirmed",
+    "externalSources": [
+      "https://www.marktechpost.com/2026/07/26/kwaikat-team-releases-kat-coder-v2-5-an-agentic-coding-model-trained-on-100000-verifiable-repository-environments/"
+    ],
+    "relatedModels": [],
+    "tags": [
+      "ai-news",
+      "breaking",
+      "marktechpost"
+    ]
+  },
+  {
+    "id": "making-sense-of-the-panic-over-chinese-ai",
+    "slug": "making-sense-of-the-panic-over-chinese-ai",
+    "title": "Making sense of the panic over Chinese AI",
+    "category": "short-news",
+    "publishDate": "2026-07-26",
+    "author": "TechCrunch AI / Modelverse Editorial",
+    "readTime": "3 min read",
+    "excerpt": "On the latest episode of Equity, we discussed why Moonshot AI's Kimi seemed to panic Silicon Valley and Wall Street.",
+    "coverImage": "https://techcrunch.com/wp-content/uploads/2026/01/GettyImages-2254580342.jpg?w=1024",
+    "status": "published",
+    "confidenceLevel": "confirmed",
+    "externalSources": [
+      "https://techcrunch.com/2026/07/26/making-sense-of-the-panic-over-chinese-ai/"
+    ],
+    "relatedModels": [],
+    "tags": [
+      "ai-news",
+      "breaking",
+      "techcrunch-ai"
+    ]
+  },
+  {
     "id": "weekly-model-recap-2026-07-26",
     "slug": "weekly-model-recap-2026-07-26",
     "title": "Weekly Model Recap: 15 Frontier & Open-Weight Releases (2026-07-26)",
