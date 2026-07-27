@@ -1,0 +1,50 @@
+{
+  "id": "moonshotai-kimi-k27-code",
+  "name": "Kimi-K2.7-Code",
+  "slug": "kimi-k27-code",
+  "developer": "moonshotai",
+  "releaseDate": "2026-06-11",
+  "updatedAt": "2026-07-27",
+  "type": "open-weights",
+  "status": "active",
+  "modality": [
+    "text",
+    "image"
+  ],
+  "primaryTask": "multimodal-general",
+  "deployment": [
+    "self-hostable"
+  ],
+  "license": "OTHER",
+  "parameters": "1.1T",
+  "contextWindow": "unknown",
+  "description": "Kimi-K2.7-Code is a 1.1T-parameter image text to text model developed by moonshotai. Built on the KimiK25ForConditionalGeneration architecture using transformers. Released on 2026-06-11 with 1,312 likes and 695,744 downloads on Hugging Face.",
+  "keyFeatures": [
+    "1.1T parameters",
+    "Built on KimiK25ForConditionalGeneration architecture (transformers)",
+    "Primary task: image text to text (text, image modality)",
+    "Open-weights under OTHER license — self-hostable and fine-tunable",
+    "High adoption: 695,744 downloads on Hugging Face"
+  ],
+  "benchmarks": [],
+  "family": null,
+  "previousVersion": null,
+  "links": {
+    "huggingface": "https://huggingface.co/moonshotai/Kimi-K2.7-Code"
+  },
+  "logo": null,
+  "tags": [
+    "open-weights",
+    "trending",
+    "huggingface",
+    "transformers",
+    "image-text-to-text"
+  ],
+  "sources": [
+    "https://huggingface.co/moonshotai/Kimi-K2.7-Code"
+  ],
+  "verified": true,
+  "featured": false,
+  "boost": 1,
+  "curatorNotes": "Auto-ingested from HuggingFace Trending on 2026-07-27. Architecture: KimiK25ForConditionalGeneration. Params: 1.1T. License: OTHER."
+}
