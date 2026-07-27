@@ -41,6 +41,15 @@ const POSTER_IMAGES = {
     "/images/news/news_short.jpg",
     "/images/news/news_featured.jpg",
   ],
+  "VentureBeat AI": [
+    "/images/news/news_featured.jpg",
+  ],
+  "MIT Technology Review": [
+    "/images/news/news_review.jpg",
+  ],
+  "MarkTechPost": [
+    "/images/news/news_short.jpg",
+  ],
   "default": [
     "/images/news/news_short.jpg",
     "/images/news/news_featured.jpg",
@@ -303,41 +312,40 @@ async function runDailyNewsIngestion() {
     console.error("  ❌ Failed fetching TechCrunch feed:", e.message);
   }
 
-  // 7. Fetch Artificial Intelligence News RSS
+  // 7. Fetch VentureBeat AI RSS
   try {
-    const ainXml = await getHttps("https://www.artificialintelligence-news.com/feed/");
-    const allItems = parseRss(ainXml);
-    console.log(`  🤖 AI News RSS: ${allItems.length} total items`);
+    const vbXml = await getHttps("https://venturebeat.com/category/ai/feed/");
+    const allItems = parseRss(vbXml);
+    console.log(`  🚀 VentureBeat AI RSS: ${allItems.length} total items`);
     const recent = filterRecentArticles(allItems, MAX_AGE_HOURS);
-    recent.forEach((item) => allCandidates.push({ ...item, lab: "AI News" }));
+    console.log(`  🚀 VentureBeat AI RSS: ${recent.length} items within ${MAX_AGE_HOURS}h window`);
+    recent.forEach((item) => allCandidates.push({ ...item, lab: "VentureBeat AI" }));
   } catch (e) {
-    console.error("  ❌ Failed fetching AI News feed:", e.message);
+    console.error("  ❌ Failed fetching VentureBeat AI feed:", e.message);
   }
 
-  // 8. Fetch MIT Technology Review RSS
+  // 8. Fetch MIT Technology Review AI RSS
   try {
-    const mitXml = await getHttps("https://www.technologyreview.com/feed/");
+    const mitXml = await getHttps("https://www.technologyreview.com/topic/artificial-intelligence/feed");
     const allItems = parseRss(mitXml);
-    console.log(`  🎓 MIT Tech Review RSS: ${allItems.length} total items`);
+    console.log(`  🎓 MIT Tech Review AI RSS: ${allItems.length} total items`);
     const recent = filterRecentArticles(allItems, MAX_AGE_HOURS);
-    // Filter to only include AI related topics for MIT since it covers all tech
-    const aiRecent = recent.filter(item => (item.title + item.description).toLowerCase().match(/ai|artificial intelligence|machine learning|openai|deepmind/));
-    aiRecent.forEach((item) => allCandidates.push({ ...item, lab: "MIT Tech Review" }));
+    console.log(`  🎓 MIT Tech Review AI RSS: ${recent.length} items within ${MAX_AGE_HOURS}h window`);
+    recent.forEach((item) => allCandidates.push({ ...item, lab: "MIT Technology Review" }));
   } catch (e) {
-    console.error("  ❌ Failed fetching MIT Tech Review feed:", e.message);
+    console.error("  ❌ Failed fetching MIT Tech Review AI feed:", e.message);
   }
 
-  // 9. Fetch The Verge RSS
+  // 9. Fetch MarkTechPost RSS
   try {
-    const vergeXml = await getHttps("https://www.theverge.com/rss/index.xml");
-    const allItems = parseRss(vergeXml);
-    console.log(`  🌐 The Verge RSS: ${allItems.length} total items`);
+    const mtpXml = await getHttps("https://www.marktechpost.com/feed/");
+    const allItems = parseRss(mtpXml);
+    console.log(`  🛠️ MarkTechPost RSS: ${allItems.length} total items`);
     const recent = filterRecentArticles(allItems, MAX_AGE_HOURS);
-    // Filter to AI for The Verge
-    const aiRecent = recent.filter(item => (item.title + item.description).toLowerCase().match(/ai|artificial intelligence|machine learning|openai|deepmind/));
-    aiRecent.forEach((item) => allCandidates.push({ ...item, lab: "The Verge" }));
+    console.log(`  🛠️ MarkTechPost RSS: ${recent.length} items within ${MAX_AGE_HOURS}h window`);
+    recent.forEach((item) => allCandidates.push({ ...item, lab: "MarkTechPost" }));
   } catch (e) {
-    console.error("  ❌ Failed fetching The Verge feed:", e.message);
+    console.error("  ❌ Failed fetching MarkTechPost feed:", e.message);
   }
 
   // Sort by date (newest first) and cap
