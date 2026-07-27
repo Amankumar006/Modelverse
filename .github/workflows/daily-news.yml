@@ -2,8 +2,8 @@ name: Daily Short News Ingestion & Publishing Pipeline
 
 on:
   schedule:
-    # Runs daily at 08:00 UTC (13:30 IST)
-    - cron: '0 8 * * *'
+    # Runs hourly (continuously checks endpoints for breaking news)
+    - cron: '0 * * * *'
   workflow_dispatch:
 
 jobs:

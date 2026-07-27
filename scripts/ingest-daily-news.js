@@ -303,6 +303,43 @@ async function runDailyNewsIngestion() {
     console.error("  ❌ Failed fetching TechCrunch feed:", e.message);
   }
 
+  // 7. Fetch Artificial Intelligence News RSS
+  try {
+    const ainXml = await getHttps("https://www.artificialintelligence-news.com/feed/");
+    const allItems = parseRss(ainXml);
+    console.log(`  🤖 AI News RSS: ${allItems.length} total items`);
+    const recent = filterRecentArticles(allItems, MAX_AGE_HOURS);
+    recent.forEach((item) => allCandidates.push({ ...item, lab: "AI News" }));
+  } catch (e) {
+    console.error("  ❌ Failed fetching AI News feed:", e.message);
+  }
+
+  // 8. Fetch MIT Technology Review RSS
+  try {
+    const mitXml = await getHttps("https://www.technologyreview.com/feed/");
+    const allItems = parseRss(mitXml);
+    console.log(`  🎓 MIT Tech Review RSS: ${allItems.length} total items`);
+    const recent = filterRecentArticles(allItems, MAX_AGE_HOURS);
+    // Filter to only include AI related topics for MIT since it covers all tech
+    const aiRecent = recent.filter(item => (item.title + item.description).toLowerCase().match(/ai|artificial intelligence|machine learning|openai|deepmind/));
+    aiRecent.forEach((item) => allCandidates.push({ ...item, lab: "MIT Tech Review" }));
+  } catch (e) {
+    console.error("  ❌ Failed fetching MIT Tech Review feed:", e.message);
+  }
+
+  // 9. Fetch The Verge RSS
+  try {
+    const vergeXml = await getHttps("https://www.theverge.com/rss/index.xml");
+    const allItems = parseRss(vergeXml);
+    console.log(`  🌐 The Verge RSS: ${allItems.length} total items`);
+    const recent = filterRecentArticles(allItems, MAX_AGE_HOURS);
+    // Filter to AI for The Verge
+    const aiRecent = recent.filter(item => (item.title + item.description).toLowerCase().match(/ai|artificial intelligence|machine learning|openai|deepmind/));
+    aiRecent.forEach((item) => allCandidates.push({ ...item, lab: "The Verge" }));
+  } catch (e) {
+    console.error("  ❌ Failed fetching The Verge feed:", e.message);
+  }
+
   // Sort by date (newest first) and cap
   allCandidates.sort((a, b) => {
     const da = a.parsedDate ? a.parsedDate.getTime() : 0;
