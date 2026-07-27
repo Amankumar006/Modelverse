@@ -383,7 +383,13 @@ async function extractFullArticleBody(url, fallbackDesc, lab) {
     return `${fallbackDesc}\n\n### Official Announcement\nRead the full update directly from the official source at [${lab} News](${url}).\n\nStay tuned to [Modelverse](https://www.themodelverse.in) for real-time model analysis and benchmark coverage.`;
   }
   try {
-    const html = await getHttps(url);
+    let html = await getHttps(url);
+    
+    // Strip script and style tags completely so their contents don't bleed into the text
+    html = html.replace(/<script[^>]*>[\s\S]*?<\/script>/gi, "");
+    html = html.replace(/<style[^>]*>[\s\S]*?<\/style>/gi, "");
+    html = html.replace(/<!--[\s\S]*?-->/g, ""); // also strip HTML comments
+
     const paragraphs = [];
     const pRegex = /<p[^>]*>([\s\S]*?)<\/p>/gi;
     let match;
