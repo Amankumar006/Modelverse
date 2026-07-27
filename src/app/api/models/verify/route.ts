@@ -6,6 +6,33 @@ import { execSync } from "child_process";
 
 export async function POST(req: NextRequest) {
   try {
+    // Security requirement: Ensure only authorized admins can verify models.
+    // Checks for 'Authorization: Bearer <key>' or 'x-api-key' header.
+    const authHeader = req.headers.get("Authorization") || req.headers.get("x-api-key");
+    let apiKey = "";
+
+    if (authHeader?.startsWith("Bearer ")) {
+      apiKey = authHeader.substring(7);
+    } else if (authHeader) {
+      apiKey = authHeader;
+    }
+
+    if (!process.env.ADMIN_API_KEY) {
+      if (process.env.NODE_ENV === "development") {
+        console.warn("WARNING: ADMIN_API_KEY is not set. Bypassing authentication for development mode.");
+      } else {
+        return NextResponse.json(
+          { error: "Server is not securely configured. Missing ADMIN_API_KEY." },
+          { status: 500 }
+        );
+      }
+    } else if (apiKey !== process.env.ADMIN_API_KEY) {
+      return NextResponse.json(
+        { error: "Unauthorized access. Invalid or missing API key." },
+        { status: 401 }
+      );
+    }
+
     const body = await req.json();
     const { slug, id, promoteDraft } = body;
 
