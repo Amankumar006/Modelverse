@@ -534,6 +534,7 @@ async function extractFullArticleBody(url, fallbackDesc, lab) {
 </html>`;
 
     fs.writeFileSync(DIGEST_PATH, htmlBody, "utf-8");
+    fs.writeFileSync(path.join(INGESTION_DIR, "new-articles.json"), JSON.stringify(createdNews, null, 2), "utf-8");
     if (process.env.GITHUB_ENV) {
       fs.appendFileSync(process.env.GITHUB_ENV, "NEW_NEWS_PUSHED=true\n");
       fs.appendFileSync(process.env.GITHUB_ENV, `NEWS_COUNT=${createdNews.length}\n`);

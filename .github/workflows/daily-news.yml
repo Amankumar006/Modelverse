@@ -42,6 +42,16 @@ jobs:
           from: Modelverse News Bot <006amanraj@gmail.com>
           html_body: file://data/ingestion/latest-news-digest.html
 
+      - name: Post Daily Digest to Reddit
+        if: env.NEW_NEWS_PUSHED == 'true'
+        env:
+          REDDIT_CLIENT_ID: ${{ secrets.REDDIT_CLIENT_ID }}
+          REDDIT_CLIENT_SECRET: ${{ secrets.REDDIT_CLIENT_SECRET }}
+          REDDIT_USERNAME: ${{ secrets.REDDIT_USERNAME }}
+          REDDIT_PASSWORD: ${{ secrets.REDDIT_PASSWORD }}
+          REDDIT_SUBREDDIT: ${{ secrets.REDDIT_SUBREDDIT }}
+        run: node scripts/post-to-reddit.js
+
       - name: Commit and Push New Articles
         run: |
           git config --global user.name "github-actions[bot]"
