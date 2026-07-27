@@ -348,15 +348,18 @@ async function runDailyNewsIngestion() {
     console.error("  ❌ Failed fetching MarkTechPost feed:", e.message);
   }
 
+  // Filter out already published articles before sorting and capping
+  const newCandidates = allCandidates.filter(c => !existingSlugs.has(slugify(c.title)));
+
   // Sort by date (newest first) and cap
-  allCandidates.sort((a, b) => {
+  newCandidates.sort((a, b) => {
     const da = a.parsedDate ? a.parsedDate.getTime() : 0;
     const db = b.parsedDate ? b.parsedDate.getTime() : 0;
     return db - da;
   });
 
-  const candidates = allCandidates.slice(0, MAX_ARTICLES_PER_RUN);
-  console.log(`\n  📋 Processing ${candidates.length} candidates (capped from ${allCandidates.length})`);
+  const candidates = newCandidates.slice(0, MAX_ARTICLES_PER_RUN);
+  console.log(`\n  📋 Processing ${candidates.length} candidates (capped from ${newCandidates.length} new articles out of ${allCandidates.length} total)`);
 
 async function extractOgImage(url) {
   if (!url) return null;
