@@ -97,7 +97,8 @@ export default function Footer() {
     {
       title: "Resources",
       links: [
-        { label: "RSS Feed", href: "/feed.xml" },
+        { label: "Models RSS", href: "/feed.xml" },
+        { label: "News RSS", href: "/news/feed.xml" },
       ],
     },
   ];
