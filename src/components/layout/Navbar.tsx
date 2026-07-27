@@ -3,8 +3,6 @@
 import { useState, useMemo, useEffect, useRef } from "react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import Fuse from "fuse.js";
-import modelIndexData from "@/lib/search-index.json";
 import ModelverseLogo from "@/components/ui/ModelverseLogo";
 import { Search, X, Menu } from "lucide-react";
 
@@ -29,6 +27,7 @@ export default function Navbar({ theme = "dark" }: { theme?: "light" | "dark" })
         e.preventDefault();
         searchInputRef.current?.focus();
         setSearchFocused(true);
+        initSearch(); // pre-load
       } else if (e.key === "Escape") {
         searchInputRef.current?.blur();
         setSearchFocused(false);
@@ -56,21 +55,40 @@ export default function Navbar({ theme = "dark" }: { theme?: "light" | "dark" })
     return "text-gray-400 hover:text-white hover:bg-[#1C1C1E]";
   };
 
-  // Initialize Fuse.js for fuzzy client search
-  const fuse = useMemo(() => {
-    return new Fuse(modelIndexData, {
-      keys: ["name", "developer"],
-      threshold: 0.3,
-    });
-  }, []);
+  // Lazy load Fuse.js and search index
+  const [fuseInstance, setFuseInstance] = useState<any>(null);
 
-  const handleSearch = (query: string) => {
+  const initSearch = async () => {
+    if (fuseInstance) return fuseInstance;
+    try {
+      const [FuseJS, searchData] = await Promise.all([
+        import("fuse.js").then((m) => m.default),
+        import("@/lib/search-index.json").then((m) => m.default),
+      ]);
+      const newFuse = new FuseJS(searchData, {
+        keys: ["name", "developer"],
+        threshold: 0.3,
+      });
+      setFuseInstance(newFuse);
+      return newFuse;
+    } catch (e) {
+      console.error("Failed to load search index", e);
+      return null;
+    }
+  };
+
+  const handleSearch = async (query: string) => {
     setSearchQuery(query);
     setSelectedIndex(-1);
+    
     if (!query.trim()) {
       setSearchResults([]);
-    } else {
-      const results = fuse.search(query).map((r) => r.item);
+      return;
+    }
+    
+    const activeFuse = await initSearch();
+    if (activeFuse) {
+      const results = activeFuse.search(query).map((r: any) => r.item);
       setSearchResults(results.slice(0, 6));
     }
   };
@@ -165,7 +183,11 @@ export default function Navbar({ theme = "dark" }: { theme?: "light" | "dark" })
               value={searchQuery}
               onChange={(e) => handleSearch(e.target.value)}
               onKeyDown={handleInputKeyDown}
-              onFocus={() => setSearchFocused(true)}
+              onFocus={() => {
+                setSearchFocused(true);
+                initSearch(); // Pre-load
+              }}
+              onMouseEnter={() => initSearch()} // Pre-load
               onBlur={() => setTimeout(() => setSearchFocused(false), 200)}
               className="bg-transparent text-xs focus:outline-none w-full font-sans text-white placeholder:text-gray-500"
             />

@@ -69,6 +69,8 @@ let _devCachedEntries: ModelEntry[] | null = null;
 function loadDevEntries(): ModelEntry[] {
   if (typeof window !== "undefined") return modelsArchive as unknown as ModelEntry[];
   
+  if (_devCachedEntries) return _devCachedEntries;
+
   const fs = require("fs");
   const path = require("path");
   const { z } = require("zod");
@@ -144,7 +146,8 @@ function loadDevEntries(): ModelEntry[] {
     console.error("[DEV] Failed to regenerate compile artifacts:", err);
   }
 
-  return entries as ModelEntry[];
+  _devCachedEntries = entries as ModelEntry[];
+  return _devCachedEntries;
 }
 
 function loadAllEntries(): ModelEntry[] {
