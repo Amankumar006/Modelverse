@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import Image from "next/image";
+import Image from "@/components/ui/FallbackImage";
 import Navbar from "@/components/layout/Navbar";
 import { getAllArticles, getCategoryLabel } from "@/lib/news";
 import { Clock, Calendar, ArrowRight, Sparkles, Filter } from "lucide-react";

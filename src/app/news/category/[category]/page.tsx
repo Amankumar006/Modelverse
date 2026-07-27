@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import Image from "next/image";
+import Image from "@/components/ui/FallbackImage";
 import Navbar from "@/components/layout/Navbar";
 import NewsBreadcrumb from "@/components/news/NewsBreadcrumb";
 import { getArticlesByCategory, getCategoryLabel } from "@/lib/news";

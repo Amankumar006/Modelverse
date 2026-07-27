@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import Image from "next/image";
+import Image from "@/components/ui/FallbackImage";
 import HeroSection from "@/components/hero/HeroSection";
 import DeveloperMarquee from "@/components/home/DeveloperMarquee";
 import { getRecentModels, getModelCount, getAllDevelopers, SITE_URL, getModelBySlug, getAllModelEntries } from "@/lib/models";

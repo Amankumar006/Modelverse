@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import Image from "next/image";
+import Image from "@/components/ui/FallbackImage";
 import Navbar from "@/components/layout/Navbar";
 import { getArticleBySlug, getAllArticles, getCategoryLabel } from "@/lib/news";
 import { getModelBySlug, getAllModelEntries, SITE_URL } from "@/lib/models";
