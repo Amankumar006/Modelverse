@@ -286,6 +286,28 @@
     ]
   },
   {
+    "id": "recursive-superintelligence-signs-410m-compute-deal-with-amazon",
+    "slug": "recursive-superintelligence-signs-410m-compute-deal-with-amazon",
+    "title": "Recursive Superintelligence signs $410M compute deal with Amazon",
+    "category": "short-news",
+    "publishDate": "2026-07-28",
+    "author": "TechCrunch AI / Modelverse Editorial",
+    "readTime": "2 min read",
+    "excerpt": "Recursive’s emphasis on self-improving AI systems means much of the budget that would traditionally go toward headcount and operations is put straight into compute, as the company ...",
+    "coverImage": "https://techcrunch.com/wp-content/uploads/2021/11/GettyImages-1236309559.jpg?w=1024",
+    "status": "published",
+    "confidenceLevel": "confirmed",
+    "externalSources": [
+      "https://techcrunch.com/2026/07/28/recursive-superintelligence-signs-400-compute-deal-with-amazon/"
+    ],
+    "relatedModels": [],
+    "tags": [
+      "ai-news",
+      "breaking",
+      "techcrunch-ai"
+    ]
+  },
+  {
     "id": "samsungs-chip-workers-are-jumping-ship-to-rival-sk-hynix",
     "slug": "samsungs-chip-workers-are-jumping-ship-to-rival-sk-hynix",
     "title": "Samsung’s chip workers are jumping ship to rival SK Hynix",
@@ -305,6 +327,28 @@
       "ai-news",
       "breaking",
       "mit-technology-review"
+    ]
+  },
+  {
+    "id": "scientific-computing-in-the-age-of-agentic-ai",
+    "slug": "scientific-computing-in-the-age-of-agentic-ai",
+    "title": "Scientific computing in the age of agentic AI",
+    "category": "short-news",
+    "publishDate": "2026-07-28",
+    "author": "OpenAI / Modelverse Editorial",
+    "readTime": "2 min read",
+    "excerpt": "A new field report shows how scientists use AI coding agents to modernize scientific computing, accelerating software development and discovery in genomics and beyond.",
+    "coverImage": "/images/news/news_featured.jpg",
+    "status": "published",
+    "confidenceLevel": "confirmed",
+    "externalSources": [
+      "https://openai.com/index/scientific-computing-agentic-ai"
+    ],
+    "relatedModels": [],
+    "tags": [
+      "ai-news",
+      "breaking",
+      "openai"
     ]
   },
   {
@@ -393,6 +437,72 @@
       "ai-news",
       "breaking",
       "marktechpost"
+    ]
+  },
+  {
+    "id": "enigma-raises-71m-to-make-controlling-a-robot-as-easy-as-adjusting-the-volume",
+    "slug": "enigma-raises-71m-to-make-controlling-a-robot-as-easy-as-adjusting-the-volume",
+    "title": "Enigma raises $71M to make controlling a robot as easy as adjusting the volume",
+    "category": "short-news",
+    "publishDate": "2026-07-27",
+    "author": "TechCrunch AI / Modelverse Editorial",
+    "readTime": "3 min read",
+    "excerpt": "The massive seed round was led by  Index Ventures and Ribbit Capital, with participation from Sarah Guo's Conviction Partners.",
+    "coverImage": "https://techcrunch.com/wp-content/uploads/2026/07/Enigma-Founders-Natasha-Zeriker-1.jpg?resize=1200,801",
+    "status": "published",
+    "confidenceLevel": "confirmed",
+    "externalSources": [
+      "https://techcrunch.com/2026/07/27/enigma-raises-70m-to-make-controlling-a-robot-as-easy-as-adjusting-the-volume/"
+    ],
+    "relatedModels": [],
+    "tags": [
+      "ai-news",
+      "breaking",
+      "techcrunch-ai"
+    ]
+  },
+  {
+    "id": "googles-ai-search-is-rapidly-becoming-the-default-new-data-shows",
+    "slug": "googles-ai-search-is-rapidly-becoming-the-default-new-data-shows",
+    "title": "Google's AI search is rapidly becoming the default, new data shows",
+    "category": "short-news",
+    "publishDate": "2026-07-27",
+    "author": "TechCrunch AI / Modelverse Editorial",
+    "readTime": "3 min read",
+    "excerpt": "Google’s AI Overviews now appear in 43% of searches, underscoring how quickly AI-generated answers are becoming the default way people discover information online.",
+    "coverImage": "https://techcrunch.com/wp-content/uploads/2024/05/Sundar-AI-Overviews-IO-2024.png?resize=1200,698",
+    "status": "published",
+    "confidenceLevel": "confirmed",
+    "externalSources": [
+      "https://techcrunch.com/2026/07/27/googles-ai-search-is-rapidly-becoming-the-default-new-data-shows/"
+    ],
+    "relatedModels": [],
+    "tags": [
+      "ai-news",
+      "breaking",
+      "techcrunch-ai"
+    ]
+  },
+  {
+    "id": "ilya-sutskevers-safe-superintelligence-partners-with-nvidia-to-scale-its-ai-rese",
+    "slug": "ilya-sutskevers-safe-superintelligence-partners-with-nvidia-to-scale-its-ai-rese",
+    "title": "Ilya Sutskever’s Safe Superintelligence partners with Nvidia to scale its AI research",
+    "category": "short-news",
+    "publishDate": "2026-07-27",
+    "author": "TechCrunch AI / Modelverse Editorial",
+    "readTime": "3 min read",
+    "excerpt": "After two years in stealth, Safe Superintelligence has announced a long-term partnership with Nvidia as it prepares to scale to its next phase.",
+    "coverImage": "https://techcrunch.com/wp-content/uploads/2024/05/ilyausutskever-GettyImages.jpg?resize=1200,800",
+    "status": "published",
+    "confidenceLevel": "confirmed",
+    "externalSources": [
+      "https://techcrunch.com/2026/07/27/ilya-sutskevers-safe-superintelligence-partners-with-nvidia-to-scale-its-ai-research/"
+    ],
+    "relatedModels": [],
+    "tags": [
+      "ai-news",
+      "breaking",
+      "techcrunch-ai"
     ]
   },
   {
@@ -510,6 +620,72 @@
     ]
   },
   {
+    "id": "openai-called-the-hugging-face-attack-unprecedented-but-weve-been-here-before",
+    "slug": "openai-called-the-hugging-face-attack-unprecedented-but-weve-been-here-before",
+    "title": "OpenAI called the Hugging Face attack unprecedented. But we’ve been here before.",
+    "category": "short-news",
+    "publishDate": "2026-07-27",
+    "author": "MIT Technology Review / Modelverse Editorial",
+    "readTime": "3 min read",
+    "excerpt": "This story originally appeared in The Algorithm, our weekly newsletter on AI. To get stories like this in your inbox first,&#160;sign up here. Reading OpenAI’s account last week of...",
+    "coverImage": "https://wp.technologyreview.com/wp-content/uploads/2026/07/redteam-faceoff.jpg?resize=1200,600",
+    "status": "published",
+    "confidenceLevel": "confirmed",
+    "externalSources": [
+      "https://www.technologyreview.com/2026/07/27/1140836/openai-hugging-face-attack-precedent/"
+    ],
+    "relatedModels": [],
+    "tags": [
+      "ai-news",
+      "breaking",
+      "mit-technology-review"
+    ]
+  },
+  {
+    "id": "openais-hugging-face-breach-has-reignited-the-debate-over-alignment-and-control",
+    "slug": "openais-hugging-face-breach-has-reignited-the-debate-over-alignment-and-control",
+    "title": "OpenAI’s Hugging Face breach has reignited the debate over alignment and control",
+    "category": "short-news",
+    "publishDate": "2026-07-27",
+    "author": "TechCrunch AI / Modelverse Editorial",
+    "readTime": "3 min read",
+    "excerpt": "OpenAI's Hugging Face breach has reignited debate over AI alignment and control, exposing competing views on whether increasingly capable AI should be better aligned, better contai...",
+    "coverImage": "https://techcrunch.com/wp-content/uploads/2026/07/hugging-face-openai-logos-split-screen.jpg?resize=1200,799",
+    "status": "published",
+    "confidenceLevel": "confirmed",
+    "externalSources": [
+      "https://techcrunch.com/2026/07/27/openais-hugging-face-breach-has-reignited-the-debate-over-alignment-and-control/"
+    ],
+    "relatedModels": [],
+    "tags": [
+      "ai-news",
+      "breaking",
+      "techcrunch-ai"
+    ]
+  },
+  {
+    "id": "power-up-your-ai-infrastructure-a-first-look-at-the-smart-systems-stage-agenda-a",
+    "slug": "power-up-your-ai-infrastructure-a-first-look-at-the-smart-systems-stage-agenda-a",
+    "title": "Power up your AI infrastructure! A first look at the Smart Systems Stage agenda at TechCrunch Disrupt 2026",
+    "category": "short-news",
+    "publishDate": "2026-07-27",
+    "author": "TechCrunch AI / Modelverse Editorial",
+    "readTime": "2 min read",
+    "excerpt": "At TechCrunch Disrupt 2026, the Smart Systems Stage will be where energy, infrastructure, and technology collide, covering everything from fusion breakthroughs to the grid strain A...",
+    "coverImage": "https://techcrunch.com/wp-content/uploads/2026/07/techcrunch-disrupt-2026-smart-systems-stage.jpg?w=1200",
+    "status": "published",
+    "confidenceLevel": "confirmed",
+    "externalSources": [
+      "https://techcrunch.com/2026/07/27/power-up-your-ai-infrastructure-a-first-look-at-the-smart-systems-stage-agenda-at-techcrunch-disrupt-2026/"
+    ],
+    "relatedModels": [],
+    "tags": [
+      "ai-news",
+      "breaking",
+      "techcrunch-ai"
+    ]
+  },
+  {
     "id": "psa-your-claude-shared-chats-and-artifacts-may-have-ended-up-on-google",
     "slug": "psa-your-claude-shared-chats-and-artifacts-may-have-ended-up-on-google",
     "title": "PSA: Your Claude shared chats and Artifacts may have ended up on Google",
@@ -545,6 +721,50 @@
     "confidenceLevel": "confirmed",
     "externalSources": [
       "https://techcrunch.com/2026/07/27/satya-nadella-says-companies-that-trust-one-ai-for-everything-may-not-survive/"
+    ],
+    "relatedModels": [],
+    "tags": [
+      "ai-news",
+      "breaking",
+      "techcrunch-ai"
+    ]
+  },
+  {
+    "id": "this-9-key-physically-locks-your-most-addictive-apps",
+    "slug": "this-9-key-physically-locks-your-most-addictive-apps",
+    "title": "This $9 key physically locks your most addictive apps",
+    "category": "short-news",
+    "publishDate": "2026-07-27",
+    "author": "TechCrunch AI / Modelverse Editorial",
+    "readTime": "2 min read",
+    "excerpt": "This $9 NFC key requires you to physically scan it to unlock distracting apps on your phone.",
+    "coverImage": "https://techcrunch.com/wp-content/uploads/2026/07/AutonomousKey1.jpeg?w=1200",
+    "status": "published",
+    "confidenceLevel": "confirmed",
+    "externalSources": [
+      "https://techcrunch.com/2026/07/27/this-9-key-physically-locks-your-most-addictive-apps/"
+    ],
+    "relatedModels": [],
+    "tags": [
+      "ai-news",
+      "breaking",
+      "techcrunch-ai"
+    ]
+  },
+  {
+    "id": "threads-users-can-now-chat-with-meta-ai-in-their-dms",
+    "slug": "threads-users-can-now-chat-with-meta-ai-in-their-dms",
+    "title": "Threads users can now chat with Meta AI in their DMs",
+    "category": "short-news",
+    "publishDate": "2026-07-27",
+    "author": "TechCrunch AI / Modelverse Editorial",
+    "readTime": "2 min read",
+    "excerpt": "Meta on Monday said it is rolling out its Meta AI chatbot within Threads' DMs, giving users a way to chat with the AI assistant.",
+    "coverImage": "https://techcrunch.com/wp-content/uploads/2026/02/threads-finger-GettyImages-2232887912.jpg?w=1024",
+    "status": "published",
+    "confidenceLevel": "confirmed",
+    "externalSources": [
+      "https://techcrunch.com/2026/07/27/threads-users-can-now-chat-with-meta-ai-in-their-dms/"
     ],
     "relatedModels": [],
     "tags": [

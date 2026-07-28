@@ -1,0 +1,24 @@
+{
+  "id": "openai-called-the-hugging-face-attack-unprecedented-but-weve-been-here-before",
+  "slug": "openai-called-the-hugging-face-attack-unprecedented-but-weve-been-here-before",
+  "title": "OpenAI called the Hugging Face attack unprecedented. But we’ve been here before.",
+  "category": "short-news",
+  "isTrending": true,
+  "publishDate": "2026-07-27",
+  "author": "MIT Technology Review / Modelverse Editorial",
+  "readTime": "3 min read",
+  "excerpt": "This story originally appeared in The Algorithm, our weekly newsletter on AI. To get stories like this in your inbox first,&#160;sign up here. Reading OpenAI’s account last week of...",
+  "body": "FeaturedTopicsNewslettersEventsAudioMIT Technology ReviewFeaturedTopicsNewslettersEventsAudioArtificial intelligenceOpenAI called the Hugging Face attack unprecedented. But we’ve been here before. A decade-old experiment showed OpenAI how far an AI will go to achieve the goals it’s given.\n\nThis story originally appeared in The Algorithm, our weekly newsletter on AI. To get stories like this in your inbox first, sign up here.\n\nReading OpenAI’s account last week of how some of its models broke their containment and hacked into the computer systems of Hugging Face, another AI company, was the first time I got genuine chills about what large language models are now able to do. But this is a case of human hubris, not rogue AI.\n\nI am not an alarmist. In fact, I have been pushing back against AI scare stories for years. Even so, this incident crossed a line. I think it’s the clearest illustration yet of how the people building and testing this technology do not fully understand what they’re doing. OpenAI could—and should—have seen this coming.\n\nHere’s what happened, at least according to the two companies involved. A couple of weeks ago, OpenAI started testing the hacking abilities of some of its new models, including GPT‑5.6 Sol (released in June) and what OpenAI describes as “an even more capable pre-release model.”\n\nOpenAI pitted its models against a benchmark called ExploitGym, released in May, which challenges LLMs to find ways to exploit hundreds of real-world vulnerabilities found in widely used software, including crucial code that underpins the web.\n\nTo see what they could do, the researchers removed most of their cybersecurity guardrails. Then they ran the models inside a sandbox that was cut off from the internet except for one link to a third-party piece of software that acted as a proxy to the outside world, so that the models could install code they needed to beat ExploitGym.\n\nOn July 9, according to reporting by Reuters, OpenAI’s models started trying to break through the proxy. They found an unknown bug in the proxy’s software and used it to access the internet. From there, they broke into Hugging Face’s computer systems on July 11, apparently looking for data sets and solutions that would help them complete the tasks they were being tested on. Hugging Face announced the hack on July 16.\n\n### Official Announcement\nRead the full update directly from the official source at [MIT Technology Review News](https://www.technologyreview.com/2026/07/27/1140836/openai-hugging-face-attack-precedent/).\n\nStay tuned to [Modelverse](https://www.themodelverse.in) for real-time model analysis and benchmark coverage.",
+  "coverImage": "https://wp.technologyreview.com/wp-content/uploads/2026/07/redteam-faceoff.jpg?resize=1200,600",
+  "status": "published",
+  "confidenceLevel": "confirmed",
+  "externalSources": [
+    "https://www.technologyreview.com/2026/07/27/1140836/openai-hugging-face-attack-precedent/"
+  ],
+  "relatedModels": [],
+  "tags": [
+    "ai-news",
+    "breaking",
+    "mit-technology-review"
+  ]
+}
