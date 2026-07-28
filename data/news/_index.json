@@ -22,6 +22,28 @@
     ]
   },
   {
+    "id": "bot-detection-startup-spur-nabs-200m-from-insight",
+    "slug": "bot-detection-startup-spur-nabs-200m-from-insight",
+    "title": "Bot-detection startup Spur nabs $200M from Insight",
+    "category": "short-news",
+    "publishDate": "2026-07-28",
+    "author": "TechCrunch AI / Modelverse Editorial",
+    "readTime": "2 min read",
+    "excerpt": "Spur Intelligence has raised a $200 million round from Insight Partners for its tech that can identify legit human traffic from bots.",
+    "coverImage": "https://techcrunch.com/wp-content/uploads/2026/03/s.jpg?resize=1200,840",
+    "status": "published",
+    "confidenceLevel": "confirmed",
+    "externalSources": [
+      "https://techcrunch.com/2026/07/28/bot-detection-startup-spur-nabs-200m-from-insight/"
+    ],
+    "relatedModels": [],
+    "tags": [
+      "ai-news",
+      "breaking",
+      "techcrunch-ai"
+    ]
+  },
+  {
     "id": "cognizant-anthropic",
     "slug": "cognizant-anthropic",
     "title": "Cognizant Anthropic",
@@ -176,6 +198,28 @@
     ]
   },
   {
+    "id": "mcp-startup-runlayer-accuses-rippling-of-stealing-its-product-idea",
+    "slug": "mcp-startup-runlayer-accuses-rippling-of-stealing-its-product-idea",
+    "title": "MCP startup Runlayer accuses Rippling of stealing its product idea",
+    "category": "short-news",
+    "publishDate": "2026-07-28",
+    "author": "TechCrunch AI / Modelverse Editorial",
+    "readTime": "2 min read",
+    "excerpt": "Runlayer is suing Rippling after Rippling evaluated the startup's MCP  gateway product and then opted to build one itself.",
+    "coverImage": "https://techcrunch.com/wp-content/uploads/2023/07/gavel-messy-legal.jpg?resize=1200,675",
+    "status": "published",
+    "confidenceLevel": "confirmed",
+    "externalSources": [
+      "https://techcrunch.com/2026/07/28/mcp-startup-runlayer-accuses-rippling-of-stealing-its-product-idea/"
+    ],
+    "relatedModels": [],
+    "tags": [
+      "ai-news",
+      "breaking",
+      "techcrunch-ai"
+    ]
+  },
+  {
     "id": "microsoft-ai-releases-mai-cyber-1-flash-a-5b-active-parameter-cyber-model-that-p",
     "slug": "microsoft-ai-releases-mai-cyber-1-flash-a-5b-active-parameter-cyber-model-that-p",
     "title": "Microsoft AI Releases MAI-Cyber-1-Flash: A 5B-Active-Parameter Cyber Model That Pushes MDASH to 95.95% on CyberGym",
@@ -299,6 +343,28 @@
     "confidenceLevel": "confirmed",
     "externalSources": [
       "https://techcrunch.com/2026/07/28/recursive-superintelligence-signs-400-compute-deal-with-amazon/"
+    ],
+    "relatedModels": [],
+    "tags": [
+      "ai-news",
+      "breaking",
+      "techcrunch-ai"
+    ]
+  },
+  {
+    "id": "sam-altman-is-ready-to-decelerate",
+    "slug": "sam-altman-is-ready-to-decelerate",
+    "title": "Sam Altman is ready to decelerate",
+    "category": "short-news",
+    "publishDate": "2026-07-28",
+    "author": "TechCrunch AI / Modelverse Editorial",
+    "readTime": "2 min read",
+    "excerpt": "His change of position comes after \"the first security incident that I have felt very viscerally.\"",
+    "coverImage": "https://techcrunch.com/wp-content/uploads/2025/07/GettyImages-2226496284.jpg?w=1024",
+    "status": "published",
+    "confidenceLevel": "confirmed",
+    "externalSources": [
+      "https://techcrunch.com/2026/07/28/sam-altman-is-ready-to-decelerate/"
     ],
     "relatedModels": [],
     "tags": [
