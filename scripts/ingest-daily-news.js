@@ -595,7 +595,7 @@ async function extractFullArticleBody(url, fallbackDesc, lab) {
       category: "short-news",
       isTrending: true,
       publishDate: articleDate,
-      author: `${candidate.lab} / Modelverse Editorial`,
+      author: "Modelverse Editorial",
       readTime: `${readTimeMinutes} min read`,
       excerpt: candidate.description.slice(0, 180) + (candidate.description.length > 180 ? "..." : ""),
       body: bodyContent,

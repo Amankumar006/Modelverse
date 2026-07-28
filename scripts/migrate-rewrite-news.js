@@ -185,6 +185,7 @@ async function runMigration() {
         );
 
         data.body = rewrittenBody;
+        data.author = "Modelverse Editorial";
         
         // Update read time based on the new word count
         const newWordCount = rewrittenBody.split(/\s+/).filter(Boolean).length;

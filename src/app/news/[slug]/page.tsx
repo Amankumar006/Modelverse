@@ -175,7 +175,7 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
 
         {/* Metadata Line */}
         <div className="flex flex-wrap items-center gap-4 text-xs font-mono text-[#90908F] pb-8 border-b border-[#282828]">
-          <span className="text-[#E1E1E0] font-semibold">By {article.author}</span>
+          <span className="text-[#E1E1E0] font-semibold">By {article.author.includes("Modelverse Editorial") ? "Modelverse Editorial" : article.author}</span>
           <span>·</span>
           <span>{formatNewsDate(article.publishDate)}</span>
           <span>·</span>
