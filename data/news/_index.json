@@ -66,6 +66,28 @@
     ]
   },
   {
+    "id": "data-centers-may-face-temporary-power-cuts-to-prevent-blackouts-on-largest-us-gr",
+    "slug": "data-centers-may-face-temporary-power-cuts-to-prevent-blackouts-on-largest-us-gr",
+    "title": "Data centers may face temporary power cuts to prevent blackouts on largest US grid",
+    "category": "short-news",
+    "publishDate": "2026-07-28",
+    "author": "TechCrunch AI / Modelverse Editorial",
+    "readTime": "3 min read",
+    "excerpt": "The decision arrives as the breakneck pace of data center construction has grid operators scrambling to generate power.",
+    "coverImage": "https://techcrunch.com/wp-content/uploads/2017/05/gettyimages-173791238.jpg?resize=1200,797",
+    "status": "published",
+    "confidenceLevel": "confirmed",
+    "externalSources": [
+      "https://techcrunch.com/2026/07/28/data-centers-may-face-temporary-power-cuts-to-prevent-blackouts-on-largest-us-grid/"
+    ],
+    "relatedModels": [],
+    "tags": [
+      "ai-news",
+      "breaking",
+      "techcrunch-ai"
+    ]
+  },
+  {
     "id": "deploying-a-1-bit-bonsai-27b-model-with-prismml-llamacpp-and-openai-compatible-l",
     "slug": "deploying-a-1-bit-bonsai-27b-model-with-prismml-llamacpp-and-openai-compatible-l",
     "title": "Deploying a 1-Bit Bonsai-27B Model with PrismML llama.cpp and OpenAI-Compatible Local Inference Workflows",
@@ -107,6 +129,50 @@
       "ai-news",
       "breaking",
       "techcrunch-ai"
+    ]
+  },
+  {
+    "id": "fish-audio-raises-52m-seed-to-build-ai-voice-models-for-creators-and-enterprises",
+    "slug": "fish-audio-raises-52m-seed-to-build-ai-voice-models-for-creators-and-enterprises",
+    "title": "Fish Audio raises $52M seed to build AI voice models for creators and enterprises",
+    "category": "short-news",
+    "publishDate": "2026-07-28",
+    "author": "TechCrunch AI / Modelverse Editorial",
+    "readTime": "3 min read",
+    "excerpt": "Since launching last year, the startup today has more than 8 million people using the open-source or hosted version of its models, and now generates annual recurring revenue of $21...",
+    "coverImage": "https://techcrunch.com/wp-content/uploads/2026/07/Fish-Audio-CoFounders.jpeg?resize=1200,675",
+    "status": "published",
+    "confidenceLevel": "confirmed",
+    "externalSources": [
+      "https://techcrunch.com/2026/07/28/fish-audio-raises-50m-seed-to-build-ai-voice-models-for-creators-and-enterprises/"
+    ],
+    "relatedModels": [],
+    "tags": [
+      "ai-news",
+      "breaking",
+      "techcrunch-ai"
+    ]
+  },
+  {
+    "id": "lfm25-encoders-for-fast-long-context-inference-on-cpu",
+    "slug": "lfm25-encoders-for-fast-long-context-inference-on-cpu",
+    "title": "LFM2.5-Encoders for Fast Long-Context Inference on CPU",
+    "category": "short-news",
+    "publishDate": "2026-07-28",
+    "author": "Hugging Face / Modelverse Editorial",
+    "readTime": "3 min read",
+    "excerpt": "LFM2.5-Encoders for Fast Long-Context Inference on CPU",
+    "coverImage": "https://cdn-uploads.huggingface.co/production/uploads/644249b08443bce4c9890a0f/n-ZhnrOiuWH5rhAFi86lL.png",
+    "status": "published",
+    "confidenceLevel": "confirmed",
+    "externalSources": [
+      "https://huggingface.co/blog/LiquidAI/lfm2-5-encoders"
+    ],
+    "relatedModels": [],
+    "tags": [
+      "ai-news",
+      "breaking",
+      "hugging-face"
     ]
   },
   {
@@ -154,9 +220,53 @@
     ]
   },
   {
+    "id": "powerful-compute-so-compact-its-clutch-build-ai-anywhere-with-nvidia-jetson",
+    "slug": "powerful-compute-so-compact-its-clutch-build-ai-anywhere-with-nvidia-jetson",
+    "title": "Powerful Compute So Compact, It’s Clutch — Build AI Anywhere With NVIDIA Jetson",
+    "category": "short-news",
+    "publishDate": "2026-07-28",
+    "author": "NVIDIA / Modelverse Editorial",
+    "readTime": "3 min read",
+    "excerpt": "As a discerning AI investor who values style and substance, Sarah Guo knows this season’s standout accessory isn’t the latest designer purse — but what’s inside it.  In a recent vi...",
+    "coverImage": "https://blogs.nvidia.com/wp-content/uploads/2026/07/SarahGuo_Jetson_FeaturedImage-1680x945.png",
+    "status": "published",
+    "confidenceLevel": "confirmed",
+    "externalSources": [
+      "https://blogs.nvidia.com/blog/build-ai-with-nvidia-jetson/"
+    ],
+    "relatedModels": [],
+    "tags": [
+      "ai-news",
+      "breaking",
+      "nvidia"
+    ]
+  },
+  {
     "id": "recursive-superintelligence-signs-410-compute-deal-with-amazon",
     "slug": "recursive-superintelligence-signs-410-compute-deal-with-amazon",
     "title": "Recursive Superintelligence signs $410 compute deal with Amazon",
+    "category": "short-news",
+    "publishDate": "2026-07-28",
+    "author": "TechCrunch AI / Modelverse Editorial",
+    "readTime": "2 min read",
+    "excerpt": "Recursive’s $400 million outlay represents the bulk of the company’s fundraising to date.",
+    "coverImage": "https://techcrunch.com/wp-content/uploads/2021/11/GettyImages-1236309559.jpg?w=1024",
+    "status": "published",
+    "confidenceLevel": "confirmed",
+    "externalSources": [
+      "https://techcrunch.com/2026/07/28/recursive-superintelligence-signs-400-compute-deal-with-amazon/"
+    ],
+    "relatedModels": [],
+    "tags": [
+      "ai-news",
+      "breaking",
+      "techcrunch-ai"
+    ]
+  },
+  {
+    "id": "recursive-superintelligence-signs-410-million-compute-deal-with-amazon",
+    "slug": "recursive-superintelligence-signs-410-million-compute-deal-with-amazon",
+    "title": "Recursive Superintelligence signs $410 million compute deal with Amazon",
     "category": "short-news",
     "publishDate": "2026-07-28",
     "author": "TechCrunch AI / Modelverse Editorial",
@@ -195,6 +305,28 @@
       "ai-news",
       "breaking",
       "mit-technology-review"
+    ]
+  },
+  {
+    "id": "the-olmoearth-platform-geospatial-inference-at-planetary-scale",
+    "slug": "the-olmoearth-platform-geospatial-inference-at-planetary-scale",
+    "title": "The OlmoEarth Platform: Geospatial inference at planetary scale",
+    "category": "short-news",
+    "publishDate": "2026-07-28",
+    "author": "Hugging Face / Modelverse Editorial",
+    "readTime": "3 min read",
+    "excerpt": "The OlmoEarth Platform: Geospatial inference at planetary scale",
+    "coverImage": "https://cdn-uploads.huggingface.co/production/uploads/638e39b249de7ae552d977b5/N27UuRDvcQy4CvmrzRKAE.png",
+    "status": "published",
+    "confidenceLevel": "confirmed",
+    "externalSources": [
+      "https://huggingface.co/blog/allenai/olmoearth-infrastructure"
+    ],
+    "relatedModels": [],
+    "tags": [
+      "ai-news",
+      "breaking",
+      "hugging-face"
     ]
   },
   {
@@ -242,6 +374,28 @@
     ]
   },
   {
+    "id": "designing-skill-driven-financial-analysis-agents-with-claude-python-mcp-connecto",
+    "slug": "designing-skill-driven-financial-analysis-agents-with-claude-python-mcp-connecto",
+    "title": "Designing Skill-Driven Financial Analysis Agents with Claude, Python, MCP Connectors, and Automated Deliverables",
+    "category": "short-news",
+    "publishDate": "2026-07-27",
+    "author": "MarkTechPost / Modelverse Editorial",
+    "readTime": "11 min read",
+    "excerpt": "In this tutorial, we build an advanced workflow around Anthropic’s financial-services repository and reproduce its skill-driven architecture in pure Python. We begin by installing ...",
+    "coverImage": "https://www.marktechpost.com/wp-content/uploads/2026/07/blog6171-9.png",
+    "status": "published",
+    "confidenceLevel": "confirmed",
+    "externalSources": [
+      "https://www.marktechpost.com/2026/07/27/designing-skill-driven-financial-analysis-agents-with-claude-python-mcp-connectors-and-automated-deliverables/"
+    ],
+    "relatedModels": [],
+    "tags": [
+      "ai-news",
+      "breaking",
+      "marktechpost"
+    ]
+  },
+  {
     "id": "industry-leaders-unite-in-open-secure-ai-alliance-for-ai-safety-and-security",
     "slug": "industry-leaders-unite-in-open-secure-ai-alliance-for-ai-safety-and-security",
     "title": "Industry Leaders Unite in Open Secure AI Alliance for AI Safety and Security",
@@ -261,6 +415,50 @@
       "ai-news",
       "breaking",
       "nvidia"
+    ]
+  },
+  {
+    "id": "kimi-ai-and-kvcache-ai-open-sources-agentenv-a-distributed-system-that-powers-ag",
+    "slug": "kimi-ai-and-kvcache-ai-open-sources-agentenv-a-distributed-system-that-powers-ag",
+    "title": "Kimi AI and kvcache-ai Open Sources 'AgentENV': A Distributed System that Powers Agentic Reinforcement Learning (RL) Training for Kimi K3",
+    "category": "short-news",
+    "publishDate": "2026-07-27",
+    "author": "MarkTechPost / Modelverse Editorial",
+    "readTime": "2 min read",
+    "excerpt": "Moonshot AI's Kimi team and kvcache-ai open-sourced AgentENV (AENV) under MIT, as part of Kimi K3 Open Day. It runs agent sandboxes as Firecracker microVMs with millisecond snapsho...",
+    "coverImage": "https://www.marktechpost.com/wp-content/uploads/2026/07/agentenv-banner-1200x900-1.png",
+    "status": "published",
+    "confidenceLevel": "confirmed",
+    "externalSources": [
+      "https://www.marktechpost.com/2026/07/27/kimi-ai-and-kvcache-ai-open-sources-agentenv/"
+    ],
+    "relatedModels": [],
+    "tags": [
+      "ai-news",
+      "breaking",
+      "marktechpost"
+    ]
+  },
+  {
+    "id": "microsoft-launches-its-first-cybersecurity-model-plus-a-new-agentic-cybersecurit",
+    "slug": "microsoft-launches-its-first-cybersecurity-model-plus-a-new-agentic-cybersecurit",
+    "title": "Microsoft launches its first cybersecurity model, plus a new agentic cybersecurity system",
+    "category": "short-news",
+    "publishDate": "2026-07-27",
+    "author": "TechCrunch AI / Modelverse Editorial",
+    "readTime": "2 min read",
+    "excerpt": "Microsoft bolstered its AI cybersecurity offerings this week with the launch of its first AI security model and a new security platform.",
+    "coverImage": "https://techcrunch.com/wp-content/uploads/2026/07/IMG_4458.jpeg?resize=1200,900",
+    "status": "published",
+    "confidenceLevel": "confirmed",
+    "externalSources": [
+      "https://techcrunch.com/2026/07/27/microsoft-launches-its-first-cyber-model-and-a-new-agentic-cybersecurity-system/"
+    ],
+    "relatedModels": [],
+    "tags": [
+      "ai-news",
+      "breaking",
+      "techcrunch-ai"
     ]
   },
   {
@@ -309,6 +507,28 @@
       "ai-news",
       "breaking",
       "nvidia"
+    ]
+  },
+  {
+    "id": "psa-your-claude-shared-chats-and-artifacts-may-have-ended-up-on-google",
+    "slug": "psa-your-claude-shared-chats-and-artifacts-may-have-ended-up-on-google",
+    "title": "PSA: Your Claude shared chats and Artifacts may have ended up on Google",
+    "category": "short-news",
+    "publishDate": "2026-07-27",
+    "author": "TechCrunch AI / Modelverse Editorial",
+    "readTime": "3 min read",
+    "excerpt": "The issue appears to have originated from Claude’s “share chat” feature, which allows users to create links that enable anyone with the assigned URL view a conversation or project.",
+    "coverImage": "https://techcrunch.com/wp-content/uploads/2026/07/facepalm-statue.jpg?resize=1200,688",
+    "status": "published",
+    "confidenceLevel": "confirmed",
+    "externalSources": [
+      "https://techcrunch.com/2026/07/27/psa-your-claude-shared-chats-and-artifacts-may-have-ended-up-on-google/"
+    ],
+    "relatedModels": [],
+    "tags": [
+      "ai-news",
+      "breaking",
+      "techcrunch-ai"
     ]
   },
   {

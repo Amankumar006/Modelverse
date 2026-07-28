@@ -1,0 +1,24 @@
+{
+  "id": "data-centers-may-face-temporary-power-cuts-to-prevent-blackouts-on-largest-us-gr",
+  "slug": "data-centers-may-face-temporary-power-cuts-to-prevent-blackouts-on-largest-us-gr",
+  "title": "Data centers may face temporary power cuts to prevent blackouts on largest US grid",
+  "category": "short-news",
+  "isTrending": true,
+  "publishDate": "2026-07-28",
+  "author": "TechCrunch AI / Modelverse Editorial",
+  "readTime": "3 min read",
+  "excerpt": "The decision arrives as the breakneck pace of data center construction has grid operators scrambling to generate power.",
+  "body": "Data centers may face temporary power cuts to prevent blackouts on largest US grid Tim De Chant 8:42 AM PDT · July 28, 2026 The largest electrical grid in the U.S. has struggled to cope with an onslaught of data centers. Now, after an auction to add more generating capacity fell short, the grid’s operator, PJM Interconnection, has said it will cut off data centers and other large users during power shortages.\n\nThe decision arrives as the breakneck pace of data center construction has grid operators scrambling to generate power. By 2035, data centers are expected to use 4x more electricity than they do today.\n\nPJM won't start curtailing supply until June 2027, and the cuts will only apply to data centers that are 50 megawatts or larger. The grid operator is running another auction for new generating capacity.\n\nSimilar to other demand response programs, which have existed for decades and typically include large users like manufacturers, the customers who have their power cut will be compensated. Such programs typically give customers advance notice, ranging from 30 minutes to a few days, depending on forecasted demand.&nbsp;\n\nThe move will likely spur many new data centers —&nbsp;and potentially existing ones — to set up their own sources of on-site power. Those that don’t will probably rely on backup generators, which tend to be costlier to run and frequently more polluting.&nbsp;\n\nMany data centers favor diesel generators since the fuel is widely available and can be stored on-site. Federal regulations allow such generators to be used for up to 50 hours per year for demand response events, and up to 100 hours per year for events like emergencies and maintenance.\n\nThis week, Vantage Data Centers came under fire for its apparent coordination with Virginia environmental regulators to cast doubt on a report that said diesel backup generators could contribute to tens of millions of dollars in annual health damages for people living near a 96 megawatt data center in Northern Virginia.\n\nPJM has come under fire in recent months for the way it has managed new generating capacity and large new users, including data centers. The grid operator’s territory runs from Virginia to Illinois, covering 67 million customers. Over the last year, wholesale electricity prices have nearly doubled, and PJM’s independent market monitor blamed data centers for much of the increase.\n\n### Official Announcement\nRead the full update directly from the official source at [TechCrunch AI News](https://techcrunch.com/2026/07/28/data-centers-may-face-temporary-power-cuts-to-prevent-blackouts-on-largest-us-grid/).\n\nStay tuned to [Modelverse](https://www.themodelverse.in) for real-time model analysis and benchmark coverage.",
+  "coverImage": "https://techcrunch.com/wp-content/uploads/2017/05/gettyimages-173791238.jpg?resize=1200,797",
+  "status": "published",
+  "confidenceLevel": "confirmed",
+  "externalSources": [
+    "https://techcrunch.com/2026/07/28/data-centers-may-face-temporary-power-cuts-to-prevent-blackouts-on-largest-us-grid/"
+  ],
+  "relatedModels": [],
+  "tags": [
+    "ai-news",
+    "breaking",
+    "techcrunch-ai"
+  ]
+}
