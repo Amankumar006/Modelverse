@@ -47,15 +47,45 @@ function postHttps(url, payload, customHeaders = {}) {
   });
 }
 
-async function rewriteArticleWithOpenRouter(title, body, author, originalUrl) {
-  const apiKey = process.env.OPENROUTER_API_KEY;
-  if (!apiKey) {
-    throw new Error("OPENROUTER_API_KEY environment variable is not defined!");
+async function rewriteArticleWithGemini(title, body) {
+  const apiKey = process.env.GEMINI_API_KEY;
+  const prompt = `You are a professional AI technology editor at Modelverse (themodelverse.in).
+Write a unique, original, and engaging summary of the following AI news or announcement.
+Do NOT copy-paste the source sentences directly (avoid plagiarism).
+Keep the narrative structured into 2-3 clean paragraphs (around 150-250 words total).
+Do NOT rewrite or modify raw code blocks, mathematical equations, links, or specific benchmark scores. Keep them intact.
+Focus on:
+1. What was announced or released.
+2. How the technology works.
+3. Why it matters to developers and researchers.
+
+Title: ${title}
+Source Content:
+${body}
+
+Write the unique summary in Markdown (do not write any intro like "Here is your summary"):`;
+
+  const payload = {
+    contents: [{
+      parts: [{ text: prompt }]
+    }],
+    generationConfig: {
+      temperature: 0.2
+    }
+  };
+
+  const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`;
+  const responseJson = await postHttps(url, payload);
+  const data = JSON.parse(responseJson);
+  
+  if (data.candidates && data.candidates[0] && data.candidates[0].content && data.candidates[0].content.parts[0]) {
+    return data.candidates[0].content.parts[0].text.trim();
   }
+  throw new Error("Invalid response from Gemini API");
+}
 
-  // Deduce lab name from author string (e.g. "TechCrunch AI / Modelverse Editorial" -> "TechCrunch AI")
-  const lab = author.split("/")[0].trim();
-
+async function rewriteArticleWithOpenRouter(title, body, lab, originalUrl) {
+  const apiKey = process.env.OPENROUTER_API_KEY;
   const prompt = `You are a professional AI technology editor at Modelverse (themodelverse.in).
 Write a unique, original, and engaging summary of the following AI news or announcement.
 Do NOT copy-paste the source sentences directly (avoid plagiarism).
@@ -90,32 +120,21 @@ Write the unique summary in Markdown (do not write any intro like "Here is your 
   };
 
   const url = "https://openrouter.ai/api/v1/chat/completions";
-  try {
-    const responseJson = await postHttps(url, payload, headers);
-    const data = JSON.parse(responseJson);
-    
-    if (data.choices && data.choices[0] && data.choices[0].message && data.choices[0].message.content) {
-      let rewritten = data.choices[0].message.content.trim();
-      
-      // Clean up typical LLM intros if they slipped through
-      rewritten = rewritten.replace(/^Here is a summary:|^Here's the summary:|^Summary:/i, "").trim();
-
-      return rewritten;
-    }
-  } catch (e) {
-    console.error(`  ⚠️ Failed to rewrite article using OpenRouter: ${e.message}`);
+  const responseJson = await postHttps(url, payload, headers);
+  const data = JSON.parse(responseJson);
+  
+  if (data.choices && data.choices[0] && data.choices[0].message && data.choices[0].message.content) {
+    return data.choices[0].message.content.trim();
   }
-
-  // Fallback
-  return body;
+  
+  throw new Error("Empty or malformed completion response from OpenRouter");
 }
 
 async function runMigration() {
   console.log("🚀 Starting existing articles migration & rewrite script...");
-  const apiKey = process.env.OPENROUTER_API_KEY;
-  if (!apiKey) {
-    console.error("❌ Error: OPENROUTER_API_KEY environment variable is missing!");
-    console.error("   Run export OPENROUTER_API_KEY='your-key' before running this script.");
+  const hasKeys = process.env.GEMINI_API_KEY || process.env.OPENROUTER_API_KEY;
+  if (!hasKeys) {
+    console.error("❌ Error: Both GEMINI_API_KEY and OPENROUTER_API_KEY environment variables are missing!");
     process.exit(1);
   }
 
@@ -143,6 +162,29 @@ async function runMigration() {
       console.error(`  ⚠️ Skipped malformed JSON [${file}]: ${e.message}`);
       skippedCount++;
       continue;
+    }
+
+    // --- Schema Auto-Healing Section ---
+    let schemaHealed = false;
+    if (!data.tags || !Array.isArray(data.tags)) {
+      data.tags = ["ai-news"];
+      schemaHealed = true;
+    }
+    if (!data.confidenceLevel) {
+      data.confidenceLevel = "confirmed";
+      schemaHealed = true;
+    }
+    if (!data.externalSources || !Array.isArray(data.externalSources)) {
+      data.externalSources = [];
+      schemaHealed = true;
+    }
+    if (!data.author) {
+      data.author = "Modelverse Editorial";
+      schemaHealed = true;
+    }
+    if (schemaHealed) {
+      console.log(`     🔧 Healed missing schema tags/fields locally for: ${file}`);
+      fs.writeFileSync(filePath, JSON.stringify(data, null, 2), "utf-8");
     }
 
     const body = data.body || "";
@@ -185,17 +227,22 @@ async function runMigration() {
     
     let retries = 3;
     let success = false;
-
     const originalUrl = data.externalSources && data.externalSources[0] ? data.externalSources[0] : "https://www.themodelverse.in";
+    const lab = (data.author || "Modelverse Editorial").split("/")[0].trim();
 
     while (retries > 0 && !success) {
       try {
-        const rewrittenBody = await rewriteArticleWithOpenRouter(
-          data.title,
-          body,
-          data.author || "Modelverse Editorial",
-          originalUrl
-        );
+        let rewrittenBody;
+        if (process.env.GEMINI_API_KEY) {
+          rewrittenBody = await rewriteArticleWithGemini(data.title, body);
+        } else {
+          rewrittenBody = await rewriteArticleWithOpenRouter(
+            data.title,
+            body,
+            lab,
+            originalUrl
+          );
+        }
 
         data.body = rewrittenBody;
         data.author = "Modelverse Editorial";
@@ -211,7 +258,7 @@ async function runMigration() {
         success = true;
       } catch (e) {
         retries--;
-        console.error(`     ⚠️ Error: ${e.message}. Retries left: ${retries}`);
+        console.error(`     ⚠️ Error rewriting: ${e.message}. Retries left: ${retries}`);
         if (retries > 0) {
           console.log("     Waiting 5 seconds before retrying...");
           await new Promise(r => setTimeout(r, 5000));
@@ -220,12 +267,12 @@ async function runMigration() {
     }
 
     if (!success) {
-      console.error(`  ❌ Failed to migrate ${file} after all retries. Halting migration to prevent partial corruption.`);
+      console.error(`  ❌ Failed to rewrite ${file} after all retries. Halting build to prevent partial corruption.`);
       process.exit(1);
     }
 
     // Sleep to prevent rate limits
-    await new Promise((r) => setTimeout(r, 1500));
+    await new Promise((r) => setTimeout(r, 1000));
   }
 
   console.log("\n📊 Migration Completed!");

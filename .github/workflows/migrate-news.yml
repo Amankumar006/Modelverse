@@ -25,6 +25,7 @@ jobs:
       - name: Run News Migration
         env:
           OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
         run: node scripts/migrate-rewrite-news.js
 
       - name: Commit and Push Migrated Articles
