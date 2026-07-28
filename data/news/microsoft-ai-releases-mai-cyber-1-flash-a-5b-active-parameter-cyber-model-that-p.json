@@ -1,0 +1,24 @@
+{
+  "id": "microsoft-ai-releases-mai-cyber-1-flash-a-5b-active-parameter-cyber-model-that-p",
+  "slug": "microsoft-ai-releases-mai-cyber-1-flash-a-5b-active-parameter-cyber-model-that-p",
+  "title": "Microsoft AI Releases MAI-Cyber-1-Flash: A 5B-Active-Parameter Cyber Model That Pushes MDASH to 95.95% on CyberGym",
+  "category": "short-news",
+  "isTrending": true,
+  "publishDate": "2026-07-28",
+  "author": "MarkTechPost / Modelverse Editorial",
+  "readTime": "2 min read",
+  "excerpt": "Microsoft AI has released MAI-Cyber-1-Flash, its first model built specifically for cyber defense. It is a 137B total, 5B active sparse MoE fine-tune of MAI-Code-1-Flash with a 256...",
+  "body": "NewsHub NewsHub Premium Content Read our exclusive articles FacebookInstagramX Home Open Source/Weights AI Agents Tutorials Voice AI Robotics Newsletter → Partner with Us NewsHub Search Home Open Source/Weights AI Agents Tutorials Voice AI Robotics Newsletter → Partner with Us Home Technology AI Shorts Microsoft AI Releases MAI-Cyber-1-Flash: A 5B-Active-Parameter Cyber Model That Pushes MDASH to... TechnologyAI ShortsArtificial IntelligenceApplicationsEditors PickNew ReleasesTech NewsPythonSecuritySoftware EngineeringStaff Microsoft AI Releases MAI-Cyber-1-Flash: A 5B-Active-Parameter Cyber Model That Pushes MDASH to 95.95% on CyberGym By Asif Razzaq - July 28, 2026 Microsoft AI has released MAI-Cyber-1-Flash, its first model built specifically for cyber defense. The model does not ship as a standalone endpoint. It runs inside MDASH, Microsoft's multi-model agentic scanning harness.\n\nMAI-Cyber-1-Flash is a transformer with self-attention and sparse Mixture-of-Experts layers. It carries 137B total parameters with 5B active, and a 256k context length. Inputs and outputs are text only.\n\nIt is a cybersecurity-specialized fine-tune of MAI-Code-1-Flash, the lightweight agentic coding model already embedded in GitHub Copilot and VS Code. The release describes it as derived from the MAI-Thinking-1 lineage.\n\nCyberGym is a public suite of 1,507 real-world vulnerability reproduction tasks drawn from 188 OSS-Fuzz projects. Microsoft evaluated at CyberGym's default level 1 configuration, which supplies vulnerable source and a high-level description.\n\nMDASH running MAI-Cyber-1-Flash alongside GPT-5.4 scores 95.95%. Microsoft frames this as roughly 12 points above Anthropic's Mythos, and the launch chart places the four competing systems between 83.2% and 85.6%.\n\nWhen Microsoft first detailed MDASH in May 2026, the harness scored 88.45% on CyberGym using only generally available models. That was already the top public leaderboard score, about five points ahead of the next entry at 83.1%. The research team states the improvement plainly: replacing 80% of the existing models in MDASH moved the harness from 88.4% to 95.95%.\n\nMDASH manages over 100 specialized agents through five stages: Prepare, Scan, Validate, Dedupe, and Prove. Auditor agents flag findings, debater agents argue exploitability (using disagreement as signal), and the Prove stage executes triggering inputs with ASan for C/C++ targets.\n\nTo control frontier model costs at scale, MAI-Cyber-1-Flash handles up to 90% of MDASH tasks, escalating the hardest 10% to GPT-5.4. This routing yields a 50% cost saving over the previous configuration of GPT-5.4, 5.4 mini, and 5.3 codex.\n\n### Official Announcement\nRead the full update directly from the official source at [MarkTechPost News](https://www.marktechpost.com/2026/07/28/microsoft-ai-releases-mai-cyber-1-flash-a-5b-active-parameter-cyber-model-that-pushes-mdash-to-95-95-on-cybergym/).\n\nStay tuned to [Modelverse](https://www.themodelverse.in) for real-time model analysis and benchmark coverage.",
+  "coverImage": "https://www.marktechpost.com/wp-content/uploads/2026/07/blog6171-11-1024x731.png",
+  "status": "published",
+  "confidenceLevel": "confirmed",
+  "externalSources": [
+    "https://www.marktechpost.com/2026/07/28/microsoft-ai-releases-mai-cyber-1-flash-a-5b-active-parameter-cyber-model-that-pushes-mdash-to-95-95-on-cybergym/"
+  ],
+  "relatedModels": [],
+  "tags": [
+    "ai-news",
+    "breaking",
+    "marktechpost"
+  ]
+}

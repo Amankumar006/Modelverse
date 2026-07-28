@@ -1,0 +1,24 @@
+{
+  "id": "samsungs-chip-workers-are-jumping-ship-to-rival-sk-hynix",
+  "slug": "samsungs-chip-workers-are-jumping-ship-to-rival-sk-hynix",
+  "title": "Samsung’s chip workers are jumping ship to rival SK Hynix",
+  "category": "short-news",
+  "isTrending": true,
+  "publishDate": "2026-07-28",
+  "author": "MIT Technology Review / Modelverse Editorial",
+  "readTime": "3 min read",
+  "excerpt": "Lee, an engineer at Samsung’s semiconductor division, clocks out when his shift ends. He used to work longer hours, going the extra mile to excel at his projects. But lately, he’s ...",
+  "body": "FeaturedTopicsNewslettersEventsAudioMIT Technology ReviewFeaturedTopicsNewslettersEventsAudioArtificial intelligenceSamsung’s chip workers are jumping ship to rival SK Hynix As the battle over the future of AI chips plays out, the fight for top talent is also ramping up.\n\nLee, an engineer at Samsung’s semiconductor division, clocks out when his shift ends. He used to work longer hours, going the extra mile to excel at his projects. But lately, he’s been coming straight home to work on his job application for the chipmaker’s South Korean rival SK Hynix, sharing tips with his coworkers on how to draft a stellar personal statement. Even his boss encourages him to make the move.\n\n“My team lead tells us all to jump ship to SK Hynix,” says Lee. He and his coworkers are feeling demoralized by the $476,000 bonus that SK Hynix is set to pay its employees, flush with record profits from making the high-bandwidth memory (HBM) chips that power Nvidia’s AI accelerators. The figure dwarfs what chip workers at Samsung are set to receive and is sparking an exodus.\n\nAs the AI boom heats up, the semiconductor titans are waging a fierce talent war with flashy bonuses, aggressive recruiting, and even a courtroom injunction. Who wins could tilt the race to dominate the next generation of the HBM chips at the heart of the AI boom.\n\n“Except for our two team leads, my entire team [of 30 people] just applied to SK Hynix,” Lee says, referring to a job posting the company published in July. Lee, who has worked at Samsung for three years, even applied for an entry-level position at its rival. A coworker, who has worked at Samsung for eight years, applied for the same one. They both got rejected. But they’re hopeful that they’ll get a callback for a posting seeking a more experienced engineer.\n\nAll employees at Samsung and SK Hynix that MIT Technology Review spoke with asked to be identified by just their last name or a pseudonym because they feared retaliation from their employer. Samsung declined to comment, and SK Hynix did not respond to requests for comment.\n\nAfter prolonged negotiations with its labor union, Samsung struck a deal in May to pay out 10.5% of the semiconductor division’s operating profits to employees as bonuses annually for 10 years, mostly in company stock that vests over three years. The move came after SK Hynix agreed last year to pay out 10% of operating profits to employees, which translates to $476,000 per employee this year—mostly in cash.\n\nBut at Samsung, each division’s bonus is tied to its own bottom line. Chip workers in its memory division, which is also reaping a windfall from making HBM chips, are getting paid a bonus of roughly $400,000 per employee this year. But those who, like Lee, work in Samsung’s foundry division, which manufactures logic chips that companies like Tesla and Google design and has been operating at a loss, are getting a bonus of roughly $135,000.\n\n### Official Announcement\nRead the full update directly from the official source at [MIT Technology Review News](https://www.technologyreview.com/2026/07/28/1140853/samsung-chip-workers-exodus-sk-hynix/).\n\nStay tuned to [Modelverse](https://www.themodelverse.in) for real-time model analysis and benchmark coverage.",
+  "coverImage": "https://wp.technologyreview.com/wp-content/uploads/2026/07/chip-money.jpg?resize=1200,600",
+  "status": "published",
+  "confidenceLevel": "confirmed",
+  "externalSources": [
+    "https://www.technologyreview.com/2026/07/28/1140853/samsung-chip-workers-exodus-sk-hynix/"
+  ],
+  "relatedModels": [],
+  "tags": [
+    "ai-news",
+    "breaking",
+    "mit-technology-review"
+  ]
+}

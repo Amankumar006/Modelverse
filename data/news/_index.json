@@ -1,5 +1,203 @@
 [
   {
+    "id": "anthropics-dario-amodei-responds-doesnt-oppose-open-weight-models-but-fears-chin",
+    "slug": "anthropics-dario-amodei-responds-doesnt-oppose-open-weight-models-but-fears-chin",
+    "title": "Anthropic's Dario Amodei responds: doesn't oppose open-weight models, but fears Chinese AI",
+    "category": "short-news",
+    "publishDate": "2026-07-28",
+    "author": "TechCrunch AI / Modelverse Editorial",
+    "readTime": "3 min read",
+    "excerpt": "Anthropic founder and CEO Dario Amodei made his views clear about open-weight models and China's growing AI capabilities.",
+    "coverImage": "https://techcrunch.com/wp-content/uploads/2026/03/Dario-Amodei-Anthropic-viva-tech.jpg?w=1024",
+    "status": "published",
+    "confidenceLevel": "confirmed",
+    "externalSources": [
+      "https://techcrunch.com/2026/07/27/anthropics-dario-amodei-responds-doesnt-oppose-open-weight-models-but-fears-chinese-ai/"
+    ],
+    "relatedModels": [],
+    "tags": [
+      "ai-news",
+      "breaking",
+      "techcrunch-ai"
+    ]
+  },
+  {
+    "id": "cognizant-anthropic",
+    "slug": "cognizant-anthropic",
+    "title": "Cognizant Anthropic",
+    "category": "short-news",
+    "publishDate": "2026-07-28",
+    "author": "Anthropic / Modelverse Editorial",
+    "readTime": "3 min read",
+    "excerpt": "Official announcement from Anthropic: Cognizant Anthropic",
+    "coverImage": "https://cdn.sanity.io/images/4zrzovbb/website/6d4a0d28992ade92d6fa63646fd9c9d318245c6c-2400x1260.jpg",
+    "status": "published",
+    "confidenceLevel": "confirmed",
+    "externalSources": [
+      "https://www.anthropic.com/news/cognizant-anthropic"
+    ],
+    "relatedModels": [],
+    "tags": [
+      "ai-news",
+      "breaking",
+      "anthropic"
+    ]
+  },
+  {
+    "id": "cursor-makes-its-biggest-india-push-yet-ahead-of-spacex-acquisition-with-localiz",
+    "slug": "cursor-makes-its-biggest-india-push-yet-ahead-of-spacex-acquisition-with-localiz",
+    "title": "Cursor makes its biggest India push yet ahead of SpaceX acquisition with localized pricing",
+    "category": "short-news",
+    "publishDate": "2026-07-28",
+    "author": "TechCrunch AI / Modelverse Editorial",
+    "readTime": "3 min read",
+    "excerpt": "Cursor says India is now its third-largest market globally and plans to expand local hiring and enterprise sales.",
+    "coverImage": "https://techcrunch.com/wp-content/uploads/2026/07/cursor.jpg?resize=1200,800",
+    "status": "published",
+    "confidenceLevel": "confirmed",
+    "externalSources": [
+      "https://techcrunch.com/2026/07/27/cursor-makes-its-biggest-india-push-yet-ahead-of-spacex-acquisition-with-localized-pricing/"
+    ],
+    "relatedModels": [],
+    "tags": [
+      "ai-news",
+      "breaking",
+      "techcrunch-ai"
+    ]
+  },
+  {
+    "id": "deploying-a-1-bit-bonsai-27b-model-with-prismml-llamacpp-and-openai-compatible-l",
+    "slug": "deploying-a-1-bit-bonsai-27b-model-with-prismml-llamacpp-and-openai-compatible-l",
+    "title": "Deploying a 1-Bit Bonsai-27B Model with PrismML llama.cpp and OpenAI-Compatible Local Inference Workflows",
+    "category": "short-news",
+    "publishDate": "2026-07-28",
+    "author": "MarkTechPost / Modelverse Editorial",
+    "readTime": "8 min read",
+    "excerpt": "In this tutorial, we deploy the 1-bit Bonsai-27B language model using the PrismML fork of llama.cpp, which provides the specialized CUDA kernels required to decode the model’s Q1_0...",
+    "coverImage": "https://www.marktechpost.com/wp-content/uploads/2026/07/blog6171-10.png",
+    "status": "published",
+    "confidenceLevel": "confirmed",
+    "externalSources": [
+      "https://www.marktechpost.com/2026/07/28/deploying-a-1-bit-bonsai-27b-model-with-prismml-llama-cpp-and-openai-compatible-local-inference-workflows/"
+    ],
+    "relatedModels": [],
+    "tags": [
+      "ai-news",
+      "breaking",
+      "marktechpost"
+    ]
+  },
+  {
+    "id": "fish-audio-raises-50m-seed-to-build-ai-voice-models-for-creators-and-enterprises",
+    "slug": "fish-audio-raises-50m-seed-to-build-ai-voice-models-for-creators-and-enterprises",
+    "title": "Fish Audio raises $50M seed to build AI voice models for creators and enterprises",
+    "category": "short-news",
+    "publishDate": "2026-07-28",
+    "author": "TechCrunch AI / Modelverse Editorial",
+    "readTime": "3 min read",
+    "excerpt": "Since launching last year, the startup today has more than 8 million people using the open-source or hosted version of its models, and now generates annual recurring revenue of $21...",
+    "coverImage": "https://techcrunch.com/wp-content/uploads/2026/07/Fish-Audio-CoFounders.jpeg?resize=1200,675",
+    "status": "published",
+    "confidenceLevel": "confirmed",
+    "externalSources": [
+      "https://techcrunch.com/2026/07/28/fish-audio-raises-50m-seed-to-build-ai-voice-models-for-creators-and-enterprises/"
+    ],
+    "relatedModels": [],
+    "tags": [
+      "ai-news",
+      "breaking",
+      "techcrunch-ai"
+    ]
+  },
+  {
+    "id": "microsoft-ai-releases-mai-cyber-1-flash-a-5b-active-parameter-cyber-model-that-p",
+    "slug": "microsoft-ai-releases-mai-cyber-1-flash-a-5b-active-parameter-cyber-model-that-p",
+    "title": "Microsoft AI Releases MAI-Cyber-1-Flash: A 5B-Active-Parameter Cyber Model That Pushes MDASH to 95.95% on CyberGym",
+    "category": "short-news",
+    "publishDate": "2026-07-28",
+    "author": "MarkTechPost / Modelverse Editorial",
+    "readTime": "2 min read",
+    "excerpt": "Microsoft AI has released MAI-Cyber-1-Flash, its first model built specifically for cyber defense. It is a 137B total, 5B active sparse MoE fine-tune of MAI-Code-1-Flash with a 256...",
+    "coverImage": "https://www.marktechpost.com/wp-content/uploads/2026/07/blog6171-11-1024x731.png",
+    "status": "published",
+    "confidenceLevel": "confirmed",
+    "externalSources": [
+      "https://www.marktechpost.com/2026/07/28/microsoft-ai-releases-mai-cyber-1-flash-a-5b-active-parameter-cyber-model-that-pushes-mdash-to-95-95-on-cybergym/"
+    ],
+    "relatedModels": [],
+    "tags": [
+      "ai-news",
+      "breaking",
+      "marktechpost"
+    ]
+  },
+  {
+    "id": "position-open-weights-models",
+    "slug": "position-open-weights-models",
+    "title": "Position Open Weights Models",
+    "category": "short-news",
+    "publishDate": "2026-07-28",
+    "author": "Anthropic / Modelverse Editorial",
+    "readTime": "3 min read",
+    "excerpt": "Official announcement from Anthropic: Position Open Weights Models",
+    "coverImage": "https://cdn.sanity.io/images/4zrzovbb/website/62993bb857986e2808c2a75024f384e7b85312b6-2400x1254.png",
+    "status": "published",
+    "confidenceLevel": "confirmed",
+    "externalSources": [
+      "https://www.anthropic.com/news/position-open-weights-models"
+    ],
+    "relatedModels": [],
+    "tags": [
+      "ai-news",
+      "breaking",
+      "anthropic"
+    ]
+  },
+  {
+    "id": "recursive-superintelligence-signs-410-compute-deal-with-amazon",
+    "slug": "recursive-superintelligence-signs-410-compute-deal-with-amazon",
+    "title": "Recursive Superintelligence signs $410 compute deal with Amazon",
+    "category": "short-news",
+    "publishDate": "2026-07-28",
+    "author": "TechCrunch AI / Modelverse Editorial",
+    "readTime": "2 min read",
+    "excerpt": "Recursive’s $400 million outlay represents the bulk of the company’s fundraising to date.",
+    "coverImage": "https://techcrunch.com/wp-content/uploads/2021/11/GettyImages-1236309559.jpg?w=1024",
+    "status": "published",
+    "confidenceLevel": "confirmed",
+    "externalSources": [
+      "https://techcrunch.com/2026/07/28/recursive-superintelligence-signs-400-compute-deal-with-amazon/"
+    ],
+    "relatedModels": [],
+    "tags": [
+      "ai-news",
+      "breaking",
+      "techcrunch-ai"
+    ]
+  },
+  {
+    "id": "samsungs-chip-workers-are-jumping-ship-to-rival-sk-hynix",
+    "slug": "samsungs-chip-workers-are-jumping-ship-to-rival-sk-hynix",
+    "title": "Samsung’s chip workers are jumping ship to rival SK Hynix",
+    "category": "short-news",
+    "publishDate": "2026-07-28",
+    "author": "MIT Technology Review / Modelverse Editorial",
+    "readTime": "3 min read",
+    "excerpt": "Lee, an engineer at Samsung’s semiconductor division, clocks out when his shift ends. He used to work longer hours, going the extra mile to excel at his projects. But lately, he’s ...",
+    "coverImage": "https://wp.technologyreview.com/wp-content/uploads/2026/07/chip-money.jpg?resize=1200,600",
+    "status": "published",
+    "confidenceLevel": "confirmed",
+    "externalSources": [
+      "https://www.technologyreview.com/2026/07/28/1140853/samsung-chip-workers-exodus-sk-hynix/"
+    ],
+    "relatedModels": [],
+    "tags": [
+      "ai-news",
+      "breaking",
+      "mit-technology-review"
+    ]
+  },
+  {
     "id": "are-brain-waves-the-next-unlock-for-physical-ai",
     "slug": "are-brain-waves-the-next-unlock-for-physical-ai",
     "title": "Are brain waves the next unlock for physical AI?",
@@ -111,6 +309,28 @@
       "ai-news",
       "breaking",
       "nvidia"
+    ]
+  },
+  {
+    "id": "satya-nadella-says-companies-that-trust-one-ai-for-everything-may-not-survive",
+    "slug": "satya-nadella-says-companies-that-trust-one-ai-for-everything-may-not-survive",
+    "title": "Satya Nadella says companies that trust one AI for everything may not survive",
+    "category": "short-news",
+    "publishDate": "2026-07-27",
+    "author": "TechCrunch AI / Modelverse Editorial",
+    "readTime": "2 min read",
+    "excerpt": "Companies without their own models — or without a layer of AI infrastructure known as AI gateways to separate their prompts from the model itself — will be in trouble, Nadella says...",
+    "coverImage": "https://techcrunch.com/wp-content/uploads/2023/11/GettyImages-1778706501.jpg?resize=1200,675",
+    "status": "published",
+    "confidenceLevel": "confirmed",
+    "externalSources": [
+      "https://techcrunch.com/2026/07/27/satya-nadella-says-companies-that-trust-one-ai-for-everything-may-not-survive/"
+    ],
+    "relatedModels": [],
+    "tags": [
+      "ai-news",
+      "breaking",
+      "techcrunch-ai"
     ]
   },
   {
