@@ -170,6 +170,89 @@ async function getHttps(url, retries = 3, backoff = 2000) {
   }
 }
 
+function postHttps(url, payload) {
+  return new Promise((resolve, reject) => {
+    const urlObj = new URL(url);
+    const bodyStr = JSON.stringify(payload);
+    const req = https.request({
+      hostname: urlObj.hostname,
+      path: urlObj.pathname + urlObj.search,
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Content-Length": Buffer.byteLength(bodyStr)
+      }
+    }, (res) => {
+      let data = "";
+      res.on("data", (chunk) => (data += chunk));
+      res.on("end", () => {
+        if (res.statusCode >= 400) {
+          reject(new Error(`HTTP status ${res.statusCode}: ${data}`));
+        } else {
+          resolve(data);
+        }
+      });
+    });
+    req.on("error", reject);
+    req.write(bodyStr);
+    req.end();
+  });
+}
+
+async function rewriteArticleWithGemini(title, body, lab, originalUrl) {
+  const apiKey = process.env.GEMINI_API_KEY;
+  if (!apiKey) {
+    console.log("  ⚠️ GEMINI_API_KEY not found. Storing raw scraped text.");
+    return body;
+  }
+
+  try {
+    const prompt = `You are a professional AI technology editor at Modelverse (themodelverse.in).
+Write a unique, original, and engaging summary of the following AI news or announcement.
+Do NOT copy-paste the source sentences directly (avoid plagiarism).
+Keep the narrative structured into 2-3 clean paragraphs (around 150-250 words total).
+Do NOT rewrite or modify raw code blocks, mathematical equations, links, or specific benchmark scores. Keep them intact.
+Focus on:
+1. What was announced or released.
+2. How the technology works.
+3. Why it matters to developers and researchers.
+
+Title: ${title}
+Source Content:
+${body}
+
+Write the unique summary in Markdown (do not write any intro like "Here is your summary"):`;
+
+    const payload = {
+      contents: [{
+        parts: [{ text: prompt }]
+      }],
+      generationConfig: {
+        temperature: 0.2
+      }
+    };
+
+    const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`;
+    const responseJson = await postHttps(url, payload);
+    const data = JSON.parse(responseJson);
+    
+    if (data.candidates && data.candidates[0] && data.candidates[0].content && data.candidates[0].content.parts[0]) {
+      let rewritten = data.candidates[0].content.parts[0].text.trim();
+      
+      // Append source attribution
+      rewritten += `\n\n### Official Announcement\nRead the full update directly from the official source at [${lab} News](${originalUrl}).\n\nStay tuned to [Modelverse](https://www.themodelverse.in/) for real-time model analysis and benchmark coverage.`;
+      
+      console.log(`  ✍️ Successfully rewrote article: "${title.slice(0, 45)}..."`);
+      return rewritten;
+    }
+  } catch (e) {
+    console.error(`  ⚠️ Failed to rewrite article using Gemini: ${e.message}`);
+  }
+
+  // Fallback to original layout
+  return body + `\n\n### Official Announcement\nRead the full update directly from the official source at [${lab} News](${originalUrl}).\n\nStay tuned to [Modelverse](https://www.themodelverse.in/) for real-time model analysis and benchmark coverage.`;
+}
+
 function slugify(text) {
   return text
     .toString()
@@ -407,9 +490,7 @@ async function extractOgImage(url) {
 }
 
 async function extractFullArticleBody(url, fallbackDesc, lab) {
-  if (!url) {
-    return `${fallbackDesc}\n\n### Official Announcement\nRead the full update directly from the official source at [${lab} News](${url}).\n\nStay tuned to [Modelverse](https://www.themodelverse.in) for real-time model analysis and benchmark coverage.`;
-  }
+  if (!url) return fallbackDesc;
   try {
     let html = await getHttps(url);
     
@@ -456,11 +537,11 @@ async function extractFullArticleBody(url, fallbackDesc, lab) {
     }
 
     if (paragraphs.length >= 2) {
-      return paragraphs.slice(0, 8).join("\n\n") + `\n\n### Official Announcement\nRead the full update directly from the official source at [${lab} News](${url}).\n\nStay tuned to [Modelverse](https://www.themodelverse.in) for real-time model analysis and benchmark coverage.`;
+      return paragraphs.slice(0, 8).join("\n\n");
     }
   } catch(e) {}
 
-  return `${fallbackDesc}\n\n### Official Announcement\nRead the full update directly from the official source at [${lab} News](${url}).\n\nStay tuned to [Modelverse](https://www.themodelverse.in) for real-time model analysis and benchmark coverage.`;
+  return fallbackDesc;
 }
 
   const todayStr = new Date().toISOString().split("T")[0];
@@ -493,7 +574,11 @@ async function extractFullArticleBody(url, fallbackDesc, lab) {
     }
 
     // Extract full article paragraphs
-    const bodyContent = await extractFullArticleBody(candidate.link, candidate.description, candidate.lab);
+    const rawBody = await extractFullArticleBody(candidate.link, candidate.description, candidate.lab);
+    
+    // Rewrite content to avoid plagiarism and present a unique editorial summary
+    const bodyContent = await rewriteArticleWithGemini(candidate.title, rawBody, candidate.lab, candidate.link);
+    
     const wordCount = bodyContent.split(/\s+/).length;
     const readTimeMinutes = Math.max(2, Math.ceil(wordCount / 200));
 
