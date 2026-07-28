@@ -1,0 +1,49 @@
+{
+  "id": "baseten-glm-52-vision-nvfp4",
+  "name": "GLM-5.2-Vision-NVFP4",
+  "slug": "glm-52-vision-nvfp4",
+  "developer": "baseten",
+  "releaseDate": "2026-07-20",
+  "updatedAt": "2026-07-28",
+  "type": "open-weights",
+  "status": "active",
+  "modality": [
+    "text",
+    "image"
+  ],
+  "primaryTask": "multimodal-general",
+  "deployment": [
+    "self-hostable"
+  ],
+  "license": "MIT",
+  "parameters": "381.0B",
+  "contextWindow": "unknown",
+  "description": "GLM-5.2-Vision-NVFP4 is a 381.0B-parameter image text to text model developed by baseten. Built on the Glm5vForConditionalGeneration architecture using sglang. Released on 2026-07-20 with 126 likes and 2,276 downloads on Hugging Face.",
+  "keyFeatures": [
+    "381.0B parameters",
+    "Built on Glm5vForConditionalGeneration architecture (sglang)",
+    "Primary task: image text to text (text, image modality)",
+    "Open-weights under MIT license — self-hostable and fine-tunable"
+  ],
+  "benchmarks": [],
+  "family": null,
+  "previousVersion": null,
+  "links": {
+    "huggingface": "https://huggingface.co/baseten/GLM-5.2-Vision-NVFP4"
+  },
+  "logo": null,
+  "tags": [
+    "open-weights",
+    "trending",
+    "huggingface",
+    "sglang",
+    "image-text-to-text"
+  ],
+  "sources": [
+    "https://huggingface.co/baseten/GLM-5.2-Vision-NVFP4"
+  ],
+  "verified": true,
+  "featured": false,
+  "boost": 1,
+  "curatorNotes": "Auto-ingested from HuggingFace Trending on 2026-07-28. Architecture: Glm5vForConditionalGeneration. Params: 381.0B. License: MIT."
+}
