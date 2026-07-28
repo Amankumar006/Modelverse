@@ -418,11 +418,28 @@ async function extractFullArticleBody(url, fallbackDesc, lab) {
     html = html.replace(/<style[^>]*>[\s\S]*?<\/style>/gi, "");
     html = html.replace(/<!--[\s\S]*?-->/g, ""); // also strip HTML comments
 
+    // Slice HTML to extract ONLY the main article block, discarding headers, footers, and sidebars
+    let startIndex = 0;
+    const articleStartRegex = /<article[^>]*>|<div[^>]+(?:class|id)="[^"]*(?:entry-content|post-content|article-body|article-content|td-post-content|pf-content)[^"]*"[^>]*>/i;
+    const startMatch = articleStartRegex.exec(html);
+    if (startMatch) {
+      startIndex = startMatch.index + startMatch[0].length;
+    }
+
+    let endIndex = html.length;
+    const articleEndRegex = /<\/article>|<footer[^>]*>|<div[^>]+(?:class|id)="[^"]*(?:sidebar|related-posts|comments-area|post-comments|footer-content|related_posts)[^"]*"[^>]*>/i;
+    const endMatch = articleEndRegex.exec(html.slice(startIndex));
+    if (endMatch) {
+      endIndex = startIndex + endMatch.index;
+    }
+
+    const cleanHtml = html.slice(startIndex, endIndex);
+
     const paragraphs = [];
     const pRegex = /<p[^>]*>([\s\S]*?)<\/p>/gi;
     let match;
 
-    while ((match = pRegex.exec(html)) !== null) {
+    while ((match = pRegex.exec(cleanHtml)) !== null) {
       let text = match[1].replace(/<[^>]+>/g, "").replace(/\s+/g, " ").trim();
       text = decodeHtmlEntities(text);
 
