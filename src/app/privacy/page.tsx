@@ -117,11 +117,16 @@ export default function PrivacyPage() {
               <div className="space-y-2">
                 <h3 className="text-lg font-semibold text-white">3. Third-Party Integrations</h3>
                 <p className="text-sm text-white/60 leading-relaxed">
-                  Our site includes links to external sources such as Hugging Face, GitHub, ArXiv, and developer blog announcements. We have no control over the privacy policies of these third-party platforms.
+                  Our platform includes integrations with third-party social services, specifically:
                 </p>
-                <p className="text-sm text-white/60 leading-relaxed">
-                  We do not sell, trade, or share user contribution logs or email correspondence with any external marketing agencies.
-                </p>
+                <ul className="list-disc pl-5 text-sm text-white/60 space-y-1.5 pt-1">
+                  <li>
+                    <strong className="text-white/80">Reddit App:</strong> We use the official Reddit Developer Platform (Devvit) to publish automated news digests to our subreddit. This bot only reads public article metadata from our server and does not track, collect, or store any personal data from Reddit users.
+                  </li>
+                  <li>
+                    <strong className="text-white/80">External Links:</strong> We link to external developer announcements (Hugging Face, GitHub, ArXiv, etc.). We do not share user data with these sources, nor are we responsible for their privacy actions.
+                  </li>
+                </ul>
               </div>
             </div>
           </div>
