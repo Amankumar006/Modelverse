@@ -73,7 +73,7 @@ jobs:
           secure: true
           username: 006amanraj@gmail.com
           password: ${{ secrets.GMAIL_APP_PASSWORD }}
-          subject: 🚨 [Modelverse] Urgent: News Pipeline Failed!
+          subject: "🚨 [Modelverse] Urgent: News Pipeline Failed!"
           to: 006amanraj@gmail.com
           from: Modelverse Alerts <006amanraj@gmail.com>
           body: |
