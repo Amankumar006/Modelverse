@@ -170,17 +170,18 @@ async function getHttps(url, retries = 3, backoff = 2000) {
   }
 }
 
-function postHttps(url, payload) {
+function postHttps(url, payload, customHeaders = {}) {
   return new Promise((resolve, reject) => {
     const urlObj = new URL(url);
     const bodyStr = JSON.stringify(payload);
     const req = https.request({
       hostname: urlObj.hostname,
-      path: urlObj.pathname + urlObj.search,
+      path: urlObj.pathname + (urlObj.search || ""),
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "Content-Length": Buffer.byteLength(bodyStr)
+        "Content-Length": Buffer.byteLength(bodyStr),
+        ...customHeaders
       }
     }, (res) => {
       let data = "";
@@ -199,11 +200,11 @@ function postHttps(url, payload) {
   });
 }
 
-async function rewriteArticleWithGemini(title, body, lab, originalUrl) {
-  const apiKey = process.env.GEMINI_API_KEY;
+async function rewriteArticleWithOpenRouter(title, body, lab, originalUrl) {
+  const apiKey = process.env.OPENROUTER_API_KEY;
   if (!apiKey) {
-    console.log("  ⚠️ GEMINI_API_KEY not found. Storing raw scraped text.");
-    return body;
+    console.log("  ⚠️ OPENROUTER_API_KEY not found. Storing raw scraped text.");
+    return body + `\n\n### Official Announcement\nRead the full update directly from the official source at [${lab} News](${originalUrl}).\n\nStay tuned to [Modelverse](https://www.themodelverse.in/) for real-time model analysis and benchmark coverage.`;
   }
 
   try {
@@ -224,29 +225,37 @@ ${body}
 Write the unique summary in Markdown (do not write any intro like "Here is your summary"):`;
 
     const payload = {
-      contents: [{
-        parts: [{ text: prompt }]
-      }],
-      generationConfig: {
-        temperature: 0.2
-      }
+      model: "nvidia/nemotron-3-super-120b-a12b:free",
+      messages: [
+        {
+          role: "user",
+          content: prompt
+        }
+      ],
+      temperature: 0.2
     };
 
-    const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`;
-    const responseJson = await postHttps(url, payload);
+    const headers = {
+      "Authorization": `Bearer ${apiKey}`,
+      "HTTP-Referer": "https://www.themodelverse.in",
+      "X-Title": "Modelverse"
+    };
+
+    const url = "https://openrouter.ai/api/v1/chat/completions";
+    const responseJson = await postHttps(url, payload, headers);
     const data = JSON.parse(responseJson);
     
-    if (data.candidates && data.candidates[0] && data.candidates[0].content && data.candidates[0].content.parts[0]) {
-      let rewritten = data.candidates[0].content.parts[0].text.trim();
+    if (data.choices && data.choices[0] && data.choices[0].message && data.choices[0].message.content) {
+      let rewritten = data.choices[0].message.content.trim();
       
       // Append source attribution
       rewritten += `\n\n### Official Announcement\nRead the full update directly from the official source at [${lab} News](${originalUrl}).\n\nStay tuned to [Modelverse](https://www.themodelverse.in/) for real-time model analysis and benchmark coverage.`;
       
-      console.log(`  ✍️ Successfully rewrote article: "${title.slice(0, 45)}..."`);
+      console.log(`  ✍️ Successfully rewrote article via OpenRouter: "${title.slice(0, 45)}..."`);
       return rewritten;
     }
   } catch (e) {
-    console.error(`  ⚠️ Failed to rewrite article using Gemini: ${e.message}`);
+    console.error(`  ⚠️ Failed to rewrite article using OpenRouter: ${e.message}`);
   }
 
   // Fallback to original layout
@@ -577,7 +586,7 @@ async function extractFullArticleBody(url, fallbackDesc, lab) {
     const rawBody = await extractFullArticleBody(candidate.link, candidate.description, candidate.lab);
     
     // Rewrite content to avoid plagiarism and present a unique editorial summary
-    const bodyContent = await rewriteArticleWithGemini(candidate.title, rawBody, candidate.lab, candidate.link);
+    const bodyContent = await rewriteArticleWithOpenRouter(candidate.title, rawBody, candidate.lab, candidate.link);
     
     const wordCount = bodyContent.split(/\s+/).length;
     const readTimeMinutes = Math.max(2, Math.ceil(wordCount / 200));
