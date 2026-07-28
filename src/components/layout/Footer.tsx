@@ -139,6 +139,9 @@ export default function Footer() {
         {/* Left Side: Copyright & Legal */}
         <div className="flex flex-wrap items-center justify-center md:justify-start gap-x-6 gap-y-2 text-xs text-white/50 font-normal">
           <span>&copy; Modelverse {currentYear}</span>
+          <Link href="/terms" className="hover:text-white transition-colors cursor-pointer">
+            Terms of Service
+          </Link>
           <Link href="/privacy" className="hover:text-white transition-colors cursor-pointer">
             Privacy Policy
           </Link>
