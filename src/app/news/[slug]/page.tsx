@@ -273,19 +273,27 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
               Footnotes & Primary References
             </h3>
             <ul className="space-y-2 text-xs font-mono text-[#90908F]">
-              {article.externalSources.map((src, idx) => (
-                <li key={idx} className="flex items-start gap-2">
-                  <span className="shrink-0 select-none text-emerald-400">[{idx + 1}]</span>
-                  <a
-                    href={src}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-[#E1E1E0] hover:text-emerald-400 hover:underline truncate"
-                  >
-                    {src}
-                  </a>
-                </li>
-              ))}
+              {article.externalSources.map((src, idx) => {
+                let domain = "";
+                try {
+                  domain = new URL(src).hostname.replace("www.", "");
+                } catch (e) {
+                  domain = "External Source";
+                }
+                return (
+                  <li key={idx} className="flex items-start gap-2">
+                    <span className="shrink-0 select-none text-emerald-400">[{idx + 1}]</span>
+                    <a
+                      href={src}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-[#E1E1E0] hover:text-emerald-400 hover:underline truncate"
+                    >
+                      Read full report on {domain}
+                    </a>
+                  </li>
+                );
+              })}
             </ul>
           </div>
         )}

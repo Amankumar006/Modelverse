@@ -90,22 +90,24 @@ Write the unique summary in Markdown (do not write any intro like "Here is your 
   };
 
   const url = "https://openrouter.ai/api/v1/chat/completions";
-  const responseJson = await postHttps(url, payload, headers);
-  const data = JSON.parse(responseJson);
-  
-  if (data.choices && data.choices[0] && data.choices[0].message && data.choices[0].message.content) {
-    let rewritten = data.choices[0].message.content.trim();
+  try {
+    const responseJson = await postHttps(url, payload, headers);
+    const data = JSON.parse(responseJson);
     
-    // Clean up typical LLM intros if they slipped through
-    rewritten = rewritten.replace(/^Here is a summary:|^Here's the summary:|^Summary:/i, "").trim();
+    if (data.choices && data.choices[0] && data.choices[0].message && data.choices[0].message.content) {
+      let rewritten = data.choices[0].message.content.trim();
+      
+      // Clean up typical LLM intros if they slipped through
+      rewritten = rewritten.replace(/^Here is a summary:|^Here's the summary:|^Summary:/i, "").trim();
 
-    // Append source attribution
-    rewritten += `\n\n### Official Announcement\nRead the full update directly from the official source at [${lab} News](${originalUrl}).\n\nStay tuned to [Modelverse](https://www.themodelverse.in/) for real-time model analysis and benchmark coverage.`;
-    
-    return rewritten;
+      return rewritten;
+    }
+  } catch (e) {
+    console.error(`  ⚠️ Failed to rewrite article using OpenRouter: ${e.message}`);
   }
-  
-  throw new Error("Empty or malformed completion response from OpenRouter");
+
+  // Fallback
+  return body;
 }
 
 async function runMigration() {

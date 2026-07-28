@@ -248,9 +248,6 @@ Write the unique summary in Markdown (do not write any intro like "Here is your 
     if (data.choices && data.choices[0] && data.choices[0].message && data.choices[0].message.content) {
       let rewritten = data.choices[0].message.content.trim();
       
-      // Append source attribution
-      rewritten += `\n\n### Official Announcement\nRead the full update directly from the official source at [${lab} News](${originalUrl}).\n\nStay tuned to [Modelverse](https://www.themodelverse.in/) for real-time model analysis and benchmark coverage.`;
-      
       console.log(`  ✍️ Successfully rewrote article via OpenRouter: "${title.slice(0, 45)}..."`);
       return rewritten;
     }
@@ -258,8 +255,8 @@ Write the unique summary in Markdown (do not write any intro like "Here is your 
     console.error(`  ⚠️ Failed to rewrite article using OpenRouter: ${e.message}`);
   }
 
-  // Fallback to original layout
-  return body + `\n\n### Official Announcement\nRead the full update directly from the official source at [${lab} News](${originalUrl}).\n\nStay tuned to [Modelverse](https://www.themodelverse.in/) for real-time model analysis and benchmark coverage.`;
+  // Fallback
+  return body;
 }
 
 function slugify(text) {
