@@ -1,0 +1,24 @@
+{
+  "id": "the-path-to-artificial-superintelligence",
+  "slug": "the-path-to-artificial-superintelligence",
+  "title": "The path to artificial superintelligence",
+  "category": "short-news",
+  "isTrending": true,
+  "publishDate": "2026-07-27",
+  "author": "MIT Technology Review / Modelverse Editorial",
+  "readTime": "2 min read",
+  "excerpt": "Imagine a healthcare system made up of multiple AI agents: one that manages symptom assessment, another scheduling, a third insurance, and a fourth pharmacy. Each is an expert in i...",
+  "body": "FeaturedTopicsNewslettersEventsAudioMIT Technology ReviewFeaturedTopicsNewslettersEventsAudioSponsored\n\nNext-generation multi-agent systems need a horizontal architecture that allows them to share intent, context, and reasoning to enable wide-scale problem solving no single agent is trained for.\n\nImagine a healthcare system made up of multiple AI agents: one that manages symptom assessment, another scheduling, a third insurance, and a fourth pharmacy.\n\nEach is an expert in its domain. But they all have their own distinct knowledge and objectives. Today they can exchange data, but they are not yet able to actually coordinate patient care without a human making the decisions.\n\n“The intelligence is already there. What is missing is the connective tissue that turns four strangers into one team,” explains Vijoy Pandey, senior vice president and general manager of Outshift by Cisco.\n\nThis “connective tissue” comes from adding a semantic layer—what Outshift calls the “Internet of Cognition”—that enables agents across domains to work together and, critically, “think” together through shared intent, context, and reasoning.\n\nThis semantic layer relies on a connectivity layer beneath it called the “Internet of Agents,” which allows autonomous agents to discover one another, prove identity, and exchange messages across domains.\n\nWhen used together, they enable “the next step on the road to distributed artificial superintelligence,” says Pandey.\n\n### Official Announcement\nRead the full update directly from the official source at [MIT Technology Review News](https://www.technologyreview.com/2026/07/27/1140724/the-path-to-artificial-superintelligence/).\n\nStay tuned to [Modelverse](https://www.themodelverse.in) for real-time model analysis and benchmark coverage.",
+  "coverImage": "https://wp.technologyreview.com/wp-content/uploads/2026/07/CREA-1571-MIT-tech-review-Misc-1200x675-option-2.png?resize=1200,600",
+  "status": "published",
+  "confidenceLevel": "confirmed",
+  "externalSources": [
+    "https://www.technologyreview.com/2026/07/27/1140724/the-path-to-artificial-superintelligence/"
+  ],
+  "relatedModels": [],
+  "tags": [
+    "ai-news",
+    "breaking",
+    "mit-technology-review"
+  ]
+}

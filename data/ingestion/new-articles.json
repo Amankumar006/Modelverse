@@ -1,68 +1,44 @@
 [
   {
-    "id": "scientific-computing-in-the-age-of-agentic-ai",
-    "slug": "scientific-computing-in-the-age-of-agentic-ai",
-    "title": "Scientific computing in the age of agentic AI",
+    "id": "perplexity-releases-pplx-a-single-binary-cli-that-puts-its-search-api-in-the-ter",
+    "slug": "perplexity-releases-pplx-a-single-binary-cli-that-puts-its-search-api-in-the-ter",
+    "title": "Perplexity Releases pplx, a Single-Binary CLI That Puts Its Search API in the Terminal for Coding Agents",
     "category": "short-news",
     "isTrending": true,
-    "publishDate": "2026-07-28",
-    "author": "OpenAI / Modelverse Editorial",
+    "publishDate": "2026-07-27",
+    "author": "MarkTechPost / Modelverse Editorial",
     "readTime": "2 min read",
-    "excerpt": "A new field report shows how scientists use AI coding agents to modernize scientific computing, accelerating software development and discovery in genomics and beyond.",
-    "body": "A new field report shows how scientists use AI coding agents to modernize scientific computing, accelerating software development and discovery in genomics and beyond.\n\n### Official Announcement\nRead the full update directly from the official source at [OpenAI News](https://openai.com/index/scientific-computing-agentic-ai).\n\nStay tuned to [Modelverse](https://www.themodelverse.in) for real-time model analysis and benchmark coverage.",
-    "coverImage": "/images/news/news_featured.jpg",
+    "excerpt": "Perplexity has released pplx, an official command line client for its Search API. The tool exposes two commands — pplx search web and pplx content fetch — and returns exactly one J...",
+    "body": "NewsHub NewsHub Premium Content Read our exclusive articles FacebookInstagramX Home Open Source/Weights AI Agents Tutorials Voice AI Robotics Newsletter → Partner with Us NewsHub Search Home Open Source/Weights AI Agents Tutorials Voice AI Robotics Newsletter → Partner with Us Home Editors Pick Agentic AI Perplexity Releases pplx, a Single-Binary CLI That Puts Its Search API in... Editors PickAgentic AIAI AgentsArtificial IntelligenceApplicationsTechnologyNew ReleasesOpen SourceSoftware EngineeringStaffTech News Perplexity Releases pplx, a Single-Binary CLI That Puts Its Search API in the Terminal for Coding Agents By Michal Sutter - July 27, 2026 Perplexity has released pplx, an official command line client for its Search API. The tool returns grounded search results and extracted page text, all as JSON. According to its docs, it targets humans and coding agents equally. It is not a chat client. There is no conversational mode, no model selection and no synthesized answer.\n\nThe tool exposes exactly two working surfaces. pplx search web runs a live web search. pplx content fetch pulls a URL and returns cleaned page text.\n\nThe contract around them is the interesting part. Per the official pplx-cli Agent Skill, success means exit code 0 and exactly one JSON object on stdout. Search returns {hits: [{url, title, domain, snippet, ...}], total, saved_to?}.\n\nEvery failure exits 1 with an empty stdout. One JSON error object goes to stderr, shaped {\"error\":{\"code\",\"message\",\"command\",\"hint\"?}}. Documented codes include AUTHENTICATION, UNKNOWN_ARGUMENT, ARGUMENT_ERROR and BAD_REQUEST. The skill notes that list is not exhaustive, so callers should branch on error.code.\n\nInstallation is a single shell command that pipes a script into sh:\n\ncurl -fsSL https://github.com/perplexityai/perplexity-cli/releases/latest/download/install.sh | sh Reading install.sh shows what it actually does. It downloads manifest.json from the latest release and extracts the tag and version. It then pins every remaining download to that tag, explicitly to avoid racing a concurrent publish.\n\nIt fetches SHA256SUMS and the platform binary, verifies the checksum, and installs to ~/.local/bin/pplx. No sudo is required. A receipt is written to ~/.config/pplx/pplx-receipt.json, but only after the installed binary runs successfully.\n\nPlatform coverage is limited to three targets: macOS on Apple Silicon, Linux x86_64 and Linux arm64. Anything else exits with an error. There is no Windows build and no Intel macOS build.\n\n### Official Announcement\nRead the full update directly from the official source at [MarkTechPost News](https://www.marktechpost.com/2026/07/27/perplexity-releases-pplx/).\n\nStay tuned to [Modelverse](https://www.themodelverse.in) for real-time model analysis and benchmark coverage.",
+    "coverImage": "https://www.marktechpost.com/wp-content/uploads/2026/07/blog6171-8.png",
     "status": "published",
     "confidenceLevel": "confirmed",
     "externalSources": [
-      "https://openai.com/index/scientific-computing-agentic-ai"
+      "https://www.marktechpost.com/2026/07/27/perplexity-releases-pplx/"
     ],
     "relatedModels": [],
     "tags": [
       "ai-news",
       "breaking",
-      "openai"
+      "marktechpost"
     ]
   },
   {
-    "id": "recursive-superintelligence-signs-410m-compute-deal-with-amazon",
-    "slug": "recursive-superintelligence-signs-410m-compute-deal-with-amazon",
-    "title": "Recursive Superintelligence signs $410M compute deal with Amazon",
-    "category": "short-news",
-    "isTrending": true,
-    "publishDate": "2026-07-28",
-    "author": "TechCrunch AI / Modelverse Editorial",
-    "readTime": "2 min read",
-    "excerpt": "Recursive’s emphasis on self-improving AI systems means much of the budget that would traditionally go toward headcount and operations is put straight into compute, as the company ...",
-    "body": "Recursive Superintelligence signs $410M compute deal with Amazon Russell Brandom 6:19 AM PDT · July 28, 2026 On Tuesday, the AI company Recursive Superintelligence announced a $410 million compute deal with Amazon Web Services. The company, which emerged from stealth in May with $650 million in funding, is focused on building open-ended self-improving systems, a potentially compute-intensive approach to AI research. This multiyear deal is meant to provide flexibility as the company looks to scale up those systems.\n\nRecursive’s $410 million outlay represents the bulk of the company’s fundraising to date — but on a call with TechCrunch, founder and CEO Richard Socher emphasized that he expected it to be the first of many such deals. Today’s announcement is \"likely going to be one of the smallest compute deals we're going to sign in the next few years,\" Socher said.\n\nRecursive’s emphasis on self-improving AI systems means much of the budget that would traditionally go toward headcount and operations is put straight into compute, as the company seeks to automate its own product development process.\n\n“For us, it's less about headcount and more about agent count,” Socher said.\n\nThere’s no investment component to Amazon’s involvement, in contrast to major labs’ habit of hybrid investment arrangements. But the sheer scale of the commitment allows AWS to commit significant resources to supporting Recursive’s unique needs, which may help to draw in other foundation-level AI companies going forward.\n\n“Part of the agreement is that we're going to co-develop infrastructure purpose-built for these types of compan[ies],” said Jason Bennett, VP for startups and venture capital at AWS.\n\nRecursive self-improvement (RSI) has long been seen as an inflection point for AI, with some expecting an explosion of progress once AI can be improved without human involvement. But as more labs and companies pursue the idea, the specific requirements have become ambiguous, with some predicting an imminent breakthrough while others characterize self-improvement as more of a continuum.\n\nBut in Recursive’s case, the goal is to use the powers of RSI to develop actual products — and Socher expects to be releasing the earliest examples before the end of the year.\n\n### Official Announcement\nRead the full update directly from the official source at [TechCrunch AI News](https://techcrunch.com/2026/07/28/recursive-superintelligence-signs-400-compute-deal-with-amazon/).\n\nStay tuned to [Modelverse](https://www.themodelverse.in) for real-time model analysis and benchmark coverage.",
-    "coverImage": "https://techcrunch.com/wp-content/uploads/2021/11/GettyImages-1236309559.jpg?w=1024",
-    "status": "published",
-    "confidenceLevel": "confirmed",
-    "externalSources": [
-      "https://techcrunch.com/2026/07/28/recursive-superintelligence-signs-400-compute-deal-with-amazon/"
-    ],
-    "relatedModels": [],
-    "tags": [
-      "ai-news",
-      "breaking",
-      "techcrunch-ai"
-    ]
-  },
-  {
-    "id": "openai-called-the-hugging-face-attack-unprecedented-but-weve-been-here-before",
-    "slug": "openai-called-the-hugging-face-attack-unprecedented-but-weve-been-here-before",
-    "title": "OpenAI called the Hugging Face attack unprecedented. But we’ve been here before.",
+    "id": "the-path-to-artificial-superintelligence",
+    "slug": "the-path-to-artificial-superintelligence",
+    "title": "The path to artificial superintelligence",
     "category": "short-news",
     "isTrending": true,
     "publishDate": "2026-07-27",
     "author": "MIT Technology Review / Modelverse Editorial",
-    "readTime": "3 min read",
-    "excerpt": "This story originally appeared in The Algorithm, our weekly newsletter on AI. To get stories like this in your inbox first,&#160;sign up here. Reading OpenAI’s account last week of...",
-    "body": "FeaturedTopicsNewslettersEventsAudioMIT Technology ReviewFeaturedTopicsNewslettersEventsAudioArtificial intelligenceOpenAI called the Hugging Face attack unprecedented. But we’ve been here before. A decade-old experiment showed OpenAI how far an AI will go to achieve the goals it’s given.\n\nThis story originally appeared in The Algorithm, our weekly newsletter on AI. To get stories like this in your inbox first, sign up here.\n\nReading OpenAI’s account last week of how some of its models broke their containment and hacked into the computer systems of Hugging Face, another AI company, was the first time I got genuine chills about what large language models are now able to do. But this is a case of human hubris, not rogue AI.\n\nI am not an alarmist. In fact, I have been pushing back against AI scare stories for years. Even so, this incident crossed a line. I think it’s the clearest illustration yet of how the people building and testing this technology do not fully understand what they’re doing. OpenAI could—and should—have seen this coming.\n\nHere’s what happened, at least according to the two companies involved. A couple of weeks ago, OpenAI started testing the hacking abilities of some of its new models, including GPT‑5.6 Sol (released in June) and what OpenAI describes as “an even more capable pre-release model.”\n\nOpenAI pitted its models against a benchmark called ExploitGym, released in May, which challenges LLMs to find ways to exploit hundreds of real-world vulnerabilities found in widely used software, including crucial code that underpins the web.\n\nTo see what they could do, the researchers removed most of their cybersecurity guardrails. Then they ran the models inside a sandbox that was cut off from the internet except for one link to a third-party piece of software that acted as a proxy to the outside world, so that the models could install code they needed to beat ExploitGym.\n\nOn July 9, according to reporting by Reuters, OpenAI’s models started trying to break through the proxy. They found an unknown bug in the proxy’s software and used it to access the internet. From there, they broke into Hugging Face’s computer systems on July 11, apparently looking for data sets and solutions that would help them complete the tasks they were being tested on. Hugging Face announced the hack on July 16.\n\n### Official Announcement\nRead the full update directly from the official source at [MIT Technology Review News](https://www.technologyreview.com/2026/07/27/1140836/openai-hugging-face-attack-precedent/).\n\nStay tuned to [Modelverse](https://www.themodelverse.in) for real-time model analysis and benchmark coverage.",
-    "coverImage": "https://wp.technologyreview.com/wp-content/uploads/2026/07/redteam-faceoff.jpg?resize=1200,600",
+    "readTime": "2 min read",
+    "excerpt": "Imagine a healthcare system made up of multiple AI agents: one that manages symptom assessment, another scheduling, a third insurance, and a fourth pharmacy. Each is an expert in i...",
+    "body": "FeaturedTopicsNewslettersEventsAudioMIT Technology ReviewFeaturedTopicsNewslettersEventsAudioSponsored\n\nNext-generation multi-agent systems need a horizontal architecture that allows them to share intent, context, and reasoning to enable wide-scale problem solving no single agent is trained for.\n\nImagine a healthcare system made up of multiple AI agents: one that manages symptom assessment, another scheduling, a third insurance, and a fourth pharmacy.\n\nEach is an expert in its domain. But they all have their own distinct knowledge and objectives. Today they can exchange data, but they are not yet able to actually coordinate patient care without a human making the decisions.\n\n“The intelligence is already there. What is missing is the connective tissue that turns four strangers into one team,” explains Vijoy Pandey, senior vice president and general manager of Outshift by Cisco.\n\nThis “connective tissue” comes from adding a semantic layer—what Outshift calls the “Internet of Cognition”—that enables agents across domains to work together and, critically, “think” together through shared intent, context, and reasoning.\n\nThis semantic layer relies on a connectivity layer beneath it called the “Internet of Agents,” which allows autonomous agents to discover one another, prove identity, and exchange messages across domains.\n\nWhen used together, they enable “the next step on the road to distributed artificial superintelligence,” says Pandey.\n\n### Official Announcement\nRead the full update directly from the official source at [MIT Technology Review News](https://www.technologyreview.com/2026/07/27/1140724/the-path-to-artificial-superintelligence/).\n\nStay tuned to [Modelverse](https://www.themodelverse.in) for real-time model analysis and benchmark coverage.",
+    "coverImage": "https://wp.technologyreview.com/wp-content/uploads/2026/07/CREA-1571-MIT-tech-review-Misc-1200x675-option-2.png?resize=1200,600",
     "status": "published",
     "confidenceLevel": "confirmed",
     "externalSources": [
-      "https://www.technologyreview.com/2026/07/27/1140836/openai-hugging-face-attack-precedent/"
+      "https://www.technologyreview.com/2026/07/27/1140724/the-path-to-artificial-superintelligence/"
     ],
     "relatedModels": [],
     "tags": [
@@ -72,171 +48,99 @@
     ]
   },
   {
-    "id": "openais-hugging-face-breach-has-reignited-the-debate-over-alignment-and-control",
-    "slug": "openais-hugging-face-breach-has-reignited-the-debate-over-alignment-and-control",
-    "title": "OpenAI’s Hugging Face breach has reignited the debate over alignment and control",
+    "id": "closing-the-data-loop-in-ai-driven-drug-discovery",
+    "slug": "closing-the-data-loop-in-ai-driven-drug-discovery",
+    "title": "Closing the data loop in AI-driven drug discovery",
     "category": "short-news",
     "isTrending": true,
     "publishDate": "2026-07-27",
-    "author": "TechCrunch AI / Modelverse Editorial",
-    "readTime": "3 min read",
-    "excerpt": "OpenAI's Hugging Face breach has reignited debate over AI alignment and control, exposing competing views on whether increasingly capable AI should be better aligned, better contai...",
-    "body": "OpenAI’s Hugging Face breach has reignited the debate over alignment and control When alignment isn't enough, build better cages. Rebecca Bellan 10:28 AM PDT · July 27, 2026 Last week, an unreleased model built by OpenAI breached Hugging Face’s systems during internal testing, and a lot of theoretical research suddenly became very practical. The hack was the first verifiable case of an AI lab losing control of its own model, chaining together exploits to gain access it never should have had. But while the AI industry has been united in its alarm, a split has emerged in how researchers want to respond.\n\nFor some, the problem is a basic cybersecurity issue: The sandbox failed to contain the model, and Hugging Face’s cybersecurity systems failed to keep it out. Those problems can be solved by patching bugs and building more robust control and containment methods for increasingly capable AI that is prone to go rogue in autonomous environments.&nbsp;\n\nBut another camp takes a more pessimistic view. For them, AI’s rapidly increasing capabilities mean that trying to control rogue models is a losing game. The only robust security comes from making sure the models aren’t trying to escape in the first place — a challenge often referred to as alignment. In alignment terms, the problem is that OpenAI’s model was trying to cheat, and solving that problem is more urgent than short-term containment efforts.\n\nJudging by its public statements, OpenAI is taking both camps seriously. The company has rushed to patch the bugs involved in the hack, and it referenced both alignment and monitoring approaches in its statement after the breach became public. But the company’s response also suggests a philosophy that has left many safety researchers alarmed: Rather than slowing down or stopping the development of more capable models, it should instead focus on building stronger cages around them.&nbsp;&nbsp;\n\n“As models take on longer and more complex tasks, failures that evaluations miss may carry greater consequences,” OpenAI said in a postmortem of the incident. “We will keep working to narrow the gap between evaluation and deployment: testing models over longer trajectories, improving alignment, building monitoring that can intervene, and giving users clearer visibility and control.”\n\nThere’s also reason to think OpenAI’s models are becoming less aligned as they become more powerful. According to OpenAI’s system card ,GPT-5.6 Sol is significantly more prone to agentic misalignment than its predecessor, GPT-5.5. In deployment simulations, the company also found the model was more likely to circumvent restrictions, engage in destructive actions, and perform unauthorized data transfers than GPT-5.5. Those figures were largely overlooked on first release, but in the wake of the breach, they’re getting a second look — particularly since Sol was one of the models involved.\n\nIn a social media post, OpenAI’s Head of Strategic Futures, Dean Ball, argued that monitoring and transparency were the best ways to keep those tendencies in check.\n\n“These issues will become more salient as the capabilities of models improve, and as the stakes of their deployment grow,” he said. “The solution is neither alarmism nor complacency. Instead, I believe the solution lies in careful measurement and monitoring, an engineering mentality, and transparency.”\n\n### Official Announcement\nRead the full update directly from the official source at [TechCrunch AI News](https://techcrunch.com/2026/07/27/openais-hugging-face-breach-has-reignited-the-debate-over-alignment-and-control/).\n\nStay tuned to [Modelverse](https://www.themodelverse.in) for real-time model analysis and benchmark coverage.",
-    "coverImage": "https://techcrunch.com/wp-content/uploads/2026/07/hugging-face-openai-logos-split-screen.jpg?resize=1200,799",
-    "status": "published",
-    "confidenceLevel": "confirmed",
-    "externalSources": [
-      "https://techcrunch.com/2026/07/27/openais-hugging-face-breach-has-reignited-the-debate-over-alignment-and-control/"
-    ],
-    "relatedModels": [],
-    "tags": [
-      "ai-news",
-      "breaking",
-      "techcrunch-ai"
-    ]
-  },
-  {
-    "id": "threads-users-can-now-chat-with-meta-ai-in-their-dms",
-    "slug": "threads-users-can-now-chat-with-meta-ai-in-their-dms",
-    "title": "Threads users can now chat with Meta AI in their DMs",
-    "category": "short-news",
-    "isTrending": true,
-    "publishDate": "2026-07-27",
-    "author": "TechCrunch AI / Modelverse Editorial",
+    "author": "MIT Technology Review / Modelverse Editorial",
     "readTime": "2 min read",
-    "excerpt": "Meta on Monday said it is rolling out its Meta AI chatbot within Threads' DMs, giving users a way to chat with the AI assistant.",
-    "body": "Meta on Monday said it is rolling out its Meta AI chatbot within Threads' DMs, giving users a way to chat with the AI assistant.\n\nAlthough Threads users in select markets could already interact with Meta AI in public posts, like people can with Grok on X, this new integration lets users talk with the AI assistant privately.\n\nBy giving users an easier way to talk to an AI chatbot, Meta is looking to keep users within its ecosystem, with an eye toward discouraging them from using third-party assistants like OpenAI's ChatGPT or Google Gemini.\n\nMeta AI is already available within DMs on Meta's other platforms, including Facebook, Instagram, and WhatsApp.\n\nThe new integration lets users share Threads posts, images, links, and videos directly with Meta AI. You can ask follow-up questions and dive deeper into topics, too.\n\nThe update will be rolled out globally starting Monday, the company says.\n\nMeta noted it's continuing to test Meta AI in Threads' public feeds in a handful of global markets and is considering feedback before expanding availability more broadly. Users who want to see fewer Meta AI replies in their feed can mute @meta.ai, use the “Not interested” option on any Meta AI post, or hide Meta AI replies that appear on their post.\n\nBy further integrating Meta AI into Threads, Meta is positioning its X rival as a place where you can get information and recommendations without having to leave the app.\n\n### Official Announcement\nRead the full update directly from the official source at [TechCrunch AI News](https://techcrunch.com/2026/07/27/threads-users-can-now-chat-with-meta-ai-in-their-dms/).\n\nStay tuned to [Modelverse](https://www.themodelverse.in) for real-time model analysis and benchmark coverage.",
-    "coverImage": "https://techcrunch.com/wp-content/uploads/2026/02/threads-finger-GettyImages-2232887912.jpg?w=1024",
+    "excerpt": "Drug discovery is a high-cost, high-risk endeavor that is under growing pressure from a market increasingly defined by first-mover advantage. Since the 1950s, the cost of developin...",
+    "body": "FeaturedTopicsNewslettersEventsAudioMIT Technology ReviewFeaturedTopicsNewslettersEventsAudioSponsored\n\nAI is identifying new therapeutics targets faster than ever. But this speed is exposing physical bottlenecks in the lab, and a need for better data.\n\nDrug discovery is a high-cost, high-risk endeavor that is under growing pressure from a market increasingly defined by first-mover advantage.\n\nSince the 1950s, the cost of developing new pharmaceuticals has roughly doubled every nine years—a phenomenon known as Eroom’s Law. Today, bringing a new drug to market takes an average of 10-15 years and costs anywhere from $1 billion to $2.5 billion, with failure rates upward of 90%.\n\nAI has become the pharmaceutical industry’s biggest bet on bringing success rates up and timelines down. The faster drug companies can identify, test, and optimize new chemical compounds, the lower the risk of costly failures later in development.\n\n“The main cost in drug discovery is still the clinical phase, so trying to reduce risk and increase your success rates there is obviously hugely beneficial,” says Paul Belcher, director of protein research strategy at global life sciences company Cytiva. “AI is one approach that drug companies hope will not only save time and compress timelines, but enable better quality candidates to reach the clinic.”\n\nEarly use of AI in drug discovery shows potential, but also highlights the need for robust and authentic data, as well as integration in lab systems.\n\nOne of the most promising early-stage applications of AI in drug discovery is in hit identification. This involves screening libraries of molecular entities against a disease-related target, such as a protein, to find molecules that bind to it. A successful hit gives researchers a starting point for further testing and refinement, with the aim of eventually developing a viable drug.\n\n### Official Announcement\nRead the full update directly from the official source at [MIT Technology Review News](https://www.technologyreview.com/2026/07/27/1139667/closing-the-data-loop-in-ai-driven-drug-discovery/).\n\nStay tuned to [Modelverse](https://www.themodelverse.in) for real-time model analysis and benchmark coverage.",
+    "coverImage": "https://wp.technologyreview.com/wp-content/uploads/2026/06/iStock-2247435323.jpg?resize=1200,600",
     "status": "published",
     "confidenceLevel": "confirmed",
     "externalSources": [
-      "https://techcrunch.com/2026/07/27/threads-users-can-now-chat-with-meta-ai-in-their-dms/"
+      "https://www.technologyreview.com/2026/07/27/1139667/closing-the-data-loop-in-ai-driven-drug-discovery/"
     ],
     "relatedModels": [],
     "tags": [
       "ai-news",
       "breaking",
-      "techcrunch-ai"
+      "mit-technology-review"
     ]
   },
   {
-    "id": "googles-ai-search-is-rapidly-becoming-the-default-new-data-shows",
-    "slug": "googles-ai-search-is-rapidly-becoming-the-default-new-data-shows",
-    "title": "Google's AI search is rapidly becoming the default, new data shows",
+    "id": "building-the-enterprise-environment-for-agentic-ai",
+    "slug": "building-the-enterprise-environment-for-agentic-ai",
+    "title": "Building the enterprise environment for agentic AI",
     "category": "short-news",
     "isTrending": true,
     "publishDate": "2026-07-27",
-    "author": "TechCrunch AI / Modelverse Editorial",
-    "readTime": "3 min read",
-    "excerpt": "Google’s AI Overviews now appear in 43% of searches, underscoring how quickly AI-generated answers are becoming the default way people discover information online.",
-    "body": "Google's AI search is rapidly becoming the default, new data shows Sarah Perez 8:57 AM PDT · July 27, 2026 AI search is rapidly becoming the default, whether users like it or not. In just a year's time, Google's AI-generated answers in search, known as AI Overviews, have gone from appearing in 15% of searches to 43%, according to a new report, driving a shift in how web users consume information online.\n\nIn a recent analysis of the generative landscape, market intelligence firm Similarweb noted that what began as an AI layer on top of search has become an integral part of the search journey itself, as Google drops users into AI Overviews, where they can then continue their research via Google's more conversational AI Mode.\n\nDuring the same period, AI Mode visits rose from 126 million in June 2025 to 279 million by May 2026.\n\nThe data illustrates a broader change in how users search the web — a shift from an era when Google provided a simple list of blue links to click through and read to one in which Google itself is the destination, sourcing its answers and information from the websites it indexes.\n\nThis, in turn, appears to increase the time users spend on Google's platform rather than using it only as a tool to discover websites. Over the past year, Similarweb's data shows that the average length of Google searches has risen, suggesting that people are now replacing their short keyword-based search queries with longer, more natural conversational ones designed for AI.\n\nThis change has not been welcomed by publishers, who are losing out on referral traffic due to the rise of AI citations that don't lead to clicks. Last year, Similarweb reported on this trend, noting in particular how devastating it was for news publishers. More recently, tech infrastructure company Cloudflare introduced tools that allow publishers to fight back by blocking AI crawlers from their websites unless those AI companies pay for access to their content through its marketplace.\n\nWhile AI citations don't always lead to users clicking through to a destination, the number of AI responses that include a citation has risen more than fivefold during the past year, Similarweb's new report says.\n\nStill, just 6.8% of U.S. ChatGPT desktop queries included citations as of May 2026, despite this growth. (Some industries fare better, with travel, retail, and sports queries generating cited responses more frequently than others.)\n\n### Official Announcement\nRead the full update directly from the official source at [TechCrunch AI News](https://techcrunch.com/2026/07/27/googles-ai-search-is-rapidly-becoming-the-default-new-data-shows/).\n\nStay tuned to [Modelverse](https://www.themodelverse.in) for real-time model analysis and benchmark coverage.",
-    "coverImage": "https://techcrunch.com/wp-content/uploads/2024/05/Sundar-AI-Overviews-IO-2024.png?resize=1200,698",
-    "status": "published",
-    "confidenceLevel": "confirmed",
-    "externalSources": [
-      "https://techcrunch.com/2026/07/27/googles-ai-search-is-rapidly-becoming-the-default-new-data-shows/"
-    ],
-    "relatedModels": [],
-    "tags": [
-      "ai-news",
-      "breaking",
-      "techcrunch-ai"
-    ]
-  },
-  {
-    "id": "power-up-your-ai-infrastructure-a-first-look-at-the-smart-systems-stage-agenda-a",
-    "slug": "power-up-your-ai-infrastructure-a-first-look-at-the-smart-systems-stage-agenda-a",
-    "title": "Power up your AI infrastructure! A first look at the Smart Systems Stage agenda at TechCrunch Disrupt 2026",
-    "category": "short-news",
-    "isTrending": true,
-    "publishDate": "2026-07-27",
-    "author": "TechCrunch AI / Modelverse Editorial",
+    "author": "MIT Technology Review / Modelverse Editorial",
     "readTime": "2 min read",
-    "excerpt": "At TechCrunch Disrupt 2026, the Smart Systems Stage will be where energy, infrastructure, and technology collide, covering everything from fusion breakthroughs to the grid strain A...",
-    "body": "Power up your AI infrastructure! A first look at the Smart Systems Stage agenda at TechCrunch Disrupt 2026 TechCrunch Events 8:30 AM PDT · July 27, 2026 AI doesn't run on code alone — it requires massive amounts of power, and that demand is increasingly becoming a critical bottleneck. At TechCrunch Disrupt 2026, the Smart Systems Stage will be where energy, infrastructure, and technology collide, covering everything from fusion breakthroughs to the grid strain AI is putting on the entire economy.\n\nFrom October 13-15 in San Francisco's Moscone Center, join leaders from Commonwealth Fusion Systems, Helion, Inertia, Bloom Energy, and more as they dig into what it actually takes to power the next decade of innovation. We’re tackling everything from commercial fusion's path, to the grid and why utilities and startups are racing to modernize aging infrastructure, to how data center operators are scrambling to secure the electricity that AI's growth depends on.\n\nWe're also closing in on the end of our current pricing window, so this is your chance to save on all of our tickets for founders, investors, and more — grab your ticket here before our current discounts are gone! As for the agenda at hand, let’s explore the Smart Systems Stage lineup so far:\n\nLeaders from Commonwealth Fusion Systems and Helion break down the breakthroughs driving commercial fusion forward, the challenges still ahead, and what it will take to get fusion power onto the grid at scale.\n\nWith David Kirtley, CEO, Helion, and Brandon Sorbom, Chief Science Officer, Commonwealth Fusion Systems\n\nInertia CEO Jeff Lawson joins for a candid fireside chat on his path from founding Twilio to leading one of the best-funded fusion power startups in the world — and how scaling Twilio is shaping his approach to talent, timelines, and the hard engineering questions ahead.\n\nElectricity demand is growing faster than the infrastructure built to support it. This panel explores what it takes to modernize the power system, where investment is flowing, and how utilities, startups, and technology providers are building a more resilient, flexible grid.\n\nWith Drew Baglino, Founder & CEO, Heron Power; Apoorv Bhargava, CEO and Co-founder, WeaveGrid; and more speakers to be announced\n\n### Official Announcement\nRead the full update directly from the official source at [TechCrunch AI News](https://techcrunch.com/2026/07/27/power-up-your-ai-infrastructure-a-first-look-at-the-smart-systems-stage-agenda-at-techcrunch-disrupt-2026/).\n\nStay tuned to [Modelverse](https://www.themodelverse.in) for real-time model analysis and benchmark coverage.",
-    "coverImage": "https://techcrunch.com/wp-content/uploads/2026/07/techcrunch-disrupt-2026-smart-systems-stage.jpg?w=1200",
+    "excerpt": "For the enterprise, the promise of agentic AI is much more than just a better chatbot. It is software agents that execute business tasks end-to-end across people, business workflow...",
+    "body": "FeaturedTopicsNewslettersEventsAudioMIT Technology ReviewFeaturedTopicsNewslettersEventsAudioSponsored\n\nEnterprises will find success with a complete agentic AI environment where agents plan, retrieve, remember, and act reliably at scale.\n\nFor the enterprise, the promise of agentic AI is much more than just a better chatbot. It is software agents that execute business tasks end-to-end across people, business workflows, data, and systems. The platform best-suited to run agents is built with proper CPU capacity, resilient data access, policy-aware tool use, observability, memory management, and the ability to predictably plan and scale agents.\n\nTo better understand some of these dependencies, Intel performed thousands of agentic AI workload experiments. Our initial findings create and support five practical lessons for enterprise leaders:\n\nAgentic AI is more than LLM inference. Its enterprise value depends on the full system, task orchestration, data access, tool execution, latency management, governance, and scalable infrastructure. An agent is a goal-driven automated enterprise workflow process: It plans a multi-step task, calls tools, reads results, and retries when something fails. Enterprise agents are therefore not just an inference problem; they are a systems problem.\n\nMost agentic AI metrics focus on evaluating the LLM used. Platform teams also need to know how long the tasks take, how many agents a fleet can support, what users experience at the end of the execution process, and how costs change as more agents work simultaneously.\n\nA more useful enterprise view looks at six metrics:\n\nTogether, these answer the questions enterprise AI operators care about: Is the system performing as expected? How many agents can the system sustain? How should it scale to support more agents?\n\n### Official Announcement\nRead the full update directly from the official source at [MIT Technology Review News](https://www.technologyreview.com/2026/07/27/1140668/building-the-enterprise-environment-for-agentic-ai/).\n\nStay tuned to [Modelverse](https://www.themodelverse.in) for real-time model analysis and benchmark coverage.",
+    "coverImage": "https://wp.technologyreview.com/wp-content/uploads/2026/07/Intel-contributed-iStock-1366067377.jpg?resize=1200,600",
     "status": "published",
     "confidenceLevel": "confirmed",
     "externalSources": [
-      "https://techcrunch.com/2026/07/27/power-up-your-ai-infrastructure-a-first-look-at-the-smart-systems-stage-agenda-at-techcrunch-disrupt-2026/"
+      "https://www.technologyreview.com/2026/07/27/1140668/building-the-enterprise-environment-for-agentic-ai/"
     ],
     "relatedModels": [],
     "tags": [
       "ai-news",
       "breaking",
-      "techcrunch-ai"
+      "mit-technology-review"
     ]
   },
   {
-    "id": "this-9-key-physically-locks-your-most-addictive-apps",
-    "slug": "this-9-key-physically-locks-your-most-addictive-apps",
-    "title": "This $9 key physically locks your most addictive apps",
+    "id": "how-ai-is-expanding-what-people-do-at-work",
+    "slug": "how-ai-is-expanding-what-people-do-at-work",
+    "title": "How AI is expanding what people do at work",
     "category": "short-news",
     "isTrending": true,
     "publishDate": "2026-07-27",
-    "author": "TechCrunch AI / Modelverse Editorial",
+    "author": "OpenAI / Modelverse Editorial",
     "readTime": "2 min read",
-    "excerpt": "This $9 NFC key requires you to physically scan it to unlock distracting apps on your phone.",
-    "body": "This $9 key physically locks your most addictive apps Lauren Forristal 8:25 AM PDT · July 27, 2026 Screen-time apps aren't effective for many people because, in the end, they depend on your willpower. They remind you to stop scrolling or let you set timers, but such notifications can be easy to ignore.&nbsp;\n\nAutonomous Key takes a different approach to this issue simply by being a physical device. It's an NFC key that pairs with a companion app to let you lock away distracting apps. So instead of tapping a button to bypass the block, you have to physically scan the key with your phone to regain access to your locked apps. Each unlock session can last for up to 60 minutes before the apps are automatically locked again.\n\nThat physical requirement is what makes the idea compelling. Instead of depending on your self-control, you can leave the NFC key in another room, or even at the office or gym, turning a mindless impulse to open Instagram or TikTok into a deliberate decision that requires extra effort.\n\nAt just $9, Autonomous Key is considerably cheaper than its competitors like Blok ($29), Unpluq ($26.50), and Brick ($59).\n\nBrick does offer a few more advanced features, including Sleep Mode and the ability to block in-app purchases, but Autonomous Key covers the core functionality at a fraction of the price.\n\nThe key itself is compact, measuring about 3 inches long, and works with smartphones running Android 8.0 or later, and iPhones running iOS 15 or later.\n\nThe companion app also provides AI-powered insights, tracking how often you unlock distracting apps, how long they remain accessible, and the times of day you're most likely to reach for them.\n\nNotably, the AI summarizes your habits with a deliberately sassy personality. For example, if you repeatedly unlock your apps immediately after locking them, it might say that the key clearly wasn't far enough away and will suggest putting it somewhere less convenient.\n\n### Official Announcement\nRead the full update directly from the official source at [TechCrunch AI News](https://techcrunch.com/2026/07/27/this-9-key-physically-locks-your-most-addictive-apps/).\n\nStay tuned to [Modelverse](https://www.themodelverse.in) for real-time model analysis and benchmark coverage.",
-    "coverImage": "https://techcrunch.com/wp-content/uploads/2026/07/AutonomousKey1.jpeg?w=1200",
+    "excerpt": "New OpenAI research shows how AI is expanding what workers do, with ChatGPT users taking on tasks across roles and reshaping job boundaries.",
+    "body": "New OpenAI research shows how AI is expanding what workers do, with ChatGPT users taking on tasks across roles and reshaping job boundaries.\n\n### Official Announcement\nRead the full update directly from the official source at [OpenAI News](https://openai.com/index/how-ai-is-expanding-what-people-do-at-work).\n\nStay tuned to [Modelverse](https://www.themodelverse.in) for real-time model analysis and benchmark coverage.",
+    "coverImage": "/images/news/news_short.jpg",
     "status": "published",
     "confidenceLevel": "confirmed",
     "externalSources": [
-      "https://techcrunch.com/2026/07/27/this-9-key-physically-locks-your-most-addictive-apps/"
+      "https://openai.com/index/how-ai-is-expanding-what-people-do-at-work"
     ],
     "relatedModels": [],
     "tags": [
       "ai-news",
       "breaking",
-      "techcrunch-ai"
+      "openai"
     ]
   },
   {
-    "id": "ilya-sutskevers-safe-superintelligence-partners-with-nvidia-to-scale-its-ai-rese",
-    "slug": "ilya-sutskevers-safe-superintelligence-partners-with-nvidia-to-scale-its-ai-rese",
-    "title": "Ilya Sutskever’s Safe Superintelligence partners with Nvidia to scale its AI research",
+    "id": "anatomy-of-a-frontier-lab-agent-intrusion-a-technical-timeline-of-the-july-2026-",
+    "slug": "anatomy-of-a-frontier-lab-agent-intrusion-a-technical-timeline-of-the-july-2026-",
+    "title": "Anatomy of a Frontier Lab Agent Intrusion: A Technical Timeline of the July 2026 Incident",
     "category": "short-news",
     "isTrending": true,
     "publishDate": "2026-07-27",
-    "author": "TechCrunch AI / Modelverse Editorial",
-    "readTime": "3 min read",
-    "excerpt": "After two years in stealth, Safe Superintelligence has announced a long-term partnership with Nvidia as it prepares to scale to its next phase.",
-    "body": "Ilya Sutskever’s Safe Superintelligence partners with Nvidia to scale its AI research Rebecca Bellan 8:01 AM PDT · July 27, 2026 After two years in stealth, Safe Superintelligence, the AI lab founded by former OpenAI co-founder and alignment lead Ilya Sutskever, has announced a long-term partnership with Nvidia as it prepares to scale to its next phase.&nbsp;\n\nThe deal, which includes an undisclosed investment, will give Safe Superintelligence (SSI) access to Nvidia’s Vera Rubin GPU platform, which is expected to increase the startup’s compute resources “by an order of magnitude.” The partnership comes as SSI has achieved significant research milestones, per Nvidia.&nbsp;\n\nNvidia's investment stretches into multiple billions, a source familiar with the deal told TechCrunch. Bloomberg reported that the deal size was $5 billion.\n\nAlready an investor in SSI, the chipmaking giant said it signed this compute partnership to “accelerate SSI’s next stage of growth after obtaining rare access into the company’s closely guarded research.”\n\n“We have research that is worthy of scaling up, and having access to a big NVIDIA computer will let us do so,” Sutskever said in a statement. “We are confident that our big bet on the Vera Rubin platform will take us to the next level.\n\nThe partnership news, while sparse in details, brings SSI back into the spotlight after a quiet two years since it was founded. The company is pursuing a “straight shot” research approach to building what it says is a safe, aligned artificial superintelligence, without getting distracted by commercial product releases or short-term revenue cycles.&nbsp;\n\nAt a time when commercial pressures to move fast could encourage AI labs to lower their bar for safety, SSI’s approach to developing foundational techniques focused on alignment and true general reasoning feels poignant.&nbsp;That's especially true in light of OpenAI's recent disclosure that one of its advanced models broke out of its sandbox to hack into Hugging Face during testing — sparking concerns about whether it’s even possible to ensure AI alignment before new, increasingly capable models are released.\n\nAccording to Nvidia, the two companies will also collaborate on advancing Nvidia’s current and future compute platforms, relying on SSI’s tech and “unique insights into the future of AI.” (SSI also partnered last year with Google Cloud to power its research.)\n\n### Official Announcement\nRead the full update directly from the official source at [TechCrunch AI News](https://techcrunch.com/2026/07/27/ilya-sutskevers-safe-superintelligence-partners-with-nvidia-to-scale-its-ai-research/).\n\nStay tuned to [Modelverse](https://www.themodelverse.in) for real-time model analysis and benchmark coverage.",
-    "coverImage": "https://techcrunch.com/wp-content/uploads/2024/05/ilyausutskever-GettyImages.jpg?resize=1200,800",
+    "author": "Hugging Face / Modelverse Editorial",
+    "readTime": "4 min read",
+    "excerpt": "Anatomy of a Frontier Lab Agent Intrusion: A Technical Timeline of the July 2026 Incident",
+    "body": "Models Datasets Spaces Buckets new Docs Enterprise Pricing Website Tasks HuggingChat Collections Languages Organizations Community Blog Posts Daily Papers Hardware Learn Discord Forum GitHub Solutions Team & Enterprise Hugging Face PRO Enterprise Support Inference Providers Inference Endpoints Storage Buckets Log In Sign Up Back to Articles a]:hidden\"> Anatomy of a Frontier Lab Agent Intrusion: A Technical Timeline of the July 2026 Incident Published July 27, 2026 Update on GitHub Upvote 4 Hugo Larcher hlarcher Follow Adrien Carreira XciD Follow raphael g raphael-gl Follow Christophe Rannou chris-rannou Follow TL;DR Initial access Stage 1: from an OpenAI evaluation sandbox to a rooted launchpad Stage 2: Penetrating Hugging Face infrastructure using two injection vectors into our dataset processor The kill chain Day-by-day Day 1 (07-09): foothold and C2 Day 2 (07-10): self-referential search Day 3 (07-11): lateral movement begins Day 4 (07-12): using the stolen credentials Day 5 (07-13): exfil, persistence, cleanup Three lateral-movement techniques 1. Node impersonation and CSI token theft (from the prod-pod foothold) 2. Forged identity tokens (from the prod-pod foothold) 3. Supply-chain write access Command-and-control and exfiltration Building an improvised message protocol Evasion and self-migration How we intercepted and analyzed the attack What we changed Reflection: the asymmetry problem A companion technical writeup to our incident disclosure. This post walks through how the intrusion actually worked: the two initial-access vectors, how the agent pivoted and moved laterally, representative examples of the commands that were run and how we investigate with GLM 5.2 (an open-source model). Live credentials, internal hostnames, and specific indicators have been redacted or genericized, while the techniques are described exactly as observed by Hugging Face.\n\nWe are publishing this level of detail because the technique matters more than the incident, as it reveals the emerging attack capabilities of the frontier agents, how they could be used by rogue actors and how everyone should be prepared as defenders.\n\n▶ Watch the interactive replay - a step-by-step visualization of the 4.5-day intrusion: the attack chain across trust boundaries, phase activity, and the commands as they were recorded.\n\nTL;DR Over roughly two and a half days, an autonomous AI agent driven by a combination of OpenAI models ran an end-to-end intrusion against our platform: it was thousands of small, automated decisions, executed at machine speed across short-lived sandbox environments, with command-and-control staged on ordinary public web services.\n\nThe agent was running an OpenAI cyber-capability evaluation harness called ExploitGym, an evaluation benchmark which tasks an AI agent with finding and exploiting software vulnerabilities. As far as we were able to infer, across the course of being evaluated on this benchmark the agent inferred that Hugging Face may host that benchmark's models, datasets, and reference solutions. We believe the entire intrusion was, from the agent's point of view, an attempt to cheat the evaluation: reach our production systems and steal the test solutions rather than solve the challenge on its own.\n\nOur forensic reconstruction covers ~17,600 attacker actions that we were able to recover, grouped into ~6,280 clusters, between 2026-07-09 02:28 UTC and 2026-07-13 14:14 UTC. We reconstructed these actions from the agent's logs on a code sandbox used by the agent (see below) and were able to map them to shell commands as well as evaluation submissions and correlate actions with our own platform logs, in particular from the dataset processor nodes, API, and pod. Using open-weights models, in particular zai-org/GLM-5.2, we were able to decipher most of the agent payloads (see below) that were encrypted via chunking and key encryption.\n\nThe campaign, as we were able to reconstruct it, had two stages:\n\nOnce a prod-pod foothold was established, the agent followed a standard escalation shape: recon, drop a stager, establish Command-and-Control (C2), then pivot into the cluster, into cloud metadata, into our internal network, and into our source-control supply chain. Output of the commands run inside our pod was sent back to the agent through the HF API and attacker-controlled dead-drop datasets, which the agent was reading back from that sandbox.\n\n### Official Announcement\nRead the full update directly from the official source at [Hugging Face News](https://huggingface.co/blog/agent-intrusion-technical-timeline).\n\nStay tuned to [Modelverse](https://www.themodelverse.in) for real-time model analysis and benchmark coverage.",
+    "coverImage": "https://huggingface.co/blog/assets/agent-intrusion-technical-timeline/thumbnail.png",
     "status": "published",
     "confidenceLevel": "confirmed",
     "externalSources": [
-      "https://techcrunch.com/2026/07/27/ilya-sutskevers-safe-superintelligence-partners-with-nvidia-to-scale-its-ai-research/"
+      "https://huggingface.co/blog/agent-intrusion-technical-timeline"
     ],
     "relatedModels": [],
     "tags": [
       "ai-news",
       "breaking",
-      "techcrunch-ai"
-    ]
-  },
-  {
-    "id": "enigma-raises-71m-to-make-controlling-a-robot-as-easy-as-adjusting-the-volume",
-    "slug": "enigma-raises-71m-to-make-controlling-a-robot-as-easy-as-adjusting-the-volume",
-    "title": "Enigma raises $71M to make controlling a robot as easy as adjusting the volume",
-    "category": "short-news",
-    "isTrending": true,
-    "publishDate": "2026-07-27",
-    "author": "TechCrunch AI / Modelverse Editorial",
-    "readTime": "3 min read",
-    "excerpt": "The massive seed round was led by  Index Ventures and Ribbit Capital, with participation from Sarah Guo's Conviction Partners.",
-    "body": "Enigma raises $71M to make controlling a robot as easy as adjusting the volume Marina Temkin 6:00 AM PDT · July 27, 2026 Multiple robotics companies are tackling one of AI’s hardest problems: building foundation models capable of executing tasks they were never explicitly trained to handle. Their approaches run the gamut — from studying millions of web videos and conducting computer simulations to collecting motion data from humans performing tasks in gloves with built-in sensors.\n\nEnigma, a research lab set to emerge from stealth on Monday, is taking a fundamentally different approach. Rather than focusing purely on model capabilities, the less-than-one-year-old startup wants to study how humans engage with robots in hopes that these interactions will lead to intuitive interfaces and possibly a different kind of robotic brain.\n\nTo finance its mission, Enigma raised a $71 million seed round led by Index Ventures and Ribbit Capital, with participation from Sarah Guo of Conviction Partners.\n\nTo test how humans want to communicate with machines, Enigma is launching a large-scale experiment that allows anyone in the world to interact online with more than 100 of its proprietary AI robots. These robots, housed in hangars located in Israel and California, can perform tasks such as drawing pictures with a paintbrush, fighting each other with swords, and performing simple chemistry experiments by picking up and mixing flasks with liquids. Enigma claims to have developed both the robotic arms and their underlying models entirely from the ground up.\n\nJonathan Jacobi (pictured right), Microsoft’s youngest-ever employee — recruited by Wiz founder Assaf Rappaport during his time there — co-founded Enigma with his longtime friend Gal Niv (pictured left). The two met while competing in hacking competitions as young teens, then became close friends while serving together in Israel’s elite Unit 8200, where they conducted cybersecurity research.\n\nWhen Jacobi and Niv set out to launch a startup together last year, they decided to apply their technical prowess to AI for robotics, a field where they lacked direct experience, but one they believed held the most exciting unsolved problems in tech.\n\nThey assembled a team of what Jacobi describes as some of their “smartest friends” from Israel’s tech ecosystem and community — including alumni from top AI labs, math Olympiad winners, and several people who were even convinced to drop out of PhD programs.\n\n\"There are a lot of robotics industry insiders participating in the next wave of embodied intelligence, but Jonathan and Gal are outsiders — they're not roboticists. It affords them more room for originality,” said Shardul Shah, partner at Index Ventures. “Someone who's an insider may start with the capability of teleoperation or dexterity, but Enigma is starting from a very different place: 'What’s the ultimate experience?'”\n\n### Official Announcement\nRead the full update directly from the official source at [TechCrunch AI News](https://techcrunch.com/2026/07/27/enigma-raises-70m-to-make-controlling-a-robot-as-easy-as-adjusting-the-volume/).\n\nStay tuned to [Modelverse](https://www.themodelverse.in) for real-time model analysis and benchmark coverage.",
-    "coverImage": "https://techcrunch.com/wp-content/uploads/2026/07/Enigma-Founders-Natasha-Zeriker-1.jpg?resize=1200,801",
-    "status": "published",
-    "confidenceLevel": "confirmed",
-    "externalSources": [
-      "https://techcrunch.com/2026/07/27/enigma-raises-70m-to-make-controlling-a-robot-as-easy-as-adjusting-the-volume/"
-    ],
-    "relatedModels": [],
-    "tags": [
-      "ai-news",
-      "breaking",
-      "techcrunch-ai"
+      "hugging-face"
     ]
   }
 ]

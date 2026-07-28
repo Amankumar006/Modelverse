@@ -1,0 +1,24 @@
+{
+  "id": "building-the-enterprise-environment-for-agentic-ai",
+  "slug": "building-the-enterprise-environment-for-agentic-ai",
+  "title": "Building the enterprise environment for agentic AI",
+  "category": "short-news",
+  "isTrending": true,
+  "publishDate": "2026-07-27",
+  "author": "MIT Technology Review / Modelverse Editorial",
+  "readTime": "2 min read",
+  "excerpt": "For the enterprise, the promise of agentic AI is much more than just a better chatbot. It is software agents that execute business tasks end-to-end across people, business workflow...",
+  "body": "FeaturedTopicsNewslettersEventsAudioMIT Technology ReviewFeaturedTopicsNewslettersEventsAudioSponsored\n\nEnterprises will find success with a complete agentic AI environment where agents plan, retrieve, remember, and act reliably at scale.\n\nFor the enterprise, the promise of agentic AI is much more than just a better chatbot. It is software agents that execute business tasks end-to-end across people, business workflows, data, and systems. The platform best-suited to run agents is built with proper CPU capacity, resilient data access, policy-aware tool use, observability, memory management, and the ability to predictably plan and scale agents.\n\nTo better understand some of these dependencies, Intel performed thousands of agentic AI workload experiments. Our initial findings create and support five practical lessons for enterprise leaders:\n\nAgentic AI is more than LLM inference. Its enterprise value depends on the full system, task orchestration, data access, tool execution, latency management, governance, and scalable infrastructure. An agent is a goal-driven automated enterprise workflow process: It plans a multi-step task, calls tools, reads results, and retries when something fails. Enterprise agents are therefore not just an inference problem; they are a systems problem.\n\nMost agentic AI metrics focus on evaluating the LLM used. Platform teams also need to know how long the tasks take, how many agents a fleet can support, what users experience at the end of the execution process, and how costs change as more agents work simultaneously.\n\nA more useful enterprise view looks at six metrics:\n\nTogether, these answer the questions enterprise AI operators care about: Is the system performing as expected? How many agents can the system sustain? How should it scale to support more agents?\n\n### Official Announcement\nRead the full update directly from the official source at [MIT Technology Review News](https://www.technologyreview.com/2026/07/27/1140668/building-the-enterprise-environment-for-agentic-ai/).\n\nStay tuned to [Modelverse](https://www.themodelverse.in) for real-time model analysis and benchmark coverage.",
+  "coverImage": "https://wp.technologyreview.com/wp-content/uploads/2026/07/Intel-contributed-iStock-1366067377.jpg?resize=1200,600",
+  "status": "published",
+  "confidenceLevel": "confirmed",
+  "externalSources": [
+    "https://www.technologyreview.com/2026/07/27/1140668/building-the-enterprise-environment-for-agentic-ai/"
+  ],
+  "relatedModels": [],
+  "tags": [
+    "ai-news",
+    "breaking",
+    "mit-technology-review"
+  ]
+}

@@ -374,6 +374,28 @@
     ]
   },
   {
+    "id": "anatomy-of-a-frontier-lab-agent-intrusion-a-technical-timeline-of-the-july-2026-",
+    "slug": "anatomy-of-a-frontier-lab-agent-intrusion-a-technical-timeline-of-the-july-2026-",
+    "title": "Anatomy of a Frontier Lab Agent Intrusion: A Technical Timeline of the July 2026 Incident",
+    "category": "short-news",
+    "publishDate": "2026-07-27",
+    "author": "Hugging Face / Modelverse Editorial",
+    "readTime": "4 min read",
+    "excerpt": "Anatomy of a Frontier Lab Agent Intrusion: A Technical Timeline of the July 2026 Incident",
+    "coverImage": "https://huggingface.co/blog/assets/agent-intrusion-technical-timeline/thumbnail.png",
+    "status": "published",
+    "confidenceLevel": "confirmed",
+    "externalSources": [
+      "https://huggingface.co/blog/agent-intrusion-technical-timeline"
+    ],
+    "relatedModels": [],
+    "tags": [
+      "ai-news",
+      "breaking",
+      "hugging-face"
+    ]
+  },
+  {
     "id": "are-brain-waves-the-next-unlock-for-physical-ai",
     "slug": "are-brain-waves-the-next-unlock-for-physical-ai",
     "title": "Are brain waves the next unlock for physical AI?",
@@ -415,6 +437,50 @@
       "ai-news",
       "breaking",
       "anthropic"
+    ]
+  },
+  {
+    "id": "building-the-enterprise-environment-for-agentic-ai",
+    "slug": "building-the-enterprise-environment-for-agentic-ai",
+    "title": "Building the enterprise environment for agentic AI",
+    "category": "short-news",
+    "publishDate": "2026-07-27",
+    "author": "MIT Technology Review / Modelverse Editorial",
+    "readTime": "2 min read",
+    "excerpt": "For the enterprise, the promise of agentic AI is much more than just a better chatbot. It is software agents that execute business tasks end-to-end across people, business workflow...",
+    "coverImage": "https://wp.technologyreview.com/wp-content/uploads/2026/07/Intel-contributed-iStock-1366067377.jpg?resize=1200,600",
+    "status": "published",
+    "confidenceLevel": "confirmed",
+    "externalSources": [
+      "https://www.technologyreview.com/2026/07/27/1140668/building-the-enterprise-environment-for-agentic-ai/"
+    ],
+    "relatedModels": [],
+    "tags": [
+      "ai-news",
+      "breaking",
+      "mit-technology-review"
+    ]
+  },
+  {
+    "id": "closing-the-data-loop-in-ai-driven-drug-discovery",
+    "slug": "closing-the-data-loop-in-ai-driven-drug-discovery",
+    "title": "Closing the data loop in AI-driven drug discovery",
+    "category": "short-news",
+    "publishDate": "2026-07-27",
+    "author": "MIT Technology Review / Modelverse Editorial",
+    "readTime": "2 min read",
+    "excerpt": "Drug discovery is a high-cost, high-risk endeavor that is under growing pressure from a market increasingly defined by first-mover advantage. Since the 1950s, the cost of developin...",
+    "coverImage": "https://wp.technologyreview.com/wp-content/uploads/2026/06/iStock-2247435323.jpg?resize=1200,600",
+    "status": "published",
+    "confidenceLevel": "confirmed",
+    "externalSources": [
+      "https://www.technologyreview.com/2026/07/27/1139667/closing-the-data-loop-in-ai-driven-drug-discovery/"
+    ],
+    "relatedModels": [],
+    "tags": [
+      "ai-news",
+      "breaking",
+      "mit-technology-review"
     ]
   },
   {
@@ -481,6 +547,28 @@
       "ai-news",
       "breaking",
       "techcrunch-ai"
+    ]
+  },
+  {
+    "id": "how-ai-is-expanding-what-people-do-at-work",
+    "slug": "how-ai-is-expanding-what-people-do-at-work",
+    "title": "How AI is expanding what people do at work",
+    "category": "short-news",
+    "publishDate": "2026-07-27",
+    "author": "OpenAI / Modelverse Editorial",
+    "readTime": "2 min read",
+    "excerpt": "New OpenAI research shows how AI is expanding what workers do, with ChatGPT users taking on tasks across roles and reshaping job boundaries.",
+    "coverImage": "/images/news/news_short.jpg",
+    "status": "published",
+    "confidenceLevel": "confirmed",
+    "externalSources": [
+      "https://openai.com/index/how-ai-is-expanding-what-people-do-at-work"
+    ],
+    "relatedModels": [],
+    "tags": [
+      "ai-news",
+      "breaking",
+      "openai"
     ]
   },
   {
@@ -664,6 +752,28 @@
     ]
   },
   {
+    "id": "perplexity-releases-pplx-a-single-binary-cli-that-puts-its-search-api-in-the-ter",
+    "slug": "perplexity-releases-pplx-a-single-binary-cli-that-puts-its-search-api-in-the-ter",
+    "title": "Perplexity Releases pplx, a Single-Binary CLI That Puts Its Search API in the Terminal for Coding Agents",
+    "category": "short-news",
+    "publishDate": "2026-07-27",
+    "author": "MarkTechPost / Modelverse Editorial",
+    "readTime": "2 min read",
+    "excerpt": "Perplexity has released pplx, an official command line client for its Search API. The tool exposes two commands — pplx search web and pplx content fetch — and returns exactly one J...",
+    "coverImage": "https://www.marktechpost.com/wp-content/uploads/2026/07/blog6171-8.png",
+    "status": "published",
+    "confidenceLevel": "confirmed",
+    "externalSources": [
+      "https://www.marktechpost.com/2026/07/27/perplexity-releases-pplx/"
+    ],
+    "relatedModels": [],
+    "tags": [
+      "ai-news",
+      "breaking",
+      "marktechpost"
+    ]
+  },
+  {
     "id": "power-up-your-ai-infrastructure-a-first-look-at-the-smart-systems-stage-agenda-a",
     "slug": "power-up-your-ai-infrastructure-a-first-look-at-the-smart-systems-stage-agenda-a",
     "title": "Power up your AI infrastructure! A first look at the Smart Systems Stage agenda at TechCrunch Disrupt 2026",
@@ -727,6 +837,28 @@
       "ai-news",
       "breaking",
       "techcrunch-ai"
+    ]
+  },
+  {
+    "id": "the-path-to-artificial-superintelligence",
+    "slug": "the-path-to-artificial-superintelligence",
+    "title": "The path to artificial superintelligence",
+    "category": "short-news",
+    "publishDate": "2026-07-27",
+    "author": "MIT Technology Review / Modelverse Editorial",
+    "readTime": "2 min read",
+    "excerpt": "Imagine a healthcare system made up of multiple AI agents: one that manages symptom assessment, another scheduling, a third insurance, and a fourth pharmacy. Each is an expert in i...",
+    "coverImage": "https://wp.technologyreview.com/wp-content/uploads/2026/07/CREA-1571-MIT-tech-review-Misc-1200x675-option-2.png?resize=1200,600",
+    "status": "published",
+    "confidenceLevel": "confirmed",
+    "externalSources": [
+      "https://www.technologyreview.com/2026/07/27/1140724/the-path-to-artificial-superintelligence/"
+    ],
+    "relatedModels": [],
+    "tags": [
+      "ai-news",
+      "breaking",
+      "mit-technology-review"
     ]
   },
   {
