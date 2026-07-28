@@ -157,12 +157,25 @@ async function runMigration() {
       }
     }
 
-    // Check if already rewritten (has clean summary structure and has official announcement link)
-    const wordCount = body.split(/\s+/).filter(Boolean).length;
-    const isAlreadySummary = wordCount < 350 && body.includes("### Official Announcement");
+    // Strip existing markdown footer attribution if present (locally, no API call needed!)
+    let cleanedBody = body;
+    if (body.includes("### Official Announcement")) {
+      cleanedBody = body.split("### Official Announcement")[0].trim();
+    }
 
-    if (isAlreadySummary && !hasBoilerplate) {
-      console.log(`  ⏭️  Skipping [${i+1}/${files.length}] (already summary): ${file}`);
+    const wordCount = cleanedBody.split(/\s+/).filter(Boolean).length;
+    const isAlreadySummary = wordCount < 350 && !hasBoilerplate;
+
+    if (isAlreadySummary) {
+      console.log(`  ⏭️  Cleaning metadata [${i+1}/${files.length}] (already summary): ${file}`);
+      data.body = cleanedBody;
+      data.author = "Modelverse Editorial";
+      
+      const newWordCount = cleanedBody.split(/\s+/).filter(Boolean).length;
+      const newReadTime = Math.max(2, Math.ceil(newWordCount / 200));
+      data.readTime = `${newReadTime} min read`;
+      
+      fs.writeFileSync(filePath, JSON.stringify(data, null, 2), "utf-8");
       skippedCount++;
       continue;
     }
