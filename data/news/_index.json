@@ -1,5 +1,27 @@
 [
   {
+    "id": "cyera-agrees-to-acquire-oasis-security-for-1b-to-safeguard-proliferating-ai-agen",
+    "slug": "cyera-agrees-to-acquire-oasis-security-for-1b-to-safeguard-proliferating-ai-agen",
+    "title": "Cyera agrees to acquire Oasis Security for $1B to safeguard proliferating AI agents",
+    "category": "short-news",
+    "publishDate": "2026-07-29",
+    "author": "Modelverse Editorial",
+    "readTime": "2 min read",
+    "excerpt": "The deal is Cyera's third acquisition this year.",
+    "coverImage": "https://techcrunch.com/wp-content/uploads/2018/02/tc-backlight-e1689786273147.png?w=1200",
+    "status": "published",
+    "confidenceLevel": "confirmed",
+    "externalSources": [
+      "https://techcrunch.com/2026/07/28/cyera-agrees-to-acquire-oasis-security-for-1b-to-safeguard-proliferating-ai-agents/"
+    ],
+    "relatedModels": [],
+    "tags": [
+      "ai-news",
+      "breaking",
+      "techcrunch-ai"
+    ]
+  },
+  {
     "id": "anthropics-dario-amodei-responds-doesnt-oppose-open-weight-models-but-fears-chin",
     "slug": "anthropics-dario-amodei-responds-doesnt-oppose-open-weight-models-but-fears-chin",
     "title": "Anthropic's Dario Amodei responds: doesn't oppose open-weight models, but fears Chinese AI",
@@ -41,6 +63,28 @@
       "ai-news",
       "breaking",
       "techcrunch-ai"
+    ]
+  },
+  {
+    "id": "building-non-interactive-agentic-coding-workflows-with-moonshot-ais-kimi-cli-jso",
+    "slug": "building-non-interactive-agentic-coding-workflows-with-moonshot-ais-kimi-cli-jso",
+    "title": "Building Non-Interactive Agentic Coding Workflows with Moonshot AI’s Kimi CLI, JSONL Streaming, Testing, and Session Memory",
+    "category": "short-news",
+    "publishDate": "2026-07-28",
+    "author": "Modelverse Editorial",
+    "readTime": "7 min read",
+    "excerpt": "In this tutorial, we configure and operate Kimi CLI as a fully non-interactive AI coding agent. We install the CLI through uv with an isolated Python 3.13 environment, configure Mo...",
+    "coverImage": "https://www.marktechpost.com/wp-content/uploads/2026/07/building-non-interactive-agentic-coding-_Z-tgt0ahVSqwN9YZAIdaDQ_BXFSJvMqQGiwPT9qQ-xkPQ_cover_2k-1024x768.png",
+    "status": "published",
+    "confidenceLevel": "confirmed",
+    "externalSources": [
+      "https://www.marktechpost.com/2026/07/28/building-non-interactive-agentic-coding-workflows-with-moonshot-ais-kimi-cli-jsonl-streaming-testing-and-session-memory/"
+    ],
+    "relatedModels": [],
+    "tags": [
+      "ai-news",
+      "breaking",
+      "marktechpost"
     ]
   },
   {
@@ -123,6 +167,28 @@
     "confidenceLevel": "confirmed",
     "externalSources": [
       "https://www.marktechpost.com/2026/07/28/deploying-a-1-bit-bonsai-27b-model-with-prismml-llama-cpp-and-openai-compatible-local-inference-workflows/"
+    ],
+    "relatedModels": [],
+    "tags": [
+      "ai-news",
+      "breaking",
+      "marktechpost"
+    ]
+  },
+  {
+    "id": "fireworks-ai-releases-fireworks-nexus-a-drop-in-routing-and-cost-control-layer-t",
+    "slug": "fireworks-ai-releases-fireworks-nexus-a-drop-in-routing-and-cost-control-layer-t",
+    "title": "Fireworks AI Releases Fireworks Nexus: A Drop-In Routing and Cost-Control Layer That Moves Routine Coding Work to Open-Weight Models",
+    "category": "short-news",
+    "publishDate": "2026-07-28",
+    "author": "Modelverse Editorial",
+    "readTime": "2 min read",
+    "excerpt": "Fireworks AI has released Fireworks Nexus, an AI management and routing platform aimed at engineering organizations. It connects the coding tools developers already use to a manage...",
+    "coverImage": "https://www.marktechpost.com/wp-content/uploads/2026/07/high-level-description-a-stylized-cartoo_FzKYIZEpVCezpy0vFq57Ng_M-oNSrmIQrSLQfBTBex6sA_cover_2k-1024x768.png",
+    "status": "published",
+    "confidenceLevel": "confirmed",
+    "externalSources": [
+      "https://www.marktechpost.com/2026/07/28/fireworks-ai-releases-fireworks-nexus-a-drop-in-routing-and-cost-control-layer-that-moves-routine-coding-work-to-open-weight-models/"
     ],
     "relatedModels": [],
     "tags": [
