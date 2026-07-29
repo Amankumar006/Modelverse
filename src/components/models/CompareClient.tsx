@@ -132,14 +132,14 @@ export default function CompareClient({ initialModels, allModels }: CompareClien
     return inputCost + outputCost;
   };
 
-  const [chartMetric, setChartMetric] = useState<string>("mmlu");
+  const [chartMetric, setChartMetric] = useState<string>("swe-bench");
   const [calcInputTokens, setCalcInputTokens] = useState<number>(100000); // 100K input tokens
   const [calcOutputTokens, setCalcOutputTokens] = useState<number>(20000); // 20K output tokens
 
   // Extract values for highlight calculations
-  const parsedMmlu = models.map(m => parseScore(m.benchmarks?.find(b => b.name.toLowerCase() === "mmlu")?.score));
-  const parsedHumaneval = models.map(m => parseScore(m.benchmarks?.find(b => b.name.toLowerCase() === "humaneval")?.score));
-  const parsedGsm8k = models.map(m => parseScore(m.benchmarks?.find(b => b.name.toLowerCase() === "gsm8k")?.score));
+  const parsedSwe = models.map(m => parseScore(m.benchmarks?.find(b => b.name.toLowerCase().includes("swe-bench"))?.score));
+  const parsedAider = models.map(m => parseScore(m.benchmarks?.find(b => b.name.toLowerCase() === "aider polyglot")?.score));
+  const parsedGpqa = models.map(m => parseScore(m.benchmarks?.find(b => b.name.toLowerCase() === "gpqa diamond")?.score));
   const parsedContext = models.map(m => parseContext(m.contextWindow));
   const calculatedCosts = models.map(m => calculateCost(m, calcInputTokens, calcOutputTokens));
 
@@ -164,9 +164,9 @@ export default function CompareClient({ initialModels, allModels }: CompareClien
     return bestIdx;
   };
 
-  const bestMmluIdx = getWinnerIndex(parsedMmlu, "higher");
-  const bestHumanevalIdx = getWinnerIndex(parsedHumaneval, "higher");
-  const bestGsm8kIdx = getWinnerIndex(parsedGsm8k, "higher");
+  const bestSweIdx = getWinnerIndex(parsedSwe, "higher");
+  const bestAiderIdx = getWinnerIndex(parsedAider, "higher");
+  const bestGpqaIdx = getWinnerIndex(parsedGpqa, "higher");
   const bestContextIdx = getWinnerIndex(parsedContext, "higher");
   const bestCostIdx = getWinnerIndex(calculatedCosts, "lower");
 
@@ -217,18 +217,18 @@ export default function CompareClient({ initialModels, allModels }: CompareClien
       <div className="rounded-2xl bg-[#1C1C1E] border border-[#282828] p-6 shadow-2xl space-y-6">
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-5 border-b border-[#282828]">
           <div>
-            <h2 className="text-xl font-semibold text-white">Compare Capability Benchmarks</h2>
+            <h2 className="text-xl font-semibold text-white">Compare Agent & Coding Benchmarks</h2>
             <p className="text-xs text-[#90908F] mt-1 leading-relaxed">
-              Visualize side-by-side relative performance differences for selected models.
+              Visualize side-by-side relative performance differences for selected models on core coding benchmarks.
             </p>
           </div>
           <div className="flex flex-wrap items-center bg-[#141414] p-1 rounded-xl border border-[#282828] gap-1">
-            {["MMLU", "HumanEval", "GSM8K", "Context Window"].map((m) => {
-              const active = chartMetric === m.toLowerCase().replace(" ", "");
+            {["SWE-Bench", "Aider Polyglot", "GPQA Diamond", "Context Window"].map((m) => {
+              const active = chartMetric === m.toLowerCase().replace(" ", "-");
               return (
                 <button
                   key={m}
-                  onClick={() => setChartMetric(m.toLowerCase().replace(" ", ""))}
+                  onClick={() => setChartMetric(m.toLowerCase().replace(" ", "-"))}
                   className={`px-3 py-1.5 text-xs font-medium rounded-lg transition-all ${
                     active
                       ? "bg-[#242426] text-emerald-400 border border-emerald-500/30 font-semibold"
@@ -247,22 +247,23 @@ export default function CompareClient({ initialModels, allModels }: CompareClien
             let value = 0;
             let displayVal = "N/A";
             
-            if (chartMetric === "contextwindow") {
+            if (chartMetric === "context-window") {
               const parsedVal = parseContext(model.contextWindow);
               value = parsedVal ?? 0;
               displayVal = model.contextWindow || "Unknown";
             } else {
-              const parsedVal = parseScore(model.benchmarks?.find(b => b.name.toLowerCase() === chartMetric)?.score);
+              const matchedBench = model.benchmarks?.find(b => b.name.toLowerCase().includes(chartMetric));
+              const parsedVal = parseScore(matchedBench?.score);
               value = parsedVal ?? 0;
-              displayVal = model.benchmarks?.find(b => b.name.toLowerCase() === chartMetric)?.score || "—";
+              displayVal = matchedBench?.score || "—";
             }
 
             // Find maximum to scale percentages
             const allVals = models.map(m => {
-              if (chartMetric === "contextwindow") {
+              if (chartMetric === "context-window") {
                 return parseContext(m.contextWindow) ?? 0;
               } else {
-                return parseScore(m.benchmarks?.find(b => b.name.toLowerCase() === chartMetric)?.score) ?? 0;
+                return parseScore(m.benchmarks?.find(b => b.name.toLowerCase().includes(chartMetric))?.score) ?? 0;
               }
             });
             const maxVal = Math.max(...allVals, 1);
@@ -485,12 +486,13 @@ export default function CompareClient({ initialModels, allModels }: CompareClien
               ))}
             </tr>
 
-            {/* MMLU Benchmark */}
+            {/* SWE-Bench Benchmark */}
             <tr>
-              <td className="p-4 text-sm font-semibold text-[#4ADE80] bg-white/[0.02]">MMLU Score</td>
+              <td className="p-4 text-sm font-semibold text-[#4ADE80] bg-white/[0.02]">SWE-Bench Score</td>
               {models.map((model, idx) => {
-                const score = model.benchmarks?.find(b => b.name.toLowerCase() === "mmlu")?.score || "—";
-                const isWinner = idx === bestMmluIdx;
+                const matched = model.benchmarks?.find(b => b.name.toLowerCase().includes("swe-bench"));
+                const score = matched?.score || "—";
+                const isWinner = idx === bestSweIdx;
                 return (
                   <td
                     key={model.id}
@@ -504,16 +506,16 @@ export default function CompareClient({ initialModels, allModels }: CompareClien
                 );
               })}
               {Array.from({ length: 4 - models.length }).map((_, i) => (
-                <td key={`empty-mmlu-${i}`} className="p-4 bg-white/[0.02] border-r border-white/5 border-dashed last:border-r-0"></td>
+                <td key={`empty-swe-${i}`} className="p-4 bg-white/[0.02] border-r border-white/5 border-dashed last:border-r-0"></td>
               ))}
             </tr>
 
-            {/* HumanEval Benchmark */}
+            {/* Aider Polyglot Benchmark */}
             <tr>
-              <td className="p-4 text-sm font-semibold text-[#4ADE80] bg-white/[0.02]">HumanEval Score</td>
+              <td className="p-4 text-sm font-semibold text-[#4ADE80] bg-white/[0.02]">Aider Polyglot</td>
               {models.map((model, idx) => {
-                const score = model.benchmarks?.find(b => b.name.toLowerCase() === "humaneval")?.score || "—";
-                const isWinner = idx === bestHumanevalIdx;
+                const score = model.benchmarks?.find(b => b.name.toLowerCase() === "aider polyglot")?.score || "—";
+                const isWinner = idx === bestAiderIdx;
                 return (
                   <td
                     key={model.id}
@@ -527,16 +529,16 @@ export default function CompareClient({ initialModels, allModels }: CompareClien
                 );
               })}
               {Array.from({ length: 4 - models.length }).map((_, i) => (
-                <td key={`empty-he-${i}`} className="p-4 bg-white/[0.02] border-r border-white/5 border-dashed last:border-r-0"></td>
+                <td key={`empty-aider-${i}`} className="p-4 bg-white/[0.02] border-r border-white/5 border-dashed last:border-r-0"></td>
               ))}
             </tr>
 
-            {/* GSM8K Benchmark */}
+            {/* GPQA Diamond Benchmark */}
             <tr>
-              <td className="p-4 text-sm font-semibold text-[#4ADE80] bg-white/[0.02]">GSM8K Score</td>
+              <td className="p-4 text-sm font-semibold text-[#4ADE80] bg-white/[0.02]">GPQA Diamond</td>
               {models.map((model, idx) => {
-                const score = model.benchmarks?.find(b => b.name.toLowerCase() === "gsm8k")?.score || "—";
-                const isWinner = idx === bestGsm8kIdx;
+                const score = model.benchmarks?.find(b => b.name.toLowerCase() === "gpqa diamond")?.score || "—";
+                const isWinner = idx === bestGpqaIdx;
                 return (
                   <td
                     key={model.id}
@@ -550,13 +552,13 @@ export default function CompareClient({ initialModels, allModels }: CompareClien
                 );
               })}
               {Array.from({ length: 4 - models.length }).map((_, i) => (
-                <td key={`empty-gsm-${i}`} className="p-4 bg-white/[0.02] border-r border-white/5 border-dashed last:border-r-0"></td>
+                <td key={`empty-gpqa-${i}`} className="p-4 bg-white/[0.02] border-r border-white/5 border-dashed last:border-r-0"></td>
               ))}
             </tr>
 
             {/* General Benchmarks Comparison (Others) */}
             {allBenchmarkNames
-              .filter(name => !["mmlu", "humaneval", "gsm8k"].includes(name.toLowerCase()))
+              .filter(name => !["mmlu", "humaneval", "gsm8k", "swe-bench verified", "swe-bench pro", "aider polyglot", "gpqa diamond"].includes(name.toLowerCase()))
               .map((benchName) => (
                 <tr key={benchName}>
                   <td className="p-4 text-sm font-semibold text-gray-300 bg-white/[0.02]">{benchName}</td>
