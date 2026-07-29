@@ -22,6 +22,28 @@
     ]
   },
   {
+    "id": "the-ai-hype-index-unsexy-ai",
+    "slug": "the-ai-hype-index-unsexy-ai",
+    "title": "The AI Hype Index: Unsexy AI",
+    "category": "short-news",
+    "publishDate": "2026-07-29",
+    "author": "Modelverse Editorial",
+    "readTime": "2 min read",
+    "excerpt": "It feels bad enough when an open letter signed by leading economists warns that AI might steal your job. The fact it may soon be better than you at making dinner? Insult to injury....",
+    "coverImage": "https://wp.technologyreview.com/wp-content/uploads/2026/07/JUL26-thumb.jpg?resize=1200,600",
+    "status": "published",
+    "confidenceLevel": "confirmed",
+    "externalSources": [
+      "https://www.technologyreview.com/2026/07/29/1140795/the-ai-hype-index-unsexy-ai/"
+    ],
+    "relatedModels": [],
+    "tags": [
+      "ai-news",
+      "breaking",
+      "mit-technology-review"
+    ]
+  },
+  {
     "id": "anthropics-dario-amodei-responds-doesnt-oppose-open-weight-models-but-fears-chin",
     "slug": "anthropics-dario-amodei-responds-doesnt-oppose-open-weight-models-but-fears-chin",
     "title": "Anthropic's Dario Amodei responds: doesn't oppose open-weight models, but fears Chinese AI",
