@@ -19,5 +19,7 @@
     "claude",
     "open-weights"
   ],
-  "status": "published"
+  "status": "published",
+  "confidenceLevel": "confirmed",
+  "externalSources": []
 }

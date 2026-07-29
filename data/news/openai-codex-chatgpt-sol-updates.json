@@ -18,5 +18,8 @@
     "codex-mini",
     "gpt-5-chat",
     "gpt-5"
+  ],
+  "tags": [
+    "ai-news"
   ]
 }

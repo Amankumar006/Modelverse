@@ -19,5 +19,7 @@
     "on-device",
     "npu"
   ],
-  "status": "published"
+  "status": "published",
+  "confidenceLevel": "confirmed",
+  "externalSources": []
 }

@@ -18,5 +18,7 @@
     "safety",
     "rlhf"
   ],
-  "status": "published"
+  "status": "published",
+  "confidenceLevel": "confirmed",
+  "externalSources": []
 }

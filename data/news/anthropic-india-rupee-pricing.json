@@ -20,5 +20,8 @@
     "gpt-live",
     "gemini-3-5-flash-cyber",
     "gemini-3-6-flash"
+  ],
+  "tags": [
+    "ai-news"
   ]
 }
