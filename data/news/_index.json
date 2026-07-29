@@ -44,6 +44,50 @@
     ]
   },
   {
+    "id": "encore-ai-raises-30m-to-build-ai-agents-that-learn-from-customer-calls",
+    "slug": "encore-ai-raises-30m-to-build-ai-agents-that-learn-from-customer-calls",
+    "title": "Encore AI raises $30M to build AI agents that learn from customer calls",
+    "category": "short-news",
+    "publishDate": "2026-07-29",
+    "author": "Modelverse Editorial",
+    "readTime": "2 min read",
+    "excerpt": "The startup analyzes calls, messages, and CRM data to identify effective sales techniques and turn them into playbooks for AI agents.",
+    "coverImage": "https://techcrunch.com/wp-content/uploads/2026/07/ENCORE-0321a.jpg?resize=1200,800",
+    "status": "published",
+    "confidenceLevel": "confirmed",
+    "externalSources": [
+      "https://techcrunch.com/2026/07/29/encore-ai-raises-30m-to-build-ai-agents-that-learn-from-customer-calls/"
+    ],
+    "relatedModels": [],
+    "tags": [
+      "ai-news",
+      "breaking",
+      "techcrunch-ai"
+    ]
+  },
+  {
+    "id": "hint-a-new-ai-startup-co-founded-by-martha-stewart-offers-an-ai-assistant-for-ho",
+    "slug": "hint-a-new-ai-startup-co-founded-by-martha-stewart-offers-an-ai-assistant-for-ho",
+    "title": "Hint, a new AI startup co-founded by Martha Stewart, offers an AI assistant for homeowners",
+    "category": "short-news",
+    "publishDate": "2026-07-29",
+    "author": "Modelverse Editorial",
+    "readTime": "2 min read",
+    "excerpt": "AI home management startup Hint, co-founded by Martha Stewart, wants to become an “AI for your home,” combining property records, maintenance schedules, home documents, and an AI a...",
+    "coverImage": "https://techcrunch.com/wp-content/uploads/2026/07/Hint-Founding-team-Credit-Kathryn-Cooper.jpg?resize=1200,800",
+    "status": "published",
+    "confidenceLevel": "confirmed",
+    "externalSources": [
+      "https://techcrunch.com/2026/07/29/hint-a-new-ai-startup-co-founded-by-martha-stewart-offers-an-ai-assistant-for-homeowners/"
+    ],
+    "relatedModels": [],
+    "tags": [
+      "ai-news",
+      "breaking",
+      "techcrunch-ai"
+    ]
+  },
+  {
     "id": "liquid-ai-releases-lfm25-encoder-230m-and-lfm25-encoder-350m-bidirectional-encod",
     "slug": "liquid-ai-releases-lfm25-encoder-230m-and-lfm25-encoder-350m-bidirectional-encod",
     "title": "Liquid AI Releases LFM2.5-Encoder-230M and LFM2.5-Encoder-350M: Bidirectional Encoders That Stay Fast at 8K Context on CPU",
