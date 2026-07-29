@@ -1,50 +1,50 @@
 [
   {
-    "id": "hint-a-new-ai-startup-co-founded-by-martha-stewart-offers-an-ai-assistant-for-ho",
-    "slug": "hint-a-new-ai-startup-co-founded-by-martha-stewart-offers-an-ai-assistant-for-ho",
-    "title": "Hint, a new AI startup co-founded by Martha Stewart, offers an AI assistant for homeowners",
+    "id": "were-launching-lyria-35-in-google-flow-music-with-advances-across-musicality-lyr",
+    "slug": "were-launching-lyria-35-in-google-flow-music-with-advances-across-musicality-lyr",
+    "title": "We’re launching Lyria 3.5 in Google Flow Music, with advances across musicality, lyrics, vocals, and creative control",
     "category": "short-news",
     "isTrending": true,
     "publishDate": "2026-07-29",
     "author": "Modelverse Editorial",
     "readTime": "2 min read",
-    "excerpt": "AI home management startup Hint, co-founded by Martha Stewart, wants to become an “AI for your home,” combining property records, maintenance schedules, home documents, and an AI a...",
-    "body": "Martha Stewart has co-founded Hint, a new AI-powered application designed to revolutionize home maintenance and management. Launched today, Hint acts as an intelligent assistant for homeowners, tackling a wide array of tasks from scheduling upkeep and managing energy consumption to analyzing soil and air quality, and even assisting with insurance claims. Beyond its advisory functions, the app also serves as a secure digital repository for crucial home-related documents like contracts, invoices, and warranties, all of which can be easily queried through its integrated AI.\n\nThe Hint app operates by first building a comprehensive profile of a user's home. Upon entering an address, the AI leverages publicly available data, including property records, local weather patterns, soil information, and utility details. This foundational data is then enriched by user-uploaded documents such as inspection reports, mortgage papers, and insurance policies. By synthesizing these diverse data points, the AI creates a personalized, dynamic knowledge base for each home, enabling it to provide tailored insights and proactive management suggestions.\n\nThis development is significant for developers and researchers as it showcases AI's expanding utility beyond traditional chatbots into practical, real-world problem-solving. Hint exemplifies how AI can effectively integrate and interpret disparate data sources—both public and private—to create a highly specialized and valuable assistant for a specific domain. It highlights the potential for AI to move into niche markets, offering a blueprint for developing intelligent systems that synthesize complex information to simplify everyday challenges, demonstrating the power of domain-specific AI applications.",
-    "coverImage": "https://techcrunch.com/wp-content/uploads/2026/07/Hint-Founding-team-Credit-Kathryn-Cooper.jpg?resize=1200,800",
+    "excerpt": "We’re launching Lyria 3.5 in Google Flow Music, with advances across musicality, lyrics, vocals, and creative control",
+    "body": "Google has announced the launch of Lyria 3.5, an advanced iteration of its AI music generation model, which is now being integrated into Google Flow Music. This release marks a notable progression in AI's capability to create and manipulate musical content, making sophisticated generative tools more accessible within Google's ecosystem.\n\nWhile specific technical details of its operation remain proprietary, Lyria 3.5 is highlighted for significant improvements across several critical aspects of music generation. Users can anticipate enhanced \"musicality,\" suggesting more sophisticated melodic structures, harmonic richness, and overall compositional coherence. Furthermore, the model demonstrates advancements in handling \"lyrics\" and \"vocals,\" indicating a greater ability to integrate textual content seamlessly with generated music and produce more natural-sounding synthetic voices.\n\nFor developers and researchers in the AI music domain, these enhancements, particularly in \"creative control,\" are highly significant. Greater control empowers creators to steer the AI's output more precisely, enabling the realization of specific artistic intentions rather than relying solely on random generation. This evolution is poised to open new avenues for personalized music experiences, accelerate the creative process for artists, and foster deeper research into the complexities of musical expression and AI's role in augmenting human creativity.",
+    "coverImage": "https://storage.googleapis.com/gweb-uniblog-publish-prod/images/Lyria3.5_social.max-1440x810.png",
     "status": "published",
     "confidenceLevel": "confirmed",
     "externalSources": [
-      "https://techcrunch.com/2026/07/29/hint-a-new-ai-startup-co-founded-by-martha-stewart-offers-an-ai-assistant-for-homeowners/"
+      "https://deepmind.google/blog/were-launching-lyria-35-in-google-flow-music-with-advances-across-musicality-lyrics-vocals-and-creative-control/"
     ],
     "relatedModels": [],
     "tags": [
       "ai-news",
       "breaking",
-      "techcrunch-ai"
+      "google-deepmind"
     ]
   },
   {
-    "id": "encore-ai-raises-30m-to-build-ai-agents-that-learn-from-customer-calls",
-    "slug": "encore-ai-raises-30m-to-build-ai-agents-that-learn-from-customer-calls",
-    "title": "Encore AI raises $30M to build AI agents that learn from customer calls",
+    "id": "accelerating-scientific-discovery-with-chatgpt-for-academic-researchers",
+    "slug": "accelerating-scientific-discovery-with-chatgpt-for-academic-researchers",
+    "title": "Accelerating scientific discovery with ChatGPT for Academic Researchers",
     "category": "short-news",
     "isTrending": true,
     "publishDate": "2026-07-29",
     "author": "Modelverse Editorial",
     "readTime": "2 min read",
-    "excerpt": "The startup analyzes calls, messages, and CRM data to identify effective sales techniques and turn them into playbooks for AI agents.",
-    "body": "Encore AI has successfully raised $30 million in Series A funding, signaling a significant step in its mission to revolutionize customer interaction through advanced AI agents. The company, which recently rebranded from Insait IO, is building a platform that trains AI voice agents by meticulously studying real-world customer support and sales conversations. These sophisticated agents are designed to either seamlessly integrate with human teams, offering real-time assistance, or operate entirely autonomously, handling customer engagements directly.\n\nThe core of Encore AI's technology lies in its unique \"interaction mining\" process. This involves analyzing a rich dataset of customer communications, including call recordings, emails, and text messages, all integrated with CRM systems. The platform dissects these interactions, identifying specific conversational stages and pinpointing which human strategies, anecdotes, or even jokes consistently lead to successful outcomes. These proven \"playbooks\" are then used to train the AI agents, enabling them to replicate the most effective communication tactics observed from top-performing employees.\n\nThis innovative approach matters significantly to developers and researchers by demonstrating a powerful method for creating highly adaptive and context-aware AI. Instead of relying on generic scripts, Encore AI's agents learn directly from the nuanced, successful strategies of human experts, pushing the boundaries of practical AI application in customer-facing roles. For businesses, this translates into enhanced customer engagement, improved sales conversion rates, and the ability to identify and rectify inefficiencies within their existing support and sales workflows, ultimately leading to more effective and personalized customer experiences.",
-    "coverImage": "https://techcrunch.com/wp-content/uploads/2026/07/ENCORE-0321a.jpg?resize=1200,800",
+    "excerpt": "OpenAI is giving 100,000 academic researchers free access to ChatGPT's most advanced AI models to accelerate scientific research, collaboration, and discovery.",
+    "body": "## Accelerating Scientific Discovery\nOpenAI has made a significant move to boost scientific progress by offering 100,000 academic researchers complimentary access to ChatGPT's cutting-edge AI models. This initiative aims to harness the power of artificial intelligence to accelerate research, foster collaboration, and drive innovation in the academic community.\n\n## Technology and Collaboration\nThe advanced AI models provided by ChatGPT are designed to process and analyze vast amounts of data, identify patterns, and generate insights that can inform and guide research. By leveraging these capabilities, researchers can streamline their workflow, explore new ideas, and engage in more effective collaboration. This synergy between human intellect and AI-driven analysis has the potential to unlock new discoveries and push the boundaries of scientific knowledge.\n\n## Impact on Research\nThe availability of ChatGPT's AI models to academic researchers can have a profound impact on the scientific community. It can enable researchers to tackle complex problems, explore new research questions, and develop innovative solutions. By democratizing access to advanced AI technology, OpenAI is empowering researchers to make breakthroughs that can benefit society as a whole, driving progress in various fields and improving our understanding of the world.",
+    "coverImage": "/images/news/news_short.jpg",
     "status": "published",
     "confidenceLevel": "confirmed",
     "externalSources": [
-      "https://techcrunch.com/2026/07/29/encore-ai-raises-30m-to-build-ai-agents-that-learn-from-customer-calls/"
+      "https://openai.com/index/chatgpt-for-academic-researchers"
     ],
     "relatedModels": [],
     "tags": [
       "ai-news",
       "breaking",
-      "techcrunch-ai"
+      "openai"
     ]
   }
 ]
