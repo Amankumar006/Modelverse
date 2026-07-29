@@ -108,7 +108,7 @@ export default function ModelCard({
   /* Redesigned Card variant (single or family) */
   return (
     <div
-      className="group relative flex flex-col justify-center h-full rounded-xl bg-white/5 border border-white/10 hover:border-white/20 hover:bg-white/10 transition-colors duration-200 w-full text-left overflow-hidden z-0"
+      className="group relative flex flex-col justify-center h-full rounded-xl bg-[#0E0E10] border border-white/5 hover:border-emerald-500/20 hover:bg-[#141416] hover:-translate-y-0.5 shadow-md hover:shadow-[0_8px_30px_rgba(16,185,129,0.03)] transition-all duration-300 w-full text-left overflow-hidden z-0"
     >
       <Link
         href={targetHref}
@@ -116,33 +116,35 @@ export default function ModelCard({
         aria-label={`View ${model.name}`}
       />
 
-      <div className="flex flex-col p-4 relative z-20 pointer-events-none">
+      <div className="flex flex-col p-5 relative z-20 pointer-events-none">
         {/* Main Content */}
-        <div className="flex items-start justify-between min-w-0 mb-2">
-          <div className="flex flex-wrap items-center gap-1.5 truncate">
-            {variant !== "family" && !hideDeveloperPrefix && (
-              <span className="text-gray-400 font-normal text-sm md:text-base">{model.developer} /</span>
-            )}
-            <h3 className="font-semibold text-white text-sm md:text-base truncate">
+        <div className="flex flex-col min-w-0 mb-3.5">
+          {variant !== "family" && !hideDeveloperPrefix && (
+            <span className="text-zinc-500 uppercase tracking-widest font-mono text-[9px] mb-1.5 block">
+              {model.developer}
+            </span>
+          )}
+          <div className="flex items-start justify-between min-w-0">
+            <h3 className="font-semibold text-white text-base md:text-lg leading-snug truncate group-hover:text-emerald-400 transition-colors">
               {variant === "family" && familySlug ? (
                 familySlug.replace(/^gpt/i, "GPT").replace(/-/g, " ").replace(/\b\w/g, c => c.toUpperCase())
               ) : (
                 model.name
               )}
             </h3>
+            {variant === "family" && familyVariantCount && (
+              <span className="text-[10px] font-semibold bg-emerald-500/10 text-emerald-400 px-2 py-0.5 rounded-full shrink-0 border border-emerald-500/20 ml-2">
+                {familyVariantCount} vars
+              </span>
+            )}
           </div>
-          {variant === "family" && familyVariantCount && (
-            <span className="text-[10px] font-semibold bg-[#121A15]/10 text-gray-300 px-1.5 py-0.5 rounded-full shrink-0 border border-white/10 ml-2">
-              {familyVariantCount} vars
-            </span>
-          )}
         </div>
 
         {/* Badges & Stats Row */}
-        <div className="flex flex-wrap items-center gap-x-2.5 gap-y-1.5 text-[11px] text-gray-400 mt-1">
+        <div className="flex flex-wrap items-center gap-x-2 gap-y-1.5 text-[11px] text-gray-400">
           {/* Task */}
           {primaryTask && (
-             <span className="flex items-center gap-1 font-medium bg-white/20 px-2 py-0.5 rounded border border-white/5">
+             <span className="flex items-center gap-1 font-medium bg-zinc-800/40 text-zinc-300 px-2 py-0.5 rounded border border-white/5">
                <svg className="w-3 h-3 text-[#4ADE80]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
                </svg>
@@ -151,7 +153,7 @@ export default function ModelCard({
           )}
 
           {/* Type Badge (open weights, etc) */}
-          <span className="flex items-center gap-1 font-medium bg-white/20 px-2 py-0.5 rounded border border-white/5">
+          <span className="flex items-center gap-1 font-medium bg-zinc-800/40 text-zinc-300 px-2 py-0.5 rounded border border-white/5">
             {(() => {
               const typeMap: Record<string, string> = {
                 "open-weights": "Open Weights",
@@ -165,24 +167,24 @@ export default function ModelCard({
           
           <StatusBadge status={model.status} vendorApiStatus={model.vendorApiStatus} />
           
-          <span className="text-gray-600">•</span>
+          <span className="text-zinc-700 font-mono select-none px-0.5">•</span>
           
           {/* Params */}
           {hasValidParams && parameters !== "undisclosed" && (
             <>
-              <span className="flex items-center gap-1 font-mono">
-                <svg className="w-3 h-3 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <span className="flex items-center gap-1 font-mono text-[10px] text-zinc-400">
+                <svg className="w-3 h-3 text-zinc-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
                 </svg>
                 {parameters}
               </span>
-              <span className="text-gray-600">•</span>
+              <span className="text-zinc-700 font-mono select-none px-0.5">•</span>
             </>
           )}
 
           {/* Date */}
-          <span className="truncate flex items-center gap-1">
-            <svg className="w-3 h-3 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <span className="truncate flex items-center gap-1 text-[10px] text-zinc-400 font-mono">
+            <svg className="w-3 h-3 text-zinc-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
             </svg>
             {formattedDate}

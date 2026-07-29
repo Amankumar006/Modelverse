@@ -170,8 +170,8 @@ export default function Navbar({ theme = "dark" }: { theme?: "light" | "dark" })
         >
           <ModelverseLogo size={34} />
           <span className="text-xl sm:text-2xl font-normal">Modelverse</span>
-          <span className="text-[11px] font-sans text-gray-400 font-medium px-2 py-0.5 rounded-full bg-[#242426] border border-[#333333]">
-            Platform Docs
+          <span className="text-[11px] font-sans text-emerald-400 font-medium px-2.5 py-0.5 rounded-full bg-emerald-500/10 border border-emerald-500/20">
+            LLM Database
           </span>
         </Link>
 
