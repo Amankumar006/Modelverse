@@ -147,7 +147,7 @@ export default function SecurityPage() {
                 </p>
                 <div className="pt-2">
                   <span className="text-xs font-semibold tracking-wider text-white bg-white/5 border border-white/10 rounded-full px-3 py-1.5 inline-block">
-                    security@modelverse.ai
+                    004akaman@gmail.com
                   </span>
                 </div>
               </div>
