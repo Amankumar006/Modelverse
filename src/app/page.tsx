@@ -128,43 +128,43 @@ export default function Home() {
                 return (
                   <div 
                     key={model.slug} 
-                    className="rounded-2xl border border-[#243629] relative overflow-hidden bg-[#121A15] p-5 md:p-6 flex flex-col justify-between hover:border-[#334D3A] hover:bg-[#15211B] transition-all group shadow-sm"
+                    className="rounded-2xl border border-[#243629] relative overflow-hidden bg-[#121A15] p-5 md:p-6 flex flex-col justify-between hover:border-[#334D3A]/60 hover:bg-[#15211B] hover:-translate-y-0.5 shadow-md hover:shadow-[0_8px_30px_rgba(74,222,128,0.02)] transition-all duration-300 group"
                   >
                     <div>
                       {/* Top Badges Row */}
-                      <div className="flex items-center justify-between gap-2 mb-3">
-                        <span className="text-[10px] font-semibold uppercase tracking-wider text-[#8C9E91] truncate">
+                      <div className="flex items-start justify-between gap-2 mb-3.5">
+                        <span className="text-zinc-400/70 uppercase tracking-widest font-mono text-[9px] block">
                           {model.developer}
                         </span>
-                        <span className={`text-[10px] font-semibold px-2 py-0.5 rounded-full uppercase tracking-wider ${
+                        <span className={`text-[9px] font-semibold px-2 py-0.5 rounded-full uppercase tracking-wider shrink-0 font-mono ${
                           model.type === "open-source" || model.type === "open-weights"
                             ? "bg-[#4ADE80]/10 text-[#4ADE80] border border-[#4ADE80]/20"
-                            : "bg-[#1A261D] text-[#8C9E91] border border-[#243629]"
+                            : "bg-[#1A261D] text-zinc-400 border border-[#243629]"
                         }`}>
-                          {model.type}
+                          {model.type === "open-weights" ? "Open" : (model.type === "closed-source" ? "Closed" : "API")}
                         </span>
                       </div>
 
                       {/* Model Title */}
-                      <h3 className="text-lg font-semibold text-white group-hover:text-[#4ADE80] transition-colors tracking-tight">
+                      <h3 className="text-base font-semibold text-white group-hover:text-[#4ADE80] transition-colors tracking-tight">
                         {model.name}
                       </h3>
 
                       {/* Brief Description */}
-                      <p className="text-xs text-[#8C9E91] mt-2.5 line-clamp-2 leading-[1.5]">
+                      <p className="text-xs text-[#8C9E91] mt-2 line-clamp-2 leading-[1.6]">
                         {model.description}
                       </p>
 
                       {/* Metadata Chips */}
                       <div className="mt-4 pt-4 border-t border-[#243629]/60 flex flex-wrap gap-2">
                         {model.contextWindow && (
-                          <div className="inline-flex items-center gap-1 text-[11px] font-mono text-[#E2E8E4] bg-[#0C120F] px-2.5 py-1 rounded-md border border-[#243629]">
+                          <div className="inline-flex items-center gap-1.5 text-[10px] font-mono text-[#E2E8E4] bg-[#0C120F] px-2.5 py-1 rounded-md border border-[#243629]">
                             <Cpu size={10} className="text-[#4ADE80]" />
                             <span>{model.contextWindow}</span>
                           </div>
                         )}
                         {model.primaryTask && (
-                          <div className="inline-flex items-center gap-1 text-[11px] font-mono text-[#8C9E91] bg-[#0C120F] px-2.5 py-1 rounded-md border border-[#243629]">
+                          <div className="inline-flex items-center gap-1.5 text-[10px] font-mono text-[#8C9E91] bg-[#0C120F] px-2.5 py-1 rounded-md border border-[#243629]">
                             <Layers size={10} />
                             <span className="capitalize">{model.primaryTask.replace("-", " ")}</span>
                           </div>
@@ -174,7 +174,7 @@ export default function Home() {
 
                     {/* Bottom Footer Row */}
                     <div className="mt-6 pt-4 border-t border-[#243629] flex items-center justify-between">
-                      <div className="flex items-center gap-1.5 text-[11px] font-mono text-[#5A6E60]">
+                      <div className="flex items-center gap-1.5 text-[10px] font-mono text-[#5A6E60]">
                         <ShieldCheck size={12} className="text-[#4ADE80]" />
                         <span>{formattedDate}</span>
                       </div>
