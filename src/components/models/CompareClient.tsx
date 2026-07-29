@@ -357,7 +357,7 @@ export default function CompareClient({ initialModels, allModels }: CompareClien
         <table className="w-full min-w-[800px] border-collapse">
           <thead>
             <tr>
-              <th className="w-48 p-4 text-left font-medium text-gray-400 border-b border-white/10"></th>
+              <th className="w-48 p-4 text-left font-medium text-gray-400 border-b border-white/10 sticky left-0 bg-[#0E0E10] z-20 border-r border-white/10"></th>
               {models.map((model) => (
                 <th key={model.id} className="w-72 p-4 align-top border-b border-white/10 relative group">
                   <div className="flex flex-col gap-3">
@@ -390,7 +390,7 @@ export default function CompareClient({ initialModels, allModels }: CompareClien
           <tbody className="divide-y divide-white/5">
             {/* Type */}
             <tr>
-              <td className="p-4 text-sm font-medium text-gray-400 flex items-center gap-2"><Tag size={16} /> Type</td>
+              <td className="p-4 text-sm font-medium text-gray-400 flex items-center gap-2 sticky left-0 bg-[#0E0E10] z-10 border-r border-white/10"><Tag size={16} /> Type</td>
               {models.map((model) => (
                 <td key={model.id} className="p-4"><TypeBadge type={model.type} /></td>
               ))}
@@ -401,7 +401,7 @@ export default function CompareClient({ initialModels, allModels }: CompareClien
 
             {/* License */}
             <tr>
-              <td className="p-4 text-sm font-medium text-gray-400 flex items-center gap-2"><Shield size={16} /> License</td>
+              <td className="p-4 text-sm font-medium text-gray-400 flex items-center gap-2 sticky left-0 bg-[#0E0E10] z-10 border-r border-white/10"><Shield size={16} /> License</td>
               {models.map((model) => (
                 <td key={model.id} className="p-4 text-sm text-white">{model.license}</td>
               ))}
@@ -412,7 +412,7 @@ export default function CompareClient({ initialModels, allModels }: CompareClien
 
             {/* Parameters */}
             <tr>
-              <td className="p-4 text-sm font-semibold text-gray-300 bg-white/[0.02]">Parameters</td>
+              <td className="p-4 text-sm font-semibold text-gray-300 bg-[#0E0E10] sticky left-0 z-10 border-r border-white/10">Parameters</td>
               {models.map((model) => (
                 <td key={model.id} className="p-4 text-sm text-white font-mono font-medium">
                   {model.parameters || "Undisclosed"}
@@ -425,7 +425,7 @@ export default function CompareClient({ initialModels, allModels }: CompareClien
 
             {/* Modalities */}
             <tr>
-              <td className="p-4 text-sm font-semibold text-gray-300 bg-white/[0.02]">Modalities</td>
+              <td className="p-4 text-sm font-semibold text-gray-300 bg-[#0E0E10] sticky left-0 z-10 border-r border-white/10">Modalities</td>
               {models.map((model) => (
                 <td key={model.id} className="p-4 align-middle">
                   <div className="flex flex-wrap gap-1">
@@ -442,7 +442,7 @@ export default function CompareClient({ initialModels, allModels }: CompareClien
 
             {/* Context Window */}
             <tr>
-              <td className="p-4 text-sm font-semibold text-gray-300 bg-white/[0.02]">Context Window</td>
+              <td className="p-4 text-sm font-semibold text-gray-300 bg-[#0E0E10] sticky left-0 z-10 border-r border-white/10">Context Window</td>
               {models.map((model, idx) => {
                 const isWinner = idx === bestContextIdx;
                 return (
@@ -464,7 +464,7 @@ export default function CompareClient({ initialModels, allModels }: CompareClien
 
             {/* Total Estimated Cost */}
             <tr>
-              <td className="p-4 text-sm font-semibold text-gray-300 bg-white/[0.02]">Estimated cost / query</td>
+              <td className="p-4 text-sm font-semibold text-gray-300 bg-[#0E0E10] sticky left-0 z-10 border-r border-white/10">Estimated cost / query</td>
               {models.map((model, idx) => {
                 const cost = calculatedCosts[idx];
                 const isWinner = idx === bestCostIdx;
@@ -488,7 +488,7 @@ export default function CompareClient({ initialModels, allModels }: CompareClien
 
             {/* SWE-Bench Benchmark */}
             <tr>
-              <td className="p-4 text-sm font-semibold text-[#4ADE80] bg-white/[0.02]">SWE-Bench Score</td>
+              <td className="p-4 text-sm font-semibold text-[#4ADE80] bg-[#0E0E10] sticky left-0 z-10 border-r border-white/10">SWE-Bench Score</td>
               {models.map((model, idx) => {
                 const matched = model.benchmarks?.find(b => b.name.toLowerCase().includes("swe-bench"));
                 const score = matched?.score || "—";
@@ -512,7 +512,7 @@ export default function CompareClient({ initialModels, allModels }: CompareClien
 
             {/* Aider Polyglot Benchmark */}
             <tr>
-              <td className="p-4 text-sm font-semibold text-[#4ADE80] bg-white/[0.02]">Aider Polyglot</td>
+              <td className="p-4 text-sm font-semibold text-[#4ADE80] bg-[#0E0E10] sticky left-0 z-10 border-r border-white/10">Aider Polyglot</td>
               {models.map((model, idx) => {
                 const score = model.benchmarks?.find(b => b.name.toLowerCase() === "aider polyglot")?.score || "—";
                 const isWinner = idx === bestAiderIdx;
@@ -535,7 +535,7 @@ export default function CompareClient({ initialModels, allModels }: CompareClien
 
             {/* GPQA Diamond Benchmark */}
             <tr>
-              <td className="p-4 text-sm font-semibold text-[#4ADE80] bg-white/[0.02]">GPQA Diamond</td>
+              <td className="p-4 text-sm font-semibold text-[#4ADE80] bg-[#0E0E10] sticky left-0 z-10 border-r border-white/10">GPQA Diamond</td>
               {models.map((model, idx) => {
                 const score = model.benchmarks?.find(b => b.name.toLowerCase() === "gpqa diamond")?.score || "—";
                 const isWinner = idx === bestGpqaIdx;
@@ -561,7 +561,7 @@ export default function CompareClient({ initialModels, allModels }: CompareClien
               .filter(name => !["mmlu", "humaneval", "gsm8k", "swe-bench verified", "swe-bench pro", "aider polyglot", "gpqa diamond"].includes(name.toLowerCase()))
               .map((benchName) => (
                 <tr key={benchName}>
-                  <td className="p-4 text-sm font-semibold text-gray-300 bg-white/[0.02]">{benchName}</td>
+                  <td className="p-4 text-sm font-semibold text-gray-300 bg-[#0E0E10] sticky left-0 z-10 border-r border-white/10">{benchName}</td>
                   {models.map((model) => {
                     const bench = model.benchmarks?.find((b) => b.name === benchName);
                     return (
