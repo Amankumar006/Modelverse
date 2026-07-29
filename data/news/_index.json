@@ -88,6 +88,28 @@
     ]
   },
   {
+    "id": "discover-whats-next-for-ai-from-the-saas-reckoning-to-the-agent-security-gap-at-",
+    "slug": "discover-whats-next-for-ai-from-the-saas-reckoning-to-the-agent-security-gap-at-",
+    "title": "Discover what's next for AI, from the SaaS reckoning to the agent security gap, at TechCrunch Disrupt 2026",
+    "category": "short-news",
+    "publishDate": "2026-07-29",
+    "author": "Modelverse Editorial",
+    "readTime": "2 min read",
+    "excerpt": "At TechCrunch Disrupt 2026, the AI Stage is back to dig into the single hottest topic in the community for the past few years, presented by Google for Startups.",
+    "coverImage": "https://techcrunch.com/wp-content/uploads/2026/07/techcrunch-disrupt-2026-ai-stage.jpg?w=1200",
+    "status": "published",
+    "confidenceLevel": "confirmed",
+    "externalSources": [
+      "https://techcrunch.com/2026/07/29/discover-whats-next-for-ai-from-the-saas-reckoning-to-the-agent-security-gap-at-techcrunch-disrupt-2026/"
+    ],
+    "relatedModels": [],
+    "tags": [
+      "ai-news",
+      "breaking",
+      "techcrunch-ai"
+    ]
+  },
+  {
     "id": "encore-ai-raises-30m-to-build-ai-agents-that-learn-from-customer-calls",
     "slug": "encore-ai-raises-30m-to-build-ai-agents-that-learn-from-customer-calls",
     "title": "Encore AI raises $30M to build AI agents that learn from customer calls",
@@ -176,6 +198,28 @@
     ]
   },
   {
+    "id": "prompt-engineering-vs-loop-engineering-vs-graph-engineering-what-changes-at-each",
+    "slug": "prompt-engineering-vs-loop-engineering-vs-graph-engineering-what-changes-at-each",
+    "title": "Prompt Engineering vs Loop Engineering vs Graph Engineering: What Changes at Each Layer",
+    "category": "short-news",
+    "publishDate": "2026-07-29",
+    "author": "Modelverse Editorial",
+    "readTime": "2 min read",
+    "excerpt": "Three terms now compete for the same line in AI engineering job descriptions. Prompt engineering is the established one. Loop engineering entered the AI vocabulary in late 2025 and...",
+    "coverImage": "https://www.marktechpost.com/wp-content/uploads/2026/07/blog6171-13.png",
+    "status": "published",
+    "confidenceLevel": "confirmed",
+    "externalSources": [
+      "https://www.marktechpost.com/2026/07/29/prompt-engineering-vs-loop-engineering-vs-graph-engineering-what-changes-at-each-layer/"
+    ],
+    "relatedModels": [],
+    "tags": [
+      "ai-news",
+      "breaking",
+      "marktechpost"
+    ]
+  },
+  {
     "id": "the-ai-hype-index-unsexy-ai",
     "slug": "the-ai-hype-index-unsexy-ai",
     "title": "The AI Hype Index: Unsexy AI",
@@ -211,6 +255,28 @@
     "confidenceLevel": "confirmed",
     "externalSources": [
       "https://techcrunch.com/2026/07/29/the-hugging-face-ai-break-in-as-told-through-an-increasingly-committed-bear-metaphor/"
+    ],
+    "relatedModels": [],
+    "tags": [
+      "ai-news",
+      "breaking",
+      "techcrunch-ai"
+    ]
+  },
+  {
+    "id": "thinking-machines-co-founder-lilian-weng-left-the-company-citing-health-reasons-",
+    "slug": "thinking-machines-co-founder-lilian-weng-left-the-company-citing-health-reasons-",
+    "title": "Thinking Machines co-founder Lilian Weng left the company citing health reasons, then joined OpenAI",
+    "category": "short-news",
+    "publishDate": "2026-07-29",
+    "author": "Modelverse Editorial",
+    "readTime": "2 min read",
+    "excerpt": "Weng previously served as the VP of AI Safety Research at OpenAI.",
+    "coverImage": "https://techcrunch.com/wp-content/uploads/2026/05/openai-logo-code-background.jpg?resize=1200,798",
+    "status": "published",
+    "confidenceLevel": "confirmed",
+    "externalSources": [
+      "https://techcrunch.com/2026/07/29/thinking-machines-co-founder-lilian-weng-left-the-company-citing-health-reasons-then-joined-openai/"
     ],
     "relatedModels": [],
     "tags": [
