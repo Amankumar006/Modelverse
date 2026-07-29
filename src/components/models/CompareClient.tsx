@@ -88,50 +88,87 @@ export default function CompareClient({ initialModels, allModels }: CompareClien
     return Array.from(names).sort();
   }, [models]);
 
-  if (models.length === 0) {
-    return (
-      <div className="flex flex-col items-center justify-center p-12 bg-white/5 border border-white/10 rounded-2xl text-center">
-        <Activity size={48} className="text-gray-600 mb-4" />
-        <h2 className="text-xl font-bold text-white mb-2">No models selected</h2>
-        <p className="text-gray-400 mb-6 max-w-md">
-          Add some models to compare their specs, context windows, and benchmarks side-by-side.
-        </p>
-        <div className="relative w-full max-w-sm" ref={dropdownRef}>
-          <div className="relative">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500" size={18} />
-            <input
-              type="text"
-              placeholder="Search for a model..."
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              onFocus={() => setIsDropdownOpen(true)}
-              className="w-full bg-[#121A15] border border-white/10 rounded-xl py-3 pl-10 pr-4 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-[#4ADE80]"
-            />
-          </div>
-          {isDropdownOpen && (
-            <div className="absolute z-10 w-full mt-2 bg-[#1a233a] border border-white/10 rounded-xl shadow-2xl max-h-60 overflow-y-auto">
-              {filteredModels.length > 0 ? (
-                filteredModels.map((m) => (
-                  <button
-                    key={m.id}
-                    onClick={() => addModel(m)}
-                    className="w-full text-left px-4 py-3 hover:bg-white/5 flex items-center gap-3 transition-colors border-b border-white/5 last:border-0"
-                  >
-                    <div>
-                      <div className="text-sm font-semibold text-white">{m.name}</div>
-                      <div className="text-xs text-gray-400">{m.developer}</div>
-                    </div>
-                  </button>
-                ))
-              ) : (
-                <div className="px-4 py-4 text-sm text-gray-400 text-center">No models found</div>
-              )}
-            </div>
-          )}
-        </div>
-      </div>
-    );
-  }
+  // Helper to parse strings like "86.1%" or "79" to a number
+  const parseScore = (scoreStr: string | undefined): number | null => {
+    if (!scoreStr) return null;
+    const num = parseFloat(scoreStr.replace(/[^0-9.]/g, ""));
+    return isNaN(num) ? null : num;
+  };
+
+  // Helper to parse strings like "128K tokens" or "1M tokens" to a number
+  const parseContext = (contextStr: string | undefined): number | null => {
+    if (!contextStr) return null;
+    let multiplier = 1;
+    const cleaned = contextStr.toLowerCase();
+    if (cleaned.includes("m")) multiplier = 1000000;
+    else if (cleaned.includes("k")) multiplier = 1000;
+    const num = parseFloat(cleaned.replace(/[^0-9.]/g, ""));
+    return isNaN(num) ? null : num * multiplier;
+  };
+
+  // Cost calculator per query based on pricing arrays
+  const calculateCost = (model: ModelEntry, inputQty: number, outputQty: number): number => {
+    if (model.type === "open-source" || model.type === "open-weights" || !model.pricing) {
+      return 0;
+    }
+    let inputCost = 0;
+    let outputCost = 0;
+    
+    const inputPricing = model.pricing.find(p => p.unit.toLowerCase().includes("input"));
+    const outputPricing = model.pricing.find(p => p.unit.toLowerCase().includes("output"));
+    
+    if (inputPricing) {
+      const perToken = inputPricing.unit.toLowerCase().includes("1m")
+        ? inputPricing.amount / 1000000
+        : inputPricing.amount;
+      inputCost = inputQty * perToken;
+    }
+    if (outputPricing) {
+      const perToken = outputPricing.unit.toLowerCase().includes("1m")
+        ? outputPricing.amount / 1000000
+        : outputPricing.amount;
+      outputCost = outputQty * perToken;
+    }
+    return inputCost + outputCost;
+  };
+
+  const [chartMetric, setChartMetric] = useState<string>("mmlu");
+  const [calcInputTokens, setCalcInputTokens] = useState<number>(100000); // 100K input tokens
+  const [calcOutputTokens, setCalcOutputTokens] = useState<number>(20000); // 20K output tokens
+
+  // Extract values for highlight calculations
+  const parsedMmlu = models.map(m => parseScore(m.benchmarks?.find(b => b.name.toLowerCase() === "mmlu")?.score));
+  const parsedHumaneval = models.map(m => parseScore(m.benchmarks?.find(b => b.name.toLowerCase() === "humaneval")?.score));
+  const parsedGsm8k = models.map(m => parseScore(m.benchmarks?.find(b => b.name.toLowerCase() === "gsm8k")?.score));
+  const parsedContext = models.map(m => parseContext(m.contextWindow));
+  const calculatedCosts = models.map(m => calculateCost(m, calcInputTokens, calcOutputTokens));
+
+  const getWinnerIndex = (
+    rowValues: (number | null)[],
+    direction: "higher" | "lower"
+  ): number => {
+    let bestVal: number | null = null;
+    let bestIdx = -1;
+    
+    rowValues.forEach((val, idx) => {
+      if (val === null || val === undefined) return;
+      if (bestVal === null) {
+        bestVal = val;
+        bestIdx = idx;
+      } else if (direction === "higher" ? val > bestVal : val < bestVal) {
+        bestVal = val;
+        bestIdx = idx;
+      }
+    });
+    
+    return bestIdx;
+  };
+
+  const bestMmluIdx = getWinnerIndex(parsedMmlu, "higher");
+  const bestHumanevalIdx = getWinnerIndex(parsedHumaneval, "higher");
+  const bestGsm8kIdx = getWinnerIndex(parsedGsm8k, "higher");
+  const bestContextIdx = getWinnerIndex(parsedContext, "higher");
+  const bestCostIdx = getWinnerIndex(calculatedCosts, "lower");
 
   return (
     <div className="space-y-8">
@@ -176,8 +213,143 @@ export default function CompareClient({ initialModels, allModels }: CompareClien
         </div>
       </div>
 
-      {/* Interactive Vision Benchmark & Latency Chart */}
-      <VisionBenchmarkChart />
+      {/* Dynamic Model Benchmark Comparison Chart */}
+      <div className="rounded-2xl bg-[#1C1C1E] border border-[#282828] p-6 shadow-2xl space-y-6">
+        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-5 border-b border-[#282828]">
+          <div>
+            <h2 className="text-xl font-semibold text-white">Compare Capability Benchmarks</h2>
+            <p className="text-xs text-[#90908F] mt-1 leading-relaxed">
+              Visualize side-by-side relative performance differences for selected models.
+            </p>
+          </div>
+          <div className="flex flex-wrap items-center bg-[#141414] p-1 rounded-xl border border-[#282828] gap-1">
+            {["MMLU", "HumanEval", "GSM8K", "Context Window"].map((m) => {
+              const active = chartMetric === m.toLowerCase().replace(" ", "");
+              return (
+                <button
+                  key={m}
+                  onClick={() => setChartMetric(m.toLowerCase().replace(" ", ""))}
+                  className={`px-3 py-1.5 text-xs font-medium rounded-lg transition-all ${
+                    active
+                      ? "bg-[#242426] text-emerald-400 border border-emerald-500/30 font-semibold"
+                      : "text-[#90908F] hover:text-white"
+                  }`}
+                >
+                  {m}
+                </button>
+              );
+            })}
+          </div>
+        </div>
+
+        <div className="space-y-4">
+          {models.map((model, idx) => {
+            let value = 0;
+            let displayVal = "N/A";
+            
+            if (chartMetric === "contextwindow") {
+              const parsedVal = parseContext(model.contextWindow);
+              value = parsedVal ?? 0;
+              displayVal = model.contextWindow || "Unknown";
+            } else {
+              const parsedVal = parseScore(model.benchmarks?.find(b => b.name.toLowerCase() === chartMetric)?.score);
+              value = parsedVal ?? 0;
+              displayVal = model.benchmarks?.find(b => b.name.toLowerCase() === chartMetric)?.score || "—";
+            }
+
+            // Find maximum to scale percentages
+            const allVals = models.map(m => {
+              if (chartMetric === "contextwindow") {
+                return parseContext(m.contextWindow) ?? 0;
+              } else {
+                return parseScore(m.benchmarks?.find(b => b.name.toLowerCase() === chartMetric)?.score) ?? 0;
+              }
+            });
+            const maxVal = Math.max(...allVals, 1);
+            const percentage = Math.max(8, (value / maxVal) * 100);
+
+            return (
+              <div key={model.id} className="p-3.5 rounded-xl bg-[#141414] border border-[#282828] space-y-2">
+                <div className="flex justify-between items-center text-xs">
+                  <span className="font-semibold text-white">{model.name}</span>
+                  <span className="font-mono text-emerald-400 font-bold">{displayVal}</span>
+                </div>
+                <div className="w-full bg-[#242426] h-2 rounded-full overflow-hidden border border-[#333333]">
+                  <div
+                    className="h-full rounded-full bg-gradient-to-r from-emerald-500 to-emerald-300 transition-all duration-500"
+                    style={{ width: `${percentage}%` }}
+                  />
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+
+      {/* Dynamic Token Cost Estimator Panel */}
+      <div className="rounded-2xl bg-[#1C1C1E] border border-[#282828] p-6 shadow-2xl space-y-6">
+        <div>
+          <h2 className="text-xl font-semibold text-white">Dynamic Running Cost Estimator</h2>
+          <p className="text-xs text-[#90908F] mt-1 leading-relaxed">
+            Estimate query costs based on the model pricing database and your expected volume.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div className="space-y-2">
+            <label className="text-xs text-gray-400 block font-medium">Input Tokens per Request</label>
+            <input
+              type="number"
+              min="0"
+              step="1000"
+              value={calcInputTokens}
+              onChange={(e) => setCalcInputTokens(Math.max(0, parseInt(e.target.value) || 0))}
+              className="w-full bg-[#141414] border border-[#282828] rounded-lg py-2 px-3 text-sm font-mono text-white focus:outline-none focus:ring-1 focus:ring-emerald-500"
+            />
+          </div>
+          <div className="space-y-2">
+            <label className="text-xs text-gray-400 block font-medium">Output Tokens per Request</label>
+            <input
+              type="number"
+              min="0"
+              step="1000"
+              value={calcOutputTokens}
+              onChange={(e) => setCalcOutputTokens(Math.max(0, parseInt(e.target.value) || 0))}
+              className="w-full bg-[#141414] border border-[#282828] rounded-lg py-2 px-3 text-sm font-mono text-white focus:outline-none focus:ring-1 focus:ring-emerald-500"
+            />
+          </div>
+        </div>
+
+        <div className="space-y-4 pt-2">
+          {models.map((model, idx) => {
+            const cost = calculateCost(model, calcInputTokens, calcOutputTokens);
+            const isFree = model.type === "open-source" || model.type === "open-weights";
+            
+            // Scaled bar width relative to highest cost
+            const maxCost = Math.max(...calculatedCosts, 0.001);
+            const barPercentage = isFree ? 0 : Math.max(5, (cost / maxCost) * 100);
+
+            return (
+              <div key={model.id} className="p-3.5 rounded-xl bg-[#141414] border border-[#282828] space-y-2">
+                <div className="flex justify-between items-center text-xs">
+                  <span className="font-semibold text-white">{model.name}</span>
+                  <span className="font-mono text-emerald-400 font-bold">
+                    {isFree ? "Free (Self-Hosted)" : `$${cost.toFixed(4)}`}
+                  </span>
+                </div>
+                {!isFree && (
+                  <div className="w-full bg-[#242426] h-2 rounded-full overflow-hidden border border-[#333333]">
+                    <div
+                      className="h-full rounded-full bg-gradient-to-r from-emerald-500/80 to-emerald-400 transition-all duration-500"
+                      style={{ width: `${barPercentage}%` }}
+                    />
+                  </div>
+                )}
+              </div>
+            );
+          })}
+        </div>
+      </div>
 
       {/* Comparison Table */}
       <CopyableTable title="Model Comparison Matrix">
@@ -226,17 +398,6 @@ export default function CompareClient({ initialModels, allModels }: CompareClien
               ))}
             </tr>
 
-            {/* Release Date */}
-            <tr>
-              <td className="p-4 text-sm font-medium text-gray-400 flex items-center gap-2"><Calendar size={16} /> Release Date</td>
-              {models.map((model) => (
-                <td key={model.id} className="p-4 text-sm text-white">{new Date(model.releaseDate).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" })}</td>
-              ))}
-              {Array.from({ length: 4 - models.length }).map((_, i) => (
-                <td key={`empty-r-${i}`} className="p-4 bg-white/[0.02] border-r border-white/5 border-dashed last:border-r-0"></td>
-              ))}
-            </tr>
-
             {/* License */}
             <tr>
               <td className="p-4 text-sm font-medium text-gray-400 flex items-center gap-2"><Shield size={16} /> License</td>
@@ -281,67 +442,148 @@ export default function CompareClient({ initialModels, allModels }: CompareClien
             {/* Context Window */}
             <tr>
               <td className="p-4 text-sm font-semibold text-gray-300 bg-white/[0.02]">Context Window</td>
-              {models.map((model) => (
-                <td key={model.id} className="p-4 text-sm text-white font-mono font-medium">
-                  {model.contextWindow || "Unknown"}
-                </td>
-              ))}
+              {models.map((model, idx) => {
+                const isWinner = idx === bestContextIdx;
+                return (
+                  <td
+                    key={model.id}
+                    className={`p-4 text-sm font-mono font-medium transition-colors ${
+                      isWinner ? "bg-emerald-500/5 text-emerald-400 font-bold border-x border-emerald-500/10" : "text-white"
+                    }`}
+                  >
+                    {model.contextWindow || "Unknown"}
+                    {isWinner && <span className="ml-1.5 text-[9px] uppercase tracking-wider bg-emerald-500/20 text-emerald-400 px-1 py-0.5 rounded">Largest</span>}
+                  </td>
+                );
+              })}
               {Array.from({ length: 4 - models.length }).map((_, i) => (
                 <td key={`empty-c-${i}`} className="p-4 bg-white/[0.02] border-r border-white/5 border-dashed last:border-r-0"></td>
               ))}
             </tr>
 
-            {/* Primary Task */}
+            {/* Total Estimated Cost */}
             <tr>
-              <td className="p-4 text-sm font-semibold text-gray-300 bg-white/[0.02]">Primary Task</td>
-              {models.map((model) => (
-                <td key={model.id} className="p-4 text-sm text-gray-200 capitalize">
-                  {model.primaryTask?.replace("-", " ") || "General"}
-                </td>
-              ))}
+              <td className="p-4 text-sm font-semibold text-gray-300 bg-white/[0.02]">Estimated cost / query</td>
+              {models.map((model, idx) => {
+                const cost = calculatedCosts[idx];
+                const isWinner = idx === bestCostIdx;
+                const isFree = model.type === "open-source" || model.type === "open-weights";
+                return (
+                  <td
+                    key={model.id}
+                    className={`p-4 text-sm font-mono font-medium transition-colors ${
+                      isWinner ? "bg-emerald-500/5 text-emerald-400 font-bold border-x border-emerald-500/10" : "text-white"
+                    }`}
+                  >
+                    {isFree ? "Free" : `$${cost.toFixed(4)}`}
+                    {isWinner && <span className="ml-1.5 text-[9px] uppercase tracking-wider bg-emerald-500/20 text-emerald-400 px-1 py-0.5 rounded">Cheapest</span>}
+                  </td>
+                );
+              })}
               {Array.from({ length: 4 - models.length }).map((_, i) => (
-                <td key={`empty-task-${i}`} className="p-4 bg-white/[0.02] border-r border-white/5 border-dashed last:border-r-0"></td>
+                <td key={`empty-cost-${i}`} className="p-4 bg-white/[0.02] border-r border-white/5 border-dashed last:border-r-0"></td>
               ))}
             </tr>
 
-            {/* Release Date */}
+            {/* MMLU Benchmark */}
             <tr>
-              <td className="p-4 text-sm font-semibold text-gray-300 bg-white/[0.02]">Release Date</td>
-              {models.map((model) => (
-                <td key={model.id} className="p-4 text-sm text-gray-400 font-mono">
-                  {model.releaseDate || "N/A"}
-                </td>
-              ))}
+              <td className="p-4 text-sm font-semibold text-[#4ADE80] bg-white/[0.02]">MMLU Score</td>
+              {models.map((model, idx) => {
+                const score = model.benchmarks?.find(b => b.name.toLowerCase() === "mmlu")?.score || "—";
+                const isWinner = idx === bestMmluIdx;
+                return (
+                  <td
+                    key={model.id}
+                    className={`p-4 text-sm font-mono transition-colors ${
+                      isWinner ? "bg-emerald-500/5 text-emerald-400 font-bold border-x border-emerald-500/10" : "text-gray-200"
+                    }`}
+                  >
+                    {score}
+                    {isWinner && score !== "—" && <span className="ml-1.5 text-[9px] uppercase tracking-wider bg-emerald-500/20 text-emerald-400 px-1 py-0.5 rounded">Top</span>}
+                  </td>
+                );
+              })}
               {Array.from({ length: 4 - models.length }).map((_, i) => (
-                <td key={`empty-r-${i}`} className="p-4 bg-white/[0.02] border-r border-white/5 border-dashed last:border-r-0"></td>
+                <td key={`empty-mmlu-${i}`} className="p-4 bg-white/[0.02] border-r border-white/5 border-dashed last:border-r-0"></td>
               ))}
             </tr>
 
-            {/* Benchmarks Comparison */}
-            {allBenchmarkNames.map((benchName) => (
-              <tr key={benchName}>
-                <td className="p-4 text-sm font-semibold text-[#4ADE80] bg-white/[0.02]">{benchName}</td>
-                {models.map((model) => {
-                  const bench = model.benchmarks?.find((b) => b.name === benchName);
-                  return (
-                    <td key={model.id} className="p-4">
-                      {bench ? (
-                        <div className="flex items-baseline gap-2">
-                          <span className="text-base font-bold text-white font-mono">{bench.score}</span>
-                          {bench.verified && (
-                            <span className="text-[10px] text-[#4ADE80] bg-[#4ADE80]/10 px-1.5 py-0.5 rounded font-mono">
-                              Verified
-                            </span>
-                          )}
-                        </div>
-                      ) : (
-                        <span className="text-sm text-gray-600">—</span>
-                      )}
-                    </td>
-                  );
-                })}
-              </tr>
-            ))}
+            {/* HumanEval Benchmark */}
+            <tr>
+              <td className="p-4 text-sm font-semibold text-[#4ADE80] bg-white/[0.02]">HumanEval Score</td>
+              {models.map((model, idx) => {
+                const score = model.benchmarks?.find(b => b.name.toLowerCase() === "humaneval")?.score || "—";
+                const isWinner = idx === bestHumanevalIdx;
+                return (
+                  <td
+                    key={model.id}
+                    className={`p-4 text-sm font-mono transition-colors ${
+                      isWinner ? "bg-emerald-500/5 text-emerald-400 font-bold border-x border-emerald-500/10" : "text-gray-200"
+                    }`}
+                  >
+                    {score}
+                    {isWinner && score !== "—" && <span className="ml-1.5 text-[9px] uppercase tracking-wider bg-emerald-500/20 text-emerald-400 px-1 py-0.5 rounded">Top</span>}
+                  </td>
+                );
+              })}
+              {Array.from({ length: 4 - models.length }).map((_, i) => (
+                <td key={`empty-he-${i}`} className="p-4 bg-white/[0.02] border-r border-white/5 border-dashed last:border-r-0"></td>
+              ))}
+            </tr>
+
+            {/* GSM8K Benchmark */}
+            <tr>
+              <td className="p-4 text-sm font-semibold text-[#4ADE80] bg-white/[0.02]">GSM8K Score</td>
+              {models.map((model, idx) => {
+                const score = model.benchmarks?.find(b => b.name.toLowerCase() === "gsm8k")?.score || "—";
+                const isWinner = idx === bestGsm8kIdx;
+                return (
+                  <td
+                    key={model.id}
+                    className={`p-4 text-sm font-mono transition-colors ${
+                      isWinner ? "bg-emerald-500/5 text-emerald-400 font-bold border-x border-emerald-500/10" : "text-gray-200"
+                    }`}
+                  >
+                    {score}
+                    {isWinner && score !== "—" && <span className="ml-1.5 text-[9px] uppercase tracking-wider bg-emerald-500/20 text-emerald-400 px-1 py-0.5 rounded">Top</span>}
+                  </td>
+                );
+              })}
+              {Array.from({ length: 4 - models.length }).map((_, i) => (
+                <td key={`empty-gsm-${i}`} className="p-4 bg-white/[0.02] border-r border-white/5 border-dashed last:border-r-0"></td>
+              ))}
+            </tr>
+
+            {/* General Benchmarks Comparison (Others) */}
+            {allBenchmarkNames
+              .filter(name => !["mmlu", "humaneval", "gsm8k"].includes(name.toLowerCase()))
+              .map((benchName) => (
+                <tr key={benchName}>
+                  <td className="p-4 text-sm font-semibold text-gray-300 bg-white/[0.02]">{benchName}</td>
+                  {models.map((model) => {
+                    const bench = model.benchmarks?.find((b) => b.name === benchName);
+                    return (
+                      <td key={model.id} className="p-4">
+                        {bench ? (
+                          <div className="flex items-baseline gap-2">
+                            <span className="text-base font-bold text-white font-mono">{bench.score}</span>
+                            {bench.verified && (
+                              <span className="text-[10px] text-[#4ADE80] bg-[#4ADE80]/10 px-1.5 py-0.5 rounded font-mono">
+                                Verified
+                              </span>
+                            )}
+                          </div>
+                        ) : (
+                          <span className="text-sm text-gray-600">—</span>
+                        )}
+                      </td>
+                    );
+                  })}
+                  {Array.from({ length: 4 - models.length }).map((_, i) => (
+                    <td key={`empty-${benchName}-${i}`} className="p-4 bg-white/[0.02] border-r border-white/5 border-dashed last:border-r-0"></td>
+                  ))}
+                </tr>
+              ))}
           </tbody>
         </table>
       </CopyableTable>
