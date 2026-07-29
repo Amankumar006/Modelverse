@@ -119,7 +119,7 @@ body {
   margin-bottom: 1.4em;
 }
 
-.prose code {
+.prose :not(pre) > code {
   color: #E4E4E7;
   background-color: #242426;
   padding: 0.15em 0.4em;
