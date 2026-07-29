@@ -559,7 +559,7 @@ export default function Home() {
               {/* Help Us Improve Card (Bottom) */}
               <div className="rounded-2xl border border-[#243629] relative overflow-hidden bg-[#121A15] p-5 md:p-6 flex flex-col justify-between min-h-[180px]">
                 <a
-                  href="mailto:corrections@modelverse.ai?subject=Modelverse Correction"
+                  href="mailto:004akaman@gmail.com?subject=Modelverse Correction"
                   className="absolute top-5 right-5 h-9 w-9 rounded-full bg-[#1A261D] border border-[#243629] hover:bg-[#243629] hover:border-[#334D3A] transition-all flex items-center justify-center text-[#8C9E91] hover:text-[#E2E8E4] z-20 cursor-pointer"
                   title="Submit Correction"
                 >
@@ -572,14 +572,14 @@ export default function Home() {
                     <span>Help Us Improve</span>
                   </div>
                   <div className="mt-4 space-y-1">
-                    <p className="text-sm sm:text-base font-semibold text-[#E2E8E4] font-mono">corrections@modelverse.ai</p>
+                    <p className="text-sm sm:text-base font-semibold text-[#E2E8E4] font-mono">004akaman@gmail.com</p>
                     <p className="text-xs sm:text-[13px] text-[#5A6E60]">Know a model we're missing? Suggest it.</p>
                   </div>
                 </div>
 
                 <div className="relative z-10 mt-3 text-left">
                   <a
-                    href="mailto:corrections@modelverse.ai?subject=Model Suggestion"
+                    href="mailto:004akaman@gmail.com?subject=Model Suggestion"
                     className="inline-flex items-center gap-1.5 text-xs text-[#4ADE80] hover:text-[#22c55e] font-semibold hover:underline cursor-pointer"
                   >
                     Send Suggestion &rarr;

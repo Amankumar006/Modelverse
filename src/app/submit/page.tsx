@@ -339,7 +339,7 @@ export default function SubmitModelPage() {
               </button>
 
               <a
-                href={`mailto:corrections@modelverse.ai?subject=${emailSubject}&body=${emailBody}`}
+                href={`mailto:004akaman@gmail.com?subject=${emailSubject}&body=${emailBody}`}
                 className="inline-flex items-center justify-center gap-2 px-5 py-3.5 rounded-xl text-sm font-semibold bg-emerald-500 hover:bg-emerald-400 text-black font-bold transition-colors cursor-pointer"
               >
                 <Mail size={16} />
