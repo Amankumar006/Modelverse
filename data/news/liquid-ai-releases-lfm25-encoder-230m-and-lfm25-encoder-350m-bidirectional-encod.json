@@ -1,0 +1,24 @@
+{
+  "id": "liquid-ai-releases-lfm25-encoder-230m-and-lfm25-encoder-350m-bidirectional-encod",
+  "slug": "liquid-ai-releases-lfm25-encoder-230m-and-lfm25-encoder-350m-bidirectional-encod",
+  "title": "Liquid AI Releases LFM2.5-Encoder-230M and LFM2.5-Encoder-350M: Bidirectional Encoders That Stay Fast at 8K Context on CPU",
+  "category": "short-news",
+  "isTrending": true,
+  "publishDate": "2026-07-29",
+  "author": "Modelverse Editorial",
+  "readTime": "2 min read",
+  "excerpt": "Liquid AI released two open-weight bidirectional encoders, LFM2.5-Encoder-230M and LFM2.5-Encoder-350M. Both carry an 8,192-token context and are built on the LFM2 hybrid backbone....",
+  "body": "Liquid AI has unveiled two new open-weight bidirectional encoders, LFM2.5-Encoder-230M and LFM2.5-Encoder-350M, designed to deliver high performance and efficiency, particularly for tasks requiring long context on CPU-only environments. These models address a critical need for applications like classifiers, intent routers, safety filters, and PII detectors, which often run continuously on longer inputs without dedicated GPU resources. This release marks a significant step in extending the capabilities of models like BERT and ModernBERT by offering a more cost-effective scaling solution for increasing input lengths.\n\nThe new encoders are built upon Liquid AI's innovative LFM2 hybrid backbone, which intelligently interleaves gated short-convolution blocks with grouped-query attention. Rather than being trained from scratch, these models are ingeniously initialized from existing LFM2.5 decoder backbones (230M and 350M) and then converted for their specific encoding purpose. Both models boast a hidden size of 1024, support a vast 65,536-token vocabulary, and are proficient across 15 languages, all released under the LFM Open License v1.0.\n\nFor developers and researchers, these encoders offer a compelling blend of accuracy and operational efficiency. The LFM2.5-Encoder-350M achieved an impressive mean score of 81.02 across 17 diverse tasks, ranking fourth among 14 evaluated models and competing favorably with models nearly ten times its size. Similarly, the LFM2.5-Encoder-230M outperformed several larger counterparts, including ModernBERT-base. This performance, combined with their ability to handle an 8,192-token context while remaining fast on CPUs, makes them invaluable for deploying sophisticated NLP capabilities in resource-constrained or high-throughput, continuous inference scenarios.",
+  "coverImage": "https://www.marktechpost.com/wp-content/uploads/2026/07/blog6171-12.png",
+  "status": "published",
+  "confidenceLevel": "confirmed",
+  "externalSources": [
+    "https://www.marktechpost.com/2026/07/29/liquid-ai-releases-lfm2-5-encoder-230m-and-lfm2-5-encoder-350m-bidirectional-encoders-that-stay-fast-at-8k-context-on-cpu/"
+  ],
+  "relatedModels": [],
+  "tags": [
+    "ai-news",
+    "breaking",
+    "marktechpost"
+  ]
+}

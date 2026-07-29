@@ -1,5 +1,27 @@
 [
   {
+    "id": "as-ai-content-floods-the-internet-pangram-raises-9m-to-detect-it",
+    "slug": "as-ai-content-floods-the-internet-pangram-raises-9m-to-detect-it",
+    "title": "As AI content floods the internet, Pangram raises $9M to detect it",
+    "category": "short-news",
+    "publishDate": "2026-07-29",
+    "author": "Modelverse Editorial",
+    "readTime": "2 min read",
+    "excerpt": "Pangram has raised $9 million to scale its AI detection software. The startup has also released a new AI text detection model, Pangram 4, and an AI image detection model in researc...",
+    "coverImage": "https://techcrunch.com/wp-content/uploads/2026/07/Pangram-founders.png?resize=1200,675",
+    "status": "published",
+    "confidenceLevel": "confirmed",
+    "externalSources": [
+      "https://techcrunch.com/2026/07/29/as-ai-content-floods-the-internet-pangram-raises-9m-to-detect-it/"
+    ],
+    "relatedModels": [],
+    "tags": [
+      "ai-news",
+      "breaking",
+      "techcrunch-ai"
+    ]
+  },
+  {
     "id": "cyera-agrees-to-acquire-oasis-security-for-1b-to-safeguard-proliferating-ai-agen",
     "slug": "cyera-agrees-to-acquire-oasis-security-for-1b-to-safeguard-proliferating-ai-agen",
     "title": "Cyera agrees to acquire Oasis Security for $1B to safeguard proliferating AI agents",
@@ -19,6 +41,28 @@
       "ai-news",
       "breaking",
       "techcrunch-ai"
+    ]
+  },
+  {
+    "id": "liquid-ai-releases-lfm25-encoder-230m-and-lfm25-encoder-350m-bidirectional-encod",
+    "slug": "liquid-ai-releases-lfm25-encoder-230m-and-lfm25-encoder-350m-bidirectional-encod",
+    "title": "Liquid AI Releases LFM2.5-Encoder-230M and LFM2.5-Encoder-350M: Bidirectional Encoders That Stay Fast at 8K Context on CPU",
+    "category": "short-news",
+    "publishDate": "2026-07-29",
+    "author": "Modelverse Editorial",
+    "readTime": "2 min read",
+    "excerpt": "Liquid AI released two open-weight bidirectional encoders, LFM2.5-Encoder-230M and LFM2.5-Encoder-350M. Both carry an 8,192-token context and are built on the LFM2 hybrid backbone....",
+    "coverImage": "https://www.marktechpost.com/wp-content/uploads/2026/07/blog6171-12.png",
+    "status": "published",
+    "confidenceLevel": "confirmed",
+    "externalSources": [
+      "https://www.marktechpost.com/2026/07/29/liquid-ai-releases-lfm2-5-encoder-230m-and-lfm2-5-encoder-350m-bidirectional-encoders-that-stay-fast-at-8k-context-on-cpu/"
+    ],
+    "relatedModels": [],
+    "tags": [
+      "ai-news",
+      "breaking",
+      "marktechpost"
     ]
   },
   {
