@@ -1,0 +1,50 @@
+{
+  "id": "luffythefox-qwen36-35b-a3b-uncensored-genesis-hermes-v6-gguf",
+  "name": "Qwen3.6-35B-A3B-Uncensored-Genesis-Hermes-V6-GGUF",
+  "slug": "qwen36-35b-a3b-uncensored-genesis-hermes-v6-gguf",
+  "developer": "LuffyTheFox",
+  "releaseDate": "2026-07-13",
+  "updatedAt": "2026-07-29",
+  "type": "open-weights",
+  "status": "active",
+  "modality": [
+    "text",
+    "image"
+  ],
+  "primaryTask": "multimodal-general",
+  "deployment": [
+    "self-hostable"
+  ],
+  "license": "APACHE-2.0",
+  "parameters": "undisclosed",
+  "contextWindow": "unknown",
+  "description": "Qwen3.6-35B-A3B-Uncensored-Genesis-Hermes-V6-GGUF is a undisclosed-parameter Mixture-of-Experts (MoE) image text to text model developed by LuffyTheFox. Supports en, zh, multilingual language(s). Released on 2026-07-13 with 207 likes and 99,660 downloads on Hugging Face.",
+  "keyFeatures": [
+    "undisclosed parameters with sparse MoE architecture for efficient inference",
+    "Primary task: image text to text (text, image modality)",
+    "Language support: en, zh, multilingual",
+    "Open-weights under APACHE-2.0 license — self-hostable and fine-tunable"
+  ],
+  "benchmarks": [],
+  "family": null,
+  "previousVersion": null,
+  "links": {
+    "huggingface": "https://huggingface.co/LuffyTheFox/Qwen3.6-35B-A3B-Uncensored-Genesis-Hermes-V6-GGUF"
+  },
+  "logo": null,
+  "tags": [
+    "open-weights",
+    "trending",
+    "huggingface",
+    "moe",
+    "hermes",
+    "image-text-to-text"
+  ],
+  "sources": [
+    "https://huggingface.co/LuffyTheFox/Qwen3.6-35B-A3B-Uncensored-Genesis-Hermes-V6-GGUF"
+  ],
+  "verified": true,
+  "featured": false,
+  "boost": 1,
+  "curatorNotes": "Auto-ingested from HuggingFace Trending on 2026-07-29. Architecture: unknown. Params: undisclosed. License: APACHE-2.0."
+}
