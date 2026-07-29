@@ -56,24 +56,45 @@ export default function Navbar({ theme = "dark" }: { theme?: "light" | "dark" })
   };
 
   // Lazy load Fuse.js and search index
-  const [fuseInstance, setFuseInstance] = useState<any>(null);
+  const [fuseModels, setFuseModels] = useState<any>(null);
+  const [fuseNews, setFuseNews] = useState<any>(null);
 
   const initSearch = async () => {
-    if (fuseInstance) return fuseInstance;
-    try {
-      const [FuseJS, searchData] = await Promise.all([
-        import("fuse.js").then((m) => m.default),
-        import("@/lib/search-index.json").then((m) => m.default),
-      ]);
-      const newFuse = new FuseJS(searchData, {
-        keys: ["name", "developer"],
-        threshold: 0.3,
-      });
-      setFuseInstance(newFuse);
-      return newFuse;
-    } catch (e) {
-      console.error("Failed to load search index", e);
-      return null;
+    const isNewsRoute = pathname?.startsWith("/news");
+    if (isNewsRoute) {
+      if (fuseNews) return fuseNews;
+      try {
+        const [FuseJS, searchData] = await Promise.all([
+          import("fuse.js").then((m) => m.default),
+          import("@/lib/news-index.json").then((m) => m.default),
+        ]);
+        const newFuse = new FuseJS(searchData, {
+          keys: ["title", "excerpt"],
+          threshold: 0.3,
+        });
+        setFuseNews(newFuse);
+        return newFuse;
+      } catch (e) {
+        console.error("Failed to load news search index", e);
+        return null;
+      }
+    } else {
+      if (fuseModels) return fuseModels;
+      try {
+        const [FuseJS, searchData] = await Promise.all([
+          import("fuse.js").then((m) => m.default),
+          import("@/lib/search-index.json").then((m) => m.default),
+        ]);
+        const newFuse = new FuseJS(searchData, {
+          keys: ["name", "developer"],
+          threshold: 0.3,
+        });
+        setFuseModels(newFuse);
+        return newFuse;
+      } catch (e) {
+        console.error("Failed to load model search index", e);
+        return null;
+      }
     }
   };
 
@@ -101,10 +122,14 @@ export default function Navbar({ theme = "dark" }: { theme?: "light" | "dark" })
 
   // Input Keyboard Navigation Handlers (Enter, ArrowUp, ArrowDown, Escape)
   const handleInputKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    const isNewsRoute = pathname?.startsWith("/news");
+    const basePath = isNewsRoute ? "/news" : "/models";
+    const detailPrefix = isNewsRoute ? "/news" : "/models";
+
     if (!searchFocused || searchResults.length === 0) {
       if (e.key === "Enter" && searchQuery.trim()) {
         e.preventDefault();
-        router.push(`/models?q=${encodeURIComponent(searchQuery)}`);
+        router.push(`${basePath}?q=${encodeURIComponent(searchQuery)}`);
         setSearchFocused(false);
       }
       return;
@@ -119,11 +144,11 @@ export default function Navbar({ theme = "dark" }: { theme?: "light" | "dark" })
     } else if (e.key === "Enter") {
       e.preventDefault();
       if (selectedIndex >= 0 && searchResults[selectedIndex]) {
-        router.push(`/models/${searchResults[selectedIndex].slug}`);
+        router.push(`${detailPrefix}/${searchResults[selectedIndex].slug}`);
       } else if (searchResults.length > 0) {
-        router.push(`/models/${searchResults[0].slug}`);
+        router.push(`${detailPrefix}/${searchResults[0].slug}`);
       } else {
-        router.push(`/models?q=${encodeURIComponent(searchQuery)}`);
+        router.push(`${basePath}?q=${encodeURIComponent(searchQuery)}`);
       }
       setSearchFocused(false);
       setSelectedIndex(-1);
@@ -179,7 +204,7 @@ export default function Navbar({ theme = "dark" }: { theme?: "light" | "dark" })
             <input
               ref={searchInputRef}
               type="text"
-              placeholder="Search docs & models..."
+              placeholder={pathname?.startsWith("/news") ? "Search news..." : "Search docs & models..."}
               value={searchQuery}
               onChange={(e) => handleSearch(e.target.value)}
               onKeyDown={handleInputKeyDown}
@@ -208,34 +233,43 @@ export default function Navbar({ theme = "dark" }: { theme?: "light" | "dark" })
           {/* Search Dropdown Results with Keyboard Highlight */}
           {searchFocused && searchQuery && (
             <div className="absolute top-full right-0 mt-2 w-80 bg-[#1C1C1E] border border-[#2E2E2E] rounded-xl p-2 shadow-2xl z-50 flex flex-col text-left">
-              {searchResults.map((model, index) => (
-                <Link
-                  key={model.id}
-                  href={`/models/${model.slug}`}
-                  onMouseEnter={() => setSelectedIndex(index)}
-                  className={`flex items-center justify-between p-2.5 rounded-lg transition-colors ${
-                    index === selectedIndex
-                      ? "bg-[#28282A] text-white border-l-2 border-emerald-400"
-                      : "hover:bg-[#28282A]"
-                  }`}
-                >
-                  <div className="min-w-0 pr-2">
-                    <p className="text-xs font-medium text-white truncate">{model.name}</p>
-                    <p className="text-[10px] text-gray-400 truncate">{model.developer}</p>
-                  </div>
-                  <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-[#242426] text-gray-300 border border-white/5">
-                    {model.type === "open-weights" ? "Open" : "API"}
-                  </span>
-                </Link>
-              ))}
+              {searchResults.map((item: any, index) => {
+                const isNewsRoute = pathname?.startsWith("/news");
+                return (
+                  <Link
+                    key={item.id}
+                    href={isNewsRoute ? `/news/${item.slug}` : `/models/${item.slug}`}
+                    onMouseEnter={() => setSelectedIndex(index)}
+                    className={`flex items-center justify-between p-2.5 rounded-lg transition-colors ${
+                      index === selectedIndex
+                        ? "bg-[#28282A] text-white border-l-2 border-emerald-400"
+                        : "hover:bg-[#28282A]"
+                    }`}
+                  >
+                    <div className="min-w-0 pr-2">
+                      <p className="text-xs font-medium text-white truncate">
+                        {isNewsRoute ? item.title : item.name}
+                      </p>
+                      <p className="text-[10px] text-gray-400 truncate">
+                        {isNewsRoute ? item.excerpt : item.developer}
+                      </p>
+                    </div>
+                    <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-[#242426] text-gray-300 border border-white/5 shrink-0">
+                      {isNewsRoute ? "News" : (item.type === "open-weights" ? "Open" : "API")}
+                    </span>
+                  </Link>
+                );
+              })}
 
               {searchResults.length === 0 && (
-                <p className="p-4 text-xs text-gray-400 text-center">No models found</p>
+                <p className="p-4 text-xs text-gray-400 text-center">
+                  {pathname?.startsWith("/news") ? "No articles found" : "No models found"}
+                </p>
               )}
 
               {searchResults.length > 0 && (
                 <Link
-                  href={`/models?q=${encodeURIComponent(searchQuery)}`}
+                  href={pathname?.startsWith("/news") ? `/news?q=${encodeURIComponent(searchQuery)}` : `/models?q=${encodeURIComponent(searchQuery)}`}
                   className="border-t border-[#2E2E2E] mt-1 pt-2 pb-1 text-center text-xs font-semibold text-emerald-400 hover:underline"
                 >
                   See all results &rarr;
@@ -269,7 +303,9 @@ export default function Navbar({ theme = "dark" }: { theme?: "light" | "dark" })
               onChange={(e) => handleSearch(e.target.value)}
               onKeyDown={(e) => {
                 if (e.key === "Enter" && searchQuery.trim()) {
-                  router.push(`/models?q=${encodeURIComponent(searchQuery)}`);
+                  const isNewsRoute = pathname?.startsWith("/news");
+                  const basePath = isNewsRoute ? "/news" : "/models";
+                  router.push(`${basePath}?q=${encodeURIComponent(searchQuery)}`);
                   setMobileMenuOpen(false);
                 }
               }}

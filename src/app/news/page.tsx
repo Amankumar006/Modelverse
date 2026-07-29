@@ -30,12 +30,13 @@ function formatNewsDate(dateStr: string): string {
 }
 
 interface NewsPageProps {
-  searchParams: Promise<{ category?: string; page?: string }>;
+  searchParams: Promise<{ category?: string; page?: string; q?: string }>;
 }
 
 export default async function NewsPage({ searchParams }: NewsPageProps) {
   const resolvedParams = await searchParams;
   const activeCategory = resolvedParams.category || "all";
+  const searchPhrase = resolvedParams.q || "";
   const allArticles = getAllArticles();
 
   if (allArticles.length === 0) {
@@ -50,15 +51,24 @@ export default async function NewsPage({ searchParams }: NewsPageProps) {
   }
 
   // Filter articles based on active category
-  const filteredArticles = activeCategory === "all"
+  const categoryArticles = activeCategory === "all"
     ? allArticles
     : allArticles.filter((a) => a.category === activeCategory);
+
+  // Filter based on search query phrase if present
+  const filteredArticles = searchPhrase.trim()
+    ? categoryArticles.filter(
+        (a) =>
+          a.title.toLowerCase().includes(searchPhrase.toLowerCase()) ||
+          a.excerpt.toLowerCase().includes(searchPhrase.toLowerCase())
+      )
+    : categoryArticles;
 
   // Top Featured News Article
   const featuredArticle = allArticles.find((p) => p.isFeatured) || allArticles[0];
 
-  // Article Pool (excluding featured hero when viewing "all")
-  const poolArticles = activeCategory === "all"
+  // Article Pool (excluding featured hero when viewing "all" and not actively searching)
+  const poolArticles = activeCategory === "all" && !searchPhrase.trim()
     ? filteredArticles.filter((p) => p.id !== featuredArticle.id)
     : filteredArticles;
 
@@ -224,7 +234,9 @@ export default async function NewsPage({ searchParams }: NewsPageProps) {
         <div className="space-y-6">
           <div className="flex items-center justify-between border-b border-[#282828] pb-4">
             <h2 className="text-xs uppercase font-mono tracking-wider text-[#90908F]">
-              {activeCategory === "all" ? "All News Coverage" : `${getCategoryLabel(activeCategory as any)} Articles`}
+              {searchPhrase.trim()
+                ? `Search Results for "${searchPhrase}"`
+                : (activeCategory === "all" ? "All News Coverage" : `${getCategoryLabel(activeCategory as any)} Articles`)}
             </h2>
             <span className="text-xs font-mono text-[#90908F]">
               Showing {paginatedArticles.length} of {poolArticles.length}

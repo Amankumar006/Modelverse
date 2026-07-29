@@ -84,6 +84,50 @@ Write the unique summary in Markdown (do not write any intro like "Here is your 
   throw new Error("Invalid response from Gemini API");
 }
 
+async function rewriteArticleWithGroq(title, body) {
+  const apiKey = process.env.GROQ_API_KEY;
+  const prompt = `You are a professional AI technology editor at Modelverse (themodelverse.in).
+Write a unique, original, and engaging summary of the following AI news or announcement.
+Do NOT copy-paste the source sentences directly (avoid plagiarism).
+Keep the narrative structured into 2-3 clean paragraphs (around 150-250 words total).
+Do NOT rewrite or modify raw code blocks, mathematical equations, links, or specific benchmark scores. Keep them intact.
+Focus on:
+1. What was announced or released.
+2. How the technology works.
+3. Why it matters to developers and researchers.
+
+Title: ${title}
+Source Content:
+${body}
+
+Write the unique summary in Markdown (do not write any intro like "Here is your summary"):`;
+
+  const payload = {
+    model: "llama-3.3-70b-versatile",
+    messages: [
+      {
+        role: "user",
+        content: prompt
+      }
+    ],
+    temperature: 0.2
+  };
+
+  const headers = {
+    "Authorization": `Bearer ${apiKey}`,
+    "Content-Type": "application/json"
+  };
+
+  const url = "https://api.groq.com/openai/v1/chat/completions";
+  const responseJson = await postHttps(url, payload, headers);
+  const data = JSON.parse(responseJson);
+  
+  if (data.choices && data.choices[0] && data.choices[0].message && data.choices[0].message.content) {
+    return data.choices[0].message.content.trim();
+  }
+  throw new Error("Empty or malformed completion response from Groq");
+}
+
 async function rewriteArticleWithOpenRouter(title, body, lab, originalUrl) {
   const apiKey = process.env.OPENROUTER_API_KEY;
   const prompt = `You are a professional AI technology editor at Modelverse (themodelverse.in).
@@ -130,11 +174,45 @@ Write the unique summary in Markdown (do not write any intro like "Here is your 
   throw new Error("Empty or malformed completion response from OpenRouter");
 }
 
+async function rewriteArticle(title, body, lab, originalUrl) {
+  // Try Gemini first
+  if (process.env.GEMINI_API_KEY) {
+    try {
+      console.log("   Using Gemini API for rewrite...");
+      return await rewriteArticleWithGemini(title, body);
+    } catch (e) {
+      console.warn(`   ⚠️ Gemini API failed: ${e.message}. Falling back...`);
+    }
+  }
+
+  // Try Groq second
+  if (process.env.GROQ_API_KEY) {
+    try {
+      console.log("   Using Groq API for rewrite...");
+      return await rewriteArticleWithGroq(title, body);
+    } catch (e) {
+      console.warn(`   ⚠️ Groq API failed: ${e.message}. Falling back...`);
+    }
+  }
+
+  // Try OpenRouter third
+  if (process.env.OPENROUTER_API_KEY) {
+    try {
+      console.log("   Using OpenRouter API for rewrite...");
+      return await rewriteArticleWithOpenRouter(title, body, lab, originalUrl);
+    } catch (e) {
+      console.warn(`   ⚠️ OpenRouter API failed: ${e.message}. Falling back...`);
+    }
+  }
+
+  throw new Error("No configured LLM API keys succeeded during rewriting attempt.");
+}
+
 async function runMigration() {
   console.log("🚀 Starting existing articles migration & rewrite script...");
-  const hasKeys = process.env.GEMINI_API_KEY || process.env.OPENROUTER_API_KEY;
+  const hasKeys = process.env.GEMINI_API_KEY || process.env.GROQ_API_KEY || process.env.OPENROUTER_API_KEY;
   if (!hasKeys) {
-    console.error("❌ Error: Both GEMINI_API_KEY and OPENROUTER_API_KEY environment variables are missing!");
+    console.error("❌ Error: GEMINI_API_KEY, GROQ_API_KEY, and OPENROUTER_API_KEY environment variables are missing!");
     process.exit(1);
   }
 
@@ -232,17 +310,7 @@ async function runMigration() {
 
     while (retries > 0 && !success) {
       try {
-        let rewrittenBody;
-        if (process.env.GEMINI_API_KEY) {
-          rewrittenBody = await rewriteArticleWithGemini(data.title, body);
-        } else {
-          rewrittenBody = await rewriteArticleWithOpenRouter(
-            data.title,
-            body,
-            lab,
-            originalUrl
-          );
-        }
+        const rewrittenBody = await rewriteArticle(data.title, body, lab, originalUrl);
 
         data.body = rewrittenBody;
         data.author = "Modelverse Editorial";

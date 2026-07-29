@@ -200,15 +200,9 @@ function postHttps(url, payload, customHeaders = {}) {
   });
 }
 
-async function rewriteArticleWithOpenRouter(title, body, lab, originalUrl) {
-  const apiKey = process.env.OPENROUTER_API_KEY;
-  if (!apiKey) {
-    console.log("  ⚠️ OPENROUTER_API_KEY not found. Storing raw scraped text.");
-    return body + `\n\n### Official Announcement\nRead the full update directly from the official source at [${lab} News](${originalUrl}).\n\nStay tuned to [Modelverse](https://www.themodelverse.in/) for real-time model analysis and benchmark coverage.`;
-  }
-
-  try {
-    const prompt = `You are a professional AI technology editor at Modelverse (themodelverse.in).
+async function rewriteArticleWithGemini(title, body) {
+  const apiKey = process.env.GEMINI_API_KEY;
+  const prompt = `You are a professional AI technology editor at Modelverse (themodelverse.in).
 Write a unique, original, and engaging summary of the following AI news or announcement.
 Do NOT copy-paste the source sentences directly (avoid plagiarism).
 Keep the narrative structured into 2-3 clean paragraphs (around 150-250 words total).
@@ -224,38 +218,147 @@ ${body}
 
 Write the unique summary in Markdown (do not write any intro like "Here is your summary"):`;
 
-    const payload = {
-      model: "nvidia/nemotron-3-super-120b-a12b:free",
-      messages: [
-        {
-          role: "user",
-          content: prompt
-        }
-      ],
+  const payload = {
+    contents: [{
+      parts: [{ text: prompt }]
+    }],
+    generationConfig: {
       temperature: 0.2
-    };
-
-    const headers = {
-      "Authorization": `Bearer ${apiKey}`,
-      "HTTP-Referer": "https://www.themodelverse.in",
-      "X-Title": "Modelverse"
-    };
-
-    const url = "https://openrouter.ai/api/v1/chat/completions";
-    const responseJson = await postHttps(url, payload, headers);
-    const data = JSON.parse(responseJson);
-    
-    if (data.choices && data.choices[0] && data.choices[0].message && data.choices[0].message.content) {
-      let rewritten = data.choices[0].message.content.trim();
-      
-      console.log(`  ✍️ Successfully rewrote article via OpenRouter: "${title.slice(0, 45)}..."`);
-      return rewritten;
     }
-  } catch (e) {
-    console.error(`  ⚠️ Failed to rewrite article using OpenRouter: ${e.message}`);
+  };
+
+  const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`;
+  const responseJson = await postHttps(url, payload);
+  const data = JSON.parse(responseJson);
+  
+  if (data.candidates && data.candidates[0] && data.candidates[0].content && data.candidates[0].content.parts[0]) {
+    return data.candidates[0].content.parts[0].text.trim();
+  }
+  throw new Error("Invalid response from Gemini API");
+}
+
+async function rewriteArticleWithGroq(title, body) {
+  const apiKey = process.env.GROQ_API_KEY;
+  const prompt = `You are a professional AI technology editor at Modelverse (themodelverse.in).
+Write a unique, original, and engaging summary of the following AI news or announcement.
+Do NOT copy-paste the source sentences directly (avoid plagiarism).
+Keep the narrative structured into 2-3 clean paragraphs (around 150-250 words total).
+Do NOT rewrite or modify raw code blocks, mathematical equations, links, or specific benchmark scores. Keep them intact.
+Focus on:
+1. What was announced or released.
+2. How the technology works.
+3. Why it matters to developers and researchers.
+
+Title: ${title}
+Source Content:
+${body}
+
+Write the unique summary in Markdown (do not write any intro like "Here is your summary"):`;
+
+  const payload = {
+    model: "llama-3.3-70b-versatile",
+    messages: [
+      {
+        role: "user",
+        content: prompt
+      }
+    ],
+    temperature: 0.2
+  };
+
+  const headers = {
+    "Authorization": `Bearer ${apiKey}`,
+    "Content-Type": "application/json"
+  };
+
+  const url = "https://api.groq.com/openai/v1/chat/completions";
+  const responseJson = await postHttps(url, payload, headers);
+  const data = JSON.parse(responseJson);
+  
+  if (data.choices && data.choices[0] && data.choices[0].message && data.choices[0].message.content) {
+    return data.choices[0].message.content.trim();
+  }
+  throw new Error("Empty or malformed completion response from Groq");
+}
+
+async function rewriteArticleWithOpenRouter(title, body, lab, originalUrl) {
+  const apiKey = process.env.OPENROUTER_API_KEY;
+  const prompt = `You are a professional AI technology editor at Modelverse (themodelverse.in).
+Write a unique, original, and engaging summary of the following AI news or announcement.
+Do NOT copy-paste the source sentences directly (avoid plagiarism).
+Keep the narrative structured into 2-3 clean paragraphs (around 150-250 words total).
+Do NOT rewrite or modify raw code blocks, mathematical equations, links, or specific benchmark scores. Keep them intact.
+Focus on:
+1. What was announced or released.
+2. How the technology works.
+3. Why it matters to developers and researchers.
+
+Title: ${title}
+Source Content:
+${body}
+
+Write the unique summary in Markdown (do not write any intro like "Here is your summary"):`;
+
+  const payload = {
+    model: "nvidia/nemotron-3-super-120b-a12b:free",
+    messages: [
+      {
+        role: "user",
+        content: prompt
+      }
+    ],
+    temperature: 0.2
+  };
+
+  const headers = {
+    "Authorization": `Bearer ${apiKey}`,
+    "HTTP-Referer": "https://www.themodelverse.in",
+    "X-Title": "Modelverse"
+  };
+
+  const url = "https://openrouter.ai/api/v1/chat/completions";
+  const responseJson = await postHttps(url, payload, headers);
+  const data = JSON.parse(responseJson);
+  
+  if (data.choices && data.choices[0] && data.choices[0].message && data.choices[0].message.content) {
+    return data.choices[0].message.content.trim();
+  }
+  throw new Error("Empty or malformed completion response from OpenRouter");
+}
+
+async function rewriteArticle(title, body, lab, originalUrl) {
+  // Try Gemini first
+  if (process.env.GEMINI_API_KEY) {
+    try {
+      console.log("   Using Gemini API for rewrite...");
+      return await rewriteArticleWithGemini(title, body);
+    } catch (e) {
+      console.warn(`   ⚠️ Gemini API failed: ${e.message}. Falling back...`);
+    }
   }
 
-  // Fallback
+  // Try Groq second
+  if (process.env.GROQ_API_KEY) {
+    try {
+      console.log("   Using Groq API for rewrite...");
+      return await rewriteArticleWithGroq(title, body);
+    } catch (e) {
+      console.warn(`   ⚠️ Groq API failed: ${e.message}. Falling back...`);
+    }
+  }
+
+  // Try OpenRouter third
+  if (process.env.OPENROUTER_API_KEY) {
+    try {
+      console.log("   Using OpenRouter API for rewrite...");
+      return await rewriteArticleWithOpenRouter(title, body, lab, originalUrl);
+    } catch (e) {
+      console.warn(`   ⚠️ OpenRouter API failed: ${e.message}. Falling back...`);
+    }
+  }
+
+  // Final fallback (returns raw text if no keys succeed)
+  console.warn("   ⚠️ No API keys succeeded or available. Storing raw scraped text.");
   return body;
 }
 
@@ -583,7 +686,7 @@ async function extractFullArticleBody(url, fallbackDesc, lab) {
     const rawBody = await extractFullArticleBody(candidate.link, candidate.description, candidate.lab);
     
     // Rewrite content to avoid plagiarism and present a unique editorial summary
-    const bodyContent = await rewriteArticleWithOpenRouter(candidate.title, rawBody, candidate.lab, candidate.link);
+    const bodyContent = await rewriteArticle(candidate.title, rawBody, candidate.lab, candidate.link);
     
     const wordCount = bodyContent.split(/\s+/).length;
     const readTimeMinutes = Math.max(2, Math.ceil(wordCount / 200));
