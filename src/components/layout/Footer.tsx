@@ -84,8 +84,8 @@ export default function Footer() {
     {
       title: "Curators",
       links: [
-        { label: "Methodology", href: "/#methodology" },
-        { label: "Submit Model", href: "mailto:corrections@modelverse.ai" },
+        { label: "Methodology", href: "/methodology" },
+        { label: "Submit Model", href: "/submit" },
       ],
     },
     {
