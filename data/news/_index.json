@@ -154,6 +154,28 @@
     ]
   },
   {
+    "id": "how-enabling-two-settings-tripled-our-scores-on-the-arc-agi-3-benchmark",
+    "slug": "how-enabling-two-settings-tripled-our-scores-on-the-arc-agi-3-benchmark",
+    "title": "How enabling two settings tripled our scores on the ARC-AGI-3 benchmark",
+    "category": "short-news",
+    "publishDate": "2026-07-29",
+    "author": "Modelverse Editorial",
+    "readTime": "2 min read",
+    "excerpt": "How two API settings improved GPT-5.6 performance on ARC-AGI-3, boosting scores and efficiency by retaining reasoning and enabling compaction.",
+    "coverImage": "/images/news/openai_sol_codex_updates_cover.jpg",
+    "status": "published",
+    "confidenceLevel": "confirmed",
+    "externalSources": [
+      "https://openai.com/index/how-two-settings-tripled-our-arc-agi-3-scores"
+    ],
+    "relatedModels": [],
+    "tags": [
+      "ai-news",
+      "breaking",
+      "openai"
+    ]
+  },
+  {
     "id": "how-gpt-56-fuses-frontier-intelligence-with-frontier-efficiency",
     "slug": "how-gpt-56-fuses-frontier-intelligence-with-frontier-efficiency",
     "title": "How GPT-5.6 fuses frontier intelligence with frontier efficiency",
@@ -195,6 +217,28 @@
       "ai-news",
       "breaking",
       "marktechpost"
+    ]
+  },
+  {
+    "id": "microsoft-logs-32b-from-anthropic-investment-but-openai-was-a-mixed-bag",
+    "slug": "microsoft-logs-32b-from-anthropic-investment-but-openai-was-a-mixed-bag",
+    "title": "Microsoft logs $3.2B from Anthropic investment, but OpenAI was a mixed bag",
+    "category": "short-news",
+    "publishDate": "2026-07-29",
+    "author": "Modelverse Editorial",
+    "readTime": "2 min read",
+    "excerpt": "When Microsoft reported killer fourth-quarter earnings for its fiscal 2026 year (which ended June 30), it tucked in an interesting little tidbit about how its investments in the tw...",
+    "coverImage": "https://techcrunch.com/wp-content/uploads/2023/11/GettyImages-1778706504.jpg?resize=1200,783",
+    "status": "published",
+    "confidenceLevel": "confirmed",
+    "externalSources": [
+      "https://techcrunch.com/2026/07/29/microsoft-logs-3-2b-from-anthropic-investment-but-openai-was-a-mixed-bag/"
+    ],
+    "relatedModels": [],
+    "tags": [
+      "ai-news",
+      "breaking",
+      "techcrunch-ai"
     ]
   },
   {
@@ -305,6 +349,28 @@
       "ai-news",
       "breaking",
       "google-deepmind"
+    ]
+  },
+  {
+    "id": "zuckerberg-says-metas-enterprise-ai-opportunity-extends-beyond-agents",
+    "slug": "zuckerberg-says-metas-enterprise-ai-opportunity-extends-beyond-agents",
+    "title": "Zuckerberg says Meta's enterprise AI opportunity extends beyond agents",
+    "category": "short-news",
+    "publishDate": "2026-07-29",
+    "author": "Modelverse Editorial",
+    "readTime": "2 min read",
+    "excerpt": "On the company’s second-quarter earnings call Wednesday, CEO Mark Zuckerberg said Meta sees a “large enterprise opportunity” spanning AI agents, APIs, compute, and internal softwar...",
+    "coverImage": "https://techcrunch.com/wp-content/uploads/2025/07/GettyImages-2170596427.jpg?w=1024",
+    "status": "published",
+    "confidenceLevel": "confirmed",
+    "externalSources": [
+      "https://techcrunch.com/2026/07/29/zuckerberg-says-metas-enterprise-ai-opportunity-extends-beyond-agents/"
+    ],
+    "relatedModels": [],
+    "tags": [
+      "ai-news",
+      "breaking",
+      "techcrunch-ai"
     ]
   },
   {

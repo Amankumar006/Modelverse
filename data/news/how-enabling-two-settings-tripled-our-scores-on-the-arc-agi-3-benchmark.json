@@ -1,0 +1,24 @@
+{
+  "id": "how-enabling-two-settings-tripled-our-scores-on-the-arc-agi-3-benchmark",
+  "slug": "how-enabling-two-settings-tripled-our-scores-on-the-arc-agi-3-benchmark",
+  "title": "How enabling two settings tripled our scores on the ARC-AGI-3 benchmark",
+  "category": "short-news",
+  "isTrending": true,
+  "publishDate": "2026-07-29",
+  "author": "Modelverse Editorial",
+  "readTime": "2 min read",
+  "excerpt": "How two API settings improved GPT-5.6 performance on ARC-AGI-3, boosting scores and efficiency by retaining reasoning and enabling compaction.",
+  "body": "## How Two API Settings Unlocked GPT-5.6's Reasoning Prowess on ARC-AGI-3\n\nA recent breakthrough reveals that simply enabling two specific API settings dramatically enhanced GPT-5.6's performance on the challenging ARC-AGI-3 benchmark, tripling its scores and boosting overall efficiency. This discovery underscores that optimizing how we interact with advanced AI models can unlock significant latent capabilities, rather than solely relying on model architecture changes. The substantial improvement highlights a critical avenue for maximizing the utility of powerful language models.\n\nThe impressive gains stem from two core mechanisms: \"retaining reasoning\" and \"enabling compaction.\" Retaining reasoning allows the model to maintain its complex thought processes and intermediate steps throughout a task, preventing loss of context or the need to re-evaluate prior deductions. Concurrently, enabling compaction likely optimizes the internal representation and processing of information, allowing the model to handle intricate problems more efficiently without sacrificing crucial details. Together, these settings empower GPT-5.6 to approach and solve abstract reasoning tasks with greater coherence and accuracy.\n\nFor developers and researchers, this finding is highly significant. It demonstrates that seemingly minor API adjustments can yield monumental performance improvements, offering a practical pathway to achieve more robust and intelligent outputs from GPT-5.6 for tasks demanding sophisticated logical inference. Furthermore, it provides valuable insights into the operational dynamics of large language models, suggesting that effective prompt engineering and interaction paradigms are as crucial as the underlying model itself for pushing the boundaries of AI capabilities in complex problem-solving domains.",
+  "coverImage": "/images/news/openai_sol_codex_updates_cover.jpg",
+  "status": "published",
+  "confidenceLevel": "confirmed",
+  "externalSources": [
+    "https://openai.com/index/how-two-settings-tripled-our-arc-agi-3-scores"
+  ],
+  "relatedModels": [],
+  "tags": [
+    "ai-news",
+    "breaking",
+    "openai"
+  ]
+}

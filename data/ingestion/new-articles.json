@@ -1,20 +1,20 @@
 [
   {
-    "id": "discover-whats-next-for-ai-from-the-saas-reckoning-to-the-agent-security-gap-at-",
-    "slug": "discover-whats-next-for-ai-from-the-saas-reckoning-to-the-agent-security-gap-at-",
-    "title": "Discover what's next for AI, from the SaaS reckoning to the agent security gap, at TechCrunch Disrupt 2026",
+    "id": "microsoft-logs-32b-from-anthropic-investment-but-openai-was-a-mixed-bag",
+    "slug": "microsoft-logs-32b-from-anthropic-investment-but-openai-was-a-mixed-bag",
+    "title": "Microsoft logs $3.2B from Anthropic investment, but OpenAI was a mixed bag",
     "category": "short-news",
     "isTrending": true,
     "publishDate": "2026-07-29",
     "author": "Modelverse Editorial",
     "readTime": "2 min read",
-    "excerpt": "At TechCrunch Disrupt 2026, the AI Stage is back to dig into the single hottest topic in the community for the past few years, presented by Google for Startups.",
-    "body": "TechCrunch Disrupt 2026 is set to host its dedicated AI Stage from October 13–15 in San Francisco, presented by Google for Startups, to dissect the profound shifts AI has brought across the startup ecosystem. The event will move beyond foundational AI capabilities to explore its disruptive impact on core business functions, including how companies sell, secure data, and scale. Key themes will encompass the redefinition of business models, the emergence of critical security vulnerabilities, and the creation of entirely new job categories driven by AI.\n\nThe AI Stage will delve into pressing questions facing founders and the broader AI community. Discussions will tackle the complexities of pricing AI products as models become increasingly commoditized, the urgent need to rebuild agent security from the ground up to address new infrastructure challenges, and what constitutes an effective go-to-market strategy in an AI-native landscape. Experts will also break down the evolving requirements for enterprise AI security in 2026, covering essential aspects like observability, governance, and architectural best practices for trusted deployments. Furthermore, sessions will explore the progression of visual AI from captivating demonstrations to real-time inference and sophisticated physical reasoning.\n\nFor developers and researchers, these discussions are paramount. The insights offered will be crucial for navigating the commercialization of AI, understanding the next generation of security challenges in autonomous systems, and identifying new opportunities in fields like GTM engineering, which has rapidly become a high-growth area. By addressing the practicalities of AI deployment, security, and market strategy, the event provides a vital platform for the AI community to understand current demands, anticipate future trends, and contribute to building more robust and impactful AI solutions.",
-    "coverImage": "https://techcrunch.com/wp-content/uploads/2026/07/techcrunch-disrupt-2026-ai-stage.jpg?w=1200",
+    "excerpt": "When Microsoft reported killer fourth-quarter earnings for its fiscal 2026 year (which ended June 30), it tucked in an interesting little tidbit about how its investments in the tw...",
+    "body": "Microsoft recently unveiled its fiscal Q4 2026 earnings, offering a rare glimpse into the contrasting financial performance of its significant AI investments. The tech giant reported a substantial $3.2 billion gain from its stake in Anthropic for the quarter, a notable boost to its diluted earnings per share. In contrast, Microsoft marked down its investment in OpenAI by approximately $600 million during the same period. However, looking at the full fiscal year, Microsoft's OpenAI investment still generated a robust $5 billion gain, underscoring the long-term value despite quarterly fluctuations.\n\nThe $5 billion investment in Anthropic, initiated in November 2025, is part of a strategic alliance where Anthropic committed to purchasing $30 billion in Azure services. This arrangement highlights a symbiotic relationship, where Microsoft's capital injection is tied to future cloud consumption, directly contributing to the rapid appreciation of its Anthropic stake. While Microsoft holds about 27% of OpenAI and benefits from revenue-share agreements, its quarterly reporting focuses on investment valuation, which saw a temporary dip despite the overall yearly positive trend.\n\nFor developers and researchers, these financial disclosures offer crucial insights into the strategic health and competitive dynamics of the AI landscape. Microsoft's substantial backing of both Anthropic and OpenAI ensures continued access to cutting-edge models, robust cloud infrastructure, and ongoing innovation within the Azure ecosystem. The differing quarterly performances, particularly Anthropic's rapid appreciation, signal the perceived market momentum and strategic importance of these AI labs, influencing where future resources and development efforts might be concentrated. This financial interplay ultimately shapes the tools, platforms, and opportunities available to the broader AI community.",
+    "coverImage": "https://techcrunch.com/wp-content/uploads/2023/11/GettyImages-1778706504.jpg?resize=1200,783",
     "status": "published",
     "confidenceLevel": "confirmed",
     "externalSources": [
-      "https://techcrunch.com/2026/07/29/discover-whats-next-for-ai-from-the-saas-reckoning-to-the-agent-security-gap-at-techcrunch-disrupt-2026/"
+      "https://techcrunch.com/2026/07/29/microsoft-logs-3-2b-from-anthropic-investment-but-openai-was-a-mixed-bag/"
     ],
     "relatedModels": [],
     "tags": [
@@ -24,21 +24,21 @@
     ]
   },
   {
-    "id": "thinking-machines-co-founder-lilian-weng-left-the-company-citing-health-reasons-",
-    "slug": "thinking-machines-co-founder-lilian-weng-left-the-company-citing-health-reasons-",
-    "title": "Thinking Machines co-founder Lilian Weng left the company citing health reasons, then joined OpenAI",
+    "id": "zuckerberg-says-metas-enterprise-ai-opportunity-extends-beyond-agents",
+    "slug": "zuckerberg-says-metas-enterprise-ai-opportunity-extends-beyond-agents",
+    "title": "Zuckerberg says Meta's enterprise AI opportunity extends beyond agents",
     "category": "short-news",
     "isTrending": true,
     "publishDate": "2026-07-29",
     "author": "Modelverse Editorial",
     "readTime": "2 min read",
-    "excerpt": "Weng previously served as the VP of AI Safety Research at OpenAI.",
-    "body": "Lilian Weng, a co-founder of Thinking Machines, recently announced her departure from the startup, citing health concerns stemming from the intense stress and workload inherent in a fast-paced startup environment. This decision, shared publicly, highlighted the personal toll that demanding roles in the tech industry can take. Shortly after this announcement, it was revealed that Weng would be rejoining OpenAI, where she previously held the position of VP of AI Safety Research.\n\nAt OpenAI, Weng is set to lead a crucial top-level team dedicated to accelerating the company's internal research initiatives. A key focus for her team will be to support cross-research efforts in recursive self-improvement. This advanced concept involves developing AI systems capable of iteratively enhancing their own capabilities, essentially learning to make themselves more powerful over time. Her role will be pivotal in pushing the boundaries of OpenAI's foundational AI development.\n\nThis high-profile talent acquisition is significant for both developers and researchers in the AI community. Weng's move underscores the fierce competition for top-tier expertise among leading AI labs. Her leadership in accelerating research, particularly in recursive self-improvement, signals OpenAI's commitment to exploring cutting-edge methods for AI advancement. For the broader AI landscape, this shift could influence the pace and direction of future AI capabilities, making her contribution to OpenAI's core research trajectory a critical development to watch.",
-    "coverImage": "https://techcrunch.com/wp-content/uploads/2026/05/openai-logo-code-background.jpg?resize=1200,798",
+    "excerpt": "On the company’s second-quarter earnings call Wednesday, CEO Mark Zuckerberg said Meta sees a “large enterprise opportunity” spanning AI agents, APIs, compute, and internal softwar...",
+    "body": "Meta CEO Mark Zuckerberg recently unveiled a significantly expanded vision for the company's enterprise AI strategy, moving beyond its initial focus on AI agents for customer service. While these agents, designed to help businesses interact with customers across messaging platforms, remain a core offering, Meta's ambitions now encompass a broader suite of services. This includes selling APIs, more sophisticated business agents, direct compute capacity, and other specialized tools to a diverse range of enterprise clients. This strategic pivot aims to diversify Meta's revenue streams, traditionally dominated by advertising, by tapping into the lucrative business-to-business AI market.\n\nThe technology works by initially offering AI agents to Meta's existing advertisers, enabling customer engagement with Meta monetizing based on results. Crucially, Meta plans to externalize its internally developed AI tools—advanced coding, development, and productivity solutions refined for its own operational needs—to external customers, from small businesses to large corporations. This provides powerful, proven AI capabilities. Additionally, Meta will sell its surplus compute resources directly to enterprises. This expansion matters greatly to developers and researchers, offering potential access to Meta's sophisticated internal AI tools and APIs, fostering innovation, and signaling a major tech player's intent to monetize its AI prowess, creating new opportunities and challenges across the industry.",
+    "coverImage": "https://techcrunch.com/wp-content/uploads/2025/07/GettyImages-2170596427.jpg?w=1024",
     "status": "published",
     "confidenceLevel": "confirmed",
     "externalSources": [
-      "https://techcrunch.com/2026/07/29/thinking-machines-co-founder-lilian-weng-left-the-company-citing-health-reasons-then-joined-openai/"
+      "https://techcrunch.com/2026/07/29/zuckerberg-says-metas-enterprise-ai-opportunity-extends-beyond-agents/"
     ],
     "relatedModels": [],
     "tags": [
@@ -48,27 +48,27 @@
     ]
   },
   {
-    "id": "prompt-engineering-vs-loop-engineering-vs-graph-engineering-what-changes-at-each",
-    "slug": "prompt-engineering-vs-loop-engineering-vs-graph-engineering-what-changes-at-each",
-    "title": "Prompt Engineering vs Loop Engineering vs Graph Engineering: What Changes at Each Layer",
+    "id": "how-enabling-two-settings-tripled-our-scores-on-the-arc-agi-3-benchmark",
+    "slug": "how-enabling-two-settings-tripled-our-scores-on-the-arc-agi-3-benchmark",
+    "title": "How enabling two settings tripled our scores on the ARC-AGI-3 benchmark",
     "category": "short-news",
     "isTrending": true,
     "publishDate": "2026-07-29",
     "author": "Modelverse Editorial",
     "readTime": "2 min read",
-    "excerpt": "Three terms now compete for the same line in AI engineering job descriptions. Prompt engineering is the established one. Loop engineering entered the AI vocabulary in late 2025 and...",
-    "body": "Modelverse highlights a crucial evolution in AI engineering, introducing a hierarchical framework that distinguishes between Prompt, Loop, and Graph Engineering. These aren't competing methodologies but rather stacked units of control, each building upon the last. Prompt engineering, the foundational layer, governs a single model's response. Loop engineering, which emerged in late 2025, elevates this by automating the prompting process within an agent's behavior cycle. The most recent addition, Graph engineering (mid-2026), sits at the apex, orchestrating the organization and interaction of multiple agents.\n\nThis progression is vital for developers and researchers as it addresses the limitations of relying solely on prompt engineering for complex AI tasks. The traditional model, requiring human judgment and revision at every iteration, becomes impractical for high-volume, multi-step processes where results must automatically feed into subsequent steps without constant human oversight. The shift towards Loop and Graph engineering enables the creation of more autonomous and sophisticated AI systems, allowing for the design of intricate workflows and collaborative agent architectures that can operate at scale, significantly reducing the need for continuous human intervention.",
-    "coverImage": "https://www.marktechpost.com/wp-content/uploads/2026/07/blog6171-13.png",
+    "excerpt": "How two API settings improved GPT-5.6 performance on ARC-AGI-3, boosting scores and efficiency by retaining reasoning and enabling compaction.",
+    "body": "## How Two API Settings Unlocked GPT-5.6's Reasoning Prowess on ARC-AGI-3\n\nA recent breakthrough reveals that simply enabling two specific API settings dramatically enhanced GPT-5.6's performance on the challenging ARC-AGI-3 benchmark, tripling its scores and boosting overall efficiency. This discovery underscores that optimizing how we interact with advanced AI models can unlock significant latent capabilities, rather than solely relying on model architecture changes. The substantial improvement highlights a critical avenue for maximizing the utility of powerful language models.\n\nThe impressive gains stem from two core mechanisms: \"retaining reasoning\" and \"enabling compaction.\" Retaining reasoning allows the model to maintain its complex thought processes and intermediate steps throughout a task, preventing loss of context or the need to re-evaluate prior deductions. Concurrently, enabling compaction likely optimizes the internal representation and processing of information, allowing the model to handle intricate problems more efficiently without sacrificing crucial details. Together, these settings empower GPT-5.6 to approach and solve abstract reasoning tasks with greater coherence and accuracy.\n\nFor developers and researchers, this finding is highly significant. It demonstrates that seemingly minor API adjustments can yield monumental performance improvements, offering a practical pathway to achieve more robust and intelligent outputs from GPT-5.6 for tasks demanding sophisticated logical inference. Furthermore, it provides valuable insights into the operational dynamics of large language models, suggesting that effective prompt engineering and interaction paradigms are as crucial as the underlying model itself for pushing the boundaries of AI capabilities in complex problem-solving domains.",
+    "coverImage": "/images/news/openai_sol_codex_updates_cover.jpg",
     "status": "published",
     "confidenceLevel": "confirmed",
     "externalSources": [
-      "https://www.marktechpost.com/2026/07/29/prompt-engineering-vs-loop-engineering-vs-graph-engineering-what-changes-at-each-layer/"
+      "https://openai.com/index/how-two-settings-tripled-our-arc-agi-3-scores"
     ],
     "relatedModels": [],
     "tags": [
       "ai-news",
       "breaking",
-      "marktechpost"
+      "openai"
     ]
   }
 ]
