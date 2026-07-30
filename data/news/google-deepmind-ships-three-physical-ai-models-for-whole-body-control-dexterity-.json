@@ -1,0 +1,24 @@
+{
+  "id": "google-deepmind-ships-three-physical-ai-models-for-whole-body-control-dexterity-",
+  "slug": "google-deepmind-ships-three-physical-ai-models-for-whole-body-control-dexterity-",
+  "title": "Google DeepMind Ships Three Physical AI Models For Whole Body Control, Dexterity And Multi Robot Collaboration",
+  "category": "short-news",
+  "isTrending": true,
+  "publishDate": "2026-07-30",
+  "author": "Modelverse Editorial",
+  "readTime": "2 min read",
+  "excerpt": "Google DeepMind has released Gemini Robotics 2, the intelligence layer for its next generation of robots. The release ships three models: a vision-language-action model for whole b...",
+  "body": "Google DeepMind has unveiled Gemini Robotics 2, a significant intelligence layer for next-generation robots. This release dramatically expands robotic capabilities beyond simple tabletop tasks, introducing comprehensive whole-body control, intricate five-finger dexterity, and advanced multi-robot collaboration. Delivered as three distinct models, Gemini Robotics 2 aims to overcome current limitations in robotic adaptability and skill transfer within dynamic, unpredictable environments.\n\nThe system operates through a specialized, modular design crucial for developers. **Gemini Robotics 2** acts as the core Vision-Language-Action (VLA) model, translating multimodal inputs into precise motor commands for full humanoids and bi-arm robots, enabling dexterous manipulation. For high-level strategic planning, the **Gemini Robotics ER 2** (Embodied Reasoning) model serves as the robot's brain, understanding human instructions and the physical world to plan complex, multi-step tasks. Built on Gemini 3.5 Flash, it processes extensive multimodal data. Complementing these, **Gemini Robotics On-Device 2** provides an optimized VLA for efficient local execution. This division allows ER 2 to orchestrate missions, delegating execution to VLA models registered as callable tools, offering flexible system design.\n\nThis innovative architecture empowers robots to move beyond rigid programming into adaptive, full-body control and complex reasoning. For researchers, it paves the way for truly autonomous and versatile robotic applications, unlocking new possibilities in human-robot interaction and real-world task execution. Gemini Robotics 2 represents a pivotal step towards more capable and responsive robotic systems.",
+  "coverImage": "https://www.marktechpost.com/wp-content/uploads/2026/07/blog6171-16.png",
+  "status": "published",
+  "confidenceLevel": "confirmed",
+  "externalSources": [
+    "https://www.marktechpost.com/2026/07/30/google-deepmind-gemini-robotics-2-whole-body-control-dexterity-multi-robot-collaboration/"
+  ],
+  "relatedModels": [],
+  "tags": [
+    "ai-news",
+    "breaking",
+    "marktechpost"
+  ]
+}

@@ -22,6 +22,28 @@
     ]
   },
   {
+    "id": "advancing-the-price-performance-frontier-with-gpt-56",
+    "slug": "advancing-the-price-performance-frontier-with-gpt-56",
+    "title": "Advancing the price-performance frontier with GPT-5.6",
+    "category": "short-news",
+    "publishDate": "2026-07-30",
+    "author": "Modelverse Editorial",
+    "readTime": "2 min read",
+    "excerpt": "Explore lower GPT‑5.6 pricing for Luna and Terra—and how OpenAI’s more efficient models help enterprises deploy AI workflows at scale.",
+    "coverImage": "/images/news/openai_sol_codex_updates_cover.jpg",
+    "status": "published",
+    "confidenceLevel": "confirmed",
+    "externalSources": [
+      "https://openai.com/index/advancing-the-price-performance-frontier-with-gpt-5-6"
+    ],
+    "relatedModels": [],
+    "tags": [
+      "ai-news",
+      "breaking",
+      "openai"
+    ]
+  },
+  {
     "id": "best-in-class-stream-pc-games-and-study-on-the-same-laptop-with-geforce-now",
     "slug": "best-in-class-stream-pc-games-and-study-on-the-same-laptop-with-geforce-now",
     "title": "Best in Class: Stream PC Games and Study on the Same Laptop With GeForce NOW",
@@ -107,6 +129,28 @@
       "ai-news",
       "breaking",
       "google-deepmind"
+    ]
+  },
+  {
+    "id": "google-deepmind-ships-three-physical-ai-models-for-whole-body-control-dexterity-",
+    "slug": "google-deepmind-ships-three-physical-ai-models-for-whole-body-control-dexterity-",
+    "title": "Google DeepMind Ships Three Physical AI Models For Whole Body Control, Dexterity And Multi Robot Collaboration",
+    "category": "short-news",
+    "publishDate": "2026-07-30",
+    "author": "Modelverse Editorial",
+    "readTime": "2 min read",
+    "excerpt": "Google DeepMind has released Gemini Robotics 2, the intelligence layer for its next generation of robots. The release ships three models: a vision-language-action model for whole b...",
+    "coverImage": "https://www.marktechpost.com/wp-content/uploads/2026/07/blog6171-16.png",
+    "status": "published",
+    "confidenceLevel": "confirmed",
+    "externalSources": [
+      "https://www.marktechpost.com/2026/07/30/google-deepmind-gemini-robotics-2-whole-body-control-dexterity-multi-robot-collaboration/"
+    ],
+    "relatedModels": [],
+    "tags": [
+      "ai-news",
+      "breaking",
+      "marktechpost"
     ]
   },
   {
@@ -255,6 +299,28 @@
     "confidenceLevel": "confirmed",
     "externalSources": [
       "https://techcrunch.com/2026/07/30/nscale-buys-anyscale-as-it-seeks-to-own-more-of-the-ai-compute-stack/"
+    ],
+    "relatedModels": [],
+    "tags": [
+      "ai-news",
+      "breaking",
+      "techcrunch-ai"
+    ]
+  },
+  {
+    "id": "okta-buys-ai-security-startup-permiso-source-says-for-about-200m",
+    "slug": "okta-buys-ai-security-startup-permiso-source-says-for-about-200m",
+    "title": "Okta buys AI security startup Permiso; source says for about $200M",
+    "category": "short-news",
+    "publishDate": "2026-07-30",
+    "author": "Modelverse Editorial",
+    "readTime": "2 min read",
+    "excerpt": "The deal gives Okta identity threat detection capabilities as enterprises seek to secure AI agents and other non-human identities across cloud environments.",
+    "coverImage": "https://techcrunch.com/wp-content/uploads/2019/10/Okta-lobby.jpg?resize=1200,816",
+    "status": "published",
+    "confidenceLevel": "confirmed",
+    "externalSources": [
+      "https://techcrunch.com/2026/07/30/okta-buys-ai-security-startup-permiso-source-says-for-about-200m/"
     ],
     "relatedModels": [],
     "tags": [
