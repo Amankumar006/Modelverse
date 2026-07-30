@@ -1,5 +1,27 @@
 [
   {
+    "id": "a-fundamental-flaw-leaves-llms-strikingly-vulnerable-to-attack",
+    "slug": "a-fundamental-flaw-leaves-llms-strikingly-vulnerable-to-attack",
+    "title": "A fundamental flaw leaves LLMs strikingly vulnerable to attack",
+    "category": "short-news",
+    "publishDate": "2026-07-30",
+    "author": "Modelverse Editorial",
+    "readTime": "2 min read",
+    "excerpt": "It is impossible to make large language models fully secure against hacks because of a fundamental flaw in how they work, a team of researchers argue in a paper presented at the In...",
+    "coverImage": "https://wp.technologyreview.com/wp-content/uploads/2026/07/chain-link.jpg?resize=1200,600",
+    "status": "published",
+    "confidenceLevel": "confirmed",
+    "externalSources": [
+      "https://www.technologyreview.com/2026/07/30/1140927/a-fundamental-flaw-leaves-llms-vulnerable-to-attack/"
+    ],
+    "relatedModels": [],
+    "tags": [
+      "ai-news",
+      "breaking",
+      "mit-technology-review"
+    ]
+  },
+  {
     "id": "meet-token-saver-an-open-source-mcp-extension-using-local-hybrid-rag-to-cut-clau",
     "slug": "meet-token-saver-an-open-source-mcp-extension-using-local-hybrid-rag-to-cut-clau",
     "title": "Meet Token Saver: An Open-Source MCP Extension Using Local Hybrid RAG to Cut Claude PDF Token Costs 90-99%",
