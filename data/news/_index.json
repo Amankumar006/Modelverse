@@ -66,6 +66,94 @@
     ]
   },
   {
+    "id": "forward-deployed-engineers-are-the-ai-industrys-latest-talent-obsession",
+    "slug": "forward-deployed-engineers-are-the-ai-industrys-latest-talent-obsession",
+    "title": "Forward-deployed engineers are the AI industry’s latest talent obsession",
+    "category": "short-news",
+    "publishDate": "2026-07-30",
+    "author": "Modelverse Editorial",
+    "readTime": "2 min read",
+    "excerpt": "A new study estimates only 2,000 U.S. engineers have the expertise to deliver meaningful AI ROI, as enterprises race to hire forward-deployed engineers to implement AI at scale.",
+    "coverImage": "https://techcrunch.com/wp-content/uploads/2026/07/GettyImages-2200018679.jpg?resize=1200,633",
+    "status": "published",
+    "confidenceLevel": "confirmed",
+    "externalSources": [
+      "https://techcrunch.com/2026/07/30/forward-deployed-engineers-are-the-ai-industrys-latest-talent-obsession/"
+    ],
+    "relatedModels": [],
+    "tags": [
+      "ai-news",
+      "breaking",
+      "techcrunch-ai"
+    ]
+  },
+  {
+    "id": "gemini-robotics-er-2-powering-robotics-with-video-understanding-task-orchestrati",
+    "slug": "gemini-robotics-er-2-powering-robotics-with-video-understanding-task-orchestrati",
+    "title": "Gemini Robotics ER 2: powering robotics with video understanding, task orchestration, and multi-robot collaboration",
+    "category": "short-news",
+    "publishDate": "2026-07-30",
+    "author": "Modelverse Editorial",
+    "readTime": "2 min read",
+    "excerpt": "Gemini Robotics ER 2 helps robots reason, collaborate, and solve real-world tasks. It represents a step change in video understanding, tool orchestration, and multi-robot collabora...",
+    "coverImage": "https://storage.googleapis.com/gweb-uniblog-publish-prod/images/gemini-robotics-2__blog__cover.width-1300.png",
+    "status": "published",
+    "confidenceLevel": "confirmed",
+    "externalSources": [
+      "https://deepmind.google/blog/gemini-robotics-er-2-powering-robotics-with-video-understanding-task-orchestration-and-multi-robot-collaboration/"
+    ],
+    "relatedModels": [],
+    "tags": [
+      "ai-news",
+      "breaking",
+      "google-deepmind"
+    ]
+  },
+  {
+    "id": "gpu-management-why-idle-gpus-are-the-new-grounded-aircraft",
+    "slug": "gpu-management-why-idle-gpus-are-the-new-grounded-aircraft",
+    "title": "GPU Management: Why Idle GPUs Are the New Grounded Aircraft",
+    "category": "short-news",
+    "publishDate": "2026-07-30",
+    "author": "Modelverse Editorial",
+    "readTime": "2 min read",
+    "excerpt": "GPU Management: Why Idle GPUs Are the New Grounded Aircraft",
+    "coverImage": "https://cdn-uploads.huggingface.co/production/uploads/69d815b52c6db28cfdfdd422/6Ry7x8XwuVxp3JpinEGzC.png",
+    "status": "published",
+    "confidenceLevel": "confirmed",
+    "externalSources": [
+      "https://huggingface.co/blog/Dharma-AI/gpu-management"
+    ],
+    "relatedModels": [],
+    "tags": [
+      "ai-news",
+      "breaking",
+      "hugging-face"
+    ]
+  },
+  {
+    "id": "in-the-hugging-face-breach-openais-hacker-was-noisy-and-fast-but-not-unstoppable",
+    "slug": "in-the-hugging-face-breach-openais-hacker-was-noisy-and-fast-but-not-unstoppable",
+    "title": "In the Hugging Face breach, OpenAI's hacker was noisy and fast — but not unstoppable",
+    "category": "short-news",
+    "publishDate": "2026-07-30",
+    "author": "Modelverse Editorial",
+    "readTime": "2 min read",
+    "excerpt": "Cybersecurity experts told TechCrunch that one of the biggest lessons to be taken from the OpenAI hack against Hugging Face has nothing to do with AI, but traditional cybersecurity...",
+    "coverImage": "https://techcrunch.com/wp-content/uploads/2026/07/hugging-face-logo-smartphone.jpg?resize=1200,800",
+    "status": "published",
+    "confidenceLevel": "confirmed",
+    "externalSources": [
+      "https://techcrunch.com/2026/07/30/in-the-hugging-face-breach-openais-hacker-was-noisy-and-fast-but-not-unstoppable/"
+    ],
+    "relatedModels": [],
+    "tags": [
+      "ai-news",
+      "breaking",
+      "techcrunch-ai"
+    ]
+  },
+  {
     "id": "meet-token-saver-an-open-source-mcp-extension-using-local-hybrid-rag-to-cut-clau",
     "slug": "meet-token-saver-an-open-source-mcp-extension-using-local-hybrid-rag-to-cut-clau",
     "title": "Meet Token Saver: An Open-Source MCP Extension Using Local Hybrid RAG to Cut Claude PDF Token Costs 90-99%",
@@ -85,6 +173,28 @@
       "ai-news",
       "breaking",
       "marktechpost"
+    ]
+  },
+  {
+    "id": "meta-says-ai-is-making-it-easier-to-build-new-apps-and-more-are-coming",
+    "slug": "meta-says-ai-is-making-it-easier-to-build-new-apps-and-more-are-coming",
+    "title": "Meta says AI is making it easier to build new apps — and more are coming",
+    "category": "short-news",
+    "publishDate": "2026-07-30",
+    "author": "Modelverse Editorial",
+    "readTime": "2 min read",
+    "excerpt": "Meta says AI is making it dramatically easier to build and launch new consumer apps, with CEO Mark Zuckerberg telling investors the company has more new consumer products on the wa...",
+    "coverImage": "https://techcrunch.com/wp-content/uploads/2025/01/GettyImages-2173579488.jpg?resize=1200,799",
+    "status": "published",
+    "confidenceLevel": "confirmed",
+    "externalSources": [
+      "https://techcrunch.com/2026/07/30/meta-says-ai-is-making-it-easier-to-build-new-apps-and-more-are-coming/"
+    ],
+    "relatedModels": [],
+    "tags": [
+      "ai-news",
+      "breaking",
+      "techcrunch-ai"
     ]
   },
   {
@@ -129,6 +239,50 @@
       "ai-news",
       "breaking",
       "marktechpost"
+    ]
+  },
+  {
+    "id": "nscale-buys-anyscale-as-it-seeks-to-own-more-of-the-ai-compute-stack",
+    "slug": "nscale-buys-anyscale-as-it-seeks-to-own-more-of-the-ai-compute-stack",
+    "title": "Nscale buys Anyscale as it seeks to own more of the AI compute stack",
+    "category": "short-news",
+    "publishDate": "2026-07-30",
+    "author": "Modelverse Editorial",
+    "readTime": "2 min read",
+    "excerpt": "British AI neocloud Nscale is buying software startup Anyscale, which helps companies scale their AI workloads across data centers and servers.",
+    "coverImage": "https://techcrunch.com/wp-content/uploads/2026/07/GettyImages-2266843677.jpg?resize=1200,800",
+    "status": "published",
+    "confidenceLevel": "confirmed",
+    "externalSources": [
+      "https://techcrunch.com/2026/07/30/nscale-buys-anyscale-as-it-seeks-to-own-more-of-the-ai-compute-stack/"
+    ],
+    "relatedModels": [],
+    "tags": [
+      "ai-news",
+      "breaking",
+      "techcrunch-ai"
+    ]
+  },
+  {
+    "id": "techcrunch-disrupt-2026s-biggest-stage-features-leaders-from-amazon-replit-tethe",
+    "slug": "techcrunch-disrupt-2026s-biggest-stage-features-leaders-from-amazon-replit-tethe",
+    "title": "TechCrunch Disrupt 2026’s biggest stage features leaders from Amazon, Replit, Tether, with much more to come",
+    "category": "short-news",
+    "publishDate": "2026-07-30",
+    "author": "Modelverse Editorial",
+    "readTime": "2 min read",
+    "excerpt": "The Disrupt Stage is where many of the biggest conversations in technology happen, with a legacy that stretches back for more than a decade.",
+    "coverImage": "https://techcrunch.com/wp-content/uploads/2026/07/54889342155_4479997650_4k.jpg?resize=1200,800",
+    "status": "published",
+    "confidenceLevel": "confirmed",
+    "externalSources": [
+      "https://techcrunch.com/2026/07/30/techcrunch-disrupt-2026s-biggest-stage-features-leaders-from-amazon-replit-tether-with-much-more-to-come/"
+    ],
+    "relatedModels": [],
+    "tags": [
+      "ai-news",
+      "breaking",
+      "techcrunch-ai"
     ]
   },
   {
