@@ -154,6 +154,28 @@
     ]
   },
   {
+    "id": "google-says-it-fixed-more-chrome-bugs-in-june-than-over-the-past-two-years-thank",
+    "slug": "google-says-it-fixed-more-chrome-bugs-in-june-than-over-the-past-two-years-thank",
+    "title": "Google says it fixed more Chrome bugs in June than over the past two years, thanks to AI",
+    "category": "short-news",
+    "publishDate": "2026-07-30",
+    "author": "Modelverse Editorial",
+    "readTime": "2 min read",
+    "excerpt": "As experts have warned for the last two years, some companies — like Microsoft and now Google — are finding and patching an exponential number of bugs in their products, thanks to ...",
+    "coverImage": "https://techcrunch.com/wp-content/uploads/2026/07/google-chrome-logo-hand.jpg?resize=1200,800",
+    "status": "published",
+    "confidenceLevel": "confirmed",
+    "externalSources": [
+      "https://techcrunch.com/2026/07/30/google-says-it-fixed-more-chrome-bugs-in-june-than-over-the-past-two-years-thanks-to-ai/"
+    ],
+    "relatedModels": [],
+    "tags": [
+      "ai-news",
+      "breaking",
+      "techcrunch-ai"
+    ]
+  },
+  {
     "id": "gpu-management-why-idle-gpus-are-the-new-grounded-aircraft",
     "slug": "gpu-management-why-idle-gpus-are-the-new-grounded-aircraft",
     "title": "GPU Management: Why Idle GPUs Are the New Grounded Aircraft",
@@ -189,6 +211,28 @@
     "confidenceLevel": "confirmed",
     "externalSources": [
       "https://techcrunch.com/2026/07/30/in-the-hugging-face-breach-openais-hacker-was-noisy-and-fast-but-not-unstoppable/"
+    ],
+    "relatedModels": [],
+    "tags": [
+      "ai-news",
+      "breaking",
+      "techcrunch-ai"
+    ]
+  },
+  {
+    "id": "linkedin-adds-a-button-to-report-ai-generated-slop",
+    "slug": "linkedin-adds-a-button-to-report-ai-generated-slop",
+    "title": "LinkedIn adds a button to report AI-generated 'slop'",
+    "category": "short-news",
+    "publishDate": "2026-07-30",
+    "author": "Modelverse Editorial",
+    "readTime": "2 min read",
+    "excerpt": "LinkedIn is introducing new ways to reduce low-quality AI-generated posts, including a “seems like AI slop” reporting option. It's also replacing its own AI writing feature with a ...",
+    "coverImage": "https://techcrunch.com/wp-content/uploads/2022/11/GettyImages-1244671434-e1669291782949.jpg?resize=1200,676",
+    "status": "published",
+    "confidenceLevel": "confirmed",
+    "externalSources": [
+      "https://techcrunch.com/2026/07/30/linkedin-adds-a-button-to-report-ai-generated-slop/"
     ],
     "relatedModels": [],
     "tags": [
