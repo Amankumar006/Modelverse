@@ -352,6 +352,28 @@
     ]
   },
   {
+    "id": "the-hugging-face-break-in-explained",
+    "slug": "the-hugging-face-break-in-explained",
+    "title": "The Hugging Face break-in explained",
+    "category": "short-news",
+    "publishDate": "2026-07-29",
+    "author": "Modelverse Editorial",
+    "readTime": "2 min read",
+    "excerpt": "Another way to think about the whole thing is to picture a bear at a campsite. (Really, we are going there.)",
+    "coverImage": "https://techcrunch.com/wp-content/uploads/2026/07/bear-analyst.png?resize=1200,800",
+    "status": "published",
+    "confidenceLevel": "confirmed",
+    "externalSources": [
+      "https://techcrunch.com/2026/07/29/the-hugging-face-ai-break-in-as-told-through-an-increasingly-committed-bear-metaphor/"
+    ],
+    "relatedModels": [],
+    "tags": [
+      "ai-news",
+      "breaking",
+      "techcrunch-ai"
+    ]
+  },
+  {
     "id": "thinking-machines-co-founder-lilian-weng-left-the-company-citing-health-reasons-",
     "slug": "thinking-machines-co-founder-lilian-weng-left-the-company-citing-health-reasons-",
     "title": "Thinking Machines co-founder Lilian Weng left the company citing health reasons, then joined OpenAI",
