@@ -242,6 +242,28 @@
     ]
   },
   {
+    "id": "investors-love-ai-as-long-as-youre-a-cloud-host",
+    "slug": "investors-love-ai-as-long-as-youre-a-cloud-host",
+    "title": "Investors love AI, as long as you’re a cloud host",
+    "category": "short-news",
+    "publishDate": "2026-07-30",
+    "author": "Modelverse Editorial",
+    "readTime": "2 min read",
+    "excerpt": "Amazon isn't slowing down on data center spending — but investors don't seem to mind.",
+    "coverImage": "https://techcrunch.com/wp-content/uploads/2024/11/GettyImages-1445867611.jpg?w=1024",
+    "status": "published",
+    "confidenceLevel": "confirmed",
+    "externalSources": [
+      "https://techcrunch.com/2026/07/30/investors-love-ai-as-long-as-youre-a-cloud-host/"
+    ],
+    "relatedModels": [],
+    "tags": [
+      "ai-news",
+      "breaking",
+      "techcrunch-ai"
+    ]
+  },
+  {
     "id": "judge-says-trump-admin-still-lacks-evidence-for-anthropic-supply-chain-risk-labe",
     "slug": "judge-says-trump-admin-still-lacks-evidence-for-anthropic-supply-chain-risk-labe",
     "title": "Judge says Trump admin still lacks evidence for Anthropic ‘supply chain risk’ label",

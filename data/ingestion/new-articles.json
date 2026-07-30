@@ -1,44 +1,20 @@
 [
   {
-    "id": "judge-says-trump-admin-still-lacks-evidence-for-anthropic-supply-chain-risk-labe",
-    "slug": "judge-says-trump-admin-still-lacks-evidence-for-anthropic-supply-chain-risk-labe",
-    "title": "Judge says Trump admin still lacks evidence for Anthropic ‘supply chain risk’ label",
+    "id": "investors-love-ai-as-long-as-youre-a-cloud-host",
+    "slug": "investors-love-ai-as-long-as-youre-a-cloud-host",
+    "title": "Investors love AI, as long as you’re a cloud host",
     "category": "short-news",
     "isTrending": true,
     "publishDate": "2026-07-30",
     "author": "Modelverse Editorial",
     "readTime": "2 min read",
-    "excerpt": "A federal judge said the Trump administration has not presented enough evidence to justify labeling Anthropic a supply chain risk, casting doubt on the government's ban on its AI t...",
-    "body": "A recent judicial development has challenged the Trump administration's designation of AI firm Anthropic as a \"supply chain risk,\" potentially overturning a ban on federal government use of its technology. U.S. District Judge Rita Lin indicated insufficient evidence to justify the label, which originated from stalled contract negotiations with the Department of Defense. The dispute centered on Anthropic's ethical refusal to allow its AI models for mass surveillance of Americans or for lethal weapon targeting and firing decisions, citing the technology's current limitations and ethical concerns.\n\nThe Pentagon argued a private company shouldn't dictate military usage and cited Anthropic's public criticism as justification for the ban. Judge Lin found this reasoning \"really troubling,\" cautioning against setting a precedent for retaliating against federal contractors. She also dismissed the government's claim that Anthropic could remotely disable or alter its AI models during operations, finding no evidence of such a \"kill switch\" capability. This hearing is part of Anthropic's ongoing legal challenge against the ban and risk designation.\n\nThis legal battle carries significant implications for the AI community. It underscores the critical importance of ethical considerations in AI deployment, especially when engaging with government and defense sectors. The case highlights how AI companies might assert their ethical guidelines and challenge demands conflicting with responsible AI development. It also sets a precedent for contractor independence and the boundaries of government influence over technological innovation, shaping future dialogues around AI governance and responsible innovation.",
-    "coverImage": "https://techcrunch.com/wp-content/uploads/2025/08/Claude-Chrome-Ext_email-hero-hero.png?w=1200",
+    "excerpt": "Amazon isn't slowing down on data center spending — but investors don't seem to mind.",
+    "body": "Amazon's recent Q2 earnings report signals a massive, investor-backed commitment to AI infrastructure. Despite pressures to curb spending, Amazon announced a significant capital expenditure increase, projecting $220 billion by 2026. This investment in data centers, equipment, and crucial GPUs is driven by surging demand for cloud AI services, with AWS revenue soaring 37% year-over-year to $42 billion, justifying this aggressive expansion even as cash reserves are tapped.\n\nBeyond physical infrastructure, Amazon is strategically investing in custom silicon, developing chips like the AI-training focused Trainium and Arm-based Graviton processors. This vertical integration aims to tailor hardware for AI workloads, promising optimized performance and cost efficiency. CEO Andy Jassy articulated a vision where the AI business mirrors AWS's core margin trajectory, driven by the belief that \"there’s not going to be a single model to rule them all,\" fostering a diverse ecosystem.\n\nFor developers and researchers, Amazon's aggressive strategy is highly significant. It promises greater availability of high-performance compute resources, including cutting-edge GPUs, essential for training and deploying complex AI models. Specialized hardware offers optimized performance and potentially reduced costs for specific AI tasks. This commitment to a flexible, expansive environment, supporting a multitude of models via platforms like Bedrock, provides crucial choice and scalability for the global AI community.",
+    "coverImage": "https://techcrunch.com/wp-content/uploads/2024/11/GettyImages-1445867611.jpg?w=1024",
     "status": "published",
     "confidenceLevel": "confirmed",
     "externalSources": [
-      "https://techcrunch.com/2026/07/30/judge-says-trump-admin-still-lacks-evidence-for-anthropic-supply-chain-risk-label/"
-    ],
-    "relatedModels": [],
-    "tags": [
-      "ai-news",
-      "breaking",
-      "techcrunch-ai"
-    ]
-  },
-  {
-    "id": "friend-the-lonely-ai-wearable-returns-with-a-new-voice-and-a-much-bigger-price-t",
-    "slug": "friend-the-lonely-ai-wearable-returns-with-a-new-voice-and-a-much-bigger-price-t",
-    "title": "Friend, the lonely AI wearable, returns with a new voice and a much bigger price tag",
-    "category": "short-news",
-    "isTrending": true,
-    "publishDate": "2026-07-30",
-    "author": "Modelverse Editorial",
-    "readTime": "2 min read",
-    "excerpt": "Friend, the AI wearable, can now talk to its users — for an enhanced price.",
-    "body": "Avi Schiffmann's \"Friend\" AI wearable has re-emerged as Friend 2.0, introducing a significant upgrade: a built-in voice. Originally conceived two years ago as a text-based AI companion to combat loneliness, this necklace-style device now features an integrated speaker, allowing it to engage users in spoken conversations. The core idea remains to offer a unique, consistent personality, acting as a digital confidant rather than a traditional assistant or romantic partner. This evolution moves the device from purely textual interactions to a more immersive, auditory experience, aiming to deepen the perceived connection with its wearer.\n\nThe re-launch also comes with a notable price hike to $249, reflecting the enhanced capabilities. While its precise functionalities beyond conversational companionship remain somewhat ambiguous, Schiffmann emphasizes Friend's role as a \"confidant, friend, God\" – deliberately positioning it outside conventional AI categories. For developers and researchers, Friend 2.0 presents an intriguing case study in designing AI for emotional support and companionship. It challenges the prevailing paradigms of AI as purely utilitarian tools, instead exploring the creation of AI entities with distinct personalities intended to foster a sense of connection and understanding. This approach raises important questions about the ethical boundaries, psychological impact, and commercial viability of AI designed to fill deeply personal roles in human lives.",
-    "coverImage": "https://techcrunch.com/wp-content/uploads/2024/07/Friend.jpg?w=523",
-    "status": "published",
-    "confidenceLevel": "confirmed",
-    "externalSources": [
-      "https://techcrunch.com/2026/07/30/friend-the-lonely-ai-wearable-returns-with-a-new-voice-and-a-much-bigger-price-tag/"
+      "https://techcrunch.com/2026/07/30/investors-love-ai-as-long-as-youre-a-cloud-host/"
     ],
     "relatedModels": [],
     "tags": [
