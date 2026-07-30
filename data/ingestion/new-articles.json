@@ -1,20 +1,20 @@
 [
   {
-    "id": "google-says-it-fixed-more-chrome-bugs-in-june-than-over-the-past-two-years-thank",
-    "slug": "google-says-it-fixed-more-chrome-bugs-in-june-than-over-the-past-two-years-thank",
-    "title": "Google says it fixed more Chrome bugs in June than over the past two years, thanks to AI",
+    "id": "judge-says-trump-admin-still-lacks-evidence-for-anthropic-supply-chain-risk-labe",
+    "slug": "judge-says-trump-admin-still-lacks-evidence-for-anthropic-supply-chain-risk-labe",
+    "title": "Judge says Trump admin still lacks evidence for Anthropic ‘supply chain risk’ label",
     "category": "short-news",
     "isTrending": true,
     "publishDate": "2026-07-30",
     "author": "Modelverse Editorial",
     "readTime": "2 min read",
-    "excerpt": "As experts have warned for the last two years, some companies — like Microsoft and now Google — are finding and patching an exponential number of bugs in their products, thanks to ...",
-    "body": "Google has announced a significant leap in browser security, attributing a record number of Chrome bug fixes to its internal AI tools. In June alone, the company patched an impressive 1,072 security vulnerabilities across the last two Chrome versions, a figure that surpasses the total number of fixes implemented over the previous two years combined (1,036 bugs across 23 versions). This unprecedented acceleration in vulnerability resolution highlights a transformative shift in cybersecurity, mirroring similar AI-driven advancements reported by Microsoft.\n\nThis dramatic increase in security patches is powered by advanced AI models, including Google's Gemini. These Large Language Models (LLMs) are fundamentally reshaping the economics of cybersecurity by automating the process of vulnerability discovery and transforming it into an industrial-scale operation. By leveraging AI, Google can now proactively identify and address security flaws, effectively staying ahead of malicious actors and continuously enhancing Chrome's safety with every update.\n\nFor developers and researchers, this development carries profound implications. It validates earlier predictions regarding AI's potential to exponentially accelerate bug identification, underscoring the necessity for security teams to integrate AI into their defensive strategies. This shift promises a future of more robust and secure software platforms, where AI plays a crucial role in building safer applications from the ground up. Researchers, in turn, gain valuable insights into the practical, large-scale deployment of AI for proactive security, opening new avenues for exploring AI's role in automated threat detection, vulnerability patching, and fostering a more secure digital ecosystem.",
-    "coverImage": "https://techcrunch.com/wp-content/uploads/2026/07/google-chrome-logo-hand.jpg?resize=1200,800",
+    "excerpt": "A federal judge said the Trump administration has not presented enough evidence to justify labeling Anthropic a supply chain risk, casting doubt on the government's ban on its AI t...",
+    "body": "A recent judicial development has challenged the Trump administration's designation of AI firm Anthropic as a \"supply chain risk,\" potentially overturning a ban on federal government use of its technology. U.S. District Judge Rita Lin indicated insufficient evidence to justify the label, which originated from stalled contract negotiations with the Department of Defense. The dispute centered on Anthropic's ethical refusal to allow its AI models for mass surveillance of Americans or for lethal weapon targeting and firing decisions, citing the technology's current limitations and ethical concerns.\n\nThe Pentagon argued a private company shouldn't dictate military usage and cited Anthropic's public criticism as justification for the ban. Judge Lin found this reasoning \"really troubling,\" cautioning against setting a precedent for retaliating against federal contractors. She also dismissed the government's claim that Anthropic could remotely disable or alter its AI models during operations, finding no evidence of such a \"kill switch\" capability. This hearing is part of Anthropic's ongoing legal challenge against the ban and risk designation.\n\nThis legal battle carries significant implications for the AI community. It underscores the critical importance of ethical considerations in AI deployment, especially when engaging with government and defense sectors. The case highlights how AI companies might assert their ethical guidelines and challenge demands conflicting with responsible AI development. It also sets a precedent for contractor independence and the boundaries of government influence over technological innovation, shaping future dialogues around AI governance and responsible innovation.",
+    "coverImage": "https://techcrunch.com/wp-content/uploads/2025/08/Claude-Chrome-Ext_email-hero-hero.png?w=1200",
     "status": "published",
     "confidenceLevel": "confirmed",
     "externalSources": [
-      "https://techcrunch.com/2026/07/30/google-says-it-fixed-more-chrome-bugs-in-june-than-over-the-past-two-years-thanks-to-ai/"
+      "https://techcrunch.com/2026/07/30/judge-says-trump-admin-still-lacks-evidence-for-anthropic-supply-chain-risk-label/"
     ],
     "relatedModels": [],
     "tags": [
@@ -24,21 +24,21 @@
     ]
   },
   {
-    "id": "linkedin-adds-a-button-to-report-ai-generated-slop",
-    "slug": "linkedin-adds-a-button-to-report-ai-generated-slop",
-    "title": "LinkedIn adds a button to report AI-generated 'slop'",
+    "id": "friend-the-lonely-ai-wearable-returns-with-a-new-voice-and-a-much-bigger-price-t",
+    "slug": "friend-the-lonely-ai-wearable-returns-with-a-new-voice-and-a-much-bigger-price-t",
+    "title": "Friend, the lonely AI wearable, returns with a new voice and a much bigger price tag",
     "category": "short-news",
     "isTrending": true,
     "publishDate": "2026-07-30",
     "author": "Modelverse Editorial",
     "readTime": "2 min read",
-    "excerpt": "LinkedIn is introducing new ways to reduce low-quality AI-generated posts, including a “seems like AI slop” reporting option. It's also replacing its own AI writing feature with a ...",
-    "body": "## LinkedIn Fights \"AI Slop\" with New User Reporting and Advanced Detection\n\nLinkedIn is taking a proactive stance against the proliferation of low-quality, AI-generated content, dubbed \"AI slop,\" by introducing a new user-facing reporting feature. Users can now click a \"Seems like AI slop\" button when encountering posts they suspect are machine-written. This move reflects a broader industry concern, as platforms like Substack and even new startups grapple with an overwhelming influx of synthetic content and bot traffic, with internet infrastructure firm Cloudflare noting that bot traffic now surpasses human-generated requests. LinkedIn's Chief Product Officer, Hari Srinivasan, emphasized the company's commitment to preserving authentic human connection and expertise on the platform.\n\nThe new reporting button is just one component of LinkedIn's multi-faceted strategy to combat inauthentic content. The user feedback gathered from these reports will serve as a crucial signal, helping to train and refine LinkedIn's internal AI models to more accurately identify \"slop.\" Complementing this, the platform is significantly investing in automated defenses, already blocking hundreds of thousands of automated comment attempts daily and millions of other automation efforts. Furthermore, LinkedIn is rolling out new AI classifiers specifically designed to detect AI-generated or low-quality content, particularly impacting what users see in suggested content recommendations from outside their immediate network.\n\nFor developers and researchers, LinkedIn's initiative highlights the escalating challenge of maintaining content integrity in the age of generative AI. The integration of user-driven reporting with sophisticated automated defenses and AI classifiers offers a valuable case study in building robust detection systems. This approach not only provides real-world data for improving AI detection models but also underscores the critical need for adaptive strategies to differentiate genuine human contributions from machine-generated noise. The platform's additional step of privately flagging potentially inauthentic content to creators, aiming to help them refine their AI usage, also points to a nuanced approach to content moderation that balances detection with user education.",
-    "coverImage": "https://techcrunch.com/wp-content/uploads/2022/11/GettyImages-1244671434-e1669291782949.jpg?resize=1200,676",
+    "excerpt": "Friend, the AI wearable, can now talk to its users — for an enhanced price.",
+    "body": "Avi Schiffmann's \"Friend\" AI wearable has re-emerged as Friend 2.0, introducing a significant upgrade: a built-in voice. Originally conceived two years ago as a text-based AI companion to combat loneliness, this necklace-style device now features an integrated speaker, allowing it to engage users in spoken conversations. The core idea remains to offer a unique, consistent personality, acting as a digital confidant rather than a traditional assistant or romantic partner. This evolution moves the device from purely textual interactions to a more immersive, auditory experience, aiming to deepen the perceived connection with its wearer.\n\nThe re-launch also comes with a notable price hike to $249, reflecting the enhanced capabilities. While its precise functionalities beyond conversational companionship remain somewhat ambiguous, Schiffmann emphasizes Friend's role as a \"confidant, friend, God\" – deliberately positioning it outside conventional AI categories. For developers and researchers, Friend 2.0 presents an intriguing case study in designing AI for emotional support and companionship. It challenges the prevailing paradigms of AI as purely utilitarian tools, instead exploring the creation of AI entities with distinct personalities intended to foster a sense of connection and understanding. This approach raises important questions about the ethical boundaries, psychological impact, and commercial viability of AI designed to fill deeply personal roles in human lives.",
+    "coverImage": "https://techcrunch.com/wp-content/uploads/2024/07/Friend.jpg?w=523",
     "status": "published",
     "confidenceLevel": "confirmed",
     "externalSources": [
-      "https://techcrunch.com/2026/07/30/linkedin-adds-a-button-to-report-ai-generated-slop/"
+      "https://techcrunch.com/2026/07/30/friend-the-lonely-ai-wearable-returns-with-a-new-voice-and-a-much-bigger-price-tag/"
     ],
     "relatedModels": [],
     "tags": [
