@@ -22,6 +22,50 @@
     ]
   },
   {
+    "id": "best-in-class-stream-pc-games-and-study-on-the-same-laptop-with-geforce-now",
+    "slug": "best-in-class-stream-pc-games-and-study-on-the-same-laptop-with-geforce-now",
+    "title": "Best in Class: Stream PC Games and Study on the Same Laptop With GeForce NOW",
+    "category": "short-news",
+    "publishDate": "2026-07-30",
+    "author": "Modelverse Editorial",
+    "readTime": "2 min read",
+    "excerpt": "Back to school means balancing assignments, deadlines and downtime. GeForce NOW makes it easy to have it all. With cloud gaming, everyday laptops used for class can also become GeF...",
+    "coverImage": "https://blogs.nvidia.com/wp-content/uploads/2026/07/gfn-thursday-7-30-bts-nv-blog-1280x680-logo.jpg",
+    "status": "published",
+    "confidenceLevel": "confirmed",
+    "externalSources": [
+      "https://blogs.nvidia.com/blog/geforce-now-thursday-back-to-school-2026/"
+    ],
+    "relatedModels": [],
+    "tags": [
+      "ai-news",
+      "breaking",
+      "nvidia"
+    ]
+  },
+  {
+    "id": "dili-raises-217m-to-bring-ai-compliance-to-the-infrastructure-boom",
+    "slug": "dili-raises-217m-to-bring-ai-compliance-to-the-infrastructure-boom",
+    "title": "Dili raises $21.7M to bring AI compliance to the infrastructure boom",
+    "category": "short-news",
+    "publishDate": "2026-07-30",
+    "author": "Modelverse Editorial",
+    "readTime": "2 min read",
+    "excerpt": "The Series A was led by Khosla Ventures, with participation from Allianz, Rebel Fund, Brick and Mortar Ventures’ Darren Bechtel, and Y Combinator’s Garry Tan.",
+    "coverImage": "https://techcrunch.com/wp-content/uploads/2026/07/GettyImages-2236544023.jpeg?resize=1200,800",
+    "status": "published",
+    "confidenceLevel": "confirmed",
+    "externalSources": [
+      "https://techcrunch.com/2026/07/30/dili-raises-15-million-to-bring-ai-compliance-to-the-infrastructure-boom/"
+    ],
+    "relatedModels": [],
+    "tags": [
+      "ai-news",
+      "breaking",
+      "techcrunch-ai"
+    ]
+  },
+  {
     "id": "meet-token-saver-an-open-source-mcp-extension-using-local-hybrid-rag-to-cut-clau",
     "slug": "meet-token-saver-an-open-source-mcp-extension-using-local-hybrid-rag-to-cut-clau",
     "title": "Meet Token Saver: An Open-Source MCP Extension Using Local Hybrid RAG to Cut Claude PDF Token Costs 90-99%",
@@ -79,6 +123,28 @@
     "confidenceLevel": "confirmed",
     "externalSources": [
       "https://www.marktechpost.com/2026/07/29/moonshot-ai-open-sources-moonep-a-perfectly-balanced-expert-parallelism-library-for-moe-training/"
+    ],
+    "relatedModels": [],
+    "tags": [
+      "ai-news",
+      "breaking",
+      "marktechpost"
+    ]
+  },
+  {
+    "id": "tencent-open-sources-angelspec-a-unified-training-framework-for-mtp-and-block-pa",
+    "slug": "tencent-open-sources-angelspec-a-unified-training-framework-for-mtp-and-block-pa",
+    "title": "Tencent Open-Sources AngelSpec: A Unified Training Framework for MTP and Block-Parallel Speculative Decoding on Hy3 Models",
+    "category": "short-news",
+    "publishDate": "2026-07-30",
+    "author": "Modelverse Editorial",
+    "readTime": "2 min read",
+    "excerpt": "Tencent has released AngelSpec, an open-source torch-native framework for training speculative-decoding draft models across six architectures. It introduces DFly, a block-diffusion...",
+    "coverImage": "https://www.marktechpost.com/wp-content/uploads/2026/07/blog6171-15.png",
+    "status": "published",
+    "confidenceLevel": "confirmed",
+    "externalSources": [
+      "https://www.marktechpost.com/2026/07/30/tencent-open-sources-angelspec-a-unified-training-framework-for-mtp-and-block-parallel-speculative-decoding-on-hy3-models/"
     ],
     "relatedModels": [],
     "tags": [

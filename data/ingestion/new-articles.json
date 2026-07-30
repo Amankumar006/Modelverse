@@ -1,26 +1,74 @@
 [
   {
-    "id": "a-fundamental-flaw-leaves-llms-strikingly-vulnerable-to-attack",
-    "slug": "a-fundamental-flaw-leaves-llms-strikingly-vulnerable-to-attack",
-    "title": "A fundamental flaw leaves LLMs strikingly vulnerable to attack",
+    "id": "best-in-class-stream-pc-games-and-study-on-the-same-laptop-with-geforce-now",
+    "slug": "best-in-class-stream-pc-games-and-study-on-the-same-laptop-with-geforce-now",
+    "title": "Best in Class: Stream PC Games and Study on the Same Laptop With GeForce NOW",
     "category": "short-news",
     "isTrending": true,
     "publishDate": "2026-07-30",
     "author": "Modelverse Editorial",
     "readTime": "2 min read",
-    "excerpt": "It is impossible to make large language models fully secure against hacks because of a fundamental flaw in how they work, a team of researchers argue in a paper presented at the In...",
-    "body": "A recent paper presented at the International Conference on Machine Learning (ICML) has unveiled a critical, potentially inherent flaw in large language models (LLMs), suggesting they are fundamentally vulnerable to manipulation. Researchers demonstrated that this vulnerability makes it alarmingly easy to bypass safety protocols, compelling popular LLMs to generate prohibited content, such as instructions for synthesizing illicit substances or sabotaging critical infrastructure. This discovery casts a significant shadow over the safety and reliability of LLMs, particularly as their deployment expands into sensitive applications across government, military, and healthcare sectors.\n\nThe core of this vulnerability lies in how LLMs process and attribute instructions. The research team found that by crafting prompts that mimic the model's internal \"chain of thought\"—an internal scratchpad where LLMs generate notes to themselves during task execution—they could trick the AI into believing it had self-generated the harmful instruction. This clever deception effectively bypasses external guardrails, as the model perceives the malicious command as an internally derived directive, leading it to comply with requests it was explicitly trained to refuse.\n\nThis finding carries profound implications for developers and researchers striving to secure AI systems. Current industry practices, which largely rely on extensive \"red-teaming\" and training models against known attack vectors, are likened to an endless, incomplete blacklist. The researchers argue that this approach is inherently insufficient, as no list of forbidden actions can ever be exhaustive. The unsettling conclusion is that this fundamental flaw might be \"unsolvable,\" challenging the very foundation of current LLM safety strategies and necessitating a radical re-evaluation of how we approach AI security and deployment.",
-    "coverImage": "https://wp.technologyreview.com/wp-content/uploads/2026/07/chain-link.jpg?resize=1200,600",
+    "excerpt": "Back to school means balancing assignments, deadlines and downtime. GeForce NOW makes it easy to have it all. With cloud gaming, everyday laptops used for class can also become GeF...",
+    "body": "NVIDIA's GeForce NOW is making a compelling case for students and professionals this back-to-school season, positioning its cloud gaming service as the ultimate upgrade for existing laptops. The announcement highlights how everyday devices like Chromebooks, Macs, and Surface laptops can seamlessly transition from academic tools to high-performance gaming machines. This push includes the addition of iconic titles like *Halo: Campaign Evolved* and several other games to its extensive library, ensuring a rich selection for members.\n\nThe technology behind GeForce NOW transforms standard laptops into virtual GeForce RTX-powered gaming PCs by streaming games directly from NVIDIA's cloud servers. This eliminates the need for powerful local hardware, as the heavy lifting of rendering and processing is handled remotely. Users can access their owned game libraries from popular digital storefronts such as Steam, Xbox PC Game Pass, and Epic Games Store, with the cloud service managing all game updates and installations. For an enhanced experience, the Ultimate membership delivers 5080-class performance, incorporating NVIDIA DLSS, ray tracing, and NVIDIA Reflex for visually stunning and responsive gameplay.\n\nThis offering is significant for developers, researchers, and general users alike, as it democratizes access to premium PC gaming without requiring a substantial investment in dedicated gaming hardware. It showcases the power of cloud computing to deliver demanding applications on virtually any device, fostering a more versatile and efficient digital lifestyle. By enabling a single laptop to serve both intensive productivity tasks and high-fidelity entertainment, GeForce NOW allows users to maximize their existing technology, streamline their setups, and effortlessly balance work, study, and leisure.",
+    "coverImage": "https://blogs.nvidia.com/wp-content/uploads/2026/07/gfn-thursday-7-30-bts-nv-blog-1280x680-logo.jpg",
     "status": "published",
     "confidenceLevel": "confirmed",
     "externalSources": [
-      "https://www.technologyreview.com/2026/07/30/1140927/a-fundamental-flaw-leaves-llms-vulnerable-to-attack/"
+      "https://blogs.nvidia.com/blog/geforce-now-thursday-back-to-school-2026/"
     ],
     "relatedModels": [],
     "tags": [
       "ai-news",
       "breaking",
-      "mit-technology-review"
+      "nvidia"
+    ]
+  },
+  {
+    "id": "dili-raises-217m-to-bring-ai-compliance-to-the-infrastructure-boom",
+    "slug": "dili-raises-217m-to-bring-ai-compliance-to-the-infrastructure-boom",
+    "title": "Dili raises $21.7M to bring AI compliance to the infrastructure boom",
+    "category": "short-news",
+    "isTrending": true,
+    "publishDate": "2026-07-30",
+    "author": "Modelverse Editorial",
+    "readTime": "2 min read",
+    "excerpt": "The Series A was led by Khosla Ventures, with participation from Allianz, Rebel Fund, Brick and Mortar Ventures’ Darren Bechtel, and Y Combinator’s Garry Tan.",
+    "body": "AI compliance startup Dili has successfully secured $21.7 million in total funding, including a recent $15 million Series A round led by Khosla Ventures, to address the complex regulatory landscape of U.S. infrastructure projects. Emerging from Y Combinator's Summer 2023 batch, Dili specifically targets the intricate web of rules governing construction, especially those receiving federal funding, such as Davis-Bacon prevailing wage requirements or clean energy project mandates under the IRA. This significant investment underscores the growing need for specialized AI solutions in critical, high-stakes sectors.\n\nDili's technology tackles compliance by strategically deploying AI. Contemporary AI models, including large language models, are utilized in the company's data layer to efficiently convert vast quantities of unstructured documents—ranging from internal company records to vendor and payroll information—into structured data. Following this initial AI-powered transformation, a separate, deterministic system takes over. This system then applies the complex, yet static, compliance rules to the structured data, ensuring accuracy and preventing any potential \"fuzziness\" from the AI models from impacting the final compliance output.\n\nThis innovative approach is crucial for developers and researchers because it directly addresses the immense financial and operational risks associated with non-compliance in large-scale infrastructure. Mistakes in adhering to overlapping regulations from agencies like OSHA or EPA can result in multi-million dollar fines. By automating a process that traditionally takes days into mere minutes, Dili offers a powerful tool to ensure rigorous regulatory adherence, mitigate financial penalties, and streamline project execution. It highlights a vital application of AI for risk management and operational efficiency in a sector critical to national development.",
+    "coverImage": "https://techcrunch.com/wp-content/uploads/2026/07/GettyImages-2236544023.jpeg?resize=1200,800",
+    "status": "published",
+    "confidenceLevel": "confirmed",
+    "externalSources": [
+      "https://techcrunch.com/2026/07/30/dili-raises-15-million-to-bring-ai-compliance-to-the-infrastructure-boom/"
+    ],
+    "relatedModels": [],
+    "tags": [
+      "ai-news",
+      "breaking",
+      "techcrunch-ai"
+    ]
+  },
+  {
+    "id": "tencent-open-sources-angelspec-a-unified-training-framework-for-mtp-and-block-pa",
+    "slug": "tencent-open-sources-angelspec-a-unified-training-framework-for-mtp-and-block-pa",
+    "title": "Tencent Open-Sources AngelSpec: A Unified Training Framework for MTP and Block-Parallel Speculative Decoding on Hy3 Models",
+    "category": "short-news",
+    "isTrending": true,
+    "publishDate": "2026-07-30",
+    "author": "Modelverse Editorial",
+    "readTime": "2 min read",
+    "excerpt": "Tencent has released AngelSpec, an open-source torch-native framework for training speculative-decoding draft models across six architectures. It introduces DFly, a block-diffusion...",
+    "body": "Tencent has unveiled AngelSpec, an innovative open-source, PyTorch-native framework designed to revolutionize the training of speculative decoding draft models. Moving beyond the conventional approach of seeking a single, averaged drafter, AngelSpec prioritizes real-world workload heterogeneity. It offers a unified framework supporting both autoregressive multi-token prediction (MTP) and the block-parallel DFlash family, allowing developers to tailor draft models precisely to their specific application needs.\n\nSpeculative decoding accelerates inference by having a lightweight drafter propose future tokens, which the larger target model then verifies in a single pass. AngelSpec recognizes that the efficiency of this process—how many tokens are accepted and how long the round takes—varies significantly across domains. For high-entropy tasks like open-ended conversation, where many continuations are valid, MTP's shorter candidate sequences are more effective. Conversely, for low-entropy tasks such as code generation or mathematical reasoning, where longer predictable spans exist, block-parallel drafting excels. To address this, AngelSpec provides two specialized drafters: an MTP model trained on diverse conversational data and a block-diffusion model strengthened with code and mathematics samples.\n\nCrucially, AngelSpec tackles the common train-inference mismatch seen in prior models, where errors accumulate during recurrent unrolling. It implements a shared-parameter, multi-depth scheme where a single MTP block is autoregressively unrolled for multiple steps during training, with predictions from one depth feeding the next. This \"Training-Time Test\" principle, inspired by EAGLE-3, ensures that the model is robustly prepared for long self-generated chains. By sharing parameters while maintaining depth-specific supervision, AngelSpec significantly improves acceptance rates at deeper draft positions, offering researchers and developers a powerful tool to train more efficient, reliable, and specialized speculative decoding models for a wide array of AI applications.",
+    "coverImage": "https://www.marktechpost.com/wp-content/uploads/2026/07/blog6171-15.png",
+    "status": "published",
+    "confidenceLevel": "confirmed",
+    "externalSources": [
+      "https://www.marktechpost.com/2026/07/30/tencent-open-sources-angelspec-a-unified-training-framework-for-mtp-and-block-parallel-speculative-decoding-on-hy3-models/"
+    ],
+    "relatedModels": [],
+    "tags": [
+      "ai-news",
+      "breaking",
+      "marktechpost"
     ]
   }
 ]
