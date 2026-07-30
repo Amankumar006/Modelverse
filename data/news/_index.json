@@ -1,5 +1,27 @@
 [
   {
+    "id": "microsoft-is-openly-competing-with-openai-anthropic-more-than-ever",
+    "slug": "microsoft-is-openly-competing-with-openai-anthropic-more-than-ever",
+    "title": "Microsoft is openly competing with OpenAI, Anthropic more than ever",
+    "category": "short-news",
+    "publishDate": "2026-07-30",
+    "author": "Modelverse Editorial",
+    "readTime": "2 min read",
+    "excerpt": "Microsoft pitched its own homegrown AI models, harnesses, and even a Mythos competitor on Wednesday, telling Wall Street it plans for continued growth.",
+    "coverImage": "https://techcrunch.com/wp-content/uploads/2024/02/GettyImages-1930518491.jpg?resize=1200,800",
+    "status": "published",
+    "confidenceLevel": "confirmed",
+    "externalSources": [
+      "https://techcrunch.com/2026/07/29/microsoft-is-openly-competing-with-openai-anthropic-more-than-ever/"
+    ],
+    "relatedModels": [],
+    "tags": [
+      "ai-news",
+      "breaking",
+      "techcrunch-ai"
+    ]
+  },
+  {
     "id": "accelerating-scientific-discovery-with-chatgpt-for-academic-researchers",
     "slug": "accelerating-scientific-discovery-with-chatgpt-for-academic-researchers",
     "title": "Accelerating scientific discovery with ChatGPT for Academic Researchers",
