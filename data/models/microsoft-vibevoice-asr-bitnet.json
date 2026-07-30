@@ -1,0 +1,51 @@
+{
+  "id": "microsoft-vibevoice-asr-bitnet",
+  "name": "VibeVoice-ASR-BitNet",
+  "slug": "vibevoice-asr-bitnet",
+  "developer": "microsoft",
+  "releaseDate": "2026-07-24",
+  "updatedAt": "2026-07-30",
+  "type": "open-weights",
+  "status": "active",
+  "modality": [
+    "audio",
+    "text"
+  ],
+  "primaryTask": "audio-speech",
+  "deployment": [
+    "self-hostable"
+  ],
+  "license": "MIT",
+  "parameters": "323M",
+  "contextWindow": "unknown",
+  "description": "VibeVoice-ASR-BitNet is a 323M-parameter automatic speech recognition model developed by microsoft. Built on the VibeVoiceForASRTraining architecture using ggml. Supports en, zh, fr, it, ko, pt, vi language(s). Released on 2026-07-24 with 115 likes and 3,864 downloads on Hugging Face.",
+  "keyFeatures": [
+    "323M parameters",
+    "Built on VibeVoiceForASRTraining architecture (ggml)",
+    "Primary task: automatic speech recognition (audio, text modality)",
+    "Language support: en, zh, fr, it, ko, pt, vi",
+    "Open-weights under MIT license — self-hostable and fine-tunable"
+  ],
+  "benchmarks": [],
+  "family": null,
+  "previousVersion": null,
+  "links": {
+    "huggingface": "https://huggingface.co/microsoft/VibeVoice-ASR-BitNet",
+    "paper": "https://arxiv.org/abs/2607.21075"
+  },
+  "logo": null,
+  "tags": [
+    "open-weights",
+    "trending",
+    "huggingface",
+    "ggml",
+    "automatic-speech-recognition"
+  ],
+  "sources": [
+    "https://huggingface.co/microsoft/VibeVoice-ASR-BitNet"
+  ],
+  "verified": true,
+  "featured": false,
+  "boost": 1,
+  "curatorNotes": "Auto-ingested from HuggingFace Trending on 2026-07-30. Architecture: VibeVoiceForASRTraining. Params: 323M. License: MIT."
+}
