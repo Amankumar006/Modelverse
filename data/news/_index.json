@@ -1,5 +1,27 @@
 [
   {
+    "id": "meet-token-saver-an-open-source-mcp-extension-using-local-hybrid-rag-to-cut-clau",
+    "slug": "meet-token-saver-an-open-source-mcp-extension-using-local-hybrid-rag-to-cut-clau",
+    "title": "Meet Token Saver: An Open-Source MCP Extension Using Local Hybrid RAG to Cut Claude PDF Token Costs 90-99%",
+    "category": "short-news",
+    "publishDate": "2026-07-30",
+    "author": "Modelverse Editorial",
+    "readTime": "2 min read",
+    "excerpt": "Marktechpost AI has released Token Saver, an open-source MCP extension for Claude Desktop that uses local Hybrid RAG to slash PDF token consumption by up to 99% while ensuring abso...",
+    "coverImage": "https://www.marktechpost.com/wp-content/uploads/2026/07/blog6171-1-1.png",
+    "status": "published",
+    "confidenceLevel": "confirmed",
+    "externalSources": [
+      "https://www.marktechpost.com/2026/07/30/token-saver-an-open-source-mcp-extension-using-local-hybrid-rag/"
+    ],
+    "relatedModels": [],
+    "tags": [
+      "ai-news",
+      "breaking",
+      "marktechpost"
+    ]
+  },
+  {
     "id": "microsoft-is-openly-competing-with-openai-anthropic-more-than-ever",
     "slug": "microsoft-is-openly-competing-with-openai-anthropic-more-than-ever",
     "title": "Microsoft is openly competing with OpenAI, Anthropic more than ever",
@@ -19,6 +41,28 @@
       "ai-news",
       "breaking",
       "techcrunch-ai"
+    ]
+  },
+  {
+    "id": "moonshot-ai-open-sources-moonep-a-perfectly-balanced-expert-parallelism-library-",
+    "slug": "moonshot-ai-open-sources-moonep-a-perfectly-balanced-expert-parallelism-library-",
+    "title": "Moonshot AI Open-Sources MoonEP: A Perfectly Balanced Expert Parallelism Library for MoE Training",
+    "category": "short-news",
+    "publishDate": "2026-07-30",
+    "author": "Modelverse Editorial",
+    "readTime": "2 min read",
+    "excerpt": "Moonshot AI has open-sourced MoonEP, an Expert Parallelism (EP) communication library for distributed Mixture-of-Experts (MoE) workloads. The team announced the release as a librar...",
+    "coverImage": "https://www.marktechpost.com/wp-content/uploads/2026/07/blog6171-14.png",
+    "status": "published",
+    "confidenceLevel": "confirmed",
+    "externalSources": [
+      "https://www.marktechpost.com/2026/07/29/moonshot-ai-open-sources-moonep-a-perfectly-balanced-expert-parallelism-library-for-moe-training/"
+    ],
+    "relatedModels": [],
+    "tags": [
+      "ai-news",
+      "breaking",
+      "marktechpost"
     ]
   },
   {

@@ -1,0 +1,24 @@
+{
+  "id": "moonshot-ai-open-sources-moonep-a-perfectly-balanced-expert-parallelism-library-",
+  "slug": "moonshot-ai-open-sources-moonep-a-perfectly-balanced-expert-parallelism-library-",
+  "title": "Moonshot AI Open-Sources MoonEP: A Perfectly Balanced Expert Parallelism Library for MoE Training",
+  "category": "short-news",
+  "isTrending": true,
+  "publishDate": "2026-07-30",
+  "author": "Modelverse Editorial",
+  "readTime": "2 min read",
+  "excerpt": "Moonshot AI has open-sourced MoonEP, an Expert Parallelism (EP) communication library for distributed Mixture-of-Experts (MoE) workloads. The team announced the release as a librar...",
+  "body": "### Moonshot AI's Open-Source Release\nMoonshot AI has announced the open-source release of MoonEP, a library designed to optimize Expert Parallelism (EP) communication for distributed Mixture-of-Experts (MoE) workloads. This release aims to make expert-parallel communication more efficient at scale, particularly for large-scale models like the 2.8-trillion-parameter Kimi K3 model.\n\n### How MoonEP Works\nMoonEP addresses the issue of imbalance in expert parallelism, where some experts receive more tokens than others, leading to increased latency and memory fragmentation. The library achieves a hard invariant, ensuring every rank receives exactly S × K tokens, regardless of the routing skew. This is done by planning a small number of redundant experts online and prefetched before expert computation, reducing gradients back to their home ranks in the backward pass.\n\n### Impact on Developers and Researchers\nThe release of MoonEP under an MIT license is significant for developers and researchers working with MoE models. By providing a more efficient and balanced approach to expert parallelism, MoonEP can help improve the scalability and performance of large-scale models, making it easier to train and deploy them. This can lead to breakthroughs in various AI applications, including natural language processing and computer vision, and can help drive innovation in the field of artificial intelligence.",
+  "coverImage": "https://www.marktechpost.com/wp-content/uploads/2026/07/blog6171-14.png",
+  "status": "published",
+  "confidenceLevel": "confirmed",
+  "externalSources": [
+    "https://www.marktechpost.com/2026/07/29/moonshot-ai-open-sources-moonep-a-perfectly-balanced-expert-parallelism-library-for-moe-training/"
+  ],
+  "relatedModels": [],
+  "tags": [
+    "ai-news",
+    "breaking",
+    "marktechpost"
+  ]
+}
