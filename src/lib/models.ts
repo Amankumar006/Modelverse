@@ -214,7 +214,17 @@ export function getModelBySlug(slug: string): ModelEntry | null {
 /** Get all unique developers from the models. */
 export function getAllDevelopers(): string[] {
   const models = loadAllEntries();
-  return [...new Set(models.map((m) => m.developer))].sort();
+  const seen = new Set<string>();
+  const result: string[] = [];
+  for (const m of models) {
+    if (!m.developer) continue;
+    const key = m.developer.toLowerCase().replace(/[^a-z0-9]/g, "");
+    if (!seen.has(key)) {
+      seen.add(key);
+      result.push(m.developer);
+    }
+  }
+  return result.sort();
 }
 
 /** Get total count of models tracked. */

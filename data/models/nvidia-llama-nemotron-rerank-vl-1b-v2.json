@@ -24,7 +24,7 @@
     "Max Output: 4K tokens"
   ],
   "benchmarks": [],
-  "family": "nemotron",
+  "family": "Nemotron",
   "previousVersion": null,
   "pricing": [
     {

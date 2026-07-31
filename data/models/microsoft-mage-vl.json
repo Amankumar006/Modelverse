@@ -2,7 +2,7 @@
   "id": "microsoft-mage-vl",
   "name": "Mage-VL",
   "slug": "mage-vl",
-  "developer": "microsoft",
+  "developer": "Microsoft",
   "releaseDate": "2026-07-25",
   "updatedAt": "2026-07-31",
   "type": "open-weights",

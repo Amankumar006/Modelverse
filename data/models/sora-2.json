@@ -25,7 +25,7 @@
     "Tool & function calling support"
   ],
   "benchmarks": [],
-  "family": "sora",
+  "family": "Sora",
   "previousVersion": "openai-sora",
   "costTiers": [
     {

@@ -22,7 +22,7 @@
     "Max Output: 1 tokens"
   ],
   "benchmarks": [],
-  "family": "gemini",
+  "family": "Gemini",
   "previousVersion": null,
   "pricing": [
     {

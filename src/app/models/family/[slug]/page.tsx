@@ -16,11 +16,17 @@ export const dynamic = "force-static";
 
 export async function generateStaticParams() {
   const models = getAllModelEntries();
-  const families = new Set<string>();
+  const seen = new Set<string>();
+  const families: string[] = [];
   for (const m of models) {
-    if (m.family) families.add(m.family);
+    if (!m.family) continue;
+    const key = m.family.toLowerCase().replace(/[^a-z0-9]/g, "");
+    if (!seen.has(key)) {
+      seen.add(key);
+      families.push(m.family);
+    }
   }
-  return Array.from(families).map((slug) => ({
+  return families.map((slug) => ({
     slug,
   }));
 }

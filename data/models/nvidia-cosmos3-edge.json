@@ -2,7 +2,7 @@
   "id": "nvidia-cosmos3-edge",
   "name": "Cosmos3-Edge",
   "slug": "cosmos3-edge",
-  "developer": "nvidia",
+  "developer": "NVIDIA",
   "releaseDate": "2026-07-01",
   "updatedAt": "2026-07-26",
   "type": "open-weights",
