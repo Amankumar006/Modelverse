@@ -10,6 +10,7 @@ import TypeBadge from "@/components/ui/TypeBadge";
 import ModalityTag from "@/components/ui/ModalityTag";
 import CopyableTable from "@/components/ui/CopyableTable";
 import VisionBenchmarkChart from "./VisionBenchmarkChart";
+import ModelLogo from "./ModelLogo";
 
 interface CompareClientProps {
   initialModels: ModelEntry[];
@@ -360,22 +361,20 @@ export default function CompareClient({ initialModels, allModels }: CompareClien
               <th className="w-48 p-4 text-left font-medium text-gray-400 border-b border-white/10 sticky left-0 bg-[#0E0E10] z-20 border-r border-white/10"></th>
               {models.map((model) => (
                 <th key={model.id} className="w-72 p-4 align-top border-b border-white/10 relative group">
-                  <div className="flex flex-col gap-3">
+                  <div className="flex flex-col gap-2.5 pr-8">
                     <button 
                       onClick={() => removeModel(model.id)}
-                      className="absolute top-4 right-4 p-1.5 bg-black/40 hover:bg-red-500/80 rounded-full text-white/50 hover:text-white transition-colors"
+                      className="absolute top-4 right-4 p-1.5 bg-black/50 hover:bg-red-500/80 rounded-full text-white/50 hover:text-white transition-colors z-20"
                       aria-label="Remove model"
                     >
                       <X size={14} />
                     </button>
                     <Link href={`/models/${model.slug}`} className="block hover:opacity-80 transition-opacity">
-                      {model.logo && (
-                        <div className="w-12 h-12 relative mb-3 rounded-lg overflow-hidden bg-white/10">
-                          <Image src={model.logo} alt={model.name} fill className="object-cover" />
-                        </div>
-                      )}
-                      <h3 className="text-lg font-bold text-white leading-tight">{model.name}</h3>
-                      <p className="text-sm text-[#4ADE80] mt-1">{model.developer}</p>
+                      <div className="mb-2.5">
+                        <ModelLogo logo={model.logo} name={model.name} developer={model.developer} size={44} />
+                      </div>
+                      <h3 className="text-base font-bold text-white leading-snug break-words pr-1">{model.name}</h3>
+                      <p className="text-xs text-[#4ADE80] font-medium mt-1 truncate">{model.developer}</p>
                     </Link>
                   </div>
                 </th>
