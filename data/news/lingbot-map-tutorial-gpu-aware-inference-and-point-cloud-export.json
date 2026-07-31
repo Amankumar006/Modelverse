@@ -1,0 +1,24 @@
+{
+  "id": "lingbot-map-tutorial-gpu-aware-inference-and-point-cloud-export",
+  "slug": "lingbot-map-tutorial-gpu-aware-inference-and-point-cloud-export",
+  "title": "LingBot-Map Tutorial: GPU-Aware Inference and Point Cloud Export",
+  "category": "short-news",
+  "isTrending": true,
+  "publishDate": "2026-07-31",
+  "author": "Modelverse Editorial",
+  "readTime": "2 min read",
+  "excerpt": "Discover how to implement a streaming 3D reconstruction pipeline using LingBot-Map. From GPU-aware configuration and preprocessing to GCTStream model inference and point cloud gene...",
+  "body": "## Introduction to LingBot-Map Tutorial\nA new tutorial has been released for LingBot-Map, a tool used for 3D reconstruction. This guide provides a step-by-step walkthrough on how to implement a streaming 3D reconstruction pipeline, enabling users to convert image or video sequences into consistent 3D scenes.\n\n## Technology Overview\nThe LingBot-Map tutorial covers key aspects such as GPU-aware configuration, preprocessing, and model inference using the GCTStream model. It also explains how to generate point clouds and export them as PLY and NPZ artifacts. By leveraging GPU-aware inference, users can optimize the performance of their 3D reconstruction pipeline.\n\n## Impact on Developers and Researchers\nThe release of this tutorial is significant for developers and researchers working with 3D reconstruction and point cloud generation. It provides a comprehensive resource for implementing a streaming 3D reconstruction pipeline, making it easier to work with complex image and video sequences. By following this guide, users can unlock new possibilities for applications such as robotics, computer vision, and autonomous systems.",
+  "coverImage": "/images/news/news_short.jpg",
+  "status": "published",
+  "confidenceLevel": "confirmed",
+  "externalSources": [
+    "https://www.marktechpost.com/2026/07/31/lingbot-map-tutorial-gpu-aware-inference-and-point-cloud-export/"
+  ],
+  "relatedModels": [],
+  "tags": [
+    "ai-news",
+    "breaking",
+    "marktechpost"
+  ]
+}
