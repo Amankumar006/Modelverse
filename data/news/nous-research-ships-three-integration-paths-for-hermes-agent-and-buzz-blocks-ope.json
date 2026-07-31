@@ -1,0 +1,24 @@
+{
+  "id": "nous-research-ships-three-integration-paths-for-hermes-agent-and-buzz-blocks-ope",
+  "slug": "nous-research-ships-three-integration-paths-for-hermes-agent-and-buzz-blocks-ope",
+  "title": "Nous Research Ships Three Integration Paths for Hermes Agent and Buzz, Block's Open Source Nostr Workspace for Humans and Agents",
+  "category": "short-news",
+  "isTrending": true,
+  "publishDate": "2026-07-31",
+  "author": "Modelverse Editorial",
+  "readTime": "2 min read",
+  "excerpt": "Nous Research has released Hermes Agent support for Buzz, Block's open source, self-hostable Nostr workspace where humans and AI agents share the same channels. Three integration p...",
+  "body": "Nous Research has unveiled a significant integration, bringing its Hermes Agent into Buzz, Block's open-source, self-hostable workspace designed for seamless human-AI collaboration. This innovative setup leverages Nostr, a decentralized network protocol, to assign unique identities (keypairs) to AI agents, mirroring human participants. This approach fundamentally redefines agent interaction by eliminating the need for traditional bot tokens, providing agents with their own channel memberships and auditable trails. This self-hostable, open-source solution (Buzz is Apache-2.0, Hermes Agent is MIT) is particularly impactful for solo developers, small engineering teams, and mid-market platform teams seeking enhanced transparency and control over their AI deployments, enabling practical applications like incident memory, code review, and automated report generation.\n\nThe integration offers three distinct paths to accommodate varying deployment complexities. For individual developers, the **Buzz Desktop managed runtime** provides the simplest setup, spawning Hermes locally as a preset harness. Mid-tier deployments can utilize the **relay bridge**, where Buzz's harness connects to a hosted Hermes agent via WebSocket, sharing its configuration and state. The most comprehensive option is the **native gateway platform**, which transforms Buzz into a full-fledged Hermes messaging platform, akin to Telegram or Discord, handling channels, DMs, threaded replies, and more, with inbound communication via NIP-42 authenticated Nostr WebSockets.\n\nThis flexible architecture empowers developers and researchers to integrate AI agents deeply into their workflows with unprecedented control and transparency. By providing agents with first-class identities and audit trails, the integration fosters a more secure and accountable environment for AI-driven tasks. The self-hostable nature and open-source licenses further democratize access to advanced agent capabilities, allowing teams to customize and scale their AI solutions without vendor lock-in, while default privacy settings ensure agents interact responsibly within channels.",
+  "coverImage": "https://www.marktechpost.com/wp-content/uploads/2026/07/blog6171-19.png",
+  "status": "published",
+  "confidenceLevel": "confirmed",
+  "externalSources": [
+    "https://www.marktechpost.com/2026/07/31/nous-research-ships-three-integration-paths-for-hermes-agent-and-buzz-blocks-open-source-nostr-workspace-for-humans-and-agents/"
+  ],
+  "relatedModels": [],
+  "tags": [
+    "ai-news",
+    "breaking",
+    "marktechpost"
+  ]
+}

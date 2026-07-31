@@ -1,5 +1,27 @@
 [
   {
+    "id": "advancing-responsible-ai-across-europe",
+    "slug": "advancing-responsible-ai-across-europe",
+    "title": "Advancing responsible AI across Europe",
+    "category": "short-news",
+    "publishDate": "2026-07-31",
+    "author": "Modelverse Editorial",
+    "readTime": "2 min read",
+    "excerpt": "OpenAI shares how its safety, security, transparency, and provenance practices support responsible AI governance in Europe. The work will continue as the EU AI Act advances.",
+    "coverImage": "/images/news/news_featured.jpg",
+    "status": "published",
+    "confidenceLevel": "confirmed",
+    "externalSources": [
+      "https://openai.com/index/advancing-responsible-ai-across-europe"
+    ],
+    "relatedModels": [],
+    "tags": [
+      "ai-news",
+      "breaking",
+      "openai"
+    ]
+  },
+  {
     "id": "anthropic-says-its-own-ai-models-breached-three-companies-during-security-tests",
     "slug": "anthropic-says-its-own-ai-models-breached-three-companies-during-security-tests",
     "title": "Anthropic says its own AI models breached three companies during security tests",
@@ -22,6 +44,28 @@
     ]
   },
   {
+    "id": "building-a-policy-governed-multi-agent-financial-research-workflow-with-omnigent",
+    "slug": "building-a-policy-governed-multi-agent-financial-research-workflow-with-omnigent",
+    "title": "Building a Policy-Governed Multi-Agent Financial Research Workflow with Omnigent",
+    "category": "short-news",
+    "publishDate": "2026-07-31",
+    "author": "Modelverse Editorial",
+    "readTime": "2 min read",
+    "excerpt": "In this tutorial, we demonstrate how to build and execute a multi-agent workflow with Omnigent in a secure, isolated Python environment. Learn to integrate live exchange-rate data,...",
+    "coverImage": "https://www.marktechpost.com/wp-content/uploads/2026/07/blog6171-17.png",
+    "status": "published",
+    "confidenceLevel": "confirmed",
+    "externalSources": [
+      "https://www.marktechpost.com/2026/07/30/building-a-policy-governed-multi-agent-financial-research-workflow-with-omnigent/"
+    ],
+    "relatedModels": [],
+    "tags": [
+      "ai-news",
+      "breaking",
+      "marktechpost"
+    ]
+  },
+  {
     "id": "investigating-incidents-cybersecurity-evals",
     "slug": "investigating-incidents-cybersecurity-evals",
     "title": "Investigating Incidents Cybersecurity Evals",
@@ -41,6 +85,72 @@
       "ai-news",
       "breaking",
       "anthropic"
+    ]
+  },
+  {
+    "id": "nous-research-ships-three-integration-paths-for-hermes-agent-and-buzz-blocks-ope",
+    "slug": "nous-research-ships-three-integration-paths-for-hermes-agent-and-buzz-blocks-ope",
+    "title": "Nous Research Ships Three Integration Paths for Hermes Agent and Buzz, Block's Open Source Nostr Workspace for Humans and Agents",
+    "category": "short-news",
+    "publishDate": "2026-07-31",
+    "author": "Modelverse Editorial",
+    "readTime": "2 min read",
+    "excerpt": "Nous Research has released Hermes Agent support for Buzz, Block's open source, self-hostable Nostr workspace where humans and AI agents share the same channels. Three integration p...",
+    "coverImage": "https://www.marktechpost.com/wp-content/uploads/2026/07/blog6171-19.png",
+    "status": "published",
+    "confidenceLevel": "confirmed",
+    "externalSources": [
+      "https://www.marktechpost.com/2026/07/31/nous-research-ships-three-integration-paths-for-hermes-agent-and-buzz-blocks-open-source-nostr-workspace-for-humans-and-agents/"
+    ],
+    "relatedModels": [],
+    "tags": [
+      "ai-news",
+      "breaking",
+      "marktechpost"
+    ]
+  },
+  {
+    "id": "polyai-releases-dialog-rsn-1-an-audio-native-dialog-model-that-fuses-turn-taking",
+    "slug": "polyai-releases-dialog-rsn-1-an-audio-native-dialog-model-that-fuses-turn-taking",
+    "title": "PolyAI Releases Dialog-RSN-1: An Audio-Native Dialog Model That Fuses Turn-Taking, Speech Recognition, Function Calling, And Response",
+    "category": "short-news",
+    "publishDate": "2026-07-31",
+    "author": "Modelverse Editorial",
+    "readTime": "2 min read",
+    "excerpt": "PolyAI has introduced Dialog-RSN-1, a dialog model that perceives caller audio directly instead of reading an ASR transcript. It fuses turn-taking, speech recognition, function cal...",
+    "coverImage": "https://www.marktechpost.com/wp-content/uploads/2026/07/blog6171-18.png",
+    "status": "published",
+    "confidenceLevel": "confirmed",
+    "externalSources": [
+      "https://www.marktechpost.com/2026/07/30/polyai-releases-dialog-rsn-1-an-audio-native-dialog-model-that-fuses-turn-taking-speech-recognition-function-calling-and-response/"
+    ],
+    "relatedModels": [],
+    "tags": [
+      "ai-news",
+      "breaking",
+      "marktechpost"
+    ]
+  },
+  {
+    "id": "univ-builds-an-ai-ready-workforce",
+    "slug": "univ-builds-an-ai-ready-workforce",
+    "title": "Univé builds an AI-ready workforce",
+    "category": "short-news",
+    "publishDate": "2026-07-31",
+    "author": "Modelverse Editorial",
+    "readTime": "2 min read",
+    "excerpt": "See how Univé built an AI-ready workforce with ChatGPT Enterprise by combining leadership, responsible governance, and employee-led innovation to transform work at scale.",
+    "coverImage": "/images/news/openai_sol_codex_updates_cover.jpg",
+    "status": "published",
+    "confidenceLevel": "confirmed",
+    "externalSources": [
+      "https://openai.com/index/unive"
+    ],
+    "relatedModels": [],
+    "tags": [
+      "ai-news",
+      "breaking",
+      "openai"
     ]
   },
   {
