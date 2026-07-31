@@ -1,20 +1,20 @@
 [
   {
-    "id": "lingbot-map-tutorial-gpu-aware-inference-and-point-cloud-export",
-    "slug": "lingbot-map-tutorial-gpu-aware-inference-and-point-cloud-export",
-    "title": "LingBot-Map Tutorial: GPU-Aware Inference and Point Cloud Export",
+    "id": "deepseek-upgrades-deepseek-v4-flash-0731-with-major-agentic-and-coding-gains",
+    "slug": "deepseek-upgrades-deepseek-v4-flash-0731-with-major-agentic-and-coding-gains",
+    "title": "DeepSeek Upgrades DeepSeek-V4-Flash-0731 with Major Agentic and Coding Gains",
     "category": "short-news",
     "isTrending": true,
     "publishDate": "2026-07-31",
     "author": "Modelverse Editorial",
     "readTime": "2 min read",
-    "excerpt": "Discover how to implement a streaming 3D reconstruction pipeline using LingBot-Map. From GPU-aware configuration and preprocessing to GCTStream model inference and point cloud gene...",
-    "body": "## Introduction to LingBot-Map Tutorial\nA new tutorial has been released for LingBot-Map, a tool used for 3D reconstruction. This guide provides a step-by-step walkthrough on how to implement a streaming 3D reconstruction pipeline, enabling users to convert image or video sequences into consistent 3D scenes.\n\n## Technology Overview\nThe LingBot-Map tutorial covers key aspects such as GPU-aware configuration, preprocessing, and model inference using the GCTStream model. It also explains how to generate point clouds and export them as PLY and NPZ artifacts. By leveraging GPU-aware inference, users can optimize the performance of their 3D reconstruction pipeline.\n\n## Impact on Developers and Researchers\nThe release of this tutorial is significant for developers and researchers working with 3D reconstruction and point cloud generation. It provides a comprehensive resource for implementing a streaming 3D reconstruction pipeline, making it easier to work with complex image and video sequences. By following this guide, users can unlock new possibilities for applications such as robotics, computer vision, and autonomous systems.",
-    "coverImage": "/images/news/news_short.jpg",
+    "excerpt": "DeepSeek published DeepSeek-V4-Flash-0731 on Hugging Face and moved the official V4-Flash API into public beta on July 31, 2026. The model card is explicit that this is the officia...",
+    "body": "DeepSeek has officially launched DeepSeek-V4-Flash-0731, moving its API into public beta and superseding previous previews. This release isn't a new architectural design but a significantly enhanced version achieved through re-post-training, building on the existing 284-billion-parameter Mixture-of-Experts (MoE) framework. Key additions include the DSpark speculative decoding module and native support for the Responses API format, alongside adaptations for Codex, signaling a focus on improved agentic and coding capabilities.\n\nThe underlying technology is a sophisticated 284B-parameter MoE model, where only 13 billion parameters are activated per token, coupled with an impressive 1-million-token context window. Its efficiency is further bolstered by a hybrid attention mechanism combining Compressed Sparse Attention (CSA) and Heavily Compressed Attention (HCA), alongside Manifold-Constrained Hyper-Connections (mHC) replacing conventional residual connections. The gains in this specific release are attributed to refined post-training, optimizing performance without altering the core architecture.\n\nThis upgrade significantly lowers the barrier to entry for developers and researchers, especially for agentic workflows and coding tasks. DeepSeek-V4-Flash-0731 is highly accessible via API with competitive pricing, making it feasible for seed-stage startups and indie developers to run complex agent loops without needing a substantial GPU budget. While self-hosting the MIT-licensed weights demands significant memory resources, it offers flexibility for mid-size and large enterprises with robust serving clusters, enabling broad adoption and experimentation with advanced AI capabilities.",
+    "coverImage": "https://www.marktechpost.com/wp-content/uploads/2026/07/blog6171-21-1024x731.png",
     "status": "published",
     "confidenceLevel": "confirmed",
     "externalSources": [
-      "https://www.marktechpost.com/2026/07/31/lingbot-map-tutorial-gpu-aware-inference-and-point-cloud-export/"
+      "https://www.marktechpost.com/2026/07/31/deepseek-upgrades-deepseek-v4-flash-0731-with-major-agentic-and-coding-gains/"
     ],
     "relatedModels": [],
     "tags": [
@@ -24,21 +24,21 @@
     ]
   },
   {
-    "id": "google-nixes-its-earth-ai-feature-one-day-after-launch-amid-criticism-it-would-s",
-    "slug": "google-nixes-its-earth-ai-feature-one-day-after-launch-amid-criticism-it-would-s",
-    "title": "Google nixes its Earth AI feature one day after launch, amid criticism it would spread misinformation",
+    "id": "india-is-starting-to-pay-for-apps-not-just-download-them",
+    "slug": "india-is-starting-to-pay-for-apps-not-just-download-them",
+    "title": "India is starting to pay for apps, not just download them",
     "category": "short-news",
     "isTrending": true,
     "publishDate": "2026-07-31",
     "author": "Modelverse Editorial",
     "readTime": "2 min read",
-    "excerpt": "A tool that allowed anyone to generate fake AI-generated imagery and superimpose it over real Google Earth maps quickly spurred backlash.",
-    "body": "Google briefly introduced an experimental feature within Google Earth that allowed users to integrate AI-generated imagery directly onto its satellite maps. Powered by its Nano Banana 2 image generator, the tool was designed to foster creative exploration of geographical concepts. Users could employ prompts to superimpose fabricated visuals over real-world locations, aiming to offer a novel way to interact with the mapping platform.\n\nHowever, the feature faced immediate and widespread criticism from various quarters, including journalists and researchers. Concerns rapidly mounted over the potential for misuse, specifically the creation and dissemination of misinformation. Critics highlighted that integrating a prompt-based AI image generator into a platform widely regarded as a reliable source of visual evidence could easily undermine its credibility and flood the internet with misleading \"geospatial slop.\"\n\nResponding swiftly to the backlash, Google announced the rollback of the feature just one day after its launch. The company stated that while some professionals found useful applications, instances of generated imagery violating their policies were observed. This incident underscores the critical challenge developers and researchers face in deploying powerful AI tools responsibly, particularly those capable of generating realistic content, and the ongoing need for robust guardrails to prevent the proliferation of AI-driven disinformation.",
-    "coverImage": "https://techcrunch.com/wp-content/uploads/2026/07/Screenshot-2026-07-31-at-12.31.10-PM.png?resize=1200,670",
+    "excerpt": "India's app market generated a record $345 million in Q2.",
+    "body": "India's mobile app market is undergoing a significant transformation, shifting from a download-heavy, low-monetization landscape to one experiencing substantial consumer spending. A recent Sensor Tower report highlights a record $345 million in consumer spending during Q2, marking a 35% year-over-year increase. This surge is notably fueled by generative AI, streaming, and productivity applications, signaling a growing willingness among Indian consumers to invest in premium digital subscriptions beyond traditional gaming.\n\nThis pivotal shift in monetization is largely enabled by the widespread adoption of robust digital payment infrastructures. Systems like India's Unified Payments Interface (UPI) and various digital wallets have dramatically reduced friction associated with in-app purchases and subscription renewals. This ease of transaction, coupled with an increasing acceptance of premium digital services, forms the backbone of India's evolving app economy, making it simpler for users to convert interest into revenue for developers.\n\nFor developers and researchers, this trend is a game-changer. India is emerging as one of the fastest-growing app monetization markets globally, presenting a compelling opportunity to innovate and scale. While revenue per download still trails more mature markets, the rapid growth trajectory indicates immense potential for long-term expansion. This signals a maturing market ripe for the development and monetization of advanced AI-powered applications and sophisticated digital services tailored for a vast and increasingly paying user base.",
+    "coverImage": "https://techcrunch.com/wp-content/uploads/2023/10/india-internet-users-getty.jpg?w=1200",
     "status": "published",
     "confidenceLevel": "confirmed",
     "externalSources": [
-      "https://techcrunch.com/2026/07/31/google-nixes-its-earth-ai-feature-one-day-after-launch-amid-criticism-it-would-spread-misinformation/"
+      "https://techcrunch.com/2026/07/31/india-is-starting-to-pay-for-apps-not-just-download-them/"
     ],
     "relatedModels": [],
     "tags": [

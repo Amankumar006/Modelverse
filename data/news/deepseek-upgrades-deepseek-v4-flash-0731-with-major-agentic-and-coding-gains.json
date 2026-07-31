@@ -1,0 +1,24 @@
+{
+  "id": "deepseek-upgrades-deepseek-v4-flash-0731-with-major-agentic-and-coding-gains",
+  "slug": "deepseek-upgrades-deepseek-v4-flash-0731-with-major-agentic-and-coding-gains",
+  "title": "DeepSeek Upgrades DeepSeek-V4-Flash-0731 with Major Agentic and Coding Gains",
+  "category": "short-news",
+  "isTrending": true,
+  "publishDate": "2026-07-31",
+  "author": "Modelverse Editorial",
+  "readTime": "2 min read",
+  "excerpt": "DeepSeek published DeepSeek-V4-Flash-0731 on Hugging Face and moved the official V4-Flash API into public beta on July 31, 2026. The model card is explicit that this is the officia...",
+  "body": "DeepSeek has officially launched DeepSeek-V4-Flash-0731, moving its API into public beta and superseding previous previews. This release isn't a new architectural design but a significantly enhanced version achieved through re-post-training, building on the existing 284-billion-parameter Mixture-of-Experts (MoE) framework. Key additions include the DSpark speculative decoding module and native support for the Responses API format, alongside adaptations for Codex, signaling a focus on improved agentic and coding capabilities.\n\nThe underlying technology is a sophisticated 284B-parameter MoE model, where only 13 billion parameters are activated per token, coupled with an impressive 1-million-token context window. Its efficiency is further bolstered by a hybrid attention mechanism combining Compressed Sparse Attention (CSA) and Heavily Compressed Attention (HCA), alongside Manifold-Constrained Hyper-Connections (mHC) replacing conventional residual connections. The gains in this specific release are attributed to refined post-training, optimizing performance without altering the core architecture.\n\nThis upgrade significantly lowers the barrier to entry for developers and researchers, especially for agentic workflows and coding tasks. DeepSeek-V4-Flash-0731 is highly accessible via API with competitive pricing, making it feasible for seed-stage startups and indie developers to run complex agent loops without needing a substantial GPU budget. While self-hosting the MIT-licensed weights demands significant memory resources, it offers flexibility for mid-size and large enterprises with robust serving clusters, enabling broad adoption and experimentation with advanced AI capabilities.",
+  "coverImage": "https://www.marktechpost.com/wp-content/uploads/2026/07/blog6171-21-1024x731.png",
+  "status": "published",
+  "confidenceLevel": "confirmed",
+  "externalSources": [
+    "https://www.marktechpost.com/2026/07/31/deepseek-upgrades-deepseek-v4-flash-0731-with-major-agentic-and-coding-gains/"
+  ],
+  "relatedModels": [],
+  "tags": [
+    "ai-news",
+    "breaking",
+    "marktechpost"
+  ]
+}

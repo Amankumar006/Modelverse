@@ -132,6 +132,28 @@
     ]
   },
   {
+    "id": "deepseek-upgrades-deepseek-v4-flash-0731-with-major-agentic-and-coding-gains",
+    "slug": "deepseek-upgrades-deepseek-v4-flash-0731-with-major-agentic-and-coding-gains",
+    "title": "DeepSeek Upgrades DeepSeek-V4-Flash-0731 with Major Agentic and Coding Gains",
+    "category": "short-news",
+    "publishDate": "2026-07-31",
+    "author": "Modelverse Editorial",
+    "readTime": "2 min read",
+    "excerpt": "DeepSeek published DeepSeek-V4-Flash-0731 on Hugging Face and moved the official V4-Flash API into public beta on July 31, 2026. The model card is explicit that this is the officia...",
+    "coverImage": "https://www.marktechpost.com/wp-content/uploads/2026/07/blog6171-21-1024x731.png",
+    "status": "published",
+    "confidenceLevel": "confirmed",
+    "externalSources": [
+      "https://www.marktechpost.com/2026/07/31/deepseek-upgrades-deepseek-v4-flash-0731-with-major-agentic-and-coding-gains/"
+    ],
+    "relatedModels": [],
+    "tags": [
+      "ai-news",
+      "breaking",
+      "marktechpost"
+    ]
+  },
+  {
     "id": "google-nixes-its-earth-ai-feature-one-day-after-launch-amid-criticism-it-would-s",
     "slug": "google-nixes-its-earth-ai-feature-one-day-after-launch-amid-criticism-it-would-s",
     "title": "Google nixes its Earth AI feature one day after launch, amid criticism it would spread misinformation",
@@ -145,6 +167,28 @@
     "confidenceLevel": "confirmed",
     "externalSources": [
       "https://techcrunch.com/2026/07/31/google-nixes-its-earth-ai-feature-one-day-after-launch-amid-criticism-it-would-spread-misinformation/"
+    ],
+    "relatedModels": [],
+    "tags": [
+      "ai-news",
+      "breaking",
+      "techcrunch-ai"
+    ]
+  },
+  {
+    "id": "india-is-starting-to-pay-for-apps-not-just-download-them",
+    "slug": "india-is-starting-to-pay-for-apps-not-just-download-them",
+    "title": "India is starting to pay for apps, not just download them",
+    "category": "short-news",
+    "publishDate": "2026-07-31",
+    "author": "Modelverse Editorial",
+    "readTime": "2 min read",
+    "excerpt": "India's app market generated a record $345 million in Q2.",
+    "coverImage": "https://techcrunch.com/wp-content/uploads/2023/10/india-internet-users-getty.jpg?w=1200",
+    "status": "published",
+    "confidenceLevel": "confirmed",
+    "externalSources": [
+      "https://techcrunch.com/2026/07/31/india-is-starting-to-pay-for-apps-not-just-download-them/"
     ],
     "relatedModels": [],
     "tags": [
