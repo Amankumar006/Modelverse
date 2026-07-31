@@ -1,5 +1,27 @@
 [
   {
+    "id": "disrupting-a-criminal-scam-operation",
+    "slug": "disrupting-a-criminal-scam-operation",
+    "title": "Disrupting a Criminal Scam Operation",
+    "category": "short-news",
+    "publishDate": "2026-08-04",
+    "author": "Modelverse Editorial",
+    "readTime": "2 min read",
+    "excerpt": "OpenAI disrupted a Cambodia-based scam operation using ChatGPT to support investment, romance, gambling, and impersonation schemes.",
+    "coverImage": "/images/news/news_featured.jpg",
+    "status": "published",
+    "confidenceLevel": "confirmed",
+    "externalSources": [
+      "https://openai.com/index/disrupting-malicious-uses-of-ai-criminal-scam-operation"
+    ],
+    "relatedModels": [],
+    "tags": [
+      "ai-news",
+      "breaking",
+      "openai"
+    ]
+  },
+  {
     "id": "advancing-responsible-ai-across-europe",
     "slug": "advancing-responsible-ai-across-europe",
     "title": "Advancing responsible AI across Europe",
@@ -19,6 +41,28 @@
       "ai-news",
       "breaking",
       "openai"
+    ]
+  },
+  {
+    "id": "ai-labs-want-to-pump-the-brakes-but-amazon-and-spacex-are-still-blasting-off",
+    "slug": "ai-labs-want-to-pump-the-brakes-but-amazon-and-spacex-are-still-blasting-off",
+    "title": "AI labs want to pump the brakes, but Amazon and SpaceX are still blasting off",
+    "category": "short-news",
+    "publishDate": "2026-07-31",
+    "author": "Modelverse Editorial",
+    "readTime": "2 min read",
+    "excerpt": "After years of pushing full speed ahead on AI,&#160;OpenAI CEO&#160;Sam Altman says&#160;maybe it’s&#160;time for the AI industry to “pace” itself. The comments came&#160;just days...",
+    "coverImage": "https://techcrunch.com/wp-content/uploads/2025/02/GettyImages-2198164456.jpg?resize=1200,801",
+    "status": "published",
+    "confidenceLevel": "confirmed",
+    "externalSources": [
+      "https://techcrunch.com/podcast/ai-labs-want-to-pump-the-brakes-but-amazon-and-spacex-are-still-blasting-off/"
+    ],
+    "relatedModels": [],
+    "tags": [
+      "ai-news",
+      "breaking",
+      "techcrunch-ai"
     ]
   },
   {
@@ -176,6 +220,50 @@
     ]
   },
   {
+    "id": "sam-altman-isnt-the-only-one-who-wants-to-pump-the-brakes-on-ai",
+    "slug": "sam-altman-isnt-the-only-one-who-wants-to-pump-the-brakes-on-ai",
+    "title": "Sam Altman isn't the only one who wants to pump the brakes on AI",
+    "category": "short-news",
+    "publishDate": "2026-07-31",
+    "author": "Modelverse Editorial",
+    "readTime": "2 min read",
+    "excerpt": "After years of pushing full speed ahead on AI,&#160;OpenAI CEO&#160;Sam Altman says&#160;maybe it’s&#160;time for the AI industry to “pace” itself. The comments came&#160;just days...",
+    "coverImage": "https://techcrunch.com/wp-content/uploads/2026/07/OpenAI-logo-in-Seoul.jpg?w=1024",
+    "status": "published",
+    "confidenceLevel": "confirmed",
+    "externalSources": [
+      "https://techcrunch.com/video/sam-altman-isnt-the-only-one-who-wants-to-pump-the-brakes-on-ai/"
+    ],
+    "relatedModels": [],
+    "tags": [
+      "ai-news",
+      "breaking",
+      "techcrunch-ai"
+    ]
+  },
+  {
+    "id": "siri-ai-could-come-with-a-paywall-for-power-users",
+    "slug": "siri-ai-could-come-with-a-paywall-for-power-users",
+    "title": "Siri AI could come with a paywall for power users",
+    "category": "short-news",
+    "publishDate": "2026-07-31",
+    "author": "Modelverse Editorial",
+    "readTime": "2 min read",
+    "excerpt": "Apple CEO Tim Cook envisions users being able to buy more compute for Siri AI via Apple's existing iCloud+ subscriptions.",
+    "coverImage": "https://techcrunch.com/wp-content/uploads/2026/06/Screenshot-2026-06-08-at-1.42.13-PM.png?w=808",
+    "status": "published",
+    "confidenceLevel": "confirmed",
+    "externalSources": [
+      "https://techcrunch.com/2026/07/31/siri-ai-could-come-with-a-paywall-for-power-users/"
+    ],
+    "relatedModels": [],
+    "tags": [
+      "ai-news",
+      "breaking",
+      "techcrunch-ai"
+    ]
+  },
+  {
     "id": "smallestai-raises-13m-to-build-ultra-fast-voice-ai-that-sounds-genuinely-human",
     "slug": "smallestai-raises-13m-to-build-ultra-fast-voice-ai-that-sounds-genuinely-human",
     "title": "Smallest.ai raises $13M to build ultra-fast voice AI that sounds genuinely human",
@@ -189,6 +277,28 @@
     "confidenceLevel": "confirmed",
     "externalSources": [
       "https://techcrunch.com/2026/07/31/smallest-ai-raises-13m-to-build-ultra-fast-voice-ai-that-sounds-genuinely-human/"
+    ],
+    "relatedModels": [],
+    "tags": [
+      "ai-news",
+      "breaking",
+      "techcrunch-ai"
+    ]
+  },
+  {
+    "id": "snapchat-no-longer-rewards-fully-ai-generated-spotlight-content",
+    "slug": "snapchat-no-longer-rewards-fully-ai-generated-spotlight-content",
+    "title": "Snapchat no longer rewards fully AI-generated Spotlight content",
+    "category": "short-news",
+    "publishDate": "2026-07-31",
+    "author": "Modelverse Editorial",
+    "readTime": "2 min read",
+    "excerpt": "Snapchat has adjusted its recommendation systems to ensure that only videos created by real people are eligible for Spotlight recommendations, taking a stance against AI slop.",
+    "coverImage": "https://techcrunch.com/wp-content/uploads/2024/06/snapchat-getty.jpg?w=1200",
+    "status": "published",
+    "confidenceLevel": "confirmed",
+    "externalSources": [
+      "https://techcrunch.com/2026/07/31/snapchat-no-longer-rewards-fully-ai-generated-spotlight-content/"
     ],
     "relatedModels": [],
     "tags": [

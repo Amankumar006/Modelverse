@@ -1,0 +1,24 @@
+{
+  "id": "siri-ai-could-come-with-a-paywall-for-power-users",
+  "slug": "siri-ai-could-come-with-a-paywall-for-power-users",
+  "title": "Siri AI could come with a paywall for power users",
+  "category": "short-news",
+  "isTrending": true,
+  "publishDate": "2026-07-31",
+  "author": "Modelverse Editorial",
+  "readTime": "2 min read",
+  "excerpt": "Apple CEO Tim Cook envisions users being able to buy more compute for Siri AI via Apple's existing iCloud+ subscriptions.",
+  "body": "Apple's outgoing CEO, Tim Cook, recently indicated a potential shift in how users will access advanced features of the upcoming Siri AI upgrade. Cook suggested that \"power users\" requiring more intensive AI capabilities might encounter a paywall, likely integrated into existing iCloud+ subscriptions. This model would enable users to \"buy up the stack\" for increased compute power, a strategy mirroring how other leading AI providers like OpenAI and Anthropic monetize their advanced offerings. The revamped Siri AI is currently available in the iOS 27 beta and is slated for a broader release this fall.\n\nThis strategic move comes as Apple seeks to revitalize Siri, an area where the company has been perceived as lagging behind competitors, even licensing Google's custom Gemini model to enhance its assistant. The decision to potentially gate advanced Siri features behind a subscription reflects a broader industry trend of monetizing high-demand AI compute, especially amidst rising hardware costs driven by an industry-wide RAM shortage. This approach aims to fund the significant investment required for next-generation AI development.\n\nFor developers and researchers, this announcement signals Apple's serious commitment to catching up in the AI race and its evolving approach to delivering sophisticated AI. A more powerful, albeit potentially tiered, Siri could open new avenues for integrating advanced AI functionalities into applications within the Apple ecosystem. It also provides a compelling case study on the evolving business models for advanced AI, where access to greater computational resources becomes a premium feature, influencing future AI development and deployment strategies across the industry.",
+  "coverImage": "https://techcrunch.com/wp-content/uploads/2026/06/Screenshot-2026-06-08-at-1.42.13-PM.png?w=808",
+  "status": "published",
+  "confidenceLevel": "confirmed",
+  "externalSources": [
+    "https://techcrunch.com/2026/07/31/siri-ai-could-come-with-a-paywall-for-power-users/"
+  ],
+  "relatedModels": [],
+  "tags": [
+    "ai-news",
+    "breaking",
+    "techcrunch-ai"
+  ]
+}
