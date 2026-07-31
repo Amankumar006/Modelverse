@@ -1,0 +1,50 @@
+{
+  "id": "deepseek-ai-deepseek-v4-flash-0731",
+  "name": "DeepSeek-V4-Flash-0731",
+  "slug": "deepseek-v4-flash-0731",
+  "developer": "deepseek-ai",
+  "releaseDate": "2026-07-31",
+  "updatedAt": "2026-07-31",
+  "type": "open-weights",
+  "status": "active",
+  "modality": [
+    "text"
+  ],
+  "primaryTask": "chat-reasoning",
+  "deployment": [
+    "self-hostable"
+  ],
+  "license": "MIT",
+  "parameters": "304.2B",
+  "contextWindow": "unknown",
+  "description": "DeepSeek-V4-Flash-0731 is a 304.2B-parameter Mixture-of-Experts (MoE) text generation model developed by deepseek-ai. Built on the DeepseekV4ForCausalLM architecture using transformers. Released on 2026-07-31 with 301 likes and 0 downloads on Hugging Face.",
+  "keyFeatures": [
+    "304.2B parameters with sparse MoE architecture for efficient inference",
+    "Built on DeepseekV4ForCausalLM architecture (transformers)",
+    "Primary task: text generation (text modality)",
+    "Open-weights under MIT license — self-hostable and fine-tunable"
+  ],
+  "benchmarks": [],
+  "family": null,
+  "previousVersion": null,
+  "links": {
+    "huggingface": "https://huggingface.co/deepseek-ai/DeepSeek-V4-Flash-0731",
+    "paper": "https://arxiv.org/abs/2606.19348"
+  },
+  "logo": null,
+  "tags": [
+    "open-weights",
+    "trending",
+    "huggingface",
+    "moe",
+    "transformers",
+    "text-generation"
+  ],
+  "sources": [
+    "https://huggingface.co/deepseek-ai/DeepSeek-V4-Flash-0731"
+  ],
+  "verified": true,
+  "featured": false,
+  "boost": 1,
+  "curatorNotes": "Auto-ingested from HuggingFace Trending on 2026-07-31. Architecture: DeepseekV4ForCausalLM. Params: 304.2B. License: MIT."
+}
