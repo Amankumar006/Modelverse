@@ -1,0 +1,50 @@
+{
+  "id": "audio8-audio8-tts-preview-06b",
+  "name": "Audio8-TTS-Preview-0.6b",
+  "slug": "audio8-tts-preview-06b",
+  "developer": "Audio8",
+  "releaseDate": "2026-07-28",
+  "updatedAt": "2026-07-31",
+  "type": "open-weights",
+  "status": "active",
+  "modality": [
+    "text",
+    "audio"
+  ],
+  "primaryTask": "audio-speech",
+  "deployment": [
+    "self-hostable"
+  ],
+  "license": "APACHE-2.0",
+  "parameters": "601M",
+  "contextWindow": "unknown",
+  "description": "Audio8-TTS-Preview-0.6b is a 601M-parameter text to speech model developed by Audio8. Built on the ArkttsModel architecture using transformers. Supports yue, zh, nl, en, fr, de, it, ja, ko, pl, es language(s). Released on 2026-07-28 with 126 likes and 225 downloads on Hugging Face.",
+  "keyFeatures": [
+    "601M parameters",
+    "Built on ArkttsModel architecture (transformers)",
+    "Primary task: text to speech (text, audio modality)",
+    "Language support: yue, zh, nl, en, fr, de, it, ja, ko, pl, es",
+    "Open-weights under APACHE-2.0 license — self-hostable and fine-tunable"
+  ],
+  "benchmarks": [],
+  "family": null,
+  "previousVersion": null,
+  "links": {
+    "huggingface": "https://huggingface.co/Audio8/Audio8-TTS-Preview-0.6b"
+  },
+  "logo": null,
+  "tags": [
+    "open-weights",
+    "trending",
+    "huggingface",
+    "transformers",
+    "text-to-speech"
+  ],
+  "sources": [
+    "https://huggingface.co/Audio8/Audio8-TTS-Preview-0.6b"
+  ],
+  "verified": true,
+  "featured": false,
+  "boost": 1,
+  "curatorNotes": "Auto-ingested from HuggingFace Trending on 2026-07-31. Architecture: ArkttsModel. Params: 601M. License: APACHE-2.0."
+}
