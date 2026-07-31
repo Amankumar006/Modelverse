@@ -1,116 +1,20 @@
 [
   {
-    "id": "advancing-responsible-ai-across-europe",
-    "slug": "advancing-responsible-ai-across-europe",
-    "title": "Advancing responsible AI across Europe",
+    "id": "jetbrains-open-sources-kotlinllm-smart-macros-that-generate-kotlin-source-code-a",
+    "slug": "jetbrains-open-sources-kotlinllm-smart-macros-that-generate-kotlin-source-code-a",
+    "title": "JetBrains Open-Sources KotlinLLM: Smart Macros That Generate Kotlin Source Code at Runtime and Hot-Reload It Through JDI",
     "category": "short-news",
     "isTrending": true,
     "publishDate": "2026-07-31",
     "author": "Modelverse Editorial",
     "readTime": "2 min read",
-    "excerpt": "OpenAI shares how its safety, security, transparency, and provenance practices support responsible AI governance in Europe. The work will continue as the EU AI Act advances.",
-    "body": "### OpenAI Details Responsible AI Framework for Europe\n\nOpenAI has publicly shared its comprehensive strategy for responsible AI governance within Europe, emphasizing how its internal practices in safety, security, transparency, and provenance are designed to align with the region's progressive regulatory environment. This proactive disclosure comes as the landmark EU AI Act continues its advancement, highlighting OpenAI's commitment to fostering trust and ensuring the ethical deployment of artificial intelligence across the continent.\n\nThe core of OpenAI's approach involves a multi-pronged framework. Safety measures are implemented to identify and mitigate potential risks and biases inherent in AI systems, while robust security protocols safeguard against malicious use and unauthorized access. Transparency initiatives aim to demystify AI model behavior and limitations, empowering users with a clearer understanding of the technology. Additionally, provenance practices ensure the traceability of data and model origins, which is vital for accountability and ethical sourcing throughout the AI development lifecycle. These practices are dynamic, evolving in anticipation of new legislative requirements.\n\nFor developers and researchers, this detailed articulation from a prominent AI developer like OpenAI carries significant weight. It offers crucial insights into the ethical and regulatory boundaries shaping the future of AI, directly influencing how they design, build, and deploy their own solutions. Adherence to such rigorous standards can cultivate greater public and institutional confidence, potentially accelerating AI innovation and collaboration. Ultimately, it underscores the imperative of embedding responsible AI principles from the very inception of any project, establishing a benchmark for best practices in a rapidly transforming technological and regulatory landscape.",
-    "coverImage": "/images/news/news_featured.jpg",
+    "excerpt": "JetBrains Research has open-sourced KotlinLLM under the Apache License 2.0. The IntelliJ IDEA plugin prototype adds Smart macros, asLlm and mockLlm, whose bodies are generated Kotl...",
+    "body": "JetBrains Research has open-sourced KotlinLLM, an experimental IntelliJ IDEA plugin for Kotlin/JVM projects that introduces \"Smart macros.\" These are Kotlin function calls, like `asLlm<F, T>(from, hint)` for type conversion or `mockLlm<T>()` for generating stateful interface implementations, whose bodies are dynamically generated Kotlin source code by an LLM. Crucially, while a research prototype, its output is deployable: once behavior is generated, the resulting plain Kotlin code can be compiled and run without further LLM interaction for that specific scenario.\n\nThe plugin operates via a sophisticated runtime evolution loop. Upon project launch, KotlinLLM identifies Smart macro calls and sets breakpoints. If initial generated logic doesn't match a runtime scenario, execution pauses. The plugin captures runtime context, feeds it to an LLM agent for a code update, then compiles and hot-reloads the new code using JVM class redefinition via JDI. This unique, Kotlin/JVM-specific capability allows applications to dynamically adapt and evolve their code based on real-time execution needs, ensuring robust and context-aware behavior with minimal overhead.\n\nKotlinLLM represents a significant advancement for developers and researchers. Developers gain a novel way to integrate LLMs, enabling dynamic code generation, reducing boilerplate, and simplifying complex tasks. Researchers benefit from an open-source platform to explore runtime code evolution and LLM-driven adaptation. This experimental plugin paves the way for intelligent development environments where code can self-adapt and optimize at runtime.",
+    "coverImage": "https://www.marktechpost.com/wp-content/uploads/2026/07/blog6171-20.png",
     "status": "published",
     "confidenceLevel": "confirmed",
     "externalSources": [
-      "https://openai.com/index/advancing-responsible-ai-across-europe"
-    ],
-    "relatedModels": [],
-    "tags": [
-      "ai-news",
-      "breaking",
-      "openai"
-    ]
-  },
-  {
-    "id": "nous-research-ships-three-integration-paths-for-hermes-agent-and-buzz-blocks-ope",
-    "slug": "nous-research-ships-three-integration-paths-for-hermes-agent-and-buzz-blocks-ope",
-    "title": "Nous Research Ships Three Integration Paths for Hermes Agent and Buzz, Block's Open Source Nostr Workspace for Humans and Agents",
-    "category": "short-news",
-    "isTrending": true,
-    "publishDate": "2026-07-31",
-    "author": "Modelverse Editorial",
-    "readTime": "2 min read",
-    "excerpt": "Nous Research has released Hermes Agent support for Buzz, Block's open source, self-hostable Nostr workspace where humans and AI agents share the same channels. Three integration p...",
-    "body": "Nous Research has unveiled a significant integration, bringing its Hermes Agent into Buzz, Block's open-source, self-hostable workspace designed for seamless human-AI collaboration. This innovative setup leverages Nostr, a decentralized network protocol, to assign unique identities (keypairs) to AI agents, mirroring human participants. This approach fundamentally redefines agent interaction by eliminating the need for traditional bot tokens, providing agents with their own channel memberships and auditable trails. This self-hostable, open-source solution (Buzz is Apache-2.0, Hermes Agent is MIT) is particularly impactful for solo developers, small engineering teams, and mid-market platform teams seeking enhanced transparency and control over their AI deployments, enabling practical applications like incident memory, code review, and automated report generation.\n\nThe integration offers three distinct paths to accommodate varying deployment complexities. For individual developers, the **Buzz Desktop managed runtime** provides the simplest setup, spawning Hermes locally as a preset harness. Mid-tier deployments can utilize the **relay bridge**, where Buzz's harness connects to a hosted Hermes agent via WebSocket, sharing its configuration and state. The most comprehensive option is the **native gateway platform**, which transforms Buzz into a full-fledged Hermes messaging platform, akin to Telegram or Discord, handling channels, DMs, threaded replies, and more, with inbound communication via NIP-42 authenticated Nostr WebSockets.\n\nThis flexible architecture empowers developers and researchers to integrate AI agents deeply into their workflows with unprecedented control and transparency. By providing agents with first-class identities and audit trails, the integration fosters a more secure and accountable environment for AI-driven tasks. The self-hostable nature and open-source licenses further democratize access to advanced agent capabilities, allowing teams to customize and scale their AI solutions without vendor lock-in, while default privacy settings ensure agents interact responsibly within channels.",
-    "coverImage": "https://www.marktechpost.com/wp-content/uploads/2026/07/blog6171-19.png",
-    "status": "published",
-    "confidenceLevel": "confirmed",
-    "externalSources": [
-      "https://www.marktechpost.com/2026/07/31/nous-research-ships-three-integration-paths-for-hermes-agent-and-buzz-blocks-open-source-nostr-workspace-for-humans-and-agents/"
-    ],
-    "relatedModels": [],
-    "tags": [
-      "ai-news",
-      "breaking",
-      "marktechpost"
-    ]
-  },
-  {
-    "id": "univ-builds-an-ai-ready-workforce",
-    "slug": "univ-builds-an-ai-ready-workforce",
-    "title": "Univé builds an AI-ready workforce",
-    "category": "short-news",
-    "isTrending": true,
-    "publishDate": "2026-07-31",
-    "author": "Modelverse Editorial",
-    "readTime": "2 min read",
-    "excerpt": "See how Univé built an AI-ready workforce with ChatGPT Enterprise by combining leadership, responsible governance, and employee-led innovation to transform work at scale.",
-    "body": "## Introduction to AI-Ready Workforce\nUnivé has successfully built an AI-ready workforce by leveraging ChatGPT Enterprise, a cutting-edge technology that enables organizations to harness the power of artificial intelligence. This achievement is a result of a strategic combination of effective leadership, responsible governance, and employee-led innovation, ultimately transforming the way work is done on a large scale.\n\n## Technology and Implementation\nThe implementation of ChatGPT Enterprise has played a crucial role in Univé's transformation. By integrating this technology, the organization has been able to foster a culture of innovation and responsibility, allowing employees to work in tandem with AI solutions. This synergy enables the workforce to enhance productivity, improve decision-making, and drive business growth.\n\n## Impact on Developers and Researchers\nThe significance of Univé's AI-ready workforce lies in its potential to inspire other organizations to adopt similar strategies. For developers and researchers, this announcement highlights the importance of responsible AI governance and employee-led innovation in driving technological advancements. By embracing AI solutions like ChatGPT Enterprise, businesses can unlock new opportunities for growth, efficiency, and competitiveness, ultimately shaping the future of work.",
-    "coverImage": "/images/news/openai_sol_codex_updates_cover.jpg",
-    "status": "published",
-    "confidenceLevel": "confirmed",
-    "externalSources": [
-      "https://openai.com/index/unive"
-    ],
-    "relatedModels": [],
-    "tags": [
-      "ai-news",
-      "breaking",
-      "openai"
-    ]
-  },
-  {
-    "id": "polyai-releases-dialog-rsn-1-an-audio-native-dialog-model-that-fuses-turn-taking",
-    "slug": "polyai-releases-dialog-rsn-1-an-audio-native-dialog-model-that-fuses-turn-taking",
-    "title": "PolyAI Releases Dialog-RSN-1: An Audio-Native Dialog Model That Fuses Turn-Taking, Speech Recognition, Function Calling, And Response",
-    "category": "short-news",
-    "isTrending": true,
-    "publishDate": "2026-07-31",
-    "author": "Modelverse Editorial",
-    "readTime": "2 min read",
-    "excerpt": "PolyAI has introduced Dialog-RSN-1, a dialog model that perceives caller audio directly instead of reading an ASR transcript. It fuses turn-taking, speech recognition, function cal...",
-    "body": "PolyAI has unveiled Dialog-RSN-1, an innovative audio-native dialog model designed to revolutionize conversational AI by directly processing a caller's raw audio. Unlike traditional systems that rely on text transcripts, Dialog-RSN-1 integrates turn-taking, speech recognition, function calling, and response generation into a single, cohesive model. This allows it to perceive crucial vocal nuances like tone and hesitation, which are often lost in text-based approaches. Already deployed in live production calls, this technology is currently exclusive to PolyAI customers, with no public API or open weights available yet.\n\nThis new architecture addresses significant limitations found in existing conversational AI models. Cascaded systems, which convert speech to text early, discard valuable acoustic cues and often require tedious manual tuning. Conversely, speech-to-speech models, while retaining audio, can bake the voice into the model, limiting pronunciation flexibility and demanding constant GPU resources. Dialog-RSN-1 circumvents these issues by being audio-aware only on input, reasoning over raw audio, and then handing off generation to a separate, promptable text-to-speech system. It operates on demand, intelligently deciding when to respond based on acoustic cues and full context, rather than continuously streaming.\n\nFor developers and researchers, Dialog-RSN-1 represents a leap forward in building more natural and efficient voice AI. PolyAI achieved impressive performance by post-training open-weight multimodal models with supervised and reinforcement learning on proprietary data, ensuring the pipeline is base-model agnostic. The model targets sub-300ms latency on A100 GPUs through various optimizations, including prefilling attention caches and speculative drafting. Benchmarking on PolyAI's internal Dialog-Eval (slated for open-sourcing) shows Dialog-RSN-1 outperforming cascaded models and even GPT Realtime in real-time scenarios, demonstrating superior accuracy and transcription quality. This advancement promises more robust and human-like interactions for next-generation voice assistants and customer service solutions.",
-    "coverImage": "https://www.marktechpost.com/wp-content/uploads/2026/07/blog6171-18.png",
-    "status": "published",
-    "confidenceLevel": "confirmed",
-    "externalSources": [
-      "https://www.marktechpost.com/2026/07/30/polyai-releases-dialog-rsn-1-an-audio-native-dialog-model-that-fuses-turn-taking-speech-recognition-function-calling-and-response/"
-    ],
-    "relatedModels": [],
-    "tags": [
-      "ai-news",
-      "breaking",
-      "marktechpost"
-    ]
-  },
-  {
-    "id": "building-a-policy-governed-multi-agent-financial-research-workflow-with-omnigent",
-    "slug": "building-a-policy-governed-multi-agent-financial-research-workflow-with-omnigent",
-    "title": "Building a Policy-Governed Multi-Agent Financial Research Workflow with Omnigent",
-    "category": "short-news",
-    "isTrending": true,
-    "publishDate": "2026-07-31",
-    "author": "Modelverse Editorial",
-    "readTime": "2 min read",
-    "excerpt": "In this tutorial, we demonstrate how to build and execute a multi-agent workflow with Omnigent in a secure, isolated Python environment. Learn to integrate live exchange-rate data,...",
-    "body": "### Introduction to Omnigent Multi-Agent Workflow\nA recent tutorial demonstrates the creation of a policy-governed multi-agent financial research workflow using Omnigent. This workflow leverages a reliable, isolated Python environment to retrieve live USD-to-EUR exchange rates from an external API, prepare client-ready summaries, and delegate drafts to a text-auditing sub-agent for validation.\n\n### Technical Implementation\nThe workflow is built using Omnigent, with reusable Python functions defined as callable agent tools. The agent structure is described in YAML, and the Claude Agent SDK serves as the execution harness. The implementation also utilizes environment variables to securely manage the Anthropic API key and applies non-interactive policies to limit tool calls and control session costs.\n\n### Significance and Applications\nThis implementation showcases the potential of Omnigent in combining agents, tools, delegation, live data access, and governance within a single configurable system. The resulting workflow provides a reusable foundation for developing sophisticated, secure, and cost-controlled multi-agent systems for financial research and other real-world applications, making it an exciting development for researchers and developers in the field.",
-    "coverImage": "https://www.marktechpost.com/wp-content/uploads/2026/07/blog6171-17.png",
-    "status": "published",
-    "confidenceLevel": "confirmed",
-    "externalSources": [
-      "https://www.marktechpost.com/2026/07/30/building-a-policy-governed-multi-agent-financial-research-workflow-with-omnigent/"
+      "https://www.marktechpost.com/2026/07/31/jetbrains-research-open-sources-kotlinllm-intellij-plugin-kotlin-runtime-llm/"
     ],
     "relatedModels": [],
     "tags": [

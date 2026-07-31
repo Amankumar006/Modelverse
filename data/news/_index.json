@@ -88,6 +88,28 @@
     ]
   },
   {
+    "id": "jetbrains-open-sources-kotlinllm-smart-macros-that-generate-kotlin-source-code-a",
+    "slug": "jetbrains-open-sources-kotlinllm-smart-macros-that-generate-kotlin-source-code-a",
+    "title": "JetBrains Open-Sources KotlinLLM: Smart Macros That Generate Kotlin Source Code at Runtime and Hot-Reload It Through JDI",
+    "category": "short-news",
+    "publishDate": "2026-07-31",
+    "author": "Modelverse Editorial",
+    "readTime": "2 min read",
+    "excerpt": "JetBrains Research has open-sourced KotlinLLM under the Apache License 2.0. The IntelliJ IDEA plugin prototype adds Smart macros, asLlm and mockLlm, whose bodies are generated Kotl...",
+    "coverImage": "https://www.marktechpost.com/wp-content/uploads/2026/07/blog6171-20.png",
+    "status": "published",
+    "confidenceLevel": "confirmed",
+    "externalSources": [
+      "https://www.marktechpost.com/2026/07/31/jetbrains-research-open-sources-kotlinllm-intellij-plugin-kotlin-runtime-llm/"
+    ],
+    "relatedModels": [],
+    "tags": [
+      "ai-news",
+      "breaking",
+      "marktechpost"
+    ]
+  },
+  {
     "id": "nous-research-ships-three-integration-paths-for-hermes-agent-and-buzz-blocks-ope",
     "slug": "nous-research-ships-three-integration-paths-for-hermes-agent-and-buzz-blocks-ope",
     "title": "Nous Research Ships Three Integration Paths for Hermes Agent and Buzz, Block's Open Source Nostr Workspace for Humans and Agents",
