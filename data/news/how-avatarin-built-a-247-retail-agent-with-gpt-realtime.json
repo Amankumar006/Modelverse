@@ -1,0 +1,24 @@
+{
+  "id": "how-avatarin-built-a-247-retail-agent-with-gpt-realtime",
+  "slug": "how-avatarin-built-a-247-retail-agent-with-gpt-realtime",
+  "title": "How avatarin built a 24/7 retail agent with GPT-Realtime",
+  "category": "short-news",
+  "isTrending": true,
+  "publishDate": "2026-07-30",
+  "author": "Modelverse Editorial",
+  "readTime": "2 min read",
+  "excerpt": "avatarin uses OpenAI’s GPT-Realtime to give Yamada Denki shoppers 24/7 multilingual support. In two weeks, 30,000 people used the agent and 92% of survey responses were positive.",
+  "body": "avatarin has successfully launched an innovative 24/7 retail assistant for Yamada Denki shoppers, powered by OpenAI's GPT-Realtime technology. This deployment provides immediate, multilingual customer support, significantly enhancing the shopping experience. The agent quickly demonstrated its value, engaging 30,000 users within just two weeks and achieving an impressive 92% positive feedback rate from surveys, underscoring its effectiveness and user satisfaction.\n\nThe core of this solution lies in OpenAI's GPT-Realtime, a sophisticated conversational AI designed for low-latency, dynamic interactions. By leveraging this technology, avatarin's agent can process queries and respond instantly across various languages, mimicking natural human conversation. This capability is crucial for delivering seamless, on-demand assistance, allowing customers to receive timely support regardless of the hour or their preferred language, thereby breaking down traditional barriers to customer service.\n\nFor developers and researchers, this initiative offers a compelling case study on the practical application and rapid deployment of advanced AI in a commercial setting. It highlights how real-time conversational AI can be integrated swiftly—in this instance, within two weeks—to yield substantial operational benefits and high user engagement. The success metrics validate the potential of such systems to revolutionize customer support, demonstrating that AI can not only handle high volumes of interactions but also maintain a high standard of service quality and user satisfaction in demanding retail environments.",
+  "coverImage": "/images/news/news_short.jpg",
+  "status": "published",
+  "confidenceLevel": "confirmed",
+  "externalSources": [
+    "https://openai.com/index/avatarin"
+  ],
+  "relatedModels": [],
+  "tags": [
+    "ai-news",
+    "breaking",
+    "openai"
+  ]
+}

@@ -1,5 +1,49 @@
 [
   {
+    "id": "anthropic-says-its-own-ai-models-breached-three-companies-during-security-tests",
+    "slug": "anthropic-says-its-own-ai-models-breached-three-companies-during-security-tests",
+    "title": "Anthropic says its own AI models breached three companies during security tests",
+    "category": "short-news",
+    "publishDate": "2026-07-31",
+    "author": "Modelverse Editorial",
+    "readTime": "2 min read",
+    "excerpt": "After OpenAI's models broke into Hugging Face, Anthropic checked its own history and found three similar incidents",
+    "coverImage": "https://techcrunch.com/wp-content/uploads/2026/06/GettyImages-2278736523.jpeg?resize=1200,798",
+    "status": "published",
+    "confidenceLevel": "confirmed",
+    "externalSources": [
+      "https://techcrunch.com/2026/07/30/anthropic-says-its-own-ai-models-breached-three-companies-during-security-tests/"
+    ],
+    "relatedModels": [],
+    "tags": [
+      "ai-news",
+      "breaking",
+      "techcrunch-ai"
+    ]
+  },
+  {
+    "id": "investigating-incidents-cybersecurity-evals",
+    "slug": "investigating-incidents-cybersecurity-evals",
+    "title": "Investigating Incidents Cybersecurity Evals",
+    "category": "short-news",
+    "publishDate": "2026-07-31",
+    "author": "Modelverse Editorial",
+    "readTime": "2 min read",
+    "excerpt": "Official announcement from Anthropic: Investigating Incidents Cybersecurity Evals",
+    "coverImage": "https://www.anthropic.com/api/opengraph-illustration?name=Hand%20Lock&backgroundColor=heather",
+    "status": "published",
+    "confidenceLevel": "confirmed",
+    "externalSources": [
+      "https://www.anthropic.com/news/investigating-incidents-cybersecurity-evals"
+    ],
+    "relatedModels": [],
+    "tags": [
+      "ai-news",
+      "breaking",
+      "anthropic"
+    ]
+  },
+  {
     "id": "a-fundamental-flaw-leaves-llms-strikingly-vulnerable-to-attack",
     "slug": "a-fundamental-flaw-leaves-llms-strikingly-vulnerable-to-attack",
     "title": "A fundamental flaw leaves LLMs strikingly vulnerable to attack",
@@ -41,6 +85,28 @@
       "ai-news",
       "breaking",
       "openai"
+    ]
+  },
+  {
+    "id": "ai-hedge-fund-situational-awareness-may-have-sold-its-public-portfolio-but-it-st",
+    "slug": "ai-hedge-fund-situational-awareness-may-have-sold-its-public-portfolio-but-it-st",
+    "title": "AI hedge fund Situational Awareness may have sold its public portfolio, but it still has its Anthropic shares",
+    "category": "short-news",
+    "publishDate": "2026-07-30",
+    "author": "Modelverse Editorial",
+    "readTime": "2 min read",
+    "excerpt": "The former OpenAI researcher’s fund was forced to unwind public equities after leveraged public bets plummeted. But he still has cards to play.",
+    "coverImage": "https://techcrunch.com/wp-content/uploads/2026/05/PM-Images.jpg?resize=1200,855",
+    "status": "published",
+    "confidenceLevel": "confirmed",
+    "externalSources": [
+      "https://techcrunch.com/2026/07/30/ai-hedge-fund-situational-awareness-may-have-sold-its-public-portfolio-but-it-still-has-its-anthropic-shares/"
+    ],
+    "relatedModels": [],
+    "tags": [
+      "ai-news",
+      "breaking",
+      "techcrunch-ai"
     ]
   },
   {
@@ -217,6 +283,28 @@
       "ai-news",
       "breaking",
       "hugging-face"
+    ]
+  },
+  {
+    "id": "how-avatarin-built-a-247-retail-agent-with-gpt-realtime",
+    "slug": "how-avatarin-built-a-247-retail-agent-with-gpt-realtime",
+    "title": "How avatarin built a 24/7 retail agent with GPT-Realtime",
+    "category": "short-news",
+    "publishDate": "2026-07-30",
+    "author": "Modelverse Editorial",
+    "readTime": "2 min read",
+    "excerpt": "avatarin uses OpenAI’s GPT-Realtime to give Yamada Denki shoppers 24/7 multilingual support. In two weeks, 30,000 people used the agent and 92% of survey responses were positive.",
+    "coverImage": "/images/news/news_short.jpg",
+    "status": "published",
+    "confidenceLevel": "confirmed",
+    "externalSources": [
+      "https://openai.com/index/avatarin"
+    ],
+    "relatedModels": [],
+    "tags": [
+      "ai-news",
+      "breaking",
+      "openai"
     ]
   },
   {
@@ -431,6 +519,28 @@
     "confidenceLevel": "confirmed",
     "externalSources": [
       "https://techcrunch.com/2026/07/30/okta-buys-ai-security-startup-permiso-source-says-for-about-200m/"
+    ],
+    "relatedModels": [],
+    "tags": [
+      "ai-news",
+      "breaking",
+      "techcrunch-ai"
+    ]
+  },
+  {
+    "id": "reddit-reports-a-solid-quarter-but-shows-signs-of-ais-impact",
+    "slug": "reddit-reports-a-solid-quarter-but-shows-signs-of-ais-impact",
+    "title": "Reddit reports a solid quarter but shows signs of AI's impact",
+    "category": "short-news",
+    "publishDate": "2026-07-30",
+    "author": "Modelverse Editorial",
+    "readTime": "2 min read",
+    "excerpt": "Reddit's financial situation is looking good but uncertainty about its relationship to Google and the new AI-ified web are stirring market concerns.",
+    "coverImage": "https://techcrunch.com/wp-content/uploads/2024/05/reddit-ipo-v2.webp?resize=1200,674",
+    "status": "published",
+    "confidenceLevel": "confirmed",
+    "externalSources": [
+      "https://techcrunch.com/2026/07/30/reddit-reports-a-solid-quarter-but-shows-signs-of-ais-impact/"
     ],
     "relatedModels": [],
     "tags": [

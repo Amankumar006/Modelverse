@@ -1,0 +1,24 @@
+{
+  "id": "ai-hedge-fund-situational-awareness-may-have-sold-its-public-portfolio-but-it-st",
+  "slug": "ai-hedge-fund-situational-awareness-may-have-sold-its-public-portfolio-but-it-st",
+  "title": "AI hedge fund Situational Awareness may have sold its public portfolio, but it still has its Anthropic shares",
+  "category": "short-news",
+  "isTrending": true,
+  "publishDate": "2026-07-30",
+  "author": "Modelverse Editorial",
+  "readTime": "2 min read",
+  "excerpt": "The former OpenAI researcher’s fund was forced to unwind public equities after leveraged public bets plummeted. But he still has cards to play.",
+  "body": "## Announcement and Background\nSituational Awareness, an AI hedge fund founded by former OpenAI researcher Leopold Aschenbrenner, has sold a significant portion of its public stock portfolio to Citadel. This move comes after the fund experienced substantial losses over the past month, despite previously impressive returns of 439% for the year through June. Aschenbrenner, a 25-year-old German-born researcher, had gained prominence for his investment thesis on the importance of scaling AI infrastructure.\n\n## Technology and Investment Strategy\nAschenbrenner's investment approach focused on the build-up of semiconductors, compute, memory, and energy infrastructure to support AI growth. His fund held stocks such as memory chip producers SK Hynix and Sandisk, clean energy developer Bloom Energy, and neocloud provider Nebius Group. However, these stocks plummeted by over 30% in the past month, leading to significant losses for the fund. The use of leverage, a common hedge fund strategy, amplified these losses.\n\n## Impact and Significance\nThe sale of Situational Awareness' public portfolio to Citadel marks a significant shift for the fund, with its assets falling to around $10 billion. Despite this setback, Aschenbrenner's fund still holds its shares in Anthropic, a notable AI company. This development is significant for developers and researchers, as it highlights the challenges and risks associated with investing in AI infrastructure. The situation also underscores the importance of adapting to changing market conditions and the need for diversified investment strategies in the rapidly evolving AI landscape.",
+  "coverImage": "https://techcrunch.com/wp-content/uploads/2026/05/PM-Images.jpg?resize=1200,855",
+  "status": "published",
+  "confidenceLevel": "confirmed",
+  "externalSources": [
+    "https://techcrunch.com/2026/07/30/ai-hedge-fund-situational-awareness-may-have-sold-its-public-portfolio-but-it-still-has-its-anthropic-shares/"
+  ],
+  "relatedModels": [],
+  "tags": [
+    "ai-news",
+    "breaking",
+    "techcrunch-ai"
+  ]
+}
