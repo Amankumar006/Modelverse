@@ -1,0 +1,53 @@
+{
+  "id": "unsloth-deepseek-v4-flash-0731-gguf",
+  "name": "DeepSeek-V4-Flash-0731-GGUF",
+  "slug": "deepseek-v4-flash-0731-gguf",
+  "developer": "unsloth",
+  "releaseDate": "2026-07-31",
+  "updatedAt": "2026-07-31",
+  "type": "open-weights",
+  "status": "active",
+  "modality": [
+    "text"
+  ],
+  "primaryTask": "chat-reasoning",
+  "deployment": [
+    "self-hostable"
+  ],
+  "license": "MIT",
+  "parameters": "undisclosed",
+  "contextWindow": "unknown",
+  "description": "DeepSeek-V4-Flash-0731-GGUF is a undisclosed-parameter text generation model developed by unsloth. Released on 2026-07-31 with 132 likes and 0 downloads on Hugging Face.",
+  "keyFeatures": [
+    "undisclosed parameters",
+    "Primary task: text generation (text modality)",
+    "Open-weights under MIT license — self-hostable and fine-tunable"
+  ],
+  "benchmarks": [],
+  "family": null,
+  "previousVersion": null,
+  "links": {
+    "huggingface": "https://huggingface.co/unsloth/DeepSeek-V4-Flash-0731-GGUF",
+    "paper": "https://arxiv.org/abs/2606.19348"
+  },
+  "logo": null,
+  "tags": [
+    "open-weights",
+    "trending",
+    "huggingface",
+    "text-generation"
+  ],
+  "sources": [
+    "https://huggingface.co/unsloth/DeepSeek-V4-Flash-0731-GGUF"
+  ],
+  "verified": false,
+  "verificationStatus": "LIKELY",
+  "fieldConfidence": {
+    "parameters": "DRAFT",
+    "license": "LIKELY"
+  },
+  "needsReview": true,
+  "featured": false,
+  "boost": 1,
+  "curatorNotes": "Auto-ingested from HuggingFace Trending on 2026-07-31. Architecture: unknown. Params: undisclosed. License: MIT."
+}
