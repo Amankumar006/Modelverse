@@ -46,5 +46,6 @@
     "https://openai.com/index/new-embedding-models-and-api-updates/"
   ],
   "verified": true,
-  "curatorNotes": "Features Matryoshka learning allowing vectors to be truncated without severe performance drop."
+  "curatorNotes": "Features Matryoshka learning allowing vectors to be truncated without severe performance drop.",
+  "isLegacyCurated": true
 }

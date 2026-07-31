@@ -64,5 +64,6 @@
   "verified": true,
   "featured": false,
   "boost": 1,
-  "curatorNotes": "Released during OpenAI DevDay. Uses 128 mel frequency bins and processes audio in 30-second sliding windows."
+  "curatorNotes": "Released during OpenAI DevDay. Uses 128 mel frequency bins and processes audio in 30-second sliding windows.",
+  "isLegacyCurated": true
 }

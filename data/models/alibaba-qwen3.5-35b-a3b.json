@@ -54,11 +54,16 @@
     "open-weights"
   ],
   "sources": [
-    "https://github.com/anomalyco/models.dev"
+    "https://github.com/anomalyco/models.dev",
+    "https://openrouter.ai/api/v1/models"
   ],
   "verified": false,
   "needsReview": true,
   "featured": false,
   "boost": 1,
-  "curatorNotes": "Skeleton entry imported from models.dev backfill (2026-07-26). Needs manual enrichment and primary-source verification."
+  "curatorNotes": "Skeleton entry imported from models.dev backfill (2026-07-26). Needs manual enrichment and primary-source verification.",
+  "fieldConfidence": {
+    "pricing": "LIKELY",
+    "contextWindow": "LIKELY"
+  }
 }

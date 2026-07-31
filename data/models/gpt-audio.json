@@ -40,11 +40,16 @@
   "tags": [],
   "sources": [
     "https://developers.openai.com/api/docs/models/all",
-    "https://github.com/anomalyco/models.dev"
+    "https://github.com/anomalyco/models.dev",
+    "https://openrouter.ai/api/v1/models"
   ],
   "verified": false,
   "needsReview": true,
   "featured": false,
   "boost": 1,
-  "curatorNotes": "Bulk imported from OpenAI developer docs."
+  "curatorNotes": "Bulk imported from OpenAI developer docs.",
+  "fieldConfidence": {
+    "pricing": "LIKELY",
+    "contextWindow": "LIKELY"
+  }
 }

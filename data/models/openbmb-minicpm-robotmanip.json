@@ -44,5 +44,6 @@
   "verified": true,
   "featured": false,
   "boost": 1,
-  "curatorNotes": "Auto-ingested from HuggingFace Trending on 2026-07-25. Architecture: MiniCPMV_VLA. Params: 1.5B. License: APACHE-2.0."
+  "curatorNotes": "Auto-ingested from HuggingFace Trending on 2026-07-25. Architecture: MiniCPMV_VLA. Params: 1.5B. License: APACHE-2.0.",
+  "isLegacyCurated": true
 }

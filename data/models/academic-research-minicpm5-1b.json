@@ -70,5 +70,6 @@
   "boost": 1,
   "curatorNotes": "Verified OpenBMB release specifications, technical report (arXiv:2506.07900), official GitHub repository (OpenBMB/MiniCPM), and Hugging Face weights.",
   "institution": "OpenBMB",
-  "templatedDescription": false
+  "templatedDescription": false,
+  "isLegacyCurated": true
 }

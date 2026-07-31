@@ -45,5 +45,6 @@
   "verified": true,
   "featured": false,
   "boost": 1,
-  "curatorNotes": "Auto-ingested from HuggingFace Trending on 2026-07-26. Architecture: Cosmos3EdgeForConditionalGeneration. Params: 3.9B. License: OTHER."
+  "curatorNotes": "Auto-ingested from HuggingFace Trending on 2026-07-26. Architecture: Cosmos3EdgeForConditionalGeneration. Params: 3.9B. License: OTHER.",
+  "isLegacyCurated": true
 }

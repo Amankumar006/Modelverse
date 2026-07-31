@@ -49,5 +49,6 @@
   "verified": true,
   "featured": false,
   "boost": 1,
-  "curatorNotes": "Auto-ingested from HuggingFace Trending on 2026-07-25. Architecture: UnlimitedOCRForCausalLM. Params: 3.3B. License: MIT."
+  "curatorNotes": "Auto-ingested from HuggingFace Trending on 2026-07-25. Architecture: UnlimitedOCRForCausalLM. Params: 3.3B. License: MIT.",
+  "isLegacyCurated": true
 }

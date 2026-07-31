@@ -47,5 +47,6 @@
   "verified": true,
   "featured": true,
   "boost": 4,
-  "curatorNotes": "Released July 21, 2026. Authors: Raluca Ada Popa and Four Flynn. First Google model explicitly specialized for cybersecurity defense use cases. Available via Google AI Studio and API."
+  "curatorNotes": "Released July 21, 2026. Authors: Raluca Ada Popa and Four Flynn. First Google model explicitly specialized for cybersecurity defense use cases. Available via Google AI Studio and API.",
+  "isLegacyCurated": true
 }

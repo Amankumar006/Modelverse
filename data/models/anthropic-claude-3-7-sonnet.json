@@ -62,5 +62,6 @@
   "verified": true,
   "featured": false,
   "boost": 1,
-  "curatorNotes": ""
+  "curatorNotes": "",
+  "isLegacyCurated": true
 }

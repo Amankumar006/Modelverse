@@ -201,8 +201,8 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
 
       {/* Ergonomic 840px Article Reading Canvas (High Contrast Dark Theme) */}
       <article className="max-w-[840px] mx-auto px-6 py-4">
-        {/* Render Interactive Benchmark Tabs for Claude Opus / Vision Articles */}
-        {(article.slug === "claude-opus-5-detailed-guide" || article.body.includes("Benchmark")) && (
+        {/* Render Interactive Benchmark Tabs specifically for Claude Opus 5 guide */}
+        {article.slug === "claude-opus-5-detailed-guide" && (
           <BenchmarkTabs />
         )}
 

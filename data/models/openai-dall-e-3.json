@@ -46,5 +46,6 @@
       "description": "Previous image model used in ChatGPT.",
       "label": "chatgpt-image-latest"
     }
-  ]
+  ],
+  "isLegacyCurated": true
 }

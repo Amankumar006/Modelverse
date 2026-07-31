@@ -71,11 +71,16 @@
   "sources": [
     "https://qwenlm.github.io/blog/qwen2.5/",
     "https://arxiv.org/abs/2412.15115",
-    "https://github.com/QwenLM/Qwen2.5"
+    "https://github.com/QwenLM/Qwen2.5",
+    "https://openrouter.ai/api/v1/models"
   ],
   "verified": false,
   "needsReview": true,
   "featured": true,
   "boost": 1,
-  "curatorNotes": "Verified paper arXiv:2412.15115 and open-weights release from Alibaba Qwen Team."
+  "curatorNotes": "Verified paper arXiv:2412.15115 and open-weights release from Alibaba Qwen Team.",
+  "fieldConfidence": {
+    "pricing": "LIKELY",
+    "contextWindow": "LIKELY"
+  }
 }

@@ -43,5 +43,6 @@
   "costTiers": [],
   "tier": "Base",
   "previousVersion": "anthropic-claude-2",
-  "links": {}
+  "links": {},
+  "isLegacyCurated": true
 }

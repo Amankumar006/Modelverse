@@ -87,5 +87,6 @@
   "verified": true,
   "featured": true,
   "boost": 4,
-  "curatorNotes": "Enriched with ByteDance Seed Research Team official specifications, LMArena Elo ratings (1294 ImgGen / 1350 ImgEdit), and Artificial Analysis benchmark data."
+  "curatorNotes": "Enriched with ByteDance Seed Research Team official specifications, LMArena Elo ratings (1294 ImgGen / 1350 ImgEdit), and Artificial Analysis benchmark data.",
+  "isLegacyCurated": true
 }

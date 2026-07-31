@@ -66,10 +66,16 @@
   ],
   "sources": [
     "https://openai.com/index/hello-gpt-4o/",
-    "https://github.com/anomalyco/models.dev"
+    "https://github.com/anomalyco/models.dev",
+    "https://openrouter.ai/api/v1/models"
   ],
   "verified": true,
   "featured": false,
   "boost": 1,
-  "curatorNotes": ""
+  "curatorNotes": "",
+  "isLegacyCurated": true,
+  "fieldConfidence": {
+    "pricing": "LIKELY",
+    "contextWindow": "LIKELY"
+  }
 }

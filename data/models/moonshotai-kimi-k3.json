@@ -45,5 +45,6 @@
   "verified": true,
   "featured": false,
   "boost": 1,
-  "curatorNotes": "Auto-ingested from HuggingFace Trending on 2026-07-27. Architecture: KimiK3ForConditionalGeneration. Params: 2.8T. License: OTHER."
+  "curatorNotes": "Auto-ingested from HuggingFace Trending on 2026-07-27. Architecture: KimiK3ForConditionalGeneration. Params: 2.8T. License: OTHER.",
+  "isLegacyCurated": true
 }

@@ -43,5 +43,6 @@
   "tier": "Opus",
   "nextVersion": "anthropic-claude-opus-4",
   "links": {},
-  "previousVersion": null
+  "previousVersion": null,
+  "isLegacyCurated": true
 }

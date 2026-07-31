@@ -55,11 +55,16 @@
   "sources": [
     "https://www.youtube.com/watch?v=Ti1V7OI2Rro",
     "https://ai.https://ai.https://ai.meta.com/blog/introducing-muse-image-muse-video-msl//blog/introducing-muse-image-muse-video-msl//blog/introducing-muse-spark-msl/",
-    "https://github.com/anomalyco/models.dev"
+    "https://github.com/anomalyco/models.dev",
+    "https://openrouter.ai/api/v1/models"
   ],
   "verified": false,
   "needsReview": true,
   "featured": false,
   "boost": 1,
-  "curatorNotes": "While internal Meta coding benchmarks claim top-tier performance, independent leaderboards suggest it currently performs closer to open-source models like GLM 5.2."
+  "curatorNotes": "While internal Meta coding benchmarks claim top-tier performance, independent leaderboards suggest it currently performs closer to open-source models like GLM 5.2.",
+  "fieldConfidence": {
+    "pricing": "LIKELY",
+    "contextWindow": "LIKELY"
+  }
 }

@@ -60,5 +60,6 @@
   "verified": true,
   "featured": false,
   "boost": 1,
-  "curatorNotes": "Auto-ingested from HuggingFace Trending on 2026-07-25. Architecture: InklingForConditionalGeneration. Params: 952.4B. License: APACHE-2.0."
+  "curatorNotes": "Auto-ingested from HuggingFace Trending on 2026-07-25. Architecture: InklingForConditionalGeneration. Params: 952.4B. License: APACHE-2.0.",
+  "isLegacyCurated": true
 }

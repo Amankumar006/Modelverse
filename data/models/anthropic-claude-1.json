@@ -44,5 +44,6 @@
   "tier": "Base",
   "nextVersion": "anthropic-claude-2",
   "links": {},
-  "previousVersion": null
+  "previousVersion": null,
+  "isLegacyCurated": true
 }

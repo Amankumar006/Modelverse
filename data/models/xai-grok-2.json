@@ -47,5 +47,6 @@
     "https://x.ai/blog/grok-2"
   ],
   "verified": true,
-  "curatorNotes": "Released initially in beta on X. Parameters estimated at 270B total, activating around 115B per token."
+  "curatorNotes": "Released initially in beta on X. Parameters estimated at 270B total, activating around 115B per token.",
+  "isLegacyCurated": true
 }

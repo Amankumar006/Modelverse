@@ -47,5 +47,6 @@
     "https://openai.com/research"
   ],
   "verified": true,
-  "curatorNotes": "Rolled out to ChatGPT Plus in September 2023, followed by full API release in November 2023."
+  "curatorNotes": "Rolled out to ChatGPT Plus in September 2023, followed by full API release in November 2023.",
+  "isLegacyCurated": true
 }

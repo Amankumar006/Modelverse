@@ -73,7 +73,7 @@
     {
       "tier": "Output Tokens",
       "unit": "1M output tokens",
-      "amount": 3.0,
+      "amount": 3,
       "currency": "USD"
     },
     {
@@ -101,10 +101,16 @@
     "https://blog.google/innovation-and-ai/models-and-research/gemini-models/",
     "https://deepmind.google/models/gemini-image/",
     "https://lmarena.ai",
-    "https://artificialanalysis.ai"
+    "https://artificialanalysis.ai",
+    "https://openrouter.ai/api/v1/models"
   ],
   "verified": true,
   "featured": true,
   "boost": 5,
-  "curatorNotes": "Enriched with official Google DeepMind launch specifications, LMArena Elo ratings (1270 ImgGen / 1387 ImgEdit), and Artificial Analysis 20.0s latency benchmark data."
+  "curatorNotes": "Enriched with official Google DeepMind launch specifications, LMArena Elo ratings (1270 ImgGen / 1387 ImgEdit), and Artificial Analysis 20.0s latency benchmark data.",
+  "isLegacyCurated": true,
+  "fieldConfidence": {
+    "pricing": "LIKELY",
+    "contextWindow": "LIKELY"
+  }
 }
