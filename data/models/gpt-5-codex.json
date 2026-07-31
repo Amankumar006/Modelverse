@@ -49,5 +49,6 @@
   "verified": true,
   "featured": false,
   "boost": 1,
-  "curatorNotes": "Bulk imported from OpenAI developer docs."
+  "curatorNotes": "Bulk imported from OpenAI developer docs.",
+  "isLegacyCurated": true
 }

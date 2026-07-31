@@ -99,10 +99,16 @@
     "https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-omni-flash-nano-banana-2-lite/",
     "https://deepmind.google/models/gemini-image/flash-lite/",
     "https://lmarena.ai",
-    "https://artificialanalysis.ai"
+    "https://artificialanalysis.ai",
+    "https://openrouter.ai/api/v1/models"
   ],
   "verified": true,
   "featured": true,
   "boost": 5,
-  "curatorNotes": "Fully enriched entry with official Google DeepMind launch specifications, LMArena Elo ratings (1251 ImgGen / 1308 ImgEdit), Artificial Analysis latency benchmarks (4.0s), and primary sources."
+  "curatorNotes": "Fully enriched entry with official Google DeepMind launch specifications, LMArena Elo ratings (1251 ImgGen / 1308 ImgEdit), Artificial Analysis latency benchmarks (4.0s), and primary sources.",
+  "isLegacyCurated": true,
+  "fieldConfidence": {
+    "pricing": "LIKELY",
+    "contextWindow": "LIKELY"
+  }
 }

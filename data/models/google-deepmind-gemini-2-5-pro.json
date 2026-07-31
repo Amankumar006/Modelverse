@@ -85,10 +85,16 @@
   "sources": [
     "https://deepmind.google/technologies/gemini/",
     "https://arxiv.org/abs/2507.06261",
-    "https://github.com/anomalyco/models.dev"
+    "https://github.com/anomalyco/models.dev",
+    "https://openrouter.ai/api/v1/models"
   ],
   "verified": true,
   "featured": true,
   "boost": 1,
-  "curatorNotes": "Verified paper arXiv:2507.06261 and commercial release from Google DeepMind."
+  "curatorNotes": "Verified paper arXiv:2507.06261 and commercial release from Google DeepMind.",
+  "isLegacyCurated": true,
+  "fieldConfidence": {
+    "pricing": "LIKELY",
+    "contextWindow": "LIKELY"
+  }
 }

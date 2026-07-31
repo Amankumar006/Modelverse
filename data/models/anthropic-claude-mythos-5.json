@@ -48,5 +48,6 @@
   "costTiers": [],
   "tier": "Mythos",
   "previousVersion": "anthropic-claude-mythos-preview",
-  "links": {}
+  "links": {},
+  "isLegacyCurated": true
 }

@@ -59,5 +59,6 @@
       "description": "Specialized model for computer use tool",
       "label": "computer-use-preview"
     }
-  ]
+  ],
+  "isLegacyCurated": true
 }

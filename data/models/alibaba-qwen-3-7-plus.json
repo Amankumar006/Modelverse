@@ -62,12 +62,18 @@
   ],
   "sources": [
     "https://qwen.ai/blog?id=qwen3.7-plus",
-    "https://github.com/QwenLM"
+    "https://github.com/QwenLM",
+    "https://openrouter.ai/api/v1/models"
   ],
   "verified": true,
   "featured": true,
   "boost": 1,
   "curatorNotes": "Verified release from Alibaba Qwen Team. Proprietary commercial API model.",
   "institution": "Alibaba Group (Qwen Team)",
-  "templatedDescription": false
+  "templatedDescription": false,
+  "isLegacyCurated": true,
+  "fieldConfidence": {
+    "pricing": "LIKELY",
+    "contextWindow": "LIKELY"
+  }
 }

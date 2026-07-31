@@ -73,5 +73,6 @@
   "boost": 1,
   "curatorNotes": "Verified release from Google DeepMind. Specialized inference-time compute scaling mode.",
   "institution": "Google DeepMind",
-  "templatedDescription": false
+  "templatedDescription": false,
+  "isLegacyCurated": true
 }

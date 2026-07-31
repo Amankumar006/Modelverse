@@ -47,5 +47,6 @@
     "https://huggingface.co/microsoft/phi-4"
   ],
   "verified": true,
-  "curatorNotes": "Released under the highly permissive MIT License. Focused primarily on reasoning tasks."
+  "curatorNotes": "Released under the highly permissive MIT License. Focused primarily on reasoning tasks.",
+  "isLegacyCurated": true
 }

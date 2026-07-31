@@ -81,5 +81,6 @@
   "verified": true,
   "featured": true,
   "boost": 4,
-  "curatorNotes": "Created and enriched with xAI official product details, LMArena Elo ratings (1174 ImgGen / 1329 ImgEdit), and Artificial Analysis 6.4s latency benchmark data."
+  "curatorNotes": "Created and enriched with xAI official product details, LMArena Elo ratings (1174 ImgGen / 1329 ImgEdit), and Artificial Analysis 6.4s latency benchmark data.",
+  "isLegacyCurated": true
 }

@@ -115,18 +115,34 @@ function StatusLine({
 }
 
 function TrustNote({ model }: { model: ModelEntry }) {
+  const benchmarkConf = model.fieldConfidence?.benchmarks;
+  const isBenchmarkPending = benchmarkConf === "DRAFT" || benchmarkConf === "LIKELY" || benchmarkConf === "DISPUTED";
   const hasVendorReported = model.benchmarks?.some(
     (b) => b.sourceType === "vendor-reported"
   );
-  if (model.verified && !hasVendorReported) return null;
+
+  if (model.verified && !hasVendorReported && !isBenchmarkPending) return null;
 
   return (
-    <div className="border-l-2 border-emerald-400 pl-3 text-sm text-[#90908F] space-y-0.5">
+    <div className="border-l-2 border-amber-400 pl-3 text-sm text-[#90908F] space-y-1 bg-[#1E1E1E]/40 p-2.5 rounded-r">
       {!model.verified && (
-        <p>Specifications on this page are provisional — not yet confirmed against a primary source.</p>
+        <p className="text-amber-300 font-medium">
+          ⚠️ Specifications on this model page are provisional drafts — not yet confirmed against a primary source.
+        </p>
+      )}
+      {isBenchmarkPending && (
+        <p className="text-amber-400 font-medium flex items-center gap-1.5">
+          <span>ℹ️ Benchmark Status:</span>
+          <span className="font-mono text-xs uppercase px-2 py-0.5 rounded bg-amber-950/60 border border-amber-800/60 text-amber-300">
+            {benchmarkConf}
+          </span>
+          <span className="text-[#90908F] text-xs font-normal">
+            (Model published via bulk approval; benchmark scores are uncorroborated / pending curator audit).
+          </span>
+        </p>
       )}
       {hasVendorReported && (
-        <p className={!model.verified ? "mt-1" : ""}>
+        <p className={!model.verified || isBenchmarkPending ? "mt-1 text-xs" : "text-xs"}>
           Some benchmark scores below are self-reported by the developer, not independently evaluated.
         </p>
       )}

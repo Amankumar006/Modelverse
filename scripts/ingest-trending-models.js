@@ -3,11 +3,15 @@ const path = require("path");
 const https = require("https");
 
 const MODELS_DIR = path.join(process.cwd(), "data", "models");
+const PENDING_DIR = path.join(process.cwd(), "data", "models-pending");
 const README_DIR = path.join(process.cwd(), "data", "models", "readme");
 const INGESTION_DIR = path.join(process.cwd(), "data", "ingestion");
 
 if (!fs.existsSync(INGESTION_DIR)) {
   fs.mkdirSync(INGESTION_DIR, { recursive: true });
+}
+if (!fs.existsSync(PENDING_DIR)) {
+  fs.mkdirSync(PENDING_DIR, { recursive: true });
 }
 
 function getHttps(url) {
@@ -153,17 +157,38 @@ async function fetchModelDetails(hfId) {
 // ─── Existing ID detection ──────────────────────────────────────────
 
 function getExistingIds() {
-  const files = fs.readdirSync(MODELS_DIR).filter((f) => f.endsWith(".json"));
   const ids = new Set();
   const slugs = new Set();
 
-  for (const file of files) {
+  const scanDir = (dir) => {
+    if (!fs.existsSync(dir)) return;
+    const files = fs.readdirSync(dir).filter((f) => f.endsWith(".json"));
+    for (const file of files) {
+      try {
+        const data = JSON.parse(fs.readFileSync(path.join(dir, file), "utf-8"));
+        if (data.id) ids.add(data.id);
+        if (data.slug) slugs.add(data.slug);
+      } catch (e) {}
+    }
+  };
+
+  scanDir(MODELS_DIR);
+  scanDir(PENDING_DIR);
+
+  // Scan rejection tombstones to prevent re-ingesting rejected candidate models
+  const tombstonePath = path.join(process.cwd(), "data", "tracking", "rejected-models.json");
+  if (fs.existsSync(tombstonePath)) {
     try {
-      const data = JSON.parse(fs.readFileSync(path.join(MODELS_DIR, file), "utf-8"));
-      if (data.id) ids.add(data.id);
-      if (data.slug) slugs.add(data.slug);
+      const tombstones = JSON.parse(fs.readFileSync(tombstonePath, "utf-8"));
+      if (Array.isArray(tombstones)) {
+        tombstones.forEach((item) => {
+          ids.add(item);
+          slugs.add(item);
+        });
+      }
     } catch (e) {}
   }
+
   return { ids, slugs };
 }
 
@@ -278,7 +303,13 @@ async function runIngestion() {
       logo: null,
       tags: modelTags,
       sources: [`https://huggingface.co/${listItem.id}`],
-      verified: true,
+      verified: false,
+      verificationStatus: "DRAFT",
+      fieldConfidence: {
+        parameters: "LIKELY",
+        license: "LIKELY"
+      },
+      needsReview: true,
       featured: false,
       boost: 1,
       curatorNotes: `Auto-ingested from HuggingFace Trending on ${todayStr}. Architecture: ${architecture || "unknown"}. Params: ${paramStr}. License: ${license}.`
@@ -331,25 +362,29 @@ ${arxivUrl ? `- **Paper**: [arXiv](${arxivUrl})` : ""}
 **${license}** — Open-weights model available for download, fine-tuning, and self-hosted deployment.
 `;
 
-    // Save JSON & README
-    fs.writeFileSync(path.join(MODELS_DIR, `${fullId}.json`), JSON.stringify(newModelJson, null, 2), "utf-8");
+    // Save JSON to pending staging directory & README
+    fs.writeFileSync(path.join(PENDING_DIR, `${fullId}.json`), JSON.stringify(newModelJson, null, 2), "utf-8");
     fs.writeFileSync(path.join(README_DIR, `${modelSlug}.md`), readmeMd, "utf-8");
 
     existingIds.add(fullId);
     existingSlugs.add(modelSlug);
     createdModels.push(modelName);
-    console.log(`✅ Published: ${modelName} — ${paramStr} params, ${pipelineTag}, ${license}`);
+    console.log(`⏳ Staged for Verification: ${modelName} — ${paramStr} params, ${pipelineTag}, ${license}`);
   }
 
-  // 3. Summary
+  // 3. Summary & Run Cross-Source Verification Engine
   console.log("\n📊 Ingestion Summary:");
   if (createdModels.length === 0) {
-    console.log("✨ No new models found. Registry is 100% up to date!");
+    console.log("✨ No new models found. Staging registry is up to date!");
   } else {
-    console.log(`🎉 Ingested and published ${createdModels.length} new models:`);
+    console.log(`🎉 Ingested ${createdModels.length} new candidate models into data/models-pending/:`);
     createdModels.forEach((name) => console.log(` - ${name}`));
 
-    console.log("⚡ Auto-compiling search indexes...");
+    console.log("\n🔍 Running cross-source verification pipeline...");
+    const { runVerificationPipeline } = require("./verify-model-facts");
+    await runVerificationPipeline();
+
+    console.log("\n⚡ Auto-compiling search indexes...");
     require("./compile-models.js");
   }
 }

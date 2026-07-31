@@ -43,8 +43,14 @@
     "open-source"
   ],
   "sources": [
-    "https://qwenlm.github.io/blog/qwen2.5-coder/"
+    "https://qwenlm.github.io/blog/qwen2.5-coder/",
+    "https://openrouter.ai/api/v1/models"
   ],
   "verified": true,
-  "curatorNotes": "Released under Apache 2.0, establishing a new SOTA for open-weights coding models."
+  "curatorNotes": "Released under Apache 2.0, establishing a new SOTA for open-weights coding models.",
+  "isLegacyCurated": true,
+  "fieldConfidence": {
+    "pricing": "LIKELY",
+    "contextWindow": "LIKELY"
+  }
 }

@@ -47,5 +47,6 @@
   "tier": "Sonnet",
   "previousVersion": "anthropic-claude-3-5-sonnet",
   "nextVersion": "anthropic-claude-3-7-sonnet",
-  "links": {}
+  "links": {},
+  "isLegacyCurated": true
 }

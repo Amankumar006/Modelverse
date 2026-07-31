@@ -45,5 +45,6 @@
   "tier": "Mythos",
   "nextVersion": "anthropic-claude-mythos-5",
   "links": {},
-  "previousVersion": null
+  "previousVersion": null,
+  "isLegacyCurated": true
 }

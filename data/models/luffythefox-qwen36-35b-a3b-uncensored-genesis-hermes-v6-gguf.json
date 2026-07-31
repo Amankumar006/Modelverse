@@ -46,5 +46,6 @@
   "verified": true,
   "featured": false,
   "boost": 1,
-  "curatorNotes": "Auto-ingested from HuggingFace Trending on 2026-07-29. Architecture: unknown. Params: undisclosed. License: APACHE-2.0."
+  "curatorNotes": "Auto-ingested from HuggingFace Trending on 2026-07-29. Architecture: unknown. Params: undisclosed. License: APACHE-2.0.",
+  "isLegacyCurated": true
 }

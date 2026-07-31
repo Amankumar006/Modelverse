@@ -51,5 +51,6 @@
   "primaryTask": "chat-reasoning",
   "deployment": [
     "self-hostable"
-  ]
+  ],
+  "isLegacyCurated": true
 }

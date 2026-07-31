@@ -42,5 +42,6 @@
   "primaryTask": "image-generation",
   "deployment": [
     "self-hostable"
-  ]
+  ],
+  "isLegacyCurated": true
 }

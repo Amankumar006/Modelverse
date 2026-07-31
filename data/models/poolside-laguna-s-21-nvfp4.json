@@ -45,5 +45,6 @@
   "verified": true,
   "featured": false,
   "boost": 1,
-  "curatorNotes": "Auto-ingested from HuggingFace Trending on 2026-07-25. Architecture: LagunaForCausalLM. Params: 67.9B. License: OPENMDW-1.1."
+  "curatorNotes": "Auto-ingested from HuggingFace Trending on 2026-07-25. Architecture: LagunaForCausalLM. Params: 67.9B. License: OPENMDW-1.1.",
+  "isLegacyCurated": true
 }

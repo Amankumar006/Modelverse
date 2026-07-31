@@ -71,5 +71,6 @@
   "boost": 1,
   "curatorNotes": "Verified academic research lab model from Shanghai AI Laboratory (InternScience).",
   "institution": "Shanghai AI Laboratory (InternScience)",
-  "templatedDescription": false
+  "templatedDescription": false,
+  "isLegacyCurated": true
 }

@@ -46,5 +46,6 @@
     "https://cohere.com/blog/introducing-embed-v3"
   ],
   "verified": true,
-  "curatorNotes": "Highly optimized for Retrieval-Augmented Generation (RAG) applications."
+  "curatorNotes": "Highly optimized for Retrieval-Augmented Generation (RAG) applications.",
+  "isLegacyCurated": true
 }

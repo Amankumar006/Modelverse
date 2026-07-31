@@ -76,5 +76,6 @@
   "verified": true,
   "featured": false,
   "boost": 1,
-  "curatorNotes": "Verified release from Cohere and Cohere Labs. Released under Apache 2.0 license."
+  "curatorNotes": "Verified release from Cohere and Cohere Labs. Released under Apache 2.0 license.",
+  "isLegacyCurated": true
 }

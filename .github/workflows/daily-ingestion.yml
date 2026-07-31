@@ -25,7 +25,9 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Run Ingestion Pipeline
+      - name: Run Ingestion Pipeline & Verification Engine
+        env:
+          ARTIFICIAL_ANALYSIS_API_KEY: ${{ secrets.ARTIFICIAL_ANALYSIS_API_KEY }}
         run: node scripts/ingest-trending-models.js
 
       - name: Generate Email Digest

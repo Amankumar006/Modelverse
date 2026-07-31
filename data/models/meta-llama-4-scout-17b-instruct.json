@@ -91,5 +91,6 @@
   "verified": true,
   "featured": true,
   "boost": 4,
-  "curatorNotes": "Enriched with Meta AI official launch benchmarks (MMMU 68.4%, MathVista 65.2%, DocVQA 92.8%), 3.5M context specs, and Hugging Face weights links."
+  "curatorNotes": "Enriched with Meta AI official launch benchmarks (MMMU 68.4%, MathVista 65.2%, DocVQA 92.8%), 3.5M context specs, and Hugging Face weights links.",
+  "isLegacyCurated": true
 }

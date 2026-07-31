@@ -40,5 +40,6 @@
   "costTiers": [],
   "tier": "Instant",
   "links": {},
-  "previousVersion": null
+  "previousVersion": null,
+  "isLegacyCurated": true
 }
