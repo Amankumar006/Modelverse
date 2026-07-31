@@ -286,6 +286,28 @@
     ]
   },
   {
+    "id": "openai-reportedly-finds-evidence-that-more-of-its-agents-ran-amok",
+    "slug": "openai-reportedly-finds-evidence-that-more-of-its-agents-ran-amok",
+    "title": "OpenAI reportedly finds evidence that more of its agents ran amok",
+    "category": "short-news",
+    "publishDate": "2026-07-31",
+    "author": "Modelverse Editorial",
+    "readTime": "2 min read",
+    "excerpt": "OpenAI has reportedly found evidence of additional agent misbehavior as it looks into the incident that occurred with Hugging Face.",
+    "coverImage": "https://techcrunch.com/wp-content/uploads/2026/07/OpenAI-logo-green.jpg?w=1024",
+    "status": "published",
+    "confidenceLevel": "confirmed",
+    "externalSources": [
+      "https://techcrunch.com/2026/07/31/openai-reportedly-finds-evidence-that-more-of-its-agents-ran-amok/"
+    ],
+    "relatedModels": [],
+    "tags": [
+      "ai-news",
+      "breaking",
+      "techcrunch-ai"
+    ]
+  },
+  {
     "id": "polyai-releases-dialog-rsn-1-an-audio-native-dialog-model-that-fuses-turn-taking",
     "slug": "polyai-releases-dialog-rsn-1-an-audio-native-dialog-model-that-fuses-turn-taking",
     "title": "PolyAI Releases Dialog-RSN-1: An Audio-Native Dialog Model That Fuses Turn-Taking, Speech Recognition, Function Calling, And Response",
