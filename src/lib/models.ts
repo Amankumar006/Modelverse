@@ -54,6 +54,13 @@ export interface ModelEntry extends ModelIndex {
   featured: boolean;
   boost: number;
   curatorNotes: string;
+  isLegacyCurated?: boolean;
+  verificationStatus?: "VERIFIED" | "DRAFT" | "DISPUTED";
+  fieldConfidence?: {
+    pricing?: "VERIFIED" | "LIKELY" | "DRAFT" | "DISPUTED";
+    contextWindow?: "VERIFIED" | "LIKELY" | "DRAFT" | "DISPUTED";
+    benchmarks?: "VERIFIED" | "LIKELY" | "DRAFT" | "DISPUTED";
+  };
   vendorApiStatus?: "active" | "deprecated" | "sunset";
   costTiers?: { id: string; label: string; description?: string }[];
   pricing?: { tier?: string; unit: string; amount: number; currency: string; notes?: string }[];
