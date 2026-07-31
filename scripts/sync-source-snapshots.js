@@ -52,7 +52,8 @@ function writeSnapshot(filename, data) {
   };
   const targetPath = path.join(SNAPSHOT_DIR, filename);
   fs.writeFileSync(targetPath, JSON.stringify(payload, null, 2), "utf-8");
-  const count = Array.isArray(data?.data ?? data) ? (data.data ?? data).length : "1";
+  const list = data?.data?.rows || data?.data || data;
+  const count = Array.isArray(list) ? list.length : (typeof list === "object" ? Object.keys(list).length : "1");
   console.log(`✅ Synced ${filename}: ${count} entries saved.`);
 }
 

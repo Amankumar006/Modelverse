@@ -75,11 +75,7 @@ module.exports = {
       }
 
       // 2. Live fallback if missing from local snapshot
-      const headers = {};
-      if (process.env.ARTIFICIAL_ANALYSIS_API_KEY) {
-        headers["x-api-key"] = process.env.ARTIFICIAL_ANALYSIS_API_KEY;
-      }
-      const liveData = await getHttpsJson("https://artificialanalysis.ai/api/v2/language/models", headers);
+      const liveData = await getHttpsJson("https://artificialanalysis.ai/api/v2/language/models");
       return findModelInPayload(liveData, modelName, developer);
     } catch (e) {
       return null;
