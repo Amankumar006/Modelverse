@@ -1,0 +1,24 @@
+{
+  "id": "smallestai-raises-13m-to-build-ultra-fast-voice-ai-that-sounds-genuinely-human",
+  "slug": "smallestai-raises-13m-to-build-ultra-fast-voice-ai-that-sounds-genuinely-human",
+  "title": "Smallest.ai raises $13M to build ultra-fast voice AI that sounds genuinely human",
+  "category": "short-news",
+  "isTrending": true,
+  "publishDate": "2026-07-31",
+  "author": "Modelverse Editorial",
+  "readTime": "2 min read",
+  "excerpt": "The startup is building voice models designed to make AI phone calls pass the Turing test.",
+  "body": "## Revolutionary Voice AI Technology\nSmallest.ai, a cutting-edge startup, has secured $13 million in funding to develop ultra-fast voice AI that mimics human conversation. The company's innovative approach focuses on creating smaller, specialized models that process information in real-time, enabling seamless and natural interactions between humans and AI agents.\n\n## How it Works\nSmallest.ai's model is designed to listen, think, and speak simultaneously, much like human conversation. This approach eliminates latency and allows for instantaneous responses, making it difficult to distinguish between human and machine interactions. The model serves as a real-time intelligence layer, handling specific topics with minimal response lag. If it encounters unfamiliar subjects, it seamlessly hands off the query to a larger foundational model, briefly placing the customer on hold to \"research\" the issue.\n\n## Impact on Developers and Researchers\nSmallest.ai's technology has significant implications for developers and researchers, as it paves the way for more human-like AI interactions. The company's founder, Sudarshan Kamath, envisions a future where AI agents rely on two models: a small voice model for real-time interactions and a larger, offline model for complex problem-solving. This hybrid approach has the potential to revolutionize customer support and beyond, enabling more natural and intuitive human-AI interactions.",
+  "coverImage": "https://techcrunch.com/wp-content/uploads/2026/07/Smallest-AI-Founders.jpg?resize=1200,927",
+  "status": "published",
+  "confidenceLevel": "confirmed",
+  "externalSources": [
+    "https://techcrunch.com/2026/07/31/smallest-ai-raises-13m-to-build-ultra-fast-voice-ai-that-sounds-genuinely-human/"
+  ],
+  "relatedModels": [],
+  "tags": [
+    "ai-news",
+    "breaking",
+    "techcrunch-ai"
+  ]
+}

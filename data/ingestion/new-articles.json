@@ -1,26 +1,74 @@
 [
   {
-    "id": "jetbrains-open-sources-kotlinllm-smart-macros-that-generate-kotlin-source-code-a",
-    "slug": "jetbrains-open-sources-kotlinllm-smart-macros-that-generate-kotlin-source-code-a",
-    "title": "JetBrains Open-Sources KotlinLLM: Smart Macros That Generate Kotlin Source Code at Runtime and Hot-Reload It Through JDI",
+    "id": "spacex-wont-remove-all-of-xais-unpermitted-turbines-for-another-year",
+    "slug": "spacex-wont-remove-all-of-xais-unpermitted-turbines-for-another-year",
+    "title": "SpaceX won’t remove all of xAI’s unpermitted turbines for another year",
     "category": "short-news",
     "isTrending": true,
     "publishDate": "2026-07-31",
     "author": "Modelverse Editorial",
     "readTime": "2 min read",
-    "excerpt": "JetBrains Research has open-sourced KotlinLLM under the Apache License 2.0. The IntelliJ IDEA plugin prototype adds Smart macros, asLlm and mockLlm, whose bodies are generated Kotl...",
-    "body": "JetBrains Research has open-sourced KotlinLLM, an experimental IntelliJ IDEA plugin for Kotlin/JVM projects that introduces \"Smart macros.\" These are Kotlin function calls, like `asLlm<F, T>(from, hint)` for type conversion or `mockLlm<T>()` for generating stateful interface implementations, whose bodies are dynamically generated Kotlin source code by an LLM. Crucially, while a research prototype, its output is deployable: once behavior is generated, the resulting plain Kotlin code can be compiled and run without further LLM interaction for that specific scenario.\n\nThe plugin operates via a sophisticated runtime evolution loop. Upon project launch, KotlinLLM identifies Smart macro calls and sets breakpoints. If initial generated logic doesn't match a runtime scenario, execution pauses. The plugin captures runtime context, feeds it to an LLM agent for a code update, then compiles and hot-reloads the new code using JVM class redefinition via JDI. This unique, Kotlin/JVM-specific capability allows applications to dynamically adapt and evolve their code based on real-time execution needs, ensuring robust and context-aware behavior with minimal overhead.\n\nKotlinLLM represents a significant advancement for developers and researchers. Developers gain a novel way to integrate LLMs, enabling dynamic code generation, reducing boilerplate, and simplifying complex tasks. Researchers benefit from an open-source platform to explore runtime code evolution and LLM-driven adaptation. This experimental plugin paves the way for intelligent development environments where code can self-adapt and optimize at runtime.",
-    "coverImage": "https://www.marktechpost.com/wp-content/uploads/2026/07/blog6171-20.png",
+    "excerpt": "SpaceX is building a new power plant for xAI's Colossus data centers, but it won't remove existing, unpermitted turbines for many more months.",
+    "body": "SpaceX has unveiled its plan to transition the power source for xAI's \"Colossus\" data centers near Memphis, moving away from a controversial setup of unpermitted gas turbines. While a permanent 1.2 gigawatt natural gas power plant is in the works, the complete removal of the existing 69 temporary turbines, which have faced lawsuits from groups like the NAACP over environmental concerns and lack of permits, won't occur until July 2027. This extended timeline comes despite claims that the current turbines, capable of emitting over 2,000 tons of smog-forming NOx annually, are exempt from permitting due to their mobile nature – a claim disputed by federal regulations.\n\nThe current infrastructure relies on these 69 gas turbines, many operating for months without permits, to fuel xAI's intensive AI operations. The planned permanent solution involves constructing a new facility equipped with 41 larger, permitted gas turbines, signaling a significant upgrade in scale and compliance. This massive investment, with SpaceX planning to acquire $2.8 billion worth of gas turbines over the next three years, underscores the colossal energy demands of advanced AI development, even as the Department of Justice has sided with SpaceX, citing \"national, economic, and energy security\" in the ongoing legal disputes.\n\nFor developers and researchers in the AI space, this announcement highlights the critical, yet often overlooked, infrastructure challenges underpinning cutting-edge AI. It vividly illustrates the immense energy footprint required to power large-scale AI models and data centers, bringing to the forefront the complex interplay between technological advancement, environmental impact, and regulatory compliance. The saga serves as a potent reminder that scaling AI isn't just about algorithms and data; it necessitates robust, sustainable, and legally sound power generation, shaping the future landscape of AI development and its broader societal implications.",
+    "coverImage": "https://techcrunch.com/wp-content/uploads/2025/06/GettyImages-2217198328.jpeg?resize=1200,800",
     "status": "published",
     "confidenceLevel": "confirmed",
     "externalSources": [
-      "https://www.marktechpost.com/2026/07/31/jetbrains-research-open-sources-kotlinllm-intellij-plugin-kotlin-runtime-llm/"
+      "https://techcrunch.com/2026/07/31/spacex-wont-remove-all-of-xais-unpermitted-turbines-for-another-year/"
     ],
     "relatedModels": [],
     "tags": [
       "ai-news",
       "breaking",
-      "marktechpost"
+      "techcrunch-ai"
+    ]
+  },
+  {
+    "id": "building-abundant-intelligence",
+    "slug": "building-abundant-intelligence",
+    "title": "Building abundant intelligence",
+    "category": "short-news",
+    "isTrending": true,
+    "publishDate": "2026-07-31",
+    "author": "Modelverse Editorial",
+    "readTime": "2 min read",
+    "excerpt": "A full-stack approach to making advanced AI more capable, more affordable, and more widely useful.",
+    "body": "### Building Abundant Intelligence: A Full-Stack Vision for AI\n\nA new strategic direction has been unveiled, championing a \"full-stack approach\" to AI development. This initiative aims to fundamentally transform how advanced artificial intelligence is built and deployed, with a core focus on enhancing its capabilities, significantly reducing its cost, and broadening its practical utility across various applications and industries. It signals a comprehensive effort to tackle the current limitations that often make cutting-edge AI inaccessible or overly expensive.\n\nThis \"full-stack\" methodology implies an integrated strategy, optimizing every layer from foundational hardware infrastructure and specialized silicon to sophisticated software frameworks and innovative model architectures. By meticulously designing and integrating these components in concert, the approach seeks to unlock unprecedented efficiencies. This holistic optimization is designed to not only boost the raw power and performance of AI systems but also to streamline their development and operational overhead, making them inherently more affordable and reliable.\n\nFor developers and researchers, this announcement holds significant promise. It paves the way for democratizing access to powerful AI capabilities, potentially lowering the barrier to entry for innovation. By making advanced AI more capable and cost-effective, it empowers a wider range of teams and individuals to experiment, build, and deploy solutions that were previously out of reach. This expanded utility is expected to accelerate discovery, foster novel applications, and ultimately contribute to a more pervasive and impactful integration of AI into daily life and specialized fields.",
+    "coverImage": "/images/news/news_short.jpg",
+    "status": "published",
+    "confidenceLevel": "confirmed",
+    "externalSources": [
+      "https://openai.com/index/building-abundant-intelligence"
+    ],
+    "relatedModels": [],
+    "tags": [
+      "ai-news",
+      "breaking",
+      "openai"
+    ]
+  },
+  {
+    "id": "smallestai-raises-13m-to-build-ultra-fast-voice-ai-that-sounds-genuinely-human",
+    "slug": "smallestai-raises-13m-to-build-ultra-fast-voice-ai-that-sounds-genuinely-human",
+    "title": "Smallest.ai raises $13M to build ultra-fast voice AI that sounds genuinely human",
+    "category": "short-news",
+    "isTrending": true,
+    "publishDate": "2026-07-31",
+    "author": "Modelverse Editorial",
+    "readTime": "2 min read",
+    "excerpt": "The startup is building voice models designed to make AI phone calls pass the Turing test.",
+    "body": "## Revolutionary Voice AI Technology\nSmallest.ai, a cutting-edge startup, has secured $13 million in funding to develop ultra-fast voice AI that mimics human conversation. The company's innovative approach focuses on creating smaller, specialized models that process information in real-time, enabling seamless and natural interactions between humans and AI agents.\n\n## How it Works\nSmallest.ai's model is designed to listen, think, and speak simultaneously, much like human conversation. This approach eliminates latency and allows for instantaneous responses, making it difficult to distinguish between human and machine interactions. The model serves as a real-time intelligence layer, handling specific topics with minimal response lag. If it encounters unfamiliar subjects, it seamlessly hands off the query to a larger foundational model, briefly placing the customer on hold to \"research\" the issue.\n\n## Impact on Developers and Researchers\nSmallest.ai's technology has significant implications for developers and researchers, as it paves the way for more human-like AI interactions. The company's founder, Sudarshan Kamath, envisions a future where AI agents rely on two models: a small voice model for real-time interactions and a larger, offline model for complex problem-solving. This hybrid approach has the potential to revolutionize customer support and beyond, enabling more natural and intuitive human-AI interactions.",
+    "coverImage": "https://techcrunch.com/wp-content/uploads/2026/07/Smallest-AI-Founders.jpg?resize=1200,927",
+    "status": "published",
+    "confidenceLevel": "confirmed",
+    "externalSources": [
+      "https://techcrunch.com/2026/07/31/smallest-ai-raises-13m-to-build-ultra-fast-voice-ai-that-sounds-genuinely-human/"
+    ],
+    "relatedModels": [],
+    "tags": [
+      "ai-news",
+      "breaking",
+      "techcrunch-ai"
     ]
   }
 ]

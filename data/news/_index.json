@@ -66,6 +66,28 @@
     ]
   },
   {
+    "id": "building-abundant-intelligence",
+    "slug": "building-abundant-intelligence",
+    "title": "Building abundant intelligence",
+    "category": "short-news",
+    "publishDate": "2026-07-31",
+    "author": "Modelverse Editorial",
+    "readTime": "2 min read",
+    "excerpt": "A full-stack approach to making advanced AI more capable, more affordable, and more widely useful.",
+    "coverImage": "/images/news/news_short.jpg",
+    "status": "published",
+    "confidenceLevel": "confirmed",
+    "externalSources": [
+      "https://openai.com/index/building-abundant-intelligence"
+    ],
+    "relatedModels": [],
+    "tags": [
+      "ai-news",
+      "breaking",
+      "openai"
+    ]
+  },
+  {
     "id": "investigating-incidents-cybersecurity-evals",
     "slug": "investigating-incidents-cybersecurity-evals",
     "title": "Investigating Incidents Cybersecurity Evals",
@@ -151,6 +173,50 @@
       "ai-news",
       "breaking",
       "marktechpost"
+    ]
+  },
+  {
+    "id": "smallestai-raises-13m-to-build-ultra-fast-voice-ai-that-sounds-genuinely-human",
+    "slug": "smallestai-raises-13m-to-build-ultra-fast-voice-ai-that-sounds-genuinely-human",
+    "title": "Smallest.ai raises $13M to build ultra-fast voice AI that sounds genuinely human",
+    "category": "short-news",
+    "publishDate": "2026-07-31",
+    "author": "Modelverse Editorial",
+    "readTime": "2 min read",
+    "excerpt": "The startup is building voice models designed to make AI phone calls pass the Turing test.",
+    "coverImage": "https://techcrunch.com/wp-content/uploads/2026/07/Smallest-AI-Founders.jpg?resize=1200,927",
+    "status": "published",
+    "confidenceLevel": "confirmed",
+    "externalSources": [
+      "https://techcrunch.com/2026/07/31/smallest-ai-raises-13m-to-build-ultra-fast-voice-ai-that-sounds-genuinely-human/"
+    ],
+    "relatedModels": [],
+    "tags": [
+      "ai-news",
+      "breaking",
+      "techcrunch-ai"
+    ]
+  },
+  {
+    "id": "spacex-wont-remove-all-of-xais-unpermitted-turbines-for-another-year",
+    "slug": "spacex-wont-remove-all-of-xais-unpermitted-turbines-for-another-year",
+    "title": "SpaceX won’t remove all of xAI’s unpermitted turbines for another year",
+    "category": "short-news",
+    "publishDate": "2026-07-31",
+    "author": "Modelverse Editorial",
+    "readTime": "2 min read",
+    "excerpt": "SpaceX is building a new power plant for xAI's Colossus data centers, but it won't remove existing, unpermitted turbines for many more months.",
+    "coverImage": "https://techcrunch.com/wp-content/uploads/2025/06/GettyImages-2217198328.jpeg?resize=1200,800",
+    "status": "published",
+    "confidenceLevel": "confirmed",
+    "externalSources": [
+      "https://techcrunch.com/2026/07/31/spacex-wont-remove-all-of-xais-unpermitted-turbines-for-another-year/"
+    ],
+    "relatedModels": [],
+    "tags": [
+      "ai-news",
+      "breaking",
+      "techcrunch-ai"
     ]
   },
   {

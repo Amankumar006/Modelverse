@@ -1,0 +1,24 @@
+{
+  "id": "spacex-wont-remove-all-of-xais-unpermitted-turbines-for-another-year",
+  "slug": "spacex-wont-remove-all-of-xais-unpermitted-turbines-for-another-year",
+  "title": "SpaceX won’t remove all of xAI’s unpermitted turbines for another year",
+  "category": "short-news",
+  "isTrending": true,
+  "publishDate": "2026-07-31",
+  "author": "Modelverse Editorial",
+  "readTime": "2 min read",
+  "excerpt": "SpaceX is building a new power plant for xAI's Colossus data centers, but it won't remove existing, unpermitted turbines for many more months.",
+  "body": "SpaceX has unveiled its plan to transition the power source for xAI's \"Colossus\" data centers near Memphis, moving away from a controversial setup of unpermitted gas turbines. While a permanent 1.2 gigawatt natural gas power plant is in the works, the complete removal of the existing 69 temporary turbines, which have faced lawsuits from groups like the NAACP over environmental concerns and lack of permits, won't occur until July 2027. This extended timeline comes despite claims that the current turbines, capable of emitting over 2,000 tons of smog-forming NOx annually, are exempt from permitting due to their mobile nature – a claim disputed by federal regulations.\n\nThe current infrastructure relies on these 69 gas turbines, many operating for months without permits, to fuel xAI's intensive AI operations. The planned permanent solution involves constructing a new facility equipped with 41 larger, permitted gas turbines, signaling a significant upgrade in scale and compliance. This massive investment, with SpaceX planning to acquire $2.8 billion worth of gas turbines over the next three years, underscores the colossal energy demands of advanced AI development, even as the Department of Justice has sided with SpaceX, citing \"national, economic, and energy security\" in the ongoing legal disputes.\n\nFor developers and researchers in the AI space, this announcement highlights the critical, yet often overlooked, infrastructure challenges underpinning cutting-edge AI. It vividly illustrates the immense energy footprint required to power large-scale AI models and data centers, bringing to the forefront the complex interplay between technological advancement, environmental impact, and regulatory compliance. The saga serves as a potent reminder that scaling AI isn't just about algorithms and data; it necessitates robust, sustainable, and legally sound power generation, shaping the future landscape of AI development and its broader societal implications.",
+  "coverImage": "https://techcrunch.com/wp-content/uploads/2025/06/GettyImages-2217198328.jpeg?resize=1200,800",
+  "status": "published",
+  "confidenceLevel": "confirmed",
+  "externalSources": [
+    "https://techcrunch.com/2026/07/31/spacex-wont-remove-all-of-xais-unpermitted-turbines-for-another-year/"
+  ],
+  "relatedModels": [],
+  "tags": [
+    "ai-news",
+    "breaking",
+    "techcrunch-ai"
+  ]
+}
