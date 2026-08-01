@@ -132,9 +132,21 @@ export async function POST(request: Request) {
       return NextResponse.json({ success: true, message: `Rejected and removed ${filename}` });
     }
 
-    if (action === 'approve') {
+    if (action === 'save_draft') {
       const raw = fs.readFileSync(pendingPath, 'utf-8');
       const model = JSON.parse(raw);
+      const updatedModel = body.editedModel ? { ...model, ...body.editedModel } : model;
+      fs.writeFileSync(pendingPath, JSON.stringify(updatedModel, null, 2), 'utf-8');
+      return NextResponse.json({ success: true, message: `Saved draft edits for ${filename}` });
+    }
+
+    if (action === 'approve') {
+      const raw = fs.readFileSync(pendingPath, 'utf-8');
+      let model = JSON.parse(raw);
+
+      if (body.editedModel) {
+        model = { ...model, ...body.editedModel };
+      }
 
       model.humanApproved = true;
       model.verified = true;
