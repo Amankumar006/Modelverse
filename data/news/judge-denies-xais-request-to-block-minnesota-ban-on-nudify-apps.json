@@ -1,0 +1,24 @@
+{
+  "id": "judge-denies-xais-request-to-block-minnesota-ban-on-nudify-apps",
+  "slug": "judge-denies-xais-request-to-block-minnesota-ban-on-nudify-apps",
+  "title": "Judge denies xAI’s request to block Minnesota ban on ‘nudify’ apps",
+  "category": "short-news",
+  "isTrending": true,
+  "publishDate": "2026-08-01",
+  "author": "Modelverse Editorial",
+  "readTime": "2 min read",
+  "excerpt": "Despite a lawsuit from xAI, a Minnesota ban on apps that allow users to “nudify” images can move forward.",
+  "body": "A U.S. District Judge has denied xAI's bid to temporarily block Minnesota's pioneering ban on \"nudify\" applications, allowing the law to take effect while xAI's broader lawsuit against it proceeds. The ruling by Judge Donovan Frank primarily cited xAI's significant delay in filing for a temporary restraining order, noting the request came nearly three months after the law was signed and just days before its implementation. This decision means the state's prohibition on AI tools capable of generating non-consensual sexualized imagery will stand for now.\n\nThe core of xAI's ongoing lawsuit contends that the Minnesota ban, the first of its kind in the United States, is overly broad and that less restrictive alternatives exist to achieve the same regulatory goals. This legal challenge follows earlier incidents where xAI's Grok chatbot was reportedly used to flood the X platform with non-consensual sexualized images, highlighting the contentious nature and potential misuse of generative AI for deepfake content. \"Nudify\" apps typically leverage advanced AI models to manipulate existing images, creating fabricated explicit content.\n\nThis development carries significant weight for AI developers and researchers. It underscores the escalating legal and ethical complexities surrounding generative AI, particularly concerning the creation and dissemination of deepfakes and non-consensual imagery. The Minnesota ban sets a precedent for how states might regulate AI applications, pushing developers to prioritize ethical design, implement robust content moderation, and navigate a rapidly evolving landscape of legal compliance to prevent misuse and ensure user safety in the deployment of powerful AI technologies.",
+  "coverImage": "https://techcrunch.com/wp-content/uploads/2025/07/GettyImages-2207699717.jpg?resize=1200,800",
+  "status": "published",
+  "confidenceLevel": "confirmed",
+  "externalSources": [
+    "https://techcrunch.com/2026/08/01/judge-denies-xais-request-to-block-minnesota-ban-on-nudify-apps/"
+  ],
+  "relatedModels": [],
+  "tags": [
+    "ai-news",
+    "breaking",
+    "techcrunch-ai"
+  ]
+}

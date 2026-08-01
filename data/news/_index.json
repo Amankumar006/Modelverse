@@ -66,6 +66,28 @@
     ]
   },
   {
+    "id": "judge-denies-xais-request-to-block-minnesota-ban-on-nudify-apps",
+    "slug": "judge-denies-xais-request-to-block-minnesota-ban-on-nudify-apps",
+    "title": "Judge denies xAI’s request to block Minnesota ban on ‘nudify’ apps",
+    "category": "short-news",
+    "publishDate": "2026-08-01",
+    "author": "Modelverse Editorial",
+    "readTime": "2 min read",
+    "excerpt": "Despite a lawsuit from xAI, a Minnesota ban on apps that allow users to “nudify” images can move forward.",
+    "coverImage": "https://techcrunch.com/wp-content/uploads/2025/07/GettyImages-2207699717.jpg?resize=1200,800",
+    "status": "published",
+    "confidenceLevel": "confirmed",
+    "externalSources": [
+      "https://techcrunch.com/2026/08/01/judge-denies-xais-request-to-block-minnesota-ban-on-nudify-apps/"
+    ],
+    "relatedModels": [],
+    "tags": [
+      "ai-news",
+      "breaking",
+      "techcrunch-ai"
+    ]
+  },
+  {
     "id": "minimax-releases-minimax-h3-an-omni-modal-video-model-that-generates-15-second-2",
     "slug": "minimax-releases-minimax-h3-an-omni-modal-video-model-that-generates-15-second-2",
     "title": "MiniMax Releases MiniMax H3: An Omni-Modal Video Model That Generates 15-Second 2K Clips With Native Stereo Audio",
@@ -151,6 +173,28 @@
       "ai-news",
       "breaking",
       "openai"
+    ]
+  },
+  {
+    "id": "youtuber-hank-green-says-his-ai-usage-is-not-healthy",
+    "slug": "youtuber-hank-green-says-his-ai-usage-is-not-healthy",
+    "title": "YouTuber Hank Green says his AI usage is ‘not healthy’",
+    "category": "short-news",
+    "publishDate": "2026-08-01",
+    "author": "Modelverse Editorial",
+    "readTime": "2 min read",
+    "excerpt": "Green offered a remarkable apology, saying that \"the level of dopamine that I've been getting from interacting with LLMs ... is not healthy for me or good for the world.\"",
+    "coverImage": "https://techcrunch.com/wp-content/uploads/2026/08/GettyImages-1040458588.jpg?w=1024",
+    "status": "published",
+    "confidenceLevel": "confirmed",
+    "externalSources": [
+      "https://techcrunch.com/2026/08/01/youtuber-hank-green-says-his-ai-usage-is-not-healthy/"
+    ],
+    "relatedModels": [],
+    "tags": [
+      "ai-news",
+      "breaking",
+      "techcrunch-ai"
     ]
   },
   {
