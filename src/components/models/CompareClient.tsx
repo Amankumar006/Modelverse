@@ -430,6 +430,21 @@ export default function CompareClient({ initialModels, allModels }: CompareClien
               ))}
             </tr>
 
+            {/* Active Parameters (MoE) */}
+            {models.some((m) => Boolean(m.activeParameters)) && (
+              <tr>
+                <td className="p-4 text-sm font-semibold text-gray-300 bg-[#0E0E10] sticky left-0 z-10 border-r border-white/10">Active Parameters (MoE)</td>
+                {models.map((model) => (
+                  <td key={model.id} className="p-4 text-sm text-emerald-400 font-mono font-medium">
+                    {model.activeParameters || "N/A (Dense)"}
+                  </td>
+                ))}
+                {Array.from({ length: 4 - models.length }).map((_, i) => (
+                  <td key={`empty-ap-${i}`} className="p-4 bg-white/[0.02] border-r border-white/5 border-dashed last:border-r-0"></td>
+                ))}
+              </tr>
+            )}
+
             {/* Modalities */}
             <tr>
               <td className="p-4 text-sm font-semibold text-gray-300 bg-[#0E0E10] sticky left-0 z-10 border-r border-white/10">Modalities</td>
