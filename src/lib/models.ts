@@ -74,6 +74,10 @@ export interface ModelEntry extends ModelIndex {
 
 let _devCachedEntries: ModelEntry[] | null = null;
 
+export function clearModelCache() {
+  _devCachedEntries = null;
+}
+
 function loadDevEntries(): ModelEntry[] {
   if (typeof window !== "undefined") return modelsArchive as unknown as ModelEntry[];
   
@@ -107,7 +111,7 @@ function loadDevEntries(): ModelEntry[] {
     description: z.string(),
     templatedDescription: z.boolean().optional(),
     keyFeatures: z.array(z.string()),
-    benchmarks: z.array(z.object({ name: z.string(), score: z.string(), verified: z.boolean() })),
+    benchmarks: z.array(z.object({ name: z.string(), score: z.string(), verified: z.boolean().optional() }).passthrough()),
     family: z.string().nullable(),
     tier: z.string().optional(),
     institution: z.string().optional(),
@@ -124,14 +128,18 @@ function loadDevEntries(): ModelEntry[] {
     boost: z.number().default(1),
     curatorNotes: z.string().default(""),
     vendorApiStatus: z.enum(["active", "deprecated", "sunset"]).optional()
-  });
+  }).passthrough();
 
   for (const file of files) {
     try {
       const raw = JSON.parse(fs.readFileSync(path.join(DATA_DIR, file), "utf-8"));
       const result = ModelSchema.safeParse(raw);
       if (!result.success) {
-        console.warn(`[DEV] Validation failed for ${file}, skipping.`);
+        console.warn(`[DEV] Validation failed for ${file}:`, result.error.format());
+        // Fallback: push raw object if essential fields exist
+        if (raw.id && raw.slug && raw.name) {
+          entries.push(raw);
+        }
         continue;
       }
       entries.push(result.data);

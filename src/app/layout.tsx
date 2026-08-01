@@ -103,7 +103,9 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${inter.variable} ${cormorant.variable}`}>
       <body className="min-h-screen bg-black tracking-[-0.02em] antialiased flex flex-col justify-between">
-        <script
+        <Script
+          id="performance-polyfill"
+          strategy="beforeInteractive"
           dangerouslySetInnerHTML={{
             __html: `
               if (typeof window !== 'undefined' && window.performance && window.performance.measure) {

@@ -1,6 +1,8 @@
 import { NextResponse } from 'next/server';
 import fs from 'fs';
 import path from 'path';
+import { revalidatePath } from 'next/cache';
+import { clearModelCache } from '@/lib/models';
 
 const PENDING_DIR = path.join(process.cwd(), 'data', 'models-pending');
 const PROD_DIR = path.join(process.cwd(), 'data', 'models');
@@ -161,10 +163,15 @@ export async function POST(request: Request) {
       fs.writeFileSync(path.join(PROD_DIR, filename), JSON.stringify(model, null, 2), 'utf-8');
       fs.unlinkSync(pendingPath);
 
-      // Trigger compilation
+      // Trigger compilation and clear dev cache
       try {
         const { execSync } = require('child_process');
         execSync('node scripts/compile-models.js', { stdio: 'inherit' });
+        clearModelCache();
+        revalidatePath('/models');
+        if (model.slug) {
+          revalidatePath(`/models/${model.slug}`);
+        }
       } catch (e) {}
 
       return NextResponse.json({ success: true, message: `Approved and promoted ${filename} to production!` });
