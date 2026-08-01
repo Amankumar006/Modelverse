@@ -132,21 +132,12 @@ export default async function BrowsePage({ searchParams }: PageProps) {
 
   return (
     <main className="min-h-screen bg-[var(--bg)] text-[var(--text)] selection:bg-[var(--accent-soft)] selection:text-[var(--accent)] pb-24 relative font-sans max-w-full">
-      <div className="relative z-20">
+      <div className="sticky top-0 z-50">
         <Navbar theme="dark" />
       </div>
 
       {/* ── Content Container ───────────────────────────────── */}
-      <div className="relative z-10 w-full max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-10 2xl:px-12 pt-8">
-        <div className="border-b border-[var(--muted)]/10 pb-6 mb-8">
-          <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-[var(--text)]">
-            Models Overview
-          </h1>
-          <p className="mt-2 text-sm sm:text-base text-[var(--muted)] max-w-2xl leading-relaxed">
-            Discover, filter, and compare performance specs across open-weights and commercial AI models in the catalog.
-          </p>
-        </div>
-
+      <div className="relative z-10 w-full max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-10 2xl:px-12 pt-4">
         {/* Catalog component */}
         <ModelCatalog models={models} developers={developers} initialSearchParams={resolvedSearchParams} />
       </div>

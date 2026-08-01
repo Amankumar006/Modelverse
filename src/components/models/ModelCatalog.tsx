@@ -506,6 +506,16 @@ function ModelCatalogContent({
 
       {/* ── Main Catalog Workspace ───────────────────────────── */}
       <div className="flex-1 min-w-0 w-full space-y-6">
+        {/* Page Header */}
+        <div className="border-b border-[var(--muted)]/10 pb-5">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-[var(--text)]">
+            Models Overview
+          </h1>
+          <p className="mt-2 text-sm sm:text-base text-[var(--muted)] max-w-2xl leading-relaxed">
+            Discover, filter, and compare performance specs across open-weights and commercial AI models in the catalog.
+          </p>
+        </div>
+
         {/* Horizontal Filter Task & Type Bar */}
         <div className="space-y-3 border-b border-[var(--muted)]/10 pb-5">
           <div className="flex items-center gap-2 overflow-x-auto pb-1 no-scrollbar w-full">
