@@ -68,7 +68,7 @@ export default function ModelCard({
   const isVerified = "verified" in model ? Boolean((model as ModelEntry).verified) : false;
 
   const targetHref = familySlug ? `/models/family/${familySlug}` : `/models/${model.slug}`;
-  const effectiveFeatured = isFeatured || (model as any).featured;
+  const effectiveFeatured = isFeatured;
 
   if (variant === "row") {
     return (

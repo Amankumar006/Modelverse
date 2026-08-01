@@ -649,30 +649,25 @@ function ModelCatalogContent({
         </div>
 
         {/* Results Model Cards Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-4 auto-rows-fr">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-5">
           {groupedItems.map((item) => {
-            const model = item.type === "family" ? item.primaryModel : item.model;
-            const featuredClass = model.featured ? "md:col-span-2 row-span-2" : "";
-
             if (item.type === "family") {
               return (
-                <div key={`family-${item.familySlug}`} className={featuredClass}>
+                <div key={`family-${item.familySlug}`}>
                   <ModelCard
                     model={item.primaryModel}
                     variant="family"
                     familyVariantCount={item.variantCount}
                     familySlug={item.familySlug}
-                    isFeatured={model.featured}
                   />
                 </div>
               );
             }
             return (
-              <div key={item.model.id} className={featuredClass}>
+              <div key={item.model.id}>
                 <ModelCard
                   model={item.model}
                   variant="single"
-                  isFeatured={model.featured}
                   hideDeveloperPrefix={hideDeveloperPrefix}
                 />
               </div>

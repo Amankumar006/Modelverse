@@ -131,24 +131,18 @@ export default async function BrowsePage({ searchParams }: PageProps) {
   const developers = getAllDevelopers();
 
   return (
-    <main className="min-h-screen bg-[#141414] text-[#E4E4E7] selection:bg-[#D97757] selection:text-white pb-24 relative font-sans overflow-x-hidden max-w-full">
-      {/* ── Top Hero Background Gradient ── */}
-      <div className="absolute top-0 left-0 w-full h-[40vh] z-0 pointer-events-none select-none bg-gradient-to-b from-[#1C1C1E]/60 to-[#141414]" />
-
+    <main className="min-h-screen bg-[var(--bg)] text-[var(--text)] selection:bg-[var(--accent-soft)] selection:text-[var(--accent)] pb-24 relative font-sans max-w-full">
       <div className="relative z-20">
         <Navbar theme="dark" />
       </div>
 
       {/* ── Content Container ───────────────────────────────── */}
       <div className="relative z-10 w-full max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-10 2xl:px-12 pt-8">
-        <div className="border-b border-[#282828] pb-6 mb-8">
-          <h1
-            className="text-4xl sm:text-5xl font-normal tracking-tight text-white"
-            style={{ fontFamily: "var(--font-display, 'Instrument Serif', Georgia, serif)" }}
-          >
-            Models overview
+        <div className="border-b border-[var(--muted)]/10 pb-6 mb-8">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-[var(--text)]">
+            Models Overview
           </h1>
-          <p className="mt-2 text-sm sm:text-base text-[#90908F] max-w-2xl leading-relaxed">
+          <p className="mt-2 text-sm sm:text-base text-[var(--muted)] max-w-2xl leading-relaxed">
             Discover, filter, and compare performance specs across open-weights and commercial AI models in the catalog.
           </p>
         </div>
