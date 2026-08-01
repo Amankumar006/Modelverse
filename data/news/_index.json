@@ -22,6 +22,28 @@
     ]
   },
   {
+    "id": "ten-advances-in-mathematics-and-theoretical-computer-science",
+    "slug": "ten-advances-in-mathematics-and-theoretical-computer-science",
+    "title": "Ten advances in mathematics and theoretical computer science",
+    "category": "short-news",
+    "publishDate": "2026-08-01",
+    "author": "Modelverse Editorial",
+    "readTime": "2 min read",
+    "excerpt": "OpenAI shares new results on long-standing open problems in mathematics and theoretical computer science, including advances in geometry, cryptography, and complexity.",
+    "coverImage": "/images/news/news_featured.jpg",
+    "status": "published",
+    "confidenceLevel": "confirmed",
+    "externalSources": [
+      "https://openai.com/index/ten-advances-in-mathematics"
+    ],
+    "relatedModels": [],
+    "tags": [
+      "ai-news",
+      "breaking",
+      "openai"
+    ]
+  },
+  {
     "id": "advancing-responsible-ai-across-europe",
     "slug": "advancing-responsible-ai-across-europe",
     "title": "Advancing responsible AI across Europe",
