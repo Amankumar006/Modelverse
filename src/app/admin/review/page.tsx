@@ -43,9 +43,12 @@ export default function AdminReviewPage() {
   // Editing Modal State
   const [activeModalModel, setActiveModalModel] = useState<PendingModel | null>(null);
   const [editForm, setEditForm] = useState<Partial<PendingModel>>({});
-  const [modalTab, setModalTab] = useState<'edit' | 'preview'>('edit');
+  const [modalTab, setModalTab] = useState<'edit' | 'preview' | 'json'>('edit');
   const [newBenchName, setNewBenchName] = useState('');
   const [newBenchScore, setNewBenchScore] = useState('');
+  const [bulkBenchText, setBulkBenchText] = useState('');
+  const [rawJsonText, setRawJsonText] = useState('');
+  const [jsonError, setJsonError] = useState('');
 
   useEffect(() => {
     const savedSecret = typeof window !== 'undefined' ? sessionStorage.getItem('curator_secret') : null;
@@ -97,16 +100,49 @@ export default function AdminReviewPage() {
 
   const openEditModal = (model: PendingModel) => {
     setActiveModalModel(model);
-    setEditForm(JSON.parse(JSON.stringify(model)));
+    const cloned = JSON.parse(JSON.stringify(model));
+    setEditForm(cloned);
+    setRawJsonText(JSON.stringify(cloned, null, 2));
+    setJsonError('');
+    setBulkBenchText('');
     setModalTab('edit');
   };
 
   const closeEditModal = () => {
     setActiveModalModel(null);
     setEditForm({});
+    setRawJsonText('');
+    setJsonError('');
+  };
+
+  const handleTabChange = (tab: 'edit' | 'preview' | 'json') => {
+    if (tab === 'json') {
+      setRawJsonText(JSON.stringify(editForm, null, 2));
+    } else if (modalTab === 'json') {
+      // Sync from json tab if valid
+      try {
+        const parsed = JSON.parse(rawJsonText);
+        setEditForm(parsed);
+        setJsonError('');
+      } catch (e: any) {
+        setJsonError(`Invalid JSON format: ${e.message}`);
+        return;
+      }
+    }
+    setModalTab(tab);
   };
 
   const handleAction = async (filename: string, action: 'approve' | 'reject' | 'save_draft', payload?: any) => {
+    let finalModel = payload?.editedModel || editForm;
+    if (modalTab === 'json') {
+      try {
+        finalModel = JSON.parse(rawJsonText);
+      } catch (e: any) {
+        setActionMessage(`❌ Cannot save: Invalid JSON format (${e.message})`);
+        return;
+      }
+    }
+
     setActionMessage(`Processing ${action} for ${filename}...`);
     try {
       const res = await fetch('/api/admin/review', {
@@ -119,7 +155,7 @@ export default function AdminReviewPage() {
           filename,
           action,
           secret: curatorSecret,
-          editedModel: payload?.editedModel,
+          editedModel: finalModel,
           humanNotes: payload?.humanNotes,
         }),
       });
@@ -139,21 +175,89 @@ export default function AdminReviewPage() {
   const handleAddBenchmark = () => {
     if (!newBenchName.trim() || !newBenchScore.trim()) return;
     const current = editForm.benchmarks || [];
-    setEditForm({
-      ...editForm,
-      benchmarks: [
-        ...current,
-        { name: newBenchName.trim(), score: newBenchScore.trim(), verified: true, sourceType: 'independent-eval' },
-      ],
-    });
+    const updated = [
+      ...current,
+      { name: newBenchName.trim(), score: newBenchScore.trim(), verified: true, sourceType: 'independent-eval' as const },
+    ];
+    setEditForm({ ...editForm, benchmarks: updated });
+    setRawJsonText(JSON.stringify({ ...editForm, benchmarks: updated }, null, 2));
     setNewBenchName('');
     setNewBenchScore('');
+  };
+
+  const handleBulkParseBenchmarks = () => {
+    if (!bulkBenchText.trim()) return;
+    const input = bulkBenchText.trim();
+    const newItems: Benchmark[] = [];
+
+    // Try JSON array/object first
+    if (input.startsWith('[') || input.startsWith('{')) {
+      try {
+        const parsed = JSON.parse(input);
+        const arr = Array.isArray(parsed) ? parsed : [parsed];
+        for (const item of arr) {
+          if (item.name && item.score) {
+            newItems.push({
+              name: String(item.name).trim(),
+              score: String(item.score).trim(),
+              verified: true,
+              sourceType: 'independent-eval',
+            });
+          }
+        }
+      } catch (e) {}
+    }
+
+    // Fallback to line-by-line parsing: "MMLU: 86.4%" or "GPQA Diamond - 59.4%" or "SWE-Bench 49.2%"
+    if (newItems.length === 0) {
+      const lines = input.split(/\r?\n/);
+      for (const line of lines) {
+        const trimmed = line.trim();
+        if (!trimmed) continue;
+
+        // Match "Name: Score" or "Name - Score" or "Name | Score" or "Name \t Score"
+        const match = trimmed.match(/^([^:\-\|\t]+)[:\-\|\t]\s*(.+)$/);
+        if (match) {
+          newItems.push({
+            name: match[1].trim(),
+            score: match[2].trim(),
+            verified: true,
+            sourceType: 'independent-eval',
+          });
+        } else {
+          // Fallback match: "MMLU 86.4%"
+          const spaceMatch = trimmed.match(/^(.+?)\s+([0-9\.]+%?)$/);
+          if (spaceMatch) {
+            newItems.push({
+              name: spaceMatch[1].trim(),
+              score: spaceMatch[2].trim(),
+              verified: true,
+              sourceType: 'independent-eval',
+            });
+          }
+        }
+      }
+    }
+
+    if (newItems.length > 0) {
+      const current = editForm.benchmarks || [];
+      const updated = [...current, ...newItems];
+      setEditForm({ ...editForm, benchmarks: updated });
+      setRawJsonText(JSON.stringify({ ...editForm, benchmarks: updated }, null, 2));
+      setBulkBenchText('');
+    }
   };
 
   const handleRemoveBenchmark = (index: number) => {
     const current = [...(editForm.benchmarks || [])];
     current.splice(index, 1);
     setEditForm({ ...editForm, benchmarks: current });
+    setRawJsonText(JSON.stringify({ ...editForm, benchmarks: current }, null, 2));
+  };
+
+  const handleClearAllBenchmarks = () => {
+    setEditForm({ ...editForm, benchmarks: [] });
+    setRawJsonText(JSON.stringify({ ...editForm, benchmarks: [] }, null, 2));
   };
 
   const handleBulkApproveClean = async () => {
@@ -189,7 +293,7 @@ export default function AdminReviewPage() {
 
   if (!isAuthenticated) {
     return (
-      <div className="min-h-screen bg-slate-950 text-slate-100 flex items-center justify-center p-6">
+      <div className="min-h-screen bg-slate-950 text-slate-100 flex items-center justify-center p-6 font-sans">
         <div className="max-w-md w-full bg-slate-900 border border-slate-800 rounded-2xl p-8 shadow-2xl space-y-6">
           <div className="text-center space-y-2">
             <div className="w-12 h-12 bg-amber-500/10 border border-amber-500/30 rounded-full flex items-center justify-center mx-auto text-amber-400 text-xl font-bold">
@@ -233,7 +337,7 @@ export default function AdminReviewPage() {
   }
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-100 p-8">
+    <div className="min-h-screen bg-slate-950 text-slate-100 p-8 font-sans">
       <div className="max-w-6xl mx-auto space-y-6">
         <header className="border-b border-slate-800 pb-6 flex items-center justify-between">
           <div>
@@ -267,13 +371,13 @@ export default function AdminReviewPage() {
         </header>
 
         {actionMessage && (
-          <div className="p-4 bg-slate-900 border border-indigo-500/30 text-indigo-300 rounded-lg text-sm">
+          <div className="p-4 bg-slate-900 border border-indigo-500/30 text-indigo-300 rounded-lg text-sm font-mono">
             {actionMessage}
           </div>
         )}
 
         {loading ? (
-          <div className="py-20 text-center text-slate-500">Loading pending models from staging area...</div>
+          <div className="py-20 text-center text-slate-500 font-mono">Loading pending models from staging area...</div>
         ) : models.length === 0 ? (
           <div className="py-20 text-center border border-dashed border-slate-800 rounded-xl bg-slate-900/50">
             <h3 className="text-lg font-semibold text-slate-300">Staging Area Clean</h3>
@@ -411,15 +515,23 @@ export default function AdminReviewPage() {
               <div className="flex items-center gap-2">
                 <div className="flex bg-slate-950 p-1 rounded-lg border border-slate-800">
                   <button
-                    onClick={() => setModalTab('edit')}
+                    onClick={() => handleTabChange('edit')}
                     className={`px-3 py-1 text-xs font-semibold rounded-md transition ${
                       modalTab === 'edit' ? 'bg-indigo-600 text-white' : 'text-slate-400 hover:text-white'
                     }`}
                   >
-                    ✏️ Edit Fields
+                    ✏️ Form Fields
                   </button>
                   <button
-                    onClick={() => setModalTab('preview')}
+                    onClick={() => handleTabChange('json')}
+                    className={`px-3 py-1 text-xs font-semibold rounded-md transition ${
+                      modalTab === 'json' ? 'bg-indigo-600 text-white' : 'text-slate-400 hover:text-white'
+                    }`}
+                  >
+                    {`{ }`} Raw JSON
+                  </button>
+                  <button
+                    onClick={() => handleTabChange('preview')}
                     className={`px-3 py-1 text-xs font-semibold rounded-md transition ${
                       modalTab === 'preview' ? 'bg-indigo-600 text-white' : 'text-slate-400 hover:text-white'
                     }`}
@@ -519,48 +631,93 @@ export default function AdminReviewPage() {
                   </div>
 
                   {/* Benchmarks Manager */}
-                  <div className="space-y-3 border-t border-slate-800 pt-4">
-                    <h4 className="text-xs font-bold text-emerald-400 uppercase tracking-wider font-mono">
-                      📊 Benchmark Scores Manager
-                    </h4>
-                    <div className="space-y-2">
-                      {(editForm.benchmarks || []).map((b, idx) => (
-                        <div key={idx} className="flex items-center gap-3 bg-slate-950 p-2.5 rounded-lg border border-slate-800">
-                          <input
-                            type="text"
-                            value={b.name}
-                            onChange={(e) => {
-                              const current = [...(editForm.benchmarks || [])];
-                              current[idx].name = e.target.value;
-                              setEditForm({ ...editForm, benchmarks: current });
-                            }}
-                            className="bg-slate-900 border border-slate-800 rounded px-2.5 py-1 text-xs text-white flex-1"
-                          />
-                          <input
-                            type="text"
-                            value={b.score}
-                            onChange={(e) => {
-                              const current = [...(editForm.benchmarks || [])];
-                              current[idx].score = e.target.value;
-                              setEditForm({ ...editForm, benchmarks: current });
-                            }}
-                            className="bg-slate-900 border border-slate-800 rounded px-2.5 py-1 text-xs text-emerald-400 font-mono w-28 font-bold"
-                          />
-                          <button
-                            type="button"
-                            onClick={() => handleRemoveBenchmark(idx)}
-                            className="text-rose-400 hover:text-rose-300 text-xs px-2 py-1 bg-rose-950/40 rounded border border-rose-800/40"
-                          >
-                            Remove
-                          </button>
-                        </div>
-                      ))}
+                  <div className="space-y-4 border-t border-slate-800 pt-4">
+                    <div className="flex items-center justify-between">
+                      <h4 className="text-xs font-bold text-emerald-400 uppercase tracking-wider font-mono">
+                        📊 Benchmark Scores Manager ({editForm.benchmarks?.length || 0})
+                      </h4>
+                      {(editForm.benchmarks || []).length > 0 && (
+                        <button
+                          type="button"
+                          onClick={handleClearAllBenchmarks}
+                          className="text-[11px] text-rose-400 hover:text-rose-300 font-mono"
+                        >
+                          Clear All Benchmarks
+                        </button>
+                      )}
                     </div>
 
-                    <div className="flex items-center gap-2 pt-1">
+                    {/* Existing Benchmarks List */}
+                    {(editForm.benchmarks || []).length > 0 && (
+                      <div className="space-y-2 max-h-48 overflow-y-auto pr-1">
+                        {(editForm.benchmarks || []).map((b, idx) => (
+                          <div key={idx} className="flex items-center gap-3 bg-slate-950 p-2 rounded-lg border border-slate-800">
+                            <input
+                              type="text"
+                              value={b.name}
+                              onChange={(e) => {
+                                const current = [...(editForm.benchmarks || [])];
+                                current[idx].name = e.target.value;
+                                setEditForm({ ...editForm, benchmarks: current });
+                              }}
+                              className="bg-slate-900 border border-slate-800 rounded px-2.5 py-1 text-xs text-white flex-1"
+                            />
+                            <input
+                              type="text"
+                              value={b.score}
+                              onChange={(e) => {
+                                const current = [...(editForm.benchmarks || [])];
+                                current[idx].score = e.target.value;
+                                setEditForm({ ...editForm, benchmarks: current });
+                              }}
+                              className="bg-slate-900 border border-slate-800 rounded px-2.5 py-1 text-xs text-emerald-400 font-mono w-28 font-bold"
+                            />
+                            <button
+                              type="button"
+                              onClick={() => handleRemoveBenchmark(idx)}
+                              className="text-rose-400 hover:text-rose-300 text-xs px-2 py-1 bg-rose-950/40 rounded border border-rose-800/40"
+                            >
+                              Remove
+                            </button>
+                          </div>
+                        ))}
+                      </div>
+                    )}
+
+                    {/* 📋 Bulk Paste Benchmarks Textarea */}
+                    <div className="p-4 bg-slate-950 border border-emerald-500/20 rounded-xl space-y-3">
+                      <div className="flex items-center justify-between">
+                        <label className="text-xs font-mono font-bold text-emerald-400 flex items-center gap-1.5">
+                          <span>📋</span>
+                          <span>BULK PASTE ALL BENCHMARKS AT ONCE</span>
+                        </label>
+                        <span className="text-[10px] text-slate-500 font-mono">Supports "MMLU: 86.4%" or JSON array</span>
+                      </div>
+                      <textarea
+                        rows={4}
+                        placeholder={`Paste full benchmark list at once, e.g.:\n\nMMLU: 86.4%\nGPQA Diamond: 59.4%\nSWE-Bench Verified: 49.2%\nHumanEval: 92.1%\nGSM8K: 95.0%`}
+                        value={bulkBenchText}
+                        onChange={(e) => setBulkBenchText(e.target.value)}
+                        className="w-full bg-slate-900 border border-slate-800 rounded-lg p-3 text-xs font-mono text-emerald-300 focus:outline-none focus:border-emerald-500 leading-relaxed"
+                      />
+                      <div className="flex justify-end">
+                        <button
+                          type="button"
+                          onClick={handleBulkParseBenchmarks}
+                          disabled={!bulkBenchText.trim()}
+                          className="px-4 py-2 bg-emerald-600 hover:bg-emerald-500 disabled:opacity-50 text-white text-xs font-bold rounded-lg shadow-lg transition flex items-center gap-1.5"
+                        >
+                          <span>⚡</span>
+                          <span>Parse & Add All Scores</span>
+                        </button>
+                      </div>
+                    </div>
+
+                    {/* Single Addition Fallback */}
+                    <div className="flex items-center gap-2 pt-1 border-t border-slate-800/60">
                       <input
                         type="text"
-                        placeholder="Benchmark Name (e.g. GPQA Diamond, SWE-Bench)"
+                        placeholder="Single Benchmark Name (e.g. GPQA Diamond)"
                         value={newBenchName}
                         onChange={(e) => setNewBenchName(e.target.value)}
                         className="bg-slate-950 border border-slate-800 rounded-lg px-3 py-1.5 text-xs text-white flex-1"
@@ -575,9 +732,9 @@ export default function AdminReviewPage() {
                       <button
                         type="button"
                         onClick={handleAddBenchmark}
-                        className="px-3 py-1.5 bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-semibold rounded-lg transition"
+                        className="px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-semibold rounded-lg transition"
                       >
-                        + Add Score
+                        + Add Single
                       </button>
                     </div>
                   </div>
@@ -593,6 +750,38 @@ export default function AdminReviewPage() {
                       className="w-full bg-slate-950 border border-slate-800 rounded-lg p-3 text-white focus:outline-none focus:border-indigo-500 font-mono text-xs"
                     />
                   </div>
+                </div>
+              ) : modalTab === 'json' ? (
+                /* Raw JSON Code Editor Mode */
+                <div className="space-y-4 font-mono">
+                  <div className="flex items-center justify-between">
+                    <label className="text-xs font-bold text-slate-300 uppercase">
+                      Edit Full Raw Candidate JSON
+                    </label>
+                    <span className="text-xs text-slate-500">Changes sync instantly with form and preview</span>
+                  </div>
+
+                  {jsonError && (
+                    <div className="p-3 bg-rose-950/60 border border-rose-800 text-rose-300 rounded-lg text-xs">
+                      ⚠️ {jsonError}
+                    </div>
+                  )}
+
+                  <textarea
+                    rows={18}
+                    value={rawJsonText}
+                    onChange={(e) => {
+                      setRawJsonText(e.target.value);
+                      try {
+                        const parsed = JSON.parse(e.target.value);
+                        setEditForm(parsed);
+                        setJsonError('');
+                      } catch (err: any) {
+                        setJsonError(`Invalid JSON: ${err.message}`);
+                      }
+                    }}
+                    className="w-full bg-slate-950 border border-slate-800 rounded-xl p-4 text-xs font-mono text-emerald-400 focus:outline-none focus:border-indigo-500 leading-relaxed shadow-inner"
+                  />
                 </div>
               ) : (
                 /* Live Preview Mode */
@@ -686,7 +875,7 @@ export default function AdminReviewPage() {
             </div>
 
             {/* Modal Footer */}
-            <div className="px-6 py-4 border-t border-slate-800 bg-slate-950/80 flex items-center justify-between">
+            <div className="px-6 py-4 border-t border-slate-800 bg-slate-950/80 flex items-center justify-between font-sans">
               <button
                 onClick={closeEditModal}
                 className="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-semibold rounded-lg transition"
