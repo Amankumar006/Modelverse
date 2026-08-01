@@ -190,7 +190,7 @@ export default function AdminReviewPage() {
     const input = bulkBenchText.trim();
     const newItems: Benchmark[] = [];
 
-    // Try JSON array/object first
+    // 1. Try JSON array/object first
     if (input.startsWith('[') || input.startsWith('{')) {
       try {
         const parsed = JSON.parse(input);
@@ -208,14 +208,13 @@ export default function AdminReviewPage() {
       } catch (e) {}
     }
 
-    // Fallback to line-by-line parsing: "MMLU: 86.4%" or "GPQA Diamond - 59.4%" or "SWE-Bench 49.2%"
+    // 2. Fallback to line-by-line parsing: "MMLU: 86.4%" or "GPQA Diamond - 59.4%" or "SWE-Bench 49.2%"
     if (newItems.length === 0) {
       const lines = input.split(/\r?\n/);
       for (const line of lines) {
         const trimmed = line.trim();
         if (!trimmed) continue;
 
-        // Match "Name: Score" or "Name - Score" or "Name | Score" or "Name \t Score"
         const match = trimmed.match(/^([^:\-\|\t]+)[:\-\|\t]\s*(.+)$/);
         if (match) {
           newItems.push({
@@ -225,7 +224,6 @@ export default function AdminReviewPage() {
             sourceType: 'independent-eval',
           });
         } else {
-          // Fallback match: "MMLU 86.4%"
           const spaceMatch = trimmed.match(/^(.+?)\s+([0-9\.]+%?)$/);
           if (spaceMatch) {
             newItems.push({
@@ -235,6 +233,30 @@ export default function AdminReviewPage() {
               sourceType: 'independent-eval',
             });
           }
+        }
+      }
+    }
+
+    // 3. Fallback to glued-table single-line extractor (e.g. copied HTML/PDF tables without line breaks)
+    if (newItems.length === 0) {
+      // Strip title prefix if present (e.g. "BenchmarkDeepSeek-V4-Flash-0731")
+      const cleanInput = input.replace(/^Benchmark[A-Za-z0-9\-_]*/i, '');
+      const gluedRegex = /([A-Za-z0-9'_\-\/\s\†\‡\(\)\:]+?)\s*([0-9]+\.[0-9]+%?|[0-9]+%)/g;
+      let match;
+      while ((match = gluedRegex.exec(cleanInput)) !== null) {
+        let name = match[1].trim();
+        const score = match[2].trim();
+
+        // Clean up residual header prefix
+        name = name.replace(/^Benchmark[A-Za-z0-9\-_]*/i, '').trim();
+
+        if (name && score) {
+          newItems.push({
+            name,
+            score: score.endsWith('%') ? score : `${score}%`,
+            verified: true,
+            sourceType: 'independent-eval',
+          });
         }
       }
     }
