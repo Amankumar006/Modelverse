@@ -104,6 +104,41 @@ export default function AdminReviewPage() {
 
     for (const item of benchmarks) {
       const combined = `${item.name || ''} ${item.score || ''}`;
+      
+      // Handle Markdown Table glued in single benchmark entry
+      if (combined.includes('|')) {
+        const lines = combined.split(/\r?\n/);
+        let parsedCount = 0;
+        for (const line of lines) {
+          const trimmed = line.trim();
+          if (!trimmed || !trimmed.includes('|')) continue;
+          const parts = trimmed.split('|').map((p) => p.trim()).filter(Boolean);
+          if (parts.length >= 2) {
+            const col1 = parts[0];
+            const col2 = parts[1];
+            if (
+              col1.toLowerCase().includes('benchmark') ||
+              col1.startsWith(':---') ||
+              col1.startsWith('---') ||
+              col2.startsWith(':---') ||
+              col2.startsWith('---')
+            ) {
+              continue;
+            }
+            if (col1 && col2) {
+              cleanList.push({
+                name: col1,
+                score: col2.endsWith('%') ? col2 : `${col2}%`,
+                verified: true,
+                sourceType: 'independent-eval',
+              });
+              parsedCount++;
+            }
+          }
+        }
+        if (parsedCount > 0) continue;
+      }
+
       // Detect if combined contains multiple glued benchmarks (e.g. "BenchmarkDeepSeek V4-Flash... 82.7NL2Repo54.2")
       if (combined.match(/[0-9]+\.[0-9]+[A-Za-z]/) || combined.length > 50) {
         const cleanInput = combined.replace(/^Benchmark[A-Za-z0-9\-_]*/i, '');
@@ -246,7 +281,38 @@ export default function AdminReviewPage() {
       } catch (e) {}
     }
 
-    // 2. Fallback to line-by-line parsing: "MMLU: 86.4%" or "GPQA Diamond - 59.4%" or "SWE-Bench 49.2%"
+    // 2. Try Markdown Pipe Table (| Benchmark | Score |)
+    if (newItems.length === 0 && input.includes('|')) {
+      const lines = input.split(/\r?\n/);
+      for (const line of lines) {
+        const trimmed = line.trim();
+        if (!trimmed || !trimmed.includes('|')) continue;
+        const parts = trimmed.split('|').map((p) => p.trim()).filter(Boolean);
+        if (parts.length >= 2) {
+          const col1 = parts[0];
+          const col2 = parts[1];
+          if (
+            col1.toLowerCase().includes('benchmark') ||
+            col1.startsWith(':---') ||
+            col1.startsWith('---') ||
+            col2.startsWith(':---') ||
+            col2.startsWith('---')
+          ) {
+            continue;
+          }
+          if (col1 && col2) {
+            newItems.push({
+              name: col1,
+              score: col2.endsWith('%') ? col2 : `${col2}%`,
+              verified: true,
+              sourceType: 'independent-eval',
+            });
+          }
+        }
+      }
+    }
+
+    // 3. Fallback to line-by-line parsing: "MMLU: 86.4%" or "GPQA Diamond - 59.4%"
     if (newItems.length === 0) {
       const lines = input.split(/\r?\n/);
       for (const line of lines) {
@@ -275,7 +341,7 @@ export default function AdminReviewPage() {
       }
     }
 
-    // 3. Fallback to glued-table single-line extractor (e.g. copied HTML/PDF tables without line breaks)
+    // 4. Fallback to glued-table single-line extractor (e.g. copied HTML/PDF tables without line breaks)
     if (newItems.length === 0) {
       // Strip title prefix if present (e.g. "BenchmarkDeepSeek-V4-Flash-0731")
       const cleanInput = input.replace(/^Benchmark[A-Za-z0-9\-_]*/i, '');
