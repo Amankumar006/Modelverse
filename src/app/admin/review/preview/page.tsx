@@ -32,7 +32,20 @@ function DraftModelPreviewContent() {
           if (found) {
             setModel(found);
           } else {
-            setError(`Pending model "${filename}" not found in staging queue.`);
+            // Check if model was already approved and published to production
+            const slugGuess = filename.replace(/\.json$/, '').replace(/^unsloth-/, '');
+            fetch(`/api/models/${slugGuess}`)
+              .then((r) => r.json())
+              .then((prodData) => {
+                if (prodData.success && prodData.model) {
+                  setModel({ ...prodData.model, isPublished: true });
+                } else {
+                  setError(`Pending model "${filename}" not found in staging queue (it may have been approved or deleted).`);
+                }
+              })
+              .catch(() => {
+                setError(`Pending model "${filename}" not found in staging queue.`);
+              });
           }
         } else {
           setError(data.error || 'Failed to load candidate from staging.');
@@ -69,19 +82,34 @@ function DraftModelPreviewContent() {
 
   return (
     <main className="min-h-screen bg-[#141414] text-[#E1E1E0] selection:bg-[#D97757] selection:text-white relative font-sans">
-      {/* Curator Draft Banner */}
-      <div className="bg-amber-950/80 border-b border-amber-800/60 px-6 py-2.5 text-xs text-amber-200 font-mono flex items-center justify-between sticky top-0 z-50 backdrop-blur-md">
-        <div className="flex items-center gap-2">
-          <span className="animate-pulse">👁️</span>
-          <span>CURATOR PREVIEW MODE: Viewing draft candidate <strong>{model.filename}</strong> prior to approval.</span>
+      {/* Curator Banner */}
+      {model.isPublished ? (
+        <div className="bg-emerald-950/90 border-b border-emerald-800/60 px-6 py-2.5 text-xs text-emerald-200 font-mono flex items-center justify-between sticky top-0 z-50 backdrop-blur-md">
+          <div className="flex items-center gap-2">
+            <span>🎉</span>
+            <span>MODEL PUBLISHED TO PRODUCTION: Candidate has been approved and is live on site.</span>
+          </div>
+          <Link
+            href={`/models/${model.slug}`}
+            className="px-3 py-1 bg-emerald-600 hover:bg-emerald-500 text-white rounded text-[11px] font-sans font-bold transition flex items-center gap-1"
+          >
+            <span>🚀 View Live Page</span>
+          </Link>
         </div>
-        <Link
-          href="/admin/review"
-          className="px-3 py-1 bg-amber-900/60 hover:bg-amber-800 text-amber-100 rounded border border-amber-700/50 text-[11px] font-sans font-semibold transition"
-        >
-          ← Return to Dashboard
-        </Link>
-      </div>
+      ) : (
+        <div className="bg-amber-950/80 border-b border-amber-800/60 px-6 py-2.5 text-xs text-amber-200 font-mono flex items-center justify-between sticky top-0 z-50 backdrop-blur-md">
+          <div className="flex items-center gap-2">
+            <span className="animate-pulse">👁️</span>
+            <span>CURATOR STAGING PREVIEW: Viewing draft candidate <strong>{model.filename || model.name}</strong> prior to approval.</span>
+          </div>
+          <Link
+            href="/admin/review"
+            className="px-3 py-1 bg-amber-900/60 hover:bg-amber-800 text-amber-100 rounded border border-amber-700/50 text-[11px] font-sans font-semibold transition"
+          >
+            ← Return to Dashboard
+          </Link>
+        </div>
+      )}
 
       <Navbar theme="dark" />
 
