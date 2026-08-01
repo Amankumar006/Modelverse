@@ -11,6 +11,28 @@ async function postToDiscord(modelData = null, newsArticles = null) {
 
   console.log("🤖 Starting Discord Auto-Notifier Webhook...");
 
+  // 1. Resolve fallback payload if arguments not explicitly passed
+  if (!modelData && (!newsArticles || newsArticles.length === 0)) {
+    const articlesPath = path.join(process.cwd(), "data", "ingestion", "new-articles.json");
+    if (fs.existsSync(articlesPath)) {
+      try {
+        const raw = JSON.parse(fs.readFileSync(articlesPath, "utf-8"));
+        if (Array.isArray(raw) && raw.length > 0) {
+          newsArticles = raw;
+        }
+      } catch (e) {}
+    }
+    const archivePath = path.join(process.cwd(), "data", "models-archive.json");
+    if (fs.existsSync(archivePath)) {
+      try {
+        const models = JSON.parse(fs.readFileSync(archivePath, "utf-8"));
+        if (Array.isArray(models) && models.length > 0) {
+          modelData = models[0];
+        }
+      } catch (e) {}
+    }
+  }
+
   const embeds = [];
 
   // Scenario A: Single Model Release Notification
@@ -65,24 +87,7 @@ async function postToDiscord(modelData = null, newsArticles = null) {
     });
   }
 
-  // If running standalone CLI or workflow without explicit arguments, load latest published items
-  if (!modelData && (!newsArticles || newsArticles.length === 0)) {
-    const articlesPath = path.join(process.cwd(), "data", "ingestion", "new-articles.json");
-    if (fs.existsSync(articlesPath)) {
-      try {
-        newsArticles = JSON.parse(fs.readFileSync(articlesPath, "utf-8"));
-      } catch (e) {}
-    }
-    const archivePath = path.join(process.cwd(), "data", "models-archive.json");
-    if (fs.existsSync(archivePath)) {
-      try {
-        const models = JSON.parse(fs.readFileSync(archivePath, "utf-8"));
-        if (models.length > 0) {
-          modelData = models[0];
-        }
-      } catch (e) {}
-    }
-  }
+
 
   if (embeds.length === 0) {
     console.log("ℹ️ No content payload to send to Discord.");
