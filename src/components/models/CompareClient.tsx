@@ -5,7 +5,7 @@ import { useRouter, usePathname, useSearchParams } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
 import { ModelEntry } from "@/lib/models";
-import { X, Plus, Search, ChevronDown, Activity, Calendar, Server, Tag, Shield, FileCode2 } from "lucide-react";
+import { X, Plus, Search, ChevronDown, Activity, Calendar, Server, Tag, Shield, FileCode2, Info } from "lucide-react";
 import TypeBadge from "@/components/ui/TypeBadge";
 import ModalityTag from "@/components/ui/ModalityTag";
 import CopyableTable from "@/components/ui/CopyableTable";
@@ -353,6 +353,14 @@ export default function CompareClient({ initialModels, allModels }: CompareClien
         </div>
       </div>
 
+      {/* Transparency Note */}
+      <div className="flex items-center gap-2 text-xs text-[#90908F] bg-[#141414] px-4 py-3 rounded-xl border border-[#282828] mb-4">
+        <Info size={15} className="text-emerald-400 flex-shrink-0" />
+        <span>
+          Not all models have been independently verified yet. Benchmark scores display exact field confidence (<span className="text-emerald-400 font-semibold">VERIFIED</span> / <span className="text-amber-400 font-semibold">LIKELY</span> / <span className="text-gray-400 font-semibold">DRAFT</span>). Uncorroborated benchmarks show <span className="text-gray-400 font-mono">Pending Curator Audit</span>.
+        </span>
+      </div>
+
       {/* Comparison Table */}
       <CopyableTable title="Model Comparison Matrix">
         <table className="w-full min-w-[800px] border-collapse">
@@ -490,17 +498,25 @@ export default function CompareClient({ initialModels, allModels }: CompareClien
               <td className="p-4 text-sm font-semibold text-[#4ADE80] bg-[#0E0E10] sticky left-0 z-10 border-r border-white/10">SWE-Bench Score</td>
               {models.map((model, idx) => {
                 const matched = model.benchmarks?.find(b => b.name.toLowerCase().includes("swe-bench"));
-                const score = matched?.score || "—";
                 const isWinner = idx === bestSweIdx;
+                const conf = model.fieldConfidence?.benchmarks;
                 return (
                   <td
                     key={model.id}
                     className={`p-4 text-sm font-mono transition-colors ${
-                      isWinner ? "bg-emerald-500/5 text-emerald-400 font-bold border-x border-emerald-500/10" : "text-gray-200"
+                      isWinner && matched?.score ? "bg-emerald-500/5 text-emerald-400 font-bold border-x border-emerald-500/10" : "text-gray-200"
                     }`}
                   >
-                    {score}
-                    {isWinner && score !== "—" && <span className="ml-1.5 text-[9px] uppercase tracking-wider bg-emerald-500/20 text-emerald-400 px-1 py-0.5 rounded">Top</span>}
+                    {matched?.score ? (
+                      <div className="flex items-center gap-1.5">
+                        <span>{matched.score}</span>
+                        {isWinner && <span className="text-[9px] uppercase tracking-wider bg-emerald-500/20 text-emerald-400 px-1 py-0.5 rounded font-sans font-semibold">Top</span>}
+                        {conf === "VERIFIED" && <span className="text-[9px] uppercase bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 px-1 py-0.5 rounded font-sans">Verified</span>}
+                        {conf === "LIKELY" && <span className="text-[9px] uppercase bg-amber-500/10 text-amber-400 border border-amber-500/20 px-1 py-0.5 rounded font-sans">Likely</span>}
+                      </div>
+                    ) : (
+                      <span className="text-gray-500 text-xs font-sans italic">— <span className="text-[10px] text-gray-600 font-normal">(Pending Audit)</span></span>
+                    )}
                   </td>
                 );
               })}
@@ -513,17 +529,26 @@ export default function CompareClient({ initialModels, allModels }: CompareClien
             <tr>
               <td className="p-4 text-sm font-semibold text-[#4ADE80] bg-[#0E0E10] sticky left-0 z-10 border-r border-white/10">Aider Polyglot</td>
               {models.map((model, idx) => {
-                const score = model.benchmarks?.find(b => b.name.toLowerCase() === "aider polyglot")?.score || "—";
+                const matched = model.benchmarks?.find(b => b.name.toLowerCase() === "aider polyglot");
                 const isWinner = idx === bestAiderIdx;
+                const conf = model.fieldConfidence?.benchmarks;
                 return (
                   <td
                     key={model.id}
                     className={`p-4 text-sm font-mono transition-colors ${
-                      isWinner ? "bg-emerald-500/5 text-emerald-400 font-bold border-x border-emerald-500/10" : "text-gray-200"
+                      isWinner && matched?.score ? "bg-emerald-500/5 text-emerald-400 font-bold border-x border-emerald-500/10" : "text-gray-200"
                     }`}
                   >
-                    {score}
-                    {isWinner && score !== "—" && <span className="ml-1.5 text-[9px] uppercase tracking-wider bg-emerald-500/20 text-emerald-400 px-1 py-0.5 rounded">Top</span>}
+                    {matched?.score ? (
+                      <div className="flex items-center gap-1.5">
+                        <span>{matched.score}</span>
+                        {isWinner && <span className="text-[9px] uppercase tracking-wider bg-emerald-500/20 text-emerald-400 px-1 py-0.5 rounded font-sans font-semibold">Top</span>}
+                        {conf === "VERIFIED" && <span className="text-[9px] uppercase bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 px-1 py-0.5 rounded font-sans">Verified</span>}
+                        {conf === "LIKELY" && <span className="text-[9px] uppercase bg-amber-500/10 text-amber-400 border border-amber-500/20 px-1 py-0.5 rounded font-sans">Likely</span>}
+                      </div>
+                    ) : (
+                      <span className="text-gray-500 text-xs font-sans italic">— <span className="text-[10px] text-gray-600 font-normal">(Pending Audit)</span></span>
+                    )}
                   </td>
                 );
               })}
@@ -536,17 +561,26 @@ export default function CompareClient({ initialModels, allModels }: CompareClien
             <tr>
               <td className="p-4 text-sm font-semibold text-[#4ADE80] bg-[#0E0E10] sticky left-0 z-10 border-r border-white/10">GPQA Diamond</td>
               {models.map((model, idx) => {
-                const score = model.benchmarks?.find(b => b.name.toLowerCase() === "gpqa diamond")?.score || "—";
+                const matched = model.benchmarks?.find(b => b.name.toLowerCase() === "gpqa diamond");
                 const isWinner = idx === bestGpqaIdx;
+                const conf = model.fieldConfidence?.benchmarks;
                 return (
                   <td
                     key={model.id}
                     className={`p-4 text-sm font-mono transition-colors ${
-                      isWinner ? "bg-emerald-500/5 text-emerald-400 font-bold border-x border-emerald-500/10" : "text-gray-200"
+                      isWinner && matched?.score ? "bg-emerald-500/5 text-emerald-400 font-bold border-x border-emerald-500/10" : "text-gray-200"
                     }`}
                   >
-                    {score}
-                    {isWinner && score !== "—" && <span className="ml-1.5 text-[9px] uppercase tracking-wider bg-emerald-500/20 text-emerald-400 px-1 py-0.5 rounded">Top</span>}
+                    {matched?.score ? (
+                      <div className="flex items-center gap-1.5">
+                        <span>{matched.score}</span>
+                        {isWinner && <span className="text-[9px] uppercase tracking-wider bg-emerald-500/20 text-emerald-400 px-1 py-0.5 rounded font-sans font-semibold">Top</span>}
+                        {conf === "VERIFIED" && <span className="text-[9px] uppercase bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 px-1 py-0.5 rounded font-sans">Verified</span>}
+                        {conf === "LIKELY" && <span className="text-[9px] uppercase bg-amber-500/10 text-amber-400 border border-amber-500/20 px-1 py-0.5 rounded font-sans">Likely</span>}
+                      </div>
+                    ) : (
+                      <span className="text-gray-500 text-xs font-sans italic">— <span className="text-[10px] text-gray-600 font-normal">(Pending Audit)</span></span>
+                    )}
                   </td>
                 );
               })}
