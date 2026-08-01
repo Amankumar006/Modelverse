@@ -118,40 +118,40 @@ export default function SubmitModelPage() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
           
           {/* Left Column: Form */}
-          <div className="lg:col-span-7 bg-[#121A15] border border-[#243629] rounded-2xl p-6 sm:p-8 space-y-6 text-left shadow-xl">
+          <div className="lg:col-span-7 bg-[var(--card-bg)] shadow-[var(--shadow-card)] rounded-[var(--radius-card)] p-6 sm:p-8 space-y-6 text-left border border-[var(--muted)]/10">
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               
               {/* Model Name */}
               <div className="flex flex-col gap-1.5">
-                <label className="text-xs font-semibold text-zinc-400 uppercase tracking-wider">Model Name</label>
+                <label className="text-xs font-semibold text-[var(--muted)] uppercase tracking-wider">Model Name</label>
                 <input
                   type="text"
                   placeholder="e.g. Claude 4.5 Sonnet"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
-                  className="bg-[#0C120F] border border-[#243629] rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-emerald-500 transition-colors"
+                  className="bg-[var(--bg)] border border-[var(--muted)]/10 rounded-[var(--radius-control)] px-3.5 py-2.5 text-sm text-[var(--text)] focus:outline-none focus:ring-2 focus:ring-[var(--accent)] transition-all"
                 />
               </div>
 
               {/* Developer */}
               <div className="flex flex-col gap-1.5">
-                <label className="text-xs font-semibold text-zinc-400 uppercase tracking-wider">Developer</label>
+                <label className="text-xs font-semibold text-[var(--muted)] uppercase tracking-wider">Developer</label>
                 <input
                   type="text"
                   placeholder="e.g. Anthropic"
                   value={developer}
                   onChange={(e) => setDeveloper(e.target.value)}
-                  className="bg-[#0C120F] border border-[#243629] rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-emerald-500 transition-colors"
+                  className="bg-[var(--bg)] border border-[var(--muted)]/10 rounded-[var(--radius-control)] px-3.5 py-2.5 text-sm text-[var(--text)] focus:outline-none focus:ring-2 focus:ring-[var(--accent)] transition-all"
                 />
               </div>
 
               {/* Model Type */}
               <div className="flex flex-col gap-1.5">
-                <label className="text-xs font-semibold text-zinc-400 uppercase tracking-wider">Model Type</label>
+                <label className="text-xs font-semibold text-[var(--muted)] uppercase tracking-wider">Model Type</label>
                 <select
                   value={type}
                   onChange={(e) => setType(e.target.value)}
-                  className="bg-[#0C120F] border border-[#243629] rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-emerald-500 transition-colors"
+                  className="bg-[var(--bg)] border border-[var(--muted)]/10 rounded-[var(--radius-control)] px-3.5 py-2.5 text-sm text-[var(--text)] focus:outline-none focus:ring-2 focus:ring-[var(--accent)] transition-all"
                 >
                   <option value="open-weights">Open Weights</option>
                   <option value="closed-source">Closed Source</option>
@@ -162,13 +162,13 @@ export default function SubmitModelPage() {
 
               {/* License */}
               <div className="flex flex-col gap-1.5">
-                <label className="text-xs font-semibold text-zinc-400 uppercase tracking-wider">License</label>
+                <label className="text-xs font-semibold text-[var(--muted)] uppercase tracking-wider">License</label>
                 <input
                   type="text"
                   placeholder="e.g. Apache-2.0 or Custom commercial"
                   value={license}
                   onChange={(e) => setLicense(e.target.value)}
-                  className="bg-[#0C120F] border border-[#243629] rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-emerald-500 transition-colors"
+                  className="bg-[var(--bg)] border border-[var(--muted)]/10 rounded-[var(--radius-control)] px-3.5 py-2.5 text-sm text-[var(--text)] focus:outline-none focus:ring-2 focus:ring-[var(--accent)] transition-all"
                 />
               </div>
 

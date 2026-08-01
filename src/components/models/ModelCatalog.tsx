@@ -129,8 +129,8 @@ function FacetGroupFilter<T>({
   }, [options, searchQuery, valFn, labelFn]);
 
   return (
-    <div className="space-y-2.5">
-      <h4 className="text-xs font-semibold text-[#90908F] uppercase tracking-wider border-b border-[#282828] pb-1.5">
+    <div className="space-y-3 bg-[var(--card-bg)] shadow-[var(--shadow-card)] p-4 rounded-[var(--radius-card)]">
+      <h4 className="text-xs font-bold text-[var(--muted)] uppercase tracking-wider border-b border-[var(--muted)]/10 pb-2">
         {title}
       </h4>
       {showSearch && (
@@ -140,19 +140,19 @@ function FacetGroupFilter<T>({
             placeholder={`Search ${title.toLowerCase()}...`}
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full bg-[#1C1C1E] border border-[#282828] rounded-md px-2.5 py-1 text-xs text-white placeholder:text-[#90908F] focus:outline-none focus:border-[#D97757] transition-colors"
+            className="w-full bg-[var(--bg)] border border-[var(--muted)]/10 rounded-[var(--radius-control)] px-3 py-1.5 text-xs text-[var(--text)] placeholder:text-[var(--muted)] focus:outline-none focus:ring-1 focus:ring-[var(--accent)] transition-colors"
           />
           {searchQuery && (
             <button
               onClick={() => setSearchQuery("")}
-              className="absolute right-2 top-1/2 -translate-y-1/2 text-[#90908F] hover:text-white p-0.5"
+              className="absolute right-2 top-1/2 -translate-y-1/2 text-[var(--muted)] hover:text-[var(--text)] p-0.5"
             >
               <X size={12} />
             </button>
           )}
         </div>
       )}
-      <div className="space-y-1 flex flex-col max-h-44 overflow-y-auto pr-1 select-none no-scrollbar">
+      <div className="space-y-1 flex flex-col max-h-52 overflow-y-auto pr-1 select-none no-scrollbar">
         {filteredOptions.map((opt) => {
           const val = valFn(opt);
           const label = labelFn(opt);
@@ -163,27 +163,27 @@ function FacetGroupFilter<T>({
           return (
             <label
               key={val}
-              className={`flex items-center justify-between text-xs cursor-pointer py-1 px-2 rounded transition-colors ${
+              className={`flex items-center justify-between text-xs cursor-pointer min-h-[44px] py-2 px-2.5 rounded-[var(--radius-control)] transition-colors ${
                 isChecked
-                  ? "text-white font-medium bg-[#242426]"
+                  ? "text-[var(--accent)] font-semibold bg-[var(--accent-soft)]"
                   : isDisabled
-                  ? "text-gray-600 cursor-not-allowed"
-                  : "text-[#90908F] hover:text-white hover:bg-[#1E1E1E]"
+                  ? "text-[var(--muted)]/40 cursor-not-allowed"
+                  : "text-[var(--muted)] hover:text-[var(--text)] hover:bg-[var(--bg)]"
               }`}
             >
-              <div className="flex items-center gap-2 min-w-0 pr-1">
+              <div className="flex items-center gap-2.5 min-w-0 pr-1">
                 <input
                   type="checkbox"
                   checked={isChecked}
                   disabled={isDisabled}
                   onChange={() => onToggle(val)}
-                  className="h-3.5 w-3.5 rounded border border-[#333333] bg-[#1C1C1E] text-[#D97757] focus:ring-0 accent-[#D97757] cursor-pointer disabled:cursor-not-allowed shrink-0"
+                  className="h-4 w-4 rounded border border-[var(--muted)]/30 bg-[var(--bg)] text-[var(--accent)] focus:ring-0 accent-[var(--accent)] cursor-pointer disabled:cursor-not-allowed shrink-0"
                 />
                 <span className="truncate">{label}</span>
               </div>
               <span
-                className={`text-[10px] tabular-nums font-mono px-1.5 py-0.2 rounded ${
-                  isChecked ? "bg-[#2E2E2E] text-white" : "text-[#90908F]"
+                className={`text-[10px] tabular-nums font-mono px-2 py-0.5 rounded-full ${
+                  isChecked ? "bg-[var(--accent)] text-[var(--accent-contrast)] font-bold" : "bg-[var(--tag-bg)] text-[var(--tag-text)]"
                 }`}
               >
                 {count}

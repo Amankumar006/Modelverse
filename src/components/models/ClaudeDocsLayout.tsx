@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import Link from "next/link";
 import type { ModelEntry } from "@/lib/models";
 import ModelDetailTabs from "./ModelDetailTabs";
+import Navbar from "@/components/layout/Navbar";
 import { Search, ChevronDown, Copy, Check, ExternalLink, Terminal, Shield, Layers, FileText } from "lucide-react";
 
 interface ClaudeDocsLayoutProps {
@@ -40,62 +41,14 @@ export default function ClaudeDocsLayout({
   ];
 
   return (
-    <div className="min-h-screen bg-[#181816] text-[#B4B2A9] font-sans antialiased">
-      {/* ── Top Header Navigation Bar ────────────────────────────── */}
-      <header className="border-b border-[#262624] bg-[#181816] sticky top-0 z-50">
-        <div className="mx-auto flex h-14 w-full max-w-[1700px] items-center justify-between px-4 sm:px-6">
-          {/* Brand */}
-          <div className="flex items-center gap-3">
-            <Link href="/" className="flex items-center gap-2 text-[#F0EFEA] hover:opacity-90">
-              <span className="text-emerald-400 font-bold text-xl">✦</span>
-              <span className="font-serif text-lg tracking-tight font-medium text-[#F0EFEA]">
-                Modelverse Platform Docs
-              </span>
-            </Link>
-          </div>
-
-          {/* Desktop Links */}
-          <nav className="hidden lg:flex items-center gap-6 text-xs font-medium text-[#8E8D85]">
-            <Link href="/models" className="hover:text-[#F0EFEA] transition-colors">
-              Messages
-            </Link>
-            <Link href="/models" className="hover:text-[#F0EFEA] transition-colors">
-              Managed Agents
-            </Link>
-            <Link href="/about" className="hover:text-[#F0EFEA] transition-colors">
-              Admin
-            </Link>
-            <button className="flex items-center gap-1 hover:text-[#F0EFEA] transition-colors">
-              Resources <ChevronDown size={12} />
-            </button>
-          </nav>
-
-          {/* Right Action Controls */}
-          <div className="flex items-center gap-3 text-xs text-[#8E8D85]">
-            <span className="hidden sm:inline-flex items-center gap-1 hover:text-[#F0EFEA] cursor-pointer">
-              <span className="font-mono">{`{}`}</span> API reference
-            </span>
-            <span className="hidden md:inline">English ∨</span>
-            <Link
-              href="/models"
-              className="px-3 py-1 rounded border border-[#343431] text-[#F0EFEA] hover:bg-[#252523] transition-colors font-medium"
-            >
-              Console
-            </Link>
-            <Link
-              href="/about"
-              className="px-3 py-1 rounded bg-[#F0EFEA] text-[#181816] font-semibold hover:bg-white transition-colors"
-            >
-              Log in
-            </Link>
-          </div>
-        </div>
-      </header>
+    <div className="min-h-screen bg-[var(--bg)] text-[var(--text)] font-sans antialiased">
+      {/* ── Global Top Navbar ────────────────────────────── */}
+      <Navbar theme="dark" />
 
       {/* ── 3-Column Main Documentation Grid ──────────────────────── */}
-      <div className="mx-auto flex w-full max-w-[1700px]">
+      <div className="mx-auto flex w-full max-w-[1700px] px-4 md:px-6 py-6 gap-6">
         {/* LEFT COLUMN: Sidebar Navigation (~240px) */}
-        <aside className="w-60 shrink-0 hidden md:block border-r border-[#262624] min-h-[calc(100vh-3.5rem)] p-4 space-y-6 sticky top-14 h-[calc(100vh-3.5rem)] overflow-y-auto">
+        <aside className="w-60 shrink-0 hidden md:block rounded-[var(--radius-card)] bg-[var(--card-bg)] shadow-[var(--shadow-card)] p-4 space-y-6 sticky top-20 h-[calc(100vh-6rem)] overflow-y-auto">
           {/* Search Box */}
           <div className="relative">
             <Search size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-[#6E6D66]" />

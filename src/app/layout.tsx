@@ -1,26 +1,20 @@
 import type { Metadata } from "next";
-import { Inter, Cormorant_Garamond } from "next/font/google";
+import { Figtree } from "next/font/google";
 import Script from "next/script";
 import "./globals.css";
 import JsonLd from "@/components/JsonLd";
 import { SITE_URL } from "@/lib/models";
 import Footer from "@/components/layout/Footer";
+import { ThemeProvider } from "@/components/ThemeProvider";
 
 /* ------------------------------------------------------------------ */
 /*  Fonts                                                              */
 /* ------------------------------------------------------------------ */
 
-const inter = Inter({
+const figtree = Figtree({
   subsets: ["latin"],
-  variable: "--font-body",
-  display: "swap",
-});
-
-const cormorant = Cormorant_Garamond({
-  subsets: ["latin"],
-  weight: ["300", "400", "500"],
-  style: ["normal", "italic"],
-  variable: "--font-serif",
+  weight: ["400", "500", "600", "700", "800"],
+  variable: "--font-sans",
   display: "swap",
 });
 
@@ -71,7 +65,6 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  // Sitewide Structured Data: WebSite & Organization
   const sitewideSchema = {
     "@context": "https://schema.org",
     "@graph": [
@@ -101,47 +94,49 @@ export default function RootLayout({
   const gaId = process.env.NEXT_PUBLIC_GA_ID;
 
   return (
-    <html lang="en" className={`${inter.variable} ${cormorant.variable}`}>
-      <body className="min-h-screen bg-black tracking-[-0.02em] antialiased flex flex-col justify-between">
-        <Script
-          id="performance-polyfill"
-          strategy="beforeInteractive"
-          dangerouslySetInnerHTML={{
-            __html: `
-              if (typeof window !== 'undefined' && window.performance && window.performance.measure) {
-                var originalMeasure = window.performance.measure;
-                window.performance.measure = function() {
-                  try {
-                    return originalMeasure.apply(this, arguments);
-                  } catch (e) {
-                    return null;
-                  }
-                };
-              }
-            `,
-          }}
-        />
-        {gaId && (
-          <>
-            <Script
-              src={`https://www.googletagmanager.com/gtag/js?id=${gaId}`}
-              strategy="afterInteractive"
-            />
-            <Script id="google-analytics" strategy="afterInteractive">
-              {`
-                window.dataLayer = window.dataLayer || [];
-                function gtag(){dataLayer.push(arguments);}
-                gtag('js', new Date());
-                gtag('config', '${gaId}');
-              `}
-            </Script>
-          </>
-        )}
-        <div>
-          <JsonLd data={sitewideSchema} />
-          {children}
-        </div>
-        <Footer />
+    <html lang="en" className={`dark ${figtree.variable}`}>
+      <body className="min-h-screen bg-[var(--bg)] text-[var(--text)] tracking-[-0.01em] antialiased flex flex-col justify-between">
+        <ThemeProvider>
+          <Script
+            id="performance-polyfill"
+            strategy="beforeInteractive"
+            dangerouslySetInnerHTML={{
+              __html: `
+                if (typeof window !== 'undefined' && window.performance && window.performance.measure) {
+                  var originalMeasure = window.performance.measure;
+                  window.performance.measure = function() {
+                    try {
+                      return originalMeasure.apply(this, arguments);
+                    } catch (e) {
+                      return null;
+                    }
+                  };
+                }
+              `,
+            }}
+          />
+          {gaId && (
+            <>
+              <Script
+                src={`https://www.googletagmanager.com/gtag/js?id=${gaId}`}
+                strategy="afterInteractive"
+              />
+              <Script id="google-analytics" strategy="afterInteractive">
+                {`
+                  window.dataLayer = window.dataLayer || [];
+                  function gtag(){dataLayer.push(arguments);}
+                  gtag('js', new Date());
+                  gtag('config', '${gaId}');
+                `}
+              </Script>
+            </>
+          )}
+          <div>
+            <JsonLd data={sitewideSchema} />
+            {children}
+          </div>
+          <Footer />
+        </ThemeProvider>
       </body>
     </html>
   );

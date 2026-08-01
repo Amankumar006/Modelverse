@@ -1,7 +1,46 @@
+/* ------------------------------------------------------------------ */
+/*  Daylight Theme Tokens & Utilities                                  */
+/* ------------------------------------------------------------------ */
+
+:root {
+  /* Default to Light Mode Daylight Tokens */
+  --bg: #FDFBF8;
+  --card-bg: #FFFFFF;
+  --text: #2B2620;
+  --muted: #8A8275;
+  --accent: #EF6C55;
+  --accent-soft: #FDE7E2;
+  --accent-contrast: #2B1810;
+  --tag-bg: #FBEEDD;
+  --tag-text: #A56B2C;
+  --shadow: rgba(60, 40, 20, 0.08);
+
+  --radius-card: 20px;
+  --radius-control: 14px;
+  --radius-pill: 999px;
+  --shadow-card: 0 4px 24px var(--shadow);
+}
+
+html.dark, :root.dark {
+  /* Dark Mode Daylight Tokens */
+  --bg: #211D18;
+  --card-bg: #2A2520;
+  --text: #F5EFE6;
+  --muted: #B0A594;
+  --accent: #FF8A72;
+  --accent-soft: #3D2A24;
+  --accent-contrast: #2B1810;
+  --tag-bg: #3A2E1E;
+  --tag-text: #E0B47C;
+  --shadow: rgba(0, 0, 0, 0.35);
+
+  --shadow-card: 0 4px 24px var(--shadow);
+}
+
 @keyframes fadeRise {
   from {
     opacity: 0;
-    transform: translateY(20px);
+    transform: translateY(16px);
   }
   to {
     opacity: 1;
@@ -10,22 +49,11 @@
 }
 
 .animate-fade-rise {
-  animation: fadeRise 0.8s ease-out both;
+  animation: fadeRise 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
-.animate-fade-rise-delay {
-  animation: fadeRise 0.8s ease-out 0.2s both;
-}
-
-.animate-fade-rise-delay-2 {
-  animation: fadeRise 0.8s ease-out 0.4s both;
-}
-
-/* Reduced motion support */
 @media (prefers-reduced-motion: reduce) {
-  .animate-fade-rise,
-  .animate-fade-rise-delay,
-  .animate-fade-rise-delay-2 {
+  .animate-fade-rise {
     animation: none !important;
     opacity: 1 !important;
     transform: none !important;

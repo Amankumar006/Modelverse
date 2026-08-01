@@ -66,16 +66,16 @@ export default function ModelDetailTabs({
 
   return (
     <div className="w-full">
-      {/* Claude Docs Minimal Tab Switcher */}
-      <div className="flex gap-8 border-b border-[#282828]">
+      {/* Daylight Pill Tab Switcher */}
+      <div className="flex gap-2 p-1.5 rounded-[var(--radius-pill)] bg-[var(--card-bg)] shadow-[var(--shadow-card)] w-fit mb-6">
         {tabs.map((t) => (
           <button
             key={t.key}
             onClick={() => setActiveTab(t.key)}
-            className={`-mb-px border-b-2 pb-3 text-sm font-medium transition-colors ${
+            className={`px-4 py-2 rounded-[var(--radius-pill)] text-xs font-bold transition-all ${
               activeTab === t.key
-                ? "border-emerald-400 text-white font-semibold"
-                : "border-transparent text-[#90908F] hover:text-[#E1E1E0]"
+                ? "bg-[var(--accent-soft)] text-[var(--accent)] shadow-sm"
+                : "text-[var(--muted)] hover:text-[var(--text)] hover:bg-[var(--bg)]"
             }`}
           >
             {t.label}

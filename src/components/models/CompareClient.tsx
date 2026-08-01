@@ -388,8 +388,11 @@ export default function CompareClient({ initialModels, allModels }: CompareClien
                 </th>
               ))}
               {Array.from({ length: 4 - models.length }).map((_, i) => (
-                <th key={`empty-${i}`} className="w-72 p-4 align-middle text-center border-b border-white/5 border-dashed bg-white/[0.02]">
-                  <div className="text-gray-500 text-sm italic">Add a model</div>
+                <th key={`empty-${i}`} className="w-72 p-6 align-middle text-center border-2 border-dashed border-[var(--accent)]/20 bg-[var(--tag-bg)]/30 rounded-[var(--radius-card)] m-2">
+                  <div className="text-[var(--tag-text)] text-sm font-semibold flex items-center justify-center gap-1.5">
+                    <Plus size={16} />
+                    <span>Add Model</span>
+                  </div>
                 </th>
               ))}
             </tr>
