@@ -19,6 +19,7 @@ interface PendingModel {
   type?: string;
   status?: string;
   parameters: string;
+  activeParameters?: string;
   contextWindow?: string;
   license: string;
   description?: string;
@@ -708,12 +709,23 @@ export default function AdminReviewPage() {
                       />
                     </div>
                     <div>
-                      <label className="block text-xs font-mono text-slate-400 mb-1">Parameters (e.g. 70B, 304.2B)</label>
+                      <label className="block text-xs font-mono text-slate-400 mb-1">Total Parameters (e.g. 671B or 70B)</label>
                       <input
                         type="text"
                         value={editForm.parameters || ''}
                         onChange={(e) => setEditForm({ ...editForm, parameters: e.target.value })}
+                        placeholder="e.g. 671B or 671B (37B active)"
                         className="w-full bg-slate-950 border border-slate-800 rounded-lg px-3 py-2 text-white focus:outline-none focus:border-indigo-500 font-medium"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-xs font-mono text-slate-400 mb-1">Active Parameters (MoE, e.g. 37B active)</label>
+                      <input
+                        type="text"
+                        value={editForm.activeParameters || ''}
+                        onChange={(e) => setEditForm({ ...editForm, activeParameters: e.target.value })}
+                        placeholder="e.g. 37B active"
+                        className="w-full bg-slate-950 border border-slate-800 rounded-lg px-3 py-2 text-white focus:outline-none focus:border-indigo-500 font-medium text-emerald-400"
                       />
                     </div>
                     <div>

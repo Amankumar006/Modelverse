@@ -36,6 +36,7 @@ export interface ModelEntry extends ModelIndex {
   deployment: string[];
   license: string;
   parameters: string;
+  activeParameters?: string;
   contextWindow: string;
   description: string;
   descriptionDraft?: string;
