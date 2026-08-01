@@ -8,7 +8,7 @@ import { X, Plus, Search, Tag, Shield, Info } from "lucide-react";
 import TypeBadge from "@/components/ui/TypeBadge";
 import ModalityTag from "@/components/ui/ModalityTag";
 import CopyableTable from "@/components/ui/CopyableTable";
-import ModelLogo from "./ModelLogo";
+import ModelLogo from "@/components/ui/ModelLogo";
 
 interface CompareClientProps {
   initialModels: ModelEntry[];

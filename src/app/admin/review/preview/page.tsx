@@ -3,7 +3,7 @@
 import React, { useEffect, useState, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 import Navbar from '@/components/layout/Navbar';
-import ModelLogo from '@/components/models/ModelLogo';
+import ModelLogo from "@/components/ui/ModelLogo";
 import { CheckCircle2, Info, ExternalLink, Shield, Tag, Calendar, Cpu } from 'lucide-react';
 import Link from 'next/link';
 

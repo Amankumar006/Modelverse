@@ -7,7 +7,7 @@ import ModelDetailTabs from "./ModelDetailTabs";
 import Navbar from "@/components/layout/Navbar";
 import { Search, ChevronDown, Copy, Check, ExternalLink, Terminal, Shield, Layers, FileText } from "lucide-react";
 
-interface ClaudeDocsLayoutProps {
+interface ModelDocsLayoutProps {
   model: ModelEntry;
   markdownContent: string | null;
   allModels: ModelEntry[];
@@ -15,13 +15,13 @@ interface ClaudeDocsLayoutProps {
   relatedModels: ModelEntry[];
 }
 
-export default function ClaudeDocsLayout({
+export default function ModelDocsLayout({
   model,
   markdownContent,
   allModels,
   familyMembers,
   relatedModels,
-}: ClaudeDocsLayoutProps) {
+}: ModelDocsLayoutProps) {
   const [copied, setCopied] = useState(false);
   const [activeToc, setActiveToc] = useState("overview");
   const [searchQuery, setSearchQuery] = useState("");
@@ -83,7 +83,7 @@ export default function ClaudeDocsLayout({
 
             <button
               onClick={() => setActiveToc("choosing")}
-              className="w-full text-left px-3 py-2 rounded-[var(--radius-control)] text-[var(--muted)] hover:text-[var(--text)] hover:bg-[var(--bg)] transition-colors font-medium"
+              className="w-full text-left px-3 py-2 rounded-[var(--radius-control)] text-[var(--muted)] hover:text-[var(--text)] hover:bg-[var(--bg)] transition-colors font-medium cursor-pointer"
             >
               Choosing a model
             </button>
@@ -129,7 +129,7 @@ export default function ClaudeDocsLayout({
 
               <button
                 onClick={handleCopyPage}
-                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-[var(--radius-pill)] border border-[var(--muted)]/10 bg-[var(--card-bg)] shadow-[var(--shadow-card)] text-xs font-bold text-[var(--text)] hover:border-[var(--accent)] transition-all cursor-pointer"
+                className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-[var(--radius-pill)] border border-[var(--muted)]/10 bg-[var(--card-bg)] shadow-[var(--shadow-card)] text-xs font-bold text-[var(--text)] hover:border-[var(--accent)] transition-all cursor-pointer"
               >
                 {copied ? <Check size={13} className="text-[var(--accent)]" /> : <Copy size={13} />}
                 <span>{copied ? "Copied!" : "Copy page"}</span>
@@ -137,7 +137,7 @@ export default function ClaudeDocsLayout({
               </button>
             </div>
 
-            <p className="text-base text-[var(--muted)] leading-relaxed max-w-3xl">
+            <p className="text-base text-[var(--muted)] leading-relaxed max-w-3xl font-normal">
               {model.description ||
                 `${model.name} is a state-of-the-art model developed by ${model.developer}. This documentation introduces the available model variants and compares their capability, context window, and pricing performance.`}
             </p>
@@ -146,10 +146,10 @@ export default function ClaudeDocsLayout({
           {/* Section 1: Choosing a model */}
           <section id="choosing" className="space-y-3 pt-6 border-t border-[var(--muted)]/10">
             <h2 className="text-2xl font-extrabold text-[var(--text)]">Choosing a model</h2>
-            <p className="text-sm text-[var(--muted)] leading-relaxed">
+            <p className="text-sm text-[var(--muted)] leading-relaxed font-normal">
               If you&apos;re unsure which model to use, start with <strong className="text-[var(--text)] font-bold">{model.name}</strong> for complex agentic coding, reasoning, and enterprise workloads. For lightweight, low-latency autocomplete or edge tasks, consider smaller parameters.
             </p>
-            <p className="text-sm text-[var(--muted)] leading-relaxed">
+            <p className="text-sm text-[var(--muted)] leading-relaxed font-normal">
               All current {model.developer} models support text and multimodal input, multilingual reasoning, and structured tool calling. Models are available via API, cloud hosters, and open-weights download repositories.
             </p>
           </section>
@@ -157,7 +157,7 @@ export default function ClaudeDocsLayout({
           {/* Section 2: Model Variant Overview */}
           <section className="space-y-4 pt-6 border-t border-[var(--muted)]/10">
             <h2 className="text-2xl font-extrabold text-[var(--text)]">Model Lineage & Specification</h2>
-            <p className="text-sm text-[var(--muted)] leading-relaxed">
+            <p className="text-sm text-[var(--muted)] leading-relaxed font-normal">
               <code className="bg-[var(--tag-bg)] text-[var(--tag-text)] px-2 py-0.5 rounded-[var(--radius-pill)] text-xs font-mono font-bold">{model.slug}</code> is {model.developer}&apos;s primary release in the {model.family || "current"} family.
             </p>
             <div className="p-5 rounded-[var(--radius-card)] bg-[var(--card-bg)] shadow-[var(--shadow-card)] border border-[var(--muted)]/10 space-y-3 text-xs">

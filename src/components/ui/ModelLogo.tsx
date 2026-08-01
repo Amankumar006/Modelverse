@@ -8,7 +8,7 @@ interface ModelLogoProps {
   logo?: string | null;
   name: string;
   developer: string;
-  size?: "sm" | "md" | "lg";
+  size?: "sm" | "md" | "lg" | number;
   className?: string;
 }
 
@@ -21,19 +21,23 @@ export default function ModelLogo({
 }: ModelLogoProps) {
   const [imgError, setImgError] = useState(false);
 
-  const sizeClasses = {
+  const sizeClasses: Record<string, string> = {
     sm: "w-6 h-6 text-xs",
     md: "w-8 h-8 text-sm",
     lg: "w-10 h-10 text-base",
   };
 
-  const iconSizes = {
+  const iconSizes: Record<string, number> = {
     sm: 14,
     md: 18,
     lg: 22,
   };
 
-  // Get initial letters for fallback avatar
+  const isNumericSize = typeof size === "number";
+  const inlineStyle = isNumericSize ? { width: `${size}px`, height: `${size}px` } : undefined;
+  const sizeClass = isNumericSize ? "text-sm" : sizeClasses[size as keyof typeof sizeClasses] || sizeClasses.md;
+  const iconSize = isNumericSize ? Math.max(14, Math.floor(size * 0.45)) : iconSizes[size as keyof typeof iconSizes] || 18;
+
   const getInitials = (devStr: string, modelNameStr: string) => {
     if (devStr.toLowerCase().includes("nvidia")) return "NV";
     if (devStr.toLowerCase().includes("google") || devStr.toLowerCase().includes("deepmind")) return "G";
@@ -48,10 +52,11 @@ export default function ModelLogo({
     return cleanName.slice(0, 2).toUpperCase() || "AI";
   };
 
-  if (logo && !imgError) {
+  if (logo && !imgError && (logo.startsWith("/") || logo.startsWith("http"))) {
     return (
       <div
-        className={`relative rounded-full overflow-hidden shrink-0 border border-white/15 bg-white/5 ${sizeClasses[size]} ${className}`}
+        style={inlineStyle}
+        className={`relative rounded-full overflow-hidden shrink-0 border border-[var(--muted)]/20 bg-[var(--card-bg)] shadow-sm ${sizeClass} ${className}`}
       >
         <Image
           src={logo}
@@ -64,18 +69,18 @@ export default function ModelLogo({
     );
   }
 
-  // Fallback monogram badge
   const initials = getInitials(developer, name);
 
   return (
     <div
-      className={`rounded-full shrink-0 flex items-center justify-center font-bold tracking-tight bg-gradient-to-br from-[#121A15] to-[#1e2e25] text-[#4ADE80] border border-[#4ADE80]/30 shadow-[0_0_12px_rgba(74,222,128,0.15)] ${sizeClasses[size]} ${className}`}
+      style={inlineStyle}
+      className={`rounded-full shrink-0 flex items-center justify-center font-extrabold tracking-tight bg-[var(--accent-soft)] text-[var(--accent)] border border-[var(--accent)]/20 shadow-sm ${sizeClass} ${className}`}
       title={`${name} by ${developer}`}
     >
       {initials ? (
         <span>{initials}</span>
       ) : (
-        <Cpu size={iconSizes[size]} className="text-[#4ADE80]" />
+        <Cpu size={iconSize} className="text-[var(--accent)]" />
       )}
     </div>
   );
