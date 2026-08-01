@@ -34,7 +34,6 @@ export default function ClaudeDocsLayout({
     }
   };
 
-  // Select top models for comparison table (Opus 5, Sonnet 5, Haiku 4.5 / Mythos 5)
   const comparisonModels = [
     model,
     ...allModels.filter((m) => m.id !== model.id && m.verified).slice(0, 3),
@@ -47,44 +46,44 @@ export default function ClaudeDocsLayout({
 
       {/* ── 3-Column Main Documentation Grid ──────────────────────── */}
       <div className="mx-auto flex w-full max-w-[1700px] px-4 md:px-6 py-6 gap-6">
-        {/* LEFT COLUMN: Sidebar Navigation (~240px) */}
-        <aside className="w-60 shrink-0 hidden md:block rounded-[var(--radius-card)] bg-[var(--card-bg)] shadow-[var(--shadow-card)] p-4 space-y-6 sticky top-20 h-[calc(100vh-6rem)] overflow-y-auto">
+        {/* LEFT COLUMN: Sidebar Navigation */}
+        <aside className="w-60 shrink-0 hidden md:block rounded-[var(--radius-card)] bg-[var(--card-bg)] shadow-[var(--shadow-card)] p-4 space-y-6 sticky top-20 h-[calc(100vh-6rem)] overflow-y-auto border border-[var(--muted)]/10">
           {/* Search Box */}
           <div className="relative">
-            <Search size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-[#6E6D66]" />
+            <Search size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-[var(--muted)]" />
             <input
               type="text"
-              placeholder="Search..."
+              placeholder="Search docs..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full rounded-md bg-[#222220] border border-[#30302D] pl-8 pr-8 py-1.5 text-xs text-[#F0EFEA] placeholder:text-[#6E6D66] focus:outline-none focus:border-[#50504B]"
+              className="w-full rounded-[var(--radius-control)] bg-[var(--bg)] border border-[var(--muted)]/10 pl-8 pr-8 py-1.5 text-xs text-[var(--text)] placeholder:text-[var(--muted)] focus:outline-none focus:border-[var(--accent)]"
             />
-            <span className="absolute right-2.5 top-1/2 -translate-y-1/2 text-[10px] font-mono text-[#6E6D66]">
+            <span className="absolute right-2.5 top-1/2 -translate-y-1/2 text-[10px] font-mono text-[var(--muted)]">
               ⌘K
             </span>
           </div>
 
           {/* Menu Sections */}
           <div className="space-y-1 text-xs">
-            <p className="px-2 py-1 font-semibold text-[#F0EFEA] text-xs">Models</p>
+            <p className="px-2 py-1 font-bold text-[var(--text)] text-xs uppercase tracking-wider">Models</p>
 
             <Link
               href={`/models/${model.slug}`}
-              className="block px-2.5 py-1.5 rounded-md bg-[#252523] text-[#F0EFEA] font-medium"
+              className="block px-3 py-2 rounded-[var(--radius-control)] bg-[var(--accent-soft)] text-[var(--accent)] font-bold shadow-sm"
             >
               Models overview
             </Link>
 
             <Link
               href={`/models/developer/${encodeURIComponent(model.developer)}`}
-              className="block px-2.5 py-1.5 rounded-md text-[#9E9D95] hover:text-[#F0EFEA] hover:bg-[#20201E] transition-colors"
+              className="block px-3 py-2 rounded-[var(--radius-control)] text-[var(--muted)] hover:text-[var(--text)] hover:bg-[var(--bg)] transition-colors font-medium"
             >
-              Model IDs and versioning
+              Model IDs & versioning
             </Link>
 
             <button
               onClick={() => setActiveToc("choosing")}
-              className="w-full text-left px-2.5 py-1.5 rounded-md text-[#9E9D95] hover:text-[#F0EFEA] hover:bg-[#20201E] transition-colors"
+              className="w-full text-left px-3 py-2 rounded-[var(--radius-control)] text-[var(--muted)] hover:text-[var(--text)] hover:bg-[var(--bg)] transition-colors font-medium"
             >
               Choosing a model
             </button>
@@ -93,7 +92,7 @@ export default function ClaudeDocsLayout({
               <Link
                 key={member.id}
                 href={`/models/${member.slug}`}
-                className="block px-2.5 py-1.5 rounded-md text-[#9E9D95] hover:text-[#F0EFEA] hover:bg-[#20201E] transition-colors truncate"
+                className="block px-3 py-2 rounded-[var(--radius-control)] text-[var(--muted)] hover:text-[var(--text)] hover:bg-[var(--bg)] transition-colors truncate font-medium"
               >
                 What&apos;s new in {member.name}
               </Link>
@@ -101,158 +100,144 @@ export default function ClaudeDocsLayout({
 
             <Link
               href="/models"
-              className="block px-2.5 py-1.5 rounded-md text-[#9E9D95] hover:text-[#F0EFEA] hover:bg-[#20201E] transition-colors"
+              className="block px-3 py-2 rounded-[var(--radius-control)] text-[var(--muted)] hover:text-[var(--text)] hover:bg-[var(--bg)] transition-colors font-medium"
             >
-              Upgrade between model versions
+              Upgrade model versions
             </Link>
 
             <Link
               href="/models"
-              className="block px-2.5 py-1.5 rounded-md text-[#9E9D95] hover:text-[#F0EFEA] hover:bg-[#20201E] transition-colors"
+              className="block px-3 py-2 rounded-[var(--radius-control)] text-[var(--muted)] hover:text-[var(--text)] hover:bg-[var(--bg)] transition-colors font-medium"
             >
-              Model deprecations
-            </Link>
-
-            <Link
-              href="/models"
-              className="block px-2.5 py-1.5 rounded-md text-[#9E9D95] hover:text-[#F0EFEA] hover:bg-[#20201E] transition-colors"
-            >
-              Model cards
-            </Link>
-
-            <Link
-              href="/models"
-              className="block px-2.5 py-1.5 rounded-md text-[#9E9D95] hover:text-[#F0EFEA] hover:bg-[#20201E] transition-colors"
-            >
-              Pricing
+              Model cards & benchmarks
             </Link>
           </div>
         </aside>
 
-        {/* CENTER COLUMN: Main Reading Area (Max ~820px) */}
-        <main className="flex-1 max-w-[860px] px-6 lg:px-10 py-8 space-y-8 min-w-0">
+        {/* CENTER COLUMN: Main Reading Area */}
+        <main className="flex-1 max-w-[860px] px-4 lg:px-8 py-4 space-y-8 min-w-0">
           {/* Breadcrumb & Header */}
           <div className="space-y-3">
-            <p className="text-xs text-[#7E7D76]">
-              Models & pricing / <span className="text-[#B4B2A9]">Models</span>
+            <p className="text-xs text-[var(--muted)] font-medium">
+              Models & pricing / <span className="text-[var(--text)] font-semibold">Models</span> / {model.name}
             </p>
 
             <div className="flex flex-wrap items-center justify-between gap-4">
-              <h1 className="font-serif text-3xl sm:text-4xl text-[#F0EFEA] tracking-tight font-normal">
+              <h1 className="font-extrabold text-3xl sm:text-4xl text-[var(--text)] tracking-tight">
                 {model.name} Overview
               </h1>
 
               <button
                 onClick={handleCopyPage}
-                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md border border-[#343431] bg-[#20201E] hover:bg-[#2A2A28] text-xs font-medium text-[#D4D3CC] transition-colors"
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-[var(--radius-pill)] border border-[var(--muted)]/10 bg-[var(--card-bg)] shadow-[var(--shadow-card)] text-xs font-bold text-[var(--text)] hover:border-[var(--accent)] transition-all cursor-pointer"
               >
-                {copied ? <Check size={13} className="text-emerald-400" /> : <Copy size={13} />}
+                {copied ? <Check size={13} className="text-[var(--accent)]" /> : <Copy size={13} />}
                 <span>{copied ? "Copied!" : "Copy page"}</span>
-                <ChevronDown size={12} className="text-[#7E7D76]" />
+                <ChevronDown size={12} className="text-[var(--muted)]" />
               </button>
             </div>
 
-            <p className="text-base text-[#B4B2A9] leading-relaxed max-w-3xl">
+            <p className="text-base text-[var(--muted)] leading-relaxed max-w-3xl">
               {model.description ||
                 `${model.name} is a state-of-the-art model developed by ${model.developer}. This documentation introduces the available model variants and compares their capability, context window, and pricing performance.`}
             </p>
           </div>
 
           {/* Section 1: Choosing a model */}
-          <section id="choosing" className="space-y-3 pt-4 border-t border-[#262624]">
-            <h2 className="font-serif text-2xl text-[#F0EFEA]">Choosing a model</h2>
-            <p className="text-sm text-[#B4B2A9] leading-relaxed">
-              If you&apos;re unsure which model to use, start with <strong className="text-[#F0EFEA] font-semibold">{model.name}</strong> for complex agentic coding, reasoning, and enterprise workloads. For lightweight, low-latency autocomplete or edge tasks, consider smaller parameters.
+          <section id="choosing" className="space-y-3 pt-6 border-t border-[var(--muted)]/10">
+            <h2 className="text-2xl font-extrabold text-[var(--text)]">Choosing a model</h2>
+            <p className="text-sm text-[var(--muted)] leading-relaxed">
+              If you&apos;re unsure which model to use, start with <strong className="text-[var(--text)] font-bold">{model.name}</strong> for complex agentic coding, reasoning, and enterprise workloads. For lightweight, low-latency autocomplete or edge tasks, consider smaller parameters.
             </p>
-            <p className="text-sm text-[#B4B2A9] leading-relaxed">
+            <p className="text-sm text-[var(--muted)] leading-relaxed">
               All current {model.developer} models support text and multimodal input, multilingual reasoning, and structured tool calling. Models are available via API, cloud hosters, and open-weights download repositories.
             </p>
           </section>
 
           {/* Section 2: Model Variant Overview */}
-          <section className="space-y-3 pt-4 border-t border-[#262624]">
-            <h2 className="font-serif text-2xl text-[#F0EFEA]">Model Lineage & Specification</h2>
-            <p className="text-sm text-[#B4B2A9] leading-relaxed">
-              <code className="bg-[#282826] text-[#D4D3CC] px-2 py-0.5 rounded text-xs font-mono">{model.slug}</code> is {model.developer}&apos;s primary release in the {model.family || "current"} family.
+          <section className="space-y-4 pt-6 border-t border-[var(--muted)]/10">
+            <h2 className="text-2xl font-extrabold text-[var(--text)]">Model Lineage & Specification</h2>
+            <p className="text-sm text-[var(--muted)] leading-relaxed">
+              <code className="bg-[var(--tag-bg)] text-[var(--tag-text)] px-2 py-0.5 rounded-[var(--radius-pill)] text-xs font-mono font-bold">{model.slug}</code> is {model.developer}&apos;s primary release in the {model.family || "current"} family.
             </p>
-            <div className="p-4 rounded-lg bg-[#1E1E1C] border border-[#2B2B28] space-y-2 text-xs">
-              <div className="flex justify-between py-1 border-b border-[#282825]">
-                <span className="text-[#7E7D76]">Developer</span>
-                <span className="text-[#F0EFEA] font-medium">{model.developer}</span>
+            <div className="p-5 rounded-[var(--radius-card)] bg-[var(--card-bg)] shadow-[var(--shadow-card)] border border-[var(--muted)]/10 space-y-3 text-xs">
+              <div className="flex justify-between py-1.5 border-b border-[var(--muted)]/10">
+                <span className="text-[var(--muted)] font-medium">Developer</span>
+                <span className="text-[var(--text)] font-bold">{model.developer}</span>
               </div>
-              <div className="flex justify-between py-1 border-b border-[#282825]">
-                <span className="text-[#7E7D76]">API Identifier</span>
-                <code className="bg-[#282826] text-[#D4D3CC] px-1.5 py-0.5 rounded font-mono">{model.slug}</code>
+              <div className="flex justify-between py-1.5 border-b border-[var(--muted)]/10">
+                <span className="text-[var(--muted)] font-medium">API Identifier</span>
+                <code className="bg-[var(--tag-bg)] text-[var(--tag-text)] px-2 py-0.5 rounded-[var(--radius-pill)] font-mono font-bold">{model.slug}</code>
               </div>
-              <div className="flex justify-between py-1 border-b border-[#282825]">
-                <span className="text-[#7E7D76]">Parameters</span>
-                <span className="text-[#F0EFEA] font-medium">{model.parameters}</span>
+              <div className="flex justify-between py-1.5 border-b border-[var(--muted)]/10">
+                <span className="text-[var(--muted)] font-medium">Parameters</span>
+                <span className="text-[var(--text)] font-bold tabular-nums font-mono">{model.parameters}</span>
               </div>
-              <div className="flex justify-between py-1 border-b border-[#282825]">
-                <span className="text-[#7E7D76]">Context Window</span>
-                <span className="text-[#F0EFEA] font-medium">{model.contextWindow}</span>
+              <div className="flex justify-between py-1.5 border-b border-[var(--muted)]/10">
+                <span className="text-[var(--muted)] font-medium">Context Window</span>
+                <span className="text-[var(--text)] font-bold tabular-nums font-mono">{model.contextWindow}</span>
               </div>
-              <div className="flex justify-between py-1">
-                <span className="text-[#7E7D76]">License</span>
-                <span className="text-[#F0EFEA] font-medium">{model.license}</span>
+              <div className="flex justify-between py-1.5">
+                <span className="text-[var(--muted)] font-medium">License</span>
+                <span className="text-[var(--text)] font-bold">{model.license}</span>
               </div>
             </div>
           </section>
 
-          {/* Section 3: Latest Models Comparison Table (Anthropic Docs Style Matrix) */}
-          <section id="comparison" className="space-y-4 pt-4 border-t border-[#262624]">
-            <h2 className="font-serif text-2xl text-[#F0EFEA]">Latest models comparison</h2>
-            <div className="overflow-x-auto rounded-lg border border-[#2B2B28] bg-[#1E1E1C]">
-              <table className="w-full text-left text-xs text-[#B4B2A9]">
-                <thead className="bg-[#242422] border-b border-[#2B2B28] text-[#F0EFEA] font-medium">
+          {/* Section 3: Latest Models Comparison Table */}
+          <section id="comparison" className="space-y-4 pt-6 border-t border-[var(--muted)]/10">
+            <h2 className="text-2xl font-extrabold text-[var(--text)]">Latest models comparison</h2>
+            <div className="overflow-x-auto rounded-[var(--radius-card)] border border-[var(--muted)]/10 bg-[var(--card-bg)] shadow-[var(--shadow-card)]">
+              <table className="w-full text-left text-xs text-[var(--muted)]">
+                <thead className="bg-[var(--accent-soft)]/20 border-b border-[var(--muted)]/10 text-[var(--text)] font-bold">
                   <tr>
-                    <th className="p-3 font-medium">Feature</th>
+                    <th className="p-3.5 font-bold">Feature</th>
                     {comparisonModels.map((m) => (
-                      <th key={m.id} className="p-3 font-semibold text-[#F0EFEA]">
+                      <th key={m.id} className="p-3.5 font-bold text-[var(--text)]">
                         {m.name}
                       </th>
                     ))}
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-[#282825]">
+                <tbody className="divide-y divide-[var(--muted)]/10">
                   <tr>
-                    <td className="p-3 font-semibold text-[#F0EFEA]">Description</td>
+                    <td className="p-3.5 font-bold text-[var(--text)]">Description</td>
                     {comparisonModels.map((m) => (
-                      <td key={m.id} className="p-3 text-[11px] leading-normal text-[#9E9D95]">
+                      <td key={m.id} className="p-3.5 text-[11px] leading-relaxed text-[var(--muted)]">
                         {m.description ? m.description.slice(0, 80) + "..." : "Frontier AI model"}
                       </td>
                     ))}
                   </tr>
                   <tr>
-                    <td className="p-3 font-semibold text-[#F0EFEA]">API Identifier</td>
+                    <td className="p-3.5 font-bold text-[var(--text)]">API Identifier</td>
                     {comparisonModels.map((m) => (
-                      <td key={m.id} className="p-3 font-mono text-[11px]">
-                        <code className="bg-[#282826] text-[#D4D3CC] px-2 py-0.5 rounded border border-[#343431]">
+                      <td key={m.id} className="p-3.5 font-mono text-[11px]">
+                        <code className="bg-[var(--tag-bg)] text-[var(--tag-text)] px-2 py-0.5 rounded-[var(--radius-pill)] font-bold">
                           {m.slug}
                         </code>
                       </td>
                     ))}
                   </tr>
                   <tr>
-                    <td className="p-3 font-semibold text-[#F0EFEA]">Parameters</td>
+                    <td className="p-3.5 font-bold text-[var(--text)]">Parameters</td>
                     {comparisonModels.map((m) => (
-                      <td key={m.id} className="p-3 font-mono text-[#F0EFEA]">
+                      <td key={m.id} className="p-3.5 font-mono tabular-nums text-[var(--text)] font-bold">
                         {m.parameters !== "undisclosed" ? m.parameters : "—"}
                       </td>
                     ))}
                   </tr>
                   <tr>
-                    <td className="p-3 font-semibold text-[#F0EFEA]">Context Window</td>
+                    <td className="p-3.5 font-bold text-[var(--text)]">Context Window</td>
                     {comparisonModels.map((m) => (
-                      <td key={m.id} className="p-3 font-mono text-[#F0EFEA]">
+                      <td key={m.id} className="p-3.5 font-mono tabular-nums text-[var(--text)] font-bold">
                         {m.contextWindow !== "undisclosed" ? m.contextWindow : "—"}
                       </td>
                     ))}
                   </tr>
                   <tr>
-                    <td className="p-3 font-semibold text-[#F0EFEA]">License / Type</td>
+                    <td className="p-3.5 font-bold text-[var(--text)]">License / Type</td>
                     {comparisonModels.map((m) => (
-                      <td key={m.id} className="p-3 text-[#B4B2A9] capitalize">
+                      <td key={m.id} className="p-3.5 text-[var(--muted)] capitalize font-medium">
                         {m.type.replace("-", " ")}
                       </td>
                     ))}
@@ -263,42 +248,32 @@ export default function ClaudeDocsLayout({
           </section>
 
           {/* Section 4: Detailed Model Tabs & Markdown Readme */}
-          <section className="pt-4 border-t border-[#262624]">
+          <section className="pt-6 border-t border-[var(--muted)]/10">
             <ModelDetailTabs model={model} markdownContent={markdownContent} />
           </section>
         </main>
 
-        {/* RIGHT COLUMN: Table of Contents (~220px) */}
-        <aside className="w-52 shrink-0 hidden xl:block p-6 border-l border-[#262624] sticky top-14 h-[calc(100vh-3.5rem)] text-xs space-y-4">
-          <div className="flex items-center gap-1.5 text-[#F0EFEA] font-medium">
-            <span className="w-1 h-3 bg-[#F0EFEA] rounded-full" />
-            <span>Choosing a model</span>
+        {/* RIGHT COLUMN: Table of Contents */}
+        <aside className="w-56 shrink-0 hidden xl:block p-5 border-l border-[var(--muted)]/10 sticky top-20 h-[calc(100vh-6rem)] text-xs space-y-4">
+          <div className="flex items-center gap-1.5 text-[var(--text)] font-bold">
+            <span className="w-1.5 h-3.5 bg-[var(--accent)] rounded-full" />
+            <span>Table of Contents</span>
           </div>
 
-          <ul className="space-y-2 text-[#7E7D76] pl-2 border-l border-[#262624]">
+          <ul className="space-y-2.5 text-[var(--muted)] pl-2 border-l border-[var(--muted)]/10 font-medium">
             <li>
-              <a href="#choosing" className="hover:text-[#F0EFEA] transition-colors block">
+              <a href="#choosing" className="hover:text-[var(--accent)] transition-colors block">
                 {model.developer} model overview
               </a>
             </li>
             <li>
-              <a href="#comparison" className="hover:text-[#F0EFEA] transition-colors block">
+              <a href="#comparison" className="hover:text-[var(--accent)] transition-colors block">
                 Latest models comparison
               </a>
             </li>
             <li>
-              <a href="#benchmarks" className="hover:text-[#F0EFEA] transition-colors block">
-                Prompt and output performance
-              </a>
-            </li>
-            <li>
-              <a href="#resources" className="hover:text-[#F0EFEA] transition-colors block">
-                Migrating to {model.name}
-              </a>
-            </li>
-            <li>
-              <a href="#resources" className="hover:text-[#F0EFEA] transition-colors block">
-                Get started with {model.developer}
+              <a href="#benchmarks" className="hover:text-[var(--accent)] transition-colors block">
+                Benchmarks & specifications
               </a>
             </li>
           </ul>

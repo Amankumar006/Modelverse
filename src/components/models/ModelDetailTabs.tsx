@@ -14,31 +14,31 @@ interface ModelDetailTabsProps {
 }
 
 const DOT = {
-  active: "bg-emerald-500",
+  active: "bg-[var(--accent)]",
   deprecated: "bg-amber-500",
   sunset: "bg-rose-500",
   vendor: "bg-amber-500",
-  independent: "bg-emerald-500",
+  independent: "bg-[var(--accent)]",
 };
 
 function DraftLabel() {
   return (
-    <p className="mb-2 text-xs text-[#D97757] font-medium">
+    <p className="mb-2 text-xs text-[var(--accent)] font-semibold">
       Draft — unreviewed, curator preview only
     </p>
   );
 }
 
 function Empty({ children }: { children: React.ReactNode }) {
-  return <p className="text-sm text-[#90908F]">{children}</p>;
+  return <p className="text-sm text-[var(--muted)]">{children}</p>;
 }
 
 function Row({ label, value }: { label: string; value?: string | number | null }) {
   if (!value) return null;
   return (
-    <div className="flex items-baseline justify-between border-b border-[#282828] py-2.5 text-sm">
-      <dt className="text-[#90908F]">{label}</dt>
-      <dd className="tabular-nums text-[#E1E1E0] font-mono">{value}</dd>
+    <div className="flex items-baseline justify-between border-b border-[var(--muted)]/10 py-2.5 text-sm">
+      <dt className="text-[var(--muted)] font-medium">{label}</dt>
+      <dd className="tabular-nums text-[var(--text)] font-mono font-bold">{value}</dd>
     </div>
   );
 }
@@ -67,12 +67,12 @@ export default function ModelDetailTabs({
   return (
     <div className="w-full">
       {/* Daylight Pill Tab Switcher */}
-      <div className="flex gap-2 p-1.5 rounded-[var(--radius-pill)] bg-[var(--card-bg)] shadow-[var(--shadow-card)] w-fit mb-6">
+      <div className="flex gap-2 p-1.5 rounded-[var(--radius-pill)] bg-[var(--card-bg)] shadow-[var(--shadow-card)] border border-[var(--muted)]/10 w-fit mb-6">
         {tabs.map((t) => (
           <button
             key={t.key}
             onClick={() => setActiveTab(t.key)}
-            className={`px-4 py-2 rounded-[var(--radius-pill)] text-xs font-bold transition-all ${
+            className={`px-4 py-2 rounded-[var(--radius-pill)] text-xs font-bold transition-all cursor-pointer ${
               activeTab === t.key
                 ? "bg-[var(--accent-soft)] text-[var(--accent)] shadow-sm"
                 : "text-[var(--muted)] hover:text-[var(--text)] hover:bg-[var(--bg)]"
@@ -84,16 +84,16 @@ export default function ModelDetailTabs({
       </div>
 
       {/* Tab Content Panels */}
-      <div className="py-7">
+      <div className="py-4">
         {/* Tab 1: Overview */}
         {activeTab === "overview" && (
           <div className="space-y-6">
             {hasLiveDescription ? (
-              <p className="max-w-2xl leading-relaxed text-[#E1E1E0] text-base">{model.description}</p>
+              <p className="max-w-2xl leading-relaxed text-[var(--text)] text-base font-normal">{model.description}</p>
             ) : showDraftPreview && hasDraftDescription ? (
               <div>
                 <DraftLabel />
-                <p className="max-w-2xl leading-relaxed text-[#90908F] text-base">{model.descriptionDraft}</p>
+                <p className="max-w-2xl leading-relaxed text-[var(--muted)] text-base">{model.descriptionDraft}</p>
               </div>
             ) : (
               <Empty>Enrichment in progress — a reviewed description isn&apos;t available yet.</Empty>
@@ -101,7 +101,7 @@ export default function ModelDetailTabs({
 
             {/* Markdown Documentation */}
             {markdownContent && (
-              <div className="pt-6 border-t border-[#282828]">
+              <div className="pt-6 border-t border-[var(--muted)]/10">
                 <MarkdownRenderer content={markdownContent} />
               </div>
             )}
@@ -112,12 +112,12 @@ export default function ModelDetailTabs({
         {activeTab === "specs" && (
           <div className="space-y-8">
             <section>
-              <h3 className="mb-3 text-xs uppercase tracking-wider font-semibold text-[#90908F]">Key features</h3>
+              <h3 className="mb-3 text-xs uppercase tracking-wider font-bold text-[var(--muted)]">Key features</h3>
               {liveFeatures.length > 0 ? (
-                <ul className="space-y-2 text-sm text-[#E1E1E0]">
+                <ul className="space-y-2 text-sm text-[var(--text)]">
                   {liveFeatures.map((f) => (
                     <li key={f} className="flex items-start gap-2">
-                      <span className="text-[#90908F]">—</span>
+                      <span className="text-[var(--muted)]">—</span>
                       <span>{f}</span>
                     </li>
                   ))}
@@ -125,10 +125,10 @@ export default function ModelDetailTabs({
               ) : showDraftFeatures ? (
                 <div>
                   <DraftLabel />
-                  <ul className="space-y-2 text-sm text-[#90908F]">
+                  <ul className="space-y-2 text-sm text-[var(--muted)]">
                     {draftFeatures.map((f) => (
                       <li key={f} className="flex items-start gap-2">
-                        <span className="text-[#90908F]">—</span>
+                        <span className="text-[var(--muted)]">—</span>
                         <span>{f}</span>
                       </li>
                     ))}
@@ -140,8 +140,8 @@ export default function ModelDetailTabs({
             </section>
 
             <section>
-              <h3 className="mb-2 text-xs uppercase tracking-wider font-semibold text-[#90908F]">Specifications</h3>
-              <dl>
+              <h3 className="mb-2 text-xs uppercase tracking-wider font-bold text-[var(--muted)]">Specifications</h3>
+              <dl className="bg-[var(--card-bg)] shadow-[var(--shadow-card)] rounded-[var(--radius-card)] p-4 border border-[var(--muted)]/10">
                 <Row label="Parameters" value={formatParameters(model)} />
                 {model.activeParameters && (
                   <Row label="Active Parameters (MoE)" value={model.activeParameters} />
@@ -160,24 +160,26 @@ export default function ModelDetailTabs({
         {activeTab === "benchmarks" && (
           <div className="space-y-8">
             <section>
-              <h3 className="mb-3 text-xs uppercase tracking-wider font-semibold text-[#90908F]">Benchmarks</h3>
+              <h3 className="mb-3 text-xs uppercase tracking-wider font-bold text-[var(--muted)]">Benchmarks</h3>
               {model.benchmarks?.length ? (
-                <table className="w-full text-sm">
-                  <tbody>
-                    {model.benchmarks.map((b) => (
-                      <tr key={b.name} className="border-b border-[#282828]">
-                        <td className="py-2.5 text-[#E1E1E0] font-medium">{b.name}</td>
-                        <td className="py-2.5 tabular-nums text-white font-mono font-bold">{b.score}</td>
-                        <td className="py-2.5 text-right">
-                          <span className="inline-flex items-center gap-1.5 text-xs text-[#90908F]">
-                            <span className={`h-1.5 w-1.5 rounded-full ${b.sourceType === "vendor-reported" ? DOT.vendor : DOT.independent}`} />
-                            {b.sourceType === "vendor-reported" ? "Vendor-reported" : "Independent"}
-                          </span>
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
+                <div className="bg-[var(--card-bg)] shadow-[var(--shadow-card)] rounded-[var(--radius-card)] p-4 border border-[var(--muted)]/10">
+                  <table className="w-full text-sm">
+                    <tbody>
+                      {model.benchmarks.map((b) => (
+                        <tr key={b.name} className="border-b border-[var(--muted)]/10 last:border-0">
+                          <td className="py-2.5 text-[var(--text)] font-semibold">{b.name}</td>
+                          <td className="py-2.5 tabular-nums text-[var(--accent)] font-mono font-bold">{b.score}</td>
+                          <td className="py-2.5 text-right">
+                            <span className="inline-flex items-center gap-1.5 text-xs text-[var(--muted)]">
+                              <span className={`h-2 w-2 rounded-full ${b.sourceType === "vendor-reported" ? DOT.vendor : DOT.independent}`} />
+                              {b.sourceType === "vendor-reported" ? "Vendor-reported" : "Independent"}
+                            </span>
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
               ) : (
                 <Empty>No benchmark data recorded yet.</Empty>
               )}
@@ -185,18 +187,18 @@ export default function ModelDetailTabs({
 
             {/* Vision Model Interactive Comparison Chart */}
             {(model.modality.includes("image") || model.primaryTask.includes("image")) && (
-              <section className="pt-4 border-t border-[#282828]">
+              <section className="pt-4 border-t border-[var(--muted)]/10">
                 <VisionBenchmarkChart />
               </section>
             )}
 
             <section>
-              <h3 className="mb-2 text-xs uppercase tracking-wider font-semibold text-[#90908F]">Pricing</h3>
+              <h3 className="mb-2 text-xs uppercase tracking-wider font-bold text-[var(--muted)]">Pricing</h3>
               {model.pricing && model.pricing.length > 0 ? (
-                <div className="space-y-2">
+                <div className="space-y-2 bg-[var(--card-bg)] shadow-[var(--shadow-card)] rounded-[var(--radius-card)] p-4 border border-[var(--muted)]/10">
                   {model.pricing.map((p, idx) => (
-                    <p key={idx} className="text-sm text-[#E1E1E0]">
-                      {p.tier ? <span className="font-semibold text-white mr-1.5">{p.tier}:</span> : null}
+                    <p key={idx} className="text-sm text-[var(--text)]">
+                      {p.tier ? <span className="font-bold text-[var(--text)] mr-1.5">{p.tier}:</span> : null}
                       ${p.amount} {p.currency || "USD"} / {p.unit}
                     </p>
                   ))}
@@ -212,19 +214,19 @@ export default function ModelDetailTabs({
         {activeTab === "resources" && (
           <div className="space-y-8">
             <section>
-              <h3 className="mb-3 text-xs uppercase tracking-wider font-semibold text-[#90908F]">Links</h3>
+              <h3 className="mb-3 text-xs uppercase tracking-wider font-bold text-[var(--muted)]">Links</h3>
               {linkEntries.length ? (
-                <ul className="space-y-2">
+                <ul className="space-y-2 bg-[var(--card-bg)] shadow-[var(--shadow-card)] rounded-[var(--radius-card)] p-4 border border-[var(--muted)]/10">
                   {linkEntries.map(([key, url]) => (
                     <li key={key}>
                       <a
                         href={url}
                         target="_blank"
                         rel="noreferrer"
-                        className="inline-flex items-center gap-1 text-sm text-[#E1E1E0] hover:text-[#D97757] hover:underline transition-colors capitalize"
+                        className="inline-flex items-center gap-1.5 text-sm text-[var(--text)] hover:text-[var(--accent)] hover:underline transition-colors capitalize font-medium"
                       >
                         {key === "huggingface" ? "Hugging Face" : key === "github" ? "GitHub Repository" : key === "blogPost" ? "Developer Blog" : key}
-                        <ArrowUpRight size={13} className="text-[#90908F]" aria-hidden />
+                        <ArrowUpRight size={13} className="text-[var(--muted)]" aria-hidden />
                       </a>
                     </li>
                   ))}
@@ -235,13 +237,13 @@ export default function ModelDetailTabs({
             </section>
 
             <section>
-              <h3 className="mb-1 text-xs uppercase tracking-wider font-semibold text-[#90908F]">Sources</h3>
-              <p className="mb-2 text-xs text-[#666664]">Citations used to compile this entry.</p>
+              <h3 className="mb-1 text-xs uppercase tracking-wider font-bold text-[var(--muted)]">Sources</h3>
+              <p className="mb-2 text-xs text-[var(--muted)]">Citations used to compile this entry.</p>
               {model.sources?.length ? (
                 <ul className="space-y-1.5">
                   {model.sources.map((s) => (
-                    <li key={s} className="break-all text-xs font-mono text-[#90908F]">
-                      <a href={s} target="_blank" rel="noreferrer" className="hover:text-[#D97757] hover:underline">
+                    <li key={s} className="break-all text-xs font-mono text-[var(--muted)]">
+                      <a href={s} target="_blank" rel="noreferrer" className="hover:text-[var(--accent)] hover:underline">
                         {s}
                       </a>
                     </li>
