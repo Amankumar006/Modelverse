@@ -424,9 +424,18 @@ export default function AdminReviewPage() {
                       modalTab === 'preview' ? 'bg-indigo-600 text-white' : 'text-slate-400 hover:text-white'
                     }`}
                   >
-                    👁️ Detail Preview
+                    👁️ In-Modal Preview
                   </button>
                 </div>
+                <a
+                  href={`/admin/review/preview?filename=${encodeURIComponent(activeModalModel.filename)}`}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="px-3 py-1.5 bg-indigo-950/80 hover:bg-indigo-900 border border-indigo-700/50 text-indigo-300 text-xs font-semibold rounded-lg transition flex items-center gap-1"
+                >
+                  <span>↗️</span>
+                  <span>Full Page Tab</span>
+                </a>
                 <button
                   onClick={closeEditModal}
                   className="p-1.5 text-slate-400 hover:text-white hover:bg-slate-800 rounded-lg text-sm"
@@ -587,16 +596,28 @@ export default function AdminReviewPage() {
                 </div>
               ) : (
                 /* Live Preview Mode */
-                <div className="bg-[#141414] border border-[#282828] rounded-xl p-6 text-white space-y-6">
-                  <div className="border-b border-white/10 pb-4">
-                    <div className="flex items-center gap-2 text-xs text-emerald-400 font-mono mb-1">
-                      <span>VERIFIED MODEL PREVIEW</span>
+                <div className="bg-[#141414] border border-[#282828] rounded-xl p-6 text-white space-y-6 font-sans">
+                  {/* Hero Header */}
+                  <div className="border-b border-white/10 pb-4 flex items-center justify-between">
+                    <div>
+                      <div className="flex items-center gap-2 text-xs text-emerald-400 font-mono mb-1">
+                        <span>LIVE MODEL PAGE PREVIEW</span>
+                      </div>
+                      <h2 className="text-2xl font-bold text-white tracking-tight">{editForm.name || 'Untitled Model'}</h2>
+                      <p className="text-sm text-[#4ADE80] font-medium mt-1">{editForm.developer || 'Unknown Developer'}</p>
                     </div>
-                    <h2 className="text-2xl font-bold text-white">{editForm.name}</h2>
-                    <p className="text-sm text-[#4ADE80] mt-1">{editForm.developer}</p>
+                    <a
+                      href={`/admin/review/preview?filename=${encodeURIComponent(activeModalModel.filename)}`}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="px-3 py-1.5 bg-emerald-600/20 text-emerald-300 border border-emerald-500/30 rounded-lg text-xs font-semibold hover:bg-emerald-600/30 transition flex items-center gap-1"
+                    >
+                      <span>↗️ Open Full Screen Preview</span>
+                    </a>
                   </div>
 
-                  <div className="grid grid-cols-3 gap-4 p-4 bg-[#1C1C1E] rounded-xl border border-[#282828]">
+                  {/* Spec Bar */}
+                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 p-4 bg-[#1C1C1E] rounded-xl border border-[#282828]">
                     <div>
                       <span className="text-xs text-gray-400 block font-mono">Parameters</span>
                       <span className="text-sm font-semibold text-white font-mono">{editForm.parameters || 'Undisclosed'}</span>
@@ -609,21 +630,50 @@ export default function AdminReviewPage() {
                       <span className="text-xs text-gray-400 block font-mono">Context Window</span>
                       <span className="text-sm font-semibold text-emerald-400 font-mono">{editForm.contextWindow || 'Unknown'}</span>
                     </div>
+                    <div>
+                      <span className="text-xs text-gray-400 block font-mono">Release Date</span>
+                      <span className="text-sm font-semibold text-white">{editForm.releaseDate || '2026'}</span>
+                    </div>
                   </div>
 
+                  {/* Trust Banner */}
+                  <div className="p-3.5 bg-emerald-950/30 border border-emerald-500/20 text-emerald-300 rounded-xl text-xs flex items-center gap-2">
+                    <span>ℹ️</span>
+                    <span><strong>Trust Status: APPROVED (PREVIEW)</strong> — Facts corroborated against primary source.</span>
+                  </div>
+
+                  {/* Description */}
                   <div>
-                    <h4 className="text-xs font-mono font-semibold text-gray-400 uppercase mb-2">Description</h4>
-                    <p className="text-sm text-gray-300 leading-relaxed">{editForm.description || 'No description provided.'}</p>
+                    <h4 className="text-xs font-mono font-semibold text-gray-400 uppercase mb-2">Model Description</h4>
+                    <p className="text-sm text-gray-300 leading-relaxed bg-[#1C1C1E] p-4 rounded-xl border border-[#282828]">
+                      {editForm.description || 'No description provided.'}
+                    </p>
                   </div>
 
+                  {/* Key Capabilities */}
+                  {editForm.keyFeatures && editForm.keyFeatures.length > 0 && (
+                    <div>
+                      <h4 className="text-xs font-mono font-semibold text-gray-400 uppercase mb-2">Key Capabilities ({editForm.keyFeatures.length})</h4>
+                      <ul className="grid grid-cols-1 md:grid-cols-2 gap-2">
+                        {editForm.keyFeatures.map((feat, i) => (
+                          <li key={i} className="text-xs text-gray-300 bg-[#1C1C1E] p-3 rounded-lg border border-[#282828] flex items-start gap-2">
+                            <span className="text-emerald-400">•</span>
+                            <span>{feat}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+
+                  {/* Benchmarks Grid */}
                   <div>
                     <h4 className="text-xs font-mono font-semibold text-gray-400 uppercase mb-2">Benchmark Scores ({editForm.benchmarks?.length || 0})</h4>
                     {(editForm.benchmarks || []).length > 0 ? (
-                      <div className="grid grid-cols-2 gap-3">
+                      <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
                         {editForm.benchmarks?.map((b, i) => (
-                          <div key={i} className="p-3 bg-[#1C1C1E] border border-[#282828] rounded-lg flex justify-between items-center">
-                            <span className="text-xs text-gray-300 font-medium">{b.name}</span>
-                            <span className="text-sm font-bold text-emerald-400 font-mono">{b.score}</span>
+                          <div key={i} className="p-3.5 bg-[#1C1C1E] border border-[#282828] rounded-xl flex flex-col gap-1">
+                            <span className="text-xs text-gray-400 font-medium">{b.name}</span>
+                            <span className="text-lg font-bold text-emerald-400 font-mono">{b.score}</span>
                           </div>
                         ))}
                       </div>
