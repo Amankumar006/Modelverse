@@ -39,6 +39,11 @@ jobs:
       - name: Instant Search Engine Indexing Ping (IndexNow)
         run: node scripts/ping-search-engines.js
 
+      - name: Send Discord Channel Webhook Notification
+        env:
+          DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
+        run: node scripts/post-to-discord.js
+
       - name: Send Gmail Digest Notification
         if: env.NEW_MODELS_PUSHED == 'true'
         uses: dawidd6/action-send-mail@v3

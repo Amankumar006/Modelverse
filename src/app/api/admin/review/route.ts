@@ -171,10 +171,14 @@ export async function POST(request: Request) {
         revalidatePath('/models');
         if (model.slug) {
           revalidatePath(`/models/${model.slug}`);
-          // Trigger instant search engine indexing ping
+          // Trigger instant search engine indexing ping & Discord webhook
           try {
             const { pingSearchEngines } = require('../../../../../scripts/ping-search-engines');
             pingSearchEngines([`https://www.themodelverse.in/models/${model.slug}`]);
+          } catch (e) {}
+          try {
+            const { postToDiscord } = require('../../../../../scripts/post-to-discord');
+            postToDiscord(model, null);
           } catch (e) {}
         }
       } catch (e) {}
