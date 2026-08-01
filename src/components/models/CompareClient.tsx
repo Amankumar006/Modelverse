@@ -4,7 +4,7 @@ import { useState, useRef, useEffect, useMemo } from "react";
 import { useRouter, usePathname, useSearchParams } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
-import { ModelEntry } from "@/lib/models";
+import { ModelEntry, formatParameters } from "@/lib/models";
 import { X, Plus, Search, ChevronDown, Activity, Calendar, Server, Tag, Shield, FileCode2, Info } from "lucide-react";
 import TypeBadge from "@/components/ui/TypeBadge";
 import ModalityTag from "@/components/ui/ModalityTag";
@@ -422,7 +422,7 @@ export default function CompareClient({ initialModels, allModels }: CompareClien
               <td className="p-4 text-sm font-semibold text-gray-300 bg-[#0E0E10] sticky left-0 z-10 border-r border-white/10">Parameters</td>
               {models.map((model) => (
                 <td key={model.id} className="p-4 text-sm text-white font-mono font-medium">
-                  {model.parameters || "Undisclosed"}
+                  {formatParameters(model)}
                 </td>
               ))}
               {Array.from({ length: 4 - models.length }).map((_, i) => (

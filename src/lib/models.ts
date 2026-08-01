@@ -253,6 +253,21 @@ export function getDeveloperCounts(): { developer: string; count: number }[] {
     .sort((a, b) => b.count - a.count || a.developer.localeCompare(b.developer));
 }
 
+/** Format parameters display string including active parameters if present */
+export function formatParameters(model: { parameters?: string; activeParameters?: string }): string {
+  if (!model.parameters) return "Undisclosed";
+  if (model.activeParameters) {
+    const active = model.activeParameters.toLowerCase().includes("active")
+      ? model.activeParameters
+      : `${model.activeParameters} active`;
+    if (model.parameters.includes("(") || model.parameters.toLowerCase().includes("active")) {
+      return model.parameters;
+    }
+    return `${model.parameters} (${active})`;
+  }
+  return model.parameters;
+}
+
 /* ------------------------------------------------------------------ */
 /*  Constants                                                          */
 /* ------------------------------------------------------------------ */

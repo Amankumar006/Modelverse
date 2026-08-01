@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import type { ModelEntry } from "@/lib/models";
+import { formatParameters } from "@/lib/models";
 import MarkdownRenderer from "@/components/ui/MarkdownRenderer";
 import { ArrowUpRight } from "lucide-react";
 import VisionBenchmarkChart from "./VisionBenchmarkChart";
@@ -141,7 +142,10 @@ export default function ModelDetailTabs({
             <section>
               <h3 className="mb-2 text-xs uppercase tracking-wider font-semibold text-[#90908F]">Specifications</h3>
               <dl>
-                <Row label="Parameters" value={model.parameters !== "undisclosed" ? model.parameters : undefined} />
+                <Row label="Parameters" value={formatParameters(model)} />
+                {model.activeParameters && (
+                  <Row label="Active Parameters (MoE)" value={model.activeParameters} />
+                )}
                 <Row label="Context window" value={model.contextWindow !== "undisclosed" ? model.contextWindow : undefined} />
                 <Row label="License" value={model.license !== "Other/Custom" ? model.license : undefined} />
                 <Row label="Primary task" value={model.primaryTask.replace(/-/g, " ")} />
