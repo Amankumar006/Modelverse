@@ -489,13 +489,13 @@ function ModelCatalogContent({
   return (
     <div className="flex flex-col lg:flex-row gap-8 items-start relative w-full max-w-full overflow-hidden">
       {/* ── Desktop Sidebar Facets ───────────────────────────── */}
-      <aside className="hidden lg:block w-64 shrink-0 space-y-5 sticky top-16 max-h-[calc(100vh-5rem)] overflow-y-auto pr-2 no-scrollbar border-r border-[#282828]">
+      <aside className="hidden lg:block w-64 shrink-0 space-y-5 sticky top-[72px] max-h-[calc(100vh-5.5rem)] overflow-y-auto pr-3 border-r border-[var(--muted)]/10 text-[var(--text)]">
         <div className="flex items-center justify-between pr-2">
-          <span className="text-xs font-semibold uppercase tracking-wider text-[#90908F]">Filters</span>
+          <span className="text-xs font-bold uppercase tracking-wider text-[var(--muted)]">Filters</span>
           {hasActiveFilters && (
             <button
               onClick={clearAllFilters}
-              className="text-xs text-[#D97757] hover:underline font-medium"
+              className="text-xs text-[var(--accent)] hover:underline font-bold cursor-pointer"
             >
               Clear All
             </button>
@@ -507,15 +507,15 @@ function ModelCatalogContent({
       {/* ── Main Catalog Workspace ───────────────────────────── */}
       <div className="flex-1 min-w-0 w-full space-y-6">
         {/* Horizontal Filter Task & Type Bar */}
-        <div className="space-y-3 border-b border-[#282828] pb-5">
+        <div className="space-y-3 border-b border-[var(--muted)]/10 pb-5">
           <div className="flex items-center gap-2 overflow-x-auto pb-1 no-scrollbar w-full">
-            <span className="text-xs font-semibold uppercase tracking-wider text-[#90908F] shrink-0 mr-1">Task:</span>
+            <span className="text-xs font-bold uppercase tracking-wider text-[var(--muted)] shrink-0 mr-1">Task:</span>
             <button
               onClick={() => setFilters((f) => ({ ...f, task: [] }))}
-              className={`px-3 py-1 rounded-full text-xs font-medium transition-colors whitespace-nowrap ${
+              className={`px-3.5 py-1.5 rounded-[var(--radius-pill)] text-xs font-medium transition-all whitespace-nowrap cursor-pointer ${
                 filters.task.length === 0
-                  ? "bg-white text-[#141414] font-semibold"
-                  : "bg-[#242426] text-[#90908F] hover:text-white border border-[#333333]"
+                  ? "bg-[var(--accent-soft)] text-[var(--accent)] font-bold shadow-sm border border-[var(--accent)]/20"
+                  : "bg-[var(--card-bg)] text-[var(--muted)] hover:text-[var(--text)] border border-[var(--muted)]/10 shadow-[var(--shadow-card)]"
               }`}
             >
               All Tasks ({models.length})
@@ -534,14 +534,14 @@ function ModelCatalogContent({
                       return { ...f, task: newTasks };
                     });
                   }}
-                  className={`px-3 py-1 rounded-full text-xs font-medium transition-colors whitespace-nowrap flex items-center gap-1.5 ${
+                  className={`px-3.5 py-1.5 rounded-[var(--radius-pill)] text-xs font-medium transition-all whitespace-nowrap flex items-center gap-1.5 cursor-pointer ${
                     isActive
-                      ? "bg-white text-[#141414] font-semibold"
-                      : "bg-[#242426] text-[#90908F] hover:text-white border border-[#333333]"
+                      ? "bg-[var(--accent-soft)] text-[var(--accent)] font-bold shadow-sm border border-[var(--accent)]/20"
+                      : "bg-[var(--card-bg)] text-[var(--muted)] hover:text-[var(--text)] border border-[var(--muted)]/10 shadow-[var(--shadow-card)]"
                   }`}
                 >
                   <span>{opt.label}</span>
-                  <span className={`text-[10px] px-1.5 py-0.2 rounded-full font-mono ${isActive ? "bg-black/20 text-[#141414]" : "bg-[#1E1E1E] text-gray-400"}`}>
+                  <span className={`text-[10px] px-1.5 py-0.2 rounded-full font-mono tabular-nums ${isActive ? "bg-[var(--accent)]/15 text-[var(--accent)]" : "bg-[var(--muted)]/10 text-[var(--muted)]"}`}>
                     {count}
                   </span>
                 </button>
@@ -550,13 +550,13 @@ function ModelCatalogContent({
           </div>
 
           <div className="flex items-center gap-2 overflow-x-auto pb-1 no-scrollbar w-full">
-            <span className="text-xs font-semibold uppercase tracking-wider text-[#90908F] shrink-0 mr-1">Type:</span>
+            <span className="text-xs font-bold uppercase tracking-wider text-[var(--muted)] shrink-0 mr-1">Type:</span>
             <button
               onClick={() => setFilters((f) => ({ ...f, type: [] }))}
-              className={`px-3 py-1 rounded-full text-xs font-medium transition-colors whitespace-nowrap ${
+              className={`px-3.5 py-1.5 rounded-[var(--radius-pill)] text-xs font-medium transition-all whitespace-nowrap cursor-pointer ${
                 filters.type.length === 0
-                  ? "bg-white text-[#141414] font-semibold"
-                  : "bg-[#242426] text-[#90908F] hover:text-white border border-[#333333]"
+                  ? "bg-[var(--accent-soft)] text-[var(--accent)] font-bold shadow-sm border border-[var(--accent)]/20"
+                  : "bg-[var(--card-bg)] text-[var(--muted)] hover:text-[var(--text)] border border-[var(--muted)]/10 shadow-[var(--shadow-card)]"
               }`}
             >
               All Types
@@ -575,14 +575,14 @@ function ModelCatalogContent({
                       return { ...f, type: newType };
                     });
                   }}
-                  className={`px-3 py-1 rounded-full text-xs font-medium transition-colors whitespace-nowrap flex items-center gap-1.5 ${
+                  className={`px-3.5 py-1.5 rounded-[var(--radius-pill)] text-xs font-medium transition-all whitespace-nowrap flex items-center gap-1.5 cursor-pointer ${
                     isActive
-                      ? "bg-white text-[#141414] font-semibold"
-                      : "bg-[#242426] text-[#90908F] hover:text-white border border-[#333333]"
+                      ? "bg-[var(--accent-soft)] text-[var(--accent)] font-bold shadow-sm border border-[var(--accent)]/20"
+                      : "bg-[var(--card-bg)] text-[var(--muted)] hover:text-[var(--text)] border border-[var(--muted)]/10 shadow-[var(--shadow-card)]"
                   }`}
                 >
                   <span>{opt.label}</span>
-                  <span className={`text-[10px] px-1.5 py-0.2 rounded-full font-mono ${isActive ? "bg-black/20 text-[#141414]" : "bg-[#1E1E1E] text-gray-400"}`}>
+                  <span className={`text-[10px] px-1.5 py-0.2 rounded-full font-mono tabular-nums ${isActive ? "bg-[var(--accent)]/15 text-[var(--accent)]" : "bg-[var(--muted)]/10 text-[var(--muted)]"}`}>
                     {count}
                   </span>
                 </button>
@@ -592,20 +592,20 @@ function ModelCatalogContent({
         </div>
 
         {/* Search Input & Controls Bar */}
-        <div className="flex flex-col sm:flex-row gap-4 items-stretch sm:items-center justify-between border-b border-[#282828] pb-4">
+        <div className="flex flex-col sm:flex-row gap-4 items-stretch sm:items-center justify-between border-b border-[var(--muted)]/10 pb-4">
           <div className="relative flex-1 max-w-md">
-            <Search size={15} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-[#90908F]" />
+            <Search size={15} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-[var(--muted)]" />
             <input
               type="text"
               placeholder="Search by name or developer..."
               value={filters.q}
               onChange={(e) => handleSearchChange(e.target.value)}
-              className="w-full bg-[#1C1C1E] border border-[#282828] rounded-lg pl-10 pr-4 py-2 text-xs text-white placeholder:text-[#90908F] focus:outline-none focus:border-[#D97757] transition-colors font-sans"
+              className="w-full bg-[var(--card-bg)] border border-[var(--muted)]/10 rounded-[var(--radius-control)] pl-10 pr-4 py-2 text-xs text-[var(--text)] placeholder:text-[var(--muted)] focus:outline-none focus:border-[var(--accent)] transition-all font-sans shadow-[var(--shadow-card)]"
             />
             {filters.q && (
               <button
                 onClick={() => handleSearchChange("")}
-                className="absolute right-3 top-1/2 -translate-y-1/2 text-[#90908F] hover:text-white"
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-[var(--muted)] hover:text-[var(--text)]"
               >
                 <X size={14} />
               </button>
@@ -615,19 +615,19 @@ function ModelCatalogContent({
           <div className="flex items-center gap-3 justify-between sm:justify-start">
             <button
               onClick={() => setMobileFiltersOpen(true)}
-              className="lg:hidden flex items-center gap-2 px-3 py-1.5 border border-[#282828] rounded-lg text-xs font-medium text-[#90908F] hover:text-white bg-[#1C1C1E]"
+              className="lg:hidden flex items-center gap-2 px-3.5 py-2 border border-[var(--muted)]/10 rounded-[var(--radius-control)] text-xs font-medium text-[var(--muted)] hover:text-[var(--text)] bg-[var(--card-bg)] shadow-[var(--shadow-card)]"
             >
               <SlidersHorizontal size={14} />
               Filters
             </button>
 
             <div className="flex items-center gap-2">
-              <span className="text-xs text-[#90908F] whitespace-nowrap hidden sm:block">Sort By</span>
+              <span className="text-xs text-[var(--muted)] whitespace-nowrap hidden sm:block">Sort By</span>
               <div className="relative">
                 <select
                   value={sortKey}
                   onChange={(e) => handleSortChange(e.target.value)}
-                  className="bg-[#1C1C1E] border border-[#282828] rounded-lg px-3 py-1.5 pr-8 text-xs font-medium text-[#E1E1E0] focus:outline-none focus:border-[#D97757] appearance-none cursor-pointer"
+                  className="bg-[var(--card-bg)] border border-[var(--muted)]/10 rounded-[var(--radius-control)] px-3.5 py-2 pr-8 text-xs font-semibold text-[var(--text)] focus:outline-none focus:border-[var(--accent)] appearance-none cursor-pointer shadow-[var(--shadow-card)]"
                 >
                   {SORT_OPTIONS.map((opt) => (
                     <option key={opt.key} value={opt.key} className="bg-[#1C1C1E] text-white">
