@@ -97,7 +97,7 @@ export default function Footer() {
     {
       title: "Resources",
       links: [
-        { label: "GitHub Repo", href: "https://github.com/Amankumar006/Modelverse" },
+        { label: "Discord Server", href: "https://discord.gg" },
         { label: "Reddit Community", href: "https://www.reddit.com/r/Modelverse" },
         { label: "Models RSS", href: "/feed.xml" },
         { label: "News RSS", href: "/news/feed.xml" },
