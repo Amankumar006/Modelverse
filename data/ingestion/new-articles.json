@@ -1,26 +1,50 @@
 [
   {
-    "id": "ten-advances-in-mathematics-and-theoretical-computer-science",
-    "slug": "ten-advances-in-mathematics-and-theoretical-computer-science",
-    "title": "Ten advances in mathematics and theoretical computer science",
+    "id": "supabase-releases-evals-an-open-source-benchmark-that-scores-claude-code-codex-a",
+    "slug": "supabase-releases-evals-an-open-source-benchmark-that-scores-claude-code-codex-a",
+    "title": "Supabase Releases Evals: an Open Source Benchmark That Scores Claude Code, Codex and OpenCode on Real Supabase Tasks",
     "category": "short-news",
     "isTrending": true,
     "publishDate": "2026-08-01",
     "author": "Modelverse Editorial",
     "readTime": "2 min read",
-    "excerpt": "OpenAI shares new results on long-standing open problems in mathematics and theoretical computer science, including advances in geometry, cryptography, and complexity.",
-    "body": "OpenAI has unveiled significant breakthroughs across ten long-standing challenges in mathematics and theoretical computer science, marking a pivotal moment in AI's capacity for abstract reasoning. These advancements span critical domains including geometry, cryptography, and computational complexity, addressing problems that have eluded human experts for decades. This announcement underscores AI's evolving role from a tool for data processing to a powerful engine for fundamental scientific discovery.\n\nWhile the specifics of the methodologies employed are not detailed, these results likely stem from OpenAI's sophisticated AI models, potentially leveraging large language models or specialized AI agents trained to explore complex mathematical structures, generate novel hypotheses, and validate intricate proofs. This approach signifies a shift where AI isn't merely assisting human researchers but actively contributing to the core theoretical foundations that underpin computing and artificial intelligence itself.\n\nFor developers and researchers, these findings hold immense implications. Progress in cryptography could lead to more secure systems, while advances in complexity theory might unlock more efficient algorithms for a myriad of computational tasks, from machine learning optimization to resource management. Furthermore, these achievements demonstrate AI's potential to accelerate scientific progress in foundational disciplines, inspiring new research avenues and pushing the boundaries of what intelligent systems can achieve in abstract problem-solving and theoretical innovation.",
-    "coverImage": "/images/news/news_featured.jpg",
+    "excerpt": "Supabase has open sourced supabase/evals, an Apache-2.0 benchmark and framework that runs coding agents including Claude Code, Codex and OpenCode against real Supabase tasks — buil...",
+    "body": "Supabase has launched \"Supabase Evals,\" an innovative open-source benchmark and framework designed to rigorously evaluate AI coding agents on practical Supabase development tasks. Released under the Apache-2.0 license, Evals tests agents like Claude Code, Codex, and OpenCode against real-world scenarios such as building schemas, debugging Edge Functions, or fixing RLS policies. The framework operates by deploying agents within a containerized environment that mimics a full Supabase stack, enabling interaction with actual MCP servers and CLI tools. Scenarios, derived from real support tickets and GitHub issues, cover diverse Supabase products, topics, and development stages (build, deploy, investigate, resolve). Each evaluation includes a `PROMPT.md` defining the task and an `EVAL.ts` script for scoring, which blends deterministic checks with an LLM-as-a-judge approach. This robust setup reveals agent weaknesses, such as a tendency to hand-write migrations instead of using declarative schemas or inconsistent documentation usage, even with loaded skills.\n\nFor developers and researchers, Supabase Evals is a crucial tool for advancing AI-assisted development. By offering an open, reproducible, and practical evaluation method, it provides invaluable insights into the real-world capabilities and limitations of current AI models. The benchmark's findings directly inform skill guidance updates and package selection recommendations, fostering the creation of more capable and context-aware AI agents. This framework empowers the community to test, compare, and ultimately accelerate the development of AI tools that genuinely streamline the developer experience on platforms like Supabase, driving innovation in how AI supports software engineering.",
+    "coverImage": "https://www.marktechpost.com/wp-content/uploads/2026/08/blog6171-1.png",
     "status": "published",
     "confidenceLevel": "confirmed",
     "externalSources": [
-      "https://openai.com/index/ten-advances-in-mathematics"
+      "https://www.marktechpost.com/2026/08/01/supabase-releases-evals-an-open-source-benchmark-that-scores-claude-code-codex-and-opencode-on-real-supabase-tasks/"
     ],
     "relatedModels": [],
     "tags": [
       "ai-news",
       "breaking",
-      "openai"
+      "marktechpost"
+    ]
+  },
+  {
+    "id": "minimax-releases-minimax-h3-an-omni-modal-video-model-that-generates-15-second-2",
+    "slug": "minimax-releases-minimax-h3-an-omni-modal-video-model-that-generates-15-second-2",
+    "title": "MiniMax Releases MiniMax H3: An Omni-Modal Video Model That Generates 15-Second 2K Clips With Native Stereo Audio",
+    "category": "short-news",
+    "isTrending": true,
+    "publishDate": "2026-08-01",
+    "author": "Modelverse Editorial",
+    "readTime": "2 min read",
+    "excerpt": "MiniMax releases MiniMax H3, a general-purpose multimodal generation model. MiniMax H3 is not a text-to-video model with add-ons. MiniMax describes it as a general-purpose multimod...",
+    "body": "MiniMax has unveiled MiniMax H3, an ambitious \"omni-modal\" video generation model poised to redefine how creators approach digital content. Unlike conventional systems that often piece together specialized models for text-to-video or image-to-video tasks, H3 operates as a singular, general-purpose engine. It processes a unified context of text, images, video, and audio inputs, culminating in high-fidelity 2K video clips, complete with native stereo sound, ranging from 4 to 15 seconds. This integrated approach marks a significant departure from fragmented video generation stacks.\n\nAt its core, MiniMax H3 streamlines complex creative workflows by allowing users to express intricate reference and editing relationships through natural language. Imagine a single prompt dictating camera movement from one video, a character from an image singing, and matching vocals from a separate audio track – H3 handles it all. This is powered by \"Contextual Omni Representation,\" which describes the *relationships* between various input modalities and the target video. Further enhancing its capabilities is the H3-VAE, a re-engineered tokenizer that dramatically boosts effective sequence length, leading to reduced training and inference costs while enabling its impressive native 2K output. Developers can access this power through a straightforward API, offering multiple generation modes.\n\nFor developers and researchers, MiniMax H3 represents a significant leap forward in multimodal AI. Its unified architecture simplifies the development landscape, offering unprecedented control and flexibility via intuitive natural language prompts. This efficiency and versatility unlock a vast array of applications across industries, from generating dynamic ad variants and product listings to crafting consistent game cinematics and film pre-visualizations. By consolidating diverse generation tasks into a single, powerful model, H3 not only lowers the barrier to sophisticated video creation but also paves the way for new paradigms in AI-driven content production, making it a pivotal tool for innovation in the creative tech space.",
+    "coverImage": "https://www.marktechpost.com/wp-content/uploads/2026/08/blog6171-1024x731.png",
+    "status": "published",
+    "confidenceLevel": "confirmed",
+    "externalSources": [
+      "https://www.marktechpost.com/2026/08/01/minimax-releases-minimax-h3-an-omni-modal-video-model-that-generates-15-second-2k-clips-with-native-stereo-audio/"
+    ],
+    "relatedModels": [],
+    "tags": [
+      "ai-news",
+      "breaking",
+      "marktechpost"
     ]
   }
 ]
