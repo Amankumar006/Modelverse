@@ -103,6 +103,22 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${inter.variable} ${cormorant.variable}`}>
       <body className="min-h-screen bg-black tracking-[-0.02em] antialiased flex flex-col justify-between">
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              if (typeof window !== 'undefined' && window.performance && window.performance.measure) {
+                var originalMeasure = window.performance.measure;
+                window.performance.measure = function() {
+                  try {
+                    return originalMeasure.apply(this, arguments);
+                  } catch (e) {
+                    return null;
+                  }
+                };
+              }
+            `,
+          }}
+        />
         {gaId && (
           <>
             <Script
