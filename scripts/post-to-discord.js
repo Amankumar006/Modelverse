@@ -65,15 +65,20 @@ async function postToDiscord(modelData = null, newsArticles = null) {
     });
   }
 
-  // If running standalone CLI without parameters, check newly published data
+  // If running standalone CLI or workflow without explicit arguments, load latest published items
   if (!modelData && (!newsArticles || newsArticles.length === 0)) {
+    const articlesPath = path.join(process.cwd(), "data", "ingestion", "new-articles.json");
+    if (fs.existsSync(articlesPath)) {
+      try {
+        newsArticles = JSON.parse(fs.readFileSync(articlesPath, "utf-8"));
+      } catch (e) {}
+    }
     const archivePath = path.join(process.cwd(), "data", "models-archive.json");
     if (fs.existsSync(archivePath)) {
       try {
         const models = JSON.parse(fs.readFileSync(archivePath, "utf-8"));
         if (models.length > 0) {
-          const latestModel = models[0];
-          return postToDiscord(latestModel, null);
+          modelData = models[0];
         }
       } catch (e) {}
     }
