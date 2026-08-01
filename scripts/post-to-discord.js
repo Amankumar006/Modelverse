@@ -22,6 +22,17 @@ async function postToDiscord(modelData = null, newsArticles = null) {
         }
       } catch (e) {}
     }
+    if (!modelData) {
+      const prodDir = path.join(process.cwd(), "data", "models");
+      if (fs.existsSync(prodDir)) {
+        const files = fs.readdirSync(prodDir).filter((f) => f.endsWith(".json") && f !== "_index.json");
+        if (files.length > 0) {
+          try {
+            modelData = JSON.parse(fs.readFileSync(path.join(prodDir, files[0]), "utf-8"));
+          } catch (e) {}
+        }
+      }
+    }
   }
 
   if (!newsArticles || newsArticles.length === 0) {
