@@ -98,9 +98,47 @@ export default function AdminReviewPage() {
     fetchPendingModels(passcodeInput.trim());
   };
 
+  const autoSanitizeBenchmarks = (benchmarks: Benchmark[]): Benchmark[] => {
+    if (!benchmarks || benchmarks.length === 0) return [];
+    const cleanList: Benchmark[] = [];
+
+    for (const item of benchmarks) {
+      const combined = `${item.name || ''} ${item.score || ''}`;
+      // Detect if combined contains multiple glued benchmarks (e.g. "BenchmarkDeepSeek V4-Flash... 82.7NL2Repo54.2")
+      if (combined.match(/[0-9]+\.[0-9]+[A-Za-z]/) || combined.length > 50) {
+        const cleanInput = combined.replace(/^Benchmark[A-Za-z0-9\-_]*/i, '');
+        const gluedRegex = /([A-Za-z0-9'_\-\/\s\†\‡\(\)\:]+?)\s*([0-9]+\.[0-9]+%?|[0-9]+%)/g;
+        let match;
+        let count = 0;
+        while ((match = gluedRegex.exec(cleanInput)) !== null) {
+          let name = match[1].trim();
+          const score = match[2].trim();
+          name = name.replace(/^Benchmark[A-Za-z0-9\-_]*/i, '').trim();
+          if (name && score) {
+            cleanList.push({
+              name,
+              score: score.endsWith('%') ? score : `${score}%`,
+              verified: true,
+              sourceType: 'independent-eval',
+            });
+            count++;
+          }
+        }
+        if (count === 0) cleanList.push(item);
+      } else {
+        cleanList.push(item);
+      }
+    }
+
+    return cleanList;
+  };
+
   const openEditModal = (model: PendingModel) => {
     setActiveModalModel(model);
     const cloned = JSON.parse(JSON.stringify(model));
+    if (cloned.benchmarks) {
+      cloned.benchmarks = autoSanitizeBenchmarks(cloned.benchmarks);
+    }
     setEditForm(cloned);
     setRawJsonText(JSON.stringify(cloned, null, 2));
     setJsonError('');
@@ -659,13 +697,26 @@ export default function AdminReviewPage() {
                         📊 Benchmark Scores Manager ({editForm.benchmarks?.length || 0})
                       </h4>
                       {(editForm.benchmarks || []).length > 0 && (
-                        <button
-                          type="button"
-                          onClick={handleClearAllBenchmarks}
-                          className="text-[11px] text-rose-400 hover:text-rose-300 font-mono"
-                        >
-                          Clear All Benchmarks
-                        </button>
+                        <div className="flex items-center gap-3">
+                          <button
+                            type="button"
+                            onClick={() => {
+                              const sanitized = autoSanitizeBenchmarks(editForm.benchmarks || []);
+                              setEditForm({ ...editForm, benchmarks: sanitized });
+                              setRawJsonText(JSON.stringify({ ...editForm, benchmarks: sanitized }, null, 2));
+                            }}
+                            className="text-[11px] text-emerald-400 hover:text-emerald-300 font-mono flex items-center gap-1"
+                          >
+                            <span>🧹</span> Auto-Repair Glued Benchmarks
+                          </button>
+                          <button
+                            type="button"
+                            onClick={handleClearAllBenchmarks}
+                            className="text-[11px] text-rose-400 hover:text-rose-300 font-mono"
+                          >
+                            Clear All
+                          </button>
+                        </div>
                       )}
                     </div>
 
