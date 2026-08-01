@@ -36,6 +36,9 @@ jobs:
       - name: Compile and Validate Models Index
         run: node scripts/compile-models.js
 
+      - name: Instant Search Engine Indexing Ping (IndexNow)
+        run: node scripts/ping-search-engines.js
+
       - name: Send Gmail Digest Notification
         if: env.NEW_MODELS_PUSHED == 'true'
         uses: dawidd6/action-send-mail@v3

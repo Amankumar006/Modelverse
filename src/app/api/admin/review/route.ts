@@ -163,7 +163,7 @@ export async function POST(request: Request) {
       fs.writeFileSync(path.join(PROD_DIR, filename), JSON.stringify(model, null, 2), 'utf-8');
       fs.unlinkSync(pendingPath);
 
-      // Trigger compilation and clear dev cache
+      // Trigger compilation, dev cache clear, and instant search engine indexing ping
       try {
         const { execSync } = require('child_process');
         execSync('node scripts/compile-models.js', { stdio: 'inherit' });
@@ -171,6 +171,11 @@ export async function POST(request: Request) {
         revalidatePath('/models');
         if (model.slug) {
           revalidatePath(`/models/${model.slug}`);
+          // Trigger instant search engine indexing ping
+          try {
+            const { pingSearchEngines } = require('../../../../../scripts/ping-search-engines');
+            pingSearchEngines([`https://www.themodelverse.in/models/${model.slug}`]);
+          } catch (e) {}
         }
       } catch (e) {}
 
