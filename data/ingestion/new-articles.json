@@ -1,20 +1,20 @@
 [
   {
-    "id": "supabase-releases-evals-an-open-source-benchmark-that-scores-claude-code-codex-a",
-    "slug": "supabase-releases-evals-an-open-source-benchmark-that-scores-claude-code-codex-a",
-    "title": "Supabase Releases Evals: an Open Source Benchmark That Scores Claude Code, Codex and OpenCode on Real Supabase Tasks",
+    "id": "amd-releases-instella-moe-16b-a3b-a-fully-open-mixture-of-experts-llm-with-28b-a",
+    "slug": "amd-releases-instella-moe-16b-a3b-a-fully-open-mixture-of-experts-llm-with-28b-a",
+    "title": "AMD Releases Instella-MoE-16B-A3B: A Fully Open Mixture-of-Experts LLM With 2.8B Active Parameters Trained On Instinct GPUs",
     "category": "short-news",
     "isTrending": true,
     "publishDate": "2026-08-01",
     "author": "Modelverse Editorial",
     "readTime": "2 min read",
-    "excerpt": "Supabase has open sourced supabase/evals, an Apache-2.0 benchmark and framework that runs coding agents including Claude Code, Codex and OpenCode against real Supabase tasks — buil...",
-    "body": "Supabase has launched \"Supabase Evals,\" an innovative open-source benchmark and framework designed to rigorously evaluate AI coding agents on practical Supabase development tasks. Released under the Apache-2.0 license, Evals tests agents like Claude Code, Codex, and OpenCode against real-world scenarios such as building schemas, debugging Edge Functions, or fixing RLS policies. The framework operates by deploying agents within a containerized environment that mimics a full Supabase stack, enabling interaction with actual MCP servers and CLI tools. Scenarios, derived from real support tickets and GitHub issues, cover diverse Supabase products, topics, and development stages (build, deploy, investigate, resolve). Each evaluation includes a `PROMPT.md` defining the task and an `EVAL.ts` script for scoring, which blends deterministic checks with an LLM-as-a-judge approach. This robust setup reveals agent weaknesses, such as a tendency to hand-write migrations instead of using declarative schemas or inconsistent documentation usage, even with loaded skills.\n\nFor developers and researchers, Supabase Evals is a crucial tool for advancing AI-assisted development. By offering an open, reproducible, and practical evaluation method, it provides invaluable insights into the real-world capabilities and limitations of current AI models. The benchmark's findings directly inform skill guidance updates and package selection recommendations, fostering the creation of more capable and context-aware AI agents. This framework empowers the community to test, compare, and ultimately accelerate the development of AI tools that genuinely streamline the developer experience on platforms like Supabase, driving innovation in how AI supports software engineering.",
-    "coverImage": "https://www.marktechpost.com/wp-content/uploads/2026/08/blog6171-1.png",
+    "excerpt": "AMD released Instella-MoE-16B-A3B, a fully open Mixture-of-Experts language model trained from scratch on Instinct MI300X and MI325X GPUs. It holds 16B total parameters but activat...",
+    "body": "AMD has unveiled Instella-MoE-16B-A3B, a groundbreaking, fully transparent Mixture-of-Experts (MoE) large language model, developed entirely on its Instinct MI300X and MI325X GPUs. This new LLM boasts a substantial 16 billion total parameters, yet its MoE architecture intelligently activates only 2.8 billion parameters for each token processed, optimizing computational efficiency.\n\nThe model's design leverages advanced techniques such as Gated MLA and FarSkip-Collective to achieve this efficient parameter activation. Crucially, AMD has committed to full openness, releasing an unprecedented level of detail for Instella-MoE-16B-A3B. This includes model weights from every training phase, comprehensive data mixtures, configuration files, and the complete inference code.\n\nThis comprehensive release is a significant boon for the AI community, offering unparalleled transparency and a robust foundation for innovation. For developers and researchers, access to the full training lineage, data, and code provides invaluable insights into MoE model development and performance on AMD hardware. It not only fosters deeper understanding and reproducibility but also empowers the community to build upon and fine-tune this powerful, openly available model, further accelerating advancements in the LLM landscape.",
+    "coverImage": "/images/news/news_short.jpg",
     "status": "published",
     "confidenceLevel": "confirmed",
     "externalSources": [
-      "https://www.marktechpost.com/2026/08/01/supabase-releases-evals-an-open-source-benchmark-that-scores-claude-code-codex-and-opencode-on-real-supabase-tasks/"
+      "https://www.marktechpost.com/2026/08/01/amd-instella-moe-16b-a3b-fully-open-mixture-of-experts-llm/"
     ],
     "relatedModels": [],
     "tags": [
@@ -24,27 +24,51 @@
     ]
   },
   {
-    "id": "minimax-releases-minimax-h3-an-omni-modal-video-model-that-generates-15-second-2",
-    "slug": "minimax-releases-minimax-h3-an-omni-modal-video-model-that-generates-15-second-2",
-    "title": "MiniMax Releases MiniMax H3: An Omni-Modal Video Model That Generates 15-Second 2K Clips With Native Stereo Audio",
+    "id": "accelerating-transformer-training-with-nvidia-transformer-engine-fused-kernels-b",
+    "slug": "accelerating-transformer-training-with-nvidia-transformer-engine-fused-kernels-b",
+    "title": "Accelerating Transformer Training with NVIDIA Transformer Engine, Fused Kernels, BF16, FP8, and GPU Benchmarking",
     "category": "short-news",
     "isTrending": true,
     "publishDate": "2026-08-01",
     "author": "Modelverse Editorial",
     "readTime": "2 min read",
-    "excerpt": "MiniMax releases MiniMax H3, a general-purpose multimodal generation model. MiniMax H3 is not a text-to-video model with add-ons. MiniMax describes it as a general-purpose multimod...",
-    "body": "MiniMax has unveiled MiniMax H3, an ambitious \"omni-modal\" video generation model poised to redefine how creators approach digital content. Unlike conventional systems that often piece together specialized models for text-to-video or image-to-video tasks, H3 operates as a singular, general-purpose engine. It processes a unified context of text, images, video, and audio inputs, culminating in high-fidelity 2K video clips, complete with native stereo sound, ranging from 4 to 15 seconds. This integrated approach marks a significant departure from fragmented video generation stacks.\n\nAt its core, MiniMax H3 streamlines complex creative workflows by allowing users to express intricate reference and editing relationships through natural language. Imagine a single prompt dictating camera movement from one video, a character from an image singing, and matching vocals from a separate audio track – H3 handles it all. This is powered by \"Contextual Omni Representation,\" which describes the *relationships* between various input modalities and the target video. Further enhancing its capabilities is the H3-VAE, a re-engineered tokenizer that dramatically boosts effective sequence length, leading to reduced training and inference costs while enabling its impressive native 2K output. Developers can access this power through a straightforward API, offering multiple generation modes.\n\nFor developers and researchers, MiniMax H3 represents a significant leap forward in multimodal AI. Its unified architecture simplifies the development landscape, offering unprecedented control and flexibility via intuitive natural language prompts. This efficiency and versatility unlock a vast array of applications across industries, from generating dynamic ad variants and product listings to crafting consistent game cinematics and film pre-visualizations. By consolidating diverse generation tasks into a single, powerful model, H3 not only lowers the barrier to sophisticated video creation but also paves the way for new paradigms in AI-driven content production, making it a pivotal tool for innovation in the creative tech space.",
-    "coverImage": "https://www.marktechpost.com/wp-content/uploads/2026/08/blog6171-1024x731.png",
+    "excerpt": "Discover how to optimize transformer workloads using the NVIDIA Transformer Engine. This tutorial guides you through configuring fused GPU kernels, implementing FP8 delayed scaling...",
+    "body": "NVIDIA has unveiled a comprehensive tutorial demonstrating how to significantly accelerate transformer model training using its specialized Transformer Engine. This resource is designed to empower developers and researchers to optimize the demanding computational workloads inherent in building and refining modern AI architectures, particularly GPT-style causal language models. The initiative aims to provide practical pathways for achieving greater efficiency and performance in the development cycle of advanced AI systems.\n\nThe core of this acceleration strategy involves several key technical advancements. The NVIDIA Transformer Engine leverages highly optimized, \"fused\" GPU kernels, which consolidate multiple operations into single, more efficient execution units on the hardware. Crucially, it champions mixed-precision training, guiding users through the implementation of BF16 and the even lower-precision FP8 formats. The tutorial specifically details FP8 delayed scaling, a technique engineered to preserve model accuracy while harnessing the substantial speed and memory benefits offered by FP8 precision. These optimizations are presented with practical code examples within the PyTorch framework.\n\nFor AI practitioners, this guide offers a direct route to constructing and training more efficient language models. Beyond the technical configuration of these advanced features, the tutorial underscores the critical role of benchmarking model performance. This enables users to quantitatively assess the gains derived from these optimizations, facilitating informed decisions regarding their training pipelines and ultimately leading to reduced training times and computational expenses for complex transformer architectures.",
+    "coverImage": "/images/news/news_short.jpg",
     "status": "published",
     "confidenceLevel": "confirmed",
     "externalSources": [
-      "https://www.marktechpost.com/2026/08/01/minimax-releases-minimax-h3-an-omni-modal-video-model-that-generates-15-second-2k-clips-with-native-stereo-audio/"
+      "https://www.marktechpost.com/2026/08/01/accelerating-transformer-training-with-nvidia-transformer-engine-fused-kernels-bf16-fp8-and-gpu-benchmarking/"
     ],
     "relatedModels": [],
     "tags": [
       "ai-news",
       "breaking",
       "marktechpost"
+    ]
+  },
+  {
+    "id": "sam-altman-is-still-making-the-case-for-parenting-via-chatgpt",
+    "slug": "sam-altman-is-still-making-the-case-for-parenting-via-chatgpt",
+    "title": "Sam Altman is still making the case for parenting via ChatGPT",
+    "category": "short-news",
+    "isTrending": true,
+    "publishDate": "2026-08-01",
+    "author": "Modelverse Editorial",
+    "readTime": "2 min read",
+    "excerpt": "OpenAI's CEO seemed excited to share a \"cool use case\" for parents.",
+    "body": "OpenAI CEO Sam Altman recently sparked discussion by proposing a \"cool use case\" for ChatGPT Work: a personalized daily podcast for parents and children. The concept involves connecting family calendars and children's interests to the AI, which would then generate a custom audio briefing for the morning school commute. This podcast would cover relevant family events like upcoming soccer games or birthdays, alongside general news, aiming to streamline information delivery and potentially foster engagement during daily routines.\n\nHowever, Altman's suggestion was met with significant public skepticism, most notably from \"Gravity Falls\" creator Alex Hirsch, whose viral response questioned the need for AI when direct parent-child conversation is an option. This reaction highlights a broader public apprehension about AI encroaching on fundamental human interactions, particularly in sensitive areas like parenting. This isn't Altman's first foray into promoting AI for family life, having previously mentioned ChatGPT's utility during newborn care, and OpenAI is actively recruiting for roles focused on building trust-sensitive consumer experiences for parents.\n\nFor developers and researchers, this episode underscores the complex challenge of integrating AI into deeply personal domains. While the proposed application showcases AI's potential for personalization and convenience, the strong public pushback signals the critical importance of understanding societal impact and user acceptance. It emphasizes that innovation must be balanced with ethical considerations and the need to build profound trust, especially as AI companies like OpenAI also face lawsuits concerning the technology's alleged negative impacts on mental health, even as they strive to improve model responses in sensitive interactions.",
+    "coverImage": "https://techcrunch.com/wp-content/uploads/2026/02/GettyImages-2236544077.jpg?resize=1200,800",
+    "status": "published",
+    "confidenceLevel": "confirmed",
+    "externalSources": [
+      "https://techcrunch.com/2026/08/01/sam-altman-is-still-making-the-case-for-parenting-via-chatgpt/"
+    ],
+    "relatedModels": [],
+    "tags": [
+      "ai-news",
+      "breaking",
+      "techcrunch-ai"
     ]
   }
 ]

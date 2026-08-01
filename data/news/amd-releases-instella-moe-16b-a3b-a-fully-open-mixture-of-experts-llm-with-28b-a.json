@@ -1,0 +1,24 @@
+{
+  "id": "amd-releases-instella-moe-16b-a3b-a-fully-open-mixture-of-experts-llm-with-28b-a",
+  "slug": "amd-releases-instella-moe-16b-a3b-a-fully-open-mixture-of-experts-llm-with-28b-a",
+  "title": "AMD Releases Instella-MoE-16B-A3B: A Fully Open Mixture-of-Experts LLM With 2.8B Active Parameters Trained On Instinct GPUs",
+  "category": "short-news",
+  "isTrending": true,
+  "publishDate": "2026-08-01",
+  "author": "Modelverse Editorial",
+  "readTime": "2 min read",
+  "excerpt": "AMD released Instella-MoE-16B-A3B, a fully open Mixture-of-Experts language model trained from scratch on Instinct MI300X and MI325X GPUs. It holds 16B total parameters but activat...",
+  "body": "AMD has unveiled Instella-MoE-16B-A3B, a groundbreaking, fully transparent Mixture-of-Experts (MoE) large language model, developed entirely on its Instinct MI300X and MI325X GPUs. This new LLM boasts a substantial 16 billion total parameters, yet its MoE architecture intelligently activates only 2.8 billion parameters for each token processed, optimizing computational efficiency.\n\nThe model's design leverages advanced techniques such as Gated MLA and FarSkip-Collective to achieve this efficient parameter activation. Crucially, AMD has committed to full openness, releasing an unprecedented level of detail for Instella-MoE-16B-A3B. This includes model weights from every training phase, comprehensive data mixtures, configuration files, and the complete inference code.\n\nThis comprehensive release is a significant boon for the AI community, offering unparalleled transparency and a robust foundation for innovation. For developers and researchers, access to the full training lineage, data, and code provides invaluable insights into MoE model development and performance on AMD hardware. It not only fosters deeper understanding and reproducibility but also empowers the community to build upon and fine-tune this powerful, openly available model, further accelerating advancements in the LLM landscape.",
+  "coverImage": "/images/news/news_short.jpg",
+  "status": "published",
+  "confidenceLevel": "confirmed",
+  "externalSources": [
+    "https://www.marktechpost.com/2026/08/01/amd-instella-moe-16b-a3b-fully-open-mixture-of-experts-llm/"
+  ],
+  "relatedModels": [],
+  "tags": [
+    "ai-news",
+    "breaking",
+    "marktechpost"
+  ]
+}
