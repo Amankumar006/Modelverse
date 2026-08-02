@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
-import type { ModelEntry } from "@/lib/models";
+import { type ModelEntry, getModalities } from "@/lib/models";
 import ModelDetailTabs from "./ModelDetailTabs";
 import Navbar from "@/components/layout/Navbar";
 import { Search, ChevronDown, Copy, Check, ExternalLink, Terminal, Shield, Layers, FileText } from "lucide-react";
@@ -36,7 +36,7 @@ export default function ModelDocsLayout({
 
   const comparisonModels = [
     model,
-    ...allModels.filter((m) => m.id !== model.id && m.verified).slice(0, 3),
+    ...allModels.filter((m) => m.id !== model.id && m.verified && m.primaryTask === model.primaryTask).slice(0, 3),
   ];
 
   return (
@@ -133,7 +133,6 @@ export default function ModelDocsLayout({
               >
                 {copied ? <Check size={13} className="text-[var(--accent)]" /> : <Copy size={13} />}
                 <span>{copied ? "Copied!" : "Copy page"}</span>
-                <ChevronDown size={12} className="text-[var(--muted)]" />
               </button>
             </div>
 
@@ -171,22 +170,29 @@ export default function ModelDocsLayout({
               </div>
               <div className="flex justify-between py-1.5 border-b border-[var(--muted)]/10">
                 <span className="text-[var(--muted)] font-medium">Parameters</span>
-                <span className="text-[var(--text)] font-bold tabular-nums font-mono">{model.parameters}</span>
+                <span className="text-[var(--text)] font-bold tabular-nums font-mono">
+                  {model.parameters ? (typeof model.parameters === "object" ? Object.values(model.parameters).join(" / ") : model.parameters) : "—"}
+                </span>
               </div>
               <div className="flex justify-between py-1.5 border-b border-[var(--muted)]/10">
                 <span className="text-[var(--muted)] font-medium">Context Window</span>
-                <span className="text-[var(--text)] font-bold tabular-nums font-mono">{model.contextWindow}</span>
+                <span className="text-[var(--text)] font-bold tabular-nums font-mono">
+                  {model.contextWindow ? (typeof model.contextWindow === "object" ? (model.contextWindow as any).native : model.contextWindow) : "—"}
+                </span>
               </div>
               <div className="flex justify-between py-1.5">
                 <span className="text-[var(--muted)] font-medium">License</span>
-                <span className="text-[var(--text)] font-bold">{model.license}</span>
+                <span className="text-[var(--text)] font-bold">
+                  {typeof model.license === "object" ? model.license.name || "Custom" : model.license}
+                </span>
               </div>
             </div>
           </section>
 
           {/* Section 3: Latest Models Comparison Table */}
+          {comparisonModels.length > 1 && (
           <section id="comparison" className="space-y-4 pt-6 border-t border-[var(--muted)]/10">
-            <h2 className="text-2xl font-extrabold text-[var(--text)]">Latest models comparison</h2>
+            <h2 className="text-2xl font-extrabold text-[var(--text)]">Comparable models</h2>
             <div className="overflow-x-auto rounded-[var(--radius-card)] border border-[var(--muted)]/10 bg-[var(--card-bg)] shadow-[var(--shadow-card)]">
               <table className="w-full text-left text-xs text-[var(--muted)]">
                 <thead className="bg-[var(--accent-soft)]/20 border-b border-[var(--muted)]/10 text-[var(--text)] font-bold">
@@ -220,19 +226,25 @@ export default function ModelDocsLayout({
                   </tr>
                   <tr>
                     <td className="p-3.5 font-bold text-[var(--text)]">Parameters</td>
-                    {comparisonModels.map((m) => (
-                      <td key={m.id} className="p-3.5 font-mono tabular-nums text-[var(--text)] font-bold">
-                        {m.parameters !== "undisclosed" ? m.parameters : "—"}
-                      </td>
-                    ))}
+                    {comparisonModels.map((m) => {
+                      const p = m.parameters ? (typeof m.parameters === "object" && m.parameters !== null ? Object.values(m.parameters).join(" / ") : m.parameters) : "—";
+                      return (
+                        <td key={m.id} className="p-3.5 font-mono tabular-nums text-[var(--text)] font-bold">
+                          {p !== "undisclosed" ? p : "—"}
+                        </td>
+                      );
+                    })}
                   </tr>
                   <tr>
                     <td className="p-3.5 font-bold text-[var(--text)]">Context Window</td>
-                    {comparisonModels.map((m) => (
-                      <td key={m.id} className="p-3.5 font-mono tabular-nums text-[var(--text)] font-bold">
-                        {m.contextWindow !== "undisclosed" ? m.contextWindow : "—"}
-                      </td>
-                    ))}
+                    {comparisonModels.map((m) => {
+                      const cw = m.contextWindow ? (typeof m.contextWindow === "object" && m.contextWindow !== null ? (m.contextWindow as any).native : m.contextWindow) : "—";
+                      return (
+                        <td key={m.id} className="p-3.5 font-mono tabular-nums text-[var(--text)] font-bold">
+                          {cw !== "undisclosed" ? cw : "—"}
+                        </td>
+                      );
+                    })}
                   </tr>
                   <tr>
                     <td className="p-3.5 font-bold text-[var(--text)]">License / Type</td>
@@ -246,6 +258,7 @@ export default function ModelDocsLayout({
               </table>
             </div>
           </section>
+          )}
 
           {/* Section 4: Detailed Model Tabs & Markdown Readme */}
           <section className="pt-6 border-t border-[var(--muted)]/10">
@@ -266,11 +279,13 @@ export default function ModelDocsLayout({
                 {model.developer} model overview
               </a>
             </li>
+            {comparisonModels.length > 1 && (
             <li>
               <a href="#comparison" className="hover:text-[var(--accent)] transition-colors block">
-                Latest models comparison
+                Comparable models
               </a>
             </li>
+            )}
             <li>
               <a href="#benchmarks" className="hover:text-[var(--accent)] transition-colors block">
                 Benchmarks & specifications

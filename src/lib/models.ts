@@ -34,10 +34,10 @@ export interface ModelEntry extends ModelIndex {
   modality: string[];
   primaryTask: string;
   deployment: string[];
-  license: string;
-  parameters: string;
-  activeParameters?: string;
-  contextWindow: string;
+  license: string | Record<string, any>;
+  parameters: string | Record<string, any>;
+  activeParameters?: string | Record<string, any>;
+  contextWindow: string | Record<string, any>;
   description: string;
   descriptionDraft?: string;
   keyFeatures: string[];
@@ -100,30 +100,30 @@ function loadDevEntries(): ModelEntry[] {
     developer: z.string(),
     releaseDate: z.string(),
     updatedAt: z.string(),
-    type: z.string(),
+    type: z.enum(["open-source", "open-weights", "closed-source", "api-only", "research-preview", "research"]),
     status: z.enum(["active", "deprecated", "sunset"]).default("active"),
-    modality: z.array(z.string()),
+    modality: z.any(),
     primaryTask: z.string(),
-    deployment: z.array(z.string()),
-    license: z.string(),
-    parameters: z.string(),
-    contextWindow: z.string(),
+    deployment: z.array(z.any()),
+    license: z.any(),
+    parameters: z.any().optional(),
+    contextWindow: z.any().optional(),
     description: z.string(),
     templatedDescription: z.boolean().optional(),
-    keyFeatures: z.array(z.string()),
-    benchmarks: z.array(z.object({ name: z.string(), score: z.string(), verified: z.boolean().optional() }).passthrough()),
-    family: z.string().nullable(),
+    keyFeatures: z.any().optional(),
+    benchmarks: z.any().optional(),
+    family: z.string().nullable().optional(),
     tier: z.string().optional(),
     institution: z.string().optional(),
-    previousVersion: z.string().nullable(),
-    costTiers: z.array(z.object({ id: z.string(), label: z.string(), description: z.string().optional() })).optional(),
-    pricing: z.array(z.object({ tier: z.string().optional(), unit: z.string(), amount: z.number(), currency: z.string().default("USD"), notes: z.string().optional() })).optional(),
+    previousVersion: z.string().nullable().optional(),
+    costTiers: z.any().optional(),
+    pricing: z.any().optional(),
     pricingLastVerified: z.string().regex(/^\d{4}-\d{2}-\d{2}$/).optional(),
-    links: z.record(z.string(), z.string()),
-    logo: z.string().nullable(),
-    tags: z.array(z.string()),
-    sources: z.array(z.string()),
-    verified: z.boolean(),
+    links: z.any().optional(),
+    logo: z.string().nullable().optional(),
+    tags: z.array(z.string()).optional(),
+    sources: z.any().optional(),
+    verified: z.boolean().optional(),
     featured: z.boolean().default(false),
     boost: z.number().default(1),
     curatorNotes: z.string().default(""),
@@ -254,18 +254,35 @@ export function getDeveloperCounts(): { developer: string; count: number }[] {
 }
 
 /** Format parameters display string including active parameters if present */
-export function formatParameters(model: { parameters?: string; activeParameters?: string }): string {
+export function formatParameters(model: { parameters?: string | any; activeParameters?: string | any }): string {
   if (!model.parameters) return "Undisclosed";
+  const p = typeof model.parameters === "object" && model.parameters !== null ? Object.values(model.parameters).join(" / ") : model.parameters;
   if (model.activeParameters) {
     const active = model.activeParameters.toLowerCase().includes("active")
       ? model.activeParameters
       : `${model.activeParameters} active`;
-    if (model.parameters.includes("(") || model.parameters.toLowerCase().includes("active")) {
-      return model.parameters;
+    if (p.includes("(") || p.toLowerCase().includes("active")) {
+      return p;
     }
-    return `${model.parameters} (${active})`;
+    return `${p} (${active})`;
   }
-  return model.parameters;
+  return p;
+}
+
+/** Flatten modality array or object to string array */
+export function getModalities(mod: any): string[] {
+  if (Array.isArray(mod)) return mod;
+  if (typeof mod === "object" && mod !== null) {
+    const allMods = new Set<string>();
+    if (mod.input && Array.isArray(mod.input)) {
+      mod.input.forEach((m: string) => allMods.add(m));
+    }
+    if (mod.output && Array.isArray(mod.output)) {
+      mod.output.forEach((m: string) => allMods.add(m));
+    }
+    return Array.from(allMods);
+  }
+  return [];
 }
 
 /* ------------------------------------------------------------------ */

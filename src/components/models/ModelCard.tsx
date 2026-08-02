@@ -62,9 +62,24 @@ export default function ModelCard({
   const rawDescription = isDetailed ? (model as ModelEntry).description : "";
   const description = truncateAtWordBoundary(rawDescription, isFeatured ? 160 : 110);
   const primaryTask = isDetailed ? (model as ModelEntry).primaryTask : undefined;
-  const modality = isDetailed ? (model as ModelEntry).modality : [];
-  const contextWindow = isDetailed ? (model as ModelEntry).contextWindow : undefined;
-  const parameters = isDetailed ? (model as ModelEntry).parameters : undefined;
+  
+  let modality = isDetailed ? (model as ModelEntry).modality : [];
+  if (modality && !Array.isArray(modality) && typeof modality === "object") {
+    const allMods: string[] = [];
+    Object.values(modality).forEach((v) => {
+      if (Array.isArray(v)) allMods.push(...v);
+    });
+    modality = allMods;
+  }
+
+  let contextWindow = isDetailed ? (model as ModelEntry).contextWindow : undefined;
+  if (typeof contextWindow === "object" && contextWindow !== null) {
+    contextWindow = (contextWindow as any).native;
+  }
+  let parameters = isDetailed ? (model as ModelEntry).parameters : undefined;
+  if (typeof parameters === "object" && parameters !== null) {
+    parameters = Object.values(parameters).join(" / ");
+  }
   const isVerified = "verified" in model ? Boolean((model as ModelEntry).verified) : false;
 
   const targetHref = familySlug ? `/models/family/${familySlug}` : `/models/${model.slug}`;
@@ -187,10 +202,10 @@ export default function ModelCard({
         <div className="pt-3 border-t border-[var(--muted)]/10 flex items-center justify-between text-[11px] text-[var(--muted)]">
           <div className="flex items-center gap-2 font-mono tabular-nums">
             {contextWindow && contextWindow !== "Unknown" && (
-              <span>{contextWindow}</span>
+              <span>{contextWindow as React.ReactNode}</span>
             )}
             {parameters && parameters !== "Unknown" && (
-              <span>• {parameters}</span>
+              <span>• {parameters as React.ReactNode}</span>
             )}
           </div>
 

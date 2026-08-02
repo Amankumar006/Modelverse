@@ -54,10 +54,10 @@
     }
   },
   "parameters": {
-    "large": "Unknown",
-    "medium": "Unknown",
-    "small": "Unknown",
-    "turbo": "Unknown"
+    "large": "1.55B",
+    "medium": "769M",
+    "small": "244M",
+    "turbo": "809M"
   },
   "availableModels": [
     {

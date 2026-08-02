@@ -202,9 +202,10 @@ export default function CompareClient({ initialModels, allModels }: CompareClien
             let displayVal = "N/A";
             
             if (chartMetric === "context-window") {
-              const parsedVal = parseContext(model.contextWindow);
+              const cw = typeof model.contextWindow === "object" && model.contextWindow !== null ? (model.contextWindow as any).native : model.contextWindow;
+              const parsedVal = parseContext(cw);
               value = parsedVal ?? 0;
-              displayVal = model.contextWindow || "Unknown";
+              displayVal = cw || "Unknown";
             } else {
               const matchedBench = model.benchmarks?.find(b => b.name.toLowerCase().includes(chartMetric));
               const parsedVal = parseScore(matchedBench?.score);
@@ -214,7 +215,8 @@ export default function CompareClient({ initialModels, allModels }: CompareClien
 
             const allVals = models.map(m => {
               if (chartMetric === "context-window") {
-                return parseContext(m.contextWindow) ?? 0;
+                const cw = typeof m.contextWindow === "object" && m.contextWindow !== null ? (m.contextWindow as any).native : m.contextWindow;
+                return parseContext(cw) ?? 0;
               } else {
                 return parseScore(m.benchmarks?.find(b => b.name.toLowerCase().includes(chartMetric))?.score) ?? 0;
               }
@@ -363,7 +365,9 @@ export default function CompareClient({ initialModels, allModels }: CompareClien
             <tr>
               <td className="p-4 text-sm font-bold text-[var(--muted)] flex items-center gap-2 sticky left-0 bg-[var(--card-bg)] z-10 border-r border-[var(--muted)]/10"><Shield size={16} /> License</td>
               {models.map((model) => (
-                <td key={model.id} className="p-4 text-sm text-[var(--text)] font-semibold">{model.license}</td>
+                <td key={model.id} className="p-4 text-sm text-[var(--text)] font-semibold">
+                  {typeof model.license === "object" ? model.license.name || "Custom" : model.license}
+                </td>
               ))}
               {Array.from({ length: 4 - models.length }).map((_, i) => (
                 <td key={`empty-l-${i}`} className="p-4 bg-[var(--card-bg)]/50 border-r border-[var(--muted)]/10 border-dashed last:border-r-0"></td>
@@ -389,7 +393,7 @@ export default function CompareClient({ initialModels, allModels }: CompareClien
                 <td className="p-4 text-sm font-bold text-[var(--muted)] bg-[var(--card-bg)] sticky left-0 z-10 border-r border-[var(--muted)]/10">Active Parameters (MoE)</td>
                 {models.map((model) => (
                   <td key={model.id} className="p-4 text-sm text-[var(--accent)] font-mono tabular-nums font-bold">
-                    {model.activeParameters || "N/A (Dense)"}
+                    {typeof model.activeParameters === "object" && model.activeParameters !== null ? Object.values(model.activeParameters).join(" / ") : model.activeParameters || "N/A (Dense)"}
                   </td>
                 ))}
                 {Array.from({ length: 4 - models.length }).map((_, i) => (

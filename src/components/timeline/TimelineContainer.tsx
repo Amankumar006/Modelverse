@@ -472,7 +472,7 @@ export default function TimelineContainer({ initialModels }: TimelineContainerPr
                 {/* Micro tags row */}
                 <div className="flex flex-wrap gap-2 pt-1">
                   <span className="text-[10px] font-medium uppercase tracking-wider text-[var(--tag-text)] bg-[var(--tag-bg)] px-2.5 py-1 rounded-[var(--radius-pill)] font-mono tabular-nums">
-                    Size: {activeModel.parameters === "undisclosed" ? "Undisclosed" : activeModel.parameters}
+                    Size: {activeModel.parameters === "undisclosed" ? "Undisclosed" : activeModel.parameters as React.ReactNode}
                   </span>
                   <span className="text-[10px] font-medium uppercase tracking-wider text-[var(--tag-text)] bg-[var(--tag-bg)] px-2.5 py-1 rounded-[var(--radius-pill)]">
                     Task: {activeModel.primaryTask.replace("-", " ")}

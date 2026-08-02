@@ -76,7 +76,20 @@ function filterModels(
     }
 
     if (excludeKey !== "modality" && filters.modality.length > 0) {
-      const intersect = model.modality.some((m) => filters.modality.includes(m));
+      const getModalities = (mod: any): string[] => {
+        if (Array.isArray(mod)) return mod;
+        if (typeof mod === "object" && mod !== null) {
+          const allMods: string[] = [];
+          Object.values(mod).forEach((v) => {
+            if (Array.isArray(v)) allMods.push(...v);
+          });
+          return allMods;
+        }
+        return [];
+      };
+      
+      const mods = getModalities(model.modality);
+      const intersect = mods.some((m) => filters.modality.includes(m));
       if (!intersect) return false;
     }
 
@@ -85,7 +98,11 @@ function filterModels(
     }
 
     if (excludeKey !== "license" && filters.license.length > 0) {
-      if (!filters.license.includes(model.license)) return false;
+      let lic = model.license;
+      if (typeof lic === "object" && lic !== null) {
+        lic = (lic as any).name || "Other/Custom";
+      }
+      if (!filters.license.includes(lic as string)) return false;
     }
 
     if (excludeKey !== "deployment" && filters.deployment.length > 0) {
@@ -249,8 +266,26 @@ function ModelCatalogContent({
     const modalities = new Set<string>();
     const licenses = new Set<string>();
     for (const m of models) {
-      m.modality.forEach((mod) => modalities.add(mod));
-      if (m.license && m.license !== "Other/Custom") licenses.add(m.license);
+      const getModalities = (mod: any): string[] => {
+        if (Array.isArray(mod)) return mod;
+        if (typeof mod === "object" && mod !== null) {
+          const allMods: string[] = [];
+          Object.values(mod).forEach((v) => {
+            if (Array.isArray(v)) allMods.push(...v);
+          });
+          return allMods;
+        }
+        return [];
+      };
+      
+      const mods = getModalities(m.modality);
+      mods.forEach((mod) => modalities.add(mod));
+
+      let lic = m.license;
+      if (typeof lic === "object" && lic !== null) {
+        lic = (lic as any).name || "Other/Custom";
+      }
+      if (lic && lic !== "Other/Custom") licenses.add(lic as string);
     }
     return {
       modalities: Array.from(modalities).sort(),
@@ -291,9 +326,26 @@ function ModelCatalogContent({
         "task",
         (m) => m.primaryTask
       ),
-      modality: calculateCounts(dynamicOptions.modalities, "modality", (m) => m.modality),
+      modality: calculateCounts(dynamicOptions.modalities, "modality", (m) => {
+        const mod = m.modality;
+        if (Array.isArray(mod)) return mod;
+        if (typeof mod === "object" && mod !== null) {
+          const allMods: string[] = [];
+          Object.values(mod).forEach((v) => {
+            if (Array.isArray(v)) allMods.push(...v);
+          });
+          return allMods;
+        }
+        return [];
+      }),
       developer: calculateCounts(developers, "developer", (m) => m.developer),
-      license: calculateCounts(dynamicOptions.licenses, "license", (m) => m.license),
+      license: calculateCounts(dynamicOptions.licenses, "license", (m) => {
+        let lic = m.license;
+        if (typeof lic === "object" && lic !== null) {
+          lic = (lic as any).name || "Other/Custom";
+        }
+        return lic as string;
+      }),
       deployment: calculateCounts(
         DEPLOYMENT_OPTIONS.map((o) => o.value),
         "deployment",

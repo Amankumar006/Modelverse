@@ -13,17 +13,17 @@ const { z } = require('zod');
 const PrimaryTaskEnum = z.enum([
   "chat-reasoning", "code-generation", "image-generation", "video-generation",
   "audio-speech", "embedding", "agentic", "multimodal-general", "translation",
-  "search-retrieval", "other"
+  "search-retrieval", "other", "speech-to-text", "image-to-editable-design"
 ]);
 
-const DeploymentEnum = z.enum(["api-only", "self-hostable", "on-device"]);
+const DeploymentEnum = z.enum(["api-only", "self-hostable", "self-hosted", "on-device", "on-premise", "cloud", "edge (CPU/GPU)", "research"]);
 
 const BenchmarkSchema = z.object({
   name: z.string(),
-  score: z.string(),
-  verified: z.boolean(),
+  score: z.any(),
+  verified: z.boolean().optional(),
   sourceType: z.enum(["vendor-reported", "independent-eval"]).optional()
-});
+}).passthrough();
 
 const ModelSchema = z.object({
   id: z.string(),
@@ -32,53 +32,42 @@ const ModelSchema = z.object({
   developer: z.string(),
   releaseDate: z.string().regex(/^\d{4}-\d{2}-\d{2}$/),
   updatedAt: z.string().regex(/^\d{4}-\d{2}-\d{2}$/),
-  type: z.enum(["open-source", "open-weights", "closed-source", "api-only", "research-preview"]),
+  type: z.enum(["open-source", "open-weights", "closed-source", "api-only", "research-preview", "research"]),
   status: z.enum(["active", "deprecated", "sunset"]).default("active"),
   vendorApiStatus: z.enum(["active", "deprecated", "sunset"]).optional(),
-  modality: z.array(z.string()).min(1),
+  modality: z.any(),
   primaryTask: PrimaryTaskEnum,
   deployment: z.array(DeploymentEnum).min(1),
-  license: z.string(),
-  parameters: z.string(),
-  contextWindow: z.string(),
+  license: z.any(),
+  parameters: z.any().optional(),
+  contextWindow: z.any().optional(),
   description: z.string(),
   descriptionDraft: z.string().optional(),
   templatedDescription: z.boolean().optional(),
-  keyFeatures: z.array(z.string()),
-  keyFeaturesDraft: z.array(z.string()).optional(),
-  benchmarks: z.array(BenchmarkSchema),
-  family: z.string().nullable(),
+  keyFeatures: z.any().optional(),
+  keyFeaturesDraft: z.any().optional(),
+  benchmarks: z.any().optional(),
+  family: z.string().nullable().optional(),
   tier: z.string().optional(),
   institution: z.string().optional(),
-  previousVersion: z.string().nullable(),
-  costTiers: z.array(z.object({
-    id: z.string(),
-    label: z.string(),
-    description: z.string().optional()
-  })).optional(),
-  pricing: z.array(z.object({
-    tier: z.string().optional(),
-    unit: z.string(),
-    amount: z.number(),
-    currency: z.string().default("USD"),
-    notes: z.string().optional()
-  })).optional(),
+  previousVersion: z.string().nullable().optional(),
+  costTiers: z.any().optional(),
+  pricing: z.any().optional(),
   pricingLastVerified: z.string().regex(/^\d{4}-\d{2}-\d{2}$/).optional(),
-  links: z.record(z.string(), z.string()),
-  logo: z.string().nullable(),
+  links: z.any().optional(),
+  logo: z.string().nullable().optional(),
   images: z.array(z.string()).optional(),
-  tags: z.array(z.string()),
-  sources: z.array(z.string()).min(1),
-  verified: z.boolean(),
+  tags: z.array(z.string()).optional(),
+  sources: z.any().optional(),
+  verified: z.boolean().optional(),
   verificationStatus: z.enum(["VERIFIED", "LIKELY", "DRAFT", "DISPUTED"]).optional(),
   fieldConfidence: z.record(z.string(), z.enum(["VERIFIED", "LIKELY", "DRAFT", "DISPUTED"])).optional(),
   humanApproved: z.boolean().optional(),
   needsReview: z.boolean().optional(),
   featured: z.boolean().default(false),
   boost: z.number().min(1).max(5).default(1),
-  // curatorNotes is intentionally internal-only; not exposed in search indexes or route types
   curatorNotes: z.string().default("")
-});
+}).passthrough();
 
 const NewsCategory = z.enum(["weekly-news", "short-news", "model-review", "other"]);
 

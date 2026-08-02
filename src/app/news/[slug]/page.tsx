@@ -11,7 +11,7 @@ import BenchmarkTabs from "@/components/news/BenchmarkTabs";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import CodeBlock from "@/components/ui/CodeBlock";
-import CopyableTable from "@/components/ui/CopyableTable";
+
 
 interface ArticlePageProps {
   params: Promise<{
@@ -199,12 +199,35 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
             components={{
               table({ children }) {
                 return (
-                  <CopyableTable title="Specification Matrix">
-                    <table className="w-full text-left border-collapse text-xs sm:text-sm font-sans">
+                  <div className="my-8 overflow-x-auto rounded-[var(--radius-card)] border border-[var(--muted)]/10 bg-[var(--card-bg)] shadow-[var(--shadow-card)]">
+                    <table className="w-full text-left text-xs sm:text-sm font-sans text-[var(--muted)]">
                       {children}
                     </table>
-                  </CopyableTable>
+                  </div>
                 );
+              },
+              thead({ children }) {
+                return (
+                  <thead className="bg-[var(--accent-soft)]/20 border-b border-[var(--muted)]/10 text-[var(--text)] font-bold">
+                    {children}
+                  </thead>
+                );
+              },
+              tbody({ children }) {
+                return (
+                  <tbody className="divide-y divide-[var(--muted)]/10">
+                    {children}
+                  </tbody>
+                );
+              },
+              tr({ children }) {
+                return <tr className="hover:bg-[var(--bg)] transition-colors">{children}</tr>;
+              },
+              th({ children }) {
+                return <th className="p-3.5 font-bold uppercase tracking-wider text-[11px] text-[var(--text)]">{children}</th>;
+              },
+              td({ children }) {
+                return <td className="p-3.5 text-[var(--text)] font-normal leading-relaxed">{children}</td>;
               },
               code({ className, children, ...props }) {
                 const match = /language-(\w+)/.exec(className || "");

@@ -104,11 +104,15 @@ export default function FrontierShowcase({ models }: { models: ModelEntry[] }) {
               <div className="flex flex-col sm:grid sm:grid-cols-2 gap-4 border-t border-[var(--accent-soft)] pt-5">
                 <div>
                   <p className="text-[10px] uppercase tracking-wider text-[var(--muted)] font-semibold mb-1">Parameters</p>
-                  <p className="text-sm font-mono text-[var(--text)] truncate">{model.parameters === "undisclosed" ? "Undisclosed" : model.parameters}</p>
+                  <p className="text-sm font-mono text-[var(--text)] truncate">
+                    {model.parameters === "undisclosed" ? "Undisclosed" : (typeof model.parameters === "object" && model.parameters !== null ? Object.values(model.parameters).join(" / ") : model.parameters)}
+                  </p>
                 </div>
                 <div>
                   <p className="text-[10px] uppercase tracking-wider text-[var(--muted)] font-semibold mb-1">Context</p>
-                  <p className="text-sm font-mono text-[var(--text)] truncate">{model.contextWindow}</p>
+                  <p className="text-sm font-mono text-[var(--text)] truncate">
+                    {typeof model.contextWindow === "object" && model.contextWindow !== null ? (model.contextWindow as any).native : model.contextWindow}
+                  </p>
                 </div>
               </div>
             </div>

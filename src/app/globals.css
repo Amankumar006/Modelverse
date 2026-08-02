@@ -4,6 +4,8 @@
 @import "../styles/theme.css";
 @plugin "@tailwindcss/typography";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 /* ------------------------------------------------------------------ */
 /*  Daylight Theme Configuration                                       */
 /* ------------------------------------------------------------------ */

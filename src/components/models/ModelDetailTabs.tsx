@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import type { ModelEntry } from "@/lib/models";
-import { formatParameters } from "@/lib/models";
+import { formatParameters, getModalities } from "@/lib/models";
 import MarkdownRenderer from "@/components/ui/MarkdownRenderer";
 import { ArrowUpRight } from "lucide-react";
 import VisionBenchmarkChart from "./VisionBenchmarkChart";
@@ -144,13 +144,19 @@ export default function ModelDetailTabs({
               <dl className="bg-[var(--card-bg)] shadow-[var(--shadow-card)] rounded-[var(--radius-card)] p-4 border border-[var(--muted)]/10">
                 <Row label="Parameters" value={formatParameters(model)} />
                 {model.activeParameters && (
-                  <Row label="Active Parameters (MoE)" value={model.activeParameters} />
+                  <Row label="Active Parameters (MoE)" value={typeof model.activeParameters === "object" ? Object.values(model.activeParameters).join(" / ") : model.activeParameters as string} />
                 )}
-                <Row label="Context window" value={model.contextWindow !== "undisclosed" ? model.contextWindow : undefined} />
-                <Row label="License" value={model.license !== "Other/Custom" ? model.license : undefined} />
+                {(() => {
+                  const cw = typeof model.contextWindow === "object" && model.contextWindow !== null ? (model.contextWindow as any).native : model.contextWindow;
+                  return <Row label="Context window" value={cw !== "undisclosed" ? cw : undefined} />;
+                })()}
+                {(() => {
+                  const lic = typeof model.license === "object" && model.license !== null ? (model.license as any).name || (model.license as any).weights?.name || "Custom" : model.license;
+                  return <Row label="License" value={lic !== "Other/Custom" ? lic : undefined} />;
+                })()}
                 <Row label="Primary task" value={model.primaryTask.replace(/-/g, " ")} />
                 <Row label="Deployment" value={model.deployment.join(", ")} />
-                <Row label="Modalities" value={model.modality.join(", ")} />
+                <Row label="Modalities" value={getModalities(model.modality).join(", ")} />
               </dl>
             </section>
           </div>
@@ -186,7 +192,7 @@ export default function ModelDetailTabs({
             </section>
 
             {/* Vision Model Interactive Comparison Chart */}
-            {(model.modality.includes("image") || model.primaryTask.includes("image")) && (
+            {(getModalities(model.modality).includes("image") || model.primaryTask.includes("image")) && (
               <section className="pt-4 border-t border-[var(--muted)]/10">
                 <VisionBenchmarkChart />
               </section>
