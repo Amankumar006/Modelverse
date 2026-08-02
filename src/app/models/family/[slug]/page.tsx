@@ -83,7 +83,7 @@ export default async function FamilyPage({
   const developer = primaryModel.developer;
 
   return (
-    <main className="min-h-screen bg-[var(--bg)] text-white selection:bg-[var(--accent)] selection:text-white pb-24 relative">
+    <main className="min-h-screen bg-[var(--bg)] text-[var(--text)] selection:bg-[var(--accent)] selection:text-white pb-24 relative">
       <Navbar theme="dark" />
       {/* ── Top Bar / Breadcrumb ─────────────────────────────── */}
       <header className="max-w-4xl mx-auto px-4 sm:px-6 pt-8 pb-4">
@@ -103,14 +103,14 @@ export default async function FamilyPage({
             Model Family
           </div>
           <h1
-            className="text-4xl sm:text-5xl font-normal tracking-tight text-white leading-none"
+            className="text-4xl sm:text-5xl font-normal tracking-tight text-[var(--text)] leading-none"
             style={{
               fontFamily: "var(--font-display, ui-sans-serif, system-ui, sans-serif)",
             }}
           >
             {slug}
           </h1>
-          <p className="text-gray-400 text-lg">
+          <p className="text-[var(--muted)] text-lg">
             Developed by {developer}. Explore the {models.length} variants available in this generation.
           </p>
         </div>
@@ -122,23 +122,23 @@ export default async function FamilyPage({
             const prevVersionModel = model.previousVersion ? allModels.find(m => m.slug === model.previousVersion) : null;
             
             return (
-              <div key={model.id} className="flex flex-col gap-2 bg-white/5 p-3 rounded-2xl border border-white/10">
+              <div key={model.id} className="flex flex-col gap-2 bg-[var(--card-bg)] p-3 rounded-2xl border border-[var(--muted)]/10">
                 <ModelCard model={model} variant="row" />
                 
                 {/* Cross-Generation Nav */}
                 {(nextVersionModel || prevVersionModel) && (
-                  <div className="flex flex-wrap items-center gap-x-4 gap-y-2 px-3 py-1 text-xs text-gray-400 font-medium">
-                    <span className="text-white/40 text-[10px] uppercase tracking-widest font-bold">Lineage</span>
+                  <div className="flex flex-wrap items-center gap-x-4 gap-y-2 px-3 py-1 text-xs text-[var(--muted)] font-medium">
+                    <span className="text-[var(--muted)] text-[10px] uppercase tracking-widest font-bold">Lineage</span>
                     <div className="flex items-center gap-3">
                       {prevVersionModel && prevVersionModel.family && (
-                         <Link href={`/models/family/${prevVersionModel.family}`} className="flex items-center gap-1 hover:text-white transition-colors">
+                         <Link href={`/models/family/${prevVersionModel.family}`} className="flex items-center gap-1 hover:text-[var(--text)] transition-colors">
                            <ArrowLeft size={12} />
                            {prevVersionModel.family} {prevVersionModel.tier ? `(${prevVersionModel.tier})` : ''}
                          </Link>
                       )}
-                      {(prevVersionModel && nextVersionModel) && <span className="text-white/20">|</span>}
+                      {(prevVersionModel && nextVersionModel) && <span className="text-[var(--muted)]/40">|</span>}
                       {nextVersionModel && nextVersionModel.family && (
-                         <Link href={`/models/family/${nextVersionModel.family}`} className="flex items-center gap-1 hover:text-white transition-colors">
+                         <Link href={`/models/family/${nextVersionModel.family}`} className="flex items-center gap-1 hover:text-[var(--text)] transition-colors">
                            {nextVersionModel.family} {nextVersionModel.tier ? `(${nextVersionModel.tier})` : ''}
                            <ArrowRight size={12} />
                          </Link>

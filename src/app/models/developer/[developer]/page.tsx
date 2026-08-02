@@ -75,16 +75,16 @@ export default async function DeveloperPage({
 
       {/* ── Content Container ───────────────────────────────── */}
       <div className="w-full mx-auto px-4 sm:px-6 lg:px-8 2xl:px-12 mt-6 relative">
-        <div className="border-b border-white/10 pb-8 mb-8">
+        <div className="border-b border-[var(--muted)]/10 pb-8 mb-8">
           <h1
-            className="text-4xl sm:text-5xl font-normal tracking-tight text-white"
+            className="text-4xl sm:text-5xl font-normal tracking-tight text-[var(--text)]"
             style={{
               fontFamily: "var(--font-display, ui-sans-serif, system-ui, sans-serif)",
             }}
           >
-            {decodedDeveloper} <span className="italic text-gray-400">Models</span>
+            {decodedDeveloper} <span className="italic text-[var(--muted)]">Models</span>
           </h1>
-          <p className="mt-2 text-sm text-gray-400 max-w-xl">
+          <p className="mt-2 text-sm text-[var(--muted)] max-w-xl">
             A complete catalog of AI models developed by {decodedDeveloper}.
           </p>
         </div>
