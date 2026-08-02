@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useMemo, Suspense } from "react";
+import { useState, useMemo, Suspense, useEffect } from "react";
 import type { ModelEntry } from "@/lib/models";
 import ModelCard from "@/components/models/ModelCard";
 import { Search, SlidersHorizontal, X, ArrowUpDown } from "lucide-react";
@@ -229,6 +229,22 @@ function ModelCatalogContent({
     (initialSearchParams.sort as string) || "newest"
   );
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
+  const [searchInput, setSearchInput] = useState<string>(filters.q);
+
+  useEffect(() => {
+    setSearchInput(filters.q);
+  }, [filters.q]);
+
+  useEffect(() => {
+    const handler = setTimeout(() => {
+      if (filters.q !== searchInput) {
+        const newFilters = { ...filters, q: searchInput };
+        setFilters(newFilters);
+        updateUrl(newFilters, sortKey);
+      }
+    }, 250);
+    return () => clearTimeout(handler);
+  }, [searchInput, filters, sortKey]);
 
   const dynamicOptions = useMemo(() => {
     const modalities = new Set<string>();
@@ -401,9 +417,7 @@ function ModelCatalogContent({
   };
 
   const handleSearchChange = (val: string) => {
-    const newFilters = { ...filters, q: val };
-    setFilters(newFilters);
-    updateUrl(newFilters, sortKey);
+    setSearchInput(val);
   };
 
   const handleSortChange = (newSort: string) => {
@@ -608,11 +622,11 @@ function ModelCatalogContent({
             <input
               type="text"
               placeholder="Search by name or developer..."
-              value={filters.q}
+              value={searchInput}
               onChange={(e) => handleSearchChange(e.target.value)}
               className="w-full bg-[var(--card-bg)] border border-[var(--muted)]/10 rounded-[var(--radius-control)] pl-10 pr-4 py-2 text-xs text-[var(--text)] placeholder:text-[var(--muted)] focus:outline-none focus:border-[var(--accent)] transition-all font-sans shadow-[var(--shadow-card)]"
             />
-            {filters.q && (
+            {searchInput && (
               <button
                 onClick={() => handleSearchChange("")}
                 className="absolute right-3 top-1/2 -translate-y-1/2 text-[var(--muted)] hover:text-[var(--text)]"
