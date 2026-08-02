@@ -235,7 +235,7 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
 
                 if (isInline) {
                   return (
-                    <code className="bg-[var(--tag-bg)] text-[var(--tag-text)] px-2 py-0.5 rounded-[var(--radius-pill)] font-mono text-xs font-bold" {...props}>
+                    <code className="!bg-[var(--tag-bg)] !text-[var(--tag-text)] px-2 py-0.5 rounded-[var(--radius-pill)] font-mono text-xs font-bold" {...props}>
                       {children}
                     </code>
                   );

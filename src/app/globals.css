@@ -92,11 +92,4 @@ body {
   margin-bottom: 1.4em;
 }
 
-.prose :not(pre) > code {
-  color: var(--accent-contrast);
-  background-color: var(--accent-soft);
-  padding: 0.15em 0.4em;
-  border-radius: 6px;
-  font-size: 0.85em;
-  font-family: var(--font-sans);
-}
+

@@ -21,7 +21,7 @@ export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
             if (isInline) {
               return (
                 <code
-                  className="bg-[var(--tag-bg)] text-[var(--tag-text)] px-2 py-0.5 rounded-[var(--radius-pill)] font-mono text-xs font-bold border border-[var(--muted)]/10"
+                  className="!bg-[var(--tag-bg)] !text-[var(--tag-text)] px-2 py-0.5 rounded-[var(--radius-pill)] font-mono text-xs font-bold border border-[var(--muted)]/10"
                   {...props}
                 >
                   {children}
