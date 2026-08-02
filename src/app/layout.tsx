@@ -27,6 +27,15 @@ export const metadata: Metadata = {
   title: "Modelverse — Every AI Model, Every Release",
   description:
     "From frontier closed-source releases to open-weight breakthroughs, Modelverse tracks every model as it ships — a living, always-current archive.",
+  icons: {
+    icon: "/logos/favicon.ico",
+    shortcut: "/logos/favicon.ico",
+    apple: "/logos/apple-touch-icon-180.png",
+    other: [
+      { rel: "icon", type: "image/png", sizes: "192x192", url: "/logos/android-chrome-192.png" },
+      { rel: "icon", type: "image/png", sizes: "512x512", url: "/logos/android-chrome-512.png" },
+    ],
+  },
   alternates: {
     canonical: "./",
     types: {
@@ -42,6 +51,14 @@ export const metadata: Metadata = {
       "From frontier closed-source releases to open-weight breakthroughs, Modelverse tracks every model as it ships.",
     url: SITE_URL,
     siteName: "Modelverse",
+    images: [
+      {
+        url: `${SITE_URL}/logos/social-avatar-1024.png`,
+        width: 1024,
+        height: 1024,
+        alt: "Modelverse",
+      },
+    ],
     locale: "en_US",
     type: "website",
   },
@@ -50,6 +67,7 @@ export const metadata: Metadata = {
     title: "Modelverse — Every AI Model, Every Release",
     description:
       "From frontier closed-source releases to open-weight breakthroughs, Modelverse tracks every model as it ships.",
+    images: [`${SITE_URL}/logos/social-avatar-1024.png`],
   },
   verification: {
     google: "google0be0f65316fe589f",
@@ -85,7 +103,7 @@ export default function RootLayout({
         url: SITE_URL,
         logo: {
           "@type": "ImageObject",
-          url: `${SITE_URL}/logo.jpg`,
+          url: `${SITE_URL}/logos/social-avatar-1024.png`,
         },
       },
     ],

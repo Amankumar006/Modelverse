@@ -164,14 +164,13 @@ export default function Navbar({ theme = "dark" }: { theme?: "light" | "dark" })
   return (
     <header className="sticky top-0 z-50 w-full bg-[var(--bg)]/90 backdrop-blur-md border-b border-[var(--muted)]/10">
       <nav className="flex justify-between items-center px-4 sm:px-6 lg:px-10 2xl:px-12 py-3 max-w-[1600px] mx-auto gap-4">
-        {/* Custom Neural Constellation Modelverse SVG Logo */}
+        {/* Official Brand Logo */}
         <Link
           href="/"
-          className="flex items-center gap-2.5 text-xl font-extrabold tracking-tight text-[var(--text)] hover:opacity-90 transition-opacity shrink-0"
+          className="flex items-center gap-2 hover:opacity-90 transition-opacity shrink-0 py-0.5"
         >
-          <ModelverseLogo size={32} />
-          <span className="text-xl sm:text-2xl font-extrabold tracking-tight">Modelverse</span>
-          <span className="text-[10px] font-sans font-bold px-2.5 py-0.5 rounded-[var(--radius-pill)] bg-[var(--tag-bg)] text-[var(--tag-text)]">
+          <ModelverseLogo variant="horizontal" height={34} priority />
+          <span className="text-[10px] font-sans font-bold px-2.5 py-0.5 rounded-[var(--radius-pill)] bg-[var(--tag-bg)] text-[var(--tag-text)] shadow-sm">
             LLM DB
           </span>
         </Link>
