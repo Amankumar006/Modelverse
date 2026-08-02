@@ -30,6 +30,8 @@ export const DEVELOPERS = [
   "Qualcomm",
   "Mirelo AI",
   "Academic/Research",
+  "Jintae Park et al.",
+  "Nyra Health",
   "Other",
 ] as const;
 

@@ -8,6 +8,8 @@ export const PrimaryTaskEnum = z.enum([
   "image-generation",
   "video-generation",
   "audio-speech",
+  "speech-to-text",
+  "image-to-editable-design",
   "embedding",
   "agentic",
   "multimodal-general",
@@ -19,12 +21,17 @@ export const PrimaryTaskEnum = z.enum([
 export const DeploymentEnum = z.enum([
   "api-only",
   "self-hostable",
+  "self-hosted",
   "on-device",
+  "on-premise",
+  "cloud",
+  "edge (CPU/GPU)",
+  "research"
 ]);
 
 export const BenchmarkSchema = z.object({
   name: z.string(),
-  score: z.string(),
+  score: z.union([z.string(), z.number()]),
   verified: z.boolean(),
   sourceType: z.enum(["vendor-reported", "independent-eval"]).optional(),
 });
@@ -39,30 +46,30 @@ export const ModelSchema = z.object({
   institution: z.string().optional(),
   releaseDate: z.string().regex(/^\d{4}-\d{2}-\d{2}$/, "Must be YYYY-MM-DD"),
   updatedAt: z.string().regex(/^\d{4}-\d{2}-\d{2}$/, "Must be YYYY-MM-DD"),
-  type: z.enum(["open-source", "open-weights", "closed-source", "api-only", "research-preview"]),
+  type: z.enum(["open-source", "open-weights", "closed-source", "api-only", "research-preview", "research"]),
   status: ModelStatusEnum.default("active"),
   // vendorApiStatus: tracks the vendor's API lifecycle independently of weight/model availability.
   // Only set when a model's open-weights remain active but the vendor's API endpoint has been deprecated/sunset.
   vendorApiStatus: ModelStatusEnum.optional(),
-  modality: z.array(z.string()).min(1),
+  modality: z.union([z.array(z.string()).min(1), z.any()]),
   primaryTask: PrimaryTaskEnum,
   deployment: z.array(DeploymentEnum).min(1),
-  license: z.enum(LICENSES),
-  parameters: z.string(),
-  contextWindow: z.string(),
+  license: z.union([z.enum(LICENSES), z.any()]),
+  parameters: z.union([z.string(), z.any()]).optional(),
+  contextWindow: z.union([z.string(), z.any()]).optional(),
   description: z.string(),
   descriptionDraft: z.string().optional(),
   templatedDescription: z.boolean().optional(),
-  keyFeatures: z.array(z.string()),
+  keyFeatures: z.array(z.string()).optional(),
   keyFeaturesDraft: z.array(z.string()).optional(),
-  benchmarks: z.array(BenchmarkSchema),
+  benchmarks: z.array(BenchmarkSchema).optional(),
   // family: the generation-level identifier shared by every variant of one release
   // (e.g. "gpt-5.6" shared by chat, codex, realtime). Convention: lowercase, hyphenated, matches the primary base entry's slug.
-  family: z.string().nullable(),
+  family: z.string().nullable().optional(),
   // tier: the persistent product-tier identity across generations (e.g., Opus, Sonnet, Flash, Pro)
   tier: z.string().optional(),
   // previousVersion: lineage pointing to the specific prior-generation entry (e.g. gpt-5.6 chat points to gpt-5.5 chat).
-  previousVersion: z.string().nullable(),
+  previousVersion: z.string().nullable().optional(),
   costTiers: z.array(z.object({
     id: z.string(),
     label: z.string(),
@@ -76,8 +83,8 @@ export const ModelSchema = z.object({
     notes: z.string().optional(),
   })).optional(),
   pricingLastVerified: z.string().regex(/^\d{4}-\d{2}-\d{2}$/).optional(),
-  links: z.record(z.string(), z.string()),
-  logo: z.string().nullable(),
+  links: z.union([z.record(z.string(), z.string()), z.any()]),
+  logo: z.string().nullable().optional(),
   images: z.array(z.string()).optional(),
   // Namespaced tags: "arxiv:2401.xxxxx" (paper), "base:<model-id>" (lineage,
   // in addition to the structured `previousVersion`/`family` fields).
@@ -87,12 +94,12 @@ export const ModelSchema = z.object({
   // (e.g. don't add a "vision" tag when `modality` already includes "image").
   tags: z.array(z.string()),
   sources: z.array(z.string()).min(1),
-  verified: z.boolean(),
+  verified: z.boolean().optional(),
   needsReview: z.boolean().optional(),
   featured: z.boolean().default(false),
   boost: z.number().min(1).max(5).default(1),
   // curatorNotes: internal-only notes for curation triage, deliberately omitted from any client-facing rendering
   curatorNotes: z.string().default(""),
-});
+}).passthrough();
 
 export type Model = z.infer<typeof ModelSchema>;
