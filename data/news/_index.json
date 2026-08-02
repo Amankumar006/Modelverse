@@ -22,6 +22,50 @@
     ]
   },
   {
+    "id": "end-to-end-forecasting-with-timesfm-25-backtesting-covariates-anomaly-detection-",
+    "slug": "end-to-end-forecasting-with-timesfm-25-backtesting-covariates-anomaly-detection-",
+    "title": "End-to-End Forecasting with TimesFM 2.5: Backtesting, Covariates, Anomaly Detection, and Scalable Colab Deployment",
+    "category": "short-news",
+    "publishDate": "2026-08-02",
+    "author": "Modelverse Editorial",
+    "readTime": "2 min read",
+    "excerpt": "In this tutorial, we build an advanced end-to-end time-series forecasting workflow with TimesFM 2.5. We begin by configuring the runtime, installing the required dependencies, dete...",
+    "coverImage": "https://www.marktechpost.com/wp-content/uploads/2026/08/blog6176-1024x731.png",
+    "status": "published",
+    "confidenceLevel": "confirmed",
+    "externalSources": [
+      "https://www.marktechpost.com/2026/08/01/end-to-end-forecasting-with-timesfm-2-5-backtesting-covariates-anomaly-detection-and-scalable-colab-deployment/"
+    ],
+    "relatedModels": [],
+    "tags": [
+      "ai-news",
+      "breaking",
+      "marktechpost"
+    ]
+  },
+  {
+    "id": "nvidia-ai-releases-molt-a-pytorch-native-agentic-reinforcement-learning-framewor",
+    "slug": "nvidia-ai-releases-molt-a-pytorch-native-agentic-reinforcement-learning-framewor",
+    "title": "NVIDIA AI Releases Molt: A PyTorch-Native Agentic Reinforcement Learning Framework",
+    "category": "short-news",
+    "publishDate": "2026-08-02",
+    "author": "Modelverse Editorial",
+    "readTime": "2 min read",
+    "excerpt": "Agentic RL research is constant algorithm modification, and in mainstream frameworks every change threads through trainer, distributed backend, and rollout glue. NVIDIA's Molt targ...",
+    "coverImage": "https://www.marktechpost.com/wp-content/uploads/2026/08/blog6176-1.png",
+    "status": "published",
+    "confidenceLevel": "confirmed",
+    "externalSources": [
+      "https://www.marktechpost.com/2026/08/01/nvidia-ai-releases-molt-a-pytorch-native-agentic-reinforcement-learning-framework/"
+    ],
+    "relatedModels": [],
+    "tags": [
+      "ai-news",
+      "breaking",
+      "marktechpost"
+    ]
+  },
+  {
     "id": "weekly-model-recap-2026-08-02",
     "slug": "weekly-model-recap-2026-08-02",
     "title": "Weekly Model Recap: 27 Frontier & Open-Weight Releases (2026-08-02)",
