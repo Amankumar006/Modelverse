@@ -129,8 +129,8 @@ function FacetGroupFilter<T>({
   }, [options, searchQuery, valFn, labelFn]);
 
   return (
-    <div className="space-y-2.5">
-      <h4 className="text-xs font-semibold text-[#90908F] uppercase tracking-wider border-b border-[#282828] pb-1.5">
+    <div className="space-y-3 bg-[var(--card-bg)] shadow-[var(--shadow-card)] p-4 rounded-[var(--radius-card)]">
+      <h4 className="text-xs font-bold text-[var(--muted)] uppercase tracking-wider border-b border-[var(--muted)]/10 pb-2">
         {title}
       </h4>
       {showSearch && (
@@ -140,19 +140,19 @@ function FacetGroupFilter<T>({
             placeholder={`Search ${title.toLowerCase()}...`}
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full bg-[#1C1C1E] border border-[#282828] rounded-md px-2.5 py-1 text-xs text-white placeholder:text-[#90908F] focus:outline-none focus:border-[#D97757] transition-colors"
+            className="w-full bg-[var(--bg)] border border-[var(--muted)]/10 rounded-[var(--radius-control)] px-3 py-1.5 text-xs text-[var(--text)] placeholder:text-[var(--muted)] focus:outline-none focus:ring-1 focus:ring-[var(--accent)] transition-colors"
           />
           {searchQuery && (
             <button
               onClick={() => setSearchQuery("")}
-              className="absolute right-2 top-1/2 -translate-y-1/2 text-[#90908F] hover:text-white p-0.5"
+              className="absolute right-2 top-1/2 -translate-y-1/2 text-[var(--muted)] hover:text-[var(--text)] p-0.5"
             >
               <X size={12} />
             </button>
           )}
         </div>
       )}
-      <div className="space-y-1 flex flex-col max-h-44 overflow-y-auto pr-1 select-none no-scrollbar">
+      <div className="space-y-1 flex flex-col max-h-52 overflow-y-auto pr-1 select-none no-scrollbar">
         {filteredOptions.map((opt) => {
           const val = valFn(opt);
           const label = labelFn(opt);
@@ -163,27 +163,27 @@ function FacetGroupFilter<T>({
           return (
             <label
               key={val}
-              className={`flex items-center justify-between text-xs cursor-pointer py-1 px-2 rounded transition-colors ${
+              className={`flex items-center justify-between text-xs cursor-pointer min-h-[44px] py-2 px-2.5 rounded-[var(--radius-control)] transition-colors ${
                 isChecked
-                  ? "text-white font-medium bg-[#242426]"
+                  ? "text-[var(--accent)] font-semibold bg-[var(--accent-soft)]"
                   : isDisabled
-                  ? "text-gray-600 cursor-not-allowed"
-                  : "text-[#90908F] hover:text-white hover:bg-[#1E1E1E]"
+                  ? "text-[var(--muted)]/40 cursor-not-allowed"
+                  : "text-[var(--muted)] hover:text-[var(--text)] hover:bg-[var(--bg)]"
               }`}
             >
-              <div className="flex items-center gap-2 min-w-0 pr-1">
+              <div className="flex items-center gap-2.5 min-w-0 pr-1">
                 <input
                   type="checkbox"
                   checked={isChecked}
                   disabled={isDisabled}
                   onChange={() => onToggle(val)}
-                  className="h-3.5 w-3.5 rounded border border-[#333333] bg-[#1C1C1E] text-[#D97757] focus:ring-0 accent-[#D97757] cursor-pointer disabled:cursor-not-allowed shrink-0"
+                  className="h-4 w-4 rounded border border-[var(--muted)]/30 bg-[var(--bg)] text-[var(--accent)] focus:ring-0 accent-[var(--accent)] cursor-pointer disabled:cursor-not-allowed shrink-0"
                 />
                 <span className="truncate">{label}</span>
               </div>
               <span
-                className={`text-[10px] tabular-nums font-mono px-1.5 py-0.2 rounded ${
-                  isChecked ? "bg-[#2E2E2E] text-white" : "text-[#90908F]"
+                className={`text-[10px] tabular-nums font-mono px-2 py-0.5 rounded-full ${
+                  isChecked ? "bg-[var(--accent)] text-[var(--accent-contrast)] font-bold" : "bg-[var(--tag-bg)] text-[var(--tag-text)]"
                 }`}
               >
                 {count}
@@ -489,13 +489,13 @@ function ModelCatalogContent({
   return (
     <div className="flex flex-col lg:flex-row gap-8 items-start relative w-full max-w-full overflow-hidden">
       {/* ── Desktop Sidebar Facets ───────────────────────────── */}
-      <aside className="hidden lg:block w-64 shrink-0 space-y-5 sticky top-16 max-h-[calc(100vh-5rem)] overflow-y-auto pr-2 no-scrollbar border-r border-[#282828]">
+      <aside className="hidden lg:block w-64 shrink-0 space-y-5 sticky top-[72px] max-h-[calc(100vh-5.5rem)] overflow-y-auto pr-3 border-r border-[var(--muted)]/10 text-[var(--text)]">
         <div className="flex items-center justify-between pr-2">
-          <span className="text-xs font-semibold uppercase tracking-wider text-[#90908F]">Filters</span>
+          <span className="text-xs font-bold uppercase tracking-wider text-[var(--muted)]">Filters</span>
           {hasActiveFilters && (
             <button
               onClick={clearAllFilters}
-              className="text-xs text-[#D97757] hover:underline font-medium"
+              className="text-xs text-[var(--accent)] hover:underline font-bold cursor-pointer"
             >
               Clear All
             </button>
@@ -506,16 +506,26 @@ function ModelCatalogContent({
 
       {/* ── Main Catalog Workspace ───────────────────────────── */}
       <div className="flex-1 min-w-0 w-full space-y-6">
+        {/* Page Header */}
+        <div className="border-b border-[var(--muted)]/10 pb-5">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-[var(--text)]">
+            Models Overview
+          </h1>
+          <p className="mt-2 text-sm sm:text-base text-[var(--muted)] max-w-2xl leading-relaxed">
+            Discover, filter, and compare performance specs across open-weights and commercial AI models in the catalog.
+          </p>
+        </div>
+
         {/* Horizontal Filter Task & Type Bar */}
-        <div className="space-y-3 border-b border-[#282828] pb-5">
+        <div className="space-y-3 border-b border-[var(--muted)]/10 pb-5">
           <div className="flex items-center gap-2 overflow-x-auto pb-1 no-scrollbar w-full">
-            <span className="text-xs font-semibold uppercase tracking-wider text-[#90908F] shrink-0 mr-1">Task:</span>
+            <span className="text-xs font-bold uppercase tracking-wider text-[var(--muted)] shrink-0 mr-1">Task:</span>
             <button
               onClick={() => setFilters((f) => ({ ...f, task: [] }))}
-              className={`px-3 py-1 rounded-full text-xs font-medium transition-colors whitespace-nowrap ${
+              className={`px-3.5 py-1.5 rounded-[var(--radius-pill)] text-xs font-medium transition-all whitespace-nowrap cursor-pointer ${
                 filters.task.length === 0
-                  ? "bg-white text-[#141414] font-semibold"
-                  : "bg-[#242426] text-[#90908F] hover:text-white border border-[#333333]"
+                  ? "bg-[var(--accent-soft)] text-[var(--accent)] font-bold shadow-sm border border-[var(--accent)]/20"
+                  : "bg-[var(--card-bg)] text-[var(--muted)] hover:text-[var(--text)] border border-[var(--muted)]/10 shadow-[var(--shadow-card)]"
               }`}
             >
               All Tasks ({models.length})
@@ -534,14 +544,14 @@ function ModelCatalogContent({
                       return { ...f, task: newTasks };
                     });
                   }}
-                  className={`px-3 py-1 rounded-full text-xs font-medium transition-colors whitespace-nowrap flex items-center gap-1.5 ${
+                  className={`px-3.5 py-1.5 rounded-[var(--radius-pill)] text-xs font-medium transition-all whitespace-nowrap flex items-center gap-1.5 cursor-pointer ${
                     isActive
-                      ? "bg-white text-[#141414] font-semibold"
-                      : "bg-[#242426] text-[#90908F] hover:text-white border border-[#333333]"
+                      ? "bg-[var(--accent-soft)] text-[var(--accent)] font-bold shadow-sm border border-[var(--accent)]/20"
+                      : "bg-[var(--card-bg)] text-[var(--muted)] hover:text-[var(--text)] border border-[var(--muted)]/10 shadow-[var(--shadow-card)]"
                   }`}
                 >
                   <span>{opt.label}</span>
-                  <span className={`text-[10px] px-1.5 py-0.2 rounded-full font-mono ${isActive ? "bg-black/20 text-[#141414]" : "bg-[#1E1E1E] text-gray-400"}`}>
+                  <span className={`text-[10px] px-1.5 py-0.2 rounded-full font-mono tabular-nums ${isActive ? "bg-[var(--accent)]/15 text-[var(--accent)]" : "bg-[var(--muted)]/10 text-[var(--muted)]"}`}>
                     {count}
                   </span>
                 </button>
@@ -550,13 +560,13 @@ function ModelCatalogContent({
           </div>
 
           <div className="flex items-center gap-2 overflow-x-auto pb-1 no-scrollbar w-full">
-            <span className="text-xs font-semibold uppercase tracking-wider text-[#90908F] shrink-0 mr-1">Type:</span>
+            <span className="text-xs font-bold uppercase tracking-wider text-[var(--muted)] shrink-0 mr-1">Type:</span>
             <button
               onClick={() => setFilters((f) => ({ ...f, type: [] }))}
-              className={`px-3 py-1 rounded-full text-xs font-medium transition-colors whitespace-nowrap ${
+              className={`px-3.5 py-1.5 rounded-[var(--radius-pill)] text-xs font-medium transition-all whitespace-nowrap cursor-pointer ${
                 filters.type.length === 0
-                  ? "bg-white text-[#141414] font-semibold"
-                  : "bg-[#242426] text-[#90908F] hover:text-white border border-[#333333]"
+                  ? "bg-[var(--accent-soft)] text-[var(--accent)] font-bold shadow-sm border border-[var(--accent)]/20"
+                  : "bg-[var(--card-bg)] text-[var(--muted)] hover:text-[var(--text)] border border-[var(--muted)]/10 shadow-[var(--shadow-card)]"
               }`}
             >
               All Types
@@ -575,14 +585,14 @@ function ModelCatalogContent({
                       return { ...f, type: newType };
                     });
                   }}
-                  className={`px-3 py-1 rounded-full text-xs font-medium transition-colors whitespace-nowrap flex items-center gap-1.5 ${
+                  className={`px-3.5 py-1.5 rounded-[var(--radius-pill)] text-xs font-medium transition-all whitespace-nowrap flex items-center gap-1.5 cursor-pointer ${
                     isActive
-                      ? "bg-white text-[#141414] font-semibold"
-                      : "bg-[#242426] text-[#90908F] hover:text-white border border-[#333333]"
+                      ? "bg-[var(--accent-soft)] text-[var(--accent)] font-bold shadow-sm border border-[var(--accent)]/20"
+                      : "bg-[var(--card-bg)] text-[var(--muted)] hover:text-[var(--text)] border border-[var(--muted)]/10 shadow-[var(--shadow-card)]"
                   }`}
                 >
                   <span>{opt.label}</span>
-                  <span className={`text-[10px] px-1.5 py-0.2 rounded-full font-mono ${isActive ? "bg-black/20 text-[#141414]" : "bg-[#1E1E1E] text-gray-400"}`}>
+                  <span className={`text-[10px] px-1.5 py-0.2 rounded-full font-mono tabular-nums ${isActive ? "bg-[var(--accent)]/15 text-[var(--accent)]" : "bg-[var(--muted)]/10 text-[var(--muted)]"}`}>
                     {count}
                   </span>
                 </button>
@@ -592,20 +602,20 @@ function ModelCatalogContent({
         </div>
 
         {/* Search Input & Controls Bar */}
-        <div className="flex flex-col sm:flex-row gap-4 items-stretch sm:items-center justify-between border-b border-[#282828] pb-4">
+        <div className="flex flex-col sm:flex-row gap-4 items-stretch sm:items-center justify-between border-b border-[var(--muted)]/10 pb-4">
           <div className="relative flex-1 max-w-md">
-            <Search size={15} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-[#90908F]" />
+            <Search size={15} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-[var(--muted)]" />
             <input
               type="text"
               placeholder="Search by name or developer..."
               value={filters.q}
               onChange={(e) => handleSearchChange(e.target.value)}
-              className="w-full bg-[#1C1C1E] border border-[#282828] rounded-lg pl-10 pr-4 py-2 text-xs text-white placeholder:text-[#90908F] focus:outline-none focus:border-[#D97757] transition-colors font-sans"
+              className="w-full bg-[var(--card-bg)] border border-[var(--muted)]/10 rounded-[var(--radius-control)] pl-10 pr-4 py-2 text-xs text-[var(--text)] placeholder:text-[var(--muted)] focus:outline-none focus:border-[var(--accent)] transition-all font-sans shadow-[var(--shadow-card)]"
             />
             {filters.q && (
               <button
                 onClick={() => handleSearchChange("")}
-                className="absolute right-3 top-1/2 -translate-y-1/2 text-[#90908F] hover:text-white"
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-[var(--muted)] hover:text-[var(--text)]"
               >
                 <X size={14} />
               </button>
@@ -615,19 +625,19 @@ function ModelCatalogContent({
           <div className="flex items-center gap-3 justify-between sm:justify-start">
             <button
               onClick={() => setMobileFiltersOpen(true)}
-              className="lg:hidden flex items-center gap-2 px-3 py-1.5 border border-[#282828] rounded-lg text-xs font-medium text-[#90908F] hover:text-white bg-[#1C1C1E]"
+              className="lg:hidden flex items-center gap-2 px-3.5 py-2 border border-[var(--muted)]/10 rounded-[var(--radius-control)] text-xs font-medium text-[var(--muted)] hover:text-[var(--text)] bg-[var(--card-bg)] shadow-[var(--shadow-card)]"
             >
               <SlidersHorizontal size={14} />
               Filters
             </button>
 
             <div className="flex items-center gap-2">
-              <span className="text-xs text-[#90908F] whitespace-nowrap hidden sm:block">Sort By</span>
+              <span className="text-xs text-[var(--muted)] whitespace-nowrap hidden sm:block">Sort By</span>
               <div className="relative">
                 <select
                   value={sortKey}
                   onChange={(e) => handleSortChange(e.target.value)}
-                  className="bg-[#1C1C1E] border border-[#282828] rounded-lg px-3 py-1.5 pr-8 text-xs font-medium text-[#E1E1E0] focus:outline-none focus:border-[#D97757] appearance-none cursor-pointer"
+                  className="bg-[var(--card-bg)] border border-[var(--muted)]/10 rounded-[var(--radius-control)] px-3.5 py-2 pr-8 text-xs font-semibold text-[var(--text)] focus:outline-none focus:border-[var(--accent)] appearance-none cursor-pointer shadow-[var(--shadow-card)]"
                 >
                   {SORT_OPTIONS.map((opt) => (
                     <option key={opt.key} value={opt.key} className="bg-[#1C1C1E] text-white">
@@ -649,30 +659,25 @@ function ModelCatalogContent({
         </div>
 
         {/* Results Model Cards Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-4 auto-rows-fr">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-5">
           {groupedItems.map((item) => {
-            const model = item.type === "family" ? item.primaryModel : item.model;
-            const featuredClass = model.featured ? "md:col-span-2 row-span-2" : "";
-
             if (item.type === "family") {
               return (
-                <div key={`family-${item.familySlug}`} className={featuredClass}>
+                <div key={`family-${item.familySlug}`}>
                   <ModelCard
                     model={item.primaryModel}
                     variant="family"
                     familyVariantCount={item.variantCount}
                     familySlug={item.familySlug}
-                    isFeatured={model.featured}
                   />
                 </div>
               );
             }
             return (
-              <div key={item.model.id} className={featuredClass}>
+              <div key={item.model.id}>
                 <ModelCard
                   model={item.model}
                   variant="single"
-                  isFeatured={model.featured}
                   hideDeveloperPrefix={hideDeveloperPrefix}
                 />
               </div>

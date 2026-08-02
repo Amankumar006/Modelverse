@@ -106,26 +106,23 @@ export default function Footer() {
   ];
 
   return (
-    <footer className="relative w-full bg-[url('/images/footer-bg.png')] bg-cover bg-bottom bg-no-repeat text-white pt-24 pb-10 px-4 sm:px-6 md:px-10 lg:px-14 overflow-hidden z-50">
-      {/* Top Gradient Blend */}
-      <div className="absolute inset-0 bg-gradient-to-b from-[#0a0a0a] via-black/10 to-transparent pointer-events-none z-0" />
-
+    <footer className="relative w-full bg-[var(--bg)] text-[var(--text)] border-t border-[var(--muted)]/10 pt-16 pb-10 px-4 sm:px-6 md:px-10 lg:px-14 overflow-hidden z-50">
       {/* Footer Navigation Grid */}
-      <div className="relative z-10 max-w-7xl mx-auto grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-8 md:gap-10 pb-20">
+      <div className="relative z-10 max-w-7xl mx-auto grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-8 md:gap-10 pb-16">
         {footerLinks.map((column, colIdx) => (
-          <div key={`col-${colIdx}`} className="space-y-4 text-left">
-            <h4 className="text-white text-[13px] font-semibold tracking-tight uppercase">
+          <div key={`col-${colIdx}`} className="space-y-3.5 text-left">
+            <h4 className="text-[var(--text)] text-xs font-bold tracking-wider uppercase">
               {column.title}
             </h4>
-            <ul className="space-y-2.5">
+            <ul className="space-y-2">
               {column.links.map((link, linkIdx) => (
                 <li key={`link-${colIdx}-${linkIdx}`}>
                   <Link
                     href={link.href}
-                    className="text-white/60 hover:text-white transition-colors text-xs inline-flex items-center gap-0.5 cursor-pointer"
+                    className="text-[var(--muted)] hover:text-[var(--accent)] transition-colors text-xs inline-flex items-center gap-0.5 cursor-pointer font-medium"
                   >
                     {link.label}
-                    {link.href.startsWith("mailto:") && (
+                    {link.href.startsWith("http") && (
                       <ArrowUpRight size={10} className="opacity-60" />
                     )}
                   </Link>
@@ -137,31 +134,31 @@ export default function Footer() {
       </div>
 
       {/* Bottom Bar */}
-      <div className="relative z-10 max-w-7xl mx-auto border-t border-white/[0.08] pt-8 flex flex-col md:flex-row items-center justify-between gap-6">
+      <div className="relative z-10 max-w-7xl mx-auto border-t border-[var(--muted)]/10 pt-8 flex flex-col md:flex-row items-center justify-between gap-6">
         {/* Left Side: Copyright & Legal */}
-        <div className="flex flex-wrap items-center justify-center md:justify-start gap-x-6 gap-y-2 text-xs text-white/50 font-normal">
+        <div className="flex flex-wrap items-center justify-center md:justify-start gap-x-6 gap-y-2 text-xs text-[var(--muted)] font-mono tabular-nums">
           <span>&copy; Modelverse {currentYear}</span>
-          <Link href="/terms" className="hover:text-white transition-colors cursor-pointer">
+          <Link href="/terms" className="hover:text-[var(--text)] transition-colors cursor-pointer">
             Terms of Service
           </Link>
-          <Link href="/privacy" className="hover:text-white transition-colors cursor-pointer">
+          <Link href="/privacy" className="hover:text-[var(--text)] transition-colors cursor-pointer">
             Privacy Policy
           </Link>
-          <Link href="/security" className="hover:text-white transition-colors cursor-pointer">
+          <Link href="/security" className="hover:text-[var(--text)] transition-colors cursor-pointer">
             Security
           </Link>
         </div>
 
         {/* Right Side: AI Summary Widgets */}
-        <div className="flex items-center gap-3 text-xs text-white/70">
+        <div className="flex items-center gap-3 text-xs text-[var(--muted)]">
           <span>Get an AI summary of Modelverse:</span>
           <div className="flex items-center gap-2">
             <button
               onClick={() => setActiveModel(activeModel === "claude" ? null : "claude")}
-              className={`p-2 rounded-full border transition-all duration-200 cursor-pointer flex items-center justify-center ${
+              className={`p-2 rounded-[var(--radius-pill)] transition-all cursor-pointer flex items-center justify-center ${
                 activeModel === "claude"
-                  ? "bg-white/20 border-white text-white scale-105 shadow-lg shadow-white/5"
-                  : "bg-white/5 border-white/10 hover:bg-white/10 hover:border-white/25 text-white/75 hover:text-white"
+                  ? "bg-[var(--accent-soft)] text-[var(--accent)] shadow-sm font-bold"
+                  : "bg-[var(--card-bg)] shadow-[var(--shadow-card)] text-[var(--muted)] hover:text-[var(--text)]"
               }`}
               title="How Claude might describe us"
             >
@@ -169,10 +166,10 @@ export default function Footer() {
             </button>
             <button
               onClick={() => setActiveModel(activeModel === "chatgpt" ? null : "chatgpt")}
-              className={`p-2 rounded-full border transition-all duration-200 cursor-pointer flex items-center justify-center ${
+              className={`p-2 rounded-[var(--radius-pill)] transition-all cursor-pointer flex items-center justify-center ${
                 activeModel === "chatgpt"
-                  ? "bg-white/20 border-white text-white scale-105 shadow-lg shadow-white/5"
-                  : "bg-white/5 border-white/10 hover:bg-white/10 hover:border-white/25 text-white/75 hover:text-white"
+                  ? "bg-[var(--accent-soft)] text-[var(--accent)] shadow-sm font-bold"
+                  : "bg-[var(--card-bg)] shadow-[var(--shadow-card)] text-[var(--muted)] hover:text-[var(--text)]"
               }`}
               title="How ChatGPT might describe us"
             >
@@ -180,10 +177,10 @@ export default function Footer() {
             </button>
             <button
               onClick={() => setActiveModel(activeModel === "gemini" ? null : "gemini")}
-              className={`p-2 rounded-full border transition-all duration-200 cursor-pointer flex items-center justify-center ${
+              className={`p-2 rounded-[var(--radius-pill)] transition-all cursor-pointer flex items-center justify-center ${
                 activeModel === "gemini"
-                  ? "bg-white/20 border-white text-white scale-105 shadow-lg shadow-white/5"
-                  : "bg-white/5 border-white/10 hover:bg-white/10 hover:border-white/25 text-white/75 hover:text-white"
+                  ? "bg-[var(--accent-soft)] text-[var(--accent)] shadow-sm font-bold"
+                  : "bg-[var(--card-bg)] shadow-[var(--shadow-card)] text-[var(--muted)] hover:text-[var(--text)]"
               }`}
               title="How Gemini might describe us"
             >
@@ -195,26 +192,26 @@ export default function Footer() {
 
       {/* AI Summary Interactive Panel */}
       {activeModel && (
-        <div className="fixed bottom-24 right-4 sm:right-6 md:right-10 lg:right-14 z-50 max-w-sm sm:max-w-md bg-black/80 backdrop-blur-md border border-white/10 rounded-2xl p-5 shadow-2xl animate-fade-in transition-all duration-300">
-          <div className="flex items-center justify-between pb-3 border-b border-white/[0.06] mb-3">
+        <div className="fixed bottom-24 right-4 sm:right-6 md:right-10 lg:right-14 z-50 max-w-sm sm:max-w-md bg-[var(--card-bg)] shadow-[var(--shadow-card)] border border-[var(--muted)]/10 rounded-[var(--radius-card)] p-5 animate-fade-rise transition-all duration-300">
+          <div className="flex items-center justify-between pb-3 border-b border-[var(--muted)]/10 mb-3">
             <div className="flex items-center gap-2">
-              <div className="p-1 rounded-md bg-white/10 text-brand-orange flex items-center justify-center">
+              <div className="p-1 rounded-[var(--radius-pill)] bg-[var(--accent-soft)] text-[var(--accent)] flex items-center justify-center">
                 {activeModel === "claude" && <ClaudeLogo />}
                 {activeModel === "chatgpt" && <OpenAILogo />}
                 {activeModel === "gemini" && <GeminiLogo />}
               </div>
-              <span className="text-xs font-semibold text-white/90">
+              <span className="text-xs font-bold text-[var(--text)]">
                 {getModelTitle(activeModel)}
               </span>
             </div>
             <button
               onClick={() => setActiveModel(null)}
-              className="text-white/40 hover:text-white transition-colors cursor-pointer p-0.5 hover:bg-white/5 rounded"
+              className="text-[var(--muted)] hover:text-[var(--text)] transition-colors cursor-pointer p-0.5"
             >
               <X size={14} />
             </button>
           </div>
-          <p className="text-xs sm:text-[13px] leading-[1.6] text-white/80 font-normal text-left">
+          <p className="text-xs sm:text-[13px] leading-relaxed text-[var(--muted)] font-normal text-left">
             {getModelSummary(activeModel)}
           </p>
         </div>

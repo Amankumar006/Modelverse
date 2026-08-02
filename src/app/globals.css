@@ -1,16 +1,21 @@
-@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital,wght@0,400;1,400&family=Inter:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,400..800;1,400..800&display=swap');
 @import "tailwindcss";
 @import "../styles/fonts.css";
 @import "../styles/theme.css";
 @plugin "@tailwindcss/typography";
 
 /* ------------------------------------------------------------------ */
-/*  Anthropic Claude Docs Theme Tokens                                  */
+/*  Daylight Theme Configuration                                       */
 /* ------------------------------------------------------------------ */
 @theme {
-  --color-brand-terracotta: #DA7756;
-  --color-brand-ochre: #D97706;
-  --color-brand-emerald: #10B981;
+  --color-daylight-bg: var(--bg);
+  --color-daylight-card: var(--card-bg);
+  --color-daylight-text: var(--text);
+  --color-daylight-muted: var(--muted);
+  --color-daylight-accent: var(--accent);
+  --color-daylight-accent-soft: var(--accent-soft);
+  --color-daylight-tag-bg: var(--tag-bg);
+  --color-daylight-tag-text: var(--tag-text);
 
   --animate-marquee-left: marquee-left 22s linear infinite;
   --animate-marquee-right: marquee-right 26s linear infinite;
@@ -26,167 +31,70 @@
 }
 
 body {
-  background-color: #141414;
-  color: #E4E4E7;
-  font-family: var(--font-body, 'Inter', ui-sans-serif, system-ui, sans-serif);
+  background-color: var(--bg);
+  color: var(--text);
+  font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.tabular-nums {
+  font-variant-numeric: tabular-nums;
 }
 
 /* ------------------------------------------------------------------ */
-/*  Anthropic Claude Docs Typography Overrides                          */
+/*  Prose & Typography Styles                                          */
 /* ------------------------------------------------------------------ */
 .prose {
   font-size: 1rem;
   line-height: 1.7;
-  color: #E4E4E7;
+  color: var(--text);
 }
 
 .prose p {
   margin-top: 1.25em;
   margin-bottom: 1.25em;
-  color: #D4D4D8;
+  color: var(--text);
   font-size: 1rem;
   font-weight: 400;
-  letter-spacing: -0.01em;
   line-height: 1.7;
 }
 
 .prose h1, .prose h2, .prose h3, .prose h4 {
-  font-family: var(--font-display, 'Instrument Serif', Georgia, serif);
-  color: #F4F4F5;
-  font-weight: 400;
+  font-family: var(--font-sans);
+  color: var(--text);
+  font-weight: 700;
   letter-spacing: -0.02em;
 }
 
-.prose h1 {
-  font-size: 2.25rem;
-  margin-top: 1.8em;
-  margin-bottom: 0.6em;
-}
-
-.prose h2 {
-  font-size: 1.75rem;
-  margin-top: 1.8em;
-  margin-bottom: 0.6em;
-  color: #F4F4F5;
-}
-
-.prose h3 {
-  font-size: 1.35rem;
-  margin-top: 1.5em;
-  margin-bottom: 0.5em;
-  color: #E4E4E7;
-}
-
 .prose a {
-  color: #DA7756;
+  color: var(--accent);
   text-decoration: underline;
   text-underline-offset: 3px;
   font-weight: 500;
 }
 
 .prose a:hover {
-  color: #F97316;
-}
-
-.prose strong {
-  color: #FFFFFF;
-  font-weight: 600;
-}
-
-.prose ul, .prose ol {
-  color: #D4D4D8;
-  padding-left: 1.25em;
-  margin-top: 1em;
-  margin-bottom: 1em;
-}
-
-.prose li {
-  margin-top: 0.4em;
-  margin-bottom: 0.4em;
-  line-height: 1.65;
-  color: #D4D4D8;
+  opacity: 0.85;
 }
 
 .prose blockquote {
-  border-left: 3px solid #DA7756;
-  color: #D4D4D8;
+  border-left: 3px solid var(--accent);
+  color: var(--muted);
   font-style: normal;
-  background: #1C1C1E;
+  background: var(--card-bg);
   padding: 0.85rem 1.15rem;
-  border-radius: 0.5rem;
+  border-radius: var(--radius-control);
+  box-shadow: var(--shadow-card);
   margin-top: 1.4em;
   margin-bottom: 1.4em;
 }
 
 .prose :not(pre) > code {
-  color: #E4E4E7;
-  background-color: #242426;
+  color: var(--accent-contrast);
+  background-color: var(--accent-soft);
   padding: 0.15em 0.4em;
-  border-radius: 0.375rem;
+  border-radius: 6px;
   font-size: 0.85em;
-  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-}
-
-/* ------------------------------------------------------------------ */
-/*  Anthropic Table Styling                                            */
-/* ------------------------------------------------------------------ */
-.prose table {
-  width: 100%;
-  min-width: 100%;
-  border-collapse: collapse;
-  margin-top: 1em;
-  margin-bottom: 1.5em;
-  background-color: transparent;
-  border: none;
-  display: table;
-}
-
-.prose th {
-  background-color: #1C1C1E;
-  color: #A1A1AA;
-  font-weight: 600;
-  text-transform: uppercase;
-  font-size: 0.725rem;
-  letter-spacing: 0.05em;
-  padding: 0.65rem 0.85rem;
-  border-bottom: 1px solid #27272A;
-  text-align: left;
-}
-
-.prose td {
-  padding: 0.65rem 0.85rem;
-  border-bottom: 1px solid #27272A;
-  color: #E4E4E7;
-  font-size: 0.875rem;
-}
-
-.prose tr:last-child td {
-  border-bottom: none;
-}
-
-.prose tr:hover td {
-  background-color: #1C1C1E;
-}
-
-/* ── Bento Grid Utilities ────────────────────────────────── */
-.liquid-glass {
-  background: rgba(255, 255, 255, 0.015);
-  backdrop-filter: blur(4px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  position: relative;
-  overflow: hidden;
-}
-
-.liquid-glass:hover {
-  background: rgba(255, 255, 255, 0.035);
-  border-color: rgba(255, 255, 255, 0.15);
-}
-
-.animate-marquee-left {
-  animation: marquee-left 22s linear infinite !important;
-}
-.animate-marquee-right {
-  animation: marquee-right 26s linear infinite !important;
+  font-family: var(--font-sans);
 }

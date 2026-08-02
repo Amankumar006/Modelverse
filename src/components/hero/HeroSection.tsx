@@ -1,110 +1,110 @@
 "use client";
 
-import { useRef, useEffect } from "react";
+import { useState } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import Navbar from "@/components/layout/Navbar";
-import { motion, useInView } from "framer-motion";
+import { Search, ArrowRight, ShieldCheck } from "lucide-react";
 
-const VIDEO_URL = "https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260619_191346_9d19d66e-86a4-47f7-8dc6-712c1788c3b2.mp4";
+interface HeroSectionProps {
+  totalModels?: number;
+  verifiedCount?: number;
+}
 
-// Staggered Fade Component
-const StaggeredFade = ({ text }: { text: string }) => {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-50px" });
+export default function HeroSection({
+  totalModels = 120,
+  verifiedCount = 105,
+}: HeroSectionProps) {
+  const [query, setQuery] = useState("");
+  const router = useRouter();
 
-  const letters = Array.from(text);
-
-  return (
-    <span ref={ref} className="inline-block">
-      {letters.map((char, index) => (
-        <motion.span
-          key={index}
-          initial={{ opacity: 0, y: 10 }}
-          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
-          transition={{ duration: 0.5, delay: index * 0.07, ease: "easeOut" }}
-          className="inline-block"
-        >
-          {char === " " ? "\u00A0" : char}
-        </motion.span>
-      ))}
-    </span>
-  );
-};
-
-export default function HeroSection() {
-  const videoRef = useRef<HTMLVideoElement>(null);
-
-  useEffect(() => {
-    // Ensure video plays
-    if (videoRef.current) {
-      videoRef.current.play().catch((err) => {
-        console.log("Video autoplay blocked:", err);
-      });
+  const handleSearchSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (query.trim()) {
+      router.push(`/models?q=${encodeURIComponent(query.trim())}`);
+    } else {
+      router.push("/models");
     }
-  }, []);
+  };
+
+  const categoryChips = [
+    { label: "Text", href: "/models?modality=text" },
+    { label: "Image", href: "/models?modality=image" },
+    { label: "Code", href: "/models?task=code-generation" },
+    { label: "Open Weights", href: "/models?type=open-weights" },
+  ];
 
   return (
-    <section className="relative min-h-screen w-full overflow-hidden bg-[#0C120F] flex flex-col">
-      {/* ── Background Video Layer (z-0) ────────────────────── */}
-      <div className="absolute inset-0 w-full h-full z-0 overflow-hidden pointer-events-none">
-        <video
-          ref={videoRef}
-          src={VIDEO_URL}
-          autoPlay
-          muted
-          loop
-          playsInline
-          className="w-full h-full object-cover object-center opacity-100"
-        />
-        {/* Dark overlay for readability */}
-        <div className="absolute inset-0 bg-black/20 z-0 pointer-events-none" />
-        {/* Seamless blend into the next section */}
-        <div className="absolute bottom-0 left-0 w-full h-[30vh] bg-gradient-to-b from-transparent to-[#0C120F] z-0 pointer-events-none" />
-      </div>
-
-      {/* ── Navigation Bar (z-20) ── */}
-      <div className="relative z-20">
+    <section className="relative w-full bg-[var(--bg)] text-[var(--text)] pt-4 pb-12 md:pb-16 flex flex-col items-center border-b border-[var(--muted)]/10">
+      {/* Navigation Header */}
+      <div className="w-full relative z-20">
         <Navbar theme="dark" />
       </div>
 
-      {/* ── Hero Content (z-10) ─────────────────────────────── */}
-      <div className="relative z-10 flex-1 flex flex-col items-center justify-start text-center px-5 sm:px-8 pt-4 sm:pt-8 md:pt-12 w-full">
-        <div className="w-full flex flex-col items-center">
-          
-          {/* Headings */}
-          <h1 className="flex flex-col items-center justify-center text-[#E2E8E4] mb-6 sm:mb-8 tracking-tight font-normal" style={{ fontFamily: "var(--font-serif)", lineHeight: "1.08" }}>
-            <span className="text-4xl sm:text-7xl md:text-8xl lg:text-9xl uppercase block">
-              <StaggeredFade text="BEYOND THE" />
-            </span>
-            <span className="text-4xl sm:text-7xl md:text-8xl lg:text-9xl uppercase block">
-              <StaggeredFade text="NOISE" />
-            </span>
-          </h1>
+      {/* Centered Hero Container (max-w-640px) */}
+      <div className="w-full max-w-[640px] mx-auto px-5 pt-8 md:pt-14 flex flex-col items-center text-center relative z-10">
+        {/* Stat Pill Badge */}
+        <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-[var(--radius-pill)] bg-[var(--accent-soft)] text-[var(--accent)] text-xs font-semibold mb-6 shadow-sm">
+          <ShieldCheck size={14} className="shrink-0" />
+          <span className="tabular-nums font-mono">
+            {totalModels} models tracked · {verifiedCount} verified by curators
+          </span>
+        </div>
 
-          {/* Subtitle */}
-          <motion.p 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 1.6 }}
-            className="text-[#8C9E91] font-light leading-relaxed max-w-xs sm:max-w-md md:max-w-xl text-sm sm:text-base md:text-lg mb-8 sm:mb-10"
-          >
-            We track the frontier. A living, fact-checked archive of every notable AI model release. Tracking parameters, context sizes, and benchmarks straight from primary documentation.
-          </motion.p>
+        {/* Headline */}
+        <h1 className="text-3xl sm:text-5xl md:text-6xl font-extrabold tracking-tight text-[var(--text)] leading-[1.1] mb-4">
+          Every AI Model. <br className="hidden sm:inline" />
+          <span className="text-[var(--accent)]">Every Release.</span>
+        </h1>
 
-          {/* CTA Button */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 2.0 }}
+        {/* Subtext */}
+        <p className="text-sm sm:text-base text-[var(--muted)] leading-relaxed max-w-lg mb-8">
+          From frontier closed APIs to open-weight breakthroughs — a living, fact-checked archive of parameters, context windows, and primary documentation.
+        </p>
+
+        {/* Search Input Form */}
+        <form
+          onSubmit={handleSearchSubmit}
+          className="w-full relative flex items-center bg-[var(--card-bg)] shadow-[var(--shadow-card)] rounded-[var(--radius-control)] p-1.5 border border-[var(--muted)]/10 focus-within:ring-2 focus-within:ring-[var(--accent)] transition-all mb-5"
+        >
+          <label htmlFor="hero-search-input" className="sr-only">
+            Search AI models, developers, or parameters
+          </label>
+
+          <Search size={18} className="ml-3 text-[var(--muted)] shrink-0" />
+
+          <input
+            id="hero-search-input"
+            type="text"
+            placeholder="Search models, developers, or specs..."
+            value={query}
+            aria-label="Search AI models, developers, or parameters"
+            onChange={(e) => setQuery(e.target.value)}
+            className="w-full bg-transparent px-3 py-2.5 text-sm text-[var(--text)] placeholder:text-[var(--muted)] focus:outline-none font-sans"
+          />
+
+          <button
+            type="submit"
+            aria-label="Submit search"
+            className="px-4 py-2.5 rounded-[var(--radius-control)] bg-[var(--accent)] text-[var(--accent-contrast)] text-xs font-bold hover:opacity-90 transition-all shrink-0 flex items-center gap-1.5 cursor-pointer"
           >
+            <span>Search</span>
+            <ArrowRight size={14} />
+          </button>
+        </form>
+
+        {/* Quick Category Chips */}
+        <div className="flex flex-wrap items-center justify-center gap-2 text-xs">
+          <span className="text-[var(--muted)] font-medium mr-1">Quick Filters:</span>
+          {categoryChips.map((chip) => (
             <Link
-              href="/models"
-              className="liquid-glass rounded-full text-[#E2E8E4] uppercase tracking-[0.18em] sm:tracking-[0.2em] px-7 sm:px-10 py-3.5 sm:py-4 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#4ADE80] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0C120F] inline-flex items-center justify-center transition-all"
+              key={chip.label}
+              href={chip.href}
+              className="px-3.5 py-1 rounded-[var(--radius-pill)] bg-[var(--tag-bg)] text-[var(--tag-text)] font-medium hover:bg-[var(--accent-soft)] hover:text-[var(--accent)] transition-colors cursor-pointer"
             >
-              Explore Models
+              {chip.label}
             </Link>
-          </motion.div>
-
+          ))}
         </div>
       </div>
     </section>

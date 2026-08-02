@@ -82,7 +82,7 @@ export default function SubmitModelPage() {
   const emailBody = encodeURIComponent(tomlCode + `\n\nSource URL/Announcement: ${sourceUrl || "Not provided"}`);
 
   return (
-    <div className="bg-[#0C120F] text-[#E2E8E4] min-h-screen relative font-sans overflow-x-hidden">
+    <div className="bg-[var(--bg)] text-[var(--text)] min-h-screen relative font-sans overflow-x-hidden">
       {/* Navbar */}
       <div className="absolute top-0 left-0 w-full z-[100]">
         <Navbar theme="dark" />
@@ -93,7 +93,7 @@ export default function SubmitModelPage() {
         <div className="mb-8 text-left">
           <Link
             href="/"
-            className="inline-flex items-center gap-1.5 text-xs uppercase tracking-widest text-[#8C9E91] hover:text-[#E2E8E4] transition-colors border border-[#243629] bg-[#121A15] px-4 py-2 rounded-full backdrop-blur-sm shadow-md"
+            className="inline-flex items-center gap-1.5 text-xs uppercase tracking-widest text-[var(--muted)] hover:text-[var(--text)] transition-colors border border-[var(--accent-soft)] bg-[var(--card-bg)] px-4 py-2 rounded-full backdrop-blur-sm shadow-md"
           >
             <ChevronLeft size={12} />
             Back to Home
@@ -102,14 +102,14 @@ export default function SubmitModelPage() {
 
         {/* Heading */}
         <div className="mb-10 text-left">
-          <div className="flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.25em] text-[#4ADE80] mb-3">
+          <div className="flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.25em] text-[var(--accent)] mb-3">
             <Sparkle size={12} strokeWidth={2} />
             <span>Community Contributions</span>
           </div>
           <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-white tracking-tight" style={{ fontFamily: "var(--font-display)" }}>
             Submit an AI Model
           </h1>
-          <p className="text-sm text-[#8C9E91] mt-2 max-w-2xl leading-relaxed">
+          <p className="text-sm text-[var(--muted)] mt-2 max-w-2xl leading-relaxed">
             Fill in the model details to generate a structured TOML configuration snippet. You can copy the code to open a PR on GitHub or email it directly to our curators.
           </p>
         </div>
@@ -118,40 +118,40 @@ export default function SubmitModelPage() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
           
           {/* Left Column: Form */}
-          <div className="lg:col-span-7 bg-[#121A15] border border-[#243629] rounded-2xl p-6 sm:p-8 space-y-6 text-left shadow-xl">
+          <div className="lg:col-span-7 bg-[var(--card-bg)] shadow-[var(--shadow-card)] rounded-[var(--radius-card)] p-6 sm:p-8 space-y-6 text-left border border-[var(--muted)]/10">
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               
               {/* Model Name */}
               <div className="flex flex-col gap-1.5">
-                <label className="text-xs font-semibold text-zinc-400 uppercase tracking-wider">Model Name</label>
+                <label className="text-xs font-semibold text-[var(--muted)] uppercase tracking-wider">Model Name</label>
                 <input
                   type="text"
                   placeholder="e.g. Claude 4.5 Sonnet"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
-                  className="bg-[#0C120F] border border-[#243629] rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-emerald-500 transition-colors"
+                  className="bg-[var(--bg)] border border-[var(--muted)]/10 rounded-[var(--radius-control)] px-3.5 py-2.5 text-sm text-[var(--text)] focus:outline-none focus:ring-2 focus:ring-[var(--accent)] transition-all"
                 />
               </div>
 
               {/* Developer */}
               <div className="flex flex-col gap-1.5">
-                <label className="text-xs font-semibold text-zinc-400 uppercase tracking-wider">Developer</label>
+                <label className="text-xs font-semibold text-[var(--muted)] uppercase tracking-wider">Developer</label>
                 <input
                   type="text"
                   placeholder="e.g. Anthropic"
                   value={developer}
                   onChange={(e) => setDeveloper(e.target.value)}
-                  className="bg-[#0C120F] border border-[#243629] rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-emerald-500 transition-colors"
+                  className="bg-[var(--bg)] border border-[var(--muted)]/10 rounded-[var(--radius-control)] px-3.5 py-2.5 text-sm text-[var(--text)] focus:outline-none focus:ring-2 focus:ring-[var(--accent)] transition-all"
                 />
               </div>
 
               {/* Model Type */}
               <div className="flex flex-col gap-1.5">
-                <label className="text-xs font-semibold text-zinc-400 uppercase tracking-wider">Model Type</label>
+                <label className="text-xs font-semibold text-[var(--muted)] uppercase tracking-wider">Model Type</label>
                 <select
                   value={type}
                   onChange={(e) => setType(e.target.value)}
-                  className="bg-[#0C120F] border border-[#243629] rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-emerald-500 transition-colors"
+                  className="bg-[var(--bg)] border border-[var(--muted)]/10 rounded-[var(--radius-control)] px-3.5 py-2.5 text-sm text-[var(--text)] focus:outline-none focus:ring-2 focus:ring-[var(--accent)] transition-all"
                 >
                   <option value="open-weights">Open Weights</option>
                   <option value="closed-source">Closed Source</option>
@@ -162,13 +162,13 @@ export default function SubmitModelPage() {
 
               {/* License */}
               <div className="flex flex-col gap-1.5">
-                <label className="text-xs font-semibold text-zinc-400 uppercase tracking-wider">License</label>
+                <label className="text-xs font-semibold text-[var(--muted)] uppercase tracking-wider">License</label>
                 <input
                   type="text"
                   placeholder="e.g. Apache-2.0 or Custom commercial"
                   value={license}
                   onChange={(e) => setLicense(e.target.value)}
-                  className="bg-[#0C120F] border border-[#243629] rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-emerald-500 transition-colors"
+                  className="bg-[var(--bg)] border border-[var(--muted)]/10 rounded-[var(--radius-control)] px-3.5 py-2.5 text-sm text-[var(--text)] focus:outline-none focus:ring-2 focus:ring-[var(--accent)] transition-all"
                 />
               </div>
 
@@ -178,7 +178,7 @@ export default function SubmitModelPage() {
                 <select
                   value={primaryTask}
                   onChange={(e) => setPrimaryTask(e.target.value)}
-                  className="bg-[#0C120F] border border-[#243629] rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-emerald-500 transition-colors"
+                  className="bg-[var(--bg)] border border-[var(--accent-soft)] rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-[var(--accent)] transition-colors"
                 >
                   <option value="code-generation">Code Generation</option>
                   <option value="chat-reasoning">Chat Reasoning</option>
@@ -197,7 +197,7 @@ export default function SubmitModelPage() {
                   placeholder="e.g. 128k or 1M"
                   value={contextWindow}
                   onChange={(e) => setContextWindow(e.target.value)}
-                  className="bg-[#0C120F] border border-[#243629] rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-emerald-500 transition-colors"
+                  className="bg-[var(--bg)] border border-[var(--accent-soft)] rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-[var(--accent)] transition-colors"
                 />
               </div>
 
@@ -209,7 +209,7 @@ export default function SubmitModelPage() {
                   placeholder="e.g. 70B or 1.5T"
                   value={parameters}
                   onChange={(e) => setParameters(e.target.value)}
-                  className="bg-[#0C120F] border border-[#243629] rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-emerald-500 transition-colors"
+                  className="bg-[var(--bg)] border border-[var(--accent-soft)] rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-[var(--accent)] transition-colors"
                 />
               </div>
 
@@ -220,12 +220,12 @@ export default function SubmitModelPage() {
                   type="date"
                   value={releaseDate}
                   onChange={(e) => setReleaseDate(e.target.value)}
-                  className="bg-[#0C120F] border border-[#243629] rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-emerald-500 transition-colors"
+                  className="bg-[var(--bg)] border border-[var(--accent-soft)] rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-[var(--accent)] transition-colors"
                 />
               </div>
             </div>
 
-            <div className="border-t border-[#243629] pt-5">
+            <div className="border-t border-[var(--accent-soft)] pt-5">
               <h3 className="text-sm font-semibold text-white uppercase tracking-wider mb-4">Pricing Specs (per 1M tokens in USD)</h3>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className="flex flex-col gap-1.5">
@@ -236,7 +236,7 @@ export default function SubmitModelPage() {
                     placeholder="e.g. 3.00"
                     value={inputPrice}
                     onChange={(e) => setInputPrice(e.target.value)}
-                    className="bg-[#0C120F] border border-[#243629] rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-emerald-500 transition-colors"
+                    className="bg-[var(--bg)] border border-[var(--accent-soft)] rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-[var(--accent)] transition-colors"
                   />
                 </div>
                 <div className="flex flex-col gap-1.5">
@@ -247,13 +247,13 @@ export default function SubmitModelPage() {
                     placeholder="e.g. 15.00"
                     value={outputPrice}
                     onChange={(e) => setOutputPrice(e.target.value)}
-                    className="bg-[#0C120F] border border-[#243629] rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-emerald-500 transition-colors"
+                    className="bg-[var(--bg)] border border-[var(--accent-soft)] rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-[var(--accent)] transition-colors"
                   />
                 </div>
               </div>
             </div>
 
-            <div className="border-t border-[#243629] pt-5">
+            <div className="border-t border-[var(--accent-soft)] pt-5">
               <h3 className="text-sm font-semibold text-white uppercase tracking-wider mb-4">Developer Benchmarks (Verified % scores)</h3>
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                 <div className="flex flex-col gap-1.5">
@@ -264,7 +264,7 @@ export default function SubmitModelPage() {
                     placeholder="e.g. 48.2"
                     value={sweBench}
                     onChange={(e) => setSweBench(e.target.value)}
-                    className="bg-[#0C120F] border border-[#243629] rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-emerald-500 transition-colors"
+                    className="bg-[var(--bg)] border border-[var(--accent-soft)] rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-[var(--accent)] transition-colors"
                   />
                 </div>
                 <div className="flex flex-col gap-1.5">
@@ -275,7 +275,7 @@ export default function SubmitModelPage() {
                     placeholder="e.g. 85.0"
                     value={aider}
                     onChange={(e) => setAider(e.target.value)}
-                    className="bg-[#0C120F] border border-[#243629] rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-emerald-500 transition-colors"
+                    className="bg-[var(--bg)] border border-[var(--accent-soft)] rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-[var(--accent)] transition-colors"
                   />
                 </div>
                 <div className="flex flex-col gap-1.5">
@@ -286,20 +286,20 @@ export default function SubmitModelPage() {
                     placeholder="e.g. 68.3"
                     value={gpqa}
                     onChange={(e) => setGpqa(e.target.value)}
-                    className="bg-[#0C120F] border border-[#243629] rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-emerald-500 transition-colors"
+                    className="bg-[var(--bg)] border border-[var(--accent-soft)] rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-[var(--accent)] transition-colors"
                   />
                 </div>
               </div>
             </div>
 
-            <div className="border-t border-[#243629] pt-5 flex flex-col gap-1.5">
+            <div className="border-t border-[var(--accent-soft)] pt-5 flex flex-col gap-1.5">
               <label className="text-xs font-semibold text-zinc-400 uppercase tracking-wider">Source announcement URL</label>
               <input
                 type="url"
                 placeholder="e.g. https://openai.com/blog/..."
                 value={sourceUrl}
                 onChange={(e) => setSourceUrl(e.target.value)}
-                className="bg-[#0C120F] border border-[#243629] rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-emerald-500 transition-colors"
+                className="bg-[var(--bg)] border border-[var(--accent-soft)] rounded-lg px-3 py-2 text-sm text-[var(--text)] focus:outline-none focus:border-[var(--accent)] transition-colors"
               />
             </div>
           </div>
@@ -308,13 +308,13 @@ export default function SubmitModelPage() {
           <div className="lg:col-span-5 flex flex-col gap-6 h-full">
             
             {/* Live TOML Preview */}
-            <div className="bg-[#121A15] border border-[#243629] rounded-2xl p-5 flex-1 flex flex-col justify-between text-left shadow-lg min-h-[380px] lg:h-full overflow-hidden">
-              <div className="flex items-center justify-between border-b border-[#243629] pb-3 mb-4 shrink-0">
+            <div className="bg-[var(--card-bg)] border border-[var(--accent-soft)] rounded-2xl p-5 flex-1 flex flex-col justify-between text-left shadow-lg min-h-[380px] lg:h-full overflow-hidden">
+              <div className="flex items-center justify-between border-b border-[var(--accent-soft)] pb-3 mb-4 shrink-0">
                 <span className="text-xs font-semibold uppercase tracking-wider text-zinc-400 font-mono">Live TOML Generator</span>
-                <span className="text-[10px] bg-[#1A261D] text-[#4ADE80] border border-[#243629] px-2 py-0.5 rounded font-mono">toml</span>
+                <span className="text-[10px] bg-[var(--tag-bg)] text-[var(--accent)] border border-[var(--accent-soft)] px-2 py-0.5 rounded font-mono">toml</span>
               </div>
 
-              <pre className="text-[11px] font-mono text-emerald-300 leading-[1.6] select-all bg-[#0C120F] p-4 rounded-xl border border-[#243629] overflow-x-auto flex-1 h-[280px] lg:h-[calc(100%-80px)] scrollbar-thin">
+              <pre className="text-[11px] font-mono text-[var(--accent)] leading-[1.6] select-all bg-[var(--bg)] p-4 rounded-xl border border-[var(--accent-soft)] overflow-x-auto flex-1 h-[280px] lg:h-[calc(100%-80px)] scrollbar-thin">
                 <code>{tomlCode}</code>
               </pre>
             </div>
@@ -327,7 +327,7 @@ export default function SubmitModelPage() {
               >
                 {copied ? (
                   <>
-                    <Check size={16} className="text-[#4ADE80]" />
+                    <Check size={16} className="text-[var(--accent)]" />
                     <span>Copied!</span>
                   </>
                 ) : (

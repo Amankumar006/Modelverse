@@ -944,7 +944,7 @@ export default function AdminReviewPage() {
                         <span>LIVE MODEL PAGE PREVIEW</span>
                       </div>
                       <h2 className="text-2xl font-bold text-white tracking-tight">{editForm.name || 'Untitled Model'}</h2>
-                      <p className="text-sm text-[#4ADE80] font-medium mt-1">{editForm.developer || 'Unknown Developer'}</p>
+                      <p className="text-sm text-[var(--accent)] font-medium mt-1">{editForm.developer || 'Unknown Developer'}</p>
                     </div>
                     <a
                       href={`/admin/review/preview?filename=${encodeURIComponent(activeModalModel.filename)}`}

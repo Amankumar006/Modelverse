@@ -428,61 +428,53 @@ export default function TimelineContainer({ initialModels }: TimelineContainerPr
 
       {/* ── Active Info Content Panel (Right side) ── */}
       <div
-        className="absolute inset-y-0 right-0 flex items-center px-8 md:px-16 z-30 pointer-events-none"
+        className="absolute inset-y-0 right-0 flex items-center px-6 md:px-12 z-30 pointer-events-none"
         style={{
           left: "var(--content-left)",
           transform: jiggle ? "translate3d(3px, -1px, 0)" : "translate3d(0, 0, 0)",
           transition: jiggle ? "none" : "transform 0.15s cubic-bezier(0.175, 0.885, 0.32, 1.275)",
         }}
       >
-        <div className="max-w-xl pointer-events-auto">
+        <div className="max-w-xl pointer-events-auto bg-[var(--card-bg)] shadow-[var(--shadow-card)] p-6 sm:p-8 rounded-[var(--radius-card)] border border-[var(--muted)]/10">
           {activeModel && (
             <div
-              className="flex items-center gap-8 md:gap-14 text-left select-text animate-premium-fade"
+              className="flex flex-col sm:flex-row items-start sm:items-center gap-6 text-left select-text animate-premium-fade"
               key={activeModel.id}
             >
               {/* Giant Index Number */}
               <div
-                className="text-7xl md:text-[11rem] font-bold text-[#1f1f21] leading-none select-none tracking-tighter shrink-0"
-                style={{
-                  fontFamily: "var(--font-display, ui-sans-serif, system-ui, sans-serif)",
-                }}
+                className="text-5xl sm:text-7xl md:text-8xl font-black text-[var(--accent)] leading-none select-none tracking-tight shrink-0 font-sans tabular-nums"
               >
                 {getSlashIndex(activeIndex)}
               </div>
 
               {/* Text Block content */}
-              <div className="space-y-4">
+              <div className="space-y-3">
                 <div className="space-y-1">
-                  <h2
-                    className="text-2xl md:text-4xl font-extrabold text-[#1f1f21] tracking-tight leading-tight"
-                    style={{
-                      fontFamily: "var(--font-display, ui-sans-serif, system-ui, sans-serif)",
-                    }}
-                  >
+                  <h2 className="text-xl sm:text-2xl md:text-3xl font-extrabold text-[var(--text)] tracking-tight leading-tight">
                     {activeModel.name}
                   </h2>
-                  <div className="flex flex-wrap gap-2 items-center text-xs font-bold uppercase tracking-wider text-[#1f1f21]/40">
+                  <div className="flex flex-wrap gap-2 items-center text-xs font-bold uppercase tracking-wider text-[var(--muted)] font-mono tabular-nums">
                     <span>{activeModel.developer}</span>
                     <span>•</span>
                     <span>{formattedDate}</span>
                     <span>•</span>
-                    <span className="text-orange-600 bg-orange-50 px-2.5 py-0.5 rounded text-[10px] tracking-widest font-extrabold border border-orange-500/10">
+                    <span className="text-[var(--accent)] bg-[var(--accent-soft)] px-2.5 py-0.5 rounded-[var(--radius-pill)] text-[10px] font-bold">
                       {activeModel.type.replace("-", " ")}
                     </span>
                   </div>
                 </div>
 
-                <p className="text-sm md:text-base text-[#1f1f21]/60 leading-relaxed font-normal">
+                <p className="text-xs sm:text-sm text-[var(--muted)] leading-relaxed font-normal line-clamp-3">
                   {activeModel.description}
                 </p>
 
                 {/* Micro tags row */}
                 <div className="flex flex-wrap gap-2 pt-1">
-                  <span className="text-[10px] font-bold uppercase tracking-wider text-[#1f1f21]/50 border border-black/10 bg-white/40 px-2 py-0.5 rounded">
+                  <span className="text-[10px] font-medium uppercase tracking-wider text-[var(--tag-text)] bg-[var(--tag-bg)] px-2.5 py-1 rounded-[var(--radius-pill)] font-mono tabular-nums">
                     Size: {activeModel.parameters === "undisclosed" ? "Undisclosed" : activeModel.parameters}
                   </span>
-                  <span className="text-[10px] font-bold uppercase tracking-wider text-[#1f1f21]/50 border border-black/10 bg-white/40 px-2 py-0.5 rounded">
+                  <span className="text-[10px] font-medium uppercase tracking-wider text-[var(--tag-text)] bg-[var(--tag-bg)] px-2.5 py-1 rounded-[var(--radius-pill)]">
                     Task: {activeModel.primaryTask.replace("-", " ")}
                   </span>
                 </div>
@@ -490,10 +482,10 @@ export default function TimelineContainer({ initialModels }: TimelineContainerPr
                 <div className="pt-2">
                   <Link
                     href={`/models/${activeModel.slug}`}
-                    className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-widest text-white bg-black hover:bg-black/85 px-6 py-3 rounded-full transition-all shadow-md hover:scale-105"
+                    className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-[var(--accent-contrast)] bg-[var(--accent)] hover:opacity-90 px-5 py-2.5 rounded-[var(--radius-pill)] transition-all shadow-sm"
                   >
                     View Specs
-                    <ArrowUpRight size={13} />
+                    <ArrowUpRight size={14} />
                   </Link>
                 </div>
               </div>

@@ -43,28 +43,28 @@ export default function CopyableTable({ title = "Data Table", children, rawText,
   };
 
   return (
-    <div className={`my-6 rounded-2xl overflow-hidden bg-[#0F1713] border border-[#243629] shadow-xl ${className}`}>
+    <div className={`my-6 rounded-[var(--radius-card)] overflow-hidden bg-[var(--card-bg)] border border-[var(--muted)]/10 shadow-[var(--shadow-card)] ${className}`}>
       {/* Table Control Header Bar */}
-      <div className="flex items-center justify-between px-4 py-2.5 bg-[#16221B] border-b border-[#243629] select-none">
-        <div className="flex items-center gap-2 text-xs font-semibold text-[#E2E8E4]">
-          <TableIcon size={14} className="text-[#4ADE80]" />
+      <div className="flex items-center justify-between px-4 py-2.5 bg-[var(--bg)] border-b border-[var(--muted)]/10 select-none">
+        <div className="flex items-center gap-2 text-xs font-bold text-[var(--text)]">
+          <TableIcon size={14} className="text-[var(--accent)]" />
           <span>{title}</span>
         </div>
 
         <button
           onClick={handleCopyTable}
           type="button"
-          className="flex items-center gap-1.5 px-3 py-1 rounded-lg bg-[#0C120F] hover:bg-[#1A261D] active:scale-95 text-[#9CA3AF] hover:text-white transition-all text-xs font-mono border border-[#243629] cursor-pointer"
+          className="flex items-center gap-1.5 px-3 py-1 rounded-[var(--radius-pill)] bg-[var(--card-bg)] hover:bg-[var(--accent-soft)] active:scale-95 text-[var(--muted)] hover:text-[var(--text)] transition-all text-xs font-bold border border-[var(--muted)]/10 cursor-pointer shadow-sm"
           title="Copy table data"
         >
           {copied ? (
             <>
-              <Check size={13} className="text-[#4ADE80]" />
-              <span className="text-[#4ADE80] font-semibold">Copied!</span>
+              <Check size={13} className="text-[var(--accent)]" />
+              <span className="text-[var(--accent)] font-bold">Copied!</span>
             </>
           ) : (
             <>
-              <Copy size={13} className="text-[#9CA3AF]" />
+              <Copy size={13} className="text-[var(--muted)]" />
               <span>Copy Table</span>
             </>
           )}
@@ -72,7 +72,7 @@ export default function CopyableTable({ title = "Data Table", children, rawText,
       </div>
 
       {/* Table Content Container */}
-      <div ref={containerRef} className="overflow-x-auto p-1 bg-[#0C120F]">
+      <div ref={containerRef} className="overflow-x-auto p-1 bg-[var(--card-bg)]">
         {children}
       </div>
     </div>

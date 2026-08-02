@@ -1,0 +1,284 @@
+"use client";
+
+import React, { useState } from "react";
+import Link from "next/link";
+import type { ModelEntry } from "@/lib/models";
+import ModelDetailTabs from "./ModelDetailTabs";
+import Navbar from "@/components/layout/Navbar";
+import { Search, ChevronDown, Copy, Check, ExternalLink, Terminal, Shield, Layers, FileText } from "lucide-react";
+
+interface ModelDocsLayoutProps {
+  model: ModelEntry;
+  markdownContent: string | null;
+  allModels: ModelEntry[];
+  familyMembers: ModelEntry[];
+  relatedModels: ModelEntry[];
+}
+
+export default function ModelDocsLayout({
+  model,
+  markdownContent,
+  allModels,
+  familyMembers,
+  relatedModels,
+}: ModelDocsLayoutProps) {
+  const [copied, setCopied] = useState(false);
+  const [activeToc, setActiveToc] = useState("overview");
+  const [searchQuery, setSearchQuery] = useState("");
+
+  const handleCopyPage = () => {
+    if (typeof window !== "undefined") {
+      navigator.clipboard.writeText(window.location.href);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    }
+  };
+
+  const comparisonModels = [
+    model,
+    ...allModels.filter((m) => m.id !== model.id && m.verified).slice(0, 3),
+  ];
+
+  return (
+    <div className="min-h-screen bg-[var(--bg)] text-[var(--text)] font-sans antialiased">
+      {/* ── Global Top Navbar ────────────────────────────── */}
+      <Navbar theme="dark" />
+
+      {/* ── 3-Column Main Documentation Grid ──────────────────────── */}
+      <div className="mx-auto flex w-full max-w-[1700px] px-4 md:px-6 py-6 gap-6">
+        {/* LEFT COLUMN: Sidebar Navigation */}
+        <aside className="w-60 shrink-0 hidden md:block rounded-[var(--radius-card)] bg-[var(--card-bg)] shadow-[var(--shadow-card)] p-4 space-y-6 sticky top-20 h-[calc(100vh-6rem)] overflow-y-auto border border-[var(--muted)]/10">
+          {/* Search Box */}
+          <div className="relative">
+            <Search size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-[var(--muted)]" />
+            <input
+              type="text"
+              placeholder="Search docs..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="w-full rounded-[var(--radius-control)] bg-[var(--bg)] border border-[var(--muted)]/10 pl-8 pr-8 py-1.5 text-xs text-[var(--text)] placeholder:text-[var(--muted)] focus:outline-none focus:border-[var(--accent)]"
+            />
+            <span className="absolute right-2.5 top-1/2 -translate-y-1/2 text-[10px] font-mono text-[var(--muted)]">
+              ⌘K
+            </span>
+          </div>
+
+          {/* Menu Sections */}
+          <div className="space-y-1 text-xs">
+            <p className="px-2 py-1 font-bold text-[var(--text)] text-xs uppercase tracking-wider">Models</p>
+
+            <Link
+              href={`/models/${model.slug}`}
+              className="block px-3 py-2 rounded-[var(--radius-control)] bg-[var(--accent-soft)] text-[var(--accent)] font-bold shadow-sm"
+            >
+              Models overview
+            </Link>
+
+            <Link
+              href={`/models/developer/${encodeURIComponent(model.developer)}`}
+              className="block px-3 py-2 rounded-[var(--radius-control)] text-[var(--muted)] hover:text-[var(--text)] hover:bg-[var(--bg)] transition-colors font-medium"
+            >
+              Model IDs & versioning
+            </Link>
+
+            <button
+              onClick={() => setActiveToc("choosing")}
+              className="w-full text-left px-3 py-2 rounded-[var(--radius-control)] text-[var(--muted)] hover:text-[var(--text)] hover:bg-[var(--bg)] transition-colors font-medium cursor-pointer"
+            >
+              Choosing a model
+            </button>
+
+            {familyMembers.map((member) => (
+              <Link
+                key={member.id}
+                href={`/models/${member.slug}`}
+                className="block px-3 py-2 rounded-[var(--radius-control)] text-[var(--muted)] hover:text-[var(--text)] hover:bg-[var(--bg)] transition-colors truncate font-medium"
+              >
+                What&apos;s new in {member.name}
+              </Link>
+            ))}
+
+            <Link
+              href="/models"
+              className="block px-3 py-2 rounded-[var(--radius-control)] text-[var(--muted)] hover:text-[var(--text)] hover:bg-[var(--bg)] transition-colors font-medium"
+            >
+              Upgrade model versions
+            </Link>
+
+            <Link
+              href="/models"
+              className="block px-3 py-2 rounded-[var(--radius-control)] text-[var(--muted)] hover:text-[var(--text)] hover:bg-[var(--bg)] transition-colors font-medium"
+            >
+              Model cards & benchmarks
+            </Link>
+          </div>
+        </aside>
+
+        {/* CENTER COLUMN: Main Reading Area */}
+        <main className="flex-1 max-w-[860px] px-4 lg:px-8 py-4 space-y-8 min-w-0">
+          {/* Breadcrumb & Header */}
+          <div className="space-y-3">
+            <p className="text-xs text-[var(--muted)] font-medium">
+              Models & pricing / <span className="text-[var(--text)] font-semibold">Models</span> / {model.name}
+            </p>
+
+            <div className="flex flex-wrap items-center justify-between gap-4">
+              <h1 className="font-extrabold text-3xl sm:text-4xl text-[var(--text)] tracking-tight">
+                {model.name} Overview
+              </h1>
+
+              <button
+                onClick={handleCopyPage}
+                className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-[var(--radius-pill)] border border-[var(--muted)]/10 bg-[var(--card-bg)] shadow-[var(--shadow-card)] text-xs font-bold text-[var(--text)] hover:border-[var(--accent)] transition-all cursor-pointer"
+              >
+                {copied ? <Check size={13} className="text-[var(--accent)]" /> : <Copy size={13} />}
+                <span>{copied ? "Copied!" : "Copy page"}</span>
+                <ChevronDown size={12} className="text-[var(--muted)]" />
+              </button>
+            </div>
+
+            <p className="text-base text-[var(--muted)] leading-relaxed max-w-3xl font-normal">
+              {model.description ||
+                `${model.name} is a state-of-the-art model developed by ${model.developer}. This documentation introduces the available model variants and compares their capability, context window, and pricing performance.`}
+            </p>
+          </div>
+
+          {/* Section 1: Choosing a model */}
+          <section id="choosing" className="space-y-3 pt-6 border-t border-[var(--muted)]/10">
+            <h2 className="text-2xl font-extrabold text-[var(--text)]">Choosing a model</h2>
+            <p className="text-sm text-[var(--muted)] leading-relaxed font-normal">
+              If you&apos;re unsure which model to use, start with <strong className="text-[var(--text)] font-bold">{model.name}</strong> for complex agentic coding, reasoning, and enterprise workloads. For lightweight, low-latency autocomplete or edge tasks, consider smaller parameters.
+            </p>
+            <p className="text-sm text-[var(--muted)] leading-relaxed font-normal">
+              All current {model.developer} models support text and multimodal input, multilingual reasoning, and structured tool calling. Models are available via API, cloud hosters, and open-weights download repositories.
+            </p>
+          </section>
+
+          {/* Section 2: Model Variant Overview */}
+          <section className="space-y-4 pt-6 border-t border-[var(--muted)]/10">
+            <h2 className="text-2xl font-extrabold text-[var(--text)]">Model Lineage & Specification</h2>
+            <p className="text-sm text-[var(--muted)] leading-relaxed font-normal">
+              <code className="bg-[var(--tag-bg)] text-[var(--tag-text)] px-2 py-0.5 rounded-[var(--radius-pill)] text-xs font-mono font-bold">{model.slug}</code> is {model.developer}&apos;s primary release in the {model.family || "current"} family.
+            </p>
+            <div className="p-5 rounded-[var(--radius-card)] bg-[var(--card-bg)] shadow-[var(--shadow-card)] border border-[var(--muted)]/10 space-y-3 text-xs">
+              <div className="flex justify-between py-1.5 border-b border-[var(--muted)]/10">
+                <span className="text-[var(--muted)] font-medium">Developer</span>
+                <span className="text-[var(--text)] font-bold">{model.developer}</span>
+              </div>
+              <div className="flex justify-between py-1.5 border-b border-[var(--muted)]/10">
+                <span className="text-[var(--muted)] font-medium">API Identifier</span>
+                <code className="bg-[var(--tag-bg)] text-[var(--tag-text)] px-2 py-0.5 rounded-[var(--radius-pill)] font-mono font-bold">{model.slug}</code>
+              </div>
+              <div className="flex justify-between py-1.5 border-b border-[var(--muted)]/10">
+                <span className="text-[var(--muted)] font-medium">Parameters</span>
+                <span className="text-[var(--text)] font-bold tabular-nums font-mono">{model.parameters}</span>
+              </div>
+              <div className="flex justify-between py-1.5 border-b border-[var(--muted)]/10">
+                <span className="text-[var(--muted)] font-medium">Context Window</span>
+                <span className="text-[var(--text)] font-bold tabular-nums font-mono">{model.contextWindow}</span>
+              </div>
+              <div className="flex justify-between py-1.5">
+                <span className="text-[var(--muted)] font-medium">License</span>
+                <span className="text-[var(--text)] font-bold">{model.license}</span>
+              </div>
+            </div>
+          </section>
+
+          {/* Section 3: Latest Models Comparison Table */}
+          <section id="comparison" className="space-y-4 pt-6 border-t border-[var(--muted)]/10">
+            <h2 className="text-2xl font-extrabold text-[var(--text)]">Latest models comparison</h2>
+            <div className="overflow-x-auto rounded-[var(--radius-card)] border border-[var(--muted)]/10 bg-[var(--card-bg)] shadow-[var(--shadow-card)]">
+              <table className="w-full text-left text-xs text-[var(--muted)]">
+                <thead className="bg-[var(--accent-soft)]/20 border-b border-[var(--muted)]/10 text-[var(--text)] font-bold">
+                  <tr>
+                    <th className="p-3.5 font-bold">Feature</th>
+                    {comparisonModels.map((m) => (
+                      <th key={m.id} className="p-3.5 font-bold text-[var(--text)]">
+                        {m.name}
+                      </th>
+                    ))}
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-[var(--muted)]/10">
+                  <tr>
+                    <td className="p-3.5 font-bold text-[var(--text)]">Description</td>
+                    {comparisonModels.map((m) => (
+                      <td key={m.id} className="p-3.5 text-[11px] leading-relaxed text-[var(--muted)]">
+                        {m.description ? m.description.slice(0, 80) + "..." : "Frontier AI model"}
+                      </td>
+                    ))}
+                  </tr>
+                  <tr>
+                    <td className="p-3.5 font-bold text-[var(--text)]">API Identifier</td>
+                    {comparisonModels.map((m) => (
+                      <td key={m.id} className="p-3.5 font-mono text-[11px]">
+                        <code className="bg-[var(--tag-bg)] text-[var(--tag-text)] px-2 py-0.5 rounded-[var(--radius-pill)] font-bold">
+                          {m.slug}
+                        </code>
+                      </td>
+                    ))}
+                  </tr>
+                  <tr>
+                    <td className="p-3.5 font-bold text-[var(--text)]">Parameters</td>
+                    {comparisonModels.map((m) => (
+                      <td key={m.id} className="p-3.5 font-mono tabular-nums text-[var(--text)] font-bold">
+                        {m.parameters !== "undisclosed" ? m.parameters : "—"}
+                      </td>
+                    ))}
+                  </tr>
+                  <tr>
+                    <td className="p-3.5 font-bold text-[var(--text)]">Context Window</td>
+                    {comparisonModels.map((m) => (
+                      <td key={m.id} className="p-3.5 font-mono tabular-nums text-[var(--text)] font-bold">
+                        {m.contextWindow !== "undisclosed" ? m.contextWindow : "—"}
+                      </td>
+                    ))}
+                  </tr>
+                  <tr>
+                    <td className="p-3.5 font-bold text-[var(--text)]">License / Type</td>
+                    {comparisonModels.map((m) => (
+                      <td key={m.id} className="p-3.5 text-[var(--muted)] capitalize font-medium">
+                        {m.type.replace("-", " ")}
+                      </td>
+                    ))}
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          {/* Section 4: Detailed Model Tabs & Markdown Readme */}
+          <section className="pt-6 border-t border-[var(--muted)]/10">
+            <ModelDetailTabs model={model} markdownContent={markdownContent} />
+          </section>
+        </main>
+
+        {/* RIGHT COLUMN: Table of Contents */}
+        <aside className="w-56 shrink-0 hidden xl:block p-5 border-l border-[var(--muted)]/10 sticky top-20 h-[calc(100vh-6rem)] text-xs space-y-4">
+          <div className="flex items-center gap-1.5 text-[var(--text)] font-bold">
+            <span className="w-1.5 h-3.5 bg-[var(--accent)] rounded-full" />
+            <span>Table of Contents</span>
+          </div>
+
+          <ul className="space-y-2.5 text-[var(--muted)] pl-2 border-l border-[var(--muted)]/10 font-medium">
+            <li>
+              <a href="#choosing" className="hover:text-[var(--accent)] transition-colors block">
+                {model.developer} model overview
+              </a>
+            </li>
+            <li>
+              <a href="#comparison" className="hover:text-[var(--accent)] transition-colors block">
+                Latest models comparison
+              </a>
+            </li>
+            <li>
+              <a href="#benchmarks" className="hover:text-[var(--accent)] transition-colors block">
+                Benchmarks & specifications
+              </a>
+            </li>
+          </ul>
+        </aside>
+      </div>
+    </div>
+  );
+}

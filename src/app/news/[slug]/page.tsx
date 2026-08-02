@@ -82,7 +82,6 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
     .filter((a) => a.slug !== article.slug)
     .slice(0, 3);
 
-  // Get full models details for related links
   let relatedModelsData = (article.relatedModels || [])
     .map((slug) => getModelBySlug(slug))
     .filter((model): model is NonNullable<typeof model> => !!model);
@@ -135,60 +134,50 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
   };
 
   return (
-    <main className="min-h-screen bg-[#141414] text-[#E1E1E0] selection:bg-emerald-500 selection:text-black font-sans antialiased relative">
-      {/* Site Navigation */}
+    <main className="min-h-screen bg-[var(--bg)] text-[var(--text)] selection:bg-[var(--accent-soft)] selection:text-[var(--accent)] font-sans antialiased relative">
       <Navbar theme="dark" />
 
-      {/* Inject JSON-LD */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
 
-      {/* Article Header Container */}
       <div className="max-w-[840px] mx-auto px-6 pt-10 sm:pt-14">
         <Link
           href="/news"
-          className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#90908F] hover:text-white transition-colors mb-8"
+          className="inline-flex items-center gap-1.5 text-xs font-bold text-[var(--muted)] hover:text-[var(--text)] transition-colors mb-8"
         >
           <ArrowLeft size={14} /> Back to Newsroom
         </Link>
 
-        {/* Article Category & Confidence Badges */}
         <div className="flex items-center gap-3 mb-6">
           <Link
             href={`/news?category=${article.category}`}
-            className="inline-flex items-center px-3 py-1 rounded-full bg-[#242426] border border-[#333333] text-[11px] font-mono font-semibold uppercase tracking-wider text-emerald-400 hover:border-emerald-500/40 transition-colors"
+            className="inline-flex items-center px-3.5 py-1 rounded-[var(--radius-pill)] bg-[var(--accent-soft)] border border-[var(--accent)]/20 text-[11px] font-mono font-bold uppercase tracking-wider text-[var(--accent)] hover:border-[var(--accent)] transition-colors"
           >
             {article.category === "weekly-news" ? `Issue ${article.issueNumber}` : getCategoryLabel(article.category)}
           </Link>
           <ConfidenceBadge confidence={article.confidenceLevel} />
         </div>
 
-        {/* High-Contrast Article Title */}
-        <h1
-          className="text-3xl sm:text-4xl md:text-5xl font-normal text-white tracking-tight leading-[1.2] mb-6"
-          style={{ fontFamily: "var(--font-display, 'Instrument Serif', Georgia, serif)" }}
-        >
+        <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-[var(--text)] tracking-tight leading-[1.2] mb-6">
           {article.title}
         </h1>
 
-        {/* Metadata Line */}
-        <div className="flex flex-wrap items-center gap-4 text-xs font-mono text-[#90908F] pb-8 border-b border-[#282828]">
-          <span className="text-[#E1E1E0] font-semibold">By {article.author.includes("Modelverse Editorial") ? "Modelverse Editorial" : article.author}</span>
+        <div className="flex flex-wrap items-center gap-4 text-xs font-mono text-[var(--muted)] pb-8 border-b border-[var(--muted)]/10">
+          <span className="text-[var(--text)] font-bold">By {article.author.includes("Modelverse Editorial") ? "Modelverse Editorial" : article.author}</span>
           <span>·</span>
           <span>{formatNewsDate(article.publishDate)}</span>
           <span>·</span>
-          <span className="flex items-center gap-1 text-emerald-400">
+          <span className="flex items-center gap-1 text-[var(--accent)] font-bold">
             <Clock size={12} />
             {article.readTime}
           </span>
         </div>
       </div>
 
-      {/* Featured Cover Image */}
       <div className="max-w-[1040px] mx-auto px-4 sm:px-6 my-10">
-        <div className="relative h-[280px] sm:h-[450px] lg:h-[540px] w-full bg-[#1C1C1E] rounded-2xl overflow-hidden shadow-2xl border border-[#282828]">
+        <div className="relative h-[280px] sm:h-[450px] lg:h-[540px] w-full bg-[var(--card-bg)] rounded-[var(--radius-card)] overflow-hidden shadow-[var(--shadow-card)] border border-[var(--muted)]/10">
           <Image
             src={article.coverImage}
             alt={article.title}
@@ -199,15 +188,12 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
         </div>
       </div>
 
-      {/* Ergonomic 840px Article Reading Canvas (High Contrast Dark Theme) */}
       <article className="max-w-[840px] mx-auto px-6 py-4">
-        {/* Render Interactive Benchmark Tabs specifically for Claude Opus 5 guide */}
         {article.slug === "claude-opus-5-detailed-guide" && (
           <BenchmarkTabs />
         )}
 
-        {/* High-Contrast Markdown Body */}
-        <div className="prose prose-invert prose-emerald max-w-none text-[#E1E1E0] leading-[1.85] text-base sm:text-lg font-sans prose-p:text-[#E1E1E0] prose-p:mb-6 prose-headings:font-serif prose-headings:font-normal prose-headings:text-white prose-h2:text-2xl sm:prose-h2:text-3xl prose-h2:mt-10 prose-h2:mb-4 prose-h3:text-xl prose-h3:mt-8 prose-h3:mb-3 prose-a:text-[#4ADE80] prose-a:underline hover:prose-a:text-emerald-300 prose-li:my-1.5 prose-strong:text-white prose-strong:font-semibold">
+        <div className="prose prose-invert max-w-none text-[var(--text)] leading-relaxed text-base sm:text-lg font-sans prose-p:text-[var(--text)] prose-p:mb-6 prose-headings:font-extrabold prose-headings:text-[var(--text)] prose-h2:text-2xl sm:prose-h2:text-3xl prose-h2:mt-10 prose-h2:mb-4 prose-h3:text-xl prose-h3:mt-8 prose-h3:mb-3 prose-a:text-[var(--accent)] prose-a:underline hover:prose-a:text-[var(--accent)] prose-li:my-1.5 prose-strong:text-[var(--text)] prose-strong:font-bold">
           <ReactMarkdown
             remarkPlugins={[remarkGfm]}
             components={{
@@ -226,7 +212,7 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
 
                 if (isInline) {
                   return (
-                    <code className="bg-[#242426] text-emerald-400 px-1.5 py-0.5 rounded font-mono text-xs border border-[#333333]" {...props}>
+                    <code className="bg-[var(--tag-bg)] text-[var(--tag-text)] px-2 py-0.5 rounded-[var(--radius-pill)] font-mono text-xs font-bold" {...props}>
                       {children}
                     </code>
                   );
@@ -248,31 +234,26 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
           </ReactMarkdown>
         </div>
 
-        {/* Tags */}
         {article.tags && article.tags.length > 0 && (
-          <div className="flex flex-wrap gap-2 mt-12 pt-8 border-t border-[#282828]">
+          <div className="flex flex-wrap gap-2 mt-12 pt-8 border-t border-[var(--muted)]/10">
             {article.tags.map((tag) => (
               <span
                 key={tag}
-                className="inline-flex items-center gap-1 text-xs font-mono text-[#E1E1E0] bg-[#242426] px-3 py-1 rounded-full border border-[#333333]"
+                className="inline-flex items-center gap-1.5 text-xs font-mono font-bold text-[var(--tag-text)] bg-[var(--tag-bg)] px-3 py-1 rounded-[var(--radius-pill)]"
               >
-                <Tag size={11} className="text-emerald-400" />
+                <Tag size={11} className="text-[var(--accent)]" />
                 {tag}
               </span>
             ))}
           </div>
         )}
 
-        {/* External Sources Footnote Section */}
         {article.externalSources && article.externalSources.length > 0 && (
-          <div className="mt-10 pt-8 border-t border-[#282828]">
-            <h3
-              className="text-xl font-normal text-white mb-3"
-              style={{ fontFamily: "var(--font-display, 'Instrument Serif', Georgia, serif)" }}
-            >
+          <div className="mt-10 pt-8 border-t border-[var(--muted)]/10">
+            <h3 className="text-xl font-extrabold text-[var(--text)] mb-3">
               Footnotes & Primary References
             </h3>
-            <ul className="space-y-2 text-xs font-mono text-[#90908F]">
+            <ul className="space-y-2 text-xs font-mono text-[var(--muted)]">
               {article.externalSources.map((src, idx) => {
                 let domain = "";
                 try {
@@ -282,12 +263,12 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
                 }
                 return (
                   <li key={idx} className="flex items-start gap-2">
-                    <span className="shrink-0 select-none text-emerald-400">[{idx + 1}]</span>
+                    <span className="shrink-0 select-none text-[var(--accent)] font-bold">[{idx + 1}]</span>
                     <a
                       href={src}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-[#E1E1E0] hover:text-emerald-400 hover:underline truncate"
+                      className="text-[var(--text)] hover:text-[var(--accent)] hover:underline truncate font-medium"
                     >
                       Read full report on {domain}
                     </a>
@@ -299,12 +280,8 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
         )}
       </article>
 
-      {/* Related Content Section */}
-      <div className="max-w-[1040px] mx-auto px-6 mt-20 pt-16 border-t border-[#282828]">
-        <h2
-          className="text-2xl sm:text-3xl font-normal text-white mb-8"
-          style={{ fontFamily: "var(--font-display, 'Instrument Serif', Georgia, serif)" }}
-        >
+      <div className="max-w-[1040px] mx-auto px-6 mt-20 pt-16 border-t border-[var(--muted)]/10">
+        <h2 className="text-2xl sm:text-3xl font-extrabold text-[var(--text)] mb-8">
           Related content
         </h2>
 
@@ -312,23 +289,20 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
           {relatedArticles.map((rel) => (
             <div
               key={rel.id}
-              className="group p-5 bg-[#1C1C1E] border border-[#282828] rounded-2xl hover:border-emerald-500/40 transition-all flex flex-col justify-between"
+              className="group p-5 bg-[var(--card-bg)] border border-[var(--muted)]/10 rounded-[var(--radius-card)] hover:border-[var(--accent)]/40 shadow-[var(--shadow-card)] transition-all flex flex-col justify-between"
             >
               <div>
-                <h3
-                  className="font-normal text-white text-lg mb-2 group-hover:text-emerald-400 transition-colors leading-snug"
-                  style={{ fontFamily: "var(--font-display, 'Instrument Serif', Georgia, serif)" }}
-                >
+                <h3 className="font-bold text-[var(--text)] text-lg mb-2 group-hover:text-[var(--accent)] transition-colors leading-snug">
                   <Link href={`/news/${rel.slug}`}>{rel.title}</Link>
                 </h3>
-                <p className="text-xs text-[#90908F] leading-relaxed line-clamp-3 mb-4">
+                <p className="text-xs text-[var(--muted)] leading-relaxed line-clamp-3 mb-4">
                   {rel.excerpt}
                 </p>
               </div>
 
               <Link
                 href={`/news/${rel.slug}`}
-                className="text-xs font-semibold text-emerald-400 group-hover:underline flex items-center gap-1 transition-colors mt-auto"
+                className="text-xs font-bold text-[var(--accent)] group-hover:underline flex items-center gap-1 transition-colors mt-auto"
               >
                 <span>Read article</span>
                 <ArrowRight size={12} className="group-hover:translate-x-1 transition-transform" />
@@ -336,14 +310,6 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
             </div>
           ))}
         </div>
-      </div>
-
-      {/* Footer Frame */}
-      <div className="max-w-[1040px] mx-auto px-6 mt-20 pb-12 border-t border-[#282828] pt-8 flex justify-between items-center text-xs text-[#90908F] font-mono">
-        <span>© 2026 Modelverse®. All rights reserved.</span>
-        <span className="uppercase text-[10px] font-semibold text-[#90908F]">
-          Modelverse Newsroom
-        </span>
       </div>
     </main>
   );

@@ -83,7 +83,7 @@ export default async function FamilyPage({
   const developer = primaryModel.developer;
 
   return (
-    <main className="min-h-screen bg-[#0C120F] text-white selection:bg-[#4ADE80] selection:text-white pb-24 relative">
+    <main className="min-h-screen bg-[var(--bg)] text-white selection:bg-[var(--accent)] selection:text-white pb-24 relative">
       <Navbar theme="dark" />
       {/* ── Top Bar / Breadcrumb ─────────────────────────────── */}
       <header className="max-w-4xl mx-auto px-4 sm:px-6 pt-8 pb-4">
@@ -98,7 +98,7 @@ export default async function FamilyPage({
         />
 
         <div className="mb-10 space-y-4">
-          <div className="inline-flex items-center gap-2 text-[#4ADE80] bg-[#4ADE80]/10 px-3 py-1 rounded-full text-xs font-semibold mb-2">
+          <div className="inline-flex items-center gap-2 text-[var(--accent)] bg-[var(--accent-soft)] px-3 py-1 rounded-full text-xs font-semibold mb-2">
             <Sparkles size={14} />
             Model Family
           </div>

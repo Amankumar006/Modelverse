@@ -4,7 +4,8 @@ import { useState, useMemo, useEffect, useRef } from "react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import ModelverseLogo from "@/components/ui/ModelverseLogo";
-import { Search, X, Menu } from "lucide-react";
+import { Search, X, Menu, Sun, Moon } from "lucide-react";
+import { useTheme } from "@/components/ThemeProvider";
 
 export default function Navbar({ theme = "dark" }: { theme?: "light" | "dark" }) {
   const [searchQuery, setSearchQuery] = useState("");
@@ -13,6 +14,7 @@ export default function Navbar({ theme = "dark" }: { theme?: "light" | "dark" })
   const [selectedIndex, setSelectedIndex] = useState<number>(-1);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
+  const { mode, toggleMode } = useTheme();
   const searchInputRef = useRef<HTMLInputElement>(null);
   const pathname = usePathname();
   const router = useRouter();
@@ -42,17 +44,17 @@ export default function Navbar({ theme = "dark" }: { theme?: "light" | "dark" })
   const getLinkClasses = (path: string) => {
     const isActive = path === "/" ? pathname === "/" : pathname?.startsWith(path);
     if (isActive) {
-      return "text-white bg-[#242426] font-semibold px-3 py-1.5 rounded-full";
+      return "text-[var(--accent)] bg-[var(--accent-soft)] font-bold px-3.5 py-1.5 rounded-[var(--radius-pill)]";
     }
-    return "text-gray-400 hover:text-white hover:bg-[#1C1C1E] px-3 py-1.5 rounded-full transition-colors";
+    return "text-[var(--muted)] hover:text-[var(--text)] hover:bg-[var(--card-bg)] px-3.5 py-1.5 rounded-[var(--radius-pill)] transition-all font-medium";
   };
 
   const getMobileLinkClasses = (path: string) => {
     const isActive = path === "/" ? pathname === "/" : pathname?.startsWith(path);
     if (isActive) {
-      return "text-white bg-[#242426] font-semibold";
+      return "text-[var(--accent)] bg-[var(--accent-soft)] font-bold";
     }
-    return "text-gray-400 hover:text-white hover:bg-[#1C1C1E]";
+    return "text-[var(--muted)] hover:text-[var(--text)]";
   };
 
   // Lazy load Fuse.js and search index
@@ -160,18 +162,16 @@ export default function Navbar({ theme = "dark" }: { theme?: "light" | "dark" })
   };
 
   return (
-    <header className="sticky top-0 z-50 w-full bg-[#141414]/95 backdrop-blur-md border-b border-[#282828]">
+    <header className="sticky top-0 z-50 w-full bg-[var(--bg)]/90 backdrop-blur-md border-b border-[var(--muted)]/10">
       <nav className="flex justify-between items-center px-4 sm:px-6 lg:px-10 2xl:px-12 py-3 max-w-[1600px] mx-auto gap-4">
-        {/* Custom Neural Constellation Modelverse SVG Logo */}
+        {/* Official Brand Logo */}
         <Link
           href="/"
-          className="flex items-center gap-2.5 text-xl font-medium tracking-tight text-white hover:opacity-90 transition-opacity shrink-0"
-          style={{ fontFamily: "var(--font-display, 'Instrument Serif', Georgia, serif)" }}
+          className="flex items-center gap-2 hover:opacity-90 transition-opacity shrink-0 py-0.5"
         >
-          <ModelverseLogo size={34} />
-          <span className="text-xl sm:text-2xl font-normal">Modelverse</span>
-          <span className="text-[11px] font-sans text-emerald-400 font-medium px-2.5 py-0.5 rounded-full bg-emerald-500/10 border border-emerald-500/20">
-            LLM Database
+          <ModelverseLogo variant="horizontal" height={34} priority />
+          <span className="text-[10px] font-sans font-bold px-2.5 py-0.5 rounded-[var(--radius-pill)] bg-[var(--tag-bg)] text-[var(--tag-text)] shadow-sm">
+            LLM DB
           </span>
         </Link>
 
@@ -304,6 +304,16 @@ export default function Navbar({ theme = "dark" }: { theme?: "light" | "dark" })
               <path d="M12 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0zm5.01 4.744c.688 0 1.25.561 1.25 1.249a1.25 1.25 0 0 1-2.498.056l-2.597-.547-.8 3.747c1.824.07 3.48.632 4.674 1.488.308-.309.73-.491 1.207-.491.968 0 1.754.786 1.754 1.754 0 .716-.435 1.333-1.01 1.614a3.111 3.111 0 0 1 .042.52c0 2.694-3.13 4.87-7.004 4.87-3.874 0-7.004-2.176-7.004-4.87 0-.183.015-.366.043-.534A1.748 1.748 0 0 1 4.028 12c0-.968.786-1.754 1.754-1.754.463 0 .898.196 1.207.49 1.207-.883 2.878-1.43 4.744-1.487l.885-4.182a.342.342 0 0 1 .14-.197.35.35 0 0 1 .238-.042l2.906.617a1.214 1.214 0 0 1 1.108-.701zM9.25 12C8.561 12 8 12.562 8 13.25c0 .687.561 1.248 1.25 1.248.687 0 1.248-.561 1.248-1.249 0-.688-.561-1.249-1.249-1.249zm5.5 0c-.687 0-1.248.562-1.248 1.25 0 .687.561 1.248 1.249 1.248.688 0 1.249-.561 1.249-1.249 0-.688-.562-1.249-1.25-1.249zm-4.566 3.875c-.12 0-.236.049-.318.135a.44.44 0 0 0 .004.623c.87.87 2.274.87 3.144 0a.44.44 0 0 0 .004-.623.447.447 0 0 0-.318-.135z" />
             </svg>
           </a>
+
+          {/* Theme Mode Toggle Button */}
+          <button
+            onClick={toggleMode}
+            className="p-2 rounded-[var(--radius-pill)] bg-[var(--card-bg)] shadow-[var(--shadow-card)] text-[var(--muted)] hover:text-[var(--text)] transition-all flex items-center justify-center cursor-pointer"
+            title={`Switch to ${mode === "dark" ? "Light" : "Dark"} Mode`}
+            aria-label={`Switch to ${mode === "dark" ? "Light" : "Dark"} Mode`}
+          >
+            {mode === "dark" ? <Sun size={15} className="text-amber-400" /> : <Moon size={15} className="text-indigo-600" />}
+          </button>
         </div>
 
 
