@@ -61,10 +61,9 @@ function filterModels(
 ): ModelEntry[] {
   return models.filter((model) => {
     if (excludeKey !== "q" && filters.q) {
-      const q = filters.q.toLowerCase();
-      const match =
-        model.name.toLowerCase().includes(q) ||
-        model.developer.toLowerCase().includes(q);
+      const searchTerms = filters.q.toLowerCase().trim().split(/\s+/);
+      const targetStr = `${model.name} ${model.developer} ${model.tags?.join(" ") || ""}`.toLowerCase();
+      const match = searchTerms.every((term) => targetStr.includes(term));
       if (!match) return false;
     }
 
