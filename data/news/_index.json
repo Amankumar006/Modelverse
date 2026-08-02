@@ -66,6 +66,28 @@
     ]
   },
   {
+    "id": "sam-altman-and-ais-decel-debate",
+    "slug": "sam-altman-and-ais-decel-debate",
+    "title": "Sam Altman and AI’s decel debate",
+    "category": "short-news",
+    "publishDate": "2026-08-02",
+    "author": "Modelverse Editorial",
+    "readTime": "2 min read",
+    "excerpt": "On the latest episode of Equity, we discuss why Sam Altman has calling on the industry to \"pace the rate of AI development.\"",
+    "coverImage": "https://techcrunch.com/wp-content/uploads/2026/05/openai-logo-code-background.jpg?resize=1200,798",
+    "status": "published",
+    "confidenceLevel": "confirmed",
+    "externalSources": [
+      "https://techcrunch.com/2026/08/02/sam-altman-and-ais-decel-debate/"
+    ],
+    "relatedModels": [],
+    "tags": [
+      "ai-news",
+      "breaking",
+      "techcrunch-ai"
+    ]
+  },
+  {
     "id": "thinking-machines-lab-releases-inkling-small-a-276b-total-12b-active-open-weight",
     "slug": "thinking-machines-lab-releases-inkling-small-a-276b-total-12b-active-open-weight",
     "title": "Thinking Machines Lab Releases Inkling-Small: A 276B Total, 12B Active Open Weights Multimodal MoE Model",
