@@ -22,6 +22,28 @@
     ]
   },
   {
+    "id": "a-tutorial-on-geoai-designing-footprint-extraction-from-naip-imagery-using-u-net",
+    "slug": "a-tutorial-on-geoai-designing-footprint-extraction-from-naip-imagery-using-u-net",
+    "title": "A Tutorial on GeoAI: Designing Footprint Extraction from NAIP Imagery Using U-Net, Grounding DINO, SAM, and Mask R-CNN",
+    "category": "short-news",
+    "publishDate": "2026-08-02",
+    "author": "Modelverse Editorial",
+    "readTime": "2 min read",
+    "excerpt": "In this tutorial, we design a complete GeoAI workflow for extracting building footprints from high-resolution NAIP aerial imagery. We begin by configuring the geospatial deep learn...",
+    "coverImage": "https://www.marktechpost.com/wp-content/uploads/2026/08/blog6176-3.png",
+    "status": "published",
+    "confidenceLevel": "confirmed",
+    "externalSources": [
+      "https://www.marktechpost.com/2026/08/02/a-tutorial-on-geoai-designing-footprint-extraction-from-naip-imagery-using-u-net-grounding-dino-sam-and-mask-r-cnn/"
+    ],
+    "relatedModels": [],
+    "tags": [
+      "ai-news",
+      "breaking",
+      "marktechpost"
+    ]
+  },
+  {
     "id": "end-to-end-forecasting-with-timesfm-25-backtesting-covariates-anomaly-detection-",
     "slug": "end-to-end-forecasting-with-timesfm-25-backtesting-covariates-anomaly-detection-",
     "title": "End-to-End Forecasting with TimesFM 2.5: Backtesting, Covariates, Anomaly Detection, and Scalable Colab Deployment",
