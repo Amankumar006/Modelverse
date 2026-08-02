@@ -66,6 +66,28 @@
     ]
   },
   {
+    "id": "thinking-machines-lab-releases-inkling-small-a-276b-total-12b-active-open-weight",
+    "slug": "thinking-machines-lab-releases-inkling-small-a-276b-total-12b-active-open-weight",
+    "title": "Thinking Machines Lab Releases Inkling-Small: A 276B Total, 12B Active Open Weights Multimodal MoE Model",
+    "category": "short-news",
+    "publishDate": "2026-08-02",
+    "author": "Modelverse Editorial",
+    "readTime": "2 min read",
+    "excerpt": "Inkling-Small matches Inkling at a quarter the size, and its NVFP4 checkpoint runs on one NVIDIA B300 GPU\nThe post Thinking Machines Lab Releases Inkling-Small: A 276B Total, 12B A...",
+    "coverImage": "/images/news/news_short.jpg",
+    "status": "published",
+    "confidenceLevel": "confirmed",
+    "externalSources": [
+      "https://www.marktechpost.com/2026/08/02/thinking-machines-lab-releases-inkling-small-276b-open-weights-multimodal-moe-model/"
+    ],
+    "relatedModels": [],
+    "tags": [
+      "ai-news",
+      "breaking",
+      "marktechpost"
+    ]
+  },
+  {
     "id": "weekly-model-recap-2026-08-02",
     "slug": "weekly-model-recap-2026-08-02",
     "title": "Weekly Model Recap: 27 Frontier & Open-Weight Releases (2026-08-02)",

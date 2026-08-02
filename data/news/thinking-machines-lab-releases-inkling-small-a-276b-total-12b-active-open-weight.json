@@ -1,0 +1,24 @@
+{
+  "id": "thinking-machines-lab-releases-inkling-small-a-276b-total-12b-active-open-weight",
+  "slug": "thinking-machines-lab-releases-inkling-small-a-276b-total-12b-active-open-weight",
+  "title": "Thinking Machines Lab Releases Inkling-Small: A 276B Total, 12B Active Open Weights Multimodal MoE Model",
+  "category": "short-news",
+  "isTrending": true,
+  "publishDate": "2026-08-02",
+  "author": "Modelverse Editorial",
+  "readTime": "2 min read",
+  "excerpt": "Inkling-Small matches Inkling at a quarter the size, and its NVFP4 checkpoint runs on one NVIDIA B300 GPU\nThe post Thinking Machines Lab Releases Inkling-Small: A 276B Total, 12B A...",
+  "body": "Thinking Machines Lab has unveiled Inkling-Small, a significant new entry in the open-weights multimodal AI landscape. This Mixture of Experts (MoE) model boasts an impressive 276 billion total parameters, yet it operates with only 12 billion active parameters at any given time. What makes Inkling-Small particularly noteworthy is its ability to achieve performance comparable to its larger predecessor, Inkling, despite being a quarter of its size.\n\nThe core of Inkling-Small's efficiency lies in its Mixture of Experts architecture. Unlike dense models that activate all parameters for every task, MoE models selectively engage a smaller, specialized subset of \"experts\" from their vast parameter pool based on the input. This intelligent routing allows Inkling-Small to maintain a massive knowledge base while significantly reducing computational demands during inference. Crucially, its NVFP4 checkpoint is optimized to run on a single NVIDIA B300 GPU, a testament to its remarkable hardware efficiency for a model of its scale and multimodal capabilities.\n\nFor developers and researchers, Inkling-Small represents a substantial leap forward in accessible, high-performance AI. Its ability to deliver top-tier multimodal performance on a single GPU dramatically lowers the barrier to entry for experimenting with and deploying advanced AI applications, making powerful models more attainable for those with limited computational resources. The open-weights release further empowers the community, fostering transparency, enabling customization, and accelerating innovation by allowing researchers to inspect, fine-tune, and build upon its foundation. This release democratizes access to state-of-the-art multimodal AI, paving the way for new discoveries and applications.",
+  "coverImage": "/images/news/news_short.jpg",
+  "status": "published",
+  "confidenceLevel": "confirmed",
+  "externalSources": [
+    "https://www.marktechpost.com/2026/08/02/thinking-machines-lab-releases-inkling-small-276b-open-weights-multimodal-moe-model/"
+  ],
+  "relatedModels": [],
+  "tags": [
+    "ai-news",
+    "breaking",
+    "marktechpost"
+  ]
+}

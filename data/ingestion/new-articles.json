@@ -1,44 +1,20 @@
 [
   {
-    "id": "nvidia-ai-releases-molt-a-pytorch-native-agentic-reinforcement-learning-framewor",
-    "slug": "nvidia-ai-releases-molt-a-pytorch-native-agentic-reinforcement-learning-framewor",
-    "title": "NVIDIA AI Releases Molt: A PyTorch-Native Agentic Reinforcement Learning Framework",
+    "id": "thinking-machines-lab-releases-inkling-small-a-276b-total-12b-active-open-weight",
+    "slug": "thinking-machines-lab-releases-inkling-small-a-276b-total-12b-active-open-weight",
+    "title": "Thinking Machines Lab Releases Inkling-Small: A 276B Total, 12B Active Open Weights Multimodal MoE Model",
     "category": "short-news",
     "isTrending": true,
     "publishDate": "2026-08-02",
     "author": "Modelverse Editorial",
     "readTime": "2 min read",
-    "excerpt": "Agentic RL research is constant algorithm modification, and in mainstream frameworks every change threads through trainer, distributed backend, and rollout glue. NVIDIA's Molt targ...",
-    "body": "NVIDIA AI has unveiled Molt, a new PyTorch-native framework specifically designed for agentic reinforcement learning (RL) research. Molt's core innovation lies in its remarkably compact codebase, measuring approximately 8.6K lines of RL-specific code. This intentional design aims to make the entire framework easily comprehensible for researchers and even AI coding assistants, directly addressing the significant overhead and complexity typically associated with iterating on new algorithms, estimators, and rollout schemes in traditional RL frameworks. Released under the Apache 2.0 license, Molt is positioned as essential research infrastructure, complete with Slurm scripts and a prebuilt container.\n\nUnder the hood, Molt intelligently integrates robust, un-forked components like Ray for task placement and asynchronous queues, vLLM for efficient rollout, and NVIDIA AutoModel with FSDP2 for distributed training. Its runtime orchestrates an agent pool, vLLM engines managed by a request router, and a single trainable policy actor. Key features include a streaming pool that keeps prompt groups in flight to prevent engine idle time, and a partial rollout mechanism that broadcasts actor shards directly to engines, resuming retained requests rather than discarding them. Molt supports both a Gymnasium-aligned `Env` interface for framework-managed LLM loops and a `ChatAgent` mode for user-controlled loops via standard SDKs, handling context management seamlessly.\n\nMolt significantly matters to developers and researchers by drastically reducing the iteration cost inherent in agentic RL experimentation. Its compact and modular nature empowers researchers to rapidly prototype and test novel ideas without getting bogged down in extensive glue code. This framework is particularly relevant for frontier and frontier-adjacent labs, well-funded AI startups, enterprise AI research groups in sectors like finance and robotics, and academic institutions with access to multi-node H100/H200 GPU setups. It unlocks advanced applications such as multi-turn tool-use agents, code-execution agents, vision-language environments, and LLM-as-judge reward loops, accelerating progress in complex AI agent development.",
-    "coverImage": "https://www.marktechpost.com/wp-content/uploads/2026/08/blog6176-1.png",
+    "excerpt": "Inkling-Small matches Inkling at a quarter the size, and its NVFP4 checkpoint runs on one NVIDIA B300 GPU\nThe post Thinking Machines Lab Releases Inkling-Small: A 276B Total, 12B A...",
+    "body": "Thinking Machines Lab has unveiled Inkling-Small, a significant new entry in the open-weights multimodal AI landscape. This Mixture of Experts (MoE) model boasts an impressive 276 billion total parameters, yet it operates with only 12 billion active parameters at any given time. What makes Inkling-Small particularly noteworthy is its ability to achieve performance comparable to its larger predecessor, Inkling, despite being a quarter of its size.\n\nThe core of Inkling-Small's efficiency lies in its Mixture of Experts architecture. Unlike dense models that activate all parameters for every task, MoE models selectively engage a smaller, specialized subset of \"experts\" from their vast parameter pool based on the input. This intelligent routing allows Inkling-Small to maintain a massive knowledge base while significantly reducing computational demands during inference. Crucially, its NVFP4 checkpoint is optimized to run on a single NVIDIA B300 GPU, a testament to its remarkable hardware efficiency for a model of its scale and multimodal capabilities.\n\nFor developers and researchers, Inkling-Small represents a substantial leap forward in accessible, high-performance AI. Its ability to deliver top-tier multimodal performance on a single GPU dramatically lowers the barrier to entry for experimenting with and deploying advanced AI applications, making powerful models more attainable for those with limited computational resources. The open-weights release further empowers the community, fostering transparency, enabling customization, and accelerating innovation by allowing researchers to inspect, fine-tune, and build upon its foundation. This release democratizes access to state-of-the-art multimodal AI, paving the way for new discoveries and applications.",
+    "coverImage": "/images/news/news_short.jpg",
     "status": "published",
     "confidenceLevel": "confirmed",
     "externalSources": [
-      "https://www.marktechpost.com/2026/08/01/nvidia-ai-releases-molt-a-pytorch-native-agentic-reinforcement-learning-framework/"
-    ],
-    "relatedModels": [],
-    "tags": [
-      "ai-news",
-      "breaking",
-      "marktechpost"
-    ]
-  },
-  {
-    "id": "end-to-end-forecasting-with-timesfm-25-backtesting-covariates-anomaly-detection-",
-    "slug": "end-to-end-forecasting-with-timesfm-25-backtesting-covariates-anomaly-detection-",
-    "title": "End-to-End Forecasting with TimesFM 2.5: Backtesting, Covariates, Anomaly Detection, and Scalable Colab Deployment",
-    "category": "short-news",
-    "isTrending": true,
-    "publishDate": "2026-08-02",
-    "author": "Modelverse Editorial",
-    "readTime": "2 min read",
-    "excerpt": "In this tutorial, we build an advanced end-to-end time-series forecasting workflow with TimesFM 2.5. We begin by configuring the runtime, installing the required dependencies, dete...",
-    "body": "Modelverse unveils a comprehensive tutorial for TimesFM 2.5, demonstrating an advanced, end-to-end workflow for time-series forecasting. This release goes beyond basic predictions, showcasing the model's capabilities in backtesting, integrating covariates, detecting anomalies, and enabling scalable deployment within a Colab environment. The tutorial provides a practical guide for developers and researchers to configure, validate, benchmark, and deploy TimesFM 2.5 for complex, real-world forecasting challenges.\n\nTimesFM 2.5 operates by generating both zero-shot point forecasts and probabilistic quantile predictions, offering a crucial understanding of prediction uncertainty. The workflow details robust evaluation methods like rolling-origin backtesting, which assesses performance across multiple historical periods. It highlights the model's XReg functionality for seamlessly incorporating dynamic numerical (e.g., price, temperature) and categorical (e.g., promotions, holidays), as well as static categorical covariates (e.g., store, region), significantly enhancing forecast accuracy. Furthermore, the tutorial illustrates how TimesFM 2.5 can be leveraged for anomaly detection by comparing observed values against its predictive intervals, and explores different strategies for effective long-horizon forecasting.\n\nThis detailed tutorial is invaluable for developers and researchers aiming to build production-grade forecasting systems. It addresses critical aspects like throughput tuning for scalability, and robustness checks for handling imperfect data, including missing values and short histories. By providing a structured foundation for adapting TimesFM 2.5 to diverse applications such as demand forecasting, operational planning, and anomaly monitoring, Modelverse empowers the community with the tools and knowledge to implement sophisticated, reliable, and scalable AI-driven forecasting solutions.",
-    "coverImage": "https://www.marktechpost.com/wp-content/uploads/2026/08/blog6176-1024x731.png",
-    "status": "published",
-    "confidenceLevel": "confirmed",
-    "externalSources": [
-      "https://www.marktechpost.com/2026/08/01/end-to-end-forecasting-with-timesfm-2-5-backtesting-covariates-anomaly-detection-and-scalable-colab-deployment/"
+      "https://www.marktechpost.com/2026/08/02/thinking-machines-lab-releases-inkling-small-276b-open-weights-multimodal-moe-model/"
     ],
     "relatedModels": [],
     "tags": [
