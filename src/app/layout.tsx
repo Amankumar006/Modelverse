@@ -27,13 +27,22 @@ export const metadata: Metadata = {
   title: "Modelverse — Every AI Model, Every Release",
   description:
     "From frontier closed-source releases to open-weight breakthroughs, Modelverse tracks every model as it ships — a living, always-current archive.",
+  manifest: "/manifest.webmanifest",
   icons: {
-    icon: "/logos/favicon.ico",
+    icon: [
+      { url: "/logos/favicon.ico" },
+      { url: "/logos/android-chrome-192.png", sizes: "192x192", type: "image/png" },
+      { url: "/logos/android-chrome-512.png", sizes: "512x512", type: "image/png" },
+    ],
     shortcut: "/logos/favicon.ico",
-    apple: "/logos/apple-touch-icon-180.png",
+    apple: [
+      { url: "/logos/apple-touch-icon-180.png", sizes: "180x180", type: "image/png" },
+    ],
     other: [
-      { rel: "icon", type: "image/png", sizes: "192x192", url: "/logos/android-chrome-192.png" },
-      { rel: "icon", type: "image/png", sizes: "512x512", url: "/logos/android-chrome-512.png" },
+      {
+        rel: "apple-touch-icon-precomposed",
+        url: "/logos/apple-touch-icon-180.png",
+      },
     ],
   },
   alternates: {
