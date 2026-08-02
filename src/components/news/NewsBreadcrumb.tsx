@@ -32,13 +32,13 @@ export default function NewsBreadcrumb({ category, article }: NewsBreadcrumbProp
 
   return (
     <nav aria-label="Breadcrumb" className="flex flex-wrap items-center gap-1.5 text-xs sm:text-sm text-[#8C9E91] mb-8 sm:mb-12">
-      <Link href="/" className="hover:text-[#4ADE80] transition-colors">
+      <Link href="/" className="hover:text-[var(--accent)] transition-colors">
         Home
       </Link>
       <ChevronRight size={12} className="text-[#5A6E60] shrink-0" />
       
       {category || article ? (
-        <Link href="/news" className="hover:text-[#4ADE80] transition-colors">
+        <Link href="/news" className="hover:text-[var(--accent)] transition-colors">
           News
         </Link>
       ) : (
@@ -51,7 +51,7 @@ export default function NewsBreadcrumb({ category, article }: NewsBreadcrumbProp
           {article ? (
             <Link
               href={`/news/category/${category.slug}`}
-              className="hover:text-[#4ADE80] transition-colors"
+              className="hover:text-[var(--accent)] transition-colors"
             >
               {getCategoryLabel(category.slug)}
             </Link>

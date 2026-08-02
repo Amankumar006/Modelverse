@@ -133,7 +133,7 @@ function DraftModelPreviewContent() {
                     <CheckCircle2 size={12} /> Verified Preview
                   </span>
                 </div>
-                <p className="text-sm font-medium text-[#4ADE80]">{model.developer}</p>
+                <p className="text-sm font-medium text-[var(--accent)]">{model.developer}</p>
               </div>
             </div>
           </div>
