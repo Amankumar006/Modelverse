@@ -73,7 +73,7 @@ async function postToDiscord(modelData = null, newsArticles = null) {
       ],
       footer: {
         text: "Modelverse AI Catalog • themodelverse.in",
-        icon_url: "https://www.themodelverse.in/icon.jpg",
+        icon_url: "https://www.themodelverse.in/logos/social-avatar-1024.png",
       },
       timestamp: new Date().toISOString(),
     });
@@ -95,7 +95,7 @@ async function postToDiscord(modelData = null, newsArticles = null) {
       fields: articleFields,
       footer: {
         text: "Modelverse News Feed • themodelverse.in",
-        icon_url: "https://www.themodelverse.in/icon.jpg",
+        icon_url: "https://www.themodelverse.in/logos/social-avatar-1024.png",
       },
       timestamp: new Date().toISOString(),
     });
@@ -114,7 +114,7 @@ async function postToDiscord(modelData = null, newsArticles = null) {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         username: "Modelverse Bot",
-        avatar_url: "https://www.themodelverse.in/icon.jpg",
+        avatar_url: "https://www.themodelverse.in/logos/social-avatar-1024.png",
         embeds: embeds,
       }),
     });
