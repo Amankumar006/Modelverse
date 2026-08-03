@@ -1,39 +1,39 @@
 [
   {
-    "id": "aws-is-helping-vibe-coding-startup-superblocks-and-the-implications-are-big",
-    "slug": "aws-is-helping-vibe-coding-startup-superblocks-and-the-implications-are-big",
-    "title": "AWS is helping vibe-coding startup Superblocks, and the implications are big",
+    "id": "how-to-secure-ai-agents-mcp-servers-and-llm-apps-in-production",
+    "slug": "how-to-secure-ai-agents-mcp-servers-and-llm-apps-in-production",
+    "title": "How to Secure AI Agents, MCP Servers, and LLM Apps in Production",
     "category": "short-news",
     "isTrending": true,
     "publishDate": "2026-08-03",
     "author": "Modelverse Editorial",
     "readTime": "2 min read",
-    "excerpt": "AWS now allows vibe coding tool Superblocks to be embedded into the private clouds of AWS customers. It's another step towards decoupling apps from models.",
-    "body": "AWS has announced a multi-year joint marketing agreement with Superblocks, a \"vibe-coding\" startup, to integrate its development tools directly into the private cloud environments of AWS customers. This strategic partnership enables applications built with Superblocks to run entirely within a customer's existing AWS account, ensuring that sensitive data remains within their secure infrastructure. By integrating with Amazon Bedrock, AWS's platform for AI application development, these \"vibe-coded\" applications will automatically adhere to an organization's established IT management and security protocols, preventing the creation of unmanaged or \"rogue\" applications. This approach leverages a customer's existing auditing, encryption, and network controls, effectively bringing the coding environment to the data rather than requiring data to move to the tool.\n\nThis collaboration offers significant advantages for both Superblocks and enterprise developers. For Superblocks, it provides a substantial boost, gaining AWS's extensive sales and marketing reach to enterprises. For developers and IT teams within AWS customer organizations, it means access to innovative \"vibe-coding\" capabilities with enterprise-grade security and compliance built-in from day one. This directly addresses critical concerns around data governance, operational oversight, and the secure deployment of AI-powered applications within regulated or sensitive environments.\n\nBeyond the immediate benefits, this partnership highlights a broader strategic shift among hyperscale cloud providers. Companies like AWS are increasingly positioning themselves as the essential infrastructure for the entire AI stack. They are encouraging enterprises to host not just their core AI models but also the crucial \"scaffolding\"—such as agentic applications, orchestration layers, and security tools—within their cloud ecosystems. This strategy aims to offer enterprises greater control, reduce costs, mitigate vendor lock-in risks, and provide a trusted environment for AI deployment, contrasting with concerns about data privacy and competitive risks associated with relying solely on frontier AI model providers for these critical operational components.",
-    "coverImage": "https://techcrunch.com/wp-content/uploads/2025/06/SuperBlocks-founder-Brad-Menezes.jpg?resize=1200,811",
+    "excerpt": "AI agents, MCP servers, and LLM apps break the core AppSec assumption that applications do what their code says. This guide walks through a practical see-fix-protect framework: a f...",
+    "body": "Mend.io has unveiled a crucial new practitioner guide, \"Securing AI agents, MCP servers & LLM apps: A practical framework,\" designed to address the rapidly expanding security blind spots introduced by AI agents, MCP integrations, and LLM-powered applications. As these AI components integrate into codebases at an unprecedented pace, traditional application security (AppSec) models, built on the assumption that applications strictly follow their code, are proving insufficient. Agentic AI's emergent behavior, influenced by models, prompts, context, and tools, creates entirely new and unpredictable security challenges that existing programs struggle to track.\n\nThe guide tackles these novel security risks by outlining a framework centered on three key actions: identifying critical assets, rapidly remediating issues, and robustly protecting AI in production. It highlights new failure modes like prompt injection via data, over-permissioned agents, and poisoned tool descriptions on MCP servers—vulnerabilities that bypass traditional CVE feeds. To counter this, the framework advocates for a \"shift left, protect right\" approach, offering practical methods for discovering \"shadow agents\" and unregistered MCP servers, alongside reusable artifacts. These include an extended AI-BOM with nine new fields for comprehensive agent/MCP server tracking and a 12-point misconfiguration checklist covering crucial aspects like credential scoping, system prompt version control, and model lifecycle monitoring.\n\nThis framework is vital for developers and researchers navigating the complex landscape of AI security. It provides a much-needed structured approach to manage the expanded \"finding surface\" and unique attack vectors that AI introduces. By offering concrete discovery methods, configuration best practices, and a prioritization pipeline (enrich → prioritize → triage), Mend.io's guide empowers teams to proactively secure their AI deployments, ensuring safer development and more resilient production environments for the next generation of intelligent applications.",
+    "coverImage": "https://www.marktechpost.com/wp-content/uploads/2026/08/blog6176-6-1024x731.png",
     "status": "published",
     "confidenceLevel": "confirmed",
     "externalSources": [
-      "https://techcrunch.com/2026/08/03/aws-is-helping-vibe-coding-startup-superblocks-and-the-implications-are-big/"
+      "https://www.marktechpost.com/2026/08/03/how-to-secure-ai-agents-mcp-servers-and-llm-apps-in-production/"
     ],
     "relatedModels": [],
     "tags": [
       "ai-news",
       "breaking",
-      "techcrunch-ai"
+      "marktechpost"
     ]
   },
   {
-    "id": "designarena-creators-raise-79-million-to-bring-taste-to-ai-models",
-    "slug": "designarena-creators-raise-79-million-to-bring-taste-to-ai-models",
-    "title": "DesignArena creators raise $7.9 million to bring taste to AI models",
+    "id": "design-arena-creators-raise-79-million-to-bring-taste-to-ai-models",
+    "slug": "design-arena-creators-raise-79-million-to-bring-taste-to-ai-models",
+    "title": "Design Arena creators raise $7.9 million to bring taste to AI models",
     "category": "short-news",
     "isTrending": true,
     "publishDate": "2026-08-03",
     "author": "Modelverse Editorial",
     "readTime": "2 min read",
-    "excerpt": "DesignArena is used by 5.3 million people around the world, providing critical human evaluations to frontier labs.",
-    "body": "## Intelligence Secures $7.9M to Infuse \"Taste\" into AI Models with DesignArena\n\nIntelligence, the company behind the innovative AI feedback platform DesignArena, has successfully raised $7.9 million in seed funding. This investment highlights the growing recognition of a critical challenge in AI development: while models excel at functionality, they often struggle with subjective qualities like \"fun\" or aesthetic \"taste.\" DesignArena emerged from the realization that scalable, honest human judgment was essential to bridge this gap, initially stemming from a quest to make AI-generated games genuinely enjoyable.\n\nDesignArena operates as a sophisticated feedback engine, allowing millions of users to provide invaluable human input. Non-enterprise users interact with a prompt-based interface, similar to a chatbot, where they submit requests for various visual formats like websites or images. They are then presented with a series of \"A vs. B\" choices, ranking outputs from best to worst based on their preferences. This user-generated data, collected at scale, forms a continuous feedback loop that participating AI models can leverage.\n\nFor developers and frontier AI labs, DesignArena addresses a significant bottleneck in refining generative models. By providing an \"endless instant feedback\" stream, the platform enables AI systems to learn what users truly want and prefer, moving beyond mere technical correctness to incorporate subjective quality. This human-led evaluation data is crucial for improving the design capabilities of AI, allowing researchers to fine-tune models to better align with human aesthetics and preferences, ultimately leading to more engaging and user-centric AI outputs.",
+    "excerpt": "Design Arena is used by 5.3 million people around the world, providing critical human evaluations to frontier labs.",
+    "body": "Intelligence, the company behind the innovative AI tool Design Arena, has successfully closed a $7.9 million seed funding round led by Index Ventures. Born from a challenge to make AI-generated games \"fun,\" Design Arena has evolved into a crucial platform addressing the critical need for scalable, authentic human feedback in the AI development lifecycle. This significant investment underscores the growing recognition of human judgment as an indispensable component for refining AI models, particularly in creative and design-oriented applications.\n\nDesign Arena operates as a sophisticated feedback engine, allowing users to submit prompts for various visual outputs, from websites to images, through a ChatGPT-style interface. Users then engage in \"A vs. B\" comparisons, ranking outputs based on their preferences. While beneficial for individual users seeking optimal results, the platform's core value lies in its enterprise offering. Frontier AI labs and companies leverage Design Arena as a continuous source of instant human evaluation, feeding real-time user preferences directly back into their media-generating models, thereby accelerating design improvements and ensuring outputs resonate with human \"taste.\"\n\nThis human-centric approach is vital for developers and researchers, as it fills a significant gap that automated benchmarks often miss or can be manipulated. By providing honest, large-scale human input, Design Arena helps AI models move beyond mere functionality to achieve desired aesthetic and experiential qualities. Furthermore, by tracking user preferences across demographics and over time, the platform offers invaluable insights into evolving tastes, enabling AI creators to build more intuitive, engaging, and culturally relevant models.",
     "coverImage": "https://techcrunch.com/wp-content/uploads/2026/08/Screenshot-2026-08-03-at-12.31.35-PM.jpg?resize=1200,739",
     "status": "published",
     "confidenceLevel": "confirmed",
@@ -45,102 +45,6 @@
       "ai-news",
       "breaking",
       "techcrunch-ai"
-    ]
-  },
-  {
-    "id": "influencers-draw-backlash-for-attending-openais-first-luxury-trip",
-    "slug": "influencers-draw-backlash-for-attending-openais-first-luxury-trip",
-    "title": "Influencers draw backlash for attending OpenAI's first luxury trip",
-    "category": "short-news",
-    "isTrending": true,
-    "publishDate": "2026-08-03",
-    "author": "Modelverse Editorial",
-    "readTime": "2 min read",
-    "excerpt": "OpenAI’s first-ever influencer brand trip is sparking online backlash as tensions over the use of AI continue.",
-    "body": "OpenAI recently hosted its inaugural \"Summer Club,\" a luxury brand trip for influencers in upstate New York, aimed at educating creators on the practical applications of its AI products. A key focus was the newly released ChatGPT Work, a specialized tool designed to assist users with productivity tasks like drafting documents and presentations. The company's objective was to provide hands-on experience, enabling influencers to demonstrate these AI capabilities to their audiences and foster broader understanding and adoption of AI tools.\n\nHowever, the initiative quickly drew significant online backlash. Influencers faced criticism regarding the perceived disconnect between the luxury event and the environmental impact of AI data centers, as well as broader ethical concerns surrounding AI development. This public reaction underscores the ongoing societal tensions and scrutiny surrounding AI deployment. For developers and researchers, this incident highlights the critical importance of considering the broader social and environmental implications of AI technologies, beyond just their functional capabilities.\n\nOpenAI's strategy, which includes engaging influencers and focusing on tools like ChatGPT Work, signals a deliberate effort to democratize AI access and understanding through practical applications. While the technical specifics of ChatGPT Work weren't detailed, its emphasis on user education and utility is a key takeaway. This approach, though met with mixed public reception, demonstrates how leading AI labs are navigating the challenge of making advanced AI accessible and relevant to everyday users, influencing future product development and communication strategies within the AI community.",
-    "coverImage": "https://techcrunch.com/wp-content/uploads/2024/05/GettyImages-1502799666.jpg?resize=1200,633",
-    "status": "published",
-    "confidenceLevel": "confirmed",
-    "externalSources": [
-      "https://techcrunch.com/2026/08/03/influencers-draw-backlash-for-attending-openais-first-luxury-trip/"
-    ],
-    "relatedModels": [],
-    "tags": [
-      "ai-news",
-      "breaking",
-      "techcrunch-ai"
-    ]
-  },
-  {
-    "id": "trumps-ai-protectionism-has-come-for-robotics",
-    "slug": "trumps-ai-protectionism-has-come-for-robotics",
-    "title": "Trump’s AI protectionism has come for robotics",
-    "category": "short-news",
-    "isTrending": true,
-    "publishDate": "2026-08-03",
-    "author": "Modelverse Editorial",
-    "readTime": "2 min read",
-    "excerpt": "This story originally appeared in The Algorithm, our weekly newsletter on AI. To get stories like this in your inbox first, sign up here. Humanoid robots usually elicit more cringe...",
-    "body": "## Trump's AI Protectionism Extends to Robotics, Banning Foreign Imports\n\nThe Federal Trade Commission (FTC) has issued a significant ban on the import of advanced foreign-made robots, including humanoids, quadrupeds, and wheeled models. This unexpected move, driven by an increasingly partisan FTC, cites two primary concerns. Firstly, it aims to mitigate national security risks, fearing that foreign robots could collect vast amounts of sensitive data from homes and critical facilities. Secondly, the ban seeks to shield nascent US robotics companies from international competition, particularly from China, to foster a more robust and secure domestic supply chain.\n\nThis policy aligns with a broader strategy of \"AI industrial policy\" under the Trump administration, expanding its protectionist stance beyond leading AI software labs to encompass emerging hardware sectors. While reminiscent of past trade disputes involving strategic technologies like solar panels and electric vehicles, the inclusion of robotics underscores its growing importance as a cutting-edge component of the AI industry. The ban effectively leverages concerns over data privacy and cybersecurity, positioning foreign-made robots as potential conduits for data exfiltration.\n\nFor developers and researchers, this decision marks a pivotal moment, signaling that the fragile US robotics sector is now a direct focus of national industrial policy. It could accelerate domestic innovation and investment in US-based robotics companies, potentially fostering a more secure and self-reliant supply chain. However, it also introduces trade-offs, such as potentially higher costs for consumers and businesses due to reduced competition. This move highlights a more aggressive governmental approach to securing the entire AI ecosystem, influencing future research directions, market dynamics, and the competitive landscape for AI hardware development in the United States.",
-    "coverImage": "https://wp.technologyreview.com/wp-content/uploads/2026/08/AP26206077599738.jpg?resize=1200,600",
-    "status": "published",
-    "confidenceLevel": "confirmed",
-    "externalSources": [
-      "https://www.technologyreview.com/2026/08/03/1141056/trumps-ai-protectionism-has-come-for-robotics/"
-    ],
-    "relatedModels": [],
-    "tags": [
-      "ai-news",
-      "breaking",
-      "mit-technology-review"
-    ]
-  },
-  {
-    "id": "congress-favorite-ai-tool-chatgpt",
-    "slug": "congress-favorite-ai-tool-chatgpt",
-    "title": "Congress' favorite AI tool? ChatGPT",
-    "category": "short-news",
-    "isTrending": true,
-    "publishDate": "2026-08-03",
-    "author": "Modelverse Editorial",
-    "readTime": "2 min read",
-    "excerpt": "House spending records show OpenAI's ChatGPT dominates paid AI use on Capitol Hill, with congressional offices relying on the chatbot to draft memos, summarize legislation, and ass...",
-    "body": "A recent CNBC report, drawing from House disbursement records, highlights OpenAI's ChatGPT as the overwhelmingly preferred AI tool within the U.S. Congress. During the year ending March 31, OpenAI captured approximately 90% of all AI-related spending by House offices, committees, and institutional accounts. Out of a total of over $113,740 spent on AI, ChatGPT alone accounted for roughly $100,580 across 798 transactions, significantly outpacing Anthropic's Claude, which saw about $13,160 in spending.\n\nCongressional staffers are leveraging these large language models for a diverse array of critical tasks. Their applications span from drafting internal memos and summarizing complex legislation to analyzing policy research, preparing materials for hearings, responding efficiently to constituent inquiries, and even crafting social media posts. This broad utility demonstrates the practical power of advanced natural language processing and generation in streamlining administrative and legislative workflows within a demanding, high-stakes environment.\n\nFor AI developers and researchers, this widespread adoption by a non-tech-native, high-profile institution like Congress is a significant validation. It underscores the maturity and practical utility of current LLM architectures, showcasing their ability to handle complex, sensitive, and varied real-world demands beyond typical tech use cases. This trend highlights the growing market for robust, user-friendly AI tools and provides valuable insights into the types of general-purpose AI capabilities that are most impactful, potentially guiding future research and development towards even more versatile and accessible applications.",
-    "coverImage": "https://techcrunch.com/wp-content/uploads/2026/08/GettyImages-2263890424.jpg?w=1024",
-    "status": "published",
-    "confidenceLevel": "confirmed",
-    "externalSources": [
-      "https://techcrunch.com/2026/08/03/congresss-favorite-ai-tool-chatgpt/"
-    ],
-    "relatedModels": [],
-    "tags": [
-      "ai-news",
-      "breaking",
-      "techcrunch-ai"
-    ]
-  },
-  {
-    "id": "how-we-built-a-realtime-system-for-responsive-voice-ai-in-six-months",
-    "slug": "how-we-built-a-realtime-system-for-responsive-voice-ai-in-six-months",
-    "title": "How we built a realtime system for responsive voice AI in six months",
-    "category": "short-news",
-    "isTrending": true,
-    "publishDate": "2026-08-03",
-    "author": "Modelverse Editorial",
-    "readTime": "2 min read",
-    "excerpt": "GPT-Live enables continuous voice interaction with AI, using a turnless speech model and low-latency architecture for faster, more natural conversations.",
-    "body": "Modelverse is excited to highlight the recent unveiling of GPT-Live, a groundbreaking system designed to revolutionize voice interaction with artificial intelligence. Developed rapidly, this innovation promises to deliver a truly continuous and highly responsive conversational experience, moving beyond the traditional \"push-to-talk\" or turn-based paradigms that often hinder natural dialogue. It aims to make speaking with AI feel as fluid and intuitive as conversing with another human.\n\nAt its core, GPT-Live achieves this seamless interaction through a sophisticated combination of a \"turnless speech model\" and a meticulously engineered low-latency architecture. Unlike conventional systems that wait for a speaker to finish before processing, the turnless model allows for real-time, overlapping speech and immediate AI responses. This architectural efficiency minimizes delays, ensuring that the AI can listen, process, and generate speech almost instantaneously, fostering significantly faster and more organic exchanges.\n\nFor developers and researchers, GPT-Live represents a significant leap forward in conversational AI. This technology unlocks new possibilities for creating highly engaging and immersive voice applications, from advanced virtual assistants to interactive educational tools and accessibility solutions. The ability to build systems that support continuous, natural dialogue removes a major barrier to user adoption and satisfaction, paving the way for more human-centric AI interfaces and accelerating innovation in the field of spoken language understanding and generation.",
-    "coverImage": "/images/news/openai_sol_codex_updates_cover.jpg",
-    "status": "published",
-    "confidenceLevel": "confirmed",
-    "externalSources": [
-      "https://openai.com/index/continuous-voice-interaction-with-gpt-live"
-    ],
-    "relatedModels": [],
-    "tags": [
-      "ai-news",
-      "breaking",
-      "openai"
     ]
   }
 ]

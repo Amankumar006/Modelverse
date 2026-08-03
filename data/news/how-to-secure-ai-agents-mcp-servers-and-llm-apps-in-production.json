@@ -1,0 +1,24 @@
+{
+  "id": "how-to-secure-ai-agents-mcp-servers-and-llm-apps-in-production",
+  "slug": "how-to-secure-ai-agents-mcp-servers-and-llm-apps-in-production",
+  "title": "How to Secure AI Agents, MCP Servers, and LLM Apps in Production",
+  "category": "short-news",
+  "isTrending": true,
+  "publishDate": "2026-08-03",
+  "author": "Modelverse Editorial",
+  "readTime": "2 min read",
+  "excerpt": "AI agents, MCP servers, and LLM apps break the core AppSec assumption that applications do what their code says. This guide walks through a practical see-fix-protect framework: a f...",
+  "body": "Mend.io has unveiled a crucial new practitioner guide, \"Securing AI agents, MCP servers & LLM apps: A practical framework,\" designed to address the rapidly expanding security blind spots introduced by AI agents, MCP integrations, and LLM-powered applications. As these AI components integrate into codebases at an unprecedented pace, traditional application security (AppSec) models, built on the assumption that applications strictly follow their code, are proving insufficient. Agentic AI's emergent behavior, influenced by models, prompts, context, and tools, creates entirely new and unpredictable security challenges that existing programs struggle to track.\n\nThe guide tackles these novel security risks by outlining a framework centered on three key actions: identifying critical assets, rapidly remediating issues, and robustly protecting AI in production. It highlights new failure modes like prompt injection via data, over-permissioned agents, and poisoned tool descriptions on MCP servers—vulnerabilities that bypass traditional CVE feeds. To counter this, the framework advocates for a \"shift left, protect right\" approach, offering practical methods for discovering \"shadow agents\" and unregistered MCP servers, alongside reusable artifacts. These include an extended AI-BOM with nine new fields for comprehensive agent/MCP server tracking and a 12-point misconfiguration checklist covering crucial aspects like credential scoping, system prompt version control, and model lifecycle monitoring.\n\nThis framework is vital for developers and researchers navigating the complex landscape of AI security. It provides a much-needed structured approach to manage the expanded \"finding surface\" and unique attack vectors that AI introduces. By offering concrete discovery methods, configuration best practices, and a prioritization pipeline (enrich → prioritize → triage), Mend.io's guide empowers teams to proactively secure their AI deployments, ensuring safer development and more resilient production environments for the next generation of intelligent applications.",
+  "coverImage": "https://www.marktechpost.com/wp-content/uploads/2026/08/blog6176-6-1024x731.png",
+  "status": "published",
+  "confidenceLevel": "confirmed",
+  "externalSources": [
+    "https://www.marktechpost.com/2026/08/03/how-to-secure-ai-agents-mcp-servers-and-llm-apps-in-production/"
+  ],
+  "relatedModels": [],
+  "tags": [
+    "ai-news",
+    "breaking",
+    "marktechpost"
+  ]
+}

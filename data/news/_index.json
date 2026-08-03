@@ -176,6 +176,28 @@
     ]
   },
   {
+    "id": "design-arena-creators-raise-79-million-to-bring-taste-to-ai-models",
+    "slug": "design-arena-creators-raise-79-million-to-bring-taste-to-ai-models",
+    "title": "Design Arena creators raise $7.9 million to bring taste to AI models",
+    "category": "short-news",
+    "publishDate": "2026-08-03",
+    "author": "Modelverse Editorial",
+    "readTime": "2 min read",
+    "excerpt": "Design Arena is used by 5.3 million people around the world, providing critical human evaluations to frontier labs.",
+    "coverImage": "https://techcrunch.com/wp-content/uploads/2026/08/Screenshot-2026-08-03-at-12.31.35-PM.jpg?resize=1200,739",
+    "status": "published",
+    "confidenceLevel": "confirmed",
+    "externalSources": [
+      "https://techcrunch.com/2026/08/03/designarena-creators-raise-7-9-million-to-bring-taste-to-ai-models/"
+    ],
+    "relatedModels": [],
+    "tags": [
+      "ai-news",
+      "breaking",
+      "techcrunch-ai"
+    ]
+  },
+  {
     "id": "designarena-creators-raise-79-million-to-bring-taste-to-ai-models",
     "slug": "designarena-creators-raise-79-million-to-bring-taste-to-ai-models",
     "title": "DesignArena creators raise $7.9 million to bring taste to AI models",
@@ -217,6 +239,28 @@
       "ai-news",
       "breaking",
       "mit-technology-review"
+    ]
+  },
+  {
+    "id": "how-to-secure-ai-agents-mcp-servers-and-llm-apps-in-production",
+    "slug": "how-to-secure-ai-agents-mcp-servers-and-llm-apps-in-production",
+    "title": "How to Secure AI Agents, MCP Servers, and LLM Apps in Production",
+    "category": "short-news",
+    "publishDate": "2026-08-03",
+    "author": "Modelverse Editorial",
+    "readTime": "2 min read",
+    "excerpt": "AI agents, MCP servers, and LLM apps break the core AppSec assumption that applications do what their code says. This guide walks through a practical see-fix-protect framework: a f...",
+    "coverImage": "https://www.marktechpost.com/wp-content/uploads/2026/08/blog6176-6-1024x731.png",
+    "status": "published",
+    "confidenceLevel": "confirmed",
+    "externalSources": [
+      "https://www.marktechpost.com/2026/08/03/how-to-secure-ai-agents-mcp-servers-and-llm-apps-in-production/"
+    ],
+    "relatedModels": [],
+    "tags": [
+      "ai-news",
+      "breaking",
+      "marktechpost"
     ]
   },
   {

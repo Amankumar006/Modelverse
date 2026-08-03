@@ -1,0 +1,24 @@
+{
+  "id": "design-arena-creators-raise-79-million-to-bring-taste-to-ai-models",
+  "slug": "design-arena-creators-raise-79-million-to-bring-taste-to-ai-models",
+  "title": "Design Arena creators raise $7.9 million to bring taste to AI models",
+  "category": "short-news",
+  "isTrending": true,
+  "publishDate": "2026-08-03",
+  "author": "Modelverse Editorial",
+  "readTime": "2 min read",
+  "excerpt": "Design Arena is used by 5.3 million people around the world, providing critical human evaluations to frontier labs.",
+  "body": "Intelligence, the company behind the innovative AI tool Design Arena, has successfully closed a $7.9 million seed funding round led by Index Ventures. Born from a challenge to make AI-generated games \"fun,\" Design Arena has evolved into a crucial platform addressing the critical need for scalable, authentic human feedback in the AI development lifecycle. This significant investment underscores the growing recognition of human judgment as an indispensable component for refining AI models, particularly in creative and design-oriented applications.\n\nDesign Arena operates as a sophisticated feedback engine, allowing users to submit prompts for various visual outputs, from websites to images, through a ChatGPT-style interface. Users then engage in \"A vs. B\" comparisons, ranking outputs based on their preferences. While beneficial for individual users seeking optimal results, the platform's core value lies in its enterprise offering. Frontier AI labs and companies leverage Design Arena as a continuous source of instant human evaluation, feeding real-time user preferences directly back into their media-generating models, thereby accelerating design improvements and ensuring outputs resonate with human \"taste.\"\n\nThis human-centric approach is vital for developers and researchers, as it fills a significant gap that automated benchmarks often miss or can be manipulated. By providing honest, large-scale human input, Design Arena helps AI models move beyond mere functionality to achieve desired aesthetic and experiential qualities. Furthermore, by tracking user preferences across demographics and over time, the platform offers invaluable insights into evolving tastes, enabling AI creators to build more intuitive, engaging, and culturally relevant models.",
+  "coverImage": "https://techcrunch.com/wp-content/uploads/2026/08/Screenshot-2026-08-03-at-12.31.35-PM.jpg?resize=1200,739",
+  "status": "published",
+  "confidenceLevel": "confirmed",
+  "externalSources": [
+    "https://techcrunch.com/2026/08/03/designarena-creators-raise-7-9-million-to-bring-taste-to-ai-models/"
+  ],
+  "relatedModels": [],
+  "tags": [
+    "ai-news",
+    "breaking",
+    "techcrunch-ai"
+  ]
+}
