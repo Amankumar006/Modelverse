@@ -66,6 +66,28 @@
     ]
   },
   {
+    "id": "apple-finally-fixed-siri-so-why-does-it-feel-anticlimactic",
+    "slug": "apple-finally-fixed-siri-so-why-does-it-feel-anticlimactic",
+    "title": "Apple finally fixed Siri. So why does it feel anticlimactic?",
+    "category": "short-news",
+    "publishDate": "2026-08-03",
+    "author": "Modelverse Editorial",
+    "readTime": "2 min read",
+    "excerpt": "Apple’s long-awaited AI overhaul finally makes Siri the assistant it was always supposed to be. But after years of delays, the launch lands in an AI landscape where chatbots have e...",
+    "coverImage": "https://techcrunch.com/wp-content/uploads/2026/06/Screenshot-2026-06-08-at-1.42.13-PM.png?w=808",
+    "status": "published",
+    "confidenceLevel": "confirmed",
+    "externalSources": [
+      "https://techcrunch.com/2026/08/03/apple-finally-fixed-siri-so-why-does-it-feel-anticlimactic/"
+    ],
+    "relatedModels": [],
+    "tags": [
+      "ai-news",
+      "breaking",
+      "techcrunch-ai"
+    ]
+  },
+  {
     "id": "cogent-ai-team-releases-vr-1-a-frontier-cyber-reasoning-model-that-composes-and-",
     "slug": "cogent-ai-team-releases-vr-1-a-frontier-cyber-reasoning-model-that-composes-and-",
     "title": "Cogent AI Team Releases VR-1: A Frontier Cyber Reasoning Model That Composes and Verifies Enterprise Attack Paths",
@@ -85,6 +107,28 @@
       "ai-news",
       "breaking",
       "marktechpost"
+    ]
+  },
+  {
+    "id": "congresss-favorite-ai-tool-chatgpt",
+    "slug": "congresss-favorite-ai-tool-chatgpt",
+    "title": "Congress's favorite AI tool? ChatGPT",
+    "category": "short-news",
+    "publishDate": "2026-08-03",
+    "author": "Modelverse Editorial",
+    "readTime": "2 min read",
+    "excerpt": "House spending records show OpenAI's ChatGPT dominates paid AI use on Capitol Hill, with congressional offices relying on the chatbot to draft memos, summarize legislation, and ass...",
+    "coverImage": "https://techcrunch.com/wp-content/uploads/2026/08/GettyImages-2263890424.jpg?w=1024",
+    "status": "published",
+    "confidenceLevel": "confirmed",
+    "externalSources": [
+      "https://techcrunch.com/2026/08/03/congresss-favorite-ai-tool-chatgpt/"
+    ],
+    "relatedModels": [],
+    "tags": [
+      "ai-news",
+      "breaking",
+      "techcrunch-ai"
     ]
   },
   {

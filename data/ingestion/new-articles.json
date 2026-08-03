@@ -1,20 +1,44 @@
 [
   {
-    "id": "a-marc-benioff-backed-startup-thinks-ai-can-solve-the-ai-deployment-problem",
-    "slug": "a-marc-benioff-backed-startup-thinks-ai-can-solve-the-ai-deployment-problem",
-    "title": "A Marc Benioff-backed startup thinks AI can solve the AI deployment problem",
+    "id": "apple-finally-fixed-siri-so-why-does-it-feel-anticlimactic",
+    "slug": "apple-finally-fixed-siri-so-why-does-it-feel-anticlimactic",
+    "title": "Apple finally fixed Siri. So why does it feel anticlimactic?",
     "category": "short-news",
     "isTrending": true,
     "publishDate": "2026-08-03",
     "author": "Modelverse Editorial",
     "readTime": "2 min read",
-    "excerpt": "June emerged from stealth today with a $20 million pre-seed round to make AI adoption simpler.",
-    "body": "A new startup, June, co-founded by former Salesforce executives Efrat Rapoport, Ohad Hen, Barak Goldstein, and Idan Tsitiat, has emerged from stealth with $20 million in pre-seed funding, led by Marc Benioff's Time Ventures. June aims to revolutionize how large enterprises deploy AI, addressing the current paradox where AI's complexity often necessitates extensive professional services and a growing workforce of \"forward-deployed engineers\" to get systems operational. The team, previously behind Bonobo AI, recognized this significant bottleneck after observing customers struggle with AI integration at Salesforce.\n\nJune's core innovation lies in simplifying the integration of AI models with the intricate, often messy, reality of enterprise legacy systems. While building an AI agent template might be straightforward, the real challenge, according to Rapoport, is making it function reliably amidst fragmented data across platforms like Salesforce, ServiceNow, and DataBricks, complex workflows, and years of technical debt. June's technology is designed to navigate these complexities, enabling AI agents to understand and operate effectively even when faced with issues like duplicate database fields or inconsistent data usage across different teams.\n\nThis initiative is crucial for developers and researchers as it tackles one of the most significant hurdles to AI adoption: practical deployment and value realization within existing corporate infrastructure. By providing a more streamlined approach to connect AI agents with disparate data sources and workflows, June could dramatically reduce the need for costly, bespoke integration efforts. This shift would allow developers and researchers to focus more on AI innovation itself, accelerating the pace at which AI solutions can be brought to market and deliver tangible business value, moving beyond the current reliance on extensive human intervention for implementation.",
-    "coverImage": "https://techcrunch.com/wp-content/uploads/2026/08/June-Headshots-7740.jpg?resize=1200,800",
+    "excerpt": "Apple’s long-awaited AI overhaul finally makes Siri the assistant it was always supposed to be. But after years of delays, the launch lands in an AI landscape where chatbots have e...",
+    "body": "Apple has rolled out its significantly enhanced Siri AI in the consumer beta of iOS 27, marking a substantial upgrade to its virtual assistant. This new iteration delivers on long-standing promises, enabling Siri to understand personal context, tap into broad world knowledge, and seamlessly access information stored directly on the user's iPhone. Key improvements include natural, back-and-forth conversational capabilities, adjustable voice responses, and the option for typed input, alongside a dedicated app to review past interactions.\n\nThe technology now intelligently retrieves specific data, such as finding a saved receipt without knowing its location or purpose, or extracting information like a driver's license number from a photo. Siri also integrates deeply with apps and web services, facilitating tasks from getting directions and playing music to editing photos and drafting emails, demonstrating a new level of reliability in executing user requests.\n\nWhile the broader AI landscape has rapidly advanced into areas like code generation and multi-step agentic reasoning, making Siri's arrival feel somewhat less groundbreaking than it once would have, its significance for developers and researchers remains. This release showcases the practical deployment of sophisticated, context-aware AI directly on a consumer device, emphasizing privacy-preserving on-device processing. It establishes a new benchmark for integrated personal assistants within a tightly controlled ecosystem, offering a robust platform for future innovation in on-device AI and setting a higher standard for user expectations regarding intelligent, personalized assistance.",
+    "coverImage": "https://techcrunch.com/wp-content/uploads/2026/06/Screenshot-2026-06-08-at-1.42.13-PM.png?w=808",
     "status": "published",
     "confidenceLevel": "confirmed",
     "externalSources": [
-      "https://techcrunch.com/2026/08/03/a-marc-benioff-backed-startup-thinks-ai-can-solve-the-ai-deployment-problem/"
+      "https://techcrunch.com/2026/08/03/apple-finally-fixed-siri-so-why-does-it-feel-anticlimactic/"
+    ],
+    "relatedModels": [],
+    "tags": [
+      "ai-news",
+      "breaking",
+      "techcrunch-ai"
+    ]
+  },
+  {
+    "id": "congresss-favorite-ai-tool-chatgpt",
+    "slug": "congresss-favorite-ai-tool-chatgpt",
+    "title": "Congress's favorite AI tool? ChatGPT",
+    "category": "short-news",
+    "isTrending": true,
+    "publishDate": "2026-08-03",
+    "author": "Modelverse Editorial",
+    "readTime": "2 min read",
+    "excerpt": "House spending records show OpenAI's ChatGPT dominates paid AI use on Capitol Hill, with congressional offices relying on the chatbot to draft memos, summarize legislation, and ass...",
+    "body": "OpenAI's ChatGPT has emerged as the dominant artificial intelligence tool within the U.S. Congress, capturing approximately 90% of all AI-related spending by House offices, committees, and institutional accounts over the past year. A CNBC report, based on House disbursement records, reveals that Congress allocated over $100,000 across nearly 800 transactions to ChatGPT, significantly outpacing competitors like Anthropic's Claude. This financial commitment highlights a clear preference for OpenAI's offering, with Democratic offices showing notably higher expenditure on AI tools.\n\nCongressional staff are deploying ChatGPT and similar large language models for a diverse array of operational tasks. These applications span from drafting internal memos and summarizing intricate legislative documents to crafting responses for constituents and preparing materials for hearings. It also streamlines policy research and social media content generation, demonstrating its utility in enhancing productivity and communication within a demanding political environment.\n\nFor AI developers and researchers, this widespread adoption by a critical governmental body underscores the practical maturity and real-world applicability of large language models. It validates the significant demand for versatile, text-generating AI solutions capable of complex information processing and communication. This trend signals the increasing importance of developing robust, reliable, and user-friendly AI tools for high-stakes, non-technical workflows, potentially influencing future research towards enhanced accuracy, security, and domain-specific customization.",
+    "coverImage": "https://techcrunch.com/wp-content/uploads/2026/08/GettyImages-2263890424.jpg?w=1024",
+    "status": "published",
+    "confidenceLevel": "confirmed",
+    "externalSources": [
+      "https://techcrunch.com/2026/08/03/congresss-favorite-ai-tool-chatgpt/"
     ],
     "relatedModels": [],
     "tags": [
