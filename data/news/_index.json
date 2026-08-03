@@ -22,6 +22,94 @@
     ]
   },
   {
+    "id": "alibaba-qwen-releases-qwen38-max-a-24-trillion-parameter-moe-model-and-the-most-",
+    "slug": "alibaba-qwen-releases-qwen38-max-a-24-trillion-parameter-moe-model-and-the-most-",
+    "title": "Alibaba Qwen Releases Qwen3.8-Max: A 2.4 Trillion Parameter MoE Model and the Most Capable One in the Qwen Family to Date",
+    "category": "short-news",
+    "publishDate": "2026-08-03",
+    "author": "Modelverse Editorial",
+    "readTime": "2 min read",
+    "excerpt": "Alibaba's Qwen team moved Qwen3.8-Max from preview to general availability, with published per-token pricing and open weights due next week. The 2.4T parameter MoE model accepts te...",
+    "coverImage": "https://www.marktechpost.com/wp-content/uploads/2026/08/blog6176-5-1024x731.png",
+    "status": "published",
+    "confidenceLevel": "confirmed",
+    "externalSources": [
+      "https://www.marktechpost.com/2026/08/03/alibaba-qwen-releases-qwen3-8-max/"
+    ],
+    "relatedModels": [],
+    "tags": [
+      "ai-news",
+      "breaking",
+      "marktechpost"
+    ]
+  },
+  {
+    "id": "cogent-ai-team-releases-vr-1-a-frontier-cyber-reasoning-model-that-composes-and-",
+    "slug": "cogent-ai-team-releases-vr-1-a-frontier-cyber-reasoning-model-that-composes-and-",
+    "title": "Cogent AI Team Releases VR-1: A Frontier Cyber Reasoning Model That Composes and Verifies Enterprise Attack Paths",
+    "category": "short-news",
+    "publishDate": "2026-08-03",
+    "author": "Modelverse Editorial",
+    "readTime": "2 min read",
+    "excerpt": "Cogent AI team released Cogent VR-1, a reasoning model post-trained specifically for cybersecurity rather than picking up cyber capability as a side effect of general coding streng...",
+    "coverImage": "https://www.marktechpost.com/wp-content/uploads/2026/08/cogent-ai-team-releases-vr-1-a-frontier-_RRfw-MN8XHCVMiq25ns72Q_GZ6ubPNqQVGq-eTcWMe7jw_cover_2k-1024x768.png",
+    "status": "published",
+    "confidenceLevel": "confirmed",
+    "externalSources": [
+      "https://www.marktechpost.com/2026/08/03/ogent-ai-team-releases-vr-1/"
+    ],
+    "relatedModels": [],
+    "tags": [
+      "ai-news",
+      "breaking",
+      "marktechpost"
+    ]
+  },
+  {
+    "id": "heres-why-ai-agents-lie-and-cheat-to-reach-their-goals",
+    "slug": "heres-why-ai-agents-lie-and-cheat-to-reach-their-goals",
+    "title": "Here’s why AI agents lie and cheat to reach their goals",
+    "category": "short-news",
+    "publishDate": "2026-08-03",
+    "author": "Modelverse Editorial",
+    "readTime": "2 min read",
+    "excerpt": "MIT Technology Review Explains: Let our writers untangle the complex, messy world of technology to help you understand what’s coming next. You can read more from the series here. W...",
+    "coverImage": "https://wp.technologyreview.com/wp-content/uploads/2026/07/paperclips3.jpg?resize=1200,600",
+    "status": "published",
+    "confidenceLevel": "confirmed",
+    "externalSources": [
+      "https://www.technologyreview.com/2026/08/03/1141009/heres-why-ai-agents-lie-and-cheat-to-reach-their-goals/"
+    ],
+    "relatedModels": [],
+    "tags": [
+      "ai-news",
+      "breaking",
+      "mit-technology-review"
+    ]
+  },
+  {
+    "id": "onton-releases-ontology-1-a-neurosymbolic-search-model-that-is-27x-more-accurate",
+    "slug": "onton-releases-ontology-1-a-neurosymbolic-search-model-that-is-27x-more-accurate",
+    "title": "Onton Releases Ontology 1: A Neurosymbolic Search Model That is 2.7x More Accurate than the World’s Best E-commerce Search Engines",
+    "category": "short-news",
+    "publishDate": "2026-08-03",
+    "author": "Modelverse Editorial",
+    "readTime": "2 min read",
+    "excerpt": "Onton, a San Francisco-based search and discovery company, has released Ontology 1, a neurosymbolic model for complex, conversational, multimodal product search. On a 90-query benc...",
+    "coverImage": "https://www.marktechpost.com/wp-content/uploads/2026/08/blog6176-4-1024x731.png",
+    "status": "published",
+    "confidenceLevel": "confirmed",
+    "externalSources": [
+      "https://www.marktechpost.com/2026/08/02/onton-releases-ontology-1-a-neurosymbolic-search-model/"
+    ],
+    "relatedModels": [],
+    "tags": [
+      "ai-news",
+      "breaking",
+      "marktechpost"
+    ]
+  },
+  {
     "id": "a-tutorial-on-geoai-designing-footprint-extraction-from-naip-imagery-using-u-net",
     "slug": "a-tutorial-on-geoai-designing-footprint-extraction-from-naip-imagery-using-u-net",
     "title": "A Tutorial on GeoAI: Designing Footprint Extraction from NAIP Imagery Using U-Net, Grounding DINO, SAM, and Mask R-CNN",
