@@ -22,6 +22,28 @@
     ]
   },
   {
+    "id": "a-marc-benioff-backed-startup-thinks-ai-can-solve-the-ai-deployment-problem",
+    "slug": "a-marc-benioff-backed-startup-thinks-ai-can-solve-the-ai-deployment-problem",
+    "title": "A Marc Benioff-backed startup thinks AI can solve the AI deployment problem",
+    "category": "short-news",
+    "publishDate": "2026-08-03",
+    "author": "Modelverse Editorial",
+    "readTime": "2 min read",
+    "excerpt": "June emerged from stealth today with a $20 million pre-seed round to make AI adoption simpler.",
+    "coverImage": "https://techcrunch.com/wp-content/uploads/2026/08/June-Headshots-7740.jpg?resize=1200,800",
+    "status": "published",
+    "confidenceLevel": "confirmed",
+    "externalSources": [
+      "https://techcrunch.com/2026/08/03/a-marc-benioff-backed-startup-thinks-ai-can-solve-the-ai-deployment-problem/"
+    ],
+    "relatedModels": [],
+    "tags": [
+      "ai-news",
+      "breaking",
+      "techcrunch-ai"
+    ]
+  },
+  {
     "id": "alibaba-qwen-releases-qwen38-max-a-24-trillion-parameter-moe-model-and-the-most-",
     "slug": "alibaba-qwen-releases-qwen38-max-a-24-trillion-parameter-moe-model-and-the-most-",
     "title": "Alibaba Qwen Releases Qwen3.8-Max: A 2.4 Trillion Parameter MoE Model and the Most Capable One in the Qwen Family to Date",
