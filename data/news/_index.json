@@ -88,6 +88,28 @@
     ]
   },
   {
+    "id": "aws-is-helping-vibe-coding-startup-superblocks-and-the-implications-are-big",
+    "slug": "aws-is-helping-vibe-coding-startup-superblocks-and-the-implications-are-big",
+    "title": "AWS is helping vibe-coding startup Superblocks, and the implications are big",
+    "category": "short-news",
+    "publishDate": "2026-08-03",
+    "author": "Modelverse Editorial",
+    "readTime": "2 min read",
+    "excerpt": "AWS now allows vibe coding tool Superblocks to be embedded into the private clouds of AWS customers. It's another step towards decoupling apps from models.",
+    "coverImage": "https://techcrunch.com/wp-content/uploads/2025/06/SuperBlocks-founder-Brad-Menezes.jpg?resize=1200,811",
+    "status": "published",
+    "confidenceLevel": "confirmed",
+    "externalSources": [
+      "https://techcrunch.com/2026/08/03/aws-is-helping-vibe-coding-startup-superblocks-and-the-implications-are-big/"
+    ],
+    "relatedModels": [],
+    "tags": [
+      "ai-news",
+      "breaking",
+      "techcrunch-ai"
+    ]
+  },
+  {
     "id": "cogent-ai-team-releases-vr-1-a-frontier-cyber-reasoning-model-that-composes-and-",
     "slug": "cogent-ai-team-releases-vr-1-a-frontier-cyber-reasoning-model-that-composes-and-",
     "title": "Cogent AI Team Releases VR-1: A Frontier Cyber Reasoning Model That Composes and Verifies Enterprise Attack Paths",
@@ -110,6 +132,28 @@
     ]
   },
   {
+    "id": "congress-favorite-ai-tool-chatgpt",
+    "slug": "congress-favorite-ai-tool-chatgpt",
+    "title": "Congress' favorite AI tool? ChatGPT",
+    "category": "short-news",
+    "publishDate": "2026-08-03",
+    "author": "Modelverse Editorial",
+    "readTime": "2 min read",
+    "excerpt": "House spending records show OpenAI's ChatGPT dominates paid AI use on Capitol Hill, with congressional offices relying on the chatbot to draft memos, summarize legislation, and ass...",
+    "coverImage": "https://techcrunch.com/wp-content/uploads/2026/08/GettyImages-2263890424.jpg?w=1024",
+    "status": "published",
+    "confidenceLevel": "confirmed",
+    "externalSources": [
+      "https://techcrunch.com/2026/08/03/congresss-favorite-ai-tool-chatgpt/"
+    ],
+    "relatedModels": [],
+    "tags": [
+      "ai-news",
+      "breaking",
+      "techcrunch-ai"
+    ]
+  },
+  {
     "id": "congresss-favorite-ai-tool-chatgpt",
     "slug": "congresss-favorite-ai-tool-chatgpt",
     "title": "Congress's favorite AI tool? ChatGPT",
@@ -123,6 +167,28 @@
     "confidenceLevel": "confirmed",
     "externalSources": [
       "https://techcrunch.com/2026/08/03/congresss-favorite-ai-tool-chatgpt/"
+    ],
+    "relatedModels": [],
+    "tags": [
+      "ai-news",
+      "breaking",
+      "techcrunch-ai"
+    ]
+  },
+  {
+    "id": "designarena-creators-raise-79-million-to-bring-taste-to-ai-models",
+    "slug": "designarena-creators-raise-79-million-to-bring-taste-to-ai-models",
+    "title": "DesignArena creators raise $7.9 million to bring taste to AI models",
+    "category": "short-news",
+    "publishDate": "2026-08-03",
+    "author": "Modelverse Editorial",
+    "readTime": "2 min read",
+    "excerpt": "DesignArena is used by 5.3 million people around the world, providing critical human evaluations to frontier labs.",
+    "coverImage": "https://techcrunch.com/wp-content/uploads/2026/08/Screenshot-2026-08-03-at-12.31.35-PM.jpg?resize=1200,739",
+    "status": "published",
+    "confidenceLevel": "confirmed",
+    "externalSources": [
+      "https://techcrunch.com/2026/08/03/designarena-creators-raise-7-9-million-to-bring-taste-to-ai-models/"
     ],
     "relatedModels": [],
     "tags": [
@@ -154,6 +220,50 @@
     ]
   },
   {
+    "id": "how-we-built-a-realtime-system-for-responsive-voice-ai-in-six-months",
+    "slug": "how-we-built-a-realtime-system-for-responsive-voice-ai-in-six-months",
+    "title": "How we built a realtime system for responsive voice AI in six months",
+    "category": "short-news",
+    "publishDate": "2026-08-03",
+    "author": "Modelverse Editorial",
+    "readTime": "2 min read",
+    "excerpt": "GPT-Live enables continuous voice interaction with AI, using a turnless speech model and low-latency architecture for faster, more natural conversations.",
+    "coverImage": "/images/news/openai_sol_codex_updates_cover.jpg",
+    "status": "published",
+    "confidenceLevel": "confirmed",
+    "externalSources": [
+      "https://openai.com/index/continuous-voice-interaction-with-gpt-live"
+    ],
+    "relatedModels": [],
+    "tags": [
+      "ai-news",
+      "breaking",
+      "openai"
+    ]
+  },
+  {
+    "id": "influencers-draw-backlash-for-attending-openais-first-luxury-trip",
+    "slug": "influencers-draw-backlash-for-attending-openais-first-luxury-trip",
+    "title": "Influencers draw backlash for attending OpenAI's first luxury trip",
+    "category": "short-news",
+    "publishDate": "2026-08-03",
+    "author": "Modelverse Editorial",
+    "readTime": "2 min read",
+    "excerpt": "OpenAI’s first-ever influencer brand trip is sparking online backlash as tensions over the use of AI continue.",
+    "coverImage": "https://techcrunch.com/wp-content/uploads/2024/05/GettyImages-1502799666.jpg?resize=1200,633",
+    "status": "published",
+    "confidenceLevel": "confirmed",
+    "externalSources": [
+      "https://techcrunch.com/2026/08/03/influencers-draw-backlash-for-attending-openais-first-luxury-trip/"
+    ],
+    "relatedModels": [],
+    "tags": [
+      "ai-news",
+      "breaking",
+      "techcrunch-ai"
+    ]
+  },
+  {
     "id": "onton-releases-ontology-1-a-neurosymbolic-search-model-that-is-27x-more-accurate",
     "slug": "onton-releases-ontology-1-a-neurosymbolic-search-model-that-is-27x-more-accurate",
     "title": "Onton Releases Ontology 1: A Neurosymbolic Search Model That is 2.7x More Accurate than the World’s Best E-commerce Search Engines",
@@ -173,6 +283,28 @@
       "ai-news",
       "breaking",
       "marktechpost"
+    ]
+  },
+  {
+    "id": "trumps-ai-protectionism-has-come-for-robotics",
+    "slug": "trumps-ai-protectionism-has-come-for-robotics",
+    "title": "Trump’s AI protectionism has come for robotics",
+    "category": "short-news",
+    "publishDate": "2026-08-03",
+    "author": "Modelverse Editorial",
+    "readTime": "2 min read",
+    "excerpt": "This story originally appeared in The Algorithm, our weekly newsletter on AI. To get stories like this in your inbox first, sign up here. Humanoid robots usually elicit more cringe...",
+    "coverImage": "https://wp.technologyreview.com/wp-content/uploads/2026/08/AP26206077599738.jpg?resize=1200,600",
+    "status": "published",
+    "confidenceLevel": "confirmed",
+    "externalSources": [
+      "https://www.technologyreview.com/2026/08/03/1141056/trumps-ai-protectionism-has-come-for-robotics/"
+    ],
+    "relatedModels": [],
+    "tags": [
+      "ai-news",
+      "breaking",
+      "mit-technology-review"
     ]
   },
   {

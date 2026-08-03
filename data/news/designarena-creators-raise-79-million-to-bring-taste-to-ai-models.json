@@ -1,0 +1,24 @@
+{
+  "id": "designarena-creators-raise-79-million-to-bring-taste-to-ai-models",
+  "slug": "designarena-creators-raise-79-million-to-bring-taste-to-ai-models",
+  "title": "DesignArena creators raise $7.9 million to bring taste to AI models",
+  "category": "short-news",
+  "isTrending": true,
+  "publishDate": "2026-08-03",
+  "author": "Modelverse Editorial",
+  "readTime": "2 min read",
+  "excerpt": "DesignArena is used by 5.3 million people around the world, providing critical human evaluations to frontier labs.",
+  "body": "## Intelligence Secures $7.9M to Infuse \"Taste\" into AI Models with DesignArena\n\nIntelligence, the company behind the innovative AI feedback platform DesignArena, has successfully raised $7.9 million in seed funding. This investment highlights the growing recognition of a critical challenge in AI development: while models excel at functionality, they often struggle with subjective qualities like \"fun\" or aesthetic \"taste.\" DesignArena emerged from the realization that scalable, honest human judgment was essential to bridge this gap, initially stemming from a quest to make AI-generated games genuinely enjoyable.\n\nDesignArena operates as a sophisticated feedback engine, allowing millions of users to provide invaluable human input. Non-enterprise users interact with a prompt-based interface, similar to a chatbot, where they submit requests for various visual formats like websites or images. They are then presented with a series of \"A vs. B\" choices, ranking outputs from best to worst based on their preferences. This user-generated data, collected at scale, forms a continuous feedback loop that participating AI models can leverage.\n\nFor developers and frontier AI labs, DesignArena addresses a significant bottleneck in refining generative models. By providing an \"endless instant feedback\" stream, the platform enables AI systems to learn what users truly want and prefer, moving beyond mere technical correctness to incorporate subjective quality. This human-led evaluation data is crucial for improving the design capabilities of AI, allowing researchers to fine-tune models to better align with human aesthetics and preferences, ultimately leading to more engaging and user-centric AI outputs.",
+  "coverImage": "https://techcrunch.com/wp-content/uploads/2026/08/Screenshot-2026-08-03-at-12.31.35-PM.jpg?resize=1200,739",
+  "status": "published",
+  "confidenceLevel": "confirmed",
+  "externalSources": [
+    "https://techcrunch.com/2026/08/03/designarena-creators-raise-7-9-million-to-bring-taste-to-ai-models/"
+  ],
+  "relatedModels": [],
+  "tags": [
+    "ai-news",
+    "breaking",
+    "techcrunch-ai"
+  ]
+}
