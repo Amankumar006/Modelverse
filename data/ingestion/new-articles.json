@@ -1,26 +1,74 @@
 [
   {
-    "id": "after-killer-quarter-palantir-ceo-alex-karp-calls-ai-industry-marxist",
-    "slug": "after-killer-quarter-palantir-ceo-alex-karp-calls-ai-industry-marxist",
-    "title": "After killer quarter, Palantir CEO Alex Karp calls AI industry 'Marxist'",
+    "id": "genspark-open-sources-genoffice-a-free-ad-free-ai-office-suite-for-macos-and-win",
+    "slug": "genspark-open-sources-genoffice-a-free-ad-free-ai-office-suite-for-macos-and-win",
+    "title": "Genspark Open Sources GenOffice: A Free, Ad-Free AI Office Suite for macOS and Windows with Docs, Sheets, Slides, PDF",
     "category": "short-news",
     "isTrending": true,
-    "publishDate": "2026-08-03",
+    "publishDate": "2026-08-04",
     "author": "Modelverse Editorial",
     "readTime": "2 min read",
-    "excerpt": "After a quarter that delivered $1 billion in profit, Palantir CEO Alex Karp on Monday once again warned that AI frontier labs are too untrustworthy for enterprises.",
-    "body": "Palantir CEO Alex Karp recently delivered a provocative critique of frontier AI labs, labeling their operational models as \"Marxist\" during the company's Q2 earnings call. This strong statement came amidst Palantir's own record-breaking financial quarter, where the company reported $1.9 billion in revenue and $1.1 billion in profit, largely driven by the surging adoption of AI. Karp's central argument is that many large language model developers, wittingly or not, aim to \"capture the means of production\" from their enterprise partners, posing a significant threat to data sovereignty and competitive advantage.\n\nKarp elaborated that enterprises using these frontier models are essentially paying for the migration of their intellectual property, know-how, and expertise into the labs' foundational models. This process, he argues, enables the AI labs to build competitive businesses that eventually render the original enterprise redundant. In stark contrast, Palantir champions a model-agnostic approach, providing AI and analysis software that empowers organizations to maintain full control over their data, prompts, orchestration, and contextual information, thereby safeguarding their digital assets and preventing vendor lock-in.\n\nThis debate holds significant implications for developers and researchers navigating the rapidly evolving AI landscape. It underscores a critical choice: whether to leverage powerful, externally developed foundational models with potential risks to data ownership and IP, or to opt for solutions that prioritize enterprise control and data sovereignty. Karp's warning challenges the industry to critically examine the long-term business models and ethical frameworks governing AI deployment, urging a deeper consideration of how AI technologies impact competitive landscapes and the future of enterprise innovation.",
-    "coverImage": "https://techcrunch.com/wp-content/uploads/2026/08/Palantir-Alex-Karp.png?resize=1200,762",
+    "excerpt": "Genspark has open sourced GenOffice under the Apache License 2.0. It is an AI-native office suite for macOS and Windows, covering Docs, Sheets, Slides and PDF as five Electron apps...",
+    "body": "Genspark has unveiled GenOffice, an open-source, AI-native office suite for macOS and Windows, now freely available under the Apache License 2.0. This comprehensive package includes a word processor, spreadsheet, presentation editor, and PDF tool, all designed with AI editing as a foundational workflow rather than an afterthought. Offered completely free and ad-free, GenOffice aims to provide a robust alternative to traditional office software, emphasizing seamless integration of AI capabilities from the ground up.\n\nThe suite operates as five distinct Electron applications sharing a unified engine layer. Its innovative approach to document handling, particularly for Word files, involves parsing top-level elements and only updating modified \"dirty\" blocks upon saving, ensuring original layout integrity and preserving untouched content. Similarly, Sheets builds upon the open-source Univer core with extensive in-house extensions and a Rust sidecar for XLSX, while Slides and PDF tools leverage specialized in-house engines and established libraries like pdf.js. AI functionalities are powered by Genspark credits, with model calls securely proxied service-side.\n\nThis release holds significant implications for developers and researchers. The Apache 2.0 license permits commercial modification and forking, offering a flexible foundation for innovation, particularly for startups and SMBs seeking a cost-free, high-fidelity solution for .docx, .xlsx, and .pptx files. While currently in an alpha stage and requiring a Genspark account for its AI features, GenOffice's modular architecture and commitment to an AI-first editing experience present a compelling platform for future development, customization, and integration into diverse workflows.",
+    "coverImage": "https://www.marktechpost.com/wp-content/uploads/2026/08/high-level-description-a-tech-news-cover_ZCsPPdgeWVyT_N_w-0YNbw_80NcwxTETLOSb0ADNIkbhA_cover_2k-1024x768.png",
     "status": "published",
     "confidenceLevel": "confirmed",
     "externalSources": [
-      "https://techcrunch.com/2026/08/03/after-killer-quarter-palantir-ceo-alex-karp-calls-ai-industry-marxist/"
+      "https://www.marktechpost.com/2026/08/03/genspark-open-sources-genoffice-a-free-ad-free-ai-office-suite-for-macos-and-windows-with-docs-sheets-slides-pdf/"
     ],
     "relatedModels": [],
     "tags": [
       "ai-news",
       "breaking",
-      "techcrunch-ai"
+      "marktechpost"
+    ]
+  },
+  {
+    "id": "evaluating-multimodal-vision-models-with-moonshot-perceptionbench-using-robust-d",
+    "slug": "evaluating-multimodal-vision-models-with-moonshot-perceptionbench-using-robust-d",
+    "title": "Evaluating Multimodal Vision Models with Moonshot PerceptionBench Using Robust Data Loading and Automated Judging",
+    "category": "short-news",
+    "isTrending": true,
+    "publishDate": "2026-08-03",
+    "author": "Modelverse Editorial",
+    "readTime": "2 min read",
+    "excerpt": "In this tutorial, we design an end-to-end evaluation workflow for PerceptionBench. This multimodal benchmark measures fine-grained visual perception capabilities across tasks such ...",
+    "body": "Modelverse is excited to highlight the release of a comprehensive, end-to-end evaluation workflow designed for PerceptionBench, a crucial multimodal benchmark. This new framework empowers developers and researchers to rigorously assess the fine-grained visual perception capabilities of AI models across a diverse set of tasks, including optical character recognition (OCR), object counting, localization, contextual reasoning, comparison, depth understanding, and even hallucination detection. This initiative addresses a critical need in the rapidly evolving field of multimodal AI, providing a standardized and reproducible method to gauge model performance beyond superficial metrics.\n\nThe workflow is engineered for robustness, featuring a resilient multi-stage data loading strategy that handles various image encodings and normalizes diverse dataset examples. It integrates a unified evaluation harness compatible with OpenAI-like APIs, local Hugging Face vision-language models, and even a \"blind-prior\" baseline for foundational comparison. A sophisticated judging system, capable of both rule-based and optional LLM-assisted assessments, extracts and normalizes answers from model outputs, ensuring accurate scoring. Images are intelligently resized and integrated with question text, preserving their contextual relevance.\n\nThis evaluation framework is invaluable for the AI community, offering deep insights into model strengths and weaknesses. It moves beyond a single accuracy score to provide detailed capability profiles, performance across difficulty slices (e.g., multi-image questions, varying resolutions), and comparisons against an included leaderboard. Developers can leverage this to refine models, understand failure modes, and explore the impact of prompt variations or image processing techniques. Researchers gain a flexible, reproducible tool to drive advancements in multimodal AI, fostering a deeper understanding of how models truly \"perceive\" the visual world.",
+    "coverImage": "https://www.marktechpost.com/wp-content/uploads/2026/08/blog6176-7.png",
+    "status": "published",
+    "confidenceLevel": "confirmed",
+    "externalSources": [
+      "https://www.marktechpost.com/2026/08/03/evaluating-multimodal-vision-models-with-moonshot-perceptionbench-using-robust-data-loading-and-automated-judging/"
+    ],
+    "relatedModels": [],
+    "tags": [
+      "ai-news",
+      "breaking",
+      "marktechpost"
+    ]
+  },
+  {
+    "id": "circles-powers-telco-personalization-with-openai-technology",
+    "slug": "circles-powers-telco-personalization-with-openai-technology",
+    "title": "Circles powers telco personalization with OpenAI technology",
+    "category": "short-news",
+    "isTrending": true,
+    "publishDate": "2026-08-03",
+    "author": "Modelverse Editorial",
+    "readTime": "2 min read",
+    "excerpt": "Circles uses the OpenAI API and Codex to power AI-native telco experiences, increasing ARPU by 22%, reducing churn by 9%, and improving development efficiency.",
+    "body": "Circles, a key innovator in telecommunications solutions, has unveiled a strategic integration of OpenAI's API and Codex to deliver what it describes as \"AI-native telco experiences.\" This initiative marks a significant step towards embedding advanced artificial intelligence directly into the core of telecommunication services, aiming to fundamentally transform how providers engage with their customer base. The essence of this deployment is to harness OpenAI's sophisticated language models to craft highly personalized and intelligent interactions, moving beyond generic service offerings to truly individualized customer journeys.\n\nThe underlying technology leverages the OpenAI API for its robust natural language understanding and generation capabilities, enabling more intuitive and contextually aware customer interactions. The incorporation of Codex further suggests an application in automating or assisting with code-related tasks, potentially streamlining the development of new features or personalized service logic. This dual approach allows Circles to not only enhance customer-facing personalization, such as dynamic plan recommendations and proactive support, but also to bolster internal operational efficiency through AI-assisted development.\n\nThis announcement carries substantial weight for developers and researchers within the AI community. It provides a compelling, real-world demonstration of how integrating powerful large language models into traditional industries can yield significant business advantages. Circles reported impressive outcomes, including a 22% increase in Average Revenue Per User (ARPU), a 9% reduction in customer churn, and notable improvements in development efficiency. This case study highlights the immense potential for AI to drive tangible return on investment and revolutionize customer engagement in sectors ripe for digital transformation, offering a clear blueprint for future AI-first strategies.",
+    "coverImage": "/images/news/openai_sol_codex_updates_cover.jpg",
+    "status": "published",
+    "confidenceLevel": "confirmed",
+    "externalSources": [
+      "https://openai.com/index/circles"
+    ],
+    "relatedModels": [],
+    "tags": [
+      "ai-news",
+      "breaking",
+      "openai"
     ]
   }
 ]

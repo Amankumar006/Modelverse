@@ -22,6 +22,28 @@
     ]
   },
   {
+    "id": "genspark-open-sources-genoffice-a-free-ad-free-ai-office-suite-for-macos-and-win",
+    "slug": "genspark-open-sources-genoffice-a-free-ad-free-ai-office-suite-for-macos-and-win",
+    "title": "Genspark Open Sources GenOffice: A Free, Ad-Free AI Office Suite for macOS and Windows with Docs, Sheets, Slides, PDF",
+    "category": "short-news",
+    "publishDate": "2026-08-04",
+    "author": "Modelverse Editorial",
+    "readTime": "2 min read",
+    "excerpt": "Genspark has open sourced GenOffice under the Apache License 2.0. It is an AI-native office suite for macOS and Windows, covering Docs, Sheets, Slides and PDF as five Electron apps...",
+    "coverImage": "https://www.marktechpost.com/wp-content/uploads/2026/08/high-level-description-a-tech-news-cover_ZCsPPdgeWVyT_N_w-0YNbw_80NcwxTETLOSb0ADNIkbhA_cover_2k-1024x768.png",
+    "status": "published",
+    "confidenceLevel": "confirmed",
+    "externalSources": [
+      "https://www.marktechpost.com/2026/08/03/genspark-open-sources-genoffice-a-free-ad-free-ai-office-suite-for-macos-and-windows-with-docs-sheets-slides-pdf/"
+    ],
+    "relatedModels": [],
+    "tags": [
+      "ai-news",
+      "breaking",
+      "marktechpost"
+    ]
+  },
+  {
     "id": "a-marc-benioff-backed-startup-thinks-ai-can-solve-the-ai-deployment-problem",
     "slug": "a-marc-benioff-backed-startup-thinks-ai-can-solve-the-ai-deployment-problem",
     "title": "A Marc Benioff-backed startup thinks AI can solve the AI deployment problem",
@@ -132,6 +154,28 @@
     ]
   },
   {
+    "id": "circles-powers-telco-personalization-with-openai-technology",
+    "slug": "circles-powers-telco-personalization-with-openai-technology",
+    "title": "Circles powers telco personalization with OpenAI technology",
+    "category": "short-news",
+    "publishDate": "2026-08-03",
+    "author": "Modelverse Editorial",
+    "readTime": "2 min read",
+    "excerpt": "Circles uses the OpenAI API and Codex to power AI-native telco experiences, increasing ARPU by 22%, reducing churn by 9%, and improving development efficiency.",
+    "coverImage": "/images/news/openai_sol_codex_updates_cover.jpg",
+    "status": "published",
+    "confidenceLevel": "confirmed",
+    "externalSources": [
+      "https://openai.com/index/circles"
+    ],
+    "relatedModels": [],
+    "tags": [
+      "ai-news",
+      "breaking",
+      "openai"
+    ]
+  },
+  {
     "id": "cogent-ai-team-releases-vr-1-a-frontier-cyber-reasoning-model-that-composes-and-",
     "slug": "cogent-ai-team-releases-vr-1-a-frontier-cyber-reasoning-model-that-composes-and-",
     "title": "Cogent AI Team Releases VR-1: A Frontier Cyber Reasoning Model That Composes and Verifies Enterprise Attack Paths",
@@ -239,6 +283,28 @@
       "ai-news",
       "breaking",
       "techcrunch-ai"
+    ]
+  },
+  {
+    "id": "evaluating-multimodal-vision-models-with-moonshot-perceptionbench-using-robust-d",
+    "slug": "evaluating-multimodal-vision-models-with-moonshot-perceptionbench-using-robust-d",
+    "title": "Evaluating Multimodal Vision Models with Moonshot PerceptionBench Using Robust Data Loading and Automated Judging",
+    "category": "short-news",
+    "publishDate": "2026-08-03",
+    "author": "Modelverse Editorial",
+    "readTime": "2 min read",
+    "excerpt": "In this tutorial, we design an end-to-end evaluation workflow for PerceptionBench. This multimodal benchmark measures fine-grained visual perception capabilities across tasks such ...",
+    "coverImage": "https://www.marktechpost.com/wp-content/uploads/2026/08/blog6176-7.png",
+    "status": "published",
+    "confidenceLevel": "confirmed",
+    "externalSources": [
+      "https://www.marktechpost.com/2026/08/03/evaluating-multimodal-vision-models-with-moonshot-perceptionbench-using-robust-data-loading-and-automated-judging/"
+    ],
+    "relatedModels": [],
+    "tags": [
+      "ai-news",
+      "breaking",
+      "marktechpost"
     ]
   },
   {
