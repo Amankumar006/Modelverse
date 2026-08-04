@@ -44,6 +44,28 @@
     ]
   },
   {
+    "id": "y-combinator-open-sources-qm-an-mit-licensed-multiplayer-agent-harness-that-runs",
+    "slug": "y-combinator-open-sources-qm-an-mit-licensed-multiplayer-agent-harness-that-runs",
+    "title": "Y Combinator Open-Sources QM: An MIT-Licensed Multiplayer Agent Harness That Runs In Slack And The Web",
+    "category": "short-news",
+    "publishDate": "2026-08-04",
+    "author": "Modelverse Editorial",
+    "readTime": "2 min read",
+    "excerpt": "Y Combinator has open-sourced QM, the multiplayer agent harness it uses internally across accounting, legal, events, and engineering. Released July 31, 2026 under an MIT license, Q...",
+    "coverImage": "https://www.marktechpost.com/wp-content/uploads/2026/08/blog6176-8-1024x731.png",
+    "status": "published",
+    "confidenceLevel": "confirmed",
+    "externalSources": [
+      "https://www.marktechpost.com/2026/08/03/y-combinator-open-sources-qm-multiplayer-ai-agent-harness/"
+    ],
+    "relatedModels": [],
+    "tags": [
+      "ai-news",
+      "breaking",
+      "marktechpost"
+    ]
+  },
+  {
     "id": "a-marc-benioff-backed-startup-thinks-ai-can-solve-the-ai-deployment-problem",
     "slug": "a-marc-benioff-backed-startup-thinks-ai-can-solve-the-ai-deployment-problem",
     "title": "A Marc Benioff-backed startup thinks AI can solve the AI deployment problem",
@@ -129,6 +151,28 @@
       "ai-news",
       "breaking",
       "techcrunch-ai"
+    ]
+  },
+  {
+    "id": "apple-is-getting-this-wrong",
+    "slug": "apple-is-getting-this-wrong",
+    "title": "Apple is getting this wrong",
+    "category": "short-news",
+    "publishDate": "2026-08-03",
+    "author": "Modelverse Editorial",
+    "readTime": "2 min read",
+    "excerpt": "OpenAI addresses Apple’s baseless lawsuit, corrects claims about its employees, and shares messages documenting what happened.",
+    "coverImage": "/images/news/news_short.jpg",
+    "status": "published",
+    "confidenceLevel": "confirmed",
+    "externalSources": [
+      "https://openai.com/index/apple-is-getting-this-wrong"
+    ],
+    "relatedModels": [],
+    "tags": [
+      "ai-news",
+      "breaking",
+      "openai"
     ]
   },
   {

@@ -1,20 +1,20 @@
 [
   {
-    "id": "genspark-open-sources-genoffice-a-free-ad-free-ai-office-suite-for-macos-and-win",
-    "slug": "genspark-open-sources-genoffice-a-free-ad-free-ai-office-suite-for-macos-and-win",
-    "title": "Genspark Open Sources GenOffice: A Free, Ad-Free AI Office Suite for macOS and Windows with Docs, Sheets, Slides, PDF",
+    "id": "y-combinator-open-sources-qm-an-mit-licensed-multiplayer-agent-harness-that-runs",
+    "slug": "y-combinator-open-sources-qm-an-mit-licensed-multiplayer-agent-harness-that-runs",
+    "title": "Y Combinator Open-Sources QM: An MIT-Licensed Multiplayer Agent Harness That Runs In Slack And The Web",
     "category": "short-news",
     "isTrending": true,
     "publishDate": "2026-08-04",
     "author": "Modelverse Editorial",
     "readTime": "2 min read",
-    "excerpt": "Genspark has open sourced GenOffice under the Apache License 2.0. It is an AI-native office suite for macOS and Windows, covering Docs, Sheets, Slides and PDF as five Electron apps...",
-    "body": "Genspark has unveiled GenOffice, an open-source, AI-native office suite for macOS and Windows, now freely available under the Apache License 2.0. This comprehensive package includes a word processor, spreadsheet, presentation editor, and PDF tool, all designed with AI editing as a foundational workflow rather than an afterthought. Offered completely free and ad-free, GenOffice aims to provide a robust alternative to traditional office software, emphasizing seamless integration of AI capabilities from the ground up.\n\nThe suite operates as five distinct Electron applications sharing a unified engine layer. Its innovative approach to document handling, particularly for Word files, involves parsing top-level elements and only updating modified \"dirty\" blocks upon saving, ensuring original layout integrity and preserving untouched content. Similarly, Sheets builds upon the open-source Univer core with extensive in-house extensions and a Rust sidecar for XLSX, while Slides and PDF tools leverage specialized in-house engines and established libraries like pdf.js. AI functionalities are powered by Genspark credits, with model calls securely proxied service-side.\n\nThis release holds significant implications for developers and researchers. The Apache 2.0 license permits commercial modification and forking, offering a flexible foundation for innovation, particularly for startups and SMBs seeking a cost-free, high-fidelity solution for .docx, .xlsx, and .pptx files. While currently in an alpha stage and requiring a Genspark account for its AI features, GenOffice's modular architecture and commitment to an AI-first editing experience present a compelling platform for future development, customization, and integration into diverse workflows.",
-    "coverImage": "https://www.marktechpost.com/wp-content/uploads/2026/08/high-level-description-a-tech-news-cover_ZCsPPdgeWVyT_N_w-0YNbw_80NcwxTETLOSb0ADNIkbhA_cover_2k-1024x768.png",
+    "excerpt": "Y Combinator has open-sourced QM, the multiplayer agent harness it uses internally across accounting, legal, events, and engineering. Released July 31, 2026 under an MIT license, Q...",
+    "body": "Y Combinator has open-sourced QM (Quartermaster), an MIT-licensed multi-agent harness designed to facilitate collaborative work within organizations. Unlike traditional personal AI assistants, QM operates as a \"multiplayer\" system, running across Slack and the web to support diverse internal functions from accounting and legal to events and engineering. YC itself leverages QM internally, framing its public release as an early-stage experiment.\n\nQM's architecture is built on the principle of isolated workspaces, providing each employee and collaborative room with its own scoped memory, files, permissions, and a durable sandbox. A central headless core manages APIs, identity, policy, and scheduling, driving an agent loop that interacts with a small, fixed tool surface. Crucially, one of these tools is an `execute` function, allowing commands to run within each scope's isolated sandbox. This design makes QM harness-agnostic, meaning it can be driven by various large language models like Pi, OpenCode, or Claude Code, without tying deployments to a single vendor.\n\nThis release is significant for developers and researchers seeking to implement sophisticated AI solutions in organizational settings. QM offers a robust framework for multi-agent collaboration, moving beyond the limitations of single-user assistants. It's deployable today for startups and mid-sized companies (10-500 people) comfortable with cloud infrastructure, allowing organizations to maintain full ownership and control within their own cloud accounts. Its flexibility in integrating different LLMs and providing secure, isolated environments makes it a powerful tool for building custom internal AI applications across various industries, from professional services to B2B SaaS internal tooling.",
+    "coverImage": "https://www.marktechpost.com/wp-content/uploads/2026/08/blog6176-8-1024x731.png",
     "status": "published",
     "confidenceLevel": "confirmed",
     "externalSources": [
-      "https://www.marktechpost.com/2026/08/03/genspark-open-sources-genoffice-a-free-ad-free-ai-office-suite-for-macos-and-windows-with-docs-sheets-slides-pdf/"
+      "https://www.marktechpost.com/2026/08/03/y-combinator-open-sources-qm-multiplayer-ai-agent-harness/"
     ],
     "relatedModels": [],
     "tags": [
@@ -24,45 +24,21 @@
     ]
   },
   {
-    "id": "evaluating-multimodal-vision-models-with-moonshot-perceptionbench-using-robust-d",
-    "slug": "evaluating-multimodal-vision-models-with-moonshot-perceptionbench-using-robust-d",
-    "title": "Evaluating Multimodal Vision Models with Moonshot PerceptionBench Using Robust Data Loading and Automated Judging",
+    "id": "apple-is-getting-this-wrong",
+    "slug": "apple-is-getting-this-wrong",
+    "title": "Apple is getting this wrong",
     "category": "short-news",
     "isTrending": true,
     "publishDate": "2026-08-03",
     "author": "Modelverse Editorial",
     "readTime": "2 min read",
-    "excerpt": "In this tutorial, we design an end-to-end evaluation workflow for PerceptionBench. This multimodal benchmark measures fine-grained visual perception capabilities across tasks such ...",
-    "body": "Modelverse is excited to highlight the release of a comprehensive, end-to-end evaluation workflow designed for PerceptionBench, a crucial multimodal benchmark. This new framework empowers developers and researchers to rigorously assess the fine-grained visual perception capabilities of AI models across a diverse set of tasks, including optical character recognition (OCR), object counting, localization, contextual reasoning, comparison, depth understanding, and even hallucination detection. This initiative addresses a critical need in the rapidly evolving field of multimodal AI, providing a standardized and reproducible method to gauge model performance beyond superficial metrics.\n\nThe workflow is engineered for robustness, featuring a resilient multi-stage data loading strategy that handles various image encodings and normalizes diverse dataset examples. It integrates a unified evaluation harness compatible with OpenAI-like APIs, local Hugging Face vision-language models, and even a \"blind-prior\" baseline for foundational comparison. A sophisticated judging system, capable of both rule-based and optional LLM-assisted assessments, extracts and normalizes answers from model outputs, ensuring accurate scoring. Images are intelligently resized and integrated with question text, preserving their contextual relevance.\n\nThis evaluation framework is invaluable for the AI community, offering deep insights into model strengths and weaknesses. It moves beyond a single accuracy score to provide detailed capability profiles, performance across difficulty slices (e.g., multi-image questions, varying resolutions), and comparisons against an included leaderboard. Developers can leverage this to refine models, understand failure modes, and explore the impact of prompt variations or image processing techniques. Researchers gain a flexible, reproducible tool to drive advancements in multimodal AI, fostering a deeper understanding of how models truly \"perceive\" the visual world.",
-    "coverImage": "https://www.marktechpost.com/wp-content/uploads/2026/08/blog6176-7.png",
+    "excerpt": "OpenAI addresses Apple’s baseless lawsuit, corrects claims about its employees, and shares messages documenting what happened.",
+    "body": "## Apple is getting this wrong\n\nOpenAI has issued a robust public response to a lawsuit initiated by Apple, firmly stating that the claims made against it are \"baseless.\" The AI research powerhouse is actively challenging Apple's allegations, particularly those pertaining to its employees. To substantiate its position and offer a counter-narrative, OpenAI has also released internal communications and messages, aiming to document the sequence of events and directly refute Apple's assertions. This public rebuttal signals a significant escalation in what appears to be a burgeoning legal confrontation between two major entities in the technology and artificial intelligence landscapes.\n\nWhile this announcement does not detail the operational mechanics of AI models or unveil new technological advancements, it provides a crucial glimpse into the complex and often competitive corporate environment within the high-stakes AI sector. The core of this dispute, as indicated by OpenAI's counter-statement, centers on legal claims and employee-related issues rather than the intricacies of AI technology itself. Nevertheless, such high-profile legal battles can indirectly illuminate broader industry trends concerning talent acquisition, competitive strategies, and the safeguarding of intellectual assets in a rapidly evolving technological domain.\n\nFor developers and researchers, this unfolding legal drama is particularly relevant as it underscores the intense competition for top-tier AI talent and the potential for disputes over personnel and corporate conduct. It highlights the intricate legal and ethical frameworks that increasingly accompany rapid technological progress, influencing how companies collaborate, compete, and manage their workforce. Such prominent disagreements can shape future industry standards, impact potential partnerships, and ultimately affect the broader ecosystem in which AI innovation is fostered or challenged.",
+    "coverImage": "/images/news/news_short.jpg",
     "status": "published",
     "confidenceLevel": "confirmed",
     "externalSources": [
-      "https://www.marktechpost.com/2026/08/03/evaluating-multimodal-vision-models-with-moonshot-perceptionbench-using-robust-data-loading-and-automated-judging/"
-    ],
-    "relatedModels": [],
-    "tags": [
-      "ai-news",
-      "breaking",
-      "marktechpost"
-    ]
-  },
-  {
-    "id": "circles-powers-telco-personalization-with-openai-technology",
-    "slug": "circles-powers-telco-personalization-with-openai-technology",
-    "title": "Circles powers telco personalization with OpenAI technology",
-    "category": "short-news",
-    "isTrending": true,
-    "publishDate": "2026-08-03",
-    "author": "Modelverse Editorial",
-    "readTime": "2 min read",
-    "excerpt": "Circles uses the OpenAI API and Codex to power AI-native telco experiences, increasing ARPU by 22%, reducing churn by 9%, and improving development efficiency.",
-    "body": "Circles, a key innovator in telecommunications solutions, has unveiled a strategic integration of OpenAI's API and Codex to deliver what it describes as \"AI-native telco experiences.\" This initiative marks a significant step towards embedding advanced artificial intelligence directly into the core of telecommunication services, aiming to fundamentally transform how providers engage with their customer base. The essence of this deployment is to harness OpenAI's sophisticated language models to craft highly personalized and intelligent interactions, moving beyond generic service offerings to truly individualized customer journeys.\n\nThe underlying technology leverages the OpenAI API for its robust natural language understanding and generation capabilities, enabling more intuitive and contextually aware customer interactions. The incorporation of Codex further suggests an application in automating or assisting with code-related tasks, potentially streamlining the development of new features or personalized service logic. This dual approach allows Circles to not only enhance customer-facing personalization, such as dynamic plan recommendations and proactive support, but also to bolster internal operational efficiency through AI-assisted development.\n\nThis announcement carries substantial weight for developers and researchers within the AI community. It provides a compelling, real-world demonstration of how integrating powerful large language models into traditional industries can yield significant business advantages. Circles reported impressive outcomes, including a 22% increase in Average Revenue Per User (ARPU), a 9% reduction in customer churn, and notable improvements in development efficiency. This case study highlights the immense potential for AI to drive tangible return on investment and revolutionize customer engagement in sectors ripe for digital transformation, offering a clear blueprint for future AI-first strategies.",
-    "coverImage": "/images/news/openai_sol_codex_updates_cover.jpg",
-    "status": "published",
-    "confidenceLevel": "confirmed",
-    "externalSources": [
-      "https://openai.com/index/circles"
+      "https://openai.com/index/apple-is-getting-this-wrong"
     ],
     "relatedModels": [],
     "tags": [
