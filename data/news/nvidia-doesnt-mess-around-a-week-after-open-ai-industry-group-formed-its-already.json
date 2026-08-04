@@ -1,0 +1,24 @@
+{
+  "id": "nvidia-doesnt-mess-around-a-week-after-open-ai-industry-group-formed-its-already",
+  "slug": "nvidia-doesnt-mess-around-a-week-after-open-ai-industry-group-formed-its-already",
+  "title": "Nvidia doesn't mess around: A week after open AI industry group formed, it's already showing progress",
+  "category": "short-news",
+  "isTrending": true,
+  "publishDate": "2026-08-04",
+  "author": "Modelverse Editorial",
+  "readTime": "2 min read",
+  "excerpt": "The week-old Open Secure AI Alliance, spearheaded by Nvidia and grown to over 120 companies, already has proposals out for defending against AI agents.",
+  "body": "## Introduction to OSAA Progress\nThe Open Secure AI Alliance (OSAA), led by Nvidia, has made significant strides in its first week. With over 120 member companies, the alliance has established a working group called the Shared AI Findings Exchange (SAFE). This group aims to facilitate the sharing of information and best practices for securing AI systems.\n\n## Technology and Collaboration\nThe SAFE working group has proposed guidelines for confidentially reporting AI cybersecurity incidents, alerting affected parties, and conducting blame-free analysis. Members of the OSAA are contributing to and cataloging open-source technologies that can help secure AI agents and defend against rogue AI attackers. Companies like Nvidia, Okta, Red Hat, and Amazon are sharing their expertise and resources, including open models, vulnerability scanners, and agent governance tools.\n\n## Impact and Future Directions\nThe OSAA's progress is significant, with many major companies on board, including Adobe, Cisco, Intel, and Microsoft. However, notable absences include Anthropic, OpenAI, and Google, despite their initial support for open-source AI efforts. As the alliance continues to build momentum, it may encourage more companies to join and contribute to the development of open-source solutions for securing AI systems.",
+  "coverImage": "https://techcrunch.com/wp-content/uploads/2026/01/jensen-ces-2026-getty.jpg?resize=1200,800",
+  "status": "published",
+  "confidenceLevel": "confirmed",
+  "externalSources": [
+    "https://techcrunch.com/2026/08/04/nvidia-doesnt-mess-around-a-week-after-open-ai-industry-group-formed-its-already-showing-progress/"
+  ],
+  "relatedModels": [],
+  "tags": [
+    "ai-news",
+    "breaking",
+    "techcrunch-ai"
+  ]
+}

@@ -1,26 +1,122 @@
 [
   {
-    "id": "cursor-open-sources-mixture-of-kittens-mok-a-deterministic-moe-training-megakern",
-    "slug": "cursor-open-sources-mixture-of-kittens-mok-a-deterministic-moe-training-megakern",
-    "title": "Cursor Open-Sources Mixture-of-Kittens (MoK): A Deterministic MoE Training Megakernel for GB300 NVL72 Racks",
+    "id": "open-weight-ai-models-are-catching-up-to-the-frontier-the-safety-gap-remains",
+    "slug": "open-weight-ai-models-are-catching-up-to-the-frontier-the-safety-gap-remains",
+    "title": "Open-weight AI models are catching up to the frontier. The safety gap remains.",
     "category": "short-news",
     "isTrending": true,
     "publishDate": "2026-08-04",
     "author": "Modelverse Editorial",
     "readTime": "2 min read",
-    "excerpt": "Cursor Research has open-sourced Mixture-of-Kittens (MoK), the MoE training megakernel behind its Composer models. MoK fuses all mixture-of-experts communication and computation in...",
-    "body": "Cursor Research has unveiled and open-sourced Mixture-of-Kittens (MoK), a groundbreaking mixture-of-experts (MoE) training megakernel that powers their Composer models. This release is significant for its reported performance, achieving up to 2.37 times higher throughput compared to existing public baselines, a testament to its efficiency in handling the complex demands of MoE architectures. MoK is now available on GitHub under the Apache-2.0 license, marking a crucial contribution to the AI community.\n\nAt its core, MoK revolutionizes MoE training by fusing every communication and computation step into a single, deterministic kernel. This innovative approach is specifically engineered for high-end NVIDIA Blackwell SM100 or SM103 GPUs, requiring GB200 or GB300 NVL72 racks. By leveraging Blackwell's Cluster Launch Control and PyTorch symmetric memory for inter-GPU buffers, MoK aggressively minimizes CPU-GPU synchronization, a critical bottleneck in previous MoE training setups. This design choice directly addresses the challenge of communication overhead, which can consume over half of the end-to-end training time for MoE layers.\n\nMoK's release is particularly impactful for developers and researchers operating at the cutting edge of AI. While its hardware requirements limit adoption to organizations with substantial NVL72 capacity—such as frontier labs, GPU neoclouds, and national computing centers—it offers immense value for pretraining and post-training DeepSeek-V3-style MoE models. Its deterministic nature also makes it invaluable for on-policy reinforcement learning post-training and rigorous internal ablations, enabling more reliable and reproducible research. This megakernel represents a significant leap in optimizing large-scale MoE model development, pushing the boundaries of what's possible in high-performance AI training.",
-    "coverImage": "https://www.marktechpost.com/wp-content/uploads/2026/08/blog6176-10.png",
+    "excerpt": "A new SaferAI report finds Z.ai's open-weight GLM-5.2 approaches frontier AI capabilities while lacking key safety mitigations, renewing concerns that powerful open models could ou...",
+    "body": "A recent report from AI safety nonprofit SaferAI highlights a significant development in the AI landscape: Z.ai's GLM-5.2, an open-weight model from China, is rapidly closing the capability gap with leading frontier AI systems like OpenAI's GPT-5.5 and Anthropic's Claude Opus 4.7. While this signals impressive progress in open-source AI, the evaluation reveals a stark and growing disparity between these advanced capabilities and the implementation of robust safety practices, particularly concerning dangerous cyber and biological applications.\n\nSaferAI's assessment, conducted via Z.ai's public API, found that GLM-5.2 refused none of the offensive cyber or dual-use biology tasks it was given, a stark contrast to Claude Opus 4.7, which consistently refused such prompts, making it impossible to complete benchmarks like CyberGym. The fundamental challenge with open-weight models is that once their weights are downloaded, any safety measures applied by the developer become unenforceable. Users can easily remove or modify safeguards, fine-tune models, or alter system prompts, effectively bypassing intended protections. While frontier models also employ safeguards like classifiers and refusal training, even these are not foolproof, with research from Far.ai demonstrating the existence of \"universal jailbreaks\" that bypass defenses on leading systems.\n\nThis rapid convergence of open-weight model capabilities with frontier systems presents a critical challenge for developers and researchers. It shifts the focus from whether these models can compete to how society can effectively manage the inherent risks once powerful AI is widely distributed without robust, enforceable safety mechanisms. The situation underscores the urgent need to prioritize safety mitigations alongside capability advancements, emphasizing that the \"frontier of capability is not the frontier of risk\" and demanding a comprehensive approach to assessing and managing the societal implications of increasingly accessible, highly capable AI.",
+    "coverImage": "https://techcrunch.com/wp-content/uploads/2026/08/Z.ai-GLM-5.2-chat.png?resize=1200,576",
     "status": "published",
     "confidenceLevel": "confirmed",
     "externalSources": [
-      "https://www.marktechpost.com/2026/08/04/cursor-open-sources-mixture-of-kittens-mok-a-deterministic-moe-training-megakernel-for-gb300-nvl72-racks/"
+      "https://techcrunch.com/2026/08/04/open-weight-ai-models-are-catching-up-to-the-frontier-the-safety-gap-remains/"
     ],
     "relatedModels": [],
     "tags": [
       "ai-news",
       "breaking",
-      "marktechpost"
+      "techcrunch-ai"
+    ]
+  },
+  {
+    "id": "anthropic-signs-10b-deal-with-ai-cloud-startup-volta",
+    "slug": "anthropic-signs-10b-deal-with-ai-cloud-startup-volta",
+    "title": "Anthropic signs $10B deal with AI cloud startup Volta",
+    "category": "short-news",
+    "isTrending": true,
+    "publishDate": "2026-08-04",
+    "author": "Modelverse Editorial",
+    "readTime": "2 min read",
+    "excerpt": "Anthropic has been on a cloud partnership spree in recent months, and its latest move is reportedly a $10 billion deal with AI cloud startup Volta.",
+    "body": "Anthropic, a prominent AI research firm, has reportedly secured a significant $10 billion, six-year deal with AI cloud startup Volta. This strategic alliance is designed to substantially expand Anthropic's computational resources, crucial for the ongoing development and scaling of its advanced AI models, including Claude. To meet this demand, Volta is partnering with Bitdeer, a crypto-mining company, to construct a dedicated 133-megawatt data center in Norway, ensuring a robust and long-term supply of compute power.\n\nThe technological backbone of this expansive infrastructure will be Nvidia's cutting-edge Vera Rubin systems, leveraging Volta's position within Nvidia's Cloud Partner program. This collaboration guarantees Anthropic access to state-of-the-art GPU technology, providing the immense processing capabilities essential for training increasingly complex large language models and fostering future AI breakthroughs. This move highlights the critical importance of securing dedicated, high-performance compute resources in today's fiercely competitive AI landscape.\n\nFor developers and researchers, this agreement underscores the intense \"compute race\" currently defining the AI industry. It signals Anthropic's proactive approach to acquiring the foundational infrastructure needed to push the boundaries of AI capabilities, ensuring they can continue to deliver more powerful and sophisticated models. Such substantial, long-term compute commitments are vital for sustained research and development, enabling the breakthroughs that will ultimately benefit the broader AI ecosystem by providing more advanced tools and platforms for innovation.",
+    "coverImage": "https://techcrunch.com/wp-content/uploads/2026/06/Claude-photo.jpg?w=1024",
+    "status": "published",
+    "confidenceLevel": "confirmed",
+    "externalSources": [
+      "https://techcrunch.com/2026/08/04/anthropic-signs-10-billion-deal-with-ai-cloud-startup-volta/"
+    ],
+    "relatedModels": [],
+    "tags": [
+      "ai-news",
+      "breaking",
+      "techcrunch-ai"
+    ]
+  },
+  {
+    "id": "meet-wrinkles-an-app-that-uncovers-the-hidden-stories-of-the-places-around-you",
+    "slug": "meet-wrinkles-an-app-that-uncovers-the-hidden-stories-of-the-places-around-you",
+    "title": "Meet Wrinkles, an app that uncovers the hidden stories of the places around you",
+    "category": "short-news",
+    "isTrending": true,
+    "publishDate": "2026-08-04",
+    "author": "Modelverse Editorial",
+    "readTime": "2 min read",
+    "excerpt": "Wrinkles, available on both iOS and Android, essentially acts as an AI-powered audio tour guide that reveals hidden history and local stories.",
+    "body": "## Wrinkles: Your AI-Powered Audio Guide to Unseen Histories\n\nModelverse is excited to spotlight Wrinkles, an innovative new app now available on iOS and Android, designed to transform how we experience the world around us. Conceived by founders David Stemler and Ryan Hansan, Wrinkles acts as an AI-powered audio tour guide, automatically surfacing compelling stories, hidden histories, and local lore based on your precise location. The app's core vision is to allow users to immerse themselves in their surroundings, bringing places to life through sound without the need to constantly look at a screen, addressing a common frustration with traditional digital guides.\n\nAt its heart, Wrinkles leverages location-aware AI to deliver contextual audio narratives. The platform boasts a foundational library of 1.3 million \"Wrinkles\" or points of interest, spanning 177 countries, providing a rich global tapestry of information. Beyond this extensive base, the technology allows historians, museums, independent creators, and brands to contribute their own unique stories and experiences, enriching the map further. Users can engage with these narratives either by physically exploring locations or by remotely browsing the map. A key interactive feature enables users to ask follow-up questions, like \"Where does this water actually come from?\" when learning about a landmark, making the experience dynamic and personalized.\n\nFor developers and researchers, Wrinkles presents a compelling case study in ambient AI and location-based intelligence. It demonstrates a practical application of AI for contextual content delivery and natural language understanding in real-world scenarios, moving beyond screen-centric interactions. The platform's open content contribution model also highlights the potential for AI to democratize and scale immersive storytelling, inviting collaboration from diverse creators. This approach could inspire further innovation in augmented audio experiences, smart city applications, and AI-driven platforms that enhance our physical interactions with the environment.",
+    "coverImage": "https://techcrunch.com/wp-content/uploads/2026/08/Great-British-Image.png?resize=1200,675",
+    "status": "published",
+    "confidenceLevel": "confirmed",
+    "externalSources": [
+      "https://techcrunch.com/2026/08/04/meet-wrinkles-an-ai-app-that-uncovers-the-hidden-stories-of-the-places-around-you/"
+    ],
+    "relatedModels": [],
+    "tags": [
+      "ai-news",
+      "breaking",
+      "techcrunch-ai"
+    ]
+  },
+  {
+    "id": "nvidia-doesnt-mess-around-a-week-after-open-ai-industry-group-formed-its-already",
+    "slug": "nvidia-doesnt-mess-around-a-week-after-open-ai-industry-group-formed-its-already",
+    "title": "Nvidia doesn't mess around: A week after open AI industry group formed, it's already showing progress",
+    "category": "short-news",
+    "isTrending": true,
+    "publishDate": "2026-08-04",
+    "author": "Modelverse Editorial",
+    "readTime": "2 min read",
+    "excerpt": "The week-old Open Secure AI Alliance, spearheaded by Nvidia and grown to over 120 companies, already has proposals out for defending against AI agents.",
+    "body": "## Introduction to OSAA Progress\nThe Open Secure AI Alliance (OSAA), led by Nvidia, has made significant strides in its first week. With over 120 member companies, the alliance has established a working group called the Shared AI Findings Exchange (SAFE). This group aims to facilitate the sharing of information and best practices for securing AI systems.\n\n## Technology and Collaboration\nThe SAFE working group has proposed guidelines for confidentially reporting AI cybersecurity incidents, alerting affected parties, and conducting blame-free analysis. Members of the OSAA are contributing to and cataloging open-source technologies that can help secure AI agents and defend against rogue AI attackers. Companies like Nvidia, Okta, Red Hat, and Amazon are sharing their expertise and resources, including open models, vulnerability scanners, and agent governance tools.\n\n## Impact and Future Directions\nThe OSAA's progress is significant, with many major companies on board, including Adobe, Cisco, Intel, and Microsoft. However, notable absences include Anthropic, OpenAI, and Google, despite their initial support for open-source AI efforts. As the alliance continues to build momentum, it may encourage more companies to join and contribute to the development of open-source solutions for securing AI systems.",
+    "coverImage": "https://techcrunch.com/wp-content/uploads/2026/01/jensen-ces-2026-getty.jpg?resize=1200,800",
+    "status": "published",
+    "confidenceLevel": "confirmed",
+    "externalSources": [
+      "https://techcrunch.com/2026/08/04/nvidia-doesnt-mess-around-a-week-after-open-ai-industry-group-formed-its-already-showing-progress/"
+    ],
+    "relatedModels": [],
+    "tags": [
+      "ai-news",
+      "breaking",
+      "techcrunch-ai"
+    ]
+  },
+  {
+    "id": "third-party-cyber-evaluations-involving-openai-models",
+    "slug": "third-party-cyber-evaluations-involving-openai-models",
+    "title": "Third-party cyber evaluations involving OpenAI models",
+    "category": "short-news",
+    "isTrending": true,
+    "publishDate": "2026-08-04",
+    "author": "Modelverse Editorial",
+    "readTime": "2 min read",
+    "excerpt": "OpenAI explains recent third-party cybersecurity evaluation incidents and outlines new safeguards to strengthen AI model testing and evaluation.",
+    "body": "### Enhanced Security for AI Models\nOpenAI has recently addressed concerns surrounding third-party cybersecurity evaluations involving their models. The company has outlined new measures to bolster the testing and evaluation of their AI models, ensuring a more secure experience for users. This move aims to strengthen the overall security posture of OpenAI's models, providing an additional layer of protection against potential threats.\n\n### Strengthening Model Testing\nThe new safeguards introduced by OpenAI are designed to enhance the testing and evaluation process for their AI models. By implementing these measures, the company can better identify and mitigate potential security risks associated with third-party evaluations. This proactive approach demonstrates OpenAI's commitment to prioritizing the security and integrity of their models, ultimately benefiting developers and researchers who rely on these technologies.\n\n### Impact on Developers and Researchers\nThe introduction of these new safeguards is significant for developers and researchers, as it provides them with a more secure foundation for building and testing AI-powered applications. By minimizing the risk of security breaches and data compromises, OpenAI's enhanced testing and evaluation protocols can foster a more trustworthy and collaborative environment for innovation, driving further advancements in the field of artificial intelligence.",
+    "coverImage": "/images/news/news_short.jpg",
+    "status": "published",
+    "confidenceLevel": "confirmed",
+    "externalSources": [
+      "https://openai.com/index/third-party-cyber-evaluations-involving-openai-models"
+    ],
+    "relatedModels": [],
+    "tags": [
+      "ai-news",
+      "breaking",
+      "openai"
     ]
   }
 ]

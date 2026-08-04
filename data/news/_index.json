@@ -22,6 +22,28 @@
     ]
   },
   {
+    "id": "anthropic-signs-10b-deal-with-ai-cloud-startup-volta",
+    "slug": "anthropic-signs-10b-deal-with-ai-cloud-startup-volta",
+    "title": "Anthropic signs $10B deal with AI cloud startup Volta",
+    "category": "short-news",
+    "publishDate": "2026-08-04",
+    "author": "Modelverse Editorial",
+    "readTime": "2 min read",
+    "excerpt": "Anthropic has been on a cloud partnership spree in recent months, and its latest move is reportedly a $10 billion deal with AI cloud startup Volta.",
+    "coverImage": "https://techcrunch.com/wp-content/uploads/2026/06/Claude-photo.jpg?w=1024",
+    "status": "published",
+    "confidenceLevel": "confirmed",
+    "externalSources": [
+      "https://techcrunch.com/2026/08/04/anthropic-signs-10-billion-deal-with-ai-cloud-startup-volta/"
+    ],
+    "relatedModels": [],
+    "tags": [
+      "ai-news",
+      "breaking",
+      "techcrunch-ai"
+    ]
+  },
+  {
     "id": "apple-says-more-ex-employees-may-have-taken-confidential-data-to-openai",
     "slug": "apple-says-more-ex-employees-may-have-taken-confidential-data-to-openai",
     "title": "Apple says more ex-employees may have taken confidential data to OpenAI",
@@ -242,6 +264,28 @@
     ]
   },
   {
+    "id": "meet-wrinkles-an-app-that-uncovers-the-hidden-stories-of-the-places-around-you",
+    "slug": "meet-wrinkles-an-app-that-uncovers-the-hidden-stories-of-the-places-around-you",
+    "title": "Meet Wrinkles, an app that uncovers the hidden stories of the places around you",
+    "category": "short-news",
+    "publishDate": "2026-08-04",
+    "author": "Modelverse Editorial",
+    "readTime": "2 min read",
+    "excerpt": "Wrinkles, available on both iOS and Android, essentially acts as an AI-powered audio tour guide that reveals hidden history and local stories.",
+    "coverImage": "https://techcrunch.com/wp-content/uploads/2026/08/Great-British-Image.png?resize=1200,675",
+    "status": "published",
+    "confidenceLevel": "confirmed",
+    "externalSources": [
+      "https://techcrunch.com/2026/08/04/meet-wrinkles-an-ai-app-that-uncovers-the-hidden-stories-of-the-places-around-you/"
+    ],
+    "relatedModels": [],
+    "tags": [
+      "ai-news",
+      "breaking",
+      "techcrunch-ai"
+    ]
+  },
+  {
     "id": "new-ways-to-learn-and-teach-with-chatgpt-work-and-codex",
     "slug": "new-ways-to-learn-and-teach-with-chatgpt-work-and-codex",
     "title": "New ways to learn and teach with ChatGPT Work and Codex",
@@ -286,6 +330,28 @@
     ]
   },
   {
+    "id": "nvidia-doesnt-mess-around-a-week-after-open-ai-industry-group-formed-its-already",
+    "slug": "nvidia-doesnt-mess-around-a-week-after-open-ai-industry-group-formed-its-already",
+    "title": "Nvidia doesn't mess around: A week after open AI industry group formed, it's already showing progress",
+    "category": "short-news",
+    "publishDate": "2026-08-04",
+    "author": "Modelverse Editorial",
+    "readTime": "2 min read",
+    "excerpt": "The week-old Open Secure AI Alliance, spearheaded by Nvidia and grown to over 120 companies, already has proposals out for defending against AI agents.",
+    "coverImage": "https://techcrunch.com/wp-content/uploads/2026/01/jensen-ces-2026-getty.jpg?resize=1200,800",
+    "status": "published",
+    "confidenceLevel": "confirmed",
+    "externalSources": [
+      "https://techcrunch.com/2026/08/04/nvidia-doesnt-mess-around-a-week-after-open-ai-industry-group-formed-its-already-showing-progress/"
+    ],
+    "relatedModels": [],
+    "tags": [
+      "ai-news",
+      "breaking",
+      "techcrunch-ai"
+    ]
+  },
+  {
     "id": "nvidia-joins-nsf-state-and-regional-ai-hubs-program-to-expand-ai-research-and-ed",
     "slug": "nvidia-joins-nsf-state-and-regional-ai-hubs-program-to-expand-ai-research-and-ed",
     "title": "NVIDIA Joins NSF State and Regional AI Hubs Program to Expand AI Research and Education Across the US",
@@ -305,6 +371,28 @@
       "ai-news",
       "breaking",
       "nvidia"
+    ]
+  },
+  {
+    "id": "open-weight-ai-models-are-catching-up-to-the-frontier-the-safety-gap-remains",
+    "slug": "open-weight-ai-models-are-catching-up-to-the-frontier-the-safety-gap-remains",
+    "title": "Open-weight AI models are catching up to the frontier. The safety gap remains.",
+    "category": "short-news",
+    "publishDate": "2026-08-04",
+    "author": "Modelverse Editorial",
+    "readTime": "2 min read",
+    "excerpt": "A new SaferAI report finds Z.ai's open-weight GLM-5.2 approaches frontier AI capabilities while lacking key safety mitigations, renewing concerns that powerful open models could ou...",
+    "coverImage": "https://techcrunch.com/wp-content/uploads/2026/08/Z.ai-GLM-5.2-chat.png?resize=1200,576",
+    "status": "published",
+    "confidenceLevel": "confirmed",
+    "externalSources": [
+      "https://techcrunch.com/2026/08/04/open-weight-ai-models-are-catching-up-to-the-frontier-the-safety-gap-remains/"
+    ],
+    "relatedModels": [],
+    "tags": [
+      "ai-news",
+      "breaking",
+      "techcrunch-ai"
     ]
   },
   {
@@ -371,6 +459,28 @@
       "ai-news",
       "breaking",
       "techcrunch-ai"
+    ]
+  },
+  {
+    "id": "third-party-cyber-evaluations-involving-openai-models",
+    "slug": "third-party-cyber-evaluations-involving-openai-models",
+    "title": "Third-party cyber evaluations involving OpenAI models",
+    "category": "short-news",
+    "publishDate": "2026-08-04",
+    "author": "Modelverse Editorial",
+    "readTime": "2 min read",
+    "excerpt": "OpenAI explains recent third-party cybersecurity evaluation incidents and outlines new safeguards to strengthen AI model testing and evaluation.",
+    "coverImage": "/images/news/news_short.jpg",
+    "status": "published",
+    "confidenceLevel": "confirmed",
+    "externalSources": [
+      "https://openai.com/index/third-party-cyber-evaluations-involving-openai-models"
+    ],
+    "relatedModels": [],
+    "tags": [
+      "ai-news",
+      "breaking",
+      "openai"
     ]
   },
   {
