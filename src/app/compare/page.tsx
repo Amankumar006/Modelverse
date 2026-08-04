@@ -3,13 +3,62 @@ import { getAllModelEntries, getModelBySlug, SITE_URL } from "@/lib/models";
 import Navbar from "@/components/layout/Navbar";
 import CompareClient from "@/components/models/CompareClient";
 
-export const metadata: Metadata = {
-  title: "Compare AI Models — Modelverse",
-  description: "Compare AI models side-by-side. Analyze parameters, context windows, benchmarks, and licensing to find the best model for your use case.",
-  alternates: {
-    canonical: `${SITE_URL}/compare`,
-  },
-};
+export async function generateMetadata({
+  searchParams,
+}: {
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
+}): Promise<Metadata> {
+  const resolvedParams = await searchParams;
+  const modelsQuery = resolvedParams.models;
+  
+  let slugs: string[] = [];
+  if (typeof modelsQuery === "string") {
+    slugs = modelsQuery.split(",").map((s) => s.trim());
+  } else if (Array.isArray(modelsQuery)) {
+    slugs = modelsQuery.flatMap((s) => s.split(",").map(val => val.trim()));
+  }
+
+  slugs = Array.from(new Set(slugs)).filter(Boolean).slice(0, 4);
+
+  const selectedModels = slugs
+    .map((slug) => getModelBySlug(slug))
+    .filter((model): model is NonNullable<typeof model> => model !== null);
+
+  if (selectedModels.length > 0) {
+    const names = selectedModels.map(m => m.name).join(" vs ");
+    const title = `Compare ${names} — Modelverse`;
+    const description = `Compare ${names} side-by-side. Analyze parameters, context windows, benchmarks, and licensing to find the best model for your use case.`;
+    const url = `${SITE_URL}/compare?models=${slugs.join(",")}`;
+
+    return {
+      title,
+      description,
+      alternates: {
+        canonical: url,
+      },
+      openGraph: {
+        title,
+        description,
+        url,
+        type: "website",
+        siteName: "Modelverse",
+      },
+      twitter: {
+        card: "summary_large_image",
+        title,
+        description,
+      },
+    };
+  }
+
+  return {
+    title: "Compare AI Models — Modelverse",
+    description: "Compare AI models side-by-side. Analyze parameters, context windows, benchmarks, and licensing to find the best model for your use case.",
+    alternates: {
+      canonical: `${SITE_URL}/compare`,
+    },
+  };
+}
 
 interface PageProps {
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>;

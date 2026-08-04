@@ -36,17 +36,24 @@ export async function generateMetadata({
     };
   }
 
-  const title = `${model.name} Overview — Modelverse Docs`;
+  let distinguishingFact = model.primaryTask;
+  if (typeof model.parameters === "string" && model.parameters !== "Unknown") {
+    distinguishingFact = `${model.parameters} Parameters`;
+  }
+
+  const title = `${model.name} by ${model.developer} — ${distinguishingFact}`;
   const description =
     model.description.length > 155
       ? `${model.description.slice(0, 152)}...`
       : model.description;
 
+  const canonicalSlug = model.baseModel || model.slug;
+
   return {
     title,
     description,
     alternates: {
-      canonical: `${SITE_URL}/models/${model.slug}`,
+      canonical: `${SITE_URL}/models/${canonicalSlug}`,
     },
     openGraph: {
       title,
@@ -109,6 +116,10 @@ export default async function ModelDetailPage({
     .slice(0, 4);
 
   // Structured JSON-LD
+  const parametersText = typeof model.parameters === "string" ? model.parameters : "Unknown";
+  const contextWindowText = typeof model.contextWindow === "string" ? model.contextWindow : "Unknown";
+  const licenseText = typeof model.license === "string" ? model.license : model.license?.name || "Custom";
+
   const softwareAppSchema = {
     "@context": "https://schema.org",
     "@graph": [
@@ -119,6 +130,25 @@ export default async function ModelDetailPage({
         applicationCategory: "AI Model",
         description: model.description,
         publisher: { "@type": "Organization", name: model.developer },
+        datePublished: model.releaseDate,
+        offers: {
+          "@type": "Offer",
+          price: "0",
+          priceCurrency: "USD"
+        },
+        license: licenseText,
+        additionalProperty: [
+          {
+            "@type": "PropertyValue",
+            name: "Parameters",
+            value: parametersText
+          },
+          {
+            "@type": "PropertyValue",
+            name: "Context Window",
+            value: contextWindowText
+          }
+        ]
       },
     ],
   };

@@ -140,9 +140,19 @@ export default function ModelDocsLayout({
             </p>
 
             <div className="flex flex-wrap items-center justify-between gap-4">
-              <h1 className="font-extrabold text-3xl sm:text-4xl text-[var(--text)] tracking-tight">
-                {model.name} Overview
-              </h1>
+              <div className="flex flex-col gap-1">
+                <h1 className="font-extrabold text-3xl sm:text-4xl text-[var(--text)] tracking-tight flex items-center gap-3">
+                  {model.name} Overview
+                  {model.verified && (
+                    <Shield size={24} className="text-emerald-500" />
+                  )}
+                </h1>
+                {model.verified && (
+                  <p className="text-xs text-[var(--muted)] font-mono">
+                    Confirmed against {model.developer} documentation, {new Date(model.updatedAt || model.releaseDate).toLocaleString('default', { month: 'long', year: 'numeric' })}
+                  </p>
+                )}
+              </div>
 
               <button
                 onClick={handleCopyPage}
@@ -152,6 +162,10 @@ export default function ModelDocsLayout({
                 <span>{copied ? "Copied!" : "Copy page"}</span>
               </button>
             </div>
+
+            <p className="text-lg text-[var(--text)] leading-relaxed max-w-3xl font-semibold">
+              {model.name} is a {model.primaryTask} AI model created by {model.developer}, featuring {model.parameters ? (typeof model.parameters === "object" ? Object.values(model.parameters).join(" / ") : model.parameters) : "Unknown"} parameters and a context window of {model.contextWindow ? (typeof model.contextWindow === "object" ? (model.contextWindow as any).native : model.contextWindow) : "Unknown"}.
+            </p>
 
             <p className="text-base text-[var(--muted)] leading-relaxed max-w-3xl font-normal">
               {model.description ||

@@ -45,6 +45,7 @@ export interface ModelEntry extends ModelIndex {
   benchmarks: Benchmark[];
   family: string | null;
   previousVersion: string | null;
+  baseModel?: string | null;
   links: Record<string, string>;
   logo: string | null;
   images?: string[];
