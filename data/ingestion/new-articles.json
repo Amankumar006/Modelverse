@@ -1,20 +1,20 @@
 [
   {
-    "id": "y-combinator-open-sources-qm-an-mit-licensed-multiplayer-agent-harness-that-runs",
-    "slug": "y-combinator-open-sources-qm-an-mit-licensed-multiplayer-agent-harness-that-runs",
-    "title": "Y Combinator Open-Sources QM: An MIT-Licensed Multiplayer Agent Harness That Runs In Slack And The Web",
+    "id": "reflex-open-sources-xy-a-rust-backed-super-fast-python-charting-library-that-kee",
+    "slug": "reflex-open-sources-xy-a-rust-backed-super-fast-python-charting-library-that-kee",
+    "title": "Reflex Open Sources XY: A Rust-Backed Super-Fast Python Charting Library That Keeps 100 Million Point Charts Interactive",
     "category": "short-news",
     "isTrending": true,
     "publishDate": "2026-08-04",
     "author": "Modelverse Editorial",
     "readTime": "2 min read",
-    "excerpt": "Y Combinator has open-sourced QM, the multiplayer agent harness it uses internally across accounting, legal, events, and engineering. Released July 31, 2026 under an MIT license, Q...",
-    "body": "Y Combinator has open-sourced QM (Quartermaster), an MIT-licensed multi-agent harness designed to facilitate collaborative work within organizations. Unlike traditional personal AI assistants, QM operates as a \"multiplayer\" system, running across Slack and the web to support diverse internal functions from accounting and legal to events and engineering. YC itself leverages QM internally, framing its public release as an early-stage experiment.\n\nQM's architecture is built on the principle of isolated workspaces, providing each employee and collaborative room with its own scoped memory, files, permissions, and a durable sandbox. A central headless core manages APIs, identity, policy, and scheduling, driving an agent loop that interacts with a small, fixed tool surface. Crucially, one of these tools is an `execute` function, allowing commands to run within each scope's isolated sandbox. This design makes QM harness-agnostic, meaning it can be driven by various large language models like Pi, OpenCode, or Claude Code, without tying deployments to a single vendor.\n\nThis release is significant for developers and researchers seeking to implement sophisticated AI solutions in organizational settings. QM offers a robust framework for multi-agent collaboration, moving beyond the limitations of single-user assistants. It's deployable today for startups and mid-sized companies (10-500 people) comfortable with cloud infrastructure, allowing organizations to maintain full ownership and control within their own cloud accounts. Its flexibility in integrating different LLMs and providing secure, isolated environments makes it a powerful tool for building custom internal AI applications across various industries, from professional services to B2B SaaS internal tooling.",
-    "coverImage": "https://www.marktechpost.com/wp-content/uploads/2026/08/blog6176-8-1024x731.png",
+    "excerpt": "Reflex has released XY, an Apache-2.0 Python charting library that moves rendering work into a native Rust core and a WebGL2 client. It holds roughly 0.08 seconds render time from ...",
+    "body": "Reflex AI has unveiled XY, an innovative open-source Python charting library designed to revolutionize interactive 2D data visualization. Traditional Python charting solutions often falter with large datasets, struggling with rendering, hovering, and zooming beyond hundreds of thousands of points. XY directly addresses this bottleneck, promising to keep charts with even 100 million points fully interactive, boasting impressive speeds like 0.081 seconds for 100 million points, a significant leap forward for data exploration.\n\nThe library achieves its remarkable performance by offloading heavy computational work to a native Rust core. Instead of sending bulky JSON data, XY transmits efficient typed binary buffers to the browser and leverages WebGL2 for high-speed, GPU-accelerated rendering. It intelligently manages data, maintaining canonical `f64` columns in Python and employing smart visualization strategies such as M4 decimation for ordered lines and automatic scatter density grids for vast point clouds, ensuring responsiveness without sacrificing detail upon zoom.\n\nThis breakthrough is particularly impactful for developers and researchers grappling with massive datasets. XY delivers substantial speedups—up to 177x at 50 million points—alongside a significantly reduced memory footprint and dramatically smaller export sizes (e.g., 258 KiB for a 10-million-point interactive scatter plot). While currently in early alpha, its capabilities make it ideal for internal analytics in fields where row counts are critical, such as quantitative finance, genomics, observability, and geospatial analytics, enabling unprecedented interactive exploration of complex data.",
+    "coverImage": "https://www.marktechpost.com/wp-content/uploads/2026/08/blog6176-9.png",
     "status": "published",
     "confidenceLevel": "confirmed",
     "externalSources": [
-      "https://www.marktechpost.com/2026/08/03/y-combinator-open-sources-qm-multiplayer-ai-agent-harness/"
+      "https://www.marktechpost.com/2026/08/04/reflex-open-sources-xy/"
     ],
     "relatedModels": [],
     "tags": [
@@ -24,27 +24,27 @@
     ]
   },
   {
-    "id": "apple-is-getting-this-wrong",
-    "slug": "apple-is-getting-this-wrong",
-    "title": "Apple is getting this wrong",
+    "id": "building-an-advanced-ai-skill-security-auditing-pipeline-with-nvidia-skillspecto",
+    "slug": "building-an-advanced-ai-skill-security-auditing-pipeline-with-nvidia-skillspecto",
+    "title": "Building an Advanced AI Skill Security Auditing Pipeline with NVIDIA SkillSpector, LangGraph, YARA Rules, SARIF, and CI Policy Gates",
     "category": "short-news",
     "isTrending": true,
-    "publishDate": "2026-08-03",
+    "publishDate": "2026-08-04",
     "author": "Modelverse Editorial",
     "readTime": "2 min read",
-    "excerpt": "OpenAI addresses Apple’s baseless lawsuit, corrects claims about its employees, and shares messages documenting what happened.",
-    "body": "## Apple is getting this wrong\n\nOpenAI has issued a robust public response to a lawsuit initiated by Apple, firmly stating that the claims made against it are \"baseless.\" The AI research powerhouse is actively challenging Apple's allegations, particularly those pertaining to its employees. To substantiate its position and offer a counter-narrative, OpenAI has also released internal communications and messages, aiming to document the sequence of events and directly refute Apple's assertions. This public rebuttal signals a significant escalation in what appears to be a burgeoning legal confrontation between two major entities in the technology and artificial intelligence landscapes.\n\nWhile this announcement does not detail the operational mechanics of AI models or unveil new technological advancements, it provides a crucial glimpse into the complex and often competitive corporate environment within the high-stakes AI sector. The core of this dispute, as indicated by OpenAI's counter-statement, centers on legal claims and employee-related issues rather than the intricacies of AI technology itself. Nevertheless, such high-profile legal battles can indirectly illuminate broader industry trends concerning talent acquisition, competitive strategies, and the safeguarding of intellectual assets in a rapidly evolving technological domain.\n\nFor developers and researchers, this unfolding legal drama is particularly relevant as it underscores the intense competition for top-tier AI talent and the potential for disputes over personnel and corporate conduct. It highlights the intricate legal and ethical frameworks that increasingly accompany rapid technological progress, influencing how companies collaborate, compete, and manage their workforce. Such prominent disagreements can shape future industry standards, impact potential partnerships, and ultimately affect the broader ecosystem in which AI innovation is fostered or challenged.",
-    "coverImage": "/images/news/news_short.jpg",
+    "excerpt": "Learn how to build an end-to-end security assessment pipeline for AI agent skills using NVIDIA SkillSpector and LangGraph. In this tutorial, we construct a synthetic skill marketpl...",
+    "body": "NVIDIA has unveiled a sophisticated framework for auditing the security of AI agent skills, integrating its SkillSpector tool with LangGraph, YARA rules, and CI policy gates. This pipeline offers a comprehensive approach to evaluating the security posture of AI skills, from benign to malicious, by scanning them through SkillSpector's LangGraph-driven inspection process. It meticulously assesses various risk indicators, including categorized findings, confidence levels, and the presence of executable scripts.\n\nThe system generates detailed outputs like risk scores, portfolio-level DataFrames, SARIF, and Markdown reports, facilitating both automated and human review. Its power lies in its customizability and extensibility: users can define baselines to manage known issues, detect new vulnerabilities as regressions, incorporate organization-specific YARA rules, and extend the LangGraph pipeline with custom analyzers—such as a dedicated secret scanner. The framework also supports optional LLM-assisted semantic analysis for deeper insights.\n\nFor developers and researchers, this pipeline is crucial for secure AI agent deployment. It provides a robust pre-deployment governance mechanism to identify critical risks like dangerous instructions, credential access, dependency vulnerabilities, and prompt injection attempts. By enabling automated CI security gates and visual risk summaries, the framework ensures consistent deployment decisions, helps enforce internal security standards, and significantly reduces the inherent risks of integrating third-party agentic tools and external skill packages.",
+    "coverImage": "https://www.marktechpost.com/wp-content/uploads/2026/08/high-level-description-a-monochrome-cybe_2rr6n78EUGGOOwTBaf3UzA_gSBnpjrRS5CwRLN0TlRb5g_cover_2k-1024x768.png",
     "status": "published",
     "confidenceLevel": "confirmed",
     "externalSources": [
-      "https://openai.com/index/apple-is-getting-this-wrong"
+      "https://www.marktechpost.com/2026/08/04/building-an-advanced-ai-skill-security-auditing-pipeline-with-nvidia-skillspector-langgraph-yara-rules-sarif-and-ci-policy-gates/"
     ],
     "relatedModels": [],
     "tags": [
       "ai-news",
       "breaking",
-      "openai"
+      "marktechpost"
     ]
   }
 ]

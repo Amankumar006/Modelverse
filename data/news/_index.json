@@ -1,5 +1,27 @@
 [
   {
+    "id": "building-an-advanced-ai-skill-security-auditing-pipeline-with-nvidia-skillspecto",
+    "slug": "building-an-advanced-ai-skill-security-auditing-pipeline-with-nvidia-skillspecto",
+    "title": "Building an Advanced AI Skill Security Auditing Pipeline with NVIDIA SkillSpector, LangGraph, YARA Rules, SARIF, and CI Policy Gates",
+    "category": "short-news",
+    "publishDate": "2026-08-04",
+    "author": "Modelverse Editorial",
+    "readTime": "2 min read",
+    "excerpt": "Learn how to build an end-to-end security assessment pipeline for AI agent skills using NVIDIA SkillSpector and LangGraph. In this tutorial, we construct a synthetic skill marketpl...",
+    "coverImage": "https://www.marktechpost.com/wp-content/uploads/2026/08/high-level-description-a-monochrome-cybe_2rr6n78EUGGOOwTBaf3UzA_gSBnpjrRS5CwRLN0TlRb5g_cover_2k-1024x768.png",
+    "status": "published",
+    "confidenceLevel": "confirmed",
+    "externalSources": [
+      "https://www.marktechpost.com/2026/08/04/building-an-advanced-ai-skill-security-auditing-pipeline-with-nvidia-skillspector-langgraph-yara-rules-sarif-and-ci-policy-gates/"
+    ],
+    "relatedModels": [],
+    "tags": [
+      "ai-news",
+      "breaking",
+      "marktechpost"
+    ]
+  },
+  {
     "id": "disrupting-a-criminal-scam-operation",
     "slug": "disrupting-a-criminal-scam-operation",
     "title": "Disrupting a Criminal Scam Operation",
@@ -35,6 +57,28 @@
     "confidenceLevel": "confirmed",
     "externalSources": [
       "https://www.marktechpost.com/2026/08/03/genspark-open-sources-genoffice-a-free-ad-free-ai-office-suite-for-macos-and-windows-with-docs-sheets-slides-pdf/"
+    ],
+    "relatedModels": [],
+    "tags": [
+      "ai-news",
+      "breaking",
+      "marktechpost"
+    ]
+  },
+  {
+    "id": "reflex-open-sources-xy-a-rust-backed-super-fast-python-charting-library-that-kee",
+    "slug": "reflex-open-sources-xy-a-rust-backed-super-fast-python-charting-library-that-kee",
+    "title": "Reflex Open Sources XY: A Rust-Backed Super-Fast Python Charting Library That Keeps 100 Million Point Charts Interactive",
+    "category": "short-news",
+    "publishDate": "2026-08-04",
+    "author": "Modelverse Editorial",
+    "readTime": "2 min read",
+    "excerpt": "Reflex has released XY, an Apache-2.0 Python charting library that moves rendering work into a native Rust core and a WebGL2 client. It holds roughly 0.08 seconds render time from ...",
+    "coverImage": "https://www.marktechpost.com/wp-content/uploads/2026/08/blog6176-9.png",
+    "status": "published",
+    "confidenceLevel": "confirmed",
+    "externalSources": [
+      "https://www.marktechpost.com/2026/08/04/reflex-open-sources-xy/"
     ],
     "relatedModels": [],
     "tags": [
