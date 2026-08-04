@@ -1,0 +1,24 @@
+{
+  "id": "eon-wants-to-move-the-data-superhighway-from-ocean-fiber-to-space-lasers",
+  "slug": "eon-wants-to-move-the-data-superhighway-from-ocean-fiber-to-space-lasers",
+  "title": "EON wants to move the data superhighway from ocean fiber to space lasers",
+  "category": "short-news",
+  "isTrending": true,
+  "publishDate": "2026-08-04",
+  "author": "Modelverse Editorial",
+  "readTime": "2 min read",
+  "excerpt": "Endeavour Optical Networks is planning to launch the fastest space laser communications system yet built.",
+  "body": "Endeavor Optical Networks (EON) has emerged from stealth with $10.75 million in seed funding, aiming to revolutionize global data transfer. The current reliance on a vulnerable network of undersea fiber optic cables for intercontinental data movement presents significant challenges. EON proposes a radical shift: establishing a high-bandwidth data superhighway in space, utilizing a network of laser-equipped satellites to create robust links between continents.\n\nEON's ambitious plan involves deploying a constellation of approximately 20 satellites, each designed to establish dedicated, high-speed optical links. While current satellite laser communication demonstrations typically achieve speeds around 2.5 Gbps, EON is targeting an impressive 2.4 terabits per second. A primary hurdle for space-to-ground laser communication is atmospheric interference, particularly from clouds. EON intends to overcome this with proprietary technology, strategically chosen redundant ground stations, and real-time weather data to ensure reliable connections.\n\nThis innovative approach holds significant promise for developers and researchers, especially within hyperscale computing and AI labs, who demand unparalleled data transfer capabilities. By offering dedicated capacity, EON aims to provide a robust alternative for underserved or expensive routes, such as lengthy connections from France to Australia or between Africa and South America. This new infrastructure could offer greater control and resilience for moving massive datasets globally, critical for training advanced AI models and synchronizing distributed computing resources, bypassing the limitations and vulnerabilities of traditional undersea infrastructure.",
+  "coverImage": "https://techcrunch.com/wp-content/uploads/2026/08/EON-Co-Founders_Horizontal_Philip-Cheung.jpg?resize=1200,898",
+  "status": "published",
+  "confidenceLevel": "confirmed",
+  "externalSources": [
+    "https://techcrunch.com/2026/08/04/eon-wants-to-move-the-data-superhighway-from-ocean-fiber-to-space-lasers/"
+  ],
+  "relatedModels": [],
+  "tags": [
+    "ai-news",
+    "breaking",
+    "techcrunch-ai"
+  ]
+}

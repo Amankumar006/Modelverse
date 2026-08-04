@@ -1,50 +1,26 @@
 [
   {
-    "id": "reflex-open-sources-xy-a-rust-backed-super-fast-python-charting-library-that-kee",
-    "slug": "reflex-open-sources-xy-a-rust-backed-super-fast-python-charting-library-that-kee",
-    "title": "Reflex Open Sources XY: A Rust-Backed Super-Fast Python Charting Library That Keeps 100 Million Point Charts Interactive",
+    "id": "eon-wants-to-move-the-data-superhighway-from-ocean-fiber-to-space-lasers",
+    "slug": "eon-wants-to-move-the-data-superhighway-from-ocean-fiber-to-space-lasers",
+    "title": "EON wants to move the data superhighway from ocean fiber to space lasers",
     "category": "short-news",
     "isTrending": true,
     "publishDate": "2026-08-04",
     "author": "Modelverse Editorial",
     "readTime": "2 min read",
-    "excerpt": "Reflex has released XY, an Apache-2.0 Python charting library that moves rendering work into a native Rust core and a WebGL2 client. It holds roughly 0.08 seconds render time from ...",
-    "body": "Reflex AI has unveiled XY, an innovative open-source Python charting library designed to revolutionize interactive 2D data visualization. Traditional Python charting solutions often falter with large datasets, struggling with rendering, hovering, and zooming beyond hundreds of thousands of points. XY directly addresses this bottleneck, promising to keep charts with even 100 million points fully interactive, boasting impressive speeds like 0.081 seconds for 100 million points, a significant leap forward for data exploration.\n\nThe library achieves its remarkable performance by offloading heavy computational work to a native Rust core. Instead of sending bulky JSON data, XY transmits efficient typed binary buffers to the browser and leverages WebGL2 for high-speed, GPU-accelerated rendering. It intelligently manages data, maintaining canonical `f64` columns in Python and employing smart visualization strategies such as M4 decimation for ordered lines and automatic scatter density grids for vast point clouds, ensuring responsiveness without sacrificing detail upon zoom.\n\nThis breakthrough is particularly impactful for developers and researchers grappling with massive datasets. XY delivers substantial speedups—up to 177x at 50 million points—alongside a significantly reduced memory footprint and dramatically smaller export sizes (e.g., 258 KiB for a 10-million-point interactive scatter plot). While currently in early alpha, its capabilities make it ideal for internal analytics in fields where row counts are critical, such as quantitative finance, genomics, observability, and geospatial analytics, enabling unprecedented interactive exploration of complex data.",
-    "coverImage": "https://www.marktechpost.com/wp-content/uploads/2026/08/blog6176-9.png",
+    "excerpt": "Endeavour Optical Networks is planning to launch the fastest space laser communications system yet built.",
+    "body": "Endeavor Optical Networks (EON) has emerged from stealth with $10.75 million in seed funding, aiming to revolutionize global data transfer. The current reliance on a vulnerable network of undersea fiber optic cables for intercontinental data movement presents significant challenges. EON proposes a radical shift: establishing a high-bandwidth data superhighway in space, utilizing a network of laser-equipped satellites to create robust links between continents.\n\nEON's ambitious plan involves deploying a constellation of approximately 20 satellites, each designed to establish dedicated, high-speed optical links. While current satellite laser communication demonstrations typically achieve speeds around 2.5 Gbps, EON is targeting an impressive 2.4 terabits per second. A primary hurdle for space-to-ground laser communication is atmospheric interference, particularly from clouds. EON intends to overcome this with proprietary technology, strategically chosen redundant ground stations, and real-time weather data to ensure reliable connections.\n\nThis innovative approach holds significant promise for developers and researchers, especially within hyperscale computing and AI labs, who demand unparalleled data transfer capabilities. By offering dedicated capacity, EON aims to provide a robust alternative for underserved or expensive routes, such as lengthy connections from France to Australia or between Africa and South America. This new infrastructure could offer greater control and resilience for moving massive datasets globally, critical for training advanced AI models and synchronizing distributed computing resources, bypassing the limitations and vulnerabilities of traditional undersea infrastructure.",
+    "coverImage": "https://techcrunch.com/wp-content/uploads/2026/08/EON-Co-Founders_Horizontal_Philip-Cheung.jpg?resize=1200,898",
     "status": "published",
     "confidenceLevel": "confirmed",
     "externalSources": [
-      "https://www.marktechpost.com/2026/08/04/reflex-open-sources-xy/"
+      "https://techcrunch.com/2026/08/04/eon-wants-to-move-the-data-superhighway-from-ocean-fiber-to-space-lasers/"
     ],
     "relatedModels": [],
     "tags": [
       "ai-news",
       "breaking",
-      "marktechpost"
-    ]
-  },
-  {
-    "id": "building-an-advanced-ai-skill-security-auditing-pipeline-with-nvidia-skillspecto",
-    "slug": "building-an-advanced-ai-skill-security-auditing-pipeline-with-nvidia-skillspecto",
-    "title": "Building an Advanced AI Skill Security Auditing Pipeline with NVIDIA SkillSpector, LangGraph, YARA Rules, SARIF, and CI Policy Gates",
-    "category": "short-news",
-    "isTrending": true,
-    "publishDate": "2026-08-04",
-    "author": "Modelverse Editorial",
-    "readTime": "2 min read",
-    "excerpt": "Learn how to build an end-to-end security assessment pipeline for AI agent skills using NVIDIA SkillSpector and LangGraph. In this tutorial, we construct a synthetic skill marketpl...",
-    "body": "NVIDIA has unveiled a sophisticated framework for auditing the security of AI agent skills, integrating its SkillSpector tool with LangGraph, YARA rules, and CI policy gates. This pipeline offers a comprehensive approach to evaluating the security posture of AI skills, from benign to malicious, by scanning them through SkillSpector's LangGraph-driven inspection process. It meticulously assesses various risk indicators, including categorized findings, confidence levels, and the presence of executable scripts.\n\nThe system generates detailed outputs like risk scores, portfolio-level DataFrames, SARIF, and Markdown reports, facilitating both automated and human review. Its power lies in its customizability and extensibility: users can define baselines to manage known issues, detect new vulnerabilities as regressions, incorporate organization-specific YARA rules, and extend the LangGraph pipeline with custom analyzers—such as a dedicated secret scanner. The framework also supports optional LLM-assisted semantic analysis for deeper insights.\n\nFor developers and researchers, this pipeline is crucial for secure AI agent deployment. It provides a robust pre-deployment governance mechanism to identify critical risks like dangerous instructions, credential access, dependency vulnerabilities, and prompt injection attempts. By enabling automated CI security gates and visual risk summaries, the framework ensures consistent deployment decisions, helps enforce internal security standards, and significantly reduces the inherent risks of integrating third-party agentic tools and external skill packages.",
-    "coverImage": "https://www.marktechpost.com/wp-content/uploads/2026/08/high-level-description-a-monochrome-cybe_2rr6n78EUGGOOwTBaf3UzA_gSBnpjrRS5CwRLN0TlRb5g_cover_2k-1024x768.png",
-    "status": "published",
-    "confidenceLevel": "confirmed",
-    "externalSources": [
-      "https://www.marktechpost.com/2026/08/04/building-an-advanced-ai-skill-security-auditing-pipeline-with-nvidia-skillspector-langgraph-yara-rules-sarif-and-ci-policy-gates/"
-    ],
-    "relatedModels": [],
-    "tags": [
-      "ai-news",
-      "breaking",
-      "marktechpost"
+      "techcrunch-ai"
     ]
   }
 ]

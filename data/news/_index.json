@@ -44,6 +44,28 @@
     ]
   },
   {
+    "id": "eon-wants-to-move-the-data-superhighway-from-ocean-fiber-to-space-lasers",
+    "slug": "eon-wants-to-move-the-data-superhighway-from-ocean-fiber-to-space-lasers",
+    "title": "EON wants to move the data superhighway from ocean fiber to space lasers",
+    "category": "short-news",
+    "publishDate": "2026-08-04",
+    "author": "Modelverse Editorial",
+    "readTime": "2 min read",
+    "excerpt": "Endeavour Optical Networks is planning to launch the fastest space laser communications system yet built.",
+    "coverImage": "https://techcrunch.com/wp-content/uploads/2026/08/EON-Co-Founders_Horizontal_Philip-Cheung.jpg?resize=1200,898",
+    "status": "published",
+    "confidenceLevel": "confirmed",
+    "externalSources": [
+      "https://techcrunch.com/2026/08/04/eon-wants-to-move-the-data-superhighway-from-ocean-fiber-to-space-lasers/"
+    ],
+    "relatedModels": [],
+    "tags": [
+      "ai-news",
+      "breaking",
+      "techcrunch-ai"
+    ]
+  },
+  {
     "id": "genspark-open-sources-genoffice-a-free-ad-free-ai-office-suite-for-macos-and-win",
     "slug": "genspark-open-sources-genoffice-a-free-ad-free-ai-office-suite-for-macos-and-win",
     "title": "Genspark Open Sources GenOffice: A Free, Ad-Free AI Office Suite for macOS and Windows with Docs, Sheets, Slides, PDF",
