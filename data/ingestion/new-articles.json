@@ -1,44 +1,20 @@
 [
   {
-    "id": "how-to-secure-ai-agents-mcp-servers-and-llm-apps-in-production",
-    "slug": "how-to-secure-ai-agents-mcp-servers-and-llm-apps-in-production",
-    "title": "How to Secure AI Agents, MCP Servers, and LLM Apps in Production",
+    "id": "after-killer-quarter-palantir-ceo-alex-karp-calls-ai-industry-marxist",
+    "slug": "after-killer-quarter-palantir-ceo-alex-karp-calls-ai-industry-marxist",
+    "title": "After killer quarter, Palantir CEO Alex Karp calls AI industry 'Marxist'",
     "category": "short-news",
     "isTrending": true,
     "publishDate": "2026-08-03",
     "author": "Modelverse Editorial",
     "readTime": "2 min read",
-    "excerpt": "AI agents, MCP servers, and LLM apps break the core AppSec assumption that applications do what their code says. This guide walks through a practical see-fix-protect framework: a f...",
-    "body": "Mend.io has unveiled a crucial new practitioner guide, \"Securing AI agents, MCP servers & LLM apps: A practical framework,\" designed to address the rapidly expanding security blind spots introduced by AI agents, MCP integrations, and LLM-powered applications. As these AI components integrate into codebases at an unprecedented pace, traditional application security (AppSec) models, built on the assumption that applications strictly follow their code, are proving insufficient. Agentic AI's emergent behavior, influenced by models, prompts, context, and tools, creates entirely new and unpredictable security challenges that existing programs struggle to track.\n\nThe guide tackles these novel security risks by outlining a framework centered on three key actions: identifying critical assets, rapidly remediating issues, and robustly protecting AI in production. It highlights new failure modes like prompt injection via data, over-permissioned agents, and poisoned tool descriptions on MCP servers—vulnerabilities that bypass traditional CVE feeds. To counter this, the framework advocates for a \"shift left, protect right\" approach, offering practical methods for discovering \"shadow agents\" and unregistered MCP servers, alongside reusable artifacts. These include an extended AI-BOM with nine new fields for comprehensive agent/MCP server tracking and a 12-point misconfiguration checklist covering crucial aspects like credential scoping, system prompt version control, and model lifecycle monitoring.\n\nThis framework is vital for developers and researchers navigating the complex landscape of AI security. It provides a much-needed structured approach to manage the expanded \"finding surface\" and unique attack vectors that AI introduces. By offering concrete discovery methods, configuration best practices, and a prioritization pipeline (enrich → prioritize → triage), Mend.io's guide empowers teams to proactively secure their AI deployments, ensuring safer development and more resilient production environments for the next generation of intelligent applications.",
-    "coverImage": "https://www.marktechpost.com/wp-content/uploads/2026/08/blog6176-6-1024x731.png",
+    "excerpt": "After a quarter that delivered $1 billion in profit, Palantir CEO Alex Karp on Monday once again warned that AI frontier labs are too untrustworthy for enterprises.",
+    "body": "Palantir CEO Alex Karp recently delivered a provocative critique of frontier AI labs, labeling their operational models as \"Marxist\" during the company's Q2 earnings call. This strong statement came amidst Palantir's own record-breaking financial quarter, where the company reported $1.9 billion in revenue and $1.1 billion in profit, largely driven by the surging adoption of AI. Karp's central argument is that many large language model developers, wittingly or not, aim to \"capture the means of production\" from their enterprise partners, posing a significant threat to data sovereignty and competitive advantage.\n\nKarp elaborated that enterprises using these frontier models are essentially paying for the migration of their intellectual property, know-how, and expertise into the labs' foundational models. This process, he argues, enables the AI labs to build competitive businesses that eventually render the original enterprise redundant. In stark contrast, Palantir champions a model-agnostic approach, providing AI and analysis software that empowers organizations to maintain full control over their data, prompts, orchestration, and contextual information, thereby safeguarding their digital assets and preventing vendor lock-in.\n\nThis debate holds significant implications for developers and researchers navigating the rapidly evolving AI landscape. It underscores a critical choice: whether to leverage powerful, externally developed foundational models with potential risks to data ownership and IP, or to opt for solutions that prioritize enterprise control and data sovereignty. Karp's warning challenges the industry to critically examine the long-term business models and ethical frameworks governing AI deployment, urging a deeper consideration of how AI technologies impact competitive landscapes and the future of enterprise innovation.",
+    "coverImage": "https://techcrunch.com/wp-content/uploads/2026/08/Palantir-Alex-Karp.png?resize=1200,762",
     "status": "published",
     "confidenceLevel": "confirmed",
     "externalSources": [
-      "https://www.marktechpost.com/2026/08/03/how-to-secure-ai-agents-mcp-servers-and-llm-apps-in-production/"
-    ],
-    "relatedModels": [],
-    "tags": [
-      "ai-news",
-      "breaking",
-      "marktechpost"
-    ]
-  },
-  {
-    "id": "design-arena-creators-raise-79-million-to-bring-taste-to-ai-models",
-    "slug": "design-arena-creators-raise-79-million-to-bring-taste-to-ai-models",
-    "title": "Design Arena creators raise $7.9 million to bring taste to AI models",
-    "category": "short-news",
-    "isTrending": true,
-    "publishDate": "2026-08-03",
-    "author": "Modelverse Editorial",
-    "readTime": "2 min read",
-    "excerpt": "Design Arena is used by 5.3 million people around the world, providing critical human evaluations to frontier labs.",
-    "body": "Intelligence, the company behind the innovative AI tool Design Arena, has successfully closed a $7.9 million seed funding round led by Index Ventures. Born from a challenge to make AI-generated games \"fun,\" Design Arena has evolved into a crucial platform addressing the critical need for scalable, authentic human feedback in the AI development lifecycle. This significant investment underscores the growing recognition of human judgment as an indispensable component for refining AI models, particularly in creative and design-oriented applications.\n\nDesign Arena operates as a sophisticated feedback engine, allowing users to submit prompts for various visual outputs, from websites to images, through a ChatGPT-style interface. Users then engage in \"A vs. B\" comparisons, ranking outputs based on their preferences. While beneficial for individual users seeking optimal results, the platform's core value lies in its enterprise offering. Frontier AI labs and companies leverage Design Arena as a continuous source of instant human evaluation, feeding real-time user preferences directly back into their media-generating models, thereby accelerating design improvements and ensuring outputs resonate with human \"taste.\"\n\nThis human-centric approach is vital for developers and researchers, as it fills a significant gap that automated benchmarks often miss or can be manipulated. By providing honest, large-scale human input, Design Arena helps AI models move beyond mere functionality to achieve desired aesthetic and experiential qualities. Furthermore, by tracking user preferences across demographics and over time, the platform offers invaluable insights into evolving tastes, enabling AI creators to build more intuitive, engaging, and culturally relevant models.",
-    "coverImage": "https://techcrunch.com/wp-content/uploads/2026/08/Screenshot-2026-08-03-at-12.31.35-PM.jpg?resize=1200,739",
-    "status": "published",
-    "confidenceLevel": "confirmed",
-    "externalSources": [
-      "https://techcrunch.com/2026/08/03/designarena-creators-raise-7-9-million-to-bring-taste-to-ai-models/"
+      "https://techcrunch.com/2026/08/03/after-killer-quarter-palantir-ceo-alex-karp-calls-ai-industry-marxist/"
     ],
     "relatedModels": [],
     "tags": [
