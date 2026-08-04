@@ -1,0 +1,24 @@
+{
+  "id": "ai-leaders-propose-safe-guidelines-for-cybersecurity-transparency",
+  "slug": "ai-leaders-propose-safe-guidelines-for-cybersecurity-transparency",
+  "title": "AI Leaders Propose SAFE Guidelines for Cybersecurity Transparency",
+  "category": "short-news",
+  "isTrending": true,
+  "publishDate": "2026-08-04",
+  "author": "Modelverse Editorial",
+  "readTime": "2 min read",
+  "excerpt": "Members of the Open Secure AI Alliance — now more than 120 organizations strong — are developing new guidelines to strengthen agentic AI cybersecurity as the annual Black Hat confe...",
+  "body": "The Open Secure AI Alliance (OSAI), a collaborative effort involving over 120 organizations including industry leaders like NVIDIA, Cisco, and Hugging Face, has partnered with the Linux Foundation to propose the Shared AI Findings Exchange (SAFE) guidelines. Announced as the Black Hat conference commenced, this initiative aims to significantly bolster cybersecurity for agentic AI systems. SAFE is designed to transform individual AI security incidents and near misses into shared protective intelligence, fostering a more resilient and secure ecosystem against evolving cyber threats.\n\nThe SAFE framework outlines a systematic approach to collective defense. It proposes the confidential collection and analysis of AI security incidents, ensuring that affected parties are promptly informed. A key component involves identifying recurring control failures across various AI deployments and subsequently publishing evidence-based operational recommendations. This collaborative methodology recognizes that securing sophisticated AI agents—which are complex systems encompassing identity controls, guardrails, and logs—demands a layered, community-driven strategy beyond basic vulnerability scanning.\n\nFor developers and researchers, SAFE represents a crucial step towards building more robust and trustworthy AI. By promoting the open exchange of threat intelligence and lessons learned, the initiative acts as a force multiplier, enabling the community to collectively address and mitigate systemic risks at \"agent speed.\" It underscores the importance of a shared commitment to developing and integrating open, inspectable security tools throughout the entire AI security stack, ultimately accelerating the creation of safer AI technologies through collaborative learning.",
+  "coverImage": "https://blogs.nvidia.com/wp-content/uploads/2026/08/agentic-ai-press-osaia-5518050-1280x680-r2.png",
+  "status": "published",
+  "confidenceLevel": "confirmed",
+  "externalSources": [
+    "https://blogs.nvidia.com/blog/open-secure-ai-alliance-contributions/"
+  ],
+  "relatedModels": [],
+  "tags": [
+    "ai-news",
+    "breaking",
+    "nvidia"
+  ]
+}

@@ -1,20 +1,164 @@
 [
   {
-    "id": "eon-wants-to-move-the-data-superhighway-from-ocean-fiber-to-space-lasers",
-    "slug": "eon-wants-to-move-the-data-superhighway-from-ocean-fiber-to-space-lasers",
-    "title": "EON wants to move the data superhighway from ocean fiber to space lasers",
+    "id": "elon-musk-spends-half-his-time-talking-robots-and-ai-on-tesla-earnings-calls",
+    "slug": "elon-musk-spends-half-his-time-talking-robots-and-ai-on-tesla-earnings-calls",
+    "title": "Elon Musk spends half his time talking robots and AI on Tesla earnings calls",
     "category": "short-news",
     "isTrending": true,
     "publishDate": "2026-08-04",
     "author": "Modelverse Editorial",
     "readTime": "2 min read",
-    "excerpt": "Endeavour Optical Networks is planning to launch the fastest space laser communications system yet built.",
-    "body": "Endeavor Optical Networks (EON) has emerged from stealth with $10.75 million in seed funding, aiming to revolutionize global data transfer. The current reliance on a vulnerable network of undersea fiber optic cables for intercontinental data movement presents significant challenges. EON proposes a radical shift: establishing a high-bandwidth data superhighway in space, utilizing a network of laser-equipped satellites to create robust links between continents.\n\nEON's ambitious plan involves deploying a constellation of approximately 20 satellites, each designed to establish dedicated, high-speed optical links. While current satellite laser communication demonstrations typically achieve speeds around 2.5 Gbps, EON is targeting an impressive 2.4 terabits per second. A primary hurdle for space-to-ground laser communication is atmospheric interference, particularly from clouds. EON intends to overcome this with proprietary technology, strategically chosen redundant ground stations, and real-time weather data to ensure reliable connections.\n\nThis innovative approach holds significant promise for developers and researchers, especially within hyperscale computing and AI labs, who demand unparalleled data transfer capabilities. By offering dedicated capacity, EON aims to provide a robust alternative for underserved or expensive routes, such as lengthy connections from France to Australia or between Africa and South America. This new infrastructure could offer greater control and resilience for moving massive datasets globally, critical for training advanced AI models and synchronizing distributed computing resources, bypassing the limitations and vulnerabilities of traditional undersea infrastructure.",
-    "coverImage": "https://techcrunch.com/wp-content/uploads/2026/08/EON-Co-Founders_Horizontal_Philip-Cheung.jpg?resize=1200,898",
+    "excerpt": "An analysis of the last seven years of Tesla earnings calls shows just little attention Musk pays to Tesla's car business.",
+    "body": "Elon Musk's strategic vision for Tesla is increasingly centered on artificial intelligence and robotics, a shift now quantified by a recent analysis from TechCrunch and Hudson Labs. Their findings reveal that Musk dedicates nearly half of his speaking time on Tesla's quarterly earnings calls to topics like AI, the Optimus robot, and autonomous driving technologies such as robotaxis and Full Self-Driving software. This represents a significant increase from previous years, underscoring his belief that Tesla's future and valuation hinge on its advancements as an AI and robotics company, rather than solely an automotive manufacturer.\n\nThe insightful analysis was made possible by Hudson Labs' proprietary AI tool, Co-Analyst, purpose-built for high-precision financial research. This AI processed transcripts of Tesla's earnings calls dating back to 2019, meticulously identifying and categorizing the topic of each sentence spoken by executives. By tracking the frequency of these topics, the AI precisely mapped the evolution of Musk's discourse, demonstrating the decisive pivot towards AI and robotics. This showcases the power of AI in extracting nuanced strategic insights from vast amounts of unstructured text data.\n\nFor developers and researchers, this announcement highlights several critical points. Firstly, it validates the immense perceived value and transformative potential of AI and robotics, as a major global company's leader explicitly ties its future valuation to solving these complex challenges. Secondly, it demonstrates a practical, high-impact application of AI in financial and market intelligence, offering a blueprint for leveraging AI to understand corporate strategies and market trends. Finally, it reinforces the ongoing industry-wide push towards achieving advanced autonomy and general-purpose robotics, signaling where significant investment and innovation are being directed.",
+    "coverImage": "https://techcrunch.com/wp-content/uploads/2024/10/GettyImages-2171035708.jpg?resize=1200,800",
     "status": "published",
     "confidenceLevel": "confirmed",
     "externalSources": [
-      "https://techcrunch.com/2026/08/04/eon-wants-to-move-the-data-superhighway-from-ocean-fiber-to-space-lasers/"
+      "https://techcrunch.com/2026/08/04/elon-musk-spends-half-his-time-talking-robots-and-ai-on-tesla-earnings-calls/"
+    ],
+    "relatedModels": [],
+    "tags": [
+      "ai-news",
+      "breaking",
+      "techcrunch-ai"
+    ]
+  },
+  {
+    "id": "nvidia-alpamayo-2-super-the-frontier-open-model-for-robotaxis-and-autonomous-veh",
+    "slug": "nvidia-alpamayo-2-super-the-frontier-open-model-for-robotaxis-and-autonomous-veh",
+    "title": "NVIDIA Alpamayo 2 Super, the Frontier Open Model for Robotaxis and Autonomous Vehicles, Now Available for Commercial Use",
+    "category": "short-news",
+    "isTrending": true,
+    "publishDate": "2026-08-04",
+    "author": "Modelverse Editorial",
+    "readTime": "2 min read",
+    "excerpt": "For robotaxis and other autonomous vehicles (AVs), the hardest problems aren’t the everyday scenarios. They’re the rare, complex situations that are difficult to anticipate and tra...",
+    "body": "NVIDIA has officially launched Alpamayo 2 Super for commercial use, an advanced open reasoning model specifically engineered to address the most complex and rare \"long-tail\" scenarios encountered by robotaxis and autonomous vehicles (AVs). Moving beyond basic perception, this model empowers AVs to deeply understand situations, reason about cause and effect, and make real-time, safe, and comfortable driving decisions, tackling challenges that are difficult to anticipate and train for.\n\nBuilt on the NVIDIA Cosmos 3 Super Reasoner and further refined with reinforcement learning, Alpamayo 2 Super functions as a single foundation model offering extensive multitask capabilities for autonomous driving. This architecture enables it to process intricate environmental data, infer optimal actions, and translate those into precise navigation paths, providing a robust solution for the demanding intelligence requirements of AV systems.\n\nThe commercial availability under the permissive OpenMDW-1.1 license from the Linux Foundation is a significant boon for developers and researchers. This license grants AV developers, automakers, and suppliers the freedom to fine-tune, create derivative models, and commercially redistribute Alpamayo 2 Super, tailoring it to their specific data, driving policies, and deployment strategies. This openness fosters greater control over proprietary data and infrastructure, encourages innovation, strengthens competition, and ultimately paves a direct path from adaptation to the deployment of safer, more transparent autonomous solutions across the entire Alpamayo model family.",
+    "coverImage": "https://blogs.nvidia.com/wp-content/uploads/2026/08/alpamayo-launch-kv-blog-1920x1080-1.jpg",
+    "status": "published",
+    "confidenceLevel": "confirmed",
+    "externalSources": [
+      "https://blogs.nvidia.com/blog/alpamayo-2-super-open-model-now-available/"
+    ],
+    "relatedModels": [],
+    "tags": [
+      "ai-news",
+      "breaking",
+      "nvidia"
+    ]
+  },
+  {
+    "id": "as-ai-increases-demands-on-memory-storage-steps-up",
+    "slug": "as-ai-increases-demands-on-memory-storage-steps-up",
+    "title": "As AI Increases Demands on Memory, Storage Steps Up",
+    "category": "short-news",
+    "isTrending": true,
+    "publishDate": "2026-08-04",
+    "author": "Modelverse Editorial",
+    "readTime": "2 min read",
+    "excerpt": "Surging AI demands are driving the need for massive datasets and context windows that burst past the confines of system memory.  But rising needs aren’t met by simply adding more s...",
+    "body": "At the recent Future of Memory and Storage (FMS) conference, NVIDIA unveiled significant advancements in storage technology designed to meet the escalating demands of modern AI. With AI models requiring ever-larger datasets and context windows that exceed traditional system memory capacities, the focus shifts from merely adding storage to creating intelligent, efficient, and secure data architectures. These innovations are crucial as AI agents increasingly consume vast amounts of data, and GPUs now directly initiate thousands of concurrent storage operations, placing immense pressure on the underlying infrastructure.\n\nNVIDIA's solution centers around making storage an active component of the data path rather than a passive repository. The NVIDIA Vera CPU, integrated into NVIDIA Vera BlueField-4 STX, plays a pivotal role by offloading critical data services such as encryption, compression, verification, and reconstruction. This specialized processing capability prevents these services from becoming bottlenecks when numerous AI agents access storage simultaneously. Benchmarks highlighted in an NVIDIA technical blog demonstrate that the NVIDIA Vera CPU delivers up to 3.21x higher throughput than an x86 CPU in a two-stage compression and encryption pipeline, enabling storage platforms to handle the deluge of AI data more efficiently with less compute infrastructure.\n\nFor developers and researchers, these advancements are transformative. They address the fundamental challenge of scaling AI by providing robust, high-throughput storage that keeps pace with accelerated computing. This redefines the long-standing economics of data placement, where the decision between fast memory and abundant storage now plays out in microseconds rather than minutes. By enabling faster access to massive datasets and reducing the computational overhead for essential data services, NVIDIA's new storage paradigm empowers the development of larger, more complex AI models and applications, ultimately accelerating the next generation of AI innovation.",
+    "coverImage": "https://blogs.nvidia.com/wp-content/uploads/2026/08/ai-storage-fms-1920x1080-1.jpg",
+    "status": "published",
+    "confidenceLevel": "confirmed",
+    "externalSources": [
+      "https://blogs.nvidia.com/blog/ai-storage-fms/"
+    ],
+    "relatedModels": [],
+    "tags": [
+      "ai-news",
+      "breaking",
+      "nvidia"
+    ]
+  },
+  {
+    "id": "apple-says-more-ex-employees-may-have-taken-confidential-data-to-openai",
+    "slug": "apple-says-more-ex-employees-may-have-taken-confidential-data-to-openai",
+    "title": "Apple says more ex-employees may have taken confidential data to OpenAI",
+    "category": "short-news",
+    "isTrending": true,
+    "publishDate": "2026-08-04",
+    "author": "Modelverse Editorial",
+    "readTime": "2 min read",
+    "excerpt": "Apple says its trade secrets investigation into OpenAI has widened. In a new court filing, Apple claims additional former staff may have retained or accessed confidential informati...",
+    "body": "Apple is significantly escalating its legal dispute with OpenAI, filing for a preliminary injunction to halt the development of any AI device or product by OpenAI that might incorporate Apple's confidential technology. The iPhone maker's latest court submission suggests a wider scope of alleged misconduct, claiming that a greater number of its former employees may have been involved in the unauthorized transfer of trade secrets to the AI research company. This move underscores Apple's heightened concern over the potential misuse of its proprietary innovations in the rapidly expanding AI hardware and software domain.\n\nThe new filing seeks expedited discovery from several parties, including former Apple senior systems engineer Chang Liu and Chief Hardware Officer Tang Yew Tan, along with OpenAI itself and io, the device startup co-founded by Jony Ive. Apple's ongoing investigation has reportedly identified at least 11 additional former employees who may have been witnesses or involved in the alleged scheme. Specific examples cited include former staff discussing unannounced Apple products with OpenAI personnel and taking screenshots of confidential documents related to unreleased Apple products prior to interviewing with OpenAI, suggesting a deliberate effort to transfer sensitive information.\n\nThis intensifying legal battle highlights the critical importance of intellectual property protection within the highly competitive AI industry. For developers and researchers, it serves as a stark reminder of the legal complexities and ethical considerations surrounding talent mobility between rival tech giants. The outcome of this case could establish significant precedents for how trade secrets are managed and protected in the AI sector, potentially influencing future hiring practices and the boundaries of knowledge transfer, even as OpenAI publicly refutes Apple's claims, asserting they do not possess or desire Apple's trade secrets.",
+    "coverImage": "https://techcrunch.com/wp-content/uploads/2026/07/tim-cook-sam-altman-GettyImages-2233062347.jpg?w=1024",
+    "status": "published",
+    "confidenceLevel": "confirmed",
+    "externalSources": [
+      "https://techcrunch.com/2026/08/04/apple-says-more-ex-employees-may-have-taken-confidential-data-to-openai/"
+    ],
+    "relatedModels": [],
+    "tags": [
+      "ai-news",
+      "breaking",
+      "techcrunch-ai"
+    ]
+  },
+  {
+    "id": "deploy-local-agents-everywhere-with-lfm25-26b",
+    "slug": "deploy-local-agents-everywhere-with-lfm25-26b",
+    "title": "Deploy local agents everywhere with LFM2.5-2.6B",
+    "category": "short-news",
+    "isTrending": true,
+    "publishDate": "2026-08-04",
+    "author": "Modelverse Editorial",
+    "readTime": "2 min read",
+    "excerpt": "Deploy local agents everywhere with LFM2.5-2.6B",
+    "body": "Modelverse is spotlighting a pivotal development in accessible AI with the introduction of the LFM2.5-2.6B model series. This announcement heralds a new era for AI deployment, emphasizing the ability to \"deploy local agents everywhere.\" The numerical designation, LFM2.5-2.6B, strongly indicates a family of compact, efficient language models specifically engineered to operate outside the traditional cloud-centric paradigm, paving the way for more pervasive and integrated artificial intelligence solutions.\n\nThe significance of LFM2.5-2.6B lies in its fundamental design for local execution. By enabling AI agents to run directly on edge devices—from smartphones and IoT gadgets to specialized embedded systems—this technology addresses critical challenges related to latency, privacy, and connectivity. For developers, it opens up vast opportunities to build innovative applications that offer real-time responsiveness and enhanced data security, as sensitive information can be processed on-device without leaving the user's control. Researchers, meanwhile, gain a powerful tool for exploring agentic AI behaviors in resource-constrained environments, fostering advancements in offline capabilities and robust, decentralized intelligence. This release marks a crucial step towards making sophisticated AI truly ubiquitous and deeply integrated into our daily lives.",
+    "coverImage": "https://cdn-uploads.huggingface.co/production/uploads/644249b08443bce4c9890a0f/DsoMk3kqhMYedjPiZINKv.png",
+    "status": "published",
+    "confidenceLevel": "confirmed",
+    "externalSources": [
+      "https://huggingface.co/blog/LiquidAI/lfm2-5-2-6b"
+    ],
+    "relatedModels": [],
+    "tags": [
+      "ai-news",
+      "breaking",
+      "hugging-face"
+    ]
+  },
+  {
+    "id": "ai-leaders-propose-safe-guidelines-for-cybersecurity-transparency",
+    "slug": "ai-leaders-propose-safe-guidelines-for-cybersecurity-transparency",
+    "title": "AI Leaders Propose SAFE Guidelines for Cybersecurity Transparency",
+    "category": "short-news",
+    "isTrending": true,
+    "publishDate": "2026-08-04",
+    "author": "Modelverse Editorial",
+    "readTime": "2 min read",
+    "excerpt": "Members of the Open Secure AI Alliance — now more than 120 organizations strong — are developing new guidelines to strengthen agentic AI cybersecurity as the annual Black Hat confe...",
+    "body": "The Open Secure AI Alliance (OSAI), a collaborative effort involving over 120 organizations including industry leaders like NVIDIA, Cisco, and Hugging Face, has partnered with the Linux Foundation to propose the Shared AI Findings Exchange (SAFE) guidelines. Announced as the Black Hat conference commenced, this initiative aims to significantly bolster cybersecurity for agentic AI systems. SAFE is designed to transform individual AI security incidents and near misses into shared protective intelligence, fostering a more resilient and secure ecosystem against evolving cyber threats.\n\nThe SAFE framework outlines a systematic approach to collective defense. It proposes the confidential collection and analysis of AI security incidents, ensuring that affected parties are promptly informed. A key component involves identifying recurring control failures across various AI deployments and subsequently publishing evidence-based operational recommendations. This collaborative methodology recognizes that securing sophisticated AI agents—which are complex systems encompassing identity controls, guardrails, and logs—demands a layered, community-driven strategy beyond basic vulnerability scanning.\n\nFor developers and researchers, SAFE represents a crucial step towards building more robust and trustworthy AI. By promoting the open exchange of threat intelligence and lessons learned, the initiative acts as a force multiplier, enabling the community to collectively address and mitigate systemic risks at \"agent speed.\" It underscores the importance of a shared commitment to developing and integrating open, inspectable security tools throughout the entire AI security stack, ultimately accelerating the creation of safer AI technologies through collaborative learning.",
+    "coverImage": "https://blogs.nvidia.com/wp-content/uploads/2026/08/agentic-ai-press-osaia-5518050-1280x680-r2.png",
+    "status": "published",
+    "confidenceLevel": "confirmed",
+    "externalSources": [
+      "https://blogs.nvidia.com/blog/open-secure-ai-alliance-contributions/"
+    ],
+    "relatedModels": [],
+    "tags": [
+      "ai-news",
+      "breaking",
+      "nvidia"
+    ]
+  },
+  {
+    "id": "is-the-future-of-data-centers-portable-runware-builds-a-pod-to-find-out",
+    "slug": "is-the-future-of-data-centers-portable-runware-builds-a-pod-to-find-out",
+    "title": "Is the future of data centers portable? Runware builds a pod to find out",
+    "category": "short-news",
+    "isTrending": true,
+    "publishDate": "2026-08-04",
+    "author": "Modelverse Editorial",
+    "readTime": "2 min read",
+    "excerpt": "On Tuesday, AI infrastructure company Runware announced the launch of its own modular data center called Sonic Inference Pod.",
+    "body": "AI infrastructure firm Runware has unveiled its Sonic Inference Pod, a novel modular data center designed to revolutionize how AI inference compute is delivered. This transportable unit offers a flexible, distributed approach to processing AI models, positioning itself as a nimble alternative or complement to the massive, fixed data centers typically built by hyperscalers. The Pod aims to provide high-quality inference at a lower cost than existing serverless platforms and GPU clouds, addressing the escalating demand for AI compute with an agile solution.\n\nThe Sonic Inference Pod operates on a principle of distributed compute, where individual units function as part of a unified network. This modularity allows for rapid capacity expansion by simply deploying new pods, a stark contrast to the lengthy construction timelines of traditional facilities. Each pod can be deployed anywhere with power, bringing compute closer to end-users for reduced latency. Furthermore, the system incorporates an efficient, closed-loop cooling mechanism that requires no water and can be assembled in days, enhancing both speed of deployment and environmental sustainability. Its networked design ensures resilience, as traffic can be rerouted if a single pod goes offline.\n\nFor developers and researchers, Runware's Sonic Inference Pod represents a significant leap in accessible and scalable AI infrastructure. It directly tackles the challenge of demand for inference outstripping the pace of facility construction, offering a solution that can scale rapidly and adapt to evolving hardware needs. This flexibility, combined with the promise of faster, more cost-effective, and resilient inference capabilities, empowers AI innovators to deploy and scale their models with unprecedented agility, ultimately accelerating the development and widespread adoption of AI applications.",
+    "coverImage": "https://techcrunch.com/wp-content/uploads/2026/08/Data-center.png?resize=1196,1200",
+    "status": "published",
+    "confidenceLevel": "confirmed",
+    "externalSources": [
+      "https://techcrunch.com/2026/08/04/is-the-future-of-data-centers-portable-runware-builds-a-pod-to-find-out/"
     ],
     "relatedModels": [],
     "tags": [

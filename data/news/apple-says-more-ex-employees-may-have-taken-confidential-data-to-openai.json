@@ -1,0 +1,24 @@
+{
+  "id": "apple-says-more-ex-employees-may-have-taken-confidential-data-to-openai",
+  "slug": "apple-says-more-ex-employees-may-have-taken-confidential-data-to-openai",
+  "title": "Apple says more ex-employees may have taken confidential data to OpenAI",
+  "category": "short-news",
+  "isTrending": true,
+  "publishDate": "2026-08-04",
+  "author": "Modelverse Editorial",
+  "readTime": "2 min read",
+  "excerpt": "Apple says its trade secrets investigation into OpenAI has widened. In a new court filing, Apple claims additional former staff may have retained or accessed confidential informati...",
+  "body": "Apple is significantly escalating its legal dispute with OpenAI, filing for a preliminary injunction to halt the development of any AI device or product by OpenAI that might incorporate Apple's confidential technology. The iPhone maker's latest court submission suggests a wider scope of alleged misconduct, claiming that a greater number of its former employees may have been involved in the unauthorized transfer of trade secrets to the AI research company. This move underscores Apple's heightened concern over the potential misuse of its proprietary innovations in the rapidly expanding AI hardware and software domain.\n\nThe new filing seeks expedited discovery from several parties, including former Apple senior systems engineer Chang Liu and Chief Hardware Officer Tang Yew Tan, along with OpenAI itself and io, the device startup co-founded by Jony Ive. Apple's ongoing investigation has reportedly identified at least 11 additional former employees who may have been witnesses or involved in the alleged scheme. Specific examples cited include former staff discussing unannounced Apple products with OpenAI personnel and taking screenshots of confidential documents related to unreleased Apple products prior to interviewing with OpenAI, suggesting a deliberate effort to transfer sensitive information.\n\nThis intensifying legal battle highlights the critical importance of intellectual property protection within the highly competitive AI industry. For developers and researchers, it serves as a stark reminder of the legal complexities and ethical considerations surrounding talent mobility between rival tech giants. The outcome of this case could establish significant precedents for how trade secrets are managed and protected in the AI sector, potentially influencing future hiring practices and the boundaries of knowledge transfer, even as OpenAI publicly refutes Apple's claims, asserting they do not possess or desire Apple's trade secrets.",
+  "coverImage": "https://techcrunch.com/wp-content/uploads/2026/07/tim-cook-sam-altman-GettyImages-2233062347.jpg?w=1024",
+  "status": "published",
+  "confidenceLevel": "confirmed",
+  "externalSources": [
+    "https://techcrunch.com/2026/08/04/apple-says-more-ex-employees-may-have-taken-confidential-data-to-openai/"
+  ],
+  "relatedModels": [],
+  "tags": [
+    "ai-news",
+    "breaking",
+    "techcrunch-ai"
+  ]
+}

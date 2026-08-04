@@ -1,5 +1,71 @@
 [
   {
+    "id": "ai-leaders-propose-safe-guidelines-for-cybersecurity-transparency",
+    "slug": "ai-leaders-propose-safe-guidelines-for-cybersecurity-transparency",
+    "title": "AI Leaders Propose SAFE Guidelines for Cybersecurity Transparency",
+    "category": "short-news",
+    "publishDate": "2026-08-04",
+    "author": "Modelverse Editorial",
+    "readTime": "2 min read",
+    "excerpt": "Members of the Open Secure AI Alliance — now more than 120 organizations strong — are developing new guidelines to strengthen agentic AI cybersecurity as the annual Black Hat confe...",
+    "coverImage": "https://blogs.nvidia.com/wp-content/uploads/2026/08/agentic-ai-press-osaia-5518050-1280x680-r2.png",
+    "status": "published",
+    "confidenceLevel": "confirmed",
+    "externalSources": [
+      "https://blogs.nvidia.com/blog/open-secure-ai-alliance-contributions/"
+    ],
+    "relatedModels": [],
+    "tags": [
+      "ai-news",
+      "breaking",
+      "nvidia"
+    ]
+  },
+  {
+    "id": "apple-says-more-ex-employees-may-have-taken-confidential-data-to-openai",
+    "slug": "apple-says-more-ex-employees-may-have-taken-confidential-data-to-openai",
+    "title": "Apple says more ex-employees may have taken confidential data to OpenAI",
+    "category": "short-news",
+    "publishDate": "2026-08-04",
+    "author": "Modelverse Editorial",
+    "readTime": "2 min read",
+    "excerpt": "Apple says its trade secrets investigation into OpenAI has widened. In a new court filing, Apple claims additional former staff may have retained or accessed confidential informati...",
+    "coverImage": "https://techcrunch.com/wp-content/uploads/2026/07/tim-cook-sam-altman-GettyImages-2233062347.jpg?w=1024",
+    "status": "published",
+    "confidenceLevel": "confirmed",
+    "externalSources": [
+      "https://techcrunch.com/2026/08/04/apple-says-more-ex-employees-may-have-taken-confidential-data-to-openai/"
+    ],
+    "relatedModels": [],
+    "tags": [
+      "ai-news",
+      "breaking",
+      "techcrunch-ai"
+    ]
+  },
+  {
+    "id": "as-ai-increases-demands-on-memory-storage-steps-up",
+    "slug": "as-ai-increases-demands-on-memory-storage-steps-up",
+    "title": "As AI Increases Demands on Memory, Storage Steps Up",
+    "category": "short-news",
+    "publishDate": "2026-08-04",
+    "author": "Modelverse Editorial",
+    "readTime": "2 min read",
+    "excerpt": "Surging AI demands are driving the need for massive datasets and context windows that burst past the confines of system memory.  But rising needs aren’t met by simply adding more s...",
+    "coverImage": "https://blogs.nvidia.com/wp-content/uploads/2026/08/ai-storage-fms-1920x1080-1.jpg",
+    "status": "published",
+    "confidenceLevel": "confirmed",
+    "externalSources": [
+      "https://blogs.nvidia.com/blog/ai-storage-fms/"
+    ],
+    "relatedModels": [],
+    "tags": [
+      "ai-news",
+      "breaking",
+      "nvidia"
+    ]
+  },
+  {
     "id": "building-an-advanced-ai-skill-security-auditing-pipeline-with-nvidia-skillspecto",
     "slug": "building-an-advanced-ai-skill-security-auditing-pipeline-with-nvidia-skillspecto",
     "title": "Building an Advanced AI Skill Security Auditing Pipeline with NVIDIA SkillSpector, LangGraph, YARA Rules, SARIF, and CI Policy Gates",
@@ -22,6 +88,28 @@
     ]
   },
   {
+    "id": "deploy-local-agents-everywhere-with-lfm25-26b",
+    "slug": "deploy-local-agents-everywhere-with-lfm25-26b",
+    "title": "Deploy local agents everywhere with LFM2.5-2.6B",
+    "category": "short-news",
+    "publishDate": "2026-08-04",
+    "author": "Modelverse Editorial",
+    "readTime": "2 min read",
+    "excerpt": "Deploy local agents everywhere with LFM2.5-2.6B",
+    "coverImage": "https://cdn-uploads.huggingface.co/production/uploads/644249b08443bce4c9890a0f/DsoMk3kqhMYedjPiZINKv.png",
+    "status": "published",
+    "confidenceLevel": "confirmed",
+    "externalSources": [
+      "https://huggingface.co/blog/LiquidAI/lfm2-5-2-6b"
+    ],
+    "relatedModels": [],
+    "tags": [
+      "ai-news",
+      "breaking",
+      "hugging-face"
+    ]
+  },
+  {
     "id": "disrupting-a-criminal-scam-operation",
     "slug": "disrupting-a-criminal-scam-operation",
     "title": "Disrupting a Criminal Scam Operation",
@@ -41,6 +129,28 @@
       "ai-news",
       "breaking",
       "openai"
+    ]
+  },
+  {
+    "id": "elon-musk-spends-half-his-time-talking-robots-and-ai-on-tesla-earnings-calls",
+    "slug": "elon-musk-spends-half-his-time-talking-robots-and-ai-on-tesla-earnings-calls",
+    "title": "Elon Musk spends half his time talking robots and AI on Tesla earnings calls",
+    "category": "short-news",
+    "publishDate": "2026-08-04",
+    "author": "Modelverse Editorial",
+    "readTime": "2 min read",
+    "excerpt": "An analysis of the last seven years of Tesla earnings calls shows just little attention Musk pays to Tesla's car business.",
+    "coverImage": "https://techcrunch.com/wp-content/uploads/2024/10/GettyImages-2171035708.jpg?resize=1200,800",
+    "status": "published",
+    "confidenceLevel": "confirmed",
+    "externalSources": [
+      "https://techcrunch.com/2026/08/04/elon-musk-spends-half-his-time-talking-robots-and-ai-on-tesla-earnings-calls/"
+    ],
+    "relatedModels": [],
+    "tags": [
+      "ai-news",
+      "breaking",
+      "techcrunch-ai"
     ]
   },
   {
@@ -85,6 +195,50 @@
       "ai-news",
       "breaking",
       "marktechpost"
+    ]
+  },
+  {
+    "id": "is-the-future-of-data-centers-portable-runware-builds-a-pod-to-find-out",
+    "slug": "is-the-future-of-data-centers-portable-runware-builds-a-pod-to-find-out",
+    "title": "Is the future of data centers portable? Runware builds a pod to find out",
+    "category": "short-news",
+    "publishDate": "2026-08-04",
+    "author": "Modelverse Editorial",
+    "readTime": "2 min read",
+    "excerpt": "On Tuesday, AI infrastructure company Runware announced the launch of its own modular data center called Sonic Inference Pod.",
+    "coverImage": "https://techcrunch.com/wp-content/uploads/2026/08/Data-center.png?resize=1196,1200",
+    "status": "published",
+    "confidenceLevel": "confirmed",
+    "externalSources": [
+      "https://techcrunch.com/2026/08/04/is-the-future-of-data-centers-portable-runware-builds-a-pod-to-find-out/"
+    ],
+    "relatedModels": [],
+    "tags": [
+      "ai-news",
+      "breaking",
+      "techcrunch-ai"
+    ]
+  },
+  {
+    "id": "nvidia-alpamayo-2-super-the-frontier-open-model-for-robotaxis-and-autonomous-veh",
+    "slug": "nvidia-alpamayo-2-super-the-frontier-open-model-for-robotaxis-and-autonomous-veh",
+    "title": "NVIDIA Alpamayo 2 Super, the Frontier Open Model for Robotaxis and Autonomous Vehicles, Now Available for Commercial Use",
+    "category": "short-news",
+    "publishDate": "2026-08-04",
+    "author": "Modelverse Editorial",
+    "readTime": "2 min read",
+    "excerpt": "For robotaxis and other autonomous vehicles (AVs), the hardest problems aren’t the everyday scenarios. They’re the rare, complex situations that are difficult to anticipate and tra...",
+    "coverImage": "https://blogs.nvidia.com/wp-content/uploads/2026/08/alpamayo-launch-kv-blog-1920x1080-1.jpg",
+    "status": "published",
+    "confidenceLevel": "confirmed",
+    "externalSources": [
+      "https://blogs.nvidia.com/blog/alpamayo-2-super-open-model-now-available/"
+    ],
+    "relatedModels": [],
+    "tags": [
+      "ai-news",
+      "breaking",
+      "nvidia"
     ]
   },
   {
