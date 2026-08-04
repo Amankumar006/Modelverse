@@ -396,6 +396,28 @@
     ]
   },
   {
+    "id": "pixel-native-rag-a-practical-guide-to-visual-document-indexing",
+    "slug": "pixel-native-rag-a-practical-guide-to-visual-document-indexing",
+    "title": "Pixel-Native RAG: A Practical Guide to Visual Document Indexing",
+    "category": "short-news",
+    "publishDate": "2026-08-04",
+    "author": "Modelverse Editorial",
+    "readTime": "2 min read",
+    "excerpt": "Move beyond traditional text-based parsing with PixelRAG, an end-to-end system that treats web pages and PDFs as images. This tutorial explores the complete pipeline—from rendering...",
+    "coverImage": "https://www.marktechpost.com/wp-content/uploads/2026/08/blog6176-1-1.png",
+    "status": "published",
+    "confidenceLevel": "confirmed",
+    "externalSources": [
+      "https://www.marktechpost.com/2026/08/04/pixel-native-rag-a-practical-guide-to-visual-document-indexing/"
+    ],
+    "relatedModels": [],
+    "tags": [
+      "ai-news",
+      "breaking",
+      "marktechpost"
+    ]
+  },
+  {
     "id": "reflex-open-sources-xy-a-rust-backed-super-fast-python-charting-library-that-kee",
     "slug": "reflex-open-sources-xy-a-rust-backed-super-fast-python-charting-library-that-kee",
     "title": "Reflex Open Sources XY: A Rust-Backed Super-Fast Python Charting Library That Keeps 100 Million Point Charts Interactive",
@@ -415,6 +437,28 @@
       "ai-news",
       "breaking",
       "marktechpost"
+    ]
+  },
+  {
+    "id": "spacex-has-bought-329m-worth-of-tesla-megapacks-so-far-this-year",
+    "slug": "spacex-has-bought-329m-worth-of-tesla-megapacks-so-far-this-year",
+    "title": "SpaceX has bought $329M worth of Tesla Megapacks so far this year",
+    "category": "short-news",
+    "publishDate": "2026-08-04",
+    "author": "Modelverse Editorial",
+    "readTime": "2 min read",
+    "excerpt": "The purchase illustrates just how interconnected Elon Musk's universe of companies are.",
+    "coverImage": "https://techcrunch.com/wp-content/uploads/2022/09/GettyImages-1241146892.jpg?resize=1200,800",
+    "status": "published",
+    "confidenceLevel": "confirmed",
+    "externalSources": [
+      "https://techcrunch.com/2026/08/04/spacex-has-bought-329m-worth-of-tesla-megapacks-so-far-this-year/"
+    ],
+    "relatedModels": [],
+    "tags": [
+      "ai-news",
+      "breaking",
+      "techcrunch-ai"
     ]
   },
   {
