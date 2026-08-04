@@ -1,0 +1,24 @@
+{
+  "id": "cursor-open-sources-mixture-of-kittens-mok-a-deterministic-moe-training-megakern",
+  "slug": "cursor-open-sources-mixture-of-kittens-mok-a-deterministic-moe-training-megakern",
+  "title": "Cursor Open-Sources Mixture-of-Kittens (MoK): A Deterministic MoE Training Megakernel for GB300 NVL72 Racks",
+  "category": "short-news",
+  "isTrending": true,
+  "publishDate": "2026-08-04",
+  "author": "Modelverse Editorial",
+  "readTime": "2 min read",
+  "excerpt": "Cursor Research has open-sourced Mixture-of-Kittens (MoK), the MoE training megakernel behind its Composer models. MoK fuses all mixture-of-experts communication and computation in...",
+  "body": "Cursor Research has unveiled and open-sourced Mixture-of-Kittens (MoK), a groundbreaking mixture-of-experts (MoE) training megakernel that powers their Composer models. This release is significant for its reported performance, achieving up to 2.37 times higher throughput compared to existing public baselines, a testament to its efficiency in handling the complex demands of MoE architectures. MoK is now available on GitHub under the Apache-2.0 license, marking a crucial contribution to the AI community.\n\nAt its core, MoK revolutionizes MoE training by fusing every communication and computation step into a single, deterministic kernel. This innovative approach is specifically engineered for high-end NVIDIA Blackwell SM100 or SM103 GPUs, requiring GB200 or GB300 NVL72 racks. By leveraging Blackwell's Cluster Launch Control and PyTorch symmetric memory for inter-GPU buffers, MoK aggressively minimizes CPU-GPU synchronization, a critical bottleneck in previous MoE training setups. This design choice directly addresses the challenge of communication overhead, which can consume over half of the end-to-end training time for MoE layers.\n\nMoK's release is particularly impactful for developers and researchers operating at the cutting edge of AI. While its hardware requirements limit adoption to organizations with substantial NVL72 capacity—such as frontier labs, GPU neoclouds, and national computing centers—it offers immense value for pretraining and post-training DeepSeek-V3-style MoE models. Its deterministic nature also makes it invaluable for on-policy reinforcement learning post-training and rigorous internal ablations, enabling more reliable and reproducible research. This megakernel represents a significant leap in optimizing large-scale MoE model development, pushing the boundaries of what's possible in high-performance AI training.",
+  "coverImage": "https://www.marktechpost.com/wp-content/uploads/2026/08/blog6176-10.png",
+  "status": "published",
+  "confidenceLevel": "confirmed",
+  "externalSources": [
+    "https://www.marktechpost.com/2026/08/04/cursor-open-sources-mixture-of-kittens-mok-a-deterministic-moe-training-megakernel-for-gb300-nvl72-racks/"
+  ],
+  "relatedModels": [],
+  "tags": [
+    "ai-news",
+    "breaking",
+    "marktechpost"
+  ]
+}

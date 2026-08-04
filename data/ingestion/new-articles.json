@@ -1,122 +1,26 @@
 [
   {
-    "id": "tino-cuellar",
-    "slug": "tino-cuellar",
-    "title": "Tino Cuellar",
+    "id": "cursor-open-sources-mixture-of-kittens-mok-a-deterministic-moe-training-megakern",
+    "slug": "cursor-open-sources-mixture-of-kittens-mok-a-deterministic-moe-training-megakern",
+    "title": "Cursor Open-Sources Mixture-of-Kittens (MoK): A Deterministic MoE Training Megakernel for GB300 NVL72 Racks",
     "category": "short-news",
     "isTrending": true,
     "publishDate": "2026-08-04",
     "author": "Modelverse Editorial",
     "readTime": "2 min read",
-    "excerpt": "Official announcement from Anthropic: Tino Cuellar",
-    "body": "Anthropic, a prominent AI research company, has made a significant strategic move by appointing Mariano-Florentino (Tino) Cuéllar as its first Chief Global Affairs Officer. This new role underscores Anthropic's commitment to proactively shaping the global discourse around AI, with Cuéllar tasked with leading the company's worldwide efforts in policy, international engagement, and government relations. His arrival signals a pivotal moment for how a major AI developer intends to navigate the complex geopolitical and regulatory landscape emerging around advanced artificial intelligence.\n\nCuéllar brings an unparalleled breadth of experience to this critical position, having served as a Justice of the Supreme Court of California, President of the Carnegie Endowment for International Peace, and director of Stanford's Freeman Spogli Institute for International Studies, among other high-profile roles. His background spans law, technology, international security, and public policy, including co-leading California’s Frontier AI Working Group and serving on the President's Intelligence Advisory Board. This diverse expertise will be instrumental in guiding Anthropic's strategy to engage with policymakers, civil society, and international bodies, ensuring that the development and deployment of AI align with democratic values and broad societal benefit, while mitigating potential risks.\n\nFor developers and researchers, this appointment is highly significant. It demonstrates Anthropic's serious intent to contribute to a stable and ethically sound global framework for AI, which directly impacts the environment in which they innovate. Cuéllar's work will help bridge the gap between rapid technological advancement and thoughtful governance, potentially leading to more informed regulations, fostering international collaboration, and building public trust. This proactive engagement aims to ensure that AI's trajectory is shaped responsibly, allowing researchers to focus on harnessing its extraordinary possibilities for human progress within a well-defined and globally accepted ethical perimeter.",
-    "coverImage": "https://cdn.sanity.io/images/4zrzovbb/website/6d4a0d28992ade92d6fa63646fd9c9d318245c6c-2400x1260.jpg",
+    "excerpt": "Cursor Research has open-sourced Mixture-of-Kittens (MoK), the MoE training megakernel behind its Composer models. MoK fuses all mixture-of-experts communication and computation in...",
+    "body": "Cursor Research has unveiled and open-sourced Mixture-of-Kittens (MoK), a groundbreaking mixture-of-experts (MoE) training megakernel that powers their Composer models. This release is significant for its reported performance, achieving up to 2.37 times higher throughput compared to existing public baselines, a testament to its efficiency in handling the complex demands of MoE architectures. MoK is now available on GitHub under the Apache-2.0 license, marking a crucial contribution to the AI community.\n\nAt its core, MoK revolutionizes MoE training by fusing every communication and computation step into a single, deterministic kernel. This innovative approach is specifically engineered for high-end NVIDIA Blackwell SM100 or SM103 GPUs, requiring GB200 or GB300 NVL72 racks. By leveraging Blackwell's Cluster Launch Control and PyTorch symmetric memory for inter-GPU buffers, MoK aggressively minimizes CPU-GPU synchronization, a critical bottleneck in previous MoE training setups. This design choice directly addresses the challenge of communication overhead, which can consume over half of the end-to-end training time for MoE layers.\n\nMoK's release is particularly impactful for developers and researchers operating at the cutting edge of AI. While its hardware requirements limit adoption to organizations with substantial NVL72 capacity—such as frontier labs, GPU neoclouds, and national computing centers—it offers immense value for pretraining and post-training DeepSeek-V3-style MoE models. Its deterministic nature also makes it invaluable for on-policy reinforcement learning post-training and rigorous internal ablations, enabling more reliable and reproducible research. This megakernel represents a significant leap in optimizing large-scale MoE model development, pushing the boundaries of what's possible in high-performance AI training.",
+    "coverImage": "https://www.marktechpost.com/wp-content/uploads/2026/08/blog6176-10.png",
     "status": "published",
     "confidenceLevel": "confirmed",
     "externalSources": [
-      "https://www.anthropic.com/news/tino-cuellar"
+      "https://www.marktechpost.com/2026/08/04/cursor-open-sources-mixture-of-kittens-mok-a-deterministic-moe-training-megakernel-for-gb300-nvl72-racks/"
     ],
     "relatedModels": [],
     "tags": [
       "ai-news",
       "breaking",
-      "anthropic"
-    ]
-  },
-  {
-    "id": "nvidia-joins-nsf-state-and-regional-ai-hubs-program-to-expand-ai-research-and-ed",
-    "slug": "nvidia-joins-nsf-state-and-regional-ai-hubs-program-to-expand-ai-research-and-ed",
-    "title": "NVIDIA Joins NSF State and Regional AI Hubs Program to Expand AI Research and Education Across the US",
-    "category": "short-news",
-    "isTrending": true,
-    "publishDate": "2026-08-04",
-    "author": "Modelverse Editorial",
-    "readTime": "2 min read",
-    "excerpt": "NVIDIA is participating in the U.S. National Science Foundation’s (NSF) State and Regional Artificial Intelligence Infrastructure Hubs program, an effort launching today to expand ...",
-    "body": "NVIDIA has announced its participation in the U.S. National Science Foundation’s (NSF) new State and Regional Artificial Intelligence Infrastructure Hubs program. This significant initiative aims to democratize access to advanced computing, data, software, and specialized expertise crucial for AI-driven research and education nationwide. By fostering collaborations between state and multi-state groups of colleges and universities, supported by private industry and government, the program seeks to bolster America's AI ecosystem and ensure broader participation in the rapidly evolving AI landscape.\n\nThe program operates by establishing regional hubs that enable institutions to share vital AI computing resources, accelerate scientific discovery, and equip students with the skills needed for the AI economy. These consortia will pool expertise and infrastructure, offering flexible deployment options—on-premises, cloud-based, or a hybrid—to align with specific regional needs and economic priorities. This model draws inspiration from the highly successful 2020 partnership between NVIDIA, co-founder Chris Malachowsky, and the University of Florida, which transformed UF into a leading AI university and extended AI compute access across Florida's public universities, now serving as a national blueprint.\n\nFor developers and researchers, this expansion is profoundly important. It breaks down barriers to entry by bringing cutting-edge AI infrastructure and tools closer to a wider array of institutions and communities, not just those at the forefront. This localized approach fosters diverse research priorities, accelerates innovation, and provides critical educational opportunities, ensuring that more faculty, students, and researchers can translate their ideas into tangible experiments and discoveries. By building on previous efforts like the NSF-led National Artificial Intelligence Research Resource (NAIRR) pilot, the program is set to cultivate a more inclusive and robust national AI talent pipeline, driving future advancements across various sectors.",
-    "coverImage": "https://blogs.nvidia.com/wp-content/uploads/2026/08/regionalhubnsf.webp",
-    "status": "published",
-    "confidenceLevel": "confirmed",
-    "externalSources": [
-      "https://blogs.nvidia.com/blog/nsf-state-regional-ai-hub-program/"
-    ],
-    "relatedModels": [],
-    "tags": [
-      "ai-news",
-      "breaking",
-      "nvidia"
-    ]
-  },
-  {
-    "id": "spotify-expands-ai-remix-and-covers-project-with-merlin-partnership",
-    "slug": "spotify-expands-ai-remix-and-covers-project-with-merlin-partnership",
-    "title": "Spotify expands AI remix and covers project with Merlin partnership",
-    "category": "short-news",
-    "isTrending": true,
-    "publishDate": "2026-08-04",
-    "author": "Modelverse Editorial",
-    "readTime": "2 min read",
-    "excerpt": "Spotify says Merlin, which represents more than 30,000 independent labels and distributors, has joined Universal Music Group in backing its upcoming AI-powered remix and covers pro...",
-    "body": "Spotify is advancing its innovative AI project, designed to empower music fans to create covers and remixes of their favorite artists' tracks. A significant development is the partnership with Merlin, a key licensing agency for independent labels, which now joins Universal Music Group (UMG) in this venture. This collaboration brings over 30,000 additional labels into the fold, vastly expanding the pool of artists whose music can be leveraged, provided they consent to participate. This initiative stands apart from more controversial generative AI music tools by focusing on \"real artists, not fake artists,\" ensuring all fan-made creations are rooted in existing, consented works.\n\nThe upcoming product operates on a foundational principle of ethical AI integration: artists must explicitly consent to their work being used, receive proper credit, and be compensated for these AI-powered remixes and covers. Spotify positions this as the \"first legal way\" for artists to engage with the burgeoning AI music landscape, creating new revenue streams through a paid add-on service. While a research preview will initially roll out to a limited user base, the core mechanism revolves around facilitating interactive music experiences that respect artist rights and intellectual property.\n\nFor developers and researchers, Spotify's approach offers a compelling model for responsible AI innovation within the creative industries. It demonstrates how AI can be harnessed to enhance fan engagement and create new economic opportunities for artists, rather than generating fully artificial content that often raises ethical and legal questions. This project highlights the potential for AI to act as a collaborative tool, fostering creativity within established frameworks of consent and compensation, thereby setting a precedent for how AI can ethically integrate with and benefit existing artistic ecosystems.",
-    "coverImage": "https://techcrunch.com/wp-content/uploads/2026/02/spotify-logo-phone-GettyImages-2236404299.jpg?w=1024",
-    "status": "published",
-    "confidenceLevel": "confirmed",
-    "externalSources": [
-      "https://techcrunch.com/2026/08/04/spotify-adds-merlin-to-its-ai-music-remix-and-covers-effort/"
-    ],
-    "relatedModels": [],
-    "tags": [
-      "ai-news",
-      "breaking",
-      "techcrunch-ai"
-    ]
-  },
-  {
-    "id": "texas-halts-new-data-centers-as-governor-calls-for-audits",
-    "slug": "texas-halts-new-data-centers-as-governor-calls-for-audits",
-    "title": "Texas halts new data centers as governor calls for audits",
-    "category": "short-news",
-    "isTrending": true,
-    "publishDate": "2026-08-04",
-    "author": "Modelverse Editorial",
-    "readTime": "2 min read",
-    "excerpt": "Tech companies and developers have been scouring the U.S. for places to build data centers, and they’ve been drawn to Texas’ loose regulations and seemingly abundant power supply. ...",
-    "body": "## Texas Halts New Data Center Projects Amid Grid Strain Concerns\n\nTexas Governor Greg Abbott has introduced a significant policy shift, mandating comprehensive audits for all new data center developments. This move comes as the state, a major hub for data infrastructure, grapples with an unprecedented surge in electricity demand. Historically attractive for its relaxed regulations and ample power, Texas now faces potential grid overwhelm, with data center interconnection requests more than doubling in six months to 474 gigawatts. This represents a critical pivot for a state that has been a magnet for tech companies seeking to expand their computing infrastructure.\n\nUnder the new directive, the Public Utility Commission of Texas (PUCT) and the Electric Reliability Council of Texas (ERCOT) will scrutinize proposed projects. This includes evaluating projected electricity and water consumption, noise and light pollution controls, tax incentive use, and ownership structures. The aim is to prevent a scenario where the sheer volume of proposed data centers—representing over five times ERCOT's current peak demand—could destabilize the state's power supply and drive up energy costs, a trend already observed with the proliferation of such facilities.\n\nFor AI and tech developers and researchers, this signals a critical shift in the data center landscape. Texas, once a go-to location for its operational advantages, now presents a more complex regulatory environment. This increased oversight means longer planning cycles, potentially higher compliance expenses, and a re-evaluation of site selection strategies. The decision underscores a growing national conversation about the sustainability and infrastructure demands of rapidly expanding AI and high-performance computing, potentially prompting other regions to consider similar measures to manage the immense energy footprint of modern tech infrastructure.",
-    "coverImage": "https://techcrunch.com/wp-content/uploads/2025/05/GettyImages-2205417979.jpg?w=1024",
-    "status": "published",
-    "confidenceLevel": "confirmed",
-    "externalSources": [
-      "https://techcrunch.com/2026/08/04/texas-halts-new-data-centers-as-governor-calls-for-audits/"
-    ],
-    "relatedModels": [],
-    "tags": [
-      "ai-news",
-      "breaking",
-      "techcrunch-ai"
-    ]
-  },
-  {
-    "id": "new-ways-to-learn-and-teach-with-chatgpt-work-and-codex",
-    "slug": "new-ways-to-learn-and-teach-with-chatgpt-work-and-codex",
-    "title": "New ways to learn and teach with ChatGPT Work and Codex",
-    "category": "short-news",
-    "isTrending": true,
-    "publishDate": "2026-08-04",
-    "author": "Modelverse Editorial",
-    "readTime": "2 min read",
-    "excerpt": "Explore new education plugins for ChatGPT Work and Codex that help K–12 teachers, college educators, and students learn, teach, research, and build.",
-    "body": "OpenAI has unveiled a significant expansion into the educational technology landscape with the introduction of new specialized plugins for ChatGPT Work and Codex. This initiative aims to fundamentally enhance how K–12 students, college educators, and researchers interact with AI, providing powerful tools designed to support various aspects of the learning and teaching process.\n\nThese innovative plugins function by extending the core capabilities of OpenAI's advanced language and code models, transforming them into more versatile educational assistants. For instance, they can facilitate personalized learning experiences, streamline content creation for lessons, assist in complex research tasks by summarizing information or generating ideas, and even provide interactive environments for students to build and experiment with code. The integration of these tools into existing AI platforms allows for a more dynamic and interactive approach to academic pursuits.\n\nFor developers and researchers, this announcement is particularly impactful, signaling a robust and expanding frontier for AI applications in education. It highlights the immense potential for creating highly specialized, AI-powered solutions that can address specific pedagogical challenges, reduce administrative overhead for educators, and empower students with unprecedented access to personalized learning resources. This move not only demonstrates the practical utility of large language models and code generation tools in academic settings but also encourages further innovation and development within the burgeoning ed-tech sector.",
-    "coverImage": "/images/news/news_short.jpg",
-    "status": "published",
-    "confidenceLevel": "confirmed",
-    "externalSources": [
-      "https://openai.com/index/learn-teach-chatgpt-work-codex"
-    ],
-    "relatedModels": [],
-    "tags": [
-      "ai-news",
-      "breaking",
-      "openai"
+      "marktechpost"
     ]
   }
 ]
