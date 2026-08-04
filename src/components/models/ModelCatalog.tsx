@@ -583,7 +583,7 @@ function ModelCatalogContent({
 
         {/* Horizontal Filter Task & Type Bar */}
         <div className="space-y-3 border-b border-[var(--muted)]/10 pb-5">
-          <div className="flex items-center gap-2 overflow-x-auto pb-1 no-scrollbar w-full">
+          <div className="flex flex-wrap gap-2 w-full">
             <span className="text-xs font-bold uppercase tracking-wider text-[var(--muted)] shrink-0 mr-1">Task:</span>
             <button
               onClick={() => setFilters((f) => ({ ...f, task: [] }))}
@@ -624,7 +624,7 @@ function ModelCatalogContent({
             })}
           </div>
 
-          <div className="flex items-center gap-2 overflow-x-auto pb-1 no-scrollbar w-full">
+          <div className="flex flex-wrap gap-2 w-full">
             <span className="text-xs font-bold uppercase tracking-wider text-[var(--muted)] shrink-0 mr-1">Type:</span>
             <button
               onClick={() => setFilters((f) => ({ ...f, type: [] }))}
@@ -724,7 +724,7 @@ function ModelCatalogContent({
         </div>
 
         {/* Results Model Cards Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-5">
+        <div className="grid grid-cols-[repeat(auto-fill,minmax(230px,1fr))] gap-5">
           {groupedItems.map((item) => {
             if (item.type === "family") {
               return (

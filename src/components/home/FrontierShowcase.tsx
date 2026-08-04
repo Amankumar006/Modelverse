@@ -58,7 +58,7 @@ export default function FrontierShowcase({ models }: { models: ModelEntry[] }) {
       >
         {/* Intro Slide */}
         <div className="w-[85vw] sm:w-[500px] shrink-0 pl-6 sm:pl-10 md:pl-20 pr-4 sm:pr-10 z-20 sticky left-0 antialiased">
-          <h2 className="text-4xl md:text-5xl font-normal text-[var(--text)] mb-4" style={{ fontFamily: "var(--font-display, ui-sans-serif, system-ui, sans-serif)", letterSpacing: "-1px" }}>
+          <h2 className="text-[clamp(2.25rem,6vw,3rem)] font-normal text-[var(--text)] mb-4" style={{ fontFamily: "var(--font-display, ui-sans-serif, system-ui, sans-serif)", letterSpacing: "-1px" }}>
             Frontier <br />
             <span className="italic text-[var(--muted)]">Intelligence.</span>
           </h2>
@@ -95,7 +95,7 @@ export default function FrontierShowcase({ models }: { models: ModelEntry[] }) {
             {/* Bottom Content */}
             <div className="relative z-10 p-6 md:p-8 pt-0">
               <h3 
-                className="text-3xl sm:text-4xl md:text-5xl font-normal text-[var(--text)] mb-6 group-hover:text-[var(--accent)] transition-colors truncate"
+                className="text-[clamp(1.875rem,5vw,3rem)] font-normal text-[var(--text)] mb-6 group-hover:text-[var(--accent)] transition-colors truncate"
                 style={{ fontFamily: "var(--font-display, ui-sans-serif, system-ui, sans-serif)", letterSpacing: "-1px" }}
               >
                 {model.name}

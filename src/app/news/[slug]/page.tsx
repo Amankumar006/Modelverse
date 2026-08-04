@@ -160,7 +160,7 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
           <ConfidenceBadge confidence={article.confidenceLevel} />
         </div>
 
-        <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-[var(--text)] tracking-tight leading-[1.2] mb-6">
+        <h1 className="text-[clamp(1.875rem,5vw,3rem)] font-extrabold text-[var(--text)] tracking-tight leading-[1.2] mb-6">
           {article.title}
         </h1>
 
@@ -193,7 +193,7 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
           <BenchmarkTabs />
         )}
 
-        <div className="prose prose-invert max-w-none text-[var(--text)] leading-relaxed text-base sm:text-lg font-sans prose-p:text-[var(--text)] prose-p:mb-6 prose-headings:font-extrabold prose-headings:text-[var(--text)] prose-h2:text-2xl sm:prose-h2:text-3xl prose-h2:mt-10 prose-h2:mb-4 prose-h3:text-xl prose-h3:mt-8 prose-h3:mb-3 prose-a:text-[var(--accent)] prose-a:underline hover:prose-a:text-[var(--accent)] prose-li:my-1.5 prose-strong:text-[var(--text)] prose-strong:font-bold">
+        <div className="prose prose-invert max-w-none text-[var(--text)] leading-relaxed text-base sm:text-lg font-sans prose-p:text-[var(--text)] prose-p:mb-6 prose-headings:font-extrabold prose-headings:text-[var(--text)] prose-h2:text-[clamp(1.5rem,4vw,1.875rem)] prose-h2:mt-10 prose-h2:mb-4 prose-h3:text-xl prose-h3:mt-8 prose-h3:mb-3 prose-a:text-[var(--accent)] prose-a:underline hover:prose-a:text-[var(--accent)] prose-li:my-1.5 prose-strong:text-[var(--text)] prose-strong:font-bold">
           <ReactMarkdown
             remarkPlugins={[remarkGfm]}
             components={{
@@ -304,7 +304,7 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
       </article>
 
       <div className="max-w-[1040px] mx-auto px-6 mt-20 pt-16 border-t border-[var(--muted)]/10">
-        <h2 className="text-2xl sm:text-3xl font-extrabold text-[var(--text)] mb-8">
+        <h2 className="text-[clamp(1.5rem,4vw,1.875rem)] font-extrabold text-[var(--text)] mb-8">
           Related content
         </h2>
 

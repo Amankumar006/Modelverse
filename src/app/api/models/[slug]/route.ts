@@ -27,7 +27,36 @@ export async function GET(
       );
     }
 
-    return NextResponse.json(model);
+    const sanitizedModel = {
+      id: model.id,
+      name: model.name,
+      slug: model.slug,
+      developer: model.developer,
+      releaseDate: model.releaseDate,
+      updatedAt: model.updatedAt,
+      type: model.type,
+      status: model.status,
+      vendorApiStatus: model.vendorApiStatus,
+      modality: model.modality,
+      primaryTask: model.primaryTask,
+      deployment: model.deployment,
+      license: model.license,
+      parameters: model.parameters,
+      contextWindow: model.contextWindow,
+      description: model.description,
+      keyFeatures: model.keyFeatures,
+      benchmarks: model.benchmarks,
+      pricing: model.pricing,
+      family: model.family,
+      previousVersion: model.previousVersion,
+      links: model.links,
+      logo: model.logo,
+      tags: model.tags,
+      sources: model.sources,
+      verified: model.verified
+    };
+
+    return NextResponse.json(sanitizedModel);
   } catch (err: any) {
     console.error("API Error in /api/models/[slug]:", err);
     return NextResponse.json(

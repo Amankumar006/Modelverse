@@ -68,7 +68,7 @@ export default function Home() {
                 <Sparkles size={14} className="shrink-0" />
                 <span>Frontier Releases</span>
               </div>
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-[var(--text)] tracking-tight">
+              <h2 className="text-[clamp(1.5rem,5vw,2.25rem)] font-extrabold text-[var(--text)] tracking-tight leading-tight">
                 Recently Added Models
               </h2>
               <p className="text-sm text-[var(--muted)] mt-1.5 max-w-xl">
@@ -108,7 +108,7 @@ export default function Home() {
                   <Newspaper size={14} className="shrink-0" />
                   <span>Intelligence Digest</span>
                 </div>
-                <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-[var(--text)] tracking-tight">
+                <h2 className="text-[clamp(1.5rem,5vw,2.25rem)] font-extrabold text-[var(--text)] tracking-tight leading-tight">
                   Latest AI News & Analysis
                 </h2>
                 <p className="text-sm text-[var(--muted)] mt-1.5 max-w-xl">
@@ -146,10 +146,10 @@ export default function Home() {
 
                   <div className="p-6 md:p-8 flex flex-col justify-between flex-1 relative z-10">
                     <div>
-                      <h3 className="text-xl md:text-2xl font-bold text-[var(--text)] group-hover:text-[var(--accent)] transition-colors leading-snug tracking-tight">
+                      <h3 className="text-[clamp(1.25rem,4vw,1.5rem)] font-bold text-[var(--text)] group-hover:text-[var(--accent)] transition-colors leading-snug tracking-tight">
                         {featuredArticle.title}
                       </h3>
-                      <p className="text-xs md:text-sm text-[var(--muted)] mt-3 line-clamp-3 leading-relaxed">
+                      <p className="text-[clamp(0.75rem,2vw,0.875rem)] text-[var(--muted)] mt-3 line-clamp-3 leading-relaxed">
                         {featuredArticle.excerpt}
                       </p>
                     </div>
@@ -198,7 +198,7 @@ export default function Home() {
                         </span>
                       </div>
 
-                      <h4 className="text-xs md:text-sm font-bold text-[var(--text)] group-hover:text-[var(--accent)] transition-colors line-clamp-2 leading-snug tracking-tight">
+                      <h4 className="text-[clamp(0.75rem,2vw,0.875rem)] font-bold text-[var(--text)] group-hover:text-[var(--accent)] transition-colors line-clamp-2 leading-snug tracking-tight">
                         {article.title}
                       </h4>
 

@@ -46,7 +46,7 @@ export default function MethodologyPage() {
             <Sparkles size={12} />
             <span>Editorial Standards</span>
           </div>
-          <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight text-[var(--text)] leading-none">
+          <h1 className="text-[clamp(2.5rem,6vw,4rem)] font-extrabold tracking-tight text-[var(--text)] leading-none">
             Our Methodology
           </h1>
           <p className="text-sm text-[var(--muted)] mt-4 max-w-xl leading-relaxed font-medium">
@@ -102,7 +102,7 @@ export default function MethodologyPage() {
 
         {/* Audit Pipeline */}
         <div className="max-w-4xl mx-auto text-left space-y-8 pt-6">
-          <h3 className="text-2xl font-extrabold tracking-tight text-[var(--text)] border-b border-[var(--muted)]/10 pb-4 flex items-center gap-2">
+          <h3 className="text-[clamp(1.5rem,3vw,1.875rem)] font-extrabold tracking-tight text-[var(--text)] border-b border-[var(--muted)]/10 pb-4 flex items-center gap-2">
             <ClipboardCheck className="text-[var(--accent)]" />
             Curation Pipeline
           </h3>

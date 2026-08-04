@@ -2,8 +2,21 @@ const fs = require("fs");
 const path = require("path");
 const assert = require("assert");
 
-const PENDING_DIR = path.join(process.cwd(), "data", "models-pending");
-const PROD_DIR = path.join(process.cwd(), "data", "models");
+const PENDING_DIR = process.env.DATA_DIR_PENDING || path.join(process.cwd(), "data", "models-test-pending");
+const PROD_DIR = process.env.DATA_DIR || path.join(process.cwd(), "data", "models-test");
+
+const REAL_PENDING_DIR = path.resolve(path.join(process.cwd(), "data", "models-pending"));
+const REAL_PROD_DIR = path.resolve(path.join(process.cwd(), "data", "models"));
+
+function assertSafePath(targetPath, realPath, dirName) {
+  const resolvedTarget = path.resolve(targetPath);
+  if (resolvedTarget === realPath || resolvedTarget.startsWith(realPath + path.sep)) {
+    throw new Error(`CRITICAL: Refusing to write test data to real production ${dirName} directory (${resolvedTarget})`);
+  }
+}
+
+assertSafePath(PENDING_DIR, REAL_PENDING_DIR, "models-pending");
+assertSafePath(PROD_DIR, REAL_PROD_DIR, "models");
 
 const { verifyModelEntry } = require("./verify-model-facts");
 const arenaAdapter = require("./lib/sources/lmarena-mirror");
@@ -12,6 +25,7 @@ console.log("🧪 Testing Daily Queue Optimizations (#2 - #5)...");
 
 async function runQueueOptimizationsTest() {
   if (!fs.existsSync(PENDING_DIR)) fs.mkdirSync(PENDING_DIR, { recursive: true });
+  if (!fs.existsSync(PROD_DIR)) fs.mkdirSync(PROD_DIR, { recursive: true });
 
   // 1. Test Base Model Derivative Benchmark Inheritance
   console.log("\n📡 1. Testing Base Model Benchmark Inheritance...");

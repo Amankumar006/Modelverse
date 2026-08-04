@@ -314,96 +314,160 @@ export default function CompareClient({ initialModels, allModels }: CompareClien
       </div>
 
       {/* Comparison Table */}
-      <CopyableTable title="Model Comparison Matrix">
-        <table className="w-full min-w-[800px] border-collapse">
-          <thead>
-            <tr>
-              <th className="w-48 p-4 text-left font-bold text-[var(--muted)] border-b border-[var(--muted)]/10 sticky left-0 bg-[var(--card-bg)] z-20 border-r border-[var(--muted)]/10"></th>
-              {models.map((model) => (
-                <th key={model.id} className="w-72 p-4 align-top border-b border-[var(--muted)]/10 relative group">
-                  <div className="flex flex-col gap-2.5 pr-8">
-                    <button 
-                      onClick={() => removeModel(model.id)}
-                      className="absolute top-4 right-4 p-1.5 bg-[var(--bg)] hover:bg-[var(--accent-soft)] rounded-full text-[var(--muted)] hover:text-[var(--accent)] transition-colors z-20 cursor-pointer"
-                      aria-label="Remove model"
-                    >
-                      <X size={14} />
-                    </button>
-                    <Link href={`/models/${model.slug}`} className="block hover:opacity-80 transition-opacity">
-                      <div className="mb-2.5">
-                        <ModelLogo logo={model.logo} name={model.name} developer={model.developer} size={44} />
-                      </div>
-                      <h3 className="text-base font-extrabold text-[var(--text)] leading-snug break-words pr-1">{model.name}</h3>
-                      <p className="text-xs text-[var(--accent)] font-bold mt-1 truncate">{model.developer}</p>
-                    </Link>
-                  </div>
-                </th>
-              ))}
-              {Array.from({ length: 4 - models.length }).map((_, i) => (
-                <th key={`empty-${i}`} className="w-72 p-6 align-middle text-center border-2 border-dashed border-[var(--accent)]/20 bg-[var(--tag-bg)]/30 rounded-[var(--radius-card)] m-2">
-                  <div className="text-[var(--tag-text)] text-sm font-bold flex items-center justify-center gap-1.5">
-                    <Plus size={16} />
-                    <span>Add Model</span>
-                  </div>
-                </th>
-              ))}
-            </tr>
-          </thead>
-          <tbody className="divide-y divide-[var(--muted)]/10">
-            {/* Type */}
-            <tr>
-              <td className="p-4 text-sm font-bold text-[var(--muted)] flex items-center gap-2 sticky left-0 bg-[var(--card-bg)] z-10 border-r border-[var(--muted)]/10"><Tag size={16} /> Type</td>
-              {models.map((model) => (
-                <td key={model.id} className="p-4"><TypeBadge type={model.type} /></td>
-              ))}
-              {Array.from({ length: 4 - models.length }).map((_, i) => (
-                <td key={`empty-t-${i}`} className="p-4 bg-[var(--card-bg)]/50 border-r border-[var(--muted)]/10 border-dashed last:border-r-0"></td>
-              ))}
-            </tr>
-
-            {/* License */}
-            <tr>
-              <td className="p-4 text-sm font-bold text-[var(--muted)] flex items-center gap-2 sticky left-0 bg-[var(--card-bg)] z-10 border-r border-[var(--muted)]/10"><Shield size={16} /> License</td>
-              {models.map((model) => (
-                <td key={model.id} className="p-4 text-sm text-[var(--text)] font-semibold">
-                  {typeof model.license === "object" ? model.license.name || "Custom" : model.license}
-                </td>
-              ))}
-              {Array.from({ length: 4 - models.length }).map((_, i) => (
-                <td key={`empty-l-${i}`} className="p-4 bg-[var(--card-bg)]/50 border-r border-[var(--muted)]/10 border-dashed last:border-r-0"></td>
-              ))}
-            </tr>
-
-            {/* Parameters */}
-            <tr>
-              <td className="p-4 text-sm font-bold text-[var(--muted)] bg-[var(--card-bg)] sticky left-0 z-10 border-r border-[var(--muted)]/10">Parameters</td>
-              {models.map((model) => (
-                <td key={model.id} className="p-4 text-sm text-[var(--text)] font-mono tabular-nums font-bold">
-                  {formatParameters(model)}
-                </td>
-              ))}
-              {Array.from({ length: 4 - models.length }).map((_, i) => (
-                <td key={`empty-p-${i}`} className="p-4 bg-[var(--card-bg)]/50 border-r border-[var(--muted)]/10 border-dashed last:border-r-0"></td>
-              ))}
-            </tr>
-
-            {/* Active Parameters (MoE) */}
-            {models.some((m) => Boolean(m.activeParameters)) && (
+      <div className="hidden md:block">
+        <CopyableTable title="Model Comparison Matrix">
+          <table className="w-full min-w-[800px] border-collapse">
+            <thead>
               <tr>
-                <td className="p-4 text-sm font-bold text-[var(--muted)] bg-[var(--card-bg)] sticky left-0 z-10 border-r border-[var(--muted)]/10">Active Parameters (MoE)</td>
+                <th className="w-48 p-4 text-left font-bold text-[var(--muted)] border-b border-[var(--muted)]/10 sticky left-0 bg-[var(--card-bg)] z-20 border-r border-[var(--muted)]/10"></th>
                 {models.map((model) => (
-                  <td key={model.id} className="p-4 text-sm text-[var(--accent)] font-mono tabular-nums font-bold">
-                    {typeof model.activeParameters === "object" && model.activeParameters !== null ? Object.values(model.activeParameters).join(" / ") : model.activeParameters || "N/A (Dense)"}
+                  <th key={model.id} className="w-72 p-4 align-top border-b border-[var(--muted)]/10 relative group">
+                    <div className="flex flex-col gap-2.5 pr-8">
+                      <button 
+                        onClick={() => removeModel(model.id)}
+                        className="absolute top-4 right-4 p-1.5 bg-[var(--bg)] hover:bg-[var(--accent-soft)] rounded-full text-[var(--muted)] hover:text-[var(--accent)] transition-colors z-20 cursor-pointer"
+                        aria-label="Remove model"
+                      >
+                        <X size={14} />
+                      </button>
+                      <Link href={`/models/${model.slug}`} className="block hover:opacity-80 transition-opacity">
+                        <div className="mb-2.5">
+                          <ModelLogo logo={model.logo} name={model.name} developer={model.developer} size={44} />
+                        </div>
+                        <h3 className="text-base font-extrabold text-[var(--text)] leading-snug break-words pr-1">{model.name}</h3>
+                        <p className="text-xs text-[var(--accent)] font-bold mt-1 truncate">{model.developer}</p>
+                      </Link>
+                    </div>
+                  </th>
+                ))}
+                {Array.from({ length: 4 - models.length }).map((_, i) => (
+                  <th key={`empty-${i}`} className="w-72 p-6 align-middle text-center border-2 border-dashed border-[var(--accent)]/20 bg-[var(--tag-bg)]/30 rounded-[var(--radius-card)] m-2">
+                    <div className="text-[var(--tag-text)] text-sm font-bold flex items-center justify-center gap-1.5">
+                      <Plus size={16} />
+                      <span>Add Model</span>
+                    </div>
+                  </th>
+                ))}
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-[var(--muted)]/10">
+              {/* Type */}
+              <tr>
+                <td className="p-4 text-sm font-bold text-[var(--muted)] flex items-center gap-2 sticky left-0 bg-[var(--card-bg)] z-10 border-r border-[var(--muted)]/10"><Tag size={16} /> Type</td>
+                {models.map((model) => (
+                  <td key={model.id} className="p-4"><TypeBadge type={model.type} /></td>
+                ))}
+                {Array.from({ length: 4 - models.length }).map((_, i) => (
+                  <td key={`empty-t-${i}`} className="p-4 bg-[var(--card-bg)]/50 border-r border-[var(--muted)]/10 border-dashed last:border-r-0"></td>
+                ))}
+              </tr>
+
+              {/* License */}
+              <tr>
+                <td className="p-4 text-sm font-bold text-[var(--muted)] flex items-center gap-2 sticky left-0 bg-[var(--card-bg)] z-10 border-r border-[var(--muted)]/10"><Shield size={16} /> License</td>
+                {models.map((model) => (
+                  <td key={model.id} className="p-4 text-sm text-[var(--text)] font-semibold">
+                    {typeof model.license === "object" ? model.license.name || "Custom" : model.license}
                   </td>
                 ))}
                 {Array.from({ length: 4 - models.length }).map((_, i) => (
-                  <td key={`empty-ap-${i}`} className="p-4 bg-[var(--card-bg)]/50 border-r border-[var(--muted)]/10 border-dashed last:border-r-0"></td>
+                  <td key={`empty-l-${i}`} className="p-4 bg-[var(--card-bg)]/50 border-r border-[var(--muted)]/10 border-dashed last:border-r-0"></td>
                 ))}
               </tr>
-            )}
-          </tbody>
-        </table>
-      </CopyableTable>
+
+              {/* Parameters */}
+              <tr>
+                <td className="p-4 text-sm font-bold text-[var(--muted)] bg-[var(--card-bg)] sticky left-0 z-10 border-r border-[var(--muted)]/10">Parameters</td>
+                {models.map((model) => (
+                  <td key={model.id} className="p-4 text-sm text-[var(--text)] font-mono tabular-nums font-bold">
+                    {formatParameters(model)}
+                  </td>
+                ))}
+                {Array.from({ length: 4 - models.length }).map((_, i) => (
+                  <td key={`empty-p-${i}`} className="p-4 bg-[var(--card-bg)]/50 border-r border-[var(--muted)]/10 border-dashed last:border-r-0"></td>
+                ))}
+              </tr>
+
+              {/* Active Parameters (MoE) */}
+              {models.some((m) => Boolean(m.activeParameters)) && (
+                <tr>
+                  <td className="p-4 text-sm font-bold text-[var(--muted)] bg-[var(--card-bg)] sticky left-0 z-10 border-r border-[var(--muted)]/10">Active Parameters (MoE)</td>
+                  {models.map((model) => (
+                    <td key={model.id} className="p-4 text-sm text-[var(--accent)] font-mono tabular-nums font-bold">
+                      {typeof model.activeParameters === "object" && model.activeParameters !== null ? Object.values(model.activeParameters).join(" / ") : model.activeParameters || "N/A (Dense)"}
+                    </td>
+                  ))}
+                  {Array.from({ length: 4 - models.length }).map((_, i) => (
+                    <td key={`empty-ap-${i}`} className="p-4 bg-[var(--card-bg)]/50 border-r border-[var(--muted)]/10 border-dashed last:border-r-0"></td>
+                  ))}
+                </tr>
+              )}
+            </tbody>
+          </table>
+        </CopyableTable>
+      </div>
+
+      {/* Mobile Card Stack View */}
+      <div className="md:hidden space-y-4">
+        <h2 className="text-xl font-extrabold text-[var(--text)]">Model Comparison Matrix</h2>
+        {models.map((model) => (
+          <div key={model.id} className="rounded-[var(--radius-card)] bg-[var(--card-bg)] border border-[var(--muted)]/10 p-4 shadow-[var(--shadow-card)] space-y-3 relative">
+            <button 
+              onClick={() => removeModel(model.id)}
+              className="absolute top-4 right-4 p-1.5 bg-[var(--bg)] hover:bg-[var(--accent-soft)] rounded-full text-[var(--muted)] hover:text-[var(--accent)] transition-colors z-20 cursor-pointer"
+              aria-label="Remove model"
+            >
+              <X size={14} />
+            </button>
+            <div className="flex items-center gap-3">
+              <ModelLogo logo={model.logo} name={model.name} developer={model.developer} size={32} />
+              <div>
+                <h3 className="font-extrabold text-[var(--text)] text-base leading-snug break-words pr-4">{model.name}</h3>
+                <p className="text-xs text-[var(--accent)] font-bold mt-0.5">{model.developer}</p>
+              </div>
+            </div>
+            
+            <div className="grid grid-cols-2 gap-3 text-xs pt-3 border-t border-[var(--muted)]/10 mt-3">
+              <div>
+                <span className="text-[var(--muted)] font-bold block mb-1">Type</span>
+                <TypeBadge type={model.type} />
+              </div>
+              <div>
+                <span className="text-[var(--muted)] font-bold block mb-1">License</span>
+                <span className="font-semibold text-[var(--text)]">
+                  {typeof model.license === "object" ? model.license.name || "Custom" : model.license}
+                </span>
+              </div>
+              <div>
+                <span className="text-[var(--muted)] font-bold block mb-1">Parameters</span>
+                <span className="font-mono font-bold text-[var(--text)] tabular-nums">{formatParameters(model)}</span>
+              </div>
+              <div>
+                <span className="text-[var(--muted)] font-bold block mb-1">Context</span>
+                <span className="font-mono font-bold text-[var(--text)] tabular-nums">
+                  {model.contextWindow ? (typeof model.contextWindow === "object" && model.contextWindow !== null ? (model.contextWindow as any).native : model.contextWindow) : "—"}
+                </span>
+              </div>
+              {model.activeParameters && (
+                <div className="col-span-2">
+                  <span className="text-[var(--muted)] font-bold block mb-1">Active Parameters</span>
+                  <span className="font-mono font-bold text-[var(--accent)] tabular-nums">
+                    {typeof model.activeParameters === "object" && model.activeParameters !== null ? Object.values(model.activeParameters).join(" / ") : model.activeParameters}
+                  </span>
+                </div>
+              )}
+            </div>
+          </div>
+        ))}
+        {models.length < 4 && (
+          <div className="p-6 text-center border-2 border-dashed border-[var(--accent)]/20 bg-[var(--tag-bg)]/30 rounded-[var(--radius-card)]">
+             <div className="text-[var(--tag-text)] text-sm font-bold flex items-center justify-center gap-1.5">
+               <Plus size={16} />
+               <span>Use the search bar above to add models</span>
+             </div>
+          </div>
+        )}
+      </div>
     </div>
   );
 }

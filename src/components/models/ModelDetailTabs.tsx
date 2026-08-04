@@ -10,7 +10,6 @@ import VisionBenchmarkChart from "./VisionBenchmarkChart";
 interface ModelDetailTabsProps {
   model: ModelEntry;
   markdownContent: string | null;
-  showDraftPreview?: boolean;
 }
 
 const DOT = {
@@ -21,13 +20,7 @@ const DOT = {
   independent: "bg-[var(--accent)]",
 };
 
-function DraftLabel() {
-  return (
-    <p className="mb-2 text-xs text-[var(--accent)] font-semibold">
-      Draft — unreviewed, curator preview only
-    </p>
-  );
-}
+
 
 function Empty({ children }: { children: React.ReactNode }) {
   return <p className="text-sm text-[var(--muted)]">{children}</p>;
@@ -46,7 +39,6 @@ function Row({ label, value }: { label: string; value?: string | number | null }
 export default function ModelDetailTabs({
   model,
   markdownContent,
-  showDraftPreview = false,
 }: ModelDetailTabsProps) {
   const [activeTab, setActiveTab] = useState<"overview" | "specs" | "benchmarks" | "resources">("overview");
 
@@ -58,10 +50,7 @@ export default function ModelDetailTabs({
   ];
 
   const hasLiveDescription = Boolean(model.description?.trim());
-  const hasDraftDescription = Boolean(model.descriptionDraft?.trim());
   const liveFeatures = model.keyFeatures ?? [];
-  const draftFeatures = model.keyFeaturesDraft ?? [];
-  const showDraftFeatures = liveFeatures.length === 0 && showDraftPreview && draftFeatures.length > 0;
   const linkEntries = Object.entries(model.links || {}).filter(([, url]) => Boolean(url));
 
   return (
@@ -90,11 +79,6 @@ export default function ModelDetailTabs({
           <div className="space-y-6">
             {hasLiveDescription ? (
               <p className="max-w-2xl leading-relaxed text-[var(--text)] text-base font-normal">{model.description}</p>
-            ) : showDraftPreview && hasDraftDescription ? (
-              <div>
-                <DraftLabel />
-                <p className="max-w-2xl leading-relaxed text-[var(--muted)] text-base">{model.descriptionDraft}</p>
-              </div>
             ) : (
               <Empty>Enrichment in progress — a reviewed description isn&apos;t available yet.</Empty>
             )}
@@ -122,18 +106,6 @@ export default function ModelDetailTabs({
                     </li>
                   ))}
                 </ul>
-              ) : showDraftFeatures ? (
-                <div>
-                  <DraftLabel />
-                  <ul className="space-y-2 text-sm text-[var(--muted)]">
-                    {draftFeatures.map((f) => (
-                      <li key={f} className="flex items-start gap-2">
-                        <span className="text-[var(--muted)]">—</span>
-                        <span>{f}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
               ) : (
                 <Empty>Not yet documented.</Empty>
               )}
@@ -168,8 +140,8 @@ export default function ModelDetailTabs({
             <section>
               <h3 className="mb-3 text-xs uppercase tracking-wider font-bold text-[var(--muted)]">Benchmarks</h3>
               {model.benchmarks?.length ? (
-                <div className="bg-[var(--card-bg)] shadow-[var(--shadow-card)] rounded-[var(--radius-card)] p-4 border border-[var(--muted)]/10">
-                  <table className="w-full text-sm">
+                <div className="overflow-x-auto bg-[var(--card-bg)] shadow-[var(--shadow-card)] rounded-[var(--radius-card)] p-4 border border-[var(--muted)]/10">
+                  <table className="w-full min-w-[300px] text-sm">
                     <tbody>
                       {model.benchmarks.map((b) => (
                         <tr key={b.name} className="border-b border-[var(--muted)]/10 last:border-0">

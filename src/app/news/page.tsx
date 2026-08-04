@@ -95,7 +95,7 @@ export default async function NewsPage({ searchParams }: NewsPageProps) {
                 Modelverse Newsroom
               </span>
             </div>
-            <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-[var(--text)] tracking-tight">
+            <h1 className="text-[clamp(2.5rem,6vw,4rem)] font-extrabold text-[var(--text)] tracking-tight">
               News & Research
             </h1>
             <p className="text-sm sm:text-base text-[var(--muted)] max-w-2xl mt-3 leading-relaxed">
@@ -105,7 +105,7 @@ export default async function NewsPage({ searchParams }: NewsPageProps) {
 
           <div className="text-right shrink-0">
             <span className="text-xs text-[var(--muted)] font-mono block">Published Coverage</span>
-            <span className="text-3xl font-extrabold text-[var(--text)] font-sans tabular-nums">{allArticles.length} Articles</span>
+            <span className="text-[clamp(1.875rem,4vw,2.25rem)] font-extrabold text-[var(--text)] font-sans tabular-nums">{allArticles.length} Articles</span>
           </div>
         </div>
       </div>
@@ -184,7 +184,7 @@ export default async function NewsPage({ searchParams }: NewsPageProps) {
                     <ConfidenceBadge confidence={featuredArticle.confidenceLevel} />
                   </div>
 
-                  <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[var(--text)] mb-4 group-hover:text-[var(--accent)] transition-colors leading-snug">
+                  <h2 className="text-[clamp(1.5rem,4vw,2.5rem)] font-extrabold text-[var(--text)] mb-4 group-hover:text-[var(--accent)] transition-colors leading-snug">
                     {featuredArticle.title}
                   </h2>
 
@@ -258,7 +258,7 @@ export default async function NewsPage({ searchParams }: NewsPageProps) {
                     </div>
 
                     <div className="p-5">
-                      <h3 className="text-lg font-bold text-[var(--text)] group-hover:text-[var(--accent)] transition-colors mb-2.5 line-clamp-2 leading-snug">
+                      <h3 className="text-[clamp(1.125rem,2.5vw,1.25rem)] font-bold text-[var(--text)] group-hover:text-[var(--accent)] transition-colors mb-2.5 line-clamp-2 leading-snug">
                         {post.title}
                       </h3>
                       <p className="text-xs text-[var(--muted)] leading-relaxed line-clamp-3">

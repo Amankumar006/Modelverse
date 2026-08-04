@@ -11,8 +11,11 @@ export async function GET(request: NextRequest) {
     const type = searchParams.get("type");
     const modality = searchParams.get("modality");
     const primaryTask = searchParams.get("primaryTask");
-    const q = searchParams.get("q")?.trim().toLowerCase();
-
+    const qRaw = searchParams.get("q");
+    if (qRaw && qRaw.length > 50) {
+      return NextResponse.json({ error: "Bad Request", message: "Query too long" }, { status: 400 });
+    }
+    const q = qRaw?.trim().toLowerCase();
     const limitParam = parseInt(searchParams.get("limit") || "20", 10);
     const offsetParam = parseInt(searchParams.get("offset") || "0", 10);
 
@@ -63,12 +66,42 @@ export async function GET(request: NextRequest) {
     const total = models.length;
     const paginated = models.slice(offset, offset + limit);
 
+    // Apply strict allowlist to prevent internal fields (e.g. curatorNotes, needsReview, draft fields) from leaking
+    const sanitizedData = paginated.map((m) => ({
+      id: m.id,
+      name: m.name,
+      slug: m.slug,
+      developer: m.developer,
+      releaseDate: m.releaseDate,
+      updatedAt: m.updatedAt,
+      type: m.type,
+      status: m.status,
+      vendorApiStatus: m.vendorApiStatus,
+      modality: m.modality,
+      primaryTask: m.primaryTask,
+      deployment: m.deployment,
+      license: m.license,
+      parameters: m.parameters,
+      contextWindow: m.contextWindow,
+      description: m.description,
+      keyFeatures: m.keyFeatures,
+      benchmarks: m.benchmarks,
+      pricing: m.pricing,
+      family: m.family,
+      previousVersion: m.previousVersion,
+      links: m.links,
+      logo: m.logo,
+      tags: m.tags,
+      sources: m.sources,
+      verified: m.verified
+    }));
+
     return NextResponse.json({
       total,
       limit,
       offset,
-      count: paginated.length,
-      data: paginated,
+      count: sanitizedData.length,
+      data: sanitizedData,
     });
   } catch (err: any) {
     console.error("API Error in /api/models:", err);

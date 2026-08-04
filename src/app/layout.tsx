@@ -1,22 +1,10 @@
 import type { Metadata } from "next";
-import { Figtree } from "next/font/google";
 import Script from "next/script";
 import "./globals.css";
 import JsonLd from "@/components/JsonLd";
 import { SITE_URL } from "@/lib/models";
 import Footer from "@/components/layout/Footer";
 import { ThemeProvider } from "@/components/ThemeProvider";
-
-/* ------------------------------------------------------------------ */
-/*  Fonts                                                              */
-/* ------------------------------------------------------------------ */
-
-const figtree = Figtree({
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700", "800"],
-  variable: "--font-sans",
-  display: "swap",
-});
 
 /* ------------------------------------------------------------------ */
 /*  Metadata                                                           */
@@ -121,7 +109,7 @@ export default function RootLayout({
   const gaId = process.env.NEXT_PUBLIC_GA_ID;
 
   return (
-    <html lang="en" className={`dark ${figtree.variable}`}>
+    <html lang="en" className="dark">
       <body className="min-h-screen bg-[var(--bg)] text-[var(--text)] tracking-[-0.01em] antialiased flex flex-col justify-between">
         <ThemeProvider>
           <Script

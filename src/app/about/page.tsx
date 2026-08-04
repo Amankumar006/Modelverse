@@ -46,10 +46,10 @@ export default function AboutPage() {
             <span>Elegance in Curation</span>
             <span>Every Model. Every Release.</span>
           </div>
-          <h1 className="text-5xl sm:text-7xl md:text-8xl font-extrabold tracking-tight text-[var(--text)] leading-none">
+          <h1 className="text-[clamp(3rem,8vw,6rem)] font-extrabold tracking-tight text-[var(--text)] leading-none">
             Modelverse
           </h1>
-          <p className="text-sm sm:text-base text-[var(--muted)] mt-4 max-w-xl font-medium">
+          <p className="text-[clamp(0.875rem,2.5vw,1rem)] text-[var(--muted)] mt-4 max-w-xl font-medium">
             Independent, human-verified registry of foundation AI models, benchmarks, and licensing.
           </p>
         </div>
@@ -67,7 +67,7 @@ export default function AboutPage() {
           </Link>
         </div>
 
-        <p className="max-w-3xl mx-auto text-lg md:text-2xl leading-relaxed text-[var(--text)] font-semibold">
+        <p className="max-w-3xl mx-auto text-[clamp(1.125rem,3vw,1.5rem)] leading-relaxed text-[var(--text)] font-semibold">
           Explore distinguished foundation models, iconic architectures, and meticulously curated metrics across the globe&apos;s most advanced artificial intelligence research.
         </p>
 
@@ -107,8 +107,8 @@ export default function AboutPage() {
         {/* Pipeline */}
         <div className="space-y-10 max-w-5xl mx-auto pt-10 text-left">
           <div className="text-center space-y-2">
-            <h3 className="text-2xl md:text-3xl font-extrabold tracking-tight text-[var(--text)]">The Curation Pipeline</h3>
-            <p className="text-sm text-[var(--muted)] max-w-xl mx-auto font-medium">
+            <h3 className="text-[clamp(1.5rem,4vw,1.875rem)] font-extrabold tracking-tight text-[var(--text)]">The Curation Pipeline</h3>
+            <p className="text-[clamp(0.875rem,2vw,1rem)] text-[var(--muted)] max-w-xl mx-auto font-medium">
               How model specifications go from raw research papers to a verified entry in our catalog.
             </p>
           </div>
