@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { X, ArrowUpRight } from "lucide-react";
 
@@ -36,6 +36,7 @@ type SummaryModel = "claude" | "chatgpt" | "gemini";
 export default function Footer() {
   const currentYear = new Date().getFullYear();
   const [activeModel, setActiveModel] = useState<SummaryModel | null>(null);
+  const [displayedText, setDisplayedText] = useState("");
 
   const getModelTitle = (model: SummaryModel) => {
     switch (model) {
@@ -58,6 +59,28 @@ export default function Footer() {
         return "Modelverse functions as a real-time, structured index of global AI advancement. By synthesizing primary sources, developer docs, and empirical evaluations, it acts as a verified directory of large language models, vision systems, and multimodal tools, empowering creators to build with confidence.";
     }
   };
+
+  useEffect(() => {
+    if (!activeModel) {
+      setDisplayedText("");
+      return;
+    }
+
+    const fullText = getModelSummary(activeModel);
+    let currentIndex = 0;
+    setDisplayedText("");
+
+    const interval = setInterval(() => {
+      if (currentIndex < fullText.length) {
+        setDisplayedText(fullText.slice(0, currentIndex + 1));
+        currentIndex++;
+      } else {
+        clearInterval(interval);
+      }
+    }, 12);
+
+    return () => clearInterval(interval);
+  }, [activeModel]);
 
   const footerLinks = [
     {
@@ -211,8 +234,11 @@ export default function Footer() {
               <X size={14} />
             </button>
           </div>
-          <p className="text-xs sm:text-[13px] leading-relaxed text-[var(--muted)] font-normal text-left">
-            {getModelSummary(activeModel)}
+          <p className="text-xs sm:text-[13px] leading-relaxed text-[var(--muted)] font-normal text-left min-h-[100px]">
+            {displayedText}
+            {displayedText.length < getModelSummary(activeModel).length && (
+              <span className="inline-block w-1.5 h-3 ml-0.5 bg-[var(--text)] animate-pulse" />
+            )}
           </p>
         </div>
       )}
