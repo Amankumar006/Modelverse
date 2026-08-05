@@ -58,6 +58,7 @@ export interface ModelEntry extends ModelIndex {
   curatorNotes: string;
   isLegacyCurated?: boolean;
   verificationStatus?: "VERIFIED" | "DRAFT" | "DISPUTED";
+  verifiedAt?: string;
   fieldConfidence?: {
     pricing?: "VERIFIED" | "LIKELY" | "DRAFT" | "DISPUTED";
     contextWindow?: "VERIFIED" | "LIKELY" | "DRAFT" | "DISPUTED";
@@ -125,6 +126,7 @@ function loadDevEntries(): ModelEntry[] {
     tags: z.array(z.string()).optional(),
     sources: z.any().optional(),
     verified: z.boolean().optional(),
+    verifiedAt: z.string().optional(),
     featured: z.boolean().default(false),
     boost: z.number().default(1),
     curatorNotes: z.string().default(""),

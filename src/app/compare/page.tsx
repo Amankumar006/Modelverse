@@ -42,11 +42,13 @@ export async function generateMetadata({
         url,
         type: "website",
         siteName: "Modelverse",
+        images: [`${SITE_URL}/api/og/compare?models=${slugs.join(",")}`],
       },
       twitter: {
         card: "summary_large_image",
         title,
         description,
+        images: [`${SITE_URL}/api/og/compare?models=${slugs.join(",")}`],
       },
     };
   }

@@ -47,13 +47,11 @@ export async function generateMetadata({
       ? `${model.description.slice(0, 152)}...`
       : model.description;
 
-  const canonicalSlug = model.baseModel || model.slug;
-
   return {
     title,
     description,
     alternates: {
-      canonical: `${SITE_URL}/models/${canonicalSlug}`,
+      canonical: `${SITE_URL}/models/${model.slug}`,
     },
     openGraph: {
       title,
@@ -115,47 +113,66 @@ export default async function ModelDetailPage({
     .filter((e) => e.primaryTask === model.primaryTask && e.id !== model.id && e.verified)
     .slice(0, 4);
 
-  // Structured JSON-LD
+  // Structured JSON-LD: Product (the model) + TechArticle (the page)
   const parametersText = typeof model.parameters === "string" ? model.parameters : "Unknown";
   const contextWindowText = typeof model.contextWindow === "string" ? model.contextWindow : "Unknown";
   const licenseText = typeof model.license === "string" ? model.license : model.license?.name || "Custom";
 
-  const softwareAppSchema = {
+  // Build the Product entity
+  const productEntity: Record<string, unknown> = {
+    "@type": "Product",
+    "@id": `${SITE_URL}/models/${model.slug}#product`,
+    name: model.name,
+    description: model.description,
+    brand: { "@type": "Organization", name: model.developer },
+    category: "AI Model",
+    releaseDate: model.releaseDate,
+    additionalProperty: [
+      { "@type": "PropertyValue", name: "Parameters", value: parametersText },
+      { "@type": "PropertyValue", name: "Context Window", value: contextWindowText },
+      { "@type": "PropertyValue", name: "License", value: licenseText },
+    ],
+  };
+
+  // Only include offers when the model has real pricing data
+  if (model.pricing && model.pricing.length > 0) {
+    productEntity.offers = model.pricing.map((p) => ({
+      "@type": "Offer",
+      price: String(p.amount),
+      priceCurrency: p.currency,
+      description: p.notes || `${p.unit}`,
+    }));
+  }
+
+  // Cross-link to base model if this is a variant
+  if (model.baseModel) {
+    productEntity.isVariantOf = {
+      "@type": "Product",
+      name: model.baseModel,
+      url: `${SITE_URL}/models/${model.baseModel}`,
+    };
+  }
+
+  const structuredData = {
     "@context": "https://schema.org",
     "@graph": [
       {
-        "@type": "SoftwareApplication",
-        "@id": `${SITE_URL}/models/${model.slug}#application`,
-        name: model.name,
-        applicationCategory: "AI Model",
+        "@type": "TechArticle",
+        "@id": `${SITE_URL}/models/${model.slug}#article`,
+        headline: `${model.name} Overview`,
         description: model.description,
-        publisher: { "@type": "Organization", name: model.developer },
         datePublished: model.releaseDate,
-        offers: {
-          "@type": "Offer",
-          price: "0",
-          priceCurrency: "USD"
-        },
-        license: licenseText,
-        additionalProperty: [
-          {
-            "@type": "PropertyValue",
-            name: "Parameters",
-            value: parametersText
-          },
-          {
-            "@type": "PropertyValue",
-            name: "Context Window",
-            value: contextWindowText
-          }
-        ]
+        dateModified: model.updatedAt || model.releaseDate,
+        publisher: { "@type": "Organization", name: "Modelverse" },
+        about: { "@id": `${SITE_URL}/models/${model.slug}#product` },
       },
+      productEntity,
     ],
   };
 
   return (
     <>
-      <JsonLd data={softwareAppSchema} />
+      <JsonLd data={structuredData} />
       <ModelDocsLayout
         model={model}
         markdownContent={markdownContent}

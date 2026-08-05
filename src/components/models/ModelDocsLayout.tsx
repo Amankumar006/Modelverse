@@ -147,11 +147,15 @@ export default function ModelDocsLayout({
                     <Shield size={24} className="text-emerald-500" />
                   )}
                 </h1>
-                {model.verified && (
-                  <p className="text-xs text-[var(--muted)] font-mono">
-                    Confirmed against {model.developer} documentation, {new Date(model.updatedAt || model.releaseDate).toLocaleString('default', { month: 'long', year: 'numeric' })}
-                  </p>
-                )}
+                {model.verified && (() => {
+                  const verificationDate = model.verifiedAt || model.updatedAt || model.releaseDate;
+                  const isEstimated = !model.verifiedAt;
+                  return (
+                    <p className="text-xs text-[var(--muted)] font-mono">
+                      Confirmed against {model.developer} documentation, {new Date(verificationDate).toLocaleString('default', { month: 'long', year: 'numeric' })}{isEstimated ? ' (estimated)' : ''}
+                    </p>
+                  );
+                })()}
               </div>
 
               <button
