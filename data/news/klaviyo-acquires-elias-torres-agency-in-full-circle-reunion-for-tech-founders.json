@@ -1,0 +1,24 @@
+{
+  "id": "klaviyo-acquires-elias-torres-agency-in-full-circle-reunion-for-tech-founders",
+  "slug": "klaviyo-acquires-elias-torres-agency-in-full-circle-reunion-for-tech-founders",
+  "title": "Klaviyo acquires Elias Torres’ Agency in full-circle reunion for tech founders",
+  "category": "short-news",
+  "isTrending": true,
+  "publishDate": "2026-08-05",
+  "author": "Modelverse Editorial",
+  "readTime": "2 min read",
+  "excerpt": "The serial entrepreneur joins the e-commerce company as CPO to lead its AI agents.",
+  "body": "Klaviyo, the publicly traded e-commerce marketing automation platform, has announced its acquisition of Agency, an AI-powered customer success startup founded by serial entrepreneur Elias Torres. This strategic move brings Torres back into a professional orbit with Klaviyo CEO Andrew Bialecki, whom he previously mentored. As part of the deal, Torres will assume the role of Chief Product Officer at Klaviyo, leading Agency's team to integrate and expand Klaviyo's existing AI capabilities.\n\nThe acquisition aims to supercharge Klaviyo's AI agents, including Composer, which crafts marketing campaigns, and Customer Agent, designed to handle post-sale support like returns and order tracking. Agency's specialized AI technology will be woven into these products, leveraging Klaviyo's extensive customer data. This deep integration of proprietary data is seen as a significant competitive advantage, enabling more intelligent and personalized automation across the customer lifecycle.\n\nFor developers and researchers, this acquisition highlights the growing importance of specialized AI solutions within broader platforms. It underscores how combining targeted AI expertise with vast, domain-specific datasets can create powerful tools for enhancing customer engagement and operational efficiency. Developers can anticipate more robust and intelligent AI-driven features within the Klaviyo ecosystem, enabling them to build richer, data-informed experiences. Researchers, meanwhile, gain a practical case study in the strategic application of AI for business growth and the critical role of data leverage in achieving AI agent superiority.",
+  "coverImage": "https://techcrunch.com/wp-content/uploads/2026/08/Screenshot-2026-08-05-at-8.53.41-PM.png?resize=1200,868",
+  "status": "published",
+  "confidenceLevel": "confirmed",
+  "externalSources": [
+    "https://techcrunch.com/2026/08/05/klaviyo-acquires-elias-torres-agency-in-full-circle-reunion-for-tech-founders/"
+  ],
+  "relatedModels": [],
+  "tags": [
+    "ai-news",
+    "breaking",
+    "techcrunch-ai"
+  ]
+}
