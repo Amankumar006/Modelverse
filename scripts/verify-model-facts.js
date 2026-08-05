@@ -191,9 +191,9 @@ async function verifyModelEntry(modelData) {
   let modelStatus = "DRAFT";
   if (overallDisputed || statuses.includes("DISPUTED")) {
     modelStatus = "DISPUTED";
-  } else if (statuses.length > 0 && statuses.every((s) => s === "VERIFIED")) {
+  } else if (modelData.humanApproved) {
     modelStatus = "VERIFIED";
-  } else if (statuses.includes("LIKELY") || statuses.includes("VERIFIED")) {
+  } else if (statuses.length > 0 && statuses.some((s) => s === "VERIFIED" || s === "LIKELY")) {
     modelStatus = "LIKELY";
   }
 
