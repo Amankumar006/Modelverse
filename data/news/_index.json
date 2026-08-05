@@ -1,5 +1,27 @@
 [
   {
+    "id": "copilotkit-open-sources-channels-sdk-an-mit-licensed-library-that-runs-any-ag-ui",
+    "slug": "copilotkit-open-sources-channels-sdk-an-mit-licensed-library-that-runs-any-ag-ui",
+    "title": "CopilotKit Open Sources Channels SDK: An MIT Licensed Library That Runs Any AG-UI Agent Inside Slack And Microsoft Teams",
+    "category": "short-news",
+    "publishDate": "2026-08-05",
+    "author": "Modelverse Editorial",
+    "readTime": "2 min read",
+    "excerpt": "CopilotKit has published the Channels SDK, an MIT licensed library that runs an existing AG-UI agent inside Slack and Microsoft Teams. Version 0.5.0 ships five platform adapters an...",
+    "coverImage": "https://www.marktechpost.com/wp-content/uploads/2026/08/blog6176-11.png",
+    "status": "published",
+    "confidenceLevel": "confirmed",
+    "externalSources": [
+      "https://www.marktechpost.com/2026/08/04/copilotkit-open-sources-channels-sdk/"
+    ],
+    "relatedModels": [],
+    "tags": [
+      "ai-news",
+      "breaking",
+      "marktechpost"
+    ]
+  },
+  {
     "id": "ai-leaders-propose-safe-guidelines-for-cybersecurity-transparency",
     "slug": "ai-leaders-propose-safe-guidelines-for-cybersecurity-transparency",
     "title": "AI Leaders Propose SAFE Guidelines for Cybersecurity Transparency",

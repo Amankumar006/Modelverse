@@ -1,0 +1,24 @@
+{
+  "id": "copilotkit-open-sources-channels-sdk-an-mit-licensed-library-that-runs-any-ag-ui",
+  "slug": "copilotkit-open-sources-channels-sdk-an-mit-licensed-library-that-runs-any-ag-ui",
+  "title": "CopilotKit Open Sources Channels SDK: An MIT Licensed Library That Runs Any AG-UI Agent Inside Slack And Microsoft Teams",
+  "category": "short-news",
+  "isTrending": true,
+  "publishDate": "2026-08-05",
+  "author": "Modelverse Editorial",
+  "readTime": "2 min read",
+  "excerpt": "CopilotKit has published the Channels SDK, an MIT licensed library that runs an existing AG-UI agent inside Slack and Microsoft Teams. Version 0.5.0 ships five platform adapters an...",
+  "body": "CopilotKit has launched its new Channels SDK, an MIT-licensed open-source library engineered to effortlessly integrate existing AI agents into widely used messaging platforms. This release tackles a significant hurdle for developers: deploying intelligent agents into user environments like Slack and Microsoft Teams without requiring extensive, platform-specific code rewrites. The fundamental premise is straightforward: if an agent already possesses its model, tools, and business logic, Channels provides the essential conduit to connect it with users directly within their communication hubs, with future support planned for Discord and Google Chat.\n\nThe Channels SDK functions by linking to any agent that adheres to the AG-UI (agent-user interaction) protocol, ensuring broad compatibility with frameworks such as LangGraph, CrewAI, Pydantic AI, and even custom HTTP agents. Crucially, Channels is not an additional agent; instead, it serves as an advanced transport and rendering layer. It processes messages authored in JSX, transforming them into a serializable intermediate representation, which is then intelligently translated into each platform's native UI format—for instance, Slack's Block Kit or Teams' Adaptive Cards—delivering rich, interactive experiences beyond simple text.\n\nThis innovation holds substantial importance for developers and researchers by greatly simplifying the deployment of AI agents into practical workflows. It liberates them from the intricacies of platform-specific UI development and integration, enabling them to dedicate their efforts to refining agent intelligence and core functionality. By offering an open-source, standardized method to embed sophisticated AI directly into communication platforms, CopilotKit's Channels SDK empowers the community to build and deploy more accessible and impactful AI applications with enhanced efficiency.",
+  "coverImage": "https://www.marktechpost.com/wp-content/uploads/2026/08/blog6176-11.png",
+  "status": "published",
+  "confidenceLevel": "confirmed",
+  "externalSources": [
+    "https://www.marktechpost.com/2026/08/04/copilotkit-open-sources-channels-sdk/"
+  ],
+  "relatedModels": [],
+  "tags": [
+    "ai-news",
+    "breaking",
+    "marktechpost"
+  ]
+}
