@@ -1,26 +1,26 @@
 [
   {
-    "id": "nvidia-releases-alpamayo-2-super-a-34b-open-vision-language-action-model-for-rob",
-    "slug": "nvidia-releases-alpamayo-2-super-a-34b-open-vision-language-action-model-for-rob",
-    "title": "NVIDIA Releases Alpamayo 2 Super: A 34B Open Vision-Language-Action Model for Robotaxis and Autonomous Driving Under OpenMDW-1.1",
+    "id": "ai-makes-weather-prediction-better-can-windborne-make-it-lucrative",
+    "slug": "ai-makes-weather-prediction-better-can-windborne-make-it-lucrative",
+    "title": "AI makes weather prediction better. Can WindBorne make it lucrative?",
     "category": "short-news",
     "isTrending": true,
     "publishDate": "2026-08-05",
     "author": "Modelverse Editorial",
     "readTime": "2 min read",
-    "excerpt": "NVIDIA released Alpamayo 2 Super, a 34B vision-language-action model for autonomous driving, under OpenMDW-1.1 — a permissive license covering fine-tuning, derivatives and commerci...",
-    "body": "NVIDIA has launched Alpamayo 2 Super, a 34-billion-parameter vision-language-action (VLA) model specifically for autonomous driving and robotaxis. A key highlight is its open commercial license, OpenMDW-1.1 (with Apache 2.0 for source code), empowering developers to fine-tune, create derivatives, and commercially redistribute the technology immediately. This permissive licensing also extends to previous Alpamayo models, significantly accelerating their real-world deployment. Alpamayo 2 Super is engineered to tackle challenging \"long-tail events\"—rare, multi-agent scenarios that often confound traditional autonomous systems.\n\nThe model integrates a 32B VLM backbone, built on NVIDIA Cosmos 3 Super Reasoner and refined with reinforcement learning, with a 2.3B diffusion-based action decoder. It processes multi-camera RGB video, text, and egomotion history (3D translation plus a 3&#215;3 rotation matrix, multi-timestep). From a single pass, Alpamayo 2 Super generates a precise planned trajectory (64 waypoints spanning 0.1 to 6.4 seconds at 0.1-second intervals. Each waypoint carries ego-frame XYZ and a 3&#215;3 rotation matrix.), a clear Chain-of-Causation (CoC) trace explaining its decision, and a high-level meta-action. This sophisticated output is powered by extensive training on 115,000 hours of driving video and millions of CoC traces.\n\nFor developers and researchers, Alpamayo 2 Super offers a pivotal advancement. Its open commercial availability drastically lowers barriers to innovation and deployment in the AV space. The model's ability to provide causal explanations alongside actions offers unprecedented interpretability, crucial for safety validation and debugging complex driving scenarios. Its impressive performance further solidifies its value: On LingoQA, Alpamayo 2 Super records a Lingo-Judge score of 79.2 and ranks first among nearly 40 models evaluated. Closed-loop evaluation with AlpaSim on 910 scenarios from the PhysicalAI-AV-NuRec dataset gives an AlpaSim score of 1.50 ± 0.13. Open-loop evaluation on 937 challenging samples from the PhysicalAI-AV dataset gives minADE₆ at 6.4s of 0.911m. These results position Alpamayo 2 Super as a leading solution for building more robust and intelligent autonomous systems.",
-    "coverImage": "https://www.marktechpost.com/wp-content/uploads/2026/08/blog6176-12-1024x731.png",
+    "excerpt": "WindBorne Systems has raised $37 million Series B round to scale its weather balloons and AI forecasts.",
+    "body": "WindBorne Systems, a pioneer in AI-enhanced weather forecasting, has successfully secured $37 million in Series B funding, valuing the company at $250 million. This significant investment, co-led by Khosla Ventures and Galvanize, underscores a growing belief in the commercial viability of advanced AI for meteorology. The announcement highlights a pivotal shift in weather prediction, where deep learning techniques, akin to those powering large language models, now enable sophisticated weather simulations to run on standard computing devices, moving beyond the traditional reliance on costly supercomputers.\n\nAt the core of WindBorne's innovation is a unique data collection strategy. The company deploys a global network of hundreds of long-flying, low-cost weather balloons and increasingly, aerial sensors that convert into floating buoys, gathering critical atmospheric data from previously inaccessible regions, such as the eye of a typhoon. This proprietary \"planetary nervous system\" data, combined with information from government weather agencies, feeds into their powerful AI forecasting model. This approach has demonstrated superior accuracy, with WindBorne asserting that their balloon data offers a stronger value per point than satellite data, creating a distinct advantage for their predictive capabilities.\n\nFor developers and researchers, this development signals the immense potential of integrating novel data acquisition with cutting-edge AI to solve complex, real-world problems. It showcases how private entities can now develop sophisticated forecasting models, a domain once exclusive to well-funded government agencies. The company's success in attracting government clients, including the U.S. National Weather Service and research partnerships with the U.S. Air Force and Navy for developing shipboard forecasting models, illustrates the practical demand for more accurate, accessible, and deployable weather intelligence. This momentum suggests a future where AI not only refines predictions but also makes them more actionable and lucrative across diverse sectors.",
+    "coverImage": "https://techcrunch.com/wp-content/uploads/2026/08/6a1cc23a5fed8844a94b28ba_weather-params.jpg?resize=1200,722",
     "status": "published",
     "confidenceLevel": "confirmed",
     "externalSources": [
-      "https://www.marktechpost.com/2026/08/05/nvidia-alpamayo-2-super-open-vla-model-autonomous-driving/"
+      "https://techcrunch.com/2026/08/05/ai-makes-weather-prediction-better-can-windborne-make-it-lucrative/"
     ],
     "relatedModels": [],
     "tags": [
       "ai-news",
       "breaking",
-      "marktechpost"
+      "techcrunch-ai"
     ]
   }
 ]

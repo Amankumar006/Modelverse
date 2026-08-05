@@ -1,5 +1,27 @@
 [
   {
+    "id": "ai-makes-weather-prediction-better-can-windborne-make-it-lucrative",
+    "slug": "ai-makes-weather-prediction-better-can-windborne-make-it-lucrative",
+    "title": "AI makes weather prediction better. Can WindBorne make it lucrative?",
+    "category": "short-news",
+    "publishDate": "2026-08-05",
+    "author": "Modelverse Editorial",
+    "readTime": "2 min read",
+    "excerpt": "WindBorne Systems has raised $37 million Series B round to scale its weather balloons and AI forecasts.",
+    "coverImage": "https://techcrunch.com/wp-content/uploads/2026/08/6a1cc23a5fed8844a94b28ba_weather-params.jpg?resize=1200,722",
+    "status": "published",
+    "confidenceLevel": "confirmed",
+    "externalSources": [
+      "https://techcrunch.com/2026/08/05/ai-makes-weather-prediction-better-can-windborne-make-it-lucrative/"
+    ],
+    "relatedModels": [],
+    "tags": [
+      "ai-news",
+      "breaking",
+      "techcrunch-ai"
+    ]
+  },
+  {
     "id": "copilotkit-open-sources-channels-sdk-an-mit-licensed-library-that-runs-any-ag-ui",
     "slug": "copilotkit-open-sources-channels-sdk-an-mit-licensed-library-that-runs-any-ag-ui",
     "title": "CopilotKit Open Sources Channels SDK: An MIT Licensed Library That Runs Any AG-UI Agent Inside Slack And Microsoft Teams",
