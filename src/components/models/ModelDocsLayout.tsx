@@ -93,14 +93,14 @@ export default function ModelDocsLayout({
         ))}
 
         <Link
-          href="/models"
+          href="/models/upgrade"
           className="block px-3 py-2 rounded-[var(--radius-control)] text-[var(--muted)] hover:text-[var(--text)] hover:bg-[var(--bg)] transition-colors font-medium"
         >
           Upgrade model versions
         </Link>
 
         <Link
-          href="/models"
+          href="/models/benchmarks"
           className="block px-3 py-2 rounded-[var(--radius-control)] text-[var(--muted)] hover:text-[var(--text)] hover:bg-[var(--bg)] transition-colors font-medium"
         >
           Model cards & benchmarks

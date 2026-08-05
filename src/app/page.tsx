@@ -11,6 +11,8 @@ import {
   ArrowUpRight,
   Newspaper,
   Clock,
+  Trophy,
+  Activity,
 } from "lucide-react";
 import type { ModelEntry } from "@/lib/models";
 
@@ -97,6 +99,106 @@ export default function Home() {
           </div>
         </section>
       )}
+
+      {/* ── Tools & Insights Section (Editorial/Linear Style) ────────────── */}
+      <section className="px-4 sm:px-6 md:px-10 lg:px-14 py-20 lg:py-28 max-w-7xl mx-auto border-t border-[var(--muted)]/10 overflow-hidden">
+        <div className="flex flex-col lg:flex-row items-center gap-16 lg:gap-24">
+          {/* Left: Editorial Content */}
+          <div className="flex-1 lg:max-w-[480px]">
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-[var(--muted)]/20 bg-[var(--card-bg)] text-[var(--muted)] text-[10px] font-bold uppercase tracking-[0.2em] mb-8">
+              <span className="w-1.5 h-1.5 rounded-full bg-[var(--accent)] animate-pulse" />
+              Intelligence Tools
+            </div>
+            <h2 className="text-[clamp(2.25rem,5vw,3.5rem)] font-medium text-[var(--text)] tracking-[-0.03em] leading-[1.05] mb-6">
+              Don't guess. <br />
+              <span className="text-[var(--muted)]">Measure and migrate with precision.</span>
+            </h2>
+            <p className="text-base sm:text-lg text-[var(--muted)] leading-relaxed mb-10">
+              Modelverse goes beyond a static directory. We actively index evaluation benchmarks and track architectural lineage so you can confidently switch to state-of-the-art models.
+            </p>
+
+            <div className="flex flex-col gap-3">
+              <Link href="/models/benchmarks" className="group flex items-center justify-between p-4 sm:p-5 rounded-[16px] border border-[var(--muted)]/10 bg-[var(--card-bg)] hover:bg-[var(--accent-soft)]/5 hover:border-[var(--accent)]/30 transition-all duration-300">
+                <div className="flex items-center gap-4">
+                  <div className="h-10 w-10 rounded-[10px] bg-[var(--bg)] border border-[var(--muted)]/10 flex items-center justify-center text-[var(--text)] group-hover:text-[var(--accent)] group-hover:scale-110 transition-all duration-300">
+                    <Trophy size={18} strokeWidth={1.5} />
+                  </div>
+                  <div>
+                    <h4 className="text-sm font-semibold text-[var(--text)]">Global Leaderboard</h4>
+                    <p className="text-xs text-[var(--muted)] mt-0.5">Rank by MMLU, HumanEval & MATH</p>
+                  </div>
+                </div>
+                <ArrowRight size={16} className="text-[var(--muted)] group-hover:text-[var(--accent)] group-hover:translate-x-1 transition-all duration-300" />
+              </Link>
+
+              <Link href="/models/upgrade" className="group flex items-center justify-between p-4 sm:p-5 rounded-[16px] border border-[var(--muted)]/10 bg-[var(--card-bg)] hover:bg-[var(--accent-soft)]/5 hover:border-[var(--accent)]/30 transition-all duration-300">
+                <div className="flex items-center gap-4">
+                  <div className="h-10 w-10 rounded-[10px] bg-[var(--bg)] border border-[var(--muted)]/10 flex items-center justify-center text-[var(--text)] group-hover:text-[var(--accent)] group-hover:scale-110 transition-all duration-300">
+                    <ArrowUpRight size={18} strokeWidth={1.5} />
+                  </div>
+                  <div>
+                    <h4 className="text-sm font-semibold text-[var(--text)]">Upgrade Paths</h4>
+                    <p className="text-xs text-[var(--muted)] mt-0.5">Navigate deprecations seamlessly</p>
+                  </div>
+                </div>
+                <ArrowRight size={16} className="text-[var(--muted)] group-hover:text-[var(--accent)] group-hover:translate-x-1 transition-all duration-300" />
+              </Link>
+            </div>
+          </div>
+
+          {/* Right: Abstract UI Visualization */}
+          <div className="flex-1 w-full relative min-h-[400px] lg:min-h-[500px] flex items-center justify-center pt-10 lg:pt-0">
+            {/* Background Glow */}
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80%] max-w-[400px] aspect-square bg-[var(--accent)]/5 rounded-full blur-[100px] pointer-events-none" />
+            
+            {/* Mock UI Composition */}
+            <div className="relative w-full max-w-[480px]">
+              {/* Leaderboard Mock Card (Back layer) */}
+              <div className="absolute -top-12 sm:-top-20 right-0 sm:-right-4 w-[85%] bg-[var(--bg)] border border-[var(--muted)]/10 rounded-[20px] shadow-2xl p-5 sm:p-6 transform rotate-[3deg] z-10 opacity-90 hover:opacity-100 hover:rotate-0 hover:-translate-y-2 transition-all duration-500 cursor-default">
+                <div className="flex items-center justify-between mb-5 pb-4 border-b border-[var(--muted)]/10">
+                  <span className="text-xs font-semibold text-[var(--text)] uppercase tracking-wider">Top Performers</span>
+                  <span className="text-[10px] text-[var(--muted)] font-mono">MMLU Score</span>
+                </div>
+                <div className="space-y-4">
+                  {[95.4, 91.2, 88.7].map((score, i) => (
+                    <div key={i} className="flex items-center gap-3">
+                      <div className="text-[10px] text-[var(--muted)] font-mono w-4">{i + 1}</div>
+                      <div className="h-1.5 flex-1 bg-[var(--card-bg)] rounded-full overflow-hidden">
+                        <div className="h-full bg-[var(--accent)]/70 rounded-full" style={{ width: `${score}%` }} />
+                      </div>
+                      <div className="text-xs font-mono text-[var(--text)]">{score}</div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Upgrade Path Mock Card (Front layer) */}
+              <div className="relative w-[90%] sm:w-[85%] mt-20 sm:mt-0 bg-[var(--card-bg)]/80 backdrop-blur-xl border border-[var(--muted)]/20 rounded-[24px] shadow-[0_20px_40px_rgba(0,0,0,0.1)] p-6 sm:p-8 transform -rotate-[4deg] z-20 hover:rotate-0 hover:-translate-y-2 transition-all duration-500">
+                <div className="flex items-center gap-4 mb-8">
+                  <div className="w-10 h-10 rounded-full bg-[var(--bg)] border border-[var(--muted)]/10 flex items-center justify-center shrink-0">
+                    <ArrowUpRight size={16} className="text-[var(--accent)]" />
+                  </div>
+                  <div>
+                    <div className="text-sm font-semibold text-[var(--text)]">Legacy Model</div>
+                    <div className="text-[11px] text-[var(--muted)] mt-0.5">Deprecation impending</div>
+                  </div>
+                </div>
+                
+                <div className="pl-5 ml-5 border-l-[1.5px] border-dashed border-[var(--muted)]/30 relative py-2">
+                  <div className="absolute w-2.5 h-2.5 rounded-full bg-[var(--bg)] border border-[var(--accent)] -left-[6px] top-1/2 -translate-y-1/2 flex items-center justify-center">
+                    <div className="w-1 h-1 rounded-full bg-[var(--accent)] animate-pulse" />
+                  </div>
+                  <div className="text-[11px] text-[var(--muted)] mb-1 uppercase tracking-wider font-semibold">Recommended Path</div>
+                  <div className="text-base font-bold text-[var(--text)]">Next-Gen Frontier</div>
+                  <div className="inline-flex mt-2 text-[10px] text-[var(--accent)] font-semibold bg-[var(--accent-soft)]/20 px-2.5 py-1 rounded-full border border-[var(--accent)]/10">
+                    Lower cost • 2x context
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
 
       {/* ── Latest AI News & Technical Analysis Section ────────────── */}
       {latestArticles.length > 0 && (
