@@ -44,6 +44,28 @@
     ]
   },
   {
+    "id": "macpaw-taps-liquid-ai-to-offer-on-device-inference-to-devs-building-for-its-app-",
+    "slug": "macpaw-taps-liquid-ai-to-offer-on-device-inference-to-devs-building-for-its-app-",
+    "title": "MacPaw taps Liquid AI to offer on-device inference to devs building for its app store",
+    "category": "short-news",
+    "publishDate": "2026-08-05",
+    "author": "Modelverse Editorial",
+    "readTime": "2 min read",
+    "excerpt": "MacPaw is building a local version of its AI assistant Eney using Liquid AI's models.",
+    "coverImage": "https://techcrunch.com/wp-content/uploads/2026/08/MacPaw-x-Liquid-AI.png?resize=1200,675",
+    "status": "published",
+    "confidenceLevel": "confirmed",
+    "externalSources": [
+      "https://techcrunch.com/2026/08/05/macpaw-taps-liquid-ai-to-offer-on-device-inference-to-devs-building-for-its-app-store/"
+    ],
+    "relatedModels": [],
+    "tags": [
+      "ai-news",
+      "breaking",
+      "techcrunch-ai"
+    ]
+  },
+  {
     "id": "nvidia-releases-alpamayo-2-super-a-34b-open-vision-language-action-model-for-rob",
     "slug": "nvidia-releases-alpamayo-2-super-a-34b-open-vision-language-action-model-for-rob",
     "title": "NVIDIA Releases Alpamayo 2 Super: A 34B Open Vision-Language-Action Model for Robotaxis and Autonomous Driving Under OpenMDW-1.1",
