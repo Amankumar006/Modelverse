@@ -1,0 +1,24 @@
+{
+  "id": "hark-previews-its-browser-use-agent-for-completing-tasks",
+  "slug": "hark-previews-its-browser-use-agent-for-completing-tasks",
+  "title": "Hark previews its browser use agent for completing tasks",
+  "category": "short-news",
+  "isTrending": true,
+  "publishDate": "2026-08-05",
+  "author": "Modelverse Editorial",
+  "readTime": "2 min read",
+  "excerpt": "Hark claims that its browser use agent is faster and cheaper than competition.",
+  "body": "Hark, a startup that recently secured substantial Series A funding, has introduced \"Hark Handoff,\" an innovative AI agent designed to efficiently automate tasks directly within a web browser. This agent aims to streamline user interactions across a multitude of websites, even those lacking dedicated APIs, such as major retail sites like Target and Walmart, or service platforms like OpenTable and LinkedIn. Handoff is built to execute a wide range of commands, from ordering essentials and booking travel to filing returns and conducting research, by intelligently navigating the digital landscape on behalf of the user.\n\nThe core of Handoff's functionality lies in its ability to interpret website structure and visual cues, enabling it to discern where to click buttons or input information. Hark differentiates its approach by claiming its model predicts the \"next action\"—a specific click or keyboard input—rather than merely predicting the next token, a common characteristic of large language models. Currently operating on a post-trained model, Hark plans to transition to pre-training later this year, a strategy intended to accelerate the refinement of its data pipelines, training infrastructure, and overall techniques.\n\nThis release holds significant implications for developers and researchers keen on advanced web automation. Hark positions Handoff as a competitive solution, asserting it outperforms rivals in speed and offers a more cost-effective alternative to high-end models like GPT 5.5 and Opus 4.8. As the field of computer-use agents continues to expand with contributions from tech giants and numerous startups, Hark's entry with Handoff underscores the growing potential for sophisticated, browser-based task automation. A waitlist is now open, with the platform slated for release by the end of summer.",
+  "coverImage": "https://techcrunch.com/wp-content/uploads/2026/08/Screenshot-2026-08-05-at-8.10.59-PM.jpg?resize=1200,596",
+  "status": "published",
+  "confidenceLevel": "confirmed",
+  "externalSources": [
+    "https://techcrunch.com/2026/08/05/hark-previews-its-browser-use-agent-for-completing-tasks/"
+  ],
+  "relatedModels": [],
+  "tags": [
+    "ai-news",
+    "breaking",
+    "techcrunch-ai"
+  ]
+}
