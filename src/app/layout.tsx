@@ -5,6 +5,7 @@ import JsonLd from "@/components/JsonLd";
 import { SITE_URL } from "@/lib/models";
 import Footer from "@/components/layout/Footer";
 import { ThemeProvider } from "@/components/ThemeProvider";
+import GoogleAdsense from "@/components/third-party/GoogleAdsense";
 
 /* ------------------------------------------------------------------ */
 /*  Metadata                                                           */
@@ -112,6 +113,7 @@ export default function RootLayout({
     <html lang="en" className="dark">
       <body className="min-h-screen bg-[var(--bg)] text-[var(--text)] tracking-[-0.01em] antialiased flex flex-col justify-between">
         <ThemeProvider>
+          <GoogleAdsense />
           <Script
             id="performance-polyfill"
             strategy="beforeInteractive"

@@ -5,6 +5,7 @@ import Link from "next/link";
 import { type ModelEntry, getModalities } from "@/lib/models";
 import ModelDetailTabs from "./ModelDetailTabs";
 import Navbar from "@/components/layout/Navbar";
+import AdUnit from "@/components/third-party/AdUnit";
 import { Search, ChevronDown, Copy, Check, ExternalLink, Terminal, Shield, Layers, FileText } from "lucide-react";
 
 interface ModelDocsLayoutProps {
@@ -223,6 +224,11 @@ export default function ModelDocsLayout({
               </div>
             </div>
           </section>
+
+          {/* AdSense Unit */}
+          <div className="w-full flex justify-center py-2">
+            <AdUnit slot="model-docs-mid" format="fluid" className="w-full max-w-[728px] aspect-[728/90]" />
+          </div>
 
           {/* Section 3: Latest Models Comparison Table */}
           {comparisonModels.length > 1 && (
