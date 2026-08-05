@@ -1,20 +1,44 @@
 [
   {
-    "id": "klaviyo-acquires-elias-torres-agency-in-full-circle-reunion-for-tech-founders",
-    "slug": "klaviyo-acquires-elias-torres-agency-in-full-circle-reunion-for-tech-founders",
-    "title": "Klaviyo acquires Elias Torres’ Agency in full-circle reunion for tech founders",
+    "id": "end-to-end-bayesian-marketing-mix-modeling-with-google-meridian-media-measuremen",
+    "slug": "end-to-end-bayesian-marketing-mix-modeling-with-google-meridian-media-measuremen",
+    "title": "End-to-End Bayesian Marketing Mix Modeling with Google Meridian: Media Measurement, ROI Analysis, and Budget Optimization",
     "category": "short-news",
     "isTrending": true,
     "publishDate": "2026-08-05",
     "author": "Modelverse Editorial",
     "readTime": "2 min read",
-    "excerpt": "The serial entrepreneur joins the e-commerce company as CPO to lead its AI agents.",
-    "body": "Klaviyo, the publicly traded e-commerce marketing automation platform, has announced its acquisition of Agency, an AI-powered customer success startup founded by serial entrepreneur Elias Torres. This strategic move brings Torres back into a professional orbit with Klaviyo CEO Andrew Bialecki, whom he previously mentored. As part of the deal, Torres will assume the role of Chief Product Officer at Klaviyo, leading Agency's team to integrate and expand Klaviyo's existing AI capabilities.\n\nThe acquisition aims to supercharge Klaviyo's AI agents, including Composer, which crafts marketing campaigns, and Customer Agent, designed to handle post-sale support like returns and order tracking. Agency's specialized AI technology will be woven into these products, leveraging Klaviyo's extensive customer data. This deep integration of proprietary data is seen as a significant competitive advantage, enabling more intelligent and personalized automation across the customer lifecycle.\n\nFor developers and researchers, this acquisition highlights the growing importance of specialized AI solutions within broader platforms. It underscores how combining targeted AI expertise with vast, domain-specific datasets can create powerful tools for enhancing customer engagement and operational efficiency. Developers can anticipate more robust and intelligent AI-driven features within the Klaviyo ecosystem, enabling them to build richer, data-informed experiences. Researchers, meanwhile, gain a practical case study in the strategic application of AI for business growth and the critical role of data leverage in achieving AI agent superiority.",
-    "coverImage": "https://techcrunch.com/wp-content/uploads/2026/08/Screenshot-2026-08-05-at-8.53.41-PM.png?resize=1200,868",
+    "excerpt": "In this tutorial, we build a complete Bayesian marketing mix modeling workflow using Google Meridian. We begin by installing the required libraries, verifying GPU availability, and...",
+    "body": "Google has unveiled a comprehensive tutorial demonstrating an end-to-end Bayesian Marketing Mix Modeling (MMM) workflow using its Meridian framework. This guide empowers marketers and data scientists to move beyond traditional media measurement, offering a robust method for analyzing media performance, calculating Return on Investment (ROI), and optimizing marketing budgets. The announcement highlights Meridian's capability to transform raw geo-level marketing data into actionable insights, providing a structured approach from data ingestion to strategic decision-making.\n\nThe Meridian workflow leverages a Bayesian statistical approach, employing NUTS sampling for both prior and posterior distributions. Users begin by mapping their marketing data, including impressions, spend, controls, and conversions, to Meridian's schema. The model then incorporates interpretable ROI-based priors before fitting, with convergence and predictive accuracy rigorously evaluated using diagnostics like R-hat. Post-training, the system provides deep insights into channel contributions, ROI, marginal ROI, effectiveness, adstock decay, and saturation curves, allowing for a nuanced understanding of media impact and diminishing returns.\n\nThis tutorial is invaluable for developers and researchers seeking a powerful, transparent, and statistically sound solution for marketing analytics. Meridian's ability to quantify uncertainty through posterior draws, coupled with its integrated optimization API, enables the creation of data-driven budget allocations for both fixed and flexible scenarios. The framework's support for generating shareable reports and persisting fitted models ensures reproducibility and efficiency, making it a critical tool for adapting complex media measurement and optimization strategies to real-world business challenges.",
+    "coverImage": "https://www.marktechpost.com/wp-content/uploads/2026/08/blog6176-14-1024x731.png",
     "status": "published",
     "confidenceLevel": "confirmed",
     "externalSources": [
-      "https://techcrunch.com/2026/08/05/klaviyo-acquires-elias-torres-agency-in-full-circle-reunion-for-tech-founders/"
+      "https://www.marktechpost.com/2026/08/05/end-to-end-bayesian-marketing-mix-modeling-with-google-meridian-media-measurement-roi-analysis-and-budget-optimization/"
+    ],
+    "relatedModels": [],
+    "tags": [
+      "ai-news",
+      "breaking",
+      "marktechpost"
+    ]
+  },
+  {
+    "id": "meta-launches-muse-code-an-ai-agent-for-large-code-bases",
+    "slug": "meta-launches-muse-code-an-ai-agent-for-large-code-bases",
+    "title": "Meta launches Muse Code, an AI agent for large code bases",
+    "category": "short-news",
+    "isTrending": true,
+    "publishDate": "2026-08-05",
+    "author": "Modelverse Editorial",
+    "readTime": "2 min read",
+    "excerpt": "Meta expanded its AI coding offerings with a new agent that, it promises, can handle complex tasks with complex software.",
+    "body": "Meta has unveiled Muse Code, a new terminal-based AI coding agent designed to empower developers tackling complex software engineering tasks within extensive codebases. Currently in beta, this agent aims to streamline the entire development lifecycle, from initial planning and code generation to the validation of results across large repositories. This launch signifies Meta's intensified efforts to establish a stronger foothold in the competitive AI development tools landscape, offering a robust solution for intricate programming challenges.\n\nAt its core, Muse Code is powered by Meta's previously released Muse Spark coding model. What distinguishes its operation is an innovative approach to managing large-scale projects: when confronted with a substantial task, Muse Code intelligently dispatches multiple sub-agents. These sub-agents operate in parallel within isolated \"worktrees,\" a crucial design choice that ensures a developer's primary working copy remains untouched and safe from potential conflicts. This parallel processing capability allows for simultaneous feature development without collisions, as exemplified by its ability to build multiple game features concurrently.\n\nFor developers and researchers, Muse Code represents a significant leap forward in AI-assisted coding. Its capacity to manage complete software engineering workflows across vast projects, coupled with its unique parallel execution model, promises enhanced productivity and reduced complexity. Moreover, Meta is strategically positioning Muse Code as a highly competitive and cost-effective alternative to established AI coding agents like OpenAI's Codex and Anthropic's Claude Code, making advanced AI assistance more accessible and efficient for a broader range of development teams.",
+    "coverImage": "https://techcrunch.com/wp-content/uploads/2025/10/GettyImages-2235448056.jpg?resize=1200,800",
+    "status": "published",
+    "confidenceLevel": "confirmed",
+    "externalSources": [
+      "https://techcrunch.com/2026/08/05/meta-launches-muse-code-an-ai-agent-for-large-code-bases/"
     ],
     "relatedModels": [],
     "tags": [
@@ -24,27 +48,27 @@
     ]
   },
   {
-    "id": "jeff-dean-and-other-top-ai-researchers-are-leaving-google-to-launch-their-own-st",
-    "slug": "jeff-dean-and-other-top-ai-researchers-are-leaving-google-to-launch-their-own-st",
-    "title": "Jeff Dean and other top AI researchers are leaving Google to launch their own startup",
+    "id": "meta-ai-releases-muse-code-beta-a-terminal-coding-agent-powered-by-the-new-muse-",
+    "slug": "meta-ai-releases-muse-code-beta-a-terminal-coding-agent-powered-by-the-new-muse-",
+    "title": "Meta AI Releases Muse Code (Beta): A Terminal Coding Agent Powered by the New Muse Spark 1.2 Model",
     "category": "short-news",
     "isTrending": true,
     "publishDate": "2026-08-05",
     "author": "Modelverse Editorial",
     "readTime": "2 min read",
-    "excerpt": "The legendary Google executive is joined by other outgoing Google execs in a joint mission to use AI to push forward the process of scientific discovery.",
-    "body": "A significant shift in the AI landscape is underway as Jeff Dean, a long-standing and highly influential executive at Google, along with several other top-tier researchers including Sanjay Ghemawat, Quoc Le, and Oriol Vinyals, are departing the tech giant. This formidable team is launching Discovery Loop, a new public benefit corporation with Dean reportedly at the helm as CEO. The startup has already secured substantial initial funding, notably from Google's parent company Alphabet, with Radical Ventures and Khosla Ventures co-leading the round, signaling strong confidence in their ambitious vision.\n\nDiscovery Loop's core mission is to revolutionize scientific research by leveraging advanced AI to automate and dramatically accelerate the discovery process. The company plans to deploy sophisticated algorithms capable of initiating and iterating thousands of experiments concurrently, aiming to partially automate research workflows and vastly expand the scale of experimentation. Crucially, they are also exploring recursive self-improvement, where AI helps create more powerful AI, potentially removing human iteration entirely from the development cycle. This endeavor matters immensely to developers and researchers as it seeks to overcome the traditional bottleneck of slow, sequential human-led iterations, promising to fundamentally transform the speed and efficiency of innovation across scientific and engineering domains.",
-    "coverImage": "https://techcrunch.com/wp-content/uploads/2026/08/GettyImages-1197130647.jpg?resize=1200,800",
+    "excerpt": "Meta Superintelligence Labs has released Muse Code, a terminal coding agent in beta, powered by the new Muse Spark 1.2 model. Muse Code plans changes, writes code, and validates re...",
+    "body": "Meta AI has unveiled Muse Code in beta, a new terminal-based coding agent powered by its latest model, Muse Spark 1.2. This release marks Meta's ambition to tackle complex software engineering challenges within extensive code repositories, handling everything from planning and code generation to validation. Muse Code is currently available for macOS and Linux, installable via `curl -fsSL https://dev.meta.ai/install.sh | bash`. Muse Spark 1.2 is accessible through Muse Code and the Meta Model API, indicating it's a hosted service rather than a downloadable model.\n\nThe agent's architecture features persistent asynchronous background agents that remain active throughout a session, eliminating redundant information gathering and reducing latency for multi-step tasks. A local, append-only event log records every action—model calls, tool runs, approvals, and edits—making it \"replay-exact and restart-safe.\" This crucial feature allows long-running tasks to resume precisely where they left off after a crash, significantly enhancing reliability. Muse Code also ships with default skills like `/plan` for task outlining, `/grill` for plan stress-testing, and `/goal` for objective completion.\n\nFor developers and researchers, Muse Spark 1.2 brings substantial improvements in code generation, complex debugging, and codebase understanding, achieved through scaled-up training compute and diverse environments. Its significance is further highlighted by a detailed case study where the model iteratively optimized GPU kernels over 1,000+ tool calls, running for up to 24 hours. This demonstrates Muse Code's potential for highly specialized, performance-critical engineering tasks. Meta also benchmarked Muse Spark 1.2 against leading models like Grok 4.5, Claude Opus 5, GPT-5.6 Terra, Gemini 3.6 Flash, and Kimi K3, showcasing its competitive capabilities in the evolving landscape of AI-powered coding.",
+    "coverImage": "https://www.marktechpost.com/wp-content/uploads/2026/08/blog6176-13.png",
     "status": "published",
     "confidenceLevel": "confirmed",
     "externalSources": [
-      "https://techcrunch.com/2026/08/05/jeff-dean-and-other-top-ai-researchers-are-leaving-google-to-launch-their-own-startup/"
+      "https://www.marktechpost.com/2026/08/05/meta-superintelligence-labs-releases-muse-code/"
     ],
     "relatedModels": [],
     "tags": [
       "ai-news",
       "breaking",
-      "techcrunch-ai"
+      "marktechpost"
     ]
   }
 ]

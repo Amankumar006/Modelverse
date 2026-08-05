@@ -66,6 +66,28 @@
     ]
   },
   {
+    "id": "end-to-end-bayesian-marketing-mix-modeling-with-google-meridian-media-measuremen",
+    "slug": "end-to-end-bayesian-marketing-mix-modeling-with-google-meridian-media-measuremen",
+    "title": "End-to-End Bayesian Marketing Mix Modeling with Google Meridian: Media Measurement, ROI Analysis, and Budget Optimization",
+    "category": "short-news",
+    "publishDate": "2026-08-05",
+    "author": "Modelverse Editorial",
+    "readTime": "2 min read",
+    "excerpt": "In this tutorial, we build a complete Bayesian marketing mix modeling workflow using Google Meridian. We begin by installing the required libraries, verifying GPU availability, and...",
+    "coverImage": "https://www.marktechpost.com/wp-content/uploads/2026/08/blog6176-14-1024x731.png",
+    "status": "published",
+    "confidenceLevel": "confirmed",
+    "externalSources": [
+      "https://www.marktechpost.com/2026/08/05/end-to-end-bayesian-marketing-mix-modeling-with-google-meridian-media-measurement-roi-analysis-and-budget-optimization/"
+    ],
+    "relatedModels": [],
+    "tags": [
+      "ai-news",
+      "breaking",
+      "marktechpost"
+    ]
+  },
+  {
     "id": "hark-previews-its-browser-use-agent-for-completing-tasks",
     "slug": "hark-previews-its-browser-use-agent-for-completing-tasks",
     "title": "Hark previews its browser use agent for completing tasks",
@@ -145,6 +167,50 @@
     "confidenceLevel": "confirmed",
     "externalSources": [
       "https://techcrunch.com/2026/08/05/macpaw-taps-liquid-ai-to-offer-on-device-inference-to-devs-building-for-its-app-store/"
+    ],
+    "relatedModels": [],
+    "tags": [
+      "ai-news",
+      "breaking",
+      "techcrunch-ai"
+    ]
+  },
+  {
+    "id": "meta-ai-releases-muse-code-beta-a-terminal-coding-agent-powered-by-the-new-muse-",
+    "slug": "meta-ai-releases-muse-code-beta-a-terminal-coding-agent-powered-by-the-new-muse-",
+    "title": "Meta AI Releases Muse Code (Beta): A Terminal Coding Agent Powered by the New Muse Spark 1.2 Model",
+    "category": "short-news",
+    "publishDate": "2026-08-05",
+    "author": "Modelverse Editorial",
+    "readTime": "2 min read",
+    "excerpt": "Meta Superintelligence Labs has released Muse Code, a terminal coding agent in beta, powered by the new Muse Spark 1.2 model. Muse Code plans changes, writes code, and validates re...",
+    "coverImage": "https://www.marktechpost.com/wp-content/uploads/2026/08/blog6176-13.png",
+    "status": "published",
+    "confidenceLevel": "confirmed",
+    "externalSources": [
+      "https://www.marktechpost.com/2026/08/05/meta-superintelligence-labs-releases-muse-code/"
+    ],
+    "relatedModels": [],
+    "tags": [
+      "ai-news",
+      "breaking",
+      "marktechpost"
+    ]
+  },
+  {
+    "id": "meta-launches-muse-code-an-ai-agent-for-large-code-bases",
+    "slug": "meta-launches-muse-code-an-ai-agent-for-large-code-bases",
+    "title": "Meta launches Muse Code, an AI agent for large code bases",
+    "category": "short-news",
+    "publishDate": "2026-08-05",
+    "author": "Modelverse Editorial",
+    "readTime": "2 min read",
+    "excerpt": "Meta expanded its AI coding offerings with a new agent that, it promises, can handle complex tasks with complex software.",
+    "coverImage": "https://techcrunch.com/wp-content/uploads/2025/10/GettyImages-2235448056.jpg?resize=1200,800",
+    "status": "published",
+    "confidenceLevel": "confirmed",
+    "externalSources": [
+      "https://techcrunch.com/2026/08/05/meta-launches-muse-code-an-ai-agent-for-large-code-bases/"
     ],
     "relatedModels": [],
     "tags": [
