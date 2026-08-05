@@ -118,12 +118,15 @@ export default async function ModelDetailPage({
   const contextWindowText = typeof model.contextWindow === "string" ? model.contextWindow : "Unknown";
   const licenseText = typeof model.license === "string" ? model.license : model.license?.name || "Custom";
 
+  const imageUrl = model.logo ? `${SITE_URL}${model.logo}` : `${SITE_URL}/icon.jpg`;
+
   // Build the Product entity
   const productEntity: Record<string, unknown> = {
     "@type": "Product",
     "@id": `${SITE_URL}/models/${model.slug}#product`,
     name: model.name,
     description: model.description,
+    image: imageUrl,
     brand: { "@type": "Organization", name: model.developer },
     category: "AI Model",
     releaseDate: model.releaseDate,
@@ -134,7 +137,7 @@ export default async function ModelDetailPage({
     ],
   };
 
-  // Only include offers when the model has real pricing data
+  // Include offers: use real pricing data if available, otherwise fallback to 0
   if (model.pricing && model.pricing.length > 0) {
     productEntity.offers = model.pricing.map((p) => ({
       "@type": "Offer",
@@ -142,6 +145,12 @@ export default async function ModelDetailPage({
       priceCurrency: p.currency,
       description: p.notes || `${p.unit}`,
     }));
+  } else {
+    productEntity.offers = {
+      "@type": "Offer",
+      price: "0",
+      priceCurrency: "USD"
+    };
   }
 
   // Cross-link to base model if this is a variant
