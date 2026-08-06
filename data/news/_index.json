@@ -1,5 +1,159 @@
 [
   {
+    "id": "amid-legal-battles-suno-says-it-will-start-watermarking-songs",
+    "slug": "amid-legal-battles-suno-says-it-will-start-watermarking-songs",
+    "title": "Amid legal battles, Suno says it will start watermarking songs",
+    "category": "short-news",
+    "publishDate": "2026-08-06",
+    "author": "Modelverse Editorial",
+    "readTime": "2 min read",
+    "excerpt": "Suno's watermarking feature comes as the company is fighting legal battles on several fronts.",
+    "coverImage": "https://techcrunch.com/wp-content/uploads/2026/07/mikey-shulman-2159558534.jpg?resize=1200,942",
+    "status": "published",
+    "confidenceLevel": "confirmed",
+    "externalSources": [
+      "https://techcrunch.com/2026/08/06/amid-legal-battles-suno-says-it-will-start-watermarking-songs/"
+    ],
+    "relatedModels": [],
+    "tags": [
+      "ai-news",
+      "breaking",
+      "techcrunch-ai"
+    ]
+  },
+  {
+    "id": "ex-spotify-employees-raise-10m-to-bring-the-ai-behind-its-recommendations-to-e-c",
+    "slug": "ex-spotify-employees-raise-10m-to-bring-the-ai-behind-its-recommendations-to-e-c",
+    "title": "Ex-Spotify employees raise $10M to bring the AI behind its recommendations to e-commerce",
+    "category": "short-news",
+    "publishDate": "2026-08-06",
+    "author": "Modelverse Editorial",
+    "readTime": "2 min read",
+    "excerpt": "The startup's platform predicts what product a shopper wants next, learn their general taste, and fine-tune continuously based on what they do in real time.",
+    "coverImage": "https://techcrunch.com/wp-content/uploads/2026/08/Malachyte.jpg?w=1200",
+    "status": "published",
+    "confidenceLevel": "confirmed",
+    "externalSources": [
+      "https://techcrunch.com/2026/08/06/ex-spotify-employees-raise-10m-to-bring-the-ai-behind-its-recommendations-to-e-commerce/"
+    ],
+    "relatedModels": [],
+    "tags": [
+      "ai-news",
+      "breaking",
+      "techcrunch-ai"
+    ]
+  },
+  {
+    "id": "exclusive-mirendil-inks-100m-google-cloud-deal-to-scale-self-improving-ai",
+    "slug": "exclusive-mirendil-inks-100m-google-cloud-deal-to-scale-self-improving-ai",
+    "title": "Exclusive: Mirendil inks $100M+ Google Cloud deal to scale self-improving AI",
+    "category": "short-news",
+    "publishDate": "2026-08-06",
+    "author": "Modelverse Editorial",
+    "readTime": "2 min read",
+    "excerpt": "Mirendil has signed a $100 million-plus Google Cloud partnership to expand its compute infrastructure, powering research into self-improving AI systems designed to accelerate scien...",
+    "coverImage": "https://techcrunch.com/wp-content/uploads/2026/04/GettyImages-2266466589.jpg?w=1024",
+    "status": "published",
+    "confidenceLevel": "confirmed",
+    "externalSources": [
+      "https://techcrunch.com/2026/08/06/exclusive-mirendil-inks-100m-google-cloud-deal-to-scale-self-improving-ai/"
+    ],
+    "relatedModels": [],
+    "tags": [
+      "ai-news",
+      "breaking",
+      "techcrunch-ai"
+    ]
+  },
+  {
+    "id": "geforce-now-shakes-up-august-with-26-new-games",
+    "slug": "geforce-now-shakes-up-august-with-26-new-games",
+    "title": "GeForce NOW Shakes Up August With 26 New Games",
+    "category": "short-news",
+    "publishDate": "2026-08-06",
+    "author": "Modelverse Editorial",
+    "readTime": "2 min read",
+    "excerpt": "August is here, bringing 26 new games for GeForce NOW members.  Command the seas in World of Warships: Legends and discover what’s next in the GeForce NOW library, starting with th...",
+    "coverImage": "https://blogs.nvidia.com/wp-content/uploads/2026/08/gfn-thursday-8-6-nv-blog-1280x680-logo.jpg",
+    "status": "published",
+    "confidenceLevel": "confirmed",
+    "externalSources": [
+      "https://blogs.nvidia.com/blog/geforce-now-thursday-august-2026-games-list/"
+    ],
+    "relatedModels": [],
+    "tags": [
+      "ai-news",
+      "breaking",
+      "nvidia"
+    ]
+  },
+  {
+    "id": "google-maps-adds-agentic-features-including-food-ordering-and-hotel-bookings",
+    "slug": "google-maps-adds-agentic-features-including-food-ordering-and-hotel-bookings",
+    "title": "Google Maps adds agentic features, including food ordering and hotel bookings",
+    "category": "short-news",
+    "publishDate": "2026-08-06",
+    "author": "Modelverse Editorial",
+    "readTime": "2 min read",
+    "excerpt": "The launch of these new features reflects Google’s ambitions to transform Google Maps from a navigation tool into an assistant that's capable of helping users complete real-world t...",
+    "coverImage": "https://techcrunch.com/wp-content/uploads/2026/03/GettyImages-2202707012.jpg?resize=1200,800",
+    "status": "published",
+    "confidenceLevel": "confirmed",
+    "externalSources": [
+      "https://techcrunch.com/2026/08/06/google-maps-adds-agentic-features-including-food-ordering-and-hotel-bookings/"
+    ],
+    "relatedModels": [],
+    "tags": [
+      "ai-news",
+      "breaking",
+      "techcrunch-ai"
+    ]
+  },
+  {
+    "id": "into-the-omniverse-how-open-world-models-push-the-frontier-of-physical-ai",
+    "slug": "into-the-omniverse-how-open-world-models-push-the-frontier-of-physical-ai",
+    "title": "Into the Omniverse: How Open World Models Push the Frontier of Physical AI",
+    "category": "short-news",
+    "publishDate": "2026-08-06",
+    "author": "Modelverse Editorial",
+    "readTime": "2 min read",
+    "excerpt": "In July, NVIDIA joined more than 200 companies and organizations in signing “Open Weights and American AI Leadership,” an open letter arguing that AI leadership will be measured no...",
+    "coverImage": "https://blogs.nvidia.com/wp-content/uploads/2026/08/nv-ov-ito-social-1920x1080-1.jpg",
+    "status": "published",
+    "confidenceLevel": "confirmed",
+    "externalSources": [
+      "https://blogs.nvidia.com/blog/open-world-models-physical-ai/"
+    ],
+    "relatedModels": [],
+    "tags": [
+      "ai-news",
+      "breaking",
+      "nvidia"
+    ]
+  },
+  {
+    "id": "omilia-raises-67m-to-scale-its-customer-support-platform",
+    "slug": "omilia-raises-67m-to-scale-its-customer-support-platform",
+    "title": "Omilia raises $67M to scale its customer support platform",
+    "category": "short-news",
+    "publishDate": "2026-08-06",
+    "author": "Modelverse Editorial",
+    "readTime": "2 min read",
+    "excerpt": "The Series B is the company's second fundraise since it last raised capital in 2020. In that time, it has increased its ARR by 10x to $60 million.",
+    "coverImage": "https://techcrunch.com/wp-content/uploads/2026/08/Self-Learning-Agents-Vertical.jpeg?resize=1200,789",
+    "status": "published",
+    "confidenceLevel": "confirmed",
+    "externalSources": [
+      "https://techcrunch.com/2026/08/06/omilia-raises-67m-to-scale-its-customer-support-platform/"
+    ],
+    "relatedModels": [],
+    "tags": [
+      "ai-news",
+      "breaking",
+      "techcrunch-ai"
+    ]
+  },
+  {
     "id": "ai-makes-weather-prediction-better-can-windborne-make-it-lucrative",
     "slug": "ai-makes-weather-prediction-better-can-windborne-make-it-lucrative",
     "title": "AI makes weather prediction better. Can WindBorne make it lucrative?",

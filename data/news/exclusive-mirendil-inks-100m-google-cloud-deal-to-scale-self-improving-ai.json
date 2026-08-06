@@ -1,0 +1,24 @@
+{
+  "id": "exclusive-mirendil-inks-100m-google-cloud-deal-to-scale-self-improving-ai",
+  "slug": "exclusive-mirendil-inks-100m-google-cloud-deal-to-scale-self-improving-ai",
+  "title": "Exclusive: Mirendil inks $100M+ Google Cloud deal to scale self-improving AI",
+  "category": "short-news",
+  "isTrending": true,
+  "publishDate": "2026-08-06",
+  "author": "Modelverse Editorial",
+  "readTime": "2 min read",
+  "excerpt": "Mirendil has signed a $100 million-plus Google Cloud partnership to expand its compute infrastructure, powering research into self-improving AI systems designed to accelerate scien...",
+  "body": "AI lab Mirendil has secured a significant multi-year partnership with Google Cloud, valued at over $100 million, to power its advanced research. This strategic deal provides Mirendil with access to Google's powerful TPUs, Nvidia GPUs, and managed training clusters, highlighting a dual trend in the AI industry: cloud giants are actively courting innovative startups with substantial infrastructure commitments, while AI companies are aggressively securing compute resources to support their rapid scaling and ambitious development goals.\n\nAt the heart of Mirendil's mission is the pursuit of \"self-improving AI,\" a concept also known as recursive self-improvement. This groundbreaking technology envisions AI systems that can iteratively enhance their own knowledge, performance, and capabilities over time, learning and evolving autonomously. Drawing on expertise from leading labs like Anthropic, where Mirendil's co-founders originated, this approach aims to create AIs that continuously refine their understanding and problem-solving abilities without constant human intervention.\n\nFor developers and researchers, this technology represents a profound shift in how scientific and AI discovery can be conducted. Mirendil believes self-improving AI can automate vast segments of research, accelerating breakthroughs in critical fields such as medicine, biology, and materials science. By mimicking the human scientific process of accumulating expertise and improving performance, these AIs could be directed at complex, long-term problems, continuously making progress on challenges like Alzheimer's disease. This promises a future where AI systems can autonomously pursue ambitious goals, fundamentally transforming the pace and scope of scientific innovation.",
+  "coverImage": "https://techcrunch.com/wp-content/uploads/2026/04/GettyImages-2266466589.jpg?w=1024",
+  "status": "published",
+  "confidenceLevel": "confirmed",
+  "externalSources": [
+    "https://techcrunch.com/2026/08/06/exclusive-mirendil-inks-100m-google-cloud-deal-to-scale-self-improving-ai/"
+  ],
+  "relatedModels": [],
+  "tags": [
+    "ai-news",
+    "breaking",
+    "techcrunch-ai"
+  ]
+}

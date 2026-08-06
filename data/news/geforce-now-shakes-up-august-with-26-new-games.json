@@ -1,0 +1,24 @@
+{
+  "id": "geforce-now-shakes-up-august-with-26-new-games",
+  "slug": "geforce-now-shakes-up-august-with-26-new-games",
+  "title": "GeForce NOW Shakes Up August With 26 New Games",
+  "category": "short-news",
+  "isTrending": true,
+  "publishDate": "2026-08-06",
+  "author": "Modelverse Editorial",
+  "readTime": "2 min read",
+  "excerpt": "August is here, bringing 26 new games for GeForce NOW members.  Command the seas in World of Warships: Legends and discover what’s next in the GeForce NOW library, starting with th...",
+  "body": "NVIDIA's GeForce NOW is significantly expanding its cloud gaming library this August, introducing 26 new titles, with eight already available this week, including the popular free-to-play naval combat game *World of Warships: Legends*. Concurrently, NVIDIA is showcasing the power of its Ultimate cloud gaming tier at QuakeCon, offering attendees hands-on experiences. Demos highlight the service's capability to deliver stunning visuals at up to 5K 120 frames per second on ultrawide displays, powered by GeForce RTX 5080 GPUs, and seamless gameplay on portable devices like the Lenovo Legion Go S.\n\nThe core of GeForce NOW's technology lies in its ability to stream a vast catalog of PC games, including beloved Bethesda titles, across a wide array of devices without requiring local installations. This means gamers can effortlessly transition their play from laptops and Macs to handhelds, mobile devices, and TVs, picking up exactly where they left off on nearly any supported screen. By leveraging powerful cloud-based GPUs, the service effectively transforms less capable hardware into high-performance gaming rigs, rendering complex graphics remotely and streaming them with minimal latency.\n\nFor game developers, platforms like GeForce NOW are increasingly vital, as they dramatically broaden the potential audience for their PC games without the need for extensive porting efforts across diverse hardware ecosystems. This allows developers to concentrate on creating immersive experiences rather than platform-specific optimizations. From a research perspective, particularly in AI and distributed systems, GeForce NOW exemplifies cutting-edge cloud streaming, showcasing advancements in low-latency video encoding, real-time interactive streaming, and dynamic resource allocation. This continuous evolution pushes the boundaries of how interactive content can be delivered globally, offering valuable insights for future AI applications requiring real-time processing and ubiquitous access.",
+  "coverImage": "https://blogs.nvidia.com/wp-content/uploads/2026/08/gfn-thursday-8-6-nv-blog-1280x680-logo.jpg",
+  "status": "published",
+  "confidenceLevel": "confirmed",
+  "externalSources": [
+    "https://blogs.nvidia.com/blog/geforce-now-thursday-august-2026-games-list/"
+  ],
+  "relatedModels": [],
+  "tags": [
+    "ai-news",
+    "breaking",
+    "nvidia"
+  ]
+}
