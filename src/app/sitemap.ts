@@ -129,7 +129,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const tasks = [...new Set(entries.map((e) => e.primaryTask))].filter(Boolean);
   const types = [...new Set(entries.map((e) => e.type))].filter(Boolean);
   const modalities = [...new Set(entries.flatMap((e) => e.modality))].filter(Boolean);
-  const licenses = [...new Set(entries.map((e) => typeof e.license === "object" ? e.license.name || "Custom" : e.license))].filter(Boolean);
+  const licenses = [...new Set(entries.map((e) => e.license && typeof e.license === "object" ? e.license.name || "Custom" : e.license))].filter(Boolean);
   const deployments = [...new Set(entries.flatMap((e) => e.deployment))].filter(Boolean);
 
   // Generate single-facet anchor URLs

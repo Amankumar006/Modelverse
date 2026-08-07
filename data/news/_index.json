@@ -811,7 +811,9 @@
       "ai-news",
       "breaking",
       "nvidia"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "nvidia-releases-alpamayo-2-super-a-34b-open-vision-language-action-model-for-rob",

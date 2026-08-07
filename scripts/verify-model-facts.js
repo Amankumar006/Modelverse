@@ -105,7 +105,7 @@ async function verifyModelEntry(modelData) {
       fieldConfidence.pricing = match ? "LIKELY" : "DISPUTED";
       if (!match) overallDisputed = true;
     } else {
-      fieldConfidence.pricing = modelData.humanApproved ? "VERIFIED" : "DRAFT";
+      fieldConfidence.pricing = "DRAFT";
     }
   }
 
@@ -125,20 +125,19 @@ async function verifyModelEntry(modelData) {
       let inheritedFromBase = false;
       const baseSlug = modelData.baseModel || modelData.previousVersion;
       if (baseSlug) {
-        const prodFiles = fs.existsSync(PROD_DIR) ? fs.readdirSync(PROD_DIR) : [];
-        for (const file of prodFiles) {
-          if (!file.endsWith(".json")) continue;
-          try {
-            const baseData = JSON.parse(fs.readFileSync(path.join(PROD_DIR, file), "utf-8"));
-            const isExactMatch = baseData.slug === baseSlug || baseData.id === baseSlug;
-            const isVerifiedParent = baseData.verified === true && 
-              (baseData.verificationStatus === "VERIFIED" || baseData.humanApproved === true || baseData.isLegacyCurated === true);
+        const { data: baseDataArr } = await require("../src/lib/supabase")
+          .from("models")
+          .select("slug, id, verified, verification_status")
+          .or(`slug.eq.${baseSlug},id.eq.${baseSlug}`);
 
-            if (isExactMatch && isVerifiedParent) {
-              inheritedFromBase = true;
-              break;
-            }
-          } catch (e) {}
+        if (baseDataArr && baseDataArr.length > 0) {
+          const baseData = baseDataArr[0];
+          const isVerifiedParent = baseData.verified === true && 
+            (baseData.verification_status === "VERIFIED" || baseData.humanApproved === true || baseData.isLegacyCurated === true);
+
+          if (isVerifiedParent) {
+            inheritedFromBase = true;
+          }
         }
       }
 
@@ -146,7 +145,7 @@ async function verifyModelEntry(modelData) {
         fieldConfidence.benchmarks = "LIKELY";
         modelData.curatorNotes = (modelData.curatorNotes || "") + `\n[Auto-Inherit] Benchmark score tier set to LIKELY derived from verified base model (${baseSlug}).`;
       } else {
-        fieldConfidence.benchmarks = modelData.humanApproved ? "VERIFIED" : "DRAFT";
+        fieldConfidence.benchmarks = "DRAFT";
       }
     }
   }
@@ -161,7 +160,7 @@ async function verifyModelEntry(modelData) {
     } else if (orCw || aaCw) {
       fieldConfidence.contextWindow = "LIKELY";
     } else {
-      fieldConfidence.contextWindow = modelData.humanApproved ? "VERIFIED" : "DRAFT";
+      fieldConfidence.contextWindow = "DRAFT";
     }
   }
 
@@ -170,19 +169,9 @@ async function verifyModelEntry(modelData) {
     const hfParams = hfData?.parameters;
     if (hfParams) {
       const match = isParamWithinTolerance(modelData.parameters, hfParams);
-      fieldConfidence.parameters = match ? "LIKELY" : "DISPUTED"; // HF is single source for params, so LIKELY max unless human-approved
-      if (modelData.humanApproved) fieldConfidence.parameters = "VERIFIED";
+      fieldConfidence.parameters = match ? "LIKELY" : "DISPUTED"; // HF is single source for params, so LIKELY max
     } else {
-      fieldConfidence.parameters = modelData.humanApproved ? "VERIFIED" : "DRAFT";
-    }
-  }
-
-  // Override: If human approved, human retains final authority
-  if (modelData.humanApproved) {
-    for (const key of Object.keys(fieldConfidence)) {
-      if (fieldConfidence[key] !== "DISPUTED") {
-        fieldConfidence[key] = "VERIFIED";
-      }
+      fieldConfidence.parameters = "DRAFT";
     }
   }
 
@@ -191,54 +180,108 @@ async function verifyModelEntry(modelData) {
   let modelStatus = "DRAFT";
   if (overallDisputed || statuses.includes("DISPUTED")) {
     modelStatus = "DISPUTED";
-  } else if (statuses.length > 0 && statuses.every((s) => s === "VERIFIED")) {
-    modelStatus = "VERIFIED";
   } else if (statuses.includes("LIKELY") || statuses.includes("VERIFIED")) {
     modelStatus = "LIKELY";
   }
 
   modelData.fieldConfidence = fieldConfidence;
   modelData.verificationStatus = modelStatus;
-  modelData.verified = (modelStatus === "VERIFIED" || modelData.humanApproved === true);
-  modelData.needsReview = (modelStatus === "DISPUTED" || modelStatus === "DRAFT" || !modelData.verified);
+  
+  // Script cannot set top-level verified to true. Only DB trigger via admin panel can.
+  // We keep verified as false, and needsReview based on the new modelStatus
+  modelData.verified = false; 
+  modelData.needsReview = true;
 
   return { modelData, modelStatus };
 }
 
 // ─── Main Verification & Staging Processing ───
 
+const supabase = require("../src/lib/supabase");
+
 async function runVerificationPipeline() {
   console.log("🚀 Starting Cross-Source Verification Engine...");
 
-  const pendingFiles = fs.readdirSync(PENDING_DIR).filter((f) => f.endsWith(".json"));
-  console.log(`📂 Found ${pendingFiles.length} pending models in data/models-pending/`);
+  const { data: pendingModels, error } = await supabase
+    .from("models")
+    .select("*")
+    .eq("needs_review", true);
+
+  if (error) {
+    console.error(`❌ Failed to fetch pending models:`, error.message);
+    process.exit(1);
+  }
+
+  console.log(`📂 Found ${pendingModels.length} pending models in Supabase`);
 
   let promotedCount = 0;
   let disputedCount = 0;
   let pendingCount = 0;
 
-  for (const file of pendingFiles) {
-    const pendingPath = path.join(PENDING_DIR, file);
-    let raw;
-    try {
-      raw = JSON.parse(fs.readFileSync(pendingPath, "utf-8"));
-    } catch (e) {
-      console.error(`❌ Failed parsing JSON ${file}:`, e.message);
-      continue;
-    }
+  for (const row of pendingModels) {
+    const raw = {
+      id: row.id,
+      name: row.name,
+      slug: row.slug,
+      developer: row.developer,
+      releaseDate: row.release_date,
+      type: row.type,
+      status: row.status,
+      vendorApiStatus: row.vendor_api_status,
+      primaryTask: row.primary_task,
+      deployment: row.deployment,
+      description: row.description,
+      family: row.family,
+      tier: row.tier,
+      institution: row.institution,
+      previousVersion: row.previous_version,
+      logo: row.logo,
+      images: row.images,
+      tags: row.tags,
+      links: row.links,
+      sources: row.sources,
+      pricing: row.pricing,
+      parameters: row.parameters,
+      contextWindow: row.context_window,
+      benchmarks: row.benchmarks,
+      fieldConfidence: row.field_confidence,
+      featured: row.featured,
+      boost: row.boost,
+      verified: row.verified,
+      verificationStatus: row.verification_status,
+      needsReview: row.needs_review,
+      curatorNotes: row.curator_notes,
+    };
 
     const { modelData, modelStatus } = await verifyModelEntry(raw);
 
-    if (modelStatus === "VERIFIED" || modelData.humanApproved) {
-      // Move to production data/models/
-      const prodPath = path.join(PROD_DIR, file);
-      fs.writeFileSync(prodPath, JSON.stringify(modelData, null, 2), "utf-8");
-      fs.unlinkSync(pendingPath);
+    const updatePayload = {
+      pricing: modelData.pricing,
+      parameters: modelData.parameters,
+      context_window: modelData.contextWindow,
+      benchmarks: modelData.benchmarks,
+      field_confidence: modelData.fieldConfidence,
+      verification_status: modelData.verificationStatus,
+      verified: modelData.verified,
+      needs_review: modelData.needsReview,
+      curator_notes: modelData.curatorNotes,
+      updated_at: new Date().toISOString(),
+    };
+
+    const { error: updateError } = await supabase
+      .from("models")
+      .update(updatePayload)
+      .eq("id", modelData.id);
+
+    if (updateError) {
+      console.error(`❌ Failed to update ${modelData.name}:`, updateError.message);
+      continue;
+    }
+
+    if (modelStatus === "VERIFIED") {
       promotedCount++;
-      console.log(`✅ PROMOTED to Production: ${modelData.name} -> data/models/${file}`);
+      console.log(`✅ PROMOTED to Production: ${modelData.name}`);
     } else {
-      // Save back to pending staging area
-      fs.writeFileSync(pendingPath, JSON.stringify(modelData, null, 2), "utf-8");
       if (modelStatus === "DISPUTED") {
         disputedCount++;
         console.warn(`🚨 DISPUTED (Blocked): ${modelData.name} has conflicting source facts!`);

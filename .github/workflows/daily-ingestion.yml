@@ -11,6 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
+      pull-requests: write
 
     steps:
       - name: Checkout repository
@@ -19,7 +20,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: '22'
           cache: 'npm'
 
       - name: Install dependencies
@@ -28,12 +29,17 @@ jobs:
       - name: Run Ingestion Pipeline & Verification Engine
         env:
           ARTIFICIAL_ANALYSIS_API_KEY: ${{ secrets.ARTIFICIAL_ANALYSIS_API_KEY }}
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
         run: node scripts/ingest-trending-models.js
 
       - name: Generate Email Digest
         run: node scripts/generate-email-digest.js
 
       - name: Compile and Validate Models Index
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
         run: node scripts/compile-models.js
 
       - name: Instant Search Engine Indexing Ping (IndexNow)
@@ -58,14 +64,3 @@ jobs:
           from: Modelverse Ingestion Bot <006amanraj@gmail.com>
           html_body: file://data/ingestion/latest-digest.html
 
-      - name: Commit and Push New Published Models
-        run: |
-          git config --global user.name "github-actions[bot]"
-          git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git add .
-          if ! git diff --staged --quiet; then
-            git commit -m "feat(ingestion): auto-publish new daily AI model releases [skip ci]"
-            git push origin main
-          else
-            echo "No new models discovered today."
-          fi

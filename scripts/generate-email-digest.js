@@ -74,7 +74,7 @@ function generateEmailDigest() {
       <tr style="border-bottom: 1px solid #243629;">
         <td style="padding: 12px; font-weight: bold; color: #ffffff;">${m.name}</td>
         <td style="padding: 12px; color: #4ADE80;">${m.developer}</td>
-        <td style="padding: 12px; color: #A3B8AA;">${(m.modality || []).join(", ")}</td>
+        <td style="padding: 12px; color: #A3B8AA;">${Array.isArray(m.modality) ? m.modality.join(", ") : (m.modality || "")}</td>
         <td style="padding: 12px; text-align: right;">
           <a href="https://www.themodelverse.in/models/${m.slug}" style="display: inline-block; padding: 6px 12px; background-color: #4ADE80; color: #0C120F; font-weight: bold; text-decoration: none; border-radius: 6px; font-size: 12px;">View Model →</a>
         </td>
