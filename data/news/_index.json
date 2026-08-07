@@ -1,5 +1,27 @@
 [
   {
+    "id": "how-hsp-gruppe-builds-ai-capabilities-for-tax-advisory",
+    "slug": "how-hsp-gruppe-builds-ai-capabilities-for-tax-advisory",
+    "title": "How HSP GRUPPE builds AI capabilities for tax advisory",
+    "category": "short-news",
+    "publishDate": "2026-08-07",
+    "author": "Modelverse Editorial",
+    "readTime": "2 min read",
+    "excerpt": "Discover how HSP GRUPPE uses ChatGPT Enterprise to boost productivity, improve work quality, and create more capacity for tax advisory and client service.",
+    "coverImage": "/images/news/news_featured.jpg",
+    "status": "published",
+    "confidenceLevel": "confirmed",
+    "externalSources": [
+      "https://openai.com/index/hsp-gruppe"
+    ],
+    "relatedModels": [],
+    "tags": [
+      "ai-news",
+      "breaking",
+      "openai"
+    ]
+  },
+  {
     "id": "improving-fable-5-s-biology-safeguards",
     "slug": "improving-fable-5-s-biology-safeguards",
     "title": "Improving Fable 5 S Biology Safeguards",
