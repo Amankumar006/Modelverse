@@ -44,6 +44,28 @@
     ]
   },
   {
+    "id": "microsoft-open-sources-code-testing-generator-a-polyglot-unit-test-agent-that-hi",
+    "slug": "microsoft-open-sources-code-testing-generator-a-polyglot-unit-test-agent-that-hi",
+    "title": "Microsoft Open Sources code-testing-generator: a Polyglot Unit-Test Agent That Hits 92.1% Task Completion Versus 78.9% for Stock Copilot",
+    "category": "short-news",
+    "publishDate": "2026-08-07",
+    "author": "Modelverse Editorial",
+    "readTime": "2 min read",
+    "excerpt": "Microsoft has open sourced code-testing-generator, a polyglot unit-test agent shipping in the MIT-licensed dotnet/skills repository. It reads a repository before writing anything —...",
+    "coverImage": "https://www.marktechpost.com/wp-content/uploads/2026/08/blog6172-2.png",
+    "status": "published",
+    "confidenceLevel": "confirmed",
+    "externalSources": [
+      "https://www.marktechpost.com/2026/08/06/microsoft-open-sources-code-testing-generator/"
+    ],
+    "relatedModels": [],
+    "tags": [
+      "ai-news",
+      "breaking",
+      "marktechpost"
+    ]
+  },
+  {
     "id": "adaptive-experimentation-with-metas-ax-a-practical-coding-guide",
     "slug": "adaptive-experimentation-with-metas-ax-a-practical-coding-guide",
     "title": "Adaptive Experimentation with Meta’s Ax: A Practical Coding Guide",
@@ -85,6 +107,28 @@
       "ai-news",
       "breaking",
       "techcrunch-ai"
+    ]
+  },
+  {
+    "id": "baseten-on-hugging-face-inference-providers",
+    "slug": "baseten-on-hugging-face-inference-providers",
+    "title": "Baseten on Hugging Face Inference Providers 🔥",
+    "category": "short-news",
+    "publishDate": "2026-08-06",
+    "author": "Modelverse Editorial",
+    "readTime": "2 min read",
+    "excerpt": "Baseten on Hugging Face Inference Providers 🔥",
+    "coverImage": "https://huggingface.co/blog/assets/inference-providers/welcome-baseten.png",
+    "status": "published",
+    "confidenceLevel": "confirmed",
+    "externalSources": [
+      "https://huggingface.co/blog/baseten"
+    ],
+    "relatedModels": [],
+    "tags": [
+      "ai-news",
+      "breaking",
+      "hugging-face"
     ]
   },
   {
@@ -176,6 +220,28 @@
     ]
   },
   {
+    "id": "from-asking-to-doing-how-the-world-is-putting-chatgpt-to-work",
+    "slug": "from-asking-to-doing-how-the-world-is-putting-chatgpt-to-work",
+    "title": "From asking to doing: How the world is putting ChatGPT to work",
+    "category": "short-news",
+    "publishDate": "2026-08-06",
+    "author": "Modelverse Editorial",
+    "readTime": "2 min read",
+    "excerpt": "New OpenAI Signals data shows how people use ChatGPT worldwide, with country-level insights on adoption, usage trends, and evolving behavior.",
+    "coverImage": "/images/news/news_featured.jpg",
+    "status": "published",
+    "confidenceLevel": "confirmed",
+    "externalSources": [
+      "https://openai.com/index/how-the-world-is-putting-chatgpt-to-work"
+    ],
+    "relatedModels": [],
+    "tags": [
+      "ai-news",
+      "breaking",
+      "openai"
+    ]
+  },
+  {
     "id": "geforce-now-shakes-up-august-with-26-new-games",
     "slug": "geforce-now-shakes-up-august-with-26-new-games",
     "title": "GeForce NOW Shakes Up August With 26 New Games",
@@ -242,6 +308,28 @@
     ]
   },
   {
+    "id": "improving-gpt56-sol-in-chatgptand-expanding-access-to-gpt-56-luna-for-free-users",
+    "slug": "improving-gpt56-sol-in-chatgptand-expanding-access-to-gpt-56-luna-for-free-users",
+    "title": "Improving GPT‑5.6 Sol in ChatGPT—and expanding access to GPT-5.6 Luna for free users",
+    "category": "short-news",
+    "publishDate": "2026-08-06",
+    "author": "Modelverse Editorial",
+    "readTime": "2 min read",
+    "excerpt": "ChatGPT introduces improved GPT-5.6 Sol with better accuracy and consistency, plus expanded access for free users and unlimited everyday chats with GPT-5.6 Luna.",
+    "coverImage": "/images/news/news_short.jpg",
+    "status": "published",
+    "confidenceLevel": "confirmed",
+    "externalSources": [
+      "https://openai.com/index/improving-gpt-5-6-sol-in-chatgpt"
+    ],
+    "relatedModels": [],
+    "tags": [
+      "ai-news",
+      "breaking",
+      "openai"
+    ]
+  },
+  {
     "id": "into-the-omniverse-how-open-world-models-push-the-frontier-of-physical-ai",
     "slug": "into-the-omniverse-how-open-world-models-push-the-frontier-of-physical-ai",
     "title": "Into the Omniverse: How Open World Models Push the Frontier of Physical AI",
@@ -261,6 +349,28 @@
       "ai-news",
       "breaking",
       "nvidia"
+    ]
+  },
+  {
+    "id": "microsofts-skillopt-shows-optimized-agent-skill-artifacts-transfer-across-model-",
+    "slug": "microsofts-skillopt-shows-optimized-agent-skill-artifacts-transfer-across-model-",
+    "title": "Microsoft's SkillOpt Shows Optimized Agent Skill Artifacts Transfer Across Model Scales and Between Codex and Claude Code Harnesses",
+    "category": "short-news",
+    "publishDate": "2026-08-06",
+    "author": "Modelverse Editorial",
+    "readTime": "2 min read",
+    "excerpt": "Most coverage of Microsoft's SkillOpt centers on its 52/52 result. The more consequential finding is in Section 4.3: the exported best_skill.md keeps working in environments it was...",
+    "coverImage": "https://www.marktechpost.com/wp-content/uploads/2026/08/blog6176-1-2.png",
+    "status": "published",
+    "confidenceLevel": "confirmed",
+    "externalSources": [
+      "https://www.marktechpost.com/2026/08/05/microsoft-skillopt-agent-skill-transfer-portability/"
+    ],
+    "relatedModels": [],
+    "tags": [
+      "ai-news",
+      "breaking",
+      "marktechpost"
     ]
   },
   {
@@ -352,6 +462,28 @@
     ]
   },
   {
+    "id": "prime-intellect-releases-prime-agent-an-open-source-rlm-harness-where-sub-agents",
+    "slug": "prime-intellect-releases-prime-agent-an-open-source-rlm-harness-where-sub-agents",
+    "title": "Prime Intellect Releases Prime Agent: An Open-Source RLM Harness Where Sub-Agents Are Function Calls Inside Persistent IPython Kernel",
+    "category": "short-news",
+    "publishDate": "2026-08-06",
+    "author": "Modelverse Editorial",
+    "readTime": "2 min read",
+    "excerpt": "Prime Intellect has open-sourced Prime Agent, a coding and research harness built on two abstractions: the Recursive Language Model, which turns sub-agent calls into functions insi...",
+    "coverImage": "https://www.marktechpost.com/wp-content/uploads/2026/08/blog6176-15.png",
+    "status": "published",
+    "confidenceLevel": "confirmed",
+    "externalSources": [
+      "https://www.marktechpost.com/2026/08/06/prime-intellect-releases-prime-agent/"
+    ],
+    "relatedModels": [],
+    "tags": [
+      "ai-news",
+      "breaking",
+      "marktechpost"
+    ]
+  },
+  {
     "id": "weathernext-ai-model-achieves-breakthrough-in-forecasting-cyclones",
     "slug": "weathernext-ai-model-achieves-breakthrough-in-forecasting-cyclones",
     "title": "WeatherNext: AI model achieves breakthrough in forecasting cyclones",
@@ -371,6 +503,28 @@
       "ai-news",
       "breaking",
       "google-deepmind"
+    ]
+  },
+  {
+    "id": "working-with-the-american-psychological-association-on-youth-mental-health-and-a",
+    "slug": "working-with-the-american-psychological-association-on-youth-mental-health-and-a",
+    "title": "Working with the American Psychological Association on youth mental health and AI",
+    "category": "short-news",
+    "publishDate": "2026-08-06",
+    "author": "Modelverse Editorial",
+    "readTime": "2 min read",
+    "excerpt": "OpenAI and the American Psychological Association advance evidence-based guidance, resources, and safeguards for responsible AI use and youth mental health.",
+    "coverImage": "/images/news/news_featured.jpg",
+    "status": "published",
+    "confidenceLevel": "confirmed",
+    "externalSources": [
+      "https://openai.com/index/openai-and-apa-partner-to-advance-responsible-ai"
+    ],
+    "relatedModels": [],
+    "tags": [
+      "ai-news",
+      "breaking",
+      "openai"
     ]
   },
   {

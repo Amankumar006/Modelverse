@@ -1,0 +1,24 @@
+{
+  "id": "microsoft-open-sources-code-testing-generator-a-polyglot-unit-test-agent-that-hi",
+  "slug": "microsoft-open-sources-code-testing-generator-a-polyglot-unit-test-agent-that-hi",
+  "title": "Microsoft Open Sources code-testing-generator: a Polyglot Unit-Test Agent That Hits 92.1% Task Completion Versus 78.9% for Stock Copilot",
+  "category": "short-news",
+  "isTrending": true,
+  "publishDate": "2026-08-07",
+  "author": "Modelverse Editorial",
+  "readTime": "2 min read",
+  "excerpt": "Microsoft has open sourced code-testing-generator, a polyglot unit-test agent shipping in the MIT-licensed dotnet/skills repository. It reads a repository before writing anything —...",
+  "body": "Microsoft has unveiled and open-sourced `code-testing-generator`, an innovative polyglot agent designed to autonomously create and validate unit tests. Released as part of the MIT-licensed `dotnet/skills` repository, this agent addresses a critical gap left by conventional coding assistants: the ability to generate contextually relevant and executable tests without explicit instructions on frameworks, file locations, or assertion types. Unlike a hosted service, it operates locally within existing coding agents, ensuring code privacy and control.\n\nThe agent employs a sophisticated \"Research-Plan-Implement\" (RPI) pipeline to achieve its high accuracy. It begins by thoroughly analyzing the repository to identify code requiring tests, detect programming languages and testing frameworks, understand existing test conventions, and pinpoint actual build and test commands. Following this research phase, it selects one of three strategies—Direct, Single Pass, or Iterative—to write tests, always avoiding modifications to production code or external dependencies. Before reporting completion, `code-testing-generator` performs five rigorous checks, including a lightweight form of mutation testing, assertion quality assessment, scenario mapping, full workspace builds, and confirmation that new tests are discoverable by the repository's own test command.\n\nThis release is highly significant for developers and researchers due to its remarkable performance and practical utility. On Microsoft's internal 152-task benchmark, `code-testing-generator` achieved an impressive 92.1% task completion rate, significantly outperforming stock GitHub Copilot's 78.9% when using the same underlying model and prompts. The agent particularly excels with vague prompts, resolving 88.8% of tasks compared to Copilot's 66.3%, and flawlessly handled all 15 tasks targeting specific code differences where Copilot failed entirely. This capability promises to dramatically enhance the efficiency and reliability of automated unit test generation.",
+  "coverImage": "https://www.marktechpost.com/wp-content/uploads/2026/08/blog6172-2.png",
+  "status": "published",
+  "confidenceLevel": "confirmed",
+  "externalSources": [
+    "https://www.marktechpost.com/2026/08/06/microsoft-open-sources-code-testing-generator/"
+  ],
+  "relatedModels": [],
+  "tags": [
+    "ai-news",
+    "breaking",
+    "marktechpost"
+  ]
+}

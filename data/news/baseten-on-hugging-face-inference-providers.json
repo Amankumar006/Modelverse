@@ -1,0 +1,24 @@
+{
+  "id": "baseten-on-hugging-face-inference-providers",
+  "slug": "baseten-on-hugging-face-inference-providers",
+  "title": "Baseten on Hugging Face Inference Providers 🔥",
+  "category": "short-news",
+  "isTrending": true,
+  "publishDate": "2026-08-06",
+  "author": "Modelverse Editorial",
+  "readTime": "2 min read",
+  "excerpt": "Baseten on Hugging Face Inference Providers 🔥",
+  "body": "## Exciting Collaboration Unveiled\nBaseten has joined forces with Hugging Face, a leading platform for natural language processing, to integrate its capabilities with Hugging Face Inference Providers. This strategic partnership aims to streamline and enhance the deployment of AI models, making it more accessible and efficient for developers and researchers.\n\n## Seamless Model Deployment\nThe technology works by leveraging Baseten's expertise in model deployment and Hugging Face's extensive library of pre-trained models. This synergy enables users to effortlessly deploy and manage their AI models, allowing for faster experimentation and iteration. By providing a unified platform for model deployment, Baseten and Hugging Face are simplifying the process of taking AI models from development to production.\n\n## Empowering Developers and Researchers\nThis collaboration matters significantly to developers and researchers, as it reduces the barriers to entry for building and deploying AI models. With Baseten on Hugging Face Inference Providers, users can focus on developing innovative AI solutions, rather than getting bogged down in the complexities of model deployment. This partnership has the potential to accelerate the development of AI applications, driving progress in various fields and industries.",
+  "coverImage": "https://huggingface.co/blog/assets/inference-providers/welcome-baseten.png",
+  "status": "published",
+  "confidenceLevel": "confirmed",
+  "externalSources": [
+    "https://huggingface.co/blog/baseten"
+  ],
+  "relatedModels": [],
+  "tags": [
+    "ai-news",
+    "breaking",
+    "hugging-face"
+  ]
+}
