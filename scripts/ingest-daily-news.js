@@ -1,10 +1,10 @@
 const fs = require("fs");
 const path = require("path");
 const https = require("https");
+const supabase = require("../src/lib/supabase");
 
 const NEWS_DIR = path.join(process.cwd(), "data", "news");
 const INGESTION_DIR = path.join(process.cwd(), "data", "ingestion");
-const DIGEST_PATH = path.join(INGESTION_DIR, "latest-news-digest.html");
 
 // ─── Configuration ──────────────────────────────────────────────────
 const MAX_ARTICLES_PER_RUN = 10;    // Safety cap per ingestion run
@@ -441,14 +441,15 @@ function filterRecentArticles(items, maxAgeHours) {
   });
 }
 
-function getExistingNewsSlugs() {
-  const files = fs.readdirSync(NEWS_DIR).filter((f) => f.endsWith(".json") && !f.endsWith("_index.json") && !f.endsWith("news-archive.json"));
+async function getExistingNewsSlugs() {
   const slugs = new Set();
-  for (const file of files) {
-    try {
-      const data = JSON.parse(fs.readFileSync(path.join(NEWS_DIR, file), "utf-8"));
-      if (data.slug) slugs.add(data.slug);
-    } catch (e) {}
+  try {
+    const { data, error } = await supabase.from("news_items").select("slug");
+    if (!error && data) {
+      data.forEach(item => slugs.add(item.slug));
+    }
+  } catch (e) {
+    console.error("Failed to fetch existing slugs from Supabase:", e.message);
   }
   return slugs;
 }
@@ -458,7 +459,7 @@ function getExistingNewsSlugs() {
 async function runDailyNewsIngestion() {
   console.log("📰 Starting Daily Short News Pipeline...");
   console.log(`   Config: max ${MAX_ARTICLES_PER_RUN} articles, age cutoff: ${MAX_AGE_HOURS}h`);
-  const existingSlugs = getExistingNewsSlugs();
+  const existingSlugs = await getExistingNewsSlugs();
   const createdNews = [];
 
   const allCandidates = [];
@@ -692,25 +693,29 @@ async function extractFullArticleBody(url, fallbackDesc, lab) {
     const readTimeMinutes = Math.max(2, Math.ceil(wordCount / 200));
 
     const newsJson = {
-      id: newsSlug,
       slug: newsSlug,
       title: candidate.title,
       category: "short-news",
-      isTrending: true,
-      publishDate: articleDate,
+      publish_date: articleDate,
       author: "Modelverse Editorial",
-      readTime: `${readTimeMinutes} min read`,
+      read_time: `${readTimeMinutes} min read`,
       excerpt: candidate.description.slice(0, 180) + (candidate.description.length > 180 ? "..." : ""),
       body: bodyContent,
-      coverImage: coverImage,
+      cover_image: coverImage,
       status: "published",
-      confidenceLevel: "confirmed",
-      externalSources: [candidate.link],
-      relatedModels: detectRelatedModelSlugs(candidate.title, bodyContent, candidate.lab),
+      confidence_level: "confirmed",
+      external_sources: [candidate.link],
+      related_models: detectRelatedModelSlugs(candidate.title, bodyContent, candidate.lab),
       tags: ["ai-news", "breaking", slugify(candidate.lab)]
     };
 
-    fs.writeFileSync(path.join(NEWS_DIR, `${newsSlug}.json`), JSON.stringify(newsJson, null, 2), "utf-8");
+    const { error: dbError } = await supabase.from('news_items').upsert(newsJson, { onConflict: 'slug' });
+    
+    if (dbError) {
+      console.error(`  ❌ Failed to insert to DB: ${candidate.title.slice(0, 30)} - ${dbError.message}`);
+      continue;
+    }
+    
     existingSlugs.add(newsSlug);
     createdNews.push(newsJson);
     posterIndex++;
@@ -719,33 +724,6 @@ async function extractFullArticleBody(url, fallbackDesc, lab) {
 
   // Generate Email Digest
   if (createdNews.length > 0) {
-    const newsRows = createdNews.map(n => `
-      <div style="background-color: #162019; border: 1px solid #243629; border-radius: 12px; padding: 16px; margin-bottom: 12px;">
-        <span style="font-size: 10px; font-weight: bold; text-transform: uppercase; color: #4ADE80; letter-spacing: 1px;">${n.category || "AI NEWS"}</span>
-        <h3 style="margin: 6px 0; font-size: 16px; color: #ffffff;">${n.title}</h3>
-        <p style="margin: 0 0 12px 0; font-size: 13px; color: #A3B8AA;">${n.excerpt}</p>
-        <a href="https://www.themodelverse.in/news/${n.slug}" style="display: inline-block; padding: 6px 12px; background-color: #4ADE80; color: #0C120F; font-weight: bold; text-decoration: none; border-radius: 6px; font-size: 12px;">Read Full Story →</a>
-      </div>
-    `).join("");
-
-    const htmlBody = `
-<!DOCTYPE html>
-<html>
-<head><meta charset="utf-8"></head>
-<body style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background-color: #0C120F; color: #E2E8E4; padding: 24px;">
-  <div style="max-width: 600px; margin: 0 auto; background-color: #121A15; border: 1px solid #243629; border-radius: 16px; padding: 24px;">
-    <h1 style="margin: 0 0 4px 0; font-size: 20px; color: #ffffff;">📰 Modelverse Daily AI News Digest</h1>
-    <p style="margin: 0 0 20px 0; font-size: 12px; color: #8C9E91;">${todayStr} • ${createdNews.length} new articles</p>
-    ${newsRows}
-    <div style="margin-top: 20px; text-align: center; font-size: 11px; color: #5A6E60;">
-      Modelverse Daily News Pipeline • <a href="https://www.themodelverse.in/news" style="color: #4ADE80;">themodelverse.in/news</a>
-    </div>
-  </div>
-</body>
-</html>`;
-
-    fs.writeFileSync(DIGEST_PATH, htmlBody, "utf-8");
-    fs.writeFileSync(path.join(INGESTION_DIR, "new-articles.json"), JSON.stringify(createdNews, null, 2), "utf-8");
     if (process.env.GITHUB_ENV) {
       fs.appendFileSync(process.env.GITHUB_ENV, "NEW_NEWS_PUSHED=true\n");
       fs.appendFileSync(process.env.GITHUB_ENV, `NEWS_COUNT=${createdNews.length}\n`);
@@ -768,8 +746,9 @@ async function extractFullArticleBody(url, fallbackDesc, lab) {
     createdNews.forEach((n) => console.log(`   - ${n.title}`));
   }
 
-  console.log("⚡ Auto-compiling indexes...");
-  require("./compile-models.js");
+  // We no longer compile files locally since we migrated to Supabase
+  // console.log("⚡ Auto-compiling indexes...");
+  // require("./compile-models.js");
 }
 
 runDailyNewsIngestion();

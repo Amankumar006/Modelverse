@@ -37,7 +37,7 @@ export default async function NewsPage({ searchParams }: NewsPageProps) {
   const resolvedParams = await searchParams;
   const activeCategory = resolvedParams.category || "all";
   const searchPhrase = resolvedParams.q || "";
-  const allArticles = getAllArticles();
+  const allArticles = await getAllArticles();
 
   if (allArticles.length === 0) {
     return (
@@ -220,7 +220,7 @@ export default async function NewsPage({ searchParams }: NewsPageProps) {
             <h2 className="text-xs uppercase font-mono tracking-wider text-[var(--muted)] font-bold">
               {searchPhrase.trim()
                 ? `Search Results for "${searchPhrase}"`
-                : (activeCategory === "all" ? "All News Coverage" : `${getCategoryLabel(activeCategory as any)} Articles`)}
+                : (activeCategory === "all" ? "All News Coverage" : `${getCategoryLabel(activeCategory as unknown as Parameters<typeof getCategoryLabel>[0])} Articles`)}
             </h2>
             <span className="text-xs font-mono text-[var(--muted)] tabular-nums">
               Showing {paginatedArticles.length} of {poolArticles.length}

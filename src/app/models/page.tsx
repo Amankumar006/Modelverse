@@ -1,9 +1,8 @@
 import type { Metadata } from "next";
-import Link from "next/link";
+
 import { getAllModelEntries, getAllDevelopers, SITE_URL } from "@/lib/models";
 import ModelCatalog from "@/components/models/ModelCatalog";
 import Navbar from "@/components/layout/Navbar";
-import { ChevronLeft } from "lucide-react";
 
 interface PageProps {
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
@@ -127,17 +126,17 @@ export async function generateMetadata({ searchParams }: PageProps): Promise<Met
 
 export default async function BrowsePage({ searchParams }: PageProps) {
   const resolvedSearchParams = await searchParams;
-  const models = getAllModelEntries();
-  const developers = getAllDevelopers();
+  const models = await getAllModelEntries();
+  const developers = await getAllDevelopers();
 
   return (
-    <main className="min-h-screen bg-[var(--bg)] text-[var(--text)] selection:bg-[var(--accent-soft)] selection:text-[var(--accent)] pb-24 relative font-sans max-w-full">
-      <div className="sticky top-0 z-50">
+    <main className="min-h-screen lg:h-screen lg:overflow-hidden bg-[var(--bg)] text-[var(--text)] selection:bg-[var(--accent-soft)] selection:text-[var(--accent)] pb-24 lg:pb-0 relative font-sans max-w-full flex flex-col">
+      <div className="sticky top-0 z-50 shrink-0 border-b border-[var(--muted)]/10">
         <Navbar theme="dark" />
       </div>
 
       {/* ── Content Container ───────────────────────────────── */}
-      <div className="relative z-10 w-full max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-10 2xl:px-12 pt-4">
+      <div className="relative z-10 w-full max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-10 2xl:px-12 pt-4 flex-1 lg:min-h-0">
         {/* Catalog component */}
         <ModelCatalog models={models} developers={developers} initialSearchParams={resolvedSearchParams} />
       </div>

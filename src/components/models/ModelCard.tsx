@@ -61,7 +61,7 @@ export default function ModelCard({
   const isDetailed = "description" in model;
   const rawDescription = isDetailed ? (model as ModelEntry).description : "";
   const description = truncateAtWordBoundary(rawDescription, isFeatured ? 160 : 110);
-  const primaryTask = isDetailed ? (model as ModelEntry).primaryTask : undefined;
+
   
   let modality = isDetailed ? (model as ModelEntry).modality : [];
   if (modality && !Array.isArray(modality) && typeof modality === "object") {
@@ -72,10 +72,8 @@ export default function ModelCard({
     modality = allMods;
   }
 
-  let contextWindow = isDetailed ? (model as ModelEntry).contextWindow : undefined;
-  if (typeof contextWindow === "object" && contextWindow !== null) {
-    contextWindow = (contextWindow as any).native;
-  }
+  /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
+  const contextWindow = typeof (model as ModelEntry).contextWindow === "object" && (model as ModelEntry).contextWindow !== null ? String(((model as ModelEntry).contextWindow as any).native) : (model as ModelEntry).contextWindow;
   let parameters = isDetailed ? (model as ModelEntry).parameters : undefined;
   if (typeof parameters === "object" && parameters !== null) {
     parameters = Object.values(parameters).join(" / ");

@@ -15,10 +15,12 @@ function validateFile(filePath: string): boolean {
     return false;
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   let data: any;
   try {
     const raw = fs.readFileSync(filePath, "utf-8");
     data = JSON.parse(raw);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (e: any) {
     console.error(`Error: Failed to parse JSON: ${e.message}`);
     return false;

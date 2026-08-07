@@ -111,6 +111,7 @@ export default function FrontierShowcase({ models }: { models: ModelEntry[] }) {
                 <div>
                   <p className="text-[10px] uppercase tracking-wider text-[var(--muted)] font-semibold mb-1">Context</p>
                   <p className="text-sm font-mono text-[var(--text)] truncate">
+                    {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
                     {typeof model.contextWindow === "object" && model.contextWindow !== null ? (model.contextWindow as any).native : model.contextWindow}
                   </p>
                 </div>

@@ -3,7 +3,23 @@ const fs = require("fs");
 const path = require("path");
 const supabase = require("../src/lib/supabase");
 
-const PROD_DIR = path.join(process.cwd(), "data", "models");
+const PROD_DIR = path.join(process.cwd(), "legacy_local_data", "models");
+
+function getModalities(mod) {
+  if (Array.isArray(mod)) return mod;
+  if (typeof mod === "object" && mod !== null) {
+    const allMods = new Set();
+    if (mod.input && Array.isArray(mod.input)) {
+      mod.input.forEach(m => allMods.add(m));
+    }
+    if (mod.output && Array.isArray(mod.output)) {
+      mod.output.forEach(m => allMods.add(m));
+    }
+    return Array.from(allMods);
+  }
+  return null;
+}
+
 
 async function runMigration() {
   console.log("🚀 Starting migration to Supabase...");
@@ -58,8 +74,30 @@ async function runMigration() {
           verified: false, // Reset unconditionally
           verification_status: "LIKELY", // Reset to LIKELY
           needs_review: true, // Needs review
+          modality: getModalities(data.modality),
+          license: data.license || null,
+          active_parameters: data.activeParameters || null,
+          description_draft: data.descriptionDraft || null,
+          key_features: data.keyFeatures || null,
+          key_features_draft: data.keyFeaturesDraft || null,
+          base_model: data.baseModel || null,
+          is_legacy_curated: data.isLegacyCurated || false,
+          cost_tiers: data.costTiers || null,
+          pricing_last_verified: data.pricingLastVerified || null,
           curator_notes: data.curatorNotes || null,
+          metadata: { ...data }, // Store entire raw payload for any unmapped fields
         };
+
+        // Remove mapped keys from metadata to save space (optional, but clean)
+        [
+          "slug", "name", "developer", "description", "primaryTask", "type", "status",
+          "vendorApiStatus", "deployment", "releaseDate", "family", "tier", "institution",
+          "previousVersion", "logo", "images", "tags", "links", "sources", "pricing",
+          "parameters", "contextWindow", "benchmarks", "fieldConfidence", "featured",
+          "boost", "curatorNotes", "modality", "license", "activeParameters",
+          "descriptionDraft", "keyFeatures", "keyFeaturesDraft", "baseModel",
+          "isLegacyCurated", "costTiers", "pricingLastVerified"
+        ].forEach(k => delete row.metadata[k]);
 
         rowsToInsert.push(row);
       } catch (e) {

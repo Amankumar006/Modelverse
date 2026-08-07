@@ -13,9 +13,9 @@ export async function GET(request: Request) {
     .filter(Boolean)
     .slice(0, 4);
 
-  const models = slugs
-    .map((slug) => getModelBySlug(slug))
-    .filter((m): m is NonNullable<typeof m> => m !== null);
+  const models = (
+    await Promise.all(slugs.map((slug) => getModelBySlug(slug)))
+  ).filter((m): m is NonNullable<typeof m> => m !== null);
 
   // Fallback if no valid models
   if (models.length === 0) {

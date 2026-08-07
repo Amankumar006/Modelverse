@@ -5,7 +5,7 @@ export const dynamic = "force-dynamic";
 
 export async function GET() {
   try {
-    const articles = getAllArticles();
+    const articles = await getAllArticles();
     
     // Sort just in case (newest first) and take the top 10
     const sorted = [...articles].sort(
@@ -18,6 +18,7 @@ export async function GET() {
         "Cache-Control": "public, s-maxage=300, stale-while-revalidate=600",
       },
     });
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (err: any) {
     console.error("API Error in /api/news:", err);
     return NextResponse.json(

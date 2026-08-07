@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect, useMemo, useRef } from "react";
 import Link from "next/link";
-import { ChevronLeft, ArrowUpRight } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 import { ModelEntry } from "@/lib/models";
 import Navbar from "@/components/layout/Navbar";
 
@@ -38,7 +38,7 @@ export default function TimelineContainer({ initialModels }: TimelineContainerPr
   const playCalmingSound = () => {
     try {
       if (typeof window === "undefined") return;
-      const AudioContextClass = window.AudioContext || (window as any).webkitAudioContext;
+      const AudioContextClass = window.AudioContext || (window as unknown as { webkitAudioContext: typeof AudioContext }).webkitAudioContext;
       if (!AudioContextClass) return;
 
       if (!audioCtxRef.current) {
@@ -84,7 +84,7 @@ export default function TimelineContainer({ initialModels }: TimelineContainerPr
       osc1.stop(now + 0.4);
       osc2.start(now);
       osc2.stop(now + 0.22);
-    } catch (e) {
+    } catch {
       // Safe fallback for autoplay browser restrictions
     }
   };

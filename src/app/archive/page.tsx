@@ -18,8 +18,8 @@ export const metadata: Metadata = {
   },
 };
 
-export default function ArchivePage() {
-  const models = getAllModelEntries();
+export default async function ArchivePage() {
+  const models = await getAllModelEntries();
   
   // Group by month (e.g. "July 2026")
   const groupedModels: Record<string, typeof models> = {};

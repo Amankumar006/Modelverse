@@ -22,7 +22,7 @@ export async function GET(request: NextRequest) {
     const limit = Math.max(1, Math.min(isNaN(limitParam) ? 20 : limitParam, 100));
     const offset = Math.max(0, isNaN(offsetParam) ? 0 : offsetParam);
 
-    let models: ModelEntry[] = getAllModelEntries();
+    let models: ModelEntry[] = await getAllModelEntries();
 
     if (status) {
       models = models.filter((m) => m.status === status);
@@ -103,6 +103,7 @@ export async function GET(request: NextRequest) {
       count: sanitizedData.length,
       data: sanitizedData,
     });
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (err: any) {
     console.error("API Error in /api/models:", err);
     return NextResponse.json(

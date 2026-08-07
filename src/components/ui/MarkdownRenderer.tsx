@@ -59,6 +59,7 @@ export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
             return (
               <figure className="my-8 text-center">
                 <div className="inline-block rounded-[var(--radius-card)] border border-[var(--muted)]/10 overflow-hidden shadow-[var(--shadow-card)] bg-[var(--card-bg)] p-1">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
                     src={src}
                     alt={alt || "Illustration"}

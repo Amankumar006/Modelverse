@@ -13,8 +13,8 @@ export const metadata: Metadata = {
   },
 };
 
-export default function UpgradePathsPage() {
-  const allModels = getAllModelEntries();
+export default async function UpgradePathsPage() {
+  const allModels = await getAllModelEntries();
 
   // Find models that explicitly list a previousVersion
   const paths = allModels
@@ -80,6 +80,7 @@ export default function UpgradePathsPage() {
                             </span>
                             <span className="flex items-center gap-1">
                               <Layers size={12} />
+                              {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
                               {path.previous?.contextWindow ? (typeof path.previous.contextWindow === "object" ? (path.previous.contextWindow as any).native : path.previous.contextWindow) : "—"}
                             </span>
                           </div>
@@ -110,6 +111,7 @@ export default function UpgradePathsPage() {
                             </span>
                             <span className="flex items-center gap-1">
                               <Layers size={12} />
+                              {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
                               {path.current.contextWindow ? (typeof path.current.contextWindow === "object" ? (path.current.contextWindow as any).native : path.current.contextWindow) : "—"}
                             </span>
                           </div>

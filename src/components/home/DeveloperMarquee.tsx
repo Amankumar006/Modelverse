@@ -64,7 +64,7 @@ function DeveloperTile({ developer }: { developer: string }) {
   );
 }
 
-export default function DeveloperMarquee({ developers }: { developers: string[] }) {
+export default function DeveloperMarquee({}: { developers?: string[] }) {
   // Use the exact five companies shown in the reference image (plus some fallbacks)
   const displayDevs = [
     "Anthropic",

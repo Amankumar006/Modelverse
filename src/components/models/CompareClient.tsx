@@ -3,10 +3,9 @@
 import { useState, useRef, useEffect, useMemo } from "react";
 import { useRouter, usePathname, useSearchParams } from "next/navigation";
 import Link from "next/link";
-import { ModelEntry, formatParameters } from "@/lib/models";
-import { X, Plus, Search, Tag, Shield, Info } from "lucide-react";
 import TypeBadge from "@/components/ui/TypeBadge";
-import ModalityTag from "@/components/ui/ModalityTag";
+import { X, Plus, Search, Tag, Shield, Info } from "lucide-react";
+import { ModelEntry, formatParameters } from "@/lib/models";
 import CopyableTable from "@/components/ui/CopyableTable";
 import ModelLogo from "@/components/ui/ModelLogo";
 
@@ -202,7 +201,7 @@ export default function CompareClient({ initialModels, allModels }: CompareClien
             let displayVal = "N/A";
             
             if (chartMetric === "context-window") {
-              const cw = typeof model.contextWindow === "object" && model.contextWindow !== null ? (model.contextWindow as any).native : model.contextWindow;
+              const cw = typeof model.contextWindow === "object" && model.contextWindow !== null ? String((model.contextWindow as any).native) : (model.contextWindow as string);
               const parsedVal = parseContext(cw);
               value = parsedVal ?? 0;
               displayVal = cw || "Unknown";
@@ -215,7 +214,7 @@ export default function CompareClient({ initialModels, allModels }: CompareClien
 
             const allVals = models.map(m => {
               if (chartMetric === "context-window") {
-                const cw = typeof m.contextWindow === "object" && m.contextWindow !== null ? (m.contextWindow as any).native : m.contextWindow;
+                const cw = typeof m.contextWindow === "object" && m.contextWindow !== null ? String((m.contextWindow as any).native) : (m.contextWindow as string);
                 return parseContext(cw) ?? 0;
               } else {
                 return parseScore(m.benchmarks?.find(b => b.name.toLowerCase().includes(chartMetric))?.score) ?? 0;
@@ -445,7 +444,7 @@ export default function CompareClient({ initialModels, allModels }: CompareClien
               <div>
                 <span className="text-[var(--muted)] font-bold block mb-1">Context</span>
                 <span className="font-mono font-bold text-[var(--text)] tabular-nums">
-                  {model.contextWindow ? (typeof model.contextWindow === "object" && model.contextWindow !== null ? (model.contextWindow as any).native : model.contextWindow) : "—"}
+                  {model.contextWindow ? (typeof model.contextWindow === "object" && model.contextWindow !== null ? (model.contextWindow as { native?: number }).native : model.contextWindow) : "—"}
                 </span>
               </div>
               {model.activeParameters && (

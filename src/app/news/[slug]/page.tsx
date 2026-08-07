@@ -2,9 +2,10 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "@/components/ui/FallbackImage";
 import Navbar from "@/components/layout/Navbar";
+import JsonLd from "@/components/JsonLd";
 import { getArticleBySlug, getAllArticles, getCategoryLabel } from "@/lib/news";
 import { getModelBySlug, getAllModelEntries, SITE_URL } from "@/lib/models";
-import { Clock, Calendar, ArrowRight, ArrowLeft, Tag } from "lucide-react";
+import { Clock, ArrowLeft, Tag, ArrowRight } from "lucide-react";
 import { notFound } from "next/navigation";
 import ConfidenceBadge from "@/components/news/ConfidenceBadge";
 import BenchmarkTabs from "@/components/news/BenchmarkTabs";
@@ -20,7 +21,7 @@ interface ArticlePageProps {
 }
 
 export async function generateStaticParams() {
-  const articles = getAllArticles();
+  const articles = await getAllArticles();
   return articles.map((a) => ({
     slug: a.slug,
   }));
@@ -28,7 +29,7 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params }: ArticlePageProps): Promise<Metadata> {
   const resolvedParams = await params;
-  const article = getArticleBySlug(resolvedParams.slug);
+  const article = await getArticleBySlug(resolvedParams.slug);
   if (!article) {
     return {};
   }
@@ -71,23 +72,23 @@ function formatNewsDate(dateStr: string): string {
 
 export default async function ArticlePage({ params }: ArticlePageProps) {
   const resolvedParams = await params;
-  const article = getArticleBySlug(resolvedParams.slug);
+  const article = await getArticleBySlug(resolvedParams.slug);
   
   if (!article) {
     notFound();
   }
 
-  const allArticles = getAllArticles();
+  const allArticles = await getAllArticles();
   const relatedArticles = allArticles
     .filter((a) => a.slug !== article.slug)
     .slice(0, 3);
 
-  let relatedModelsData = (article.relatedModels || [])
-    .map((slug) => getModelBySlug(slug))
-    .filter((model): model is NonNullable<typeof model> => !!model);
+  let relatedModelsData = (await Promise.all(
+    (article.relatedModels || []).map(async (slug) => await getModelBySlug(slug))
+  )).filter((model): model is NonNullable<typeof model> => !!model);
 
   if (relatedModelsData.length < 2) {
-    const allModels = getAllModelEntries();
+    const allModels = await getAllModelEntries();
     const textToMatch = `${article.title} ${article.body}`.toLowerCase();
     const existingSlugs = new Set(relatedModelsData.map((m) => m.slug));
 
@@ -137,10 +138,7 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
     <main className="min-h-screen bg-[var(--bg)] text-[var(--text)] selection:bg-[var(--accent-soft)] selection:text-[var(--accent)] font-sans antialiased relative">
       <Navbar theme="dark" />
 
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
+      <JsonLd data={jsonLd} />
 
       <div className="max-w-[840px] mx-auto px-6 pt-10 sm:pt-14">
         <Link
@@ -281,7 +279,7 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
                 let domain = "";
                 try {
                   domain = new URL(src).hostname.replace("www.", "");
-                } catch (e) {
+                } catch {
                   domain = "External Source";
                 }
                 return (

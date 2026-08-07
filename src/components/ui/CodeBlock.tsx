@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { Check, Copy, Terminal } from "lucide-react";
+import { Check, Copy } from "lucide-react";
 
 interface CodeBlockProps {
   language?: string;
@@ -9,7 +9,7 @@ interface CodeBlockProps {
   filename?: string;
 }
 
-export default function CodeBlock({ language = "bash", code, filename }: CodeBlockProps) {
+export default function CodeBlock({ language = "bash", code }: CodeBlockProps) {
   const [copied, setCopied] = useState(false);
 
   const handleCopy = async () => {

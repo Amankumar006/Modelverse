@@ -24,7 +24,7 @@ export default function Error({
         </div>
         <h2 className="text-3xl mb-4 font-display text-[#F4F4F5] tracking-tight">Something went wrong</h2>
         <p className="text-[#D4D4D8] mb-8 text-base">
-          An unexpected error has occurred. We've logged the issue and are looking into it.
+          An unexpected error has occurred. We&apos;ve logged the issue and are looking into it.
         </p>
         <button
           onClick={() => reset()}

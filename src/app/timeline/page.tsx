@@ -21,8 +21,8 @@ export const metadata: Metadata = {
   },
 };
 
-export default function TimelinePage() {
-  const models = getAllModelEntries(); // Already sorted newest-first by library
+export default async function TimelinePage() {
+  const models = await getAllModelEntries(); // Already sorted newest-first by library
 
   return (
     <main className="min-h-screen bg-[#141414] text-[#E4E4E7] selection:bg-[#DA7756] selection:text-white pb-24 relative font-sans">

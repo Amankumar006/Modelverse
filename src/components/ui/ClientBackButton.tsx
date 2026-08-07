@@ -16,9 +16,12 @@ export default function ClientBackButton({
   const [canGoBack, setCanGoBack] = useState(false);
 
   useEffect(() => {
-    if (typeof window !== "undefined" && document.referrer.includes(window.location.host)) {
-      setCanGoBack(true);
-    }
+    const timer = setTimeout(() => {
+      if (typeof window !== "undefined" && document.referrer.includes(window.location.host)) {
+        setCanGoBack(true);
+      }
+    }, 0);
+    return () => clearTimeout(timer);
   }, []);
 
   if (canGoBack) {

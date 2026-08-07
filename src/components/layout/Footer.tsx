@@ -62,13 +62,13 @@ export default function Footer() {
 
   useEffect(() => {
     if (!activeModel) {
-      setDisplayedText("");
-      return;
+      const t = setTimeout(() => setDisplayedText(""), 0);
+      return () => clearTimeout(t);
     }
 
     const fullText = getModelSummary(activeModel);
     let currentIndex = 0;
-    setDisplayedText("");
+    setTimeout(() => setDisplayedText(""), 0);
 
     const interval = setInterval(() => {
       if (currentIndex < fullText.length) {

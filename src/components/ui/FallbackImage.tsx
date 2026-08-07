@@ -1,7 +1,7 @@
 "use client";
 
 import Image, { ImageProps } from "next/image";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 interface FallbackImageProps extends Omit<ImageProps, "onError"> {
   fallbackSrc?: string;
@@ -13,20 +13,23 @@ export default function FallbackImage({
   alt, 
   ...rest 
 }: FallbackImageProps) {
-  const [imgSrc, setImgSrc] = useState(src);
+  const [hasError, setHasError] = useState(false);
+  const [prevSrc, setPrevSrc] = useState(src);
 
-  // If the src prop changes (e.g. during client navigation), reset to the new src
-  useEffect(() => {
-    setImgSrc(src);
-  }, [src]);
+  if (src !== prevSrc) {
+    setPrevSrc(src);
+    setHasError(false);
+  }
+
+  const currentSrc = hasError ? fallbackSrc : (src || fallbackSrc);
 
   return (
     <Image
       {...rest}
-      src={imgSrc || fallbackSrc}
+      src={currentSrc}
       alt={alt || "Image"}
       onError={() => {
-        setImgSrc(fallbackSrc);
+        setHasError(true);
       }}
     />
   );

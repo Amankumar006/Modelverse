@@ -5,7 +5,7 @@ import { SITE_URL } from "@/lib/models";
 export const dynamic = "force-static";
 
 export async function GET() {
-  const articles = getAllArticles();
+  const articles = await getAllArticles();
 
   const xmlItems = articles
     .map((article) => {

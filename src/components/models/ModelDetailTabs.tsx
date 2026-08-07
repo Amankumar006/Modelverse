@@ -119,11 +119,11 @@ export default function ModelDetailTabs({
                   <Row label="Active Parameters (MoE)" value={typeof model.activeParameters === "object" ? Object.values(model.activeParameters).join(" / ") : model.activeParameters as string} />
                 )}
                 {(() => {
-                  const cw = typeof model.contextWindow === "object" && model.contextWindow !== null ? (model.contextWindow as any).native : model.contextWindow;
+                  const cw = typeof model.contextWindow === "object" && model.contextWindow !== null ? (model.contextWindow as { native?: number }).native : model.contextWindow;
                   return <Row label="Context window" value={cw !== "undisclosed" ? cw : undefined} />;
                 })()}
                 {(() => {
-                  const lic = typeof model.license === "object" && model.license !== null ? (model.license as any).name || (model.license as any).weights?.name || "Custom" : model.license;
+                  const lic = typeof model.license === "object" && model.license !== null ? (model.license as { name?: string, weights?: { name?: string } }).name || (model.license as { name?: string, weights?: { name?: string } }).weights?.name || "Custom" : model.license;
                   return <Row label="License" value={lic !== "Other/Custom" ? lic : undefined} />;
                 })()}
                 <Row label="Primary task" value={model.primaryTask.replace(/-/g, " ")} />

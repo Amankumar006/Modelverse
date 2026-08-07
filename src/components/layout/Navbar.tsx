@@ -1,15 +1,19 @@
 "use client";
 
-import { useState, useMemo, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import ModelverseLogo from "@/components/ui/ModelverseLogo";
 import { Search, X, Menu, Sun, Moon } from "lucide-react";
 import { useTheme } from "@/components/ThemeProvider";
+import type Fuse from "fuse.js";
 
-export default function Navbar({ theme = "dark" }: { theme?: "light" | "dark" }) {
+type SearchItem = { id: string; name?: string; title?: string; slug: string; developer?: string; excerpt?: string; type: string };
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+export default function Navbar({ theme }: { theme?: string }) {
   const [searchQuery, setSearchQuery] = useState("");
-  const [searchResults, setSearchResults] = useState<Array<{ id: string; name: string; slug: string; developer: string; type: string }>>([]);
+  const [searchResults, setSearchResults] = useState<Array<SearchItem>>([]);
   const [searchFocused, setSearchFocused] = useState(false);
   const [selectedIndex, setSelectedIndex] = useState<number>(-1);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -18,6 +22,49 @@ export default function Navbar({ theme = "dark" }: { theme?: "light" | "dark" })
   const searchInputRef = useRef<HTMLInputElement>(null);
   const pathname = usePathname();
   const router = useRouter();
+
+  // Lazy load Fuse.js and search index
+  const [fuseModels, setFuseModels] = useState<Fuse<SearchItem> | null>(null);
+  const [fuseNews, setFuseNews] = useState<Fuse<SearchItem> | null>(null);
+
+  const initSearch = useCallback(async () => {
+    const isNewsRoute = pathname?.startsWith("/news");
+    if (isNewsRoute) {
+      if (fuseNews) return fuseNews;
+      try {
+        const [FuseJS, searchData] = await Promise.all([
+          import("fuse.js").then((m) => m.default),
+          fetch("/api/search?type=news").then((r) => r.json()),
+        ]);
+        const newFuse = new FuseJS<SearchItem>(searchData, {
+          keys: ["title", "excerpt"],
+          threshold: 0.3,
+        });
+        setFuseNews(newFuse);
+        return newFuse;
+      } catch (e) {
+        console.error("Failed to load news search index", e);
+        return null;
+      }
+    } else {
+      if (fuseModels) return fuseModels;
+      try {
+        const [FuseJS, searchData] = await Promise.all([
+          import("fuse.js").then((m) => m.default),
+          fetch("/api/search?type=models").then((r) => r.json()),
+        ]);
+        const newFuse = new FuseJS<SearchItem>(searchData, {
+          keys: ["name", "developer"],
+          threshold: 0.3,
+        });
+        setFuseModels(newFuse);
+        return newFuse;
+      } catch (e) {
+        console.error("Failed to load model search index", e);
+        return null;
+      }
+    }
+  }, [pathname, fuseNews, fuseModels]);
 
   // Register global Cmd+K / Ctrl+K keyboard shortcut
   useEffect(() => {
@@ -39,7 +86,7 @@ export default function Navbar({ theme = "dark" }: { theme?: "light" | "dark" })
 
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, []);
+  }, [initSearch]);
 
   const getLinkClasses = (path: string) => {
     const isActive = path === "/" ? pathname === "/" : pathname?.startsWith(path);
@@ -57,48 +104,6 @@ export default function Navbar({ theme = "dark" }: { theme?: "light" | "dark" })
     return "text-[var(--muted)] hover:text-[var(--text)]";
   };
 
-  // Lazy load Fuse.js and search index
-  const [fuseModels, setFuseModels] = useState<any>(null);
-  const [fuseNews, setFuseNews] = useState<any>(null);
-
-  const initSearch = async () => {
-    const isNewsRoute = pathname?.startsWith("/news");
-    if (isNewsRoute) {
-      if (fuseNews) return fuseNews;
-      try {
-        const [FuseJS, searchData] = await Promise.all([
-          import("fuse.js").then((m) => m.default),
-          import("@/lib/news-index.json").then((m) => m.default),
-        ]);
-        const newFuse = new FuseJS(searchData, {
-          keys: ["title", "excerpt"],
-          threshold: 0.3,
-        });
-        setFuseNews(newFuse);
-        return newFuse;
-      } catch (e) {
-        console.error("Failed to load news search index", e);
-        return null;
-      }
-    } else {
-      if (fuseModels) return fuseModels;
-      try {
-        const [FuseJS, searchData] = await Promise.all([
-          import("fuse.js").then((m) => m.default),
-          import("@/lib/search-index.json").then((m) => m.default),
-        ]);
-        const newFuse = new FuseJS(searchData, {
-          keys: ["name", "developer"],
-          threshold: 0.3,
-        });
-        setFuseModels(newFuse);
-        return newFuse;
-      } catch (e) {
-        console.error("Failed to load model search index", e);
-        return null;
-      }
-    }
-  };
 
   const handleSearch = async (query: string) => {
     setSearchQuery(query);
@@ -111,7 +116,7 @@ export default function Navbar({ theme = "dark" }: { theme?: "light" | "dark" })
     
     const activeFuse = await initSearch();
     if (activeFuse) {
-      const results = activeFuse.search(query).map((r: any) => r.item);
+      const results = activeFuse.search(query).map((r) => r.item as SearchItem);
       setSearchResults(results.slice(0, 6));
     }
   };
@@ -234,7 +239,7 @@ export default function Navbar({ theme = "dark" }: { theme?: "light" | "dark" })
             {/* Search Dropdown Results */}
             {searchFocused && searchQuery && (
               <div className="absolute top-full right-0 mt-2 w-80 bg-[var(--card-bg)] border border-[var(--muted)]/10 rounded-xl p-2 shadow-2xl z-50 flex flex-col text-left">
-                {searchResults.map((item: any, index) => {
+                {searchResults.map((item, index) => {
                   const isNewsRoute = pathname?.startsWith("/news");
                   return (
                     <Link

@@ -2,11 +2,11 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
-import { type ModelEntry, getModalities } from "@/lib/models";
+import { type ModelEntry } from "@/lib/models";
 import ModelDetailTabs from "./ModelDetailTabs";
 import Navbar from "@/components/layout/Navbar";
 import AdUnit from "@/components/third-party/AdUnit";
-import { Search, ChevronDown, Copy, Check, ExternalLink, Terminal, Shield, Layers, FileText } from "lucide-react";
+import { Search, ChevronDown, Copy, Check, Shield } from "lucide-react";
 
 interface ModelDocsLayoutProps {
   model: ModelEntry;
@@ -21,10 +21,8 @@ export default function ModelDocsLayout({
   markdownContent,
   allModels,
   familyMembers,
-  relatedModels,
 }: ModelDocsLayoutProps) {
   const [copied, setCopied] = useState(false);
-  const [activeToc, setActiveToc] = useState("overview");
   const [searchQuery, setSearchQuery] = useState("");
 
   const handleCopyPage = () => {
@@ -76,7 +74,7 @@ export default function ModelDocsLayout({
         </Link>
 
         <button
-          onClick={() => setActiveToc("choosing")}
+          onClick={() => {}}
           className="w-full text-left px-3 py-2 rounded-[var(--radius-control)] text-[var(--muted)] hover:text-[var(--text)] hover:bg-[var(--bg)] transition-colors font-medium cursor-pointer"
         >
           Choosing a model
@@ -169,7 +167,7 @@ export default function ModelDocsLayout({
             </div>
 
             <p className="text-lg text-[var(--text)] leading-relaxed max-w-3xl font-semibold">
-              {model.name} is a {model.primaryTask} AI model created by {model.developer}, featuring {model.parameters ? (typeof model.parameters === "object" ? Object.values(model.parameters).join(" / ") : model.parameters) : "Unknown"} parameters and a context window of {model.contextWindow ? (typeof model.contextWindow === "object" ? (model.contextWindow as any).native : model.contextWindow) : "Unknown"}.
+              {model.name} is a {model.primaryTask} AI model created by {model.developer}, featuring {model.parameters ? (typeof model.parameters === "object" ? Object.values(model.parameters).join(" / ") : model.parameters) : "Unknown"} parameters and a context window of {model.contextWindow ? (typeof model.contextWindow === "object" ? (model.contextWindow as { native?: number }).native : model.contextWindow) : "Unknown"}.
             </p>
 
             <p className="text-base text-[var(--muted)] leading-relaxed max-w-3xl font-normal">
@@ -213,7 +211,7 @@ export default function ModelDocsLayout({
               <div className="flex justify-between py-1.5 border-b border-[var(--muted)]/10">
                 <span className="text-[var(--muted)] font-medium">Context Window</span>
                 <span className="text-[var(--text)] font-bold tabular-nums font-mono">
-                  {model.contextWindow ? (typeof model.contextWindow === "object" ? (model.contextWindow as any).native : model.contextWindow) : "—"}
+                  {model.contextWindow ? (typeof model.contextWindow === "object" ? (model.contextWindow as { native?: number }).native : model.contextWindow) : "—"}
                 </span>
               </div>
               <div className="flex justify-between py-1.5">
@@ -281,7 +279,7 @@ export default function ModelDocsLayout({
                     <tr>
                       <td className="p-3.5 font-bold text-[var(--text)]">Context Window</td>
                       {comparisonModels.map((m) => {
-                        const cw = m.contextWindow ? (typeof m.contextWindow === "object" && m.contextWindow !== null ? (m.contextWindow as any).native : m.contextWindow) : "—";
+                        const cw = m.contextWindow ? (typeof m.contextWindow === "object" && m.contextWindow !== null ? (m.contextWindow as { native?: number }).native : m.contextWindow) : "—";
                         return (
                           <td key={m.id} className="p-3.5 font-mono tabular-nums text-[var(--text)] font-bold">
                             {cw !== "undisclosed" ? cw : "—"}
@@ -305,7 +303,7 @@ export default function ModelDocsLayout({
               <div className="md:hidden grid grid-cols-1 gap-4">
                 {comparisonModels.map((m) => {
                   const p = m.parameters ? (typeof m.parameters === "object" && m.parameters !== null ? Object.values(m.parameters).join(" / ") : m.parameters) : "—";
-                  const cw = m.contextWindow ? (typeof m.contextWindow === "object" && m.contextWindow !== null ? (m.contextWindow as any).native : m.contextWindow) : "—";
+                  const cw = m.contextWindow ? (typeof m.contextWindow === "object" && m.contextWindow !== null ? (m.contextWindow as { native?: number }).native : m.contextWindow) : "—";
                   return (
                     <div key={m.id} className="rounded-[var(--radius-card)] border border-[var(--muted)]/10 bg-[var(--card-bg)] shadow-[var(--shadow-card)] p-4 space-y-3">
                       <h3 className="font-extrabold text-[var(--text)] text-sm">{m.name}</h3>

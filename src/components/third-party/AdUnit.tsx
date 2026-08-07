@@ -27,8 +27,10 @@ export default function AdUnit({
   useEffect(() => {
     if (!loaded.current && typeof window !== "undefined") {
       try {
-        const adsbygoogle = (window as any).adsbygoogle || [];
-        adsbygoogle.push({});
+        const adsbygoogle = (window as unknown as { adsbygoogle: unknown[] }).adsbygoogle || [];
+        if (typeof adsbygoogle.push === "function") {
+          adsbygoogle.push({});
+        }
         loaded.current = true;
       } catch (err) {
         console.error("AdSense error:", err);

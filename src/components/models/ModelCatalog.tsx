@@ -77,7 +77,7 @@ function filterModels(
     }
 
     if (excludeKey !== "modality" && filters.modality.length > 0) {
-      const getModalities = (mod: any): string[] => {
+      const getModalities = (mod: unknown): string[] => {
         if (Array.isArray(mod)) return mod;
         if (typeof mod === "object" && mod !== null) {
           const allMods: string[] = [];
@@ -101,7 +101,7 @@ function filterModels(
     if (excludeKey !== "license" && filters.license.length > 0) {
       let lic = model.license;
       if (typeof lic === "object" && lic !== null) {
-        lic = (lic as any).name || "Other/Custom";
+        lic = (lic as { name?: string }).name || "Other/Custom";
       }
       if (!filters.license.includes(lic as string)) return false;
     }
@@ -169,7 +169,7 @@ function FacetGroupFilter<T>({
           )}
         </div>
       )}
-      <div className="space-y-1 flex flex-col max-h-52 overflow-y-auto pr-1 select-none no-scrollbar">
+      <div className="space-y-1 flex flex-col max-h-52 overflow-y-auto pr-1 select-none">
         {filteredOptions.map((opt) => {
           const val = valFn(opt);
           const label = labelFn(opt);
@@ -249,25 +249,42 @@ function ModelCatalogContent({
   const [searchInput, setSearchInput] = useState<string>(filters.q);
 
   useEffect(() => {
-    setSearchInput(filters.q);
+    const t = setTimeout(() => setSearchInput(filters.q), 0);
+    return () => clearTimeout(t);
   }, [filters.q]);
+
+  function updateUrl(updatedFilters: FiltersState, updatedSort: string) {
+    const params = new URLSearchParams();
+
+    if (updatedFilters.q) params.set("q", updatedFilters.q);
+    if (updatedFilters.type.length > 0) params.set("type", updatedFilters.type.join(","));
+    if (updatedFilters.task.length > 0) params.set("task", updatedFilters.task.join(","));
+    if (updatedFilters.modality.length > 0) params.set("modality", updatedFilters.modality.join(","));
+    if (updatedFilters.developer.length > 0) params.set("developer", updatedFilters.developer.join(","));
+    if (updatedFilters.license.length > 0) params.set("license", updatedFilters.license.join(","));
+    if (updatedFilters.deployment.length > 0) params.set("deployment", updatedFilters.deployment.join(","));
+    if (updatedSort !== "newest") params.set("sort", updatedSort);
+
+    const queryStr = params.toString();
+    router.replace(`/models${queryStr ? `?${queryStr}` : ""}`, { scroll: false });
+  }
 
   useEffect(() => {
     const handler = setTimeout(() => {
-      if (filters.q !== searchInput) {
+      if (searchInput !== filters.q) {
         const newFilters = { ...filters, q: searchInput };
         setFilters(newFilters);
         updateUrl(newFilters, sortKey);
       }
     }, 250);
     return () => clearTimeout(handler);
-  }, [searchInput, filters, sortKey]);
+  }, [searchInput, filters, sortKey]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const dynamicOptions = useMemo(() => {
     const modalities = new Set<string>();
     const licenses = new Set<string>();
     for (const m of models) {
-      const getModalities = (mod: any): string[] => {
+      const getModalities = (mod: unknown): string[] => {
         if (Array.isArray(mod)) return mod;
         if (typeof mod === "object" && mod !== null) {
           const allMods: string[] = [];
@@ -284,7 +301,7 @@ function ModelCatalogContent({
 
       let lic = m.license;
       if (typeof lic === "object" && lic !== null) {
-        lic = (lic as any).name || "Other/Custom";
+        lic = (lic as { name?: string }).name || "Other/Custom";
       }
       if (lic && lic !== "Other/Custom") licenses.add(lic as string);
     }
@@ -343,7 +360,7 @@ function ModelCatalogContent({
       license: calculateCounts(dynamicOptions.licenses, "license", (m) => {
         let lic = m.license;
         if (typeof lic === "object" && lic !== null) {
-          lic = (lic as any).name || "Other/Custom";
+          lic = (lic as { name?: string }).name || "Other/Custom";
         }
         return lic as string;
       }),
@@ -356,7 +373,7 @@ function ModelCatalogContent({
   }, [models, filters, dynamicOptions, developers]);
 
   const filtered = useMemo(() => {
-    let result = filterModels(models, filters);
+    const result = filterModels(models, filters);
 
     switch (sortKey) {
       case "newest":
@@ -441,21 +458,7 @@ function ModelCatalogContent({
     filters.license.length > 0 ||
     filters.deployment.length > 0;
 
-  const updateUrl = (updatedFilters: FiltersState, updatedSort: string) => {
-    const params = new URLSearchParams();
 
-    if (updatedFilters.q) params.set("q", updatedFilters.q);
-    if (updatedFilters.type.length > 0) params.set("type", updatedFilters.type.join(","));
-    if (updatedFilters.task.length > 0) params.set("task", updatedFilters.task.join(","));
-    if (updatedFilters.modality.length > 0) params.set("modality", updatedFilters.modality.join(","));
-    if (updatedFilters.developer.length > 0) params.set("developer", updatedFilters.developer.join(","));
-    if (updatedFilters.license.length > 0) params.set("license", updatedFilters.license.join(","));
-    if (updatedFilters.deployment.length > 0) params.set("deployment", updatedFilters.deployment.join(","));
-    if (updatedSort !== "newest") params.set("sort", updatedSort);
-
-    const queryStr = params.toString();
-    router.replace(`/models${queryStr ? `?${queryStr}` : ""}`, { scroll: false });
-  };
 
   const toggleFilter = (key: keyof Omit<FiltersState, "q">, val: string) => {
     const current = filters[key] as string[];
@@ -553,9 +556,9 @@ function ModelCatalogContent({
   );
 
   return (
-    <div className="flex flex-col lg:flex-row gap-8 items-start relative w-full max-w-full overflow-hidden">
+    <div className="flex flex-col lg:flex-row gap-8 items-start relative w-full lg:h-full max-w-full lg:overflow-hidden pb-12 lg:pb-0">
       {/* ── Desktop Sidebar Facets ───────────────────────────── */}
-      <aside className="hidden lg:block w-64 shrink-0 space-y-5 sticky top-[72px] max-h-[calc(100vh-5.5rem)] overflow-y-auto pr-3 border-r border-[var(--muted)]/10 text-[var(--text)]">
+      <aside className="hidden lg:block w-64 shrink-0 space-y-5 lg:h-full lg:overflow-y-auto overscroll-contain pr-3 border-r border-[var(--muted)]/10 text-[var(--text)] pb-8">
         <div className="flex items-center justify-between pr-2">
           <span className="text-xs font-bold uppercase tracking-wider text-[var(--muted)]">Filters</span>
           {hasActiveFilters && (
@@ -571,9 +574,9 @@ function ModelCatalogContent({
       </aside>
 
       {/* ── Main Catalog Workspace ───────────────────────────── */}
-      <div className="flex-1 min-w-0 w-full space-y-6">
+      <div className="flex-1 min-w-0 w-full lg:h-full lg:overflow-y-auto overscroll-contain space-y-6 lg:pb-24 lg:pr-4">
         {/* Page Header */}
-        <div className="border-b border-[var(--muted)]/10 pb-5">
+        <div className="border-b border-[var(--muted)]/10 pb-5 pt-1">
           <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-[var(--text)]">
             Models Overview
           </h1>
@@ -750,7 +753,7 @@ function ModelCatalogContent({
             return (
               <React.Fragment key={`item-wrapper-${idx}`}>
                 {isAdSlot && (
-                  <div className="col-span-1 rounded-[var(--radius-card)] border border-[var(--muted)]/10 bg-[var(--card-bg)] shadow-[var(--shadow-card)] flex items-center justify-center p-3 overflow-hidden">
+                  <div className="col-span-1 rounded-[var(--radius-card)] border border-[var(--muted)]/10 bg-[var(--card-bg)] shadow-[var(--shadow-card)] flex items-center justify-center p-3 overflow-hidden [&:has(ins:empty)]:hidden [&:has(ins[data-ad-status='unfilled'])]:hidden">
                     <AdUnit slot="catalog-in-feed" className="aspect-[4/3] flex items-center justify-center w-full h-full" />
                   </div>
                 )}

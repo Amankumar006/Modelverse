@@ -10,12 +10,12 @@ export default function MethodologyPage() {
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    setMounted(true);
+    const t = setTimeout(() => setMounted(true), 0);
     const handleScroll = () => {
       setScrollY(window.scrollY);
     };
     window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
+    return () => { clearTimeout(t); window.removeEventListener("scroll", handleScroll); };
   }, []);
 
   const bgY = mounted ? scrollY * 0.2 : 0;

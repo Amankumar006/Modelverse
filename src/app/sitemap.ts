@@ -1,5 +1,5 @@
 import type { MetadataRoute } from "next";
-import { getAllModels, getAllModelEntries } from "@/lib/models";
+import { getAllModelEntries } from "@/lib/models";
 import { getAllArticles } from "@/lib/news";
 import { NewsCategory } from "../../data/schema/news.schema";
 
@@ -7,8 +7,8 @@ export const dynamic = "force-static";
 
 const BASE_URL = "https://www.themodelverse.in";
 
-export default function sitemap(): MetadataRoute.Sitemap {
-  const entries = getAllModelEntries();
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  const entries = await getAllModelEntries();
 
   // Define static base routes
   const staticRoutes: MetadataRoute.Sitemap = [
@@ -162,8 +162,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
   }));
 
   // Dynamic news articles
-  const articles = getAllArticles();
-  const newsArticleRoutes: MetadataRoute.Sitemap = articles.map((article) => {
+  const allArticles = await getAllArticles();
+  const newsArticleRoutes: MetadataRoute.Sitemap = allArticles.map((article) => {
     const lastModDate = article.updatedDate || article.publishDate;
     return {
       url: `${BASE_URL}/news/${article.slug}`,

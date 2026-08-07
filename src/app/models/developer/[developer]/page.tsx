@@ -12,7 +12,7 @@ import Navbar from "@/components/layout/Navbar";
 export const dynamic = "force-static";
 
 export async function generateStaticParams() {
-  const developers = getAllDevelopers();
+  const developers = await getAllDevelopers();
   return developers.map((developer) => ({
     developer,
   }));
@@ -25,7 +25,8 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { developer } = await params;
   const decodedDeveloper = decodeURIComponent(developer);
-  const models = getAllModelEntries().filter((m) => m.developer === decodedDeveloper);
+  const allModels = await getAllModelEntries();
+  const models = allModels.filter((m) => m.developer === decodedDeveloper);
   
   if (models.length === 0) {
     return { title: "Developer Not Found — Modelverse" };
@@ -58,8 +59,9 @@ export default async function DeveloperPage({
   const { developer } = await params;
   const decodedDeveloper = decodeURIComponent(developer);
   
-  const models = getAllModelEntries().filter((m) => m.developer === decodedDeveloper);
-  const developers = getAllDevelopers();
+  const allModels = await getAllModelEntries();
+  const models = allModels.filter((m) => m.developer === decodedDeveloper);
+  const developers = await getAllDevelopers();
 
   if (models.length === 0) {
     notFound();

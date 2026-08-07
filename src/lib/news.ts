@@ -1,166 +1,81 @@
-import newsIndex from "./news-index.json";
-import newsArchive from "./news-archive.json";
+import { createClient } from "@supabase/supabase-js";
 import type { NewsArticle, NewsCategoryType } from "../../data/schema/news.schema";
+
+// Create a generic anonymous client for public data fetching.
+// This avoids the 'cookies() cannot be used in generateStaticParams' error.
+const supabase = createClient(
+  process.env.NEXT_PUBLIC_SUPABASE_URL!,
+  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+);
 
 export type NewsArticleIndexEntry = Omit<NewsArticle, "body">;
 
-function loadDevNewsIndex(): NewsArticleIndexEntry[] {
-  if (typeof window !== "undefined") return newsIndex as unknown as NewsArticleIndexEntry[];
+// Helper to map DB snake_case columns to frontend camelCase expected by NewsArticle
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function mapDbRowToArticle(row: any): any {
+  return {
+    id: row.id,
+    slug: row.slug,
+    title: row.title,
+    category: row.category as NewsCategoryType,
+    publishDate: row.publish_date,
+    updatedDate: row.updated_at,
+    author: row.author,
+    readTime: row.read_time,
+    excerpt: row.excerpt || "",
+    body: row.body || "",
+    coverImage: row.cover_image || "",
+    status: row.status,
+    confidenceLevel: row.confidence_level,
+    externalSources: row.external_sources || [],
+    relatedModels: row.related_models || [],
+    tags: row.tags || []
+  };
+}
 
-  const fs = require("fs");
-  const path = require("path");
-  const { z } = require("zod");
+export async function getAllArticles(): Promise<NewsArticleIndexEntry[]> {
+  const { data, error } = await supabase
+    .from("news_items")
+    .select("id, slug, title, category, publish_date, updated_at, author, read_time, excerpt, cover_image, status, confidence_level, external_sources, related_models, tags")
+    .eq("status", "published")
+    .order("publish_date", { ascending: false });
 
-  const newsDir = path.join(process.cwd(), "data", "news");
-  const files = fs.readdirSync(newsDir).filter((f: string) => f.endsWith(".json") && f !== "_index.json");
+  if (error || !data) {
+    console.error("Error fetching articles from Supabase:", error);
+    return [];
+  }
 
-  const rawEntries: any[] = [];
-  const NewsCategory = z.enum(["weekly-news", "short-news", "model-review", "other"]);
-  const NewsPostSchema = z.object({
-    id: z.string(),
-    slug: z.string(),
-    title: z.string(),
-    category: NewsCategory,
-    publishDate: z.string(),
-    updatedDate: z.string().optional(),
-    author: z.string(),
-    readTime: z.string(),
-    excerpt: z.string(),
-    body: z.string(),
-    coverImage: z.string(),
-    issueNumber: z.number().optional(),
-    status: z.enum(["draft", "published"]).default("draft"),
-    confidenceLevel: z.enum(["confirmed", "reported", "rumor", "community-discussion"]).default("confirmed"),
-    externalSources: z.array(z.string()).optional(),
-    relatedModels: z.array(z.string()).optional(),
-    tags: z.array(z.string()).optional(),
-    seoTitle: z.string().optional(),
-    seoDescription: z.string().optional(),
-    isFeatured: z.boolean().optional().default(false),
-    isTrending: z.boolean().optional().default(false)
-  });
-
-  for (const file of files) {
-    try {
-      const raw = JSON.parse(fs.readFileSync(path.join(newsDir, file), "utf-8"));
-      const result = NewsPostSchema.safeParse(raw);
-      if (!result.success) continue;
-      rawEntries.push(result.data);
-    } catch (err: any) {
-      console.error(`[DEV] Failed to parse news file ${file}:`, err.message);
+  // Calculate issue numbers for weekly news
+  let weeklyCount = 0;
+  const mapped = data.map(row => {
+    const article = mapDbRowToArticle(row);
+    // Rough approximation: oldest to newest issue numbers
+    if (article.category === "weekly-news") {
+      weeklyCount++;
+      article.issueNumber = weeklyCount; 
     }
-  }
-
-  // Filter out draft entries - only compile published articles
-  const publishedEntries = rawEntries.filter(e => e.status === "published");
-
-  // Auto-increment issueNumber for weekly-news category (chronological oldest to newest)
-  const weeklyNews = publishedEntries.filter(e => e.category === 'weekly-news');
-  weeklyNews.sort((a, b) => new Date(a.publishDate).getTime() - new Date(b.publishDate).getTime());
-  weeklyNews.forEach((entry, idx) => {
-    entry.issueNumber = entry.issueNumber ?? (idx + 1);
+    return article;
   });
 
-  const entries: any[] = [];
-  for (const validated of publishedEntries) {
-    const { body, ...lightweight } = validated;
-    entries.push(lightweight);
-  }
-
-  entries.sort((a, b) => new Date(b.publishDate).getTime() - new Date(a.publishDate).getTime());
-
-  try {
-    fs.writeFileSync(path.join(process.cwd(), "src", "lib", "news-index.json"), JSON.stringify(entries, null, 2));
-    fs.writeFileSync(path.join(newsDir, "_index.json"), JSON.stringify(entries, null, 2));
-  } catch (err) {
-    console.error("[DEV] Failed to compile news-index.json:", err);
-  }
-
-  return entries as NewsArticleIndexEntry[];
+  return mapped;
 }
 
-function loadDevArticleBySlug(slug: string): NewsArticle | null {
-  if (typeof window !== "undefined") {
-    const found = newsArchive.find((a: any) => a.slug === slug);
-    return found ? (found as unknown as NewsArticle) : null;
+export async function getArticleBySlug(slug: string): Promise<NewsArticle | null> {
+  const { data, error } = await supabase
+    .from("news_items")
+    .select("*")
+    .eq("slug", slug)
+    .single();
+
+  if (error || !data) {
+    return null;
   }
 
-  const fs = require("fs");
-  const path = require("path");
-  const { z } = require("zod");
-
-  const newsDir = path.join(process.cwd(), "data", "news");
-  const files = fs.readdirSync(newsDir).filter((f: string) => f.endsWith(".json") && f !== "_index.json");
-
-  const NewsCategory = z.enum(["weekly-news", "short-news", "model-review", "other"]);
-  const NewsPostSchema = z.object({
-    id: z.string(),
-    slug: z.string(),
-    title: z.string(),
-    category: NewsCategory,
-    publishDate: z.string(),
-    updatedDate: z.string().optional(),
-    author: z.string(),
-    readTime: z.string(),
-    excerpt: z.string(),
-    body: z.string(),
-    coverImage: z.string(),
-    issueNumber: z.number().optional(),
-    status: z.enum(["draft", "published"]).default("draft"),
-    confidenceLevel: z.enum(["confirmed", "reported", "rumor", "community-discussion"]).default("confirmed"),
-    externalSources: z.array(z.string()).optional(),
-    relatedModels: z.array(z.string()).optional(),
-    tags: z.array(z.string()).optional(),
-    seoTitle: z.string().optional(),
-    seoDescription: z.string().optional(),
-    isFeatured: z.boolean().optional().default(false),
-    isTrending: z.boolean().optional().default(false)
-  });
-
-  const rawEntries: any[] = [];
-  for (const file of files) {
-    try {
-      const raw = JSON.parse(fs.readFileSync(path.join(newsDir, file), "utf-8"));
-      const result = NewsPostSchema.safeParse(raw);
-      if (result.success) {
-        rawEntries.push(result.data);
-      }
-    } catch (err: any) {
-      console.error(`[DEV] Failed to parse news file ${file}:`, err.message);
-    }
-  }
-
-  // Filter out draft entries - only compile published articles
-  const publishedEntries = rawEntries.filter(e => e.status === "published");
-
-  // Auto-increment issueNumber for weekly-news category (chronological oldest to newest)
-  const weeklyNews = publishedEntries.filter(e => e.category === 'weekly-news');
-  weeklyNews.sort((a, b) => new Date(a.publishDate).getTime() - new Date(b.publishDate).getTime());
-  weeklyNews.forEach((entry, idx) => {
-    entry.issueNumber = entry.issueNumber ?? (idx + 1);
-  });
-
-  const found = publishedEntries.find(e => e.slug === slug);
-  return found ? (found as NewsArticle) : null;
+  return mapDbRowToArticle(data);
 }
 
-export function getAllArticles(): NewsArticleIndexEntry[] {
-  if (process.env.NODE_ENV !== "production") {
-    return loadDevNewsIndex();
-  }
-  return newsIndex as unknown as NewsArticleIndexEntry[];
-}
-
-export function getArticleBySlug(slug: string): NewsArticle | null {
-  if (process.env.NODE_ENV !== "production") {
-    return loadDevArticleBySlug(slug);
-  }
-  const found = newsArchive.find((a: any) => a.slug === slug);
-  return found ? (found as unknown as NewsArticle) : null;
-}
-
-export function getArticlesByCategory(category: NewsCategoryType): NewsArticleIndexEntry[] {
-  const all = getAllArticles();
+export async function getArticlesByCategory(category: NewsCategoryType): Promise<NewsArticleIndexEntry[]> {
+  const all = await getAllArticles();
   return all.filter((a) => a.category === category);
 }
 
@@ -178,3 +93,4 @@ export function getCategoryLabel(category: NewsCategoryType): string {
       return category;
   }
 }
+

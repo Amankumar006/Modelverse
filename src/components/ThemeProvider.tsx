@@ -16,12 +16,15 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
   const [mode, setModeState] = useState<ThemeMode>("dark");
 
   useEffect(() => {
-    const savedMode = localStorage.getItem("daylight-theme-mode") as ThemeMode | null;
-    if (savedMode === "light" || savedMode === "dark") {
-      setModeState(savedMode);
-    } else if (window.matchMedia("(prefers-color-scheme: light)").matches) {
-      setModeState("light");
-    }
+    const t = setTimeout(() => {
+      const savedMode = localStorage.getItem("daylight-theme-mode") as ThemeMode | null;
+      if (savedMode === "light" || savedMode === "dark") {
+        setModeState(savedMode);
+      } else if (window.matchMedia("(prefers-color-scheme: light)").matches) {
+        setModeState("light");
+      }
+    }, 0);
+    return () => clearTimeout(t);
   }, []);
 
   useEffect(() => {

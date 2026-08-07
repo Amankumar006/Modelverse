@@ -15,7 +15,7 @@ export async function GET(
     }
     const normalizedSlug = slug.toLowerCase();
 
-    const models = getAllModelEntries();
+    const models = await getAllModelEntries();
     const model = models.find(
       (m) => m.slug.toLowerCase() === normalizedSlug || m.id.toLowerCase() === normalizedSlug
     );
@@ -57,6 +57,7 @@ export async function GET(
     };
 
     return NextResponse.json(sanitizedModel);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (err: any) {
     console.error("API Error in /api/models/[slug]:", err);
     return NextResponse.json(

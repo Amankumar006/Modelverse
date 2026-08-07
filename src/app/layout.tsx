@@ -112,29 +112,17 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark">
       <head>
-        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5666739187500051" crossOrigin="anonymous"></script>
+        <Script
+          id="adsbygoogle"
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5666739187500051"
+          crossOrigin="anonymous"
+          strategy="afterInteractive"
+        />
       </head>
       <body className="min-h-screen bg-[var(--bg)] text-[var(--text)] tracking-[-0.01em] antialiased flex flex-col justify-between">
         <ThemeProvider>
           <GoogleAdsense />
-          <Script
-            id="performance-polyfill"
-            strategy="beforeInteractive"
-            dangerouslySetInnerHTML={{
-              __html: `
-                if (typeof window !== 'undefined' && window.performance && window.performance.measure) {
-                  var originalMeasure = window.performance.measure;
-                  window.performance.measure = function() {
-                    try {
-                      return originalMeasure.apply(this, arguments);
-                    } catch (e) {
-                      return null;
-                    }
-                  };
-                }
-              `,
-            }}
-          />
           {gaId && (
             <>
               <Script

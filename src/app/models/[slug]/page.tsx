@@ -15,7 +15,7 @@ export const dynamic = "force-static";
 
 // Enable static site generation at build time for all model entries
 export async function generateStaticParams() {
-  const models = getAllModels();
+  const models = await getAllModels();
   return models.map((m) => ({
     slug: m.slug,
   }));
@@ -28,7 +28,7 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
   const { slug } = await params;
-  const model = getModelBySlug(slug);
+  const model = await getModelBySlug(slug);
 
   if (!model) {
     return {
@@ -74,7 +74,7 @@ export default async function ModelDetailPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const model = getModelBySlug(slug);
+  const model = await getModelBySlug(slug);
 
   if (!model) {
     notFound();
@@ -101,7 +101,7 @@ export default async function ModelDetailPage({
     }
   }
 
-  const allEntries = getAllModelEntries();
+  const allEntries = await getAllModelEntries();
 
   // Find other models in the same family
   const familyMembers = model.family

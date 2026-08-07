@@ -21,8 +21,8 @@ export const metadata: Metadata = {
   },
 };
 
-export default function TrendingPage() {
-  const trendingModels = getTrendingModels(20);
+export default async function TrendingPage() {
+  const trendingModels = await getTrendingModels(20);
 
   const structuredData = {
     "@context": "https://schema.org",

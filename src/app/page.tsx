@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Image from "@/components/ui/FallbackImage";
 import HeroSection from "@/components/hero/HeroSection";
 import ModelCard from "@/components/models/ModelCard";
-import { getRecentModels, getModelCount, getAllDevelopers, SITE_URL, getAllModelEntries } from "@/lib/models";
+import { getModelCount, SITE_URL, getAllModelEntries } from "@/lib/models";
 import { getAllArticles } from "@/lib/news";
 import Link from "next/link";
 import {
@@ -12,7 +12,6 @@ import {
   Newspaper,
   Clock,
   Trophy,
-  Activity,
 } from "lucide-react";
 import type { ModelEntry } from "@/lib/models";
 
@@ -42,11 +41,11 @@ export const metadata: Metadata = {
   },
 };
 
-export default function Home() {
-  const allModels = getAllModelEntries();
-  const totalModels = getModelCount();
+export default async function Home() {
+  const allModels = await getAllModelEntries();
+  const totalModels = await getModelCount();
   const verifiedCount = allModels.filter((m) => m.verified).length;
-  const latestArticles = getAllArticles().slice(0, 4);
+  const latestArticles = (await getAllArticles()).slice(0, 4);
   const featuredArticle = latestArticles[0];
   const subArticles = latestArticles.slice(1, 4);
 
@@ -110,7 +109,7 @@ export default function Home() {
               Intelligence Tools
             </div>
             <h2 className="text-[clamp(2.25rem,5vw,3.5rem)] font-medium text-[var(--text)] tracking-[-0.03em] leading-[1.05] mb-6">
-              Don't guess. <br />
+              Don&apos;t guess. <br />
               <span className="text-[var(--muted)]">Measure and migrate with precision.</span>
             </h2>
             <p className="text-base sm:text-lg text-[var(--muted)] leading-relaxed mb-10">

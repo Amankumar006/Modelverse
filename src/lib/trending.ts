@@ -57,8 +57,8 @@ export interface TrendingModelEntry extends ModelEntry {
   trendingScore: number;
 }
 
-export function getTrendingModels(limit: number): TrendingModelEntry[] {
-  const entries = getAllModelEntries();
+export async function getTrendingModels(limit: number): Promise<TrendingModelEntry[]> {
+  const entries = await getAllModelEntries();
   
   const scoredEntries: TrendingModelEntry[] = entries.map(entry => {
     return {

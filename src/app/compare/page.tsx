@@ -20,9 +20,9 @@ export async function generateMetadata({
 
   slugs = Array.from(new Set(slugs)).filter(Boolean).slice(0, 4);
 
-  const selectedModels = slugs
-    .map((slug) => getModelBySlug(slug))
-    .filter((model): model is NonNullable<typeof model> => model !== null);
+  const selectedModels = (await Promise.all(
+    slugs.map(async (slug) => await getModelBySlug(slug))
+  )).filter((model): model is NonNullable<typeof model> => model !== null);
 
   if (selectedModels.length > 0) {
     const names = selectedModels.map(m => m.name).join(" vs ");
@@ -81,21 +81,23 @@ export default async function ComparePage({ searchParams }: PageProps) {
   // Remove duplicates and limit to 4 to prevent UI overflow
   slugs = Array.from(new Set(slugs)).filter(Boolean).slice(0, 4);
 
-  const selectedModels = slugs
-    .map((slug) => getModelBySlug(slug))
-    .filter((model): model is NonNullable<typeof model> => model !== null);
+  const selectedModels = (await Promise.all(
+    slugs.map(async (slug) => await getModelBySlug(slug))
+  )).filter((model): model is NonNullable<typeof model> => model !== null);
 
-  const allModels = getAllModelEntries();
+  const allModels = await getAllModelEntries();
 
   return (
-    <div className="min-h-screen bg-[#0C120F] text-gray-200">
-      <Navbar />
+    <div className="min-h-screen bg-[var(--bg)] text-[var(--text)] selection:bg-[var(--accent-soft)] selection:text-[var(--accent)] font-sans">
+      <div className="sticky top-0 z-50 shrink-0 border-b border-[var(--muted)]/10 bg-[var(--bg)]">
+        <Navbar />
+      </div>
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="mb-8 space-y-4 text-center sm:text-left">
-          <h1 className="text-3xl md:text-4xl font-extrabold text-white tracking-tight">
+          <h1 className="text-3xl md:text-4xl font-extrabold text-[var(--text)] tracking-tight">
             Compare Models
           </h1>
-          <p className="text-gray-400 max-w-2xl text-sm md:text-base leading-relaxed">
+          <p className="text-[var(--muted)] max-w-2xl text-sm md:text-base leading-relaxed">
             Evaluate leading AI models side-by-side. Compare context windows, open-weights licensing, parameters, and verified benchmarks to choose the right model for your application.
           </p>
         </div>

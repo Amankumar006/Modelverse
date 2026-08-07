@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import {
-  getAllModels,
   getAllModelEntries,
   SITE_URL,
 } from "@/lib/models";
@@ -10,12 +9,12 @@ import Breadcrumb from "@/components/models/Breadcrumb";
 import ModelCard from "@/components/models/ModelCard";
 import Navbar from "@/components/layout/Navbar";
 import ClientBackButton from "@/components/ui/ClientBackButton";
-import { ChevronLeft, Sparkles, ArrowLeft, ArrowRight } from "lucide-react";
+import { Sparkles, ArrowLeft, ArrowRight } from "lucide-react";
 
 export const dynamic = "force-static";
 
 export async function generateStaticParams() {
-  const models = getAllModelEntries();
+  const models = await getAllModelEntries();
   const seen = new Set<string>();
   const families: string[] = [];
   for (const m of models) {
@@ -38,7 +37,8 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { slug: rawSlug } = await params;
   const slug = decodeURIComponent(rawSlug);
-  const models = getAllModelEntries().filter((m) => m.family === slug);
+  const allModels = await getAllModelEntries();
+  const models = allModels.filter((m) => m.family === slug);
   
   if (models.length === 0) {
     return { title: "Family Not Found — Modelverse" };
@@ -73,7 +73,8 @@ export default async function FamilyPage({
 }) {
   const { slug: rawSlug } = await params;
   const slug = decodeURIComponent(rawSlug);
-  const models = getAllModelEntries().filter((m) => m.family === slug);
+  const allModels = await getAllModelEntries();
+  const models = allModels.filter((m) => m.family === slug);
 
   if (models.length === 0) {
     notFound();
@@ -117,7 +118,6 @@ export default async function FamilyPage({
 
         <div className="flex flex-col gap-6">
           {models.map((model) => {
-            const allModels = getAllModelEntries();
             const nextVersionModel = allModels.find(m => m.previousVersion === model.slug);
             const prevVersionModel = model.previousVersion ? allModels.find(m => m.slug === model.previousVersion) : null;
             

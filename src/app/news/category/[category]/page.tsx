@@ -55,7 +55,7 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
     notFound();
   }
 
-  const posts = getArticlesByCategory(category);
+  const posts = await getArticlesByCategory(category);
   const label = getCategoryLabel(category);
 
   return (

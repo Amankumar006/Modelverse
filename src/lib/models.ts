@@ -1,5 +1,3 @@
-import modelsArchive from "./models-archive.json";
-
 /* ------------------------------------------------------------------ */
 /*  Types                                                              */
 /* ------------------------------------------------------------------ */
@@ -34,9 +32,13 @@ export interface ModelEntry extends ModelIndex {
   modality: string[];
   primaryTask: string;
   deployment: string[];
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   license: string | Record<string, any>;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   parameters: string | Record<string, any>;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   activeParameters?: string | Record<string, any>;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   contextWindow: string | Record<string, any>;
   description: string;
   descriptionDraft?: string;
@@ -70,193 +72,173 @@ export interface ModelEntry extends ModelIndex {
   pricingLastVerified?: string;
 }
 
-/* ------------------------------------------------------------------ */
-/*  Development Hot-Reload Helper                                      */
-/* ------------------------------------------------------------------ */
 
-let _devCachedEntries: ModelEntry[] | null = null;
+import { createClient } from '@supabase/supabase-js';
 
-export function clearModelCache() {
-  _devCachedEntries = null;
-}
+const supabase = createClient(
+  process.env.NEXT_PUBLIC_SUPABASE_URL!,
+  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+);
 
-function loadDevEntries(): ModelEntry[] {
-  if (typeof window !== "undefined") return modelsArchive as unknown as ModelEntry[];
-  
-  if (_devCachedEntries) return _devCachedEntries;
-
-  const fs = require("fs");
-  const path = require("path");
-  const { z } = require("zod");
-
-  const DATA_DIR = path.join(process.cwd(), "data", "models");
-  const files = fs.readdirSync(DATA_DIR).filter((f: string) => f.endsWith(".json") && f !== "_index.json");
-
-  const entries: any[] = [];
-
-  // Re-declare mini schema here for validation check in dev
-  const ModelSchema = z.object({
-    id: z.string(),
-    name: z.string(),
-    slug: z.string(),
-    developer: z.string(),
-    releaseDate: z.string(),
-    updatedAt: z.string(),
-    type: z.enum(["open-source", "open-weights", "closed-source", "api-only", "research-preview", "research"]),
-    status: z.enum(["active", "deprecated", "sunset"]).default("active"),
-    modality: z.any(),
-    primaryTask: z.string(),
-    deployment: z.array(z.any()),
-    license: z.any(),
-    parameters: z.any().optional(),
-    contextWindow: z.any().optional(),
-    description: z.string(),
-    templatedDescription: z.boolean().optional(),
-    keyFeatures: z.any().optional(),
-    benchmarks: z.any().optional(),
-    family: z.string().nullable().optional(),
-    tier: z.string().optional(),
-    institution: z.string().optional(),
-    previousVersion: z.string().nullable().optional(),
-    costTiers: z.any().optional(),
-    pricing: z.any().optional(),
-    pricingLastVerified: z.string().regex(/^\d{4}-\d{2}-\d{2}$/).optional(),
-    links: z.any().optional(),
-    logo: z.string().nullable().optional(),
-    tags: z.array(z.string()).optional(),
-    sources: z.any().optional(),
-    verified: z.boolean().optional(),
-    verifiedAt: z.string().optional(),
-    featured: z.boolean().default(false),
-    boost: z.number().default(1),
-    curatorNotes: z.string().default(""),
-    vendorApiStatus: z.enum(["active", "deprecated", "sunset"]).optional()
-  }).passthrough();
-
-  for (const file of files) {
-    try {
-      const raw = JSON.parse(fs.readFileSync(path.join(DATA_DIR, file), "utf-8"));
-      const result = ModelSchema.safeParse(raw);
-      if (!result.success) {
-        console.warn(`[DEV] Validation failed for ${file}:`, result.error.format());
-        // Fallback: push raw object if essential fields exist
-        if (raw.id && raw.slug && raw.name) {
-          entries.push(raw);
-        }
-        continue;
-      }
-      entries.push(result.data);
-    } catch (err: any) {
-      console.error(`[DEV] Failed to parse model file ${file}:`, err.message);
-    }
-  }
-
-  entries.sort((a, b) => new Date(b.releaseDate).getTime() - new Date(a.releaseDate).getTime());
-
-  // Auto-regenerate files in background so client bundles are hot-reloaded
-  try {
-    const searchIndex = entries.map((e) => ({
-      id: e.id,
-      name: e.name,
-      slug: e.slug,
-      developer: e.developer,
-      type: e.type,
-    })).sort((a, b) => a.name.localeCompare(b.name));
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function mapRowToModelEntry(row: any): ModelEntry {
+  // Map snake_case to camelCase and merge metadata
+  const base = {
+    id: row.id,
+    name: row.name,
+    slug: row.slug,
+    developer: row.developer,
+    releaseDate: row.release_date,
+    type: row.type,
+    status: row.status,
+    vendorApiStatus: row.vendor_api_status,
+    featured: row.featured,
+    boost: row.boost,
+    family: row.family,
+    tier: row.tier,
+    institution: row.institution,
     
-    fs.writeFileSync(path.join(process.cwd(), "src", "lib", "search-index.json"), JSON.stringify(searchIndex, null, 2));
-    fs.writeFileSync(path.join(process.cwd(), "src", "lib", "models-archive.json"), JSON.stringify(entries, null, 2));
-  } catch (err) {
-    console.error("[DEV] Failed to regenerate compile artifacts:", err);
-  }
+    updatedAt: row.updated_at,
+    modality: row.modality || [],
+    primaryTask: row.primary_task,
+    deployment: row.deployment || [],
+    license: row.license,
+    parameters: row.parameters,
+    activeParameters: row.active_parameters,
+    contextWindow: row.context_window,
+    description: row.description,
+    descriptionDraft: row.description_draft,
+    keyFeatures: row.key_features || [],
+    keyFeaturesDraft: row.key_features_draft,
+    benchmarks: row.benchmarks || [],
+    previousVersion: row.previous_version,
+    baseModel: row.base_model,
+    links: row.links || {},
+    logo: row.logo,
+    images: row.images || [],
+    tags: row.tags || [],
+    sources: row.sources || [],
+    verified: row.verified,
+    needsReview: row.needs_review,
+    curatorNotes: row.curator_notes,
+    isLegacyCurated: row.is_legacy_curated,
+    verificationStatus: row.verification_status,
+    verifiedAt: row.reviewed_at,
+    fieldConfidence: row.field_confidence,
+    costTiers: row.cost_tiers,
+    pricing: row.pricing,
+    pricingLastVerified: row.pricing_last_verified,
+  };
 
-  _devCachedEntries = entries as ModelEntry[];
-  return _devCachedEntries;
+  if (row.metadata) {
+    return { ...row.metadata, ...base };
+  }
+  return base as ModelEntry;
 }
 
-function loadAllEntries(): ModelEntry[] {
-  if (process.env.NODE_ENV !== "production") {
-    return loadDevEntries();
-  }
-  return modelsArchive as unknown as ModelEntry[];
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function mapRowToModelIndex(row: any): ModelIndex {
+  return {
+    id: row.id,
+    name: row.name,
+    slug: row.slug,
+    developer: row.developer,
+    releaseDate: row.release_date,
+    type: row.type,
+    status: row.status,
+    vendorApiStatus: row.vendor_api_status,
+    featured: row.featured,
+    boost: row.boost,
+    family: row.family,
+    tier: row.tier,
+    institution: row.institution,
+  };
 }
 
 /* ------------------------------------------------------------------ */
-/*  Public API (Precompiled in production, Dynamic in development)      */
+/*  Public API (Supabase Backend)                                     */
 /* ------------------------------------------------------------------ */
 
 /** Return lightweight index summaries, sorted newest-first. */
-export function getAllModels(): ModelIndex[] {
-  return loadAllEntries().map((e) => ({
-    id: e.id,
-    name: e.name,
-    slug: e.slug,
-    developer: e.developer,
-    releaseDate: e.releaseDate,
-    type: e.type,
-    status: e.status,
-    vendorApiStatus: e.vendorApiStatus,
-    featured: e.featured,
-    boost: e.boost,
-    family: e.family,
-    tier: e.tier,
-    institution: e.institution,
-  }));
+export async function getAllModels(): Promise<ModelIndex[]> {
+  const { data } = await supabase
+    .from('models')
+    .select('id, name, slug, developer, release_date, type, status, vendor_api_status, featured, boost, family, tier, institution')
+    .order('release_date', { ascending: false });
+  return (data || []).map(mapRowToModelIndex);
 }
 
 /** Return all full model entries, sorted newest-first. */
-export function getAllModelEntries(): ModelEntry[] {
-  return loadAllEntries();
+export async function getAllModelEntries(): Promise<ModelEntry[]> {
+  const { data } = await supabase
+    .from('models')
+    .select('*')
+    .order('release_date', { ascending: false });
+  return (data || []).map(mapRowToModelEntry);
 }
 
 /** Return the N most recently released models. */
-export function getRecentModels(n: number): ModelIndex[] {
-  return getAllModels().slice(0, n);
+export async function getRecentModels(n: number): Promise<ModelIndex[]> {
+  const { data } = await supabase
+    .from('models')
+    .select('id, name, slug, developer, release_date, type, status, vendor_api_status, featured, boost, family, tier, institution')
+    .order('release_date', { ascending: false })
+    .limit(n);
+  return (data || []).map(mapRowToModelIndex);
 }
 
 /** Return all slugs — for generateStaticParams. */
-export function getAllSlugs(): string[] {
-  return loadAllEntries().map((m) => m.slug);
+export async function getAllSlugs(): Promise<string[]> {
+  const { data } = await supabase
+    .from('models')
+    .select('slug');
+  return (data || []).map(row => row.slug);
 }
 
 /** Read a single model's full data by slug. */
-export function getModelBySlug(slug: string): ModelEntry | null {
-  return loadAllEntries().find((m) => m.slug === slug) ?? null;
+export async function getModelBySlug(slug: string): Promise<ModelEntry | null> {
+  const { data } = await supabase
+    .from('models')
+    .select('*')
+    .eq('slug', slug)
+    .single();
+  if (!data) return null;
+  return mapRowToModelEntry(data);
 }
 
 /** Get all unique developers from the models. */
-export function getAllDevelopers(): string[] {
-  const models = loadAllEntries();
-  const seen = new Set<string>();
-  const result: string[] = [];
-  for (const m of models) {
-    if (!m.developer) continue;
-    const key = m.developer.toLowerCase().replace(/[^a-z0-9]/g, "");
-    if (!seen.has(key)) {
-      seen.add(key);
-      result.push(m.developer);
-    }
-  }
-  return result.sort();
+export async function getAllDevelopers(): Promise<string[]> {
+  const { data } = await supabase
+    .from('models')
+    .select('developer');
+  const devs = new Set((data || []).map(row => row.developer));
+  return Array.from(devs).sort();
 }
 
 /** Get total count of models tracked. */
-export function getModelCount(): number {
-  return loadAllEntries().length;
+export async function getModelCount(): Promise<number> {
+  const { count } = await supabase
+    .from('models')
+    .select('*', { count: 'exact', head: true });
+  return count || 0;
 }
 
 /** Get developers and their counts of tracked models. */
-export function getDeveloperCounts(): { developer: string; count: number }[] {
-  const models = loadAllEntries();
+export async function getDeveloperCounts(): Promise<{ developer: string; count: number }[]> {
+  const { data } = await supabase
+    .from('models')
+    .select('developer');
   const counts: Record<string, number> = {};
-  for (const m of models) {
-    counts[m.developer] = (counts[m.developer] || 0) + 1;
-  }
+  (data || []).forEach(row => {
+    counts[row.developer] = (counts[row.developer] || 0) + 1;
+  });
   return Object.entries(counts)
     .map(([developer, count]) => ({ developer, count }))
     .sort((a, b) => b.count - a.count || a.developer.localeCompare(b.developer));
 }
 
 /** Format parameters display string including active parameters if present */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function formatParameters(model: { parameters?: string | any; activeParameters?: string | any }): string {
   if (!model.parameters) return "Undisclosed";
   const p = typeof model.parameters === "object" && model.parameters !== null ? Object.values(model.parameters).join(" / ") : model.parameters;
@@ -273,6 +255,7 @@ export function formatParameters(model: { parameters?: string | any; activeParam
 }
 
 /** Flatten modality array or object to string array */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function getModalities(mod: any): string[] {
   if (Array.isArray(mod)) return mod;
   if (typeof mod === "object" && mod !== null) {
@@ -294,3 +277,4 @@ export function getModalities(mod: any): string[] {
 
 /** Base URL for canonical links and OG images. */
 export const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://www.themodelverse.in";
+
