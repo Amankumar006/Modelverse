@@ -19,7 +19,9 @@
       "ai-news",
       "breaking",
       "openai"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "improving-fable-5-s-biology-safeguards",
@@ -41,7 +43,9 @@
       "ai-news",
       "breaking",
       "anthropic"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "liquid-ai-releases-lfm25-26b-an-on-device-agentic-model-with-128k-context-tool-c",
@@ -63,7 +67,9 @@
       "ai-news",
       "breaking",
       "marktechpost"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "microsoft-open-sources-code-testing-generator-a-polyglot-unit-test-agent-that-hi",
@@ -85,7 +91,9 @@
       "ai-news",
       "breaking",
       "marktechpost"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "new-mexico-court-orders-meta-to-pay-additional-567m-in-child-safety-case",
@@ -107,7 +115,9 @@
       "ai-news",
       "breaking",
       "techcrunch-ai"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "adaptive-experimentation-with-metas-ax-a-practical-coding-guide",
@@ -129,7 +139,9 @@
       "ai-news",
       "breaking",
       "marktechpost"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "amid-legal-battles-suno-says-it-will-start-watermarking-songs",
@@ -151,7 +163,9 @@
       "ai-news",
       "breaking",
       "techcrunch-ai"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "baseten-on-hugging-face-inference-providers",
@@ -173,7 +187,9 @@
       "ai-news",
       "breaking",
       "hugging-face"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "chatgpt-brings-unlimited-text-chats-to-free-users",
@@ -195,7 +211,9 @@
       "ai-news",
       "breaking",
       "techcrunch-ai"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "cloudflare-introduces-kitesurf-an-agent-first-web-browser-that-runs-entirely-in-",
@@ -217,7 +235,9 @@
       "ai-news",
       "breaking",
       "marktechpost"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "ex-spotify-employees-raise-10m-to-bring-the-ai-behind-its-recommendations-to-e-c",
@@ -239,7 +259,9 @@
       "ai-news",
       "breaking",
       "techcrunch-ai"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "exclusive-mirendil-inks-100m-google-cloud-deal-to-scale-self-improving-ai",
@@ -261,7 +283,9 @@
       "ai-news",
       "breaking",
       "techcrunch-ai"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "from-asking-to-doing-how-the-world-is-putting-chatgpt-to-work",
@@ -283,7 +307,9 @@
       "ai-news",
       "breaking",
       "openai"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "geforce-now-shakes-up-august-with-26-new-games",
@@ -305,7 +331,9 @@
       "ai-news",
       "breaking",
       "nvidia"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "gen-z-dating-apps-like-ditto-ditch-swiping-in-favor-of-ai-matchmaking",
@@ -327,7 +355,9 @@
       "ai-news",
       "breaking",
       "techcrunch-ai"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "google-maps-adds-agentic-features-including-food-ordering-and-hotel-bookings",
@@ -349,7 +379,9 @@
       "ai-news",
       "breaking",
       "techcrunch-ai"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "improving-gpt56-sol-in-chatgptand-expanding-access-to-gpt-56-luna-for-free-users",
@@ -371,7 +403,9 @@
       "ai-news",
       "breaking",
       "openai"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "into-the-omniverse-how-open-world-models-push-the-frontier-of-physical-ai",
@@ -393,7 +427,9 @@
       "ai-news",
       "breaking",
       "nvidia"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "microsofts-skillopt-shows-optimized-agent-skill-artifacts-transfer-across-model-",
@@ -415,7 +451,9 @@
       "ai-news",
       "breaking",
       "marktechpost"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "nave-raises-285m-to-automate-the-grunt-work-of-setting-up-and-running-a-company",
@@ -437,7 +475,9 @@
       "ai-news",
       "breaking",
       "techcrunch-ai"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "omilia-raises-67m-to-scale-its-customer-support-platform",
@@ -459,7 +499,9 @@
       "ai-news",
       "breaking",
       "techcrunch-ai"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "openai-says-apples-own-security-practices-undermine-its-trade-secrets-case",
@@ -481,7 +523,9 @@
       "ai-news",
       "breaking",
       "techcrunch-ai"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "openais-new-ai-smart-speaker-will-reportedly-sell-for-between-300-and-400",
@@ -503,7 +547,9 @@
       "ai-news",
       "breaking",
       "techcrunch-ai"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "prime-intellect-releases-prime-agent-an-open-source-rlm-harness-where-sub-agents",
@@ -525,7 +571,9 @@
       "ai-news",
       "breaking",
       "marktechpost"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "weathernext-ai-model-achieves-breakthrough-in-forecasting-cyclones",
@@ -547,7 +595,9 @@
       "ai-news",
       "breaking",
       "google-deepmind"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "working-with-the-american-psychological-association-on-youth-mental-health-and-a",
@@ -569,7 +619,9 @@
       "ai-news",
       "breaking",
       "openai"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "ai-makes-weather-prediction-better-can-windborne-make-it-lucrative",
@@ -591,7 +643,9 @@
       "ai-news",
       "breaking",
       "techcrunch-ai"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "anthropic-is-hiring-an-ai-chip-design-team",
@@ -613,7 +667,9 @@
       "ai-news",
       "breaking",
       "techcrunch-ai"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "copilotkit-open-sources-channels-sdk-an-mit-licensed-library-that-runs-any-ag-ui",
@@ -635,7 +691,9 @@
       "ai-news",
       "breaking",
       "marktechpost"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "end-to-end-bayesian-marketing-mix-modeling-with-google-meridian-media-measuremen",
@@ -657,7 +715,9 @@
       "ai-news",
       "breaking",
       "marktechpost"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "hark-previews-its-browser-use-agent-for-completing-tasks",
@@ -679,7 +739,9 @@
       "ai-news",
       "breaking",
       "techcrunch-ai"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "jeff-dean-and-other-top-ai-researchers-are-leaving-google-to-launch-their-own-st",
@@ -701,7 +763,9 @@
       "ai-news",
       "breaking",
       "techcrunch-ai"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "klaviyo-acquires-elias-torres-agency-in-full-circle-reunion-for-tech-founders",
@@ -723,7 +787,9 @@
       "ai-news",
       "breaking",
       "techcrunch-ai"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "macpaw-taps-liquid-ai-to-offer-on-device-inference-to-devs-building-for-its-app-",
@@ -745,7 +811,9 @@
       "ai-news",
       "breaking",
       "techcrunch-ai"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "meta-ai-releases-muse-code-beta-a-terminal-coding-agent-powered-by-the-new-muse-",
@@ -767,7 +835,9 @@
       "ai-news",
       "breaking",
       "marktechpost"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "meta-launches-muse-code-an-ai-agent-for-large-code-bases",
@@ -789,7 +859,9 @@
       "ai-news",
       "breaking",
       "techcrunch-ai"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "nvidia-and-partners-build-in-america-for-america",
@@ -835,7 +907,9 @@
       "ai-news",
       "breaking",
       "marktechpost"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "shopify-says-ai-search-is-driving-more-traffic-and-sales-not-replacing-google",
@@ -857,7 +931,9 @@
       "ai-news",
       "breaking",
       "techcrunch-ai"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "techcrunch-disrupt-2026s-real-world-ai-stage-features-robots-automated-factories",
@@ -879,7 +955,9 @@
       "ai-news",
       "breaking",
       "techcrunch-ai"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "ai-leaders-propose-safe-guidelines-for-cybersecurity-transparency",
@@ -901,7 +979,9 @@
       "ai-news",
       "breaking",
       "nvidia"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "anthropic-signs-10b-deal-with-ai-cloud-startup-volta",
@@ -923,7 +1003,9 @@
       "ai-news",
       "breaking",
       "techcrunch-ai"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "apple-says-more-ex-employees-may-have-taken-confidential-data-to-openai",
@@ -945,7 +1027,9 @@
       "ai-news",
       "breaking",
       "techcrunch-ai"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "as-ai-increases-demands-on-memory-storage-steps-up",
@@ -967,7 +1051,9 @@
       "ai-news",
       "breaking",
       "nvidia"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "building-an-advanced-ai-skill-security-auditing-pipeline-with-nvidia-skillspecto",
@@ -989,7 +1075,9 @@
       "ai-news",
       "breaking",
       "marktechpost"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "cursor-open-sources-mixture-of-kittens-mok-a-deterministic-moe-training-megakern",
@@ -1011,7 +1099,9 @@
       "ai-news",
       "breaking",
       "marktechpost"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "deploy-local-agents-everywhere-with-lfm25-26b",
@@ -1033,7 +1123,9 @@
       "ai-news",
       "breaking",
       "hugging-face"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "disrupting-a-criminal-scam-operation",
@@ -1055,7 +1147,9 @@
       "ai-news",
       "breaking",
       "openai"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "elon-musk-spends-half-his-time-talking-robots-and-ai-on-tesla-earnings-calls",
@@ -1077,7 +1171,9 @@
       "ai-news",
       "breaking",
       "techcrunch-ai"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "eon-wants-to-move-the-data-superhighway-from-ocean-fiber-to-space-lasers",
@@ -1099,7 +1195,9 @@
       "ai-news",
       "breaking",
       "techcrunch-ai"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "genspark-open-sources-genoffice-a-free-ad-free-ai-office-suite-for-macos-and-win",
@@ -1121,7 +1219,9 @@
       "ai-news",
       "breaking",
       "marktechpost"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "is-the-future-of-data-centers-portable-runware-builds-a-pod-to-find-out",
@@ -1143,7 +1243,9 @@
       "ai-news",
       "breaking",
       "techcrunch-ai"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "meet-wrinkles-an-app-that-uncovers-the-hidden-stories-of-the-places-around-you",
@@ -1165,7 +1267,9 @@
       "ai-news",
       "breaking",
       "techcrunch-ai"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "new-ways-to-learn-and-teach-with-chatgpt-work-and-codex",
@@ -1187,7 +1291,9 @@
       "ai-news",
       "breaking",
       "openai"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "nvidia-alpamayo-2-super-the-frontier-open-model-for-robotaxis-and-autonomous-veh",
@@ -1209,7 +1315,9 @@
       "ai-news",
       "breaking",
       "nvidia"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "nvidia-doesnt-mess-around-a-week-after-open-ai-industry-group-formed-its-already",
@@ -1231,7 +1339,9 @@
       "ai-news",
       "breaking",
       "techcrunch-ai"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "nvidia-joins-nsf-state-and-regional-ai-hubs-program-to-expand-ai-research-and-ed",
@@ -1253,7 +1363,9 @@
       "ai-news",
       "breaking",
       "nvidia"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "open-weight-ai-models-are-catching-up-to-the-frontier-the-safety-gap-remains",
@@ -1275,7 +1387,9 @@
       "ai-news",
       "breaking",
       "techcrunch-ai"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "pixel-native-rag-a-practical-guide-to-visual-document-indexing",
@@ -1297,7 +1411,9 @@
       "ai-news",
       "breaking",
       "marktechpost"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "reflex-open-sources-xy-a-rust-backed-super-fast-python-charting-library-that-kee",
@@ -1319,7 +1435,9 @@
       "ai-news",
       "breaking",
       "marktechpost"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "spacex-has-bought-329m-worth-of-tesla-megapacks-so-far-this-year",
@@ -1341,7 +1459,9 @@
       "ai-news",
       "breaking",
       "techcrunch-ai"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "spotify-expands-ai-remix-and-covers-project-with-merlin-partnership",
@@ -1363,7 +1483,9 @@
       "ai-news",
       "breaking",
       "techcrunch-ai"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "texas-halts-new-data-centers-as-governor-calls-for-audits",
@@ -1385,7 +1507,9 @@
       "ai-news",
       "breaking",
       "techcrunch-ai"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "third-party-cyber-evaluations-involving-openai-models",
@@ -1407,7 +1531,9 @@
       "ai-news",
       "breaking",
       "openai"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "tino-cuellar",
@@ -1429,7 +1555,9 @@
       "ai-news",
       "breaking",
       "anthropic"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "y-combinator-open-sources-qm-an-mit-licensed-multiplayer-agent-harness-that-runs",
@@ -1451,7 +1579,9 @@
       "ai-news",
       "breaking",
       "marktechpost"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "a-marc-benioff-backed-startup-thinks-ai-can-solve-the-ai-deployment-problem",
@@ -1473,7 +1603,9 @@
       "ai-news",
       "breaking",
       "techcrunch-ai"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "after-killer-quarter-palantir-ceo-alex-karp-calls-ai-industry-marxist",
@@ -1495,7 +1627,9 @@
       "ai-news",
       "breaking",
       "techcrunch-ai"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "alibaba-qwen-releases-qwen38-max-a-24-trillion-parameter-moe-model-and-the-most-",
@@ -1517,7 +1651,9 @@
       "ai-news",
       "breaking",
       "marktechpost"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "apple-finally-fixed-siri-so-why-does-it-feel-anticlimactic",
@@ -1539,7 +1675,9 @@
       "ai-news",
       "breaking",
       "techcrunch-ai"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "apple-is-getting-this-wrong",
@@ -1561,7 +1699,9 @@
       "ai-news",
       "breaking",
       "openai"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "aws-is-helping-vibe-coding-startup-superblocks-and-the-implications-are-big",
@@ -1583,7 +1723,9 @@
       "ai-news",
       "breaking",
       "techcrunch-ai"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "circles-powers-telco-personalization-with-openai-technology",
@@ -1605,7 +1747,9 @@
       "ai-news",
       "breaking",
       "openai"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "cogent-ai-team-releases-vr-1-a-frontier-cyber-reasoning-model-that-composes-and-",
@@ -1627,7 +1771,9 @@
       "ai-news",
       "breaking",
       "marktechpost"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "congress-favorite-ai-tool-chatgpt",
@@ -1649,7 +1795,9 @@
       "ai-news",
       "breaking",
       "techcrunch-ai"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "congresss-favorite-ai-tool-chatgpt",
@@ -1671,7 +1819,9 @@
       "ai-news",
       "breaking",
       "techcrunch-ai"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "design-arena-creators-raise-79-million-to-bring-taste-to-ai-models",
@@ -1693,7 +1843,9 @@
       "ai-news",
       "breaking",
       "techcrunch-ai"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "designarena-creators-raise-79-million-to-bring-taste-to-ai-models",
@@ -1715,7 +1867,9 @@
       "ai-news",
       "breaking",
       "techcrunch-ai"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "evaluating-multimodal-vision-models-with-moonshot-perceptionbench-using-robust-d",
@@ -1737,7 +1891,9 @@
       "ai-news",
       "breaking",
       "marktechpost"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "heres-why-ai-agents-lie-and-cheat-to-reach-their-goals",
@@ -1759,7 +1915,9 @@
       "ai-news",
       "breaking",
       "mit-technology-review"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "how-to-secure-ai-agents-mcp-servers-and-llm-apps-in-production",
@@ -1781,7 +1939,9 @@
       "ai-news",
       "breaking",
       "marktechpost"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "how-we-built-a-realtime-system-for-responsive-voice-ai-in-six-months",
@@ -1803,7 +1963,9 @@
       "ai-news",
       "breaking",
       "openai"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "influencers-draw-backlash-for-attending-openais-first-luxury-trip",
@@ -1825,7 +1987,9 @@
       "ai-news",
       "breaking",
       "techcrunch-ai"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "onton-releases-ontology-1-a-neurosymbolic-search-model-that-is-27x-more-accurate",
@@ -1847,7 +2011,9 @@
       "ai-news",
       "breaking",
       "marktechpost"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "trumps-ai-protectionism-has-come-for-robotics",
@@ -1869,7 +2035,9 @@
       "ai-news",
       "breaking",
       "mit-technology-review"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "a-tutorial-on-geoai-designing-footprint-extraction-from-naip-imagery-using-u-net",
@@ -1891,7 +2059,9 @@
       "ai-news",
       "breaking",
       "marktechpost"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "end-to-end-forecasting-with-timesfm-25-backtesting-covariates-anomaly-detection-",
@@ -1913,7 +2083,9 @@
       "ai-news",
       "breaking",
       "marktechpost"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "nvidia-ai-releases-molt-a-pytorch-native-agentic-reinforcement-learning-framewor",
@@ -1935,7 +2107,9 @@
       "ai-news",
       "breaking",
       "marktechpost"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "sam-altman-and-ais-decel-debate",
@@ -1957,7 +2131,9 @@
       "ai-news",
       "breaking",
       "techcrunch-ai"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "thinking-machines-lab-releases-inkling-small-a-276b-total-12b-active-open-weight",
@@ -1979,7 +2155,9 @@
       "ai-news",
       "breaking",
       "marktechpost"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "weekly-model-recap-2026-08-02",
@@ -2008,6 +2186,8 @@
       "model-releases",
       "ai-roundup"
     ],
+    "isFeatured": false,
+    "isTrending": true,
     "issueNumber": 5
   },
   {
@@ -2030,7 +2210,9 @@
       "ai-news",
       "breaking",
       "marktechpost"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "amd-releases-instella-moe-16b-a3b-a-fully-open-mixture-of-experts-llm-with-28b-a",
@@ -2052,7 +2234,9 @@
       "ai-news",
       "breaking",
       "marktechpost"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "judge-denies-xais-request-to-block-minnesota-ban-on-nudify-apps",
@@ -2074,7 +2258,9 @@
       "ai-news",
       "breaking",
       "techcrunch-ai"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "minimax-releases-minimax-h3-an-omni-modal-video-model-that-generates-15-second-2",
@@ -2096,7 +2282,9 @@
       "ai-news",
       "breaking",
       "marktechpost"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "sam-altman-is-still-making-the-case-for-parenting-via-chatgpt",
@@ -2118,7 +2306,9 @@
       "ai-news",
       "breaking",
       "techcrunch-ai"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "supabase-releases-evals-an-open-source-benchmark-that-scores-claude-code-codex-a",
@@ -2140,7 +2330,9 @@
       "ai-news",
       "breaking",
       "marktechpost"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "ten-advances-in-mathematics-and-theoretical-computer-science",
@@ -2162,7 +2354,9 @@
       "ai-news",
       "breaking",
       "openai"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "youtuber-hank-green-says-his-ai-usage-is-not-healthy",
@@ -2184,7 +2378,9 @@
       "ai-news",
       "breaking",
       "techcrunch-ai"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "advancing-responsible-ai-across-europe",
@@ -2206,7 +2402,9 @@
       "ai-news",
       "breaking",
       "openai"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "ai-labs-want-to-pump-the-brakes-but-amazon-and-spacex-are-still-blasting-off",
@@ -2228,7 +2426,9 @@
       "ai-news",
       "breaking",
       "techcrunch-ai"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "anthropic-says-its-own-ai-models-breached-three-companies-during-security-tests",
@@ -2250,7 +2450,9 @@
       "ai-news",
       "breaking",
       "techcrunch-ai"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "building-a-policy-governed-multi-agent-financial-research-workflow-with-omnigent",
@@ -2272,7 +2474,9 @@
       "ai-news",
       "breaking",
       "marktechpost"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "building-abundant-intelligence",
@@ -2294,7 +2498,9 @@
       "ai-news",
       "breaking",
       "openai"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "deepseek-upgrades-deepseek-v4-flash-0731-with-major-agentic-and-coding-gains",
@@ -2316,7 +2522,9 @@
       "ai-news",
       "breaking",
       "marktechpost"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "google-nixes-its-earth-ai-feature-one-day-after-launch-amid-criticism-it-would-s",
@@ -2338,7 +2546,9 @@
       "ai-news",
       "breaking",
       "techcrunch-ai"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "india-is-starting-to-pay-for-apps-not-just-download-them",
@@ -2360,7 +2570,9 @@
       "ai-news",
       "breaking",
       "techcrunch-ai"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "investigating-incidents-cybersecurity-evals",
@@ -2382,7 +2594,9 @@
       "ai-news",
       "breaking",
       "anthropic"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "jetbrains-open-sources-kotlinllm-smart-macros-that-generate-kotlin-source-code-a",
@@ -2404,7 +2618,9 @@
       "ai-news",
       "breaking",
       "marktechpost"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "lingbot-map-tutorial-gpu-aware-inference-and-point-cloud-export",
@@ -2426,7 +2642,9 @@
       "ai-news",
       "breaking",
       "marktechpost"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "nous-research-ships-three-integration-paths-for-hermes-agent-and-buzz-blocks-ope",
@@ -2448,7 +2666,9 @@
       "ai-news",
       "breaking",
       "marktechpost"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "openai-reportedly-finds-evidence-that-more-of-its-agents-ran-amok",
@@ -2470,7 +2690,9 @@
       "ai-news",
       "breaking",
       "techcrunch-ai"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "polyai-releases-dialog-rsn-1-an-audio-native-dialog-model-that-fuses-turn-taking",
@@ -2492,7 +2714,9 @@
       "ai-news",
       "breaking",
       "marktechpost"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "sam-altman-isnt-the-only-one-who-wants-to-pump-the-brakes-on-ai",
@@ -2514,7 +2738,9 @@
       "ai-news",
       "breaking",
       "techcrunch-ai"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "siri-ai-could-come-with-a-paywall-for-power-users",
@@ -2536,7 +2762,9 @@
       "ai-news",
       "breaking",
       "techcrunch-ai"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "smallestai-raises-13m-to-build-ultra-fast-voice-ai-that-sounds-genuinely-human",
@@ -2558,7 +2786,9 @@
       "ai-news",
       "breaking",
       "techcrunch-ai"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "snapchat-no-longer-rewards-fully-ai-generated-spotlight-content",
@@ -2580,7 +2810,9 @@
       "ai-news",
       "breaking",
       "techcrunch-ai"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "spacex-wont-remove-all-of-xais-unpermitted-turbines-for-another-year",
@@ -2602,7 +2834,9 @@
       "ai-news",
       "breaking",
       "techcrunch-ai"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "univ-builds-an-ai-ready-workforce",
@@ -2624,7 +2858,9 @@
       "ai-news",
       "breaking",
       "openai"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "a-fundamental-flaw-leaves-llms-strikingly-vulnerable-to-attack",
@@ -2646,7 +2882,9 @@
       "ai-news",
       "breaking",
       "mit-technology-review"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "advancing-the-price-performance-frontier-with-gpt-56",
@@ -2668,7 +2906,9 @@
       "ai-news",
       "breaking",
       "openai"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "ai-hedge-fund-situational-awareness-may-have-sold-its-public-portfolio-but-it-st",
@@ -2690,7 +2930,9 @@
       "ai-news",
       "breaking",
       "techcrunch-ai"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "best-in-class-stream-pc-games-and-study-on-the-same-laptop-with-geforce-now",
@@ -2712,7 +2954,9 @@
       "ai-news",
       "breaking",
       "nvidia"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "dili-raises-217m-to-bring-ai-compliance-to-the-infrastructure-boom",
@@ -2734,7 +2978,9 @@
       "ai-news",
       "breaking",
       "techcrunch-ai"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "forward-deployed-engineers-are-the-ai-industrys-latest-talent-obsession",
@@ -2756,7 +3002,9 @@
       "ai-news",
       "breaking",
       "techcrunch-ai"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "friend-the-lonely-ai-wearable-returns-with-a-new-voice-and-a-much-bigger-price-t",
@@ -2778,7 +3026,9 @@
       "ai-news",
       "breaking",
       "techcrunch-ai"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "gemini-robotics-er-2-powering-robotics-with-video-understanding-task-orchestrati",
@@ -2800,7 +3050,9 @@
       "ai-news",
       "breaking",
       "google-deepmind"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "google-deepmind-ships-three-physical-ai-models-for-whole-body-control-dexterity-",
@@ -2822,7 +3074,9 @@
       "ai-news",
       "breaking",
       "marktechpost"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "google-says-it-fixed-more-chrome-bugs-in-june-than-over-the-past-two-years-thank",
@@ -2844,7 +3098,9 @@
       "ai-news",
       "breaking",
       "techcrunch-ai"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "gpu-management-why-idle-gpus-are-the-new-grounded-aircraft",
@@ -2866,7 +3122,9 @@
       "ai-news",
       "breaking",
       "hugging-face"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "how-avatarin-built-a-247-retail-agent-with-gpt-realtime",
@@ -2888,7 +3146,9 @@
       "ai-news",
       "breaking",
       "openai"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "in-the-hugging-face-breach-openais-hacker-was-noisy-and-fast-but-not-unstoppable",
@@ -2910,7 +3170,9 @@
       "ai-news",
       "breaking",
       "techcrunch-ai"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "investors-love-ai-as-long-as-youre-a-cloud-host",
@@ -2932,7 +3194,9 @@
       "ai-news",
       "breaking",
       "techcrunch-ai"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "judge-says-trump-admin-still-lacks-evidence-for-anthropic-supply-chain-risk-labe",
@@ -2954,7 +3218,9 @@
       "ai-news",
       "breaking",
       "techcrunch-ai"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "linkedin-adds-a-button-to-report-ai-generated-slop",
@@ -2976,7 +3242,9 @@
       "ai-news",
       "breaking",
       "techcrunch-ai"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "meet-token-saver-an-open-source-mcp-extension-using-local-hybrid-rag-to-cut-clau",
@@ -2998,7 +3266,9 @@
       "ai-news",
       "breaking",
       "marktechpost"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "meta-says-ai-is-making-it-easier-to-build-new-apps-and-more-are-coming",
@@ -3020,7 +3290,9 @@
       "ai-news",
       "breaking",
       "techcrunch-ai"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "microsoft-is-openly-competing-with-openai-anthropic-more-than-ever",
@@ -3042,7 +3314,9 @@
       "ai-news",
       "breaking",
       "techcrunch-ai"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "moonshot-ai-open-sources-moonep-a-perfectly-balanced-expert-parallelism-library-",
@@ -3064,7 +3338,9 @@
       "ai-news",
       "breaking",
       "marktechpost"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "nscale-buys-anyscale-as-it-seeks-to-own-more-of-the-ai-compute-stack",
@@ -3086,7 +3362,9 @@
       "ai-news",
       "breaking",
       "techcrunch-ai"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "okta-buys-ai-security-startup-permiso-source-says-for-about-200m",
@@ -3108,7 +3386,9 @@
       "ai-news",
       "breaking",
       "techcrunch-ai"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "reddit-reports-a-solid-quarter-but-shows-signs-of-ais-impact",
@@ -3130,7 +3410,9 @@
       "ai-news",
       "breaking",
       "techcrunch-ai"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "techcrunch-disrupt-2026s-biggest-stage-features-leaders-from-amazon-replit-tethe",
@@ -3152,7 +3434,9 @@
       "ai-news",
       "breaking",
       "techcrunch-ai"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "tencent-open-sources-angelspec-a-unified-training-framework-for-mtp-and-block-pa",
@@ -3174,7 +3458,9 @@
       "ai-news",
       "breaking",
       "marktechpost"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "accelerating-scientific-discovery-with-chatgpt-for-academic-researchers",
@@ -3196,7 +3482,9 @@
       "ai-news",
       "breaking",
       "openai"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "as-ai-content-floods-the-internet-pangram-raises-9m-to-detect-it",
@@ -3218,7 +3506,9 @@
       "ai-news",
       "breaking",
       "techcrunch-ai"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "claude-opus-5-became-downright-ruthless-when-tasked-with-running-a-vending-machi",
@@ -3240,7 +3530,9 @@
       "ai-news",
       "breaking",
       "techcrunch-ai"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "cyera-agrees-to-acquire-oasis-security-for-1b-to-safeguard-proliferating-ai-agen",
@@ -3262,7 +3554,9 @@
       "ai-news",
       "breaking",
       "techcrunch-ai"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "discover-whats-next-for-ai-from-the-saas-reckoning-to-the-agent-security-gap-at-",
@@ -3284,7 +3578,9 @@
       "ai-news",
       "breaking",
       "techcrunch-ai"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "encore-ai-raises-30m-to-build-ai-agents-that-learn-from-customer-calls",
@@ -3306,7 +3602,9 @@
       "ai-news",
       "breaking",
       "techcrunch-ai"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "hint-a-new-ai-startup-co-founded-by-martha-stewart-offers-an-ai-assistant-for-ho",
@@ -3328,7 +3626,9 @@
       "ai-news",
       "breaking",
       "techcrunch-ai"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "how-enabling-two-settings-tripled-our-scores-on-the-arc-agi-3-benchmark",
@@ -3350,7 +3650,9 @@
       "ai-news",
       "breaking",
       "openai"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "how-gpt-56-fuses-frontier-intelligence-with-frontier-efficiency",
@@ -3372,7 +3674,9 @@
       "ai-news",
       "breaking",
       "openai"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "liquid-ai-releases-lfm25-encoder-230m-and-lfm25-encoder-350m-bidirectional-encod",
@@ -3394,7 +3698,9 @@
       "ai-news",
       "breaking",
       "marktechpost"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "mark-zuckerberg-predicts-that-billions-of-people-will-have-personal-ai-agents-in",
@@ -3416,7 +3722,9 @@
       "ai-news",
       "breaking",
       "techcrunch-ai"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "microsoft-logs-32b-from-anthropic-investment-but-openai-was-a-mixed-bag",
@@ -3438,7 +3746,9 @@
       "ai-news",
       "breaking",
       "techcrunch-ai"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "prompt-engineering-vs-loop-engineering-vs-graph-engineering-what-changes-at-each",
@@ -3460,7 +3770,9 @@
       "ai-news",
       "breaking",
       "marktechpost"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "the-ai-hype-index-unsexy-ai",
@@ -3482,7 +3794,9 @@
       "ai-news",
       "breaking",
       "mit-technology-review"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "the-hugging-face-ai-break-in-as-told-through-an-increasingly-committed-bear-meta",
@@ -3504,7 +3818,9 @@
       "ai-news",
       "breaking",
       "techcrunch-ai"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "the-hugging-face-break-in-explained",
@@ -3526,7 +3842,9 @@
       "ai-news",
       "breaking",
       "techcrunch-ai"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "thinking-machines-co-founder-lilian-weng-left-the-company-citing-health-reasons-",
@@ -3548,7 +3866,9 @@
       "ai-news",
       "breaking",
       "techcrunch-ai"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "were-launching-lyria-35-in-google-flow-music-with-advances-across-musicality-lyr",
@@ -3570,7 +3890,9 @@
       "ai-news",
       "breaking",
       "google-deepmind"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "zuckerberg-says-metas-enterprise-ai-opportunity-extends-beyond-agents",
@@ -3592,7 +3914,9 @@
       "ai-news",
       "breaking",
       "techcrunch-ai"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "anthropics-dario-amodei-responds-doesnt-oppose-open-weight-models-but-fears-chin",
@@ -3614,7 +3938,9 @@
       "ai-news",
       "breaking",
       "techcrunch-ai"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "bot-detection-startup-spur-nabs-200m-from-insight",
@@ -3636,7 +3962,9 @@
       "ai-news",
       "breaking",
       "techcrunch-ai"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "building-non-interactive-agentic-coding-workflows-with-moonshot-ais-kimi-cli-jso",
@@ -3658,7 +3986,9 @@
       "ai-news",
       "breaking",
       "marktechpost"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "cognizant-anthropic",
@@ -3680,7 +4010,9 @@
       "ai-news",
       "breaking",
       "anthropic"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "cursor-makes-its-biggest-india-push-yet-ahead-of-spacex-acquisition-with-localiz",
@@ -3702,7 +4034,9 @@
       "ai-news",
       "breaking",
       "techcrunch-ai"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "data-centers-may-face-temporary-power-cuts-to-prevent-blackouts-on-largest-us-gr",
@@ -3724,7 +4058,9 @@
       "ai-news",
       "breaking",
       "techcrunch-ai"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "deploying-a-1-bit-bonsai-27b-model-with-prismml-llamacpp-and-openai-compatible-l",
@@ -3746,7 +4082,9 @@
       "ai-news",
       "breaking",
       "marktechpost"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "fireworks-ai-releases-fireworks-nexus-a-drop-in-routing-and-cost-control-layer-t",
@@ -3768,7 +4106,9 @@
       "ai-news",
       "breaking",
       "marktechpost"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "fish-audio-raises-50m-seed-to-build-ai-voice-models-for-creators-and-enterprises",
@@ -3790,7 +4130,9 @@
       "ai-news",
       "breaking",
       "techcrunch-ai"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "fish-audio-raises-52m-seed-to-build-ai-voice-models-for-creators-and-enterprises",
@@ -3812,7 +4154,9 @@
       "ai-news",
       "breaking",
       "techcrunch-ai"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "lfm25-encoders-for-fast-long-context-inference-on-cpu",
@@ -3834,7 +4178,9 @@
       "ai-news",
       "breaking",
       "hugging-face"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "mcp-startup-runlayer-accuses-rippling-of-stealing-its-product-idea",
@@ -3856,7 +4202,9 @@
       "ai-news",
       "breaking",
       "techcrunch-ai"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "microsoft-ai-releases-mai-cyber-1-flash-a-5b-active-parameter-cyber-model-that-p",
@@ -3878,7 +4226,9 @@
       "ai-news",
       "breaking",
       "marktechpost"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "position-open-weights-models",
@@ -3900,7 +4250,9 @@
       "ai-news",
       "breaking",
       "anthropic"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "powerful-compute-so-compact-its-clutch-build-ai-anywhere-with-nvidia-jetson",
@@ -3922,7 +4274,9 @@
       "ai-news",
       "breaking",
       "nvidia"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "recursive-superintelligence-signs-410-compute-deal-with-amazon",
@@ -3944,7 +4298,9 @@
       "ai-news",
       "breaking",
       "techcrunch-ai"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "recursive-superintelligence-signs-410-million-compute-deal-with-amazon",
@@ -3966,7 +4322,9 @@
       "ai-news",
       "breaking",
       "techcrunch-ai"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "recursive-superintelligence-signs-410m-compute-deal-with-amazon",
@@ -3988,7 +4346,9 @@
       "ai-news",
       "breaking",
       "techcrunch-ai"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "sam-altman-is-ready-to-decelerate",
@@ -4010,7 +4370,9 @@
       "ai-news",
       "breaking",
       "techcrunch-ai"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "samsungs-chip-workers-are-jumping-ship-to-rival-sk-hynix",
@@ -4032,7 +4394,9 @@
       "ai-news",
       "breaking",
       "mit-technology-review"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "scientific-computing-in-the-age-of-agentic-ai",
@@ -4054,7 +4418,9 @@
       "ai-news",
       "breaking",
       "openai"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "the-olmoearth-platform-geospatial-inference-at-planetary-scale",
@@ -4076,7 +4442,9 @@
       "ai-news",
       "breaking",
       "hugging-face"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "anatomy-of-a-frontier-lab-agent-intrusion-a-technical-timeline-of-the-july-2026-",
@@ -4098,7 +4466,9 @@
       "ai-news",
       "breaking",
       "hugging-face"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "are-brain-waves-the-next-unlock-for-physical-ai",
@@ -4120,7 +4490,9 @@
       "ai-news",
       "breaking",
       "techcrunch-ai"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "ben-bernanke",
@@ -4142,7 +4514,9 @@
       "ai-news",
       "breaking",
       "anthropic"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "building-the-enterprise-environment-for-agentic-ai",
@@ -4164,7 +4538,9 @@
       "ai-news",
       "breaking",
       "mit-technology-review"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "closing-the-data-loop-in-ai-driven-drug-discovery",
@@ -4186,7 +4562,9 @@
       "ai-news",
       "breaking",
       "mit-technology-review"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "designing-skill-driven-financial-analysis-agents-with-claude-python-mcp-connecto",
@@ -4208,7 +4586,9 @@
       "ai-news",
       "breaking",
       "marktechpost"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "enigma-raises-71m-to-make-controlling-a-robot-as-easy-as-adjusting-the-volume",
@@ -4230,7 +4610,9 @@
       "ai-news",
       "breaking",
       "techcrunch-ai"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "googles-ai-search-is-rapidly-becoming-the-default-new-data-shows",
@@ -4252,7 +4634,9 @@
       "ai-news",
       "breaking",
       "techcrunch-ai"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "how-ai-is-expanding-what-people-do-at-work",
@@ -4274,7 +4658,9 @@
       "ai-news",
       "breaking",
       "openai"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "ilya-sutskevers-safe-superintelligence-partners-with-nvidia-to-scale-its-ai-rese",
@@ -4296,7 +4682,9 @@
       "ai-news",
       "breaking",
       "techcrunch-ai"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "industry-leaders-unite-in-open-secure-ai-alliance-for-ai-safety-and-security",
@@ -4318,7 +4706,9 @@
       "ai-news",
       "breaking",
       "nvidia"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "kimi-ai-and-kvcache-ai-open-sources-agentenv-a-distributed-system-that-powers-ag",
@@ -4340,7 +4730,9 @@
       "ai-news",
       "breaking",
       "marktechpost"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "microsoft-launches-its-first-cybersecurity-model-plus-a-new-agentic-cybersecurit",
@@ -4362,7 +4754,9 @@
       "ai-news",
       "breaking",
       "techcrunch-ai"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "nvidia-cosmos-h-dreams-bringing-real-time-generative-simulation-to-surgical-robo",
@@ -4388,7 +4782,9 @@
       "ai-news",
       "breaking",
       "hugging-face"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "nvidia-harnesses-vera-cpu-to-speed-up-design-of-next-generation-cpus-and-gpus",
@@ -4410,7 +4806,9 @@
       "ai-news",
       "breaking",
       "nvidia"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "openai-called-the-hugging-face-attack-unprecedented-but-weve-been-here-before",
@@ -4432,7 +4830,9 @@
       "ai-news",
       "breaking",
       "mit-technology-review"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "openais-hugging-face-breach-has-reignited-the-debate-over-alignment-and-control",
@@ -4454,7 +4854,9 @@
       "ai-news",
       "breaking",
       "techcrunch-ai"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "perplexity-releases-pplx-a-single-binary-cli-that-puts-its-search-api-in-the-ter",
@@ -4476,7 +4878,9 @@
       "ai-news",
       "breaking",
       "marktechpost"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "power-up-your-ai-infrastructure-a-first-look-at-the-smart-systems-stage-agenda-a",
@@ -4498,7 +4902,9 @@
       "ai-news",
       "breaking",
       "techcrunch-ai"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "psa-your-claude-shared-chats-and-artifacts-may-have-ended-up-on-google",
@@ -4520,7 +4926,9 @@
       "ai-news",
       "breaking",
       "techcrunch-ai"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "satya-nadella-says-companies-that-trust-one-ai-for-everything-may-not-survive",
@@ -4542,7 +4950,9 @@
       "ai-news",
       "breaking",
       "techcrunch-ai"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "the-path-to-artificial-superintelligence",
@@ -4564,7 +4974,9 @@
       "ai-news",
       "breaking",
       "mit-technology-review"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "this-9-key-physically-locks-your-most-addictive-apps",
@@ -4586,7 +4998,9 @@
       "ai-news",
       "breaking",
       "techcrunch-ai"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "threads-users-can-now-chat-with-meta-ai-in-their-dms",
@@ -4608,7 +5022,9 @@
       "ai-news",
       "breaking",
       "techcrunch-ai"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "ust-claude",
@@ -4630,7 +5046,9 @@
       "ai-news",
       "breaking",
       "anthropic"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "black-forest-labs-releases-flux-3-a-multimodal-flow-model-for-image-video-audio-",
@@ -4652,7 +5070,9 @@
       "ai-news",
       "breaking",
       "marktechpost"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "fairchem-v2-uma-for-multidomain-atomistic-simulation-across-molecules-catalysts-",
@@ -4674,7 +5094,9 @@
       "ai-news",
       "breaking",
       "marktechpost"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "hugging-face-ceo-calls-for-radical-transparency-after-unprecedented-openai-hack",
@@ -4696,7 +5118,9 @@
       "ai-news",
       "breaking",
       "techcrunch-ai"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "induction-labs-photon-1-simulates-desktops-plays-checkers-and-models-billiard-ph",
@@ -4718,7 +5142,9 @@
       "ai-news",
       "breaking",
       "marktechpost"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "kwaikat-team-releases-kat-coder-v25-an-agentic-coding-model-trained-on-100000-ve",
@@ -4740,7 +5166,9 @@
       "ai-news",
       "breaking",
       "marktechpost"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "making-sense-of-the-panic-over-chinese-ai",
@@ -4762,7 +5190,9 @@
       "ai-news",
       "breaking",
       "techcrunch-ai"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "mondaycom-is-the-latest-tech-company-to-blame-ai-for-layoffs-here-are-20-others",
@@ -4784,7 +5214,9 @@
       "ai-news",
       "breaking",
       "techcrunch-ai"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "sakana-ai-releases-fugu-cyber-an-orchestration-model-reporting-869-on-cybergym-a",
@@ -4806,7 +5238,9 @@
       "ai-news",
       "breaking",
       "marktechpost"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "weekly-model-recap-2026-07-26",
@@ -4835,6 +5269,8 @@
       "model-releases",
       "ai-roundup"
     ],
+    "isFeatured": false,
+    "isTrending": true,
     "issueNumber": 4
   },
   {
@@ -4857,7 +5293,9 @@
       "ai-news",
       "breaking",
       "anthropic"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "canadian-ai-research",
@@ -4879,7 +5317,9 @@
       "ai-news",
       "breaking",
       "anthropic"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "claude-for-teachers",
@@ -4901,7 +5341,9 @@
       "ai-news",
       "breaking",
       "anthropic"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "claude-opus-5",
@@ -4923,7 +5365,9 @@
       "ai-news",
       "breaking",
       "anthropic"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "claude-sonnet-5",
@@ -4945,7 +5389,9 @@
       "ai-news",
       "breaking",
       "anthropic"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "designing-high-performance-gpu-kernels-with-tilelang-tensor-core-gemm-fused-soft",
@@ -4967,7 +5413,9 @@
       "ai-news",
       "breaking",
       "marktechpost"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "donation-public-first-action",
@@ -4989,7 +5437,9 @@
       "ai-news",
       "breaking",
       "anthropic"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "economic-futures-research-fund-agenda",
@@ -5011,7 +5461,9 @@
       "ai-news",
       "breaking",
       "anthropic"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "hard-questions",
@@ -5033,7 +5485,9 @@
       "ai-news",
       "breaking",
       "anthropic"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "i-tried-out-openais-new-ai-keypad-which-will-be-fun-for-some-coders-and-slightly",
@@ -5059,7 +5513,9 @@
       "ai-news",
       "breaking",
       "techcrunch-ai"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "librarians-are-hosting-viral-avoiding-ai-workshops-for-people-who-are-fed-up-wit",
@@ -5081,7 +5537,9 @@
       "ai-news",
       "breaking",
       "techcrunch-ai"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "meet-open-dreamer-a-jaxflax-reproduction-of-the-dreamer-4-world-model-pipeline-w",
@@ -5103,7 +5561,9 @@
       "ai-news",
       "breaking",
       "marktechpost"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "one-fallen-power-line-exposed-a-growing-ai-data-center-problem-heres-how-to-fix-",
@@ -5125,7 +5585,9 @@
       "ai-news",
       "breaking",
       "techcrunch-ai"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "rare-disease-research-grants",
@@ -5147,7 +5609,9 @@
       "ai-news",
       "breaking",
       "anthropic"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "redeploying-fable-5",
@@ -5169,7 +5633,9 @@
       "ai-news",
       "breaking",
       "anthropic"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "ai-communism-rogue-models-and-the-why-kimi-k3-spooked-wall-street",
@@ -5195,7 +5661,9 @@
       "ai-news",
       "breaking",
       "techcrunch-ai"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "anthropic-launches-opus-5",
@@ -5220,7 +5688,9 @@
       "ai-news",
       "breaking",
       "techcrunch-ai"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "as-us-weighs-response-to-chinese-ai-industry-urges-against-broad-open-weight-res",
@@ -5246,7 +5716,9 @@
       "ai-news",
       "breaking",
       "techcrunch-ai"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "blueskys-ai-assistant-attie-expands-into-an-open-social-research-tool",
@@ -5272,7 +5744,9 @@
       "ai-news",
       "breaking",
       "techcrunch-ai"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "how-ai-guardrails-are-impeding-the-work-of-offensive-cybersecurity-researchers",
@@ -5297,7 +5771,9 @@
       "ai-news",
       "breaking",
       "techcrunch-ai"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "midjourney-acquired-the-astrology-app-co-star",
@@ -5323,7 +5799,9 @@
       "ai-news",
       "breaking",
       "techcrunch-ai"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "openais-new-voice-mode-makes-it-to-the-chatgpt-desktop-app",
@@ -5349,7 +5827,9 @@
       "ai-news",
       "breaking",
       "techcrunch-ai"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "prentis-new-ai-lab-co-founded-by-reid-hoffman-mark-pincus-in-talks-to-raise-100m",
@@ -5375,7 +5855,9 @@
       "ai-news",
       "breaking",
       "techcrunch-ai"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "why-cognition-bought-poke-ai-personality-is-becoming-a-competitive-advantage",
@@ -5400,7 +5882,9 @@
       "ai-news",
       "breaking",
       "techcrunch-ai"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "kimi-k3-full-review",
@@ -5429,7 +5913,9 @@
       "model-review",
       "open-weights",
       "architecture"
-    ]
+    ],
+    "isFeatured": true,
+    "isTrending": true
   },
   {
     "id": "kimi-k3-release-short",
@@ -5458,7 +5944,9 @@
       "open-source",
       "kimi-k3",
       "moonshot-ai"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "post-8",
@@ -5486,6 +5974,8 @@
       "red-teaming",
       "weekly-recap"
     ],
+    "isFeatured": false,
+    "isTrending": false,
     "issueNumber": 3
   },
   {
@@ -5511,7 +6001,9 @@
     ],
     "tags": [
       "ai-news"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "post-9",
@@ -5538,7 +6030,9 @@
       "deepmind",
       "alphaevolve",
       "agentic"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": false
   },
   {
     "id": "openai-codex-chatgpt-sol-updates",
@@ -5562,7 +6056,9 @@
     ],
     "tags": [
       "ai-news"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": false
   },
   {
     "id": "featured-1",
@@ -5586,6 +6082,8 @@
       "safety",
       "rlhf"
     ],
+    "isFeatured": false,
+    "isTrending": false,
     "issueNumber": 2
   },
   {
@@ -5611,6 +6109,8 @@
       "claude",
       "open-weights"
     ],
+    "isFeatured": false,
+    "isTrending": false,
     "issueNumber": 1
   },
   {
@@ -5635,7 +6135,9 @@
       "hardware",
       "on-device",
       "npu"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": false
   },
   {
     "id": "post-3",
@@ -5663,7 +6165,9 @@
       "gemini",
       "benchmarks",
       "speed"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": false
   },
   {
     "id": "post-7",
@@ -5690,7 +6194,9 @@
       "google",
       "diffusion",
       "open-source"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": true
   },
   {
     "id": "post-10",
@@ -5717,7 +6223,9 @@
       "medical",
       "healthcare",
       "open-weights"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": false
   },
   {
     "id": "post-11",
@@ -5744,6 +6252,8 @@
       "vaultgemma",
       "gemma",
       "open-weights"
-    ]
+    ],
+    "isFeatured": false,
+    "isTrending": false
   }
 ]

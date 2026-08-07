@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, Suspense, useEffect } from 'react'
+import { useState, Suspense } from 'react'
 import { createClient } from '@/utils/supabase/client'
 import { useSearchParams, useRouter } from 'next/navigation'
 
@@ -10,151 +10,118 @@ function LoginForm() {
   const urlError = searchParams.get('error')
   
   const [email, setEmail] = useState('')
-  const [token, setToken] = useState('')
-  const [step, setStep] = useState<'email' | 'otp'>('email')
+  const [password, setPassword] = useState('')
+  const [isSignUp, setIsSignUp] = useState(false)
   
   const [error, setError] = useState<string | null>(
-    urlError === 'auth-callback-failed' ? 'The magic link was invalid or has expired. Please try again.' : null
+    urlError ? 'An authentication error occurred. Please try again.' : null
   )
   const [loading, setLoading] = useState(false)
-  const [cooldown, setCooldown] = useState(0)
 
-  useEffect(() => {
-    if (cooldown > 0) {
-      const timer = setTimeout(() => setCooldown(cooldown - 1), 1000)
-      return () => clearTimeout(timer)
-    }
-  }, [cooldown])
-
-  const handleSendOtp = async (e: React.FormEvent) => {
+  const handleAuth = async (e: React.FormEvent) => {
     e.preventDefault()
-    if (cooldown > 0) return
-    
     setLoading(true)
     setError(null)
     
     const supabase = createClient()
-    const { error } = await supabase.auth.signInWithOtp({
-      email,
-    })
-
-    if (error) {
-      setError(error.message)
-      if (error.message.toLowerCase().includes('rate limit')) {
-        setCooldown(60)
+    
+    if (isSignUp) {
+      const { error } = await supabase.auth.signUp({
+        email,
+        password,
+      })
+      if (error) {
+        setError(error.message)
+      } else {
+        // If email confirmation is off, this will log them in immediately.
+        // Otherwise they would need to check email, but we'll assume they 
+        // can manage their account directly.
+        router.push('/admin')
+        router.refresh()
       }
     } else {
-      setStep('otp')
-      setCooldown(60)
+      const { error } = await supabase.auth.signInWithPassword({
+        email,
+        password,
+      })
+      if (error) {
+        setError(error.message)
+      } else {
+        router.push('/admin')
+        router.refresh()
+      }
     }
     setLoading(false)
   }
 
-  const handleVerifyOtp = async (e: React.FormEvent) => {
-    e.preventDefault()
-    setLoading(true)
-    setError(null)
-    
-    const supabase = createClient()
-    const { error } = await supabase.auth.verifyOtp({
-      email,
-      token,
-      type: 'email'
-    })
-
-    if (error) {
-      setError(error.message)
-      setLoading(false)
-    } else {
-      router.push('/admin')
-      router.refresh()
-    }
-  }
-
   return (
     <div className="flex min-h-screen items-center justify-center p-4">
-      <div className="w-full max-w-md p-8 border border-gray-200 dark:border-gray-800 rounded-lg shadow-sm">
-        <h1 className="text-2xl font-bold mb-6 text-center">Curator Login</h1>
+      <div className="w-full max-w-md p-8 border border-gray-200 dark:border-gray-800 rounded-lg shadow-sm bg-white dark:bg-gray-950">
+        <h1 className="text-2xl font-bold mb-6 text-center">
+          {isSignUp ? 'Create Curator Account' : 'Curator Login'}
+        </h1>
         
-        {step === 'email' ? (
-          <form onSubmit={handleSendOtp} className="flex flex-col gap-4">
-            <div>
-              <label htmlFor="email" className="block text-sm font-medium mb-1 text-gray-700 dark:text-gray-300">
-                Email address
-              </label>
-              <input
-                id="email"
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="you@example.com"
-                required
-                className="w-full px-3 py-2 border border-gray-300 dark:border-gray-700 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 bg-transparent"
-              />
+        <form onSubmit={handleAuth} className="flex flex-col gap-4">
+          <div>
+            <label htmlFor="email" className="block text-sm font-medium mb-1 text-gray-700 dark:text-gray-300">
+              Email address
+            </label>
+            <input
+              id="email"
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="you@example.com"
+              required
+              className="w-full px-3 py-2 border border-gray-300 dark:border-gray-700 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 bg-transparent"
+            />
+          </div>
+          
+          <div>
+            <label htmlFor="password" className="block text-sm font-medium mb-1 text-gray-700 dark:text-gray-300">
+              Password
+            </label>
+            <input
+              id="password"
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              placeholder="••••••••"
+              required
+              minLength={6}
+              className="w-full px-3 py-2 border border-gray-300 dark:border-gray-700 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 bg-transparent"
+            />
+          </div>
+          
+          {error && (
+            <div className="text-red-500 text-sm p-3 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-900/50 rounded-md">
+              {error}
             </div>
-            
-            {error && (
-              <div className="text-red-500 text-sm p-2 bg-red-50 dark:bg-red-900/20 rounded">
-                {error}
-              </div>
-            )}
-            
-            <button
-              type="submit"
-              disabled={loading || cooldown > 0}
-              className="w-full py-2 px-4 bg-gray-900 dark:bg-gray-100 text-white dark:text-gray-900 font-medium rounded-md hover:opacity-90 disabled:opacity-50 transition-opacity"
-            >
-              {loading ? 'Sending code...' : cooldown > 0 ? `Wait ${cooldown}s` : 'Send OTP Code'}
-            </button>
-          </form>
-        ) : (
-          <form onSubmit={handleVerifyOtp} className="flex flex-col gap-4">
-            <div>
-              <label htmlFor="token" className="block text-sm font-medium mb-1 text-gray-700 dark:text-gray-300">
-                6-digit code
-              </label>
-              <p className="text-xs text-gray-500 mb-2">We sent a code to {email}</p>
-              <input
-                id="token"
-                type="text"
-                inputMode="numeric"
-                pattern="[0-9]*"
-                maxLength={6}
-                value={token}
-                onChange={(e) => setToken(e.target.value)}
-                placeholder="000000"
-                required
-                className="w-full px-3 py-2 border border-gray-300 dark:border-gray-700 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 bg-transparent text-center tracking-widest text-lg"
-              />
-            </div>
-            
-            {error && (
-              <div className="text-red-500 text-sm p-2 bg-red-50 dark:bg-red-900/20 rounded">
-                {error}
-              </div>
-            )}
-            
-            <button
-              type="submit"
-              disabled={loading || token.length !== 6}
-              className="w-full py-2 px-4 bg-gray-900 dark:bg-gray-100 text-white dark:text-gray-900 font-medium rounded-md hover:opacity-90 disabled:opacity-50 transition-opacity"
-            >
-              {loading ? 'Verifying...' : 'Verify Code'}
-            </button>
-            
+          )}
+          
+          <button
+            type="submit"
+            disabled={loading || !email || !password}
+            className="w-full py-2 px-4 bg-gray-900 dark:bg-gray-100 text-white dark:text-gray-900 font-medium rounded-md hover:opacity-90 disabled:opacity-50 transition-opacity mt-2"
+          >
+            {loading ? 'Authenticating...' : isSignUp ? 'Sign Up' : 'Sign In'}
+          </button>
+          
+          <div className="text-center mt-4">
             <button
               type="button"
               onClick={() => {
-                setStep('email')
-                setToken('')
+                setIsSignUp(!isSignUp)
                 setError(null)
               }}
-              className="w-full py-2 px-4 text-sm text-gray-600 dark:text-gray-400 hover:underline"
+              className="text-sm text-blue-600 dark:text-blue-400 hover:underline"
             >
-              Use a different email
+              {isSignUp 
+                ? 'Already have an account? Sign In' 
+                : 'Need an account? Sign Up'}
             </button>
-          </form>
-        )}
+          </div>
+        </form>
       </div>
     </div>
   )
