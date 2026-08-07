@@ -1,5 +1,71 @@
 [
   {
+    "id": "improving-fable-5-s-biology-safeguards",
+    "slug": "improving-fable-5-s-biology-safeguards",
+    "title": "Improving Fable 5 S Biology Safeguards",
+    "category": "short-news",
+    "publishDate": "2026-08-07",
+    "author": "Modelverse Editorial",
+    "readTime": "2 min read",
+    "excerpt": "Official announcement from Anthropic: Improving Fable 5 S Biology Safeguards",
+    "coverImage": "https://www.anthropic.com/api/opengraph-illustration?name=Node%20Bird&backgroundColor=heather",
+    "status": "published",
+    "confidenceLevel": "confirmed",
+    "externalSources": [
+      "https://www.anthropic.com/news/improving-fable-5-s-biology-safeguards"
+    ],
+    "relatedModels": [],
+    "tags": [
+      "ai-news",
+      "breaking",
+      "anthropic"
+    ]
+  },
+  {
+    "id": "liquid-ai-releases-lfm25-26b-an-on-device-agentic-model-with-128k-context-tool-c",
+    "slug": "liquid-ai-releases-lfm25-26b-an-on-device-agentic-model-with-128k-context-tool-c",
+    "title": "Liquid AI Releases LFM2.5-2.6B: An On-Device Agentic Model With 128K Context, Tool Calling, And Open Weights",
+    "category": "short-news",
+    "publishDate": "2026-08-07",
+    "author": "Modelverse Editorial",
+    "readTime": "2 min read",
+    "excerpt": "Liquid AI released LFM2.5-2.6B, an agentic model that plans, calls tools, and completes multi-step tasks entirely on-device. The 2.69B parameter model pairs 22 double-gated short c...",
+    "coverImage": "https://www.marktechpost.com/wp-content/uploads/2026/08/blog6172-1.png",
+    "status": "published",
+    "confidenceLevel": "confirmed",
+    "externalSources": [
+      "https://www.marktechpost.com/2026/08/06/liquid-ai-lfm2-5-2-6b-on-device-agentic-model/"
+    ],
+    "relatedModels": [],
+    "tags": [
+      "ai-news",
+      "breaking",
+      "marktechpost"
+    ]
+  },
+  {
+    "id": "adaptive-experimentation-with-metas-ax-a-practical-coding-guide",
+    "slug": "adaptive-experimentation-with-metas-ax-a-practical-coding-guide",
+    "title": "Adaptive Experimentation with Meta’s Ax: A Practical Coding Guide",
+    "category": "short-news",
+    "publishDate": "2026-08-06",
+    "author": "Modelverse Editorial",
+    "readTime": "2 min read",
+    "excerpt": "In this tutorial, we explore adaptive experimentation using Meta’s Ax with the modern Client API. We work through a complete workflow where we tune a RandomForest model on a synthe...",
+    "coverImage": "https://www.marktechpost.com/wp-content/uploads/2026/08/blog6176-16.png",
+    "status": "published",
+    "confidenceLevel": "confirmed",
+    "externalSources": [
+      "https://www.marktechpost.com/2026/08/06/adaptive-experimentation-with-metas-ax-a-practical-coding-guide/"
+    ],
+    "relatedModels": [],
+    "tags": [
+      "ai-news",
+      "breaking",
+      "marktechpost"
+    ]
+  },
+  {
     "id": "amid-legal-battles-suno-says-it-will-start-watermarking-songs",
     "slug": "amid-legal-battles-suno-says-it-will-start-watermarking-songs",
     "title": "Amid legal battles, Suno says it will start watermarking songs",
@@ -19,6 +85,50 @@
       "ai-news",
       "breaking",
       "techcrunch-ai"
+    ]
+  },
+  {
+    "id": "chatgpt-brings-unlimited-text-chats-to-free-users",
+    "slug": "chatgpt-brings-unlimited-text-chats-to-free-users",
+    "title": "ChatGPT brings unlimited text chats to free users",
+    "category": "short-news",
+    "publishDate": "2026-08-06",
+    "author": "Modelverse Editorial",
+    "readTime": "2 min read",
+    "excerpt": "OpenAI said that ChatGPT free and Go users are also getting a new think button for complex queries.",
+    "coverImage": "https://techcrunch.com/wp-content/uploads/2025/04/GettyImages-2205105208.jpg?resize=1200,800",
+    "status": "published",
+    "confidenceLevel": "confirmed",
+    "externalSources": [
+      "https://techcrunch.com/2026/08/06/openai-brings-unlimited-chatgpt-text-chats-to-free-users/"
+    ],
+    "relatedModels": [],
+    "tags": [
+      "ai-news",
+      "breaking",
+      "techcrunch-ai"
+    ]
+  },
+  {
+    "id": "cloudflare-introduces-kitesurf-an-agent-first-web-browser-that-runs-entirely-in-",
+    "slug": "cloudflare-introduces-kitesurf-an-agent-first-web-browser-that-runs-entirely-in-",
+    "title": "Cloudflare Introduces Kitesurf: An Agent-First Web Browser That Runs Entirely in V8 Isolates on Cloudflare Workers",
+    "category": "short-news",
+    "publishDate": "2026-08-06",
+    "author": "Modelverse Editorial",
+    "readTime": "2 min read",
+    "excerpt": "Cloudflare has released Kitesurf, a stateless web browser built specifically for AI agents that runs entirely in V8 isolates on Cloudflare Workers, with no Chromium underneath. The...",
+    "coverImage": "https://www.marktechpost.com/wp-content/uploads/2026/08/blog6172-1024x731.png",
+    "status": "published",
+    "confidenceLevel": "confirmed",
+    "externalSources": [
+      "https://www.marktechpost.com/2026/08/06/cloudflare-introduces-kitesurf-an-agent-first-web-browser-that-runs-entirely-in-v8-isolates-on-cloudflare-workers/"
+    ],
+    "relatedModels": [],
+    "tags": [
+      "ai-news",
+      "breaking",
+      "marktechpost"
     ]
   },
   {
@@ -88,6 +198,28 @@
     ]
   },
   {
+    "id": "gen-z-dating-apps-like-ditto-ditch-swiping-in-favor-of-ai-matchmaking",
+    "slug": "gen-z-dating-apps-like-ditto-ditch-swiping-in-favor-of-ai-matchmaking",
+    "title": "Gen Z dating apps like Ditto ditch swiping in favor of AI matchmaking",
+    "category": "short-news",
+    "publishDate": "2026-08-06",
+    "author": "Modelverse Editorial",
+    "readTime": "2 min read",
+    "excerpt": "This generation of twentysomethings is so disillusioned with swipe-based dating apps that they'll try literally anything else — even an AI matchmaker.",
+    "coverImage": "https://techcrunch.com/wp-content/uploads/2026/08/ditto-ai-app.jpg?resize=1200,675",
+    "status": "published",
+    "confidenceLevel": "confirmed",
+    "externalSources": [
+      "https://techcrunch.com/2026/08/06/gen-z-dating-apps-like-ditto-ditch-swiping-in-favor-of-ai-matchmaking/"
+    ],
+    "relatedModels": [],
+    "tags": [
+      "ai-news",
+      "breaking",
+      "techcrunch-ai"
+    ]
+  },
+  {
     "id": "google-maps-adds-agentic-features-including-food-ordering-and-hotel-bookings",
     "slug": "google-maps-adds-agentic-features-including-food-ordering-and-hotel-bookings",
     "title": "Google Maps adds agentic features, including food ordering and hotel bookings",
@@ -132,6 +264,28 @@
     ]
   },
   {
+    "id": "nave-raises-285m-to-automate-the-grunt-work-of-setting-up-and-running-a-company",
+    "slug": "nave-raises-285m-to-automate-the-grunt-work-of-setting-up-and-running-a-company",
+    "title": "Naïve raises $28.5M to automate the grunt work of setting up and running a company",
+    "category": "short-news",
+    "publishDate": "2026-08-06",
+    "author": "Modelverse Editorial",
+    "readTime": "2 min read",
+    "excerpt": "Taking vibe-coding a step further, Naïve claims its infra can automate most of the work in setting up and running a business.",
+    "coverImage": "https://techcrunch.com/wp-content/uploads/2026/08/GettyImages-2082335389.jpg?resize=1200,857",
+    "status": "published",
+    "confidenceLevel": "confirmed",
+    "externalSources": [
+      "https://techcrunch.com/2026/08/06/naive-raises-28-5m-to-automate-the-grunt-work-of-setting-up-and-running-a-company/"
+    ],
+    "relatedModels": [],
+    "tags": [
+      "ai-news",
+      "breaking",
+      "techcrunch-ai"
+    ]
+  },
+  {
     "id": "omilia-raises-67m-to-scale-its-customer-support-platform",
     "slug": "omilia-raises-67m-to-scale-its-customer-support-platform",
     "title": "Omilia raises $67M to scale its customer support platform",
@@ -151,6 +305,72 @@
       "ai-news",
       "breaking",
       "techcrunch-ai"
+    ]
+  },
+  {
+    "id": "openai-says-apples-own-security-practices-undermine-its-trade-secrets-case",
+    "slug": "openai-says-apples-own-security-practices-undermine-its-trade-secrets-case",
+    "title": "OpenAI says Apple’s own security practices undermine its trade secrets case",
+    "category": "short-news",
+    "publishDate": "2026-08-06",
+    "author": "Modelverse Editorial",
+    "readTime": "2 min read",
+    "excerpt": "Newly filed court exhibits show OpenAI’s legal strategy in Apple’s trade secrets lawsuit: argue that Apple’s own security and offboarding practices — including allowing an Apple ma...",
+    "coverImage": "https://techcrunch.com/wp-content/uploads/2026/07/OpenAI-logo-in-Seoul.jpg?w=1024",
+    "status": "published",
+    "confidenceLevel": "confirmed",
+    "externalSources": [
+      "https://techcrunch.com/2026/08/06/openai-says-apples-own-security-practices-undermine-its-trade-secrets-case/"
+    ],
+    "relatedModels": [],
+    "tags": [
+      "ai-news",
+      "breaking",
+      "techcrunch-ai"
+    ]
+  },
+  {
+    "id": "openais-new-ai-smart-speaker-will-reportedly-sell-for-between-300-and-400",
+    "slug": "openais-new-ai-smart-speaker-will-reportedly-sell-for-between-300-and-400",
+    "title": "OpenAI's new AI smart speaker will reportedly sell for between $300 and $400",
+    "category": "short-news",
+    "publishDate": "2026-08-06",
+    "author": "Modelverse Editorial",
+    "readTime": "2 min read",
+    "excerpt": "Additional details about OpenAI's mysterious new AI device make it sound like a pricey smart speaker.",
+    "coverImage": "https://techcrunch.com/wp-content/uploads/2026/07/OpenAI-logo-in-Seoul.jpg?w=1024",
+    "status": "published",
+    "confidenceLevel": "confirmed",
+    "externalSources": [
+      "https://techcrunch.com/2026/08/06/openais-new-ai-smart-speaker-will-reportedly-sell-for-between-300-and-400/"
+    ],
+    "relatedModels": [],
+    "tags": [
+      "ai-news",
+      "breaking",
+      "techcrunch-ai"
+    ]
+  },
+  {
+    "id": "weathernext-ai-model-achieves-breakthrough-in-forecasting-cyclones",
+    "slug": "weathernext-ai-model-achieves-breakthrough-in-forecasting-cyclones",
+    "title": "WeatherNext: AI model achieves breakthrough in forecasting cyclones",
+    "category": "short-news",
+    "publishDate": "2026-08-06",
+    "author": "Modelverse Editorial",
+    "readTime": "2 min read",
+    "excerpt": "WeatherNext: AI model achieves breakthrough in forecasting cyclones",
+    "coverImage": "/images/news/alphaevolve_cover.jpg",
+    "status": "published",
+    "confidenceLevel": "confirmed",
+    "externalSources": [
+      "https://deepmind.google/blog/weathernext-ai-model-achieves-breakthrough-in-forecasting-cyclones/"
+    ],
+    "relatedModels": [],
+    "tags": [
+      "ai-news",
+      "breaking",
+      "google-deepmind"
     ]
   },
   {

@@ -1,0 +1,24 @@
+{
+  "id": "chatgpt-brings-unlimited-text-chats-to-free-users",
+  "slug": "chatgpt-brings-unlimited-text-chats-to-free-users",
+  "title": "ChatGPT brings unlimited text chats to free users",
+  "category": "short-news",
+  "isTrending": true,
+  "publishDate": "2026-08-06",
+  "author": "Modelverse Editorial",
+  "readTime": "2 min read",
+  "excerpt": "OpenAI said that ChatGPT free and Go users are also getting a new think button for complex queries.",
+  "body": "## Enhanced ChatGPT Experience\nOpenAI has announced significant updates to its ChatGPT platform, removing limits on text-based chats for all users. This development is powered by the new GPT-5.6 Luna model, which will serve as the default for Free and Go users, replacing the previous GPT-5.5 model. The GPT-5.6 Luna model aims to provide a more comprehensive and accurate text-based chat experience.\n\n## Improved Models and Features\nThe update introduces a \"Think\" button, allowing users to opt for higher reasoning power when dealing with complex questions. Additionally, Plus and Pro users will gain access to the GPT-5.6 Sol model, designed for quick tasks such as research, advice, and decision-making. This model promises to deliver more compact and robust answers. A thinking slider will also be available for Plus and Pro users, enabling them to adjust the level of thought the model puts into an answer based on the query's complexity.\n\n## Impact on Developers and Researchers\nThese updates are expected to significantly enhance the ChatGPT experience, with internal evaluations showing a substantial reduction in factual errors for both GPT-5.6 Luna and GPT-5.6 Sol models. The removal of text chat limits and introduction of new features will likely benefit developers and researchers, providing them with more flexible and accurate tools for testing and exploring AI capabilities. As the updated version of GPT-5.6 Sol becomes available to Plus and Pro users, and other changes roll out to Free and Go users, the ChatGPT platform is poised to become an even more powerful resource for a wide range of applications.",
+  "coverImage": "https://techcrunch.com/wp-content/uploads/2025/04/GettyImages-2205105208.jpg?resize=1200,800",
+  "status": "published",
+  "confidenceLevel": "confirmed",
+  "externalSources": [
+    "https://techcrunch.com/2026/08/06/openai-brings-unlimited-chatgpt-text-chats-to-free-users/"
+  ],
+  "relatedModels": [],
+  "tags": [
+    "ai-news",
+    "breaking",
+    "techcrunch-ai"
+  ]
+}

@@ -1,20 +1,68 @@
 [
   {
-    "id": "amid-legal-battles-suno-says-it-will-start-watermarking-songs",
-    "slug": "amid-legal-battles-suno-says-it-will-start-watermarking-songs",
-    "title": "Amid legal battles, Suno says it will start watermarking songs",
+    "id": "improving-fable-5-s-biology-safeguards",
+    "slug": "improving-fable-5-s-biology-safeguards",
+    "title": "Improving Fable 5 S Biology Safeguards",
+    "category": "short-news",
+    "isTrending": true,
+    "publishDate": "2026-08-07",
+    "author": "Modelverse Editorial",
+    "readTime": "2 min read",
+    "excerpt": "Official announcement from Anthropic: Improving Fable 5 S Biology Safeguards",
+    "body": "### Improving Fable 5's Biology Safeguards\n\nModelverse is excited to report that Claude Fable 5 has received a significant update to its biology safeguards, dramatically reducing instances where the AI system defaults to a less capable model for biology-related queries. This refinement targets \"false positives,\" which previously caused the system to switch models unnecessarily. Internal testing reveals an impressive 85% reduction in these biology-related fallbacks across various product interfaces, signaling a major step forward in Fable 5's utility for biological tasks.\n\nThis enhancement means Fable 5 can now assist developers and researchers with a much broader spectrum of biological inquiries. Users will experience fewer interruptions when seeking information on everyday health questions, interpreting lab results, understanding symptoms, or engaging in educational biology. Healthcare professionals, in particular, stand to benefit from more consistent and robust support for clinical tasks, leveraging Fable 5's advanced capabilities without frequent system downgrades.\n\nHowever, the developers maintain a cautious approach to \"dual-use\" capabilities—areas like virology, toxicology, and molecular design—where the AI's power could potentially be misused. For these high-risk requests, Fable 5 will still defer to Opus 5, underscoring a commitment to responsible AI deployment. This strategic limitation highlights the ongoing challenge of balancing frontier AI access with safety, as Modelverse aims to eventually provide trusted pathways for professional biology research and drug development while mitigating potential catastrophic risks.",
+    "coverImage": "https://www.anthropic.com/api/opengraph-illustration?name=Node%20Bird&backgroundColor=heather",
+    "status": "published",
+    "confidenceLevel": "confirmed",
+    "externalSources": [
+      "https://www.anthropic.com/news/improving-fable-5-s-biology-safeguards"
+    ],
+    "relatedModels": [],
+    "tags": [
+      "ai-news",
+      "breaking",
+      "anthropic"
+    ]
+  },
+  {
+    "id": "liquid-ai-releases-lfm25-26b-an-on-device-agentic-model-with-128k-context-tool-c",
+    "slug": "liquid-ai-releases-lfm25-26b-an-on-device-agentic-model-with-128k-context-tool-c",
+    "title": "Liquid AI Releases LFM2.5-2.6B: An On-Device Agentic Model With 128K Context, Tool Calling, And Open Weights",
+    "category": "short-news",
+    "isTrending": true,
+    "publishDate": "2026-08-07",
+    "author": "Modelverse Editorial",
+    "readTime": "2 min read",
+    "excerpt": "Liquid AI released LFM2.5-2.6B, an agentic model that plans, calls tools, and completes multi-step tasks entirely on-device. The 2.69B parameter model pairs 22 double-gated short c...",
+    "body": "### Liquid AI's Latest Release: LFM2.5-2.6B\nLiquid AI has unveiled LFM2.5-2.6B, a groundbreaking on-device agentic model designed to operate on a wide range of devices, from phones and laptops to PCs and robots. This innovative model boasts an impressive 2.69B total parameters, a vast 131,072-token context window, and a substantial 128,000-token vocabulary. By leveraging pre-training with approximately 34 trillion tokens, LFM2.5-2.6B demonstrates exceptional capabilities in planning, tool calling, and multi-step task execution.\n\n### Technical Capabilities and Open Access\nThe model's architecture consists of 30 layers, featuring a combination of double-gated short convolution blocks and grouped-query attention blocks. Notably, Liquid AI has made both checkpoints publicly available on Hugging Face under the lfm1.0 license, allowing developers to access the model's weights in various formats. This open approach enables seamless integration with popular frameworks, including llama.cpp, vLLM, SGLang, and LM Studio. By keeping inference local, LFM2.5-2.6B ensures that data remains on the device, minimizing marginal costs and enhancing user privacy.\n\n### Implications for Developers and Researchers\nThe release of LFM2.5-2.6B is significant, as it offers competitive performance with larger models while maintaining a relatively smaller size. Liquid AI's model has shown impressive results in instruction-following and tool-use benchmarks, outperforming larger models in several areas. This development has far-reaching implications for developers and researchers, as it enables the creation of more efficient, privacy-focused, and powerful AI applications that can operate effectively on a wide range of devices.",
+    "coverImage": "https://www.marktechpost.com/wp-content/uploads/2026/08/blog6172-1.png",
+    "status": "published",
+    "confidenceLevel": "confirmed",
+    "externalSources": [
+      "https://www.marktechpost.com/2026/08/06/liquid-ai-lfm2-5-2-6b-on-device-agentic-model/"
+    ],
+    "relatedModels": [],
+    "tags": [
+      "ai-news",
+      "breaking",
+      "marktechpost"
+    ]
+  },
+  {
+    "id": "openais-new-ai-smart-speaker-will-reportedly-sell-for-between-300-and-400",
+    "slug": "openais-new-ai-smart-speaker-will-reportedly-sell-for-between-300-and-400",
+    "title": "OpenAI's new AI smart speaker will reportedly sell for between $300 and $400",
     "category": "short-news",
     "isTrending": true,
     "publishDate": "2026-08-06",
     "author": "Modelverse Editorial",
     "readTime": "2 min read",
-    "excerpt": "Suno's watermarking feature comes as the company is fighting legal battles on several fronts.",
-    "body": "Suno, the popular AI music creation service, has unveiled a suite of new tools and policy updates aimed at enhancing transparency and combating misuse of its platform. Amidst increasing legal scrutiny from major music labels and artist groups, the company announced the implementation of audio watermarking, stricter download policies, and revised community guidelines. CEO Mikey Shulman emphasized Suno's commitment to fostering original creation while making AI music accessible, acknowledging the need to address concerns around unauthorized monetization of AI-generated tracks on external streaming services.\n\nTo achieve this, Suno plans to integrate robust audio watermarking and fingerprinting technologies designed to be durable and resistant to tampering without compromising the listening experience. While the specific underlying technology remains undisclosed, these measures are intended to prevent the deceptive presentation of AI-generated audio. Furthermore, Suno has partnered with lyrics provider Musixmatch, leveraging its Sentinal system for advanced copyright detection. These tools are positioned as mechanisms to offer transparency options to artists and platforms, fostering greater collaboration across the music industry.\n\nFor developers and researchers in the generative AI space, this announcement underscores the critical importance of building ethical safeguards and content provenance into AI models. Suno's proactive steps, driven by ongoing legal battles, highlight the industry's evolving responsibility to balance creative innovation with intellectual property rights. The updated community guidelines, explicitly prohibiting \"deceptive audio presented as real\" and unauthorized use of a person's voice or likeness, set clearer boundaries for responsible AI content generation, influencing future development and deployment strategies in the rapidly evolving AI music landscape.",
-    "coverImage": "https://techcrunch.com/wp-content/uploads/2026/07/mikey-shulman-2159558534.jpg?resize=1200,942",
+    "excerpt": "Additional details about OpenAI's mysterious new AI device make it sound like a pricey smart speaker.",
+    "body": "## Introduction to OpenAI's New Smart Speaker\nOpenAI is set to release a revolutionary AI-powered smart speaker, described as the physical embodiment of ChatGPT. This innovative device is expected to be donut-shaped, allowing users to effortlessly move it around their home and place it in various locations. Constructed from high-quality metal, the speaker will boast a premium look and intriguingly, feature distinct moving parts.\n\n## Technology and Design\nThe smart speaker's design is the result of a collaboration between OpenAI and LoveFrom, a renowned design studio founded by former Apple developer Jony Ive. This partnership has led to the creation of a unique and potentially game-changing device. Although the exact functionality of the moving parts is unclear, the speaker's ability to integrate ChatGPT into users' daily lives is a significant development. The device's portability and sleek design are expected to set it apart from existing smart speakers on the market.\n\n## Market Implications and Release\nWith a projected price point of $300 to $400, OpenAI's smart speaker may face challenges in a market where profitability has been elusive for many manufacturers. Nevertheless, the company's foray into the hardware market is a strategic move to further integrate ChatGPT into users' lives. Despite being sued by Apple over alleged trade secret theft, OpenAI is pushing forward with the device's development, with a planned release in 2027.",
+    "coverImage": "https://techcrunch.com/wp-content/uploads/2026/07/OpenAI-logo-in-Seoul.jpg?w=1024",
     "status": "published",
     "confidenceLevel": "confirmed",
     "externalSources": [
-      "https://techcrunch.com/2026/08/06/amid-legal-battles-suno-says-it-will-start-watermarking-songs/"
+      "https://techcrunch.com/2026/08/06/openais-new-ai-smart-speaker-will-reportedly-sell-for-between-300-and-400/"
     ],
     "relatedModels": [],
     "tags": [
@@ -24,69 +72,45 @@
     ]
   },
   {
-    "id": "geforce-now-shakes-up-august-with-26-new-games",
-    "slug": "geforce-now-shakes-up-august-with-26-new-games",
-    "title": "GeForce NOW Shakes Up August With 26 New Games",
+    "id": "cloudflare-introduces-kitesurf-an-agent-first-web-browser-that-runs-entirely-in-",
+    "slug": "cloudflare-introduces-kitesurf-an-agent-first-web-browser-that-runs-entirely-in-",
+    "title": "Cloudflare Introduces Kitesurf: An Agent-First Web Browser That Runs Entirely in V8 Isolates on Cloudflare Workers",
     "category": "short-news",
     "isTrending": true,
     "publishDate": "2026-08-06",
     "author": "Modelverse Editorial",
     "readTime": "2 min read",
-    "excerpt": "August is here, bringing 26 new games for GeForce NOW members.  Command the seas in World of Warships: Legends and discover what’s next in the GeForce NOW library, starting with th...",
-    "body": "NVIDIA's GeForce NOW is significantly expanding its cloud gaming library this August, introducing 26 new titles, with eight already available this week, including the popular free-to-play naval combat game *World of Warships: Legends*. Concurrently, NVIDIA is showcasing the power of its Ultimate cloud gaming tier at QuakeCon, offering attendees hands-on experiences. Demos highlight the service's capability to deliver stunning visuals at up to 5K 120 frames per second on ultrawide displays, powered by GeForce RTX 5080 GPUs, and seamless gameplay on portable devices like the Lenovo Legion Go S.\n\nThe core of GeForce NOW's technology lies in its ability to stream a vast catalog of PC games, including beloved Bethesda titles, across a wide array of devices without requiring local installations. This means gamers can effortlessly transition their play from laptops and Macs to handhelds, mobile devices, and TVs, picking up exactly where they left off on nearly any supported screen. By leveraging powerful cloud-based GPUs, the service effectively transforms less capable hardware into high-performance gaming rigs, rendering complex graphics remotely and streaming them with minimal latency.\n\nFor game developers, platforms like GeForce NOW are increasingly vital, as they dramatically broaden the potential audience for their PC games without the need for extensive porting efforts across diverse hardware ecosystems. This allows developers to concentrate on creating immersive experiences rather than platform-specific optimizations. From a research perspective, particularly in AI and distributed systems, GeForce NOW exemplifies cutting-edge cloud streaming, showcasing advancements in low-latency video encoding, real-time interactive streaming, and dynamic resource allocation. This continuous evolution pushes the boundaries of how interactive content can be delivered globally, offering valuable insights for future AI applications requiring real-time processing and ubiquitous access.",
-    "coverImage": "https://blogs.nvidia.com/wp-content/uploads/2026/08/gfn-thursday-8-6-nv-blog-1280x680-logo.jpg",
+    "excerpt": "Cloudflare has released Kitesurf, a stateless web browser built specifically for AI agents that runs entirely in V8 isolates on Cloudflare Workers, with no Chromium underneath. The...",
+    "body": "### Introduction to Kitesurf\nCloudflare has introduced Kitesurf, a revolutionary, stateless web browser designed specifically for AI agents. This browser operates entirely in V8 isolates on Cloudflare Workers, eliminating the need for Chromium. By stripping away human-facing features, Kitesurf provides a lightweight, scalable, and secure solution for agents to interact with web content.\n\n### How Kitesurf Works\nKitesurf's architecture is based on isolated Workers components, with the Engine being the only public-facing piece. It utilizes the Chrome DevTools Protocol and stores session state, while other components are stateless and disposable. The browser leverages Dynamic Workers, Blitz, and Stylo for HTML and CSS parsing, and Boa JS for occasional eval calls. This design enables Kitesurf to provide machine-readable content, low token overhead, and isolation against threats.\n\n### Impact on Developers and Researchers\nKitesurf's release is significant for developers and researchers, as it offers a free, production-adjacent solution for AI agents. With minimal adoption costs, existing clients can integrate Kitesurf by adding a simple parameter. The browser's ability to pass over 215,000 Web Platform Tests and its plans for open-sourcing make it an attractive option for those seeking a scalable and secure browser solution. As Kitesurf continues to grow, it has the potential to transform the way AI agents interact with the web.",
+    "coverImage": "https://www.marktechpost.com/wp-content/uploads/2026/08/blog6172-1024x731.png",
     "status": "published",
     "confidenceLevel": "confirmed",
     "externalSources": [
-      "https://blogs.nvidia.com/blog/geforce-now-thursday-august-2026-games-list/"
+      "https://www.marktechpost.com/2026/08/06/cloudflare-introduces-kitesurf-an-agent-first-web-browser-that-runs-entirely-in-v8-isolates-on-cloudflare-workers/"
     ],
     "relatedModels": [],
     "tags": [
       "ai-news",
       "breaking",
-      "nvidia"
+      "marktechpost"
     ]
   },
   {
-    "id": "into-the-omniverse-how-open-world-models-push-the-frontier-of-physical-ai",
-    "slug": "into-the-omniverse-how-open-world-models-push-the-frontier-of-physical-ai",
-    "title": "Into the Omniverse: How Open World Models Push the Frontier of Physical AI",
+    "id": "chatgpt-brings-unlimited-text-chats-to-free-users",
+    "slug": "chatgpt-brings-unlimited-text-chats-to-free-users",
+    "title": "ChatGPT brings unlimited text chats to free users",
     "category": "short-news",
     "isTrending": true,
     "publishDate": "2026-08-06",
     "author": "Modelverse Editorial",
     "readTime": "2 min read",
-    "excerpt": "In July, NVIDIA joined more than 200 companies and organizations in signing “Open Weights and American AI Leadership,” an open letter arguing that AI leadership will be measured no...",
-    "body": "### Introduction to Open World Models\nNVIDIA has made a significant announcement regarding the development of open world models, which are crucial for advancing physical AI. These models enable the understanding and prediction of consequences in physical environments, allowing for more accurate and effective AI systems. By making these models open, NVIDIA is promoting an ecosystem where developers and researchers can collaborate and build upon each other's work.\n\n### How Open World Models Work\nOpen world models learn how physical environments behave, predict future states, and provide a foundation for specializing physical AI systems. They can generate physically grounded world and action data, simulate future states, and test policies. This technology has the potential to revolutionize the field of physical AI, enabling the development of more sophisticated and capable systems.\n\n### Impact on Developers and Researchers\nThe release of open world models, such as NVIDIA Cosmos 3, and the NVIDIA Omniverse libraries, provides developers and researchers with powerful tools for building and training physical AI systems. These resources can help reduce the difficulty and expense of collecting data, particularly for rare events and long-tail scenarios. By leveraging these open models and libraries, developers can create more advanced and specialized physical AI systems, driving innovation and progress in the field.",
-    "coverImage": "https://blogs.nvidia.com/wp-content/uploads/2026/08/nv-ov-ito-social-1920x1080-1.jpg",
+    "excerpt": "OpenAI said that ChatGPT free and Go users are also getting a new think button for complex queries.",
+    "body": "## Enhanced ChatGPT Experience\nOpenAI has announced significant updates to its ChatGPT platform, removing limits on text-based chats for all users. This development is powered by the new GPT-5.6 Luna model, which will serve as the default for Free and Go users, replacing the previous GPT-5.5 model. The GPT-5.6 Luna model aims to provide a more comprehensive and accurate text-based chat experience.\n\n## Improved Models and Features\nThe update introduces a \"Think\" button, allowing users to opt for higher reasoning power when dealing with complex questions. Additionally, Plus and Pro users will gain access to the GPT-5.6 Sol model, designed for quick tasks such as research, advice, and decision-making. This model promises to deliver more compact and robust answers. A thinking slider will also be available for Plus and Pro users, enabling them to adjust the level of thought the model puts into an answer based on the query's complexity.\n\n## Impact on Developers and Researchers\nThese updates are expected to significantly enhance the ChatGPT experience, with internal evaluations showing a substantial reduction in factual errors for both GPT-5.6 Luna and GPT-5.6 Sol models. The removal of text chat limits and introduction of new features will likely benefit developers and researchers, providing them with more flexible and accurate tools for testing and exploring AI capabilities. As the updated version of GPT-5.6 Sol becomes available to Plus and Pro users, and other changes roll out to Free and Go users, the ChatGPT platform is poised to become an even more powerful resource for a wide range of applications.",
+    "coverImage": "https://techcrunch.com/wp-content/uploads/2025/04/GettyImages-2205105208.jpg?resize=1200,800",
     "status": "published",
     "confidenceLevel": "confirmed",
     "externalSources": [
-      "https://blogs.nvidia.com/blog/open-world-models-physical-ai/"
-    ],
-    "relatedModels": [],
-    "tags": [
-      "ai-news",
-      "breaking",
-      "nvidia"
-    ]
-  },
-  {
-    "id": "ex-spotify-employees-raise-10m-to-bring-the-ai-behind-its-recommendations-to-e-c",
-    "slug": "ex-spotify-employees-raise-10m-to-bring-the-ai-behind-its-recommendations-to-e-c",
-    "title": "Ex-Spotify employees raise $10M to bring the AI behind its recommendations to e-commerce",
-    "category": "short-news",
-    "isTrending": true,
-    "publishDate": "2026-08-06",
-    "author": "Modelverse Editorial",
-    "readTime": "2 min read",
-    "excerpt": "The startup's platform predicts what product a shopper wants next, learn their general taste, and fine-tune continuously based on what they do in real time.",
-    "body": "Former Spotify recommendation engine architects Sidd Motwani, Ian Anderson, and Shivaditya Sinha have launched Malachyte, securing $10 million in seed funding. Their mission is to adapt the advanced behavioral AI, similar to the \"Vector AI\" system that powers 90% of Spotify's personalized content, for the e-commerce sector. This initiative aims to revolutionize online shopping by moving beyond traditional personalization methods that often rely solely on historical purchases, demographics, or logged-in profiles, which can leave first-time visitors with generic experiences and existing shoppers with outdated recommendations.\n\nMalachyte's core technology is a \"two-headed Vector AI\" designed to predict a shopper's real-time intent and next actions. Unlike systems that aggregate data overnight, this AI continuously learns from every micro-interaction—hovers, clicks, scrolls, search refinements, and add-to-carts—from the moment a page loads. This allows it to dynamically build a robust profile of a user's preferences and current goals within a single session, instantly adjusting product recommendations to be highly relevant and responsive to immediate needs, without requiring an account or prior purchase history.\n\nThis innovation is crucial for developers and researchers as it represents a significant leap from static, history-based personalization to dynamic, intent-aware experiences. It highlights the immense potential of real-time behavioral intelligence to transform user engagement and conversion rates in e-commerce. Malachyte's approach underscores the value of granular, continuous signal processing for building adaptive AI models that truly understand immediate user needs, opening new avenues for research in predictive analytics and personalized user interfaces beyond traditional content recommendations.",
-    "coverImage": "https://techcrunch.com/wp-content/uploads/2026/08/Malachyte.jpg?w=1200",
-    "status": "published",
-    "confidenceLevel": "confirmed",
-    "externalSources": [
-      "https://techcrunch.com/2026/08/06/ex-spotify-employees-raise-10m-to-bring-the-ai-behind-its-recommendations-to-e-commerce/"
+      "https://techcrunch.com/2026/08/06/openai-brings-unlimited-chatgpt-text-chats-to-free-users/"
     ],
     "relatedModels": [],
     "tags": [
@@ -96,21 +120,45 @@
     ]
   },
   {
-    "id": "exclusive-mirendil-inks-100m-google-cloud-deal-to-scale-self-improving-ai",
-    "slug": "exclusive-mirendil-inks-100m-google-cloud-deal-to-scale-self-improving-ai",
-    "title": "Exclusive: Mirendil inks $100M+ Google Cloud deal to scale self-improving AI",
+    "id": "adaptive-experimentation-with-metas-ax-a-practical-coding-guide",
+    "slug": "adaptive-experimentation-with-metas-ax-a-practical-coding-guide",
+    "title": "Adaptive Experimentation with Meta’s Ax: A Practical Coding Guide",
     "category": "short-news",
     "isTrending": true,
     "publishDate": "2026-08-06",
     "author": "Modelverse Editorial",
     "readTime": "2 min read",
-    "excerpt": "Mirendil has signed a $100 million-plus Google Cloud partnership to expand its compute infrastructure, powering research into self-improving AI systems designed to accelerate scien...",
-    "body": "AI lab Mirendil has secured a significant multi-year partnership with Google Cloud, valued at over $100 million, to power its advanced research. This strategic deal provides Mirendil with access to Google's powerful TPUs, Nvidia GPUs, and managed training clusters, highlighting a dual trend in the AI industry: cloud giants are actively courting innovative startups with substantial infrastructure commitments, while AI companies are aggressively securing compute resources to support their rapid scaling and ambitious development goals.\n\nAt the heart of Mirendil's mission is the pursuit of \"self-improving AI,\" a concept also known as recursive self-improvement. This groundbreaking technology envisions AI systems that can iteratively enhance their own knowledge, performance, and capabilities over time, learning and evolving autonomously. Drawing on expertise from leading labs like Anthropic, where Mirendil's co-founders originated, this approach aims to create AIs that continuously refine their understanding and problem-solving abilities without constant human intervention.\n\nFor developers and researchers, this technology represents a profound shift in how scientific and AI discovery can be conducted. Mirendil believes self-improving AI can automate vast segments of research, accelerating breakthroughs in critical fields such as medicine, biology, and materials science. By mimicking the human scientific process of accumulating expertise and improving performance, these AIs could be directed at complex, long-term problems, continuously making progress on challenges like Alzheimer's disease. This promises a future where AI systems can autonomously pursue ambitious goals, fundamentally transforming the pace and scope of scientific innovation.",
-    "coverImage": "https://techcrunch.com/wp-content/uploads/2026/04/GettyImages-2266466589.jpg?w=1024",
+    "excerpt": "In this tutorial, we explore adaptive experimentation using Meta’s Ax with the modern Client API. We work through a complete workflow where we tune a RandomForest model on a synthe...",
+    "body": "### Introduction to Adaptive Experimentation with Meta's Ax\nMeta's Ax is a powerful tool for adaptive experimentation, allowing developers and researchers to optimize hyperparameters and explore complex search spaces. A recent tutorial demonstrates the capabilities of Ax through a series of studies, including constrained single-objective Bayesian optimization, multi-objective optimization, and parameter-constrained experimentation.\n\n### How Ax Works\nAx works by defining a search space with various parameters, such as integers, floats, and categoricals, and then using an ask-tell optimization loop to suggest hyperparameter configurations. The user evaluates these configurations and reports the results back to Ax, which then uses this information to inform future suggestions. Ax also provides built-in analysis tools and persistence features, making it easier to interpret and reproduce experiments.\n\n### Why Ax Matters\nAx is a valuable tool for developers and researchers because it enables efficient and structured hyperparameter optimization. By using Ax, users can enforce constraints, compare competing objectives, and identify trade-offs between different metrics. The tutorial showcases the flexibility and power of Ax, demonstrating its ability to handle mixed-type search spaces, outcome constraints, and parameter constraints. Overall, Ax is an essential tool for anyone looking to optimize their machine learning models and improve their experimentation workflow.",
+    "coverImage": "https://www.marktechpost.com/wp-content/uploads/2026/08/blog6176-16.png",
     "status": "published",
     "confidenceLevel": "confirmed",
     "externalSources": [
-      "https://techcrunch.com/2026/08/06/exclusive-mirendil-inks-100m-google-cloud-deal-to-scale-self-improving-ai/"
+      "https://www.marktechpost.com/2026/08/06/adaptive-experimentation-with-metas-ax-a-practical-coding-guide/"
+    ],
+    "relatedModels": [],
+    "tags": [
+      "ai-news",
+      "breaking",
+      "marktechpost"
+    ]
+  },
+  {
+    "id": "nave-raises-285m-to-automate-the-grunt-work-of-setting-up-and-running-a-company",
+    "slug": "nave-raises-285m-to-automate-the-grunt-work-of-setting-up-and-running-a-company",
+    "title": "Naïve raises $28.5M to automate the grunt work of setting up and running a company",
+    "category": "short-news",
+    "isTrending": true,
+    "publishDate": "2026-08-06",
+    "author": "Modelverse Editorial",
+    "readTime": "2 min read",
+    "excerpt": "Taking vibe-coding a step further, Naïve claims its infra can automate most of the work in setting up and running a business.",
+    "body": "## Automation of Business Setup and Operations\nNaïve, a startup, has secured $28.5 million in funding to further develop its infrastructure that enables AI agents to automate the setup and running of businesses. This technology allows developers to provision infrastructure, including payments, email accounts, phone numbers, and cloud storage, through a single API. By providing a prompt to tools like Cursor, Claude Code, or Codex, developers can connect to Naïve's API and have their AI agents set up a business, including forming a U.S. LLC and configuring necessary services.\n\n## How the Technology Works\nThe process involves supplying AI agents with a token budget and using Naïve's API to orchestrate the setup of a business. The agents can handle tasks such as setting up email inboxes, virtual cards, phone numbers, databases, and connections to services like Stripe and QuickBooks. A governance layer ensures that users can set budgets, restrict agent capabilities, and require human approval for sensitive actions. Naïve also provides templates for various business types, including AI SEO, full-stack SaaS apps, and customer support.\n\n## Impact on Developers and Researchers\nThe automation of business setup and operations has significant implications for developers and researchers. With Naïve's infrastructure, they can focus on high-level tasks and strategy, rather than tedious setup and maintenance. The company's rapid growth, with over 30,000 developer customers and a 10x increase in annual run-rate revenue, demonstrates the demand for such automation. As AI technology continues to advance, Naïve's platform is poised to play a key role in enabling the creation of autonomous businesses and streamlining operations.",
+    "coverImage": "https://techcrunch.com/wp-content/uploads/2026/08/GettyImages-2082335389.jpg?resize=1200,857",
+    "status": "published",
+    "confidenceLevel": "confirmed",
+    "externalSources": [
+      "https://techcrunch.com/2026/08/06/naive-raises-28-5m-to-automate-the-grunt-work-of-setting-up-and-running-a-company/"
     ],
     "relatedModels": [],
     "tags": [
@@ -120,21 +168,21 @@
     ]
   },
   {
-    "id": "google-maps-adds-agentic-features-including-food-ordering-and-hotel-bookings",
-    "slug": "google-maps-adds-agentic-features-including-food-ordering-and-hotel-bookings",
-    "title": "Google Maps adds agentic features, including food ordering and hotel bookings",
+    "id": "gen-z-dating-apps-like-ditto-ditch-swiping-in-favor-of-ai-matchmaking",
+    "slug": "gen-z-dating-apps-like-ditto-ditch-swiping-in-favor-of-ai-matchmaking",
+    "title": "Gen Z dating apps like Ditto ditch swiping in favor of AI matchmaking",
     "category": "short-news",
     "isTrending": true,
     "publishDate": "2026-08-06",
     "author": "Modelverse Editorial",
     "readTime": "2 min read",
-    "excerpt": "The launch of these new features reflects Google’s ambitions to transform Google Maps from a navigation tool into an assistant that's capable of helping users complete real-world t...",
-    "body": "Google Maps is significantly enhancing its \"Ask Maps\" feature, transforming it from a mere navigation tool into a sophisticated AI assistant capable of executing real-world tasks. The latest update introduces \"agentic\" capabilities, enabling users to directly order food, book hotels, and find event tickets within the app. Complementing this, \"Personal Intelligence\" will allow Ask Maps to deliver highly personalized responses by leveraging information from a user's Gmail and Google Calendar, marking a substantial leap towards a more proactive and integrated user experience.\n\nThese new functionalities operate by allowing users to articulate complex requests in natural language. For instance, one can ask for specific vegan dishes near home, and Ask Maps will identify suitable restaurants, facilitate adding items to a cart, and direct users to supported platforms like Square or Uber Eats for payment. Similarly, users can describe their ideal hotel for a trip, including preferences for price, ratings, and amenities, prompting Ask Maps to compare options and link to booking sites. For entertainment, users can inquire about local events, receiving a curated list with links to purchase tickets. The Personal Intelligence feature further refines this by answering questions about upcoming flights or recommending activities based on personal calendar entries and emails.\n\nFor developers and researchers, this announcement underscores a pivotal shift in the application of AI, moving beyond information retrieval to multi-step, task-oriented execution within a widely adopted consumer platform. It highlights the growing importance of agentic AI systems that can understand nuanced user intent, interact with external services, and integrate personal context for a truly intelligent experience. This evolution presents exciting challenges and opportunities in natural language understanding, secure data integration, and the development of robust, context-aware AI agents that can seamlessly bridge the digital and physical worlds.",
-    "coverImage": "https://techcrunch.com/wp-content/uploads/2026/03/GettyImages-2202707012.jpg?resize=1200,800",
+    "excerpt": "This generation of twentysomethings is so disillusioned with swipe-based dating apps that they'll try literally anything else — even an AI matchmaker.",
+    "body": "## Revolutionizing Dating Apps with AI Matchmaking\nA new generation of dating apps is emerging, catering to the needs of Gen Z users who are disillusioned with traditional swipe-based platforms. Ditto, a novel dating initiative, is leveraging AI technology to connect people in a more meaningful way. By ditching the swiping mechanism, Ditto aims to provide a more genuine and effortless dating experience for its users.\n\n## How Ditto Works\nThe Ditto algorithm uses a unique approach to match users, focusing on the underlying characteristics and personality traits that define an individual's interests and hobbies. Rather than relying on surface-level similarities, the AI chatbot delves deeper to identify commonalities that can spark chemistry between two people. Users engage with Ditto through a text-based onboarding process, providing information about their personality, interests, and dating preferences. This data is then used to facilitate matches every Wednesday at 7 p.m., complete with a suggested time, location, and date.\n\n## Impact on Developers and Researchers\nDitto's innovative approach to matchmaking has significant implications for the dating app industry and the broader field of AI research. By demonstrating the potential of AI-driven matchmaking, Ditto is paving the way for more sophisticated and effective dating platforms. Developers and researchers can draw inspiration from Ditto's use of AI to analyze complex human behaviors and preferences, applying these insights to other areas of social interaction and relationship-building. As the dating landscape continues to evolve, Ditto's pioneering work is likely to influence the development of more personalized and engaging social experiences.",
+    "coverImage": "https://techcrunch.com/wp-content/uploads/2026/08/ditto-ai-app.jpg?resize=1200,675",
     "status": "published",
     "confidenceLevel": "confirmed",
     "externalSources": [
-      "https://techcrunch.com/2026/08/06/google-maps-adds-agentic-features-including-food-ordering-and-hotel-bookings/"
+      "https://techcrunch.com/2026/08/06/gen-z-dating-apps-like-ditto-ditch-swiping-in-favor-of-ai-matchmaking/"
     ],
     "relatedModels": [],
     "tags": [
@@ -144,27 +192,51 @@
     ]
   },
   {
-    "id": "omilia-raises-67m-to-scale-its-customer-support-platform",
-    "slug": "omilia-raises-67m-to-scale-its-customer-support-platform",
-    "title": "Omilia raises $67M to scale its customer support platform",
+    "id": "openai-says-apples-own-security-practices-undermine-its-trade-secrets-case",
+    "slug": "openai-says-apples-own-security-practices-undermine-its-trade-secrets-case",
+    "title": "OpenAI says Apple’s own security practices undermine its trade secrets case",
     "category": "short-news",
     "isTrending": true,
     "publishDate": "2026-08-06",
     "author": "Modelverse Editorial",
     "readTime": "2 min read",
-    "excerpt": "The Series B is the company's second fundraise since it last raised capital in 2020. In that time, it has increased its ARR by 10x to $60 million.",
-    "body": "### Announcement and Funding\nOmilia, a company specializing in automating customer support, has secured $67 million in Series B funding led by Expedition Growth Capital. This investment will enable the company to scale its customer support platform, which has already shown significant growth, with a 10x increase in annual recurring revenue to $60 million since its last funding round in 2020.\n\n### Technology and Approach\nOmilia's approach to customer support automation differs from other startups in the industry. Instead of relying solely on AI, the company uses a combination of tools to handle customer queries efficiently. Its self-learning agents can work across various customer contact points, providing basic information such as account balances without the need for large language models. This pragmatic approach allows Omilia to offer great unit economics for both itself and its customers.\n\n### Impact and Future Plans\nThe funding will help Omilia expand its operations and build on its existing client base, which includes notable companies like Capital One and Taco Bell. With a focus on quick-service restaurants and voice-based ordering, Omilia is well-positioned for growth in the customer support industry. The company's goal is to achieve $1 billion in revenue within the next three years, prioritizing steady growth and strong foundations over flashy technology.",
-    "coverImage": "https://techcrunch.com/wp-content/uploads/2026/08/Self-Learning-Agents-Vertical.jpeg?resize=1200,789",
+    "excerpt": "Newly filed court exhibits show OpenAI’s legal strategy in Apple’s trade secrets lawsuit: argue that Apple’s own security and offboarding practices — including allowing an Apple ma...",
+    "body": "## Announcement Overview\nOpenAI has filed a motion to dismiss Apple's trade secrets lawsuit, arguing that Apple's own security practices undermine its claim. The lawsuit, filed in July, accuses OpenAI of orchestrating a scheme to obtain confidential hardware information from former Apple engineers. However, OpenAI contends that Apple's lax security measures, including allowing employees to use personal iCloud accounts for work and failing to revoke access after they left the company, weaken its trade secrets claim.\n\n## Technology and Defense Strategy\nOpenAI's defense strategy focuses on highlighting Apple's inadequate information-management practices, which created confusion and unwanted access issues. The company submitted evidence, including text message records, showing that an Apple manager remained logged into a former employee's personal iCloud account after they left the company. This, OpenAI argues, demonstrates that former Apple employees were simply trying to assist their prior colleagues, rather than stealing trade secrets.\n\n## Implications for Developers and Researchers\nThe outcome of this lawsuit may have significant implications for developers and researchers in the AI industry. OpenAI's argument that Apple is using this lawsuit to slow down its competitor from innovating in AI-powered hardware raises concerns about the use of trade secrets lawsuits to stifle competition. If successful, OpenAI's defense strategy could set a precedent for companies to prioritize robust security practices to protect their trade secrets, rather than relying on lawsuits to prevent competitors from hiring talented engineers and developers.",
+    "coverImage": "https://techcrunch.com/wp-content/uploads/2026/07/OpenAI-logo-in-Seoul.jpg?w=1024",
     "status": "published",
     "confidenceLevel": "confirmed",
     "externalSources": [
-      "https://techcrunch.com/2026/08/06/omilia-raises-67m-to-scale-its-customer-support-platform/"
+      "https://techcrunch.com/2026/08/06/openai-says-apples-own-security-practices-undermine-its-trade-secrets-case/"
     ],
     "relatedModels": [],
     "tags": [
       "ai-news",
       "breaking",
       "techcrunch-ai"
+    ]
+  },
+  {
+    "id": "weathernext-ai-model-achieves-breakthrough-in-forecasting-cyclones",
+    "slug": "weathernext-ai-model-achieves-breakthrough-in-forecasting-cyclones",
+    "title": "WeatherNext: AI model achieves breakthrough in forecasting cyclones",
+    "category": "short-news",
+    "isTrending": true,
+    "publishDate": "2026-08-06",
+    "author": "Modelverse Editorial",
+    "readTime": "2 min read",
+    "excerpt": "WeatherNext: AI model achieves breakthrough in forecasting cyclones",
+    "body": "## Breakthrough in Cyclone Forecasting\nA significant advancement has been made in weather forecasting with the introduction of WeatherNext, an AI model designed to predict cyclones with unprecedented accuracy. This innovative technology leverages complex algorithms and machine learning techniques to analyze vast amounts of meteorological data, enabling it to identify patterns and trends that may indicate the formation of cyclones.\n\n## Technology Behind WeatherNext\nThe WeatherNext model works by processing large datasets, including atmospheric conditions, wind patterns, and historical weather events. By applying advanced predictive analytics, the model can forecast the likelihood of cyclone formation, trajectory, and intensity. This capability has the potential to revolutionize the field of meteorology, providing critical insights that can help mitigate the impact of severe weather events.\n\n## Impact on Developers and Researchers\nThe development of WeatherNext is a significant milestone for researchers and developers working in the field of AI and meteorology. This breakthrough demonstrates the potential of AI to improve weather forecasting, which can have a substantial impact on public safety, emergency response planning, and climate research. By harnessing the power of AI, scientists can refine their understanding of complex weather phenomena, ultimately leading to more accurate predictions and better decision-making.",
+    "coverImage": "/images/news/alphaevolve_cover.jpg",
+    "status": "published",
+    "confidenceLevel": "confirmed",
+    "externalSources": [
+      "https://deepmind.google/blog/weathernext-ai-model-achieves-breakthrough-in-forecasting-cyclones/"
+    ],
+    "relatedModels": [],
+    "tags": [
+      "ai-news",
+      "breaking",
+      "google-deepmind"
     ]
   }
 ]

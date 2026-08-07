@@ -1,0 +1,24 @@
+{
+  "id": "liquid-ai-releases-lfm25-26b-an-on-device-agentic-model-with-128k-context-tool-c",
+  "slug": "liquid-ai-releases-lfm25-26b-an-on-device-agentic-model-with-128k-context-tool-c",
+  "title": "Liquid AI Releases LFM2.5-2.6B: An On-Device Agentic Model With 128K Context, Tool Calling, And Open Weights",
+  "category": "short-news",
+  "isTrending": true,
+  "publishDate": "2026-08-07",
+  "author": "Modelverse Editorial",
+  "readTime": "2 min read",
+  "excerpt": "Liquid AI released LFM2.5-2.6B, an agentic model that plans, calls tools, and completes multi-step tasks entirely on-device. The 2.69B parameter model pairs 22 double-gated short c...",
+  "body": "### Liquid AI's Latest Release: LFM2.5-2.6B\nLiquid AI has unveiled LFM2.5-2.6B, a groundbreaking on-device agentic model designed to operate on a wide range of devices, from phones and laptops to PCs and robots. This innovative model boasts an impressive 2.69B total parameters, a vast 131,072-token context window, and a substantial 128,000-token vocabulary. By leveraging pre-training with approximately 34 trillion tokens, LFM2.5-2.6B demonstrates exceptional capabilities in planning, tool calling, and multi-step task execution.\n\n### Technical Capabilities and Open Access\nThe model's architecture consists of 30 layers, featuring a combination of double-gated short convolution blocks and grouped-query attention blocks. Notably, Liquid AI has made both checkpoints publicly available on Hugging Face under the lfm1.0 license, allowing developers to access the model's weights in various formats. This open approach enables seamless integration with popular frameworks, including llama.cpp, vLLM, SGLang, and LM Studio. By keeping inference local, LFM2.5-2.6B ensures that data remains on the device, minimizing marginal costs and enhancing user privacy.\n\n### Implications for Developers and Researchers\nThe release of LFM2.5-2.6B is significant, as it offers competitive performance with larger models while maintaining a relatively smaller size. Liquid AI's model has shown impressive results in instruction-following and tool-use benchmarks, outperforming larger models in several areas. This development has far-reaching implications for developers and researchers, as it enables the creation of more efficient, privacy-focused, and powerful AI applications that can operate effectively on a wide range of devices.",
+  "coverImage": "https://www.marktechpost.com/wp-content/uploads/2026/08/blog6172-1.png",
+  "status": "published",
+  "confidenceLevel": "confirmed",
+  "externalSources": [
+    "https://www.marktechpost.com/2026/08/06/liquid-ai-lfm2-5-2-6b-on-device-agentic-model/"
+  ],
+  "relatedModels": [],
+  "tags": [
+    "ai-news",
+    "breaking",
+    "marktechpost"
+  ]
+}
