@@ -1,26 +1,26 @@
 [
   {
-    "id": "how-hsp-gruppe-builds-ai-capabilities-for-tax-advisory",
-    "slug": "how-hsp-gruppe-builds-ai-capabilities-for-tax-advisory",
-    "title": "How HSP GRUPPE builds AI capabilities for tax advisory",
+    "id": "new-mexico-court-orders-meta-to-pay-additional-567m-in-child-safety-case",
+    "slug": "new-mexico-court-orders-meta-to-pay-additional-567m-in-child-safety-case",
+    "title": "New Mexico court orders Meta to pay additional $567M in child safety case",
     "category": "short-news",
     "isTrending": true,
     "publishDate": "2026-08-07",
     "author": "Modelverse Editorial",
     "readTime": "2 min read",
-    "excerpt": "Discover how HSP GRUPPE uses ChatGPT Enterprise to boost productivity, improve work quality, and create more capacity for tax advisory and client service.",
-    "body": "HSP GRUPPE, a prominent tax advisory firm, has announced its strategic integration of ChatGPT Enterprise to significantly enhance its operational capabilities. This move positions the firm at the forefront of leveraging advanced AI to transform traditional professional services, aiming to boost overall productivity, elevate the quality of work, and expand capacity for both tax advisory functions and client service delivery.\n\nThe deployment of ChatGPT Enterprise by HSP GRUPPE is designed to streamline various aspects of tax advisory. While specific implementations aren't detailed, enterprise-grade large language models typically assist by automating routine tasks such as drafting communications, summarizing complex tax codes and regulations, generating initial analyses, and supporting internal knowledge management. This allows human advisors to focus on higher-value, strategic tasks requiring nuanced judgment and direct client interaction, thereby improving efficiency and ensuring more consistent, high-quality outputs within a secure and private environment.\n\nThis adoption holds significant implications for developers and researchers in the AI space. It serves as a compelling real-world case study demonstrating the practical application and measurable benefits of enterprise-level AI in a highly specialized and regulated domain like tax advisory. For developers, it highlights the demand for robust, secure, and customizable AI solutions that can integrate seamlessly into existing workflows. For researchers, it offers insights into human-AI collaboration dynamics, the challenges of deploying AI in sensitive professional contexts, and the potential for AI to redefine productivity and service standards across various industries.",
-    "coverImage": "/images/news/news_featured.jpg",
+    "excerpt": "Meta's total fine has raked up to $942 million in this case",
+    "body": "A New Mexico court has significantly escalated its legal action against Meta, ordering the tech giant to pay an additional $567 million in fines. This new penalty, combined with a previous $375 million levy from March, brings Meta's total financial obligation in the state to $942 million. The ruling stems from a case alleging that Meta's social media platforms contribute to harms and addiction among children and young people.\n\nBeyond the substantial financial penalty, the court mandated specific operational changes to Meta's platforms within New Mexico. These include removing \"Like\" counts for users under 18, unless parental consent is provided, and pausing push notifications for minors between 10 p.m. and 7 a.m. Furthermore, the court ordered a monthly usage cap of 90 hours for underage users, equating to roughly three hours per day. The judge deemed Meta's platforms a \"public nuisance,\" citing their contribution to risks like sexual exploitation, educational disruption, and adverse mental health outcomes for the state's youth, a claim Meta disputes while asserting its commitment to user safety.\n\nFor developers and researchers in the AI and social media space, this ruling is a critical signal. It underscores the intensifying regulatory scrutiny on platform design and engagement mechanics, particularly concerning their impact on vulnerable populations. The mandated changes highlight a growing demand for \"safety-by-design\" principles and ethical AI development that prioritizes user well-being over pure engagement metrics. This could spur innovation in areas like age-appropriate AI interfaces, responsible notification systems, and advanced parental control features, pushing the industry towards more human-centric and less addictive digital experiences.",
+    "coverImage": "https://techcrunch.com/wp-content/uploads/2026/02/zuckerberg-LA-trial-2026-GettyImages-2261841364.jpg?w=1024",
     "status": "published",
     "confidenceLevel": "confirmed",
     "externalSources": [
-      "https://openai.com/index/hsp-gruppe"
+      "https://techcrunch.com/2026/08/07/new-mexico-court-orders-meta-to-pay-additional-567m-in-child-safety-case/"
     ],
     "relatedModels": [],
     "tags": [
       "ai-news",
       "breaking",
-      "openai"
+      "techcrunch-ai"
     ]
   }
 ]
