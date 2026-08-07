@@ -219,7 +219,7 @@ export default function ModelDocsLayout({
               <div className="flex justify-between py-1.5">
                 <span className="text-[var(--muted)] font-medium">License</span>
                 <span className="text-[var(--text)] font-bold">
-                  {typeof model.license === "object" ? model.license.name || "Custom" : model.license}
+                  {model.license && typeof model.license === "object" ? model.license.name || "Custom" : model.license || "Unknown"}
                 </span>
               </div>
             </div>

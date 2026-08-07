@@ -156,24 +156,17 @@ async function fetchModelDetails(hfId) {
 
 // ─── Existing ID detection ──────────────────────────────────────────
 
-function getExistingIds() {
+async function getExistingIds() {
   const ids = new Set();
   const slugs = new Set();
+  const supabase = require("../src/lib/supabase");
 
-  const scanDir = (dir) => {
-    if (!fs.existsSync(dir)) return;
-    const files = fs.readdirSync(dir).filter((f) => f.endsWith(".json"));
-    for (const file of files) {
-      try {
-        const data = JSON.parse(fs.readFileSync(path.join(dir, file), "utf-8"));
-        if (data.id) ids.add(data.id);
-        if (data.slug) slugs.add(data.slug);
-      } catch (e) {}
+  const { data, error } = await supabase.from("models").select("slug");
+  if (data) {
+    for (const row of data) {
+      slugs.add(row.slug);
     }
-  };
-
-  scanDir(MODELS_DIR);
-  scanDir(PENDING_DIR);
+  }
 
   // Scan rejection tombstones to prevent re-ingesting rejected candidate models
   const tombstonePath = path.join(process.cwd(), "data", "tracking", "rejected-models.json");
@@ -196,7 +189,7 @@ function getExistingIds() {
 
 async function runIngestion() {
   console.log("🚀 Starting Daily Ingestion Pipeline...");
-  const { ids: existingIds, slugs: existingSlugs } = getExistingIds();
+  const { ids: existingIds, slugs: existingSlugs } = await getExistingIds();
   const createdModels = [];
 
   // 1. Fetch trending model list
@@ -362,14 +355,53 @@ ${arxivUrl ? `- **Paper**: [arXiv](${arxivUrl})` : ""}
 **${license}** — Open-weights model available for download, fine-tuning, and self-hosted deployment.
 `;
 
-    // Save JSON to pending staging directory & README
-    fs.writeFileSync(path.join(PENDING_DIR, `${fullId}.json`), JSON.stringify(newModelJson, null, 2), "utf-8");
+    // Save JSON to Supabase staging & write README locally
+    const supabase = require("../src/lib/supabase");
+    
+    const row = {
+      slug: newModelJson.slug,
+      name: newModelJson.name,
+      developer: newModelJson.developer,
+      description: newModelJson.description,
+      primary_task: newModelJson.primaryTask,
+      type: newModelJson.type,
+      status: newModelJson.status,
+      vendor_api_status: newModelJson.vendorApiStatus,
+      deployment: newModelJson.deployment,
+      release_date: newModelJson.releaseDate,
+      family: newModelJson.family,
+      tier: newModelJson.tier,
+      institution: newModelJson.institution,
+      previous_version: newModelJson.previousVersion,
+      logo: newModelJson.logo,
+      images: newModelJson.images,
+      tags: newModelJson.tags,
+      links: newModelJson.links,
+      sources: newModelJson.sources,
+      pricing: newModelJson.pricing,
+      parameters: newModelJson.parameters,
+      context_window: newModelJson.contextWindow,
+      benchmarks: newModelJson.benchmarks,
+      field_confidence: newModelJson.fieldConfidence,
+      featured: newModelJson.featured,
+      boost: newModelJson.boost,
+      verified: newModelJson.verified,
+      verification_status: newModelJson.verificationStatus,
+      needs_review: newModelJson.needsReview,
+      curator_notes: newModelJson.curatorNotes,
+    };
+    
+    const { error: insertError } = await supabase.from("models").insert(row);
+    if (insertError) {
+      console.error(`❌ Failed to insert ${modelName}:`, insertError.message);
+      continue;
+    }
     fs.writeFileSync(path.join(README_DIR, `${modelSlug}.md`), readmeMd, "utf-8");
 
     existingIds.add(fullId);
     existingSlugs.add(modelSlug);
     createdModels.push(modelName);
-    console.log(`⏳ Staged for Verification: ${modelName} — ${paramStr} params, ${pipelineTag}, ${license}`);
+    console.log(`⏳ Staged for Verification in Supabase: ${modelName} — ${paramStr} params, ${pipelineTag}, ${license}`);
   }
 
   // 3. Summary & Run Cross-Source Verification Engine

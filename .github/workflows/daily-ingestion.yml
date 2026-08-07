@@ -11,6 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
+      pull-requests: write
 
     steps:
       - name: Checkout repository
@@ -28,12 +29,17 @@ jobs:
       - name: Run Ingestion Pipeline & Verification Engine
         env:
           ARTIFICIAL_ANALYSIS_API_KEY: ${{ secrets.ARTIFICIAL_ANALYSIS_API_KEY }}
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
         run: node scripts/ingest-trending-models.js
 
       - name: Generate Email Digest
         run: node scripts/generate-email-digest.js
 
       - name: Compile and Validate Models Index
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
         run: node scripts/compile-models.js
 
       - name: Instant Search Engine Indexing Ping (IndexNow)
@@ -58,10 +64,3 @@ jobs:
           from: Modelverse Ingestion Bot <006amanraj@gmail.com>
           html_body: file://data/ingestion/latest-digest.html
 
-      - name: Open PR for Pending Models
-        uses: peter-evans/create-pull-request@v6
-        with:
-          commit-message: "chore: ingested models pending curator review"
-          branch: ingestion/auto-${{ github.run_id }}
-          title: "Automated ingestion — needs curator review"
-          labels: needs-curator-review

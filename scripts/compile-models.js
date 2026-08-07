@@ -99,93 +99,154 @@ const archivePath = path.join(__dirname, '..', 'src', 'lib', 'models-archive.jso
 const indexPath = path.join(__dirname, '..', 'src', 'lib', 'search-index.json');
 const newsArchivePath = path.join(__dirname, '..', 'src', 'lib', 'news-archive.json');
 
-/* ── 1. Compile Models ──────────────────────────────────────── */
+const supabase = require('../src/lib/supabase');
 
-const files = fs.readdirSync(modelsDir).filter(f => f.endsWith('.json') && f !== '_index.json');
+async function compileModels() {
+  /* ── 1. Compile Models ──────────────────────────────────────── */
+  const { data: modelsData, error } = await supabase
+    .from('models')
+    .select('*')
+    .in('verification_status', ['VERIFIED', 'LIKELY']);
 
-const fullEntries = [];
-const searchIndex = [];
-
-for (const file of files) {
-  const filePath = path.join(modelsDir, file);
-  const raw = JSON.parse(fs.readFileSync(filePath, 'utf-8'));
-
-  const result = ModelSchema.safeParse(raw);
-  if (!result.success) {
-    const errors = result.error.issues.map(i => `  ${i.path.join('.')}: ${i.message}`).join('\n');
-    console.error(`\n❌ Schema validation failed for ${file}:\n${errors}\n`);
+  if (error) {
+    console.error(`❌ Failed to fetch models from Supabase:`, error);
     process.exit(1);
   }
 
-  const validated = result.data;
-  fullEntries.push(validated);
+  const fullEntries = [];
+  const searchIndex = [];
 
-  searchIndex.push({
-    id: validated.id,
-    name: validated.name,
-    slug: validated.slug,
-    developer: validated.developer,
-    type: validated.type
-  });
+  for (const row of modelsData) {
+    const raw = {
+      id: row.id,
+      name: row.name,
+      slug: row.slug,
+      developer: row.developer,
+      releaseDate: row.release_date ? row.release_date.substring(0, 10) : null,
+      updatedAt: row.updated_at ? row.updated_at.substring(0, 10) : (row.release_date ? row.release_date.substring(0, 10) : null),
+      type: row.type,
+      status: row.status,
+      vendorApiStatus: row.vendor_api_status,
+      modality: null, // missing from DB schema, Zod expects it
+      primaryTask: row.primary_task,
+      deployment: row.deployment,
+      license: null, // missing from DB schema, Zod expects it
+      description: row.description,
+      family: row.family,
+      tier: row.tier,
+      institution: row.institution,
+      previousVersion: row.previous_version,
+      logo: row.logo,
+      images: row.images,
+      tags: row.tags,
+      links: row.links,
+      sources: row.sources,
+      pricing: row.pricing,
+      parameters: row.parameters,
+      contextWindow: row.context_window,
+      benchmarks: row.benchmarks,
+      fieldConfidence: row.field_confidence,
+      featured: row.featured,
+      boost: row.boost,
+      verified: row.verified,
+      verificationStatus: row.verification_status,
+      needsReview: row.needs_review,
+      curatorNotes: row.curator_notes,
+    };
+
+    // Remove null values so Zod uses defaults or optionals correctly
+    for (const key in raw) {
+      if (raw[key] === null && key !== 'modality' && key !== 'license') {
+        delete raw[key];
+      }
+    }
+
+    const result = ModelSchema.safeParse(raw);
+    if (!result.success) {
+      const errors = result.error.issues.map(i => `  ${i.path.join('.')}: ${i.message}`).join('\n');
+      console.error(`\n❌ Schema validation failed for ${row.slug}:\n${errors}\n`);
+      process.exit(1);
+    }
+
+    const validated = result.data;
+    fullEntries.push(validated);
+
+    searchIndex.push({
+      id: validated.id,
+      name: validated.name,
+      slug: validated.slug,
+      developer: validated.developer,
+      type: validated.type
+    });
+  }
+
+  // Sort full entries newest-first
+  fullEntries.sort((a, b) => new Date(b.releaseDate).getTime() - new Date(a.releaseDate).getTime());
+
+  // Sort search index alphabetically
+  searchIndex.sort((a, b) => a.name.localeCompare(b.name));
+
+  fs.writeFileSync(archivePath, JSON.stringify(fullEntries, null, 2));
+  fs.writeFileSync(indexPath, JSON.stringify(searchIndex, null, 2));
+
+  console.log(`✅ Compiled ${fullEntries.length} models into models-archive.json and search-index.json`);
 }
-
-// Sort full entries newest-first
-fullEntries.sort((a, b) => new Date(b.releaseDate).getTime() - new Date(a.releaseDate).getTime());
-
-// Sort search index alphabetically
-searchIndex.sort((a, b) => a.name.localeCompare(b.name));
-
-fs.writeFileSync(archivePath, JSON.stringify(fullEntries, null, 2));
-fs.writeFileSync(indexPath, JSON.stringify(searchIndex, null, 2));
-
-console.log(`✅ Compiled ${fullEntries.length} models into models-archive.json and search-index.json`);
 
 /* ── 2. Compile News ────────────────────────────────────────── */
 
-const newsFiles = fs.readdirSync(newsDir).filter(f => f.endsWith('.json') && f !== '_index.json');
-const tempEntries = [];
+function compileNews() {
+  const newsFiles = fs.readdirSync(newsDir).filter(f => f.endsWith('.json') && f !== '_index.json');
+  const tempEntries = [];
 
-for (const file of newsFiles) {
-  const filePath = path.join(newsDir, file);
-  const raw = JSON.parse(fs.readFileSync(filePath, 'utf-8'));
+  for (const file of newsFiles) {
+    const filePath = path.join(newsDir, file);
+    const raw = JSON.parse(fs.readFileSync(filePath, 'utf-8'));
 
-  const result = NewsPostSchema.safeParse(raw);
-  if (!result.success) {
-    const errors = result.error.issues.map(i => `  ${i.path.join('.')}: ${i.message}`).join('\n');
-    console.error(`\n❌ News validation failed for ${file}:\n${errors}\n`);
-    process.exit(1);
+    const result = NewsPostSchema.safeParse(raw);
+    if (!result.success) {
+      const errors = result.error.issues.map(i => `  ${i.path.join('.')}: ${i.message}`).join('\n');
+      console.error(`\n❌ News validation failed for ${file}:\n${errors}\n`);
+      process.exit(1);
+    }
+
+    tempEntries.push(result.data);
   }
 
-  tempEntries.push(result.data);
+  // Filter out draft entries - only compile published articles
+  const publishedEntries = tempEntries.filter(e => e.status === "published");
+
+  // Auto-increment issueNumber for weekly-news category (chronological oldest to newest)
+  const weeklyNews = publishedEntries.filter(e => e.category === 'weekly-news');
+  weeklyNews.sort((a, b) => new Date(a.publishDate).getTime() - new Date(b.publishDate).getTime());
+  weeklyNews.forEach((entry, idx) => {
+    entry.issueNumber = entry.issueNumber ?? (idx + 1);
+  });
+
+  const newsEntries = [];
+  const newsIndex = [];
+
+  for (const validated of publishedEntries) {
+    newsEntries.push(validated);
+
+    // Lightweight news index entry (excluding 'body')
+    const { body, ...lightweight } = validated;
+    newsIndex.push(lightweight);
+  }
+
+  // Sort news entries newest-first (by date string)
+  newsEntries.sort((a, b) => new Date(b.publishDate).getTime() - new Date(a.publishDate).getTime());
+  newsIndex.sort((a, b) => new Date(b.publishDate).getTime() - new Date(a.publishDate).getTime());
+
+  fs.writeFileSync(newsArchivePath, JSON.stringify(newsEntries, null, 2));
+  fs.writeFileSync(path.join(__dirname, '..', 'src', 'lib', 'news-index.json'), JSON.stringify(newsIndex, null, 2));
+  fs.writeFileSync(path.join(newsDir, '_index.json'), JSON.stringify(newsIndex, null, 2));
+
+  console.log(`✅ Compiled ${newsEntries.length} news posts into news-archive.json, src/lib/news-index.json, and data/news/_index.json`);
 }
 
-// Filter out draft entries - only compile published articles
-const publishedEntries = tempEntries.filter(e => e.status === "published");
-
-// Auto-increment issueNumber for weekly-news category (chronological oldest to newest)
-const weeklyNews = publishedEntries.filter(e => e.category === 'weekly-news');
-weeklyNews.sort((a, b) => new Date(a.publishDate).getTime() - new Date(b.publishDate).getTime());
-weeklyNews.forEach((entry, idx) => {
-  entry.issueNumber = entry.issueNumber ?? (idx + 1);
-});
-
-const newsEntries = [];
-const newsIndex = [];
-
-for (const validated of publishedEntries) {
-  newsEntries.push(validated);
-
-  // Lightweight news index entry (excluding 'body')
-  const { body, ...lightweight } = validated;
-  newsIndex.push(lightweight);
+async function run() {
+  await compileModels();
+  compileNews();
 }
 
-// Sort news entries newest-first (by date string)
-newsEntries.sort((a, b) => new Date(b.publishDate).getTime() - new Date(a.publishDate).getTime());
-newsIndex.sort((a, b) => new Date(b.publishDate).getTime() - new Date(a.publishDate).getTime());
-
-fs.writeFileSync(newsArchivePath, JSON.stringify(newsEntries, null, 2));
-fs.writeFileSync(path.join(__dirname, '..', 'src', 'lib', 'news-index.json'), JSON.stringify(newsIndex, null, 2));
-fs.writeFileSync(path.join(newsDir, '_index.json'), JSON.stringify(newsIndex, null, 2));
-
-console.log(`✅ Compiled ${newsEntries.length} news posts into news-archive.json, src/lib/news-index.json, and data/news/_index.json`);
+run().catch(console.error);

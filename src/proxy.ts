@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
+import { updateSession } from '@/utils/supabase/middleware'
 
 // Simple in-memory rate limiting. 
 // Note: In a serverless Edge environment, this state is per-isolate. 
@@ -8,7 +9,7 @@ const rateLimitMap = new Map<string, { count: number; startTime: number }>();
 const RATE_LIMIT = 60; // Max requests per window
 const WINDOW_MS = 60 * 1000; // 1 minute
 
-export function proxy(request: NextRequest) {
+export async function proxy(request: NextRequest) {
   // Only apply rate limiting to /api/models endpoints
   if (request.nextUrl.pathname.startsWith('/api/models')) {
     // Read Vercel's actual forwarded-IP context
@@ -36,9 +37,11 @@ export function proxy(request: NextRequest) {
     }
   }
 
-  return NextResponse.next();
+  return await updateSession(request);
 }
 
 export const config = {
-  matcher: '/api/models/:path*',
+  matcher: [
+    '/((?!_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)',
+  ],
 }
