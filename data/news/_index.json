@@ -88,6 +88,28 @@
     ]
   },
   {
+    "id": "jill-lepore-on-the-artificial-state-and-why-silicon-valleys-leaders-are-bad-sci-",
+    "slug": "jill-lepore-on-the-artificial-state-and-why-silicon-valleys-leaders-are-bad-sci-",
+    "title": "Jill Lepore on the ‘Artificial State’ and why Silicon Valley's leaders are bad sci-fi readers",
+    "category": "short-news",
+    "publishDate": "2026-08-07",
+    "author": "Modelverse Editorial",
+    "readTime": "2 min read",
+    "excerpt": "Historian Jill Lepore has a theory about why tech companies often use soaring language to describe their products —&#160;almost as&#160;if&#160;they're&#160;forming a new governmen...",
+    "coverImage": "https://techcrunch.com/wp-content/uploads/2026/08/GettyImages-2181827335.jpg?resize=1200,703",
+    "status": "published",
+    "confidenceLevel": "confirmed",
+    "externalSources": [
+      "https://techcrunch.com/podcast/jill-lepore-on-the-artificial-state-and-why-silicon-valleys-leaders-are-bad-sci-fi-readers/"
+    ],
+    "relatedModels": [],
+    "tags": [
+      "ai-news",
+      "breaking",
+      "techcrunch-ai"
+    ]
+  },
+  {
     "id": "liquid-ai-releases-lfm25-26b-an-on-device-agentic-model-with-128k-context-tool-c",
     "slug": "liquid-ai-releases-lfm25-26b-an-on-device-agentic-model-with-128k-context-tool-c",
     "title": "Liquid AI Releases LFM2.5-2.6B: An On-Device Agentic Model With 128K Context, Tool Calling, And Open Weights",
@@ -173,6 +195,28 @@
       "ai-news",
       "breaking",
       "openai"
+    ]
+  },
+  {
+    "id": "tutormoments-do-ai-tutors-know-when-to-help-and-when-to-hold-back",
+    "slug": "tutormoments-do-ai-tutors-know-when-to-help-and-when-to-hold-back",
+    "title": "TutorMoments: Do AI tutors know when to help and when to hold back?",
+    "category": "short-news",
+    "publishDate": "2026-08-07",
+    "author": "Modelverse Editorial",
+    "readTime": "2 min read",
+    "excerpt": "TutorMoments: Do AI tutors know when to help and when to hold back?",
+    "coverImage": "https://cdn-uploads.huggingface.co/production/uploads/638e39b249de7ae552d977b5/j9L73K19mkz-n8Rr8ZI_B.png",
+    "status": "published",
+    "confidenceLevel": "confirmed",
+    "externalSources": [
+      "https://huggingface.co/blog/allenai/tutormoments"
+    ],
+    "relatedModels": [],
+    "tags": [
+      "ai-news",
+      "breaking",
+      "hugging-face"
     ]
   },
   {
