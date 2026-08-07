@@ -22,6 +22,28 @@
     ]
   },
   {
+    "id": "cloudflare-launches-kitesurf-a-browser-built-for-ai-agents",
+    "slug": "cloudflare-launches-kitesurf-a-browser-built-for-ai-agents",
+    "title": "Cloudflare launches Kitesurf, a browser built for AI agents",
+    "category": "short-news",
+    "publishDate": "2026-08-07",
+    "author": "Modelverse Editorial",
+    "readTime": "2 min read",
+    "excerpt": "Cloudflare has introduced Kitesurf, a cloud-hosted browser designed for AI agents instead of people. The company says the browser uses less computing power than Chromium for common...",
+    "coverImage": "https://techcrunch.com/wp-content/uploads/2026/08/kitesurf.webp?resize=1200,640",
+    "status": "published",
+    "confidenceLevel": "confirmed",
+    "externalSources": [
+      "https://techcrunch.com/2026/08/07/cloudflare-launches-kitesurf-a-browser-built-for-ai-agents/"
+    ],
+    "relatedModels": [],
+    "tags": [
+      "ai-news",
+      "breaking",
+      "techcrunch-ai"
+    ]
+  },
+  {
     "id": "how-hsp-gruppe-builds-ai-capabilities-for-tax-advisory",
     "slug": "how-hsp-gruppe-builds-ai-capabilities-for-tax-advisory",
     "title": "How HSP GRUPPE builds AI capabilities for tax advisory",
@@ -129,6 +151,28 @@
       "ai-news",
       "breaking",
       "techcrunch-ai"
+    ]
+  },
+  {
+    "id": "responding-to-the-next-frontier-of-critical-cyber-capabilities",
+    "slug": "responding-to-the-next-frontier-of-critical-cyber-capabilities",
+    "title": "Responding to the next frontier of critical cyber capabilities",
+    "category": "short-news",
+    "publishDate": "2026-08-07",
+    "author": "Modelverse Editorial",
+    "readTime": "2 min read",
+    "excerpt": "OpenAI is sharing preliminary cybersecurity evaluations for Astra and the steps we’re taking to strengthen safeguards and security controls.",
+    "coverImage": "/images/news/news_short.jpg",
+    "status": "published",
+    "confidenceLevel": "confirmed",
+    "externalSources": [
+      "https://openai.com/index/responding-next-frontier-critical-cyber-capabilities"
+    ],
+    "relatedModels": [],
+    "tags": [
+      "ai-news",
+      "breaking",
+      "openai"
     ]
   },
   {
