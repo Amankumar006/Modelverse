@@ -1,0 +1,24 @@
+{
+  "id": "airbnb-says-ai-is-helping-it-ship-features-faster-as-it-tests-a-new-search-funct",
+  "slug": "airbnb-says-ai-is-helping-it-ship-features-faster-as-it-tests-a-new-search-funct",
+  "title": "Airbnb says AI is helping it ship features faster as it tests a new search function",
+  "category": "short-news",
+  "isTrending": true,
+  "publishDate": "2026-08-07",
+  "author": "Modelverse Editorial",
+  "readTime": "2 min read",
+  "excerpt": "Airbnb will debut a new AI-powered search experience with a toggle.",
+  "body": "Airbnb is significantly accelerating its product development cycle by deeply integrating AI into its internal operations. CEO Brian Chesky revealed that the company has slashed the time from feature conceptualization to launch by an impressive 60%, leading to an 80% increase in the number of features and improvements shipped compared to the previous year. This efficiency boost is attributed to AI's role in various internal processes, including generating 60% of its code and streamlining functions across search, sign-up, checkout, and payments.\n\nBuilding on this internal success, Airbnb is now poised to test a new AI-powered search function for its users. Unlike a generic chatbot, this feature is tailored for travel discovery. Users will have the option to toggle into this AI search, where they can input natural language queries. The system will then deliver highly visual results, complete with AI-generated, conversational titles and real-time personalized highlights on individual listing pages, aiming to provide a more intuitive and rich browsing experience.\n\nThis dual approach by Airbnb offers valuable insights for developers and researchers. Internally, it highlights AI's transformative potential in dramatically enhancing software development velocity and operational efficiency, moving beyond mere automation to intelligent code generation and pipeline optimization. Externally, it presents a compelling model for integrating AI into complex user experiences like travel search, demonstrating how natural language processing, visual presentation, and personalization can create a powerful, non-chatbot-centric interface, pushing the boundaries of AI application in consumer products.",
+  "coverImage": "https://techcrunch.com/wp-content/uploads/2025/08/brian-chesky-GettyImages-2217178973.jpg?w=1024",
+  "status": "published",
+  "confidenceLevel": "confirmed",
+  "externalSources": [
+    "https://techcrunch.com/2026/08/07/airbnb-says-ai-is-helping-it-ship-features-faster-as-it-tests-a-new-search-function/"
+  ],
+  "relatedModels": [],
+  "tags": [
+    "ai-news",
+    "breaking",
+    "techcrunch-ai"
+  ]
+}
