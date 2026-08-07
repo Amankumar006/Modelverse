@@ -1,0 +1,56 @@
+{
+  "id": "liquidai-lfm25-26b",
+  "name": "LFM2.5-2.6B",
+  "slug": "lfm25-26b",
+  "developer": "LiquidAI",
+  "releaseDate": "2026-07-28",
+  "updatedAt": "2026-08-07",
+  "type": "open-weights",
+  "status": "active",
+  "modality": [
+    "text"
+  ],
+  "primaryTask": "chat-reasoning",
+  "deployment": [
+    "self-hostable"
+  ],
+  "license": "OTHER",
+  "parameters": "2.7B",
+  "contextWindow": "unknown",
+  "description": "LFM2.5-2.6B is a 2.7B-parameter text generation model developed by LiquidAI. Built on the Lfm2ForCausalLM architecture using transformers. Supports ar, zh, en, fr, de, hi, id, it, ja, ko, pl, pt, ru, es, th, vi language(s). Released on 2026-07-28 with 351 likes and 77,973 downloads on Hugging Face.",
+  "keyFeatures": [
+    "2.7B parameters",
+    "Built on Lfm2ForCausalLM architecture (transformers)",
+    "Primary task: text generation (text modality)",
+    "Language support: ar, zh, en, fr, de, hi, id, it, ja, ko, pl, pt, ru, es, th, vi",
+    "Open-weights under OTHER license — self-hostable and fine-tunable"
+  ],
+  "benchmarks": [],
+  "family": null,
+  "previousVersion": null,
+  "links": {
+    "huggingface": "https://huggingface.co/LiquidAI/LFM2.5-2.6B",
+    "paper": "https://arxiv.org/abs/2511.23404"
+  },
+  "logo": null,
+  "tags": [
+    "open-weights",
+    "trending",
+    "huggingface",
+    "transformers",
+    "text-generation"
+  ],
+  "sources": [
+    "https://huggingface.co/LiquidAI/LFM2.5-2.6B"
+  ],
+  "verified": false,
+  "verificationStatus": "LIKELY",
+  "fieldConfidence": {
+    "parameters": "LIKELY",
+    "license": "LIKELY"
+  },
+  "needsReview": true,
+  "featured": false,
+  "boost": 1,
+  "curatorNotes": "Auto-ingested from HuggingFace Trending on 2026-08-07. Architecture: Lfm2ForCausalLM. Params: 2.7B. License: OTHER."
+}

@@ -1,0 +1,53 @@
+{
+  "id": "larryvrh-minimax-h3-turbo-lora",
+  "name": "MiniMax-H3-Turbo-Lora",
+  "slug": "minimax-h3-turbo-lora",
+  "developer": "larryvrh",
+  "releaseDate": "2026-08-05",
+  "updatedAt": "2026-08-07",
+  "type": "open-weights",
+  "status": "active",
+  "modality": [
+    "text",
+    "video"
+  ],
+  "primaryTask": "video-generation",
+  "deployment": [
+    "self-hostable"
+  ],
+  "license": "APACHE-2.0",
+  "parameters": "undisclosed",
+  "contextWindow": "unknown",
+  "description": "MiniMax-H3-Turbo-Lora is a undisclosed-parameter text to video model developed by larryvrh. Released on 2026-08-05 with 365 likes and 0 downloads on Hugging Face.",
+  "keyFeatures": [
+    "undisclosed parameters",
+    "Primary task: text to video (text, video modality)",
+    "Open-weights under APACHE-2.0 license — self-hostable and fine-tunable"
+  ],
+  "benchmarks": [],
+  "family": null,
+  "previousVersion": null,
+  "links": {
+    "huggingface": "https://huggingface.co/larryvrh/MiniMax-H3-Turbo-Lora"
+  },
+  "logo": null,
+  "tags": [
+    "open-weights",
+    "trending",
+    "huggingface",
+    "text-to-video"
+  ],
+  "sources": [
+    "https://huggingface.co/larryvrh/MiniMax-H3-Turbo-Lora"
+  ],
+  "verified": false,
+  "verificationStatus": "LIKELY",
+  "fieldConfidence": {
+    "parameters": "DRAFT",
+    "license": "LIKELY"
+  },
+  "needsReview": true,
+  "featured": false,
+  "boost": 1,
+  "curatorNotes": "Auto-ingested from HuggingFace Trending on 2026-08-07. Architecture: unknown. Params: undisclosed. License: APACHE-2.0."
+}

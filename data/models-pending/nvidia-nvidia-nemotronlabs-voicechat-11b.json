@@ -1,0 +1,54 @@
+{
+  "id": "nvidia-nvidia-nemotronlabs-voicechat-11b",
+  "name": "NVIDIA-NemotronLabs-VoiceChat-11B",
+  "slug": "nvidia-nemotronlabs-voicechat-11b",
+  "developer": "nvidia",
+  "releaseDate": "2026-07-29",
+  "updatedAt": "2026-08-07",
+  "type": "open-weights",
+  "status": "active",
+  "modality": [
+    "text"
+  ],
+  "primaryTask": "chat-reasoning",
+  "deployment": [
+    "self-hostable"
+  ],
+  "license": "OPENMDW-1.1",
+  "parameters": "11.1B",
+  "contextWindow": "unknown",
+  "description": "NVIDIA-NemotronLabs-VoiceChat-11B is a 11.1B-parameter text generation model developed by nvidia. Supports en language(s). Released on 2026-07-29 with 208 likes and 359 downloads on Hugging Face.",
+  "keyFeatures": [
+    "11.1B parameters",
+    "Primary task: text generation (text modality)",
+    "Language support: en",
+    "Open-weights under OPENMDW-1.1 license — self-hostable and fine-tunable"
+  ],
+  "benchmarks": [],
+  "family": null,
+  "previousVersion": null,
+  "links": {
+    "huggingface": "https://huggingface.co/nvidia/NVIDIA-NemotronLabs-VoiceChat-11B",
+    "paper": "https://arxiv.org/abs/2410.17196"
+  },
+  "logo": null,
+  "tags": [
+    "open-weights",
+    "trending",
+    "huggingface",
+    "text-generation"
+  ],
+  "sources": [
+    "https://huggingface.co/nvidia/NVIDIA-NemotronLabs-VoiceChat-11B"
+  ],
+  "verified": false,
+  "verificationStatus": "LIKELY",
+  "fieldConfidence": {
+    "parameters": "LIKELY",
+    "license": "LIKELY"
+  },
+  "needsReview": true,
+  "featured": false,
+  "boost": 1,
+  "curatorNotes": "Auto-ingested from HuggingFace Trending on 2026-08-07. Architecture: unknown. Params: 11.1B. License: OPENMDW-1.1."
+}

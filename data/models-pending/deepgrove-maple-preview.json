@@ -1,0 +1,56 @@
+{
+  "id": "deepgrove-maple-preview",
+  "name": "maple-preview",
+  "slug": "maple-preview",
+  "developer": "deepgrove",
+  "releaseDate": "2026-08-04",
+  "updatedAt": "2026-08-07",
+  "type": "open-weights",
+  "status": "active",
+  "modality": [
+    "text"
+  ],
+  "primaryTask": "chat-reasoning",
+  "deployment": [
+    "self-hostable"
+  ],
+  "license": "MIT",
+  "parameters": "20.2B",
+  "contextWindow": "unknown",
+  "description": "maple-preview is a 20.2B-parameter Mixture-of-Experts (MoE) text generation model developed by deepgrove. Built on the MapleForCausalLM architecture using transformers. Supports en language(s). Released on 2026-08-04 with 219 likes and 686 downloads on Hugging Face.",
+  "keyFeatures": [
+    "20.2B parameters with sparse MoE architecture for efficient inference",
+    "Built on MapleForCausalLM architecture (transformers)",
+    "Primary task: text generation (text modality)",
+    "Language support: en",
+    "Open-weights under MIT license — self-hostable and fine-tunable"
+  ],
+  "benchmarks": [],
+  "family": null,
+  "previousVersion": null,
+  "links": {
+    "huggingface": "https://huggingface.co/deepgrove/maple-preview"
+  },
+  "logo": null,
+  "tags": [
+    "open-weights",
+    "trending",
+    "huggingface",
+    "moe",
+    "transformers",
+    "text-generation"
+  ],
+  "sources": [
+    "https://huggingface.co/deepgrove/maple-preview"
+  ],
+  "verified": false,
+  "verificationStatus": "LIKELY",
+  "fieldConfidence": {
+    "parameters": "LIKELY",
+    "license": "LIKELY"
+  },
+  "needsReview": true,
+  "featured": false,
+  "boost": 1,
+  "curatorNotes": "Auto-ingested from HuggingFace Trending on 2026-08-07. Architecture: MapleForCausalLM. Params: 20.2B. License: MIT."
+}

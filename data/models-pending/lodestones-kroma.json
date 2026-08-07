@@ -1,0 +1,53 @@
+{
+  "id": "lodestones-kroma",
+  "name": "Kroma",
+  "slug": "kroma",
+  "developer": "lodestones",
+  "releaseDate": "2026-07-31",
+  "updatedAt": "2026-08-07",
+  "type": "open-weights",
+  "status": "active",
+  "modality": [
+    "text",
+    "image"
+  ],
+  "primaryTask": "image-generation",
+  "deployment": [
+    "self-hostable"
+  ],
+  "license": "MIT",
+  "parameters": "undisclosed",
+  "contextWindow": "unknown",
+  "description": "Kroma is a undisclosed-parameter text to image model developed by lodestones. Released on 2026-07-31 with 217 likes and 0 downloads on Hugging Face.",
+  "keyFeatures": [
+    "undisclosed parameters",
+    "Primary task: text to image (text, image modality)",
+    "Open-weights under MIT license — self-hostable and fine-tunable"
+  ],
+  "benchmarks": [],
+  "family": null,
+  "previousVersion": null,
+  "links": {
+    "huggingface": "https://huggingface.co/lodestones/Kroma"
+  },
+  "logo": null,
+  "tags": [
+    "open-weights",
+    "trending",
+    "huggingface",
+    "text-to-image"
+  ],
+  "sources": [
+    "https://huggingface.co/lodestones/Kroma"
+  ],
+  "verified": false,
+  "verificationStatus": "LIKELY",
+  "fieldConfidence": {
+    "parameters": "DRAFT",
+    "license": "LIKELY"
+  },
+  "needsReview": true,
+  "featured": false,
+  "boost": 1,
+  "curatorNotes": "Auto-ingested from HuggingFace Trending on 2026-08-07. Architecture: unknown. Params: undisclosed. License: MIT."
+}

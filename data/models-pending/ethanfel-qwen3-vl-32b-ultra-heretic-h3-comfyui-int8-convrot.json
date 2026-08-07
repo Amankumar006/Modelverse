@@ -1,0 +1,55 @@
+{
+  "id": "ethanfel-qwen3-vl-32b-ultra-heretic-h3-comfyui-int8-convrot",
+  "name": "Qwen3-VL-32B-Ultra-Heretic-H3-ComfyUI-INT8-ConvRot",
+  "slug": "qwen3-vl-32b-ultra-heretic-h3-comfyui-int8-convrot",
+  "developer": "ethanfel",
+  "releaseDate": "2026-08-03",
+  "updatedAt": "2026-08-07",
+  "type": "open-weights",
+  "status": "active",
+  "modality": [
+    "text",
+    "image"
+  ],
+  "primaryTask": "multimodal-general",
+  "deployment": [
+    "self-hostable"
+  ],
+  "license": "APACHE-2.0",
+  "parameters": "undisclosed",
+  "contextWindow": "unknown",
+  "description": "Qwen3-VL-32B-Ultra-Heretic-H3-ComfyUI-INT8-ConvRot is a undisclosed-parameter image text to text model developed by ethanfel. Supports en language(s). Released on 2026-08-03 with 360 likes and 0 downloads on Hugging Face.",
+  "keyFeatures": [
+    "undisclosed parameters",
+    "Primary task: image text to text (text, image modality)",
+    "Language support: en",
+    "Open-weights under APACHE-2.0 license — self-hostable and fine-tunable"
+  ],
+  "benchmarks": [],
+  "family": null,
+  "previousVersion": null,
+  "links": {
+    "huggingface": "https://huggingface.co/ethanfel/Qwen3-VL-32B-Ultra-Heretic-H3-ComfyUI-INT8-ConvRot"
+  },
+  "logo": null,
+  "tags": [
+    "open-weights",
+    "trending",
+    "huggingface",
+    "comfyui",
+    "image-text-to-text"
+  ],
+  "sources": [
+    "https://huggingface.co/ethanfel/Qwen3-VL-32B-Ultra-Heretic-H3-ComfyUI-INT8-ConvRot"
+  ],
+  "verified": false,
+  "verificationStatus": "LIKELY",
+  "fieldConfidence": {
+    "parameters": "DRAFT",
+    "license": "LIKELY"
+  },
+  "needsReview": true,
+  "featured": false,
+  "boost": 1,
+  "curatorNotes": "Auto-ingested from HuggingFace Trending on 2026-08-07. Architecture: unknown. Params: undisclosed. License: APACHE-2.0."
+}

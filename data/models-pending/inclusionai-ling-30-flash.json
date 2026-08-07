@@ -1,0 +1,54 @@
+{
+  "id": "inclusionai-ling-30-flash",
+  "name": "Ling-3.0-flash",
+  "slug": "ling-30-flash",
+  "developer": "inclusionAI",
+  "releaseDate": "2026-08-02",
+  "updatedAt": "2026-08-07",
+  "type": "open-weights",
+  "status": "active",
+  "modality": [
+    "text"
+  ],
+  "primaryTask": "chat-reasoning",
+  "deployment": [
+    "self-hostable"
+  ],
+  "license": "MIT",
+  "parameters": "127.5B",
+  "contextWindow": "unknown",
+  "description": "Ling-3.0-flash is a 127.5B-parameter Mixture-of-Experts (MoE) text generation model developed by inclusionAI. Built on the BailingMoeV3ForCausalLM architecture. Released on 2026-08-02 with 195 likes and 3,065 downloads on Hugging Face.",
+  "keyFeatures": [
+    "127.5B parameters with sparse MoE architecture for efficient inference",
+    "Built on BailingMoeV3ForCausalLM architecture",
+    "Primary task: text generation (text modality)",
+    "Open-weights under MIT license — self-hostable and fine-tunable"
+  ],
+  "benchmarks": [],
+  "family": null,
+  "previousVersion": null,
+  "links": {
+    "huggingface": "https://huggingface.co/inclusionAI/Ling-3.0-flash"
+  },
+  "logo": null,
+  "tags": [
+    "open-weights",
+    "trending",
+    "huggingface",
+    "moe",
+    "text-generation"
+  ],
+  "sources": [
+    "https://huggingface.co/inclusionAI/Ling-3.0-flash"
+  ],
+  "verified": false,
+  "verificationStatus": "LIKELY",
+  "fieldConfidence": {
+    "parameters": "LIKELY",
+    "license": "LIKELY"
+  },
+  "needsReview": true,
+  "featured": false,
+  "boost": 1,
+  "curatorNotes": "Auto-ingested from HuggingFace Trending on 2026-08-07. Architecture: BailingMoeV3ForCausalLM. Params: 127.5B. License: MIT."
+}

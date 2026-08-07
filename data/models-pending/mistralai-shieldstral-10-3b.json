@@ -1,0 +1,56 @@
+{
+  "id": "mistralai-shieldstral-10-3b",
+  "name": "Shieldstral-1.0-3B",
+  "slug": "shieldstral-10-3b",
+  "developer": "mistralai",
+  "releaseDate": "2026-07-16",
+  "updatedAt": "2026-08-07",
+  "type": "open-weights",
+  "status": "active",
+  "modality": [
+    "text"
+  ],
+  "primaryTask": "chat-reasoning",
+  "deployment": [
+    "self-hostable"
+  ],
+  "license": "APACHE-2.0",
+  "parameters": "3.8B",
+  "contextWindow": "unknown",
+  "description": "Shieldstral-1.0-3B is a 3.8B-parameter text generation model developed by mistralai. Built on the Mistral3ForConditionalGeneration architecture using vllm. Supports en, fr, es, de, it, pt, nl, zh, ja, ko, ar, ru language(s). Released on 2026-07-16 with 174 likes and 2,480 downloads on Hugging Face.",
+  "keyFeatures": [
+    "3.8B parameters",
+    "Built on Mistral3ForConditionalGeneration architecture (vllm)",
+    "Primary task: text generation (text modality)",
+    "Language support: en, fr, es, de, it, pt, nl, zh, ja, ko, ar, ru",
+    "Open-weights under APACHE-2.0 license — self-hostable and fine-tunable"
+  ],
+  "benchmarks": [],
+  "family": null,
+  "previousVersion": null,
+  "links": {
+    "huggingface": "https://huggingface.co/mistralai/Shieldstral-1.0-3B",
+    "paper": "https://arxiv.org/abs/2607.25857"
+  },
+  "logo": null,
+  "tags": [
+    "open-weights",
+    "trending",
+    "huggingface",
+    "vllm",
+    "text-generation"
+  ],
+  "sources": [
+    "https://huggingface.co/mistralai/Shieldstral-1.0-3B"
+  ],
+  "verified": false,
+  "verificationStatus": "LIKELY",
+  "fieldConfidence": {
+    "parameters": "LIKELY",
+    "license": "LIKELY"
+  },
+  "needsReview": true,
+  "featured": false,
+  "boost": 1,
+  "curatorNotes": "Auto-ingested from HuggingFace Trending on 2026-08-07. Architecture: Mistral3ForConditionalGeneration. Params: 3.8B. License: APACHE-2.0."
+}
