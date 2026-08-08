@@ -35,7 +35,7 @@ export const metadata: Metadata = {
     ],
   },
   alternates: {
-    canonical: "./",
+
     types: {
       "application/rss+xml": [
         { url: `${SITE_URL}/feed.xml`, title: "Modelverse Models RSS Feed" },

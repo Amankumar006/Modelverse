@@ -3,7 +3,7 @@ import { getAllModelEntries } from "@/lib/models";
 import { getAllArticles } from "@/lib/news";
 import { NewsCategory } from "../../data/schema/news.schema";
 
-export const dynamic = "force-static";
+export const revalidate = 3600; // Revalidate every hour
 
 const BASE_URL = "https://www.themodelverse.in";
 
