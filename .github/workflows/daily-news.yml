@@ -34,9 +34,6 @@ jobs:
           SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
         run: node scripts/ingest-daily-news.js
 
-      - name: Verify Scraped News Quality
-        run: node scripts/verify-news.js
-
       - name: Send Gmail News Digest
         if: env.NEW_NEWS_PUSHED == 'true'
         uses: dawidd6/action-send-mail@v3

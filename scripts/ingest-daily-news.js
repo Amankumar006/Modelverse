@@ -724,6 +724,15 @@ async function extractFullArticleBody(url, fallbackDesc, lab) {
 
   // Generate Email Digest
   if (createdNews.length > 0) {
+    fs.writeFileSync(path.join(INGESTION_DIR, "new-articles.json"), JSON.stringify(createdNews, null, 2));
+
+    let htmlDigest = `<h2>📰 Modelverse Daily News Digest</h2><ul>`;
+    createdNews.forEach(n => {
+      htmlDigest += `<li><strong>${n.title}</strong> (${n.read_time})<br/><em>${n.excerpt}</em><br/><a href="https://www.themodelverse.in/news/${n.slug}">Read on Modelverse</a></li><br/>`;
+    });
+    htmlDigest += `</ul><p><small>Automated by Modelverse Ingestion Bot</small></p>`;
+    fs.writeFileSync(path.join(INGESTION_DIR, "latest-news-digest.html"), htmlDigest);
+
     if (process.env.GITHUB_ENV) {
       fs.appendFileSync(process.env.GITHUB_ENV, "NEW_NEWS_PUSHED=true\n");
       fs.appendFileSync(process.env.GITHUB_ENV, `NEWS_COUNT=${createdNews.length}\n`);
