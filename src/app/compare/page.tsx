@@ -1,7 +1,6 @@
 import { Metadata } from "next";
-import { getAllModelEntries, getModelBySlug, SITE_URL } from "@/lib/models";
+import { getModelBySlug, SITE_URL } from "@/lib/models";
 import Navbar from "@/components/layout/Navbar";
-import CompareClient from "@/components/models/CompareClient";
 
 export async function generateMetadata({
   searchParams,
@@ -62,47 +61,21 @@ export async function generateMetadata({
   };
 }
 
-interface PageProps {
-  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
-}
-
-export default async function ComparePage({ searchParams }: PageProps) {
-  const resolvedParams = await searchParams;
-  const modelsQuery = resolvedParams.models;
-  
-  let slugs: string[] = [];
-  if (typeof modelsQuery === "string") {
-    slugs = modelsQuery.split(",").map((s) => s.trim());
-  } else if (Array.isArray(modelsQuery)) {
-    // If someone passes ?models=a&models=b
-    slugs = modelsQuery.flatMap((s) => s.split(",").map(val => val.trim()));
-  }
-
-  // Remove duplicates and limit to 4 to prevent UI overflow
-  slugs = Array.from(new Set(slugs)).filter(Boolean).slice(0, 4);
-
-  const selectedModels = (await Promise.all(
-    slugs.map(async (slug) => await getModelBySlug(slug))
-  )).filter((model): model is NonNullable<typeof model> => model !== null);
-
-  const allModels = await getAllModelEntries();
-
+export default function ComparePage() {
   return (
-    <div className="min-h-screen bg-[var(--bg)] text-[var(--text)] selection:bg-[var(--accent-soft)] selection:text-[var(--accent)] font-sans">
+    <div className="min-h-screen bg-[var(--bg)] text-[var(--text)] font-sans flex flex-col">
       <div className="sticky top-0 z-50 shrink-0 border-b border-[var(--muted)]/10 bg-[var(--bg)]">
         <Navbar />
       </div>
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="mb-8 space-y-4 text-center sm:text-left">
-          <h1 className="text-3xl md:text-4xl font-extrabold text-[var(--text)] tracking-tight">
-            Compare Models
+      <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-24 flex items-center justify-center">
+        <div className="max-w-md text-center space-y-6 p-8 bg-[var(--card-bg)] rounded-[var(--radius-card)] border border-[var(--muted)]/10 shadow-[var(--shadow-card)]">
+          <h1 className="text-3xl font-extrabold text-[var(--text)] tracking-tight">
+            Under Maintenance
           </h1>
-          <p className="text-[var(--muted)] max-w-2xl text-sm md:text-base leading-relaxed">
-            Evaluate leading AI models side-by-side. Compare context windows, open-weights licensing, parameters, and verified benchmarks to choose the right model for your application.
+          <p className="text-[var(--muted)] leading-relaxed">
+            The Compare feature is currently being redesigned for a better UX. It will be back soon!
           </p>
         </div>
-
-        <CompareClient initialModels={selectedModels} allModels={allModels} />
       </main>
     </div>
   );

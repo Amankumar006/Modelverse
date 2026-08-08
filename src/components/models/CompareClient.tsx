@@ -201,7 +201,7 @@ export default function CompareClient({ initialModels, allModels }: CompareClien
             let displayVal = "N/A";
             
             if (chartMetric === "context-window") {
-              const cw = typeof model.contextWindow === "object" && model.contextWindow !== null ? String((model.contextWindow as any).native) : (model.contextWindow as string);
+              const cw = typeof model.contextWindow === "object" && model.contextWindow !== null ? String((model.contextWindow as { native?: number }).native) : (model.contextWindow as string);
               const parsedVal = parseContext(cw);
               value = parsedVal ?? 0;
               displayVal = cw || "Unknown";
@@ -214,7 +214,7 @@ export default function CompareClient({ initialModels, allModels }: CompareClien
 
             const allVals = models.map(m => {
               if (chartMetric === "context-window") {
-                const cw = typeof m.contextWindow === "object" && m.contextWindow !== null ? String((m.contextWindow as any).native) : (m.contextWindow as string);
+                const cw = typeof m.contextWindow === "object" && m.contextWindow !== null ? String((m.contextWindow as { native?: number }).native) : (m.contextWindow as string);
                 return parseContext(cw) ?? 0;
               } else {
                 return parseScore(m.benchmarks?.find(b => b.name.toLowerCase().includes(chartMetric))?.score) ?? 0;
@@ -366,7 +366,7 @@ export default function CompareClient({ initialModels, allModels }: CompareClien
                 <td className="p-4 text-sm font-bold text-[var(--muted)] flex items-center gap-2 sticky left-0 bg-[var(--card-bg)] z-10 border-r border-[var(--muted)]/10"><Shield size={16} /> License</td>
                 {models.map((model) => (
                   <td key={model.id} className="p-4 text-sm text-[var(--text)] font-semibold">
-                    {typeof model.license === "object" ? model.license.name || "Custom" : model.license}
+                    {typeof model.license === "object" && model.license !== null ? model.license.name || "Custom" : model.license || "Unknown"}
                   </td>
                 ))}
                 {Array.from({ length: 4 - models.length }).map((_, i) => (
@@ -434,7 +434,7 @@ export default function CompareClient({ initialModels, allModels }: CompareClien
               <div>
                 <span className="text-[var(--muted)] font-bold block mb-1">License</span>
                 <span className="font-semibold text-[var(--text)]">
-                  {typeof model.license === "object" ? model.license.name || "Custom" : model.license}
+                  {typeof model.license === "object" && model.license !== null ? model.license.name || "Custom" : model.license || "Unknown"}
                 </span>
               </div>
               <div>
