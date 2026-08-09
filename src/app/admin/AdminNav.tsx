@@ -8,6 +8,7 @@ const navItems = [
   { name: 'Dashboard', href: '/admin' },
   { name: 'Models', href: '/admin/review' },
   { name: 'News', href: '/admin/news' },
+  { name: 'Data Health', href: '/admin/health' },
   { name: 'Curators', href: '/admin/curators' },
 ];
 
