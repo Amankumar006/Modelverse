@@ -127,7 +127,7 @@ export default async function ModelDetailPage({
     name: model.name,
     description: model.description,
     image: imageUrl,
-    brand: { "@type": "Organization", name: model.developer },
+    brand: { "@type": "Brand", name: model.developer },
     category: "AI Model",
     releaseDate: model.releaseDate,
     additionalProperty: [
@@ -137,6 +137,43 @@ export default async function ModelDetailPage({
     ],
   };
 
+  const commonOfferDetails = {
+    availability: "https://schema.org/InStock",
+    itemCondition: "https://schema.org/NewCondition",
+    hasMerchantReturnPolicy: {
+      "@type": "MerchantReturnPolicy",
+      applicableCountry: "US",
+      returnPolicyCategory: "https://schema.org/MerchantReturnNotPermitted",
+    },
+    shippingDetails: {
+      "@type": "OfferShippingDetails",
+      shippingRate: {
+        "@type": "MonetaryAmount",
+        value: "0",
+        currency: "USD",
+      },
+      deliveryTime: {
+        "@type": "ShippingDeliveryTime",
+        handlingTime: {
+          "@type": "QuantitativeValue",
+          minValue: 0,
+          maxValue: 0,
+          unitCode: "DAY",
+        },
+        transitTime: {
+          "@type": "QuantitativeValue",
+          minValue: 0,
+          maxValue: 0,
+          unitCode: "DAY",
+        },
+      },
+      shippingDestination: {
+        "@type": "DefinedRegion",
+        addressCountry: "US",
+      },
+    },
+  };
+
   // Include offers: use real pricing data if available, otherwise fallback to 0
   if (model.pricing && model.pricing.length > 0) {
     productEntity.offers = model.pricing.map((p) => ({
@@ -144,12 +181,14 @@ export default async function ModelDetailPage({
       price: String(p.amount),
       priceCurrency: p.currency,
       description: p.notes || `${p.unit}`,
+      ...commonOfferDetails,
     }));
   } else {
     productEntity.offers = {
       "@type": "Offer",
       price: "0",
-      priceCurrency: "USD"
+      priceCurrency: "USD",
+      ...commonOfferDetails,
     };
   }
 
