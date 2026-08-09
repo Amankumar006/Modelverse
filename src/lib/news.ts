@@ -8,19 +8,14 @@ import type { NewsArticle, NewsCategoryType } from "../../data/schema/news.schem
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || '';
 const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || '';
 
-const supabase = supabaseUrl && supabaseKey
-  ? createClient(supabaseUrl, supabaseKey)
-  : ({
-      from: () => ({
-        select: () => ({
-          eq: () => ({
-            order: () => Promise.resolve({ data: [], error: null }),
-            single: () => Promise.resolve({ data: null, error: null }),
-          }),
-          order: () => Promise.resolve({ data: [], error: null }),
-        }),
-      }),
-    } as any);
+if (!supabaseUrl) {
+  console.warn("⚠️ Warning: NEXT_PUBLIC_SUPABASE_URL is missing during build in news.ts.");
+}
+
+const supabase = createClient(
+  supabaseUrl || 'https://placeholder.supabase.co',
+  supabaseKey || 'placeholder-key'
+);
 
 export type NewsArticleIndexEntry = Omit<NewsArticle, "body">;
 
