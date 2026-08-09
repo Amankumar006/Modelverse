@@ -1,11 +1,10 @@
 "use client";
 
-import { useState } from "react";
+import React, { useState, Fragment } from "react";
 import type { ModelEntry } from "@/lib/models";
 import { formatParameters, getModalities } from "@/lib/models";
 import MarkdownRenderer from "@/components/ui/MarkdownRenderer";
 import { ArrowUpRight } from "lucide-react";
-import VisionBenchmarkChart from "./VisionBenchmarkChart";
 
 interface ModelDetailTabsProps {
   model: ModelEntry;
@@ -143,17 +142,42 @@ export default function ModelDetailTabs({
                 <div className="overflow-x-auto bg-[var(--card-bg)] shadow-[var(--shadow-card)] rounded-[var(--radius-card)] p-4 border border-[var(--muted)]/10">
                   <table className="w-full min-w-[300px] text-sm">
                     <tbody>
-                      {model.benchmarks.map((b) => (
-                        <tr key={b.name} className="border-b border-[var(--muted)]/10 last:border-0">
-                          <td className="py-2.5 text-[var(--text)] font-semibold">{b.name}</td>
-                          <td className="py-2.5 tabular-nums text-[var(--accent)] font-mono font-bold">{b.score}</td>
-                          <td className="py-2.5 text-right">
-                            <span className="inline-flex items-center gap-1.5 text-xs text-[var(--muted)]">
-                              <span className={`h-2 w-2 rounded-full ${b.sourceType === "vendor-reported" ? DOT.vendor : DOT.independent}`} />
-                              {b.sourceType === "vendor-reported" ? "Vendor-reported" : "Independent"}
-                            </span>
-                          </td>
-                        </tr>
+                      {Object.entries(
+                        model.benchmarks.reduce((acc, b) => {
+                          const cat = b.category || "General";
+                          if (!acc[cat]) acc[cat] = [];
+                          acc[cat].push(b);
+                          return acc;
+                        }, {} as Record<string, typeof model.benchmarks>)
+                      ).map(([category, benchs]) => (
+                        <Fragment key={category}>
+                          {Object.keys(
+                            model.benchmarks.reduce((a, b) => {
+                              a[b.category || "General"] = true;
+                              return a;
+                            }, {} as Record<string, boolean>)
+                          ).length > 1 && (
+                            <tr>
+                              <td colSpan={3} className="pt-5 pb-2 text-[10px] uppercase tracking-wider font-bold text-[var(--muted)] border-b border-[var(--muted)]/10 bg-[var(--card-bg)]">
+                                {category}
+                              </td>
+                            </tr>
+                          )}
+                          {benchs.map((b) => (
+                            <tr key={b.name} className="border-b border-[var(--muted)]/10 last:border-0 hover:bg-[var(--bg)]/50 transition-colors">
+                              <td className={`py-2.5 text-[var(--text)] font-semibold ${category !== "General" || Object.keys(model.benchmarks.reduce((a, b) => ({ ...a, [b.category || "General"]: true }), {})).length > 1 ? 'pl-3' : ''}`}>
+                                {b.name}
+                              </td>
+                              <td className="py-2.5 tabular-nums text-[var(--accent)] font-mono font-bold">{b.score}</td>
+                              <td className="py-2.5 text-right pr-2">
+                                <span className="inline-flex items-center gap-1.5 text-xs text-[var(--muted)]">
+                                  <span className={`h-2 w-2 rounded-full ${b.sourceType === "vendor-reported" ? DOT.vendor : DOT.independent}`} />
+                                  {b.sourceType === "vendor-reported" ? "Vendor-reported" : "Independent"}
+                                </span>
+                              </td>
+                            </tr>
+                          ))}
+                        </Fragment>
                       ))}
                     </tbody>
                   </table>
@@ -162,13 +186,6 @@ export default function ModelDetailTabs({
                 <Empty>No benchmark data recorded yet.</Empty>
               )}
             </section>
-
-            {/* Vision Model Interactive Comparison Chart */}
-            {(getModalities(model.modality).includes("image") || model.primaryTask.includes("image")) && (
-              <section className="pt-4 border-t border-[var(--muted)]/10">
-                <VisionBenchmarkChart />
-              </section>
-            )}
 
             <section>
               <h3 className="mb-2 text-xs uppercase tracking-wider font-bold text-[var(--muted)]">Pricing</h3>

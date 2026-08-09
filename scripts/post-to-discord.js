@@ -11,40 +11,36 @@ async function postToDiscord(modelData = null, newsArticles = null) {
 
   console.log("🤖 Starting Discord Auto-Notifier Webhook...");
 
+const supabase = require("../src/lib/supabase");
+
   // 1. Resolve fallback payloads if arguments not explicitly passed
   if (!modelData) {
-    const archivePath = path.join(process.cwd(), "data", "models-archive.json");
-    if (fs.existsSync(archivePath)) {
-      try {
-        const models = JSON.parse(fs.readFileSync(archivePath, "utf-8"));
-        if (Array.isArray(models) && models.length > 0) {
-          modelData = models[0];
-        }
-      } catch (e) {}
-    }
-    if (!modelData) {
-      const prodDir = path.join(process.cwd(), "data", "models");
-      if (fs.existsSync(prodDir)) {
-        const files = fs.readdirSync(prodDir).filter((f) => f.endsWith(".json") && f !== "_index.json");
-        if (files.length > 0) {
-          try {
-            modelData = JSON.parse(fs.readFileSync(path.join(prodDir, files[0]), "utf-8"));
-          } catch (e) {}
-        }
+    try {
+      const { data, error } = await supabase
+        .from("models")
+        .select("*")
+        .order("release_date", { ascending: false })
+        .limit(1);
+      if (data && data.length > 0) {
+        modelData = data[0];
       }
-    }
+    } catch (e) {}
   }
 
   if (!newsArticles || newsArticles.length === 0) {
-    const articlesPath = path.join(process.cwd(), "data", "ingestion", "new-articles.json");
-    if (fs.existsSync(articlesPath)) {
-      try {
-        const raw = JSON.parse(fs.readFileSync(articlesPath, "utf-8"));
-        if (Array.isArray(raw) && raw.length > 0) {
-          newsArticles = raw;
-        }
-      } catch (e) {}
-    }
+    try {
+      const oneDayAgo = new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString();
+      const { data, error } = await supabase
+        .from("news_items")
+        .select("*")
+        .eq("status", "published")
+        .gte("created_at", oneDayAgo)
+        .order("created_at", { ascending: false })
+        .limit(4);
+      if (data && data.length > 0) {
+        newsArticles = data;
+      }
+    } catch (e) {}
   }
 
   const embeds = [];

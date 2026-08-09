@@ -19,6 +19,8 @@ const path = require("path");
 const aaSource = require("./lib/sources/artificial-analysis");
 const orSource = require("./lib/sources/openrouter");
 const hfSource = require("./lib/sources/huggingface");
+const { crawlDeepOfficialSource } = require("./lib/crawl-deep-sources");
+const { extractOfficialFacts } = require("./lib/extract-official-facts");
 
 const PENDING_DIR = path.join(process.cwd(), "data", "models-pending");
 const PROD_DIR = path.join(process.cwd(), "data", "models");
@@ -75,11 +77,22 @@ async function verifyModelEntry(modelData) {
   console.log(`\n🔍 Verifying pending model: ${modelData.name} (${modelData.id})...`);
 
   // Fetch facts from all sources concurrently
-  const [aaData, orData, hfData] = await Promise.all([
+  const hfRepoId = modelData.links?.huggingface?.replace("https://huggingface.co/", "");
+  const [aaData, orData, hfData, rawOfficialText] = await Promise.all([
     aaSource.fetchModel(modelData.name, modelData.developer),
     orSource.fetchModel(modelData.name, modelData.developer),
-    hfSource.fetchModel(modelData.name, modelData.developer, modelData.links?.huggingface?.replace("https://huggingface.co/", "")),
+    hfSource.fetchModel(modelData.name, modelData.developer, hfRepoId),
+    hfRepoId ? crawlDeepOfficialSource(hfRepoId) : Promise.resolve(null),
   ]);
+
+  let officialData = null;
+  if (rawOfficialText) {
+    try {
+      officialData = await extractOfficialFacts(rawOfficialText);
+    } catch (e) {
+      console.warn(`⚠️ Official extraction failed: ${e.message}`);
+    }
+  }
 
   const fieldConfidence = modelData.fieldConfidence || {};
   let overallDisputed = false;
@@ -113,8 +126,15 @@ async function verifyModelEntry(modelData) {
   if (modelData.benchmarks && modelData.benchmarks.length > 0) {
     const aaBm = aaData?.benchmarks?.gpqa || aaData?.benchmarks?.humanEval;
     const hfBm = hfData?.benchmarks?.gpqa || hfData?.benchmarks?.mmlu;
+    const offBm = officialData?.benchmarks?.gpqa || officialData?.benchmarks?.mmlu;
 
-    if (aaBm != null && hfBm != null) {
+    if (offBm != null) {
+      // If the official markdown stated a benchmark, we trust it absolutely.
+      // Merge official benchmarks over existing ones
+      if (!modelData.benchmarks[0]) modelData.benchmarks[0] = {};
+      Object.assign(modelData.benchmarks[0], officialData.benchmarks);
+      fieldConfidence.benchmarks = "OFFICIAL";
+    } else if (aaBm != null && hfBm != null) {
       const match = isBenchmarkWithinTolerance(aaBm, hfBm);
       fieldConfidence.benchmarks = match ? "VERIFIED" : "DISPUTED";
       if (!match) overallDisputed = true;
@@ -152,9 +172,14 @@ async function verifyModelEntry(modelData) {
 
   // 3. Context Window Verification
   if (modelData.contextWindow && modelData.contextWindow !== "unknown") {
+    const offCw = officialData?.contextWindow;
     const orCw = orData?.contextWindow;
     const aaCw = aaData?.contextWindow;
-    if (orCw && aaCw) {
+    
+    if (offCw) {
+      modelData.contextWindow = offCw;
+      fieldConfidence.contextWindow = "OFFICIAL";
+    } else if (orCw && aaCw) {
       fieldConfidence.contextWindow = (orCw === aaCw) ? "VERIFIED" : "DISPUTED";
       if (orCw !== aaCw) overallDisputed = true;
     } else if (orCw || aaCw) {
@@ -166,8 +191,13 @@ async function verifyModelEntry(modelData) {
 
   // 4. Parameters Verification
   if (modelData.parameters) {
+    const offParams = officialData?.parameters;
     const hfParams = hfData?.parameters;
-    if (hfParams) {
+    
+    if (offParams) {
+      modelData.parameters = offParams;
+      fieldConfidence.parameters = "OFFICIAL";
+    } else if (hfParams) {
       const match = isParamWithinTolerance(modelData.parameters, hfParams);
       fieldConfidence.parameters = match ? "LIKELY" : "DISPUTED"; // HF is single source for params, so LIKELY max
     } else {
@@ -180,6 +210,8 @@ async function verifyModelEntry(modelData) {
   let modelStatus = "DRAFT";
   if (overallDisputed || statuses.includes("DISPUTED")) {
     modelStatus = "DISPUTED";
+  } else if (statuses.includes("OFFICIAL")) {
+    modelStatus = "OFFICIAL";
   } else if (statuses.includes("LIKELY") || statuses.includes("VERIFIED")) {
     modelStatus = "LIKELY";
   }
@@ -278,9 +310,9 @@ async function runVerificationPipeline() {
       continue;
     }
 
-    if (modelStatus === "VERIFIED") {
+    if (modelStatus === "VERIFIED" || modelStatus === "OFFICIAL") {
       promotedCount++;
-      console.log(`✅ PROMOTED to Production: ${modelData.name}`);
+      console.log(`✅ PROMOTED to Production (Status: ${modelStatus}): ${modelData.name}`);
     } else {
       if (modelStatus === "DISPUTED") {
         disputedCount++;

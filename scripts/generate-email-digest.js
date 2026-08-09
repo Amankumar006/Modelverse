@@ -9,42 +9,39 @@ if (!fs.existsSync(INGESTION_DIR)) {
   fs.mkdirSync(INGESTION_DIR, { recursive: true });
 }
 
-function generateEmailDigest() {
+const supabase = require("../src/lib/supabase");
+
+async function generateEmailDigest() {
   console.log("📧 Generating Email Digest...");
 
-  // Find newly added model JSON files in git working directory or last commit
-  let addedFiles = [];
+  const oneDayAgo = new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString();
+  
+  let newModels = [];
   try {
-    const gitDiff = execSync("git status -s data/models/*.json", { encoding: "utf-8" });
-    const lines = gitDiff.split("\n").filter(Boolean);
-    addedFiles = lines
-      .filter((l) => l.startsWith("??") || l.startsWith(" A") || l.startsWith("A ") || l.startsWith(" M") || l.startsWith("M "))
-      .map((l) => l.trim().split(/\s+/)[1])
-      .filter((f) => f && f.endsWith(".json") && !f.endsWith("_index.json") && !f.endsWith("models-archive.json"));
-  } catch (e) {
-    console.error("Git diff error:", e.message);
-  }
-
-  // Fallback: If no git diff, load the 5 newest models by releaseDate / updatedAt
-  const newModels = [];
-  for (const file of addedFiles) {
-    try {
-      const fullPath = path.join(process.cwd(), file);
-      if (fs.existsSync(fullPath)) {
-        const data = JSON.parse(fs.readFileSync(fullPath, "utf-8"));
-        newModels.push(data);
-      }
-    } catch (err) {}
+    const { data, error } = await supabase
+      .from("models")
+      .select("*")
+      .gte("created_at", oneDayAgo)
+      .order("created_at", { ascending: false });
+      
+    if (error) throw error;
+    newModels = data || [];
+  } catch (err) {
+    console.error("Supabase fetch error:", err.message);
   }
 
   // Fallback for manual test runs (workflow_dispatch)
   if (newModels.length === 0) {
-    console.log("No git diff models found. Gathering top 5 newest models for digest...");
+    console.log("No recent models found in last 24h. Gathering top 5 newest models for digest...");
     try {
-      const allFiles = fs.readdirSync(path.join(process.cwd(), "data", "models")).filter(f => f.endsWith(".json") && !f.endsWith("_index.json") && !f.endsWith("models-archive.json"));
-      const allData = allFiles.map(f => JSON.parse(fs.readFileSync(path.join(process.cwd(), "data", "models", f), "utf-8")));
-      allData.sort((a, b) => new Date(b.updatedAt || b.releaseDate).getTime() - new Date(a.updatedAt || a.releaseDate).getTime());
-      newModels.push(...allData.slice(0, 5));
+      const { data, error } = await supabase
+        .from("models")
+        .select("*")
+        .order("release_date", { ascending: false })
+        .limit(5);
+        
+      if (error) throw error;
+      newModels = data || [];
     } catch (e) {
       console.error("Fallback error:", e.message);
     }
@@ -74,9 +71,9 @@ function generateEmailDigest() {
       <tr style="border-bottom: 1px solid #243629;">
         <td style="padding: 12px; font-weight: bold; color: #ffffff;">${m.name}</td>
         <td style="padding: 12px; color: #4ADE80;">${m.developer}</td>
-        <td style="padding: 12px; color: #A3B8AA;">${Array.isArray(m.modality) ? m.modality.join(", ") : (m.modality || "")}</td>
+        <td style="padding: 12px; color: #A3B8AA;">${m.verification_status || 'DRAFT'}</td>
         <td style="padding: 12px; text-align: right;">
-          <a href="https://www.themodelverse.in/models/${m.slug}" style="display: inline-block; padding: 6px 12px; background-color: #4ADE80; color: #0C120F; font-weight: bold; text-decoration: none; border-radius: 6px; font-size: 12px;">View Model →</a>
+          <a href="https://www.themodelverse.in/admin/review/${m.slug}" style="display: inline-block; padding: 6px 12px; background-color: #4ADE80; color: #0C120F; font-weight: bold; text-decoration: none; border-radius: 6px; font-size: 12px;">Review →</a>
         </td>
       </tr>
     `
@@ -103,7 +100,7 @@ function generateEmailDigest() {
 
     <!-- Intro -->
     <p style="font-size: 14px; line-height: 1.5; color: #A3B8AA;">
-      The automated daily ingestion pipeline discovered and published <strong>${newModels.length} new AI model(s)</strong> to <a href="https://www.themodelverse.in" style="color: #4ADE80; text-decoration: underline;">themodelverse.in</a>:
+      The automated daily ingestion pipeline discovered <strong>${newModels.length} new AI model(s)</strong>. They have been added to your <a href="https://www.themodelverse.in/admin" style="color: #4ADE80; text-decoration: underline;">Admin Review Queue</a> for verification:
     </p>
 
     <!-- Table -->
@@ -112,7 +109,7 @@ function generateEmailDigest() {
         <tr style="background-color: #1A261D; color: #8C9E91;">
           <th style="padding: 10px;">Model Name</th>
           <th style="padding: 10px;">Developer</th>
-          <th style="padding: 10px;">Modality</th>
+          <th style="padding: 10px;">Status</th>
           <th style="padding: 10px; text-align: right;">Action</th>
         </tr>
       </thead>

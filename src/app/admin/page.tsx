@@ -1,25 +1,105 @@
-export default function AdminPage() {
+import { createClient } from '@/utils/supabase/server';
+import Link from 'next/link';
+import StatusDots from '@/components/StatusDots';
+
+export default async function AdminPage() {
+  const supabase = await createClient();
+  
+  // Fetch models where needs_review = true to get counts
+  const { data: models } = await supabase
+    .from('models')
+    .select('verification_status')
+    .eq('needs_review', true);
+
+  const counts = {
+    DRAFT: 0,
+    LIKELY: 0,
+    DISPUTED: 0,
+    VERIFIED: 0,
+  };
+
+  if (models) {
+    models.forEach((m: any) => {
+      if (m.verification_status in counts) {
+        counts[m.verification_status as keyof typeof counts]++;
+      }
+    });
+  }
+
+  // Fetch recently verified
+  const { count: recentlyVerified } = await supabase
+    .from('models')
+    .select('*', { count: 'exact', head: true })
+    .eq('verification_status', 'VERIFIED');
+
+  counts.VERIFIED = recentlyVerified || 0;
+
+  // Fetch last 5 audit logs
+  const { data: auditLogs } = await supabase
+    .from('audit_log')
+    .select('*, curator_profiles(display_name)')
+    .order('created_at', { ascending: false })
+    .limit(5);
+
   return (
-    <div className="bg-white dark:bg-gray-950 rounded-lg p-8 border border-gray-200 dark:border-gray-800 shadow-sm">
-      <h1 className="text-2xl font-bold mb-4">Welcome to the Modelverse Curator Admin Panel</h1>
-      <p className="text-gray-600 dark:text-gray-400">
-        You have successfully authenticated and your curator profile has been verified. 
-        This is a secure area protected by both session middleware and database-level Authorization.
-      </p>
+    <div className="space-y-8">
+      <h1 className="text-3xl font-bold text-daylight-text">Dashboard</h1>
       
-      <div className="mt-8 grid gap-4 md:grid-cols-2">
-        <div className="p-4 border border-gray-200 dark:border-gray-800 rounded-md">
-          <h2 className="font-semibold text-lg mb-2">Pending Models</h2>
-          <p className="text-sm text-gray-500 mb-4">Review and verify automated model ingestions.</p>
-          <span className="text-xs font-mono bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200 px-2 py-1 rounded">Coming soon</span>
-        </div>
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+        <Link href="/admin/review?status=DISPUTED" className="bg-daylight-card p-6 rounded-2xl shadow-card border border-daylight-muted/10 hover:border-daylight-accent transition-colors block">
+          <div className="flex items-center justify-between mb-4">
+            <h2 className="font-semibold text-daylight-muted">Disputed</h2>
+            <StatusDots status="DISPUTED" />
+          </div>
+          <div className="text-4xl font-bold text-daylight-text tabular-nums">{counts.DISPUTED}</div>
+        </Link>
         
-        <div className="p-4 border border-gray-200 dark:border-gray-800 rounded-md">
-          <h2 className="font-semibold text-lg mb-2">News Triage</h2>
-          <p className="text-sm text-gray-500 mb-4">Curate and publish model-related news.</p>
-          <span className="text-xs font-mono bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200 px-2 py-1 rounded">Coming soon</span>
+        <Link href="/admin/review?status=LIKELY" className="bg-daylight-card p-6 rounded-2xl shadow-card border border-daylight-muted/10 hover:border-daylight-accent transition-colors block">
+          <div className="flex items-center justify-between mb-4">
+            <h2 className="font-semibold text-daylight-muted">Likely</h2>
+            <StatusDots status="LIKELY" />
+          </div>
+          <div className="text-4xl font-bold text-daylight-text tabular-nums">{counts.LIKELY}</div>
+        </Link>
+
+        <Link href="/admin/review?status=DRAFT" className="bg-daylight-card p-6 rounded-2xl shadow-card border border-daylight-muted/10 hover:border-daylight-accent transition-colors block">
+          <div className="flex items-center justify-between mb-4">
+            <h2 className="font-semibold text-daylight-muted">Draft</h2>
+            <StatusDots status="DRAFT" />
+          </div>
+          <div className="text-4xl font-bold text-daylight-text tabular-nums">{counts.DRAFT}</div>
+        </Link>
+
+        <Link href="/admin/review?status=VERIFIED" className="bg-daylight-card p-6 rounded-2xl shadow-card border border-daylight-muted/10 hover:border-daylight-accent transition-colors block">
+          <div className="flex items-center justify-between mb-4">
+            <h2 className="font-semibold text-daylight-muted">Verified</h2>
+            <StatusDots status="VERIFIED" />
+          </div>
+          <div className="text-4xl font-bold text-daylight-text tabular-nums">{counts.VERIFIED}</div>
+        </Link>
+      </div>
+
+      <div className="bg-daylight-card rounded-2xl shadow-card border border-daylight-muted/10 overflow-hidden">
+        <div className="p-6 border-b border-daylight-muted/10">
+          <h2 className="text-xl font-bold text-daylight-text">Recent Activity</h2>
+        </div>
+        <div className="divide-y divide-daylight-muted/10">
+          {auditLogs?.map((log: any) => (
+            <div key={log.id} className="p-4 px-6 flex items-start gap-4 hover:bg-daylight-muted/5 transition-colors">
+              <div className="flex-1">
+                <p className="text-sm text-daylight-text">
+                  <span className="font-semibold">{(log.curator_profiles as any)?.display_name || 'Unknown curator'}</span>{' '}
+                  performed <span className="font-mono text-xs bg-daylight-tag-bg text-daylight-tag-text px-1.5 py-0.5 rounded">{log.action}</span> on table <span className="font-mono text-xs text-daylight-muted">{log.table_name}</span>
+                </p>
+                <p className="text-xs text-daylight-muted mt-1">{new Date(log.created_at).toLocaleString()}</p>
+              </div>
+            </div>
+          ))}
+          {(!auditLogs || auditLogs.length === 0) && (
+            <div className="p-6 text-center text-daylight-muted">No recent activity</div>
+          )}
         </div>
       </div>
     </div>
-  )
+  );
 }
