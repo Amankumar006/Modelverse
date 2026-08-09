@@ -71,9 +71,9 @@ async function generateEmailDigest() {
       <tr style="border-bottom: 1px solid #243629;">
         <td style="padding: 12px; font-weight: bold; color: #ffffff;">${m.name}</td>
         <td style="padding: 12px; color: #4ADE80;">${m.developer}</td>
-        <td style="padding: 12px; color: #A3B8AA;">${Array.isArray(m.modality) ? m.modality.join(", ") : (m.modality || "")}</td>
+        <td style="padding: 12px; color: #A3B8AA;">${m.verification_status || 'DRAFT'}</td>
         <td style="padding: 12px; text-align: right;">
-          <a href="https://www.themodelverse.in/models/${m.slug}" style="display: inline-block; padding: 6px 12px; background-color: #4ADE80; color: #0C120F; font-weight: bold; text-decoration: none; border-radius: 6px; font-size: 12px;">View Model →</a>
+          <a href="https://www.themodelverse.in/admin/review/${m.slug}" style="display: inline-block; padding: 6px 12px; background-color: #4ADE80; color: #0C120F; font-weight: bold; text-decoration: none; border-radius: 6px; font-size: 12px;">Review →</a>
         </td>
       </tr>
     `
@@ -100,7 +100,7 @@ async function generateEmailDigest() {
 
     <!-- Intro -->
     <p style="font-size: 14px; line-height: 1.5; color: #A3B8AA;">
-      The automated daily ingestion pipeline discovered and published <strong>${newModels.length} new AI model(s)</strong> to <a href="https://www.themodelverse.in" style="color: #4ADE80; text-decoration: underline;">themodelverse.in</a>:
+      The automated daily ingestion pipeline discovered <strong>${newModels.length} new AI model(s)</strong>. They have been added to your <a href="https://www.themodelverse.in/admin" style="color: #4ADE80; text-decoration: underline;">Admin Review Queue</a> for verification:
     </p>
 
     <!-- Table -->
@@ -109,7 +109,7 @@ async function generateEmailDigest() {
         <tr style="background-color: #1A261D; color: #8C9E91;">
           <th style="padding: 10px;">Model Name</th>
           <th style="padding: 10px;">Developer</th>
-          <th style="padding: 10px;">Modality</th>
+          <th style="padding: 10px;">Status</th>
           <th style="padding: 10px; text-align: right;">Action</th>
         </tr>
       </thead>

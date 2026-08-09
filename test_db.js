@@ -1,11 +1,6 @@
-const { createClient } = require('@supabase/supabase-js');
-require('dotenv').config({ path: '.env.local' });
-
-const supabase = createClient(process.env.NEXT_PUBLIC_SUPABASE_URL, process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY);
-
-async function run() {
-  const { data, error } = await supabase.from('models').select('id, name, slug, needs_review, status').ilike('name', '%Qwen%3.7%');
-  if (error) console.error(error);
-  else console.log(data);
+const supabase = require('./src/lib/supabase.js');
+async function test() {
+  const { data, error } = await supabase.from('models').select('slug, name, verified, verification_status').order('release_date', { ascending: false }).limit(5);
+  console.log(data);
 }
-run();
+test();
