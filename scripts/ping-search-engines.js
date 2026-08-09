@@ -18,31 +18,41 @@ async function pingSearchEngines(customUrls = []) {
   urlsToPing.add(`${BASE_URL}/trending`);
   urlsToPing.add(`${BASE_URL}/news`);
 
+const supabase = require("../src/lib/supabase");
+
   // Load recently updated models from production catalog
   try {
-    const modelsPath = path.join(process.cwd(), "data", "models-archive.json");
-    if (fs.existsSync(modelsPath)) {
-      const models = JSON.parse(fs.readFileSync(modelsPath, "utf-8"));
-      // Take top 20 latest models
-      models.slice(0, 20).forEach((m) => {
+    const { data: models, error } = await supabase
+      .from("models")
+      .select("slug")
+      .order("release_date", { ascending: false })
+      .limit(20);
+    if (error) throw error;
+    if (models) {
+      models.forEach((m) => {
         if (m.slug) urlsToPing.add(`${BASE_URL}/models/${m.slug}`);
       });
     }
   } catch (e) {
-    console.warn("⚠️ Could not load models-archive.json for url extraction:", e.message);
+    console.warn("⚠️ Could not load models for url extraction:", e.message);
   }
 
   // Load recent news posts
   try {
-    const newsPath = path.join(process.cwd(), "data", "news", "_index.json");
-    if (fs.existsSync(newsPath)) {
-      const news = JSON.parse(fs.readFileSync(newsPath, "utf-8"));
-      news.slice(0, 10).forEach((n) => {
+    const { data: news, error } = await supabase
+      .from("news_items")
+      .select("slug")
+      .eq("status", "published")
+      .order("publish_date", { ascending: false })
+      .limit(10);
+    if (error) throw error;
+    if (news) {
+      news.forEach((n) => {
         if (n.slug) urlsToPing.add(`${BASE_URL}/news/${n.slug}`);
       });
     }
   } catch (e) {
-    console.warn("⚠️ Could not load news _index.json for url extraction:", e.message);
+    console.warn("⚠️ Could not load news for url extraction:", e.message);
   }
 
   const urlList = Array.from(urlsToPing);

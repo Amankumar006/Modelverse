@@ -36,11 +36,7 @@ jobs:
       - name: Generate Email Digest
         run: node scripts/generate-email-digest.js
 
-      - name: Compile and Validate Models Index
-        env:
-          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
-          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
-        run: node scripts/compile-models.js
+
 
       - name: Instant Search Engine Indexing Ping (IndexNow)
         run: node scripts/ping-search-engines.js

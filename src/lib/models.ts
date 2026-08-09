@@ -59,7 +59,7 @@ export interface ModelEntry extends ModelIndex {
   boost: number;
   curatorNotes: string;
   isLegacyCurated?: boolean;
-  verificationStatus?: "VERIFIED" | "DRAFT" | "DISPUTED";
+  verificationStatus?: "VERIFIED" | "LIKELY" | "DRAFT" | "DISPUTED";
   verifiedAt?: string;
   fieldConfidence?: {
     pricing?: "VERIFIED" | "LIKELY" | "DRAFT" | "DISPUTED";
@@ -81,7 +81,7 @@ const supabase = createClient(
 );
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-function mapRowToModelEntry(row: any): ModelEntry {
+export function mapRowToModelEntry(row: any): ModelEntry {
   // Map snake_case to camelCase and merge metadata
   const base = {
     id: row.id,

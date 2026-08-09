@@ -416,8 +416,6 @@ ${arxivUrl ? `- **Paper**: [arXiv](${arxivUrl})` : ""}
     const { runVerificationPipeline } = require("./verify-model-facts");
     await runVerificationPipeline();
 
-    console.log("\n⚡ Auto-compiling search indexes...");
-    require("./compile-models.js");
   }
 }
 
