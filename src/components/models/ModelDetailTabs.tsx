@@ -137,57 +137,49 @@ export default function ModelDetailTabs({
         {activeTab === "benchmarks" && (
           <div className="space-y-8">
             <section>
-              <h3 className="mb-3 text-xs uppercase tracking-wider font-bold text-[var(--muted)]">Benchmarks</h3>
+              <h3 className="mb-4 text-xs uppercase tracking-wider font-bold text-[var(--muted)]">Benchmarks</h3>
               {model.benchmarks?.length ? (
-                <div className="overflow-x-auto bg-[var(--card-bg)] shadow-[var(--shadow-card)] rounded-[var(--radius-card)] p-4 border border-[var(--muted)]/10">
-                  <table className="w-full min-w-[300px] text-sm">
-                    <tbody>
-                      {Object.entries(
-                        model.benchmarks.reduce((acc, b) => {
-                          const cat = b.category || "General";
-                          const sub = b.subCategory || "None";
-                          if (!acc[cat]) acc[cat] = {};
-                          if (!acc[cat][sub]) acc[cat][sub] = [];
-                          acc[cat][sub].push(b);
-                          return acc;
-                        }, {} as Record<string, Record<string, typeof model.benchmarks>>)
-                      ).map(([category, subcategories]) => {
-                        const hasMultipleCategories = Object.keys(
-                          model.benchmarks.reduce((a, b) => { a[b.category || "General"] = true; return a; }, {} as Record<string, boolean>)
-                        ).length > 1;
-                        
-                        return (
-                          <Fragment key={category}>
-                            {/* Category Header */}
-                            {(hasMultipleCategories || category !== "General") && (
-                              <tr>
-                                <td colSpan={3} className="pt-6 pb-2 text-[11px] uppercase tracking-wider font-extrabold text-[var(--text)] border-b border-[var(--muted)]/20 bg-[var(--card-bg)]">
-                                  {category}
-                                </td>
-                              </tr>
-                            )}
-                            
-                            {/* Subcategories */}
-                            {Object.entries(subcategories).map(([subCategory, benchs]) => (
-                              <Fragment key={subCategory}>
-                                {/* Subcategory Header */}
-                                {subCategory !== "None" && (
-                                  <tr>
-                                    <td colSpan={3} className={`pt-4 pb-1.5 text-[10px] uppercase tracking-wider font-bold text-[var(--muted)] border-b border-[var(--muted)]/10 bg-[var(--card-bg)] ${(hasMultipleCategories || category !== "General") ? 'pl-3' : ''}`}>
-                                      {subCategory}
-                                    </td>
-                                  </tr>
-                                )}
-                                
-                                {/* Benchmarks */}
-                                {benchs.map((b) => {
-                                  let indentClass = '';
-                                  if (subCategory !== "None") indentClass = (hasMultipleCategories || category !== "General") ? 'pl-6' : 'pl-3';
-                                  else if (hasMultipleCategories || category !== "General") indentClass = 'pl-3';
+                <div className="space-y-6">
+                  {Object.entries(
+                    model.benchmarks.reduce((acc, b) => {
+                      const cat = b.category || "General";
+                      const sub = b.subCategory || "None";
+                      if (!acc[cat]) acc[cat] = {};
+                      if (!acc[cat][sub]) acc[cat][sub] = [];
+                      acc[cat][sub].push(b);
+                      return acc;
+                    }, {} as Record<string, Record<string, typeof model.benchmarks>>)
+                  ).map(([category, subcategories]) => {
+                    const hasMultipleCategories = Object.keys(
+                      model.benchmarks.reduce((a, b) => { a[b.category || "General"] = true; return a; }, {} as Record<string, boolean>)
+                    ).length > 1;
+
+                    return (
+                      <div key={category} className="mb-6 last:mb-0">
+                        {/* Dynamic Table Title if there are multiple domains */}
+                        {(hasMultipleCategories || category !== "General") && (
+                          <h4 className="mb-3 text-[13px] uppercase tracking-wider font-extrabold text-[var(--text)] flex items-center gap-2">
+                            <div className="w-1.5 h-1.5 rounded-full bg-[var(--accent)]" />
+                            {category} Benchmarks
+                          </h4>
+                        )}
+
+                        <div className="overflow-x-auto bg-[var(--card-bg)] shadow-[var(--shadow-card)] rounded-[var(--radius-card)] p-4 border border-[var(--muted)]/10">
+                          <table className="w-full min-w-[300px] text-sm">
+                            <tbody>
+                              {Object.entries(subcategories).map(([subCategory, benchs]) => (
+                                <Fragment key={subCategory}>
+                                  {subCategory !== "None" && (
+                                    <tr>
+                                      <td colSpan={3} className="pt-4 pb-1.5 text-[10px] uppercase tracking-wider font-bold text-[var(--muted)] border-b border-[var(--muted)]/10">
+                                        {subCategory}
+                                      </td>
+                                    </tr>
+                                  )}
                                   
-                                  return (
+                                  {benchs.map((b) => (
                                     <tr key={b.name} className="border-b border-[var(--muted)]/10 last:border-0 hover:bg-[var(--bg)]/50 transition-colors">
-                                      <td className={`py-2.5 text-[var(--text)] font-semibold ${indentClass}`}>
+                                      <td className={`py-2.5 text-[var(--text)] font-semibold ${subCategory !== "None" ? 'pl-3' : ''}`}>
                                         {b.name}
                                       </td>
                                       <td className="py-2.5 tabular-nums text-[var(--accent)] font-mono font-bold">{b.score}</td>
@@ -198,15 +190,15 @@ export default function ModelDetailTabs({
                                         </span>
                                       </td>
                                     </tr>
-                                  );
-                                })}
-                              </Fragment>
-                            ))}
-                          </Fragment>
-                        );
-                      })}
-                    </tbody>
-                  </table>
+                                  ))}
+                                </Fragment>
+                              ))}
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                    );
+                  })}
                 </div>
               ) : (
                 <Empty>No benchmark data recorded yet.</Empty>
