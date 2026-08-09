@@ -3,10 +3,24 @@ import type { NewsArticle, NewsCategoryType } from "../../data/schema/news.schem
 
 // Create a generic anonymous client for public data fetching.
 // This avoids the 'cookies() cannot be used in generateStaticParams' error.
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
-);
+// We use a defensive pattern here so that if env vars are missing during Vercel's build phase
+// (e.g., when doing a static build without connecting to the DB), it doesn't crash the build.
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || '';
+const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || '';
+
+const supabase = supabaseUrl && supabaseKey
+  ? createClient(supabaseUrl, supabaseKey)
+  : ({
+      from: () => ({
+        select: () => ({
+          eq: () => ({
+            order: () => Promise.resolve({ data: [], error: null }),
+            single: () => Promise.resolve({ data: null, error: null }),
+          }),
+          order: () => Promise.resolve({ data: [], error: null }),
+        }),
+      }),
+    } as any);
 
 export type NewsArticleIndexEntry = Omit<NewsArticle, "body">;
 
