@@ -145,40 +145,66 @@ export default function ModelDetailTabs({
                       {Object.entries(
                         model.benchmarks.reduce((acc, b) => {
                           const cat = b.category || "General";
-                          if (!acc[cat]) acc[cat] = [];
-                          acc[cat].push(b);
+                          const sub = b.subCategory || "None";
+                          if (!acc[cat]) acc[cat] = {};
+                          if (!acc[cat][sub]) acc[cat][sub] = [];
+                          acc[cat][sub].push(b);
                           return acc;
-                        }, {} as Record<string, typeof model.benchmarks>)
-                      ).map(([category, benchs]) => (
-                        <Fragment key={category}>
-                          {Object.keys(
-                            model.benchmarks.reduce((a, b) => {
-                              a[b.category || "General"] = true;
-                              return a;
-                            }, {} as Record<string, boolean>)
-                          ).length > 1 && (
-                            <tr>
-                              <td colSpan={3} className="pt-5 pb-2 text-[10px] uppercase tracking-wider font-bold text-[var(--muted)] border-b border-[var(--muted)]/10 bg-[var(--card-bg)]">
-                                {category}
-                              </td>
-                            </tr>
-                          )}
-                          {benchs.map((b) => (
-                            <tr key={b.name} className="border-b border-[var(--muted)]/10 last:border-0 hover:bg-[var(--bg)]/50 transition-colors">
-                              <td className={`py-2.5 text-[var(--text)] font-semibold ${category !== "General" || Object.keys(model.benchmarks.reduce((a, b) => ({ ...a, [b.category || "General"]: true }), {})).length > 1 ? 'pl-3' : ''}`}>
-                                {b.name}
-                              </td>
-                              <td className="py-2.5 tabular-nums text-[var(--accent)] font-mono font-bold">{b.score}</td>
-                              <td className="py-2.5 text-right pr-2">
-                                <span className="inline-flex items-center gap-1.5 text-xs text-[var(--muted)]">
-                                  <span className={`h-2 w-2 rounded-full ${b.sourceType === "vendor-reported" ? DOT.vendor : DOT.independent}`} />
-                                  {b.sourceType === "vendor-reported" ? "Vendor-reported" : "Independent"}
-                                </span>
-                              </td>
-                            </tr>
-                          ))}
-                        </Fragment>
-                      ))}
+                        }, {} as Record<string, Record<string, typeof model.benchmarks>>)
+                      ).map(([category, subcategories]) => {
+                        const hasMultipleCategories = Object.keys(
+                          model.benchmarks.reduce((a, b) => { a[b.category || "General"] = true; return a; }, {} as Record<string, boolean>)
+                        ).length > 1;
+                        
+                        return (
+                          <Fragment key={category}>
+                            {/* Category Header */}
+                            {(hasMultipleCategories || category !== "General") && (
+                              <tr>
+                                <td colSpan={3} className="pt-6 pb-2 text-[11px] uppercase tracking-wider font-extrabold text-[var(--text)] border-b border-[var(--muted)]/20 bg-[var(--card-bg)]">
+                                  {category}
+                                </td>
+                              </tr>
+                            )}
+                            
+                            {/* Subcategories */}
+                            {Object.entries(subcategories).map(([subCategory, benchs]) => (
+                              <Fragment key={subCategory}>
+                                {/* Subcategory Header */}
+                                {subCategory !== "None" && (
+                                  <tr>
+                                    <td colSpan={3} className={`pt-4 pb-1.5 text-[10px] uppercase tracking-wider font-bold text-[var(--muted)] border-b border-[var(--muted)]/10 bg-[var(--card-bg)] ${(hasMultipleCategories || category !== "General") ? 'pl-3' : ''}`}>
+                                      {subCategory}
+                                    </td>
+                                  </tr>
+                                )}
+                                
+                                {/* Benchmarks */}
+                                {benchs.map((b) => {
+                                  let indentClass = '';
+                                  if (subCategory !== "None") indentClass = (hasMultipleCategories || category !== "General") ? 'pl-6' : 'pl-3';
+                                  else if (hasMultipleCategories || category !== "General") indentClass = 'pl-3';
+                                  
+                                  return (
+                                    <tr key={b.name} className="border-b border-[var(--muted)]/10 last:border-0 hover:bg-[var(--bg)]/50 transition-colors">
+                                      <td className={`py-2.5 text-[var(--text)] font-semibold ${indentClass}`}>
+                                        {b.name}
+                                      </td>
+                                      <td className="py-2.5 tabular-nums text-[var(--accent)] font-mono font-bold">{b.score}</td>
+                                      <td className="py-2.5 text-right pr-2">
+                                        <span className="inline-flex items-center gap-1.5 text-xs text-[var(--muted)]">
+                                          <span className={`h-2 w-2 rounded-full ${b.sourceType === "vendor-reported" ? DOT.vendor : DOT.independent}`} />
+                                          {b.sourceType === "vendor-reported" ? "Vendor-reported" : "Independent"}
+                                        </span>
+                                      </td>
+                                    </tr>
+                                  );
+                                })}
+                              </Fragment>
+                            ))}
+                          </Fragment>
+                        );
+                      })}
                     </tbody>
                   </table>
                 </div>
