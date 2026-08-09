@@ -211,6 +211,13 @@ async function verifyModelEntry(modelData) {
     modelData.curatorNotes = (modelData.curatorNotes || "") + `\n[Description Updated] Used LLM extraction from official markdown.`;
   }
 
+  // 6. Community Derivative Flagging
+  if (officialData?.isCommunityDerivative === true) {
+    if (!modelData.tags) modelData.tags = [];
+    if (!modelData.tags.includes("community-derivative")) modelData.tags.push("community-derivative");
+    modelData.curatorNotes = (modelData.curatorNotes || "") + `\n[Derivative Flagged] LLM identified this as an unofficial community quantization/finetune.`;
+  }
+
   // Overall Model Status Determination
   const statuses = Object.values(fieldConfidence);
   let modelStatus = "DRAFT";
@@ -304,6 +311,7 @@ async function runVerificationPipeline() {
       needs_review: modelData.needsReview,
       curator_notes: modelData.curatorNotes,
       description: modelData.description,
+      tags: modelData.tags,
       updated_at: new Date().toISOString(),
     };
 

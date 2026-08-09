@@ -159,12 +159,16 @@ async function fetchModelDetails(hfId) {
 async function getExistingIds() {
   const ids = new Set();
   const slugs = new Set();
+  const sources = new Set();
   const supabase = require("../src/lib/supabase");
 
-  const { data, error } = await supabase.from("models").select("slug");
+  const { data, error } = await supabase.from("models").select("slug, sources");
   if (data) {
     for (const row of data) {
       slugs.add(row.slug);
+      if (row.sources && Array.isArray(row.sources)) {
+        row.sources.forEach(src => sources.add(src));
+      }
     }
   }
 
@@ -182,14 +186,14 @@ async function getExistingIds() {
     } catch (e) {}
   }
 
-  return { ids, slugs };
+  return { ids, slugs, sources };
 }
 
 // ─── Main ingestion ─────────────────────────────────────────────────
 
 async function runIngestion() {
   console.log("🚀 Starting Daily Ingestion Pipeline...");
-  const { ids: existingIds, slugs: existingSlugs } = await getExistingIds();
+  const { ids: existingIds, slugs: existingSlugs, sources: existingSources } = await getExistingIds();
   const createdModels = [];
 
   // 1. Fetch trending model list
@@ -211,8 +215,12 @@ async function runIngestion() {
     const devSlug = slugify(author);
     const modelSlug = slugify(modelName);
     const fullId = `${devSlug}-${modelSlug}`;
+    const hfUrl = `https://huggingface.co/${listItem.id}`;
 
-    if (existingIds.has(fullId) || existingSlugs.has(modelSlug)) continue;
+    if (existingIds.has(fullId) || existingSlugs.has(modelSlug) || existingSources.has(hfUrl)) {
+      console.log(`  ⏭️  Skipping duplicate: ${listItem.id}`);
+      continue;
+    }
 
     // Fetch rich details from individual model endpoint
     console.log(`  📡 Fetching details for ${listItem.id}...`);

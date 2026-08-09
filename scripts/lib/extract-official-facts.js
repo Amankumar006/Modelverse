@@ -16,7 +16,8 @@ Ensure the keys match this exact format (use null if a value is not found):
   },
   "trainingTokens": "15T", // String, e.g. 15T, 2T
   "license": "Apache 2.0", // String
-  "description": "A 2-3 sentence technical description of the model based on the markdown. Focus on its architecture, intended use cases, special capabilities (like quantization, pruning, reasoning), and who built it. Do not use promotional language."
+  "description": "A 2-3 sentence technical description of the model based on the markdown. Focus on its architecture, intended use cases, special capabilities (like quantization, pruning, reasoning), and who built it. Do not use promotional language.",
+  "isCommunityDerivative": true // Boolean. Set to true if this is an unofficial quantization, GGUF/AWQ port, or community finetune of another model. False if it's the original official release.
 }`;
 
 async function extractWithGemini(markdown) {
