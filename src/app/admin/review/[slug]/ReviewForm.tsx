@@ -100,7 +100,7 @@ export default function ReviewForm({ model }: { model: any }) {
     const srcArray = sources.split('\n').map((s: string) => s.trim()).filter(Boolean);
     if (!srcArray.length) return null;
 
-    const badges = srcArray.map(src => {
+    const badges = srcArray.map((src: string) => {
       let label = '🔗';
       if (src.includes('huggingface.co')) label = 'HF';
       else if (src.includes('github.com')) label = 'GH';
@@ -113,7 +113,7 @@ export default function ReviewForm({ model }: { model: any }) {
 
     return (
       <span className="ml-3 inline-flex items-center gap-1.5">
-        {badges.map((badge, i) => (
+        {badges.map((badge: { url: string; label: string }, i: number) => (
           <a 
             key={i} 
             href={badge.url} 
