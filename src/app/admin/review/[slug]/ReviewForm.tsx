@@ -3,7 +3,7 @@
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { approveModel, saveModelEdits, markDisputed } from '../../actions'
-import StatusDots from '@/components/StatusDots'
+import StatusDots, { StatusValue } from '@/components/StatusDots'
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export default function ReviewForm({ model }: { model: any }) {
@@ -90,7 +90,7 @@ export default function ReviewForm({ model }: { model: any }) {
     if (!conf) return null
     return (
       <span className="ml-3 inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-daylight-bg border border-daylight-muted/10 text-xs font-mono tracking-wide">
-        <StatusDots status={conf} />
+        <StatusDots status={conf as StatusValue} />
         {conf}
       </span>
     )
