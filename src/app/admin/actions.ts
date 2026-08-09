@@ -97,6 +97,7 @@ export async function saveModelEdits(slug: string, edits: any) {
 
   revalidatePath('/admin/review');
   revalidatePath(`/admin/review/${slug}`);
+  revalidatePath(`/models/${slug}`);
   
   return { success: true };
 }
