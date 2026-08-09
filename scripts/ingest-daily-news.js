@@ -234,7 +234,7 @@ Content:
     generationConfig: { temperature: 0.1, maxOutputTokens: 5 }
   };
 
-  const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=\${apiKey}`;
+  const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`;
   try {
     const responseJson = await postHttps(url, payload);
     const data = JSON.parse(responseJson);
@@ -244,7 +244,7 @@ Content:
       return isNaN(score) ? 5 : score;
     }
   } catch(e) {
-    console.warn(\`   ⚠️ Scoring API failed: \${e.message}\`);
+    console.warn(`   ⚠️ Scoring API failed: ${e.message}`);
   }
   return 5;
 }
@@ -274,7 +274,7 @@ Return ONLY the final, polished, verified markdown text. Do not include introduc
     generationConfig: { temperature: 0.2 }
   };
 
-  const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=\${apiKey}`;
+  const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`;
   try {
     const responseJson = await postHttps(url, payload);
     const data = JSON.parse(responseJson);
@@ -282,14 +282,14 @@ Return ONLY the final, polished, verified markdown text. Do not include introduc
       return data.candidates[0].content.parts[0].text.trim();
     }
   } catch(e) {
-    console.warn(\`   ⚠️ Verifier API failed: \${e.message}\`);
+    console.warn(`   ⚠️ Verifier API failed: ${e.message}`);
   }
   return draftSummary;
 }
 
 async function rewriteArticleWithGemini(title, body) {
   const apiKey = process.env.GEMINI_API_KEY;
-  let prompt = GENERATOR_PROMPT.replace('\${title}', title).replace('\${body}', body);
+  let prompt = GENERATOR_PROMPT.replace('${title}', title).replace('${body}', body);
 
   const payload = {
     contents: [{
@@ -312,7 +312,7 @@ async function rewriteArticleWithGemini(title, body) {
 
 async function rewriteArticleWithGroq(title, body) {
   const apiKey = process.env.GROQ_API_KEY;
-  let prompt = GENERATOR_PROMPT.replace('\${title}', title).replace('\${body}', body);
+  let prompt = GENERATOR_PROMPT.replace('${title}', title).replace('${body}', body);
 
   const payload = {
     model: "llama-3.3-70b-versatile",
@@ -342,7 +342,7 @@ async function rewriteArticleWithGroq(title, body) {
 
 async function rewriteArticleWithOpenRouter(title, body, lab, originalUrl) {
   const apiKey = process.env.OPENROUTER_API_KEY;
-  let prompt = GENERATOR_PROMPT.replace('\${title}', title).replace('\${body}', body);
+  let prompt = GENERATOR_PROMPT.replace('${title}', title).replace('${body}', body);
 
   const payload = {
     model: "nvidia/nemotron-3-super-120b-a12b:free",
