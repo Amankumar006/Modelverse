@@ -200,23 +200,96 @@ function postHttps(url, payload, customHeaders = {}) {
   });
 }
 
-async function rewriteArticleWithGemini(title, body) {
-  const apiKey = process.env.GEMINI_API_KEY;
-  const prompt = `You are a professional AI technology editor at Modelverse (themodelverse.in).
-Write a unique, original, and engaging summary of the following AI news or announcement.
+const GENERATOR_PROMPT = `You are a technical AI research analyst writing for a highly technical audience at Modelverse (themodelverse.in).
+Write a unique, original summary of the following AI news or announcement.
 Do NOT copy-paste the source sentences directly (avoid plagiarism).
-Keep the narrative structured into 2-3 clean paragraphs (around 150-250 words total).
+Structure your response into 2-3 clean paragraphs (150-250 words total). Use a bulleted list for technical specs or key takeaways if applicable.
+Do NOT use marketing buzzwords like 'revolutionize', 'groundbreaking', or 'game-changer'. Focus heavily on architectural changes, benchmark scores, context window sizes, and licensing.
 Do NOT rewrite or modify raw code blocks, mathematical equations, links, or specific benchmark scores. Keep them intact.
-Focus on:
-1. What was announced or released.
-2. How the technology works.
-3. Why it matters to developers and researchers.
 
-Title: ${title}
+Title: \${title}
 Source Content:
-${body}
+\${body}
 
 Write the unique summary in Markdown (do not write any intro like "Here is your summary"):`;
+
+async function scoreArticleRelevance(title, body) {
+  const apiKey = process.env.GEMINI_API_KEY;
+  if (!apiKey) return 7; // Default pass if no key
+  
+  const prompt = `You are a strict tech editor filtering noise from a high-quality AI news aggregator.
+Score the following raw article from 1 to 10 based on its relevance to AI model developers, researchers, and enterprises.
+10 = Major foundation model release, major benchmark breakthrough, major framework update.
+7-9 = New finetunes, useful tools, significant research paper.
+4-6 = Corporate drama, minor feature updates, generic opinions.
+1-3 = Completely irrelevant, non-AI news, generic clickbait.
+Return ONLY a single integer between 1 and 10.
+
+Title: \${title}
+Content:
+\${body}`;
+
+  const payload = {
+    contents: [{ parts: [{ text: prompt }] }],
+    generationConfig: { temperature: 0.1, maxOutputTokens: 5 }
+  };
+
+  const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=\${apiKey}`;
+  try {
+    const responseJson = await postHttps(url, payload);
+    const data = JSON.parse(responseJson);
+    if (data.candidates && data.candidates[0] && data.candidates[0].content && data.candidates[0].content.parts[0]) {
+      const scoreStr = data.candidates[0].content.parts[0].text.trim();
+      const score = parseInt(scoreStr.replace(/[^0-9]/g, ''));
+      return isNaN(score) ? 5 : score;
+    }
+  } catch(e) {
+    console.warn(\`   ⚠️ Scoring API failed: \${e.message}\`);
+  }
+  return 5;
+}
+
+async function verifyAndRefineArticle(title, rawBody, draftSummary) {
+  const apiKey = process.env.GEMINI_API_KEY;
+  if (!apiKey) return draftSummary; // bypass if no key
+  
+  const prompt = `You are the strict Senior Editor (Verifier Agent) for Modelverse news.
+Your job is to audit a drafted summary of an AI news article against the original raw text.
+
+Original Raw Text:
+\${rawBody}
+
+Draft Summary to Audit:
+\${draftSummary}
+
+Task:
+1. Hallucination Check: Are there any facts, numbers, or claims in the draft that do NOT appear in the original text? If so, remove them.
+2. Tone Check: Remove marketing fluff, buzzwords (e.g. "game-changer", "revolutionize", "groundbreaking"), and subjective opinions. Make it sound like an objective, highly technical AI researcher wrote it.
+3. Formatting Check: Ensure the final output uses markdown formatting (like a bulleted list for technical specs/takeaways) if appropriate.
+
+Return ONLY the final, polished, verified markdown text. Do not include introductory notes or explanations of what you changed.`;
+
+  const payload = {
+    contents: [{ parts: [{ text: prompt }] }],
+    generationConfig: { temperature: 0.2 }
+  };
+
+  const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=\${apiKey}`;
+  try {
+    const responseJson = await postHttps(url, payload);
+    const data = JSON.parse(responseJson);
+    if (data.candidates && data.candidates[0] && data.candidates[0].content && data.candidates[0].content.parts[0]) {
+      return data.candidates[0].content.parts[0].text.trim();
+    }
+  } catch(e) {
+    console.warn(\`   ⚠️ Verifier API failed: \${e.message}\`);
+  }
+  return draftSummary;
+}
+
+async function rewriteArticleWithGemini(title, body) {
+  const apiKey = process.env.GEMINI_API_KEY;
+  let prompt = GENERATOR_PROMPT.replace('\${title}', title).replace('\${body}', body);
 
   const payload = {
     contents: [{
@@ -239,21 +312,7 @@ Write the unique summary in Markdown (do not write any intro like "Here is your 
 
 async function rewriteArticleWithGroq(title, body) {
   const apiKey = process.env.GROQ_API_KEY;
-  const prompt = `You are a professional AI technology editor at Modelverse (themodelverse.in).
-Write a unique, original, and engaging summary of the following AI news or announcement.
-Do NOT copy-paste the source sentences directly (avoid plagiarism).
-Keep the narrative structured into 2-3 clean paragraphs (around 150-250 words total).
-Do NOT rewrite or modify raw code blocks, mathematical equations, links, or specific benchmark scores. Keep them intact.
-Focus on:
-1. What was announced or released.
-2. How the technology works.
-3. Why it matters to developers and researchers.
-
-Title: ${title}
-Source Content:
-${body}
-
-Write the unique summary in Markdown (do not write any intro like "Here is your summary"):`;
+  let prompt = GENERATOR_PROMPT.replace('\${title}', title).replace('\${body}', body);
 
   const payload = {
     model: "llama-3.3-70b-versatile",
@@ -283,21 +342,7 @@ Write the unique summary in Markdown (do not write any intro like "Here is your 
 
 async function rewriteArticleWithOpenRouter(title, body, lab, originalUrl) {
   const apiKey = process.env.OPENROUTER_API_KEY;
-  const prompt = `You are a professional AI technology editor at Modelverse (themodelverse.in).
-Write a unique, original, and engaging summary of the following AI news or announcement.
-Do NOT copy-paste the source sentences directly (avoid plagiarism).
-Keep the narrative structured into 2-3 clean paragraphs (around 150-250 words total).
-Do NOT rewrite or modify raw code blocks, mathematical equations, links, or specific benchmark scores. Keep them intact.
-Focus on:
-1. What was announced or released.
-2. How the technology works.
-3. Why it matters to developers and researchers.
-
-Title: ${title}
-Source Content:
-${body}
-
-Write the unique summary in Markdown (do not write any intro like "Here is your summary"):`;
+  let prompt = GENERATOR_PROMPT.replace('\${title}', title).replace('\${body}', body);
 
   const payload = {
     model: "nvidia/nemotron-3-super-120b-a12b:free",
@@ -683,11 +728,23 @@ async function extractFullArticleBody(url, fallbackDesc, lab) {
       coverImage = getPosterImage(candidate.lab, posterIndex);
     }
 
-    // Extract full article paragraphs
+    // Relevance Scoring Phase
     const rawBody = await extractFullArticleBody(candidate.link, candidate.description, candidate.lab);
+    const relevanceScore = await scoreArticleRelevance(candidate.title, rawBody);
     
-    // Rewrite content to avoid plagiarism and present a unique editorial summary
-    const bodyContent = await rewriteArticle(candidate.title, rawBody, candidate.lab, candidate.link);
+    if (relevanceScore < 6) {
+      console.log(`  ⏭️  Skipping (Low Score ${relevanceScore}/10): ${candidate.title.slice(0, 40)}...`);
+      existingSlugs.add(newsSlug); // prevent reprocessing next run
+      continue;
+    } else {
+      console.log(`  ⭐  Scored ${relevanceScore}/10: ${candidate.title.slice(0, 40)}...`);
+    }
+
+    // Generator Agent Phase
+    const draftContent = await rewriteArticle(candidate.title, rawBody, candidate.lab, candidate.link);
+    
+    // Verifier Agent Phase
+    const bodyContent = await verifyAndRefineArticle(candidate.title, rawBody, draftContent);
     
     const wordCount = bodyContent.split(/\s+/).length;
     const readTimeMinutes = Math.max(2, Math.ceil(wordCount / 200));

@@ -1,0 +1,33 @@
+name: Weekly Deep Dive Synthesis Pipeline
+
+on:
+  schedule:
+    # Runs every Sunday at 23:00 UTC
+    - cron: '0 23 * * 0'
+  workflow_dispatch:
+
+jobs:
+  generate-deep-dive:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run Weekly Deep Dive Synthesis
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+        run: node scripts/ingest-deep-dives.js
