@@ -25,9 +25,11 @@ export default function ReviewForm({ model }: { model: any }) {
 
   // JSON states
   const [pricing, setPricing] = useState(model.pricing ? JSON.stringify(model.pricing, null, 2) : '')
-  const [benchmarks, setBenchmarks] = useState(model.benchmarks ? JSON.stringify(model.benchmarks, null, 2) : '')
   const [parameters, setParameters] = useState(model.parameters ? JSON.stringify(model.parameters, null, 2) : '')
   const [contextWindow, setContextWindow] = useState(model.contextWindow ? JSON.stringify(model.contextWindow, null, 2) : '')
+
+  // Benchmark Interactive State
+  const [benchmarks, setBenchmarks] = useState<any[]>(model.benchmarks || [])
 
   const [curatorNotes, setCuratorNotes] = useState(model.curatorNotes || '')
 
@@ -53,7 +55,6 @@ export default function ReviewForm({ model }: { model: any }) {
   const validateJson = () => {
     const fields = [
       { name: 'Pricing', val: pricing },
-      { name: 'Benchmarks', val: benchmarks },
       { name: 'Parameters', val: parameters },
       { name: 'Context Window', val: contextWindow }
     ]
@@ -210,11 +211,53 @@ export default function ReviewForm({ model }: { model: any }) {
             </label>
             <textarea value={pricing} onChange={e => setPricing(e.target.value)} rows={4} className={`${inputClass} font-mono text-[13px] leading-relaxed`} />
           </div>
-          <div>
-            <label className={`${labelClass} flex items-center`}>
-              Benchmarks <ConfidenceBadge conf={fieldConf.benchmarks} /><SourceBadges />
-            </label>
-            <textarea value={benchmarks} onChange={e => setBenchmarks(e.target.value)} rows={4} className={`${inputClass} font-mono text-[13px] leading-relaxed`} />
+          <div className="col-span-full mb-4">
+            <div className="flex items-center justify-between mb-2">
+              <label className={`${labelClass} mb-0 flex items-center`}>
+                Benchmarks <ConfidenceBadge conf={fieldConf.benchmarks} /><SourceBadges />
+              </label>
+              <button 
+                type="button"
+                onClick={() => setBenchmarks([...benchmarks, { name: '', score: '', category: 'Knowledge', subCategory: 'General', sourceType: 'vendor-reported', verified: false }])}
+                className="text-xs bg-daylight-accent/10 text-daylight-accent px-2 py-1 rounded hover:bg-daylight-accent hover:text-white transition-colors"
+              >
+                + Add Benchmark
+              </button>
+            </div>
+            <div className="space-y-2 max-h-[400px] overflow-y-auto pr-2 custom-scrollbar">
+              {benchmarks.map((bm, i) => (
+                <div key={i} className="flex items-center gap-2 bg-daylight-bg border border-daylight-muted/20 p-2 rounded-lg">
+                  <input 
+                    type="text" placeholder="Category" value={bm.category || ''}
+                    onChange={e => { const newB = [...benchmarks]; newB[i].category = e.target.value; setBenchmarks(newB); }}
+                    className="flex-1 text-xs p-1.5 bg-daylight-bg border border-daylight-muted/20 rounded focus:outline-none focus:border-daylight-accent"
+                    title="Category"
+                  />
+                  <input 
+                    type="text" placeholder="Sub-category" value={bm.subCategory || ''}
+                    onChange={e => { const newB = [...benchmarks]; newB[i].subCategory = e.target.value; setBenchmarks(newB); }}
+                    className="flex-1 text-xs p-1.5 bg-daylight-bg border border-daylight-muted/20 rounded focus:outline-none focus:border-daylight-accent"
+                    title="Sub-category"
+                  />
+                  <input 
+                    type="text" placeholder="Benchmark Name" value={bm.name || ''}
+                    onChange={e => { const newB = [...benchmarks]; newB[i].name = e.target.value; setBenchmarks(newB); }}
+                    className="flex-1 text-xs p-1.5 bg-daylight-bg border border-daylight-muted/20 rounded font-semibold focus:outline-none focus:border-daylight-accent"
+                    title="Name"
+                  />
+                  <input 
+                    type="text" placeholder="Score" value={bm.score || ''}
+                    onChange={e => { const newB = [...benchmarks]; newB[i].score = e.target.value; setBenchmarks(newB); }}
+                    className="w-24 text-xs p-1.5 bg-daylight-bg border border-daylight-muted/20 rounded font-mono focus:outline-none focus:border-daylight-accent"
+                    title="Score"
+                  />
+                  <button type="button" onClick={() => { const newB = [...benchmarks]; newB.splice(i, 1); setBenchmarks(newB); }} className="p-1.5 text-red-500/70 hover:text-red-500 hover:bg-red-500/10 rounded transition-colors" title="Remove">
+                    ✕
+                  </button>
+                </div>
+              ))}
+              {benchmarks.length === 0 && <div className="text-sm text-daylight-muted italic text-center py-4 border border-dashed border-daylight-muted/20 rounded-lg">No benchmarks defined</div>}
+            </div>
           </div>
           <div>
             <label className={`${labelClass} flex items-center`}>
