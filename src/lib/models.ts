@@ -24,6 +24,7 @@ export interface Benchmark {
   score: string;
   verified: boolean;
   sourceType?: "vendor-reported" | "independent-eval";
+  category?: string;
 }
 
 /** Full model entry. */

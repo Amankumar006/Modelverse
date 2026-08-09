@@ -96,6 +96,39 @@ export default function ReviewForm({ model }: { model: any }) {
     )
   }
 
+  const SourceBadges = () => {
+    const srcArray = sources.split('\n').map((s: string) => s.trim()).filter(Boolean);
+    if (!srcArray.length) return null;
+
+    const badges = srcArray.map(src => {
+      let label = '🔗';
+      if (src.includes('huggingface.co')) label = 'HF';
+      else if (src.includes('github.com')) label = 'GH';
+      else if (src.includes('youtube.com') || src.includes('youtu.be')) label = 'YT';
+      else if (src.includes('x.com') || src.includes('twitter.com')) label = 'X';
+      else if (src.includes('arxiv.org')) label = 'arXiv';
+      
+      return { url: src, label };
+    });
+
+    return (
+      <span className="ml-3 inline-flex items-center gap-1.5">
+        {badges.map((badge, i) => (
+          <a 
+            key={i} 
+            href={badge.url} 
+            target="_blank" 
+            rel="noreferrer"
+            title={badge.url}
+            className="px-1.5 py-0.5 rounded bg-daylight-accent/10 text-daylight-accent border border-daylight-accent/20 text-[10px] font-bold hover:bg-daylight-accent hover:text-white transition-colors"
+          >
+            {badge.label}
+          </a>
+        ))}
+      </span>
+    );
+  }
+
   const inputClass = "w-full p-2.5 bg-daylight-bg border border-daylight-muted/20 rounded-lg text-daylight-text focus:outline-none focus:ring-1 focus:ring-daylight-accent focus:border-daylight-accent placeholder-daylight-muted/50"
   const labelClass = "block text-sm font-medium mb-1.5 text-daylight-text"
 
@@ -173,25 +206,25 @@ export default function ReviewForm({ model }: { model: any }) {
           <h2 className="text-lg font-semibold border-b border-daylight-muted/10 pb-2 text-daylight-text">Complex Fields (JSON)</h2>
           <div>
             <label className={`${labelClass} flex items-center`}>
-              Pricing <ConfidenceBadge conf={fieldConf.pricing} />
+              Pricing <ConfidenceBadge conf={fieldConf.pricing} /><SourceBadges />
             </label>
             <textarea value={pricing} onChange={e => setPricing(e.target.value)} rows={4} className={`${inputClass} font-mono text-[13px] leading-relaxed`} />
           </div>
           <div>
             <label className={`${labelClass} flex items-center`}>
-              Benchmarks <ConfidenceBadge conf={fieldConf.benchmarks} />
+              Benchmarks <ConfidenceBadge conf={fieldConf.benchmarks} /><SourceBadges />
             </label>
             <textarea value={benchmarks} onChange={e => setBenchmarks(e.target.value)} rows={4} className={`${inputClass} font-mono text-[13px] leading-relaxed`} />
           </div>
           <div>
             <label className={`${labelClass} flex items-center`}>
-              Parameters <ConfidenceBadge conf={fieldConf.parameters} />
+              Parameters <ConfidenceBadge conf={fieldConf.parameters} /><SourceBadges />
             </label>
             <textarea value={parameters} onChange={e => setParameters(e.target.value)} rows={3} className={`${inputClass} font-mono text-[13px] leading-relaxed`} />
           </div>
           <div>
             <label className={`${labelClass} flex items-center`}>
-              Context Window <ConfidenceBadge conf={fieldConf.contextWindow} />
+              Context Window <ConfidenceBadge conf={fieldConf.contextWindow} /><SourceBadges />
             </label>
             <textarea value={contextWindow} onChange={e => setContextWindow(e.target.value)} rows={3} className={`${inputClass} font-mono text-[13px] leading-relaxed`} />
           </div>
@@ -224,6 +257,14 @@ export default function ReviewForm({ model }: { model: any }) {
         >
           Save without verifying
         </button>
+        <a 
+          href={`/models/${model.slug}`} 
+          target="_blank" 
+          rel="noreferrer"
+          className="px-6 py-2.5 border border-daylight-muted/20 text-daylight-text rounded-lg hover:bg-daylight-muted/5 font-medium transition-colors flex items-center gap-2"
+        >
+          Preview ↗
+        </a>
         <div className="flex-1"></div>
         <button 
           onClick={onDispute} 
