@@ -15,7 +15,8 @@ Ensure the keys match this exact format (use null if a value is not found):
     "gsm8k": "82.1" // String, percentage score
   },
   "trainingTokens": "15T", // String, e.g. 15T, 2T
-  "license": "Apache 2.0" // String
+  "license": "Apache 2.0", // String
+  "description": "A 2-3 sentence technical description of the model based on the markdown. Focus on its architecture, intended use cases, special capabilities (like quantization, pruning, reasoning), and who built it. Do not use promotional language."
 }`;
 
 async function extractWithGemini(markdown) {

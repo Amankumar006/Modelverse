@@ -205,6 +205,12 @@ async function verifyModelEntry(modelData) {
     }
   }
 
+  // 5. Description Verification / Enhancement
+  if (officialData?.description && officialData.description.length > 50) {
+    modelData.description = officialData.description;
+    modelData.curatorNotes = (modelData.curatorNotes || "") + `\n[Description Updated] Used LLM extraction from official markdown.`;
+  }
+
   // Overall Model Status Determination
   const statuses = Object.values(fieldConfidence);
   let modelStatus = "DRAFT";
@@ -297,6 +303,7 @@ async function runVerificationPipeline() {
       verified: modelData.verified,
       needs_review: modelData.needsReview,
       curator_notes: modelData.curatorNotes,
+      description: modelData.description,
       updated_at: new Date().toISOString(),
     };
 
