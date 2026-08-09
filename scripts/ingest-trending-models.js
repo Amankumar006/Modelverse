@@ -13,6 +13,9 @@ if (!fs.existsSync(INGESTION_DIR)) {
 if (!fs.existsSync(PENDING_DIR)) {
   fs.mkdirSync(PENDING_DIR, { recursive: true });
 }
+if (!fs.existsSync(README_DIR)) {
+  fs.mkdirSync(README_DIR, { recursive: true });
+}
 
 function getHttps(url) {
   return new Promise((resolve, reject) => {

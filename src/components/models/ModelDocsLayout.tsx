@@ -73,13 +73,6 @@ export default function ModelDocsLayout({
           Model IDs & versioning
         </Link>
 
-        <button
-          onClick={() => {}}
-          className="w-full text-left px-3 py-2 rounded-[var(--radius-control)] text-[var(--muted)] hover:text-[var(--text)] hover:bg-[var(--bg)] transition-colors font-medium cursor-pointer"
-        >
-          Choosing a model
-        </button>
-
         {familyMembers.map((member) => (
           <Link
             key={member.id}
@@ -176,19 +169,8 @@ export default function ModelDocsLayout({
             </p>
           </div>
 
-          {/* Section 1: Choosing a model */}
-          <section id="choosing" className="space-y-3 pt-6 border-t border-[var(--muted)]/10">
-            <h2 className="text-2xl font-extrabold text-[var(--text)]">Choosing a model</h2>
-            <p className="text-sm text-[var(--muted)] leading-relaxed font-normal">
-              If you&apos;re unsure which model to use, start with <strong className="text-[var(--text)] font-bold">{model.name}</strong> for complex agentic coding, reasoning, and enterprise workloads. For lightweight, low-latency autocomplete or edge tasks, consider smaller parameters.
-            </p>
-            <p className="text-sm text-[var(--muted)] leading-relaxed font-normal">
-              All current {model.developer} models support text and multimodal input, multilingual reasoning, and structured tool calling. Models are available via API, cloud hosters, and open-weights download repositories.
-            </p>
-          </section>
-
-          {/* Section 2: Model Variant Overview */}
-          <section className="space-y-4 pt-6 border-t border-[var(--muted)]/10">
+          {/* Section 1: Model Variant Overview */}
+          <section id="overview" className="space-y-4 pt-6 border-t border-[var(--muted)]/10">
             <h2 className="text-2xl font-extrabold text-[var(--text)]">Model Lineage & Specification</h2>
             <p className="text-sm text-[var(--muted)] leading-relaxed font-normal">
               <code className="bg-[var(--tag-bg)] text-[var(--tag-text)] px-2 py-0.5 rounded-[var(--radius-pill)] text-xs font-mono font-bold">{model.slug}</code> is {model.developer}&apos;s primary release in the {model.family || "current"} family.
@@ -359,7 +341,7 @@ export default function ModelDocsLayout({
 
           <ul className="space-y-2.5 text-[var(--muted)] pl-2 border-l border-[var(--muted)]/10 font-medium">
             <li>
-              <a href="#choosing" className="hover:text-[var(--accent)] transition-colors block">
+              <a href="#overview" className="hover:text-[var(--accent)] transition-colors block">
                 {model.developer} model overview
               </a>
             </li>
