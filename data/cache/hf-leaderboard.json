@@ -1,5 +1,5 @@
 {
-  "fetchedAt": "2026-08-09T05:10:37.768Z",
+  "fetchedAt": "2026-08-10T05:37:21.478Z",
   "data": {
     "features": [
       {
@@ -2608,7 +2608,7 @@
           "eval_name": "AicoresSecurity_Cybernet-Sec-3B-R1-V0_bfloat16",
           "Precision": "bfloat16",
           "Type": "🔶 fine-tuned on domain-specific datasets",
-          "T": "🔶",
+          "T": "���",
           "Weight type": "Original",
           "Architecture": "LlamaForCausalLM",
           "Model": "<a target=\"_blank\" href=\"https://huggingface.co/AicoresSecurity/Cybernet-Sec-3B-R1-V0\" style=\"color: var(--link-text-color); text-decoration: underline;text-decoration-style: dotted;\">AicoresSecurity/Cybernet-Sec-3B-R1-V0</a>  <a target=\"_blank\" href=\"https://huggingface.co/datasets/open-llm-leaderboard/AicoresSecurity__Cybernet-Sec-3B-R1-V0-details\" style=\"color: var(--link-text-color); text-decoration: underline;text-decoration-style: dotted;\">📑</a>",
