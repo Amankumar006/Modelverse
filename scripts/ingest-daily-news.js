@@ -225,9 +225,9 @@ Score the following raw article from 1 to 10 based on its relevance to AI model 
 1-3 = Completely irrelevant, non-AI news, generic clickbait.
 Return ONLY a single integer between 1 and 10.
 
-Title: \${title}
+Title: ${title}
 Content:
-\${body}`;
+${body}`;
 
   const payload = {
     contents: [{ parts: [{ text: prompt }] }],
@@ -257,10 +257,10 @@ async function verifyAndRefineArticle(title, rawBody, draftSummary) {
 Your job is to audit a drafted summary of an AI news article against the original raw text.
 
 Original Raw Text:
-\${rawBody}
+${rawBody}
 
 Draft Summary to Audit:
-\${draftSummary}
+${draftSummary}
 
 Task:
 1. Hallucination Check: Are there any facts, numbers, or claims in the draft that do NOT appear in the original text? If so, remove them.
