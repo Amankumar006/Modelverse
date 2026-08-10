@@ -17,6 +17,8 @@ export interface ModelIndex {
   family: string | null;
   tier?: string | null;
   institution?: string;
+  verified?: boolean;
+  verificationStatus?: string;
 }
 
 export interface Benchmark {
@@ -78,7 +80,7 @@ export interface ModelEntry extends ModelIndex {
 import { createClient } from '@supabase/supabase-js';
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || process.env.SUPABASE_URL || '';
-const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || process.env.SUPABASE_SERVICE_ROLE_KEY || '';
+const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || '';
 
 if (!supabaseUrl) {
   console.warn("⚠️ Warning: NEXT_PUBLIC_SUPABASE_URL is missing during build.");
@@ -161,6 +163,8 @@ function mapRowToModelIndex(row: any): ModelIndex {
     family: row.family,
     tier: row.tier,
     institution: row.institution,
+    verified: row.verified,
+    verificationStatus: row.verification_status,
   };
 }
 
@@ -172,7 +176,7 @@ function mapRowToModelIndex(row: any): ModelIndex {
 export async function getAllModels(): Promise<ModelIndex[]> {
   const { data } = await supabase
     .from('models')
-    .select('id, name, slug, developer, release_date, type, status, vendor_api_status, featured, boost, family, tier, institution')
+    .select('id, name, slug, developer, release_date, type, status, vendor_api_status, featured, boost, family, tier, institution, verified, verification_status')
     .order('release_date', { ascending: false });
   return (data || []).map(mapRowToModelIndex);
 }
@@ -190,7 +194,7 @@ export async function getAllModelEntries(): Promise<ModelEntry[]> {
 export async function getRecentModels(n: number): Promise<ModelIndex[]> {
   const { data } = await supabase
     .from('models')
-    .select('id, name, slug, developer, release_date, type, status, vendor_api_status, featured, boost, family, tier, institution')
+    .select('id, name, slug, developer, release_date, type, status, vendor_api_status, featured, boost, family, tier, institution, verified, verification_status')
     .order('release_date', { ascending: false })
     .limit(n);
   return (data || []).map(mapRowToModelIndex);
@@ -247,13 +251,27 @@ export async function getDeveloperCounts(): Promise<{ developer: string; count: 
 }
 
 /** Format parameters display string including active parameters if present */
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function formatParameters(model: { parameters?: string | any; activeParameters?: string | any }): string {
   if (!model.parameters) return "Undisclosed";
-  const p = typeof model.parameters === "object" && model.parameters !== null ? Object.values(model.parameters).join(" / ") : model.parameters;
+  
+  let p = model.parameters;
+  if (typeof p === "object" && p !== null) {
+    if (Array.isArray(p)) {
+      if (p.length > 0 && typeof p[0] === 'object') {
+        p = "Undisclosed";
+      } else {
+        p = p.join(" / ");
+      }
+    } else {
+      p = Object.values(p).join(" / ");
+    }
+  }
+  
+  p = String(p);
+
   if (model.activeParameters) {
-    const active = model.activeParameters.toLowerCase().includes("active")
-      ? model.activeParameters
+    const active = String(model.activeParameters).toLowerCase().includes("active")
+      ? String(model.activeParameters)
       : `${model.activeParameters} active`;
     if (p.includes("(") || p.toLowerCase().includes("active")) {
       return p;

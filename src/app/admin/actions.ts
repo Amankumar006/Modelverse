@@ -3,7 +3,6 @@
 import { createClient } from '@/utils/supabase/server'
 import { revalidatePath } from 'next/cache'
 
-// Helper to safely parse JSON strings back to objects for the database
 function parseJsonFields(edits: any) {
   const jsonFields = ['pricing', 'benchmarks', 'parameters', 'context_window'];
   const parsed = { ...edits };
@@ -14,7 +13,8 @@ function parseJsonFields(edits: any) {
         try {
           parsed[field] = JSON.parse(parsed[field]);
         } catch (e) {
-          throw new Error(`Invalid JSON for field: ${field}`);
+          // If it fails to parse as JSON, keep it as a string
+          // This allows users to type "128K" or "72B" without quotes in the form
         }
       }
     }

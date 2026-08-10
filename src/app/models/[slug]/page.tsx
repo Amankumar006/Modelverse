@@ -120,15 +120,15 @@ export default async function ModelDetailPage({
 
   const imageUrl = model.logo ? `${SITE_URL}${model.logo}` : `${SITE_URL}/icon.jpg`;
 
-  // Build the Product entity
+  // Build the SoftwareApplication entity
   const productEntity: Record<string, unknown> = {
-    "@type": "Product",
-    "@id": `${SITE_URL}/models/${model.slug}#product`,
+    "@type": "SoftwareApplication",
+    "@id": `${SITE_URL}/models/${model.slug}#software`,
     name: model.name,
     description: model.description,
     image: imageUrl,
-    brand: { "@type": "Brand", name: model.developer },
-    category: "AI Model",
+    applicationCategory: "WebApplication",
+    publisher: { "@type": "Organization", name: model.developer },
     releaseDate: model.releaseDate,
     additionalProperty: [
       { "@type": "PropertyValue", name: "Parameters", value: parametersText },
@@ -140,40 +140,7 @@ export default async function ModelDetailPage({
   const commonOfferDetails = {
     availability: "https://schema.org/InStock",
     itemCondition: "https://schema.org/NewCondition",
-    hasMerchantReturnPolicy: {
-      "@type": "MerchantReturnPolicy",
-      applicableCountry: "US",
-      returnPolicyCategory: "https://schema.org/MerchantReturnNotPermitted",
-    },
-    shippingDetails: {
-      "@type": "OfferShippingDetails",
-      shippingRate: {
-        "@type": "MonetaryAmount",
-        value: "0",
-        currency: "USD",
-      },
-      deliveryTime: {
-        "@type": "ShippingDeliveryTime",
-        handlingTime: {
-          "@type": "QuantitativeValue",
-          minValue: 0,
-          maxValue: 0,
-          unitCode: "DAY",
-        },
-        transitTime: {
-          "@type": "QuantitativeValue",
-          minValue: 0,
-          maxValue: 0,
-          unitCode: "DAY",
-        },
-      },
-      shippingDestination: {
-        "@type": "DefinedRegion",
-        addressCountry: "US",
-      },
-    },
   };
-
   // Include offers: use real pricing data if available, otherwise fallback to 0
   if (model.pricing && model.pricing.length > 0) {
     productEntity.offers = model.pricing.map((p) => ({
@@ -195,7 +162,7 @@ export default async function ModelDetailPage({
   // Cross-link to base model if this is a variant
   if (model.baseModel) {
     productEntity.isVariantOf = {
-      "@type": "Product",
+      "@type": "SoftwareApplication",
       name: model.baseModel,
       url: `${SITE_URL}/models/${model.baseModel}`,
     };
@@ -212,7 +179,7 @@ export default async function ModelDetailPage({
         datePublished: model.releaseDate,
         dateModified: model.updatedAt || model.releaseDate,
         publisher: { "@type": "Organization", name: "Modelverse" },
-        about: { "@id": `${SITE_URL}/models/${model.slug}#product` },
+        about: { "@id": `${SITE_URL}/models/${model.slug}#software` },
       },
       productEntity,
     ],

@@ -23,10 +23,10 @@ export default function ReviewForm({ model }: { model: any }) {
   const [institution, setInstitution] = useState(model.institution || '')
   const [sources, setSources] = useState(model.sources ? model.sources.join('\n') : '')
 
-  // JSON states
-  const [pricing, setPricing] = useState(model.pricing ? JSON.stringify(model.pricing, null, 2) : '')
-  const [parameters, setParameters] = useState(model.parameters ? JSON.stringify(model.parameters, null, 2) : '')
-  const [contextWindow, setContextWindow] = useState(model.contextWindow ? JSON.stringify(model.contextWindow, null, 2) : '')
+  // JSON or string states
+  const [pricing, setPricing] = useState(model.pricing ? (typeof model.pricing === 'string' ? model.pricing : JSON.stringify(model.pricing, null, 2)) : '')
+  const [parameters, setParameters] = useState(model.parameters ? (typeof model.parameters === 'string' ? model.parameters : JSON.stringify(model.parameters, null, 2)) : '')
+  const [contextWindow, setContextWindow] = useState(model.contextWindow ? (typeof model.contextWindow === 'string' ? model.contextWindow : JSON.stringify(model.contextWindow, null, 2)) : '')
 
   // Benchmark Interactive State
   const [benchmarks, setBenchmarks] = useState<any[]>(model.benchmarks || [])
@@ -53,10 +53,9 @@ export default function ReviewForm({ model }: { model: any }) {
   })
 
   const validateJson = () => {
+    // Only Pricing strictly requires JSON. Parameters and Context Window can be strings.
     const fields = [
-      { name: 'Pricing', val: pricing },
-      { name: 'Parameters', val: parameters },
-      { name: 'Context Window', val: contextWindow }
+      { name: 'Pricing', val: pricing }
     ]
     for (const f of fields) {
       if (f.val.trim()) {

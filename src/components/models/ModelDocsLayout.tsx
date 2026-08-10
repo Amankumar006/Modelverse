@@ -135,11 +135,17 @@ export default function ModelDocsLayout({
               <div className="flex flex-col gap-1">
                 <h1 className="font-extrabold text-3xl sm:text-4xl text-[var(--text)] tracking-tight flex items-center gap-3">
                   {model.name} Overview
-                  {model.verified && (
+                  {model.verified ? (
                     <Shield size={24} className="text-emerald-500" />
+                  ) : (
+                    <span
+                      aria-label="Unverified model"
+                      title="Unverified Data"
+                      className="w-3 h-3 rounded-full border-2 border-amber-500 bg-transparent shrink-0 ml-2"
+                    />
                   )}
                 </h1>
-                {model.verified && (() => {
+                {model.verified ? (() => {
                   const verificationDate = model.verifiedAt || model.updatedAt || model.releaseDate;
                   const isEstimated = !model.verifiedAt;
                   return (
@@ -147,7 +153,11 @@ export default function ModelDocsLayout({
                       Confirmed against {model.developer} documentation, {new Date(verificationDate).toLocaleString('default', { month: 'long', year: 'numeric' })}{isEstimated ? ' (estimated)' : ''}
                     </p>
                   );
-                })()}
+                })() : (
+                  <p className="text-xs text-amber-600/80 dark:text-amber-500/80 font-mono">
+                    This model's data has not been fully verified and benchmarks may be missing.
+                  </p>
+                )}
               </div>
 
               <button
