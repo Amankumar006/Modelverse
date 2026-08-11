@@ -155,7 +155,7 @@ export default function ModelDocsLayout({
                   );
                 })() : (
                   <p className="text-xs text-amber-600/80 dark:text-amber-500/80 font-mono">
-                    This model's data has not been fully verified and benchmarks may be missing.
+                  This model&apos;s data has not been fully verified and benchmarks may be missing.
                   </p>
                 )}
               </div>

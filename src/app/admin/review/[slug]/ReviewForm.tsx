@@ -5,6 +5,50 @@ import { useRouter } from 'next/navigation'
 import { approveModel, saveModelEdits, markDisputed } from '../../actions'
 import StatusDots, { StatusValue } from '@/components/StatusDots'
 
+const ConfidenceBadge = ({ conf }: { conf?: string }) => {
+  if (!conf) return null
+  return (
+    <span className="ml-3 inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-daylight-bg border border-daylight-muted/10 text-xs font-mono tracking-wide">
+      <StatusDots status={conf as StatusValue} />
+      {conf}
+    </span>
+  )
+}
+
+const SourceBadges = ({ sources }: { sources: string }) => {
+  if (!sources) return null;
+  const srcArray = sources.split('\n').map((s: string) => s.trim()).filter(Boolean);
+  if (!srcArray.length) return null;
+
+  const badges = srcArray.map((src: string) => {
+    let label = '🔗';
+    if (src.includes('huggingface.co')) label = 'HF';
+    else if (src.includes('github.com')) label = 'GH';
+    else if (src.includes('youtube.com') || src.includes('youtu.be')) label = 'YT';
+    else if (src.includes('x.com') || src.includes('twitter.com')) label = 'X';
+    else if (src.includes('arxiv.org')) label = 'arXiv';
+    
+    return { url: src, label };
+  });
+
+  return (
+    <span className="ml-3 inline-flex items-center gap-1.5">
+      {badges.map((badge: { url: string; label: string }, i: number) => (
+        <a 
+          key={i} 
+          href={badge.url} 
+          target="_blank" 
+          rel="noreferrer"
+          title={badge.url}
+          className="px-1.5 py-0.5 rounded bg-daylight-accent/10 text-daylight-accent border border-daylight-accent/20 text-[10px] font-bold hover:bg-daylight-accent hover:text-white transition-colors"
+        >
+          {badge.label}
+        </a>
+      ))}
+    </span>
+  );
+}
+
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export default function ReviewForm({ model }: { model: any }) {
   const router = useRouter()
@@ -86,48 +130,7 @@ export default function ReviewForm({ model }: { model: any }) {
 
   const fieldConf = model.fieldConfidence || {}
 
-  const ConfidenceBadge = ({ conf }: { conf?: string }) => {
-    if (!conf) return null
-    return (
-      <span className="ml-3 inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-daylight-bg border border-daylight-muted/10 text-xs font-mono tracking-wide">
-        <StatusDots status={conf as StatusValue} />
-        {conf}
-      </span>
-    )
-  }
 
-  const SourceBadges = () => {
-    const srcArray = sources.split('\n').map((s: string) => s.trim()).filter(Boolean);
-    if (!srcArray.length) return null;
-
-    const badges = srcArray.map((src: string) => {
-      let label = '🔗';
-      if (src.includes('huggingface.co')) label = 'HF';
-      else if (src.includes('github.com')) label = 'GH';
-      else if (src.includes('youtube.com') || src.includes('youtu.be')) label = 'YT';
-      else if (src.includes('x.com') || src.includes('twitter.com')) label = 'X';
-      else if (src.includes('arxiv.org')) label = 'arXiv';
-      
-      return { url: src, label };
-    });
-
-    return (
-      <span className="ml-3 inline-flex items-center gap-1.5">
-        {badges.map((badge: { url: string; label: string }, i: number) => (
-          <a 
-            key={i} 
-            href={badge.url} 
-            target="_blank" 
-            rel="noreferrer"
-            title={badge.url}
-            className="px-1.5 py-0.5 rounded bg-daylight-accent/10 text-daylight-accent border border-daylight-accent/20 text-[10px] font-bold hover:bg-daylight-accent hover:text-white transition-colors"
-          >
-            {badge.label}
-          </a>
-        ))}
-      </span>
-    );
-  }
 
   const inputClass = "w-full p-2.5 bg-daylight-bg border border-daylight-muted/20 rounded-lg text-daylight-text focus:outline-none focus:ring-1 focus:ring-daylight-accent focus:border-daylight-accent placeholder-daylight-muted/50"
   const labelClass = "block text-sm font-medium mb-1.5 text-daylight-text"
@@ -260,13 +263,13 @@ export default function ReviewForm({ model }: { model: any }) {
           </div>
           <div>
             <label className={`${labelClass} flex items-center`}>
-              Parameters <ConfidenceBadge conf={fieldConf.parameters} /><SourceBadges />
+              Parameters <ConfidenceBadge conf={fieldConf.parameters} /><SourceBadges sources={sources} />
             </label>
             <textarea value={parameters} onChange={e => setParameters(e.target.value)} rows={3} className={`${inputClass} font-mono text-[13px] leading-relaxed`} />
           </div>
           <div>
             <label className={`${labelClass} flex items-center`}>
-              Context Window <ConfidenceBadge conf={fieldConf.contextWindow} /><SourceBadges />
+              Context Window <ConfidenceBadge conf={fieldConf.contextWindow} /><SourceBadges sources={sources} />
             </label>
             <textarea value={contextWindow} onChange={e => setContextWindow(e.target.value)} rows={3} className={`${inputClass} font-mono text-[13px] leading-relaxed`} />
           </div>
