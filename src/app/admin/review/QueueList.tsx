@@ -4,7 +4,7 @@ import { useState } from 'react';
 import Link from 'next/link';
 import clsx from 'clsx';
 import StatusDots from '@/components/StatusDots';
-import { dismissModels } from '../actions'; // we will need to create this action
+import { dismissModels, approveModels } from '../actions'; // we will need to create this action
 
 type Model = {
   slug: string;
@@ -21,6 +21,7 @@ export default function QueueList({ models }: { models: Model[] }) {
   const [expandedFamilies, setExpandedFamilies] = useState<Record<string, boolean>>({});
   const [selectedSlugs, setSelectedSlugs] = useState<Set<string>>(new Set());
   const [isDismissing, setIsDismissing] = useState(false);
+  const [isApproving, setIsApproving] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
 
   // Filter models based on search query
@@ -97,6 +98,16 @@ export default function QueueList({ models }: { models: Model[] }) {
     // In a real app we'd refresh the page or use transition, relying on server action revalidatePath here.
   };
 
+  const handleApprove = async () => {
+    if (selectedSlugs.size === 0) return;
+    if (!confirm(`Are you sure you want to approve ${selectedSlugs.size} selected models?`)) return;
+    
+    setIsApproving(true);
+    await approveModels(Array.from(selectedSlugs));
+    setIsApproving(false);
+    setSelectedSlugs(new Set());
+  };
+
   return (
     <div className="space-y-6">
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center bg-daylight-card p-4 rounded-xl shadow-sm border border-daylight-muted/20 gap-4">
@@ -117,13 +128,23 @@ export default function QueueList({ models }: { models: Model[] }) {
           </div>
         </div>
 
-        <button 
-          onClick={handleDismiss}
-          disabled={selectedSlugs.size === 0 || isDismissing}
-          className="px-4 py-2 bg-daylight-accent/10 text-daylight-accent font-medium rounded-lg hover:bg-daylight-accent/20 disabled:opacity-50 disabled:cursor-not-allowed transition-colors whitespace-nowrap"
-        >
-          {isDismissing ? 'Dismissing...' : `Dismiss Selected (${selectedSlugs.size})`}
-        </button>
+        <div className="flex items-center gap-2">
+          <button 
+            onClick={handleDismiss}
+            disabled={selectedSlugs.size === 0 || isDismissing || isApproving}
+            className="px-4 py-2 bg-daylight-muted/10 text-daylight-muted font-medium rounded-lg hover:bg-daylight-muted/20 disabled:opacity-50 disabled:cursor-not-allowed transition-colors whitespace-nowrap"
+          >
+            {isDismissing ? 'Dismissing...' : `Dismiss (${selectedSlugs.size})`}
+          </button>
+          
+          <button 
+            onClick={handleApprove}
+            disabled={selectedSlugs.size === 0 || isDismissing || isApproving}
+            className="px-4 py-2 bg-emerald-500/10 text-emerald-600 font-medium rounded-lg hover:bg-emerald-500/20 disabled:opacity-50 disabled:cursor-not-allowed transition-colors whitespace-nowrap"
+          >
+            {isApproving ? 'Approving...' : `Approve (${selectedSlugs.size})`}
+          </button>
+        </div>
       </div>
 
       <div className="space-y-4">

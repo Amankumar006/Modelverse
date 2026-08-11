@@ -181,6 +181,43 @@ export async function dismissModels(slugs: string[]) {
   return { success: true };
 }
 
+export async function approveModels(slugs: string[]) {
+  const supabase = await createClient();
+
+  const { data: { user }, error: authError } = await supabase.auth.getUser();
+  if (authError || !user) {
+    throw new Error('Authentication required');
+  }
+
+  const { error: updateError } = await supabase
+    .from('models')
+    .update({ 
+      verified: true, 
+      verification_status: 'VERIFIED', 
+      needs_review: false, 
+      reviewed_by: user.id, 
+      reviewed_at: new Date().toISOString() 
+    })
+    .in('slug', slugs);
+
+  if (updateError) {
+    console.error('Update failed:', updateError);
+    throw new Error('Failed to approve models');
+  }
+
+  await supabase.from('audit_log').insert({
+    actor: user.id,
+    action: 'bulk_approve_models',
+    target_type: 'model',
+    target_id: 'multiple',
+    metadata: { slugs }
+  });
+
+  revalidatePath('/admin/review');
+  return { success: true };
+}
+
+
 export async function triageNews(id: string, action: 'approve' | 'dismiss', slug?: string) {
   const supabase = await createClient();
 
