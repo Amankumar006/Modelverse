@@ -32,6 +32,7 @@ export const DEVELOPERS = [
   "Academic/Research",
   "Jintae Park et al.",
   "Nyra Health",
+  "Upstage",
   "Other",
 ] as const;
 
