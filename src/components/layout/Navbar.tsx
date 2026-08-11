@@ -287,7 +287,7 @@ export default function Navbar({ theme }: { theme?: string }) {
 
           {/* Social & Community External Links */}
           <a
-            href="https://discord.gg"
+            href="https://discord.gg/fF3fHGWnd"
             target="_blank"
             rel="noopener noreferrer"
             className="p-2 rounded-lg bg-[var(--card-bg)] hover:bg-[var(--bg)] border border-[var(--muted)]/10 text-[var(--muted)] hover:text-indigo-500 transition-colors flex items-center justify-center"
