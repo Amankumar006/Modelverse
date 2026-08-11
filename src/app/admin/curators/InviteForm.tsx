@@ -22,8 +22,8 @@ export default function InviteForm() {
       await inviteCurator(email, displayName);
       setSuccess(`Successfully invited ${email}`);
       (e.target as HTMLFormElement).reset();
-    } catch (err: any) {
-      setError(err.message || 'Failed to invite curator');
+    } catch (err: unknown) {
+      setError(err instanceof Error ? err.message : String(err));
     } finally {
       setIsSubmitting(false);
     }

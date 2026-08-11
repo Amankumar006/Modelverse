@@ -1,6 +1,6 @@
 import React from "react";
 
-export type ConfidenceType = "confirmed" | "reported" | "rumor" | "community-discussion";
+type ConfidenceType = "confirmed" | "reported" | "rumor" | "community-discussion";
 
 interface ConfidenceBadgeProps {
   confidence?: ConfidenceType;

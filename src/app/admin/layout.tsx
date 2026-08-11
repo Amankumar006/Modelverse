@@ -1,6 +1,4 @@
 import type { Metadata } from "next";
-import Link from 'next/link';
-import { headers } from 'next/headers';
 import AdminNav from './AdminNav'; // We will create this client component
 
 export const metadata: Metadata = {

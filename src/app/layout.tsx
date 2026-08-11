@@ -1,11 +1,18 @@
 import type { Metadata } from "next";
-import Script from "next/script";
+import { Figtree } from "next/font/google";
 import "./globals.css";
 import JsonLd from "@/components/JsonLd";
 import { SITE_URL } from "@/lib/models";
 import Footer from "@/components/layout/Footer";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import GoogleAdsense from "@/components/third-party/GoogleAdsense";
+import Script from "next/script";
+
+const figtree = Figtree({
+  subsets: ["latin"],
+  variable: "--font-sans",
+  display: "swap",
+});
 
 /* ------------------------------------------------------------------ */
 /*  Metadata                                                           */
@@ -110,17 +117,15 @@ export default function RootLayout({
   const gaId = process.env.NEXT_PUBLIC_GA_ID;
 
   return (
-    <html lang="en" className="dark">
+    <html lang="en" suppressHydrationWarning>
       <head>
         <Script
-          id="adsbygoogle"
-          async
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5666739187500051"
           crossOrigin="anonymous"
           strategy="afterInteractive"
         />
       </head>
-      <body className="min-h-screen bg-[var(--bg)] text-[var(--text)] tracking-[-0.01em] antialiased flex flex-col justify-between">
+      <body className={`${figtree.variable} font-sans min-h-screen bg-[var(--bg)] text-[var(--text)] tracking-[-0.01em] antialiased flex flex-col justify-between`}>
         <ThemeProvider>
           <GoogleAdsense />
           {gaId && (
@@ -129,14 +134,18 @@ export default function RootLayout({
                 src={`https://www.googletagmanager.com/gtag/js?id=${gaId}`}
                 strategy="afterInteractive"
               />
-              <Script id="google-analytics" strategy="afterInteractive">
-                {`
-                  window.dataLayer = window.dataLayer || [];
-                  function gtag(){dataLayer.push(arguments);}
-                  gtag('js', new Date());
-                  gtag('config', '${gaId}');
-                `}
-              </Script>
+              <Script
+                id="google-analytics"
+                strategy="afterInteractive"
+                dangerouslySetInnerHTML={{
+                  __html: `
+                    window.dataLayer = window.dataLayer || [];
+                    function gtag(){dataLayer.push(arguments);}
+                    gtag('js', new Date());
+                    gtag('config', '${gaId}');
+                  `,
+                }}
+              />
             </>
           )}
           <div>

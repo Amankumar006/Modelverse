@@ -69,6 +69,7 @@ export interface ModelEntry extends ModelIndex {
     pricing?: "VERIFIED" | "LIKELY" | "DRAFT" | "DISPUTED";
     contextWindow?: "VERIFIED" | "LIKELY" | "DRAFT" | "DISPUTED";
     benchmarks?: "VERIFIED" | "LIKELY" | "DRAFT" | "DISPUTED";
+    parameters?: "VERIFIED" | "LIKELY" | "DRAFT" | "DISPUTED";
   };
   vendorApiStatus?: "active" | "deprecated" | "sunset";
   costTiers?: { id: string; label: string; description?: string }[];
@@ -190,23 +191,7 @@ export async function getAllModelEntries(): Promise<ModelEntry[]> {
   return (data || []).map(mapRowToModelEntry);
 }
 
-/** Return the N most recently released models. */
-export async function getRecentModels(n: number): Promise<ModelIndex[]> {
-  const { data } = await supabase
-    .from('models')
-    .select('id, name, slug, developer, release_date, type, status, vendor_api_status, featured, boost, family, tier, institution, verified, verification_status')
-    .order('release_date', { ascending: false })
-    .limit(n);
-  return (data || []).map(mapRowToModelIndex);
-}
 
-/** Return all slugs — for generateStaticParams. */
-export async function getAllSlugs(): Promise<string[]> {
-  const { data } = await supabase
-    .from('models')
-    .select('slug');
-  return (data || []).map(row => row.slug);
-}
 
 /** Read a single model's full data by slug. */
 export async function getModelBySlug(slug: string): Promise<ModelEntry | null> {
@@ -236,25 +221,13 @@ export async function getModelCount(): Promise<number> {
   return count || 0;
 }
 
-/** Get developers and their counts of tracked models. */
-export async function getDeveloperCounts(): Promise<{ developer: string; count: number }[]> {
-  const { data } = await supabase
-    .from('models')
-    .select('developer');
-  const counts: Record<string, number> = {};
-  (data || []).forEach(row => {
-    counts[row.developer] = (counts[row.developer] || 0) + 1;
-  });
-  return Object.entries(counts)
-    .map(([developer, count]) => ({ developer, count }))
-    .sort((a, b) => b.count - a.count || a.developer.localeCompare(b.developer));
-}
 
 /** Format parameters display string including active parameters if present */
-export function formatParameters(model: { parameters?: string | any; activeParameters?: string | any }): string {
+export function formatParameters(model: { parameters?: string | unknown; activeParameters?: string | unknown }): string {
   if (!model.parameters) return "Undisclosed";
   
-  let p = model.parameters;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  let p: any = model.parameters;
   if (typeof p === "object" && p !== null) {
     if (Array.isArray(p)) {
       if (p.length > 0 && typeof p[0] === 'object') {

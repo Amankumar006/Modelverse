@@ -19,8 +19,8 @@ export default async function AdminPage() {
   };
 
   if (models) {
-    models.forEach((m: any) => {
-      if (m.verification_status in counts) {
+    models.forEach((m: Record<string, unknown>) => {
+      if (typeof m.verification_status === 'string' && m.verification_status in counts) {
         counts[m.verification_status as keyof typeof counts]++;
       }
     });
@@ -84,14 +84,14 @@ export default async function AdminPage() {
           <h2 className="text-xl font-bold text-daylight-text">Recent Activity</h2>
         </div>
         <div className="divide-y divide-daylight-muted/10">
-          {auditLogs?.map((log: any) => (
-            <div key={log.id} className="p-4 px-6 flex items-start gap-4 hover:bg-daylight-muted/5 transition-colors">
+          {auditLogs?.map((log: Record<string, unknown>) => (
+            <div key={String(log.id)} className="p-4 px-6 flex items-start gap-4 hover:bg-daylight-muted/5 transition-colors">
               <div className="flex-1">
                 <p className="text-sm text-daylight-text">
-                  <span className="font-semibold">{(log.curator_profiles as any)?.display_name || 'Unknown curator'}</span>{' '}
-                  performed <span className="font-mono text-xs bg-daylight-tag-bg text-daylight-tag-text px-1.5 py-0.5 rounded">{log.action}</span> on table <span className="font-mono text-xs text-daylight-muted">{log.table_name}</span>
+                  <span className="font-semibold">{(log.curator_profiles as Record<string, unknown>)?.display_name as string || 'Unknown curator'}</span>{' '}
+                  performed <span className="font-mono text-xs bg-daylight-tag-bg text-daylight-tag-text px-1.5 py-0.5 rounded">{String(log.action)}</span> on table <span className="font-mono text-xs text-daylight-muted">{String(log.table_name)}</span>
                 </p>
-                <p className="text-xs text-daylight-muted mt-1">{new Date(log.created_at).toLocaleString()}</p>
+                <p className="text-xs text-daylight-muted mt-1">{new Date(String(log.created_at)).toLocaleString()}</p>
               </div>
             </div>
           ))}

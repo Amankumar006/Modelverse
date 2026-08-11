@@ -235,6 +235,7 @@ export default async function Home() {
                       src={featuredArticle.coverImage}
                       alt={featuredArticle.title}
                       fill
+                      priority
                       className="object-cover group-hover:scale-105 transition-transform duration-500"
                       sizes="(max-width: 1024px) 100vw, 58vw"
                     />

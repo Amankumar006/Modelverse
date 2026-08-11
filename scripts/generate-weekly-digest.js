@@ -267,9 +267,6 @@ ${renderTable(cats.communityQuant)}
     fs.appendFileSync(process.env.GITHUB_ENV, "HAS_WEEKLY_DIGEST=true\n");
     fs.appendFileSync(process.env.GITHUB_ENV, `WEEKLY_MODELS_COUNT=${weeklyModels.length}\n`);
   }
-
-  console.log("⚡ Auto-compiling indexes...");
-  require("./compile-models.js");
 }
 
 generateWeeklyDigest();

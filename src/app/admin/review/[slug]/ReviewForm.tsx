@@ -2,8 +2,9 @@
 
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
-import { approveModel, saveModelEdits, markDisputed } from '../../actions'
+import { markDisputed, approveModel, saveModelEdits } from '../../actions'
 import StatusDots, { StatusValue } from '@/components/StatusDots'
+import { ModelEntry, Benchmark } from '@/lib/models'
 
 const ConfidenceBadge = ({ conf }: { conf?: string }) => {
   if (!conf) return null
@@ -49,23 +50,22 @@ const SourceBadges = ({ sources }: { sources: string }) => {
   );
 }
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export default function ReviewForm({ model }: { model: any }) {
+export default function ReviewForm({ model }: { model: ModelEntry }) {
   const router = useRouter()
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
 
   // Scalar states
-  const [name, setName] = useState(model.name || '')
-  const [developer, setDeveloper] = useState(model.developer || '')
-  const [description, setDescription] = useState(model.description || '')
-  const [type, setType] = useState(model.type || 'open-source')
-  const [status, setStatus] = useState(model.status || 'active')
-  const [releaseDate, setReleaseDate] = useState(model.releaseDate || '')
-  const [family, setFamily] = useState(model.family || '')
-  const [tier, setTier] = useState(model.tier || '')
-  const [institution, setInstitution] = useState(model.institution || '')
-  const [sources, setSources] = useState(model.sources ? model.sources.join('\n') : '')
+  const [name, setName] = useState((model.name as string) || '')
+  const [developer, setDeveloper] = useState((model.developer as string) || '')
+  const [description, setDescription] = useState((model.description as string) || '')
+  const [type, setType] = useState((model.type as string) || 'open-source')
+  const [status, setStatus] = useState((model.status as string) || 'active')
+  const [releaseDate, setReleaseDate] = useState((model.releaseDate as string) || '')
+  const [family, setFamily] = useState((model.family as string) || '')
+  const [tier, setTier] = useState((model.tier as string) || '')
+  const [institution, setInstitution] = useState((model.institution as string) || '')
+  const [sources, setSources] = useState(model.sources && Array.isArray(model.sources) ? model.sources.join('\n') : '')
 
   // JSON or string states
   const [pricing, setPricing] = useState(model.pricing ? (typeof model.pricing === 'string' ? model.pricing : JSON.stringify(model.pricing, null, 2)) : '')
@@ -73,18 +73,18 @@ export default function ReviewForm({ model }: { model: any }) {
   const [contextWindow, setContextWindow] = useState(model.contextWindow ? (typeof model.contextWindow === 'string' ? model.contextWindow : JSON.stringify(model.contextWindow, null, 2)) : '')
 
   // Benchmark Interactive State
-  const [benchmarks, setBenchmarks] = useState<any[]>(model.benchmarks || [])
+  const [benchmarks, setBenchmarks] = useState<Benchmark[]>(Array.isArray(model.benchmarks) ? model.benchmarks : [])
 
-  const [curatorNotes, setCuratorNotes] = useState(model.curatorNotes || '')
+  const [curatorNotes, setCuratorNotes] = useState((model.curatorNotes as string) || '')
 
-  const handleAction = async (actionFn: () => Promise<any>) => {
+  const handleAction = async (actionFn: () => Promise<unknown>) => {
     setLoading(true)
     setError(null)
     try {
       await actionFn()
       router.push('/admin/review')
-    } catch (err: any) {
-      setError(err.message || 'An error occurred')
+    } catch (err: unknown) {
+      setError(err instanceof Error ? err.message : String(err))
     } finally {
       setLoading(false)
     }
@@ -105,7 +105,7 @@ export default function ReviewForm({ model }: { model: any }) {
       if (f.val.trim()) {
         try {
           JSON.parse(f.val)
-        } catch (e) {
+        } catch {
           setError(`Invalid JSON in ${f.name}`)
           return false
         }
@@ -116,16 +116,16 @@ export default function ReviewForm({ model }: { model: any }) {
 
   const onApprove = () => {
     if (!validateJson()) return
-    handleAction(() => approveModel(model.slug, getEdits()))
+    handleAction(() => approveModel(model.slug as string, getEdits()))
   }
 
   const onSave = () => {
     if (!validateJson()) return
-    handleAction(() => saveModelEdits(model.slug, getEdits()))
+    handleAction(() => saveModelEdits(model.slug as string, getEdits()))
   }
 
   const onDispute = () => {
-    handleAction(() => markDisputed(model.slug, curatorNotes))
+    handleAction(() => markDisputed(model.slug as string, curatorNotes))
   }
 
   const fieldConf = model.fieldConfidence || {}

@@ -43,7 +43,7 @@ import { getAllModelEntries, ModelEntry } from "./models";
  * to the curve stay eyeball-able without re-deriving the math from scratch.
  */
 
-export function getTrendingScore(releaseDate: string, boost: number): number {
+function getTrendingScore(releaseDate: string, boost: number): number {
   const releaseTime = new Date(releaseDate).getTime();
   const now = Date.now();
   

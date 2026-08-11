@@ -217,7 +217,7 @@ export default function ModelDocsLayout({
 
           {/* AdSense Unit */}
           <div className="w-full flex justify-center py-2">
-            <AdUnit slot="model-docs-mid" format="fluid" className="w-full max-w-[728px] aspect-[728/90]" />
+            <AdUnit slot="1234567890" format="fluid" className="w-full max-w-[728px] aspect-[728/90]" />
           </div>
 
           {/* Section 3: Latest Models Comparison Table */}

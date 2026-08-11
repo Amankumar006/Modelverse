@@ -2,10 +2,16 @@
 
 import { useState } from 'react';
 import { triageNews } from '../actions';
-import clsx from 'clsx';
-import Link from 'next/link';
+export type NewsItem = {
+  id: string;
+  title: string;
+  source: string;
+  source_url: string;
+  published_at?: string;
+  fetched_at: string;
+};
 
-export default function NewsTriageList({ initialItems }: { initialItems: any[] }) {
+export default function NewsTriageList({ initialItems }: { initialItems: NewsItem[] }) {
   const [items, setItems] = useState(initialItems);
   const [isProcessing, setIsProcessing] = useState<string | null>(null);
 
@@ -19,6 +25,7 @@ export default function NewsTriageList({ initialItems }: { initialItems: any[] }
       await triageNews(id, action, slug);
       setItems(prev => prev.filter(item => item.id !== id));
     } catch (err) {
+      console.error(err);
       alert('Failed to triage news.');
     } finally {
       setIsProcessing(null);
@@ -67,7 +74,7 @@ export default function NewsTriageList({ initialItems }: { initialItems: any[] }
           <div className="md:border-l md:border-daylight-muted/10 md:pl-6 md:h-full flex items-center shrink-0">
             <button 
               type="button"
-              onClick={(e) => handleTriage(item.id, 'dismiss', { preventDefault: () => {} } as any)}
+              onClick={() => handleTriage(String(item.id), 'dismiss', { preventDefault: () => {} } as unknown as React.FormEvent<HTMLFormElement>)}
               disabled={isProcessing === item.id}
               className="px-4 py-2 text-daylight-accent hover:bg-daylight-accent/10 rounded-lg font-medium disabled:opacity-50 transition-colors"
             >

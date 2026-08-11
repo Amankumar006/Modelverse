@@ -10,7 +10,7 @@ function truncateAtWordBoundary(text: string, maxLength: number): string {
   return sub.slice(0, lastSpace) + "...";
 }
 
-export function StatusDot({ status, verified }: { status?: string; verified?: boolean }) {
+function StatusDot({ status, verified }: { status?: string; verified?: boolean }) {
   if (verified) {
     return (
       <span

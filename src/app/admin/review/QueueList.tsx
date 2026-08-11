@@ -243,7 +243,7 @@ function ModelRow({ model, isSelected, onSelect }: { model: Model, isSelected: b
       </div>
       <div className="flex items-center gap-4">
         <div className="flex flex-col items-end">
-          <StatusDots status={model.verification_status as any} />
+          <StatusDots status={model.verification_status as "VERIFIED" | "LIKELY" | "DRAFT" | "DISPUTED"} />
           <span className="text-[10px] uppercase tracking-wider text-daylight-muted mt-1 font-medium">{model.verification_status || 'DRAFT'}</span>
         </div>
         <Link 

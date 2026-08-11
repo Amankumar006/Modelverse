@@ -3,7 +3,7 @@
 import { createClient } from '@/utils/supabase/server'
 import { revalidatePath } from 'next/cache'
 
-function parseJsonFields(edits: any) {
+function parseJsonFields(edits: Record<string, unknown>) {
   const jsonFields = ['pricing', 'benchmarks', 'parameters', 'context_window'];
   const parsed = { ...edits };
 
@@ -11,8 +11,8 @@ function parseJsonFields(edits: any) {
     if (parsed[field]) {
       if (typeof parsed[field] === 'string') {
         try {
-          parsed[field] = JSON.parse(parsed[field]);
-        } catch (e) {
+          parsed[field] = JSON.parse(parsed[field] as string);
+        } catch {
           // If it fails to parse as JSON, keep it as a string
           // This allows users to type "128K" or "72B" without quotes in the form
         }
@@ -22,7 +22,7 @@ function parseJsonFields(edits: any) {
   return parsed;
 }
 
-export async function approveModel(slug: string, edits: any) {
+export async function approveModel(slug: string, edits: Record<string, unknown>) {
   const supabase = await createClient();
 
   const { data: { user }, error: authError } = await supabase.auth.getUser();
@@ -75,7 +75,7 @@ export async function approveModel(slug: string, edits: any) {
   return { success: true };
 }
 
-export async function saveModelEdits(slug: string, edits: any) {
+export async function saveModelEdits(slug: string, edits: Record<string, unknown>) {
   const supabase = await createClient();
 
   const { data: { user }, error: authError } = await supabase.auth.getUser();
@@ -226,7 +226,7 @@ export async function triageNews(id: string, action: 'approve' | 'dismiss', slug
     throw new Error('Authentication required');
   }
 
-  const updates: any = {
+  const updates: Record<string, unknown> = {
     review_status: action === 'approve' ? 'approved' : 'dismissed',
     reviewed_by: user.id,
     reviewed_at: new Date().toISOString(),

@@ -754,7 +754,7 @@ function ModelCatalogContent({
               <React.Fragment key={`item-wrapper-${idx}`}>
                 {isAdSlot && (
                   <div className="col-span-1 rounded-[var(--radius-card)] border border-[var(--muted)]/10 bg-[var(--card-bg)] shadow-[var(--shadow-card)] flex items-center justify-center p-3 overflow-hidden [&:has(ins:empty)]:hidden [&:has(ins[data-ad-status='unfilled'])]:hidden">
-                    <AdUnit slot="catalog-in-feed" className="aspect-[4/3] flex items-center justify-center w-full h-full" />
+                    <AdUnit slot="1234567890" className="aspect-[4/3] flex items-center justify-center w-full h-full" />
                   </div>
                 )}
                 {content}

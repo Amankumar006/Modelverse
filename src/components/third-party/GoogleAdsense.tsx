@@ -3,8 +3,6 @@
 import Script from "next/script";
 
 export default function GoogleAdsense() {
-  const pId = "ca-pub-5666739187500051";
-  
   // The publisher ID without 'ca-' for Funding Choices
   const fcId = "pub-5666739187500051";
 
@@ -40,13 +38,7 @@ export default function GoogleAdsense() {
           `,
         }}
       />
-      {/* Google AdSense */}
-      <Script
-        id="adsbygoogle-init"
-        src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${pId}`}
-        strategy="afterInteractive"
-        crossOrigin="anonymous"
-      />
+      {/* Google AdSense script is now in layout.tsx head */}
     </>
   );
 }
