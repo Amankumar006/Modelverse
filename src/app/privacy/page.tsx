@@ -14,7 +14,7 @@ export const metadata: Metadata = {
 };
 
 export default function PrivacyPage() {
-  const lastUpdated = "July 14, 2026";
+  const lastUpdated = "August 11, 2026";
 
   return (
     <main className="min-h-screen bg-black text-white selection:bg-brand-orange selection:text-white pb-24 relative overflow-hidden">
