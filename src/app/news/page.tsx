@@ -95,7 +95,7 @@ export default async function NewsPage({ searchParams }: NewsPageProps) {
                 Modelverse Newsroom
               </span>
             </div>
-            <h1 className="text-[clamp(2.5rem,6vw,4rem)] font-extrabold text-[var(--text)] tracking-tight">
+            <h1 className="text-fluid-h1 font-extrabold text-[var(--text)] tracking-tight">
               News & Research
             </h1>
             <p className="text-sm sm:text-base text-[var(--muted)] max-w-2xl mt-3 leading-relaxed">
@@ -105,7 +105,7 @@ export default async function NewsPage({ searchParams }: NewsPageProps) {
 
           <div className="text-right shrink-0">
             <span className="text-xs text-[var(--muted)] font-mono block">Published Coverage</span>
-            <span className="text-[clamp(1.875rem,4vw,2.25rem)] font-extrabold text-[var(--text)] font-sans tabular-nums">{allArticles.length} Articles</span>
+            <span className="text-fluid-h2 font-extrabold text-[var(--text)] font-sans tabular-nums">{allArticles.length} Articles</span>
           </div>
         </div>
       </div>
@@ -158,7 +158,8 @@ export default async function NewsPage({ searchParams }: NewsPageProps) {
               </span>
             </div>
 
-            <div className="group relative bg-[var(--card-bg)] rounded-[var(--radius-card)] border border-[var(--muted)]/10 hover:border-[var(--accent)]/40 transition-all duration-300 overflow-hidden grid grid-cols-1 lg:grid-cols-2 shadow-[var(--shadow-card)]">
+            <div className="group relative bg-[var(--card-bg)]/90 backdrop-blur-xl rounded-[var(--radius-card)] border border-[var(--muted)]/10 hover:shadow-[0_15px_35px_-10px_rgba(0,0,0,0.1)] hover:border-[var(--accent)]/30 hover:-translate-y-1 transition-all duration-400 overflow-hidden grid grid-cols-1 lg:grid-cols-2 shadow-sm z-0">
+              <div className="absolute inset-0 bg-gradient-to-br from-[var(--accent)]/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
               <Link
                 href={`/news/${featuredArticle.slug}`}
                 className="absolute inset-0 z-10"
@@ -184,7 +185,7 @@ export default async function NewsPage({ searchParams }: NewsPageProps) {
                     <ConfidenceBadge confidence={featuredArticle.confidenceLevel} />
                   </div>
 
-                  <h2 className="text-[clamp(1.5rem,4vw,2.5rem)] font-extrabold text-[var(--text)] mb-4 group-hover:text-[var(--accent)] transition-colors leading-snug">
+                  <h2 className="text-fluid-h2 font-extrabold text-[var(--text)] mb-4 group-hover:text-[var(--accent)] transition-colors leading-snug">
                     {featuredArticle.title}
                   </h2>
 
@@ -232,8 +233,9 @@ export default async function NewsPage({ searchParams }: NewsPageProps) {
               {paginatedArticles.map((post) => (
                 <div
                   key={post.id}
-                  className="group relative bg-[var(--card-bg)] rounded-[var(--radius-card)] border border-[var(--muted)]/10 hover:border-[var(--accent)]/40 shadow-[var(--shadow-card)] transition-all duration-300 overflow-hidden flex flex-col justify-between"
+                  className="group relative bg-[var(--card-bg)]/90 backdrop-blur-xl rounded-[var(--radius-card)] border border-[var(--muted)]/10 hover:shadow-[0_15px_35px_-10px_rgba(0,0,0,0.1)] hover:border-[var(--accent)]/30 hover:-translate-y-1 transition-all duration-400 overflow-hidden flex flex-col justify-between shadow-sm z-0"
                 >
+                  <div className="absolute inset-0 bg-gradient-to-br from-[var(--accent)]/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
                   <Link
                     href={`/news/${post.slug}`}
                     className="absolute inset-0 z-10"
@@ -258,7 +260,7 @@ export default async function NewsPage({ searchParams }: NewsPageProps) {
                     </div>
 
                     <div className="p-5">
-                      <h3 className="text-[clamp(1.125rem,2.5vw,1.25rem)] font-bold text-[var(--text)] group-hover:text-[var(--accent)] transition-colors mb-2.5 line-clamp-2 leading-snug">
+                      <h3 className="text-fluid-h3 font-bold text-[var(--text)] group-hover:text-[var(--accent)] transition-colors mb-2.5 line-clamp-2 leading-snug">
                         {post.title}
                       </h3>
                       <p className="text-xs text-[var(--muted)] leading-relaxed line-clamp-3">
