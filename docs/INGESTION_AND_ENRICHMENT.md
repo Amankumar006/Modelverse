@@ -8,6 +8,7 @@ This document outlines the data ingestion, enrichment workflows, provenance boun
 
 1. **Human Verification Gate (`verified: true`)**:
    - `verified: true` MUST ONLY be set manually by a human curator after reviewing primary sources.
+   - Unverified models display a small amber indicator dot (`w-3 h-3 rounded-full border-2 border-amber-500`) in the UI.
    - Ingestion scripts and automated APIs MUST NEVER flip `verified: true` automatically.
    - All script-enriched data lands as `verified: false` and `needsReview: true`.
 
@@ -15,29 +16,26 @@ This document outlines the data ingestion, enrichment workflows, provenance boun
    - Generated summaries and candidate features are written **exclusively** to `descriptionDraft` and `keyFeaturesDraft`.
    - Production live fields (`description`, `keyFeatures`) are NEVER overwritten by scripts without human approval.
 
-3. **Canonical Repository Lookups**:
-   - Parameter counts and open licenses are pulled from confirmed Hugging Face API endpoints (`https://huggingface.co/api/models/{org}/{repo}`).
-   - Exact API source URLs are attached to `sources[]`.
+3. **News Ingestion & Agent Formatting**:
+   - GitHub Actions (`.github/workflows/daily-news.yml`) trigger `scripts/ingest-daily-news.js` daily.
+   - Summarization AI templates strictly use JavaScript interpolation to evaluate `rawBody` and `draftSummary` before prompting to prevent hallucination errors. 
 
 ---
 
 ## 🛠️ Ingestion & Enrichment Scripts
 
-- **`scripts/import-models-dev.js`**: Initial snapshot import from `models.dev`. Maps raw TOML entries into Modelverse JSON schema.
-- **`scripts/enrich-skeleton-models.js`**: Enriches skeleton entries via Hugging Face API (safetensors parameters, open licenses, draft prose).
+- **`scripts/ingest-daily-news.js`**: Fetches RSS feeds from Anthropic, HF, OpenAI, DeepMind, NVIDIA, TechCrunch, etc., evaluates relevance via Gemini, and generates Markdown summaries via Gemini/Groq/OpenRouter.
+- **`scripts/enrich-skeleton-models.js`**: Enriches skeleton entries via Hugging Face API and inserts directly into Supabase.
 - **`scripts/enrich-catalog-metadata.js`**: Upgrades skeleton default placeholders across tasks, context windows, licenses, and key features.
-- **`scripts/generate-missing-model-readmes.js`**: Generates multi-section Markdown documentation readmes (`data/models/readme/*.md`) for catalog models.
-- **`scripts/compile-models.js`**: Validates JSON specifications against Zod schema and generates search & archive bundles.
+- **`scripts/generate-missing-model-readmes.js`**: Generates multi-section Markdown documentation readmes for catalog models.
 
 ---
 
 ## 🖐️ Curator Review UI & Verification API
 
-- **API Endpoint (`POST /api/models/verify`)**:
-  - Receives `{ slug: string, promoteDraft?: boolean }`.
-  - Sets `"verified": true`, `"needsReview": false`, and updates `"updatedAt"`.
-  - Promotes `descriptionDraft` -> `description` if requested.
-  - Re-compiles model archives and invalidates Next.js route caches.
-- **UI Banner (`src/components/CuratorReviewBanner.tsx`)**:
-  - Rendered on `/models/[slug]` when `needsReview === true` or `?curate=true` is present in the URL.
+- **Server Actions (`src/app/admin/actions.ts`)**:
+   - Next.js Server Actions manage Supabase mutations instead of raw API endpoints.
+   - Updating verification calls `revalidatePath('/admin/review')` and `revalidatePath('/models/[slug]')` to instantly update static App Router caches.
+- **Curator Review Dashboard (`/admin/review`)**:
   - Allows side-by-side preview of Draft Prose vs. Live Specs, inspection of source links, and one-click verification approval.
+  - Controls model public visibility and verification states (`VERIFIED`, `LIKELY`, `DRAFT`, `DISPUTED`).
