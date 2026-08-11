@@ -209,14 +209,14 @@ export default function ReviewForm({ model }: { model: any }) {
           <h2 className="text-lg font-semibold border-b border-daylight-muted/10 pb-2 text-daylight-text">Complex Fields (JSON)</h2>
           <div>
             <label className={`${labelClass} flex items-center`}>
-              Pricing <ConfidenceBadge conf={fieldConf.pricing} /><SourceBadges />
+              Pricing <ConfidenceBadge conf={fieldConf.pricing} /><SourceBadges sources={sources} />
             </label>
             <textarea value={pricing} onChange={e => setPricing(e.target.value)} rows={4} className={`${inputClass} font-mono text-[13px] leading-relaxed`} />
           </div>
           <div className="col-span-full mb-4">
             <div className="flex items-center justify-between mb-2">
               <label className={`${labelClass} mb-0 flex items-center`}>
-                Benchmarks <ConfidenceBadge conf={fieldConf.benchmarks} /><SourceBadges />
+                Benchmarks <ConfidenceBadge conf={fieldConf.benchmarks} /><SourceBadges sources={sources} />
               </label>
               <button 
                 type="button"
