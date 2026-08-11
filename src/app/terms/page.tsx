@@ -125,7 +125,7 @@ export default function TermsPage() {
               <div className="space-y-2">
                 <h3 className="text-lg font-semibold text-white">4. Governing Law & Jurisdiction</h3>
                 <p className="text-sm text-white/60 leading-relaxed">
-                  Modelverse is operated by an individual creator based in India. These Terms of Service shall be governed by, and construed in accordance with, the laws of <strong>India</strong>. Any legal disputes arising out of the use of this website shall be subject to the exclusive jurisdiction of the competent courts in India.
+                  Modelverse is operated by a dedicated team based in India. These Terms of Service shall be governed by, and construed in accordance with, the laws of <strong>India</strong>. Any legal disputes arising out of the use of this website shall be subject to the exclusive jurisdiction of the competent courts in India.
                 </p>
               </div>
             </div>

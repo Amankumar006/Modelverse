@@ -140,7 +140,7 @@ export default function PrivacyPage() {
               <div className="space-y-2">
                 <h3 className="text-lg font-semibold text-white">4. Privacy Contact & Jurisdiction</h3>
                 <p className="text-sm text-white/60 leading-relaxed">
-                  Modelverse is operated by an individual creator based in India. For privacy questions, data deletion requests, or reporting documentation discrepancies under Indian data protection guidelines, please contact us at:
+                  Modelverse is operated by a dedicated team based in India. For privacy questions, data deletion requests, or reporting documentation discrepancies under Indian data protection guidelines, please contact us at:
                 </p>
                 <div className="pt-2">
                   <span className="text-xs font-semibold tracking-wider text-white bg-white/5 border border-white/10 rounded-full px-3 py-1.5 inline-block">
