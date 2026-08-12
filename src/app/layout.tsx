@@ -7,6 +7,7 @@ import Footer from "@/components/layout/Footer";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import GoogleAdsense from "@/components/third-party/GoogleAdsense";
 import Script from "next/script";
+import { GoogleAnalytics } from "@next/third-parties/google";
 
 const figtree = Figtree({
   subsets: ["latin"],
@@ -128,26 +129,7 @@ export default function RootLayout({
       <body className={`${figtree.variable} font-sans min-h-screen bg-[var(--bg)] text-[var(--text)] tracking-[-0.01em] antialiased flex flex-col justify-between`}>
         <ThemeProvider>
           <GoogleAdsense />
-          {gaId && (
-            <>
-              <Script
-                src={`https://www.googletagmanager.com/gtag/js?id=${gaId}`}
-                strategy="afterInteractive"
-              />
-              <Script
-                id="google-analytics"
-                strategy="afterInteractive"
-                dangerouslySetInnerHTML={{
-                  __html: `
-                    window.dataLayer = window.dataLayer || [];
-                    function gtag(){dataLayer.push(arguments);}
-                    gtag('js', new Date());
-                    gtag('config', '${gaId}');
-                  `,
-                }}
-              />
-            </>
-          )}
+          {gaId && <GoogleAnalytics gaId={gaId} />}
           <div>
             <JsonLd data={sitewideSchema} />
             {children}

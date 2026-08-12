@@ -97,6 +97,7 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
                       src={post.coverImage}
                       alt={post.title}
                       fill
+                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, (max-width: 1536px) 33vw, 25vw"
                       className="object-cover transition-transform duration-700 group-hover:scale-102 opacity-90"
                     />
                     <div className="absolute top-3 left-3 z-10">
