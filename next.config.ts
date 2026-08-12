@@ -12,6 +12,7 @@ const nextConfig: NextConfig = {
   },
   images: {
     remotePatterns: [
+      { protocol: 'https', hostname: 'blogs.nvidia.com' },
       { protocol: 'https', hostname: 'cdn-uploads.huggingface.co' },
       { protocol: 'https', hostname: 'cdn.sanity.io' },
       { protocol: 'https', hostname: 'docs.perplexity.ai' },

@@ -52,13 +52,13 @@ export default function HeroSection({
         </div>
 
         {/* Headline */}
-        <h1 className="text-[clamp(2.5rem,8vw,4.5rem)] font-extrabold tracking-tight text-[var(--text)] leading-[1.1] mb-4">
+        <h1 className="text-3xl sm:text-5xl md:text-6xl font-extrabold tracking-tight text-[var(--text)] leading-[1.1] mb-4">
           Every AI Model. <br className="hidden sm:inline" />
           <span className="text-[var(--accent)]">Every Release.</span>
         </h1>
 
         {/* Subtext */}
-        <p className="text-[clamp(0.875rem,2.5vw,1rem)] text-[var(--muted)] leading-relaxed max-w-lg mb-8">
+        <p className="text-sm sm:text-base text-[var(--muted)] leading-relaxed max-w-lg mb-8">
           From frontier closed APIs to open-weight breakthroughs — a living, fact-checked archive of parameters, context windows, and primary documentation.
         </p>
 

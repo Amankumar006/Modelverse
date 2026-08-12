@@ -64,7 +64,7 @@ export default async function Home() {
       {/* ── Featured & Recent Model Card Grid ────────────────── */}
       {homepageModels.length > 0 && (
         <Reveal>
-          <section className="px-4 sm:px-6 md:px-10 lg:px-14 py-12 md:py-16 border-t border-[var(--muted)]/10 max-w-7xl mx-auto">
+          <section className="px-4 sm:px-6 md:px-10 lg:px-14 pt-8 md:pt-12 pb-12 md:pb-16 border-t border-[var(--muted)]/10 max-w-7xl mx-auto">
             <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-8">
               <div>
                 <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[var(--accent)] mb-2">
