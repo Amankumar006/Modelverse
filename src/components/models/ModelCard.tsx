@@ -87,6 +87,7 @@ export default function ModelCard({
     return (
       <Link
         href={targetHref}
+        prefetch={false}
         className="group grid grid-cols-[1fr_auto_auto_auto] sm:grid-cols-[1.4fr_0.8fr_0.6fr_0.5fr_auto] items-center gap-3 sm:gap-4 px-4 py-3.5 rounded-[14px] bg-[var(--card-bg)]/80 backdrop-blur-md border border-[var(--muted)]/10 hover:border-[var(--accent)]/30 hover:bg-[var(--accent-soft)]/5 transition-all duration-300 shadow-sm hover:shadow-md cursor-pointer"
       >
         <div className="min-w-0">

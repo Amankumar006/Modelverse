@@ -14,7 +14,20 @@ if (!supabaseUrl) {
 
 const supabase = createClient(
   supabaseUrl || 'https://placeholder.supabase.co',
-  supabaseKey || 'placeholder-key'
+  supabaseKey || 'placeholder-key',
+  {
+    global: {
+      fetch: (url, options) => {
+        return fetch(url, {
+          ...options,
+          next: {
+            revalidate: 3600,
+            tags: ['news']
+          }
+        });
+      }
+    }
+  }
 );
 
 export type NewsArticleIndexEntry = Omit<NewsArticle, "body">;

@@ -15,7 +15,7 @@ export async function GET() {
 
     return NextResponse.json(sliced, {
       headers: {
-        "Cache-Control": "public, s-maxage=300, stale-while-revalidate=600",
+        "Cache-Control": "public, s-maxage=3600, stale-while-revalidate=86400",
       },
     });
   // eslint-disable-next-line @typescript-eslint/no-explicit-any

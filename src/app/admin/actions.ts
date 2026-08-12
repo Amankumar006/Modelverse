@@ -71,6 +71,7 @@ export async function approveModel(slug: string, edits: Record<string, unknown>)
   revalidatePath('/admin/review');
   revalidatePath(`/admin/review/${slug}`);
   revalidatePath(`/models/${slug}`); // Revalidate public page if it exists
+  revalidatePath('/models');
   
   return { success: true };
 }
@@ -98,6 +99,7 @@ export async function saveModelEdits(slug: string, edits: Record<string, unknown
   revalidatePath('/admin/review');
   revalidatePath(`/admin/review/${slug}`);
   revalidatePath(`/models/${slug}`);
+  revalidatePath('/models');
   
   return { success: true };
 }
@@ -143,6 +145,7 @@ export async function markDisputed(slug: string, notes: string) {
 
   revalidatePath('/admin/review');
   revalidatePath(`/admin/review/${slug}`);
+  revalidatePath('/models');
 
   return { success: true };
 }
@@ -178,6 +181,7 @@ export async function dismissModels(slugs: string[]) {
   });
 
   revalidatePath('/admin/review');
+  revalidatePath('/models');
   return { success: true };
 }
 
@@ -214,6 +218,7 @@ export async function approveModels(slugs: string[]) {
   });
 
   revalidatePath('/admin/review');
+  revalidatePath('/models');
   return { success: true };
 }
 
@@ -256,6 +261,7 @@ export async function triageNews(id: string, action: 'approve' | 'dismiss', slug
   });
 
   revalidatePath('/admin/news');
+  revalidatePath('/news');
   return { success: true };
 }
 
