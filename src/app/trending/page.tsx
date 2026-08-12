@@ -64,7 +64,7 @@ export default async function TrendingPage() {
           <div className="text-[10px] sm:text-xs uppercase tracking-[0.2em] text-[#8C9485] font-semibold">
             Index 01—20 · Updated Hourly
           </div>
-          <h1 className="text-[clamp(2.5rem,5vw,3rem)] font-light italic text-[#2E352B]" style={{ fontFamily: "var(--font-serif), serif" }}>
+          <h1 className="text-fluid-h1 font-light italic text-[#2E352B]" style={{ fontFamily: "var(--font-serif), serif" }}>
             Trending Now
           </h1>
         </header>

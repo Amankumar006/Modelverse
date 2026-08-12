@@ -43,7 +43,7 @@ export default async function TimelinePage() {
       {/* ── Content Container ───────────────────────────────── */}
       <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 mt-6">
         <div className="border-b border-[#27272A] pb-8 mb-12">
-          <h1 className="text-[clamp(2.25rem,5vw,3rem)] font-serif font-normal tracking-tight text-[#F4F4F5]">
+          <h1 className="text-fluid-h1 font-serif font-normal tracking-tight text-[#F4F4F5]">
             Release Timeline
           </h1>
           <p className="mt-2 text-sm text-white/50 max-w-xl">

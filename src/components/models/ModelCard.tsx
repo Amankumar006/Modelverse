@@ -87,7 +87,7 @@ export default function ModelCard({
     return (
       <Link
         href={targetHref}
-        className="group grid grid-cols-[1fr_auto_auto_auto] sm:grid-cols-[1.4fr_0.8fr_0.6fr_0.5fr_auto] items-center gap-3 sm:gap-4 px-4 py-3.5 rounded-[14px] bg-[var(--card-bg)] hover:bg-[var(--accent-soft)]/20 transition-all shadow-[var(--shadow-card)] cursor-pointer"
+        className="group grid grid-cols-[1fr_auto_auto_auto] sm:grid-cols-[1.4fr_0.8fr_0.6fr_0.5fr_auto] items-center gap-3 sm:gap-4 px-4 py-3.5 rounded-[14px] bg-[var(--card-bg)]/80 backdrop-blur-md border border-[var(--muted)]/10 hover:border-[var(--accent)]/30 hover:bg-[var(--accent-soft)]/5 transition-all duration-300 shadow-sm hover:shadow-md cursor-pointer"
       >
         <div className="min-w-0">
           <div className="flex items-center gap-2">
@@ -128,12 +128,14 @@ export default function ModelCard({
 
   return (
     <div
-      className={`group relative flex flex-col justify-between rounded-[20px] bg-[var(--card-bg)] shadow-[var(--shadow-card)] hover:-translate-y-1 transition-all duration-300 w-full text-left overflow-hidden z-0 ${
+      className={`group relative flex flex-col justify-between rounded-[20px] bg-[var(--card-bg)]/90 backdrop-blur-xl border border-[var(--muted)]/10 shadow-sm hover:shadow-[0_15px_35px_-10px_rgba(0,0,0,0.1)] hover:border-[var(--accent)]/30 hover:-translate-y-1 transition-all duration-400 w-full text-left overflow-hidden z-0 ${
         effectiveFeatured
           ? "col-span-1 md:col-span-2 p-7 text-base"
           : "col-span-1 p-5.5 text-xs"
       }`}
     >
+      <div className="absolute inset-0 bg-gradient-to-br from-[var(--accent)]/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+
       <Link
         href={targetHref}
         className="absolute inset-0 z-10"
