@@ -1,5 +1,5 @@
 {
-  "fetchedAt": "2026-08-12T05:40:52.496Z",
+  "fetchedAt": "2026-08-13T05:43:49.561Z",
   "data": {
     "features": [
       {
@@ -1684,7 +1684,7 @@
           "eval_name": "AALF_FuseChat-Llama-3.1-8B-SFT-preview_bfloat16",
           "Precision": "bfloat16",
           "Type": "🔶 fine-tuned on domain-specific datasets",
-          "T": "🔶",
+          "T": "��",
           "Weight type": "Original",
           "Architecture": "LlamaForCausalLM",
           "Model": "<a target=\"_blank\" href=\"https://huggingface.co/AALF/FuseChat-Llama-3.1-8B-SFT-preview\" style=\"color: var(--link-text-color); text-decoration: underline;text-decoration-style: dotted;\">AALF/FuseChat-Llama-3.1-8B-SFT-preview</a>  <a target=\"_blank\" href=\"https://huggingface.co/datasets/open-llm-leaderboard/AALF__FuseChat-Llama-3.1-8B-SFT-preview-details\" style=\"color: var(--link-text-color); text-decoration: underline;text-decoration-style: dotted;\">📑</a>",
