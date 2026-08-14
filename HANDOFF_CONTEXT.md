@@ -6,7 +6,7 @@
 - **Name:** Modelverse
 - **Description:** A comprehensive directory of released AI models.
 - **Live Site:** `https://www.themodelverse.in/`
-- **Tech Stack:** Next.js 15 (App Router), TypeScript, Tailwind CSS v4, Framer Motion.
+- **Tech Stack:** Next.js 16 (App Router), TypeScript, Tailwind CSS v4, GSAP.
 - **Database:** Supabase (PostgreSQL).
 - **Deployment:** Vercel (Auto-deploys on every merge to `main`).
 
@@ -19,10 +19,10 @@
   - **Publishing:** The public frontend (like `page.tsx`) explicitly filters for `verified: true`. Once an admin approves a model in the Admin Dashboard (`/admin/review`), it becomes visible on the live site.
 - **Reddit Bot Integration:** A Reddit Devvit app (`themodelversebot`) is linked to the project and interacts with Reddit's developer platform. 
 
-## 3. Recent Updates (As of August 11, 2026)
-- **Legal Documents:** Updated `Privacy`, `Security`, and `Terms of Service` pages to reflect the current effective date (August 11, 2026) and changed attributions to reflect a "dedicated team" rather than an individual.
-- **Model Ingestion:** Successfully scraped and ingested the **Upstage Solar Pro 4** model into the production Supabase database.
-- **Reddit Devvit Bot:** Resolved HTTP Fetch Policy rejections by updating the bot's `readme.md` to clarify its data sources and APIs.
+## 3. Recent Updates (As of August 14, 2026)
+- **Performance & CWV Optimization:** Removed `framer-motion` to shave bundle size, self-hosted fonts (`next/font/google`), added `priority` to LCP images, and migrated tracking tags to `@next/third-parties`.
+- **UI & Aesthetic Polish:** Integrated seamless `gsap/ScrollTrigger` staggered fade animations, implemented fluid typography variables in Tailwind v4, added glassmorphism to ModelCards, and resolved `ThemeProvider` hydration mismatch for Next Themes.
+- **ISR & Edge Data Caching:** Drastically minimized continuous database reads by implementing Edge Data Caching on the Supabase client (`next: { revalidate: 3600 }`). Admin actions now utilize `revalidatePath` for on-demand cache invalidation. Prevented aggressive prefetching by adding `prefetch={false}` to all listing card `Link` components.
 
 ## 4. Golden Rules for AI Agents
 1. **Never push directly to `main` for WIP features.** `main` = production. Branch off `develop` for features, build/lint locally, and merge only when fully verified.
@@ -31,5 +31,4 @@
 4. **Strict Types & Static Builds:** Next.js builds are sensitive to strict TypeScript types. Run `npm run build` and `npm run lint` before any merges.
 
 ## 5. Next Steps / Pending Items
-- **Reddit Bot:** Monitor the Devvit app submission for final approval.
-- **Content Expansion:** Continue ingesting new foundation models using the established ingestion scripts.
+- **Feature Development:** With the platform heavily optimized, we are ready to move on to developing new features, expanding the dataset, or building user-facing tooling.
