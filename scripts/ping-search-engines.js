@@ -24,13 +24,13 @@ const supabase = require("../src/lib/supabase");
   try {
     const { data: models, error } = await supabase
       .from("models")
-      .select("slug")
+      .select("slug, quality_status")
       .order("release_date", { ascending: false })
       .limit(20);
     if (error) throw error;
     if (models) {
       models.forEach((m) => {
-        if (m.slug) urlsToPing.add(`${BASE_URL}/models/${m.slug}`);
+        if (m.slug && m.quality_status === "indexed") urlsToPing.add(`${BASE_URL}/models/${m.slug}`);
       });
     }
   } catch (e) {
@@ -41,14 +41,15 @@ const supabase = require("../src/lib/supabase");
   try {
     const { data: news, error } = await supabase
       .from("news_items")
-      .select("slug")
+      .select("slug, quality_status")
       .eq("status", "published")
+      .eq("quality_status", "indexed")
       .order("publish_date", { ascending: false })
       .limit(10);
     if (error) throw error;
     if (news) {
       news.forEach((n) => {
-        if (n.slug) urlsToPing.add(`${BASE_URL}/news/${n.slug}`);
+        if (n.slug && n.quality_status === "indexed") urlsToPing.add(`${BASE_URL}/news/${n.slug}`);
       });
     }
   } catch (e) {

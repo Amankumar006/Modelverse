@@ -65,6 +65,9 @@ export async function generateMetadata({
       title,
       description,
     },
+    robots: model.qualityStatus && model.qualityStatus !== "indexed"
+      ? { index: false, follow: true }
+      : undefined,
   };
 }
 

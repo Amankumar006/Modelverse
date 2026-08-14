@@ -39,7 +39,17 @@ jobs:
       - name: Generate Email Digest
         run: node scripts/generate-email-digest.js
 
-
+      - name: Commit Quality Gate Artifacts
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add .
+          if ! git diff --staged --quiet; then
+            git commit -m "chore(models): publish ${QUALITY_INDEXED:-0} indexed, ${QUALITY_UNLISTED:-0} unlisted, ${QUALITY_QUARANTINED:-0} quarantined [skip ci]"
+            git push origin main
+          else
+            echo "No model quality artifacts to commit."
+          fi
 
       - name: Instant Search Engine Indexing Ping (IndexNow)
         run: node scripts/ping-search-engines.js
@@ -62,4 +72,3 @@ jobs:
           to: 006amanraj@gmail.com
           from: Modelverse Ingestion Bot <006amanraj@gmail.com>
           html_body: file://data/ingestion/latest-digest.html
-

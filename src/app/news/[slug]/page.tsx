@@ -58,6 +58,9 @@ export async function generateMetadata({ params }: ArticlePageProps): Promise<Me
         }
       ],
     },
+    robots: article.qualityStatus && article.qualityStatus !== "indexed"
+      ? { index: false, follow: true }
+      : undefined,
   };
 }
 

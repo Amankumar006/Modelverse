@@ -21,8 +21,13 @@ CREATE TABLE news_items (
     status TEXT DEFAULT 'published',
     confidence_level TEXT DEFAULT 'confirmed',
     external_sources JSONB DEFAULT '[]'::jsonb,
+    sources JSONB DEFAULT '[]'::jsonb,
     related_models JSONB DEFAULT '[]'::jsonb,
     tags JSONB DEFAULT '[]'::jsonb,
+    quality_status TEXT CHECK (quality_status IS NULL OR quality_status IN ('indexed', 'unlisted')),
+    quality_score INTEGER,
+    quality_reasons JSONB DEFAULT '[]'::jsonb,
+    quality_checked_at TIMESTAMPTZ,
     created_at TIMESTAMPTZ DEFAULT NOW(),
     updated_at TIMESTAMPTZ DEFAULT NOW()
 );

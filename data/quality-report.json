@@ -1,0 +1,30 @@
+{
+  "generatedAt": "2026-08-14T18:15:46.892Z",
+  "pipeline": "quality-backfill",
+  "dryRun": false,
+  "models": {
+    "total": 470,
+    "indexed": 17,
+    "thin": 453,
+    "unlisted": 0,
+    "failed": 0
+  },
+  "news": {
+    "total": 278,
+    "indexed": 229,
+    "thin": 0,
+    "unlisted": 49,
+    "failed": 0
+  },
+  "summary": {
+    "total": 748,
+    "indexed": 246,
+    "unlistedOrThin": 502,
+    "failed": 0,
+    "indexedPercent": 32.9,
+    "thinOrUnlistedPercent": 67.1
+  },
+  "indexed": 246,
+  "unlistedOrThin": 502,
+  "quarantined": 0
+}

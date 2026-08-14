@@ -48,7 +48,8 @@ export default function ModelDetailTabs({
     { key: "resources", label: "Resources" },
   ];
 
-  const hasLiveDescription = Boolean(model.description?.trim());
+  const overview = model.pageOverview?.trim() || model.description;
+  const hasLiveDescription = Boolean(overview?.trim());
   const liveFeatures = model.keyFeatures ?? [];
   const linkEntries = Object.entries(model.links || {}).filter(([, url]) => Boolean(url));
 
@@ -77,7 +78,7 @@ export default function ModelDetailTabs({
         {activeTab === "overview" && (
           <div className="space-y-6">
             {hasLiveDescription ? (
-              <p className="max-w-2xl leading-relaxed text-[var(--text)] text-base font-normal">{model.description}</p>
+              <p className="max-w-2xl leading-relaxed text-[var(--text)] text-base font-normal">{overview}</p>
             ) : (
               <Empty>Enrichment in progress — a reviewed description isn&apos;t available yet.</Empty>
             )}

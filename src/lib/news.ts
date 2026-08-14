@@ -50,15 +50,20 @@ function mapDbRowToArticle(row: any): any {
     status: row.status,
     confidenceLevel: row.confidence_level,
     externalSources: row.external_sources || [],
+    sources: row.sources || row.external_sources || [],
     relatedModels: row.related_models || [],
-    tags: row.tags || []
+    tags: row.tags || [],
+    qualityStatus: row.quality_status,
+    qualityScore: row.quality_score,
+    qualityReasons: row.quality_reasons || [],
+    qualityCheckedAt: row.quality_checked_at,
   };
 }
 
 export async function getAllArticles(): Promise<NewsArticleIndexEntry[]> {
   const { data, error } = await supabase
     .from("news_items")
-    .select("id, slug, title, category, publish_date, updated_at, author, read_time, excerpt, cover_image, status, confidence_level, external_sources, related_models, tags")
+    .select("id, slug, title, category, publish_date, updated_at, author, read_time, excerpt, cover_image, status, confidence_level, external_sources, sources, related_models, tags, quality_status, quality_score, quality_reasons, quality_checked_at")
     .eq("status", "published")
     .order("publish_date", { ascending: false });
 
@@ -115,4 +120,3 @@ export function getCategoryLabel(category: NewsCategoryType): string {
       return category;
   }
 }
-

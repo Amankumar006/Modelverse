@@ -100,6 +100,15 @@ export const ModelSchema = z.object({
   boost: z.number().min(1).max(5).default(1),
   // curatorNotes: internal-only notes for curation triage, deliberately omitted from any client-facing rendering
   curatorNotes: z.string().default(""),
+  // Public quality-gate state. curatorNotes remains internal; these fields are
+  // safe to expose to discovery/rendering logic.
+  qualityStatus: z.enum(["indexed", "thin"]).optional(),
+  qualityScore: z.number().min(0).max(100).optional(),
+  qualityReasons: z.array(z.string()).optional(),
+  qualityCheckedAt: z.string().datetime().optional(),
+  cardSummary: z.string().optional(),
+  pageOverview: z.string().optional(),
+  editorialNote: z.string().optional(),
 }).passthrough();
 
 export type Model = z.infer<typeof ModelSchema>;

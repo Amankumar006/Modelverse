@@ -93,7 +93,10 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   ];
 
   // Dynamic model detail pages
-  const modelRoutes: MetadataRoute.Sitemap = entries.map((entry) => {
+  // Existing records predate the gate and remain indexable by design. New gate
+  // records must explicitly pass before discovery surfaces include them.
+  const indexedEntries = entries.filter((entry) => !entry.qualityStatus || entry.qualityStatus === "indexed");
+  const modelRoutes: MetadataRoute.Sitemap = indexedEntries.map((entry) => {
     const lastModDate = entry.updatedAt || entry.releaseDate;
     return {
       url: `${BASE_URL}/models/${entry.slug}`,
@@ -104,7 +107,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   });
 
   // Dynamic family pages
-  const families = [...new Set(entries.map((e) => e.family))].filter(Boolean) as string[];
+  const families = [...new Set(indexedEntries.map((e) => e.family))].filter(Boolean) as string[];
   const familyRoutes: MetadataRoute.Sitemap = families.map((familySlug) => {
     return {
       url: `${BASE_URL}/models/family/${familySlug}`,
@@ -115,7 +118,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   });
 
   // Dynamic developer pages
-  const developers = [...new Set(entries.map((e) => e.developer))].filter(Boolean);
+  const developers = [...new Set(indexedEntries.map((e) => e.developer))].filter(Boolean);
   const developerRoutes: MetadataRoute.Sitemap = developers.map((developer) => {
     return {
       url: `${BASE_URL}/models/developer/${encodeURIComponent(developer)}`,
@@ -126,11 +129,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   });
 
   // Collect unique single-facet values
-  const tasks = [...new Set(entries.map((e) => e.primaryTask))].filter(Boolean);
-  const types = [...new Set(entries.map((e) => e.type))].filter(Boolean);
-  const modalities = [...new Set(entries.flatMap((e) => e.modality))].filter(Boolean);
-  const licenses = [...new Set(entries.map((e) => e.license && typeof e.license === "object" ? e.license.name || "Custom" : e.license))].filter(Boolean);
-  const deployments = [...new Set(entries.flatMap((e) => e.deployment))].filter(Boolean);
+  const tasks = [...new Set(indexedEntries.map((e) => e.primaryTask))].filter(Boolean);
+  const types = [...new Set(indexedEntries.map((e) => e.type))].filter(Boolean);
+  const modalities = [...new Set(indexedEntries.flatMap((e) => e.modality))].filter(Boolean);
+  const licenses = [...new Set(indexedEntries.map((e) => e.license && typeof e.license === "object" ? e.license.name || "Custom" : e.license))].filter(Boolean);
+  const deployments = [...new Set(indexedEntries.flatMap((e) => e.deployment))].filter(Boolean);
 
   // Generate single-facet anchor URLs
   const facetRoutes: MetadataRoute.Sitemap = [];
@@ -163,7 +166,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   // Dynamic news articles
   const allArticles = await getAllArticles();
-  const newsArticleRoutes: MetadataRoute.Sitemap = allArticles.map((article) => {
+  const newsArticleRoutes: MetadataRoute.Sitemap = allArticles.filter((article) => !article.qualityStatus || article.qualityStatus === "indexed").map((article) => {
     const lastModDate = article.updatedDate || article.publishDate;
     return {
       url: `${BASE_URL}/news/${article.slug}`,

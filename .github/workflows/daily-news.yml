@@ -64,7 +64,7 @@ jobs:
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git add .
           if ! git diff --staged --quiet; then
-            git commit -m "feat(news): auto-publish daily AI news articles [skip ci]"
+            git commit -m "content(news): publish ${QUALITY_INDEXED:-0} indexed, ${QUALITY_UNLISTED:-0} unlisted briefs, ${QUALITY_QUARANTINED:-0} quarantined [skip ci]"
             git push origin main
           else
             echo "No new news articles to publish today."
@@ -88,4 +88,3 @@ jobs:
             All feeds may be down, or the script encountered a fatal parsing error.
             Please check the GitHub Actions logs immediately:
             https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
-

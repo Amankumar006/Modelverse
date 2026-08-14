@@ -11,6 +11,15 @@ if (!fs.existsSync(INGESTION_DIR)) {
 
 const supabase = require("../src/lib/supabase");
 
+function getQualitySummary() {
+  try {
+    const report = JSON.parse(fs.readFileSync(path.join(process.cwd(), "data", "quality-report.json"), "utf8"));
+    return `Quality gate: ${report.indexed || 0} indexed, ${report.unlistedOrThin || 0} unlisted/thin, ${report.quarantined || 0} quarantined.`;
+  } catch {
+    return "Quality gate summary was not available for this run.";
+  }
+}
+
 async function generateEmailDigest() {
   console.log("📧 Generating Email Digest...");
 
@@ -102,6 +111,7 @@ async function generateEmailDigest() {
     <p style="font-size: 14px; line-height: 1.5; color: #A3B8AA;">
       The automated daily ingestion pipeline discovered <strong>${newModels.length} new AI model(s)</strong>. They have been added to your <a href="https://www.themodelverse.in/admin" style="color: #4ADE80; text-decoration: underline;">Admin Review Queue</a> for verification:
     </p>
+    <p style="font-size: 13px; line-height: 1.5; color: #A3B8AA;">${getQualitySummary()}</p>
 
     <!-- Table -->
     <table style="width: 100%; border-collapse: collapse; margin-top: 16px; font-size: 13px; text-align: left;">

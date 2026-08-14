@@ -18,12 +18,19 @@ export const NewsArticleSchema = z.object({
   status: z.enum(["draft", "published"]).default("draft"),
   confidenceLevel: z.enum(["confirmed", "reported", "rumor", "community-discussion"]).default("confirmed"),
   externalSources: z.array(z.string()).optional(),
+  // `externalSources` is the legacy display field. `sources` is the quality
+  // gate's canonical array and supports either URLs or a URL-bearing record.
+  sources: z.array(z.union([z.string().url(), z.object({ url: z.string().url(), title: z.string().optional() })])).optional(),
   relatedModels: z.array(z.string()).optional(), // model slugs for internal linking
   tags: z.array(z.string()).optional(),
   seoTitle: z.string().optional(), // override <title>
   seoDescription: z.string().optional(), // override meta description
   isFeatured: z.boolean().optional().default(false), // pin to Hero section
   isTrending: z.boolean().optional().default(false), // pin to Trending section
+  qualityStatus: z.enum(["indexed", "unlisted"]).optional(),
+  qualityScore: z.number().min(0).max(100).optional(),
+  qualityReasons: z.array(z.string()).optional(),
+  qualityCheckedAt: z.string().datetime().optional(),
 });
 
 export type NewsArticle = z.infer<typeof NewsArticleSchema>;

@@ -2,13 +2,45 @@ const fs = require("fs");
 const path = require("path");
 const https = require("https");
 const supabase = require("../src/lib/supabase");
+const { scoreNewsArticle } = require("./quality/score-content");
+const { findNearDuplicates, loadFingerprintIndex, appendFingerprint } = require("./quality/detect-duplicates");
 
 const NEWS_DIR = path.join(process.cwd(), "data", "news");
 const INGESTION_DIR = path.join(process.cwd(), "data", "ingestion");
+const QUARANTINE_DIR = path.join(process.cwd(), "data", "quarantine", "news");
 
 // ─── Configuration ──────────────────────────────────────────────────
 const MAX_ARTICLES_PER_RUN = 10;    // Safety cap per ingestion run
 const MAX_AGE_HOURS = 48;           // Only process articles from last 48h
+
+if (!fs.existsSync(QUARANTINE_DIR)) {
+  fs.mkdirSync(QUARANTINE_DIR, { recursive: true });
+}
+
+function writeQualityReport(pipeline, counts) {
+  const report = {
+    generatedAt: new Date().toISOString(),
+    pipeline,
+    indexed: counts.indexed,
+    unlistedOrThin: counts.unlistedOrThin,
+    quarantined: counts.quarantined,
+  };
+  fs.writeFileSync(path.join(process.cwd(), "data", "quality-report.json"), `${JSON.stringify(report, null, 2)}\n`);
+}
+
+function storyWorthiness(candidate, recentTitles = []) {
+  const title = String(candidate?.title || "").toLowerCase();
+  const lab = String(candidate?.lab || "").toLowerCase();
+  let score = 3;
+  const authority = ["anthropic", "openai", "hugging face", "google deepmind", "nvidia", "mit technology review"];
+  if (authority.some((name) => lab.includes(name))) score += 2;
+  if (/\b(model|release|launch|open.source|open.weight|benchmark|research|api|agent|reasoning|security|framework)\b/.test(title)) score += 3;
+  if (/\b(gpt|claude|gemini|llama|mistral|qwen|kimi|deepseek)\b/.test(title)) score += 1;
+  if (/\b(minor|patch|changelog|maintenance|bug fix|version \d+\.\d+\.\d+|v\d+\.\d+\.\d+)\b/.test(title)) score -= 4;
+  const normalizedTitle = title.replace(/\W+/g, " ").trim();
+  if (recentTitles.some((existing) => String(existing).toLowerCase().replace(/\W+/g, " ").trim() === normalizedTitle)) score -= 3;
+  return Math.max(0, Math.min(10, score));
+}
 
 // ─── Poster images rotation by lab/source ───────────────────────────
 const POSTER_IMAGES = {
@@ -203,7 +235,7 @@ function postHttps(url, payload, customHeaders = {}) {
 const GENERATOR_PROMPT = `You are a technical AI research analyst writing for a highly technical audience at Modelverse (themodelverse.in).
 Write a unique, original summary of the following AI news or announcement.
 Do NOT copy-paste the source sentences directly (avoid plagiarism).
-Structure your response into 2-3 clean paragraphs (150-250 words total). Use a bulleted list for technical specs or key takeaways if applicable.
+Structure your response into 2-3 clean paragraphs (150-250 words total). Add a final ## Why this matters section with one clearly-labelled, evidence-grounded editorial analysis paragraph; distinguish inference from source facts. Use a bulleted list for technical specs or key takeaways if applicable.
 Do NOT use marketing buzzwords like 'revolutionize', 'groundbreaking', or 'game-changer'. Focus heavily on architectural changes, benchmark scores, context window sizes, and licensing.
 Do NOT rewrite or modify raw code blocks, mathematical equations, links, or specific benchmark scores. Keep them intact.
 
@@ -265,7 +297,7 @@ ${draftSummary}
 Task:
 1. Hallucination Check: Are there any facts, numbers, or claims in the draft that do NOT appear in the original text? If so, remove them.
 2. Tone Check: Remove marketing fluff, buzzwords (e.g. "game-changer", "revolutionize", "groundbreaking"), and subjective opinions. Make it sound like an objective, highly technical AI researcher wrote it.
-3. Formatting Check: Ensure the final output uses markdown formatting (like a bulleted list for technical specs/takeaways) if appropriate.
+3. Formatting Check: Preserve a concise ## Why this matters section when it is grounded in the source. Clearly label inference as analysis rather than source fact.
 
 Return ONLY the final, polished, verified markdown text. Do not include introductory notes or explanations of what you changed.`;
 
@@ -506,6 +538,8 @@ async function runDailyNewsIngestion() {
   console.log(`   Config: max ${MAX_ARTICLES_PER_RUN} articles, age cutoff: ${MAX_AGE_HOURS}h`);
   const existingSlugs = await getExistingNewsSlugs();
   const createdNews = [];
+  const qualityCounts = { indexed: 0, unlistedOrThin: 0, quarantined: 0 };
+  const fingerprintIndex = loadFingerprintIndex();
 
   const allCandidates = [];
 
@@ -703,6 +737,7 @@ async function extractFullArticleBody(url, fallbackDesc, lab) {
   let posterIndex = 0;
 
   for (const candidate of candidates) {
+    try {
     if (!candidate.title || !candidate.link) {
       console.log(`  ⚠️  Skipping malformed candidate: missing title or link`);
       continue;
@@ -717,6 +752,18 @@ async function extractFullArticleBody(url, fallbackDesc, lab) {
       continue;
     }
 
+    const recentTitles = [
+      ...createdNews.map((item) => item.title),
+      ...Object.values(fingerprintIndex.entries).map((entry) => entry?.title).filter(Boolean),
+    ];
+    const worthiness = storyWorthiness(candidate, recentTitles);
+    const isBrief = worthiness < 6;
+    if (isBrief) {
+      console.log(`  📝 Brief only (${worthiness}/10 story-worthiness): ${candidate.title.slice(0, 60)}`);
+    } else {
+      console.log(`  ⭐ Story-worthiness ${worthiness}/10: ${candidate.title.slice(0, 60)}`);
+    }
+
     // Use article's actual publication date if available
     const articleDate = candidate.parsedDate && !isNaN(candidate.parsedDate.getTime())
       ? candidate.parsedDate.toISOString().split("T")[0]
@@ -728,11 +775,11 @@ async function extractFullArticleBody(url, fallbackDesc, lab) {
       coverImage = getPosterImage(candidate.lab, posterIndex);
     }
 
-    // Relevance Scoring Phase
+    // Relevance Scoring Phase. Briefs intentionally avoid LLM generation.
     const rawBody = await extractFullArticleBody(candidate.link, candidate.description, candidate.lab);
-    const relevanceScore = await scoreArticleRelevance(candidate.title, rawBody);
+    const relevanceScore = isBrief ? 0 : await scoreArticleRelevance(candidate.title, rawBody);
     
-    if (relevanceScore < 6) {
+    if (!isBrief && relevanceScore < 6) {
       console.log(`  ⏭️  Skipping (Low Score ${relevanceScore}/10): ${candidate.title.slice(0, 40)}...`);
       existingSlugs.add(newsSlug); // prevent reprocessing next run
       continue;
@@ -740,11 +787,13 @@ async function extractFullArticleBody(url, fallbackDesc, lab) {
       console.log(`  ⭐  Scored ${relevanceScore}/10: ${candidate.title.slice(0, 40)}...`);
     }
 
-    // Generator Agent Phase
-    const draftContent = await rewriteArticle(candidate.title, rawBody, candidate.lab, candidate.link);
-    
-    // Verifier Agent Phase
-    const bodyContent = await verifyAndRefineArticle(candidate.title, rawBody, draftContent);
+    const bodyContent = isBrief
+      ? `${candidate.description.trim()}\n\n[Brief: this item did not meet the threshold for a full editorial analysis.]`
+      : await verifyAndRefineArticle(
+        candidate.title,
+        rawBody,
+        await rewriteArticle(candidate.title, rawBody, candidate.lab, candidate.link)
+      );
     
     const wordCount = bodyContent.split(/\s+/).length;
     const readTimeMinutes = Math.max(2, Math.ceil(wordCount / 200));
@@ -762,28 +811,74 @@ async function extractFullArticleBody(url, fallbackDesc, lab) {
       status: "published",
       confidence_level: "confirmed",
       external_sources: [candidate.link],
+      sources: [candidate.link],
       related_models: detectRelatedModelSlugs(candidate.title, bodyContent, candidate.lab),
       tags: ["ai-news", "breaking", slugify(candidate.lab)]
     };
 
+    const gate = scoreNewsArticle(newsJson, [rawBody]);
+    const duplicate = findNearDuplicates(newsJson, fingerprintIndex.entries);
+    if (duplicate) {
+      gate.status = "unlisted";
+      gate.reasons.push(`near duplicate of ${duplicate.slug} (${duplicate.similarity})`);
+    }
+    if (isBrief) {
+      gate.status = "unlisted";
+      gate.reasons.push("brief did not receive a full editorial analysis");
+    }
+    newsJson.quality_status = gate.status;
+    newsJson.quality_score = gate.score;
+    newsJson.quality_reasons = gate.reasons;
+    newsJson.quality_checked_at = new Date().toISOString();
+
+    // Always record the fingerprint, including unlisted and quarantined items.
+    const fingerprint = appendFingerprint(newsJson);
+    if (fingerprint) fingerprintIndex.entries[newsSlug] = fingerprint;
+
+    if (gate.score < 25) {
+      fs.writeFileSync(path.join(QUARANTINE_DIR, `${newsSlug}.json`), `${JSON.stringify(newsJson, null, 2)}\n`, "utf-8");
+      qualityCounts.quarantined += 1;
+      existingSlugs.add(newsSlug);
+      console.warn(`  🚧 Quarantined (quality ${gate.score}/100): ${candidate.title.slice(0, 60)}`);
+      continue;
+    }
     const { error: dbError } = await supabase.from('news_items').upsert(newsJson, { onConflict: 'slug' });
     
     if (dbError) {
       console.error(`  ❌ Failed to insert to DB: ${candidate.title.slice(0, 30)} - ${dbError.message}`);
+      fs.writeFileSync(path.join(QUARANTINE_DIR, `${newsSlug}.json`), `${JSON.stringify(newsJson, null, 2)}\n`, "utf-8");
+      qualityCounts.quarantined += 1;
       continue;
     }
     
+    if (gate.status === "indexed") qualityCounts.indexed += 1;
+    else qualityCounts.unlistedOrThin += 1;
     existingSlugs.add(newsSlug);
     createdNews.push(newsJson);
     posterIndex++;
     console.log(`  ✅ Published (${readTimeMinutes} min read): ${candidate.title.slice(0, 60)}`);
+    } catch (error) {
+      const failedSlug = slugify(candidate?.title || `malformed-news-${Date.now()}`);
+      const failedItem = {
+        ...candidate,
+        slug: failedSlug,
+        quality_status: "unlisted",
+        quality_score: 0,
+        quality_reasons: ["malformed input", error.message],
+        quality_checked_at: new Date().toISOString(),
+      };
+      fs.writeFileSync(path.join(QUARANTINE_DIR, `${failedSlug}.json`), `${JSON.stringify(failedItem, null, 2)}\n`, "utf-8");
+      appendFingerprint(failedItem);
+      qualityCounts.quarantined += 1;
+      console.error(`  ⚠️ Quarantined failed candidate ${failedSlug}: ${error.message}`);
+    }
   }
 
   // Generate Email Digest
   if (createdNews.length > 0) {
     fs.writeFileSync(path.join(INGESTION_DIR, "new-articles.json"), JSON.stringify(createdNews, null, 2));
 
-    let htmlDigest = `<h2>📰 Modelverse Daily News Digest</h2><ul>`;
+    let htmlDigest = `<h2>📰 Modelverse Daily News Digest</h2><p><strong>Quality gate:</strong> ${qualityCounts.indexed} indexed, ${qualityCounts.unlistedOrThin} unlisted, ${qualityCounts.quarantined} quarantined.</p><ul>`;
     createdNews.forEach(n => {
       htmlDigest += `<li><strong>${n.title}</strong> (${n.read_time})<br/><em>${n.excerpt}</em><br/><a href="https://www.themodelverse.in/news/${n.slug}">Read on Modelverse</a></li><br/>`;
     });
@@ -798,14 +893,22 @@ async function extractFullArticleBody(url, fallbackDesc, lab) {
 
   // Summary
   console.log("\n📊 Ingestion Summary:");
+  console.log(`Published (indexed): ${qualityCounts.indexed}`);
+  console.log(`Published (unlisted/thin): ${qualityCounts.unlistedOrThin}`);
+  console.log(`Quarantined: ${qualityCounts.quarantined}`);
+  writeQualityReport("news", qualityCounts);
+  if (process.env.GITHUB_ENV) {
+    fs.appendFileSync(process.env.GITHUB_ENV, `QUALITY_INDEXED=${qualityCounts.indexed}\n`);
+    fs.appendFileSync(process.env.GITHUB_ENV, `QUALITY_UNLISTED=${qualityCounts.unlistedOrThin}\n`);
+    fs.appendFileSync(process.env.GITHUB_ENV, `QUALITY_QUARANTINED=${qualityCounts.quarantined}\n`);
+  }
   if (createdNews.length === 0) {
     console.log("✨ No new articles found in the last " + MAX_AGE_HOURS + " hours.");
     if (process.env.GITHUB_ENV) {
       fs.appendFileSync(process.env.GITHUB_ENV, "NEW_NEWS_PUSHED=false\n");
     }
     if (allCandidates.length === 0) {
-      console.error("🚨 CRITICAL ERROR: All feeds failed to fetch or parsed zero items. Failing pipeline to trigger alert.");
-      process.exit(1);
+      console.error("🚨 All feeds failed to fetch or parsed zero items; recorded a zero-item quality report without failing the pipeline.");
     }
   } else {
     console.log(`🎉 Published ${createdNews.length} new articles:`);

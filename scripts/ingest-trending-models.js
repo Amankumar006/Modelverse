@@ -1,11 +1,13 @@
 const fs = require("fs");
 const path = require("path");
 const https = require("https");
+const { scoreModelPage } = require("./quality/score-content");
 
 const MODELS_DIR = path.join(process.cwd(), "data", "models");
 const PENDING_DIR = path.join(process.cwd(), "data", "models-pending");
 const README_DIR = path.join(process.cwd(), "data", "models", "readme");
 const INGESTION_DIR = path.join(process.cwd(), "data", "ingestion");
+const QUARANTINE_DIR = path.join(process.cwd(), "data", "quarantine", "models");
 
 if (!fs.existsSync(INGESTION_DIR)) {
   fs.mkdirSync(INGESTION_DIR, { recursive: true });
@@ -15,6 +17,21 @@ if (!fs.existsSync(PENDING_DIR)) {
 }
 if (!fs.existsSync(README_DIR)) {
   fs.mkdirSync(README_DIR, { recursive: true });
+}
+if (!fs.existsSync(QUARANTINE_DIR)) {
+  fs.mkdirSync(QUARANTINE_DIR, { recursive: true });
+}
+
+function writeQualityReport(pipeline, counts) {
+  const reportPath = path.join(process.cwd(), "data", "quality-report.json");
+  const report = {
+    generatedAt: new Date().toISOString(),
+    pipeline,
+    indexed: counts.indexed,
+    unlistedOrThin: counts.unlistedOrThin,
+    quarantined: counts.quarantined,
+  };
+  fs.writeFileSync(reportPath, `${JSON.stringify(report, null, 2)}\n`);
 }
 
 function getHttps(url) {
@@ -198,6 +215,7 @@ async function runIngestion() {
   console.log("🚀 Starting Daily Ingestion Pipeline...");
   const { ids: existingIds, slugs: existingSlugs, sources: existingSources } = await getExistingIds();
   const createdModels = [];
+  const qualityCounts = { indexed: 0, unlistedOrThin: 0, quarantined: 0 };
 
   // 1. Fetch trending model list
   console.log("🔍 Fetching HuggingFace Trending models...");
@@ -212,6 +230,7 @@ async function runIngestion() {
 
   // 2. For each trending model, fetch full details and build rich entries
   for (const listItem of trendingList) {
+    try {
     const parts = listItem.id.split("/");
     const author = parts[0] || "Other";
     const modelName = parts[1] || listItem.id;
@@ -319,6 +338,26 @@ async function runIngestion() {
       curatorNotes: `Auto-ingested from HuggingFace Trending on ${todayStr}. Architecture: ${architecture || "unknown"}. Params: ${paramStr}. License: ${license}.`
     };
 
+    // Quality controls are deliberately non-blocking for the run: every item
+    // gets a score, while only the very lowest tier is kept out of Supabase.
+    const gate = scoreModelPage(newModelJson);
+    newModelJson.qualityStatus = gate.status;
+    newModelJson.qualityScore = gate.score;
+    newModelJson.qualityReasons = gate.reasons;
+    newModelJson.qualityCheckedAt = new Date().toISOString();
+
+    if (gate.score < 40) {
+      fs.writeFileSync(
+        path.join(QUARANTINE_DIR, `${modelSlug}.json`),
+        `${JSON.stringify(newModelJson, null, 2)}\n`,
+        "utf-8"
+      );
+      existingIds.add(fullId);
+      existingSlugs.add(modelSlug);
+      qualityCounts.quarantined += 1;
+      console.warn(`  🚧 Quarantined (quality ${gate.score}/100): ${modelName}`);
+      continue;
+    }
     // Build rich README
     const readmeMd = `# ${modelName}
 
@@ -400,23 +439,55 @@ ${arxivUrl ? `- **Paper**: [arXiv](${arxivUrl})` : ""}
       verification_status: newModelJson.verificationStatus,
       needs_review: newModelJson.needsReview,
       curator_notes: newModelJson.curatorNotes,
+      quality_status: newModelJson.qualityStatus,
+      quality_score: newModelJson.qualityScore,
+      quality_reasons: newModelJson.qualityReasons,
+      quality_checked_at: newModelJson.qualityCheckedAt,
+      metadata: { ...newModelJson },
     };
     
     const { error: insertError } = await supabase.from("models").insert(row);
     if (insertError) {
       console.error(`❌ Failed to insert ${modelName}:`, insertError.message);
+      fs.writeFileSync(path.join(QUARANTINE_DIR, `${modelSlug}.json`), `${JSON.stringify(newModelJson, null, 2)}\n`, "utf-8");
+      qualityCounts.quarantined += 1;
       continue;
     }
+    if (gate.status === "indexed") qualityCounts.indexed += 1;
+    else qualityCounts.unlistedOrThin += 1;
     fs.writeFileSync(path.join(README_DIR, `${modelSlug}.md`), readmeMd, "utf-8");
 
     existingIds.add(fullId);
     existingSlugs.add(modelSlug);
     createdModels.push(modelName);
     console.log(`⏳ Staged for Verification in Supabase: ${modelName} — ${paramStr} params, ${pipelineTag}, ${license}`);
+    } catch (error) {
+      const fallbackSlug = slugify(listItem?.id || `malformed-model-${Date.now()}`);
+      const failedItem = {
+        source: listItem,
+        slug: fallbackSlug,
+        qualityStatus: "thin",
+        qualityScore: 0,
+        qualityReasons: ["malformed input", error.message],
+        qualityCheckedAt: new Date().toISOString(),
+      };
+      fs.writeFileSync(path.join(QUARANTINE_DIR, `${fallbackSlug}.json`), `${JSON.stringify(failedItem, null, 2)}\n`, "utf-8");
+      qualityCounts.quarantined += 1;
+      console.error(`  ⚠️ Quarantined failed model ${fallbackSlug}: ${error.message}`);
+    }
   }
 
   // 3. Summary & Run Cross-Source Verification Engine
   console.log("\n📊 Ingestion Summary:");
+  console.log(`Published (indexed): ${qualityCounts.indexed}`);
+  console.log(`Published (unlisted/thin): ${qualityCounts.unlistedOrThin}`);
+  console.log(`Quarantined: ${qualityCounts.quarantined}`);
+  writeQualityReport("models", qualityCounts);
+  if (process.env.GITHUB_ENV) {
+    fs.appendFileSync(process.env.GITHUB_ENV, `QUALITY_INDEXED=${qualityCounts.indexed}\n`);
+    fs.appendFileSync(process.env.GITHUB_ENV, `QUALITY_UNLISTED=${qualityCounts.unlistedOrThin}\n`);
+    fs.appendFileSync(process.env.GITHUB_ENV, `QUALITY_QUARANTINED=${qualityCounts.quarantined}\n`);
+  }
   if (createdModels.length === 0) {
     console.log("✨ No new models found. Staging registry is up to date!");
   } else {

@@ -19,6 +19,7 @@ export interface ModelIndex {
   institution?: string;
   verified?: boolean;
   verificationStatus?: string;
+  qualityStatus?: "indexed" | "thin";
 }
 
 export interface Benchmark {
@@ -75,6 +76,13 @@ export interface ModelEntry extends ModelIndex {
   costTiers?: { id: string; label: string; description?: string }[];
   pricing?: { tier?: string; unit: string; amount: number; currency: string; notes?: string }[];
   pricingLastVerified?: string;
+  qualityStatus?: "indexed" | "thin";
+  qualityScore?: number;
+  qualityReasons?: string[];
+  qualityCheckedAt?: string;
+  cardSummary?: string;
+  pageOverview?: string;
+  editorialNote?: string;
 }
 
 
@@ -153,6 +161,13 @@ export function mapRowToModelEntry(row: any): ModelEntry {
     costTiers: row.cost_tiers,
     pricing: row.pricing,
     pricingLastVerified: row.pricing_last_verified,
+    qualityStatus: row.quality_status,
+    qualityScore: row.quality_score,
+    qualityReasons: row.quality_reasons || [],
+    qualityCheckedAt: row.quality_checked_at,
+    cardSummary: row.card_summary,
+    pageOverview: row.page_overview,
+    editorialNote: row.editorial_note,
   };
 
   if (row.metadata) {
@@ -179,6 +194,7 @@ function mapRowToModelIndex(row: any): ModelIndex {
     institution: row.institution,
     verified: row.verified,
     verificationStatus: row.verification_status,
+    qualityStatus: row.quality_status,
   };
 }
 
@@ -190,7 +206,7 @@ function mapRowToModelIndex(row: any): ModelIndex {
 export async function getAllModels(): Promise<ModelIndex[]> {
   const { data } = await supabase
     .from('models')
-    .select('id, name, slug, developer, release_date, type, status, vendor_api_status, featured, boost, family, tier, institution, verified, verification_status')
+    .select('id, name, slug, developer, release_date, type, status, vendor_api_status, featured, boost, family, tier, institution, verified, verification_status, quality_status')
     .order('release_date', { ascending: false });
   return (data || []).map(mapRowToModelIndex);
 }
@@ -290,4 +306,3 @@ export function getModalities(mod: any): string[] {
 
 /** Base URL for canonical links and OG images. */
 export const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://www.themodelverse.in";
-
