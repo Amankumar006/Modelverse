@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-08-14T21:20:46.517Z",
+  "generatedAt": "2026-08-14T22:18:48.557Z",
   "pipeline": "news",
-  "indexed": 0,
-  "unlistedOrThin": 4,
-  "quarantined": 0
+  "indexed": 2,
+  "unlistedOrThin": 1,
+  "quarantined": 1
 }
