@@ -76,45 +76,48 @@ export default async function ArchivePage() {
               </h2>
               
               <div className="space-y-4">
-                {groupedModels[month].map((model) => (
-                  <Link
-                    key={model.id}
-                    href={`/models/${model.slug}`}
-                    className={`block rounded-xl border transition-all duration-300 ${
-                      model.featured 
-                        ? "border-brand-orange/30 bg-brand-orange/[0.03] hover:bg-brand-orange/[0.05] p-5 sm:p-6 shadow-[0_0_20px_rgba(232,90,40,0.05)]" 
-                        : "border-white/[0.06] bg-white/[0.02] hover:bg-white/[0.04] p-4 sm:p-5"
-                    }`}
-                  >
-                    <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4">
-                      <div>
-                        <div className="flex items-center gap-2 mb-1">
-                          {model.featured && (
-                            <Sparkle size={14} className="text-brand-orange shrink-0" strokeWidth={1.5} />
-                          )}
-                          <div className="text-xs font-mono text-white/50 uppercase tracking-wider">
-                            {model.developer}
+                {groupedModels[month].map((model) => {
+                  const isFeaturedModel = Boolean(model.featured && model.qualityStatus === "indexed");
+                  return (
+                    <Link
+                      key={model.id}
+                      href={`/models/${model.slug}`}
+                      className={`block rounded-xl border transition-all duration-300 ${
+                        isFeaturedModel 
+                          ? "border-brand-orange/30 bg-brand-orange/[0.03] hover:bg-brand-orange/[0.05] p-5 sm:p-6 shadow-[0_0_20px_rgba(232,90,40,0.05)]" 
+                          : "border-white/[0.06] bg-white/[0.02] hover:bg-white/[0.04] p-4 sm:p-5"
+                      }`}
+                    >
+                      <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4">
+                        <div>
+                          <div className="flex items-center gap-2 mb-1">
+                            {isFeaturedModel && (
+                              <Sparkle size={14} className="text-brand-orange shrink-0" strokeWidth={1.5} />
+                            )}
+                            <div className="text-xs font-mono text-white/50 uppercase tracking-wider">
+                              {model.developer}
+                            </div>
+                          </div>
+                          <h3 className={`font-semibold tracking-tight ${isFeaturedModel ? "text-xl text-white" : "text-lg text-white/90"}`}>
+                            {model.name}
+                          </h3>
+                          <p className="text-sm text-white/60 mt-2 line-clamp-2 max-w-2xl">
+                            {model.description}
+                          </p>
+                        </div>
+                      
+                        <div className="flex flex-wrap sm:flex-col items-center sm:items-end gap-2 shrink-0">
+                          <span className="text-xs font-mono text-white/40">
+                            {new Date(model.releaseDate).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" })}
+                          </span>
+                          <div className="px-2 py-1 rounded bg-white/5 border border-white/10 text-[10px] uppercase tracking-widest text-white/50 font-semibold">
+                            {model.type.replace("-", " ")}
                           </div>
                         </div>
-                        <h3 className={`font-semibold tracking-tight ${model.featured ? "text-xl text-white" : "text-lg text-white/90"}`}>
-                          {model.name}
-                        </h3>
-                        <p className="text-sm text-white/60 mt-2 line-clamp-2 max-w-2xl">
-                          {model.description}
-                        </p>
                       </div>
-                      
-                      <div className="flex flex-wrap sm:flex-col items-center sm:items-end gap-2 shrink-0">
-                        <span className="text-xs font-mono text-white/40">
-                          {new Date(model.releaseDate).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" })}
-                        </span>
-                        <div className="px-2 py-1 rounded bg-white/5 border border-white/10 text-[10px] uppercase tracking-widest text-white/50 font-semibold">
-                          {model.type.replace("-", " ")}
-                        </div>
-                      </div>
-                    </div>
-                  </Link>
-                ))}
+                    </Link>
+                  );
+                })}
               </div>
             </section>
           ))}
