@@ -1,0 +1,11 @@
+{
+  "modelId": "ff629fe1-1dc3-4226-9fd5-f1e7e6f13294",
+  "slug": "minimax-h3-experimental",
+  "name": "MiniMax-H3-experimental",
+  "crawledAt": "2026-08-15T20:32:20.792Z",
+  "crawledUrls": [
+    "https://huggingface.co/Kijai/MiniMax-H3-experimental"
+  ],
+  "byteCounts": 437,
+  "text": "w4a8 is experimental format using 4bit weights and int8-convrot activations, at testing phase, further info here:\n\nhttps://github.com/Comfy-Org/comfy-kitchen/pull/90\n\nRequires ComfyUI 0.31.0\n\n---\n\nint8_convrot VAE needs ComfyUI 0.31.0 or you get black outputs\n\nIt speeds up VAE decode times by ~1.5x\n\n---\n\nref lora is the difference between fl2va and ref2va, completely experimental, I don't even know if it has a use case at this point."
+}
