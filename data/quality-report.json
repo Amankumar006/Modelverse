@@ -1,30 +1,30 @@
 {
-  "generatedAt": "2026-08-15T11:04:59.133Z",
+  "generatedAt": "2026-08-15T11:26:58.730Z",
   "pipeline": "quality-backfill",
   "dryRun": false,
   "models": {
     "total": 473,
-    "indexed": 65,
-    "thin": 408,
+    "indexed": 31,
+    "thin": 442,
     "unlisted": 0,
     "failed": 0
   },
   "news": {
-    "total": 301,
-    "indexed": 232,
+    "total": 302,
+    "indexed": 233,
     "thin": 0,
     "unlisted": 69,
     "failed": 0
   },
   "summary": {
-    "total": 774,
-    "indexed": 297,
-    "unlistedOrThin": 477,
+    "total": 775,
+    "indexed": 264,
+    "unlistedOrThin": 511,
     "failed": 0,
-    "indexedPercent": 38.4,
-    "thinOrUnlistedPercent": 61.6
+    "indexedPercent": 34.1,
+    "thinOrUnlistedPercent": 65.9
   },
-  "indexed": 297,
-  "unlistedOrThin": 477,
+  "indexed": 264,
+  "unlistedOrThin": 511,
   "quarantined": 0
 }
