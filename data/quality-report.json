@@ -1,7 +1,30 @@
 {
-  "generatedAt": "2026-08-15T12:13:12.430Z",
-  "pipeline": "models",
-  "indexed": 0,
-  "unlistedOrThin": 0,
+  "generatedAt": "2026-08-15T12:15:00.000Z",
+  "pipeline": "quality-backfill",
+  "dryRun": false,
+  "models": {
+    "total": 473,
+    "indexed": 31,
+    "thin": 442,
+    "unlisted": 0,
+    "failed": 0
+  },
+  "news": {
+    "total": 302,
+    "indexed": 233,
+    "thin": 0,
+    "unlisted": 69,
+    "failed": 0
+  },
+  "summary": {
+    "total": 775,
+    "indexed": 264,
+    "unlistedOrThin": 511,
+    "failed": 0,
+    "indexedPercent": 34.1,
+    "thinOrUnlistedPercent": 65.9
+  },
+  "indexed": 264,
+  "unlistedOrThin": 511,
   "quarantined": 0
 }
