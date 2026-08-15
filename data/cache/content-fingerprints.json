@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-15T13:26:23.934Z",
+  "generatedAt": "2026-08-15T18:21:14.174Z",
   "entries": {
     "donation-public-first-action": {
       "slug": "donation-public-first-action",
@@ -3608,6 +3608,44 @@
         "qwen compatible chatml re"
       ],
       "checkedAt": "2026-08-15T13:26:23.935Z"
+    },
+    "spacex-officially-closes-its-cursor-acquisition": {
+      "slug": "spacex-officially-closes-its-cursor-acquisition",
+      "title": "SpaceX officially closes its Cursor acquisition",
+      "contentHash": "a32ad659cb60f471047c307c09d5a8fe61ae176996e0c1e8095ddfc2a5eda473",
+      "shingles": [
+        "spacex officially closes its",
+        "officially closes its cursor",
+        "closes its cursor acquisition",
+        "its cursor acquisition ai",
+        "cursor acquisition ai coding",
+        "acquisition ai coding startup",
+        "ai coding startup cursor",
+        "coding startup cursor is",
+        "startup cursor is now",
+        "cursor is now officially",
+        "is now officially a",
+        "now officially a part",
+        "officially a part of",
+        "a part of spacex",
+        "part of spacex brief",
+        "of spacex brief this",
+        "spacex brief this item",
+        "brief this item did",
+        "this item did not",
+        "item did not meet",
+        "did not meet the",
+        "not meet the threshold",
+        "meet the threshold for",
+        "the threshold for a",
+        "threshold for a full",
+        "for a full editorial",
+        "a full editorial analysis",
+        "full editorial analysis ai",
+        "editorial analysis ai coding",
+        "analysis ai coding startup"
+      ],
+      "checkedAt": "2026-08-15T18:21:14.175Z"
     }
   }
 }
