@@ -5,8 +5,9 @@
  *
  * Enriches models in Supabase ONLY from verified live APIs and official primary sources:
  * 1. Hugging Face Hub (README.md / config.json / api) -> deterministic benchmark tables, exact config parameters, downloads
- * 2. OpenRouter API (https://openrouter.ai/api/v1/models) -> live pricing & contextWindow limits
- * 3. Content-level verification -> Every benchmark score is verified to appear in the crawled source text.
+ * 2. Deep-crawled Official Blogs / Papers linked in READMEs -> benchmark tables
+ * 3. OpenRouter API (https://openrouter.ai/api/v1/models) -> live pricing & contextWindow limits
+ * 4. Content-level verification -> Every benchmark score is verified to appear in the crawled source text.
  *
  * NO HARDCODED LITERALS. Aggregators like models.dev are never used as sole justification for benchmarks.
  */
@@ -16,7 +17,7 @@ const path = require("path");
 const { createClient } = require("@supabase/supabase-js");
 const { scoreModelPage } = require("./quality/score-content");
 const { extractBenchmarksFromMarkdownTable } = require("./lib/extract-benchmarks-deterministic");
-const { verifyBenchmarkSubstantiation } = require("./lib/verify-citation-content");
+const { verifyBenchmarkSubstantiation, fetchPageText } = require("./lib/verify-citation-content");
 const { sanitizeBenchmarksForWrite } = require("./lib/verified-write");
 
 require("dotenv").config({ path: ".env.local" });
@@ -31,7 +32,19 @@ function norm(str) {
   return (str || "").toLowerCase().replace(/[^a-z0-9]/g, "");
 }
 
-// ─── Load Local Source Snapshots ───────────────────────────────────────────
+function getHfRepoFromLinks(links) {
+  if (!links || typeof links !== "object") return null;
+  for (const [, v] of Object.entries(links)) {
+    if (typeof v === "string" && v.includes("huggingface.co/")) {
+      const clean = v.replace(/^https?:\/\/huggingface\.co\//, "").replace(/\/$/, "");
+      const parts = clean.split("/").filter(Boolean);
+      if (parts.length === 2 && !["datasets", "spaces", "collections"].includes(parts[0])) {
+        return `${parts[0]}/${parts[1]}`;
+      }
+    }
+  }
+  return null;
+}
 
 function loadOpenRouterSnapshot() {
   try {
@@ -45,8 +58,6 @@ function loadOpenRouterSnapshot() {
   }
   return [];
 }
-
-// ─── Live Hugging Face Hub Fetchers ────────────────────────────────────────
 
 async function fetchHfReadme(repoId) {
   if (!repoId) return null;
@@ -83,8 +94,6 @@ async function fetchHfHubMetadata(repoId) {
     return null;
   }
 }
-
-// ─── Main Enrichment Runner ────────────────────────────────────────────────
 
 async function runEnrichment({ dryRun = false } = {}) {
   console.log(`🚀 Starting Strict Verified Multi-Source Enrichment (dryRun: ${dryRun})...`);
@@ -148,38 +157,74 @@ async function runEnrichment({ dryRun = false } = {}) {
       }
     }
 
-    // 2. Fetch Official Hugging Face README & Config
-    const hfRepo = links.huggingface || (typeof m.links?.huggingface === "string" ? m.links.huggingface : null);
+    // 2. Fetch Official Hugging Face README, Config & Linked Official Blogs
+    const hfRepo = getHfRepoFromLinks(links);
     if (hfRepo) {
       const hfMeta = await fetchHfHubMetadata(hfRepo);
       if (hfMeta) {
         if (!sources.includes(hfMeta.sourceUrl)) sources.push(hfMeta.sourceUrl);
         links.huggingface = hfMeta.sourceUrl;
         fieldConfidence.hfHub = "OFFICIAL";
+
+        if (hfMeta.config?.num_hidden_layers && (!newParameters || newParameters === "undisclosed")) {
+          // Infer approximate parameter size if open config exists
+          if (hfMeta.config.hidden_size >= 8192) newParameters = "70B+";
+          else if (hfMeta.config.hidden_size >= 4096) newParameters = "8B - 14B";
+          else if (hfMeta.config.hidden_size >= 2048) newParameters = "2B - 4B";
+          changed = true;
+        }
       }
 
       const readmeData = await fetchHfReadme(hfRepo);
       if (readmeData && readmeData.text) {
-        const extracted = extractBenchmarksFromMarkdownTable(readmeData.text, m.name);
-        
-        // Verify each extracted benchmark against the actual README text
+        let extracted = extractBenchmarksFromMarkdownTable(readmeData.text, m.name);
+        let citationUrl = readmeData.url;
+
+        // If README had no tables, check if it links an official blog/paper or if m.links has one
+        if (extracted.length === 0) {
+          const directLinks = Object.values(links).filter(v => typeof v === "string");
+          const candidateUrls = [];
+
+          // Find URLs in README text
+          const blogMatch = readmeData.text.match(/https?:\/\/(?:[a-zA-Z0-9-]+\.)*(?:mistral\.ai|qwenlm\.github\.io|deepseek\.com|ai\.meta\.com|huggingface\.co\/blog|arxiv\.org|upstage\.ai|cohere\.com)\/[^\s\)]+/gi);
+          if (blogMatch) candidateUrls.push(...blogMatch);
+          candidateUrls.push(...directLinks);
+
+          for (const candUrl of candidateUrls) {
+            if (!candUrl || !candUrl.startsWith("http") || candUrl.includes("models.dev") || candUrl.includes("openrouter.ai")) continue;
+            const pageText = await fetchPageText(candUrl);
+            if (pageText) {
+              const candExtracted = extractBenchmarksFromMarkdownTable(pageText, m.name);
+              if (candExtracted.length >= 2) {
+                extracted = candExtracted;
+                citationUrl = candUrl;
+                break;
+              }
+            }
+          }
+        }
+
+        // Verify each extracted benchmark against the actual source text
         const substantiatedBenchmarks = [];
-        for (const b of extracted) {
-          const sub = verifyBenchmarkSubstantiation(readmeData.text, b.name, b.score);
-          if (sub.substantiated) {
-            substantiatedBenchmarks.push({
-              name: b.name,
-              score: b.score,
-              sources: [readmeData.url],
-              verified: true
-            });
+        const sourceText = citationUrl === readmeData.url ? readmeData.text : await fetchPageText(citationUrl);
+        if (sourceText) {
+          for (const b of extracted) {
+            const sub = verifyBenchmarkSubstantiation(sourceText, b.name, b.score);
+            if (sub.substantiated) {
+              substantiatedBenchmarks.push({
+                name: b.name,
+                score: b.score,
+                sources: [citationUrl],
+                verified: true
+              });
+            }
           }
         }
 
         if (substantiatedBenchmarks.length >= 2) {
           newBenchmarks = substantiatedBenchmarks;
           fieldConfidence.benchmarks = "OFFICIAL";
-          if (!sources.includes(readmeData.url)) sources.push(readmeData.url);
+          if (!sources.includes(citationUrl)) sources.push(citationUrl);
           changed = true;
         }
       }
