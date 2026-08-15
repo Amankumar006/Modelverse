@@ -151,6 +151,26 @@ function benchmarkIsNumeric(entry) {
   return Number.isFinite(score);
 }
 
+function benchmarkIsVerifiedAndSourced(entry, model) {
+  if (!benchmarkIsNumeric(entry)) return false;
+
+  // Check entry-level source citations
+  if (entry.source && validHttpUrl(entry.source)) return true;
+  if (Array.isArray(entry.sources) && entry.sources.some(validHttpUrl)) return true;
+
+  // Check model-level verified confidence or source URLs
+  const conf = model?.fieldConfidence?.benchmarks || model?.field_confidence?.benchmarks;
+  if (conf === "VERIFIED" || conf === "OFFICIAL") return true;
+
+  const modelSources = Array.isArray(model?.sources) ? model.sources : [];
+  if (modelSources.some(validHttpUrl)) return true;
+
+  const modelLinks = model?.links && typeof model.links === "object" ? Object.values(model.links) : [];
+  if (modelLinks.some((l) => typeof l === "string" && validHttpUrl(l))) return true;
+
+  return false;
+}
+
 function modelTextFields(model) {
   return [
     model?.description,
@@ -205,15 +225,17 @@ function scoreModelPage(model) {
       reasons.push(`incomplete fields: ${requiredFields.filter(([, value]) => !populated(value)).map(([name]) => name).join(", ")}`);
     }
 
-    // 2. Verified Numeric Benchmarks (up to 35 points — mandatory for index eligibility)
-    const numericBenchmarks = Array.isArray(model?.benchmarks) ? model.benchmarks.filter(benchmarkIsNumeric).length : 0;
-    if (numericBenchmarks >= 2) {
+    // 2. Verified Numeric Benchmarks with Provenance (up to 35 points — mandatory for index eligibility)
+    const verifiedBenchmarks = Array.isArray(model?.benchmarks)
+      ? model.benchmarks.filter((b) => benchmarkIsVerifiedAndSourced(b, model)).length
+      : 0;
+    if (verifiedBenchmarks >= 2) {
       score += 35;
-    } else if (numericBenchmarks === 1) {
+    } else if (verifiedBenchmarks === 1) {
       score += 15;
-      reasons.push("only one numeric benchmark");
+      reasons.push("only one verified numeric benchmark with citation");
     } else {
-      reasons.push("missing numeric benchmarks");
+      reasons.push("missing verified numeric benchmarks with citations");
     }
 
     // 3. Unique Non-Templated Structural Content (up to 20 points)
@@ -264,7 +286,7 @@ function scoreModelPage(model) {
     score = Math.round(Math.max(0, Math.min(100, score)));
 
     // Index gate: must score >= 65 AND have at least 2 verified benchmarks AND no boilerplate
-    const isIndexed = score >= 65 && numericBenchmarks >= 2 && !poBoilerplate && !enBoilerplate;
+    const isIndexed = score >= 65 && verifiedBenchmarks >= 2 && !poBoilerplate && !enBoilerplate;
     return { score, status: isIndexed ? "indexed" : "thin", reasons };
   }, "thin");
 }

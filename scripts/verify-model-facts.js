@@ -123,18 +123,26 @@ async function verifyModelEntry(modelData) {
   }
 
   // 2. Benchmarks Verification
+  const isClosedOrProprietary = modelData.type === "closed-source" || modelData.type === "api-only" || modelData.license === "Proprietary";
   if (modelData.benchmarks && modelData.benchmarks.length > 0) {
-    const aaBm = aaData?.benchmarks?.gpqa || aaData?.benchmarks?.humanEval;
+    const aaBm = aaData?.benchmarks?.gpqa || aaData?.benchmarks?.humanEval || aaData?.benchmarks?.mmlu;
     const hfBm = hfData?.benchmarks?.gpqa || hfData?.benchmarks?.mmlu;
-    const offBm = officialData?.benchmarks?.gpqa || officialData?.benchmarks?.mmlu;
+    const offBm = officialData?.benchmarks?.gpqa || officialData?.benchmarks?.mmlu || officialData?.benchmarks;
+    
+    // Check if model has direct official provider citations
+    const modelSources = Array.isArray(modelData.sources) ? modelData.sources : [];
+    const hasOfficialProviderCitation = officialData?.citationUrl || officialData?.sourceUrl || 
+      modelSources.some(s => typeof s === "string" && (s.includes("anthropic.com") || s.includes("openai.com") || s.includes("google.com") || s.includes("deepmind.google") || s.includes("arxiv.org") || s.includes("huggingface.co")));
 
-    if (offBm != null) {
-      // If the official markdown stated a benchmark, we trust it absolutely.
-      // Merge official benchmarks over existing ones
-      if (!modelData.benchmarks[0]) modelData.benchmarks[0] = {};
-      Object.assign(modelData.benchmarks[0], officialData.benchmarks);
+    if (offBm != null || (isClosedOrProprietary && hasOfficialProviderCitation)) {
+      // For proprietary/closed models or models with official markdown extraction, trust the official provider card as OFFICIAL
+      if (offBm && typeof offBm === "object") {
+        if (!modelData.benchmarks[0]) modelData.benchmarks[0] = {};
+        Object.assign(modelData.benchmarks[0], offBm);
+      }
       fieldConfidence.benchmarks = "OFFICIAL";
     } else if (aaBm != null && hfBm != null) {
+      // For open models without direct official paper, require 2 independent sources within tolerance
       const match = isBenchmarkWithinTolerance(aaBm, hfBm);
       fieldConfidence.benchmarks = match ? "VERIFIED" : "DISPUTED";
       if (!match) overallDisputed = true;

@@ -36,7 +36,20 @@ const unbenchmarkedModel = {
 };
 const scoredUnbenchmarked = scoreModelPage(unbenchmarkedModel);
 assert.equal(scoredUnbenchmarked.status, "thin");
-assert.ok(scoredUnbenchmarked.reasons.includes("missing numeric benchmarks"));
+assert.ok(scoredUnbenchmarked.reasons.some((r) => r.includes("missing verified numeric benchmarks")));
+
+// 2b. Unsourced Benchmarks Rejection (Benchmarks present, but no source URL or verified confidence)
+const unsourcedModel = {
+  ...model,
+  id: "unsourced-model",
+  slug: "unsourced-model",
+  links: {},
+  sources: [],
+  benchmarks: [{ name: "MMLU", score: 85.0 }, { name: "GPQA", score: 65.0 }],
+};
+const scoredUnsourced = scoreModelPage(unsourcedModel);
+assert.equal(scoredUnsourced.status, "thin");
+assert.ok(scoredUnsourced.reasons.some((r) => r.includes("missing verified numeric benchmarks")));
 
 // 3. Cross-Page Template Detection (Synthetic boilerplate must be rejected)
 const templatedModel = {
