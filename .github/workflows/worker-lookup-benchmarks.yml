@@ -1,0 +1,50 @@
+name: Worker - Lookup Benchmarks
+
+on:
+  schedule:
+    # Runs hourly at :15 (after scrape_source has saved snapshots)
+    - cron: '15 * * * *'
+  workflow_dispatch:
+    inputs:
+      batch_size:
+        description: 'Batch size of queued jobs to process'
+        required: false
+        default: '25'
+
+jobs:
+  lookup-benchmarks:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    env:
+      SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+      SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+      BATCH_SIZE: ${{ github.event.inputs.batch_size || '25' }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run Lookup Benchmarks Worker
+        run: node scripts/workers/lookup-benchmarks.js --batch-size $BATCH_SIZE
+
+      - name: Commit Artifacts
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/
+          if ! git diff --staged --quiet; then
+            git commit -m "chore(workers): lookup-benchmarks results updated [skip ci]"
+            git push origin main
+          else
+            echo "No benchmark artifacts to commit."
+          fi

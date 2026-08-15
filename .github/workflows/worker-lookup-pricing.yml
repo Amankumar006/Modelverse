@@ -1,0 +1,51 @@
+name: Worker - Lookup Pricing
+
+on:
+  schedule:
+    # Runs every 2 hours at :20
+    - cron: '20 */2 * * *'
+  workflow_dispatch:
+    inputs:
+      batch_size:
+        description: 'Batch size of queued jobs to process'
+        required: false
+        default: '25'
+
+jobs:
+  lookup-pricing:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    env:
+      SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+      SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+      OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
+      BATCH_SIZE: ${{ github.event.inputs.batch_size || '25' }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run Lookup Pricing Worker
+        run: node scripts/workers/lookup-pricing.js --batch-size $BATCH_SIZE
+
+      - name: Commit Artifacts
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/
+          if ! git diff --staged --quiet; then
+            git commit -m "chore(workers): lookup-pricing updated [skip ci]"
+            git push origin main
+          else
+            echo "No pricing artifacts to commit."
+          fi
