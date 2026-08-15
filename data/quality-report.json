@@ -1,11 +1,11 @@
 {
-  "generatedAt": "2026-08-15T10:38:02.042Z",
+  "generatedAt": "2026-08-15T11:04:59.133Z",
   "pipeline": "quality-backfill",
   "dryRun": false,
   "models": {
     "total": 473,
-    "indexed": 19,
-    "thin": 454,
+    "indexed": 65,
+    "thin": 408,
     "unlisted": 0,
     "failed": 0
   },
@@ -18,13 +18,13 @@
   },
   "summary": {
     "total": 774,
-    "indexed": 251,
-    "unlistedOrThin": 523,
+    "indexed": 297,
+    "unlistedOrThin": 477,
     "failed": 0,
-    "indexedPercent": 32.4,
-    "thinOrUnlistedPercent": 67.6
+    "indexedPercent": 38.4,
+    "thinOrUnlistedPercent": 61.6
   },
-  "indexed": 251,
-  "unlistedOrThin": 523,
+  "indexed": 297,
+  "unlistedOrThin": 477,
   "quarantined": 0
 }

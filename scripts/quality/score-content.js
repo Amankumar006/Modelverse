@@ -186,8 +186,13 @@ function scoreModelPage(model) {
     const reasons = [];
 
     // 1. Required Metadata Completeness (up to 15 points)
+    const isProprietary = model?.type === "closed-source" || model?.type === "api-only" || model?.license === "Proprietary";
+    const paramsValue = populated(model?.parameters)
+      ? model.parameters
+      : (isProprietary && Boolean(text(model?.parameters)) ? model.parameters : null);
+
     const requiredFields = [
-      ["parameters", model?.parameters],
+      ["parameters", paramsValue],
       ["context window", model?.contextWindow || model?.context_window],
       ["license", model?.license],
       ["developer", model?.developer],
