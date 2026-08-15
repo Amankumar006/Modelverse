@@ -3,7 +3,6 @@
 import React, { useState, useMemo, Suspense, useEffect } from "react";
 import type { ModelEntry } from "@/lib/models";
 import ModelCard from "@/components/models/ModelCard";
-import AdUnit from "@/components/third-party/AdUnit";
 import { Search, SlidersHorizontal, X, ArrowUpDown } from "lucide-react";
 import { useRouter } from "next/navigation";
 
@@ -729,18 +728,20 @@ function ModelCatalogContent({
 
         {/* Results Model Cards Grid */}
         <div className="grid grid-cols-[repeat(auto-fill,minmax(230px,1fr))] gap-5">
-          {groupedItems.map((item, idx) => {
-            const isAdSlot = idx > 0 && idx % 8 === 0;
-            const content = item.type === "family" ? (
-              <div key={`family-${item.familySlug}`}>
-                <ModelCard
-                  model={item.primaryModel}
-                  variant="family"
-                  familyVariantCount={item.variantCount}
-                  familySlug={item.familySlug}
-                />
-              </div>
-            ) : (
+          {groupedItems.map((item) => {
+            if (item.type === "family") {
+              return (
+                <div key={`family-${item.familySlug}`}>
+                  <ModelCard
+                    model={item.primaryModel}
+                    variant="family"
+                    familyVariantCount={item.variantCount}
+                    familySlug={item.familySlug}
+                  />
+                </div>
+              );
+            }
+            return (
               <div key={item.model.id}>
                 <ModelCard
                   model={item.model}
@@ -748,17 +749,6 @@ function ModelCatalogContent({
                   hideDeveloperPrefix={hideDeveloperPrefix}
                 />
               </div>
-            );
-
-            return (
-              <React.Fragment key={`item-wrapper-${idx}`}>
-                {isAdSlot && (
-                  <div className="col-span-1 rounded-[var(--radius-card)] border border-[var(--muted)]/10 bg-[var(--card-bg)] shadow-[var(--shadow-card)] flex items-center justify-center p-3 overflow-hidden [&:has(ins:empty)]:hidden [&:has(ins[data-ad-status='unfilled'])]:hidden">
-                    <AdUnit slot="1234567890" className="aspect-[4/3] flex items-center justify-center w-full h-full" />
-                  </div>
-                )}
-                {content}
-              </React.Fragment>
             );
           })}
         </div>
