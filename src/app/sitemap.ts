@@ -93,9 +93,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   ];
 
   // Dynamic model detail pages
-  // Existing records predate the gate and remain indexable by design. New gate
-  // records must explicitly pass before discovery surfaces include them.
-  const indexedEntries = entries.filter((entry) => !entry.qualityStatus || entry.qualityStatus === "indexed");
+  // Only models that meet the strict verified provenance gate are included in sitemap.
+  const indexedEntries = entries.filter((entry) => entry.qualityStatus === "indexed");
   const modelRoutes: MetadataRoute.Sitemap = indexedEntries.map((entry) => {
     const lastModDate = entry.updatedAt || entry.releaseDate;
     return {

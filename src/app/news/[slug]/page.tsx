@@ -97,6 +97,7 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
 
     const matched = allModels.filter((m) => {
       if (existingSlugs.has(m.slug)) return false;
+      if (m.qualityStatus && m.qualityStatus !== "indexed") return false;
       const nameLower = m.name.toLowerCase();
       if (nameLower.length >= 3 && textToMatch.includes(nameLower)) return true;
       if (m.family && m.family.length >= 3 && textToMatch.includes(m.family.toLowerCase())) return true;
@@ -105,7 +106,7 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
 
     const combined = [...relatedModelsData, ...matched];
     if (combined.length < 2) {
-      const featuredFallback = allModels.filter((m) => m.featured && !existingSlugs.has(m.slug));
+      const featuredFallback = allModels.filter((m) => (m.qualityStatus === "indexed" || m.featured) && !existingSlugs.has(m.slug));
       combined.push(...featuredFallback);
     }
     relatedModelsData = combined.slice(0, 3);

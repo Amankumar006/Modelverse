@@ -111,9 +111,9 @@ export default async function ModelDetailPage({
     ? allEntries.filter((e) => e.family === model.family && e.id !== model.id)
     : [];
 
-  // Filter related models (sharing primary task and verified)
+  // Filter related models (sharing primary task and strictly indexed)
   const relatedModels = allEntries
-    .filter((e) => e.primaryTask === model.primaryTask && e.id !== model.id && e.verified)
+    .filter((e) => e.primaryTask === model.primaryTask && e.id !== model.id && e.qualityStatus === "indexed")
     .slice(0, 4);
 
   // Structured JSON-LD: Product (the model) + TechArticle (the page)
