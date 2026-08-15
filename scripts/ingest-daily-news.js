@@ -757,12 +757,12 @@ async function extractFullArticleBody(url, fallbackDesc, lab) {
       ...Object.values(fingerprintIndex.entries).map((entry) => entry?.title).filter(Boolean),
     ];
     const worthiness = storyWorthiness(candidate, recentTitles);
-    const isBrief = worthiness < 6;
-    if (isBrief) {
-      console.log(`  📝 Brief only (${worthiness}/10 story-worthiness): ${candidate.title.slice(0, 60)}`);
-    } else {
-      console.log(`  ⭐ Story-worthiness ${worthiness}/10: ${candidate.title.slice(0, 60)}`);
+    if (worthiness < 6) {
+      console.log(`  ⏭️  Skipping (Low story-worthiness ${worthiness}/10): ${candidate.title.slice(0, 60)}`);
+      existingSlugs.add(newsSlug);
+      continue;
     }
+    console.log(`  ⭐ Story-worthiness ${worthiness}/10: ${candidate.title.slice(0, 60)}`);
 
     // Use article's actual publication date if available
     const articleDate = candidate.parsedDate && !isNaN(candidate.parsedDate.getTime())
@@ -775,11 +775,11 @@ async function extractFullArticleBody(url, fallbackDesc, lab) {
       coverImage = getPosterImage(candidate.lab, posterIndex);
     }
 
-    // Relevance Scoring Phase. Briefs intentionally avoid LLM generation.
+    // Relevance Scoring Phase
     const rawBody = await extractFullArticleBody(candidate.link, candidate.description, candidate.lab);
-    const relevanceScore = isBrief ? 0 : await scoreArticleRelevance(candidate.title, rawBody);
+    const relevanceScore = await scoreArticleRelevance(candidate.title, rawBody);
     
-    if (!isBrief && relevanceScore < 6) {
+    if (relevanceScore < 6) {
       console.log(`  ⏭️  Skipping (Low Score ${relevanceScore}/10): ${candidate.title.slice(0, 40)}...`);
       existingSlugs.add(newsSlug); // prevent reprocessing next run
       continue;
@@ -787,13 +787,8 @@ async function extractFullArticleBody(url, fallbackDesc, lab) {
       console.log(`  ⭐  Scored ${relevanceScore}/10: ${candidate.title.slice(0, 40)}...`);
     }
 
-    const bodyContent = isBrief
-      ? `${candidate.description.trim()}\n\n[Brief: this item did not meet the threshold for a full editorial analysis.]`
-      : await verifyAndRefineArticle(
-        candidate.title,
-        rawBody,
-        await rewriteArticle(candidate.title, rawBody, candidate.lab, candidate.link)
-      );
+    const rewritten = await rewriteArticle(candidate.title, rawBody, candidate.lab, candidate.link);
+    const bodyContent = await verifyAndRefineArticle(candidate.title, rawBody, rewritten);
     
     const wordCount = bodyContent.split(/\s+/).length;
     const readTimeMinutes = Math.max(2, Math.ceil(wordCount / 200));
@@ -821,10 +816,6 @@ async function extractFullArticleBody(url, fallbackDesc, lab) {
     if (duplicate) {
       gate.status = "unlisted";
       gate.reasons.push(`near duplicate of ${duplicate.slug} (${duplicate.similarity})`);
-    }
-    if (isBrief) {
-      gate.status = "unlisted";
-      gate.reasons.push("brief did not receive a full editorial analysis");
     }
     newsJson.quality_status = gate.status;
     newsJson.quality_score = gate.score;
