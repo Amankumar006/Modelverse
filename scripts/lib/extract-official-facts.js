@@ -1,3 +1,5 @@
+require("dotenv").config({ path: ".env.local" });
+require("dotenv").config({ path: ".env" });
 const https = require("https");
 
 const PROMPT = `You are an expert AI researcher analyzing a raw Markdown file from a new AI model release.

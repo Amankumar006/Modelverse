@@ -3,18 +3,21 @@
 /**
  * scripts/enrich-from-live-sources.js
  *
- * Enriches models in Supabase ONLY from verified live APIs and snapshot feeds:
- * 1. OpenRouter API (https://openrouter.ai/api/v1/models) -> live pricing, contextWindow, architecture
- * 2. Hugging Face Hub API (https://huggingface.co/api/models/<repo>) -> exact config.json parameters, downloads, tags
- * 3. models.dev Verified Registry -> official source URLs, context limits, modalities
+ * Enriches models in Supabase ONLY from verified live APIs and official primary sources:
+ * 1. Hugging Face Hub (README.md / config.json / api) -> deterministic benchmark tables, exact config parameters, downloads
+ * 2. OpenRouter API (https://openrouter.ai/api/v1/models) -> live pricing & contextWindow limits
+ * 3. Content-level verification -> Every benchmark score is verified to appear in the crawled source text.
  *
- * NO HARDCODED LITERALS. Every field is derived from a fetched payload with provenance citations.
+ * NO HARDCODED LITERALS. Aggregators like models.dev are never used as sole justification for benchmarks.
  */
 
 const fs = require("fs");
 const path = require("path");
 const { createClient } = require("@supabase/supabase-js");
 const { scoreModelPage } = require("./quality/score-content");
+const { extractBenchmarksFromMarkdownTable } = require("./lib/extract-benchmarks-deterministic");
+const { verifyBenchmarkSubstantiation } = require("./lib/verify-citation-content");
+const { sanitizeBenchmarksForWrite } = require("./lib/verified-write");
 
 require("dotenv").config({ path: ".env.local" });
 require("dotenv").config({ path: ".env" });
@@ -43,19 +46,21 @@ function loadOpenRouterSnapshot() {
   return [];
 }
 
-function loadModelsDevSnapshot() {
-  try {
-    const p = path.join(process.cwd(), "scripts", ".import-cache", "models-dev-snapshot.json");
-    if (fs.existsSync(p)) {
-      return JSON.parse(fs.readFileSync(p, "utf8"));
-    }
-  } catch (e) {
-    console.warn("Could not load models.dev snapshot:", e.message);
-  }
-  return {};
-}
+// ─── Live Hugging Face Hub Fetchers ────────────────────────────────────────
 
-// ─── Live Hugging Face Hub Fetcher ─────────────────────────────────────────
+async function fetchHfReadme(repoId) {
+  if (!repoId) return null;
+  const cleanRepo = repoId.replace(/^https?:\/\/huggingface\.co\//, "").replace(/\/$/, "");
+  const url = `https://huggingface.co/${cleanRepo}/raw/main/README.md`;
+  try {
+    const res = await fetch(url, { headers: { "User-Agent": "Modelverse-Enrichment/1.0" } });
+    if (!res.ok) return null;
+    const text = await res.text();
+    return { text, url };
+  } catch {
+    return null;
+  }
+}
 
 async function fetchHfHubMetadata(repoId) {
   if (!repoId) return null;
@@ -82,17 +87,15 @@ async function fetchHfHubMetadata(repoId) {
 // ─── Main Enrichment Runner ────────────────────────────────────────────────
 
 async function runEnrichment({ dryRun = false } = {}) {
-  console.log(`Starting Verified Multi-Source Enrichment (dryRun: ${dryRun})...`);
+  console.log(`🚀 Starting Strict Verified Multi-Source Enrichment (dryRun: ${dryRun})...`);
 
   const openRouterModels = loadOpenRouterSnapshot();
-  const modelsDevData = loadModelsDevSnapshot();
 
   const { data: models, error } = await db.from("models").select("*");
   if (error) throw error;
 
   console.log(`Loaded ${models.length} models from Supabase.`);
   console.log(`Loaded ${openRouterModels.length} OpenRouter models.`);
-  console.log(`Loaded ${Object.keys(modelsDevData).length} models.dev models.`);
 
   let updatedCount = 0;
   let indexedCount = 0;
@@ -100,8 +103,6 @@ async function runEnrichment({ dryRun = false } = {}) {
 
   for (const m of models) {
     const targetNorm = norm(m.name);
-    const targetSlug = norm(m.slug);
-
     const sources = Array.isArray(m.sources) ? [...m.sources] : [];
     const links = (m.links && typeof m.links === "object") ? { ...m.links } : {};
     const fieldConfidence = (m.field_confidence && typeof m.field_confidence === "object") ? { ...m.field_confidence } : {};
@@ -111,8 +112,9 @@ async function runEnrichment({ dryRun = false } = {}) {
     let newPricing = m.pricing;
     let newParameters = m.parameters;
     let newLicense = m.license;
+    let newBenchmarks = Array.isArray(m.benchmarks) ? [...m.benchmarks] : [];
 
-    // 1. Match OpenRouter
+    // 1. Match OpenRouter for Pricing & Context Limits ONLY (Never for benchmarks)
     const orMatch = openRouterModels.find((o) => {
       const oId = norm(o.id);
       const oName = norm(o.name);
@@ -146,28 +148,7 @@ async function runEnrichment({ dryRun = false } = {}) {
       }
     }
 
-    // 2. Match models.dev
-    const mdEntry = Object.entries(modelsDevData).find(([k, v]) => {
-      const kNorm = norm(k);
-      const vNameNorm = norm(v.name);
-      return kNorm.includes(targetNorm) || targetNorm.includes(kNorm) || vNameNorm.includes(targetNorm);
-    });
-
-    if (mdEntry) {
-      const [, mdVal] = mdEntry;
-      if (!sources.includes("https://github.com/anomalyco/models.dev")) {
-        sources.push("https://github.com/anomalyco/models.dev");
-      }
-
-      if (mdVal.limit?.context && (!newContextWindow || newContextWindow === "unknown")) {
-        const cw = mdVal.limit.context;
-        newContextWindow = cw >= 1000000 ? `${(cw / 1000000).toFixed(0)}M tokens` : `${Math.round(cw / 1000)}K tokens`;
-        fieldConfidence.contextWindow = fieldConfidence.contextWindow ? "VERIFIED" : "LIKELY";
-        changed = true;
-      }
-    }
-
-    // 3. Match HF Hub if link exists
+    // 2. Fetch Official Hugging Face README & Config
     const hfRepo = links.huggingface || (typeof m.links?.huggingface === "string" ? m.links.huggingface : null);
     if (hfRepo) {
       const hfMeta = await fetchHfHubMetadata(hfRepo);
@@ -175,7 +156,32 @@ async function runEnrichment({ dryRun = false } = {}) {
         if (!sources.includes(hfMeta.sourceUrl)) sources.push(hfMeta.sourceUrl);
         links.huggingface = hfMeta.sourceUrl;
         fieldConfidence.hfHub = "OFFICIAL";
-        changed = true;
+      }
+
+      const readmeData = await fetchHfReadme(hfRepo);
+      if (readmeData && readmeData.text) {
+        const extracted = extractBenchmarksFromMarkdownTable(readmeData.text, m.name);
+        
+        // Verify each extracted benchmark against the actual README text
+        const substantiatedBenchmarks = [];
+        for (const b of extracted) {
+          const sub = verifyBenchmarkSubstantiation(readmeData.text, b.name, b.score);
+          if (sub.substantiated) {
+            substantiatedBenchmarks.push({
+              name: b.name,
+              score: b.score,
+              sources: [readmeData.url],
+              verified: true
+            });
+          }
+        }
+
+        if (substantiatedBenchmarks.length >= 2) {
+          newBenchmarks = substantiatedBenchmarks;
+          fieldConfidence.benchmarks = "OFFICIAL";
+          if (!sources.includes(readmeData.url)) sources.push(readmeData.url);
+          changed = true;
+        }
       }
     }
 
@@ -186,14 +192,19 @@ async function runEnrichment({ dryRun = false } = {}) {
       changed = true;
     }
 
+    // Sanitize benchmarks through the write-layer guardrail
+    const benchmarkValidation = sanitizeBenchmarksForWrite(newBenchmarks, sources);
+    const finalBenchmarks = benchmarkValidation.sanitized;
+
     const payload = {
       ...m,
       parameters: newParameters,
       contextWindow: newContextWindow,
       license: newLicense,
-      benchmarks: m.benchmarks || [],
+      benchmarks: finalBenchmarks,
       links,
       sources,
+      fieldConfidence,
       keyFeatures: m.key_features || [],
       description: m.description,
       pageOverview: m.page_overview,
@@ -210,6 +221,7 @@ async function runEnrichment({ dryRun = false } = {}) {
         context_window: newContextWindow,
         parameters: newParameters,
         license: newLicense,
+        benchmarks: finalBenchmarks,
         sources,
         links,
         field_confidence: fieldConfidence,
@@ -225,9 +237,9 @@ async function runEnrichment({ dryRun = false } = {}) {
     }
   }
 
-  console.log(`\n=== VERIFIED ENRICHMENT SUMMARY ===`);
+  console.log(`\n=== STRICT VERIFIED ENRICHMENT SUMMARY ===`);
   console.log(`Updated Models: ${updatedCount}`);
-  console.log(`Indexed Models (score >= 65 + benchmarks): ${indexedCount}`);
+  console.log(`Indexed Models (score >= 65 + verified benchmarks): ${indexedCount}`);
   console.log(`Thin Models (< 65): ${thinCount}`);
 }
 
