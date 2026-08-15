@@ -168,11 +168,7 @@ export default function ModelDocsLayout({
               </button>
             </div>
 
-            <p className="text-lg text-[var(--text)] leading-relaxed max-w-3xl font-semibold">
-              {model.name} is a {model.primaryTask} AI model created by {model.developer}, featuring {model.parameters ? (typeof model.parameters === "object" ? Object.values(model.parameters).join(" / ") : model.parameters) : "Unknown"} parameters and a context window of {model.contextWindow ? (typeof model.contextWindow === "object" ? (model.contextWindow as { native?: number }).native : model.contextWindow) : "Unknown"}.
-            </p>
-
-            <p className="text-base text-[var(--muted)] leading-relaxed max-w-3xl font-normal">
+            <p className="text-base sm:text-lg text-[var(--muted)] leading-relaxed max-w-3xl font-normal">
               {model.description ||
                 `${model.name} is a state-of-the-art model developed by ${model.developer}. This documentation introduces the available model variants and compares their capability, context window, and pricing performance.`}
             </p>

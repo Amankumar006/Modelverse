@@ -81,7 +81,8 @@ export default function ModelCard({
   const isVerified = "verified" in model ? Boolean((model as ModelEntry).verified) : false;
 
   const targetHref = familySlug ? `/models/family/${familySlug}` : `/models/${model.slug}`;
-  const effectiveFeatured = isFeatured;
+  const isIndexed = "qualityStatus" in model ? model.qualityStatus === "indexed" : false;
+  const effectiveFeatured = Boolean(isFeatured) && isIndexed;
 
   if (variant === "row") {
     return (

@@ -51,10 +51,12 @@ export default async function Home() {
   const subArticles = latestArticles.slice(1, 4);
 
   const todayStr = new Date().toISOString().split("T")[0];
-  const validModels = allModels.filter((m) => m.releaseDate <= todayStr && m.verified);
+  const indexedModels = allModels.filter(
+    (m) => m.releaseDate <= todayStr && m.verified && m.qualityStatus === "indexed"
+  );
 
-  // Pick top 5 models: 1 featured (spans 2 cols) + 3-4 regular
-  const homepageModels: ModelEntry[] = validModels.slice(0, 5);
+  // Pick top 5 indexed models: 1 featured (spans 2 cols) + up to 4 regular
+  const homepageModels: ModelEntry[] = indexedModels.slice(0, 5);
 
   return (
     <main className="bg-[var(--bg)] text-[var(--text)] selection:bg-[var(--accent-soft)] selection:text-[var(--accent)] min-h-screen">
@@ -62,33 +64,33 @@ export default async function Home() {
       <HeroSection totalModels={totalModels} verifiedCount={verifiedCount} />
 
       {/* ── Featured & Recent Model Card Grid ────────────────── */}
-      {homepageModels.length > 0 && (
-        <Reveal>
-          <section className="px-4 sm:px-6 md:px-10 lg:px-14 pt-8 md:pt-12 pb-12 md:pb-16 border-t border-[var(--muted)]/10 max-w-7xl mx-auto">
-            <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-8">
-              <div>
-                <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[var(--accent)] mb-2">
-                  <Sparkles size={14} className="shrink-0" />
-                  <span>Frontier Releases</span>
-                </div>
-                <h2 className="text-fluid-h2 font-extrabold text-[var(--text)] tracking-tight leading-tight">
-                  Recently Added Models
-                </h2>
-                <p className="text-sm text-[var(--muted)] mt-1.5 max-w-xl">
-                  Fact-checked specifications, context windows, and deployment parameters for the newest foundation releases.
-                </p>
+      <Reveal>
+        <section className="px-4 sm:px-6 md:px-10 lg:px-14 pt-8 md:pt-12 pb-12 md:pb-16 border-t border-[var(--muted)]/10 max-w-7xl mx-auto">
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-8">
+            <div>
+              <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[var(--accent)] mb-2">
+                <Sparkles size={14} className="shrink-0" />
+                <span>Frontier Releases</span>
               </div>
-
-              <Link
-                href="/models"
-                className="inline-flex items-center gap-2 text-xs font-bold text-[var(--accent)] hover:opacity-85 transition-opacity uppercase tracking-wider group shrink-0"
-              >
-                Explore All {totalModels}+ Models
-                <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
-              </Link>
+              <h2 className="text-fluid-h2 font-extrabold text-[var(--text)] tracking-tight leading-tight">
+                Featured &amp; Indexed Models
+              </h2>
+              <p className="text-sm text-[var(--muted)] mt-1.5 max-w-xl">
+                Fact-checked specifications, verified benchmarks, and deployment parameters for vetted foundation releases.
+              </p>
             </div>
 
-            {/* ModelCard Grid: 1st card is Featured (spans 2 cols) */}
+            <Link
+              href="/models"
+              className="inline-flex items-center gap-2 text-xs font-bold text-[var(--accent)] hover:opacity-85 transition-opacity uppercase tracking-wider group shrink-0"
+            >
+              Explore All {totalModels}+ Models
+              <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
+            </Link>
+          </div>
+
+          {homepageModels.length > 0 ? (
+            /* ModelCard Grid: 1st card is Featured (spans 2 cols) */
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 items-stretch">
               {homepageModels.map((model, idx) => (
                 <ModelCard
@@ -98,9 +100,15 @@ export default async function Home() {
                 />
               ))}
             </div>
-          </section>
-        </Reveal>
-      )}
+          ) : (
+            <div className="p-8 text-center rounded-[20px] bg-[var(--card-bg)]/80 border border-[var(--muted)]/10">
+              <p className="text-sm text-[var(--muted)]">
+                More indexed models coming soon as benchmarks are verified by curators.
+              </p>
+            </div>
+          )}
+        </section>
+      </Reveal>
 
       {/* ── Tools & Insights Section (Editorial/Linear Style) ────────────── */}
       <Reveal y={40}>

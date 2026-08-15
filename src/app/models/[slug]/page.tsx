@@ -42,10 +42,11 @@ export async function generateMetadata({
   }
 
   const title = `${model.name} by ${model.developer} — ${distinguishingFact}`;
+  const rawDesc = model.cardSummary || model.description || "";
   const description =
-    model.description.length > 155
-      ? `${model.description.slice(0, 152)}...`
-      : model.description;
+    rawDesc.length > 155
+      ? `${rawDesc.slice(0, 152)}...`
+      : rawDesc;
 
   return {
     title,
