@@ -106,7 +106,7 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
 
     const combined = [...relatedModelsData, ...matched];
     if (combined.length < 2) {
-      const featuredFallback = allModels.filter((m) => (m.qualityStatus === "indexed" || m.featured) && !existingSlugs.has(m.slug));
+      const featuredFallback = allModels.filter((m) => m.qualityStatus === "indexed" && !existingSlugs.has(m.slug));
       combined.push(...featuredFallback);
     }
     relatedModelsData = combined.slice(0, 3);
