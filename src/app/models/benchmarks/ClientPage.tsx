@@ -22,9 +22,10 @@ export default function BenchmarksClient({ allModels }: { allModels: ModelEntry[
     }
   };
 
-  const parseScore = (scoreStr?: string) => {
-    if (!scoreStr) return 0;
-    const match = scoreStr.match(/[0-9.]+/);
+  const parseScore = (scoreStr?: string | number) => {
+    if (scoreStr == null) return 0;
+    if (typeof scoreStr === "number") return scoreStr;
+    const match = String(scoreStr).match(/[0-9.]+/);
     return match ? parseFloat(match[0]) : 0;
   };
 

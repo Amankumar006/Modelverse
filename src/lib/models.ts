@@ -24,7 +24,7 @@ export interface ModelIndex {
 
 export interface Benchmark {
   name: string;
-  score: string;
+  score: string | number;
   verified: boolean;
   sourceType?: "vendor-reported" | "independent-eval";
   category?: string;
