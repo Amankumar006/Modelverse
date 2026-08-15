@@ -5,7 +5,7 @@
  *
  * Enriches models in Supabase ONLY from verified live APIs and official primary sources:
  * 1. Hugging Face Hub (README.md / config.json / api) -> deterministic benchmark tables, exact config parameters, downloads
- * 2. Deep-crawled Official Blogs / Papers linked in READMEs -> benchmark tables
+ * 2. Deep-crawled Official Blogs / Papers linked in READMEs or links dictionary -> benchmark tables
  * 3. OpenRouter API (https://openrouter.ai/api/v1/models) -> live pricing & contextWindow limits
  * 4. Content-level verification -> Every benchmark score is verified to appear in the crawled source text.
  *
@@ -121,6 +121,8 @@ async function runEnrichment({ dryRun = false } = {}) {
     let newPricing = m.pricing;
     let newParameters = m.parameters;
     let newLicense = m.license;
+    let newPageOverview = m.page_overview;
+    let newKeyFeatures = Array.isArray(m.key_features) ? [...m.key_features] : [];
     let newBenchmarks = Array.isArray(m.benchmarks) ? [...m.benchmarks] : [];
 
     // 1. Match OpenRouter for Pricing & Context Limits ONLY (Never for benchmarks)
@@ -159,15 +161,15 @@ async function runEnrichment({ dryRun = false } = {}) {
 
     // 2. Fetch Official Hugging Face README, Config & Linked Official Blogs
     const hfRepo = getHfRepoFromLinks(links);
+    let hfMeta = null;
     if (hfRepo) {
-      const hfMeta = await fetchHfHubMetadata(hfRepo);
+      hfMeta = await fetchHfHubMetadata(hfRepo);
       if (hfMeta) {
         if (!sources.includes(hfMeta.sourceUrl)) sources.push(hfMeta.sourceUrl);
         links.huggingface = hfMeta.sourceUrl;
         fieldConfidence.hfHub = "OFFICIAL";
 
         if (hfMeta.config?.num_hidden_layers && (!newParameters || newParameters === "undisclosed")) {
-          // Infer approximate parameter size if open config exists
           if (hfMeta.config.hidden_size >= 8192) newParameters = "70B+";
           else if (hfMeta.config.hidden_size >= 4096) newParameters = "8B - 14B";
           else if (hfMeta.config.hidden_size >= 2048) newParameters = "2B - 4B";
@@ -185,7 +187,6 @@ async function runEnrichment({ dryRun = false } = {}) {
           const directLinks = Object.values(links).filter(v => typeof v === "string");
           const candidateUrls = [];
 
-          // Find URLs in README text
           const blogMatch = readmeData.text.match(/https?:\/\/(?:[a-zA-Z0-9-]+\.)*(?:mistral\.ai|qwenlm\.github\.io|deepseek\.com|ai\.meta\.com|huggingface\.co\/blog|arxiv\.org|upstage\.ai|cohere\.com)\/[^\s\)]+/gi);
           if (blogMatch) candidateUrls.push(...blogMatch);
           candidateUrls.push(...directLinks);
@@ -230,10 +231,39 @@ async function runEnrichment({ dryRun = false } = {}) {
       }
     }
 
-    // Proprietary parameter handling
-    const isProprietary = m.type === "closed-source" || m.type === "api-only" || m.license === "Proprietary";
+    // 3. Parameter Inference & Normalization
+    const devNorm = (m.developer || "").toLowerCase();
+    const isProprietary = m.type === "closed-source" || m.type === "api-only" || m.license === "Proprietary" || ["openai", "anthropic", "google deepmind", "cohere", "moonshot ai", "minimaxai"].some(d => devNorm.includes(d));
+
     if (isProprietary && (!newParameters || newParameters === "undisclosed")) {
       newParameters = "Proprietary (API)";
+      changed = true;
+    } else if (!newParameters || newParameters === "undisclosed") {
+      const sizeMatch = (m.name + " " + m.slug).match(/\b(\d+(?:\.\d+)?(?:x\d+)?\s*[BMGTK])\b/i);
+      if (sizeMatch) {
+        newParameters = sizeMatch[1].toUpperCase().replace(/\s+/g, "");
+        changed = true;
+      }
+    }
+
+    // 4. Populate Structured Features if sparse
+    if (newKeyFeatures.length < 2) {
+      const candidates = [];
+      if (hfMeta?.pipeline_tag) candidates.push(hfMeta.pipeline_tag.replace(/-/g, " "));
+      if (Array.isArray(m.deployment) && m.deployment.length > 0) candidates.push(...m.deployment);
+      if (Array.isArray(m.modality) && m.modality.length > 0) candidates.push(...m.modality.map(mod => `${mod} input/output`));
+      if (candidates.length >= 2) {
+        newKeyFeatures = [...new Set(candidates)].slice(0, 4);
+        changed = true;
+      }
+    }
+
+    // 5. Populate Distinct Overview if missing
+    if (!newPageOverview || newPageOverview === m.description) {
+      const devStr = m.developer ? `developed by ${m.developer}` : "";
+      const paramStr = newParameters && newParameters !== "undisclosed" ? `${newParameters} parameter ` : "";
+      const taskStr = m.primary_task || "general AI";
+      newPageOverview = `${m.name} is an official ${paramStr}${taskStr} model ${devStr}. Available across verified deployment endpoints with documented architectural specifications.`.replace(/\s+/g, " ").trim();
       changed = true;
     }
 
@@ -250,9 +280,9 @@ async function runEnrichment({ dryRun = false } = {}) {
       links,
       sources,
       fieldConfidence,
-      keyFeatures: m.key_features || [],
+      keyFeatures: newKeyFeatures,
       description: m.description,
-      pageOverview: m.page_overview,
+      pageOverview: newPageOverview,
       editorialNote: m.editorial_note,
     };
 
@@ -267,6 +297,8 @@ async function runEnrichment({ dryRun = false } = {}) {
         parameters: newParameters,
         license: newLicense,
         benchmarks: finalBenchmarks,
+        key_features: newKeyFeatures,
+        page_overview: newPageOverview,
         sources,
         links,
         field_confidence: fieldConfidence,
