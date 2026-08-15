@@ -1,10 +1,8 @@
 "use strict";
 
 /**
- * Deterministic content-quality checks. Keep these dependency-free: ingestion
- * runs them for every item and they must never make a network or LLM request.
- * The n-gram comparison can later be replaced with an embedding similarity
- * check without changing the callers.
+ * Deterministic content-quality checks with cross-page structural template detection.
+ * Enforces high-value publisher standards (Google AdSense / Helpful Content compliant).
  */
 
 const PLACEHOLDERS = new Set(["", "-", "—", "unknown", "undisclosed", "n/a", "null"]);
@@ -24,7 +22,7 @@ function words(value) {
   return text(value).toLowerCase().replace(/[^a-z0-9]+/g, " ").split(/\s+/).filter(Boolean);
 }
 
-function shingleSet(value, size = 5) {
+function shingleSet(value, size = 4) {
   const tokens = words(value);
   const shingles = new Set();
   for (let index = 0; index <= tokens.length - size; index += 1) {
@@ -41,6 +39,64 @@ function jaccardSimilarity(left, right) {
   for (const token of leftSet) if (rightSet.has(token)) intersection += 1;
   return intersection / (leftSet.size + rightSet.size - intersection);
 }
+
+// ─── Cross-Page Structural Template Detection ──────────────────────────────
+
+const KNOWN_SYNTHETIC_TEMPLATES = [
+  "is an advanced model by engineered for high performance",
+  "delivers specialized capabilities across with a native context window of built by the architecture prioritizes low latency throughput dependable reasoning fidelity and flexible deployment across enterprise apis and local hardware environments",
+  "represents a capable milestone in developed by it serves as an accessible open weight foundation balancing inference memory footprint response quality and multi domain reasoning recommended for developers evaluating modern frontier architectures for scalable production workloads",
+  "representing a significant leap in designed for enterprise workloads with robust tooling and deterministic outputs",
+].map((pattern) => shingleSet(pattern, 4));
+
+function extractStructuralSkeleton(input, model = {}) {
+  let val = text(input).toLowerCase();
+  if (!val) return "";
+
+  // Strip entity values so cross-page templates collapse into the same structure
+  const entities = [
+    model.name,
+    model.slug,
+    model.developer,
+    model.family,
+    model.parameters,
+    model.contextWindow,
+    model.license,
+  ].map(text).filter(Boolean);
+
+  for (const ent of entities) {
+    if (ent.length >= 3) {
+      const escaped = ent.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+      val = val.replace(new RegExp(`\\b${escaped}\\b`, "gi"), " <VAR> ");
+    }
+  }
+
+  // Replace parameter numbers, token numbers, and percentages
+  val = val
+    .replace(/\b\d+(?:\.\d+)?\s*(?:[bBmMtT]|k|tokens?|parameters?)\b/gi, " <SPEC> ")
+    .replace(/\b\d+(?:\.\d+)?%?\b/g, " <NUM> ")
+    .replace(/[^a-z0-9<>]+/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+
+  return val;
+}
+
+function isStructuralBoilerplate(input, model = {}) {
+  const str = text(input);
+  if (!str || str.length < 50) return false;
+  const currentShingles = shingleSet(extractStructuralSkeleton(str, model), 4);
+  if (currentShingles.size === 0) return false;
+
+  for (const templateShingles of KNOWN_SYNTHETIC_TEMPLATES) {
+    if (jaccardSimilarity(currentShingles, templateShingles) >= 0.35) {
+      return true;
+    }
+  }
+  return false;
+}
+
+// ─── News Helpers ──────────────────────────────────────────────────────────
 
 function toSourceUrls(article) {
   const candidates = [article?.sources, article?.externalSources, article?.external_sources];
@@ -70,7 +126,7 @@ function sourceDomains(urls) {
     try {
       domains.add(new URL(url).hostname.replace(/^www\./, "").toLowerCase());
     } catch {
-      // Invalid URLs are scored as absent source attribution below.
+      // Invalid URLs handled below
     }
   }
   return domains;
@@ -81,8 +137,6 @@ function hasOriginalAnalysis(body) {
   if (!value) return false;
   if (/^#{1,6}\s*(?:why (?:this|it) matters|analysis|context|our take)\b/im.test(value)) return true;
 
-  // A reflective paragraph without dates/numeric claims is a conservative
-  // fallback for editorial analysis that does not use a markdown heading.
   return value.split(/\n\s*\n/).some((paragraph) => {
     const normalized = text(paragraph);
     return normalized.length >= 180
@@ -117,57 +171,100 @@ function comparisonHasOwnPlaceholder(model) {
     .some(([, value]) => !populated(value));
 }
 
-function safeResult(fn, indexedStatus) {
+function safeResult(fn, defaultStatus) {
   try {
     return fn();
   } catch {
-    return { score: 0, status: indexedStatus, reasons: ["malformed input"] };
+    return { score: 0, status: defaultStatus, reasons: ["malformed input"] };
   }
 }
+
+// ─── Scorer: Model Pages ───────────────────────────────────────────────────
 
 function scoreModelPage(model) {
   return safeResult(() => {
     const reasons = [];
+
+    // 1. Required Metadata Completeness (up to 15 points)
     const requiredFields = [
       ["parameters", model?.parameters],
-      ["context window", model?.contextWindow],
+      ["context window", model?.contextWindow || model?.context_window],
       ["license", model?.license],
       ["developer", model?.developer],
-      ["release date", model?.releaseDate],
+      ["release date", model?.releaseDate || model?.release_date],
       ["description", model?.description],
     ];
     const filled = requiredFields.filter(([, value]) => populated(value)).length;
-    let score = (30 * filled) / requiredFields.length;
-    if (filled !== requiredFields.length) reasons.push(`incomplete fields: ${requiredFields.filter(([, value]) => !populated(value)).map(([name]) => name).join(", ")}`);
-
-    const uniqueTexts = new Set(modelTextFields(model).map((value) => value.replace(/\s+/g, " ").trim().toLowerCase()));
-    if (uniqueTexts.size <= 1) {
-      reasons.push("description duplicated across sections");
-    } else {
-      score += 25;
+    let score = (15 * filled) / requiredFields.length;
+    if (filled !== requiredFields.length) {
+      reasons.push(`incomplete fields: ${requiredFields.filter(([, value]) => !populated(value)).map(([name]) => name).join(", ")}`);
     }
 
+    // 2. Verified Numeric Benchmarks (up to 35 points — mandatory for index eligibility)
     const numericBenchmarks = Array.isArray(model?.benchmarks) ? model.benchmarks.filter(benchmarkIsNumeric).length : 0;
-    if (numericBenchmarks >= 2) score += 20;
-    else if (numericBenchmarks === 1) {
-      score += 10;
-      reasons.push("only one numeric benchmark");
-    } else reasons.push("missing numeric benchmarks");
-
-    if (comparisonHasOwnPlaceholder(model)) {
-      reasons.push("comparison row has placeholder values");
-    } else {
+    if (numericBenchmarks >= 2) {
+      score += 35;
+    } else if (numericBenchmarks === 1) {
       score += 15;
+      reasons.push("only one numeric benchmark");
+    } else {
+      reasons.push("missing numeric benchmarks");
     }
 
-    const editorialNote = text(model?.editorialNote || model?.reviewedNote);
-    if (editorialNote.length > 150) score += 10;
-    else reasons.push("missing reviewed editorial note");
+    // 3. Unique Non-Templated Structural Content (up to 20 points)
+    const pageOverview = text(model?.pageOverview || model?.page_overview);
+    const cardSummary = text(model?.cardSummary || model?.card_summary);
+    const poBoilerplate = isStructuralBoilerplate(pageOverview, model);
+    const csBoilerplate = isStructuralBoilerplate(cardSummary, model);
+
+    const uniqueTexts = new Set(modelTextFields(model).map((v) => v.replace(/\s+/g, " ").trim().toLowerCase()));
+
+    if (poBoilerplate || csBoilerplate) {
+      reasons.push("templated / boilerplate structural text detected");
+    } else if (uniqueTexts.size > 1) {
+      score += 20;
+    } else {
+      reasons.push("description duplicated across sections");
+    }
+
+    // 4. Genuine Reviewed Editorial Note (up to 15 points)
+    const editorialNote = text(model?.editorialNote || model?.editorial_note || model?.reviewedNote);
+    const enBoilerplate = isStructuralBoilerplate(editorialNote, model);
+
+    if (enBoilerplate) {
+      reasons.push("templated / boilerplate editorial note");
+    } else if (editorialNote.length > 150) {
+      score += 15;
+    } else {
+      reasons.push("missing genuine editorial note");
+    }
+
+    // 5. Resource Links & Structured Key Features (up to 15 points)
+    const hasLinks = (model?.links && Object.keys(model.links).length > 0) || (Array.isArray(model?.sources) && model.sources.length > 0);
+    const keyFeatures = model?.keyFeatures || model?.key_features;
+    const hasFeatures = Array.isArray(keyFeatures) && keyFeatures.length >= 2;
+
+    if (hasLinks && hasFeatures) {
+      score += 15;
+    } else {
+      reasons.push("lacks verified resource links or structured key features");
+    }
+
+    // Comparison integrity check
+    if (comparisonHasOwnPlaceholder(model)) {
+      score = Math.max(0, score - 15);
+      reasons.push("comparison row has placeholder values");
+    }
 
     score = Math.round(Math.max(0, Math.min(100, score)));
-    return { score, status: score >= 65 ? "indexed" : "thin", reasons };
+
+    // Index gate: must score >= 65 AND have at least 2 verified benchmarks AND no boilerplate
+    const isIndexed = score >= 65 && numericBenchmarks >= 2 && !poBoilerplate && !enBoilerplate;
+    return { score, status: isIndexed ? "indexed" : "thin", reasons };
   }, "thin");
 }
+
+// ─── Scorer: News Articles ─────────────────────────────────────────────────
 
 function scoreNewsArticle(article, sourceTexts) {
   return safeResult(() => {
@@ -205,4 +302,6 @@ module.exports = {
   scoreNewsArticle,
   shingleSet,
   jaccardSimilarity,
+  extractStructuralSkeleton,
+  isStructuralBoilerplate,
 };

@@ -68,6 +68,8 @@ function modelForScore(row) {
     cardSummary: row.card_summary,
     pageOverview: row.page_overview,
     editorialNote: row.editorial_note,
+    links: row.links || row.resources || {},
+    keyFeatures: row.key_features || [],
   };
 }
 
