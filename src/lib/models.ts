@@ -112,7 +112,7 @@ const supabase = createClient(
         return fetch(url, {
           ...options,
           next: {
-            revalidate: 3600,
+            revalidate: 0,
             tags: ['models']
           }
         });

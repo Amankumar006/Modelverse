@@ -1,7 +1,7 @@
 'use server'
 
 import { createClient } from '@/utils/supabase/server'
-import { revalidatePath } from 'next/cache'
+import { revalidatePath, updateTag } from 'next/cache'
 
 function parseJsonFields(edits: Record<string, unknown>) {
   const jsonFields = ['pricing', 'benchmarks', 'parameters', 'context_window'];
@@ -94,6 +94,7 @@ export async function approveModel(slug: string, edits: Record<string, unknown>)
       }
     });
 
+  updateTag('models');
   revalidatePath('/admin/review');
   revalidatePath(`/admin/review/${slug}`);
   revalidatePath(`/models/${slug}`);
@@ -151,6 +152,7 @@ export async function saveModelEdits(slug: string, edits: Record<string, unknown
       metadata: { fields_changed: Object.keys(edits) }
     });
 
+  updateTag('models');
   revalidatePath('/admin/review');
   revalidatePath(`/admin/review/${slug}`);
   revalidatePath(`/models/${slug}`);
@@ -198,6 +200,7 @@ export async function markDisputed(slug: string, notes: string) {
       metadata: { notes, action: 'revoked_indexed_status' }
     });
 
+  updateTag('models');
   revalidatePath('/admin/review');
   revalidatePath(`/admin/review/${slug}`);
   revalidatePath(`/models/${slug}`);
@@ -233,6 +236,7 @@ export async function dismissModels(slugs: string[]) {
     metadata: { slugs }
   });
 
+  updateTag('models');
   revalidatePath('/admin/review');
   revalidatePath('/models');
   revalidatePath('/');
@@ -284,6 +288,7 @@ export async function approveModels(slugs: string[]) {
     metadata: { slugs }
   });
 
+  updateTag('models');
   revalidatePath('/admin/review');
   revalidatePath('/models');
   revalidatePath('/');
@@ -335,6 +340,7 @@ export async function overrideVerification(slug: string, reason: string) {
     }
   });
 
+  updateTag('models');
   revalidatePath('/admin/review');
   revalidatePath(`/admin/review/${slug}`);
   revalidatePath(`/models/${slug}`);
