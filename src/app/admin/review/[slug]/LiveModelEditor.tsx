@@ -9,6 +9,7 @@ import { saveModelEdits, approveModel, markDisputed, overrideVerification } from
 import ModelDetailTabs from "@/components/models/ModelDetailTabs";
 import MarkdownRenderer from "@/components/ui/MarkdownRenderer";
 import MarkdownFieldEditor from "@/components/admin/MarkdownFieldEditor";
+import { parseSmartBenchmarkInput, parseMultiLineBenchmarks } from "@/lib/benchmarkParser";
 import {
   Save,
   CheckCircle2,
@@ -32,6 +33,7 @@ import {
   Columns,
   X,
   SlidersHorizontal,
+  Sparkles,
 } from "lucide-react";
 
 interface LiveModelEditorProps {
@@ -148,6 +150,10 @@ export default function LiveModelEditor({ initialModel, allModels = [] }: LiveMo
   const [newPresetCategory, setNewPresetCategory] = useState("Reasoning");
   const [newPresetMetric, setNewPresetMetric] = useState("% Accuracy");
 
+  // Smart Bulk Paste Management
+  const [showBulkPasteModal, setShowBulkPasteModal] = useState(false);
+  const [bulkPasteText, setBulkPasteText] = useState("");
+
   // Modals & Action Status
   const [saving, setSaving] = useState(false);
   const [actionError, setActionError] = useState<string | null>(null);
@@ -238,6 +244,51 @@ export default function LiveModelEditor({ initialModel, allModels = [] }: LiveMo
       },
     };
     setModel((prev) => ({ ...prev, benchmarks: current }));
+  };
+
+  // Smart Bulk Paste Memo
+  const parsedBulkPreview = useMemo(
+    () => parseMultiLineBenchmarks(bulkPasteText),
+    [bulkPasteText]
+  );
+
+  const handleInsertBulkBenchmarks = () => {
+    if (parsedBulkPreview.length === 0) return;
+    const newEntries: Benchmark[] = parsedBulkPreview.map((p) => ({
+      name: p.name,
+      score: p.score,
+      category: p.category || "Reasoning",
+      subCategory: p.subCategory || "% Accuracy",
+      sourceType: "independent-eval",
+      verified: true,
+      customColumns: {},
+    }));
+    setModel((prev) => ({
+      ...prev,
+      benchmarks: [...(Array.isArray(prev.benchmarks) ? prev.benchmarks : []), ...newEntries],
+    }));
+    setBulkPasteText("");
+    setShowBulkPasteModal(false);
+    setActionSuccess(`Added ${newEntries.length} benchmarks from smart paste.`);
+    setTimeout(() => setActionSuccess(null), 3500);
+  };
+
+  const handleSmartBenchmarkNameInput = (idx: number, rawInput: string) => {
+    // If rawInput has numbers/scores attached or separated (e.g. "MMLU-Pro86.3%", "SWE-bench: 77.9%")
+    if (/\d/.test(rawInput)) {
+      const parsed = parseSmartBenchmarkInput(rawInput);
+      if (parsed.score) {
+        const updates: Partial<Benchmark> = {
+          name: parsed.name,
+          score: parsed.score,
+        };
+        if (parsed.category) updates.category = parsed.category;
+        if (parsed.subCategory) updates.subCategory = parsed.subCategory;
+        updateBenchmark(idx, updates);
+        return;
+      }
+    }
+    updateBenchmark(idx, { name: rawInput });
   };
 
   const removeBenchmark = (index: number) => {
@@ -1173,6 +1224,14 @@ export default function LiveModelEditor({ initialModel, allModels = [] }: LiveMo
                       </div>
 
                       <button
+                        onClick={() => setShowBulkPasteModal(true)}
+                        className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-[var(--radius-control)] bg-[var(--bg)] border border-[var(--muted)]/20 hover:border-[var(--accent)] text-[var(--text)] text-xs font-bold transition-all cursor-pointer shadow-xs"
+                        title="Smart paste multiple benchmarks or single strings like MMLU-Pro86.3%"
+                      >
+                        <Sparkles size={13} className="text-[var(--accent)]" /> Smart Paste
+                      </button>
+
+                      <button
                         onClick={() => setShowAddColModal(true)}
                         className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-[var(--radius-control)] bg-[var(--bg)] border border-[var(--muted)]/20 hover:border-[var(--accent)] text-[var(--text)] text-xs font-bold transition-all cursor-pointer shadow-xs"
                       >
@@ -1315,8 +1374,8 @@ export default function LiveModelEditor({ initialModel, allModels = [] }: LiveMo
                                 <input
                                   type="text"
                                   value={b.name || ""}
-                                  onChange={(e) => updateBenchmark(idx, { name: e.target.value })}
-                                  placeholder="e.g. SWE-bench Verified"
+                                  onChange={(e) => handleSmartBenchmarkNameInput(idx, e.target.value)}
+                                  placeholder="e.g. MMLU-Pro86.3% or SWE-bench"
                                   className={inputClass}
                                 />
                               </td>
@@ -1873,6 +1932,94 @@ export default function LiveModelEditor({ initialModel, allModels = [] }: LiveMo
           </div>
         )}
       </div>
+
+      {/* ── MODAL: SMART IMPORT / BULK BENCHMARK PASTE ─────────────────────── */}
+      {showBulkPasteModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/75 p-4 backdrop-blur-xs">
+          <div className="w-full max-w-2xl rounded-[var(--radius-card)] bg-[var(--card-bg)] p-6 shadow-2xl border border-[var(--muted)]/20 space-y-4 max-h-[90vh] flex flex-col">
+            <div className="flex justify-between items-center border-b border-[var(--muted)]/10 pb-3">
+              <h3 className="text-base font-bold text-[var(--text)] flex items-center gap-2">
+                <Sparkles size={16} className="text-[var(--accent)]" />
+                Smart Import & Bulk Benchmark Paste
+              </h3>
+              <button
+                onClick={() => {
+                  setShowBulkPasteModal(false);
+                  setBulkPasteText("");
+                }}
+                className="text-[var(--muted)] hover:text-[var(--text)] cursor-pointer"
+              >
+                <X size={16} />
+              </button>
+            </div>
+
+            <p className="text-xs text-[var(--muted)] leading-relaxed">
+              Paste raw benchmark text from release posts, tables, or PDF papers (e.g. <code>MMLU-Pro86.3%</code> or <code>SWE-bench: 77.9%</code>). It automatically separates the <strong>Benchmark Name</strong>, <strong>Score</strong>, <strong>Metric</strong>, and <strong>Category</strong>.
+            </p>
+
+            <div>
+              <label className={labelClass}>Paste Raw Benchmark Text or Table Rows</label>
+              <textarea
+                rows={5}
+                autoFocus
+                value={bulkPasteText}
+                onChange={(e) => setBulkPasteText(e.target.value)}
+                placeholder={"MMLU-Pro86.3%\nSWE-bench Verified 77.9%\nTerminal-Bench 2.0: 58.1%\nHumanity's Last Exam 40.2%\nOSWorld-Verifie 85.0\nLiveCodeBench (Pass@1) 68.4"}
+                className={`${inputClass} font-mono text-xs leading-relaxed`}
+              />
+            </div>
+
+            {/* Live Parsed Preview Table */}
+            {parsedBulkPreview.length > 0 && (
+              <div className="flex-1 overflow-y-auto max-h-[220px] rounded-[var(--radius-control)] border border-[var(--muted)]/15 bg-[var(--bg)] p-2">
+                <span className="text-[10px] font-mono text-[var(--muted)] uppercase tracking-wider block mb-1.5 px-1">
+                  Detected {parsedBulkPreview.length} Benchmark{parsedBulkPreview.length > 1 ? "s" : ""}:
+                </span>
+                <table className="w-full text-left text-xs">
+                  <thead className="text-[var(--muted)] font-mono uppercase text-[10px] border-b border-[var(--muted)]/10">
+                    <tr>
+                      <th className="p-1.5">Name</th>
+                      <th className="p-1.5">Score</th>
+                      <th className="p-1.5">Metric</th>
+                      <th className="p-1.5">Category</th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-[var(--muted)]/10 font-sans text-xs">
+                    {parsedBulkPreview.map((item, i) => (
+                      <tr key={i}>
+                        <td className="p-1.5 font-bold text-[var(--text)] truncate max-w-[160px]">{item.name}</td>
+                        <td className="p-1.5 font-mono text-emerald-400 font-bold">{item.score || "—"}</td>
+                        <td className="p-1.5 text-[var(--muted)]">{item.subCategory || "% Accuracy"}</td>
+                        <td className="p-1.5 text-[var(--accent)] font-medium">{item.category || "Reasoning"}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            )}
+
+            <div className="flex justify-end gap-2 pt-2 border-t border-[var(--muted)]/10">
+              <button
+                onClick={() => {
+                  setShowBulkPasteModal(false);
+                  setBulkPasteText("");
+                }}
+                className="px-3.5 py-1.5 rounded-[var(--radius-control)] border border-[var(--muted)]/20 text-xs font-bold text-[var(--muted)] hover:text-[var(--text)] cursor-pointer"
+              >
+                Cancel
+              </button>
+              <button
+                onClick={handleInsertBulkBenchmarks}
+                disabled={parsedBulkPreview.length === 0}
+                className="px-4 py-1.5 rounded-[var(--radius-control)] bg-[var(--accent)] text-black text-xs font-bold hover:bg-[var(--accent)]/90 cursor-pointer disabled:opacity-50 flex items-center gap-1.5"
+              >
+                <Plus size={13} />
+                Insert {parsedBulkPreview.length} Benchmark{parsedBulkPreview.length > 1 ? "s" : ""}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* ── MODAL: ADD CUSTOM BENCHMARK COLUMN ────────────────────────────── */}
       {showAddColModal && (
