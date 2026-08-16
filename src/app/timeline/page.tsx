@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { getAllModelEntries, SITE_URL } from "@/lib/models";
+import { getAllModels, SITE_URL } from "@/lib/models";
 import { ChevronLeft } from "lucide-react";
 import TimelineContainer from "@/components/timeline/TimelineContainer";
 
-export const dynamic = "force-static";
+export const revalidate = 60;
 
 export const metadata: Metadata = {
   title: "AI Model Release Timeline & Changelog — Modelverse",
@@ -22,7 +22,7 @@ export const metadata: Metadata = {
 };
 
 export default async function TimelinePage() {
-  const models = await getAllModelEntries(); // Already sorted newest-first by library
+  const models = await getAllModels(); // Already sorted newest-first by library
 
   return (
     <main className="min-h-screen bg-[#141414] text-[#E4E4E7] selection:bg-[#DA7756] selection:text-white pb-24 relative font-sans">

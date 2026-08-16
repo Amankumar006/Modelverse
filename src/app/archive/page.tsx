@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { getAllModelEntries, SITE_URL } from "@/lib/models";
+import { getAllModels, SITE_URL } from "@/lib/models";
 import { ChevronLeft, Sparkle } from "lucide-react";
 
-export const dynamic = "force-static";
+export const revalidate = 60;
 
 export const metadata: Metadata = {
   title: "Archive — Every AI Model Release, Chronologically — Modelverse",
@@ -19,7 +19,7 @@ export const metadata: Metadata = {
 };
 
 export default async function ArchivePage() {
-  const models = await getAllModelEntries();
+  const models = await getAllModels();
   
   // Group by month (e.g. "July 2026")
   const groupedModels: Record<string, typeof models> = {};
