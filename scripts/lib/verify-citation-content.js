@@ -15,7 +15,9 @@ const { extractBenchmarksFromMarkdownTable, KNOWN_BENCHMARKS } = require("./extr
 
 const fetchCache = new Map();
 
-async function fetchPageText(url, timeoutMs = 8000) {
+const BROWSER_UA = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36";
+
+async function fetchPageText(url, timeoutMs = 12000) {
   if (!url || typeof url !== "string") return null;
   if (fetchCache.has(url)) return fetchCache.get(url);
 
@@ -36,7 +38,10 @@ async function fetchPageText(url, timeoutMs = 8000) {
 
     const res = await fetch(targetUrl, {
       signal: controller.signal,
-      headers: { "User-Agent": "Modelverse-CitationVerifier/1.0" },
+      headers: {
+        "User-Agent": BROWSER_UA,
+        "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,text/plain;q=0.8,*/*;q=0.7",
+      },
     });
     clearTimeout(timer);
 
@@ -45,7 +50,17 @@ async function fetchPageText(url, timeoutMs = 8000) {
       return null;
     }
 
-    const text = await res.text();
+    let text = await res.text();
+    // If it's HTML, clean it for text search
+    if (text.includes("<body") || text.includes("<div") || text.includes("<p>")) {
+      text = text
+        .replace(/<script[^>]*>[\s\S]*?<\/script>/gi, "")
+        .replace(/<style[^>]*>[\s\S]*?<\/style>/gi, "")
+        .replace(/<[^>]+>/g, " ")
+        .replace(/\s+/g, " ")
+        .trim();
+    }
+
     fetchCache.set(url, text);
     return text;
   } catch {

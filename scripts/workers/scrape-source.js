@@ -89,17 +89,15 @@ async function scrapeModelSources(model) {
     }
   }
 
-  // 2. Crawl any directly attached official blog/paper links
+  // 2. Crawl any attached links (case-insensitive keys) and sources
   const links = model.links || {};
-  const directUrls = [
-    links.paper,
-    links.website,
-    links.github,
-    ...(Array.isArray(model.sources) ? model.sources : []),
-  ].filter((u) => typeof u === "string" && u.startsWith("http"));
+  const linkValues = typeof links === "object" ? Object.values(links) : [];
+  const modelSources = Array.isArray(model.sources) ? model.sources : [];
+
+  const directUrls = [...linkValues, ...modelSources]
+    .filter((u) => typeof u === "string" && u.startsWith("http") && !u.includes("models.dev") && !u.includes("openrouter.ai"));
 
   for (const url of directUrls) {
-    if (url.includes("models.dev") || url.includes("openrouter.ai")) continue;
     if (!crawledUrls.includes(url)) {
       crawledUrls.push(url);
       const pageText = await fetchPageText(url);
@@ -107,6 +105,11 @@ async function scrapeModelSources(model) {
         texts.push(pageText);
       }
     }
+  }
+
+  // 3. Fallback: Always include baseline curated description if available
+  if (model.description && model.description.length > 30) {
+    texts.push(`## Model Description (${model.name})\n${model.description}`);
   }
 
   const combinedText = texts.join("\n\n---\n\n").trim();
@@ -251,4 +254,4 @@ if (require.main === module) {
   });
 }
 
-module.exports = { runScrapeWorker };
+module.exports = { runScrapeWorker, scrapeModelSources };

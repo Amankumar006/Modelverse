@@ -2,16 +2,47 @@
  * Extracts official URLs (GitHub, arXiv, official blogs) from a HuggingFace Model Card.
  */
 
+const BROWSER_UA = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36";
+
 async function fetchReadme(repoId) {
   try {
-    const url = `https://huggingface.co/${repoId}/raw/main/README.md`;
-    const headers = {};
+    const cleanRepo = repoId.replace(/^https?:\/\/huggingface\.co\//, "").replace(/\/$/, "");
+    const headers = {
+      "User-Agent": BROWSER_UA,
+      "Accept": "text/plain,text/markdown,application/json,*/*",
+    };
     if (process.env.HF_TOKEN) {
       headers["Authorization"] = `Bearer ${process.env.HF_TOKEN}`;
     }
-    const response = await fetch(url, { headers });
-    if (!response.ok) return null;
-    return await response.text();
+
+    // 1. Try main branch
+    let url = `https://huggingface.co/${cleanRepo}/raw/main/README.md`;
+    let response = await fetch(url, { headers });
+
+    // 2. Try master branch if main is 404
+    if (!response.ok) {
+      url = `https://huggingface.co/${cleanRepo}/raw/master/README.md`;
+      response = await fetch(url, { headers });
+    }
+
+    if (response.ok) {
+      const text = await response.text();
+      if (text && text.length > 50) return text;
+    }
+
+    // 3. Fallback to HF API model details
+    const apiUrl = `https://huggingface.co/api/models/${cleanRepo}`;
+    const apiRes = await fetch(apiUrl, { headers });
+    if (apiRes.ok) {
+      const json = await apiRes.json();
+      const card = json.cardData;
+      const desc = (card && card.description) || json.description || (card && JSON.stringify(card));
+      if (desc && desc.length > 30) {
+        return `# ${json.id}\n\n${desc}\n\n${(json.tags || []).join(", ")}`;
+      }
+    }
+
+    return null;
   } catch (error) {
     console.error(`Error fetching README for ${repoId}:`, error.message);
     return null;
