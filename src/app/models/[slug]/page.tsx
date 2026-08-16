@@ -11,7 +11,7 @@ import {
 import JsonLd from "@/components/JsonLd";
 import ModelDocsLayout from "@/components/models/ModelDocsLayout";
 
-export const dynamic = "force-static";
+export const revalidate = 0;
 
 // Enable static site generation at build time for all model entries
 export async function generateStaticParams() {
