@@ -6,7 +6,7 @@ import Link from "next/link";
 import { type ModelEntry, type Benchmark } from "@/lib/models";
 import { evaluateModelQualityClient } from "@/lib/scoreModelClient";
 import { saveModelEdits, approveModel, markDisputed, overrideVerification } from "../../actions";
-import MarkdownRenderer from "@/components/ui/MarkdownRenderer";
+import ModelDetailTabs from "@/components/models/ModelDetailTabs";
 import {
   Save,
   CheckCircle2,
@@ -24,10 +24,14 @@ import {
   ChevronDown,
   ChevronUp,
   Table as TableIcon,
+  Search,
+  Copy,
+  Check,
 } from "lucide-react";
 
 interface LiveModelEditorProps {
   initialModel: ModelEntry;
+  allModels?: ModelEntry[];
 }
 
 const COMMON_BENCHMARK_PRESETS = [
@@ -88,7 +92,7 @@ function normalizeModelEntry(raw: ModelEntry): ModelEntry {
   };
 }
 
-export default function LiveModelEditor({ initialModel }: LiveModelEditorProps) {
+export default function LiveModelEditor({ initialModel, allModels = [] }: LiveModelEditorProps) {
   const router = useRouter();
 
   // Model Working State - Safely normalized
@@ -96,6 +100,8 @@ export default function LiveModelEditor({ initialModel }: LiveModelEditorProps) 
   const [activeTab, setActiveTab] = useState<"overview" | "specs" | "benchmarks" | "resources" | "custom">("overview");
   const [viewMode, setViewMode] = useState<"edit" | "preview">("edit");
   const [inspectorOpen, setInspectorOpen] = useState(false);
+  const [copied, setCopied] = useState(false);
+  const [previewSearch, setPreviewSearch] = useState("");
 
   // Modals & Action Status
   const [saving, setSaving] = useState(false);
@@ -112,6 +118,18 @@ export default function LiveModelEditor({ initialModel }: LiveModelEditorProps) 
   const keyFeaturesList = Array.isArray(model.keyFeatures) ? model.keyFeatures : [];
   const sourcesList = Array.isArray(model.sources) ? model.sources : [];
   const customSectionsList = Array.isArray(model.customSections) ? model.customSections : [];
+
+  // Comparison Models for Public Preview
+  const familyMembers = useMemo(() => {
+    return model.family ? allModels.filter((m) => m.family === model.family && m.id !== model.id) : [];
+  }, [allModels, model.family, model.id]);
+
+  const comparisonModels = useMemo(() => {
+    return [
+      model,
+      ...allModels.filter((m) => m.id !== model.id && m.verified && m.primaryTask === model.primaryTask).slice(0, 3),
+    ];
+  }, [allModels, model]);
 
   // Live Client Quality Evaluation
   const quality = useMemo(() => evaluateModelQualityClient(model), [model]);
@@ -331,6 +349,14 @@ export default function LiveModelEditor({ initialModel }: LiveModelEditorProps) 
     }
   };
 
+  const handleCopyPage = () => {
+    if (typeof window !== "undefined") {
+      navigator.clipboard.writeText(window.location.href);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    }
+  };
+
   const inputClass =
     "w-full rounded-[var(--radius-control)] bg-[var(--bg)] border border-[var(--muted)]/20 px-3.5 py-2 text-sm text-[var(--text)] placeholder:text-[var(--muted)]/50 focus:outline-none focus:border-[var(--accent)] focus:ring-1 focus:ring-[var(--accent)] transition-all font-sans";
   const labelClass = "block text-xs font-bold uppercase tracking-wider text-[var(--muted)] mb-1.5";
@@ -339,7 +365,7 @@ export default function LiveModelEditor({ initialModel }: LiveModelEditorProps) 
     <div className="min-h-screen bg-[var(--bg)] text-[var(--text)] pb-24 font-sans">
       {/* ── Top Sticky Command Bar ────────────────────────────────────────── */}
       <header className="sticky top-0 z-40 bg-[var(--card-bg)]/95 backdrop-blur-md border-b border-[var(--muted)]/15 px-4 sm:px-8 py-3.5 shadow-sm">
-        <div className="max-w-[1600px] mx-auto flex flex-wrap items-center justify-between gap-4">
+        <div className="max-w-[1700px] mx-auto flex flex-wrap items-center justify-between gap-4">
           {/* Left: Identity & Back */}
           <div className="flex items-center gap-4">
             <Link
@@ -451,7 +477,7 @@ export default function LiveModelEditor({ initialModel }: LiveModelEditorProps) 
 
         {/* Expandable Live Quality Inspector Dropdown */}
         {inspectorOpen && (
-          <div className="max-w-[1600px] mx-auto mt-3 p-4 rounded-[var(--radius-card)] bg-[var(--bg)] border border-[var(--muted)]/15 text-xs">
+          <div className="max-w-[1700px] mx-auto mt-3 p-4 rounded-[var(--radius-card)] bg-[var(--bg)] border border-[var(--muted)]/15 text-xs">
             <div className="flex justify-between items-center mb-3">
               <h4 className="font-bold text-sm text-[var(--text)] flex items-center gap-2">
                 <Shield size={15} className="text-[var(--accent)]" />
@@ -508,22 +534,22 @@ export default function LiveModelEditor({ initialModel }: LiveModelEditorProps) 
 
         {/* Feedback Alerts */}
         {actionError && (
-          <div className="max-w-[1600px] mx-auto mt-3 p-3 rounded-[var(--radius-control)] bg-rose-500/10 border border-rose-500/20 text-rose-400 text-xs flex justify-between items-center">
+          <div className="max-w-[1700px] mx-auto mt-3 p-3 rounded-[var(--radius-control)] bg-rose-500/10 border border-rose-500/20 text-rose-400 text-xs flex justify-between items-center">
             <span>{actionError}</span>
             <button onClick={() => setActionError(null)} className="font-bold underline cursor-pointer">Dismiss</button>
           </div>
         )}
         {actionSuccess && (
-          <div className="max-w-[1600px] mx-auto mt-3 p-3 rounded-[var(--radius-control)] bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs">
+          <div className="max-w-[1700px] mx-auto mt-3 p-3 rounded-[var(--radius-control)] bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs">
             {actionSuccess}
           </div>
         )}
       </header>
 
       {/* ── Main Canvas ───────────────────────────────────────────────────── */}
-      <div className="max-w-[1400px] mx-auto px-4 sm:px-8 pt-8">
+      <div className="max-w-[1700px] mx-auto px-4 sm:px-8 pt-8">
         {viewMode === "edit" ? (
-          <div className="space-y-8">
+          <div className="max-w-[1400px] mx-auto space-y-8">
             {/* Top Meta Bar */}
             <div className="p-6 rounded-[var(--radius-card)] bg-[var(--card-bg)] border border-[var(--muted)]/15 shadow-[var(--shadow-card)]">
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
@@ -1236,92 +1262,255 @@ export default function LiveModelEditor({ initialModel }: LiveModelEditorProps) 
             )}
           </div>
         ) : (
-          /* ── LIVE READER PREVIEW MODE ────────────────────────────────────── */
-          <div className="rounded-[var(--radius-card)] bg-[var(--card-bg)] border border-[var(--muted)]/15 shadow-[var(--shadow-card)] p-8 space-y-8">
-            <div className="border-b border-[var(--muted)]/10 pb-6 flex justify-between items-start">
-              <div>
-                <p className="text-xs text-[var(--muted)] font-medium mb-1">
-                  Models & pricing / <span className="text-[var(--text)] font-semibold">{model.developer}</span> / {model.name}
-                </p>
-                <h1 className="font-extrabold text-3xl text-[var(--text)] tracking-tight flex items-center gap-3">
-                  {model.name}
-                  {model.verified && <Shield size={22} className="text-emerald-500" />}
-                </h1>
-                <p className="text-sm text-[var(--muted)] mt-1">{model.cardSummary || model.description?.slice(0, 150)}</p>
-              </div>
-
-              <div className="text-right">
-                <span className="px-3 py-1 rounded-[var(--radius-pill)] bg-[var(--accent-soft)] text-[var(--accent)] text-xs font-mono font-bold uppercase">
-                  {model.type || "open-source"}
-                </span>
-              </div>
+          /* ── FULL-FIDELITY LIVE READER PREVIEW MODE (EXACT PRODUCTION LAYOUT) ─ */
+          <div className="rounded-[var(--radius-card)] bg-[var(--bg)] border border-[var(--muted)]/15 shadow-2xl overflow-hidden">
+            {/* Top Preview Banner */}
+            <div className="bg-[var(--card-bg)] px-6 py-2.5 border-b border-[var(--muted)]/10 flex justify-between items-center text-xs">
+              <span className="font-mono text-[var(--muted)] flex items-center gap-2">
+                <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+                Live Production Page Preview (/models/{model.slug})
+              </span>
+              <span className="font-mono text-[11px] text-[var(--muted)]">Interactive State Active</span>
             </div>
 
-            {/* Overview Preview */}
-            <div className="space-y-6">
-              <h2 className="text-xl font-bold text-[var(--text)]">Overview</h2>
-              <div className="prose prose-invert max-w-none text-sm text-[var(--text)] leading-relaxed">
-                <MarkdownRenderer content={model.pageOverview || model.description || ""} />
-              </div>
-
-              {model.editorialNote && (
-                <div className="p-5 rounded-[var(--radius-card)] bg-[var(--bg)] border border-[var(--muted)]/15">
-                  <h4 className="text-xs uppercase tracking-wider font-bold text-[var(--accent)] mb-2">Editorial Context</h4>
-                  <p className="text-sm text-[var(--muted)] leading-relaxed">{model.editorialNote}</p>
+            {/* 3-Column Documentation Grid identical to ModelDocsLayout */}
+            <div className="mx-auto grid w-full max-w-[1700px] px-4 md:px-6 py-6 gap-8 grid-cols-1 lg:grid-cols-[240px_1fr] xl:grid-cols-[240px_1fr_240px]">
+              {/* LEFT COLUMN: Sidebar Navigation */}
+              <aside className="w-full shrink-0 hidden lg:block rounded-[var(--radius-card)] bg-[var(--card-bg)] shadow-[var(--shadow-card)] p-4 space-y-6 border border-[var(--muted)]/10 h-fit">
+                {/* Search Box */}
+                <div className="relative">
+                  <Search size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-[var(--muted)]" />
+                  <input
+                    type="text"
+                    placeholder="Search docs..."
+                    value={previewSearch}
+                    onChange={(e) => setPreviewSearch(e.target.value)}
+                    className="w-full rounded-[var(--radius-control)] bg-[var(--bg)] border border-[var(--muted)]/10 pl-8 pr-8 py-1.5 text-xs text-[var(--text)] placeholder:text-[var(--muted)] focus:outline-none focus:border-[var(--accent)]"
+                  />
+                  <span className="absolute right-2.5 top-1/2 -translate-y-1/2 text-[10px] font-mono text-[var(--muted)]">
+                    ⌘K
+                  </span>
                 </div>
-              )}
 
-              {/* Benchmarks Preview */}
-              {benchmarksList.length > 0 && (
-                <div className="pt-6 border-t border-[var(--muted)]/10 space-y-3">
-                  <h2 className="text-xl font-bold text-[var(--text)]">Verified Benchmarks</h2>
-                  <div className="overflow-x-auto rounded-[var(--radius-card)] border border-[var(--muted)]/10">
-                    <table className="w-full text-left text-xs">
-                      <thead className="bg-[var(--bg)] border-b border-[var(--muted)]/10 text-[var(--muted)] uppercase font-mono font-bold">
-                        <tr>
-                          <th className="p-3">Benchmark</th>
-                          <th className="p-3">Score</th>
-                          <th className="p-3">Category</th>
-                          <th className="p-3">Evaluation Type</th>
-                          <th className="p-3">Citation Link</th>
-                        </tr>
-                      </thead>
-                      <tbody className="divide-y divide-[var(--muted)]/10">
-                        {benchmarksList.map((b, i) => {
-                          const citation = (b as unknown as { citation?: string; source?: string })?.citation || (b as unknown as { source?: string })?.source;
-                          return (
-                            <tr key={i}>
-                              <td className="p-3 font-bold text-[var(--text)]">{b.name}</td>
-                              <td className="p-3 font-mono font-bold text-emerald-400">{String(b.score)} {b.subCategory}</td>
-                              <td className="p-3 text-[var(--muted)]">{b.category}</td>
-                              <td className="p-3 text-[var(--muted)]">{b.sourceType}</td>
-                              <td className="p-3">
-                                {citation ? (
-                                  <a href={citation} target="_blank" rel="noreferrer" className="text-[var(--accent)] hover:underline flex items-center gap-1">
-                                    Source Link <ExternalLink size={11} />
-                                  </a>
-                                ) : (
-                                  <span className="text-[var(--muted)]">—</span>
-                                )}
+                {/* Menu Sections */}
+                <div className="space-y-1 text-xs">
+                  <p className="px-2 py-1 font-bold text-[var(--text)] text-xs uppercase tracking-wider">Models</p>
+                  <span className="block px-3 py-2 rounded-[var(--radius-control)] bg-[var(--accent-soft)] text-[var(--accent)] font-bold shadow-sm">
+                    Models overview
+                  </span>
+                  <span className="block px-3 py-2 rounded-[var(--radius-control)] text-[var(--muted)] hover:text-[var(--text)] transition-colors font-medium">
+                    Model IDs & versioning
+                  </span>
+                  {familyMembers.map((member) => (
+                    <span
+                      key={member.id}
+                      className="block px-3 py-2 rounded-[var(--radius-control)] text-[var(--muted)] hover:text-[var(--text)] transition-colors truncate font-medium"
+                    >
+                      What&apos;s new in {member.name}
+                    </span>
+                  ))}
+                  <span className="block px-3 py-2 rounded-[var(--radius-control)] text-[var(--muted)] hover:text-[var(--text)] transition-colors font-medium">
+                    Upgrade model versions
+                  </span>
+                  <span className="block px-3 py-2 rounded-[var(--radius-control)] text-[var(--muted)] hover:text-[var(--text)] transition-colors font-medium">
+                    Model cards & benchmarks
+                  </span>
+                </div>
+              </aside>
+
+              {/* CENTER COLUMN: Main Reading Area */}
+              <main className="flex-1 max-w-[860px] py-4 space-y-8 min-w-0">
+                {/* Breadcrumb & Header */}
+                <div className="space-y-3">
+                  <p className="text-xs text-[var(--muted)] font-medium">
+                    Models & pricing / <span className="text-[var(--text)] font-semibold">Models</span> / {model.name}
+                  </p>
+
+                  <div className="flex flex-wrap items-center justify-between gap-4">
+                    <div className="flex flex-col gap-1">
+                      <h1 className="font-extrabold text-3xl sm:text-4xl text-[var(--text)] tracking-tight flex items-center gap-3">
+                        {model.name} Overview
+                        {model.verified ? (
+                          <Shield size={24} className="text-emerald-500" />
+                        ) : (
+                          <span
+                            aria-label="Unverified model"
+                            title="Unverified Data"
+                            className="w-3 h-3 rounded-full border-2 border-amber-500 bg-transparent shrink-0 ml-2"
+                          />
+                        )}
+                      </h1>
+                      {model.verified ? (
+                        <p className="text-xs text-[var(--muted)] font-mono">
+                          Confirmed against {model.developer} documentation, {new Date(model.releaseDate || "2026-01-01").toLocaleString("default", { month: "long", year: "numeric" })}
+                        </p>
+                      ) : (
+                        <p className="text-xs text-amber-600/80 dark:text-amber-500/80 font-mono">
+                          This model&apos;s data has not been fully verified and benchmarks may be missing.
+                        </p>
+                      )}
+                    </div>
+
+                    <button
+                      onClick={handleCopyPage}
+                      className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-[var(--radius-pill)] border border-[var(--muted)]/10 bg-[var(--card-bg)] shadow-[var(--shadow-card)] text-xs font-bold text-[var(--text)] hover:border-[var(--accent)] transition-all cursor-pointer"
+                    >
+                      {copied ? <Check size={13} className="text-[var(--accent)]" /> : <Copy size={13} />}
+                      <span>{copied ? "Copied!" : "Copy page"}</span>
+                    </button>
+                  </div>
+
+                  <p className="text-base sm:text-lg text-[var(--muted)] leading-relaxed max-w-3xl font-normal">
+                    {model.description ||
+                      `${model.name} is a state-of-the-art model developed by ${model.developer}. This documentation introduces the available model variants and compares their capability, context window, and pricing performance.`}
+                  </p>
+                </div>
+
+                {/* Section 1: Model Variant Overview */}
+                <section id="preview-overview" className="space-y-4 pt-6 border-t border-[var(--muted)]/10">
+                  <h2 className="text-2xl font-extrabold text-[var(--text)]">Model Lineage & Specification</h2>
+                  <p className="text-sm text-[var(--muted)] leading-relaxed font-normal">
+                    <code className="bg-[var(--tag-bg)] text-[var(--tag-text)] px-2 py-0.5 rounded-[var(--radius-pill)] text-xs font-mono font-bold">
+                      {model.slug}
+                    </code>{" "}
+                    is {model.developer}&apos;s primary release in the {model.family || "current"} family.
+                  </p>
+                  <div className="p-5 rounded-[var(--radius-card)] bg-[var(--card-bg)] shadow-[var(--shadow-card)] border border-[var(--muted)]/10 space-y-3 text-xs">
+                    <div className="flex justify-between py-1.5 border-b border-[var(--muted)]/10">
+                      <span className="text-[var(--muted)] font-medium">Developer</span>
+                      <span className="text-[var(--text)] font-bold">{model.developer}</span>
+                    </div>
+                    <div className="flex justify-between py-1.5 border-b border-[var(--muted)]/10">
+                      <span className="text-[var(--muted)] font-medium">API Identifier</span>
+                      <code className="bg-[var(--tag-bg)] text-[var(--tag-text)] px-2 py-0.5 rounded-[var(--radius-pill)] font-mono font-bold">
+                        {model.slug}
+                      </code>
+                    </div>
+                    <div className="flex justify-between py-1.5 border-b border-[var(--muted)]/10">
+                      <span className="text-[var(--muted)] font-medium">Parameters</span>
+                      <span className="text-[var(--text)] font-bold tabular-nums font-mono">
+                        {model.parameters ? (typeof model.parameters === "object" ? Object.values(model.parameters).join(" / ") : model.parameters) : "—"}
+                      </span>
+                    </div>
+                    <div className="flex justify-between py-1.5 border-b border-[var(--muted)]/10">
+                      <span className="text-[var(--muted)] font-medium">Context Window</span>
+                      <span className="text-[var(--text)] font-bold tabular-nums font-mono">
+                        {model.contextWindow ? (typeof model.contextWindow === "object" ? (model.contextWindow as { native?: number }).native : model.contextWindow) : "—"}
+                      </span>
+                    </div>
+                    <div className="flex justify-between py-1.5">
+                      <span className="text-[var(--muted)] font-medium">License</span>
+                      <span className="text-[var(--text)] font-bold">
+                        {model.license && typeof model.license === "object" ? (model.license as { name?: string }).name || "Custom" : model.license || "Unknown"}
+                      </span>
+                    </div>
+                  </div>
+                </section>
+
+                {/* Section 2: Latest Models Comparison Table */}
+                {comparisonModels.length > 1 && (
+                  <section id="preview-comparison" className="space-y-4 pt-6 border-t border-[var(--muted)]/10">
+                    <h2 className="text-2xl font-extrabold text-[var(--text)]">Comparable models</h2>
+                    <div className="hidden md:block overflow-x-auto rounded-[var(--radius-card)] border border-[var(--muted)]/10 bg-[var(--card-bg)] shadow-[var(--shadow-card)]">
+                      <table className="w-full text-left text-xs text-[var(--muted)]">
+                        <thead className="bg-[var(--accent-soft)]/20 border-b border-[var(--muted)]/10 text-[var(--text)] font-bold">
+                          <tr>
+                            <th className="p-3.5 font-bold">Feature</th>
+                            {comparisonModels.map((m) => (
+                              <th key={m.id} className="p-3.5 font-bold text-[var(--text)]">
+                                {m.name}
+                              </th>
+                            ))}
+                          </tr>
+                        </thead>
+                        <tbody className="divide-y divide-[var(--muted)]/10">
+                          <tr>
+                            <td className="p-3.5 font-bold text-[var(--text)]">Description</td>
+                            {comparisonModels.map((m) => (
+                              <td key={m.id} className="p-3.5 text-[11px] leading-relaxed text-[var(--muted)]">
+                                {m.description ? m.description.slice(0, 80) + "..." : "Frontier AI model"}
                               </td>
-                            </tr>
-                          );
-                        })}
-                      </tbody>
-                    </table>
-                  </div>
-                </div>
-              )}
+                            ))}
+                          </tr>
+                          <tr>
+                            <td className="p-3.5 font-bold text-[var(--text)]">API Identifier</td>
+                            {comparisonModels.map((m) => (
+                              <td key={m.id} className="p-3.5 font-mono text-[11px]">
+                                <code className="bg-[var(--tag-bg)] text-[var(--tag-text)] px-2 py-0.5 rounded-[var(--radius-pill)] font-bold">
+                                  {m.slug}
+                                </code>
+                              </td>
+                            ))}
+                          </tr>
+                          <tr>
+                            <td className="p-3.5 font-bold text-[var(--text)]">Parameters</td>
+                            {comparisonModels.map((m) => {
+                              const p = m.parameters ? (typeof m.parameters === "object" ? Object.values(m.parameters).join(" / ") : m.parameters) : "—";
+                              return (
+                                <td key={m.id} className="p-3.5 font-mono tabular-nums text-[var(--text)] font-bold">
+                                  {p}
+                                </td>
+                              );
+                            })}
+                          </tr>
+                          <tr>
+                            <td className="p-3.5 font-bold text-[var(--text)]">Context Window</td>
+                            {comparisonModels.map((m) => {
+                              const cw = m.contextWindow ? (typeof m.contextWindow === "object" ? (m.contextWindow as { native?: number }).native : m.contextWindow) : "—";
+                              return (
+                                <td key={m.id} className="p-3.5 font-mono tabular-nums text-[var(--text)] font-bold">
+                                  {cw}
+                                </td>
+                              );
+                            })}
+                          </tr>
+                          <tr>
+                            <td className="p-3.5 font-bold text-[var(--text)]">License / Type</td>
+                            {comparisonModels.map((m) => (
+                              <td key={m.id} className="p-3.5 text-[var(--muted)] capitalize font-medium">
+                                {m.type?.replace("-", " ") || "open source"}
+                              </td>
+                            ))}
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </section>
+                )}
 
-              {/* Custom Sections Preview */}
-              {customSectionsList.map((sec, i) => (
-                <div key={i} className="pt-6 border-t border-[var(--muted)]/10 space-y-3">
-                  <h2 className="text-xl font-bold text-[var(--text)]">{sec.title}</h2>
-                  <div className="prose prose-invert max-w-none text-sm text-[var(--text)] leading-relaxed">
-                    <MarkdownRenderer content={sec.content} />
-                  </div>
+                {/* Section 3: Detailed Model Tabs */}
+                <section id="preview-tabs" className="pt-6 border-t border-[var(--muted)]/10">
+                  <ModelDetailTabs model={model} markdownContent={null} />
+                </section>
+              </main>
+
+              {/* RIGHT COLUMN: Table of Contents */}
+              <aside className="w-56 shrink-0 hidden xl:block p-5 border-l border-[var(--muted)]/10 sticky top-20 h-fit text-xs space-y-4">
+                <div className="flex items-center gap-1.5 text-[var(--text)] font-bold">
+                  <span className="w-1.5 h-3.5 bg-[var(--accent)] rounded-full" />
+                  <span>Table of Contents</span>
                 </div>
-              ))}
+
+                <ul className="space-y-2.5 text-[var(--muted)] pl-2 border-l border-[var(--muted)]/10 font-medium">
+                  <li>
+                    <a href="#preview-overview" className="hover:text-[var(--accent)] transition-colors block">
+                      {model.developer} model overview
+                    </a>
+                  </li>
+                  {comparisonModels.length > 1 && (
+                    <li>
+                      <a href="#preview-comparison" className="hover:text-[var(--accent)] transition-colors block">
+                        Comparable models
+                      </a>
+                    </li>
+                  )}
+                  <li>
+                    <a href="#preview-tabs" className="hover:text-[var(--accent)] transition-colors block">
+                      Benchmarks & specifications
+                    </a>
+                  </li>
+                </ul>
+              </aside>
             </div>
           </div>
         )}
