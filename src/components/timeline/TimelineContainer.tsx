@@ -3,11 +3,11 @@
 import React, { useState, useEffect, useMemo, useRef } from "react";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
-import { ModelEntry } from "@/lib/models";
+import { type ModelEntry, type ModelIndex } from "@/lib/models";
 import Navbar from "@/components/layout/Navbar";
 
 interface TimelineContainerProps {
-  initialModels: ModelEntry[];
+  initialModels: (ModelIndex | ModelEntry)[];
 }
 
 export default function TimelineContainer({ initialModels }: TimelineContainerProps) {
@@ -475,7 +475,7 @@ export default function TimelineContainer({ initialModels }: TimelineContainerPr
                     Size: {activeModel.parameters === "undisclosed" ? "Undisclosed" : activeModel.parameters as React.ReactNode}
                   </span>
                   <span className="text-[10px] font-medium uppercase tracking-wider text-[var(--tag-text)] bg-[var(--tag-bg)] px-2.5 py-1 rounded-[var(--radius-pill)]">
-                    Task: {activeModel.primaryTask.replace("-", " ")}
+                    Task: {activeModel.primaryTask ? activeModel.primaryTask.replace("-", " ") : "General"}
                   </span>
                 </div>
 

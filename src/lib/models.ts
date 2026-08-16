@@ -26,6 +26,7 @@ export interface ModelIndex {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   contextWindow?: string | Record<string, any>;
   primaryTask?: string;
+  previousVersion?: string | null;
 }
 
 export interface Benchmark {
@@ -214,6 +215,7 @@ function mapRowToModelIndex(row: any): ModelIndex {
     parameters: row.parameters || row.metadata?.parameters || "",
     contextWindow: row.context_window || row.metadata?.context_window || "",
     primaryTask: row.primary_task || row.metadata?.primary_task || "",
+    previousVersion: row.previous_version || row.metadata?.previous_version || undefined,
   };
 }
 
@@ -225,7 +227,7 @@ function mapRowToModelIndex(row: any): ModelIndex {
 export async function getAllModels(): Promise<ModelIndex[]> {
   const { data } = await supabase
     .from('models')
-    .select('id, name, slug, developer, release_date, type, status, vendor_api_status, featured, boost, family, tier, institution, verified, verification_status, quality_status, description, parameters, context_window, primary_task')
+    .select('id, name, slug, developer, release_date, type, status, vendor_api_status, featured, boost, family, tier, institution, verified, verification_status, quality_status, description, parameters, context_window, primary_task, previous_version')
     .order('release_date', { ascending: false });
   return (data || []).map(mapRowToModelIndex);
 }

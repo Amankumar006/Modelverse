@@ -1,12 +1,17 @@
 import { Metadata } from "next";
-import { getModelBySlug, SITE_URL } from "@/lib/models";
+import { getModelBySlug, getAllModels, SITE_URL } from "@/lib/models";
 import Navbar from "@/components/layout/Navbar";
+import CompareClient from "@/components/compare/CompareClient";
+
+export const revalidate = 60;
+
+interface PageProps {
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
+}
 
 export async function generateMetadata({
   searchParams,
-}: {
-  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
-}): Promise<Metadata> {
+}: PageProps): Promise<Metadata> {
   const resolvedParams = await searchParams;
   const modelsQuery = resolvedParams.models;
   
@@ -14,17 +19,17 @@ export async function generateMetadata({
   if (typeof modelsQuery === "string") {
     slugs = modelsQuery.split(",").map((s) => s.trim());
   } else if (Array.isArray(modelsQuery)) {
-    slugs = modelsQuery.flatMap((s) => s.split(",").map(val => val.trim()));
+    slugs = modelsQuery.flatMap((s) => s.split(",").map((val) => val.trim()));
   }
 
   slugs = Array.from(new Set(slugs)).filter(Boolean).slice(0, 4);
 
-  const selectedModels = (await Promise.all(
-    slugs.map(async (slug) => await getModelBySlug(slug))
-  )).filter((model): model is NonNullable<typeof model> => model !== null);
+  const selectedModels = (
+    await Promise.all(slugs.map(async (slug) => await getModelBySlug(slug)))
+  ).filter((model): model is NonNullable<typeof model> => model !== null);
 
   if (selectedModels.length > 0) {
-    const names = selectedModels.map(m => m.name).join(" vs ");
+    const names = selectedModels.map((m) => m.name).join(" vs ");
     const title = `Compare ${names} — Modelverse`;
     const description = `Compare ${names} side-by-side. Analyze parameters, context windows, benchmarks, and licensing to find the best model for your use case.`;
     const url = `${SITE_URL}/compare?models=${slugs.join(",")}`;
@@ -54,29 +59,54 @@ export async function generateMetadata({
 
   return {
     title: "Compare AI Models — Modelverse",
-    description: "Compare AI models side-by-side. Analyze parameters, context windows, benchmarks, and licensing to find the best model for your use case.",
+    description:
+      "Compare AI models side-by-side. Analyze parameters, context windows, benchmarks, and licensing to find the best model for your use case.",
     alternates: {
       canonical: `${SITE_URL}/compare`,
     },
   };
 }
 
-export default function ComparePage() {
+export default async function ComparePage({ searchParams }: PageProps) {
+  const resolvedParams = await searchParams;
+  const modelsQuery = resolvedParams.models;
+
+  let slugs: string[] = [];
+  if (typeof modelsQuery === "string") {
+    slugs = modelsQuery.split(",").map((s) => s.trim());
+  } else if (Array.isArray(modelsQuery)) {
+    slugs = modelsQuery.flatMap((s) => s.split(",").map((val) => val.trim()));
+  }
+
+  slugs = Array.from(new Set(slugs)).filter(Boolean).slice(0, 4);
+
+  // Default to frontier flagship comparison if no query provided
+  if (slugs.length === 0) {
+    slugs = ["openai-gpt-4o", "anthropic-claude-3-5-sonnet"];
+  }
+
+  const [allAvailableModels, selectedModels] = await Promise.all([
+    getAllModels(),
+    Promise.all(slugs.map((slug) => getModelBySlug(slug))),
+  ]);
+
+  const initialModels = selectedModels.filter(
+    (model): model is NonNullable<typeof model> => model !== null
+  );
+
   return (
-    <div className="min-h-screen bg-[var(--bg)] text-[var(--text)] font-sans flex flex-col">
-      <div className="sticky top-0 z-50 shrink-0 border-b border-[var(--muted)]/10 bg-[var(--bg)]">
-        <Navbar />
-      </div>
-      <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-24 flex items-center justify-center">
-        <div className="max-w-md text-center space-y-6 p-8 bg-[var(--card-bg)] rounded-[var(--radius-card)] border border-[var(--muted)]/10 shadow-[var(--shadow-card)]">
-          <h1 className="text-3xl font-extrabold text-[var(--text)] tracking-tight">
-            Under Maintenance
-          </h1>
-          <p className="text-[var(--muted)] leading-relaxed">
-            The Compare feature is currently being redesigned for a better UX. It will be back soon!
-          </p>
+    <div className="min-h-screen bg-[var(--bg)] text-[var(--text)] font-sans flex flex-col justify-between">
+      <div>
+        <div className="sticky top-0 z-50 shrink-0 border-b border-[var(--muted)]/10 bg-[var(--bg)]">
+          <Navbar />
         </div>
-      </main>
+        <main className="max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-10 md:py-14">
+          <CompareClient
+            initialModels={initialModels}
+            allAvailableModels={allAvailableModels}
+          />
+        </main>
+      </div>
     </div>
   );
 }

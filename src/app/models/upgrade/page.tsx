@@ -1,9 +1,11 @@
 import React from "react";
 import { Metadata } from "next";
 import Navbar from "@/components/layout/Navbar";
-import { getAllModelEntries, SITE_URL } from "@/lib/models";
+import { getAllModels, SITE_URL } from "@/lib/models";
 import { ArrowRight, ArrowUpRight, Cpu, Layers } from "lucide-react";
 import Link from "next/link";
+
+export const revalidate = 60;
 
 export const metadata: Metadata = {
   title: "Upgrade Paths & Model Migrations | Modelverse",
@@ -14,7 +16,7 @@ export const metadata: Metadata = {
 };
 
 export default async function UpgradePathsPage() {
-  const allModels = await getAllModelEntries();
+  const allModels = await getAllModels();
 
   // Find models that explicitly list a previousVersion
   const paths = allModels
