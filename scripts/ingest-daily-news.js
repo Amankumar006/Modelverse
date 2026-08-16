@@ -6,7 +6,8 @@ const { scoreNewsArticle } = require("./quality/score-content");
 const { findNearDuplicates, loadFingerprintIndex, appendFingerprint } = require("./quality/detect-duplicates");
 const { storyWorthiness } = require("./news/story-worthiness");
 const { researchStory } = require("./news/research-story");
-const { generateLongformArticle } = require("./news/generate-longform-article");
+const { generateLongformArticle, generateDeepDiveArticle } = require("./news/generate-longform-article");
+const { isUnderDailyDeepDiveCap } = require("./news/deep-dive-gate");
 
 const NEWS_DIR = path.join(process.cwd(), "data", "news");
 const INGESTION_DIR = path.join(process.cwd(), "data", "ingestion");
@@ -771,28 +772,46 @@ async function extractFullArticleBody(url, fallbackDesc, lab) {
     let newsJson = null;
     let sourceTextsForScoring = [rawBody];
 
-    // Branch A: Longform Multi-Source Synthesis (Worthiness >= 6)
+    // Branch A: Longform / Deep-Dive Multi-Source Synthesis (Worthiness >= 6)
     if (worthiness >= 6) {
       try {
         const researchDossier = await researchStory({ ...candidate, rawBody, slug: newsSlug }, candidates);
         if (researchDossier.eligibleForLongform) {
-          console.log(`  🔬 Attempting multi-source longform synthesis across ${researchDossier.sources.length} sources...`);
-          newsJson = await generateLongformArticle(
-            {
-              ...candidate,
-              slug: newsSlug,
-              publish_date: articleDate,
-              cover_image: coverImage,
-              related_models: detectRelatedModelSlugs(candidate.title, rawBody, candidate.lab),
-            },
-            researchDossier
-          );
+          const isDeepDiveEligible = worthinessResult.deepDiveEligible && (await isUnderDailyDeepDiveCap(supabase));
+
+          if (isDeepDiveEligible) {
+            console.log(`  🧠 [Deep-Dive Breakthrough] Eligible signals: (${(worthinessResult.breakthroughSignals || []).join(", ")}). Generating 6-part Explainer...`);
+            newsJson = await generateDeepDiveArticle(
+              {
+                ...candidate,
+                slug: newsSlug,
+                publish_date: articleDate,
+                cover_image: coverImage,
+                related_models: detectRelatedModelSlugs(candidate.title, rawBody, candidate.lab),
+                deepDiveScore: worthinessResult.deepDiveScore,
+                breakthroughSignals: worthinessResult.breakthroughSignals,
+              },
+              researchDossier
+            );
+          } else {
+            console.log(`  🔬 Attempting multi-source longform synthesis across ${researchDossier.sources.length} sources...`);
+            newsJson = await generateLongformArticle(
+              {
+                ...candidate,
+                slug: newsSlug,
+                publish_date: articleDate,
+                cover_image: coverImage,
+                related_models: detectRelatedModelSlugs(candidate.title, rawBody, candidate.lab),
+              },
+              researchDossier
+            );
+          }
           sourceTextsForScoring = researchDossier.sources.map((s) => s.fetchedText).filter(Boolean);
         } else {
           console.log(`  ℹ️ Research found ${researchDossier.distinctDomainCount} source(s). Falling back to single-source brief...`);
         }
       } catch (err) {
-        console.warn(`  ⚠️ Longform generation failed (${err.message}). Falling back to brief...`);
+        console.warn(`  ⚠️ Longform/Deep-dive generation failed (${err.message}). Falling back to brief...`);
       }
     }
 

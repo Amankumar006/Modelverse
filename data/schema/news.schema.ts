@@ -1,7 +1,7 @@
 import { z } from "zod";
 
 export const NewsCategory = z.enum(["weekly-news", "short-news", "model-review", "other"]);
-export const NewsArticleType = z.enum(["brief", "longform"]);
+export const NewsArticleType = z.enum(["brief", "longform", "deep-dive"]);
 
 export const NewsArticleSchema = z.object({
   id: z.string(),
@@ -33,6 +33,13 @@ export const NewsArticleSchema = z.object({
   qualityScore: z.number().min(0).max(100).optional(),
   qualityReasons: z.array(z.string()).optional(),
   qualityCheckedAt: z.string().datetime().optional(),
+  // Deep-Dive Explainer metadata
+  deepDiveScore: z.number().optional(),
+  readTimeMinutes: z.number().optional(),
+  hasDiagram: z.boolean().optional().default(false),
+  mermaidDiagrams: z.array(z.any()).optional().default([]),
+  curatorReviewed: z.boolean().optional().default(false),
+  breakthroughSignals: z.array(z.string()).optional().default([]),
 });
 
 export type NewsArticle = z.infer<typeof NewsArticleSchema>;

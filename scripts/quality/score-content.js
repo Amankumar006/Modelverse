@@ -299,12 +299,15 @@ const OFFICIAL_PRIMARY_DOMAINS = new Set([
   "ai.meta.com", "mistral.ai", "x.ai", "deepseek.com", "moonshot.cn", "qwenlm.github.io"
 ]);
 
+const { scoreDeepDiveExtras, DEEP_DIVE_WORD_FLOOR, checkPedagogicalStructure } = require("./deep-dive-quality-checks");
+
 function scoreNewsArticle(article, sourceTexts) {
   return safeResult(() => {
     const reasons = [];
     const body = text(article?.body);
     const wordCount = words(body).length;
-    const isLongform = article?.article_type === "longform" || article?.articleType === "longform";
+    const isDeepDive = article?.article_type === "deep-dive" || article?.articleType === "deep-dive";
+    const isLongform = isDeepDive || article?.article_type === "longform" || article?.articleType === "longform";
     let score = 0;
 
     // 1. Originality check against each individual source text
@@ -323,7 +326,7 @@ function scoreNewsArticle(article, sourceTexts) {
       }
     });
 
-    const maxAllowedSimilarity = isLongform ? 0.50 : 0.55;
+    const maxAllowedSimilarity = isDeepDive ? 0.45 : (isLongform ? 0.50 : 0.55);
 
     if (sources.length === 0) {
       reasons.push("source text unavailable for originality check");
@@ -334,7 +337,7 @@ function scoreNewsArticle(article, sourceTexts) {
     }
 
     // 2. Analysis section check
-    const hasAnalysis = hasOriginalAnalysis(body);
+    const hasAnalysis = hasOriginalAnalysis(body) || isDeepDive;
     if (hasAnalysis) {
       score += 25;
     } else {
@@ -365,26 +368,41 @@ function scoreNewsArticle(article, sourceTexts) {
     }
 
     // 4. Length floor check
-    const minWords = isLongform ? 800 : 120;
+    const minWords = isDeepDive ? DEEP_DIVE_WORD_FLOOR : (isLongform ? 800 : 120);
     if (wordCount >= minWords) {
       score += 10;
     } else {
       reasons.push(`below editorial length floor (${wordCount}/${minWords} words)`);
     }
 
-    // 5. Hard indexing gates for longform
+    // 5. Deep-Dive Pedagogical Extras & Structure
+    let deepDiveStructureComplete = true;
+    if (isDeepDive) {
+      const extraDelta = scoreDeepDiveExtras(article);
+      score += extraDelta;
+      const structure = checkPedagogicalStructure(body);
+      if (!structure.complete) {
+        deepDiveStructureComplete = false;
+        reasons.push(`missing pedagogical sections: ${structure.missing.join(", ")}`);
+      }
+    }
+
+    // 6. Hard indexing gates
     let isIndexed = score >= 55 && hasAnalysis;
     if (isLongform) {
       if (domains.size < 2) {
         isIndexed = false;
-        reasons.push("longform synthesis requires >= 2 distinct source domains");
+        reasons.push("multi-source synthesis requires >= 2 distinct source domains");
       }
-      if (wordCount < 800) {
+      if (wordCount < minWords) {
         isIndexed = false;
       }
       if (maxSimilarity > maxAllowedSimilarity) {
         isIndexed = false;
       }
+    }
+    if (isDeepDive && !deepDiveStructureComplete) {
+      isIndexed = false;
     }
 
     score = Math.round(Math.max(0, Math.min(100, score)));
