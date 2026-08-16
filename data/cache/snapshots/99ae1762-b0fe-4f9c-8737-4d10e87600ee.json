@@ -1,0 +1,11 @@
+{
+  "modelId": "99ae1762-b0fe-4f9c-8737-4d10e87600ee",
+  "slug": "tencent-hy-mt2",
+  "name": "HY-MT2",
+  "crawledAt": "2026-08-16T05:26:58.292Z",
+  "crawledUrls": [
+    "https://huggingface.co/tencent/Hy-MT2"
+  ],
+  "byteCounts": 212,
+  "text": "## Model Description (HY-MT2)\nHY-MT2 is a model developed by Tencent, released on 2026-07-15. It is engineered for multilingual translation and cross-lingual knowledge retrieval with a 128K tokens context window."
+}

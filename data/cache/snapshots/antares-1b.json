@@ -1,0 +1,11 @@
+{
+  "modelId": "33873bee-e324-4e3b-9095-14e69b60ed21",
+  "slug": "antares-1b",
+  "name": "antares-1b",
+  "crawledAt": "2026-08-16T05:26:55.276Z",
+  "crawledUrls": [
+    "https://huggingface.co/fdtn-ai/antares-1b"
+  ],
+  "byteCounts": 1525,
+  "text": "# fdtn-ai/antares-1b\n\n{\"base_model\":[\"ibm-granite/granite-4.0-1b\"],\"language\":[\"en\"],\"library_name\":\"transformers\",\"license\":\"apache-2.0\",\"pipeline_tag\":\"text-generation\",\"tags\":[\"security\",\"vulnerability-detection\",\"agentic\",\"terminal-agent\",\"reinforcement-learning\",\"granite\"],\"gated\":true,\"extra_gated_prompt\":\"Please complete the form below to request access to this model. All requests are reviewed manually.\\nBy submitting this form, you confirm that the information provided is accurate,  agree to share your contact details with the repository authors. You will be  subject to their communications and Privacy Statement:  https://www.cisco.com/c/en/us/about/legal/privacy-full.html\\n\",\"extra_gated_fields\":{\"First name\":\"text\",\"Last name\":\"text\",\"Email address\":\"text\",\"Country\":\"country\",\"Affiliation\":\"text\",\"Occupation\":\"text\",\"I have read, understood, and agree to the Terms and Conditions above\":\"checkbox\"}}\n\ntransformers, safetensors, granitemoehybrid, text-generation, security, vulnerability-detection, agentic, terminal-agent, reinforcement-learning, granite, conversational, en, base_model:ibm-granite/granite-4.0-1b, base_model:finetune:ibm-granite/granite-4.0-1b, license:apache-2.0, endpoints_compatible, region:us\n\n---\n\n## Model Description (antares-1b)\nantares-1b is a 1.8B-parameter text generation model developed by fdtn-ai. Built on the GraniteMoeHybridForCausalLM architecture using transformers. Supports en language(s). Released on 2026-07-21 with 150 likes and 4,266 downloads on Hugging Face."
+}

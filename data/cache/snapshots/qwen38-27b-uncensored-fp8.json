@@ -1,0 +1,11 @@
+{
+  "modelId": "9e710f55-ad6c-4315-b92d-8533f39bb910",
+  "slug": "qwen38-27b-uncensored-fp8",
+  "name": "Qwen3.8-27B-Uncensored-FP8",
+  "crawledAt": "2026-08-16T05:27:02.126Z",
+  "crawledUrls": [
+    "https://huggingface.co/orcarouter/Qwen3.8-27B-Uncensored-FP8"
+  ],
+  "byteCounts": 792,
+  "text": "# orcarouter/Qwen3.8-27B-Uncensored-FP8\n\n{\"license\":\"apache-2.0\",\"base_model\":\"Qwen/Qwen3.8-27B\",\"base_model_relation\":\"quantized\",\"pipeline_tag\":\"image-text-to-text\",\"library_name\":\"transformers\",\"language\":[\"en\",\"zh\"],\"tags\":[\"qwen3.8\",\"abliterated\",\"uncensored\",\"ai-red-team\",\"red-teaming\",\"fp8\",\"block-fp8\",\"vllm\",\"function-calling\",\"reasoning\",\"mtp\"]}\n\ntransformers, safetensors, qwen3_5, image-text-to-text, qwen3.8, abliterated, uncensored, ai-red-team, red-teaming, fp8, block-fp8, vllm, function-calling, reasoning, mtp, conversational, en, zh, base_model:Qwen/Qwen3.8-27B, base_model:quantized:Qwen/Qwen3.8-27B, license:apache-2.0, endpoints_compatible, region:us\n\n---\n\n## Model Description (Qwen3.8-27B-Uncensored-FP8)\nQwen3.8-27B-Uncensored-FP8 is a model developed by orcarouter."
+}
