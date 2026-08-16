@@ -4,14 +4,15 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import {
   getAllModels,
-  getAllModelEntries,
   getModelBySlug,
+  getFamilyModels,
+  getRelatedModels,
   SITE_URL,
 } from "@/lib/models";
 import JsonLd from "@/components/JsonLd";
 import ModelDocsLayout from "@/components/models/ModelDocsLayout";
 
-export const revalidate = 0;
+export const revalidate = 60;
 
 // Enable static site generation at build time for all model entries
 export async function generateStaticParams() {
@@ -105,17 +106,11 @@ export default async function ModelDetailPage({
     }
   }
 
-  const allEntries = await getAllModelEntries();
-
-  // Find other models in the same family
-  const familyMembers = model.family
-    ? allEntries.filter((e) => e.family === model.family && e.id !== model.id)
-    : [];
-
-  // Filter related models (sharing primary task and strictly indexed)
-  const relatedModels = allEntries
-    .filter((e) => e.primaryTask === model.primaryTask && e.id !== model.id && e.qualityStatus === "indexed")
-    .slice(0, 4);
+  // Fetch family and related models in parallel (lightweight projection, avoiding full table scans)
+  const [familyMembers, relatedModels] = await Promise.all([
+    model.family ? getFamilyModels(model.family, model.id) : Promise.resolve([]),
+    model.primaryTask ? getRelatedModels(model.primaryTask, model.id) : Promise.resolve([]),
+  ]);
 
   // Structured JSON-LD: Product (the model) + TechArticle (the page)
   const parametersText = typeof model.parameters === "string" ? model.parameters : "Unknown";
@@ -195,7 +190,6 @@ export default async function ModelDetailPage({
       <ModelDocsLayout
         model={model}
         markdownContent={markdownContent}
-        allModels={allEntries}
         familyMembers={familyMembers}
         relatedModels={relatedModels}
       />

@@ -9,7 +9,7 @@ import ModelCatalog from "@/components/models/ModelCatalog";
 import Breadcrumb from "@/components/models/Breadcrumb";
 import Navbar from "@/components/layout/Navbar";
 
-export const dynamic = "force-static";
+export const revalidate = 60;
 
 export async function generateStaticParams() {
   const developers = await getAllDevelopers();
