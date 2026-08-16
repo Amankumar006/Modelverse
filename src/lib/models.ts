@@ -26,9 +26,16 @@ export interface Benchmark {
   name: string;
   score: string | number;
   verified: boolean;
-  sourceType?: "vendor-reported" | "independent-eval";
+  sourceType?: "vendor-reported" | "independent-eval" | string;
   category?: string;
   subCategory?: string;
+  citation?: string;
+  source?: string;
+  baseline?: string;
+  hardware?: string;
+  notes?: string;
+  customColumns?: Record<string, string>;
+  [key: string]: unknown;
 }
 
 /** Full model entry. */

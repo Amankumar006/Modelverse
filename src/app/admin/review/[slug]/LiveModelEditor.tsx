@@ -27,6 +27,8 @@ import {
   Search,
   Copy,
   Check,
+  Columns,
+  X,
 } from "lucide-react";
 
 interface LiveModelEditorProps {
@@ -34,7 +36,7 @@ interface LiveModelEditorProps {
   allModels?: ModelEntry[];
 }
 
-const COMMON_BENCHMARK_PRESETS = [
+const DEFAULT_BENCHMARK_PRESETS = [
   { name: "MMLU-Pro", category: "Reasoning", metric: "% Accuracy" },
   { name: "SWE-bench Verified", category: "Code", metric: "% Solved" },
   { name: "LiveCodeBench", category: "Code", metric: "Pass@1" },
@@ -102,6 +104,25 @@ export default function LiveModelEditor({ initialModel, allModels = [] }: LiveMo
   const [inspectorOpen, setInspectorOpen] = useState(false);
   const [copied, setCopied] = useState(false);
   const [previewSearch, setPreviewSearch] = useState("");
+
+  // Benchmark Custom Columns & Presets
+  const [customBenchmarkCols, setCustomBenchmarkCols] = useState<string[]>(() => {
+    const fromMeta = (initialModel as unknown as { metadata?: { benchmark_columns?: string[] } })?.metadata?.benchmark_columns;
+    if (Array.isArray(fromMeta)) return fromMeta;
+    const fromBenchs = Array.from(
+      new Set((initialModel.benchmarks || []).flatMap((b) => Object.keys(b.customColumns || {})))
+    );
+    return fromBenchs;
+  });
+  const [showAddColModal, setShowAddColModal] = useState(false);
+  const [newColName, setNewColName] = useState("");
+
+  // Benchmark Presets Management
+  const [presets, setPresets] = useState(DEFAULT_BENCHMARK_PRESETS);
+  const [showAddPresetModal, setShowAddPresetModal] = useState(false);
+  const [newPresetName, setNewPresetName] = useState("");
+  const [newPresetCategory, setNewPresetCategory] = useState("Reasoning");
+  const [newPresetMetric, setNewPresetMetric] = useState("% Accuracy");
 
   // Modals & Action Status
   const [saving, setSaving] = useState(false);
@@ -172,6 +193,7 @@ export default function LiveModelEditor({ initialModel, allModels = [] }: LiveMo
       category: preset?.category || "Reasoning",
       sourceType: "independent-eval",
       subCategory: preset?.metric || "% Accuracy",
+      customColumns: {},
     };
     setModel((prev) => ({ ...prev, benchmarks: [...(Array.isArray(prev.benchmarks) ? prev.benchmarks : []), newBenchmark] }));
   };
@@ -182,10 +204,62 @@ export default function LiveModelEditor({ initialModel, allModels = [] }: LiveMo
     setModel((prev) => ({ ...prev, benchmarks: current }));
   };
 
+  const updateBenchmarkCustomCell = (benchIdx: number, colName: string, val: string) => {
+    const current = [...benchmarksList];
+    current[benchIdx] = {
+      ...current[benchIdx],
+      customColumns: {
+        ...(current[benchIdx].customColumns || {}),
+        [colName]: val,
+      },
+    };
+    setModel((prev) => ({ ...prev, benchmarks: current }));
+  };
+
   const removeBenchmark = (index: number) => {
     const current = [...benchmarksList];
     current.splice(index, 1);
     setModel((prev) => ({ ...prev, benchmarks: current }));
+  };
+
+  // Benchmark Custom Column Helpers
+  const handleAddBenchmarkColumn = () => {
+    const clean = newColName.trim();
+    if (!clean) return;
+    if (customBenchmarkCols.includes(clean)) {
+      setActionError(`Column "${clean}" already exists.`);
+      return;
+    }
+    setCustomBenchmarkCols((prev) => [...prev, clean]);
+    setNewColName("");
+    setShowAddColModal(false);
+  };
+
+  const handleRemoveBenchmarkColumn = (colName: string) => {
+    setCustomBenchmarkCols((prev) => prev.filter((c) => c !== colName));
+    setModel((prev) => ({
+      ...prev,
+      benchmarks: (prev.benchmarks || []).map((b) => {
+        const copy = { ...(b.customColumns || {}) };
+        delete copy[colName];
+        return { ...b, customColumns: copy };
+      }),
+    }));
+  };
+
+  // Benchmark Preset Helpers
+  const handleAddPreset = () => {
+    if (!newPresetName.trim()) return;
+    setPresets((prev) => [
+      ...prev,
+      {
+        name: newPresetName.trim(),
+        category: newPresetCategory.trim() || "Reasoning",
+        metric: newPresetMetric.trim() || "% Accuracy",
+      },
+    ]);
+    setNewPresetName("");
+    setShowAddPresetModal(false);
   };
 
   // Source URL Builder Helpers
@@ -260,6 +334,7 @@ export default function LiveModelEditor({ initialModel, allModels = [] }: LiveMo
         curator_notes: model.curatorNotes,
         metadata: {
           custom_sections: customSectionsList,
+          benchmark_columns: customBenchmarkCols,
         },
       };
 
@@ -300,6 +375,7 @@ export default function LiveModelEditor({ initialModel, allModels = [] }: LiveMo
         pricing: pricingList,
         metadata: {
           custom_sections: customSectionsList,
+          benchmark_columns: customBenchmarkCols,
         },
       };
 
@@ -363,6 +439,45 @@ export default function LiveModelEditor({ initialModel, allModels = [] }: LiveMo
 
   return (
     <div className="min-h-screen bg-[var(--bg)] text-[var(--text)] pb-24 font-sans">
+      {/* ── Global Datalists for Combobox Experience ─────────────────────── */}
+      <datalist id="category-presets">
+        <option value="Reasoning" />
+        <option value="Code" />
+        <option value="Math" />
+        <option value="Knowledge" />
+        <option value="Vision" />
+        <option value="Agentic" />
+        <option value="Instruction Following" />
+        <option value="Safety & Alignment" />
+        <option value="Long Context" />
+        <option value="Multilingual" />
+        <option value="Speed & Latency" />
+        <option value="General" />
+      </datalist>
+
+      <datalist id="metric-presets">
+        <option value="% Accuracy" />
+        <option value="Pass@1" />
+        <option value="Pass@5" />
+        <option value="% Solved" />
+        <option value="Elo / Arena Score" />
+        <option value="Score (0-100)" />
+        <option value="Tokens/sec" />
+        <option value="Latency (ms)" />
+        <option value="F1 Score" />
+        <option value="BLEU / ROUGE" />
+      </datalist>
+
+      <datalist id="evaluator-presets">
+        <option value="independent-eval" />
+        <option value="vendor-reported" />
+        <option value="LMSYS Chatbot Arena" />
+        <option value="SWE-bench Leaderboard" />
+        <option value="Scale AI SEAL Leaderboard" />
+        <option value="Artificial Analysis" />
+        <option value="LiveCodeBench Leaderboard" />
+      </datalist>
+
       {/* ── Top Sticky Command Bar ────────────────────────────────────────── */}
       <header className="sticky top-0 z-40 bg-[var(--card-bg)]/95 backdrop-blur-md border-b border-[var(--muted)]/15 px-4 sm:px-8 py-3.5 shadow-sm">
         <div className="max-w-[1700px] mx-auto flex flex-wrap items-center justify-between gap-4">
@@ -924,7 +1039,7 @@ export default function LiveModelEditor({ initialModel, allModels = [] }: LiveMo
               </div>
             )}
 
-            {/* ── TAB 3: BENCHMARKS MANAGER ───────────────────────────────── */}
+            {/* ── TAB 3: BENCHMARKS MANAGER (EXPANDABLE & EDITABLE) ───────── */}
             {activeTab === "benchmarks" && (
               <div className="space-y-6">
                 <div className="p-6 rounded-[var(--radius-card)] bg-[var(--card-bg)] border border-[var(--muted)]/15 space-y-4">
@@ -932,19 +1047,26 @@ export default function LiveModelEditor({ initialModel, allModels = [] }: LiveMo
                     <div>
                       <h3 className="font-extrabold text-base text-[var(--text)] flex items-center gap-2">
                         <TableIcon size={16} className="text-[var(--accent)]" />
-                        Verified Numeric Benchmarks Table
+                        Verified Numeric Benchmarks & Custom Dimensions
                       </h3>
                       <p className="text-xs text-[var(--muted)]">
-                        Must contain at least 2 verified numeric benchmarks with live citation URLs to satisfy the quality gate.
+                        Edit existing values, type custom categories/metrics freely, or add brand new custom columns.
                       </p>
                     </div>
 
-                    <div className="flex items-center gap-2">
+                    <div className="flex flex-wrap items-center gap-2">
+                      <button
+                        onClick={() => setShowAddColModal(true)}
+                        className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-[var(--radius-control)] bg-[var(--bg)] border border-[var(--muted)]/20 hover:border-[var(--accent)] text-[var(--text)] text-xs font-bold transition-all cursor-pointer shadow-xs"
+                      >
+                        <Columns size={13} className="text-[var(--accent)]" /> + Add Column
+                      </button>
+
                       <button
                         onClick={() => addBenchmark()}
                         className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-[var(--radius-control)] bg-[var(--accent-soft)] text-[var(--accent)] text-xs font-bold hover:bg-[var(--accent-soft)]/80 transition-colors cursor-pointer"
                       >
-                        <Plus size={13} /> Add Custom Benchmark
+                        <Plus size={13} /> Add Benchmark Row
                       </button>
                     </div>
                   </div>
@@ -952,29 +1074,51 @@ export default function LiveModelEditor({ initialModel, allModels = [] }: LiveMo
                   {/* Quick Preset Badges */}
                   <div className="flex flex-wrap items-center gap-2 pt-2">
                     <span className="text-xs font-mono text-[var(--muted)]">Quick Presets:</span>
-                    {COMMON_BENCHMARK_PRESETS.map((preset) => (
+                    {presets.map((preset) => (
                       <button
                         key={preset.name}
                         onClick={() => addBenchmark(preset)}
                         className="px-2.5 py-1 rounded-[var(--radius-pill)] bg-[var(--bg)] border border-[var(--muted)]/15 text-[11px] font-mono text-[var(--muted)] hover:text-[var(--text)] hover:border-[var(--accent)] transition-all cursor-pointer"
+                        title={`Category: ${preset.category} | Metric: ${preset.metric}`}
                       >
                         + {preset.name}
                       </button>
                     ))}
+                    <button
+                      onClick={() => setShowAddPresetModal(true)}
+                      className="px-2 py-1 rounded-[var(--radius-pill)] border border-dashed border-[var(--accent)]/40 text-[11px] font-mono text-[var(--accent)] hover:bg-[var(--accent-soft)] transition-all cursor-pointer"
+                    >
+                      + New Preset
+                    </button>
                   </div>
 
                   {/* Benchmarks Table */}
                   <div className="overflow-x-auto pt-4">
-                    <table className="w-full text-left text-xs">
+                    <table className="w-full text-left text-xs min-w-[700px]">
                       <thead className="bg-[var(--bg)] border-b border-[var(--muted)]/10 text-[var(--muted)] uppercase font-mono font-bold">
                         <tr>
-                          <th className="p-3 w-44">Benchmark Name</th>
-                          <th className="p-3 w-28">Score</th>
-                          <th className="p-3 w-32">Metric / Unit</th>
-                          <th className="p-3 w-32">Category</th>
-                          <th className="p-3 w-32">Evaluator</th>
-                          <th className="p-3">Citation URL (Verification Material)</th>
-                          <th className="p-3 w-16 text-right">Action</th>
+                          <th className="p-3 min-w-[170px]">Benchmark Name</th>
+                          <th className="p-3 min-w-[95px]">Score</th>
+                          <th className="p-3 min-w-[130px]">Metric / Unit</th>
+                          <th className="p-3 min-w-[140px]">Category (Editable)</th>
+                          <th className="p-3 min-w-[140px]">Evaluator / Source</th>
+                          <th className="p-3 min-w-[200px]">Citation URL (Source Link)</th>
+                          {/* Dynamic Custom Columns Headers */}
+                          {customBenchmarkCols.map((col) => (
+                            <th key={col} className="p-3 min-w-[140px] text-[var(--accent)] bg-[var(--accent-soft)]/10 border-l border-[var(--muted)]/15">
+                              <div className="flex items-center justify-between gap-1">
+                                <span className="truncate">{col}</span>
+                                <button
+                                  onClick={() => handleRemoveBenchmarkColumn(col)}
+                                  className="text-[var(--muted)] hover:text-rose-400 p-0.5 transition-colors cursor-pointer"
+                                  title={`Remove ${col} column`}
+                                >
+                                  <X size={12} />
+                                </button>
+                              </div>
+                            </th>
+                          ))}
+                          <th className="p-3 w-14 text-right">Action</th>
                         </tr>
                       </thead>
                       <tbody className="divide-y divide-[var(--muted)]/10 font-sans">
@@ -984,6 +1128,7 @@ export default function LiveModelEditor({ initialModel, allModels = [] }: LiveMo
 
                           return (
                             <tr key={idx} className="hover:bg-[var(--bg)]/50 transition-colors">
+                              {/* Benchmark Name */}
                               <td className="p-2">
                                 <input
                                   type="text"
@@ -993,6 +1138,8 @@ export default function LiveModelEditor({ initialModel, allModels = [] }: LiveMo
                                   className={inputClass}
                                 />
                               </td>
+
+                              {/* Score */}
                               <td className="p-2">
                                 <input
                                   type="text"
@@ -1002,8 +1149,11 @@ export default function LiveModelEditor({ initialModel, allModels = [] }: LiveMo
                                   className={`${inputClass} font-mono font-bold text-emerald-400`}
                                 />
                               </td>
+
+                              {/* Metric / Unit (Editable Combobox with Presets) */}
                               <td className="p-2">
                                 <input
+                                  list="metric-presets"
                                   type="text"
                                   value={b.subCategory || ""}
                                   onChange={(e) => updateBenchmark(idx, { subCategory: e.target.value })}
@@ -1011,39 +1161,40 @@ export default function LiveModelEditor({ initialModel, allModels = [] }: LiveMo
                                   className={inputClass}
                                 />
                               </td>
+
+                              {/* Category (Editable Combobox with Presets) */}
                               <td className="p-2">
-                                <select
-                                  value={b.category || "Reasoning"}
+                                <input
+                                  list="category-presets"
+                                  type="text"
+                                  value={b.category || ""}
                                   onChange={(e) => updateBenchmark(idx, { category: e.target.value })}
+                                  placeholder="e.g. Reasoning"
                                   className={inputClass}
-                                >
-                                  <option value="Reasoning">Reasoning</option>
-                                  <option value="Code">Code</option>
-                                  <option value="Math">Math</option>
-                                  <option value="Knowledge">Knowledge</option>
-                                  <option value="Vision">Vision</option>
-                                  <option value="Agentic">Agentic</option>
-                                  <option value="General">General</option>
-                                </select>
+                                />
                               </td>
+
+                              {/* Evaluator (Editable Combobox with Presets) */}
                               <td className="p-2">
-                                <select
+                                <input
+                                  list="evaluator-presets"
+                                  type="text"
                                   value={b.sourceType || "independent-eval"}
                                   onChange={(e) => updateBenchmark(idx, { sourceType: e.target.value as Benchmark["sourceType"] })}
+                                  placeholder="Evaluator Type"
                                   className={inputClass}
-                                >
-                                  <option value="independent-eval">Independent Eval</option>
-                                  <option value="vendor-reported">Vendor Reported</option>
-                                </select>
+                                />
                               </td>
+
+                              {/* Citation Link */}
                               <td className="p-2">
                                 <div className="flex items-center gap-2">
                                   <input
                                     type="text"
                                     value={citationVal}
                                     onChange={(e) => updateBenchmark(idx, { citation: e.target.value, source: e.target.value } as Partial<Benchmark>)}
-                                    placeholder="https://arxiv.org/... or https://blogs.nvidia.com/..."
-                                    className={`${inputClass} font-mono text-[12px] ${!isUrlValid ? "border-amber-500/50" : ""}`}
+                                    placeholder="https://arxiv.org/..."
+                                    className={`${inputClass} font-mono text-[12px] ${!isUrlValid && citationVal ? "border-amber-500/50" : ""}`}
                                   />
                                   {isUrlValid && (
                                     <a
@@ -1058,6 +1209,21 @@ export default function LiveModelEditor({ initialModel, allModels = [] }: LiveMo
                                   )}
                                 </div>
                               </td>
+
+                              {/* Dynamic Custom Column Cells */}
+                              {customBenchmarkCols.map((col) => (
+                                <td key={col} className="p-2 bg-[var(--accent-soft)]/5 border-l border-[var(--muted)]/15">
+                                  <input
+                                    type="text"
+                                    value={b.customColumns?.[col] ?? ""}
+                                    onChange={(e) => updateBenchmarkCustomCell(idx, col, e.target.value)}
+                                    placeholder={`Value for ${col}`}
+                                    className={`${inputClass} font-mono text-xs`}
+                                  />
+                                </td>
+                              ))}
+
+                              {/* Actions */}
                               <td className="p-2 text-right">
                                 <button
                                   onClick={() => removeBenchmark(idx)}
@@ -1456,7 +1622,7 @@ export default function LiveModelEditor({ initialModel, allModels = [] }: LiveMo
                           <tr>
                             <td className="p-3.5 font-bold text-[var(--text)]">Context Window</td>
                             {comparisonModels.map((m) => {
-                              const cw = m.contextWindow ? (typeof m.contextWindow === "object" ? (m.contextWindow as { native?: number }).native : m.contextWindow) : "—";
+                              const cw = m.contextWindow ? (typeof m.contextWindow === "object" ? (model.contextWindow as { native?: number }).native : m.contextWindow) : "—";
                               return (
                                 <td key={m.id} className="p-3.5 font-mono tabular-nums text-[var(--text)] font-bold">
                                   {cw}
@@ -1515,6 +1681,112 @@ export default function LiveModelEditor({ initialModel, allModels = [] }: LiveMo
           </div>
         )}
       </div>
+
+      {/* ── MODAL: ADD CUSTOM BENCHMARK COLUMN ────────────────────────────── */}
+      {showAddColModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/75 p-4 backdrop-blur-xs">
+          <div className="w-full max-w-md rounded-[var(--radius-card)] bg-[var(--card-bg)] p-6 shadow-2xl border border-[var(--muted)]/20 space-y-4">
+            <h3 className="text-base font-bold text-[var(--text)] flex items-center gap-2">
+              <Columns size={16} className="text-[var(--accent)]" />
+              Add Brand New Benchmark Column
+            </h3>
+            <p className="text-xs text-[var(--muted)] leading-relaxed">
+              Create an arbitrary custom column across your benchmark table (e.g. <code>Baseline (GPT-4o)</code>, <code>Hardware Setup</code>, <code>Test Split</code>, <code>Shots</code>, <code>Latency</code>).
+            </p>
+            <div>
+              <label className={labelClass}>Column Header Title</label>
+              <input
+                type="text"
+                autoFocus
+                value={newColName}
+                onChange={(e) => setNewColName(e.target.value)}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter") handleAddBenchmarkColumn();
+                }}
+                placeholder="e.g. Baseline Score (GPT-4o)"
+                className={inputClass}
+              />
+            </div>
+            <div className="flex justify-end gap-2 pt-2">
+              <button
+                onClick={() => {
+                  setShowAddColModal(false);
+                  setNewColName("");
+                }}
+                className="px-3.5 py-1.5 rounded-[var(--radius-control)] border border-[var(--muted)]/20 text-xs font-bold text-[var(--muted)] hover:text-[var(--text)] cursor-pointer"
+              >
+                Cancel
+              </button>
+              <button
+                onClick={handleAddBenchmarkColumn}
+                disabled={!newColName.trim()}
+                className="px-4 py-1.5 rounded-[var(--radius-control)] bg-[var(--accent)] text-black text-xs font-bold hover:bg-[var(--accent)]/90 cursor-pointer disabled:opacity-50"
+              >
+                Add Column
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* ── MODAL: ADD CUSTOM BENCHMARK PRESET ────────────────────────────── */}
+      {showAddPresetModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/75 p-4 backdrop-blur-xs">
+          <div className="w-full max-w-md rounded-[var(--radius-card)] bg-[var(--card-bg)] p-6 shadow-2xl border border-[var(--muted)]/20 space-y-4">
+            <h3 className="text-base font-bold text-[var(--text)] flex items-center gap-2">
+              <Plus size={16} className="text-[var(--accent)]" />
+              Add Custom Benchmark Quick Preset
+            </h3>
+            <div>
+              <label className={labelClass}>Benchmark Name</label>
+              <input
+                type="text"
+                value={newPresetName}
+                onChange={(e) => setNewPresetName(e.target.value)}
+                placeholder="e.g. FrontierMath"
+                className={inputClass}
+              />
+            </div>
+            <div>
+              <label className={labelClass}>Category</label>
+              <input
+                list="category-presets"
+                type="text"
+                value={newPresetCategory}
+                onChange={(e) => setNewPresetCategory(e.target.value)}
+                placeholder="e.g. Math / Reasoning"
+                className={inputClass}
+              />
+            </div>
+            <div>
+              <label className={labelClass}>Default Metric</label>
+              <input
+                list="metric-presets"
+                type="text"
+                value={newPresetMetric}
+                onChange={(e) => setNewPresetMetric(e.target.value)}
+                placeholder="e.g. % Accuracy"
+                className={inputClass}
+              />
+            </div>
+            <div className="flex justify-end gap-2 pt-2">
+              <button
+                onClick={() => setShowAddPresetModal(false)}
+                className="px-3.5 py-1.5 rounded-[var(--radius-control)] border border-[var(--muted)]/20 text-xs font-bold text-[var(--muted)] hover:text-[var(--text)] cursor-pointer"
+              >
+                Cancel
+              </button>
+              <button
+                onClick={handleAddPreset}
+                disabled={!newPresetName.trim()}
+                className="px-4 py-1.5 rounded-[var(--radius-control)] bg-[var(--accent)] text-black text-xs font-bold hover:bg-[var(--accent)]/90 cursor-pointer disabled:opacity-50"
+              >
+                Save Preset
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* ── MODAL: OVERRIDE PROVENANCE GATE ───────────────────────────────── */}
       {overrideModalOpen && (

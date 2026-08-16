@@ -215,6 +215,12 @@ export default function ModelDetailTabs({
                     model.benchmarks.reduce((a, b) => { a[b.category || "General"] = true; return a; }, {} as Record<string, boolean>)
                   ).length > 1;
 
+                  // Extract any custom columns present in this category
+                  const allCategoryBenchs = Object.values(subcategories).flat();
+                  const categoryCustomCols = Array.from(
+                    new Set(allCategoryBenchs.flatMap((b) => Object.keys(b.customColumns || {})))
+                  );
+
                   return (
                     <div key={category} className="mb-6 last:mb-0">
                       {/* Dynamic Table Title if there are multiple domains */}
@@ -226,32 +232,67 @@ export default function ModelDetailTabs({
                       )}
 
                       <div className="overflow-x-auto bg-[var(--card-bg)] shadow-[var(--shadow-card)] rounded-[var(--radius-card)] p-4 border border-[var(--muted)]/10">
-                        <table className="w-full min-w-[300px] text-sm">
+                        <table className="w-full min-w-[340px] text-sm">
+                          {categoryCustomCols.length > 0 && (
+                            <thead className="border-b border-[var(--muted)]/10 text-[11px] uppercase tracking-wider text-[var(--muted)] font-mono">
+                              <tr>
+                                <th className="pb-2 text-left font-bold">Benchmark</th>
+                                <th className="pb-2 text-left font-bold">Score</th>
+                                {categoryCustomCols.map((col) => (
+                                  <th key={col} className="pb-2 text-left font-bold">
+                                    {col}
+                                  </th>
+                                ))}
+                                <th className="pb-2 text-right font-bold pr-2">Evaluation</th>
+                              </tr>
+                            </thead>
+                          )}
                           <tbody>
                             {Object.entries(subcategories).map(([subCategory, benchs]) => (
                               <Fragment key={subCategory}>
                                 {subCategory !== "None" && (
                                   <tr>
-                                    <td colSpan={3} className="pt-4 pb-1.5 text-[10px] uppercase tracking-wider font-bold text-[var(--muted)] border-b border-[var(--muted)]/10">
+                                    <td colSpan={3 + categoryCustomCols.length} className="pt-4 pb-1.5 text-[10px] uppercase tracking-wider font-bold text-[var(--muted)] border-b border-[var(--muted)]/10">
                                       {subCategory}
                                     </td>
                                   </tr>
                                 )}
                                 
-                                {benchs.map((b) => (
-                                  <tr key={b.name} className="border-b border-[var(--muted)]/10 last:border-0 hover:bg-[var(--bg)]/50 transition-colors">
-                                    <td className={`py-2.5 text-[var(--text)] font-semibold ${subCategory !== "None" ? 'pl-3' : ''}`}>
-                                      {b.name}
-                                    </td>
-                                    <td className="py-2.5 tabular-nums text-[var(--accent)] font-mono font-bold">{b.score}</td>
-                                    <td className="py-2.5 text-right pr-2">
-                                      <span className="inline-flex items-center gap-1.5 text-xs text-[var(--muted)]">
-                                        <span className={`h-2 w-2 rounded-full ${b.sourceType === "vendor-reported" ? DOT.vendor : DOT.independent}`} />
-                                        {b.sourceType === "vendor-reported" ? "Vendor-reported" : "Independent"}
-                                      </span>
-                                    </td>
-                                  </tr>
-                                ))}
+                                {benchs.map((b) => {
+                                  const citation = (b.citation || b.source || "") as string;
+                                  return (
+                                    <tr key={b.name} className="border-b border-[var(--muted)]/10 last:border-0 hover:bg-[var(--bg)]/50 transition-colors">
+                                      <td className={`py-2.5 text-[var(--text)] font-semibold ${subCategory !== "None" ? 'pl-3' : ''}`}>
+                                        <div className="flex items-center gap-1.5">
+                                          <span>{b.name}</span>
+                                          {citation && citation.startsWith("http") && (
+                                            <a
+                                              href={citation}
+                                              target="_blank"
+                                              rel="noreferrer"
+                                              className="text-[var(--muted)] hover:text-[var(--accent)] transition-colors inline-flex items-center"
+                                              title="View citation"
+                                            >
+                                              <ArrowUpRight size={12} />
+                                            </a>
+                                          )}
+                                        </div>
+                                      </td>
+                                      <td className="py-2.5 tabular-nums text-[var(--accent)] font-mono font-bold">{b.score}</td>
+                                      {categoryCustomCols.map((col) => (
+                                        <td key={col} className="py-2.5 font-mono text-xs text-[var(--muted)]">
+                                          {b.customColumns?.[col] ?? "—"}
+                                        </td>
+                                      ))}
+                                      <td className="py-2.5 text-right pr-2">
+                                        <span className="inline-flex items-center gap-1.5 text-xs text-[var(--muted)]">
+                                          <span className={`h-2 w-2 rounded-full ${b.sourceType === "vendor-reported" ? DOT.vendor : DOT.independent}`} />
+                                          {b.sourceType === "vendor-reported" ? "Vendor-reported" : "Independent"}
+                                        </span>
+                                      </td>
+                                    </tr>
+                                  );
+                                })}
                               </Fragment>
                             ))}
                           </tbody>
