@@ -43,11 +43,56 @@ const COMMON_BENCHMARK_PRESETS = [
   { name: "Arena Hard Auto", category: "General", metric: "Elo / Score" },
 ];
 
+function normalizeModelEntry(raw: ModelEntry): ModelEntry {
+  let pricingArray: { tier?: string; unit: string; amount: number; currency: string; notes?: string }[] = [];
+  if (Array.isArray(raw.pricing)) {
+    pricingArray = raw.pricing;
+  } else if (raw.pricing && typeof raw.pricing === "object") {
+    pricingArray = Object.entries(raw.pricing).map(([k, v]) => ({
+      tier: k,
+      unit: typeof v === "number" ? "1M tokens" : "Standard",
+      amount: typeof v === "number" ? v : parseFloat(String(v)) || 0,
+      currency: "USD",
+      notes: typeof v === "string" ? v : undefined,
+    }));
+  }
+
+  let benchmarksArray: Benchmark[] = [];
+  if (Array.isArray(raw.benchmarks)) {
+    benchmarksArray = raw.benchmarks;
+  } else if (raw.benchmarks && typeof raw.benchmarks === "object") {
+    benchmarksArray = Object.entries(raw.benchmarks).map(([k, v]) => ({
+      name: k,
+      score: typeof v === "number" || typeof v === "string" ? v : (v as { score?: number | string })?.score || 0,
+      verified: true,
+      category: "Reasoning",
+      subCategory: "% Accuracy",
+    }));
+  }
+
+  let customSectionsArray: { id: string; title: string; content: string }[] = [];
+  if (Array.isArray(raw.customSections)) {
+    customSectionsArray = raw.customSections;
+  } else if (Array.isArray((raw as unknown as { metadata?: { custom_sections?: unknown[] } })?.metadata?.custom_sections)) {
+    customSectionsArray = (raw as unknown as { metadata: { custom_sections: { id: string; title: string; content: string }[] } }).metadata.custom_sections;
+  }
+
+  return {
+    ...raw,
+    keyFeatures: Array.isArray(raw.keyFeatures) ? raw.keyFeatures : [],
+    sources: Array.isArray(raw.sources) ? raw.sources : [],
+    benchmarks: benchmarksArray,
+    pricing: pricingArray,
+    links: raw.links && typeof raw.links === "object" ? raw.links : {},
+    customSections: customSectionsArray,
+  };
+}
+
 export default function LiveModelEditor({ initialModel }: LiveModelEditorProps) {
   const router = useRouter();
 
-  // Model Working State
-  const [model, setModel] = useState<ModelEntry>({ ...initialModel });
+  // Model Working State - Safely normalized
+  const [model, setModel] = useState<ModelEntry>(() => normalizeModelEntry(initialModel));
   const [activeTab, setActiveTab] = useState<"overview" | "specs" | "benchmarks" | "resources" | "custom">("overview");
   const [viewMode, setViewMode] = useState<"edit" | "preview">("edit");
   const [inspectorOpen, setInspectorOpen] = useState(false);
@@ -60,6 +105,13 @@ export default function LiveModelEditor({ initialModel }: LiveModelEditorProps) 
   const [overrideReason, setOverrideReason] = useState("");
   const [disputeModalOpen, setDisputeModalOpen] = useState(false);
   const [disputeNotes, setDisputeNotes] = useState("");
+
+  // Safe Arrays for Rendering
+  const pricingList = Array.isArray(model.pricing) ? model.pricing : [];
+  const benchmarksList = Array.isArray(model.benchmarks) ? model.benchmarks : [];
+  const keyFeaturesList = Array.isArray(model.keyFeatures) ? model.keyFeatures : [];
+  const sourcesList = Array.isArray(model.sources) ? model.sources : [];
+  const customSectionsList = Array.isArray(model.customSections) ? model.customSections : [];
 
   // Live Client Quality Evaluation
   const quality = useMemo(() => evaluateModelQualityClient(model), [model]);
@@ -78,86 +130,81 @@ export default function LiveModelEditor({ initialModel }: LiveModelEditorProps) 
 
   // Feature List Builder Helpers
   const addKeyFeature = () => {
-    const current = Array.isArray(model.keyFeatures) ? [...model.keyFeatures] : [];
-    setModel((prev) => ({ ...prev, keyFeatures: [...current, "New technical capability or feature"] }));
+    setModel((prev) => ({ ...prev, keyFeatures: [...(Array.isArray(prev.keyFeatures) ? prev.keyFeatures : []), "New technical capability or feature"] }));
   };
 
   const updateKeyFeature = (index: number, val: string) => {
-    const current = Array.isArray(model.keyFeatures) ? [...model.keyFeatures] : [];
+    const current = [...keyFeaturesList];
     current[index] = val;
     setModel((prev) => ({ ...prev, keyFeatures: current }));
   };
 
   const removeKeyFeature = (index: number) => {
-    const current = Array.isArray(model.keyFeatures) ? [...model.keyFeatures] : [];
+    const current = [...keyFeaturesList];
     current.splice(index, 1);
     setModel((prev) => ({ ...prev, keyFeatures: current }));
   };
 
   // Benchmark Builder Helpers
   const addBenchmark = (preset?: { name: string; category: string; metric: string }) => {
-    const current = Array.isArray(model.benchmarks) ? [...model.benchmarks] : [];
-    current.push({
+    const newBenchmark: Benchmark = {
       name: preset?.name || "New Benchmark",
       score: "85.0",
       verified: true,
       category: preset?.category || "Reasoning",
       sourceType: "independent-eval",
       subCategory: preset?.metric || "% Accuracy",
-    });
-    setModel((prev) => ({ ...prev, benchmarks: current }));
+    };
+    setModel((prev) => ({ ...prev, benchmarks: [...(Array.isArray(prev.benchmarks) ? prev.benchmarks : []), newBenchmark] }));
   };
 
   const updateBenchmark = (index: number, updates: Partial<Benchmark & { citation?: string; source?: string }>) => {
-    const current = Array.isArray(model.benchmarks) ? [...model.benchmarks] : [];
+    const current = [...benchmarksList];
     current[index] = { ...current[index], ...updates };
     setModel((prev) => ({ ...prev, benchmarks: current }));
   };
 
   const removeBenchmark = (index: number) => {
-    const current = Array.isArray(model.benchmarks) ? [...model.benchmarks] : [];
+    const current = [...benchmarksList];
     current.splice(index, 1);
     setModel((prev) => ({ ...prev, benchmarks: current }));
   };
 
   // Source URL Builder Helpers
   const addSourceUrl = () => {
-    const current = Array.isArray(model.sources) ? [...model.sources] : [];
-    setModel((prev) => ({ ...prev, sources: [...current, "https://"] }));
+    setModel((prev) => ({ ...prev, sources: [...(Array.isArray(prev.sources) ? prev.sources : []), "https://"] }));
   };
 
   const updateSourceUrl = (index: number, val: string) => {
-    const current = Array.isArray(model.sources) ? [...model.sources] : [];
+    const current = [...sourcesList];
     current[index] = val;
     setModel((prev) => ({ ...prev, sources: current }));
   };
 
   const removeSourceUrl = (index: number) => {
-    const current = Array.isArray(model.sources) ? [...model.sources] : [];
+    const current = [...sourcesList];
     current.splice(index, 1);
     setModel((prev) => ({ ...prev, sources: current }));
   };
 
   // Custom Sections Builder Helpers
-  const customSections = Array.isArray(model.customSections) ? model.customSections : [];
-
   const addCustomSection = () => {
     const newSection = {
       id: `section-${Date.now()}`,
       title: "New Custom Section",
       content: "Write technical documentation, configuration parameters, or deployment code snippets here.",
     };
-    setModel((prev) => ({ ...prev, customSections: [...(prev.customSections || []), newSection] }));
+    setModel((prev) => ({ ...prev, customSections: [...(Array.isArray(prev.customSections) ? prev.customSections : []), newSection] }));
   };
 
   const updateCustomSection = (index: number, field: "title" | "content", val: string) => {
-    const current = [...customSections];
+    const current = [...customSectionsList];
     current[index] = { ...current[index], [field]: val };
     setModel((prev) => ({ ...prev, customSections: current }));
   };
 
   const removeCustomSection = (index: number) => {
-    const current = [...customSections];
+    const current = [...customSectionsList];
     current.splice(index, 1);
     setModel((prev) => ({ ...prev, customSections: current }));
   };
@@ -186,15 +233,15 @@ export default function LiveModelEditor({ initialModel }: LiveModelEditorProps) 
         active_parameters: model.activeParameters,
         context_window: model.contextWindow,
         license: model.license,
-        key_features: model.keyFeatures,
-        benchmarks: model.benchmarks,
-        sources: model.sources,
-        links: model.links,
-        pricing: model.pricing,
-        tags: model.tags,
+        key_features: keyFeaturesList,
+        benchmarks: benchmarksList,
+        sources: sourcesList,
+        links: model.links || {},
+        pricing: pricingList,
+        tags: model.tags || [],
         curator_notes: model.curatorNotes,
         metadata: {
-          custom_sections: model.customSections || [],
+          custom_sections: customSectionsList,
         },
       };
 
@@ -228,13 +275,13 @@ export default function LiveModelEditor({ initialModel }: LiveModelEditorProps) 
         parameters: model.parameters,
         context_window: model.contextWindow,
         license: model.license,
-        key_features: model.keyFeatures,
-        benchmarks: model.benchmarks,
-        sources: model.sources,
-        links: model.links,
-        pricing: model.pricing,
+        key_features: keyFeaturesList,
+        benchmarks: benchmarksList,
+        sources: sourcesList,
+        links: model.links || {},
+        pricing: pricingList,
         metadata: {
-          custom_sections: model.customSections || [],
+          custom_sections: customSectionsList,
         },
       };
 
@@ -358,7 +405,7 @@ export default function LiveModelEditor({ initialModel }: LiveModelEditorProps) 
           {/* Right: Actions */}
           <div className="flex items-center gap-2">
             <button
-              onClick={() => setModel({ ...initialModel })}
+              onClick={() => setModel(normalizeModelEntry(initialModel))}
               disabled={saving}
               className="p-2 rounded-[var(--radius-control)] border border-[var(--muted)]/20 text-[var(--muted)] hover:text-[var(--text)] hover:bg-[var(--bg)] transition-colors cursor-pointer"
               title="Reset all unsaved changes"
@@ -531,9 +578,9 @@ export default function LiveModelEditor({ initialModel }: LiveModelEditorProps) 
               {[
                 { id: "overview", label: "Overview & Features" },
                 { id: "specs", label: "Specifications & Pricing" },
-                { id: "benchmarks", label: `Benchmarks (${(model.benchmarks || []).length})` },
+                { id: "benchmarks", label: `Benchmarks (${benchmarksList.length})` },
                 { id: "resources", label: "Resources & Links" },
-                { id: "custom", label: `Custom Sections (${customSections.length})` },
+                { id: "custom", label: `Custom Sections (${customSectionsList.length})` },
               ].map((tab) => (
                 <button
                   key={tab.id}
@@ -627,7 +674,7 @@ export default function LiveModelEditor({ initialModel }: LiveModelEditorProps) 
                   </div>
 
                   <div className="space-y-3">
-                    {(model.keyFeatures || []).map((feat, idx) => (
+                    {keyFeaturesList.map((feat, idx) => (
                       <div key={idx} className="flex items-center gap-2">
                         <span className="text-xs font-mono text-[var(--muted)] w-6 text-right select-none">
                           {idx + 1}.
@@ -647,7 +694,7 @@ export default function LiveModelEditor({ initialModel }: LiveModelEditorProps) 
                         </button>
                       </div>
                     ))}
-                    {(model.keyFeatures || []).length === 0 && (
+                    {keyFeaturesList.length === 0 && (
                       <p className="text-xs text-[var(--muted)] italic py-2">No key capabilities recorded yet.</p>
                     )}
                   </div>
@@ -739,15 +786,14 @@ export default function LiveModelEditor({ initialModel }: LiveModelEditorProps) 
                     </div>
                     <button
                       onClick={() => {
-                        const current = Array.isArray(model.pricing) ? [...model.pricing] : [];
-                        current.push({
+                        const newTier = {
                           tier: "Standard API",
                           amount: 0.15,
                           currency: "USD",
                           unit: "1M Input Tokens",
                           notes: "Batch pricing available",
-                        });
-                        updateField("pricing", current);
+                        };
+                        updateField("pricing", [...pricingList, newTier]);
                       }}
                       className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-[var(--radius-control)] bg-[var(--accent-soft)] text-[var(--accent)] text-xs font-bold hover:bg-[var(--accent-soft)]/80 transition-colors cursor-pointer"
                     >
@@ -768,14 +814,14 @@ export default function LiveModelEditor({ initialModel }: LiveModelEditorProps) 
                         </tr>
                       </thead>
                       <tbody className="divide-y divide-[var(--muted)]/10 font-sans">
-                        {(model.pricing || []).map((p, idx) => (
+                        {pricingList.map((p, idx) => (
                           <tr key={idx}>
                             <td className="p-2">
                               <input
                                 type="text"
                                 value={p.tier || ""}
                                 onChange={(e) => {
-                                  const current = [...(model.pricing || [])];
+                                  const current = [...pricingList];
                                   current[idx] = { ...current[idx], tier: e.target.value };
                                   updateField("pricing", current);
                                 }}
@@ -787,7 +833,7 @@ export default function LiveModelEditor({ initialModel }: LiveModelEditorProps) 
                                 type="text"
                                 value={p.unit || ""}
                                 onChange={(e) => {
-                                  const current = [...(model.pricing || [])];
+                                  const current = [...pricingList];
                                   current[idx] = { ...current[idx], unit: e.target.value };
                                   updateField("pricing", current);
                                 }}
@@ -800,7 +846,7 @@ export default function LiveModelEditor({ initialModel }: LiveModelEditorProps) 
                                 step="0.0001"
                                 value={p.amount}
                                 onChange={(e) => {
-                                  const current = [...(model.pricing || [])];
+                                  const current = [...pricingList];
                                   current[idx] = { ...current[idx], amount: parseFloat(e.target.value) || 0 };
                                   updateField("pricing", current);
                                 }}
@@ -812,7 +858,7 @@ export default function LiveModelEditor({ initialModel }: LiveModelEditorProps) 
                                 type="text"
                                 value={p.currency || "USD"}
                                 onChange={(e) => {
-                                  const current = [...(model.pricing || [])];
+                                  const current = [...pricingList];
                                   current[idx] = { ...current[idx], currency: e.target.value };
                                   updateField("pricing", current);
                                 }}
@@ -824,7 +870,7 @@ export default function LiveModelEditor({ initialModel }: LiveModelEditorProps) 
                                 type="text"
                                 value={p.notes || ""}
                                 onChange={(e) => {
-                                  const current = [...(model.pricing || [])];
+                                  const current = [...pricingList];
                                   current[idx] = { ...current[idx], notes: e.target.value };
                                   updateField("pricing", current);
                                 }}
@@ -834,7 +880,7 @@ export default function LiveModelEditor({ initialModel }: LiveModelEditorProps) 
                             <td className="p-2 text-right">
                               <button
                                 onClick={() => {
-                                  const current = [...(model.pricing || [])];
+                                  const current = [...pricingList];
                                   current.splice(idx, 1);
                                   updateField("pricing", current);
                                 }}
@@ -906,7 +952,7 @@ export default function LiveModelEditor({ initialModel }: LiveModelEditorProps) 
                         </tr>
                       </thead>
                       <tbody className="divide-y divide-[var(--muted)]/10 font-sans">
-                        {(model.benchmarks || []).map((b, idx) => {
+                        {benchmarksList.map((b, idx) => {
                           const citationVal = (b as unknown as { citation?: string; source?: string })?.citation || (b as unknown as { source?: string })?.source || "";
                           const isUrlValid = citationVal.startsWith("http://") || citationVal.startsWith("https://");
 
@@ -1024,7 +1070,7 @@ export default function LiveModelEditor({ initialModel }: LiveModelEditorProps) 
                   </div>
 
                   <div className="space-y-3">
-                    {(model.sources || []).map((src, idx) => (
+                    {sourcesList.map((src, idx) => (
                       <div key={idx} className="flex items-center gap-2">
                         <span className="text-xs font-mono text-[var(--muted)] w-6 text-right select-none">
                           [{idx + 1}]
@@ -1131,7 +1177,7 @@ export default function LiveModelEditor({ initialModel }: LiveModelEditorProps) 
                   </div>
 
                   <div className="space-y-6 pt-2">
-                    {customSections.map((sec, idx) => (
+                    {customSectionsList.map((sec, idx) => (
                       <div
                         key={sec.id || idx}
                         className="p-5 rounded-[var(--radius-card)] bg-[var(--bg)] border border-[var(--muted)]/15 space-y-4 shadow-sm"
@@ -1172,7 +1218,7 @@ export default function LiveModelEditor({ initialModel }: LiveModelEditorProps) 
                       </div>
                     ))}
 
-                    {customSections.length === 0 && (
+                    {customSectionsList.length === 0 && (
                       <div className="text-center py-8 border border-dashed border-[var(--muted)]/20 rounded-[var(--radius-card)]">
                         <Layers size={24} className="mx-auto text-[var(--muted)]/40 mb-2" />
                         <p className="text-xs text-[var(--muted)]">No custom sections added yet.</p>
@@ -1226,7 +1272,7 @@ export default function LiveModelEditor({ initialModel }: LiveModelEditorProps) 
               )}
 
               {/* Benchmarks Preview */}
-              {(model.benchmarks || []).length > 0 && (
+              {benchmarksList.length > 0 && (
                 <div className="pt-6 border-t border-[var(--muted)]/10 space-y-3">
                   <h2 className="text-xl font-bold text-[var(--text)]">Verified Benchmarks</h2>
                   <div className="overflow-x-auto rounded-[var(--radius-card)] border border-[var(--muted)]/10">
@@ -1241,7 +1287,7 @@ export default function LiveModelEditor({ initialModel }: LiveModelEditorProps) 
                         </tr>
                       </thead>
                       <tbody className="divide-y divide-[var(--muted)]/10">
-                        {(model.benchmarks || []).map((b, i) => {
+                        {benchmarksList.map((b, i) => {
                           const citation = (b as unknown as { citation?: string; source?: string })?.citation || (b as unknown as { source?: string })?.source;
                           return (
                             <tr key={i}>
@@ -1268,7 +1314,7 @@ export default function LiveModelEditor({ initialModel }: LiveModelEditorProps) 
               )}
 
               {/* Custom Sections Preview */}
-              {customSections.map((sec, i) => (
+              {customSectionsList.map((sec, i) => (
                 <div key={i} className="pt-6 border-t border-[var(--muted)]/10 space-y-3">
                   <h2 className="text-xl font-bold text-[var(--text)]">{sec.title}</h2>
                   <div className="prose prose-invert max-w-none text-sm text-[var(--text)] leading-relaxed">
