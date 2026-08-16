@@ -30,12 +30,35 @@ export async function approveModel(slug: string, edits: Record<string, unknown>)
     throw new Error('Authentication required');
   }
 
+  const { data: existingModel, error: fetchError } = await supabase
+    .from('models')
+    .select('*')
+    .eq('slug', slug)
+    .single();
+
+  if (fetchError || !existingModel) {
+    throw new Error('Model not found');
+  }
+
   const parsedEdits = parseJsonFields(edits);
+  const mergedModel = {
+    ...existingModel,
+    ...parsedEdits,
+  };
+
+  // Evaluate deterministic quality gate on the curated model
+  // Human edits only promote to 'indexed' if benchmarks and provenance rules pass
+  const { scoreModelPage } = await import('@/../scripts/quality/score-content');
+  const gate = scoreModelPage(mergedModel);
 
   const updates = {
     ...parsedEdits,
-    verified: true,
-    verification_status: 'VERIFIED',
+    verified: gate.status === 'indexed',
+    verification_status: gate.status === 'indexed' ? 'VERIFIED' : 'LIKELY',
+    quality_status: gate.status,
+    quality_score: gate.score,
+    quality_reasons: gate.reasons,
+    quality_checked_at: new Date().toISOString(),
     needs_review: false,
     reviewed_by: user.id,
     reviewed_at: new Date().toISOString(),
@@ -52,28 +75,28 @@ export async function approveModel(slug: string, edits: Record<string, unknown>)
   }
 
   // Insert audit log
-  const { error: auditError } = await supabase
+  await supabase
     .from('audit_log')
     .insert({
       actor: user.id,
       action: 'approve_model',
       target_type: 'model',
       target_id: slug,
-      metadata: { fields_changed: Object.keys(edits) }
+      metadata: { 
+        fields_changed: Object.keys(edits),
+        quality_status: gate.status,
+        quality_score: gate.score,
+        quality_reasons: gate.reasons,
+      }
     });
-
-  if (auditError) {
-    console.error('Audit log failed:', auditError);
-    // Depending on strictness, we might throw here, but usually audit log failure shouldn't fail the action completely.
-    // Given the prompt requirements, let's keep it robust.
-  }
 
   revalidatePath('/admin/review');
   revalidatePath(`/admin/review/${slug}`);
-  revalidatePath(`/models/${slug}`); // Revalidate public page if it exists
+  revalidatePath(`/models/${slug}`);
   revalidatePath('/models');
+  revalidatePath('/');
   
-  return { success: true };
+  return { success: true, quality_status: gate.status, quality_score: gate.score };
 }
 
 export async function saveModelEdits(slug: string, edits: Record<string, unknown>) {
@@ -100,6 +123,7 @@ export async function saveModelEdits(slug: string, edits: Record<string, unknown
   revalidatePath(`/admin/review/${slug}`);
   revalidatePath(`/models/${slug}`);
   revalidatePath('/models');
+  revalidatePath('/');
   
   return { success: true };
 }
@@ -112,8 +136,11 @@ export async function markDisputed(slug: string, notes: string) {
     throw new Error('Authentication required');
   }
 
+  // When a model is disputed, it immediately loses verified status and drops out of indexed feeds
   const updates = {
+    verified: false,
     verification_status: 'DISPUTED',
+    quality_status: 'thin',
     needs_review: true,
     curator_notes: notes,
   };
@@ -129,23 +156,21 @@ export async function markDisputed(slug: string, notes: string) {
   }
 
   // Insert audit log
-  const { error: auditError } = await supabase
+  await supabase
     .from('audit_log')
     .insert({
       actor: user.id,
       action: 'mark_disputed',
       target_type: 'model',
       target_id: slug,
-      metadata: { notes }
+      metadata: { notes, action: 'revoked_indexed_status' }
     });
-
-  if (auditError) {
-    console.error('Audit log failed:', auditError);
-  }
 
   revalidatePath('/admin/review');
   revalidatePath(`/admin/review/${slug}`);
+  revalidatePath(`/models/${slug}`);
   revalidatePath('/models');
+  revalidatePath('/');
 
   return { success: true };
 }
@@ -158,9 +183,6 @@ export async function dismissModels(slugs: string[]) {
     throw new Error('Authentication required');
   }
 
-  // To dismiss, we set needs_review = false and perhaps verification_status = 'DRAFT' or we leave it.
-  // The user prompt says "dismiss them together... irrelevant entries". 
-  // There is no specific "DISMISSED" status for models in the prompt, but we can set needs_review = false.
   const { error: updateError } = await supabase
     .from('models')
     .update({ needs_review: false })
@@ -171,7 +193,6 @@ export async function dismissModels(slugs: string[]) {
     throw new Error('Failed to dismiss models');
   }
 
-  // Audit log
   await supabase.from('audit_log').insert({
     actor: user.id,
     action: 'bulk_dismiss_models',
@@ -182,6 +203,7 @@ export async function dismissModels(slugs: string[]) {
 
   revalidatePath('/admin/review');
   revalidatePath('/models');
+  revalidatePath('/');
   return { success: true };
 }
 
@@ -193,20 +215,33 @@ export async function approveModels(slugs: string[]) {
     throw new Error('Authentication required');
   }
 
-  const { error: updateError } = await supabase
+  const { data: models, error: fetchError } = await supabase
     .from('models')
-    .update({ 
-      verified: true, 
-      verification_status: 'VERIFIED', 
-      needs_review: false, 
-      reviewed_by: user.id, 
-      reviewed_at: new Date().toISOString() 
-    })
+    .select('*')
     .in('slug', slugs);
 
-  if (updateError) {
-    console.error('Update failed:', updateError);
-    throw new Error('Failed to approve models');
+  if (fetchError || !models) {
+    throw new Error('Failed to fetch models for bulk approval');
+  }
+
+  const { scoreModelPage } = await import('@/../scripts/quality/score-content');
+
+  for (const model of models) {
+    const gate = scoreModelPage(model);
+    await supabase
+      .from('models')
+      .update({ 
+        verified: gate.status === 'indexed', 
+        verification_status: gate.status === 'indexed' ? 'VERIFIED' : 'LIKELY', 
+        quality_status: gate.status,
+        quality_score: gate.score,
+        quality_reasons: gate.reasons,
+        quality_checked_at: new Date().toISOString(),
+        needs_review: false, 
+        reviewed_by: user.id, 
+        reviewed_at: new Date().toISOString() 
+      })
+      .eq('slug', model.slug);
   }
 
   await supabase.from('audit_log').insert({
@@ -219,6 +254,7 @@ export async function approveModels(slugs: string[]) {
 
   revalidatePath('/admin/review');
   revalidatePath('/models');
+  revalidatePath('/');
   return { success: true };
 }
 
