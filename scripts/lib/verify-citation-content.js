@@ -15,9 +15,9 @@ const { extractBenchmarksFromMarkdownTable, KNOWN_BENCHMARKS } = require("./extr
 
 const fetchCache = new Map();
 
-const BROWSER_UA = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36";
+const BOT_UA = "Modelverse-Bot/1.0 (+https://themodelverse.in; contact@themodelverse.in)";
 
-async function fetchPageText(url, timeoutMs = 12000) {
+async function fetchPageText(url, timeoutMs = 10000) {
   if (!url || typeof url !== "string") return null;
   if (fetchCache.has(url)) return fetchCache.get(url);
 
@@ -39,7 +39,7 @@ async function fetchPageText(url, timeoutMs = 12000) {
     const res = await fetch(targetUrl, {
       signal: controller.signal,
       headers: {
-        "User-Agent": BROWSER_UA,
+        "User-Agent": BOT_UA,
         "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,text/plain;q=0.8,*/*;q=0.7",
       },
     });

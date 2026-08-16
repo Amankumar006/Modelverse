@@ -1,16 +1,14 @@
-const { extractOfficialUrls } = require("./extract-official-urls");
-
-const BROWSER_UA = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36";
+const BOT_UA = "Modelverse-Bot/1.0 (+https://themodelverse.in; contact@themodelverse.in)";
 
 // Utility to fetch raw text with timeout
-async function fetchRawText(url, timeoutMs = 12000) {
+async function fetchRawText(url, timeoutMs = 10000) {
   try {
     const controller = new AbortController();
     const id = setTimeout(() => controller.abort(), timeoutMs);
     const response = await fetch(url, {
       signal: controller.signal,
       headers: {
-        "User-Agent": BROWSER_UA,
+        "User-Agent": BOT_UA,
         "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,text/plain;q=0.8,*/*;q=0.7",
       },
     });

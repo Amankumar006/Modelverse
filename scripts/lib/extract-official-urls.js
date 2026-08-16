@@ -1,14 +1,10 @@
-/**
- * Extracts official URLs (GitHub, arXiv, official blogs) from a HuggingFace Model Card.
- */
-
-const BROWSER_UA = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36";
+const BOT_UA = "Modelverse-Bot/1.0 (+https://themodelverse.in; contact@themodelverse.in)";
 
 async function fetchReadme(repoId) {
   try {
     const cleanRepo = repoId.replace(/^https?:\/\/huggingface\.co\//, "").replace(/\/$/, "");
     const headers = {
-      "User-Agent": BROWSER_UA,
+      "User-Agent": BOT_UA,
       "Accept": "text/plain,text/markdown,application/json,*/*",
     };
     if (process.env.HF_TOKEN) {
