@@ -156,6 +156,7 @@ function benchmarkIsVerifiedAndSourced(entry, model) {
 
   // Check entry-level source citations
   if (entry.source && validHttpUrl(entry.source)) return true;
+  if (entry.citation && validHttpUrl(entry.citation)) return true;
   if (Array.isArray(entry.sources) && entry.sources.some(validHttpUrl)) return true;
 
   // Check model-level verified confidence or source URLs

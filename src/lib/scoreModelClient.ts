@@ -56,12 +56,18 @@ export function evaluateModelQualityClient(model: Partial<ModelEntry>): QualityE
   }
 
   // 2. Verified Benchmarks (35 points)
+  const hasGlobalSource =
+    (Array.isArray(model.sources) && model.sources.some(isValidUrl)) ||
+    (model.links && typeof model.links === "object" && Object.values(model.links).some(isValidUrl));
+
   const benchmarks: Benchmark[] = Array.isArray(model.benchmarks) ? model.benchmarks : [];
   const validBenchmarks = benchmarks.filter((b) => {
     const scoreVal = b.score !== undefined && b.score !== null ? String(b.score).trim() : "";
     const hasNum = /\d/.test(scoreVal);
     const hasName = typeof b.name === "string" && b.name.trim().length > 0;
-    const hasCite = isValidUrl((b as unknown as { citation?: string; sourceUrl?: string; source?: string })?.citation || (b as unknown as { source?: string })?.source);
+    const hasCite =
+      isValidUrl((b as unknown as { citation?: string; sourceUrl?: string; source?: string })?.citation || (b as unknown as { source?: string })?.source) ||
+      hasGlobalSource;
     return hasNum && hasName && hasCite;
   });
 
