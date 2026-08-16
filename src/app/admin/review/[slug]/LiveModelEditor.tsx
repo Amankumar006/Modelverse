@@ -29,12 +29,27 @@ import {
   Check,
   Columns,
   X,
+  SlidersHorizontal,
 } from "lucide-react";
 
 interface LiveModelEditorProps {
   initialModel: ModelEntry;
   allModels?: ModelEntry[];
 }
+
+interface VisibleBenchmarkCols {
+  metric: boolean;
+  category: boolean;
+  evaluator: boolean;
+  citation: boolean;
+}
+
+const DEFAULT_VISIBLE_BENCHMARK_COLS: VisibleBenchmarkCols = {
+  metric: true,
+  category: true,
+  evaluator: true,
+  citation: true,
+};
 
 const DEFAULT_BENCHMARK_PRESETS = [
   { name: "MMLU-Pro", category: "Reasoning", metric: "% Accuracy" },
@@ -105,7 +120,7 @@ export default function LiveModelEditor({ initialModel, allModels = [] }: LiveMo
   const [copied, setCopied] = useState(false);
   const [previewSearch, setPreviewSearch] = useState("");
 
-  // Benchmark Custom Columns & Presets
+  // Benchmark Custom Columns & Column Visibility Management
   const [customBenchmarkCols, setCustomBenchmarkCols] = useState<string[]>(() => {
     const fromMeta = (initialModel as unknown as { metadata?: { benchmark_columns?: string[] } })?.metadata?.benchmark_columns;
     if (Array.isArray(fromMeta)) return fromMeta;
@@ -114,7 +129,14 @@ export default function LiveModelEditor({ initialModel, allModels = [] }: LiveMo
     );
     return fromBenchs;
   });
+
+  const [visibleCols, setVisibleCols] = useState<VisibleBenchmarkCols>(() => {
+    const fromMeta = (initialModel as unknown as { metadata?: { visible_benchmark_cols?: VisibleBenchmarkCols } })?.metadata?.visible_benchmark_cols;
+    return fromMeta ? { ...DEFAULT_VISIBLE_BENCHMARK_COLS, ...fromMeta } : DEFAULT_VISIBLE_BENCHMARK_COLS;
+  });
+
   const [showAddColModal, setShowAddColModal] = useState(false);
+  const [showColManagerPopover, setShowColManagerPopover] = useState(false);
   const [newColName, setNewColName] = useState("");
 
   // Benchmark Presets Management
@@ -222,7 +244,7 @@ export default function LiveModelEditor({ initialModel, allModels = [] }: LiveMo
     setModel((prev) => ({ ...prev, benchmarks: current }));
   };
 
-  // Benchmark Custom Column Helpers
+  // Benchmark Column Management Helpers
   const handleAddBenchmarkColumn = () => {
     const clean = newColName.trim();
     if (!clean) return;
@@ -245,6 +267,14 @@ export default function LiveModelEditor({ initialModel, allModels = [] }: LiveMo
         return { ...b, customColumns: copy };
       }),
     }));
+  };
+
+  const toggleStandardCol = (key: keyof VisibleBenchmarkCols) => {
+    setVisibleCols((prev) => ({ ...prev, [key]: !prev[key] }));
+  };
+
+  const resetAllColumns = () => {
+    setVisibleCols(DEFAULT_VISIBLE_BENCHMARK_COLS);
   };
 
   // Benchmark Preset Helpers
@@ -335,6 +365,7 @@ export default function LiveModelEditor({ initialModel, allModels = [] }: LiveMo
         metadata: {
           custom_sections: customSectionsList,
           benchmark_columns: customBenchmarkCols,
+          visible_benchmark_cols: visibleCols,
         },
       };
 
@@ -376,6 +407,7 @@ export default function LiveModelEditor({ initialModel, allModels = [] }: LiveMo
         metadata: {
           custom_sections: customSectionsList,
           benchmark_columns: customBenchmarkCols,
+          visible_benchmark_cols: visibleCols,
         },
       };
 
@@ -1039,7 +1071,7 @@ export default function LiveModelEditor({ initialModel, allModels = [] }: LiveMo
               </div>
             )}
 
-            {/* ── TAB 3: BENCHMARKS MANAGER (EXPANDABLE & EDITABLE) ───────── */}
+            {/* ── TAB 3: BENCHMARKS MANAGER (EXPANDABLE, REMOVABLE & EDITABLE) ─ */}
             {activeTab === "benchmarks" && (
               <div className="space-y-6">
                 <div className="p-6 rounded-[var(--radius-card)] bg-[var(--card-bg)] border border-[var(--muted)]/15 space-y-4">
@@ -1050,14 +1082,109 @@ export default function LiveModelEditor({ initialModel, allModels = [] }: LiveMo
                         Verified Numeric Benchmarks & Custom Dimensions
                       </h3>
                       <p className="text-xs text-[var(--muted)]">
-                        Edit existing values, type custom categories/metrics freely, or add brand new custom columns.
+                        Click <span className="font-mono text-rose-400">✕</span> on any column header to remove/hide it, or customize visible columns below.
                       </p>
                     </div>
 
                     <div className="flex flex-wrap items-center gap-2">
+                      {/* Column Manager Dropdown / Toggle Button */}
+                      <div className="relative">
+                        <button
+                          onClick={() => setShowColManagerPopover(!showColManagerPopover)}
+                          className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-[var(--radius-control)] bg-[var(--bg)] border border-[var(--muted)]/20 hover:border-[var(--text)] text-[var(--text)] text-xs font-bold transition-all cursor-pointer shadow-xs"
+                        >
+                          <SlidersHorizontal size={13} className="text-[var(--accent)]" /> Customize Columns
+                        </button>
+
+                        {/* Column Manager Popover */}
+                        {showColManagerPopover && (
+                          <div className="absolute right-0 top-full mt-2 w-64 rounded-[var(--radius-card)] bg-[var(--card-bg)] border border-[var(--muted)]/20 shadow-2xl p-4 z-50 space-y-3 text-xs">
+                            <div className="flex justify-between items-center border-b border-[var(--muted)]/10 pb-2">
+                              <span className="font-bold text-[var(--text)]">Visible Columns</span>
+                              <button
+                                onClick={resetAllColumns}
+                                className="text-[10px] text-[var(--accent)] hover:underline cursor-pointer"
+                              >
+                                Reset All
+                              </button>
+                            </div>
+
+                            <div className="space-y-2">
+                              <label className="flex items-center gap-2 cursor-pointer text-[var(--text)]">
+                                <input
+                                  type="checkbox"
+                                  checked={visibleCols.metric}
+                                  onChange={() => toggleStandardCol("metric")}
+                                  className="rounded border-[var(--muted)]/30 text-[var(--accent)] focus:ring-0"
+                                />
+                                <span>Metric / Unit</span>
+                              </label>
+
+                              <label className="flex items-center gap-2 cursor-pointer text-[var(--text)]">
+                                <input
+                                  type="checkbox"
+                                  checked={visibleCols.category}
+                                  onChange={() => toggleStandardCol("category")}
+                                  className="rounded border-[var(--muted)]/30 text-[var(--accent)] focus:ring-0"
+                                />
+                                <span>Category</span>
+                              </label>
+
+                              <label className="flex items-center gap-2 cursor-pointer text-[var(--text)]">
+                                <input
+                                  type="checkbox"
+                                  checked={visibleCols.evaluator}
+                                  onChange={() => toggleStandardCol("evaluator")}
+                                  className="rounded border-[var(--muted)]/30 text-[var(--accent)] focus:ring-0"
+                                />
+                                <span>Evaluator / Source</span>
+                              </label>
+
+                              <label className="flex items-center gap-2 cursor-pointer text-[var(--text)]">
+                                <input
+                                  type="checkbox"
+                                  checked={visibleCols.citation}
+                                  onChange={() => toggleStandardCol("citation")}
+                                  className="rounded border-[var(--muted)]/30 text-[var(--accent)] focus:ring-0"
+                                />
+                                <span>Citation URL</span>
+                              </label>
+                            </div>
+
+                            {customBenchmarkCols.length > 0 && (
+                              <div className="border-t border-[var(--muted)]/10 pt-2 space-y-1.5">
+                                <span className="text-[10px] uppercase font-mono text-[var(--muted)] block">Custom Columns</span>
+                                {customBenchmarkCols.map((col) => (
+                                  <div key={col} className="flex justify-between items-center text-[var(--text)] py-0.5">
+                                    <span className="font-mono truncate">{col}</span>
+                                    <button
+                                      onClick={() => handleRemoveBenchmarkColumn(col)}
+                                      className="text-[var(--muted)] hover:text-rose-400 transition-colors p-0.5 cursor-pointer"
+                                      title={`Delete ${col}`}
+                                    >
+                                      <Trash2 size={12} />
+                                    </button>
+                                  </div>
+                                ))}
+                              </div>
+                            )}
+
+                            <button
+                              onClick={() => {
+                                setShowColManagerPopover(false);
+                                setShowAddColModal(true);
+                              }}
+                              className="w-full mt-2 py-1.5 rounded-[var(--radius-control)] bg-[var(--accent-soft)] text-[var(--accent)] font-bold text-center hover:bg-[var(--accent-soft)]/80 transition-colors cursor-pointer"
+                            >
+                              + Add New Column
+                            </button>
+                          </div>
+                        )}
+                      </div>
+
                       <button
                         onClick={() => setShowAddColModal(true)}
-                        className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-[var(--radius-control)] bg-[var(--bg)] border border-[var(--muted)]/20 hover:border-[var(--accent)] text-[var(--text)] text-xs font-bold transition-all cursor-pointer shadow-xs"
+                        className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-[var(--radius-control)] bg-[var(--bg)] border border-[var(--muted)]/20 hover:border-[var(--accent)] text-[var(--text)] text-xs font-bold transition-all cursor-pointer shadow-xs"
                       >
                         <Columns size={13} className="text-[var(--accent)]" /> + Add Column
                       </button>
@@ -1094,16 +1221,80 @@ export default function LiveModelEditor({ initialModel, allModels = [] }: LiveMo
 
                   {/* Benchmarks Table */}
                   <div className="overflow-x-auto pt-4">
-                    <table className="w-full text-left text-xs min-w-[700px]">
+                    <table className="w-full text-left text-xs min-w-[600px]">
                       <thead className="bg-[var(--bg)] border-b border-[var(--muted)]/10 text-[var(--muted)] uppercase font-mono font-bold">
                         <tr>
+                          {/* Required: Benchmark Name */}
                           <th className="p-3 min-w-[170px]">Benchmark Name</th>
+
+                          {/* Required: Score */}
                           <th className="p-3 min-w-[95px]">Score</th>
-                          <th className="p-3 min-w-[130px]">Metric / Unit</th>
-                          <th className="p-3 min-w-[140px]">Category (Editable)</th>
-                          <th className="p-3 min-w-[140px]">Evaluator / Source</th>
-                          <th className="p-3 min-w-[200px]">Citation URL (Source Link)</th>
-                          {/* Dynamic Custom Columns Headers */}
+
+                          {/* Optional: Metric / Unit */}
+                          {visibleCols.metric && (
+                            <th className="p-3 min-w-[130px]">
+                              <div className="flex items-center justify-between gap-1">
+                                <span>Metric / Unit</span>
+                                <button
+                                  onClick={() => toggleStandardCol("metric")}
+                                  className="text-[var(--muted)] hover:text-rose-400 p-0.5 transition-colors cursor-pointer"
+                                  title="Hide Metric column"
+                                >
+                                  <X size={12} />
+                                </button>
+                              </div>
+                            </th>
+                          )}
+
+                          {/* Optional: Category */}
+                          {visibleCols.category && (
+                            <th className="p-3 min-w-[140px]">
+                              <div className="flex items-center justify-between gap-1">
+                                <span>Category</span>
+                                <button
+                                  onClick={() => toggleStandardCol("category")}
+                                  className="text-[var(--muted)] hover:text-rose-400 p-0.5 transition-colors cursor-pointer"
+                                  title="Hide Category column"
+                                >
+                                  <X size={12} />
+                                </button>
+                              </div>
+                            </th>
+                          )}
+
+                          {/* Optional: Evaluator / Source */}
+                          {visibleCols.evaluator && (
+                            <th className="p-3 min-w-[140px]">
+                              <div className="flex items-center justify-between gap-1">
+                                <span>Evaluator / Source</span>
+                                <button
+                                  onClick={() => toggleStandardCol("evaluator")}
+                                  className="text-[var(--muted)] hover:text-rose-400 p-0.5 transition-colors cursor-pointer"
+                                  title="Hide Evaluator column"
+                                >
+                                  <X size={12} />
+                                </button>
+                              </div>
+                            </th>
+                          )}
+
+                          {/* Optional: Citation URL */}
+                          {visibleCols.citation && (
+                            <th className="p-3 min-w-[200px]">
+                              <div className="flex items-center justify-between gap-1">
+                                <span>Citation URL (Source Link)</span>
+                                <button
+                                  onClick={() => toggleStandardCol("citation")}
+                                  className="text-[var(--muted)] hover:text-rose-400 p-0.5 transition-colors cursor-pointer"
+                                  title="Hide Citation column"
+                                >
+                                  <X size={12} />
+                                </button>
+                              </div>
+                            </th>
+                          )}
+
+                          {/* Dynamic Custom Columns Headers with Remove Button */}
                           {customBenchmarkCols.map((col) => (
                             <th key={col} className="p-3 min-w-[140px] text-[var(--accent)] bg-[var(--accent-soft)]/10 border-l border-[var(--muted)]/15">
                               <div className="flex items-center justify-between gap-1">
@@ -1118,6 +1309,7 @@ export default function LiveModelEditor({ initialModel, allModels = [] }: LiveMo
                               </div>
                             </th>
                           ))}
+
                           <th className="p-3 w-14 text-right">Action</th>
                         </tr>
                       </thead>
@@ -1150,65 +1342,73 @@ export default function LiveModelEditor({ initialModel, allModels = [] }: LiveMo
                                 />
                               </td>
 
-                              {/* Metric / Unit (Editable Combobox with Presets) */}
-                              <td className="p-2">
-                                <input
-                                  list="metric-presets"
-                                  type="text"
-                                  value={b.subCategory || ""}
-                                  onChange={(e) => updateBenchmark(idx, { subCategory: e.target.value })}
-                                  placeholder="e.g. % Solved"
-                                  className={inputClass}
-                                />
-                              </td>
+                              {/* Metric / Unit */}
+                              {visibleCols.metric && (
+                                <td className="p-2">
+                                  <input
+                                    list="metric-presets"
+                                    type="text"
+                                    value={b.subCategory || ""}
+                                    onChange={(e) => updateBenchmark(idx, { subCategory: e.target.value })}
+                                    placeholder="e.g. % Solved"
+                                    className={inputClass}
+                                  />
+                                </td>
+                              )}
 
-                              {/* Category (Editable Combobox with Presets) */}
-                              <td className="p-2">
-                                <input
-                                  list="category-presets"
-                                  type="text"
-                                  value={b.category || ""}
-                                  onChange={(e) => updateBenchmark(idx, { category: e.target.value })}
-                                  placeholder="e.g. Reasoning"
-                                  className={inputClass}
-                                />
-                              </td>
+                              {/* Category */}
+                              {visibleCols.category && (
+                                <td className="p-2">
+                                  <input
+                                    list="category-presets"
+                                    type="text"
+                                    value={b.category || ""}
+                                    onChange={(e) => updateBenchmark(idx, { category: e.target.value })}
+                                    placeholder="e.g. Reasoning"
+                                    className={inputClass}
+                                  />
+                                </td>
+                              )}
 
-                              {/* Evaluator (Editable Combobox with Presets) */}
-                              <td className="p-2">
-                                <input
-                                  list="evaluator-presets"
-                                  type="text"
-                                  value={b.sourceType || "independent-eval"}
-                                  onChange={(e) => updateBenchmark(idx, { sourceType: e.target.value as Benchmark["sourceType"] })}
-                                  placeholder="Evaluator Type"
-                                  className={inputClass}
-                                />
-                              </td>
+                              {/* Evaluator */}
+                              {visibleCols.evaluator && (
+                                <td className="p-2">
+                                  <input
+                                    list="evaluator-presets"
+                                    type="text"
+                                    value={b.sourceType || "independent-eval"}
+                                    onChange={(e) => updateBenchmark(idx, { sourceType: e.target.value as Benchmark["sourceType"] })}
+                                    placeholder="Evaluator Type"
+                                    className={inputClass}
+                                  />
+                                </td>
+                              )}
 
                               {/* Citation Link */}
-                              <td className="p-2">
-                                <div className="flex items-center gap-2">
-                                  <input
-                                    type="text"
-                                    value={citationVal}
-                                    onChange={(e) => updateBenchmark(idx, { citation: e.target.value, source: e.target.value } as Partial<Benchmark>)}
-                                    placeholder="https://arxiv.org/..."
-                                    className={`${inputClass} font-mono text-[12px] ${!isUrlValid && citationVal ? "border-amber-500/50" : ""}`}
-                                  />
-                                  {isUrlValid && (
-                                    <a
-                                      href={citationVal}
-                                      target="_blank"
-                                      rel="noreferrer"
-                                      className="p-2 text-[var(--accent)] hover:text-white transition-colors"
-                                      title="Open citation source"
-                                    >
-                                      <ExternalLink size={14} />
-                                    </a>
-                                  )}
-                                </div>
-                              </td>
+                              {visibleCols.citation && (
+                                <td className="p-2">
+                                  <div className="flex items-center gap-2">
+                                    <input
+                                      type="text"
+                                      value={citationVal}
+                                      onChange={(e) => updateBenchmark(idx, { citation: e.target.value, source: e.target.value } as Partial<Benchmark>)}
+                                      placeholder="https://arxiv.org/..."
+                                      className={`${inputClass} font-mono text-[12px] ${!isUrlValid && citationVal ? "border-amber-500/50" : ""}`}
+                                    />
+                                    {isUrlValid && (
+                                      <a
+                                        href={citationVal}
+                                        target="_blank"
+                                        rel="noreferrer"
+                                        className="p-2 text-[var(--accent)] hover:text-white transition-colors"
+                                        title="Open citation source"
+                                      >
+                                        <ExternalLink size={14} />
+                                      </a>
+                                    )}
+                                  </div>
+                                </td>
+                              )}
 
                               {/* Dynamic Custom Column Cells */}
                               {customBenchmarkCols.map((col) => (
@@ -1611,7 +1811,7 @@ export default function LiveModelEditor({ initialModel, allModels = [] }: LiveMo
                           <tr>
                             <td className="p-3.5 font-bold text-[var(--text)]">Parameters</td>
                             {comparisonModels.map((m) => {
-                              const p = m.parameters ? (typeof m.parameters === "object" ? Object.values(m.parameters).join(" / ") : m.parameters) : "—";
+                              const p = m.parameters ? (typeof m.parameters === "object" && m.parameters !== null ? Object.values(m.parameters).join(" / ") : String(m.parameters)) : "—";
                               return (
                                 <td key={m.id} className="p-3.5 font-mono tabular-nums text-[var(--text)] font-bold">
                                   {p}
@@ -1622,7 +1822,7 @@ export default function LiveModelEditor({ initialModel, allModels = [] }: LiveMo
                           <tr>
                             <td className="p-3.5 font-bold text-[var(--text)]">Context Window</td>
                             {comparisonModels.map((m) => {
-                              const cw = m.contextWindow ? (typeof m.contextWindow === "object" ? (model.contextWindow as { native?: number }).native : m.contextWindow) : "—";
+                              const cw = m.contextWindow ? (typeof m.contextWindow === "object" && m.contextWindow !== null ? ((m.contextWindow as { native?: number }).native ?? JSON.stringify(m.contextWindow)) : String(m.contextWindow)) : "—";
                               return (
                                 <td key={m.id} className="p-3.5 font-mono tabular-nums text-[var(--text)] font-bold">
                                   {cw}
