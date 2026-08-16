@@ -45,6 +45,8 @@ const MINOR_EVENT_PENALTIES = [
   /\b(?:opinion:|editorial:|letter to editor|roundup)\b/i,
 ];
 
+const { scoreDeepDiveEligibility } = require("./deep-dive-gate");
+
 function storyWorthiness(candidate, recentTitles = []) {
   if (!candidate || typeof candidate !== "object") return 0;
 
@@ -91,13 +93,25 @@ function storyWorthiness(candidate, recentTitles = []) {
   }
 
   const finalScore = Math.max(0, Math.min(10, score));
+  const isWorthLongform = finalScore >= 6;
+
+  // Evaluate Deep-Dive Breakthrough Eligibility for stories reaching longform threshold
+  let deepDive = { eligible: false, score: 0, matchedSignals: [] };
+  if (isWorthLongform) {
+    deepDive = scoreDeepDiveEligibility(candidate, finalScore);
+  }
 
   return {
     score: finalScore,
-    isWorthLongform: finalScore >= 6,
+    isWorthLongform,
+    isDeepDive: deepDive.eligible,
+    deepDiveScore: deepDive.score,
+    deepDiveEligible: deepDive.eligible,
+    breakthroughSignals: deepDive.matchedSignals,
     reasons: [
       TIER_1_AUTHORITIES.some((auth) => lab.includes(auth)) ? "Tier-1 source authority" : null,
       noveltyMatches > 0 ? `Novelty signals (${noveltyMatches})` : null,
+      deepDive.eligible ? `Deep-dive breakthrough eligible (${deepDive.matchedSignals.join(", ")})` : null,
       finalScore < 6 ? "Standard brief threshold" : "Eligible for multi-source research & longform",
     ].filter(Boolean),
   };

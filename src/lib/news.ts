@@ -58,6 +58,12 @@ function mapDbRowToArticle(row: any): any {
     qualityScore: row.quality_score,
     qualityReasons: row.quality_reasons || [],
     qualityCheckedAt: row.quality_checked_at,
+    deepDiveScore: row.deep_dive_score,
+    readTimeMinutes: row.read_time_minutes,
+    hasDiagram: row.has_diagram || false,
+    mermaidDiagrams: row.mermaid_diagrams || [],
+    curatorReviewed: row.curator_reviewed || false,
+    breakthroughSignals: row.breakthrough_signals || [],
   };
 }
 

@@ -277,8 +277,127 @@ async function generateLongformArticle(story, researchDossier) {
   return articlePayload;
 }
 
+const { buildExplainerPrompt, validateMermaidBlocks } = require("./generate-explainer-prompt");
+
+async function synthesizeCustomPrompt(prompt) {
+  // 1. Try Gemini
+  if (process.env.GEMINI_API_KEY) {
+    try {
+      return await callGeminiSynthesis(prompt);
+    } catch (e) {
+      console.warn(`    ⚠️ Gemini synthesis failed (${e.message}). Trying Groq...`);
+    }
+  }
+
+  // 2. Try Groq
+  if (process.env.GROQ_API_KEY) {
+    try {
+      return await callGroqSynthesis(prompt);
+    } catch (e) {
+      console.warn(`    ⚠️ Groq synthesis failed (${e.message}). Trying OpenRouter...`);
+    }
+  }
+
+  // 3. Try OpenRouter
+  if (process.env.OPENROUTER_API_KEY) {
+    try {
+      return await callOpenRouterSynthesis(prompt);
+    } catch (e) {
+      console.warn(`    ⚠️ OpenRouter synthesis failed (${e.message}).`);
+    }
+  }
+
+  throw new Error("No synthesis LLM providers succeeded.");
+}
+
+async function generateDeepDiveArticle(story, researchDossier) {
+  const sources = researchDossier.sources || [];
+  if (sources.length < 2) {
+    throw new Error(`Cannot generate deep-dive explainer with < 2 sources (found ${sources.length})`);
+  }
+
+  console.log(`\n🧠 [Deep-Dive Explainer Synthesis] Generating 6-part explainer for: "${story.title}"...`);
+
+  const dossier = {
+    title: story.title,
+    breakthroughSignals: story.breakthroughSignals || researchDossier.breakthroughSignals || [],
+    sources: sources.map((s) => ({
+      domain: s.domain,
+      classification: s.sourceType === "official_primary" ? "Official Announcement / Paper" : "Independent Technical Analysis",
+      text: (s.fetchedText || "").slice(0, 3000),
+    })),
+  };
+
+  const { system, user } = buildExplainerPrompt(dossier);
+  const combinedPrompt = `${system}\n\n${user}`;
+
+  // 1. First synthesis pass
+  let body = await synthesizeCustomPrompt(combinedPrompt);
+
+  // 2. Structural boilerplate check on mental model opener
+  const mentalModelMatch = body.match(/##\s*The Intuitive Mental Model[\s\S]*?(?=##|$)/i);
+  const mentalModelText = mentalModelMatch ? mentalModelMatch[0] : "";
+  let isBoilerplate = isStructuralBoilerplate(mentalModelText);
+
+  if (isBoilerplate) {
+    console.warn(`    ⚠️ Repetitive phrasing detected in Mental Model opener. Retrying with analogy directive...`);
+    const retryPrompt = `${combinedPrompt}\n\nCRITICAL RETRY: Open '## The Intuitive Mental Model' immediately with a fresh, vivid real-world analogy (e.g. comparing tensor operations to an airport routing hub or kitchen assembly line). Avoid generic AI landscape filler.`;
+    body = await synthesizeCustomPrompt(retryPrompt);
+  }
+
+  // 3. Validate Mermaid Diagram
+  const mermaidVal = validateMermaidBlocks(body);
+  if (mermaidVal.valid) {
+    console.log(`    📊 Validated ${mermaidVal.diagrams.length} Mermaid architectural diagram(s).`);
+  } else {
+    console.warn(`    ⚠️ No structurally valid Mermaid diagram detected in output (continuing with has_diagram: false).`);
+  }
+
+  // 4. Append formal sources & citations section
+  const fullBody = body.trim() + formatSourcesSection(sources);
+  const wordCount = fullBody.split(/\s+/).length;
+  const readTimeMinutes = Math.max(5, Math.ceil(wordCount / 220));
+
+  console.log(`    ✅ Successfully generated Deep-Dive Explainer (${wordCount} words, ~${readTimeMinutes} min read).`);
+
+  const articlePayload = {
+    slug: story.slug,
+    title: story.title,
+    category: "short-news",
+    article_type: "deep-dive",
+    publish_date: story.publish_date || new Date().toISOString().split("T")[0],
+    author: "Modelverse Architecture Team",
+    read_time: `${readTimeMinutes} min read`,
+    excerpt: story.description ? story.description.slice(0, 200) + "..." : body.slice(0, 200) + "...",
+    body: fullBody,
+    cover_image: story.cover_image || "/images/news/news_featured.jpg",
+    status: "published",
+    confidence_level: "confirmed",
+    sources: sources.map((s) => ({
+      url: s.url,
+      domain: s.domain,
+      title: s.title,
+      sourceType: s.sourceType,
+    })),
+    external_sources: sources.map((s) => s.url),
+    related_models: story.related_models || [],
+    tags: ["deep-dive", "architecture-explainer", "mechanisms", ...(story.tags || [])],
+    deep_dive_score: story.deepDiveScore || 9,
+    read_time_minutes: readTimeMinutes,
+    has_diagram: mermaidVal.valid,
+    mermaid_diagrams: mermaidVal.diagrams,
+    curator_reviewed: false,
+    breakthrough_signals: story.breakthroughSignals || [],
+  };
+
+  return articlePayload;
+}
+
 module.exports = {
   generateLongformArticle,
+  generateDeepDiveArticle,
+  synthesizeCustomPrompt,
+  synthesizeArticleProse,
   buildSynthesisPrompt,
   formatSourcesSection,
 };
