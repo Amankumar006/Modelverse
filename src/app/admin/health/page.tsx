@@ -13,11 +13,20 @@ export default async function DataHealthPage() {
     return <div>Error loading models for health check.</div>;
   }
 
-  // Calculate missing data categories
-  const missingLogos = models.filter(m => !m.logo || m.logo.trim() === '');
-  const missingParams = models.filter(m => !m.parameters || m.parameters.trim() === '');
-  const missingContext = models.filter(m => !m.context_window || m.context_window.trim() === '');
-  const missingDesc = models.filter(m => !m.description || m.description.length < 50);
+  const isValueEmpty = (val: unknown) => {
+    if (val === null || val === undefined) return true;
+    if (typeof val === 'string') return val.trim() === '';
+    if (typeof val === 'number') return isNaN(val);
+    if (Array.isArray(val)) return val.length === 0;
+    if (typeof val === 'object') return Object.keys(val).length === 0;
+    return false;
+  };
+
+  // Calculate missing data categories safely across strings, numbers, and JSON objects
+  const missingLogos = models.filter(m => isValueEmpty(m.logo));
+  const missingParams = models.filter(m => isValueEmpty(m.parameters));
+  const missingContext = models.filter(m => isValueEmpty(m.context_window));
+  const missingDesc = models.filter(m => isValueEmpty(m.description) || (typeof m.description === 'string' && m.description.length < 50));
   const missingDate = models.filter(m => !m.release_date);
 
   const sections = [
