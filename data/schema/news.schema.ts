@@ -1,12 +1,14 @@
 import { z } from "zod";
 
 export const NewsCategory = z.enum(["weekly-news", "short-news", "model-review", "other"]);
+export const NewsArticleType = z.enum(["brief", "longform"]);
 
 export const NewsArticleSchema = z.object({
   id: z.string(),
   slug: z.string(),
   title: z.string(),
   category: NewsCategory,
+  articleType: NewsArticleType.optional(),
   publishDate: z.string().regex(/^\d{4}-\d{2}-\d{2}$/, "Must be YYYY-MM-DD"), // ISO Date format
   updatedDate: z.string().regex(/^\d{4}-\d{2}-\d{2}$/, "Must be YYYY-MM-DD").optional(),
   author: z.string(),

@@ -4,6 +4,9 @@ const https = require("https");
 const supabase = require("../src/lib/supabase");
 const { scoreNewsArticle } = require("./quality/score-content");
 const { findNearDuplicates, loadFingerprintIndex, appendFingerprint } = require("./quality/detect-duplicates");
+const { storyWorthiness } = require("./news/story-worthiness");
+const { researchStory } = require("./news/research-story");
+const { generateLongformArticle } = require("./news/generate-longform-article");
 
 const NEWS_DIR = path.join(process.cwd(), "data", "news");
 const INGESTION_DIR = path.join(process.cwd(), "data", "ingestion");
@@ -26,20 +29,6 @@ function writeQualityReport(pipeline, counts) {
     quarantined: counts.quarantined,
   };
   fs.writeFileSync(path.join(process.cwd(), "data", "quality-report.json"), `${JSON.stringify(report, null, 2)}\n`);
-}
-
-function storyWorthiness(candidate, recentTitles = []) {
-  const title = String(candidate?.title || "").toLowerCase();
-  const lab = String(candidate?.lab || "").toLowerCase();
-  let score = 3;
-  const authority = ["anthropic", "openai", "hugging face", "google deepmind", "nvidia", "mit technology review"];
-  if (authority.some((name) => lab.includes(name))) score += 2;
-  if (/\b(model|release|launch|open.source|open.weight|benchmark|research|api|agent|reasoning|security|framework)\b/.test(title)) score += 3;
-  if (/\b(gpt|claude|gemini|llama|mistral|qwen|kimi|deepseek)\b/.test(title)) score += 1;
-  if (/\b(minor|patch|changelog|maintenance|bug fix|version \d+\.\d+\.\d+|v\d+\.\d+\.\d+)\b/.test(title)) score -= 4;
-  const normalizedTitle = title.replace(/\W+/g, " ").trim();
-  if (recentTitles.some((existing) => String(existing).toLowerCase().replace(/\W+/g, " ").trim() === normalizedTitle)) score -= 3;
-  return Math.max(0, Math.min(10, score));
 }
 
 // ─── Poster images rotation by lab/source ───────────────────────────
@@ -756,8 +745,10 @@ async function extractFullArticleBody(url, fallbackDesc, lab) {
       ...createdNews.map((item) => item.title),
       ...Object.values(fingerprintIndex.entries).map((entry) => entry?.title).filter(Boolean),
     ];
-    const worthiness = storyWorthiness(candidate, recentTitles);
-    if (worthiness < 6) {
+    const worthinessResult = storyWorthiness(candidate, recentTitles);
+    const worthiness = typeof worthinessResult === "object" ? worthinessResult.score : worthinessResult;
+
+    if (worthiness < 4) {
       console.log(`  ⏭️  Skipping (Low story-worthiness ${worthiness}/10): ${candidate.title.slice(0, 60)}`);
       existingSlugs.add(newsSlug);
       continue;
@@ -775,43 +766,73 @@ async function extractFullArticleBody(url, fallbackDesc, lab) {
       coverImage = getPosterImage(candidate.lab, posterIndex);
     }
 
-    // Relevance Scoring Phase
     const rawBody = await extractFullArticleBody(candidate.link, candidate.description, candidate.lab);
-    const relevanceScore = await scoreArticleRelevance(candidate.title, rawBody);
-    
-    if (relevanceScore < 6) {
-      console.log(`  ⏭️  Skipping (Low Score ${relevanceScore}/10): ${candidate.title.slice(0, 40)}...`);
-      existingSlugs.add(newsSlug); // prevent reprocessing next run
-      continue;
-    } else {
-      console.log(`  ⭐  Scored ${relevanceScore}/10: ${candidate.title.slice(0, 40)}...`);
+
+    let newsJson = null;
+    let sourceTextsForScoring = [rawBody];
+
+    // Branch A: Longform Multi-Source Synthesis (Worthiness >= 6)
+    if (worthiness >= 6) {
+      try {
+        const researchDossier = await researchStory({ ...candidate, rawBody, slug: newsSlug }, candidates);
+        if (researchDossier.eligibleForLongform) {
+          console.log(`  🔬 Attempting multi-source longform synthesis across ${researchDossier.sources.length} sources...`);
+          newsJson = await generateLongformArticle(
+            {
+              ...candidate,
+              slug: newsSlug,
+              publish_date: articleDate,
+              cover_image: coverImage,
+              related_models: detectRelatedModelSlugs(candidate.title, rawBody, candidate.lab),
+            },
+            researchDossier
+          );
+          sourceTextsForScoring = researchDossier.sources.map((s) => s.fetchedText).filter(Boolean);
+        } else {
+          console.log(`  ℹ️ Research found ${researchDossier.distinctDomainCount} source(s). Falling back to single-source brief...`);
+        }
+      } catch (err) {
+        console.warn(`  ⚠️ Longform generation failed (${err.message}). Falling back to brief...`);
+      }
     }
 
-    const rewritten = await rewriteArticle(candidate.title, rawBody, candidate.lab, candidate.link);
-    const bodyContent = await verifyAndRefineArticle(candidate.title, rawBody, rewritten);
-    
-    const wordCount = bodyContent.split(/\s+/).length;
-    const readTimeMinutes = Math.max(2, Math.ceil(wordCount / 200));
+    // Branch B: Single-Source Short Brief Path (Fallback or worthiness < 6)
+    if (!newsJson) {
+      const relevanceScore = await scoreArticleRelevance(candidate.title, rawBody);
+      if (relevanceScore < 5) {
+        console.log(`  ⏭️  Skipping (Low Relevance ${relevanceScore}/10): ${candidate.title.slice(0, 40)}...`);
+        existingSlugs.add(newsSlug);
+        continue;
+      }
 
-    const newsJson = {
-      slug: newsSlug,
-      title: candidate.title,
-      category: "short-news",
-      publish_date: articleDate,
-      author: "Modelverse Editorial",
-      read_time: `${readTimeMinutes} min read`,
-      excerpt: candidate.description.slice(0, 180) + (candidate.description.length > 180 ? "..." : ""),
-      body: bodyContent,
-      cover_image: coverImage,
-      status: "published",
-      confidence_level: "confirmed",
-      external_sources: [candidate.link],
-      sources: [candidate.link],
-      related_models: detectRelatedModelSlugs(candidate.title, bodyContent, candidate.lab),
-      tags: ["ai-news", "breaking", slugify(candidate.lab)]
-    };
+      const rewritten = await rewriteArticle(candidate.title, rawBody, candidate.lab, candidate.link);
+      const bodyContent = await verifyAndRefineArticle(candidate.title, rawBody, rewritten);
+      
+      const wordCount = bodyContent.split(/\s+/).length;
+      const readTimeMinutes = Math.max(2, Math.ceil(wordCount / 200));
 
-    const gate = scoreNewsArticle(newsJson, [rawBody]);
+      newsJson = {
+        slug: newsSlug,
+        title: candidate.title,
+        category: "short-news",
+        article_type: "brief",
+        publish_date: articleDate,
+        author: "Modelverse Editorial",
+        read_time: `${readTimeMinutes} min read`,
+        excerpt: candidate.description.slice(0, 180) + (candidate.description.length > 180 ? "..." : ""),
+        body: bodyContent,
+        cover_image: coverImage,
+        status: "published",
+        confidence_level: "confirmed",
+        external_sources: [candidate.link],
+        sources: [candidate.link],
+        related_models: detectRelatedModelSlugs(candidate.title, bodyContent, candidate.lab),
+        tags: ["ai-news", "brief", slugify(candidate.lab)]
+      };
+      sourceTextsForScoring = [rawBody];
+    }
+
+    const gate = scoreNewsArticle(newsJson, sourceTextsForScoring);
     const duplicate = findNearDuplicates(newsJson, fingerprintIndex.entries);
     if (duplicate) {
       gate.status = "unlisted";
@@ -847,7 +868,7 @@ async function extractFullArticleBody(url, fallbackDesc, lab) {
     existingSlugs.add(newsSlug);
     createdNews.push(newsJson);
     posterIndex++;
-    console.log(`  ✅ Published (${readTimeMinutes} min read): ${candidate.title.slice(0, 60)}`);
+    console.log(`  ✅ Published [${newsJson.article_type || "brief"}] (${newsJson.read_time}): ${candidate.title.slice(0, 60)} -> Score: ${gate.score}/100 (${gate.status})`);
     } catch (error) {
       const failedSlug = slugify(candidate?.title || `malformed-news-${Date.now()}`);
       const failedItem = {

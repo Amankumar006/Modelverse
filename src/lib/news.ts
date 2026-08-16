@@ -40,6 +40,7 @@ function mapDbRowToArticle(row: any): any {
     slug: row.slug,
     title: row.title,
     category: row.category as NewsCategoryType,
+    articleType: row.article_type || (row.category === "short-news" && (row.read_time?.includes("4") || row.read_time?.includes("5") || row.read_time?.includes("6")) ? "longform" : "brief"),
     publishDate: row.publish_date,
     updatedDate: row.updated_at,
     author: row.author,

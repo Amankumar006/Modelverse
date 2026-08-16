@@ -293,34 +293,102 @@ function scoreModelPage(model) {
 
 // ─── Scorer: News Articles ─────────────────────────────────────────────────
 
+const OFFICIAL_PRIMARY_DOMAINS = new Set([
+  "anthropic.com", "openai.com", "deepmind.google", "google.com",
+  "huggingface.co", "blogs.nvidia.com", "nvidia.com", "meta.com",
+  "ai.meta.com", "mistral.ai", "x.ai", "deepseek.com", "moonshot.cn", "qwenlm.github.io"
+]);
+
 function scoreNewsArticle(article, sourceTexts) {
   return safeResult(() => {
     const reasons = [];
     const body = text(article?.body);
+    const wordCount = words(body).length;
+    const isLongform = article?.article_type === "longform" || article?.articleType === "longform";
     let score = 0;
-    const sources = Array.isArray(sourceTexts) ? sourceTexts.filter((entry) => typeof entry === "string" && entry.trim()) : [];
+
+    // 1. Originality check against each individual source text
+    const sources = Array.isArray(sourceTexts)
+      ? sourceTexts.filter((entry) => typeof entry === "string" && entry.trim())
+      : [];
     const bodyShingles = shingleSet(body);
-    const maxSimilarity = sources.reduce((max, sourceText) => Math.max(max, jaccardSimilarity(bodyShingles, shingleSet(sourceText))), 0);
-    if (sources.length === 0) reasons.push("source text unavailable for originality check");
-    else if (body && maxSimilarity <= 0.55) score += 35;
-    else reasons.push("too close to source");
+    
+    let maxSimilarity = 0;
+    let closestSourceIdx = -1;
+    sources.forEach((sourceText, idx) => {
+      const sim = jaccardSimilarity(bodyShingles, shingleSet(sourceText));
+      if (sim > maxSimilarity) {
+        maxSimilarity = sim;
+        closestSourceIdx = idx;
+      }
+    });
 
-    if (hasOriginalAnalysis(body)) score += 25;
-    else reasons.push("no original analysis section");
+    const maxAllowedSimilarity = isLongform ? 0.50 : 0.55;
 
+    if (sources.length === 0) {
+      reasons.push("source text unavailable for originality check");
+    } else if (body && maxSimilarity <= maxAllowedSimilarity) {
+      score += 35;
+    } else {
+      reasons.push(`too close to source ${closestSourceIdx + 1} (${(maxSimilarity * 100).toFixed(1)}% similarity)`);
+    }
+
+    // 2. Analysis section check
+    const hasAnalysis = hasOriginalAnalysis(body);
+    if (hasAnalysis) {
+      score += 25;
+    } else {
+      reasons.push("no original analysis section");
+    }
+
+    // 3. Source citations & domain diversity
     const urls = toSourceUrls(article);
     const validUrls = urls.filter(validHttpUrl);
-    if (validUrls.length) score += 15;
-    else reasons.push("missing valid source attribution");
+    const domains = sourceDomains(validUrls);
 
-    if (sourceDomains(validUrls).size > 1) score += 15;
-    else reasons.push("not a multi-source synthesis");
+    if (validUrls.length) {
+      score += 15;
+    } else {
+      reasons.push("missing valid source attribution");
+    }
 
-    if (words(body).length >= 120) score += 10;
-    else reasons.push("below editorial length floor");
+    if (domains.size > 1) {
+      score += 15;
+      // Bonus (+10): Mix of official primary + independent coverage
+      const hasOfficial = Array.from(domains).some((d) => OFFICIAL_PRIMARY_DOMAINS.has(d));
+      const hasIndependent = Array.from(domains).some((d) => !OFFICIAL_PRIMARY_DOMAINS.has(d));
+      if (hasOfficial && hasIndependent) {
+        score += 10;
+      }
+    } else {
+      reasons.push("not a multi-source synthesis");
+    }
+
+    // 4. Length floor check
+    const minWords = isLongform ? 800 : 120;
+    if (wordCount >= minWords) {
+      score += 10;
+    } else {
+      reasons.push(`below editorial length floor (${wordCount}/${minWords} words)`);
+    }
+
+    // 5. Hard indexing gates for longform
+    let isIndexed = score >= 55 && hasAnalysis;
+    if (isLongform) {
+      if (domains.size < 2) {
+        isIndexed = false;
+        reasons.push("longform synthesis requires >= 2 distinct source domains");
+      }
+      if (wordCount < 800) {
+        isIndexed = false;
+      }
+      if (maxSimilarity > maxAllowedSimilarity) {
+        isIndexed = false;
+      }
+    }
 
     score = Math.round(Math.max(0, Math.min(100, score)));
-    return { score, status: score >= 55 ? "indexed" : "unlisted", reasons };
+    return { score, status: isIndexed ? "indexed" : "unlisted", reasons };
   }, "unlisted");
 }
 
