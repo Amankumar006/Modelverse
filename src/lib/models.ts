@@ -20,6 +20,12 @@ export interface ModelIndex {
   verified?: boolean;
   verificationStatus?: string;
   qualityStatus?: "indexed" | "thin";
+  description?: string;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  parameters?: string | Record<string, any>;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  contextWindow?: string | Record<string, any>;
+  primaryTask?: string;
 }
 
 export interface Benchmark {
@@ -112,7 +118,7 @@ const supabase = createClient(
         return fetch(url, {
           ...options,
           next: {
-            revalidate: 0,
+            revalidate: 60,
             tags: ['models']
           }
         });
@@ -204,6 +210,10 @@ function mapRowToModelIndex(row: any): ModelIndex {
     verified: row.verified,
     verificationStatus: row.verification_status,
     qualityStatus: row.quality_status,
+    description: row.description || row.metadata?.description || "",
+    parameters: row.parameters || row.metadata?.parameters || "",
+    contextWindow: row.context_window || row.metadata?.context_window || "",
+    primaryTask: row.primary_task || row.metadata?.primary_task || "",
   };
 }
 
@@ -215,7 +225,7 @@ function mapRowToModelIndex(row: any): ModelIndex {
 export async function getAllModels(): Promise<ModelIndex[]> {
   const { data } = await supabase
     .from('models')
-    .select('id, name, slug, developer, release_date, type, status, vendor_api_status, featured, boost, family, tier, institution, verified, verification_status, quality_status')
+    .select('id, name, slug, developer, release_date, type, status, vendor_api_status, featured, boost, family, tier, institution, verified, verification_status, quality_status, description, parameters, context_window, primary_task')
     .order('release_date', { ascending: false });
   return (data || []).map(mapRowToModelIndex);
 }
@@ -240,6 +250,41 @@ export async function getModelBySlug(slug: string): Promise<ModelEntry | null> {
     .single();
   if (!data) return null;
   return mapRowToModelEntry(data);
+}
+
+/** Read models belonging to the same family (lightweight index projection). */
+export async function getFamilyModels(family: string, excludeId?: string): Promise<ModelIndex[]> {
+  let query = supabase
+    .from('models')
+    .select('id, name, slug, developer, release_date, type, status, vendor_api_status, featured, boost, family, tier, institution, verified, verification_status, quality_status, description, parameters, context_window, primary_task')
+    .eq('family', family)
+    .order('release_date', { ascending: false })
+    .limit(8);
+
+  if (excludeId) {
+    query = query.neq('id', excludeId);
+  }
+
+  const { data } = await query;
+  return (data || []).map(mapRowToModelIndex);
+}
+
+/** Read related models sharing the same primary task (lightweight index projection). */
+export async function getRelatedModels(primaryTask: string, excludeId?: string): Promise<ModelIndex[]> {
+  let query = supabase
+    .from('models')
+    .select('id, name, slug, developer, release_date, type, status, vendor_api_status, featured, boost, family, tier, institution, verified, verification_status, quality_status, description, parameters, context_window, primary_task')
+    .eq('primary_task', primaryTask)
+    .eq('quality_status', 'indexed')
+    .order('release_date', { ascending: false })
+    .limit(4);
+
+  if (excludeId) {
+    query = query.neq('id', excludeId);
+  }
+
+  const { data } = await query;
+  return (data || []).map(mapRowToModelIndex);
 }
 
 /** Get all unique developers from the models. */

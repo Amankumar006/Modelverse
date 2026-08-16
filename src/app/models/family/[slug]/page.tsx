@@ -11,7 +11,7 @@ import Navbar from "@/components/layout/Navbar";
 import ClientBackButton from "@/components/ui/ClientBackButton";
 import { Sparkles, ArrowLeft, ArrowRight } from "lucide-react";
 
-export const dynamic = "force-static";
+export const revalidate = 60;
 
 export async function generateStaticParams() {
   const models = await getAllModelEntries();

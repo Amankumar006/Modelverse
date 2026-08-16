@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
-import { type ModelEntry } from "@/lib/models";
+import { type ModelEntry, type ModelIndex } from "@/lib/models";
 import ModelDetailTabs from "./ModelDetailTabs";
 import Navbar from "@/components/layout/Navbar";
 import MarkdownRenderer from "@/components/ui/MarkdownRenderer";
@@ -11,16 +11,16 @@ import { Search, ChevronDown, Copy, Check, Shield } from "lucide-react";
 interface ModelDocsLayoutProps {
   model: ModelEntry;
   markdownContent: string | null;
-  allModels: ModelEntry[];
-  familyMembers: ModelEntry[];
-  relatedModels: ModelEntry[];
+  allModels?: (ModelIndex | ModelEntry)[];
+  familyMembers: (ModelIndex | ModelEntry)[];
+  relatedModels: (ModelIndex | ModelEntry)[];
 }
 
 export default function ModelDocsLayout({
   model,
   markdownContent,
-  allModels,
   familyMembers,
+  relatedModels = [],
 }: ModelDocsLayoutProps) {
   const [copied, setCopied] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
@@ -35,7 +35,7 @@ export default function ModelDocsLayout({
 
   const comparisonModels = [
     model,
-    ...allModels.filter((m) => m.id !== model.id && m.verified && m.primaryTask === model.primaryTask).slice(0, 3),
+    ...(relatedModels || []).slice(0, 3),
   ];
 
   const renderLeftNav = () => (

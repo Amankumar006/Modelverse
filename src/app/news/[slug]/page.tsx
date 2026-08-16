@@ -4,7 +4,7 @@ import Image from "@/components/ui/FallbackImage";
 import Navbar from "@/components/layout/Navbar";
 import JsonLd from "@/components/JsonLd";
 import { getArticleBySlug, getAllArticles, getCategoryLabel } from "@/lib/news";
-import { getModelBySlug, getAllModelEntries, SITE_URL } from "@/lib/models";
+import { SITE_URL } from "@/lib/models";
 import { Clock, ArrowLeft, Tag, ArrowRight } from "lucide-react";
 import { notFound } from "next/navigation";
 import ConfidenceBadge from "@/components/news/ConfidenceBadge";
@@ -12,6 +12,8 @@ import BenchmarkTabs from "@/components/news/BenchmarkTabs";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import CodeBlock from "@/components/ui/CodeBlock";
+
+export const revalidate = 60;
 
 
 import ReadingProgressBar from "@/components/news/ReadingProgressBar";
@@ -89,32 +91,6 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
   const relatedArticles = allArticles
     .filter((a) => a.slug !== article.slug)
     .slice(0, 3);
-
-  let relatedModelsData = (await Promise.all(
-    (article.relatedModels || []).map(async (slug) => await getModelBySlug(slug))
-  )).filter((model): model is NonNullable<typeof model> => !!model);
-
-  if (relatedModelsData.length < 2) {
-    const allModels = await getAllModelEntries();
-    const textToMatch = `${article.title} ${article.body}`.toLowerCase();
-    const existingSlugs = new Set(relatedModelsData.map((m) => m.slug));
-
-    const matched = allModels.filter((m) => {
-      if (existingSlugs.has(m.slug)) return false;
-      if (m.qualityStatus && m.qualityStatus !== "indexed") return false;
-      const nameLower = m.name.toLowerCase();
-      if (nameLower.length >= 3 && textToMatch.includes(nameLower)) return true;
-      if (m.family && m.family.length >= 3 && textToMatch.includes(m.family.toLowerCase())) return true;
-      return false;
-    });
-
-    const combined = [...relatedModelsData, ...matched];
-    if (combined.length < 2) {
-      const featuredFallback = allModels.filter((m) => m.qualityStatus === "indexed" && !existingSlugs.has(m.slug));
-      combined.push(...featuredFallback);
-    }
-    relatedModelsData = combined.slice(0, 3);
-  }
 
   const isDeepDive = article.articleType === "deep-dive";
   const isLongform = isDeepDive || article.articleType === "longform";

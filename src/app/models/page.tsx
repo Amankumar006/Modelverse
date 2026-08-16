@@ -4,6 +4,8 @@ import { getAllModelEntries, getAllDevelopers, SITE_URL } from "@/lib/models";
 import ModelCatalog from "@/components/models/ModelCatalog";
 import Navbar from "@/components/layout/Navbar";
 
+export const revalidate = 60;
+
 interface PageProps {
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 }
