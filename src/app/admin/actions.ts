@@ -258,6 +258,59 @@ export async function approveModels(slugs: string[]) {
   return { success: true };
 }
 
+export async function overrideVerification(slug: string, reason: string) {
+  const supabase = await createClient();
+
+  const { data: { user }, error: authError } = await supabase.auth.getUser();
+  if (authError || !user) {
+    throw new Error('Authentication required');
+  }
+
+  if (!reason || reason.trim().length < 15) {
+    throw new Error('Override requires a detailed reason explaining why automated verification was bypassed (min 15 chars).');
+  }
+
+  // Explicit override: forces indexed status with explicit audit trace
+  const updates = {
+    verified: true,
+    verification_status: 'VERIFIED',
+    quality_status: 'indexed',
+    needs_review: false,
+    curator_notes: `OVERRIDE: ${reason.trim()}`,
+    reviewed_by: user.id,
+    reviewed_at: new Date().toISOString(),
+  };
+
+  const { error: updateError } = await supabase
+    .from('models')
+    .update(updates)
+    .eq('slug', slug);
+
+  if (updateError) {
+    console.error('Override failed:', updateError);
+    throw new Error('Failed to apply override');
+  }
+
+  // Audit log with dedicated override action
+  await supabase.from('audit_log').insert({
+    actor: user.id,
+    action: 'override_provenance_gate',
+    target_type: 'model',
+    target_id: slug,
+    metadata: { 
+      reason: reason.trim(),
+      curator_override: true,
+    }
+  });
+
+  revalidatePath('/admin/review');
+  revalidatePath(`/admin/review/${slug}`);
+  revalidatePath(`/models/${slug}`);
+  revalidatePath('/models');
+  revalidatePath('/');
+
+  return { success: true };
+}
 
 export async function triageNews(id: string, action: 'approve' | 'dismiss', slug?: string) {
   const supabase = await createClient();
