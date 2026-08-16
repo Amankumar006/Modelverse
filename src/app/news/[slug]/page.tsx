@@ -14,6 +14,10 @@ import remarkGfm from "remark-gfm";
 import CodeBlock from "@/components/ui/CodeBlock";
 
 
+import ReadingProgressBar from "@/components/news/ReadingProgressBar";
+import MermaidDiagram from "@/components/news/MermaidDiagram";
+import { Sparkles, Layers } from "lucide-react";
+
 interface ArticlePageProps {
   params: Promise<{
     slug: string;
@@ -112,6 +116,9 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
     relatedModelsData = combined.slice(0, 3);
   }
 
+  const isDeepDive = article.articleType === "deep-dive";
+  const isLongform = isDeepDive || article.articleType === "longform";
+
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "NewsArticle",
@@ -141,6 +148,7 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
   return (
     <main className="min-h-screen bg-[var(--bg)] text-[var(--text)] selection:bg-[var(--accent-soft)] selection:text-[var(--accent)] font-sans antialiased relative">
       <Navbar theme="dark" />
+      {isLongform && <ReadingProgressBar />}
 
       <JsonLd data={jsonLd} />
 
@@ -152,13 +160,19 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
           <ArrowLeft size={14} /> Back to Newsroom
         </Link>
 
-        <div className="flex items-center gap-3 mb-6">
+        <div className="flex flex-wrap items-center gap-3 mb-6">
           <Link
             href={`/news?category=${article.category}`}
             className="inline-flex items-center px-3.5 py-1 rounded-[var(--radius-pill)] bg-[var(--accent-soft)] border border-[var(--accent)]/20 text-[11px] font-mono font-bold uppercase tracking-wider text-[var(--accent)] hover:border-[var(--accent)] transition-colors"
           >
             {article.category === "weekly-news" ? `Issue ${article.issueNumber}` : getCategoryLabel(article.category)}
           </Link>
+          {isDeepDive && (
+            <span className="inline-flex items-center gap-1 px-3 py-1 rounded-[var(--radius-pill)] bg-[var(--card-bg)] border border-[var(--accent)]/40 text-[11px] font-mono font-bold uppercase tracking-wider text-[var(--accent)]">
+              <Sparkles size={11} className="text-[var(--accent)]" />
+              Deep-Dive Explainer
+            </span>
+          )}
           <ConfidenceBadge confidence={article.confidenceLevel} />
         </div>
 
@@ -175,6 +189,15 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
             <Clock size={12} />
             {article.readTime}
           </span>
+          {isDeepDive && article.breakthroughSignals && article.breakthroughSignals.length > 0 && (
+            <>
+              <span>·</span>
+              <span className="flex items-center gap-1 text-[var(--muted)]">
+                <Layers size={12} className="text-[var(--accent)]" />
+                {article.breakthroughSignals.join(", ")}
+              </span>
+            </>
+          )}
         </div>
       </div>
 
@@ -200,6 +223,31 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
           <ReactMarkdown
             remarkPlugins={[remarkGfm]}
             components={{
+              h2({ children }) {
+                const headerText = String(children);
+                let badge = null;
+
+                if (headerText.includes("The Intuitive Mental Model")) {
+                  badge = <span className="inline-block mr-2 text-base select-none">💡</span>;
+                } else if (headerText.includes("The Traditional Bottleneck")) {
+                  badge = <span className="inline-block mr-2 text-base select-none">⚠️</span>;
+                } else if (headerText.includes("Under the Hood")) {
+                  badge = <span className="inline-block mr-2 text-base select-none">⚙️</span>;
+                } else if (headerText.includes("Empirical Evidence")) {
+                  badge = <span className="inline-block mr-2 text-base select-none">📊</span>;
+                } else if (headerText.includes("Engineering Trade-Offs")) {
+                  badge = <span className="inline-block mr-2 text-base select-none">⚖️</span>;
+                } else if (headerText.includes("Key Takeaways")) {
+                  badge = <span className="inline-block mr-2 text-base select-none">🎯</span>;
+                }
+
+                return (
+                  <h2 className="text-fluid-h2 font-extrabold text-[var(--text)] mt-12 mb-4 tracking-tight flex items-center">
+                    {badge}
+                    <span>{children}</span>
+                  </h2>
+                );
+              },
               table({ children }) {
                 return (
                   <div className="my-8 overflow-x-auto rounded-[var(--radius-card)] border border-[var(--muted)]/10 bg-[var(--card-bg)] shadow-[var(--shadow-card)]">
@@ -242,6 +290,10 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
                       {children}
                     </code>
                   );
+                }
+
+                if (match && match[1] === "mermaid") {
+                  return <MermaidDiagram code={String(children).replace(/\n$/, "")} />;
                 }
 
                 return (
