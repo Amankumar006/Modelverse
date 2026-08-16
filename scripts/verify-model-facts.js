@@ -363,4 +363,8 @@ if (require.main === module) {
 
 module.exports = {
   runVerificationPipeline,
+  isPricingWithinTolerance,
+  isBenchmarkWithinTolerance,
+  isParamWithinTolerance,
+  verifyModelEntry,
 };

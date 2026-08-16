@@ -96,7 +96,7 @@ Return ONLY the Markdown content for the article body.`;
     generationConfig: { temperature: 0.3 }
   };
 
-  const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`;
+  const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`;
   const responseJson = await postHttps(url, payload);
   const data = JSON.parse(responseJson);
   
