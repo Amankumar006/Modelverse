@@ -48,6 +48,6 @@ src/lib/news-index.json
 
 # Import cache & temporary logs
 data/ingestion/
-data/cache/
+data/cache/news-research/
 scripts/.import-cache/
 *.log
