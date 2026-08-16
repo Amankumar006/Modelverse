@@ -7,6 +7,8 @@ import { type ModelEntry, type Benchmark } from "@/lib/models";
 import { evaluateModelQualityClient } from "@/lib/scoreModelClient";
 import { saveModelEdits, approveModel, markDisputed, overrideVerification } from "../../actions";
 import ModelDetailTabs from "@/components/models/ModelDetailTabs";
+import MarkdownRenderer from "@/components/ui/MarkdownRenderer";
+import MarkdownFieldEditor from "@/components/admin/MarkdownFieldEditor";
 import {
   Save,
   CheckCircle2,
@@ -788,47 +790,35 @@ export default function LiveModelEditor({ initialModel, allModels = [] }: LiveMo
                     />
                   </div>
 
-                  <div>
-                    <div className="flex justify-between items-center mb-1.5">
-                      <label className={labelClass}>Main Technical Description (Markdown Supported)</label>
-                      <span className="text-[11px] font-mono text-[var(--muted)]">
-                        {(model.description || "").length} chars
-                      </span>
-                    </div>
-                    <textarea
-                      rows={5}
-                      value={model.description || ""}
-                      onChange={(e) => updateField("description", e.target.value)}
-                      placeholder="Detailed architectural summary and capabilities..."
-                      className={`${inputClass} leading-relaxed font-sans`}
-                    />
-                  </div>
+                  <MarkdownFieldEditor
+                    label="Main Technical Description"
+                    sublabel="Markdown bullet lists, bolding, and headings supported."
+                    value={model.description || ""}
+                    onChange={(val) => updateField("description", val)}
+                    placeholder="Detailed architectural summary and capabilities..."
+                    rows={6}
+                    minChars={100}
+                  />
 
-                  <div>
-                    <div className="flex justify-between items-center mb-1.5">
-                      <label className={labelClass}>Distinct Page Overview (Optional Extended Context)</label>
-                    </div>
-                    <textarea
-                      rows={3}
-                      value={model.pageOverview || ""}
-                      onChange={(e) => updateField("pageOverview", e.target.value)}
-                      placeholder="Provide additional architectural depth distinct from the description..."
-                      className={`${inputClass} leading-relaxed`}
-                    />
-                  </div>
+                  <MarkdownFieldEditor
+                    label="Distinct Page Overview"
+                    sublabel="Optional extended context rendered on the overview tab."
+                    value={model.pageOverview || ""}
+                    onChange={(val) => updateField("pageOverview", val)}
+                    placeholder="Provide additional architectural depth, structured bullets, or technical specs..."
+                    rows={6}
+                  />
 
-                  <div>
-                    <div className="flex justify-between items-center mb-1.5">
-                      <label className={labelClass}>Editorial Note / Curator Analysis (Mandatory for Index Gate)</label>
-                    </div>
-                    <textarea
-                      rows={4}
-                      value={model.editorialNote || ""}
-                      onChange={(e) => updateField("editorialNote", e.target.value)}
-                      placeholder="Evaluated context on engineering trade-offs, target hardware, and evaluation notes..."
-                      className={`${inputClass} leading-relaxed border-amber-500/20 focus:border-amber-500`}
-                    />
-                  </div>
+                  <MarkdownFieldEditor
+                    label="Editorial Note / Curator Analysis"
+                    sublabel="Evaluated context on engineering trade-offs, target hardware, and evaluation notes (min 80 chars)."
+                    value={model.editorialNote || ""}
+                    onChange={(val) => updateField("editorialNote", val)}
+                    placeholder="Evaluated context on engineering trade-offs, target hardware, and evaluation notes..."
+                    rows={5}
+                    minChars={80}
+                    highlightBorder
+                  />
                 </div>
 
                 {/* Key Capabilities / Features List Builder */}
@@ -1597,16 +1587,14 @@ export default function LiveModelEditor({ initialModel, allModels = [] }: LiveMo
                           />
                         </div>
 
-                        <div>
-                          <label className={labelClass}>Section Content (Full Markdown Supported)</label>
-                          <textarea
-                            rows={6}
-                            value={sec.content}
-                            onChange={(e) => updateCustomSection(idx, "content", e.target.value)}
-                            placeholder="Write code blocks, technical guides, or hardware compatibility notes..."
-                            className={`${inputClass} font-mono text-xs leading-relaxed`}
-                          />
-                        </div>
+                        <MarkdownFieldEditor
+                          label="Section Content"
+                          sublabel="Full Markdown, code blocks, bullet points, and tables supported."
+                          value={sec.content}
+                          onChange={(val) => updateCustomSection(idx, "content", val)}
+                          placeholder="Write code blocks, technical guides, or hardware compatibility notes..."
+                          rows={6}
+                        />
                       </div>
                     ))}
 
@@ -1726,10 +1714,14 @@ export default function LiveModelEditor({ initialModel, allModels = [] }: LiveMo
                     </button>
                   </div>
 
-                  <p className="text-base sm:text-lg text-[var(--muted)] leading-relaxed max-w-3xl font-normal">
-                    {model.description ||
-                      `${model.name} is a state-of-the-art model developed by ${model.developer}. This documentation introduces the available model variants and compares their capability, context window, and pricing performance.`}
-                  </p>
+                  <div className="text-base sm:text-lg text-[var(--muted)] leading-relaxed max-w-3xl font-normal">
+                    <MarkdownRenderer
+                      content={
+                        model.description ||
+                        `${model.name} is a state-of-the-art model developed by ${model.developer}. This documentation introduces the available model variants and compares their capability, context window, and pricing performance.`
+                      }
+                    />
+                  </div>
                 </div>
 
                 {/* Section 1: Model Variant Overview */}

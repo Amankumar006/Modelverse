@@ -94,13 +94,17 @@ export default function ModelDetailTabs({
           className={`space-y-6 ${activeTab === "overview" ? "block" : "hidden"}`}
         >
           {distinctOverview && (
-            <p className="max-w-2xl leading-relaxed text-[var(--text)] text-base font-normal">{distinctOverview}</p>
+            <div className="max-w-3xl leading-relaxed text-[var(--text)] text-base font-normal">
+              <MarkdownRenderer content={distinctOverview} />
+            </div>
           )}
 
           {editorialNote && (
             <div className="p-4 rounded-[var(--radius-card)] bg-[var(--card-bg)] border border-[var(--muted)]/10 text-sm">
               <h4 className="text-xs uppercase tracking-wider font-bold text-[var(--accent)] mb-2">Editorial Context</h4>
-              <p className="text-[var(--muted)] leading-relaxed">{editorialNote}</p>
+              <div className="text-[var(--muted)] leading-relaxed text-sm">
+                <MarkdownRenderer content={editorialNote} />
+              </div>
             </div>
           )}
 

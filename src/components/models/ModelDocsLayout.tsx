@@ -5,6 +5,7 @@ import Link from "next/link";
 import { type ModelEntry } from "@/lib/models";
 import ModelDetailTabs from "./ModelDetailTabs";
 import Navbar from "@/components/layout/Navbar";
+import MarkdownRenderer from "@/components/ui/MarkdownRenderer";
 import { Search, ChevronDown, Copy, Check, Shield } from "lucide-react";
 
 interface ModelDocsLayoutProps {
@@ -168,10 +169,14 @@ export default function ModelDocsLayout({
               </button>
             </div>
 
-            <p className="text-base sm:text-lg text-[var(--muted)] leading-relaxed max-w-3xl font-normal">
-              {model.description ||
-                `${model.name} is a state-of-the-art model developed by ${model.developer}. This documentation introduces the available model variants and compares their capability, context window, and pricing performance.`}
-            </p>
+            <div className="text-base sm:text-lg text-[var(--muted)] leading-relaxed max-w-3xl font-normal">
+              <MarkdownRenderer
+                content={
+                  model.description ||
+                  `${model.name} is a state-of-the-art model developed by ${model.developer}. This documentation introduces the available model variants and compares their capability, context window, and pricing performance.`
+                }
+              />
+            </div>
           </div>
 
           {/* Section 1: Model Variant Overview */}

@@ -74,38 +74,45 @@ export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
           // Headings
           h1({ children }) {
             return (
-              <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-[var(--text)] mt-10 mb-5 pb-3 border-b border-[var(--muted)]/10 flex items-center gap-2">
+              <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-[var(--text)] mt-6 mb-3 pb-2 border-b border-[var(--muted)]/10 flex items-center gap-2">
                 {children}
               </h1>
             );
           },
           h2({ children }) {
             return (
-              <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-[var(--text)] mt-10 mb-4 pb-2 border-b border-[var(--muted)]/10 flex items-center gap-2">
+              <h2 className="text-xl sm:text-2xl font-extrabold tracking-tight text-[var(--text)] mt-5 mb-2.5 pb-1 border-b border-[var(--muted)]/10 flex items-center gap-2">
                 {children}
               </h2>
             );
           },
           h3({ children }) {
             return (
-              <h3 className="text-xl font-bold text-[var(--text)] mt-8 mb-3">
+              <h3 className="text-base sm:text-lg font-bold text-[var(--text)] mt-4 mb-2">
                 {children}
               </h3>
+            );
+          },
+          h4({ children }) {
+            return (
+              <h4 className="text-sm font-bold text-[var(--accent)] mt-3 mb-1.5">
+                {children}
+              </h4>
             );
           },
 
           // Paragraphs & Lists
           p({ children }) {
-            return <p className="text-[var(--text)] text-base sm:text-lg leading-relaxed my-5 font-normal">{children}</p>;
+            return <p className="text-inherit leading-relaxed my-3 font-normal">{children}</p>;
           },
           ul({ children }) {
-            return <ul className="list-disc list-outside ml-6 space-y-3 my-5 text-[var(--text)] text-base sm:text-lg leading-relaxed">{children}</ul>;
+            return <ul className="list-disc list-outside ml-5 space-y-1.5 my-3 text-inherit leading-relaxed">{children}</ul>;
           },
           ol({ children }) {
-            return <ol className="list-decimal list-outside ml-6 space-y-3 my-5 text-[var(--text)] text-base sm:text-lg leading-relaxed">{children}</ol>;
+            return <ol className="list-decimal list-outside ml-5 space-y-1.5 my-3 text-inherit leading-relaxed">{children}</ol>;
           },
           li({ children }) {
-            return <li className="text-[var(--text)] text-base sm:text-lg leading-relaxed pl-1">{children}</li>;
+            return <li className="text-inherit leading-relaxed pl-1">{children}</li>;
           },
 
           // Tables (Styled like "Comparable models")
