@@ -83,6 +83,7 @@ export interface ModelEntry extends ModelIndex {
   cardSummary?: string;
   pageOverview?: string;
   editorialNote?: string;
+  customSections?: { id: string; title: string; content: string }[];
 }
 
 
@@ -168,6 +169,7 @@ export function mapRowToModelEntry(row: any): ModelEntry {
     cardSummary: row.card_summary,
     pageOverview: row.page_overview,
     editorialNote: row.editorial_note,
+    customSections: row.metadata?.custom_sections || row.metadata?.customSections || row.custom_sections || [],
   };
 
   if (row.metadata) {

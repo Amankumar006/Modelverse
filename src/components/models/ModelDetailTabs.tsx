@@ -130,6 +130,19 @@ export default function ModelDetailTabs({
               </div>
             )
           )}
+
+          {model.customSections && model.customSections.length > 0 && (
+            <div className="space-y-6 pt-6 border-t border-[var(--muted)]/10">
+              {model.customSections.map((sec, i) => (
+                <section key={sec.id || i} className="space-y-3">
+                  <h3 className="text-base font-extrabold text-[var(--text)]">{sec.title}</h3>
+                  <div className="prose prose-invert max-w-none text-sm text-[var(--text)] leading-relaxed">
+                    <MarkdownRenderer content={sec.content} />
+                  </div>
+                </section>
+              ))}
+            </div>
+          )}
         </div>
 
         {/* Tab 2: Specs */}

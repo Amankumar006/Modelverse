@@ -53,6 +53,9 @@ export async function approveModel(slug: string, edits: Record<string, unknown>)
 
   const updates = {
     ...parsedEdits,
+    ...(parsedEdits.metadata
+      ? { metadata: { ...(existingModel.metadata || {}), ...(parsedEdits.metadata as Record<string, unknown>) } }
+      : {}),
     verified: gate.status === 'indexed',
     verification_status: gate.status === 'indexed' ? 'VERIFIED' : 'LIKELY',
     quality_status: gate.status,
@@ -62,6 +65,7 @@ export async function approveModel(slug: string, edits: Record<string, unknown>)
     needs_review: false,
     reviewed_by: user.id,
     reviewed_at: new Date().toISOString(),
+    updated_at: new Date().toISOString(),
   };
 
   const { error: updateError } = await supabase
@@ -109,15 +113,43 @@ export async function saveModelEdits(slug: string, edits: Record<string, unknown
 
   const parsedEdits = parseJsonFields(edits);
 
+  if (parsedEdits.metadata) {
+    const { data: existing } = await supabase
+      .from('models')
+      .select('metadata')
+      .eq('slug', slug)
+      .single();
+    if (existing?.metadata) {
+      parsedEdits.metadata = {
+        ...existing.metadata,
+        ...(parsedEdits.metadata as Record<string, unknown>),
+      };
+    }
+  }
+
   const { error: updateError } = await supabase
     .from('models')
-    .update(parsedEdits)
+    .update({
+      ...parsedEdits,
+      updated_at: new Date().toISOString(),
+    })
     .eq('slug', slug);
 
   if (updateError) {
     console.error('Update failed:', updateError);
     throw new Error('Failed to update model');
   }
+
+  // Insert audit log
+  await supabase
+    .from('audit_log')
+    .insert({
+      actor: user.id,
+      action: 'edit_model_draft',
+      target_type: 'model',
+      target_id: slug,
+      metadata: { fields_changed: Object.keys(edits) }
+    });
 
   revalidatePath('/admin/review');
   revalidatePath(`/admin/review/${slug}`);
