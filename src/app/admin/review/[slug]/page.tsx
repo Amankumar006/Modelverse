@@ -28,5 +28,12 @@ export default async function ReviewModelPage({ params }: { params: Promise<{ sl
 
   const model = mapRowToModelEntry(rawModel)
 
-  return <LiveModelEditor initialModel={model} />
+  const { data: allRawModels } = await supabase
+    .from('models')
+    .select('*')
+    .order('release_date', { ascending: false })
+
+  const allModels = (allRawModels || []).map(mapRowToModelEntry)
+
+  return <LiveModelEditor initialModel={model} allModels={allModels} />
 }
