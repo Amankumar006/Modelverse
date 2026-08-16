@@ -32,12 +32,13 @@ jobs:
           OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
           GNEWS_API_KEY: ${{ secrets.GNEWS_API_KEY }}
           SERPAPI_KEY: ${{ secrets.SERPAPI_KEY }}
-          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
-          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL || secrets.NEXT_PUBLIC_SUPABASE_URL }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY || secrets.NEXT_PUBLIC_SUPABASE_ANON_KEY }}
         run: node scripts/ingest-daily-news.js
 
       - name: Send Gmail News Digest
         if: env.NEW_NEWS_PUSHED == 'true'
+        continue-on-error: true
         uses: dawidd6/action-send-mail@v3
         with:
           server_address: smtp.gmail.com
@@ -52,6 +53,7 @@ jobs:
 
       - name: Post Daily Digest to Reddit
         if: env.NEW_NEWS_PUSHED == 'true'
+        continue-on-error: true
         env:
           REDDIT_CLIENT_ID: ${{ secrets.REDDIT_CLIENT_ID }}
           REDDIT_CLIENT_SECRET: ${{ secrets.REDDIT_CLIENT_SECRET }}
@@ -67,6 +69,7 @@ jobs:
           git add data/
           if ! git diff --staged --quiet; then
             git commit -m "content(news): publish ${QUALITY_INDEXED:-0} indexed, ${QUALITY_UNLISTED:-0} unlisted [skip ci]"
+            git pull --rebase origin main || true
             git push origin main
           else
             echo "No new news articles to publish today."
@@ -74,6 +77,7 @@ jobs:
 
       - name: Send Failure Alert Email
         if: failure()
+        continue-on-error: true
         uses: dawidd6/action-send-mail@v3
         with:
           server_address: smtp.gmail.com

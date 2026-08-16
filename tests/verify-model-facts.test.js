@@ -3,7 +3,7 @@ const {
   isPricingWithinTolerance,
   isBenchmarkWithinTolerance,
   isParamWithinTolerance,
-} = require("./verify-model-facts");
+} = require("../scripts/verify-model-facts");
 
 console.log("🧪 Running unit tests for verification engine tolerance bands...");
 

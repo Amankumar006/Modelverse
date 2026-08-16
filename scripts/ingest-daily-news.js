@@ -79,18 +79,22 @@ const POSTER_IMAGES = {
   ]
 };
 
-// ─── Automated Model Linking ──────────────────────────────────────────
-function getModelList() {
-  const modelsPath = path.join(process.cwd(), "src", "lib", "models-archive.json");
-  if (fs.existsSync(modelsPath)) {
-    try {
-      return JSON.parse(fs.readFileSync(modelsPath, "utf-8"));
-    } catch(e) {}
-  }
-  return [];
-}
+let ALL_MODELS = [];
 
-const ALL_MODELS = getModelList();
+async function loadModelList() {
+  try {
+    const { data, error } = await supabase
+      .from("models")
+      .select("name, slug, developer, family")
+      .limit(500);
+    if (!error && Array.isArray(data) && data.length > 0) {
+      ALL_MODELS = data;
+      return;
+    }
+  } catch (e) {
+    // Non-fatal, fallback to empty list
+  }
+}
 
 function detectRelatedModelSlugs(title, body, lab) {
   const textToMatch = `${title} ${body}`.toLowerCase();
@@ -256,7 +260,7 @@ ${body}`;
     generationConfig: { temperature: 0.1, maxOutputTokens: 5 }
   };
 
-  const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`;
+  const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`;
   try {
     const responseJson = await postHttps(url, payload);
     const data = JSON.parse(responseJson);
@@ -296,7 +300,7 @@ Return ONLY the final, polished, verified markdown text. Do not include introduc
     generationConfig: { temperature: 0.2 }
   };
 
-  const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`;
+  const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`;
   try {
     const responseJson = await postHttps(url, payload);
     const data = JSON.parse(responseJson);
@@ -322,7 +326,7 @@ async function rewriteArticleWithGemini(title, body) {
     }
   };
 
-  const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`;
+  const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`;
   const responseJson = await postHttps(url, payload);
   const data = JSON.parse(responseJson);
   
@@ -526,6 +530,7 @@ async function getExistingNewsSlugs() {
 async function runDailyNewsIngestion() {
   console.log("📰 Starting Daily Short News Pipeline...");
   console.log(`   Config: max ${MAX_ARTICLES_PER_RUN} articles, age cutoff: ${MAX_AGE_HOURS}h`);
+  await loadModelList();
   const existingSlugs = await getExistingNewsSlugs();
   const createdNews = [];
   const qualityCounts = { indexed: 0, unlistedOrThin: 0, quarantined: 0 };

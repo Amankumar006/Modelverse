@@ -5,7 +5,7 @@ const {
   isPricingWithinTolerance,
   isBenchmarkWithinTolerance,
   verifyModelEntry
-} = require("./verify-model-facts");
+} = require("../scripts/verify-model-facts");
 
 console.log("🧪 Testing Tolerance Boundary Cases (Edge of Band)...");
 
