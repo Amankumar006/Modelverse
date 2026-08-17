@@ -17,9 +17,11 @@ export const revalidate = 60;
 // Enable static site generation at build time for all model entries
 export async function generateStaticParams() {
   const models = await getAllModels();
-  return models.map((m) => ({
-    slug: m.slug,
-  }));
+  return models
+    .filter((m) => m.status !== "staged" && m.verificationStatus !== "DISPUTED")
+    .map((m) => ({
+      slug: m.slug,
+    }));
 }
 
 // Generate metadata dynamically per model
@@ -31,7 +33,7 @@ export async function generateMetadata({
   const { slug } = await params;
   const model = await getModelBySlug(slug);
 
-  if (!model) {
+  if (!model || model.status === "staged" || model.verificationStatus === "DISPUTED") {
     return {
       title: "Model Not Found — Modelverse",
     };
@@ -81,7 +83,7 @@ export default async function ModelDetailPage({
   const { slug } = await params;
   const model = await getModelBySlug(slug);
 
-  if (!model) {
+  if (!model || model.status === "staged" || model.verificationStatus === "DISPUTED") {
     notFound();
   }
 

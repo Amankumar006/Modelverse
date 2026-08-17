@@ -1,10 +1,10 @@
 "use client";
 
-import React, { useState, Fragment } from "react";
+import React, { useState } from "react";
 import type { ModelEntry } from "@/lib/models";
 import { formatParameters, getModalities } from "@/lib/models";
 import MarkdownRenderer from "@/components/ui/MarkdownRenderer";
-import { ArrowUpRight } from "lucide-react";
+import { ArrowUpRight, Copy, Check } from "lucide-react";
 
 interface ModelDetailTabsProps {
   model: ModelEntry;
@@ -18,8 +18,6 @@ const DOT = {
   vendor: "bg-amber-500",
   independent: "bg-[var(--accent)]",
 };
-
-
 
 function Empty({ children }: { children: React.ReactNode }) {
   return <p className="text-sm text-[var(--muted)]">{children}</p>;
@@ -35,14 +33,114 @@ function Row({ label, value }: { label: string; value?: string | number | null }
   );
 }
 
+function QuickstartSection({ quickstart }: { quickstart: Record<string, string> }) {
+  const entries = Object.entries(quickstart).filter(
+    ([, code]) => typeof code === "string" && code.trim().length > 0
+  );
+  const [selectedLang, setSelectedLang] = useState<string>(entries[0]?.[0] || "python");
+  const [copiedKey, setCopiedKey] = useState<string | null>(null);
+
+  if (entries.length === 0) return null;
+
+  const currentCode = quickstart[selectedLang] || entries[0][1];
+
+  const handleCopy = (key: string, code: string) => {
+    if (typeof window !== "undefined") {
+      navigator.clipboard.writeText(code);
+      setCopiedKey(key);
+      setTimeout(() => setCopiedKey(null), 2000);
+    }
+  };
+
+  const getLanguageLabel = (key: string) => {
+    const map: Record<string, string> = {
+      python: "Python",
+      javascript: "JavaScript",
+      typescript: "TypeScript",
+      curl: "cURL",
+      bash: "Bash",
+      json: "JSON",
+      go: "Go",
+      rust: "Rust",
+    };
+    return map[key.toLowerCase()] || key.charAt(0).toUpperCase() + key.slice(1);
+  };
+
+  return (
+    <div className="space-y-4">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-2 border-b border-[var(--muted)]/10">
+        <div>
+          <h3 className="text-xs uppercase tracking-wider font-bold text-[var(--muted)]">Quickstart & API Integration</h3>
+          <p className="text-xs text-[var(--muted)] mt-0.5">Ready-to-run implementation code snippet for inference and integration.</p>
+        </div>
+        {entries.length > 1 && (
+          <div className="flex gap-1.5 p-1 rounded-[var(--radius-pill)] bg-[var(--card-bg)] border border-[var(--muted)]/10">
+            {entries.map(([key]) => (
+              <button
+                key={key}
+                type="button"
+                onClick={() => setSelectedLang(key)}
+                className={`px-3 py-1 text-xs font-bold rounded-[var(--radius-pill)] transition-all cursor-pointer ${
+                  selectedLang === key
+                    ? "bg-[var(--accent-soft)] text-[var(--accent)] shadow-sm"
+                    : "text-[var(--muted)] hover:text-[var(--text)]"
+                }`}
+              >
+                {getLanguageLabel(key)}
+              </button>
+            ))}
+          </div>
+        )}
+      </div>
+
+      <div className="relative rounded-[var(--radius-card)] bg-[var(--card-bg)] shadow-[var(--shadow-card)] border border-[var(--muted)]/10 overflow-hidden">
+        <div className="flex items-center justify-between px-4 py-2.5 bg-[var(--bg)]/80 border-b border-[var(--muted)]/10 text-xs">
+          <span className="font-mono font-bold text-[var(--text)] flex items-center gap-2">
+            <span className="w-2 h-2 rounded-full bg-[var(--accent)]" />
+            {getLanguageLabel(selectedLang)}
+          </span>
+          <button
+            type="button"
+            onClick={() => handleCopy(selectedLang, currentCode)}
+            className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-[var(--radius-control)] bg-[var(--card-bg)] border border-[var(--muted)]/10 text-xs font-semibold text-[var(--text)] hover:border-[var(--accent)] transition-all cursor-pointer"
+          >
+            {copiedKey === selectedLang ? (
+              <>
+                <Check size={13} className="text-emerald-500" />
+                <span className="text-emerald-500">Copied!</span>
+              </>
+            ) : (
+              <>
+                <Copy size={13} className="text-[var(--muted)]" />
+                <span>Copy code</span>
+              </>
+            )}
+          </button>
+        </div>
+        <div className="p-4 overflow-x-auto">
+          <pre className="font-mono text-xs sm:text-sm text-[var(--text)] leading-relaxed whitespace-pre font-normal selection:bg-[var(--accent-soft)]">
+            <code>{currentCode}</code>
+          </pre>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export default function ModelDetailTabs({
   model,
   markdownContent,
 }: ModelDetailTabsProps) {
-  const [activeTab, setActiveTab] = useState<"overview" | "specs" | "benchmarks" | "resources">("overview");
+  const [activeTab, setActiveTab] = useState<"overview" | "getting-started" | "specs" | "benchmarks" | "resources">("overview");
 
-  const tabs: { key: "overview" | "specs" | "benchmarks" | "resources"; label: string }[] = [
+  const quickstart = (model.quickstart || model.metadata?.quickstart || {}) as Record<string, string>;
+  const hasQuickstart = Object.values(quickstart).some(
+    (code) => typeof code === "string" && code.trim().length > 0
+  );
+
+  const tabs: { key: "overview" | "getting-started" | "specs" | "benchmarks" | "resources"; label: string }[] = [
     { key: "overview", label: "Overview" },
+    ...(hasQuickstart ? [{ key: "getting-started" as const, label: "Getting Started" }] : []),
     { key: "specs", label: "Specs" },
     { key: "benchmarks", label: "Benchmarks" },
     { key: "resources", label: "Resources" },
@@ -119,12 +217,15 @@ export default function ModelDetailTabs({
                   <div className="p-5 rounded-[var(--radius-card)] bg-[var(--card-bg)] border border-[var(--muted)]/10">
                     <h4 className="text-xs uppercase tracking-wider font-bold text-[var(--muted)] mb-3">Model Capabilities & Focus</h4>
                     <ul className="space-y-2 text-sm text-[var(--text)]">
-                      {liveFeatures.map((f) => (
-                        <li key={f} className="flex items-start gap-2">
-                          <span className="text-[var(--accent)] font-bold">—</span>
-                          <span>{f}</span>
-                        </li>
-                      ))}
+                      {liveFeatures.map((f) => {
+                        const cleanFeature = f.replace(/^[\s—–\-•*]+\s*/, "");
+                        return (
+                          <li key={f} className="flex items-start gap-2.5">
+                            <span className="w-1.5 h-1.5 rounded-full bg-[var(--accent)] mt-2 shrink-0" />
+                            <span>{cleanFeature}</span>
+                          </li>
+                        );
+                      })}
                     </ul>
                   </div>
                 )}
@@ -149,7 +250,19 @@ export default function ModelDetailTabs({
           )}
         </div>
 
-        {/* Tab 2: Specs */}
+        {/* Tab 2: Getting Started (if quickstart exists) */}
+        {hasQuickstart && (
+          <div
+            id="tabpanel-getting-started"
+            role="tabpanel"
+            aria-labelledby="tab-getting-started"
+            className={`space-y-8 ${activeTab === "getting-started" ? "block" : "hidden"}`}
+          >
+            <QuickstartSection quickstart={quickstart} />
+          </div>
+        )}
+
+        {/* Tab 3: Specs */}
         <div
           id="tabpanel-specs"
           role="tabpanel"
@@ -160,12 +273,15 @@ export default function ModelDetailTabs({
             <h3 className="mb-3 text-xs uppercase tracking-wider font-bold text-[var(--muted)]">Key features</h3>
             {liveFeatures.length > 0 ? (
               <ul className="space-y-2 text-sm text-[var(--text)]">
-                {liveFeatures.map((f) => (
-                  <li key={f} className="flex items-start gap-2">
-                    <span className="text-[var(--muted)]">—</span>
-                    <span>{f}</span>
-                  </li>
-                ))}
+                {liveFeatures.map((f) => {
+                  const cleanFeature = f.replace(/^[\s—–\-•*]+\s*/, "");
+                  return (
+                    <li key={f} className="flex items-start gap-2.5">
+                      <span className="w-1.5 h-1.5 rounded-full bg-[var(--muted)]/60 mt-2 shrink-0" />
+                      <span>{cleanFeature}</span>
+                    </li>
+                  );
+                })}
               </ul>
             ) : (
               <Empty>Not yet documented.</Empty>
@@ -194,7 +310,7 @@ export default function ModelDetailTabs({
           </section>
         </div>
 
-        {/* Tab 3: Benchmarks & Pricing */}
+        {/* Tab 4: Benchmarks & Pricing */}
         <div
           id="tabpanel-benchmarks"
           role="tabpanel"
@@ -208,21 +324,18 @@ export default function ModelDetailTabs({
                 {Object.entries(
                   model.benchmarks.reduce((acc, b) => {
                     const cat = b.category || "General";
-                    const sub = b.subCategory || "None";
-                    if (!acc[cat]) acc[cat] = {};
-                    if (!acc[cat][sub]) acc[cat][sub] = [];
-                    acc[cat][sub].push(b);
+                    if (!acc[cat]) acc[cat] = [];
+                    acc[cat].push(b);
                     return acc;
-                  }, {} as Record<string, Record<string, typeof model.benchmarks>>)
-                ).map(([category, subcategories]) => {
+                  }, {} as Record<string, typeof model.benchmarks>)
+                ).map(([category, benchs]) => {
                   const hasMultipleCategories = Object.keys(
                     model.benchmarks.reduce((a, b) => { a[b.category || "General"] = true; return a; }, {} as Record<string, boolean>)
                   ).length > 1;
 
                   // Extract any custom columns present in this category
-                  const allCategoryBenchs = Object.values(subcategories).flat();
                   const categoryCustomCols = Array.from(
-                    new Set(allCategoryBenchs.flatMap((b) => Object.keys(b.customColumns || {})))
+                    new Set(benchs.flatMap((b) => Object.keys(b.customColumns || {})))
                   );
 
                   return (
@@ -237,68 +350,61 @@ export default function ModelDetailTabs({
 
                       <div className="overflow-x-auto bg-[var(--card-bg)] shadow-[var(--shadow-card)] rounded-[var(--radius-card)] p-4 border border-[var(--muted)]/10">
                         <table className="w-full min-w-[340px] text-sm">
-                          {categoryCustomCols.length > 0 && (
-                            <thead className="border-b border-[var(--muted)]/10 text-[11px] uppercase tracking-wider text-[var(--muted)] font-mono">
-                              <tr>
-                                <th className="pb-2 text-left font-bold">Benchmark</th>
-                                <th className="pb-2 text-left font-bold">Score</th>
-                                {categoryCustomCols.map((col) => (
-                                  <th key={col} className="pb-2 text-left font-bold">
-                                    {col}
-                                  </th>
-                                ))}
-                                <th className="pb-2 text-right font-bold pr-2">Evaluation</th>
-                              </tr>
-                            </thead>
-                          )}
-                          <tbody>
-                            {Object.entries(subcategories).map(([subCategory, benchs]) => (
-                              <Fragment key={subCategory}>
-                                {subCategory !== "None" && (
-                                  <tr>
-                                    <td colSpan={3 + categoryCustomCols.length} className="pt-4 pb-1.5 text-[10px] uppercase tracking-wider font-bold text-[var(--muted)] border-b border-[var(--muted)]/10">
-                                      {subCategory}
-                                    </td>
-                                  </tr>
-                                )}
-                                
-                                {benchs.map((b) => {
-                                  const citation = (b.citation || b.source || "") as string;
-                                  return (
-                                    <tr key={b.name} className="border-b border-[var(--muted)]/10 last:border-0 hover:bg-[var(--bg)]/50 transition-colors">
-                                      <td className={`py-2.5 text-[var(--text)] font-semibold ${subCategory !== "None" ? 'pl-3' : ''}`}>
-                                        <div className="flex items-center gap-1.5">
-                                          <span>{b.name}</span>
-                                          {citation && citation.startsWith("http") && (
-                                            <a
-                                              href={citation}
-                                              target="_blank"
-                                              rel="noreferrer"
-                                              className="text-[var(--muted)] hover:text-[var(--accent)] transition-colors inline-flex items-center"
-                                              title="View citation"
-                                            >
-                                              <ArrowUpRight size={12} />
-                                            </a>
-                                          )}
-                                        </div>
-                                      </td>
-                                      <td className="py-2.5 tabular-nums text-[var(--accent)] font-mono font-bold">{b.score}</td>
-                                      {categoryCustomCols.map((col) => (
-                                        <td key={col} className="py-2.5 font-mono text-xs text-[var(--muted)]">
-                                          {b.customColumns?.[col] ?? "—"}
-                                        </td>
-                                      ))}
-                                      <td className="py-2.5 text-right pr-2">
-                                        <span className="inline-flex items-center gap-1.5 text-xs text-[var(--muted)]">
-                                          <span className={`h-2 w-2 rounded-full ${b.sourceType === "vendor-reported" ? DOT.vendor : DOT.independent}`} />
-                                          {b.sourceType === "vendor-reported" ? "Vendor-reported" : "Independent"}
+                          <thead className="border-b border-[var(--muted)]/10 text-[11px] uppercase tracking-wider text-[var(--muted)] font-mono">
+                            <tr>
+                              <th className="pb-2 text-left font-bold">Benchmark</th>
+                              <th className="pb-2 text-left font-bold">Score</th>
+                              {categoryCustomCols.map((col) => (
+                                <th key={col} className="pb-2 text-left font-bold">
+                                  {col}
+                                </th>
+                              ))}
+                              <th className="pb-2 text-right font-bold pr-2">Evaluation</th>
+                            </tr>
+                          </thead>
+                          <tbody className="divide-y divide-[var(--muted)]/10">
+                            {benchs.map((b) => {
+                              const citation = (b.citation || b.source || "") as string;
+                              return (
+                                <tr key={b.name} className="hover:bg-[var(--bg)]/50 transition-colors">
+                                  <td className="py-2.5 text-[var(--text)] font-semibold">
+                                    <div className="flex flex-col gap-0.5">
+                                      <div className="flex items-center gap-1.5">
+                                        <span>{b.name}</span>
+                                        {citation && citation.startsWith("http") && (
+                                          <a
+                                            href={citation}
+                                            target="_blank"
+                                            rel="noreferrer"
+                                            className="text-[var(--muted)] hover:text-[var(--accent)] transition-colors inline-flex items-center"
+                                            title="View citation"
+                                          >
+                                            <ArrowUpRight size={12} />
+                                          </a>
+                                        )}
+                                      </div>
+                                      {b.subCategory && b.subCategory !== "None" && (
+                                        <span className="text-[11px] text-[var(--muted)] font-mono font-normal">
+                                          {b.subCategory}
                                         </span>
-                                      </td>
-                                    </tr>
-                                  );
-                                })}
-                              </Fragment>
-                            ))}
+                                      )}
+                                    </div>
+                                  </td>
+                                  <td className="py-2.5 tabular-nums text-[var(--accent)] font-mono font-bold">{b.score}</td>
+                                  {categoryCustomCols.map((col) => (
+                                    <td key={col} className="py-2.5 font-mono text-xs text-[var(--muted)]">
+                                      {b.customColumns?.[col] ?? "—"}
+                                    </td>
+                                  ))}
+                                  <td className="py-2.5 text-right pr-2">
+                                    <span className="inline-flex items-center gap-1.5 text-xs text-[var(--muted)]">
+                                      <span className={`h-2 w-2 rounded-full ${b.sourceType === "vendor-reported" ? DOT.vendor : DOT.independent}`} />
+                                      {b.sourceType === "vendor-reported" ? "Vendor-reported" : "Independent"}
+                                    </span>
+                                  </td>
+                                </tr>
+                              );
+                            })}
                           </tbody>
                         </table>
                       </div>
@@ -328,7 +434,7 @@ export default function ModelDetailTabs({
           </section>
         </div>
 
-        {/* Tab 4: Resources */}
+        {/* Tab 5: Resources */}
         <div
           id="tabpanel-resources"
           role="tabpanel"

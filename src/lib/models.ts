@@ -10,7 +10,7 @@ export interface ModelIndex {
   developer: string;
   releaseDate: string;
   type: "open-source" | "open-weights" | "closed-source" | "api-only" | "research-preview";
-  status: "active" | "deprecated" | "sunset";
+  status: "active" | "deprecated" | "sunset" | "staged" | string;
   vendorApiStatus?: "active" | "deprecated" | "sunset";
   featured: boolean;
   boost: number;
@@ -98,6 +98,9 @@ export interface ModelEntry extends ModelIndex {
   pageOverview?: string;
   editorialNote?: string;
   customSections?: { id: string; title: string; content: string }[];
+  quickstart?: Record<string, string>;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  metadata?: Record<string, any>;
 }
 
 
@@ -184,6 +187,8 @@ export function mapRowToModelEntry(row: any): ModelEntry {
     pageOverview: row.page_overview,
     editorialNote: row.editorial_note,
     customSections: row.metadata?.custom_sections || row.metadata?.customSections || row.custom_sections || [],
+    quickstart: row.metadata?.quickstart || row.quickstart || undefined,
+    metadata: row.metadata || {},
   };
 
   if (row.metadata) {
@@ -223,22 +228,28 @@ function mapRowToModelIndex(row: any): ModelIndex {
 /*  Public API (Supabase Backend)                                     */
 /* ------------------------------------------------------------------ */
 
-/** Return lightweight index summaries, sorted newest-first. */
+/** Return lightweight index summaries, sorted newest-first. Excludes staged and disputed models. */
 export async function getAllModels(): Promise<ModelIndex[]> {
   const { data } = await supabase
     .from('models')
     .select('id, name, slug, developer, release_date, type, status, vendor_api_status, featured, boost, family, tier, institution, verified, verification_status, quality_status, description, parameters, context_window, primary_task, previous_version')
+    .neq('status', 'staged')
     .order('release_date', { ascending: false });
-  return (data || []).map(mapRowToModelIndex);
+  return (data || [])
+    .filter((m) => m.verification_status !== 'DISPUTED')
+    .map(mapRowToModelIndex);
 }
 
-/** Return all full model entries, sorted newest-first. */
+/** Return all full model entries, sorted newest-first. Excludes staged and disputed models. */
 export async function getAllModelEntries(): Promise<ModelEntry[]> {
   const { data } = await supabase
     .from('models')
     .select('*')
+    .neq('status', 'staged')
     .order('release_date', { ascending: false });
-  return (data || []).map(mapRowToModelEntry);
+  return (data || [])
+    .filter((m) => m.verification_status !== 'DISPUTED')
+    .map(mapRowToModelEntry);
 }
 
 
