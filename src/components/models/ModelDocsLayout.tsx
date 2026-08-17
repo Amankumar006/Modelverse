@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import Link from "next/link";
 import { type ModelEntry, type ModelIndex } from "@/lib/models";
 import ModelDetailTabs from "./ModelDetailTabs";
+import QuickstartSection from "./QuickstartSection";
 import Navbar from "@/components/layout/Navbar";
 import MarkdownRenderer from "@/components/ui/MarkdownRenderer";
 import { Search, ChevronDown, Copy, Check, Shield } from "lucide-react";
@@ -37,6 +38,11 @@ export default function ModelDocsLayout({
     model,
     ...(relatedModels || []).slice(0, 3),
   ];
+
+  const quickstart = (model.quickstart || model.metadata?.quickstart || {}) as Record<string, string>;
+  const hasQuickstart = Object.values(quickstart).some(
+    (code) => typeof code === "string" && code.trim().length > 0
+  );
 
   const renderLeftNav = () => (
     <>
@@ -215,6 +221,13 @@ export default function ModelDocsLayout({
             </div>
           </section>
 
+          {/* Section 2: Getting Started (Quickstart) */}
+          {hasQuickstart && (
+            <section id="getting-started" className="space-y-4 pt-6 border-t border-[var(--muted)]/10">
+              <h2 className="text-2xl font-extrabold text-[var(--text)]">Getting Started</h2>
+              <QuickstartSection quickstart={quickstart} />
+            </section>
+          )}
 
           {/* Section 3: Latest Models Comparison Table */}
           {comparisonModels.length > 1 && (
@@ -333,7 +346,7 @@ export default function ModelDocsLayout({
           )}
 
           {/* Section 4: Detailed Model Tabs & Markdown Readme */}
-          <section className="pt-6 border-t border-[var(--muted)]/10">
+          <section id="benchmarks" className="pt-6 border-t border-[var(--muted)]/10">
             <ModelDetailTabs model={model} markdownContent={markdownContent} />
           </section>
         </main>
@@ -348,15 +361,22 @@ export default function ModelDocsLayout({
           <ul className="space-y-2.5 text-[var(--muted)] pl-2 border-l border-[var(--muted)]/10 font-medium">
             <li>
               <a href="#overview" className="hover:text-[var(--accent)] transition-colors block">
-                {model.developer} model overview
+                Model lineage & specification
               </a>
             </li>
+            {hasQuickstart && (
+              <li>
+                <a href="#getting-started" className="hover:text-[var(--accent)] transition-colors block">
+                  Getting started
+                </a>
+              </li>
+            )}
             {comparisonModels.length > 1 && (
-            <li>
-              <a href="#comparison" className="hover:text-[var(--accent)] transition-colors block">
-                Comparable models
-              </a>
-            </li>
+              <li>
+                <a href="#comparison" className="hover:text-[var(--accent)] transition-colors block">
+                  Comparable models
+                </a>
+              </li>
             )}
             <li>
               <a href="#benchmarks" className="hover:text-[var(--accent)] transition-colors block">
