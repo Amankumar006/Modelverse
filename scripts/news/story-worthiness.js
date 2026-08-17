@@ -20,42 +20,64 @@ const TIER_1_AUTHORITIES = [
   "openai",
   "google deepmind",
   "deepmind",
+  "google",
   "hugging face",
+  "huggingface",
   "nvidia",
   "meta ai",
+  "meta",
   "mistral ai",
+  "mistral",
   "mit technology review",
   "alibaba",
   "qwen",
   "deepseek",
-  "moonshot ai"
+  "moonshot ai",
+  "moonshot",
+  "zhipu",
+  "xai",
+  "cohere",
+  "microsoft",
+  "marktechpost"
 ];
 
 const MAJOR_EVENT_KEYWORDS = [
-  /\b(?:released?|launch(?:es|ed)?|announc(?:es|ed)|unveils?|introduc(?:es|ed))\b/i,
-  /\b(?:frontier|foundation model|open-weights?|open-source|architecture|reasoning|multimodal)\b/i,
-  /\b(?:benchmark|evaluations?|breakthrough|state-of-the-art|sota|agentic|supercomputer)\b/i,
-  /\b(?:gpt-[45]|claude-[34]|gemini-[23]|llama-[34]|deepseek-[rv]|qwen-[23]|kimi|mistral)\b/i,
+  // Releases & Launches
+  /\b(?:released?|launch(?:es|ed)?|announc(?:es|ed)|unveils?|introduc(?:es|ed)|publishes?|published|open-sources?|open-sourced)\b/i,
+  // Model architectures, types & foundations
+  /\b(?:frontier|foundation model|open-weights?|open-source|architecture|reasoning|multimodal|llms?|slms?|vlms?|diffusion|transformer)\b/i,
+  // Technical Benchmarks & Breakthroughs
+  /\b(?:benchmark|evaluations?|breakthrough|state-of-the-art|sota|agentic|supercomputer|dataset|research paper)\b/i,
+  // Developer workflows, training & optimization
+  /\b(?:fine-tun(?:ing|ed|es)|tool-calling|function calling|quantiz(?:ation|ed)|lora|qlora|distill(?:ation|ed)|inference|synthetic data|rlhf|dpo|grpo|rag|watermark(?:ing|ed)|context window|jailbreak|speculative decoding|embedding|vector)\b/i,
+  // AI ecosystem, tooling & infrastructure
+  /\b(?:openrouter|vllm|sglang|ollama|cursor|copilot|langchain|llamaindex|transformers|pytorch|tensorrt|triton|guidance|mlx|huggingface)\b/i,
+  // Strategic AI industry movements & developer platforms
+  /\b(?:acquir(?:e|es|ed|ition)|partnership|api launch|developer platform|enterprise api)\b/i,
+  // Known model lines
+  /\b(?:gpt-[45]|claude-[34]|gemini-[123]|llama-[34]|deepseek-[rv]|qwen-[23]|kimi|mistral|grok|phi-[34]|o[13]|command-r)\b/i,
 ];
 
 const MINOR_EVENT_PENALTIES = [
-  /\b(?:minor|patch|maintenance|bug fix|hotfix|changelog)\b/i,
+  /\b(?:minor maintenance|routine maintenance|changelog update|patch notes)\b/i,
   /\b(?:version \d+\.\d+\.\d+|v\d+\.\d+\.\d+)\b/i,
-  /\b(?:outage|pricing tweak|terms of service|tos update|podcast episode)\b/i,
-  /\b(?:opinion:|editorial:|letter to editor|roundup)\b/i,
+  /\b(?:outage|terms of service|tos update|podcast episode|ask me anything|ama session)\b/i,
+  /\b(?:opinion:|editorial:|letter to editor|roundup:|weekly recap:)\b/i,
+  /\b(?:woman claims|man claims|viral tweet|bizarre|celebrity)\b/i,
+  /\b(?:donation|charity|fundraising campaign)\b/i,
 ];
 
 const { scoreDeepDiveEligibility } = require("./deep-dive-gate");
 
 function storyWorthiness(candidate, recentTitles = []) {
-  if (!candidate || typeof candidate !== "object") return 0;
+  if (!candidate || typeof candidate !== "object") return { score: 0, isWorthLongform: false, isDuplicate: false };
 
   const title = String(candidate.title || "").trim();
   const lab = String(candidate.lab || candidate.author || "").toLowerCase();
   const description = String(candidate.description || "").toLowerCase();
   const titleLower = title.toLowerCase();
 
-  if (!title) return 0;
+  if (!title) return { score: 0, isWorthLongform: false, isDuplicate: false };
 
   let score = 3; // Baseline score for parsed technical feed item
 
@@ -64,7 +86,7 @@ function storyWorthiness(candidate, recentTitles = []) {
     score += 2;
   }
 
-  // 2. Major Event / Novelty Bonus (+1 to +3)
+  // 2. Major Event / Technical Novelty Bonus (+1 to +3)
   let noveltyMatches = 0;
   for (const regex of MAJOR_EVENT_KEYWORDS) {
     if (regex.test(titleLower) || regex.test(description)) {
@@ -73,12 +95,12 @@ function storyWorthiness(candidate, recentTitles = []) {
   }
   score += Math.min(3, noveltyMatches);
 
-  // 3. Known Frontier Model / Lab Keyword in Title (+1)
-  if (/\b(?:gpt|claude|gemini|llama|mistral|deepseek|qwen|kimi|diffusers|vllm|pytorch)\b/i.test(titleLower)) {
+  // 3. Known Frontier Model / Ecosystem Keyword in Title (+1)
+  if (/\b(?:gpt|claude|gemini|llama|mistral|deepseek|qwen|kimi|grok|phi|command-r|diffusers|vllm|pytorch|openrouter|cursor|copilot|huggingface|ollama)\b/i.test(titleLower)) {
     score += 1;
   }
 
-  // 4. Minor Event / Low-Signal Penalties (-3 to -4)
+  // 4. Minor Event / Noise Penalties (-2 to -4)
   for (const penaltyRegex of MINOR_EVENT_PENALTIES) {
     if (penaltyRegex.test(titleLower)) {
       score -= 3;
@@ -86,11 +108,12 @@ function storyWorthiness(candidate, recentTitles = []) {
     }
   }
 
-  // 5. Recent Title Collision Penalty (-3)
+  // 5. Duplicate Detection
   const normalizedTitle = titleLower.replace(/\W+/g, " ").trim();
-  if (recentTitles.some((existing) => String(existing).toLowerCase().replace(/\W+/g, " ").trim() === normalizedTitle)) {
-    score -= 3;
-  }
+  const isDuplicate = recentTitles.some((existing) => {
+    const normExisting = String(existing).toLowerCase().replace(/\W+/g, " ").trim();
+    return normExisting === normalizedTitle && normalizedTitle.length > 5;
+  });
 
   const finalScore = Math.max(0, Math.min(10, score));
   const isWorthLongform = finalScore >= 6;
@@ -104,13 +127,14 @@ function storyWorthiness(candidate, recentTitles = []) {
   return {
     score: finalScore,
     isWorthLongform,
+    isDuplicate,
     isDeepDive: deepDive.eligible,
     deepDiveScore: deepDive.score,
     deepDiveEligible: deepDive.eligible,
     breakthroughSignals: deepDive.matchedSignals,
     reasons: [
       TIER_1_AUTHORITIES.some((auth) => lab.includes(auth)) ? "Tier-1 source authority" : null,
-      noveltyMatches > 0 ? `Novelty signals (${noveltyMatches})` : null,
+      noveltyMatches > 0 ? `Novelty/Technical signals (${noveltyMatches})` : null,
       deepDive.eligible ? `Deep-dive breakthrough eligible (${deepDive.matchedSignals.join(", ")})` : null,
       finalScore < 6 ? "Standard brief threshold" : "Eligible for multi-source research & longform",
     ].filter(Boolean),
