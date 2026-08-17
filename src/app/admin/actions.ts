@@ -53,8 +53,14 @@ export async function approveModel(slug: string, edits: Record<string, unknown>)
 
   const updates = {
     ...parsedEdits,
-    ...(parsedEdits.metadata
-      ? { metadata: { ...(existingModel.metadata || {}), ...(parsedEdits.metadata as Record<string, unknown>) } }
+    ...(parsedEdits.metadata || parsedEdits.quickstart
+      ? {
+          metadata: {
+            ...(existingModel.metadata || {}),
+            ...((parsedEdits.metadata as Record<string, unknown>) || {}),
+            ...(parsedEdits.quickstart ? { quickstart: parsedEdits.quickstart } : {}),
+          },
+        }
       : {}),
     verified: gate.status === 'indexed',
     verification_status: gate.status === 'indexed' ? 'VERIFIED' : 'LIKELY',
@@ -114,18 +120,17 @@ export async function saveModelEdits(slug: string, edits: Record<string, unknown
 
   const parsedEdits = parseJsonFields(edits);
 
-  if (parsedEdits.metadata) {
+  if (parsedEdits.metadata || parsedEdits.quickstart) {
     const { data: existing } = await supabase
       .from('models')
       .select('metadata')
       .eq('slug', slug)
       .single();
-    if (existing?.metadata) {
-      parsedEdits.metadata = {
-        ...existing.metadata,
-        ...(parsedEdits.metadata as Record<string, unknown>),
-      };
-    }
+    parsedEdits.metadata = {
+      ...(existing?.metadata || {}),
+      ...((parsedEdits.metadata as Record<string, unknown>) || {}),
+      ...(parsedEdits.quickstart ? { quickstart: parsedEdits.quickstart } : {}),
+    };
   }
 
   const { error: updateError } = await supabase

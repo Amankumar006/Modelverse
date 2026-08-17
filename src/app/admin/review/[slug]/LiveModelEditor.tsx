@@ -7,6 +7,7 @@ import { type ModelEntry, type Benchmark } from "@/lib/models";
 import { evaluateModelQualityClient } from "@/lib/scoreModelClient";
 import { saveModelEdits, approveModel, markDisputed, overrideVerification } from "../../actions";
 import ModelDetailTabs from "@/components/models/ModelDetailTabs";
+import QuickstartSection from "@/components/models/QuickstartSection";
 import MarkdownRenderer from "@/components/ui/MarkdownRenderer";
 import MarkdownFieldEditor from "@/components/admin/MarkdownFieldEditor";
 import { parseSmartBenchmarkInput, parseMultiLineBenchmarks } from "@/lib/benchmarkParser";
@@ -102,8 +103,17 @@ function normalizeModelEntry(raw: ModelEntry): ModelEntry {
     customSectionsArray = (raw as unknown as { metadata: { custom_sections: { id: string; title: string; content: string }[] } }).metadata.custom_sections;
   }
 
+  let quickstartObj: Record<string, string> = {};
+  if (raw.quickstart && typeof raw.quickstart === "object") {
+    quickstartObj = raw.quickstart as Record<string, string>;
+  } else if (raw.metadata?.quickstart && typeof raw.metadata.quickstart === "object") {
+    quickstartObj = raw.metadata.quickstart as Record<string, string>;
+  }
+
   return {
     ...raw,
+    quickstart: quickstartObj,
+    metadata: raw.metadata || {},
     keyFeatures: Array.isArray(raw.keyFeatures) ? raw.keyFeatures : [],
     sources: Array.isArray(raw.sources) ? raw.sources : [],
     benchmarks: benchmarksArray,
@@ -118,11 +128,12 @@ export default function LiveModelEditor({ initialModel, allModels = [] }: LiveMo
 
   // Model Working State - Safely normalized
   const [model, setModel] = useState<ModelEntry>(() => normalizeModelEntry(initialModel));
-  const [activeTab, setActiveTab] = useState<"overview" | "specs" | "benchmarks" | "resources" | "custom">("overview");
+  const [activeTab, setActiveTab] = useState<"overview" | "quickstart" | "specs" | "benchmarks" | "resources" | "custom">("overview");
   const [viewMode, setViewMode] = useState<"edit" | "preview">("edit");
   const [inspectorOpen, setInspectorOpen] = useState(false);
   const [copied, setCopied] = useState(false);
   const [previewSearch, setPreviewSearch] = useState("");
+  const [selectedQuickstartLang, setSelectedQuickstartLang] = useState<string>("python");
 
   // Benchmark Custom Columns & Column Visibility Management
   const [customBenchmarkCols, setCustomBenchmarkCols] = useState<string[]>(() => {
@@ -385,6 +396,54 @@ export default function LiveModelEditor({ initialModel, allModels = [] }: LiveMo
   };
 
   // Server Actions
+  const updateQuickstart = (lang: string, code: string) => {
+    setModel((prev) => {
+      const qs = { ...(prev.quickstart || {}) };
+      if (code.trim()) {
+        qs[lang] = code;
+      } else {
+        delete qs[lang];
+      }
+      return {
+        ...prev,
+        quickstart: qs,
+        metadata: {
+          ...(prev.metadata || {}),
+          quickstart: qs,
+        },
+      };
+    });
+  };
+
+  const removeQuickstart = (lang: string) => {
+    setModel((prev) => {
+      const qs = { ...(prev.quickstart || {}) };
+      delete qs[lang];
+      return {
+        ...prev,
+        quickstart: qs,
+        metadata: {
+          ...(prev.metadata || {}),
+          quickstart: qs,
+        },
+      };
+    });
+  };
+
+  const getStarterCodeSnippet = (lang: string, m: ModelEntry) => {
+    const slug = m.slug || "model-id";
+    if (lang === "python") {
+      return `from openai import OpenAI\n\nclient = OpenAI(api_key="YOUR_API_KEY")\n\nresponse = client.chat.completions.create(\n    model="${slug}",\n    messages=[{"role": "user", "content": "Hello!"}],\n)\nprint(response.choices[0].message.content)`;
+    }
+    if (lang === "javascript") {
+      return `import OpenAI from "openai";\n\nconst client = new OpenAI({\n  apiKey: process.env.API_KEY,\n});\n\nconst completion = await client.chat.completions.create({\n  model: "${slug}",\n  messages: [{ role: "user", content: "Hello!" }],\n});\nconsole.log(completion.choices[0].message.content);`;
+    }
+    if (lang === "curl") {
+      return `curl https://api.openai.com/v1/chat/completions \\\n  -H "Content-Type: application/json" \\\n  -H "Authorization: Bearer $API_KEY" \\\n  -d '{\n    "model": "${slug}",\n    "messages": [{"role": "user", "content": "Hello!"}]\n  }'`;
+    }
+    return `# Code sample for ${m.name}\n`;
+  };
+
   const handleSave = async () => {
     setSaving(true);
     setActionError(null);
@@ -416,6 +475,8 @@ export default function LiveModelEditor({ initialModel, allModels = [] }: LiveMo
         tags: model.tags || [],
         curator_notes: model.curatorNotes,
         metadata: {
+          ...(model.metadata || {}),
+          quickstart: model.quickstart || model.metadata?.quickstart || {},
           custom_sections: customSectionsList,
           benchmark_columns: customBenchmarkCols,
           visible_benchmark_cols: visibleCols,
@@ -458,6 +519,8 @@ export default function LiveModelEditor({ initialModel, allModels = [] }: LiveMo
         links: model.links || {},
         pricing: pricingList,
         metadata: {
+          ...(model.metadata || {}),
+          quickstart: model.quickstart || model.metadata?.quickstart || {},
           custom_sections: customSectionsList,
           benchmark_columns: customBenchmarkCols,
           visible_benchmark_cols: visibleCols,
@@ -803,6 +866,7 @@ export default function LiveModelEditor({ initialModel, allModels = [] }: LiveMo
             <div className="flex gap-2 p-1.5 rounded-[var(--radius-pill)] bg-[var(--card-bg)] border border-[var(--muted)]/15 w-fit">
               {[
                 { id: "overview", label: "Overview & Features" },
+                { id: "quickstart", label: `Quickstart (${Object.keys(model.quickstart || {}).length})` },
                 { id: "specs", label: "Specifications & Pricing" },
                 { id: "benchmarks", label: `Benchmarks (${benchmarksList.length})` },
                 { id: "resources", label: "Resources & Links" },
@@ -912,6 +976,89 @@ export default function LiveModelEditor({ initialModel, allModels = [] }: LiveMo
                       <p className="text-xs text-[var(--muted)] italic py-2">No key capabilities recorded yet.</p>
                     )}
                   </div>
+                </div>
+              </div>
+            )}
+
+            {/* ── TAB: QUICKSTART & INTEGRATION CODE ─────────────────────── */}
+            {activeTab === "quickstart" && (
+              <div className="space-y-6">
+                <div className="p-6 rounded-[var(--radius-card)] bg-[var(--card-bg)] border border-[var(--muted)]/15 space-y-6">
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-[var(--muted)]/10 pb-4">
+                    <div>
+                      <h3 className="font-extrabold text-base text-[var(--text)] flex items-center gap-2">
+                        <Zap size={18} className="text-[var(--accent)]" />
+                        Getting Started & Quickstart Code Snippets
+                      </h3>
+                      <p className="text-xs text-[var(--muted)] mt-1">
+                        Provide ready-to-run inference code samples (e.g. Python, JavaScript, cURL) rendered directly on the public model page.
+                      </p>
+                    </div>
+
+                    <div className="flex flex-wrap items-center gap-2">
+                      {["python", "javascript", "curl", "bash"].map((lang) => {
+                        const hasLang = Boolean(model.quickstart?.[lang]);
+                        return (
+                          <button
+                            key={lang}
+                            type="button"
+                            onClick={() => {
+                              if (!hasLang) {
+                                updateQuickstart(lang, getStarterCodeSnippet(lang, model));
+                              }
+                              setSelectedQuickstartLang(lang);
+                            }}
+                            className={`px-3 py-1.5 rounded-[var(--radius-pill)] text-xs font-bold transition-all cursor-pointer flex items-center gap-1.5 ${
+                              selectedQuickstartLang === lang
+                                ? "bg-[var(--accent)] text-white shadow-sm"
+                                : hasLang
+                                ? "bg-[var(--accent-soft)] text-[var(--accent)]"
+                                : "bg-[var(--bg)] text-[var(--muted)] hover:text-[var(--text)] border border-[var(--muted)]/10"
+                            }`}
+                          >
+                            {hasLang && <Check size={12} />}
+                            {lang === "curl" ? "cURL" : lang.charAt(0).toUpperCase() + lang.slice(1)}
+                          </button>
+                        );
+                      })}
+                    </div>
+                  </div>
+
+                  {/* Code Editor for Selected Language */}
+                  <div className="space-y-3">
+                    <div className="flex items-center justify-between">
+                      <label className={labelClass}>
+                        Code Snippet for <span className="text-[var(--accent)] uppercase font-bold">{selectedQuickstartLang}</span>
+                      </label>
+
+                      {model.quickstart?.[selectedQuickstartLang] && (
+                        <button
+                          type="button"
+                          onClick={() => removeQuickstart(selectedQuickstartLang)}
+                          className="text-xs text-rose-400 hover:text-rose-300 font-bold flex items-center gap-1 cursor-pointer"
+                        >
+                          <Trash2 size={13} />
+                          Remove {selectedQuickstartLang} snippet
+                        </button>
+                      )}
+                    </div>
+
+                    <textarea
+                      rows={9}
+                      value={model.quickstart?.[selectedQuickstartLang] || ""}
+                      onChange={(e) => updateQuickstart(selectedQuickstartLang, e.target.value)}
+                      placeholder={`Enter ready-to-run ${selectedQuickstartLang} code snippet for ${model.name}...`}
+                      className={`${inputClass} font-mono text-xs sm:text-sm leading-relaxed p-4 bg-[var(--bg)] border border-[var(--muted)]/15`}
+                    />
+                  </div>
+
+                  {/* Live Rendered Preview */}
+                  {model.quickstart && Object.keys(model.quickstart).length > 0 && (
+                    <div className="pt-4 border-t border-[var(--muted)]/10 space-y-3">
+                      <h4 className="text-xs uppercase tracking-wider font-bold text-[var(--muted)]">Preview Output</h4>
+                      <QuickstartSection quickstart={model.quickstart} />
+                    </div>
+                  )}
                 </div>
               </div>
             )}
@@ -1824,6 +1971,16 @@ export default function LiveModelEditor({ initialModel, allModels = [] }: LiveMo
                   </div>
                 </section>
 
+                {/* Section: Getting Started Preview */}
+                {Object.values(model.quickstart || model.metadata?.quickstart || {}).some(
+                  (code) => typeof code === "string" && code.trim().length > 0
+                ) && (
+                  <section id="preview-getting-started" className="space-y-4 pt-6 border-t border-[var(--muted)]/10">
+                    <h2 className="text-2xl font-extrabold text-[var(--text)]">Getting Started</h2>
+                    <QuickstartSection quickstart={(model.quickstart || model.metadata?.quickstart || {}) as Record<string, string>} />
+                  </section>
+                )}
+
                 {/* Section 2: Latest Models Comparison Table */}
                 {comparisonModels.length > 1 && (
                   <section id="preview-comparison" className="space-y-4 pt-6 border-t border-[var(--muted)]/10">
@@ -1911,9 +2068,18 @@ export default function LiveModelEditor({ initialModel, allModels = [] }: LiveMo
                 <ul className="space-y-2.5 text-[var(--muted)] pl-2 border-l border-[var(--muted)]/10 font-medium">
                   <li>
                     <a href="#preview-overview" className="hover:text-[var(--accent)] transition-colors block">
-                      {model.developer} model overview
+                      Model lineage & specification
                     </a>
                   </li>
+                  {Object.values(model.quickstart || model.metadata?.quickstart || {}).some(
+                    (code) => typeof code === "string" && code.trim().length > 0
+                  ) && (
+                    <li>
+                      <a href="#preview-getting-started" className="hover:text-[var(--accent)] transition-colors block">
+                        Getting started
+                      </a>
+                    </li>
+                  )}
                   {comparisonModels.length > 1 && (
                     <li>
                       <a href="#preview-comparison" className="hover:text-[var(--accent)] transition-colors block">
