@@ -754,7 +754,13 @@ async function extractFullArticleBody(url, fallbackDesc, lab) {
     const worthinessResult = storyWorthiness(candidate, recentTitles);
     const worthiness = typeof worthinessResult === "object" ? worthinessResult.score : worthinessResult;
 
-    if (worthiness < 4) {
+    if (worthinessResult && worthinessResult.isDuplicate) {
+      console.log(`  ⏭️  Skipping (Duplicate title): ${candidate.title.slice(0, 60)}`);
+      existingSlugs.add(newsSlug);
+      continue;
+    }
+
+    if (worthiness < 3) {
       console.log(`  ⏭️  Skipping (Low story-worthiness ${worthiness}/10): ${candidate.title.slice(0, 60)}`);
       existingSlugs.add(newsSlug);
       continue;
