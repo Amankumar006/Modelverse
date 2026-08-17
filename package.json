@@ -6,7 +6,8 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "recompute-quality": "node scripts/recompute-quality.js"
   },
   "dependencies": {
     "@gsap/react": "^2.1.2",
