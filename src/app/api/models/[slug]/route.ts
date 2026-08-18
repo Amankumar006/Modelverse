@@ -1,8 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
-import { getAllModelEntries } from "@/lib/models";
+import { getAllModelEntries, getModelBySlug } from "@/lib/models";
 
 export async function GET(
-  _request: NextRequest,
+  request: NextRequest,
   { params }: { params: Promise<{ slug: string }> }
 ) {
   try {
@@ -14,6 +14,12 @@ export async function GET(
       );
     }
     const normalizedSlug = slug.toLowerCase();
+
+    const singleModel = await getModelBySlug(slug);
+    const redirectTo = singleModel?.metadata?.redirect_to || singleModel?.metadata?.redirectTo;
+    if (redirectTo && typeof redirectTo === "string") {
+      return NextResponse.redirect(new URL(`/api/models/${redirectTo}`, request.url), 308);
+    }
 
     const models = await getAllModelEntries();
     const model = models.find(
