@@ -6,7 +6,6 @@ import { SITE_URL } from "@/lib/models";
 import Footer from "@/components/layout/Footer";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import GoogleAdsense from "@/components/third-party/GoogleAdsense";
-import Script from "next/script";
 import { GoogleAnalytics } from "@next/third-parties/google";
 
 const figtree = Figtree({
@@ -78,6 +77,9 @@ export const metadata: Metadata = {
   verification: {
     google: "google0be0f65316fe589f",
   },
+  other: {
+    "google-adsense-account": "ca-pub-5666739187500051",
+  },
 };
 
 /* ------------------------------------------------------------------ */
@@ -133,12 +135,14 @@ export default function RootLayout({
 
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${figtree.variable} font-sans min-h-screen bg-[var(--bg)] text-[var(--text)] tracking-[-0.01em] antialiased flex flex-col justify-between`}>
-        <Script
+      <head>
+        <script
+          async
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5666739187500051"
           crossOrigin="anonymous"
-          strategy="afterInteractive"
         />
+      </head>
+      <body className={`${figtree.variable} font-sans min-h-screen bg-[var(--bg)] text-[var(--text)] tracking-[-0.01em] antialiased flex flex-col justify-between`}>
         <ThemeProvider>
           <GoogleAdsense />
           {gaId && <GoogleAnalytics gaId={gaId} />}
