@@ -29,12 +29,15 @@ export const DeploymentEnum = z.enum([
   "research"
 ]);
 
+export const MetricTypeEnum = z.enum(["performance", "technical", "economic", "ranking", "availability"]);
+
 export const BenchmarkSchema = z.object({
   name: z.string(),
   score: z.union([z.string(), z.number()]),
   verified: z.boolean(),
+  metricType: MetricTypeEnum.optional(),
   sourceType: z.enum(["vendor-reported", "independent-eval"]).optional(),
-});
+}).passthrough();
 
 export const ModelStatusEnum = z.enum(["active", "deprecated", "sunset"]);
 

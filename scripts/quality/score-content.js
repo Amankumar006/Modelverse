@@ -281,20 +281,46 @@ function scoreModelPage(model) {
       gettingStartedScore = Math.min(12, gettingStartedScore + 2);
     }
 
-    // 6. Verified Numeric Benchmarks with Provenance (max 15 — key requirement for index status)
-    const verifiedBenchmarks = Array.isArray(model?.benchmarks)
-      ? model.benchmarks.filter((b) => benchmarkIsVerifiedAndSourced(b, model)).length
-      : 0;
+    // 6. Verified Numeric Performance Benchmarks with Provenance (max 15 — mandatory for index eligibility)
+    const rawBenchmarks = Array.isArray(model?.benchmarks) ? model.benchmarks : [];
+    
+    let performanceBenchmarkCount = 0;
+    let technicalMetricCount = 0;
+    let economicMetricCount = 0;
+    let rankingMetricCount = 0;
+    let availabilityMetricCount = 0;
+
+    for (const b of rawBenchmarks) {
+      const metricType = String(b?.metricType || "performance").toLowerCase().trim();
+      const isVerifiedAndSourced = benchmarkIsVerifiedAndSourced(b, model);
+
+      if (metricType === "performance") {
+        if (isVerifiedAndSourced) {
+          performanceBenchmarkCount++;
+        }
+      } else if (metricType === "technical") {
+        technicalMetricCount++;
+      } else if (metricType === "economic") {
+        economicMetricCount++;
+      } else if (metricType === "ranking") {
+        rankingMetricCount++;
+      } else if (metricType === "availability") {
+        availabilityMetricCount++;
+      }
+    }
+
+    const meetsTwoPerformanceBenchmarkGate = performanceBenchmarkCount >= 2;
+
     let benchmarkScore = 0;
-    if (verifiedBenchmarks >= 4) {
+    if (performanceBenchmarkCount >= 4) {
       benchmarkScore = 15;
-    } else if (verifiedBenchmarks >= 2) {
+    } else if (performanceBenchmarkCount >= 2) {
       benchmarkScore = 12;
-    } else if (verifiedBenchmarks === 1) {
+    } else if (performanceBenchmarkCount === 1) {
       benchmarkScore = 6;
-      reasons.push("only one verified numeric benchmark with citation");
+      reasons.push("only one verified numeric performance benchmark with citation (requires at least 2)");
     } else {
-      reasons.push("missing verified numeric benchmarks with citations");
+      reasons.push("missing verified numeric performance benchmarks with citations (requires at least 2 performance benchmarks)");
     }
 
     // 7. Pricing & Commercial Transparency (max 8)
@@ -360,10 +386,16 @@ function scoreModelPage(model) {
       editorial: editorialScore,
       uiCompleteness: uiScore,
       total: score,
+      performanceBenchmarkCount,
+      technicalMetricCount,
+      economicMetricCount,
+      rankingMetricCount,
+      availabilityMetricCount,
+      meetsTwoPerformanceBenchmarkGate,
     };
 
-    // Index gate: must score >= 65 AND have at least 2 verified benchmarks AND no boilerplate
-    const isIndexed = score >= 65 && verifiedBenchmarks >= 2 && !poBoilerplate && !enBoilerplate;
+    // Index gate: must score >= 65 AND meet the 2 performance benchmarks requirement AND no boilerplate
+    const isIndexed = score >= 65 && meetsTwoPerformanceBenchmarkGate && !poBoilerplate && !enBoilerplate;
     return { score, status: isIndexed ? "indexed" : "thin", reasons, breakdown };
   }, "thin");
 }

@@ -39,6 +39,7 @@ export interface Benchmark {
   name: string;
   score: string | number;
   verified: boolean;
+  metricType?: "performance" | "technical" | "economic" | "ranking" | "availability" | string;
   sourceType?: "vendor-reported" | "independent-eval" | string;
   category?: string;
   subCategory?: string;

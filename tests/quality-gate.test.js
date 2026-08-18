@@ -11,15 +11,28 @@ const model = {
   name: "Example Model",
   parameters: "7B",
   contextWindow: "128k",
+  modality: ["text"],
+  deployment: ["api", "cloud"],
+  primaryTask: "chat-reasoning",
   license: "Apache-2.0",
   developer: "Example Labs",
+  family: "example-family",
+  tier: "7B",
+  type: "open-source",
   releaseDate: "2026-08-14",
-  description: "A concise card summary for Example Model.",
-  pageOverview: "This reviewed overview explains the architecture, deployment trade-offs, and intended users.",
+  description: "A comprehensive model designed for agentic reasoning and tool use in production workflows.",
+  cardSummary: "A concise card summary for Example Model in search and cards.",
+  pageOverview: "This reviewed overview explains the architecture, deployment trade-offs, and intended users across enterprise production workloads without repetitive boilerplate text.",
   editorialNote: "This deliberately long reviewed note gives readers context beyond generated catalogue copy. It discusses the provenance of available evaluation results and the practical caveats teams should consider before adopting the model in a production workflow.",
-  benchmarks: [{ name: "MMLU", score: 82.1 }, { name: "GPQA", score: "61.4" }],
+  benchmarks: [
+    { name: "MMLU", score: 82.1, metricType: "performance", verified: true, source: "https://example.com/eval" },
+    { name: "GPQA", score: "61.4", metricType: "performance", verified: true, source: "https://example.com/eval" },
+  ],
+  pricing: [{ tier: "Standard", unit: "1M tokens", amount: 0.5, currency: "USD" }],
+  sources: ["https://example.com/announcement", "https://example.com/paper"],
   links: { huggingface: "https://huggingface.co/example/model" },
   keyFeatures: ["Native 128k context", "Tool use support"],
+  tags: ["reasoning", "tool-use"],
 };
 
 const scoredModel = scoreModelPage(model);
@@ -36,7 +49,7 @@ const unbenchmarkedModel = {
 };
 const scoredUnbenchmarked = scoreModelPage(unbenchmarkedModel);
 assert.equal(scoredUnbenchmarked.status, "thin");
-assert.ok(scoredUnbenchmarked.reasons.some((r) => r.includes("missing verified numeric benchmarks")));
+assert.ok(scoredUnbenchmarked.reasons.some((r) => r.includes("missing verified numeric")));
 
 // 2b. Unsourced Benchmarks Rejection (Benchmarks present, but no source URL or verified confidence)
 const unsourcedModel = {
@@ -49,7 +62,7 @@ const unsourcedModel = {
 };
 const scoredUnsourced = scoreModelPage(unsourcedModel);
 assert.equal(scoredUnsourced.status, "thin");
-assert.ok(scoredUnsourced.reasons.some((r) => r.includes("missing verified numeric benchmarks")));
+assert.ok(scoredUnsourced.reasons.some((r) => r.includes("missing verified numeric")));
 
 // 3. Cross-Page Template Detection (Synthetic boilerplate must be rejected)
 const templatedModel = {
