@@ -23,17 +23,33 @@ function modelForScore(row) {
     slug: row.slug,
     developer: row.developer,
     releaseDate: row.release_date,
+    type: row.type,
+    status: row.status,
     parameters: row.parameters,
+    activeParameters: row.active_parameters,
     contextWindow: row.context_window,
+    modality: row.modality || [],
+    deployment: row.deployment || [],
+    primaryTask: row.primary_task,
     license: row.license,
+    family: row.family,
+    tier: row.tier,
+    previousVersion: row.previous_version,
+    baseModel: row.base_model,
     description: row.description,
     descriptionDraft: row.description_draft,
-    benchmarks: row.benchmarks,
     cardSummary: row.card_summary,
     pageOverview: row.page_overview,
     editorialNote: row.editorial_note,
-    links: row.links || row.resources || {},
     keyFeatures: row.key_features || [],
+    benchmarks: row.benchmarks || [],
+    pricing: row.pricing,
+    pricingLastVerified: row.pricing_last_verified,
+    links: row.links || row.resources || {},
+    sources: row.sources || [],
+    tags: row.tags || [],
+    quickstart: row.metadata?.quickstart,
+    customSections: row.metadata?.custom_sections,
   };
 }
 
@@ -95,20 +111,35 @@ async function main() {
     console.log(`📌 Model: ${row.name} (${row.slug})`);
     console.log(`   Quality Score : ${prevScore} ➔ ${gate.score}`);
     console.log(`   Quality Status: ${prevStatus} ➔ ${gate.status}`);
+    if (gate.breakdown) {
+      console.log(`   Breakdown     : ${JSON.stringify(gate.breakdown)}`);
+    }
     if (gate.reasons && gate.reasons.length > 0) {
       console.log(`   Gate Feedback : ${gate.reasons.join("; ")}`);
     }
 
     if (!dryRun) {
-      const { error: updateError } = await db
+      const updatePayload = {
+        quality_status: gate.status,
+        quality_score: gate.score,
+        quality_reasons: gate.reasons,
+        quality_checked_at: new Date().toISOString(),
+      };
+
+      // Try updating quality_breakdown, fallback gracefully if column isn't created yet in DB
+      let { error: updateError } = await db
         .from("models")
         .update({
-          quality_status: gate.status,
-          quality_score: gate.score,
-          quality_reasons: gate.reasons,
-          quality_checked_at: new Date().toISOString(),
+          ...updatePayload,
+          quality_breakdown: gate.breakdown,
         })
         .eq("id", row.id);
+
+      if (updateError && updateError.message.includes("quality_breakdown")) {
+        // Fallback without the new column
+        const res = await db.from("models").update(updatePayload).eq("id", row.id);
+        updateError = res.error;
+      }
 
       if (updateError) {
         console.error(`   ❌ Failed to update ${row.slug}:`, updateError.message);

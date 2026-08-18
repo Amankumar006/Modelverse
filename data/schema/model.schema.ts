@@ -106,9 +106,13 @@ export const ModelSchema = z.object({
   qualityScore: z.number().min(0).max(100).optional(),
   qualityReasons: z.array(z.string()).optional(),
   qualityCheckedAt: z.string().datetime().optional(),
+  qualityBreakdown: z.record(z.string(), z.any()).optional(),
   cardSummary: z.string().optional(),
   pageOverview: z.string().optional(),
   editorialNote: z.string().optional(),
+  chatgptAvailability: z.record(z.string(), z.any()).optional(),
+  apiAvailability: z.record(z.string(), z.any()).optional(),
+  aliases: z.array(z.string()).optional(),
 }).passthrough();
 
 export type Model = z.infer<typeof ModelSchema>;

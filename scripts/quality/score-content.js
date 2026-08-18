@@ -206,89 +206,165 @@ function scoreModelPage(model) {
   return safeResult(() => {
     const reasons = [];
 
-    // 1. Required Metadata Completeness (up to 15 points)
+    // 1. Identity Completeness (max 10)
+    const identityFields = [
+      ["name", model?.name],
+      ["slug", model?.slug],
+      ["developer", model?.developer],
+      ["release date", model?.releaseDate || model?.release_date],
+      ["license", model?.license],
+    ];
+    const identityFilled = identityFields.filter(([, value]) => populated(value)).length;
+    const identityScore = Math.round((10 * identityFilled) / identityFields.length);
+    if (identityFilled !== identityFields.length) {
+      reasons.push(`missing identity fields: ${identityFields.filter(([, value]) => !populated(value)).map(([name]) => name).join(", ")}`);
+    }
+
+    // 2. Specifications Completeness (max 10)
     const isProprietary = model?.type === "closed-source" || model?.type === "api-only" || model?.license === "Proprietary";
     const paramsValue = populated(model?.parameters)
       ? model.parameters
       : (isProprietary && Boolean(text(model?.parameters)) ? model.parameters : null);
 
-    const requiredFields = [
+    const specFields = [
       ["parameters", paramsValue],
       ["context window", model?.contextWindow || model?.context_window],
-      ["license", model?.license],
-      ["developer", model?.developer],
-      ["release date", model?.releaseDate || model?.release_date],
-      ["description", model?.description],
+      ["modality", Array.isArray(model?.modality) ? model.modality.length : model?.modality],
+      ["deployment", Array.isArray(model?.deployment) ? model.deployment.length : model?.deployment],
+      ["primary task", model?.primaryTask || model?.primary_task],
     ];
-    const filled = requiredFields.filter(([, value]) => populated(value)).length;
-    let score = (15 * filled) / requiredFields.length;
-    if (filled !== requiredFields.length) {
-      reasons.push(`incomplete fields: ${requiredFields.filter(([, value]) => !populated(value)).map(([name]) => name).join(", ")}`);
+    const specFilled = specFields.filter(([, value]) => populated(value)).length;
+    const specScore = Math.round((10 * specFilled) / specFields.length);
+    if (specFilled !== specFields.length) {
+      reasons.push(`incomplete specifications: ${specFields.filter(([, value]) => !populated(value)).map(([name]) => name).join(", ")}`);
     }
 
-    // 2. Verified Numeric Benchmarks with Provenance (up to 35 points — mandatory for index eligibility)
+    // 3. Lineage & Ancestry (max 8)
+    let lineageScore = 0;
+    if (populated(model?.family)) lineageScore += 3;
+    if (populated(model?.tier)) lineageScore += 2;
+    if (populated(model?.previousVersion || model?.previous_version || model?.baseModel || model?.base_model)) lineageScore += 3;
+
+    // 4. Content & Unique Architecture Overview (max 15)
+    const pageOverview = text(model?.pageOverview || model?.page_overview);
+    const cardSummary = text(model?.cardSummary || model?.card_summary);
+    const description = text(model?.description);
+    const poBoilerplate = isStructuralBoilerplate(pageOverview, model);
+    const csBoilerplate = isStructuralBoilerplate(cardSummary, model);
+
+    const uniqueTexts = new Set(modelTextFields(model).map((v) => v.replace(/\s+/g, " ").trim().toLowerCase()));
+    let contentScore = 0;
+
+    if (poBoilerplate || csBoilerplate) {
+      reasons.push("templated / boilerplate structural text detected");
+    } else {
+      if (description.length > 50) contentScore += 5;
+      if (cardSummary.length > 30) contentScore += 4;
+      if (pageOverview.length > 100) contentScore += 6;
+      if (uniqueTexts.size <= 1 && description.length > 0) {
+        contentScore = Math.max(3, contentScore - 5);
+        reasons.push("description duplicated across sections");
+      }
+    }
+
+    // 5. Getting Started & Integration Guides (max 12)
+    const quickstart = model?.quickstart || model?.metadata?.quickstart;
+    const customSections = model?.customSections || model?.custom_sections || model?.metadata?.custom_sections;
+    let gettingStartedScore = 0;
+    if (quickstart && typeof quickstart === "object") {
+      const codeLangs = Object.keys(quickstart).filter((k) => !["overview", "prerequisites", "installation", "environment", "env"].includes(k));
+      if (codeLangs.length >= 2) gettingStartedScore += 8;
+      else if (codeLangs.length >= 1) gettingStartedScore += 5;
+      if (quickstart.overview || quickstart.prerequisites || quickstart.installation) gettingStartedScore += 2;
+    }
+    if (Array.isArray(customSections) && customSections.length > 0) {
+      gettingStartedScore = Math.min(12, gettingStartedScore + 2);
+    }
+
+    // 6. Verified Numeric Benchmarks with Provenance (max 15 — key requirement for index status)
     const verifiedBenchmarks = Array.isArray(model?.benchmarks)
       ? model.benchmarks.filter((b) => benchmarkIsVerifiedAndSourced(b, model)).length
       : 0;
-    if (verifiedBenchmarks >= 2) {
-      score += 35;
+    let benchmarkScore = 0;
+    if (verifiedBenchmarks >= 4) {
+      benchmarkScore = 15;
+    } else if (verifiedBenchmarks >= 2) {
+      benchmarkScore = 12;
     } else if (verifiedBenchmarks === 1) {
-      score += 15;
+      benchmarkScore = 6;
       reasons.push("only one verified numeric benchmark with citation");
     } else {
       reasons.push("missing verified numeric benchmarks with citations");
     }
 
-    // 3. Unique Non-Templated Structural Content (up to 20 points)
-    const pageOverview = text(model?.pageOverview || model?.page_overview);
-    const cardSummary = text(model?.cardSummary || model?.card_summary);
-    const poBoilerplate = isStructuralBoilerplate(pageOverview, model);
-    const csBoilerplate = isStructuralBoilerplate(cardSummary, model);
-
-    const uniqueTexts = new Set(modelTextFields(model).map((v) => v.replace(/\s+/g, " ").trim().toLowerCase()));
-
-    if (poBoilerplate || csBoilerplate) {
-      reasons.push("templated / boilerplate structural text detected");
-    } else if (uniqueTexts.size > 1) {
-      score += 20;
-    } else {
-      reasons.push("description duplicated across sections");
+    // 7. Pricing & Commercial Transparency (max 8)
+    const pricing = model?.pricing;
+    let pricingScore = 0;
+    if (Array.isArray(pricing) && pricing.length > 0) {
+      pricingScore = 8;
+    } else if (pricing && typeof pricing === "object" && Object.keys(pricing).length > 0) {
+      pricingScore = 6;
+    } else if (model?.type === "open-source" || model?.type === "open-weights") {
+      pricingScore = 8; // Open weights models get full transparency points
     }
 
-    // 4. Genuine Reviewed Editorial Note (up to 15 points)
+    // 8. Sources & Provenance Attribution (max 10)
+    const sources = Array.isArray(model?.sources) ? model.sources.filter(validHttpUrl) : [];
+    const links = model?.links && typeof model.links === "object" ? Object.values(model.links).filter((l) => typeof l === "string" && validHttpUrl(l)) : [];
+    let sourcesScore = 0;
+    const totalSources = sources.length + links.length;
+    if (totalSources >= 3) sourcesScore = 10;
+    else if (totalSources >= 1) sourcesScore = 6;
+    else reasons.push("lacks verified resource links and source citations");
+
+    // 9. Genuine Reviewed Editorial Note (max 8)
     const editorialNote = text(model?.editorialNote || model?.editorial_note || model?.reviewedNote);
     const enBoilerplate = isStructuralBoilerplate(editorialNote, model);
+    let editorialScore = 0;
 
     if (enBoilerplate) {
       reasons.push("templated / boilerplate editorial note");
     } else if (editorialNote.length > 150) {
-      score += 15;
+      editorialScore = 8;
+    } else if (editorialNote.length > 50) {
+      editorialScore = 4;
     } else {
       reasons.push("missing genuine editorial note");
     }
 
-    // 5. Resource Links & Structured Key Features (up to 15 points)
-    const hasLinks = (model?.links && Object.keys(model.links).length > 0) || (Array.isArray(model?.sources) && model.sources.length > 0);
+    // 10. UI Completeness & Structured Key Features (max 4)
     const keyFeatures = model?.keyFeatures || model?.key_features;
     const hasFeatures = Array.isArray(keyFeatures) && keyFeatures.length >= 2;
+    let uiScore = 0;
+    if (hasFeatures) uiScore += 2;
+    if (Array.isArray(model?.tags) && model.tags.length >= 2) uiScore += 2;
 
-    if (hasLinks && hasFeatures) {
-      score += 15;
-    } else {
-      reasons.push("lacks verified resource links or structured key features");
-    }
-
-    // Comparison integrity check
+    // Comparison integrity penalty
     if (comparisonHasOwnPlaceholder(model)) {
-      score = Math.max(0, score - 15);
       reasons.push("comparison row has placeholder values");
+      uiScore = Math.max(0, uiScore - 4);
     }
 
+    let score = identityScore + specScore + lineageScore + contentScore + gettingStartedScore + benchmarkScore + pricingScore + sourcesScore + editorialScore + uiScore;
     score = Math.round(Math.max(0, Math.min(100, score)));
+
+    const breakdown = {
+      identity: identityScore,
+      specifications: specScore,
+      lineage: lineageScore,
+      content: contentScore,
+      gettingStarted: gettingStartedScore,
+      benchmarks: benchmarkScore,
+      pricing: pricingScore,
+      sources: sourcesScore,
+      editorial: editorialScore,
+      uiCompleteness: uiScore,
+      total: score,
+    };
 
     // Index gate: must score >= 65 AND have at least 2 verified benchmarks AND no boilerplate
     const isIndexed = score >= 65 && verifiedBenchmarks >= 2 && !poBoilerplate && !enBoilerplate;
-    return { score, status: isIndexed ? "indexed" : "thin", reasons };
+    return { score, status: isIndexed ? "indexed" : "thin", reasons, breakdown };
   }, "thin");
 }
 

@@ -269,14 +269,62 @@ export default function LineageSpecSection({ model }: LineageSpecSectionProps) {
             </div>
 
             {/* License */}
-            <div className="flex items-center justify-between py-1.5">
+            <div className="flex items-center justify-between py-1.5 border-b border-[var(--muted)]/10">
               <span className="text-[var(--muted)] font-medium flex items-center gap-1.5">
                 <ShieldCheck size={13} className="text-[var(--muted)]" />
                 License
               </span>
               <span className="font-bold text-[var(--text)]">{licenseStr}</span>
             </div>
+
+            {/* ChatGPT Availability (if defined) */}
+            {model.chatgptAvailability && (
+              <div className="flex items-center justify-between py-1.5 border-b border-[var(--muted)]/10">
+                <span className="text-[var(--muted)] font-medium">ChatGPT Access</span>
+                <span className="text-xs font-semibold text-[var(--text)] text-right">
+                  {(() => {
+                    const c = model.chatgptAvailability as { status?: string; plans?: string[]; access?: string };
+                    if (c.status === "active") {
+                      return `Active (${Array.isArray(c.plans) ? c.plans.join(", ") : c.access || "Available"})`;
+                    }
+                    if (c.status === "retired") {
+                      return "API Only (Retired from ChatGPT)";
+                    }
+                    return "Not available";
+                  })()}
+                </span>
+              </div>
+            )}
+
+            {/* API Availability (if defined) */}
+            {model.apiAvailability && (
+              <div className="flex items-center justify-between py-1.5">
+                <span className="text-[var(--muted)] font-medium">API Endpoint ID</span>
+                <span className="text-xs font-mono font-bold text-[var(--accent)]">
+                  {String((model.apiAvailability as { apiModelId?: string }).apiModelId || model.slug)}
+                </span>
+              </div>
+            )}
           </div>
+
+          {/* Canonical Aliases */}
+          {model.aliases && model.aliases.length > 0 && (
+            <div className="pt-2 border-t border-[var(--muted)]/10 space-y-1.5">
+              <span className="text-[10px] uppercase tracking-wider font-bold text-[var(--muted)] block">
+                Canonical Aliases
+              </span>
+              <div className="flex flex-wrap gap-1.5">
+                {model.aliases.map((alias) => (
+                  <span
+                    key={alias}
+                    className="px-2 py-0.5 rounded-[var(--radius-pill)] bg-[var(--accent-soft)]/20 text-[var(--accent)] border border-[var(--accent)]/30 text-[11px] font-mono font-medium"
+                  >
+                    {alias}
+                  </span>
+                ))}
+              </div>
+            </div>
+          )}
 
           {/* Regular Tags */}
           {regularTags.length > 0 && (

@@ -27,6 +27,10 @@ export interface ModelIndex {
   contextWindow?: string | Record<string, any>;
   primaryTask?: string;
   previousVersion?: string | null;
+  chatgptAvailability?: Record<string, unknown>;
+  apiAvailability?: Record<string, unknown>;
+  aliases?: string[];
+  qualityBreakdown?: Record<string, unknown>;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   metadata?: Record<string, any>;
 }
@@ -96,11 +100,15 @@ export interface ModelEntry extends ModelIndex {
   qualityScore?: number;
   qualityReasons?: string[];
   qualityCheckedAt?: string;
+  qualityBreakdown?: Record<string, unknown>;
   cardSummary?: string;
   pageOverview?: string;
   editorialNote?: string;
   customSections?: { id: string; title: string; content: string }[];
   quickstart?: Record<string, string>;
+  chatgptAvailability?: Record<string, unknown>;
+  apiAvailability?: Record<string, unknown>;
+  aliases?: string[];
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   metadata?: Record<string, any>;
 }
@@ -171,7 +179,7 @@ export function mapRowToModelEntry(row: any): ModelEntry {
     images: row.images || [],
     tags: row.tags || [],
     sources: row.sources || [],
-    verified: row.verified,
+    verified: Boolean(row.verified),
     needsReview: row.needs_review,
     curatorNotes: row.curator_notes,
     isLegacyCurated: row.is_legacy_curated,
@@ -185,9 +193,13 @@ export function mapRowToModelEntry(row: any): ModelEntry {
     qualityScore: row.quality_score,
     qualityReasons: row.quality_reasons || [],
     qualityCheckedAt: row.quality_checked_at,
+    qualityBreakdown: row.quality_breakdown,
     cardSummary: row.card_summary,
     pageOverview: row.page_overview,
     editorialNote: row.editorial_note,
+    chatgptAvailability: row.chatgpt_availability || row.metadata?.chatgptAvailability || row.metadata?.chatgpt_availability,
+    apiAvailability: row.api_availability || row.metadata?.apiAvailability || row.metadata?.api_availability,
+    aliases: row.aliases || row.metadata?.aliases || [],
     customSections: row.metadata?.custom_sections || row.metadata?.customSections || row.custom_sections || [],
     quickstart: row.metadata?.quickstart || row.quickstart || undefined,
     metadata: row.metadata || {},
@@ -215,9 +227,13 @@ function mapRowToModelIndex(row: any): ModelIndex {
     family: row.family,
     tier: row.tier,
     institution: row.institution,
-    verified: row.verified,
+    verified: Boolean(row.verified),
     verificationStatus: row.verification_status,
     qualityStatus: row.quality_status,
+    chatgptAvailability: row.chatgpt_availability || row.metadata?.chatgptAvailability || row.metadata?.chatgpt_availability,
+    apiAvailability: row.api_availability || row.metadata?.apiAvailability || row.metadata?.api_availability,
+    aliases: row.aliases || row.metadata?.aliases || [],
+    qualityBreakdown: row.quality_breakdown,
     description: row.description || row.metadata?.description || "",
     parameters: row.parameters || row.metadata?.parameters || "",
     contextWindow: row.context_window || row.metadata?.context_window || "",
