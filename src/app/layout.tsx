@@ -97,9 +97,17 @@ export default function RootLayout({
         "@id": `${SITE_URL}/#website`,
         url: SITE_URL,
         name: "Modelverse",
-        description: "Every AI model. Every release.",
+        description: "Every AI model. Every release. A structured, living archive of frontier LLMs and open weights.",
         publisher: {
           "@id": `${SITE_URL}/#organization`,
+        },
+        potentialAction: {
+          "@type": "SearchAction",
+          target: {
+            "@type": "EntryPoint",
+            urlTemplate: `${SITE_URL}/models?q={search_term_string}`,
+          },
+          "query-input": "required name=search_term_string",
         },
       },
       {
@@ -110,7 +118,13 @@ export default function RootLayout({
         logo: {
           "@type": "ImageObject",
           url: `${SITE_URL}/logos/social-avatar-1024.png`,
+          width: 1024,
+          height: 1024,
         },
+        sameAs: [
+          "https://x.com/themodelverse",
+          "https://github.com/Amankumar006/Modelverse",
+        ],
       },
     ],
   };

@@ -2,6 +2,7 @@ import { Metadata } from "next";
 import { getModelBySlug, getAllModels, SITE_URL } from "@/lib/models";
 import Navbar from "@/components/layout/Navbar";
 import CompareClient from "@/components/compare/CompareClient";
+import JsonLd from "@/components/JsonLd";
 
 export const revalidate = 60;
 
@@ -58,11 +59,25 @@ export async function generateMetadata({
   }
 
   return {
-    title: "Compare AI Models — Modelverse",
+    title: "Compare AI Models Side-by-Side — Modelverse",
     description:
       "Compare AI models side-by-side. Analyze parameters, context windows, benchmarks, and licensing to find the best model for your use case.",
     alternates: {
       canonical: `${SITE_URL}/compare`,
+    },
+    openGraph: {
+      title: "Compare AI Models Side-by-Side — Modelverse",
+      description: "Analyze parameters, context windows, benchmarks, and pricing across top AI foundation models.",
+      url: `${SITE_URL}/compare`,
+      type: "website",
+      siteName: "Modelverse",
+      images: [`${SITE_URL}/logos/social-avatar-1024.png`],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: "Compare AI Models Side-by-Side — Modelverse",
+      description: "Analyze parameters, context windows, benchmarks, and pricing across top AI foundation models.",
+      images: [`${SITE_URL}/logos/social-avatar-1024.png`],
     },
   };
 }
@@ -94,8 +109,33 @@ export default async function ComparePage({ searchParams }: PageProps) {
     (model): model is NonNullable<typeof model> => model !== null
   );
 
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "BreadcrumbList",
+        "@id": `${SITE_URL}/compare#breadcrumb`,
+        itemListElement: [
+          {
+            "@type": "ListItem",
+            position: 1,
+            name: "Home",
+            item: SITE_URL,
+          },
+          {
+            "@type": "ListItem",
+            position: 2,
+            name: "Compare Models",
+            item: `${SITE_URL}/compare`,
+          },
+        ],
+      },
+    ],
+  };
+
   return (
     <div className="min-h-screen bg-[var(--bg)] text-[var(--text)] font-sans flex flex-col justify-between">
+      <JsonLd data={jsonLd} />
       <div>
         <div className="sticky top-0 z-50 shrink-0 border-b border-[var(--muted)]/10 bg-[var(--bg)]">
           <Navbar />

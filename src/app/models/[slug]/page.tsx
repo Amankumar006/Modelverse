@@ -189,17 +189,49 @@ export default async function ModelDetailPage({
     };
   }
 
+  const breadcrumbEntity = {
+    "@type": "BreadcrumbList",
+    "@id": `${SITE_URL}/models/${model.slug}#breadcrumb`,
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "Home",
+        item: SITE_URL,
+      },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: "Models",
+        item: `${SITE_URL}/models`,
+      },
+      {
+        "@type": "ListItem",
+        position: 3,
+        name: model.developer,
+        item: `${SITE_URL}/models/developer/${encodeURIComponent(model.developer)}`,
+      },
+      {
+        "@type": "ListItem",
+        position: 4,
+        name: model.name,
+        item: `${SITE_URL}/models/${model.slug}`,
+      },
+    ],
+  };
+
   const structuredData = {
     "@context": "https://schema.org",
     "@graph": [
+      breadcrumbEntity,
       {
         "@type": "TechArticle",
         "@id": `${SITE_URL}/models/${model.slug}#article`,
-        headline: `${model.name} Overview`,
+        headline: `${model.name} Technical Specifications & Overview`,
         description: model.description,
         datePublished: model.releaseDate,
         dateModified: model.updatedAt || model.releaseDate,
-        publisher: { "@type": "Organization", name: "Modelverse" },
+        publisher: { "@type": "Organization", name: "Modelverse", url: SITE_URL },
         about: { "@id": `${SITE_URL}/models/${model.slug}#software` },
       },
       productEntity,

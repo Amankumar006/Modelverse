@@ -9,6 +9,7 @@ import Breadcrumb from "@/components/models/Breadcrumb";
 import ModelCard from "@/components/models/ModelCard";
 import Navbar from "@/components/layout/Navbar";
 import ClientBackButton from "@/components/ui/ClientBackButton";
+import JsonLd from "@/components/JsonLd";
 import { Sparkles, ArrowLeft, ArrowRight } from "lucide-react";
 
 export const revalidate = 60;
@@ -47,8 +48,8 @@ export async function generateMetadata({
   const primaryModel = models.find((m) => m.primaryTask === "chat-reasoning") || models.sort((a, b) => b.boost - a.boost)[0];
   const developer = primaryModel.developer;
   
-  const title = `${slug} Family by ${developer} — Modelverse`;
-  const description = `Explore all variants in the ${slug} family by ${developer}.`;
+  const title = `${slug} AI Models Family by ${developer} — Modelverse`;
+  const description = `Explore all ${models.length} model variants and specifications in the ${slug} family developed by ${developer}.`;
 
   return {
     title,
@@ -62,6 +63,20 @@ export async function generateMetadata({
       url: `${SITE_URL}/models/family/${encodeURIComponent(slug)}`,
       type: "website",
       siteName: "Modelverse",
+      images: [
+        {
+          url: `${SITE_URL}/logos/social-avatar-1024.png`,
+          width: 1024,
+          height: 1024,
+          alt: `${slug} AI Family`,
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: [`${SITE_URL}/logos/social-avatar-1024.png`],
     },
   };
 }
@@ -83,9 +98,63 @@ export default async function FamilyPage({
   const primaryModel = models.find((m) => m.primaryTask === "chat-reasoning") || models.sort((a, b) => b.boost - a.boost)[0];
   const developer = primaryModel.developer;
 
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "BreadcrumbList",
+        "@id": `${SITE_URL}/models/family/${encodeURIComponent(slug)}#breadcrumb`,
+        itemListElement: [
+          {
+            "@type": "ListItem",
+            position: 1,
+            name: "Home",
+            item: SITE_URL,
+          },
+          {
+            "@type": "ListItem",
+            position: 2,
+            name: "Models",
+            item: `${SITE_URL}/models`,
+          },
+          {
+            "@type": "ListItem",
+            position: 3,
+            name: developer,
+            item: `${SITE_URL}/models/developer/${encodeURIComponent(developer)}`,
+          },
+          {
+            "@type": "ListItem",
+            position: 4,
+            name: `${slug} Family`,
+            item: `${SITE_URL}/models/family/${encodeURIComponent(slug)}`,
+          },
+        ],
+      },
+      {
+        "@type": "CollectionPage",
+        "@id": `${SITE_URL}/models/family/${encodeURIComponent(slug)}#page`,
+        name: `${slug} Model Family`,
+        description: `Explore all variants in the ${slug} family by ${developer}.`,
+        url: `${SITE_URL}/models/family/${encodeURIComponent(slug)}`,
+        publisher: { "@type": "Organization", name: "Modelverse", url: SITE_URL },
+        mainEntity: {
+          "@type": "ItemList",
+          itemListElement: models.map((m, idx) => ({
+            "@type": "ListItem",
+            position: idx + 1,
+            name: m.name,
+            url: `${SITE_URL}/models/${m.slug}`,
+          })),
+        },
+      },
+    ],
+  };
+
   return (
     <main className="min-h-screen bg-[var(--bg)] text-[var(--text)] selection:bg-[var(--accent)] selection:text-white pb-24 relative">
       <Navbar theme="dark" />
+      <JsonLd data={jsonLd} />
       {/* ── Top Bar / Breadcrumb ─────────────────────────────── */}
       <header className="max-w-4xl mx-auto px-4 sm:px-6 pt-8 pb-4">
         <Breadcrumb developer={developer} family={{ slug, label: slug }} />

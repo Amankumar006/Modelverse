@@ -1,11 +1,9 @@
 import type { MetadataRoute } from "next";
-import { getAllModelEntries } from "@/lib/models";
+import { getAllModelEntries, SITE_URL } from "@/lib/models";
 import { getAllArticles } from "@/lib/news";
 import { NewsCategory } from "../../data/schema/news.schema";
 
 export const revalidate = 3600; // Revalidate every hour
-
-const BASE_URL = "https://www.themodelverse.in";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const entries = await getAllModelEntries();
@@ -13,82 +11,88 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   // Define static base routes
   const staticRoutes: MetadataRoute.Sitemap = [
     {
-      url: BASE_URL,
+      url: SITE_URL,
       lastModified: new Date(),
       changeFrequency: "daily",
       priority: 1.0,
     },
     {
-      url: `${BASE_URL}/models`,
+      url: `${SITE_URL}/models`,
+      lastModified: new Date(),
+      changeFrequency: "daily",
+      priority: 0.9,
+    },
+    {
+      url: `${SITE_URL}/models/benchmarks`,
+      lastModified: new Date(),
+      changeFrequency: "daily",
+      priority: 0.85,
+    },
+    {
+      url: `${SITE_URL}/compare`,
       lastModified: new Date(),
       changeFrequency: "daily",
       priority: 0.8,
     },
     {
-      url: `${BASE_URL}/timeline`,
+      url: `${SITE_URL}/timeline`,
       lastModified: new Date(),
       changeFrequency: "daily",
       priority: 0.8,
     },
     {
-      url: `${BASE_URL}/archive`,
+      url: `${SITE_URL}/archive`,
       lastModified: new Date(),
       changeFrequency: "daily",
       priority: 0.7,
     },
     {
-      url: `${BASE_URL}/trending`,
+      url: `${SITE_URL}/trending`,
       lastModified: new Date(),
       changeFrequency: "hourly",
       priority: 0.8,
     },
     {
-      url: `${BASE_URL}/news`,
+      url: `${SITE_URL}/news`,
       lastModified: new Date(),
       changeFrequency: "daily",
       priority: 0.8,
     },
     {
-      url: `${BASE_URL}/terms`,
-      lastModified: new Date(),
-      changeFrequency: "weekly",
-      priority: 0.5,
-    },
-    {
-      url: `${BASE_URL}/privacy`,
-      lastModified: new Date(),
-      changeFrequency: "weekly",
-      priority: 0.5,
-    },
-    {
-      url: `${BASE_URL}/methodology`,
+      url: `${SITE_URL}/methodology`,
       lastModified: new Date(),
       changeFrequency: "weekly",
       priority: 0.6,
     },
     {
-      url: `${BASE_URL}/submit`,
+      url: `${SITE_URL}/about`,
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.5,
+    },
+    {
+      url: `${SITE_URL}/submit`,
       lastModified: new Date(),
       changeFrequency: "weekly",
       priority: 0.6,
     },
     {
-      url: `${BASE_URL}/compare`,
+      url: `${SITE_URL}/terms`,
       lastModified: new Date(),
-      changeFrequency: "daily",
-      priority: 0.7,
+      changeFrequency: "weekly",
+      priority: 0.4,
     },
     {
-      url: `${BASE_URL}/security`,
+      url: `${SITE_URL}/privacy`,
+      lastModified: new Date(),
+      changeFrequency: "weekly",
+      priority: 0.4,
+    },
+    {
+      url: `${SITE_URL}/security`,
       lastModified: new Date(),
       changeFrequency: "monthly",
       priority: 0.3,
-    },
-    {
-      url: `${BASE_URL}/about`,
-      lastModified: new Date(),
-      changeFrequency: "monthly",
-      priority: 0.5,
     },
   ];
 
@@ -104,7 +108,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const modelRoutes: MetadataRoute.Sitemap = indexedEntries.map((entry) => {
     const lastModDate = entry.updatedAt || entry.releaseDate;
     return {
-      url: `${BASE_URL}/models/${entry.slug}`,
+      url: `${SITE_URL}/models/${entry.slug}`,
       lastModified: new Date(lastModDate),
       changeFrequency: "weekly",
       priority: 0.6,
@@ -115,7 +119,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const families = [...new Set(indexedEntries.map((e) => e.family))].filter(Boolean) as string[];
   const familyRoutes: MetadataRoute.Sitemap = families.map((familySlug) => {
     return {
-      url: `${BASE_URL}/models/family/${familySlug}`,
+      url: `${SITE_URL}/models/family/${familySlug}`,
       lastModified: new Date(),
       changeFrequency: "weekly",
       priority: 0.65,
@@ -126,7 +130,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const developers = [...new Set(indexedEntries.map((e) => e.developer))].filter(Boolean);
   const developerRoutes: MetadataRoute.Sitemap = developers.map((developer) => {
     return {
-      url: `${BASE_URL}/models/developer/${encodeURIComponent(developer)}`,
+      url: `${SITE_URL}/models/developer/${encodeURIComponent(developer)}`,
       lastModified: new Date(),
       changeFrequency: "weekly",
       priority: 0.7,
@@ -146,7 +150,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const addFacetUrls = (key: string, values: string[]) => {
     for (const val of values) {
       facetRoutes.push({
-        url: `${BASE_URL}/models?${key}=${encodeURIComponent(val)}`,
+        url: `${SITE_URL}/models?${key}=${encodeURIComponent(val)}`,
         lastModified: new Date(),
         changeFrequency: "daily",
         priority: 0.7,
@@ -163,7 +167,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   // Dynamic news categories
   const newsCategoryRoutes: MetadataRoute.Sitemap = NewsCategory.options.map((cat) => ({
-    url: `${BASE_URL}/news/category/${cat}`,
+    url: `${SITE_URL}/news/category/${cat}`,
     lastModified: new Date(),
     changeFrequency: "daily",
     priority: 0.7,
@@ -174,7 +178,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const newsArticleRoutes: MetadataRoute.Sitemap = allArticles.filter((article) => !article.qualityStatus || article.qualityStatus === "indexed").map((article) => {
     const lastModDate = article.updatedDate || article.publishDate;
     return {
-      url: `${BASE_URL}/news/${article.slug}`,
+      url: `${SITE_URL}/news/${article.slug}`,
       lastModified: new Date(lastModDate),
       changeFrequency: "weekly",
       priority: 0.75,

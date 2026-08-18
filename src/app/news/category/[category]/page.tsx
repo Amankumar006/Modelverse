@@ -3,6 +3,7 @@ import Link from "next/link";
 import Image from "@/components/ui/FallbackImage";
 import Navbar from "@/components/layout/Navbar";
 import NewsBreadcrumb from "@/components/news/NewsBreadcrumb";
+import JsonLd from "@/components/JsonLd";
 import { getArticlesByCategory, getCategoryLabel } from "@/lib/news";
 import { Clock, ArrowRight } from "lucide-react";
 import { SITE_URL } from "@/lib/models";
@@ -31,8 +32,8 @@ export async function generateMetadata({ params }: CategoryPageProps): Promise<M
   }
 
   const label = getCategoryLabel(category);
-  const title = `${label} Archives — Modelverse`;
-  const description = `Read the latest articles, analysis and releases related to ${label} on Modelverse.`;
+  const title = `${label} — AI Research & Analysis | Modelverse`;
+  const description = `Read the latest ${label} articles, technical reviews, and release breakdowns on Modelverse.`;
 
   return {
     title,
@@ -44,6 +45,22 @@ export async function generateMetadata({ params }: CategoryPageProps): Promise<M
       title,
       description,
       url: `${SITE_URL}/news/category/${category}`,
+      type: "website",
+      siteName: "Modelverse",
+      images: [
+        {
+          url: `${SITE_URL}/logos/social-avatar-1024.png`,
+          width: 1024,
+          height: 1024,
+          alt: `${label} Category`,
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: [`${SITE_URL}/logos/social-avatar-1024.png`],
     },
   };
 }
@@ -58,9 +75,48 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
   const posts = await getArticlesByCategory(category);
   const label = getCategoryLabel(category);
 
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "BreadcrumbList",
+        "@id": `${SITE_URL}/news/category/${category}#breadcrumb`,
+        itemListElement: [
+          {
+            "@type": "ListItem",
+            position: 1,
+            name: "Home",
+            item: SITE_URL,
+          },
+          {
+            "@type": "ListItem",
+            position: 2,
+            name: "News",
+            item: `${SITE_URL}/news`,
+          },
+          {
+            "@type": "ListItem",
+            position: 3,
+            name: label,
+            item: `${SITE_URL}/news/category/${category}`,
+          },
+        ],
+      },
+      {
+        "@type": "CollectionPage",
+        "@id": `${SITE_URL}/news/category/${category}#page`,
+        name: `${label} Archives`,
+        description: `Articles filed under the ${label} category on Modelverse.`,
+        url: `${SITE_URL}/news/category/${category}`,
+        publisher: { "@type": "Organization", name: "Modelverse", url: SITE_URL },
+      },
+    ],
+  };
+
   return (
     <main className="min-h-screen bg-[#141414] text-[#E1E1E0] selection:bg-emerald-500 selection:text-black pb-24 font-sans antialiased relative">
       <Navbar theme="dark" />
+      <JsonLd data={jsonLd} />
 
       {/* Header Container */}
       <div className="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-10 2xl:px-12 pt-10 sm:pt-14 text-left">

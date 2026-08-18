@@ -8,6 +8,7 @@ import {
 import ModelCatalog from "@/components/models/ModelCatalog";
 import Breadcrumb from "@/components/models/Breadcrumb";
 import Navbar from "@/components/layout/Navbar";
+import JsonLd from "@/components/JsonLd";
 
 export const revalidate = 60;
 
@@ -32,8 +33,8 @@ export async function generateMetadata({
     return { title: "Developer Not Found — Modelverse" };
   }
 
-  const title = `${decodedDeveloper} AI Models — Modelverse`;
-  const description = `Explore all AI models developed by ${decodedDeveloper} in the Modelverse catalog.`;
+  const title = `${decodedDeveloper} AI Models — Catalog & Specifications | Modelverse`;
+  const description = `Explore all ${models.length} AI models developed by ${decodedDeveloper} with technical specs, benchmarks, context windows, and pricing.`;
 
   return {
     title,
@@ -47,6 +48,20 @@ export async function generateMetadata({
       url: `${SITE_URL}/models/developer/${encodeURIComponent(decodedDeveloper)}`,
       type: "website",
       siteName: "Modelverse",
+      images: [
+        {
+          url: `${SITE_URL}/logos/social-avatar-1024.png`,
+          width: 1024,
+          height: 1024,
+          alt: `${decodedDeveloper} Models`,
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: [`${SITE_URL}/logos/social-avatar-1024.png`],
     },
   };
 }
@@ -67,9 +82,57 @@ export default async function DeveloperPage({
     notFound();
   }
 
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "BreadcrumbList",
+        "@id": `${SITE_URL}/models/developer/${encodeURIComponent(decodedDeveloper)}#breadcrumb`,
+        itemListElement: [
+          {
+            "@type": "ListItem",
+            position: 1,
+            name: "Home",
+            item: SITE_URL,
+          },
+          {
+            "@type": "ListItem",
+            position: 2,
+            name: "Models",
+            item: `${SITE_URL}/models`,
+          },
+          {
+            "@type": "ListItem",
+            position: 3,
+            name: decodedDeveloper,
+            item: `${SITE_URL}/models/developer/${encodeURIComponent(decodedDeveloper)}`,
+          },
+        ],
+      },
+      {
+        "@type": "CollectionPage",
+        "@id": `${SITE_URL}/models/developer/${encodeURIComponent(decodedDeveloper)}#page`,
+        name: `${decodedDeveloper} AI Models`,
+        description: `A complete catalog of AI models developed by ${decodedDeveloper}.`,
+        url: `${SITE_URL}/models/developer/${encodeURIComponent(decodedDeveloper)}`,
+        publisher: { "@type": "Organization", name: "Modelverse", url: SITE_URL },
+        mainEntity: {
+          "@type": "ItemList",
+          itemListElement: models.map((m, idx) => ({
+            "@type": "ListItem",
+            position: idx + 1,
+            name: m.name,
+            url: `${SITE_URL}/models/${m.slug}`,
+          })),
+        },
+      },
+    ],
+  };
+
   return (
     <main className="min-h-screen bg-[var(--bg)] text-[var(--text)] selection:bg-[var(--accent)] selection:text-white pb-24 relative">
       <Navbar theme="dark" />
+      <JsonLd data={jsonLd} />
       {/* ── Top Bar / Breadcrumb ─────────────────────────────── */}
       <header className="w-full mx-auto px-4 sm:px-6 lg:px-8 2xl:px-12 pt-8 pb-4">
         <Breadcrumb developer={decodedDeveloper} />

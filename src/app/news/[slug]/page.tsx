@@ -97,28 +97,68 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
 
   const jsonLd = {
     "@context": "https://schema.org",
-    "@type": "NewsArticle",
-    "headline": article.title,
-    "image": [
-      article.coverImage.startsWith("http") ? article.coverImage : `${SITE_URL}${article.coverImage}`
-    ],
-    "datePublished": article.publishDate,
-    "dateModified": article.updatedDate || article.publishDate,
-    "author": [
+    "@graph": [
       {
-        "@type": "Person",
-        "name": article.author,
-      }
+        "@type": "BreadcrumbList",
+        "@id": `${SITE_URL}/news/${article.slug}#breadcrumb`,
+        itemListElement: [
+          {
+            "@type": "ListItem",
+            position: 1,
+            name: "Home",
+            item: SITE_URL,
+          },
+          {
+            "@type": "ListItem",
+            position: 2,
+            name: "News",
+            item: `${SITE_URL}/news`,
+          },
+          {
+            "@type": "ListItem",
+            position: 3,
+            name: getCategoryLabel(article.category),
+            item: `${SITE_URL}/news/category/${article.category}`,
+          },
+          {
+            "@type": "ListItem",
+            position: 4,
+            name: article.title,
+            item: `${SITE_URL}/news/${article.slug}`,
+          },
+        ],
+      },
+      {
+        "@type": "NewsArticle",
+        "@id": `${SITE_URL}/news/${article.slug}#article`,
+        headline: article.title,
+        image: [
+          article.coverImage.startsWith("http") ? article.coverImage : `${SITE_URL}${article.coverImage}`,
+        ],
+        datePublished: article.publishDate,
+        dateModified: article.updatedDate || article.publishDate,
+        author: [
+          {
+            "@type": "Person",
+            name: article.author,
+          },
+        ],
+        publisher: {
+          "@type": "Organization",
+          name: "Modelverse",
+          url: SITE_URL,
+          logo: {
+            "@type": "ImageObject",
+            url: `${SITE_URL}/logos/social-avatar-1024.png`,
+          },
+        },
+        description: article.excerpt,
+        mainEntityOfPage: {
+          "@type": "WebPage",
+          "@id": `${SITE_URL}/news/${article.slug}`,
+        },
+      },
     ],
-    "publisher": {
-      "@type": "Organization",
-      "name": "Modelverse",
-      "logo": {
-        "@type": "ImageObject",
-        "url": `${SITE_URL}/logo.svg`
-      }
-    },
-    "description": article.excerpt
   };
 
   return (
