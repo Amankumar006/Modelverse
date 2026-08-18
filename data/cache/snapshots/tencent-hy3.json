@@ -1,0 +1,11 @@
+{
+  "modelId": "cb62caf3-32d9-40c5-b271-aaa58093dce1",
+  "slug": "tencent-hy3",
+  "name": "Hy3",
+  "crawledAt": "2026-08-18T18:51:03.809Z",
+  "crawledUrls": [
+    "https://hy.tencent.com/research/hy3"
+  ],
+  "byteCounts": 163,
+  "text": "## Model Description (Hy3)\nTencent's flagship open-weights Mixture-of-Experts reasoning model, utilizing hybrid thinking and active chain-of-thought configuration."
+}
