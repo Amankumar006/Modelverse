@@ -2,7 +2,8 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import {
-  getAllModelEntries,
+  getAllFamilies,
+  getModelsByFamily,
   SITE_URL,
 } from "@/lib/models";
 import Breadcrumb from "@/components/models/Breadcrumb";
@@ -15,17 +16,7 @@ import { Sparkles, ArrowLeft, ArrowRight } from "lucide-react";
 export const revalidate = 60;
 
 export async function generateStaticParams() {
-  const models = await getAllModelEntries();
-  const seen = new Set<string>();
-  const families: string[] = [];
-  for (const m of models) {
-    if (!m.family) continue;
-    const key = m.family.toLowerCase().replace(/[^a-z0-9]/g, "");
-    if (!seen.has(key)) {
-      seen.add(key);
-      families.push(m.family);
-    }
-  }
+  const families = await getAllFamilies();
   return families.map((slug) => ({
     slug,
   }));
@@ -38,8 +29,7 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { slug: rawSlug } = await params;
   const slug = decodeURIComponent(rawSlug);
-  const allModels = await getAllModelEntries();
-  const models = allModels.filter((m) => m.family === slug);
+  const models = await getModelsByFamily(slug);
   
   if (models.length === 0) {
     return { title: "Family Not Found — Modelverse" };
@@ -88,8 +78,7 @@ export default async function FamilyPage({
 }) {
   const { slug: rawSlug } = await params;
   const slug = decodeURIComponent(rawSlug);
-  const allModels = await getAllModelEntries();
-  const models = allModels.filter((m) => m.family === slug);
+  const models = await getModelsByFamily(slug);
 
   if (models.length === 0) {
     notFound();
@@ -187,8 +176,8 @@ export default async function FamilyPage({
 
         <div className="flex flex-col gap-6">
           {models.map((model) => {
-            const nextVersionModel = allModels.find(m => m.previousVersion === model.slug);
-            const prevVersionModel = model.previousVersion ? allModels.find(m => m.slug === model.previousVersion) : null;
+            const nextVersionModel = models.find((m) => m.previousVersion === model.slug);
+            const prevVersionModel = model.previousVersion ? models.find((m) => m.slug === model.previousVersion) : null;
             
             return (
               <div key={model.id} className="flex flex-col gap-2 bg-[var(--card-bg)] p-3 rounded-2xl border border-[var(--muted)]/10">

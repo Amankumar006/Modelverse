@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Image from "@/components/ui/FallbackImage";
 import HeroSection from "@/components/hero/HeroSection";
 import ModelCard from "@/components/models/ModelCard";
-import { getModelCount, SITE_URL, getAllModelEntries } from "@/lib/models";
+import { getModelCount, SITE_URL, getAllModels } from "@/lib/models";
 import { getAllArticles } from "@/lib/news";
 import Reveal from "@/components/ui/Reveal";
 import Link from "next/link";
@@ -14,7 +14,7 @@ import {
   Clock,
   Trophy,
 } from "lucide-react";
-import type { ModelEntry } from "@/lib/models";
+import type { ModelIndex } from "@/lib/models";
 
 export const revalidate = 3600;
 
@@ -43,7 +43,7 @@ export const metadata: Metadata = {
 };
 
 export default async function Home() {
-  const allModels = await getAllModelEntries();
+  const allModels = await getAllModels();
   const totalModels = await getModelCount();
   const verifiedCount = allModels.filter((m) => m.verified).length;
   const latestArticles = (await getAllArticles()).slice(0, 4);
@@ -56,7 +56,7 @@ export default async function Home() {
   );
 
   // Pick top 5 indexed models: 1 featured (spans 2 cols) + up to 4 regular
-  const homepageModels: ModelEntry[] = indexedModels.slice(0, 5);
+  const homepageModels: ModelIndex[] = indexedModels.slice(0, 5);
 
   return (
     <main className="bg-[var(--bg)] text-[var(--text)] selection:bg-[var(--accent-soft)] selection:text-[var(--accent)] min-h-screen">

@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import {
-  getAllModelEntries,
+  getModelsByDeveloper,
   getAllDevelopers,
   SITE_URL,
 } from "@/lib/models";
@@ -26,8 +26,7 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { developer } = await params;
   const decodedDeveloper = decodeURIComponent(developer);
-  const allModels = await getAllModelEntries();
-  const models = allModels.filter((m) => m.developer === decodedDeveloper);
+  const models = await getModelsByDeveloper(decodedDeveloper);
   
   if (models.length === 0) {
     return { title: "Developer Not Found — Modelverse" };
@@ -74,9 +73,10 @@ export default async function DeveloperPage({
   const { developer } = await params;
   const decodedDeveloper = decodeURIComponent(developer);
   
-  const allModels = await getAllModelEntries();
-  const models = allModels.filter((m) => m.developer === decodedDeveloper);
-  const developers = await getAllDevelopers();
+  const [models, developers] = await Promise.all([
+    getModelsByDeveloper(decodedDeveloper),
+    getAllDevelopers(),
+  ]);
 
   if (models.length === 0) {
     notFound();

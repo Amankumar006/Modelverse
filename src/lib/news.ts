@@ -67,7 +67,15 @@ function mapDbRowToArticle(row: any): any {
   };
 }
 
+let cachedArticles: { data: NewsArticleIndexEntry[]; timestamp: number } | null = null;
+const CACHE_TTL_MS = 60000;
+
 export async function getAllArticles(): Promise<NewsArticleIndexEntry[]> {
+  const now = Date.now();
+  if (cachedArticles && now - cachedArticles.timestamp < CACHE_TTL_MS) {
+    return cachedArticles.data;
+  }
+
   const { data, error } = await supabase
     .from("news_items")
     .select("id, slug, title, category, publish_date, updated_at, author, read_time, excerpt, cover_image, status, confidence_level, external_sources, sources, related_models, tags, quality_status, quality_score, quality_reasons, quality_checked_at")
@@ -91,6 +99,7 @@ export async function getAllArticles(): Promise<NewsArticleIndexEntry[]> {
     return article;
   });
 
+  cachedArticles = { data: mapped, timestamp: now };
   return mapped;
 }
 

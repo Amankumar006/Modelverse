@@ -245,31 +245,53 @@ function mapRowToModelIndex(row: any): ModelIndex {
 }
 
 /* ------------------------------------------------------------------ */
-/*  Public API (Supabase Backend)                                     */
+/*  Public API (Supabase Backend with Build-Time In-Memory Cache)      */
 /* ------------------------------------------------------------------ */
+
+let cachedModelEntries: { data: ModelEntry[]; timestamp: number } | null = null;
+let cachedModelIndexes: { data: ModelIndex[]; timestamp: number } | null = null;
+const CACHE_TTL_MS = 60000; // 60 seconds in-memory cache
 
 /** Return lightweight index summaries, sorted newest-first. Excludes staged, disputed, and redirected models. */
 export async function getAllModels(): Promise<ModelIndex[]> {
+  const now = Date.now();
+  if (cachedModelIndexes && now - cachedModelIndexes.timestamp < CACHE_TTL_MS) {
+    return cachedModelIndexes.data;
+  }
+
   const { data } = await supabase
     .from('models')
     .select('id, name, slug, developer, release_date, type, status, vendor_api_status, featured, boost, family, tier, institution, verified, verification_status, quality_status, description, parameters, context_window, primary_task, previous_version, metadata')
     .neq('status', 'staged')
     .order('release_date', { ascending: false });
-  return (data || [])
+  
+  const result = (data || [])
     .filter((m) => m.verification_status !== 'DISPUTED' && !m.metadata?.redirect_to && !m.metadata?.redirectTo)
     .map(mapRowToModelIndex);
+
+  cachedModelIndexes = { data: result, timestamp: now };
+  return result;
 }
 
 /** Return all full model entries, sorted newest-first. Excludes staged, disputed, and redirected models. */
 export async function getAllModelEntries(): Promise<ModelEntry[]> {
+  const now = Date.now();
+  if (cachedModelEntries && now - cachedModelEntries.timestamp < CACHE_TTL_MS) {
+    return cachedModelEntries.data;
+  }
+
   const { data } = await supabase
     .from('models')
     .select('*')
     .neq('status', 'staged')
     .order('release_date', { ascending: false });
-  return (data || [])
+  
+  const result = (data || [])
     .filter((m) => m.verification_status !== 'DISPUTED' && !m.metadata?.redirect_to && !m.metadata?.redirectTo)
     .map(mapRowToModelEntry);
+
+  cachedModelEntries = { data: result, timestamp: now };
+  return result;
 }
 
 
@@ -324,6 +346,55 @@ export async function getRelatedModels(primaryTask: string, excludeId?: string):
   return (data || [])
     .filter((m) => m.verification_status !== 'DISPUTED' && !m.metadata?.redirect_to && !m.metadata?.redirectTo)
     .map(mapRowToModelIndex);
+}
+
+/** Get all models belonging to a specific family */
+export async function getModelsByFamily(family: string): Promise<ModelEntry[]> {
+  const { data } = await supabase
+    .from('models')
+    .select('*')
+    .eq('family', family)
+    .neq('status', 'staged')
+    .order('release_date', { ascending: false });
+  return (data || [])
+    .filter((m) => m.verification_status !== 'DISPUTED' && !m.metadata?.redirect_to && !m.metadata?.redirectTo)
+    .map(mapRowToModelEntry);
+}
+
+/** Get all models belonging to a specific developer */
+export async function getModelsByDeveloper(developer: string): Promise<ModelEntry[]> {
+  const { data } = await supabase
+    .from('models')
+    .select('*')
+    .eq('developer', developer)
+    .neq('status', 'staged')
+    .order('release_date', { ascending: false });
+  return (data || [])
+    .filter((m) => m.verification_status !== 'DISPUTED' && !m.metadata?.redirect_to && !m.metadata?.redirectTo)
+    .map(mapRowToModelEntry);
+}
+
+/** Get all unique families from the models */
+export async function getAllFamilies(): Promise<string[]> {
+  const { data } = await supabase
+    .from('models')
+    .select('family, status, verification_status, metadata')
+    .not('family', 'is', null)
+    .neq('status', 'staged');
+  const validRows = (data || []).filter(
+    (row) => row.verification_status !== 'DISPUTED' && !row.metadata?.redirect_to && !row.metadata?.redirectTo
+  );
+  const seen = new Set<string>();
+  const families: string[] = [];
+  for (const row of validRows) {
+    if (!row.family) continue;
+    const key = row.family.toLowerCase().replace(/[^a-z0-9]/g, '');
+    if (!seen.has(key)) {
+      seen.add(key);
+      families.push(row.family);
+    }
+  }
+  return families.sort();
 }
 
 /** Get all unique developers from the models. */
