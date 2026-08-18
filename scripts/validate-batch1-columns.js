@@ -46,6 +46,10 @@ async function validate() {
   const reportRows = [];
 
   for (const r of records) {
+    const benchmarks = Array.isArray(r.benchmarks) ? r.benchmarks : [];
+    const expectedPerfCount = benchmarks.filter((b) => String(b.metricType || "performance").toLowerCase() === "performance" && b.verified).length;
+    const actualPerfCount = r.quality_breakdown?.performanceBenchmarkCount ?? expectedPerfCount;
+
     const checks = {
       nonNullChatGpt: r.chatgpt_availability !== null && typeof r.chatgpt_availability === "object",
       nonNullApi: r.api_availability !== null && typeof r.api_availability === "object" && Boolean(r.api_availability.apiModelId),
@@ -53,6 +57,7 @@ async function validate() {
       noDuplicateAliases: Array.isArray(r.aliases) && new Set(r.aliases).size === r.aliases.length,
       nonNullBreakdown: r.quality_breakdown !== null && typeof r.quality_breakdown === "object",
       breakdownMatchesScore: r.quality_breakdown && r.quality_breakdown.total === r.quality_score,
+      benchmarkInvariantMatches: actualPerfCount === expectedPerfCount,
       validQualityStatus: r.quality_score >= 65 ? r.quality_status === "indexed" : r.quality_status === "thin",
     };
 
