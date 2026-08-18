@@ -2,12 +2,25 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
-import { type ModelEntry, type ModelIndex } from "@/lib/models";
-import ModelDetailTabs from "./ModelDetailTabs";
-import QuickstartSection from "./QuickstartSection";
+import { type ModelEntry, type ModelIndex, formatParameters } from "@/lib/models";
 import Navbar from "@/components/layout/Navbar";
 import MarkdownRenderer from "@/components/ui/MarkdownRenderer";
-import { Search, ChevronDown, Copy, Check, Shield } from "lucide-react";
+import QuickstartSection from "./QuickstartSection";
+import LineageSpecSection from "./LineageSpecSection";
+import CustomSectionsView from "./CustomSectionsView";
+import BenchmarksSection from "./BenchmarksSection";
+import PricingSection from "./PricingSection";
+import ComparableModelsSection from "./ComparableModelsSection";
+import SourcesSection from "./SourcesSection";
+import {
+  Search,
+  ChevronDown,
+  Copy,
+  Check,
+  ShieldCheck,
+  Sparkles,
+  FileCode2,
+} from "lucide-react";
 
 interface ModelDocsLayoutProps {
   model: ModelEntry;
@@ -20,30 +33,44 @@ interface ModelDocsLayoutProps {
 export default function ModelDocsLayout({
   model,
   markdownContent,
-  familyMembers,
+  familyMembers = [],
   relatedModels = [],
 }: ModelDocsLayoutProps) {
-  const [copied, setCopied] = useState(false);
+  const [copiedPage, setCopiedPage] = useState(false);
+  const [copiedSlug, setCopiedSlug] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
 
   const handleCopyPage = () => {
     if (typeof window !== "undefined") {
       navigator.clipboard.writeText(window.location.href);
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2000);
+      setCopiedPage(true);
+      setTimeout(() => setCopiedPage(false), 2000);
     }
   };
 
-  const comparisonModels = [
-    model,
-    ...(relatedModels || []).slice(0, 3),
-  ];
+  const handleCopySlug = () => {
+    if (typeof window !== "undefined") {
+      navigator.clipboard.writeText(model.slug);
+      setCopiedSlug(true);
+      setTimeout(() => setCopiedSlug(false), 2000);
+    }
+  };
 
-  const quickstart = (model.quickstart || model.metadata?.quickstart || {}) as Record<string, string>;
-  const hasQuickstart = Object.values(quickstart).some(
-    (code) => typeof code === "string" && code.trim().length > 0
-  );
+  // Quickstart and custom sections detection
+  const quickstartData = model.quickstart || model.metadata?.quickstart;
+  const customSectionsData = model.customSections || model.metadata?.custom_sections || model.metadata?.customSections;
+  const hasQuickstart = Boolean(quickstartData && typeof quickstartData === "object" && Object.keys(quickstartData).length > 0);
+  const hasCustomSections = Boolean(Array.isArray(customSectionsData) && customSectionsData.length > 0);
+  const hasKeyFeatures = Boolean(model.keyFeatures && model.keyFeatures.length > 0);
+  const distinctCardSummary =
+    model.cardSummary && model.cardSummary.trim() !== model.description.trim() ? model.cardSummary.trim() : null;
+  const distinctPageOverview =
+    model.pageOverview && model.pageOverview.trim() !== model.description.trim() && model.pageOverview.trim() !== distinctCardSummary
+      ? model.pageOverview.trim()
+      : null;
+  const editorialNote = model.editorialNote?.trim();
 
+  // Left Navigation Menu
   const renderLeftNav = () => (
     <>
       {/* Search Box */}
@@ -63,44 +90,56 @@ export default function ModelDocsLayout({
 
       {/* Menu Sections */}
       <div className="space-y-1 text-xs">
-        <p className="px-2 py-1 font-bold text-[var(--text)] text-xs uppercase tracking-wider">Models</p>
+        <p className="px-2 py-1 font-bold text-[var(--text)] text-xs uppercase tracking-wider">Models Catalog</p>
 
         <Link
           href={`/models/${model.slug}`}
           className="block px-3 py-2 rounded-[var(--radius-control)] bg-[var(--accent-soft)] text-[var(--accent)] font-bold shadow-sm"
         >
-          Models overview
+          {model.name}
         </Link>
 
         <Link
           href={`/models/developer/${encodeURIComponent(model.developer)}`}
           className="block px-3 py-2 rounded-[var(--radius-control)] text-[var(--muted)] hover:text-[var(--text)] hover:bg-[var(--bg)] transition-colors font-medium"
         >
-          Model IDs & versioning
+          {model.developer} Models
         </Link>
 
-        {familyMembers.map((member) => (
+        {model.family && (
           <Link
-            key={member.id}
-            href={`/models/${member.slug}`}
-            className="block px-3 py-2 rounded-[var(--radius-control)] text-[var(--muted)] hover:text-[var(--text)] hover:bg-[var(--bg)] transition-colors truncate font-medium"
+            href={`/models/family/${encodeURIComponent(model.family)}`}
+            className="block px-3 py-2 rounded-[var(--radius-control)] text-[var(--muted)] hover:text-[var(--text)] hover:bg-[var(--bg)] transition-colors font-medium"
           >
-            What&apos;s new in {member.name}
+            {model.family} Generation
           </Link>
-        ))}
+        )}
+
+        {familyMembers.slice(0, 6).map((member) => {
+          if (member.slug === model.slug) return null;
+          return (
+            <Link
+              key={member.id}
+              href={`/models/${member.slug}`}
+              className="block px-3 py-2 rounded-[var(--radius-control)] text-[var(--muted)] hover:text-[var(--text)] hover:bg-[var(--bg)] transition-colors truncate font-medium pl-5"
+            >
+              {member.name}
+            </Link>
+          );
+        })}
 
         <Link
           href="/models/upgrade"
           className="block px-3 py-2 rounded-[var(--radius-control)] text-[var(--muted)] hover:text-[var(--text)] hover:bg-[var(--bg)] transition-colors font-medium"
         >
-          Upgrade model versions
+          Upgrade paths &amp; migrations
         </Link>
 
         <Link
           href="/models/benchmarks"
           className="block px-3 py-2 rounded-[var(--radius-control)] text-[var(--muted)] hover:text-[var(--text)] hover:bg-[var(--bg)] transition-colors font-medium"
         >
-          Model cards & benchmarks
+          Global leaderboard
         </Link>
       </div>
     </>
@@ -119,249 +158,307 @@ export default function ModelDocsLayout({
         </aside>
 
         {/* CENTER COLUMN: Main Reading Area */}
-        <main className="flex-1 max-w-[860px] py-4 space-y-8 min-w-0">
-          
+        <main className="flex-1 max-w-[880px] py-2 space-y-10 min-w-0">
           {/* Mobile Left Nav Collapsible */}
-          <details className="lg:hidden group rounded-[var(--radius-card)] bg-[var(--card-bg)] shadow-[var(--shadow-card)] border border-[var(--muted)]/10 mb-8">
+          <details className="lg:hidden group rounded-[var(--radius-card)] bg-[var(--card-bg)] shadow-[var(--shadow-card)] border border-[var(--muted)]/10 mb-6">
             <summary className="p-4 font-bold text-[var(--text)] text-sm cursor-pointer list-none flex justify-between items-center">
               <span>Documentation Navigation</span>
               <ChevronDown size={16} className="text-[var(--muted)] group-open:rotate-180 transition-transform" />
             </summary>
-            <div className="p-4 pt-0 space-y-6">
-              {renderLeftNav()}
-            </div>
+            <div className="p-4 pt-0 space-y-6">{renderLeftNav()}</div>
           </details>
-          {/* Breadcrumb & Header */}
-          <div className="space-y-3">
-            <p className="text-xs text-[var(--muted)] font-medium">
-              Models & pricing / <span className="text-[var(--text)] font-semibold">Models</span> / {model.name}
-            </p>
 
-            <div className="flex flex-wrap items-center justify-between gap-4">
-              <div className="flex flex-col gap-1">
-                <h1 className="font-extrabold text-3xl sm:text-4xl text-[var(--text)] tracking-tight flex items-center gap-3">
-                  {model.name} Overview
+          {/* ══════════════════════════════════════════════════════════ */}
+          {/* 1. MODEL HEADER / IDENTITY                                  */}
+          {/* ══════════════════════════════════════════════════════════ */}
+          <section id="identity" className="space-y-4">
+            {/* Breadcrumb Path */}
+            <nav aria-label="Breadcrumb" className="text-xs text-[var(--muted)] font-medium flex items-center gap-1.5 flex-wrap">
+              <Link href="/models" className="hover:text-[var(--text)]">Models</Link>
+              <span>/</span>
+              <Link href={`/models/developer/${encodeURIComponent(model.developer)}`} className="hover:text-[var(--text)]">
+                {model.developer}
+              </Link>
+              {model.family && (
+                <>
+                  <span>/</span>
+                  <Link href={`/models/family/${encodeURIComponent(model.family)}`} className="hover:text-[var(--text)]">
+                    {model.family}
+                  </Link>
+                </>
+              )}
+              <span>/</span>
+              <span className="text-[var(--text)] font-semibold">{model.name}</span>
+            </nav>
+
+            {/* Title & Top Action Bar */}
+            <div className="flex flex-wrap items-start justify-between gap-4">
+              <div className="space-y-2">
+                <div className="flex items-center gap-3 flex-wrap">
+                  <h1 className="font-extrabold text-3xl sm:text-4xl text-[var(--text)] tracking-tight">
+                    {model.name}
+                  </h1>
                   {model.verified ? (
-                    <Shield size={24} className="text-emerald-500" />
+                    <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-[var(--radius-pill)] bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 text-xs font-semibold">
+                      <ShieldCheck size={13} />
+                      Verified Model
+                    </span>
                   ) : (
-                    <span
-                      aria-label="Unverified model"
-                      title="Unverified Data"
-                      className="w-3 h-3 rounded-full border-2 border-amber-500 bg-transparent shrink-0 ml-2"
-                    />
+                    <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-[var(--radius-pill)] bg-amber-500/10 text-amber-400 border border-amber-500/20 text-xs font-semibold">
+                      Community Record
+                    </span>
                   )}
-                </h1>
-                {model.verified ? (() => {
-                  const verificationDate = model.verifiedAt || model.updatedAt || model.releaseDate;
-                  const isEstimated = !model.verifiedAt;
-                  return (
-                    <p className="text-xs text-[var(--muted)] font-mono">
-                      Confirmed against {model.developer} documentation, {new Date(verificationDate).toLocaleString('default', { month: 'long', year: 'numeric' })}{isEstimated ? ' (estimated)' : ''}
-                    </p>
-                  );
-                })() : (
-                  <p className="text-xs text-amber-600/80 dark:text-amber-500/80 font-mono">
-                  This model&apos;s data has not been fully verified and benchmarks may be missing.
-                  </p>
-                )}
+                  <span className="capitalize px-2 py-0.5 rounded-[var(--radius-pill)] bg-[var(--accent-soft)] text-[var(--accent)] text-xs font-semibold">
+                    {model.status || "Active"}
+                  </span>
+                </div>
+
+                {/* API Identifier Copy Badge */}
+                <div className="flex items-center gap-2 flex-wrap">
+                  <span className="text-xs text-[var(--muted)] font-medium">API Model ID:</span>
+                  <div className="inline-flex items-center gap-1.5 bg-[var(--card-bg)] border border-[var(--muted)]/10 px-2.5 py-1 rounded-[var(--radius-control)] shadow-sm">
+                    <code className="text-xs font-mono font-bold text-[var(--accent)]">{model.slug}</code>
+                    <button
+                      type="button"
+                      onClick={handleCopySlug}
+                      className="text-[var(--muted)] hover:text-[var(--text)] p-0.5 transition-colors cursor-pointer"
+                      title="Copy API identifier"
+                    >
+                      {copiedSlug ? <Check size={12} className="text-emerald-400" /> : <Copy size={12} />}
+                    </button>
+                  </div>
+                </div>
               </div>
 
-              <button
-                onClick={handleCopyPage}
-                className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-[var(--radius-pill)] border border-[var(--muted)]/10 bg-[var(--card-bg)] shadow-[var(--shadow-card)] text-xs font-bold text-[var(--text)] hover:border-[var(--accent)] transition-all cursor-pointer"
-              >
-                {copied ? <Check size={13} className="text-[var(--accent)]" /> : <Copy size={13} />}
-                <span>{copied ? "Copied!" : "Copy page"}</span>
-              </button>
+              {/* Action Buttons */}
+              <div className="flex items-center gap-2">
+                <button
+                  type="button"
+                  onClick={handleCopyPage}
+                  className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-[var(--radius-pill)] border border-[var(--muted)]/10 bg-[var(--card-bg)] shadow-[var(--shadow-card)] text-xs font-bold text-[var(--text)] hover:border-[var(--accent)] transition-all cursor-pointer"
+                >
+                  {copiedPage ? <Check size={13} className="text-emerald-400" /> : <Copy size={13} />}
+                  <span>{copiedPage ? "Copied!" : "Copy URL"}</span>
+                </button>
+              </div>
             </div>
 
-            <div className="text-base sm:text-lg text-[var(--muted)] leading-relaxed max-w-3xl font-normal">
-              <MarkdownRenderer
-                content={
-                  model.description ||
-                  `${model.name} is a state-of-the-art model developed by ${model.developer}. This documentation introduces the available model variants and compares their capability, context window, and pricing performance.`
-                }
-              />
-            </div>
-          </div>
-
-          {/* Section 1: Model Variant Overview */}
-          <section id="overview" className="space-y-4 pt-6 border-t border-[var(--muted)]/10">
-            <h2 className="text-2xl font-extrabold text-[var(--text)]">Model Lineage & Specification</h2>
-            <p className="text-sm text-[var(--muted)] leading-relaxed font-normal">
-              <code className="bg-[var(--tag-bg)] text-[var(--tag-text)] px-2 py-0.5 rounded-[var(--radius-pill)] text-xs font-mono font-bold">{model.slug}</code> is {model.developer}&apos;s primary release in the {model.family || "current"} family.
-            </p>
-            <div className="p-5 rounded-[var(--radius-card)] bg-[var(--card-bg)] shadow-[var(--shadow-card)] border border-[var(--muted)]/10 space-y-3 text-xs">
-              <div className="flex justify-between py-1.5 border-b border-[var(--muted)]/10">
-                <span className="text-[var(--muted)] font-medium">Developer</span>
-                <span className="text-[var(--text)] font-bold">{model.developer}</span>
+            {/* Quick Stat Pill Ribbon */}
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 pt-2 text-xs">
+              <div className="p-3 rounded-[var(--radius-card)] bg-[var(--card-bg)] border border-[var(--muted)]/10 space-y-0.5">
+                <span className="text-[var(--muted)] font-medium text-[11px] block">Developer</span>
+                <span className="font-bold text-[var(--text)] truncate block">{model.developer}</span>
               </div>
-              <div className="flex justify-between py-1.5 border-b border-[var(--muted)]/10">
-                <span className="text-[var(--muted)] font-medium">API Identifier</span>
-                <code className="bg-[var(--tag-bg)] text-[var(--tag-text)] px-2 py-0.5 rounded-[var(--radius-pill)] font-mono font-bold">{model.slug}</code>
-              </div>
-              <div className="flex justify-between py-1.5 border-b border-[var(--muted)]/10">
-                <span className="text-[var(--muted)] font-medium">Parameters</span>
-                <span className="text-[var(--text)] font-bold tabular-nums font-mono">
-                  {model.parameters ? (typeof model.parameters === "object" ? Object.values(model.parameters).join(" / ") : model.parameters) : "—"}
+              <div className="p-3 rounded-[var(--radius-card)] bg-[var(--card-bg)] border border-[var(--muted)]/10 space-y-0.5">
+                <span className="text-[var(--muted)] font-medium text-[11px] block">Parameters</span>
+                <span className="font-mono tabular-nums font-bold text-[var(--text)] truncate block">
+                  {formatParameters(model)}
                 </span>
               </div>
-              <div className="flex justify-between py-1.5 border-b border-[var(--muted)]/10">
-                <span className="text-[var(--muted)] font-medium">Context Window</span>
-                <span className="text-[var(--text)] font-bold tabular-nums font-mono">
-                  {model.contextWindow ? (typeof model.contextWindow === "object" ? (model.contextWindow as { native?: number }).native : model.contextWindow) : "—"}
+              <div className="p-3 rounded-[var(--radius-card)] bg-[var(--card-bg)] border border-[var(--muted)]/10 space-y-0.5">
+                <span className="text-[var(--muted)] font-medium text-[11px] block">Context Window</span>
+                <span className="font-mono tabular-nums font-bold text-[var(--text)] truncate block">
+                  {typeof model.contextWindow === "object" && model.contextWindow !== null
+                    ? (model.contextWindow as { native?: number }).native
+                      ? `${(model.contextWindow as { native?: number }).native} tokens`
+                      : JSON.stringify(model.contextWindow)
+                    : model.contextWindow || "Undisclosed"}
                 </span>
               </div>
-              <div className="flex justify-between py-1.5">
-                <span className="text-[var(--muted)] font-medium">License</span>
-                <span className="text-[var(--text)] font-bold">
-                  {model.license && typeof model.license === "object" ? model.license.name || "Custom" : model.license || "Unknown"}
+              <div className="p-3 rounded-[var(--radius-card)] bg-[var(--card-bg)] border border-[var(--muted)]/10 space-y-0.5">
+                <span className="text-[var(--muted)] font-medium text-[11px] block">License</span>
+                <span className="font-bold text-[var(--text)] truncate block">
+                  {model.license && typeof model.license === "object"
+                    ? (model.license as { name?: string }).name || "Custom"
+                    : model.license || "Not specified"}
                 </span>
               </div>
             </div>
           </section>
 
-          {/* Section 2: Getting Started (Quickstart) */}
-          {hasQuickstart && (
-            <section id="getting-started" className="space-y-4 pt-6 border-t border-[var(--muted)]/10">
-              <h2 className="text-2xl font-extrabold text-[var(--text)]">Getting Started</h2>
-              <QuickstartSection quickstart={quickstart} />
-            </section>
-          )}
+          {/* ══════════════════════════════════════════════════════════ */}
+          {/* 9. OVERVIEW & DESCRIPTIONS                                 */}
+          {/* ══════════════════════════════════════════════════════════ */}
+          <section id="overview" className="space-y-4 pt-4 border-t border-[var(--muted)]/10">
+            {/* Primary Description */}
+            <div className="text-base sm:text-lg text-[var(--text)] leading-relaxed font-normal max-w-3xl">
+              <MarkdownRenderer
+                content={
+                  model.description ||
+                  `${model.name} is an advanced AI model developed by ${model.developer}, indexed and benchmarked in the Modelverse registry.`
+                }
+              />
+            </div>
 
-          {/* Section 3: Latest Models Comparison Table */}
-          {comparisonModels.length > 1 && (
-          <section id="comparison" className="space-y-4 pt-6 border-t border-[var(--muted)]/10">
-            <h2 className="text-2xl font-extrabold text-[var(--text)]">Comparable models</h2>
-            <>
-              {/* Desktop Table View */}
-              <div className="hidden md:block overflow-x-auto rounded-[var(--radius-card)] border border-[var(--muted)]/10 bg-[var(--card-bg)] shadow-[var(--shadow-card)]">
-                <table className="w-full text-left text-xs text-[var(--muted)]">
-                  <thead className="bg-[var(--accent-soft)]/20 border-b border-[var(--muted)]/10 text-[var(--text)] font-bold">
-                    <tr>
-                      <th className="p-3.5 font-bold">Feature</th>
-                      {comparisonModels.map((m) => (
-                        <th key={m.id} className="p-3.5 font-bold text-[var(--text)]">
-                          {m.name}
-                        </th>
-                      ))}
-                    </tr>
-                  </thead>
-                  <tbody className="divide-y divide-[var(--muted)]/10">
-                    <tr>
-                      <td className="p-3.5 font-bold text-[var(--text)]">Description</td>
-                      {comparisonModels.map((m) => (
-                        <td key={m.id} className="p-3.5 text-[11px] leading-relaxed text-[var(--muted)]">
-                          {m.description ? m.description.slice(0, 80) + "..." : "Frontier AI model"}
-                        </td>
-                      ))}
-                    </tr>
-                    <tr>
-                      <td className="p-3.5 font-bold text-[var(--text)]">API Identifier</td>
-                      {comparisonModels.map((m) => (
-                        <td key={m.id} className="p-3.5 font-mono text-[11px]">
-                          <code className="bg-[var(--tag-bg)] text-[var(--tag-text)] px-2 py-0.5 rounded-[var(--radius-pill)] font-bold">
-                            {m.slug}
-                          </code>
-                        </td>
-                      ))}
-                    </tr>
-                    <tr>
-                      <td className="p-3.5 font-bold text-[var(--text)]">Parameters</td>
-                      {comparisonModels.map((m) => {
-                        const p = m.parameters ? (typeof m.parameters === "object" && m.parameters !== null ? Object.values(m.parameters).join(" / ") : m.parameters) : "—";
-                        return (
-                          <td key={m.id} className="p-3.5 font-mono tabular-nums text-[var(--text)] font-bold">
-                            {p !== "undisclosed" ? p : "—"}
-                          </td>
-                        );
-                      })}
-                    </tr>
-                    <tr>
-                      <td className="p-3.5 font-bold text-[var(--text)]">Context Window</td>
-                      {comparisonModels.map((m) => {
-                        const cw = m.contextWindow ? (typeof m.contextWindow === "object" && m.contextWindow !== null ? (m.contextWindow as { native?: number }).native : m.contextWindow) : "—";
-                        return (
-                          <td key={m.id} className="p-3.5 font-mono tabular-nums text-[var(--text)] font-bold">
-                            {cw !== "undisclosed" ? cw : "—"}
-                          </td>
-                        );
-                      })}
-                    </tr>
-                    <tr>
-                      <td className="p-3.5 font-bold text-[var(--text)]">License / Type</td>
-                      {comparisonModels.map((m) => (
-                        <td key={m.id} className="p-3.5 text-[var(--muted)] capitalize font-medium">
-                          {m.type.replace("-", " ")}
-                        </td>
-                      ))}
-                    </tr>
-                  </tbody>
-                </table>
+            {/* Card Summary (if distinct) */}
+            {distinctCardSummary && (
+              <div className="p-4 rounded-[var(--radius-card)] bg-[var(--accent-soft)]/15 border border-[var(--accent)]/20 text-sm text-[var(--text)] leading-relaxed">
+                <span className="text-[10px] uppercase tracking-wider font-bold text-[var(--accent)] block mb-1">
+                  Executive Summary
+                </span>
+                <MarkdownRenderer content={distinctCardSummary} />
               </div>
+            )}
 
-              {/* Mobile Card Stack View */}
-              <div className="md:hidden grid grid-cols-1 gap-4">
-                {comparisonModels.map((m) => {
-                  const p = m.parameters ? (typeof m.parameters === "object" && m.parameters !== null ? Object.values(m.parameters).join(" / ") : m.parameters) : "—";
-                  const cw = m.contextWindow ? (typeof m.contextWindow === "object" && m.contextWindow !== null ? (m.contextWindow as { native?: number }).native : m.contextWindow) : "—";
+            {/* Page Overview (deep technical architecture breakdown) */}
+            {distinctPageOverview && (
+              <div className="space-y-2 pt-2">
+                <h3 className="text-lg font-extrabold text-[var(--text)] tracking-tight">
+                  Architecture &amp; System Overview
+                </h3>
+                <div className="text-sm text-[var(--text)] leading-relaxed prose prose-invert max-w-none">
+                  <MarkdownRenderer content={distinctPageOverview} />
+                </div>
+              </div>
+            )}
+          </section>
+
+          {/* ══════════════════════════════════════════════════════════ */}
+          {/* 8. KEY FEATURES                                            */}
+          {/* ══════════════════════════════════════════════════════════ */}
+          {hasKeyFeatures && (
+            <section id="key-features" className="space-y-4 pt-6 border-t border-[var(--muted)]/10">
+              <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[var(--accent)] mb-1">
+                <Sparkles size={14} />
+                <span>Capabilities &amp; Highlights</span>
+              </div>
+              <h2 className="text-2xl sm:text-3xl font-extrabold text-[var(--text)] tracking-tight">
+                Key Features
+              </h2>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
+                {model.keyFeatures!.map((feature, idx) => {
+                  const cleanFeature = feature.replace(/^[\s—–\-•*]+\s*/, "");
                   return (
-                    <div key={m.id} className="rounded-[var(--radius-card)] border border-[var(--muted)]/10 bg-[var(--card-bg)] shadow-[var(--shadow-card)] p-4 space-y-3">
-                      <h3 className="font-extrabold text-[var(--text)] text-sm">{m.name}</h3>
-                      <p className="text-[11px] leading-relaxed text-[var(--muted)] border-b border-[var(--muted)]/10 pb-2">
-                        {m.description ? m.description.slice(0, 80) + "..." : "Frontier AI model"}
-                      </p>
-                      <div className="grid grid-cols-2 gap-2 text-xs">
-                        <div>
-                          <span className="text-[var(--muted)] font-bold block mb-1">API ID</span>
-                          <code className="bg-[var(--tag-bg)] text-[var(--tag-text)] px-1.5 py-0.5 rounded-[var(--radius-pill)] font-mono text-[10px] font-bold">
-                            {m.slug}
-                          </code>
-                        </div>
-                        <div>
-                          <span className="text-[var(--muted)] font-bold block mb-1">Type</span>
-                          <span className="text-[var(--text)] capitalize font-medium">
-                            {m.type.replace("-", " ")}
-                          </span>
-                        </div>
-                        <div>
-                          <span className="text-[var(--muted)] font-bold block mb-1">Parameters</span>
-                          <span className="font-mono tabular-nums text-[var(--text)] font-bold">
-                            {p !== "undisclosed" ? p : "—"}
-                          </span>
-                        </div>
-                        <div>
-                          <span className="text-[var(--muted)] font-bold block mb-1">Context</span>
-                          <span className="font-mono tabular-nums text-[var(--text)] font-bold">
-                            {cw !== "undisclosed" ? cw : "—"}
-                          </span>
-                        </div>
-                      </div>
+                    <div
+                      key={idx}
+                      className="rounded-[var(--radius-card)] bg-[var(--card-bg)] shadow-[var(--shadow-card)] p-3.5 border border-[var(--muted)]/10 flex items-start gap-2.5"
+                    >
+                      <span className="w-1.5 h-1.5 rounded-full bg-[var(--accent)] mt-2 shrink-0" />
+                      <span className="text-xs sm:text-sm text-[var(--text)] leading-relaxed font-medium">
+                        {cleanFeature}
+                      </span>
                     </div>
                   );
                 })}
               </div>
-            </>
-          </section>
+            </section>
           )}
 
-          {/* Section 4: Detailed Model Tabs & Markdown Readme */}
-          <section id="benchmarks" className="pt-6 border-t border-[var(--muted)]/10">
-            <ModelDetailTabs model={model} markdownContent={markdownContent} />
-          </section>
+          {/* ══════════════════════════════════════════════════════════ */}
+          {/* 2. MODEL LINEAGE & SPECIFICATION                           */}
+          {/* ══════════════════════════════════════════════════════════ */}
+          <LineageSpecSection model={model} />
+
+          {/* ══════════════════════════════════════════════════════════ */}
+          {/* 3. GETTING STARTED                                         */}
+          {/* ══════════════════════════════════════════════════════════ */}
+          {hasQuickstart && (
+            <QuickstartSection quickstart={quickstartData} modelName={model.name} developer={model.developer} />
+          )}
+
+          {/* ══════════════════════════════════════════════════════════ */}
+          {/* 4. CUSTOM DOCUMENTATION SECTIONS                           */}
+          {/* ══════════════════════════════════════════════════════════ */}
+          {hasCustomSections && <CustomSectionsView customSections={customSectionsData} />}
+
+          {/* ══════════════════════════════════════════════════════════ */}
+          {/* 7. COMPARABLE MODELS                                       */}
+          {/* ══════════════════════════════════════════════════════════ */}
+          {relatedModels.length > 0 && (
+            <ComparableModelsSection currentModel={model} comparableModels={relatedModels} />
+          )}
+
+          {/* ══════════════════════════════════════════════════════════ */}
+          {/* 5. BENCHMARKS                                              */}
+          {/* ══════════════════════════════════════════════════════════ */}
+          <BenchmarksSection
+            benchmarks={model.benchmarks}
+            visibleCols={model.metadata?.visible_benchmark_cols}
+            benchmarkColumns={model.metadata?.benchmark_columns}
+            developer={model.developer}
+          />
+
+          {/* ══════════════════════════════════════════════════════════ */}
+          {/* 6. PRICING                                                 */}
+          {/* ══════════════════════════════════════════════════════════ */}
+          <PricingSection
+            pricing={model.pricing}
+            pricingLastVerified={model.pricingLastVerified}
+            costTiers={model.costTiers}
+            modelType={model.type}
+          />
+
+          {/* ══════════════════════════════════════════════════════════ */}
+          {/* 9. EDITORIAL ANALYSIS                                      */}
+          {/* ══════════════════════════════════════════════════════════ */}
+          {editorialNote && (
+            <section id="editorial-analysis" className="space-y-4 pt-6 border-t border-[var(--muted)]/10">
+              <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[var(--accent)] mb-1">
+                <Sparkles size={14} className="text-[var(--accent)]" />
+                <span>Expert Editorial Assessment</span>
+              </div>
+              <h2 className="text-2xl sm:text-3xl font-extrabold text-[var(--text)] tracking-tight">
+                Modelverse Editorial Analysis
+              </h2>
+              <div className="rounded-[var(--radius-card)] bg-[var(--card-bg)] shadow-[var(--shadow-card)] p-6 border border-[var(--accent)]/30 space-y-3 relative overflow-hidden">
+                <div className="absolute top-0 left-0 w-1.5 h-full bg-[var(--accent)]" />
+                <div className="text-sm text-[var(--text)] leading-relaxed prose prose-invert max-w-none font-normal">
+                  <MarkdownRenderer content={editorialNote} />
+                </div>
+              </div>
+            </section>
+          )}
+
+          {/* Candidate Markdown Readme (if attached) */}
+          {markdownContent && (
+            <section id="readme-docs" className="space-y-4 pt-6 border-t border-[var(--muted)]/10">
+              <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[var(--accent)] mb-1">
+                <FileCode2 size={14} />
+                <span>Supplementary Documentation</span>
+              </div>
+              <h2 className="text-2xl sm:text-3xl font-extrabold text-[var(--text)] tracking-tight">
+                Technical Readme
+              </h2>
+              <div className="p-6 rounded-[var(--radius-card)] bg-[var(--card-bg)] shadow-[var(--shadow-card)] border border-[var(--muted)]/10">
+                <MarkdownRenderer content={markdownContent} />
+              </div>
+            </section>
+          )}
+
+          {/* ══════════════════════════════════════════════════════════ */}
+          {/* 10. SOURCES & PROVENANCE                                   */}
+          {/* ══════════════════════════════════════════════════════════ */}
+          <SourcesSection
+            sources={model.sources}
+            links={model.links}
+            developer={model.developer}
+            modelName={model.name}
+          />
         </main>
 
         {/* RIGHT COLUMN: Table of Contents */}
-        <aside className="w-56 shrink-0 hidden xl:block p-5 border-l border-[var(--muted)]/10 sticky top-20 h-[calc(100vh-6rem)] text-xs space-y-4">
+        <aside className="w-56 shrink-0 hidden xl:block p-5 border-l border-[var(--muted)]/10 sticky top-20 h-[calc(100vh-6rem)] overflow-y-auto text-xs space-y-4">
           <div className="flex items-center gap-1.5 text-[var(--text)] font-bold">
             <span className="w-1.5 h-3.5 bg-[var(--accent)] rounded-full" />
-            <span>Table of Contents</span>
+            <span>On This Page</span>
           </div>
 
-          <ul className="space-y-2.5 text-[var(--muted)] pl-2 border-l border-[var(--muted)]/10 font-medium">
+          <ul className="space-y-2 text-[var(--muted)] pl-2 border-l border-[var(--muted)]/10 font-medium">
             <li>
-              <a href="#overview" className="hover:text-[var(--accent)] transition-colors block">
-                Model lineage & specification
+              <a href="#identity" className="hover:text-[var(--accent)] transition-colors block">
+                Overview &amp; Identity
+              </a>
+            </li>
+            {hasKeyFeatures && (
+              <li>
+                <a href="#key-features" className="hover:text-[var(--accent)] transition-colors block">
+                  Key features
+                </a>
+              </li>
+            )}
+            <li>
+              <a href="#lineage-spec" className="hover:text-[var(--accent)] transition-colors block">
+                Lineage &amp; specification
               </a>
             </li>
             {hasQuickstart && (
@@ -371,16 +468,47 @@ export default function ModelDocsLayout({
                 </a>
               </li>
             )}
-            {comparisonModels.length > 1 && (
+            {hasCustomSections && (
               <li>
-                <a href="#comparison" className="hover:text-[var(--accent)] transition-colors block">
+                <a href="#custom-sections" className="hover:text-[var(--accent)] transition-colors block">
+                  Integration guides
+                </a>
+              </li>
+            )}
+            {relatedModels.length > 0 && (
+              <li>
+                <a href="#comparable-models" className="hover:text-[var(--accent)] transition-colors block">
                   Comparable models
                 </a>
               </li>
             )}
             <li>
               <a href="#benchmarks" className="hover:text-[var(--accent)] transition-colors block">
-                Benchmarks & specifications
+                Verified benchmarks
+              </a>
+            </li>
+            <li>
+              <a href="#pricing" className="hover:text-[var(--accent)] transition-colors block">
+                API pricing
+              </a>
+            </li>
+            {editorialNote && (
+              <li>
+                <a href="#editorial-analysis" className="hover:text-[var(--accent)] transition-colors block">
+                  Editorial analysis
+                </a>
+              </li>
+            )}
+            {markdownContent && (
+              <li>
+                <a href="#readme-docs" className="hover:text-[var(--accent)] transition-colors block">
+                  Technical readme
+                </a>
+              </li>
+            )}
+            <li>
+              <a href="#sources" className="hover:text-[var(--accent)] transition-colors block">
+                Sources &amp; provenance
               </a>
             </li>
           </ul>

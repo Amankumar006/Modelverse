@@ -27,6 +27,8 @@ export interface ModelIndex {
   contextWindow?: string | Record<string, any>;
   primaryTask?: string;
   previousVersion?: string | null;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  metadata?: Record<string, any>;
 }
 
 export interface Benchmark {
@@ -221,6 +223,7 @@ function mapRowToModelIndex(row: any): ModelIndex {
     contextWindow: row.context_window || row.metadata?.context_window || "",
     primaryTask: row.primary_task || row.metadata?.primary_task || "",
     previousVersion: row.previous_version || row.metadata?.previous_version || undefined,
+    metadata: row.metadata || {},
   };
 }
 
@@ -228,19 +231,19 @@ function mapRowToModelIndex(row: any): ModelIndex {
 /*  Public API (Supabase Backend)                                     */
 /* ------------------------------------------------------------------ */
 
-/** Return lightweight index summaries, sorted newest-first. Excludes staged and disputed models. */
+/** Return lightweight index summaries, sorted newest-first. Excludes staged, disputed, and redirected models. */
 export async function getAllModels(): Promise<ModelIndex[]> {
   const { data } = await supabase
     .from('models')
-    .select('id, name, slug, developer, release_date, type, status, vendor_api_status, featured, boost, family, tier, institution, verified, verification_status, quality_status, description, parameters, context_window, primary_task, previous_version')
+    .select('id, name, slug, developer, release_date, type, status, vendor_api_status, featured, boost, family, tier, institution, verified, verification_status, quality_status, description, parameters, context_window, primary_task, previous_version, metadata')
     .neq('status', 'staged')
     .order('release_date', { ascending: false });
   return (data || [])
-    .filter((m) => m.verification_status !== 'DISPUTED')
+    .filter((m) => m.verification_status !== 'DISPUTED' && !m.metadata?.redirect_to && !m.metadata?.redirectTo)
     .map(mapRowToModelIndex);
 }
 
-/** Return all full model entries, sorted newest-first. Excludes staged and disputed models. */
+/** Return all full model entries, sorted newest-first. Excludes staged, disputed, and redirected models. */
 export async function getAllModelEntries(): Promise<ModelEntry[]> {
   const { data } = await supabase
     .from('models')
@@ -248,7 +251,7 @@ export async function getAllModelEntries(): Promise<ModelEntry[]> {
     .neq('status', 'staged')
     .order('release_date', { ascending: false });
   return (data || [])
-    .filter((m) => m.verification_status !== 'DISPUTED')
+    .filter((m) => m.verification_status !== 'DISPUTED' && !m.metadata?.redirect_to && !m.metadata?.redirectTo)
     .map(mapRowToModelEntry);
 }
 
@@ -269,8 +272,9 @@ export async function getModelBySlug(slug: string): Promise<ModelEntry | null> {
 export async function getFamilyModels(family: string, excludeId?: string): Promise<ModelIndex[]> {
   let query = supabase
     .from('models')
-    .select('id, name, slug, developer, release_date, type, status, vendor_api_status, featured, boost, family, tier, institution, verified, verification_status, quality_status, description, parameters, context_window, primary_task')
+    .select('id, name, slug, developer, release_date, type, status, vendor_api_status, featured, boost, family, tier, institution, verified, verification_status, quality_status, description, parameters, context_window, primary_task, metadata')
     .eq('family', family)
+    .neq('status', 'staged')
     .order('release_date', { ascending: false })
     .limit(8);
 
@@ -279,16 +283,19 @@ export async function getFamilyModels(family: string, excludeId?: string): Promi
   }
 
   const { data } = await query;
-  return (data || []).map(mapRowToModelIndex);
+  return (data || [])
+    .filter((m) => m.verification_status !== 'DISPUTED' && !m.metadata?.redirect_to && !m.metadata?.redirectTo)
+    .map(mapRowToModelIndex);
 }
 
 /** Read related models sharing the same primary task (lightweight index projection). */
 export async function getRelatedModels(primaryTask: string, excludeId?: string): Promise<ModelIndex[]> {
   let query = supabase
     .from('models')
-    .select('id, name, slug, developer, release_date, type, status, vendor_api_status, featured, boost, family, tier, institution, verified, verification_status, quality_status, description, parameters, context_window, primary_task')
+    .select('id, name, slug, developer, release_date, type, status, vendor_api_status, featured, boost, family, tier, institution, verified, verification_status, quality_status, description, parameters, context_window, primary_task, metadata')
     .eq('primary_task', primaryTask)
     .eq('quality_status', 'indexed')
+    .neq('status', 'staged')
     .order('release_date', { ascending: false })
     .limit(4);
 
@@ -297,24 +304,34 @@ export async function getRelatedModels(primaryTask: string, excludeId?: string):
   }
 
   const { data } = await query;
-  return (data || []).map(mapRowToModelIndex);
+  return (data || [])
+    .filter((m) => m.verification_status !== 'DISPUTED' && !m.metadata?.redirect_to && !m.metadata?.redirectTo)
+    .map(mapRowToModelIndex);
 }
 
 /** Get all unique developers from the models. */
 export async function getAllDevelopers(): Promise<string[]> {
   const { data } = await supabase
     .from('models')
-    .select('developer');
-  const devs = new Set((data || []).map(row => row.developer));
+    .select('developer, status, verification_status, metadata')
+    .neq('status', 'staged');
+  const validRows = (data || []).filter(
+    (row) => row.verification_status !== 'DISPUTED' && !row.metadata?.redirect_to && !row.metadata?.redirectTo
+  );
+  const devs = new Set(validRows.map(row => row.developer));
   return Array.from(devs).sort();
 }
 
 /** Get total count of models tracked. */
 export async function getModelCount(): Promise<number> {
-  const { count } = await supabase
+  const { data } = await supabase
     .from('models')
-    .select('*', { count: 'exact', head: true });
-  return count || 0;
+    .select('id, status, verification_status, metadata')
+    .neq('status', 'staged');
+  const count = (data || []).filter(
+    (m) => m.verification_status !== 'DISPUTED' && !m.metadata?.redirect_to && !m.metadata?.redirectTo
+  ).length;
+  return count;
 }
 
 
