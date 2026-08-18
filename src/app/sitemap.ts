@@ -94,7 +94,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   // Dynamic model detail pages
   // Only models that meet the strict verified provenance gate are included in sitemap.
-  const indexedEntries = entries.filter((entry) => entry.qualityStatus === "indexed");
+  const indexedEntries = entries.filter(
+    (entry) =>
+      entry.qualityStatus === "indexed" &&
+      entry.status !== "sunset" &&
+      !entry.metadata?.redirect_to &&
+      !entry.metadata?.redirectTo
+  );
   const modelRoutes: MetadataRoute.Sitemap = indexedEntries.map((entry) => {
     const lastModDate = entry.updatedAt || entry.releaseDate;
     return {

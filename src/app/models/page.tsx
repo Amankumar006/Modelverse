@@ -128,7 +128,7 @@ export async function generateMetadata({ searchParams }: PageProps): Promise<Met
 
 export default async function BrowsePage({ searchParams }: PageProps) {
   const resolvedSearchParams = await searchParams;
-  const models = await getAllModelEntries();
+  const models = (await getAllModelEntries()).filter((m) => m.status !== "sunset");
   const developers = await getAllDevelopers();
 
   return (

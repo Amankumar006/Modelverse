@@ -1,7 +1,7 @@
 import fs from "fs/promises";
 import path from "path";
 import type { Metadata } from "next";
-import { notFound } from "next/navigation";
+import { notFound, permanentRedirect } from "next/navigation";
 import {
   getAllModels,
   getModelBySlug,
@@ -18,7 +18,7 @@ export const revalidate = 60;
 export async function generateStaticParams() {
   const models = await getAllModels();
   return models
-    .filter((m) => m.status !== "staged" && m.verificationStatus !== "DISPUTED")
+    .filter((m) => m.status !== "staged" && m.verificationStatus !== "DISPUTED" && !m.metadata?.redirect_to && !m.metadata?.redirectTo)
     .map((m) => ({
       slug: m.slug,
     }));
@@ -33,7 +33,18 @@ export async function generateMetadata({
   const { slug } = await params;
   const model = await getModelBySlug(slug);
 
-  if (!model || model.status === "staged" || model.verificationStatus === "DISPUTED") {
+  if (!model) {
+    return {
+      title: "Model Not Found — Modelverse",
+    };
+  }
+
+  const redirectTo = model.metadata?.redirect_to || model.metadata?.redirectTo;
+  if (redirectTo && typeof redirectTo === "string") {
+    permanentRedirect(`/models/${redirectTo}`);
+  }
+
+  if (model.status === "staged" || model.verificationStatus === "DISPUTED") {
     return {
       title: "Model Not Found — Modelverse",
     };
@@ -83,7 +94,16 @@ export default async function ModelDetailPage({
   const { slug } = await params;
   const model = await getModelBySlug(slug);
 
-  if (!model || model.status === "staged" || model.verificationStatus === "DISPUTED") {
+  if (!model) {
+    notFound();
+  }
+
+  const redirectTo = model.metadata?.redirect_to || model.metadata?.redirectTo;
+  if (redirectTo && typeof redirectTo === "string") {
+    permanentRedirect(`/models/${redirectTo}`);
+  }
+
+  if (model.status === "staged" || model.verificationStatus === "DISPUTED") {
     notFound();
   }
 
