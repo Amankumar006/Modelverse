@@ -27,6 +27,10 @@ export interface ModelIndex {
   contextWindow?: string | Record<string, any>;
   primaryTask?: string;
   previousVersion?: string | null;
+  modality?: string[];
+  deployment?: string[];
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  license?: string | Record<string, any>;
   chatgptAvailability?: Record<string, unknown>;
   apiAvailability?: Record<string, unknown>;
   aliases?: string[];
@@ -231,6 +235,9 @@ function mapRowToModelIndex(row: any): ModelIndex {
     verified: Boolean(row.verified),
     verificationStatus: row.verification_status,
     qualityStatus: row.quality_status,
+    modality: row.modality || [],
+    deployment: row.deployment || [],
+    license: row.license,
     chatgptAvailability: row.chatgpt_availability || row.metadata?.chatgptAvailability || row.metadata?.chatgpt_availability,
     apiAvailability: row.api_availability || row.metadata?.apiAvailability || row.metadata?.api_availability,
     aliases: row.aliases || row.metadata?.aliases || [],
@@ -259,18 +266,28 @@ export async function getAllModels(): Promise<ModelIndex[]> {
     return cachedModelIndexes.data;
   }
 
-  const { data } = await supabase
-    .from('models')
-    .select('id, name, slug, developer, release_date, type, status, vendor_api_status, featured, boost, family, tier, institution, verified, verification_status, quality_status, description, parameters, context_window, primary_task, previous_version, metadata')
-    .neq('status', 'staged')
-    .order('release_date', { ascending: false });
-  
-  const result = (data || [])
-    .filter((m) => m.verification_status !== 'DISPUTED' && !m.metadata?.redirect_to && !m.metadata?.redirectTo)
-    .map(mapRowToModelIndex);
+  try {
+    const { data, error } = await supabase
+      .from('models')
+      .select('id, name, slug, developer, release_date, type, status, vendor_api_status, featured, boost, family, tier, institution, verified, verification_status, quality_status, modality, deployment, license, description, parameters, context_window, primary_task, previous_version, metadata')
+      .neq('status', 'staged')
+      .order('release_date', { ascending: false });
 
-  cachedModelIndexes = { data: result, timestamp: now };
-  return result;
+    if (error) {
+      console.error("Database error in getAllModels:", error);
+      return cachedModelIndexes?.data || [];
+    }
+    
+    const result = (data || [])
+      .filter((m) => m.verification_status !== 'DISPUTED' && !m.metadata?.redirect_to && !m.metadata?.redirectTo)
+      .map(mapRowToModelIndex);
+
+    cachedModelIndexes = { data: result, timestamp: now };
+    return result;
+  } catch (err) {
+    console.error("Unexpected error in getAllModels:", err);
+    return cachedModelIndexes?.data || [];
+  }
 }
 
 /** Return all full model entries, sorted newest-first. Excludes staged, disputed, and redirected models. */
@@ -280,146 +297,231 @@ export async function getAllModelEntries(): Promise<ModelEntry[]> {
     return cachedModelEntries.data;
   }
 
-  const { data } = await supabase
-    .from('models')
-    .select('*')
-    .neq('status', 'staged')
-    .order('release_date', { ascending: false });
-  
-  const result = (data || [])
-    .filter((m) => m.verification_status !== 'DISPUTED' && !m.metadata?.redirect_to && !m.metadata?.redirectTo)
-    .map(mapRowToModelEntry);
+  try {
+    const { data, error } = await supabase
+      .from('models')
+      .select('*')
+      .neq('status', 'staged')
+      .order('release_date', { ascending: false });
+    
+    if (error) {
+      console.error("Database error in getAllModelEntries:", error);
+      return cachedModelEntries?.data || [];
+    }
 
-  cachedModelEntries = { data: result, timestamp: now };
-  return result;
+    const result = (data || [])
+      .filter((m) => m.verification_status !== 'DISPUTED' && !m.metadata?.redirect_to && !m.metadata?.redirectTo)
+      .map(mapRowToModelEntry);
+
+    cachedModelEntries = { data: result, timestamp: now };
+    return result;
+  } catch (err) {
+    console.error("Unexpected error in getAllModelEntries:", err);
+    return cachedModelEntries?.data || [];
+  }
 }
-
-
 
 /** Read a single model's full data by slug. */
 export async function getModelBySlug(slug: string): Promise<ModelEntry | null> {
-  const { data } = await supabase
-    .from('models')
-    .select('*')
-    .eq('slug', slug)
-    .single();
-  if (!data) return null;
-  return mapRowToModelEntry(data);
+  try {
+    const { data, error } = await supabase
+      .from('models')
+      .select('*')
+      .eq('slug', slug)
+      .maybeSingle();
+
+    if (error) {
+      console.error(`Database error fetching model slug "${slug}":`, error);
+      return null;
+    }
+    if (!data) return null;
+    return mapRowToModelEntry(data);
+  } catch (err) {
+    console.error(`Unexpected error fetching model slug "${slug}":`, err);
+    return null;
+  }
 }
 
 /** Read models belonging to the same family (lightweight index projection). */
 export async function getFamilyModels(family: string, excludeId?: string): Promise<ModelIndex[]> {
-  let query = supabase
-    .from('models')
-    .select('id, name, slug, developer, release_date, type, status, vendor_api_status, featured, boost, family, tier, institution, verified, verification_status, quality_status, description, parameters, context_window, primary_task, metadata')
-    .eq('family', family)
-    .neq('status', 'staged')
-    .order('release_date', { ascending: false })
-    .limit(8);
+  try {
+    let query = supabase
+      .from('models')
+      .select('id, name, slug, developer, release_date, type, status, vendor_api_status, featured, boost, family, tier, institution, verified, verification_status, quality_status, description, parameters, context_window, primary_task, metadata')
+      .eq('family', family)
+      .neq('status', 'staged')
+      .order('release_date', { ascending: false })
+      .limit(8);
 
-  if (excludeId) {
-    query = query.neq('id', excludeId);
+    if (excludeId) {
+      query = query.neq('id', excludeId);
+    }
+
+    const { data, error } = await query;
+    if (error) {
+      console.error(`Database error in getFamilyModels for family "${family}":`, error);
+      return [];
+    }
+    return (data || [])
+      .filter((m) => m.verification_status !== 'DISPUTED' && !m.metadata?.redirect_to && !m.metadata?.redirectTo)
+      .map(mapRowToModelIndex);
+  } catch (err) {
+    console.error(`Unexpected error in getFamilyModels for family "${family}":`, err);
+    return [];
   }
-
-  const { data } = await query;
-  return (data || [])
-    .filter((m) => m.verification_status !== 'DISPUTED' && !m.metadata?.redirect_to && !m.metadata?.redirectTo)
-    .map(mapRowToModelIndex);
 }
 
 /** Read related models sharing the same primary task (lightweight index projection). */
 export async function getRelatedModels(primaryTask: string, excludeId?: string): Promise<ModelIndex[]> {
-  let query = supabase
-    .from('models')
-    .select('id, name, slug, developer, release_date, type, status, vendor_api_status, featured, boost, family, tier, institution, verified, verification_status, quality_status, description, parameters, context_window, primary_task, metadata')
-    .eq('primary_task', primaryTask)
-    .eq('quality_status', 'indexed')
-    .neq('status', 'staged')
-    .order('release_date', { ascending: false })
-    .limit(4);
+  try {
+    let query = supabase
+      .from('models')
+      .select('id, name, slug, developer, release_date, type, status, vendor_api_status, featured, boost, family, tier, institution, verified, verification_status, quality_status, description, parameters, context_window, primary_task, metadata')
+      .eq('primary_task', primaryTask)
+      .eq('quality_status', 'indexed')
+      .neq('status', 'staged')
+      .order('release_date', { ascending: false })
+      .limit(4);
 
-  if (excludeId) {
-    query = query.neq('id', excludeId);
+    if (excludeId) {
+      query = query.neq('id', excludeId);
+    }
+
+    const { data, error } = await query;
+    if (error) {
+      console.error(`Database error in getRelatedModels for primaryTask "${primaryTask}":`, error);
+      return [];
+    }
+    return (data || [])
+      .filter((m) => m.verification_status !== 'DISPUTED' && !m.metadata?.redirect_to && !m.metadata?.redirectTo)
+      .map(mapRowToModelIndex);
+  } catch (err) {
+    console.error(`Unexpected error in getRelatedModels for primaryTask "${primaryTask}":`, err);
+    return [];
   }
-
-  const { data } = await query;
-  return (data || [])
-    .filter((m) => m.verification_status !== 'DISPUTED' && !m.metadata?.redirect_to && !m.metadata?.redirectTo)
-    .map(mapRowToModelIndex);
 }
 
 /** Get all models belonging to a specific family */
 export async function getModelsByFamily(family: string): Promise<ModelEntry[]> {
-  const { data } = await supabase
-    .from('models')
-    .select('*')
-    .eq('family', family)
-    .neq('status', 'staged')
-    .order('release_date', { ascending: false });
-  return (data || [])
-    .filter((m) => m.verification_status !== 'DISPUTED' && !m.metadata?.redirect_to && !m.metadata?.redirectTo)
-    .map(mapRowToModelEntry);
+  try {
+    const { data, error } = await supabase
+      .from('models')
+      .select('*')
+      .eq('family', family)
+      .neq('status', 'staged')
+      .order('release_date', { ascending: false });
+
+    if (error) {
+      console.error(`Database error in getModelsByFamily for "${family}":`, error);
+      return [];
+    }
+    return (data || [])
+      .filter((m) => m.verification_status !== 'DISPUTED' && !m.metadata?.redirect_to && !m.metadata?.redirectTo)
+      .map(mapRowToModelEntry);
+  } catch (err) {
+    console.error(`Unexpected error in getModelsByFamily for "${family}":`, err);
+    return [];
+  }
 }
 
 /** Get all models belonging to a specific developer */
 export async function getModelsByDeveloper(developer: string): Promise<ModelEntry[]> {
-  const { data } = await supabase
-    .from('models')
-    .select('*')
-    .eq('developer', developer)
-    .neq('status', 'staged')
-    .order('release_date', { ascending: false });
-  return (data || [])
-    .filter((m) => m.verification_status !== 'DISPUTED' && !m.metadata?.redirect_to && !m.metadata?.redirectTo)
-    .map(mapRowToModelEntry);
+  try {
+    const { data, error } = await supabase
+      .from('models')
+      .select('*')
+      .eq('developer', developer)
+      .neq('status', 'staged')
+      .order('release_date', { ascending: false });
+
+    if (error) {
+      console.error(`Database error in getModelsByDeveloper for "${developer}":`, error);
+      return [];
+    }
+    return (data || [])
+      .filter((m) => m.verification_status !== 'DISPUTED' && !m.metadata?.redirect_to && !m.metadata?.redirectTo)
+      .map(mapRowToModelEntry);
+  } catch (err) {
+    console.error(`Unexpected error in getModelsByDeveloper for "${developer}":`, err);
+    return [];
+  }
 }
 
 /** Get all unique families from the models */
 export async function getAllFamilies(): Promise<string[]> {
-  const { data } = await supabase
-    .from('models')
-    .select('family, status, verification_status, metadata')
-    .not('family', 'is', null)
-    .neq('status', 'staged');
-  const validRows = (data || []).filter(
-    (row) => row.verification_status !== 'DISPUTED' && !row.metadata?.redirect_to && !row.metadata?.redirectTo
-  );
-  const seen = new Set<string>();
-  const families: string[] = [];
-  for (const row of validRows) {
-    if (!row.family) continue;
-    const key = row.family.toLowerCase().replace(/[^a-z0-9]/g, '');
-    if (!seen.has(key)) {
-      seen.add(key);
-      families.push(row.family);
+  try {
+    const { data, error } = await supabase
+      .from('models')
+      .select('family, status, verification_status, metadata')
+      .not('family', 'is', null)
+      .neq('status', 'staged');
+
+    if (error) {
+      console.error("Database error in getAllFamilies:", error);
+      return [];
     }
+
+    const validRows = (data || []).filter(
+      (row) => row.verification_status !== 'DISPUTED' && !row.metadata?.redirect_to && !row.metadata?.redirectTo
+    );
+    const seen = new Set<string>();
+    const families: string[] = [];
+    for (const row of validRows) {
+      if (!row.family) continue;
+      const key = row.family.toLowerCase().replace(/[^a-z0-9]/g, '');
+      if (!seen.has(key)) {
+        seen.add(key);
+        families.push(row.family);
+      }
+    }
+    return families.sort();
+  } catch (err) {
+    console.error("Unexpected error in getAllFamilies:", err);
+    return [];
   }
-  return families.sort();
 }
 
 /** Get all unique developers from the models. */
 export async function getAllDevelopers(): Promise<string[]> {
-  const { data } = await supabase
-    .from('models')
-    .select('developer, status, verification_status, metadata')
-    .neq('status', 'staged');
-  const validRows = (data || []).filter(
-    (row) => row.verification_status !== 'DISPUTED' && !row.metadata?.redirect_to && !row.metadata?.redirectTo
-  );
-  const devs = new Set(validRows.map(row => row.developer));
-  return Array.from(devs).sort();
+  try {
+    const { data, error } = await supabase
+      .from('models')
+      .select('developer, status, verification_status, metadata')
+      .neq('status', 'staged');
+
+    if (error) {
+      console.error("Database error in getAllDevelopers:", error);
+      return [];
+    }
+
+    const validRows = (data || []).filter(
+      (row) => row.verification_status !== 'DISPUTED' && !row.metadata?.redirect_to && !row.metadata?.redirectTo
+    );
+    const devs = new Set(validRows.map(row => row.developer));
+    return Array.from(devs).sort();
+  } catch (err) {
+    console.error("Unexpected error in getAllDevelopers:", err);
+    return [];
+  }
 }
 
 /** Get total count of models tracked. */
 export async function getModelCount(): Promise<number> {
-  const { data } = await supabase
-    .from('models')
-    .select('id, status, verification_status, metadata')
-    .neq('status', 'staged');
-  const count = (data || []).filter(
-    (m) => m.verification_status !== 'DISPUTED' && !m.metadata?.redirect_to && !m.metadata?.redirectTo
-  ).length;
-  return count;
+  try {
+    const { count, error } = await supabase
+      .from('models')
+      .select('*', { count: 'exact', head: true })
+      .neq('status', 'staged');
+
+    if (error) {
+      console.error("Database error in getModelCount:", error);
+      return 0;
+    }
+    return count ?? 0;
+  } catch (err) {
+    console.error("Unexpected error in getModelCount:", err);
+    return 0;
+  }
 }
 
 

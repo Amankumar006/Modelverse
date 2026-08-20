@@ -3,6 +3,7 @@ import Link from "next/link";
 import { getAllModels, SITE_URL } from "@/lib/models";
 import { ChevronLeft } from "lucide-react";
 import TimelineContainer from "@/components/timeline/TimelineContainer";
+import JsonLd from "@/components/JsonLd";
 
 export const revalidate = 60;
 
@@ -24,8 +25,26 @@ export const metadata: Metadata = {
 export default async function TimelinePage() {
   const models = await getAllModels(); // Already sorted newest-first by library
 
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "name": "AI Model Release Timeline & Changelog",
+    "description": "A chronological ledger of every notable foundation AI model release tracked by Modelverse.",
+    "url": `${SITE_URL}/timeline`,
+    "mainEntity": {
+      "@type": "ItemList",
+      "itemListElement": models.slice(0, 50).map((m, idx) => ({
+        "@type": "ListItem",
+        "position": idx + 1,
+        "url": `${SITE_URL}/models/${m.slug}`,
+        "name": m.name,
+      })),
+    },
+  };
+
   return (
     <main className="min-h-screen bg-[#141414] text-[#E4E4E7] selection:bg-[#DA7756] selection:text-white pb-24 relative font-sans">
+      <JsonLd data={structuredData} />
       {/* ── Top Hero Background Gradient ── */}
       <div className="absolute top-0 left-0 w-full h-[40vh] z-0 pointer-events-none select-none bg-gradient-to-b from-[#1C1C1E]/60 to-[#141414]" />
 

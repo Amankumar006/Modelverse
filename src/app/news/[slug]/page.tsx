@@ -18,6 +18,7 @@ export const revalidate = 60;
 
 import ReadingProgressBar from "@/components/news/ReadingProgressBar";
 import MermaidDiagram from "@/components/news/MermaidDiagram";
+import ShareBar from "@/components/ui/ShareBar";
 import { Sparkles, Layers } from "lucide-react";
 
 interface ArticlePageProps {
@@ -215,6 +216,11 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
             </>
           )}
         </div>
+
+        {/* Share buttons */}
+        <div className="flex items-center justify-center mt-6">
+          <ShareBar title={article.title} type="news" variant="header" />
+        </div>
       </div>
 
       <div className="max-w-[1040px] mx-auto px-4 sm:px-6 my-10">
@@ -326,6 +332,11 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
           >
             {article.body}
           </ReactMarkdown>
+        </div>
+
+        {/* Community Share Bar */}
+        <div className="my-10">
+          <ShareBar title={article.title} type="news" variant="card" />
         </div>
 
         {article.tags && article.tags.length > 0 && (

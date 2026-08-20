@@ -299,7 +299,7 @@ export default function Navbar({ theme }: { theme?: string }) {
           </a>
 
           <a
-            href="https://www.reddit.com/r/Modelverse"
+            href="https://www.reddit.com/r/themodelversebot_dev/"
             target="_blank"
             rel="noopener noreferrer"
             className="p-2 rounded-lg bg-[var(--card-bg)] hover:bg-[var(--bg)] border border-[var(--muted)]/10 text-[var(--muted)] hover:text-[#ff4500] transition-colors flex items-center justify-center"

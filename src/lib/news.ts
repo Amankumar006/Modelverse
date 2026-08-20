@@ -104,17 +104,24 @@ export async function getAllArticles(): Promise<NewsArticleIndexEntry[]> {
 }
 
 export async function getArticleBySlug(slug: string): Promise<NewsArticle | null> {
-  const { data, error } = await supabase
-    .from("news_items")
-    .select("*")
-    .eq("slug", slug)
-    .single();
+  try {
+    const { data, error } = await supabase
+      .from("news_items")
+      .select("*")
+      .eq("slug", slug)
+      .maybeSingle();
 
-  if (error || !data) {
+    if (error) {
+      console.error(`Database error fetching article slug "${slug}":`, error);
+      return null;
+    }
+    if (!data) return null;
+
+    return mapDbRowToArticle(data);
+  } catch (err) {
+    console.error(`Unexpected error fetching article slug "${slug}":`, err);
     return null;
   }
-
-  return mapDbRowToArticle(data);
 }
 
 export async function getArticlesByCategory(category: NewsCategoryType): Promise<NewsArticleIndexEntry[]> {

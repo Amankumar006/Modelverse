@@ -1,12 +1,12 @@
 import type { MetadataRoute } from "next";
-import { getAllModelEntries, SITE_URL } from "@/lib/models";
+import { getAllModels, SITE_URL } from "@/lib/models";
 import { getAllArticles } from "@/lib/news";
 import { NewsCategory } from "../../data/schema/news.schema";
 
 export const revalidate = 3600; // Revalidate every hour
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const entries = await getAllModelEntries();
+  const entries = await getAllModels();
 
   // Define static base routes
   const staticRoutes: MetadataRoute.Sitemap = [
@@ -106,10 +106,10 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       !entry.metadata?.redirectTo
   );
   const modelRoutes: MetadataRoute.Sitemap = indexedEntries.map((entry) => {
-    const lastModDate = entry.updatedAt || entry.releaseDate;
+    const lastModDate = entry.releaseDate ? new Date(entry.releaseDate) : new Date();
     return {
       url: `${SITE_URL}/models/${entry.slug}`,
-      lastModified: new Date(lastModDate),
+      lastModified: lastModDate,
       changeFrequency: "weekly",
       priority: 0.6,
     };
@@ -138,11 +138,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   });
 
   // Collect unique single-facet values
-  const tasks = [...new Set(indexedEntries.map((e) => e.primaryTask))].filter(Boolean);
-  const types = [...new Set(indexedEntries.map((e) => e.type))].filter(Boolean);
-  const modalities = [...new Set(indexedEntries.flatMap((e) => e.modality))].filter(Boolean);
-  const licenses = [...new Set(indexedEntries.map((e) => e.license && typeof e.license === "object" ? e.license.name || "Custom" : e.license))].filter(Boolean);
-  const deployments = [...new Set(indexedEntries.flatMap((e) => e.deployment))].filter(Boolean);
+  const tasks = [...new Set(indexedEntries.map((e) => e.primaryTask))].filter((v): v is string => Boolean(v));
+  const types = [...new Set(indexedEntries.map((e) => String(e.type)))].filter((v): v is string => Boolean(v));
+  const modalities = [...new Set(indexedEntries.flatMap((e) => e.modality || []))].filter((v): v is string => Boolean(v));
+  const licenses = [...new Set(indexedEntries.map((e) => e.license && typeof e.license === "object" ? (e.license as { name?: string }).name || "Custom" : e.license))].filter((v): v is string => Boolean(v));
+  const deployments = [...new Set(indexedEntries.flatMap((e) => e.deployment || []))].filter((v): v is string => Boolean(v));
 
   // Generate single-facet anchor URLs
   const facetRoutes: MetadataRoute.Sitemap = [];

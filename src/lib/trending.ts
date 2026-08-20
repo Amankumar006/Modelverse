@@ -1,5 +1,3 @@
-import { getAllModelEntries, ModelEntry } from "./models";
-
 /**
  * ── Stage 1 Trending — Decay Curve Sanity Check ──
  *
@@ -43,6 +41,8 @@ import { getAllModelEntries, ModelEntry } from "./models";
  * to the curve stay eyeball-able without re-deriving the math from scratch.
  */
 
+import { getAllModels, ModelIndex } from "./models";
+
 function getTrendingScore(releaseDate: string, boost: number): number {
   const releaseTime = new Date(releaseDate).getTime();
   const now = Date.now();
@@ -53,22 +53,27 @@ function getTrendingScore(releaseDate: string, boost: number): number {
   return boost / Math.pow(ageHours + 2, 1.7);
 }
 
-export interface TrendingModelEntry extends ModelEntry {
+export interface TrendingModelEntry extends ModelIndex {
   trendingScore: number;
 }
 
 export async function getTrendingModels(limit: number): Promise<TrendingModelEntry[]> {
-  const entries = await getAllModelEntries();
-  
-  const scoredEntries: TrendingModelEntry[] = entries.map(entry => {
-    return {
-      ...entry,
-      trendingScore: getTrendingScore(entry.releaseDate, entry.boost),
-    };
-  });
-  
-  // Sort descending by trending score
-  scoredEntries.sort((a, b) => b.trendingScore - a.trendingScore);
-  
-  return scoredEntries.slice(0, limit);
+  try {
+    const entries = await getAllModels();
+    
+    const scoredEntries: TrendingModelEntry[] = entries.map(entry => {
+      return {
+        ...entry,
+        trendingScore: getTrendingScore(entry.releaseDate, entry.boost || 1),
+      };
+    });
+    
+    // Sort descending by trending score
+    scoredEntries.sort((a, b) => b.trendingScore - a.trendingScore);
+    
+    return scoredEntries.slice(0, limit);
+  } catch (err) {
+    console.error("Error computing trending models:", err);
+    return [];
+  }
 }

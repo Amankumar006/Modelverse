@@ -96,13 +96,20 @@ export async function GET(request: NextRequest) {
       verified: m.verified
     }));
 
-    return NextResponse.json({
-      total,
-      limit,
-      offset,
-      count: sanitizedData.length,
-      data: sanitizedData,
-    });
+    return NextResponse.json(
+      {
+        total,
+        limit,
+        offset,
+        count: sanitizedData.length,
+        data: sanitizedData,
+      },
+      {
+        headers: {
+          "Cache-Control": "public, s-maxage=60, stale-while-revalidate=300",
+        },
+      }
+    );
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (err: any) {
     console.error("API Error in /api/models:", err);

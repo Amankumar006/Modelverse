@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { getAllModels, SITE_URL } from "@/lib/models";
 import { ChevronLeft, Sparkle } from "lucide-react";
+import JsonLd from "@/components/JsonLd";
 
 export const revalidate = 60;
 
@@ -41,8 +42,26 @@ export default async function ArchivePage() {
   // by releaseDate, and we iterate over them. But let's be safe:
   const monthKeys = Object.keys(groupedModels);
 
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "name": "Modelverse AI Model Release Archive",
+    "description": "A complete chronologically ordered archive of every foundation AI model release tracked by Modelverse.",
+    "url": `${SITE_URL}/archive`,
+    "mainEntity": {
+      "@type": "ItemList",
+      "itemListElement": models.slice(0, 100).map((m, idx) => ({
+        "@type": "ListItem",
+        "position": idx + 1,
+        "url": `${SITE_URL}/models/${m.slug}`,
+        "name": m.name,
+      })),
+    },
+  };
+
   return (
     <main className="min-h-screen bg-black text-white selection:bg-brand-orange selection:text-white pb-24">
+      <JsonLd data={structuredData} />
       <div className="absolute top-0 left-0 w-full h-[500px] bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-white/5 via-white/2 to-transparent pointer-events-none" />
 
       <div className="max-w-4xl mx-auto px-4 sm:px-6 md:px-8 pt-8 relative z-10">

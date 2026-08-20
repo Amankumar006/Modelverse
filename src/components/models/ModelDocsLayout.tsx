@@ -12,6 +12,7 @@ import BenchmarksSection from "./BenchmarksSection";
 import PricingSection from "./PricingSection";
 import ComparableModelsSection from "./ComparableModelsSection";
 import SourcesSection from "./SourcesSection";
+import ShareBar from "@/components/ui/ShareBar";
 import {
   Search,
   ChevronDown,
@@ -36,17 +37,8 @@ export default function ModelDocsLayout({
   familyMembers = [],
   relatedModels = [],
 }: ModelDocsLayoutProps) {
-  const [copiedPage, setCopiedPage] = useState(false);
   const [copiedSlug, setCopiedSlug] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
-
-  const handleCopyPage = () => {
-    if (typeof window !== "undefined") {
-      navigator.clipboard.writeText(window.location.href);
-      setCopiedPage(true);
-      setTimeout(() => setCopiedPage(false), 2000);
-    }
-  };
 
   const handleCopySlug = () => {
     if (typeof window !== "undefined") {
@@ -232,14 +224,7 @@ export default function ModelDocsLayout({
 
               {/* Action Buttons */}
               <div className="flex items-center gap-2">
-                <button
-                  type="button"
-                  onClick={handleCopyPage}
-                  className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-[var(--radius-pill)] border border-[var(--muted)]/10 bg-[var(--card-bg)] shadow-[var(--shadow-card)] text-xs font-bold text-[var(--text)] hover:border-[var(--accent)] transition-all cursor-pointer"
-                >
-                  {copiedPage ? <Check size={13} className="text-emerald-400" /> : <Copy size={13} />}
-                  <span>{copiedPage ? "Copied!" : "Copy URL"}</span>
-                </button>
+                <ShareBar title={model.name} type="model" variant="header" />
               </div>
             </div>
 
@@ -424,6 +409,11 @@ export default function ModelDocsLayout({
               </div>
             </section>
           )}
+
+          {/* ══════════════════════════════════════════════════════════ */}
+          {/* COMMUNITY SHARING                                          */}
+          {/* ══════════════════════════════════════════════════════════ */}
+          <ShareBar title={model.name} type="model" variant="card" className="my-6" />
 
           {/* ══════════════════════════════════════════════════════════ */}
           {/* 10. SOURCES & PROVENANCE                                   */}
