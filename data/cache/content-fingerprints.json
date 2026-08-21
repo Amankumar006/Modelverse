@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-21T01:01:55.745Z",
+  "generatedAt": "2026-08-21T12:36:44.597Z",
   "entries": {
     "donation-public-first-action": {
       "slug": "donation-public-first-action",
@@ -31332,6 +31332,39 @@
         "startup and its rivals"
       ],
       "checkedAt": "2026-08-21T01:01:55.753Z"
+    },
+    "from-atari-to-eve-online-building-on-15-years-of-ai-research-in-games": {
+      "slug": "from-atari-to-eve-online-building-on-15-years-of-ai-research-in-games",
+      "title": "From Atari to EVE Online: Building on 15 Years of AI Research in Games",
+      "contentHash": "3fef909ec13aae185d0febd11b14571b3a5cdf17dfbe0cfeaf73fd66f3fc6d61",
+      "shingles": [
+        "from atari to eve",
+        "atari to eve online",
+        "to eve online building",
+        "eve online building on",
+        "online building on 15",
+        "building on 15 years",
+        "on 15 years of",
+        "15 years of ai",
+        "years of ai research",
+        "of ai research in",
+        "ai research in games",
+        "research in games google",
+        "in games google deepmind",
+        "games google deepmind partners",
+        "google deepmind partners with",
+        "deepmind partners with game",
+        "partners with game studios",
+        "with game studios to",
+        "game studios to prototype",
+        "studios to prototype breakthrough",
+        "to prototype breakthrough ai",
+        "prototype breakthrough ai gameplay",
+        "breakthrough ai gameplay google",
+        "ai gameplay google deepmind",
+        "gameplay google deepmind partners"
+      ],
+      "checkedAt": "2026-08-21T12:36:44.604Z"
     }
   }
 }
