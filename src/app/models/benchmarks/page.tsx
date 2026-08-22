@@ -72,6 +72,7 @@ export default async function BenchmarksPage() {
         name: "AI Model Benchmarks Leaderboard",
         description: "Comparative benchmark evaluations across artificial intelligence foundation models.",
         url: `${SITE_URL}/models/benchmarks`,
+        license: "https://creativecommons.org/licenses/by/4.0/",
         creator: {
           "@type": "Organization",
           name: "Modelverse",

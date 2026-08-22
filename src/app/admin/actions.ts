@@ -400,7 +400,7 @@ export async function triageNews(id: string, action: 'approve' | 'dismiss', slug
   return { success: true };
 }
 
-export async function approveDeepDiveArticle(slug: string) {
+export async function approveNewsItem(slugOrId: string) {
   const supabase = await createClient();
 
   const { data: { user }, error: authError } = await supabase.auth.getUser();
@@ -408,32 +408,112 @@ export async function approveDeepDiveArticle(slug: string) {
     throw new Error('Authentication required');
   }
 
-  const { error: updateError } = await supabase
+  const isUUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(slugOrId);
+  const query = supabase
     .from('news_items')
     .update({
-      curator_reviewed: true,
+      status: 'published',
       quality_status: 'indexed',
+      curator_reviewed: true,
       reviewed_by: user.id,
       reviewed_at: new Date().toISOString(),
-    })
-    .eq('slug', slug)
-    .eq('article_type', 'deep-dive');
+    });
+
+  const { data, error: updateError } = isUUID
+    ? await query.eq('id', slugOrId).select('slug').single()
+    : await query.eq('slug', slugOrId).select('slug').single();
 
   if (updateError) {
-    console.error('Failed to approve deep-dive article:', updateError);
-    throw new Error('Failed to approve deep-dive article');
+    console.error('Failed to approve news item:', updateError);
+    throw new Error('Failed to approve news item: ' + updateError.message);
   }
 
   await supabase.from('audit_log').insert({
     actor: user.id,
-    action: 'approve_deep_dive_article',
-    target_type: 'news_item',
-    target_id: slug,
+    action: 'approve_news_item',
+    target_type: 'news_items',
+    target_id: slugOrId,
     metadata: { curator_id: user.id }
   });
 
+  const slug = data?.slug || slugOrId;
   revalidatePath('/admin/news');
   revalidatePath(`/news/${slug}`);
+  revalidatePath('/news');
+  return { success: true, slug };
+}
+
+export async function updateNewsItemStatus(slugOrId: string, status: string, qualityStatus: string) {
+  const supabase = await createClient();
+
+  const { data: { user }, error: authError } = await supabase.auth.getUser();
+  if (authError || !user) {
+    throw new Error('Authentication required');
+  }
+
+  const isUUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(slugOrId);
+  const query = supabase
+    .from('news_items')
+    .update({
+      status,
+      quality_status: qualityStatus,
+      reviewed_by: user.id,
+      reviewed_at: new Date().toISOString(),
+    });
+
+  const { data, error: updateError } = isUUID
+    ? await query.eq('id', slugOrId).select('slug').single()
+    : await query.eq('slug', slugOrId).select('slug').single();
+
+  if (updateError) {
+    console.error('Failed to update news status:', updateError);
+    throw new Error('Failed to update news status: ' + updateError.message);
+  }
+
+  await supabase.from('audit_log').insert({
+    actor: user.id,
+    action: 'update_news_status',
+    target_type: 'news_items',
+    target_id: slugOrId,
+    metadata: { status, quality_status: qualityStatus }
+  });
+
+  const slug = data?.slug || slugOrId;
+  revalidatePath('/admin/news');
+  revalidatePath(`/news/${slug}`);
+  revalidatePath('/news');
+  return { success: true, slug };
+}
+
+export async function deleteNewsItem(slugOrId: string) {
+  const supabase = await createClient();
+
+  const { data: { user }, error: authError } = await supabase.auth.getUser();
+  if (authError || !user) {
+    throw new Error('Authentication required');
+  }
+
+  const isUUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(slugOrId);
+  const query = supabase.from('news_items').delete();
+
+  const { error: deleteError } = isUUID
+    ? await query.eq('id', slugOrId)
+    : await query.eq('slug', slugOrId);
+
+  if (deleteError) {
+    console.error('Failed to delete news item:', deleteError);
+    throw new Error('Failed to delete news item: ' + deleteError.message);
+  }
+
+  await supabase.from('audit_log').insert({
+    actor: user.id,
+    action: 'delete_news_item',
+    target_type: 'news_items',
+    target_id: slugOrId,
+    metadata: { deleted_by: user.id }
+  });
+
+  revalidatePath('/admin/news');
   revalidatePath('/news');
   return { success: true };
 }
