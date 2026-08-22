@@ -394,6 +394,89 @@ export default function CompareClient({
         </div>
       </div>
 
+      {/* ── Technical Capabilities Matrix ───────────────────────────── */}
+      <div className="space-y-6">
+        <div className="flex items-center justify-between">
+          <h2 className="text-xl font-extrabold text-[var(--text)] flex items-center gap-2">
+            <Sparkles size={18} className="text-[var(--accent)]" />
+            <span>Technical Capabilities Comparison</span>
+          </h2>
+          <span className="text-xs font-mono text-[var(--muted)]">
+            14 Verified Architectural &amp; System Capabilities
+          </span>
+        </div>
+
+        <div className="overflow-x-auto rounded-[var(--radius-card)] border border-[var(--muted)]/15 bg-[var(--card-bg)] shadow-[var(--shadow-card)]">
+          <table className="w-full text-left text-xs border-collapse min-w-[640px]">
+            <thead className="bg-[var(--bg)] border-b border-[var(--muted)]/10 text-[var(--muted)] uppercase font-mono font-bold">
+              <tr>
+                <th className="p-3.5 w-1/4">Capability</th>
+                {models.map((m) => (
+                  <th key={m.slug} className="p-3.5 font-bold text-[var(--text)]">
+                    {m.name}
+                  </th>
+                ))}
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-[var(--muted)]/10 font-sans">
+              {[
+                { key: "reasoning", label: "Deep Reasoning & CoT", icon: "🧠" },
+                { key: "tool_calling", label: "Tool & Function Calling", icon: "🛠️" },
+                { key: "vision_input", label: "Vision & Image Input", icon: "👁️" },
+                { key: "structured_outputs", label: "Strict JSON Schema", icon: "📋" },
+                { key: "web_search", label: "Web Grounding & Search", icon: "🌐" },
+                { key: "prompt_caching", label: "Prompt Prefix Caching", icon: "⚡" },
+                { key: "fine_tuning", label: "Fine-Tuning & Custom LoRA", icon: "🔧" },
+                { key: "image_generation", label: "Image Generation", icon: "🎨" },
+                { key: "audio_input", label: "Audio & Speech Input", icon: "🎙️" },
+                { key: "audio_output", label: "Voice / TTS Output", icon: "🔊" },
+                { key: "computer_use", label: "Computer & OS Control", icon: "💻" },
+                { key: "video_input", label: "Video Processing", icon: "🎥" },
+                { key: "batch", label: "Batch API Processing", icon: "📦" },
+              ].map((cap) => (
+                <tr key={cap.key} className="hover:bg-[var(--bg)]/40 transition-colors">
+                  <td className="p-3.5 font-medium text-[var(--text)] flex items-center gap-2">
+                    <span>{cap.icon}</span>
+                    <span>{cap.label}</span>
+                  </td>
+                  {models.map((m) => {
+                    const isSupported = Boolean(m.capabilities && m.capabilities[cap.key]);
+                    return (
+                      <td key={m.slug} className="p-3.5">
+                        {isSupported ? (
+                          <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-bold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+                            <Check size={13} className="text-emerald-400" />
+                            Supported
+                          </span>
+                        ) : (
+                          <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-medium text-[var(--muted)]/60 bg-[var(--muted)]/5 border border-[var(--muted)]/10">
+                            — No
+                          </span>
+                        )}
+                      </td>
+                    );
+                  })}
+                </tr>
+              ))}
+              {/* Summary Row */}
+              <tr className="bg-[var(--bg)]/60 font-bold border-t-2 border-[var(--muted)]/20">
+                <td className="p-3.5 font-mono text-[var(--text)] uppercase tracking-wider">
+                  Total Supported
+                </td>
+                {models.map((m) => {
+                  const supportedCount = m.capabilities ? Object.values(m.capabilities).filter(Boolean).length : 0;
+                  return (
+                    <td key={m.slug} className="p-3.5 font-mono text-sm text-[var(--accent)] font-extrabold">
+                      {supportedCount} / 14
+                    </td>
+                  );
+                })}
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
       {/* ── Verified Benchmarks Comparison Matrix ───────────────────── */}
       {benchmarkNames.length > 0 && (
         <div className="space-y-6">

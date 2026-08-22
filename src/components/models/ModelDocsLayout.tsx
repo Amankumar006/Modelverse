@@ -2,11 +2,13 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
-import { type ModelEntry, type ModelIndex, formatParameters } from "@/lib/models";
+import { type ModelEntry, type ModelIndex, type ModelEvidence, formatParameters } from "@/lib/models";
 import Navbar from "@/components/layout/Navbar";
 import MarkdownRenderer from "@/components/ui/MarkdownRenderer";
 import QuickstartSection from "./QuickstartSection";
 import LineageSpecSection from "./LineageSpecSection";
+import CapabilitiesMatrix from "./CapabilitiesMatrix";
+import ProvenanceEvidenceDrawer from "./ProvenanceEvidenceDrawer";
 import CustomSectionsView from "./CustomSectionsView";
 import BenchmarksSection from "./BenchmarksSection";
 import PricingSection from "./PricingSection";
@@ -29,6 +31,7 @@ interface ModelDocsLayoutProps {
   allModels?: (ModelIndex | ModelEntry)[];
   familyMembers: (ModelIndex | ModelEntry)[];
   relatedModels: (ModelIndex | ModelEntry)[];
+  evidence?: ModelEvidence[];
 }
 
 export default function ModelDocsLayout({
@@ -36,6 +39,7 @@ export default function ModelDocsLayout({
   markdownContent,
   familyMembers = [],
   relatedModels = [],
+  evidence = [],
 }: ModelDocsLayoutProps) {
   const [copiedSlug, setCopiedSlug] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
@@ -335,6 +339,13 @@ export default function ModelDocsLayout({
           <LineageSpecSection model={model} />
 
           {/* ══════════════════════════════════════════════════════════ */}
+          {/* 2.5 TECHNICAL CAPABILITIES MATRIX                           */}
+          {/* ══════════════════════════════════════════════════════════ */}
+          <div id="capabilities">
+            <CapabilitiesMatrix capabilities={model.capabilities} modelName={model.name} />
+          </div>
+
+          {/* ══════════════════════════════════════════════════════════ */}
           {/* 3. GETTING STARTED                                         */}
           {/* ══════════════════════════════════════════════════════════ */}
           {hasQuickstart && (
@@ -411,6 +422,13 @@ export default function ModelDocsLayout({
           )}
 
           {/* ══════════════════════════════════════════════════════════ */}
+          {/* 9.5 VERIFIED EVIDENCE & PROVENANCE DRAWER                  */}
+          {/* ══════════════════════════════════════════════════════════ */}
+          <div id="provenance">
+            <ProvenanceEvidenceDrawer evidence={evidence} modelName={model.name} />
+          </div>
+
+          {/* ══════════════════════════════════════════════════════════ */}
           {/* COMMUNITY SHARING                                          */}
           {/* ══════════════════════════════════════════════════════════ */}
           <ShareBar title={model.name} type="model" variant="card" className="my-6" />
@@ -449,6 +467,11 @@ export default function ModelDocsLayout({
             <li>
               <a href="#lineage-spec" className="hover:text-[var(--accent)] transition-colors block">
                 Lineage &amp; specification
+              </a>
+            </li>
+            <li>
+              <a href="#capabilities" className="hover:text-[var(--accent)] transition-colors block">
+                Capabilities matrix
               </a>
             </li>
             {hasQuickstart && (
@@ -496,6 +519,11 @@ export default function ModelDocsLayout({
                 </a>
               </li>
             )}
+            <li>
+              <a href="#provenance" className="hover:text-[var(--accent)] transition-colors block">
+                Verified citations
+              </a>
+            </li>
             <li>
               <a href="#sources" className="hover:text-[var(--accent)] transition-colors block">
                 Sources &amp; provenance
