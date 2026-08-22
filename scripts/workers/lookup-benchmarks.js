@@ -123,12 +123,52 @@ async function runBenchmarkWorker() {
       // Check for source snapshot
       const snapshot = loadSnapshot(model.id, model.slug);
       if (!snapshot || !snapshot.text || snapshot.text.length < 50) {
-        console.log(`  ⏳ Model ${model.name} is awaiting scrape_source snapshot. Re-queuing...`);
+        // Check dependency state in scrape_source
+        const { data: scrapeJob } = await db
+          .from("enrichment_jobs")
+          .select("status, attempts, error")
+          .eq("model_id", model.id)
+          .eq("action_type", "scrape_source")
+          .maybeSingle();
+
+        const currentAttempts = job.attempts || 0;
+
+        if (scrapeJob && (scrapeJob.status === "failed" || scrapeJob.status === "skipped" || scrapeJob.status === "blocked")) {
+          console.log(`  🚫 Model ${model.name} scrape_source is ${scrapeJob.status}. Marking lookup_benchmarks as blocked.`);
+          await db
+            .from("enrichment_jobs")
+            .update({
+              status: "blocked",
+              error: `Blocked because scrape_source is ${scrapeJob.status}: ${scrapeJob.error || "no content extracted"}`,
+              result_summary: { reason: "source_failed" },
+              updated_at: new Date().toISOString(),
+            })
+            .eq("id", job.id);
+          skippedCount++;
+          continue;
+        }
+
+        if (currentAttempts >= 5) {
+          console.log(`  ⚠️ Model ${model.name} exceeded max 5 attempts awaiting snapshot. Marking needs_review.`);
+          await db
+            .from("enrichment_jobs")
+            .update({
+              status: "needs_review",
+              error: "Exceeded max 5 retry attempts awaiting scrape_source snapshot",
+              result_summary: { reason: "max_attempts_exceeded" },
+              updated_at: new Date().toISOString(),
+            })
+            .eq("id", job.id);
+          skippedCount++;
+          continue;
+        }
+
+        console.log(`  ⏳ Model ${model.name} is awaiting scrape_source snapshot (attempt ${currentAttempts}/5). Setting status to waiting...`);
         await db
           .from("enrichment_jobs")
           .update({
-            status: "queued",
-            result_summary: { note: "awaiting snapshot from scrape_source" },
+            status: "waiting",
+            result_summary: { note: "awaiting snapshot from scrape_source", attempt: currentAttempts },
             updated_at: new Date().toISOString(),
           })
           .eq("id", job.id);
@@ -160,6 +200,27 @@ async function runBenchmarkWorker() {
             score: b.score,
             reason: "Score not substantiated within proximity window of snapshot text",
           });
+        }
+      }
+
+      // Record evidence in model_evidence table
+      for (const b of substantiatedBenchmarks) {
+        try {
+          const fieldKey = `benchmarks.${b.name.toLowerCase().replace(/[^a-z0-9_]/g, '_')}`;
+          await db.from("model_evidence").upsert({
+            model_id: model.id,
+            field_name: fieldKey,
+            source_type: "official_model_card",
+            source_url: primaryCitation,
+            extracted_value: { score: b.score, name: b.name },
+            confidence: "OFFICIAL",
+            verification_notes: "Substantiated in official markdown table snapshot with exact score match",
+            extracted_at: new Date().toISOString(),
+            updated_at: new Date().toISOString(),
+          }, { onConflict: "model_id,field_name,source_url" });
+        } catch (evErr) {
+          // Non-fatal logging
+          console.warn(`  ⚠️ Could not record evidence for benchmark ${b.name}:`, evErr.message);
         }
       }
 
