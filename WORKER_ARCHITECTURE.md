@@ -12,8 +12,31 @@ Jobs are persisted in Supabase in the `enrichment_jobs` table:
 CREATE TABLE IF NOT EXISTS enrichment_jobs (
   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
   model_id UUID NOT NULL REFERENCES models(id) ON DELETE CASCADE,
-  action_type TEXT NOT NULL CHECK (action_type IN ('scrape_source','lookup_benchmarks','lookup_pricing','lookup_specs')),
-  status TEXT NOT NULL DEFAULT 'queued' CHECK (status IN ('queued','running','done','failed','skipped')),
+  action_type TEXT NOT NULL CHECK (action_type IN (
+    'discover_model',
+    'scrape_source',
+    'lookup_specs',
+    'lookup_pricing',
+    'lookup_benchmarks',
+    'lookup_capabilities',
+    'lookup_providers',
+    'collect_runtime',
+    'verify_facts',
+    'run_evaluation',
+    'generate_editorial',
+    'generate_quickstart',
+    'quality_check'
+  )),
+  status TEXT NOT NULL DEFAULT 'queued' CHECK (status IN (
+    'queued',
+    'running',
+    'waiting',
+    'done',
+    'failed',
+    'blocked',
+    'needs_review',
+    'skipped'
+  )),
   attempts INT NOT NULL DEFAULT 0,
   last_run_at TIMESTAMPTZ,
   result_summary JSONB,
@@ -30,139 +53,106 @@ CREATE INDEX IF NOT EXISTS enrichment_jobs_model_id_idx ON enrichment_jobs(model
 ### Key Properties
 - **Unique Constraint `(model_id, action_type)`**: Guarantees exactly one state machine record per model per fact dimension.
 - **Independent Isolation**: A failure in pricing or benchmarks never blocks or pollutes other dimensions for that model.
-- **Retryability**: Failed or stale jobs can be safely re-queued by the discovery orchestrator without duplicating rows.
+- **Deadlock Prevention Protocol**: Workers check cross-job dependencies. If an upstream dependency (e.g. `scrape_source`) fails, the downstream worker (e.g. `lookup_benchmarks`) enters `blocked` or `skipped` rather than looping in `queued`.
+- **Max Attempt Cap (5 Retries)**: Any job exceeding 5 attempts is automatically transitioned to `needs_review` with an alert.
 
 ---
 
-## 2. Freshness Windows
+## 2. Pipeline Execution Hierarchy
 
-When the Discovery Orchestrator (`scripts/discovery/discover-and-queue.js`) runs, it re-queues models based on domain-specific data volatility:
+The data extraction and enrichment pipeline follows a strict priority order:
+
+```
+                            PIPELINE FLOW
+┌────────────────────────────────────────────────────────────────────────┐
+│ 1. Model Discovery (HF Hub, OpenRouter, Official Feeds)                │
+└───────────────────────────────────┬────────────────────────────────────┘
+                                    │
+                                    ▼
+┌────────────────────────────────────────────────────────────────────────┐
+│ 2. Factual Ingestion Layer (Parallel & Independent)                    │
+│    ├── scrape_source        (Crawls official docs/READMEs)             │
+│    ├── lookup_specs         (Parameters, Context, License)             │
+│    ├── lookup_capabilities  (Vision, Tools, Reasoning, JSON Mode)      │
+│    ├── lookup_pricing       (OpenRouter token rates & tiers)           │
+│    └── collect_runtime      (TTFT, tokens/sec, P50/P95 Latency)        │
+└───────────────────────────────────┬────────────────────────────────────┘
+                                    │
+                                    ▼
+┌────────────────────────────────────────────────────────────────────────┐
+│ 3. Derived Extraction Layer                                            │
+│    └── lookup_benchmarks    (Requires scrape snapshot; max 5 attempts) │
+└───────────────────────────────────┬────────────────────────────────────┘
+                                    │
+                                    ▼
+┌────────────────────────────────────────────────────────────────────────┐
+│ 4. Cross-Source Evidence Layer (`model_evidence`)                      │
+│    └── verify_facts         (Substantiates values & sets confidence)   │
+└───────────────────────────────────┬────────────────────────────────────┘
+                                    │
+                                    ▼
+┌────────────────────────────────────────────────────────────────────────┐
+│ 5. Scoring Gate (`quality_check`)                                      │
+│    └── Requires ≥2 verified facts & ≥1 benchmark to qualify for index  │
+└───────────────────────────────────┬────────────────────────────────────┘
+                                    │
+                                    ▼
+┌────────────────────────────────────────────────────────────────────────┐
+│ 6. Grounded Editorial Layer (`generate_editorial`)                     │
+│    └── Executed LAST using verified evidence to prevent hallucination  │
+└────────────────────────────────────────────────────────────────────────┘
+```
+
+---
+
+## 3. Freshness Windows
 
 | Action Type | Freshness Window | Rationale |
 | :--- | :--- | :--- |
 | `lookup_pricing` | **30 Days** | Provider pricing and token cost tiers adjust frequently. |
-| `lookup_specs` | **30 Days** | Context windows and quantization formats may be updated. |
+| `collect_runtime` | **14 Days** | Provider latency and throughput fluctuate with infrastructure. |
+| `lookup_capabilities`| **60 Days** | Provider parameter updates and new modality features. |
+| `lookup_specs` | **60 Days** | Context windows and quantization formats may be updated. |
 | `lookup_benchmarks` | **90 Days** | Canonical evaluation scores (MMLU, HumanEval, etc.) remain stable. |
 | `scrape_source` | **90 Days** | Official READMEs and research papers are generally immutable post-release. |
 
 ---
 
-## 3. Worker Contracts
+## 4. Evidence Layer (`model_evidence`)
 
-Each worker processes a bounded batch (default: 25) for its specific `action_type`. A single model failure is caught inside the loop and never aborts the batch.
-
-```
-┌────────────────────────────────────────────────────────┐
-│               discover-and-queue.js                    │
-│   (Fans out candidate models into enrichment_jobs)     │
-└────────┬──────────────┬──────────────┬─────────────┬───┘
-         │              │              │             │
-         ▼              ▼              ▼             ▼
-┌─────────────────┐ ┌───────────────┐ ┌───────────────┐ ┌───────────────┐
-│  scrape-source  │ │lookup-pricing │ │ lookup-specs  │ │ lookup-bench  │
-│  (Deep Crawler) │ │ (OpenRouter)  │ │(Deterministic)│ │ (Deterministic│
-└────────┬────────┘ └───────┬───────┘ └───────┬───────┘ │   Extractor)  │
-         │                  │                 │         └───────┬───────┘
-         ▼                  │                 │                 │
-┌─────────────────┐         │                 │                 │
-│ data/cache/     │◄────────┼─────────────────┼─────────────────┘
-│ snapshots/*.json│         │                 │
-└────────┬────────┘         │                 │
-         │                  │                 │
-         └──────────┬───────┴─────────────────┘
-                    ▼
-       ┌───────────────────────────────┐
-       │ compute-fact-completeness.js  │
-       │ (>=2 verified facts & >=1 bm) │
-       └────────────┬──────────────────┘
-                    ▼
-       ┌───────────────────────────────┐
-       │    generate-editorial.js      │
-       │ (Grounded LLM + Boilerplate   │
-       │        Gate Check)            │
-       └───────────────────────────────┘
-```
-
-### A. `scrape-source.js` (`action_type: scrape_source`)
-- **Inputs**: `links.huggingface`, official blogs, papers, GitHub URLs.
-- **Operation**: Crawls the deepest official primary sources (`crawlDeepOfficialSource`).
-- **Outputs**: Writes raw crawled text to `data/cache/snapshots/<model_id>.json`.
-- **Result Summary**: `{ crawledUrls: string[], byteCounts: number, timestamp: string }`.
-- **Failure Mode**: Network timeout or unresolvable URLs -> records `status = 'failed'` with error description.
-
-### B. `lookup-benchmarks.js` (`action_type: lookup_benchmarks`)
-- **Inputs**: Reads snapshot from `data/cache/snapshots/<model_id>.json`.
-- **Operation**:
-  - If snapshot is missing -> re-queues job with note `"awaiting snapshot"` (never crawls inline).
-  - Deterministically extracts table rows via `extractBenchmarksFromMarkdownTable`.
-  - Validates score proximity with `verifyBenchmarkSubstantiation`.
-  - Sanitizes and enforces write-layer guardrails with `sanitizeBenchmarksForWrite` via `verified-write.js`.
-- **Outputs**: Writes verified benchmark objects to `models.benchmarks` with provenance URLs.
-- **Result Summary**: `{ benchmarksFound: number, substantiated: number, rejected: object[], timestamp: string }`.
-
-### C. `lookup-pricing.js` (`action_type: lookup_pricing`)
-- **Inputs**: Live OpenRouter catalog (`https://openrouter.ai/api/v1/models`).
-- **Operation**: Matches model by name/slug and extracts exact prompt/completion pricing and context limit.
-- **Outputs**: Updates `models.pricing`, `models.context_window`, and tags `sources: ["https://openrouter.ai/api/v1/models"]`. Sets `field_confidence.pricing = 'VERIFIED'`.
-- **Result Summary**: `{ matched: boolean, openRouterId: string|null, pricing: object, contextWindow: string, timestamp: string }`.
-
-### D. `lookup-specs.js` (`action_type: lookup_specs`)
-- **Inputs**: Model `name`, `slug`, `developer`, `type`.
-- **Operation**: Deterministic regex extraction of parameters (e.g. `8x7B`, `70B`), context window normalization (`128K tokens`, `1M tokens`), license inference (`Apache-2.0`, `MIT`, `Proprietary`), and open vs closed classification.
-- **Guarantees**: Zero LLM dependencies, zero network requests. Always deterministically evaluates model specs.
-- **Outputs**: Updates `models.parameters`, `models.context_window`, `models.license`, `models.type`.
-- **Result Summary**: `{ parameters: string, contextWindow: string, license: string, type: string, timestamp: string }`.
+Every extracted fact is substantiated with granular provenance:
+- **`official_model_card`**: Directly extracted and validated from the author's primary repository.
+- **`provider_api`**: Verified via live marketplace endpoints (e.g. OpenRouter).
+- **`benchmark_paper`**: Academic research papers with table citation links.
+- **`independent_eval`**: LMSYS Chatbot Arena, Artificial Analysis, or independent community runs.
+- **`curator_verified`**: Manual inspection and approval by a Modelverse administrator.
 
 ---
 
-## 4. Precondition Fact Gate (`compute-fact-completeness.js`)
+## 5. Structured Capabilities
 
-Before invoking any LLM for editorial generation, `computeFactCompleteness()` evaluates the model's factual verification state:
-
-$$\text{Eligible} \iff (\text{verifiedFactCount} \ge 2) \land (\text{verifiedBenchmarksCount} \ge 1)$$
-
-- **`verifiedFactCount`**: Count of fields (`parameters`, `contextWindow`, `pricing`, `license`, `benchmarks`, `hfHub`) with `field_confidence IN ('VERIFIED', 'OFFICIAL')`.
-- **`verifiedBenchmarksCount`**: Count of substantiated numeric benchmarks with valid HTTP citation URLs.
-- **Ineligible models**: Skipped with zero LLM spend; left as clean unverified/thin rows without synthetic filler.
-
----
-
-## 5. Editorial Worker (`generate-editorial.js`)
-
-1. **Grounded Context**: Passes the verified benchmark numbers and parameters into the prompt.
-2. **Structural Boilerplate Gate**: Runs `isStructuralBoilerplate()` (Jaccard 4-shingle similarity against synthetic templates).
-3. **Retry Protocol**:
-   - If boilerplate is detected, retries **once** with an explicit structure-variation directive.
-   - If boilerplate is still detected on retry, **marks failed and leaves fields null** (never writes boilerplate).
-4. **Final Scoring**: Evaluates the model with `scoreModelPage()` and updates `quality_status` and `quality_score`.
+Modelverse tracks 14 first-class capabilities per model:
+1. `vision_input`: Image understanding & multimodal parsing
+2. `image_generation`: Diffusion/generative visual outputs
+3. `audio_input`: Speech recognition / Whisper audio parsing
+4. `audio_output`: Text-to-speech synthesis
+5. `video_input`: Video reasoning and frame comprehension
+6. `tool_calling`: Function calling and external API tools
+7. `structured_outputs`: JSON schema compliance & structured output guarantees
+8. `json_mode`: JSON output formatting
+9. `reasoning`: Chain-of-thought & deep reasoning architecture
+10. `computer_use`: GUI manipulation & OS action agents
+11. `web_search`: Search grounding and live web retrieval
+12. `prompt_caching`: Context and prefix caching support
+13. `batch`: Asynchronous batch inference APIs
+14. `fine_tuning`: Open weights or vendor fine-tuning availability
 
 ---
 
 ## 6. Observability (`queue-status.js`)
 
-Run `node scripts/monitoring/queue-status.js` at any time to inspect queue health:
+Run `node scripts/monitoring/queue-status.js` to inspect queue health across all action types:
 
+```bash
+node scripts/monitoring/queue-status.js
 ```
-==================== ENRICHMENT QUEUE STATUS ====================
-Action Type             Done   Failed   Running   Queued   Skipped    Total
----------------------------------------------------------------------------
-scrape_source             25        0         0       75         0      100
-lookup_benchmarks         25        0         0       75         0      100
-lookup_pricing            25        0         0       75         0      100
-lookup_specs              25        0         0       75         0      100
----------------------------------------------------------------------------
-Total Tracked Jobs in Queue: 400
-```
-
----
-
-## 7. CI/CD Orchestration Schedule
-
-| Workflow | Schedule | Command |
-| :--- | :--- | :--- |
-| `discovery.yml` | Every 6 hours (`0 */6 * * *`) | `node scripts/discovery/discover-and-queue.js` |
-| `worker-scrape-source.yml` | Hourly at :05 (`5 * * * *`) | `node scripts/workers/scrape-source.js --batch-size 25` |
-| `worker-lookup-specs.yml` | Hourly at :10 (`10 * * * *`) | `node scripts/workers/lookup-specs.js --batch-size 50` |
-| `worker-lookup-benchmarks.yml` | Hourly at :15 (`15 * * * *`) | `node scripts/workers/lookup-benchmarks.js --batch-size 25` |
-| `worker-lookup-pricing.yml` | Every 2h at :20 (`20 */2 * * *`) | `node scripts/workers/lookup-pricing.js --batch-size 25` |
-| `merge-and-editorial.yml` | Hourly at :30 (`30 * * * *`) | `node scripts/workers/generate-editorial.js --batch-size 15` |

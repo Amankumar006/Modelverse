@@ -198,6 +198,40 @@ async function runPricingWorker() {
               outputPricePerM: Number(outPrice.toFixed(4)),
             };
             fieldConfidence.pricing = "VERIFIED";
+
+            try {
+              await db.from("model_evidence").upsert({
+                model_id: model.id,
+                field_name: "pricing",
+                source_type: "provider_api",
+                source_url: "https://openrouter.ai/api/v1/models",
+                extracted_value: updateData.pricing,
+                confidence: "VERIFIED",
+                verification_notes: `Live provider rates for OpenRouter ID: ${orMatch.id}`,
+                extracted_at: new Date().toISOString(),
+                updated_at: new Date().toISOString(),
+              }, { onConflict: "model_id,field_name,source_url" });
+            } catch (evErr) {
+              console.warn(`  ⚠️ Pricing evidence note:`, evErr.message);
+            }
+          }
+        }
+
+        if (updateData.context_window) {
+          try {
+            await db.from("model_evidence").upsert({
+              model_id: model.id,
+              field_name: "context_window",
+              source_type: "provider_api",
+              source_url: "https://openrouter.ai/api/v1/models",
+              extracted_value: { context_window: updateData.context_window, tokens: orMatch.context_length },
+              confidence: "VERIFIED",
+              verification_notes: `Provider context length: ${orMatch.context_length} tokens`,
+              extracted_at: new Date().toISOString(),
+              updated_at: new Date().toISOString(),
+            }, { onConflict: "model_id,field_name,source_url" });
+          } catch (evErr) {
+            console.warn(`  ⚠️ Context window evidence note:`, evErr.message);
           }
         }
 
