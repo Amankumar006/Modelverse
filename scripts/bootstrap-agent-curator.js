@@ -8,7 +8,13 @@ const supabase = createClient(
 
 async function bootstrap() {
   const email = 'agent@modelverse.ai';
-  const password = 'SuperSecretPassword123!';
+  // Credentials must never be hardcoded — set CURATOR_INITIAL_PASSWORD in .env.local.
+  const password = process.env.CURATOR_INITIAL_PASSWORD;
+
+  if (!password || password.length < 12) {
+    console.error('❌ Refusing to run: set CURATOR_INITIAL_PASSWORD (min 12 chars) in .env.local. This script creates an admin-role account.');
+    process.exit(1);
+  }
   
   console.log('Creating auth user...');
   let userId;
