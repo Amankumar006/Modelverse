@@ -1,15 +1,15 @@
 # Product Scope
 
-> Drafted from what's inferable about Modelverse from the repo/spec so far. **Confirm and edit the bracketed parts** — this file directly shapes what an agent treats as in-scope vs. a scope-creeping feature, so it's worth getting right.
+> Confirmed with the project owner on 2026-08-22. This file directly shapes what an agent treats as in-scope vs. a scope-creeping feature.
 
-## What Modelverse is (best current understanding)
+## What Modelverse is
 
 Modelverse is an AI-model directory / news site: it ingests AI-related news via RSS daily, uses an LLM (Gemini/Groq) to summarize it, syncs model metadata from external sources (HuggingFace, OpenRouter), and presents this as browsable model cards, with a curator review dashboard for quality control before content goes live.
 
-- **Target users:** [who is this for — ML practitioners, general AI-curious readers, both?]
-- **Core value prop:** [e.g. "the fastest, most accurate place to see what's new across AI models" — confirm/replace]
-- **Monetization / business model:** [none yet / ads / subscription / other — fill in, since it affects how cautious to be with anything touching payments or user accounts]
-- **Primary user flows to protect above all else:** [e.g. homepage load, model card pages, search — list the pages/flows that must never break]
+- **Target users:** both general AI-curious readers and ML practitioners. Content must stay accessible to non-technical readers while model metadata stays accurate enough for practitioners to compare models.
+- **Core value prop:** the fastest, most accurate place to see what's new across AI models — freshness and speed of coverage is the differentiator.
+- **Monetization / business model:** ads, live via Google AdSense (`src/components/third-party/AdUnit.tsx`, `GoogleAdsense.tsx`). Keep ad slots isolated from content rendering paths; ad scripts must never block or alter core page rendering.
+- **Primary user flows to protect above all else:** homepage, model card pages, search, and the news feed.
 
 ## In scope
 
