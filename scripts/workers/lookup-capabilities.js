@@ -60,17 +60,25 @@ function loadOpenRouterCache() {
  * Deterministically extracts structured capability flags for a model
  */
 function extractCapabilities(model, openRouterModels) {
-  const name = (model.name || "").toLowerCase();
-  const slug = (model.slug || "").toLowerCase();
-  const primaryTask = (model.primary_task || "").toLowerCase();
-  const modality = (model.modality || "").toLowerCase();
-  const description = (model.description || "").toLowerCase();
-  const tags = Array.isArray(model.tags) ? model.tags.map((t) => String(t).toLowerCase()) : [];
+  const name = String(model.name || "").toLowerCase();
+  const slug = String(model.slug || "").toLowerCase();
+  const primaryTask = String(model.primary_task || "").toLowerCase();
+  const modality = Array.isArray(model.modality)
+    ? model.modality.map((m) => String(m).toLowerCase()).join(" ")
+    : typeof model.modality === "object" && model.modality !== null
+    ? JSON.stringify(model.modality).toLowerCase()
+    : String(model.modality || "").toLowerCase();
+  const description = String(model.description || "").toLowerCase();
+  const tags = Array.isArray(model.tags)
+    ? model.tags.map((t) => String(t).toLowerCase())
+    : typeof model.tags === "string"
+    ? model.tags.toLowerCase().split(",")
+    : [];
 
   // Match OpenRouter entry
   const orMatch = openRouterModels.find((or) => {
-    const orId = (or.id || "").toLowerCase();
-    const orName = (or.name || "").toLowerCase();
+    const orId = String(or.id || "").toLowerCase();
+    const orName = String(or.name || "").toLowerCase();
     return orId === slug || orName === name || orId.includes(slug) || slug.includes(orId.split("/")[1] || "___");
   });
 
