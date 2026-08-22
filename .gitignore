@@ -51,3 +51,5 @@ data/ingestion/
 data/cache/news-research/
 scripts/.import-cache/
 *.log
+.claude/
+.mcp.json
