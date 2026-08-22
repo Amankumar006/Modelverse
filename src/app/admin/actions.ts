@@ -266,10 +266,10 @@ export async function approveModels(slugs: string[]) {
   }
 
   const { scoreModelPage } = await import('@/../scripts/quality/score-content');
-
-  for (const model of models) {
+  const now = new Date().toISOString();
+  const updatePromises = models.map((model) => {
     const gate = scoreModelPage(model);
-    await supabase
+    return supabase
       .from('models')
       .update({ 
         verified: gate.status === 'indexed', 
@@ -277,13 +277,16 @@ export async function approveModels(slugs: string[]) {
         quality_status: gate.status,
         quality_score: gate.score,
         quality_reasons: gate.reasons,
-        quality_checked_at: new Date().toISOString(),
+        quality_checked_at: now,
         needs_review: false, 
         reviewed_by: user.id, 
-        reviewed_at: new Date().toISOString() 
+        reviewed_at: now,
+        updated_at: now
       })
       .eq('slug', model.slug);
-  }
+  });
+
+  await Promise.all(updatePromises);
 
   await supabase.from('audit_log').insert({
     actor: user.id,

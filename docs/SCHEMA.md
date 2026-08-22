@@ -59,3 +59,22 @@ Every model in Modelverse is backed by a relational record in the Supabase `mode
 | `curatorNotes` | `string` | Operational notes regarding verification status or migration history |
 
 **SEO Note:** Models are marked up using `SoftwareApplication` JSON-LD schema for optimal Google Search coverage, avoiding ecommerce product errors.
+
+---
+
+### 5. Performance Indexes & Server-Side Functions
+
+#### Database Indexes
+- `idx_models_active_release_date`: `(release_date DESC) WHERE status != 'staged' AND (verification_status IS NULL OR verification_status != 'DISPUTED')`
+- `idx_models_developer_active`: `(developer, release_date DESC) WHERE status != 'staged'`
+- `idx_models_family_active`: `(family, release_date DESC) WHERE family IS NOT NULL AND status != 'staged'`
+- `idx_models_primary_task_active`: `(primary_task, release_date DESC) WHERE status != 'staged'`
+- `idx_news_items_published_date`: `(publish_date DESC) WHERE status = 'published'`
+- `idx_news_items_category_published`: `(category, publish_date DESC) WHERE status = 'published'`
+- `idx_community_submissions_submitted_by`: `(submitted_by)`
+- `idx_audit_log_target_created`: `(target_type, target_id, created_at DESC)`
+
+#### Server-Side RPC Functions
+- `get_distinct_developers()`: Returns sorted distinct developers from active models.
+- `get_distinct_families()`: Returns sorted distinct model families from active models.
+

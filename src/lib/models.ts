@@ -259,6 +259,89 @@ let cachedModelEntries: { data: ModelEntry[]; timestamp: number } | null = null;
 let cachedModelIndexes: { data: ModelIndex[]; timestamp: number } | null = null;
 const CACHE_TTL_MS = 60000; // 60 seconds in-memory cache
 
+export interface GetModelsOptions {
+  status?: string | null;
+  vendorApiStatus?: string | null;
+  developer?: string | null;
+  type?: string | null;
+  modality?: string | null;
+  primaryTask?: string | null;
+  q?: string | null;
+  limit?: number;
+  offset?: number;
+}
+
+export interface PaginatedModelsResult {
+  models: ModelEntry[];
+  total: number;
+}
+
+/** Return paginated models with database-level filtering, search, and pagination. */
+export async function getPaginatedModels(options: GetModelsOptions): Promise<PaginatedModelsResult> {
+  const {
+    status,
+    vendorApiStatus,
+    developer,
+    type,
+    modality,
+    primaryTask,
+    q,
+    limit = 20,
+    offset = 0,
+  } = options;
+
+  try {
+    let query = supabase
+      .from('models')
+      .select('*', { count: 'exact' })
+      .neq('status', 'staged')
+      .neq('verification_status', 'DISPUTED');
+
+    if (status) {
+      query = query.eq('status', status);
+    }
+    if (vendorApiStatus) {
+      query = query.eq('vendor_api_status', vendorApiStatus);
+    }
+    if (developer) {
+      query = query.ilike('developer', developer);
+    }
+    if (type) {
+      query = query.eq('type', type);
+    }
+    if (primaryTask) {
+      query = query.eq('primary_task', primaryTask);
+    }
+    if (modality) {
+      query = query.contains('modality', [modality]);
+    }
+    if (q) {
+      query = query.or(`name.ilike.%${q}%,developer.ilike.%${q}%,slug.ilike.%${q}%,description.ilike.%${q}%`);
+    }
+
+    const { data, count, error } = await query
+      .order('release_date', { ascending: false })
+      .range(offset, offset + limit - 1);
+
+    if (error) {
+      console.error("Database error in getPaginatedModels:", error);
+      return { models: [], total: 0 };
+    }
+
+    const validData = (data || []).filter(
+      (m) => !m.metadata?.redirect_to && !m.metadata?.redirectTo
+    );
+
+    return {
+      models: validData.map(mapRowToModelEntry),
+      total: count ?? validData.length,
+    };
+  } catch (err) {
+    console.error("Unexpected error in getPaginatedModels:", err);
+    return { models: [], total: 0 };
+  }
+}
+
 /** Return lightweight index summaries, sorted newest-first. Excludes staged, disputed, and redirected models. */
 export async function getAllModels(): Promise<ModelIndex[]> {
   const now = Date.now();
@@ -300,7 +383,7 @@ export async function getAllModelEntries(): Promise<ModelEntry[]> {
   try {
     const { data, error } = await supabase
       .from('models')
-      .select('*')
+      .select('id, name, slug, developer, release_date, type, status, vendor_api_status, featured, boost, family, tier, institution, verified, verification_status, quality_status, quality_score, quality_reasons, quality_checked_at, quality_breakdown, modality, primary_task, deployment, license, parameters, active_parameters, context_window, description, key_features, benchmarks, previous_version, base_model, links, logo, images, tags, sources, pricing, cost_tiers, pricing_last_verified, card_summary, page_overview, editorial_note, chatgpt_availability, api_availability, aliases, updated_at, metadata')
       .neq('status', 'staged')
       .order('release_date', { ascending: false });
     
@@ -450,6 +533,11 @@ export async function getModelsByDeveloper(developer: string): Promise<ModelEntr
 /** Get all unique families from the models */
 export async function getAllFamilies(): Promise<string[]> {
   try {
+    const { data: rpcData, error: rpcError } = await supabase.rpc('get_distinct_families');
+    if (!rpcError && Array.isArray(rpcData) && rpcData.length > 0) {
+      return (rpcData as { family: string }[]).map((r) => r.family).filter(Boolean);
+    }
+
     const { data, error } = await supabase
       .from('models')
       .select('family, status, verification_status, metadata')
@@ -484,6 +572,11 @@ export async function getAllFamilies(): Promise<string[]> {
 /** Get all unique developers from the models. */
 export async function getAllDevelopers(): Promise<string[]> {
   try {
+    const { data: rpcData, error: rpcError } = await supabase.rpc('get_distinct_developers');
+    if (!rpcError && Array.isArray(rpcData) && rpcData.length > 0) {
+      return (rpcData as { developer: string }[]).map((r) => r.developer).filter(Boolean);
+    }
+
     const { data, error } = await supabase
       .from('models')
       .select('developer, status, verification_status, metadata')
