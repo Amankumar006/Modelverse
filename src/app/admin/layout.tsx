@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
+import { redirect } from "next/navigation";
 import AdminNav from './AdminNav'; // We will create this client component
+import { requireCurator } from '@/utils/supabase/require-curator';
 
 export const metadata: Metadata = {
   title: "Admin | Modelverse",
@@ -9,11 +11,20 @@ export const metadata: Metadata = {
   },
 };
 
-export default function AdminLayout({
+export default async function AdminLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  // Single choke point for the whole /admin area: must be an authenticated
+  // user WITH a curator_profiles row. Middleware only checks authentication;
+  // this also enforces the curator role before any admin page renders.
+  try {
+    await requireCurator();
+  } catch {
+    redirect('/login');
+  }
+
   return (
     <div className="min-h-screen bg-daylight-bg flex flex-col md:flex-row">
       {/* Mobile Header */}
