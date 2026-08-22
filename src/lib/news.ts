@@ -125,8 +125,24 @@ export async function getArticleBySlug(slug: string): Promise<NewsArticle | null
 }
 
 export async function getArticlesByCategory(category: NewsCategoryType): Promise<NewsArticleIndexEntry[]> {
-  const all = await getAllArticles();
-  return all.filter((a) => a.category === category);
+  const now = Date.now();
+  if (cachedArticles && now - cachedArticles.timestamp < CACHE_TTL_MS) {
+    return cachedArticles.data.filter((a) => a.category === category);
+  }
+
+  const { data, error } = await supabase
+    .from("news_items")
+    .select("id, slug, title, category, publish_date, updated_at, author, read_time, excerpt, cover_image, status, confidence_level, external_sources, sources, related_models, tags, quality_status, quality_score, quality_reasons, quality_checked_at")
+    .eq("status", "published")
+    .eq("category", category)
+    .order("publish_date", { ascending: false });
+
+  if (error || !data) {
+    console.error(`Error fetching articles for category ${category}:`, error);
+    return [];
+  }
+
+  return data.map(mapDbRowToArticle);
 }
 
 export function getCategoryLabel(category: NewsCategoryType): string {
