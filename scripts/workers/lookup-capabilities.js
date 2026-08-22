@@ -44,8 +44,11 @@ function parseBatchSize() {
 function loadOpenRouterCache() {
   if (fs.existsSync(OPENROUTER_CACHE_PATH)) {
     try {
-      const data = JSON.parse(fs.readFileSync(OPENROUTER_CACHE_PATH, "utf8"));
-      return Array.isArray(data) ? data : data.data || [];
+      const parsed = JSON.parse(fs.readFileSync(OPENROUTER_CACHE_PATH, "utf8"));
+      if (Array.isArray(parsed)) return parsed;
+      if (Array.isArray(parsed?.data?.data)) return parsed.data.data;
+      if (Array.isArray(parsed?.data)) return parsed.data;
+      return [];
     } catch {
       return [];
     }
