@@ -11,6 +11,9 @@
  * and records individual capability evidence in model_evidence table.
  */
 
+require("dotenv").config({ path: ".env.local", quiet: true });
+require("dotenv").config({ quiet: true });
+
 const { createClient } = require("@supabase/supabase-js");
 const fs = require("fs");
 const path = require("path");
