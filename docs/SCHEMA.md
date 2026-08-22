@@ -114,4 +114,3 @@ Live performance telemetry across inference providers:
 | `error_rate` | `numeric` | Request failure percentage |
 | `measured_at` | `timestamptz` | Test execution timestamp |
 
-
