@@ -113,4 +113,3 @@ Live performance telemetry across inference providers:
 | `p95_latency_ms` | `numeric` | P95 latency |
 | `error_rate` | `numeric` | Request failure percentage |
 | `measured_at` | `timestamptz` | Test execution timestamp |
-
