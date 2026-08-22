@@ -194,9 +194,40 @@ export default function ModelCard({
 
           {/* Description */}
           {description && (
-            <p className="text-[var(--muted)] text-xs md:text-sm line-clamp-2 leading-relaxed mb-4">
+            <p className="text-[var(--muted)] text-xs md:text-sm line-clamp-2 leading-relaxed mb-3">
               {description}
             </p>
+          )}
+
+          {/* Capability Mini-Badges */}
+          {model.capabilities && typeof model.capabilities === "object" && (
+            <div className="flex items-center gap-1.5 flex-wrap mb-3">
+              {model.capabilities.reasoning && (
+                <span className="text-[10px] font-medium px-2 py-0.5 rounded-full bg-[var(--accent-soft)]/20 text-[var(--accent)] border border-[var(--accent)]/30 flex items-center gap-1">
+                  🧠 Reasoning
+                </span>
+              )}
+              {model.capabilities.tool_calling && (
+                <span className="text-[10px] font-medium px-2 py-0.5 rounded-full bg-blue-500/10 text-blue-400 border border-blue-500/20 flex items-center gap-1">
+                  🛠️ Tools
+                </span>
+              )}
+              {model.capabilities.vision_input && (
+                <span className="text-[10px] font-medium px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 flex items-center gap-1">
+                  👁️ Vision
+                </span>
+              )}
+              {model.capabilities.structured_outputs && (
+                <span className="text-[10px] font-medium px-2 py-0.5 rounded-full bg-purple-500/10 text-purple-400 border border-purple-500/20 flex items-center gap-1">
+                  📋 JSON
+                </span>
+              )}
+              {model.capabilities.prompt_caching && (
+                <span className="text-[10px] font-medium px-2 py-0.5 rounded-full bg-amber-500/10 text-amber-400 border border-amber-500/20 flex items-center gap-1">
+                  ⚡ Cache
+                </span>
+              )}
+            </div>
           )}
         </div>
 

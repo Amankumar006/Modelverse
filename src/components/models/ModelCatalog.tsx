@@ -44,6 +44,21 @@ const SORT_OPTIONS = [
   { key: "developer-asc", label: "Developer A–Z" },
 ];
 
+const CAPABILITY_OPTIONS = [
+  { value: "reasoning", label: "Reasoning", icon: "🧠" },
+  { value: "tool_calling", label: "Tool Calling", icon: "🛠️" },
+  { value: "vision_input", label: "Vision", icon: "👁️" },
+  { value: "structured_outputs", label: "JSON Schema", icon: "📋" },
+  { value: "web_search", label: "Web Search", icon: "🌐" },
+  { value: "prompt_caching", label: "Prompt Caching", icon: "⚡" },
+  { value: "fine_tuning", label: "Fine-Tuning", icon: "🔧" },
+  { value: "image_generation", label: "Image Gen", icon: "🎨" },
+  { value: "audio_input", label: "Audio In", icon: "🎙️" },
+  { value: "audio_output", label: "Voice Out", icon: "🔊" },
+  { value: "computer_use", label: "Computer Use", icon: "💻" },
+  { value: "video_input", label: "Video", icon: "🎥" },
+];
+
 interface FiltersState {
   q: string;
   type: string[];
@@ -52,6 +67,7 @@ interface FiltersState {
   developer: string[];
   license: string[];
   deployment: string[];
+  capabilities: string[];
 }
 
 function filterModels(
@@ -73,6 +89,12 @@ function filterModels(
 
     if (excludeKey !== "task" && filters.task.length > 0) {
       if (!filters.task.includes(model.primaryTask)) return false;
+    }
+
+    if (excludeKey !== "capabilities" && filters.capabilities.length > 0) {
+      const modelCaps = model.capabilities || {};
+      const hasAllCaps = filters.capabilities.every((c) => Boolean(modelCaps[c]));
+      if (!hasAllCaps) return false;
     }
 
     if (excludeKey !== "modality" && filters.modality.length > 0) {
@@ -239,6 +261,7 @@ function ModelCatalogContent({
     developer: parseParamArray(initialSearchParams.developer),
     license: parseParamArray(initialSearchParams.license),
     deployment: parseParamArray(initialSearchParams.deployment),
+    capabilities: parseParamArray(initialSearchParams.capabilities),
   });
 
   const [sortKey, setSortKey] = useState<string>(
@@ -258,6 +281,7 @@ function ModelCatalogContent({
     if (updatedFilters.q) params.set("q", updatedFilters.q);
     if (updatedFilters.type.length > 0) params.set("type", updatedFilters.type.join(","));
     if (updatedFilters.task.length > 0) params.set("task", updatedFilters.task.join(","));
+    if (updatedFilters.capabilities.length > 0) params.set("capabilities", updatedFilters.capabilities.join(","));
     if (updatedFilters.modality.length > 0) params.set("modality", updatedFilters.modality.join(","));
     if (updatedFilters.developer.length > 0) params.set("developer", updatedFilters.developer.join(","));
     if (updatedFilters.license.length > 0) params.set("license", updatedFilters.license.join(","));
@@ -343,6 +367,16 @@ function ModelCatalogContent({
         "task",
         (m) => m.primaryTask
       ),
+      capabilities: calculateCounts(
+        CAPABILITY_OPTIONS.map((c) => c.value),
+        "capabilities",
+        (m) => {
+          if (!m.capabilities || typeof m.capabilities !== "object") return [];
+          return Object.entries(m.capabilities)
+            .filter(([, v]) => Boolean(v))
+            .map(([k]) => k);
+        }
+      ),
       modality: calculateCounts(dynamicOptions.modalities, "modality", (m) => {
         const mod = m.modality;
         if (Array.isArray(mod)) return mod;
@@ -416,6 +450,7 @@ function ModelCatalogContent({
       filters.q === "" &&
       filters.type.length === 0 &&
       filters.task.length === 0 &&
+      filters.capabilities.length === 0 &&
       filters.modality.length === 0 &&
       filters.license.length === 0 &&
       filters.deployment.length === 0;
@@ -426,38 +461,37 @@ function ModelCatalogContent({
           seenFamilies.add(model.family);
           const allVariants = models.filter((m) => m.family === model.family);
 
-          if (allVariants.length === 1) {
-            finalItems.push({ type: "standalone", model: allVariants[0] });
-          } else {
-            let primary = allVariants.find((v) => v.primaryTask === "chat-reasoning");
-            if (!primary) primary = [...allVariants].sort((a, b) => b.boost - a.boost)[0];
+          const featuredVariant = allVariants.find((m) => m.featured && m.qualityStatus === "indexed");
+          const highestScoreVariant = [...allVariants].sort((a, b) => (b.qualityScore || 0) - (a.qualityScore || 0))[0];
+          const primaryModel = featuredVariant || highestScoreVariant || allVariants[0];
 
-            finalItems.push({
-              type: "family",
-              familySlug: model.family,
-              primaryModel: primary || model,
-              variantCount: allVariants.length,
-              variants: allVariants,
-            });
-          }
+          finalItems.push({
+            type: "family",
+            familySlug: model.family,
+            primaryModel,
+            variantCount: allVariants.length,
+            variants: allVariants,
+          });
         }
       } else {
-        finalItems.push({ type: "standalone", model });
+        finalItems.push({
+          type: "standalone",
+          model,
+        });
       }
     }
     return finalItems;
-  }, [filtered, models, filters]);
+  }, [filtered, filters, models]);
 
   const hasActiveFilters =
     filters.q !== "" ||
     filters.type.length > 0 ||
     filters.task.length > 0 ||
+    filters.capabilities.length > 0 ||
     filters.modality.length > 0 ||
     filters.developer.length > 0 ||
     filters.license.length > 0 ||
     filters.deployment.length > 0;
-
-
 
   const toggleFilter = (key: keyof Omit<FiltersState, "q">, val: string) => {
     const current = filters[key] as string[];
@@ -484,6 +518,7 @@ function ModelCatalogContent({
       q: "",
       type: [],
       task: [],
+      capabilities: [],
       modality: [],
       developer: [],
       license: [],
@@ -495,6 +530,15 @@ function ModelCatalogContent({
 
   const renderSidebar = () => (
     <div className="space-y-6">
+      <FacetGroupFilter
+        title="Technical Capabilities"
+        options={CAPABILITY_OPTIONS}
+        valFn={(o) => o.value}
+        labelFn={(o) => `${o.icon} ${o.label}`}
+        selectedValues={filters.capabilities}
+        counts={facetCounts.capabilities}
+        onToggle={(val) => toggleFilter("capabilities", val)}
+      />
       <FacetGroupFilter
         title="Type"
         options={TYPE_OPTIONS}
@@ -661,6 +705,55 @@ function ModelCatalogContent({
                 >
                   <span>{opt.label}</span>
                   <span className={`text-[10px] px-1.5 py-0.2 rounded-full font-mono tabular-nums ${isActive ? "bg-[var(--accent)]/15 text-[var(--accent)]" : "bg-[var(--muted)]/10 text-[var(--muted)]"}`}>
+                    {count}
+                  </span>
+                </button>
+              );
+            })}
+          </div>
+
+          {/* Capabilities Quick Pills Row */}
+          <div className="flex flex-wrap items-center gap-1.5 w-full pt-1 border-t border-[var(--muted)]/5">
+            <span className="text-xs font-bold uppercase tracking-wider text-[var(--muted)] shrink-0 mr-1 flex items-center gap-1">
+              Capabilities:
+            </span>
+            <button
+              onClick={() => setFilters((f) => ({ ...f, capabilities: [] }))}
+              className={`px-3 py-1 rounded-[var(--radius-pill)] text-xs font-medium transition-all whitespace-nowrap cursor-pointer ${
+                filters.capabilities.length === 0
+                  ? "bg-[var(--accent-soft)] text-[var(--accent)] font-bold shadow-sm border border-[var(--accent)]/20"
+                  : "bg-[var(--card-bg)] text-[var(--muted)] hover:text-[var(--text)] border border-[var(--muted)]/10 shadow-[var(--shadow-card)]"
+              }`}
+            >
+              All
+            </button>
+            {CAPABILITY_OPTIONS.map((opt) => {
+              const isActive = filters.capabilities.includes(opt.value);
+              const count = facetCounts.capabilities[opt.value] || 0;
+              return (
+                <button
+                  key={opt.value}
+                  onClick={() => {
+                    setFilters((f) => {
+                      const newCaps = isActive
+                        ? f.capabilities.filter((c) => c !== opt.value)
+                        : [...f.capabilities, opt.value];
+                      return { ...f, capabilities: newCaps };
+                    });
+                  }}
+                  className={`px-2.5 py-1 rounded-[var(--radius-pill)] text-xs font-medium transition-all whitespace-nowrap flex items-center gap-1 cursor-pointer ${
+                    isActive
+                      ? "bg-[var(--accent-soft)] text-[var(--accent)] font-bold shadow-sm border border-[var(--accent)]/20"
+                      : "bg-[var(--card-bg)] text-[var(--muted)] hover:text-[var(--text)] border border-[var(--muted)]/10 shadow-[var(--shadow-card)]"
+                  }`}
+                >
+                  <span className="text-[11px]">{opt.icon}</span>
+                  <span>{opt.label}</span>
+                  <span
+                    className={`text-[10px] px-1.5 py-0.2 rounded-full font-mono tabular-nums ${
+                      isActive ? "bg-[var(--accent)]/15 text-[var(--accent)]" : "bg-[var(--muted)]/10 text-[var(--muted)]"
+                    }`}
+                  >
                     {count}
                   </span>
                 </button>

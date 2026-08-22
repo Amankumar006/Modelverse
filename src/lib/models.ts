@@ -34,9 +34,22 @@ export interface ModelIndex {
   chatgptAvailability?: Record<string, unknown>;
   apiAvailability?: Record<string, unknown>;
   aliases?: string[];
+  capabilities?: Record<string, boolean>;
   qualityBreakdown?: Record<string, unknown>;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   metadata?: Record<string, any>;
+}
+
+export interface ModelEvidence {
+  id: string;
+  modelId: string;
+  fieldName: string;
+  sourceType: string;
+  sourceUrl: string;
+  extractedValue: Record<string, unknown>;
+  confidence: "OFFICIAL" | "VERIFIED" | "LIKELY" | "DISPUTED" | "UNVERIFIED" | string;
+  verificationNotes?: string;
+  extractedAt: string;
 }
 
 export interface Benchmark {
@@ -205,6 +218,7 @@ export function mapRowToModelEntry(row: any): ModelEntry {
     chatgptAvailability: row.chatgpt_availability || row.metadata?.chatgptAvailability || row.metadata?.chatgpt_availability,
     apiAvailability: row.api_availability || row.metadata?.apiAvailability || row.metadata?.api_availability,
     aliases: row.aliases || row.metadata?.aliases || [],
+    capabilities: row.capabilities || row.metadata?.capabilities || {},
     customSections: row.metadata?.custom_sections || row.metadata?.customSections || row.custom_sections || [],
     quickstart: row.metadata?.quickstart || row.quickstart || undefined,
     metadata: row.metadata || {},
@@ -241,6 +255,7 @@ function mapRowToModelIndex(row: any): ModelIndex {
     chatgptAvailability: row.chatgpt_availability || row.metadata?.chatgptAvailability || row.metadata?.chatgpt_availability,
     apiAvailability: row.api_availability || row.metadata?.apiAvailability || row.metadata?.api_availability,
     aliases: row.aliases || row.metadata?.aliases || [],
+    capabilities: row.capabilities || row.metadata?.capabilities || {},
     qualityBreakdown: row.quality_breakdown,
     description: row.description || row.metadata?.description || "",
     parameters: row.parameters || row.metadata?.parameters || "",
@@ -352,7 +367,7 @@ export async function getAllModels(): Promise<ModelIndex[]> {
   try {
     const { data, error } = await supabase
       .from('models')
-      .select('id, name, slug, developer, release_date, type, status, vendor_api_status, featured, boost, family, tier, institution, verified, verification_status, quality_status, modality, deployment, license, description, parameters, context_window, primary_task, previous_version, metadata')
+      .select('id, name, slug, developer, release_date, type, status, vendor_api_status, featured, boost, family, tier, institution, verified, verification_status, quality_status, modality, deployment, license, description, parameters, context_window, primary_task, previous_version, capabilities, aliases, metadata')
       .neq('status', 'staged')
       .order('release_date', { ascending: false });
 
@@ -383,7 +398,7 @@ export async function getAllModelEntries(): Promise<ModelEntry[]> {
   try {
     const { data, error } = await supabase
       .from('models')
-      .select('id, name, slug, developer, release_date, type, status, vendor_api_status, featured, boost, family, tier, institution, verified, verification_status, quality_status, quality_score, quality_reasons, quality_checked_at, quality_breakdown, modality, primary_task, deployment, license, parameters, active_parameters, context_window, description, key_features, benchmarks, previous_version, base_model, links, logo, images, tags, sources, pricing, cost_tiers, pricing_last_verified, card_summary, page_overview, editorial_note, chatgpt_availability, api_availability, aliases, updated_at, metadata')
+      .select('*')
       .neq('status', 'staged')
       .order('release_date', { ascending: false });
     
@@ -422,6 +437,36 @@ export async function getModelBySlug(slug: string): Promise<ModelEntry | null> {
   } catch (err) {
     console.error(`Unexpected error fetching model slug "${slug}":`, err);
     return null;
+  }
+}
+
+/** Retrieve verified provenance and evidence entries for a given model */
+export async function getModelEvidence(modelId: string): Promise<ModelEvidence[]> {
+  try {
+    const { data, error } = await supabase
+      .from('model_evidence')
+      .select('*')
+      .eq('model_id', modelId)
+      .order('extracted_at', { ascending: false });
+
+    if (error) {
+      console.error(`Database error fetching model evidence for "${modelId}":`, error);
+      return [];
+    }
+    return (data || []).map((row: Record<string, unknown>) => ({
+      id: String(row.id),
+      modelId: String(row.model_id),
+      fieldName: String(row.field_name),
+      sourceType: String(row.source_type),
+      sourceUrl: String(row.source_url),
+      extractedValue: (row.extracted_value as Record<string, unknown>) || {},
+      confidence: (row.confidence as string) || "UNVERIFIED",
+      verificationNotes: typeof row.verification_notes === "string" ? row.verification_notes : undefined,
+      extractedAt: String(row.extracted_at),
+    }));
+  } catch (err) {
+    console.error(`Unexpected error fetching model evidence for "${modelId}":`, err);
+    return [];
   }
 }
 

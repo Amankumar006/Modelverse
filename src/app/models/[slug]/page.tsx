@@ -7,6 +7,7 @@ import {
   getModelBySlug,
   getFamilyModels,
   getRelatedModels,
+  getModelEvidence,
   SITE_URL,
 } from "@/lib/models";
 import JsonLd from "@/components/JsonLd";
@@ -128,10 +129,11 @@ export default async function ModelDetailPage({
     }
   }
 
-  // Fetch family and related models in parallel (lightweight projection, avoiding full table scans)
-  const [familyMembers, relatedModels] = await Promise.all([
+  // Fetch family, related models, and verified evidence in parallel
+  const [familyMembers, relatedModels, evidence] = await Promise.all([
     model.family ? getFamilyModels(model.family, model.id) : Promise.resolve([]),
     model.primaryTask ? getRelatedModels(model.primaryTask, model.id) : Promise.resolve([]),
+    getModelEvidence(model.id),
   ]);
 
   // Structured JSON-LD: Product (the model) + TechArticle (the page)
@@ -246,6 +248,7 @@ export default async function ModelDetailPage({
         markdownContent={markdownContent}
         familyMembers={familyMembers}
         relatedModels={relatedModels}
+        evidence={evidence}
       />
     </>
   );
