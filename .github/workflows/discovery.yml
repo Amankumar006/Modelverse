@@ -11,6 +11,11 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
+    # 6-hourly cron that pushes to main; serialize runs so pushes never race.
+    concurrency:
+      group: ${{ github.workflow }}
+      cancel-in-progress: false
+    timeout-minutes: 30
     env:
       SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
       SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
@@ -42,3 +47,20 @@ jobs:
           else
             echo "No discovery artifacts to commit."
           fi
+
+      - name: Failure Alert Email
+        if: failure()
+        continue-on-error: true
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: smtp.gmail.com
+          server_port: 465
+          secure: true
+          username: 006amanraj@gmail.com
+          password: ${{ secrets.GMAIL_APP_PASSWORD }}
+          subject: '🚨 [Modelverse] Discovery & Enrichment Fan-Out failed'
+          to: 006amanraj@gmail.com
+          from: Modelverse Alert Bot <006amanraj@gmail.com>
+          body: |
+            Workflow ${{ github.workflow }} failed on schedule.
+            Run: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
