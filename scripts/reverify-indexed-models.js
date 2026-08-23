@@ -19,8 +19,15 @@ const { verifyCitationUrlForBenchmark, fetchPageText } = require("./lib/verify-c
 require("dotenv").config({ path: ".env.local" });
 require("dotenv").config({ path: ".env" });
 
-const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL || process.env.SUPABASE_URL || "https://zmfyclrjbiewmwqiswqk.supabase.co";
-const SUPABASE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY || "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InptZnljbHJqYmlld213cWlzd3FrIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc4NjAwODUzNiwiZXhwIjoyMTAxNTg0NTM2fQ.tsPoYBo5oetneR7-vJG0GuZoV13YQwyd1jobMeG5d9Y";
+// Credentials must come from the environment (.env.local locally, GitHub Actions
+// secrets in CI). Never hardcode keys here — a leaked service-role JWT bypasses RLS.
+const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL || process.env.SUPABASE_URL;
+const SUPABASE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY;
+
+if (!SUPABASE_URL || !SUPABASE_KEY) {
+  console.error("❌ Missing NEXT_PUBLIC_SUPABASE_URL or SUPABASE_SERVICE_ROLE_KEY — refusing to run without explicit credentials.");
+  process.exit(1);
+}
 
 const db = createClient(SUPABASE_URL, SUPABASE_KEY);
 

@@ -537,6 +537,11 @@ async function runDailyNewsIngestion() {
   const fingerprintIndex = loadFingerprintIndex();
 
   const allCandidates = [];
+  // Track source-level failures so a total outage can be distinguished from a
+  // quiet news day. If EVERY source fails, the run must exit non-zero — a dead
+  // pipeline that stays green is invisible (see .agents/rules testing gate).
+  let failedFeeds = 0;
+  const FEED_SOURCE_COUNT = 9;
 
   // 1. Fetch Anthropic Official News
   try {
@@ -544,6 +549,7 @@ async function runDailyNewsIngestion() {
     console.log(`  🟧 Anthropic Official: ${anthropicItems.length} items`);
     anthropicItems.forEach((item) => allCandidates.push({ ...item, lab: "Anthropic" }));
   } catch (e) {
+    failedFeeds += 1;
     console.error("  ❌ Failed fetching Anthropic feed:", e.message);
   }
 
@@ -556,6 +562,7 @@ async function runDailyNewsIngestion() {
     console.log(`  🤗 Hugging Face RSS: ${recent.length} items within ${MAX_AGE_HOURS}h window`);
     recent.forEach((item) => allCandidates.push({ ...item, lab: "Hugging Face" }));
   } catch (e) {
+    failedFeeds += 1;
     console.error("  ❌ Failed fetching Hugging Face feed:", e.message);
   }
   
@@ -568,6 +575,7 @@ async function runDailyNewsIngestion() {
     console.log(`  🟢 OpenAI RSS: ${recent.length} items within ${MAX_AGE_HOURS}h window`);
     recent.forEach((item) => allCandidates.push({ ...item, lab: "OpenAI" }));
   } catch (e) {
+    failedFeeds += 1;
     console.error("  ❌ Failed fetching OpenAI feed:", e.message);
   }
 
@@ -580,6 +588,7 @@ async function runDailyNewsIngestion() {
     console.log(`  🔴 DeepMind RSS: ${recent.length} items within ${MAX_AGE_HOURS}h window`);
     recent.forEach((item) => allCandidates.push({ ...item, lab: "Google DeepMind" }));
   } catch (e) {
+    failedFeeds += 1;
     console.error("  ❌ Failed fetching DeepMind feed:", e.message);
   }
 
@@ -592,6 +601,7 @@ async function runDailyNewsIngestion() {
     console.log(`  💚 NVIDIA AI RSS: ${recent.length} items within ${MAX_AGE_HOURS}h window`);
     recent.forEach((item) => allCandidates.push({ ...item, lab: "NVIDIA" }));
   } catch (e) {
+    failedFeeds += 1;
     console.error("  ❌ Failed fetching NVIDIA feed:", e.message);
   }
 
@@ -604,6 +614,7 @@ async function runDailyNewsIngestion() {
     console.log(`  ⚡ TechCrunch AI RSS: ${recent.length} items within ${MAX_AGE_HOURS}h window`);
     recent.forEach((item) => allCandidates.push({ ...item, lab: "TechCrunch AI" }));
   } catch (e) {
+    failedFeeds += 1;
     console.error("  ❌ Failed fetching TechCrunch feed:", e.message);
   }
 
@@ -616,6 +627,7 @@ async function runDailyNewsIngestion() {
     console.log(`  🚀 VentureBeat AI RSS: ${recent.length} items within ${MAX_AGE_HOURS}h window`);
     recent.forEach((item) => allCandidates.push({ ...item, lab: "VentureBeat AI" }));
   } catch (e) {
+    failedFeeds += 1;
     console.error("  ❌ Failed fetching VentureBeat AI feed:", e.message);
   }
 
@@ -628,6 +640,7 @@ async function runDailyNewsIngestion() {
     console.log(`  🎓 MIT Tech Review AI RSS: ${recent.length} items within ${MAX_AGE_HOURS}h window`);
     recent.forEach((item) => allCandidates.push({ ...item, lab: "MIT Technology Review" }));
   } catch (e) {
+    failedFeeds += 1;
     console.error("  ❌ Failed fetching MIT Tech Review AI feed:", e.message);
   }
 
@@ -640,6 +653,7 @@ async function runDailyNewsIngestion() {
     console.log(`  🛠️ MarkTechPost RSS: ${recent.length} items within ${MAX_AGE_HOURS}h window`);
     recent.forEach((item) => allCandidates.push({ ...item, lab: "MarkTechPost" }));
   } catch (e) {
+    failedFeeds += 1;
     console.error("  ❌ Failed fetching MarkTechPost feed:", e.message);
   }
 
@@ -949,8 +963,11 @@ async function extractFullArticleBody(url, fallbackDesc, lab) {
     if (process.env.GITHUB_ENV) {
       fs.appendFileSync(process.env.GITHUB_ENV, "NEW_NEWS_PUSHED=false\n");
     }
-    if (allCandidates.length === 0) {
-      console.error("🚨 All feeds failed to fetch or parsed zero items; recorded a zero-item quality report without failing the pipeline.");
+    if (allCandidates.length === 0 && failedFeeds >= FEED_SOURCE_COUNT) {
+      console.error(`🚨 FATAL: all ${FEED_SOURCE_COUNT} news sources failed to fetch or parsed zero items — the pipeline is effectively down. Exiting non-zero so monitoring and alerts fire.`);
+      process.exitCode = 1;
+    } else if (allCandidates.length === 0) {
+      console.error(`⚠️ Zero candidates from any source (${failedFeeds}/${FEED_SOURCE_COUNT} feeds failed, the rest had no recent items). If this repeats across runs, investigate the failing sources.`);
     }
   } else {
     console.log(`🎉 Published ${createdNews.length} new articles:`);
@@ -962,4 +979,8 @@ async function extractFullArticleBody(url, fallbackDesc, lab) {
   // require("./compile-models.js");
 }
 
-runDailyNewsIngestion();
+runDailyNewsIngestion().catch((err) => {
+  // Fail loud: an unhandled fatal must turn the GitHub Actions run red.
+  console.error("🚨 Fatal error in daily news ingestion:", err);
+  process.exitCode = 1;
+});

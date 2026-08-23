@@ -33,8 +33,25 @@ jobs:
           GNEWS_API_KEY: ${{ secrets.GNEWS_API_KEY }}
           SERPAPI_KEY: ${{ secrets.SERPAPI_KEY }}
           SUPABASE_URL: ${{ secrets.SUPABASE_URL || secrets.NEXT_PUBLIC_SUPABASE_URL }}
-          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY || secrets.NEXT_PUBLIC_SUPABASE_ANON_KEY }}
+          # No anon-key fallback: silently running with the anon key means every
+          # write fails RLS while the run stays green. Missing secret = loud failure.
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
         run: node scripts/ingest-daily-news.js
+
+      - name: Enrichment Queue Status Report
+        if: always()
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL || secrets.NEXT_PUBLIC_SUPABASE_URL }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+        run: node scripts/monitoring/queue-status.js
+
+      - name: Worker Health Check & Discord Alert
+        if: always()
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL || secrets.NEXT_PUBLIC_SUPABASE_URL }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+          DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
+        run: node scripts/monitoring/alert-on-failure.js
 
       - name: Send Gmail News Digest
         if: env.NEW_NEWS_PUSHED == 'true'
