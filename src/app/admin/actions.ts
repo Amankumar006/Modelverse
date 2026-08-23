@@ -1,6 +1,6 @@
 'use server'
 
-import { createClient } from '@/utils/supabase/server'
+import { requireCurator } from '@/utils/supabase/require-curator'
 import { revalidatePath, updateTag } from 'next/cache'
 
 function parseJsonFields(edits: Record<string, unknown>) {
@@ -23,12 +23,7 @@ function parseJsonFields(edits: Record<string, unknown>) {
 }
 
 export async function approveModel(slug: string, edits: Record<string, unknown>) {
-  const supabase = await createClient();
-
-  const { data: { user }, error: authError } = await supabase.auth.getUser();
-  if (authError || !user) {
-    throw new Error('Authentication required');
-  }
+  const { supabase, user } = await requireCurator();
 
   const { data: existingModel, error: fetchError } = await supabase
     .from('models')
@@ -111,12 +106,7 @@ export async function approveModel(slug: string, edits: Record<string, unknown>)
 }
 
 export async function saveModelEdits(slug: string, edits: Record<string, unknown>) {
-  const supabase = await createClient();
-
-  const { data: { user }, error: authError } = await supabase.auth.getUser();
-  if (authError || !user) {
-    throw new Error('Authentication required');
-  }
+  const { supabase, user } = await requireCurator();
 
   const parsedEdits = parseJsonFields(edits);
 
@@ -168,12 +158,7 @@ export async function saveModelEdits(slug: string, edits: Record<string, unknown
 }
 
 export async function markDisputed(slug: string, notes: string) {
-  const supabase = await createClient();
-
-  const { data: { user }, error: authError } = await supabase.auth.getUser();
-  if (authError || !user) {
-    throw new Error('Authentication required');
-  }
+  const { supabase, user } = await requireCurator();
 
   // When a model is disputed, it immediately loses verified status and drops out of indexed feeds
   const updates = {
@@ -216,12 +201,7 @@ export async function markDisputed(slug: string, notes: string) {
 }
 
 export async function dismissModels(slugs: string[]) {
-  const supabase = await createClient();
-
-  const { data: { user }, error: authError } = await supabase.auth.getUser();
-  if (authError || !user) {
-    throw new Error('Authentication required');
-  }
+  const { supabase, user } = await requireCurator();
 
   const { error: updateError } = await supabase
     .from('models')
@@ -249,12 +229,7 @@ export async function dismissModels(slugs: string[]) {
 }
 
 export async function approveModels(slugs: string[]) {
-  const supabase = await createClient();
-
-  const { data: { user }, error: authError } = await supabase.auth.getUser();
-  if (authError || !user) {
-    throw new Error('Authentication required');
-  }
+  const { supabase, user } = await requireCurator();
 
   const { data: models, error: fetchError } = await supabase
     .from('models')
@@ -304,12 +279,7 @@ export async function approveModels(slugs: string[]) {
 }
 
 export async function overrideVerification(slug: string, reason: string) {
-  const supabase = await createClient();
-
-  const { data: { user }, error: authError } = await supabase.auth.getUser();
-  if (authError || !user) {
-    throw new Error('Authentication required');
-  }
+  const { supabase, user } = await requireCurator();
 
   if (!reason || reason.trim().length < 15) {
     throw new Error('Override requires a detailed reason explaining why automated verification was bypassed (min 15 chars).');
@@ -359,12 +329,7 @@ export async function overrideVerification(slug: string, reason: string) {
 }
 
 export async function triageNews(id: string, action: 'approve' | 'dismiss', slug?: string) {
-  const supabase = await createClient();
-
-  const { data: { user }, error: authError } = await supabase.auth.getUser();
-  if (authError || !user) {
-    throw new Error('Authentication required');
-  }
+  const { supabase, user } = await requireCurator();
 
   const updates: Record<string, unknown> = {
     review_status: action === 'approve' ? 'approved' : 'dismissed',
@@ -401,12 +366,7 @@ export async function triageNews(id: string, action: 'approve' | 'dismiss', slug
 }
 
 export async function approveNewsItem(slugOrId: string) {
-  const supabase = await createClient();
-
-  const { data: { user }, error: authError } = await supabase.auth.getUser();
-  if (authError || !user) {
-    throw new Error('Authentication required');
-  }
+  const { supabase, user } = await requireCurator();
 
   const isUUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(slugOrId);
   const query = supabase
@@ -444,12 +404,7 @@ export async function approveNewsItem(slugOrId: string) {
 }
 
 export async function updateNewsItemStatus(slugOrId: string, status: string, qualityStatus: string) {
-  const supabase = await createClient();
-
-  const { data: { user }, error: authError } = await supabase.auth.getUser();
-  if (authError || !user) {
-    throw new Error('Authentication required');
-  }
+  const { supabase, user } = await requireCurator();
 
   const isUUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(slugOrId);
   const query = supabase
@@ -486,12 +441,7 @@ export async function updateNewsItemStatus(slugOrId: string, status: string, qua
 }
 
 export async function deleteNewsItem(slugOrId: string) {
-  const supabase = await createClient();
-
-  const { data: { user }, error: authError } = await supabase.auth.getUser();
-  if (authError || !user) {
-    throw new Error('Authentication required');
-  }
+  const { supabase, user } = await requireCurator();
 
   const isUUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(slugOrId);
   const query = supabase.from('news_items').delete();
@@ -519,25 +469,16 @@ export async function deleteNewsItem(slugOrId: string) {
 }
 
 export async function inviteCurator(email: string, displayName: string) {
-  const supabase = await createClient();
+  // requireCurator() already verifies the caller holds a curator_profiles row;
+  // inviting additionally demands the admin role.
+  const { role } = await requireCurator();
 
-  // Check if current user is admin
-  const { data: { user }, error: authError } = await supabase.auth.getUser();
-  if (authError || !user) {
-    throw new Error('Authentication required');
-  }
-
-  const { data: profile } = await supabase
-    .from('curator_profiles')
-    .select('role')
-    .eq('id', user.id)
-    .single();
-
-  if (profile?.role !== 'admin') {
+  if (role !== 'admin') {
     throw new Error('Only admins can invite curators');
   }
 
-  // Use service role to invite user
+  // Service-role client: this action is admin-only, and curator_profiles has no
+  // public INSERT policy, so the profile insert must bypass RLS here.
   const { createClient: createAdminClient } = await import('@supabase/supabase-js');
   const adminClient = createAdminClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
@@ -553,8 +494,9 @@ export async function inviteCurator(email: string, displayName: string) {
 
   const newUserId = inviteData.user.id;
 
-  // Insert into curator_profiles using the authenticated client to respect RLS
-  const { error: insertError } = await supabase
+  // Insert into curator_profiles with the service-role client — there is no
+  // INSERT policy on this table, so the authenticated client would always fail.
+  const { error: insertError } = await adminClient
     .from('curator_profiles')
     .insert({
       id: newUserId,
