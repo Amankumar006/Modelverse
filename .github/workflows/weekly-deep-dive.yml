@@ -11,6 +11,12 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
+    # Weekly LLM-heavy synthesis: serialize runs and bound the hang time so a
+    # stuck provider call can't burn the 6h default timeout.
+    concurrency:
+      group: ${{ github.workflow }}
+      cancel-in-progress: false
+    timeout-minutes: 90
 
     steps:
       - name: Checkout repository
@@ -31,3 +37,20 @@ jobs:
           SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
           SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
         run: node scripts/ingest-deep-dives.js
+
+      - name: Failure Alert Email
+        if: failure()
+        continue-on-error: true
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: smtp.gmail.com
+          server_port: 465
+          secure: true
+          username: 006amanraj@gmail.com
+          password: ${{ secrets.GMAIL_APP_PASSWORD }}
+          subject: '🚨 [Modelverse] Weekly Deep Dive Synthesis failed'
+          to: 006amanraj@gmail.com
+          from: Modelverse Alert Bot <006amanraj@gmail.com>
+          body: |
+            Workflow ${{ github.workflow }} failed on schedule.
+            Run: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}

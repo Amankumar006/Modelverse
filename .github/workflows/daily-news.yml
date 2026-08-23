@@ -11,6 +11,12 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
+    # Hourly cron that pushes to main: serialize runs so overlapping runs
+    # can't race each other's rebase/push, and bound the hang time.
+    concurrency:
+      group: ${{ github.workflow }}
+      cancel-in-progress: false
+    timeout-minutes: 60
 
     steps:
       - name: Checkout repository
