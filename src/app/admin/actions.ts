@@ -1,7 +1,29 @@
 'use server'
 
 import { requireCurator } from '@/utils/supabase/require-curator'
+import { createClient } from '@/utils/supabase/server'
 import { revalidatePath, updateTag } from 'next/cache'
+
+type Db = Awaited<ReturnType<typeof createClient>>
+
+// Audit entries are best-effort: a failed insert must not fail a curation
+// action whose DB mutation already applied, but it must never be silently
+// dropped either — surface it in server logs.
+async function logAudit(
+  db: Db,
+  entry: {
+    actor: string;
+    action: string;
+    target_type: string;
+    target_id: string;
+    metadata?: Record<string, unknown>;
+  }
+) {
+  const { error } = await db.from('audit_log').insert(entry);
+  if (error) {
+    console.error('Audit log insert failed:', error.message);
+  }
+}
 
 function parseJsonFields(edits: Record<string, unknown>) {
   const jsonFields = ['pricing', 'benchmarks', 'parameters', 'context_window'];
@@ -80,20 +102,18 @@ export async function approveModel(slug: string, edits: Record<string, unknown>)
   }
 
   // Insert audit log
-  await supabase
-    .from('audit_log')
-    .insert({
-      actor: user.id,
-      action: 'approve_model',
-      target_type: 'model',
-      target_id: slug,
-      metadata: { 
-        fields_changed: Object.keys(edits),
-        quality_status: gate.status,
-        quality_score: gate.score,
-        quality_reasons: gate.reasons,
-      }
-    });
+  await logAudit(supabase, {
+    actor: user.id,
+    action: 'approve_model',
+    target_type: 'model',
+    target_id: slug,
+    metadata: {
+      fields_changed: Object.keys(edits),
+      quality_status: gate.status,
+      quality_score: gate.score,
+      quality_reasons: gate.reasons,
+    }
+  });
 
   updateTag('models');
   revalidatePath('/admin/review');
@@ -137,15 +157,13 @@ export async function saveModelEdits(slug: string, edits: Record<string, unknown
   }
 
   // Insert audit log
-  await supabase
-    .from('audit_log')
-    .insert({
-      actor: user.id,
-      action: 'edit_model_draft',
-      target_type: 'model',
-      target_id: slug,
-      metadata: { fields_changed: Object.keys(edits) }
-    });
+  await logAudit(supabase, {
+    actor: user.id,
+    action: 'edit_model_draft',
+    target_type: 'model',
+    target_id: slug,
+    metadata: { fields_changed: Object.keys(edits) }
+  });
 
   updateTag('models');
   revalidatePath('/admin/review');
@@ -180,15 +198,13 @@ export async function markDisputed(slug: string, notes: string) {
   }
 
   // Insert audit log
-  await supabase
-    .from('audit_log')
-    .insert({
-      actor: user.id,
-      action: 'mark_disputed',
-      target_type: 'model',
-      target_id: slug,
-      metadata: { notes, action: 'revoked_indexed_status' }
-    });
+  await logAudit(supabase, {
+    actor: user.id,
+    action: 'mark_disputed',
+    target_type: 'model',
+    target_id: slug,
+    metadata: { notes, action: 'revoked_indexed_status' }
+  });
 
   updateTag('models');
   revalidatePath('/admin/review');
@@ -213,7 +229,7 @@ export async function dismissModels(slugs: string[]) {
     throw new Error('Failed to dismiss models');
   }
 
-  await supabase.from('audit_log').insert({
+  await logAudit(supabase, {
     actor: user.id,
     action: 'bulk_dismiss_models',
     target_type: 'model',
@@ -263,7 +279,7 @@ export async function approveModels(slugs: string[]) {
 
   await Promise.all(updatePromises);
 
-  await supabase.from('audit_log').insert({
+  await logAudit(supabase, {
     actor: user.id,
     action: 'bulk_approve_models',
     target_type: 'model',
@@ -307,12 +323,12 @@ export async function overrideVerification(slug: string, reason: string) {
   }
 
   // Audit log with dedicated override action
-  await supabase.from('audit_log').insert({
+  await logAudit(supabase, {
     actor: user.id,
     action: 'override_provenance_gate',
     target_type: 'model',
     target_id: slug,
-    metadata: { 
+    metadata: {
       reason: reason.trim(),
       curator_override: true,
     }
@@ -352,7 +368,7 @@ export async function triageNews(id: string, action: 'approve' | 'dismiss', slug
   }
 
   // Audit log
-  await supabase.from('audit_log').insert({
+  await logAudit(supabase, {
     actor: user.id,
     action: `triage_news_${action}`,
     target_type: 'news_triage',
@@ -388,7 +404,7 @@ export async function approveNewsItem(slugOrId: string) {
     throw new Error('Failed to approve news item: ' + updateError.message);
   }
 
-  await supabase.from('audit_log').insert({
+  await logAudit(supabase, {
     actor: user.id,
     action: 'approve_news_item',
     target_type: 'news_items',
@@ -425,7 +441,7 @@ export async function updateNewsItemStatus(slugOrId: string, status: string, qua
     throw new Error('Failed to update news status: ' + updateError.message);
   }
 
-  await supabase.from('audit_log').insert({
+  await logAudit(supabase, {
     actor: user.id,
     action: 'update_news_status',
     target_type: 'news_items',
@@ -455,7 +471,7 @@ export async function deleteNewsItem(slugOrId: string) {
     throw new Error('Failed to delete news item: ' + deleteError.message);
   }
 
-  await supabase.from('audit_log').insert({
+  await logAudit(supabase, {
     actor: user.id,
     action: 'delete_news_item',
     target_type: 'news_items',

@@ -22,7 +22,10 @@ export default function MermaidDiagram({ code }: MermaidDiagramProps) {
         mermaid.initialize({
           startOnLoad: false,
           theme: "dark",
-          securityLevel: "loose",
+          // Diagrams come from LLM-generated article bodies (indirect prompt
+          // injection surface). "strict" sanitizes labels and disables HTML
+          // in them — never render untrusted diagram code as "loose".
+          securityLevel: "strict",
           fontFamily: "var(--font-sans, inherit)",
           themeVariables: {
             darkMode: true,
