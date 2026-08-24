@@ -1,6 +1,7 @@
 import { mapRowToModelEntry } from '@/lib/models'
 import { notFound, redirect } from 'next/navigation'
 import LiveModelEditor from './LiveModelEditor'
+import StagedChangesPanel from '@/components/admin/StagedChangesPanel'
 import { createClient } from '@/utils/supabase/server'
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
@@ -35,5 +36,20 @@ export default async function ReviewModelPage({ params }: { params: Promise<{ sl
 
   const allModels = (allRawModels || []).map(mapRowToModelEntry)
 
-  return <LiveModelEditor initialModel={model} allModels={allModels} />
+  const stagedChanges = (rawModel.staged_changes as Record<string, unknown>) || {}
+  const hasStaged = Object.keys(stagedChanges).length > 0
+
+  return (
+    <div className="space-y-4">
+      {hasStaged && (
+        <StagedChangesPanel
+          slug={slug}
+          stagedChanges={stagedChanges}
+          stagedAt={(rawModel.staged_at as string) || null}
+          liveValues={rawModel as Record<string, unknown>}
+        />
+      )}
+      <LiveModelEditor initialModel={model} allModels={allModels} />
+    </div>
+  )
 }

@@ -529,3 +529,138 @@ export async function inviteCurator(email: string, displayName: string) {
   revalidatePath('/admin/curators');
   return { success: true };
 }
+
+// ----------------------------------------------------------------------------
+// Staged-changes approval (Phase 1)
+//
+// Pipeline workers stage proposed edits in models.staged_changes via the
+// shared scripts/lib/staged-write.js helper. Curators review the diff here
+// and either promote the staged values to live columns (approveStaged) or
+// discard them (rejectStaged). Direct models.update() of content columns
+// from scripts is now an anti-pattern; approval always wins.
+// ----------------------------------------------------------------------------
+
+export async function approveStaged(slug: string) {
+  const { supabase, user } = await requireCurator();
+
+  const { data: existingModel, error: fetchError } = await supabase
+    .from('models')
+    .select('*')
+    .eq('slug', slug)
+    .single();
+
+  if (fetchError || !existingModel) {
+    throw new Error('Model not found');
+  }
+
+  const staged = (existingModel.staged_changes as Record<string, unknown>) || {};
+  if (Object.keys(staged).length === 0) {
+    throw new Error('No staged changes to approve');
+  }
+
+  const { scoreModelPage } = await import('@/../scripts/quality/score-content');
+  const mergedModel = { ...existingModel, ...staged };
+  const gate = scoreModelPage(mergedModel);
+  const now = new Date().toISOString();
+
+  const { error: updateError } = await supabase
+    .from('models')
+    .update({
+      ...staged,
+      staged_changes: {},
+      staged_at: null,
+      verified: gate.status === 'indexed',
+      verification_status: gate.status === 'indexed' ? 'VERIFIED' : 'LIKELY',
+      quality_status: gate.status,
+      quality_score: gate.score,
+      quality_reasons: gate.reasons,
+      quality_checked_at: now,
+      needs_review: false,
+      reviewed_by: user.id,
+      reviewed_at: now,
+      updated_at: now,
+    })
+    .eq('slug', slug);
+
+  if (updateError) {
+    console.error('Approve staged failed:', updateError);
+    throw new Error('Failed to approve staged changes');
+  }
+
+  await logAudit(supabase, {
+    actor: user.id,
+    action: 'approve_staged',
+    target_type: 'model',
+    target_id: slug,
+    metadata: {
+      fields_promoted: Object.keys(staged),
+      quality_status: gate.status,
+      quality_score: gate.score,
+    },
+  });
+
+  updateTag('models');
+  revalidatePath('/admin/review');
+  revalidatePath(`/admin/review/${slug}`);
+  revalidatePath(`/models/${slug}`);
+  revalidatePath('/models');
+  revalidatePath('/');
+
+  return { success: true, fields_promoted: Object.keys(staged), quality_status: gate.status };
+}
+
+export async function rejectStaged(slug: string, feedback?: string) {
+  const { supabase, user } = await requireCurator();
+
+  const { data: existingModel, error: fetchError } = await supabase
+    .from('models')
+    .select('*')
+    .eq('slug', slug)
+    .single();
+
+  if (fetchError || !existingModel) {
+    throw new Error('Model not found');
+  }
+
+  const rejectedFields = Object.keys(
+    (existingModel.staged_changes as Record<string, unknown>) || {},
+  );
+
+  const note = feedback
+    ? `[rejected ${rejectedFields.length} staged fields on ${new Date().toISOString().slice(0, 10)}] ${feedback}`
+    : `[rejected ${rejectedFields.length} staged fields on ${new Date().toISOString().slice(0, 10)}]`;
+
+  const { error: updateError } = await supabase
+    .from('models')
+    .update({
+      staged_changes: {},
+      staged_at: null,
+      needs_review: false,
+      curator_notes: existingModel.curator_notes
+        ? `${existingModel.curator_notes}\n${note}`
+        : note,
+      updated_at: new Date().toISOString(),
+    })
+    .eq('slug', slug);
+
+  if (updateError) {
+    console.error('Reject staged failed:', updateError);
+    throw new Error('Failed to reject staged changes');
+  }
+
+  await logAudit(supabase, {
+    actor: user.id,
+    action: 'reject_staged',
+    target_type: 'model',
+    target_id: slug,
+    metadata: { fields_rejected: rejectedFields, feedback: feedback || null },
+  });
+
+  updateTag('models');
+  revalidatePath('/admin/review');
+  revalidatePath(`/admin/review/${slug}`);
+  revalidatePath(`/models/${slug}`);
+  revalidatePath('/models');
+
+  return { success: true, fields_rejected: rejectedFields };
+}
