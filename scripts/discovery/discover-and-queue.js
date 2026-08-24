@@ -31,6 +31,9 @@ const ACTION_TYPES = [
   "lookup_benchmarks",
   "lookup_pricing",
   "lookup_specs",
+  "research_gaps",
+  "generate_editorial",
+  "quality_check",
 ];
 
 // Jobs past this many attempts are terminal: re-queueing them every hour just
@@ -42,6 +45,9 @@ const FRESHNESS_WINDOWS_MS = {
   lookup_benchmarks: 90 * 24 * 60 * 60 * 1000, // 90 days
   lookup_pricing: 30 * 24 * 60 * 60 * 1000,    // 30 days
   lookup_specs: 30 * 24 * 60 * 60 * 1000,      // 30 days
+  research_gaps: 14 * 24 * 60 * 60 * 1000,     // 14 days (matches worker freshness skip)
+  generate_editorial: 30 * 24 * 60 * 60 * 1000, // 30 days
+  quality_check: 7 * 24 * 60 * 60 * 1000,      // 7 days — cheap recompute keeps scores fresh
 };
 
 function getHttps(url) {
@@ -203,6 +209,9 @@ async function discoverAndQueue() {
     lookup_benchmarks: 0,
     lookup_pricing: 0,
     lookup_specs: 0,
+    research_gaps: 0,
+    generate_editorial: 0,
+    quality_check: 0,
   };
 
   for (const model of candidateModels) {
@@ -289,6 +298,9 @@ async function discoverAndQueue() {
   console.log(` - lookup_benchmarks:  ${queuedCounts.lookup_benchmarks}`);
   console.log(` - lookup_pricing:     ${queuedCounts.lookup_pricing}`);
   console.log(` - lookup_specs:       ${queuedCounts.lookup_specs}`);
+  console.log(` - research_gaps:      ${queuedCounts.research_gaps}`);
+  console.log(` - generate_editorial: ${queuedCounts.generate_editorial}`);
+  console.log(` - quality_check:      ${queuedCounts.quality_check}`);
   if (cappedJobs.length > 0) {
     console.log(`Capped failures -> needs_review: ${cappedJobs.length}`);
   }
