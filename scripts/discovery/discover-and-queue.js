@@ -33,6 +33,10 @@ const ACTION_TYPES = [
   "lookup_specs",
 ];
 
+// Jobs past this many attempts are terminal: re-queueing them every hour just
+// burns runs (the Aug 2026 scrape_source outage looped to 27 attempts).
+const MAX_JOB_ATTEMPTS = 5;
+
 const FRESHNESS_WINDOWS_MS = {
   scrape_source: 90 * 24 * 60 * 60 * 1000,     // 90 days
   lookup_benchmarks: 90 * 24 * 60 * 60 * 1000, // 90 days
@@ -193,6 +197,7 @@ async function discoverAndQueue() {
 
   const now = Date.now();
   const jobsToUpsert = [];
+  const cappedJobs = [];
   const queuedCounts = {
     scrape_source: 0,
     lookup_benchmarks: 0,
@@ -212,8 +217,13 @@ async function discoverAndQueue() {
         // No job exists yet -> Queue
         shouldQueue = true;
       } else if (existing.status === "failed") {
-        // Failed job -> Retry / re-queue
-        shouldQueue = true;
+        // Failed job -> Retry / re-queue, unless it exhausted its attempt cap;
+        // capped failures move to needs_review instead of cycling hourly.
+        if ((existing.attempts || 0) >= MAX_JOB_ATTEMPTS) {
+          cappedJobs.push(existing.id);
+        } else {
+          shouldQueue = true;
+        }
       } else if (existing.status === "running") {
         // Stale running job (> 2 hours) -> Re-queue
         const lastRunTime = existing.last_run_at ? new Date(existing.last_run_at).getTime() : 0;
@@ -255,6 +265,23 @@ async function discoverAndQueue() {
     }
   }
 
+  // Move attempt-capped failures to needs_review so they exit the re-queue cycle
+  for (let i = 0; i < cappedJobs.length; i += BATCH_SIZE) {
+    const chunk = cappedJobs.slice(i, i + BATCH_SIZE);
+    const { error: capErr } = await db
+      .from("enrichment_jobs")
+      .update({
+        status: "needs_review",
+        result_summary: { reason: "max_attempts_exceeded" },
+        updated_at: new Date().toISOString(),
+      })
+      .in("id", chunk);
+
+    if (capErr) {
+      console.error(`❌ Failed transitioning capped jobs (chunk ${i / BATCH_SIZE}):`, capErr.message);
+    }
+  }
+
   console.log("\n=== DISCOVERY & QUEUE SUMMARY ===");
   console.log(`Candidates Evaluated: ${candidateModels.length}`);
   console.log(`Total Jobs Queued:    ${jobsToUpsert.length}`);
@@ -262,6 +289,9 @@ async function discoverAndQueue() {
   console.log(` - lookup_benchmarks:  ${queuedCounts.lookup_benchmarks}`);
   console.log(` - lookup_pricing:     ${queuedCounts.lookup_pricing}`);
   console.log(` - lookup_specs:       ${queuedCounts.lookup_specs}`);
+  if (cappedJobs.length > 0) {
+    console.log(`Capped failures -> needs_review: ${cappedJobs.length}`);
+  }
 }
 
 if (require.main === module) {

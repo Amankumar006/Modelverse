@@ -18,6 +18,7 @@ const fs = require("fs");
 const path = require("path");
 const https = require("https");
 const { createClient } = require("@supabase/supabase-js");
+const { markJobFailure } = require("../lib/job-lifecycle");
 
 const SUPABASE_URL = process.env.SUPABASE_URL || process.env.NEXT_PUBLIC_SUPABASE_URL;
 const SUPABASE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY;
@@ -271,14 +272,7 @@ async function runPricingWorker() {
       doneCount++;
     } catch (err) {
       console.error(`  ❌ Pricing job failed for model ${job.model_id}:`, err.message);
-      await db
-        .from("enrichment_jobs")
-        .update({
-          status: "failed",
-          error: err.message,
-          updated_at: new Date().toISOString(),
-        })
-        .eq("id", job.id);
+      await markJobFailure(db, job.id, err.message, (job.attempts || 0) + 1);
       failedCount++;
     }
   }

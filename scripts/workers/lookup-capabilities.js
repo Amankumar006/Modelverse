@@ -15,6 +15,7 @@ require("dotenv").config({ path: ".env.local", quiet: true });
 require("dotenv").config({ quiet: true });
 
 const { createClient } = require("@supabase/supabase-js");
+const { markJobFailure } = require("../lib/job-lifecycle");
 const fs = require("fs");
 const path = require("path");
 
@@ -386,14 +387,7 @@ async function runCapabilitiesWorker() {
     } catch (err) {
       console.error(`  ❌ Failed capability extraction for model ${modelId}:`, err.message);
       if (job) {
-        await db
-          .from("enrichment_jobs")
-          .update({
-            status: "failed",
-            error: err.message,
-            updated_at: new Date().toISOString(),
-          })
-          .eq("id", job.id);
+        await markJobFailure(db, job.id, err.message, (job.attempts || 0) + 1);
       }
       failedCount++;
     }
