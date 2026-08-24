@@ -205,7 +205,8 @@ async function runResearchGapsWorker() {
     process.exit(1);
   }
 
-  const requeued = await requeueStaleFailures();
+  // A dry run must not mutate any state — not even job requeues.
+  const requeued = dryRun ? 0 : await requeueStaleFailures();
   if (requeued > 0) console.log(`♻️  Requeued ${requeued} stale failed research job(s).`);
 
   // 1. Claim queued jobs (over-fetch so post-filtering still fills the batch)
