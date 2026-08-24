@@ -22,6 +22,7 @@ const { createClient } = require("@supabase/supabase-js");
 const { computeFactCompleteness } = require("../merge/compute-fact-completeness");
 const { isStructuralBoilerplate, scoreModelPage } = require("../quality/score-content");
 const { stageChanges } = require("../lib/staged-write");
+const { markJobFailure } = require("../lib/job-lifecycle");
 const { parseEditorialOutput } = require("../../data/schemas/editorial-output.schema");
 
 const SUPABASE_URL = process.env.SUPABASE_URL || process.env.NEXT_PUBLIC_SUPABASE_URL;
@@ -239,35 +240,81 @@ async function runEditorialWorker() {
   const batchSize = parseBatchSize();
   console.log(`🚀 [Worker: generate_editorial] Starting editorial pipeline (batch size: ${batchSize})...`);
 
-  // Query models that either have thin status or are missing editorial fields
-  const { data: models, error } = await db
-    .from("models")
-    .select("*")
-    .or("editorial_note.is.null,page_overview.is.null")
-    .order("boost", { ascending: false })
-    .order("release_date", { ascending: false })
-    .limit(batchSize * 3);
+  // Claim queued generate_editorial jobs (discovery fans these out; the
+  // quality_check worker queues them when a card crosses into eligibility).
+  const { data: jobs, error } = await db
+    .from("enrichment_jobs")
+    .select("id, model_id, attempts")
+    .eq("action_type", "generate_editorial")
+    .eq("status", "queued")
+    .order("created_at", { ascending: true })
+    .limit(batchSize * 2);
 
   if (error) {
-    console.error("❌ Failed to query candidate models:", error.message);
+    console.error("❌ Failed to query queued jobs:", error.message);
     process.exit(1);
   }
 
-  console.log(`📋 Loaded ${models.length} candidate models to evaluate against factual completeness gate.`);
+  if (!jobs || jobs.length === 0) {
+    console.log("✨ No queued jobs for generate_editorial.");
+    return { processedCount: 0, ineligibleCount: 0, boilerplateRejectedCount: 0 };
+  }
+
+  const modelIds = [...new Set(jobs.map((j) => j.model_id))];
+  const { data: models, error: modelsErr } = await db
+    .from("models")
+    .select("*")
+    .in("id", modelIds);
+
+  if (modelsErr) {
+    console.error("❌ Failed to load models:", modelsErr.message);
+    process.exit(1);
+  }
+
+  const modelsById = new Map((models || []).map((m) => [m.id, m]));
+  const work = [];
+  for (const job of jobs) {
+    const model = modelsById.get(job.model_id);
+    if (model) work.push({ job, model });
+  }
+
+  console.log(`📥 Claimed ${work.length} job(s) to evaluate against factual completeness gate.`);
 
   let processedCount = 0;
   let eligibleCount = 0;
   let ineligibleCount = 0;
   let boilerplateRejectedCount = 0;
 
-  for (const model of models) {
+  const markJob = (id, payload) =>
+    db.from("enrichment_jobs").update(payload).eq("id", id);
+
+  for (const { job, model } of work) {
     if (processedCount >= batchSize) break;
+
+    await markJob(job.id, {
+      status: "running",
+      attempts: (job.attempts || 0) + 1,
+      last_run_at: new Date().toISOString(),
+    });
+    const attemptNo = (job.attempts || 0) + 1;
 
     // Task 4 Hard Gate: Check fact completeness
     const completeness = computeFactCompleteness(model);
 
     if (!completeness.eligible) {
       ineligibleCount++;
+      // Park rather than fail: facts may still arrive (research_gaps +
+      // approval), and the quality_check worker re-queues this job when the
+      // card crosses into eligibility.
+      await markJob(job.id, {
+        status: "blocked",
+        blocked_reason: "fact_completeness_gate",
+        result_summary: {
+          verifiedFacts: completeness.verifiedFactCount ?? null,
+          verifiedBenchmarks: completeness.verifiedBenchmarksCount ?? null,
+        },
+        updated_at: new Date().toISOString(),
+      });
       continue;
     }
 
@@ -280,8 +327,9 @@ async function runEditorialWorker() {
       let editorial = await generateEditorialWithLlm(model, completeness.verifiedFacts);
 
       if (!editorial) {
-        console.warn(`  ⚠️ LLM generation returned empty response for ${model.name}. Skipping.`);
-        continue;
+        // All providers came back empty — likely transient, so burn an
+        // attempt via the normal failure path rather than parking the job.
+        throw new Error("all LLM providers returned empty responses");
       }
 
       // 2. Structural boilerplate detection
@@ -304,6 +352,15 @@ async function runEditorialWorker() {
       if (isPoBoilerplate || isEnBoilerplate) {
         console.warn(`  ❌ Retry failed structural boilerplate check for ${model.name}. Leaving editorial fields null.`);
         boilerplateRejectedCount++;
+        // Completed evaluation with a negative result — mark done with the
+        // reason so the job doesn't strand in 'running'; discovery will
+        // naturally re-examine after its freshness window.
+        await markJob(job.id, {
+          status: "done",
+          error: null,
+          result_summary: { reason: "boilerplate_rejected" },
+          updated_at: new Date().toISOString(),
+        });
         continue;
       }
 
@@ -347,10 +404,23 @@ async function runEditorialWorker() {
         },
       ]);
 
+      await markJob(job.id, {
+        status: "done",
+        error: null,
+        result_summary: {
+          stagedFields: Object.keys(proposals),
+          projectedQualityScore: previewGate.score,
+          projectedQualityStatus: previewGate.status,
+          timestamp: new Date().toISOString(),
+        },
+        updated_at: new Date().toISOString(),
+      });
+
       processedCount++;
       console.log(`  🎉 Staged editorial for ${model.name} (${Object.keys(proposals).length} fields) -> projected quality ${previewGate.score}/100 (${previewGate.status}, live after approval)`);
     } catch (err) {
       console.error(`  ❌ Editorial generation failed for ${model.name}:`, err.message);
+      await markJobFailure(db, job.id, err.message, attemptNo);
     }
   }
 
