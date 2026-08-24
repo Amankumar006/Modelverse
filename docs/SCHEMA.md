@@ -99,6 +99,8 @@ Cross-source factual substantiation layer storing extracted values and primary U
 | `confidence` | `text` | Factual confidence level (`OFFICIAL`, `VERIFIED`, `LIKELY`, `DISPUTED`, `UNVERIFIED`) |
 | `extracted_at` | `timestamptz` | Extraction timestamp |
 
+Provenance integrity: a CHECK constraint (`model_evidence_curator_verified_requires_human`, added 2026-08-25) requires `verified_by` to be set on any row claiming `source_type='curator_verified'` — machine backfills must use the honest `machine_backfill` label. Historical rows that faked curator attribution were relabeled in migration `20260825000000_relabel_machine_backfill_evidence.sql`.
+
 ---
 
 ### 7. Runtime Metrics Layer (`model_runtime_metrics`)
