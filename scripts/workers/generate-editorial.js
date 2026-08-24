@@ -22,6 +22,7 @@ const { createClient } = require("@supabase/supabase-js");
 const { computeFactCompleteness } = require("../merge/compute-fact-completeness");
 const { isStructuralBoilerplate, scoreModelPage } = require("../quality/score-content");
 const { stageChanges } = require("../lib/staged-write");
+const { parseEditorialOutput } = require("../../data/schemas/editorial-output.schema");
 
 const SUPABASE_URL = process.env.SUPABASE_URL || process.env.NEXT_PUBLIC_SUPABASE_URL;
 const SUPABASE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY;
@@ -175,11 +176,16 @@ Output valid JSON with keys: "cardSummary", "pageOverview", "editorialNote".`;
 
   let responseJson = null;
 
+  // LLM output is untrusted input (security.md): every provider response goes
+  // through the Zod-backed parse — malformed or injected payloads are treated
+  // as a provider failure and fall through to the next provider.
   // Try Gemini first
   if (process.env.GEMINI_API_KEY) {
     try {
       const raw = await callGemini(process.env.GEMINI_API_KEY, prompt);
-      responseJson = JSON.parse(raw);
+      const parsed = parseEditorialOutput(raw);
+      if (!parsed.ok) throw new Error(parsed.error);
+      responseJson = parsed.data;
     } catch (e) {
       console.warn(`  ⚠️ Gemini call failed (${e.message}); falling back...`);
     }
@@ -198,7 +204,9 @@ Output valid JSON with keys: "cardSummary", "pageOverview", "editorialNote".`;
           temperature: 0.7,
         }
       );
-      responseJson = JSON.parse(raw);
+      const parsed = parseEditorialOutput(raw);
+      if (!parsed.ok) throw new Error(parsed.error);
+      responseJson = parsed.data;
     } catch (e) {
       console.warn(`  ⚠️ Groq call failed (${e.message}); falling back...`);
     }
@@ -216,7 +224,9 @@ Output valid JSON with keys: "cardSummary", "pageOverview", "editorialNote".`;
           temperature: 0.7,
         }
       );
-      responseJson = JSON.parse(raw);
+      const parsed = parseEditorialOutput(raw);
+      if (!parsed.ok) throw new Error(parsed.error);
+      responseJson = parsed.data;
     } catch (e) {
       console.warn(`  ⚠️ OpenRouter call failed: ${e.message}`);
     }
