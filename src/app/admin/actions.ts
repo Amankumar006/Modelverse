@@ -219,9 +219,17 @@ export async function markDisputed(slug: string, notes: string) {
 export async function dismissModels(slugs: string[]) {
   const { supabase, user } = await requireCurator();
 
+  // Dismissing clears the queue signal AND discards any pending staged
+  // proposals — otherwise the model leaves the review queue while its
+  // staged_changes bucket silently waits for an approval that can no longer
+  // be triggered from the queue.
   const { error: updateError } = await supabase
     .from('models')
-    .update({ needs_review: false })
+    .update({
+      needs_review: false,
+      staged_changes: {},
+      staged_at: null,
+    })
     .in('slug', slugs);
 
   if (updateError) {
@@ -234,7 +242,7 @@ export async function dismissModels(slugs: string[]) {
     action: 'bulk_dismiss_models',
     target_type: 'model',
     target_id: 'multiple',
-    metadata: { slugs }
+    metadata: { slugs, discarded_staged_changes: true }
   });
 
   updateTag('models');
@@ -259,18 +267,25 @@ export async function approveModels(slugs: string[]) {
   const { scoreModelPage } = await import('@/../scripts/quality/score-content');
   const now = new Date().toISOString();
   const updatePromises = models.map((model) => {
-    const gate = scoreModelPage(model);
+    // Models with pending staged proposals get them promoted as part of the
+    // approval — same semantics as approveStaged, so both paths converge.
+    const staged = ((model.staged_changes as Record<string, unknown>) || {});
+    const hasStaged = Object.keys(staged).length > 0;
+    const scoredModel = hasStaged ? { ...model, ...staged } : model;
+    const gate = scoreModelPage(scoredModel);
     return supabase
       .from('models')
-      .update({ 
-        verified: gate.status === 'indexed', 
-        verification_status: gate.status === 'indexed' ? 'VERIFIED' : 'LIKELY', 
+      .update({
+        ...(hasStaged ? staged : {}),
+        ...(hasStaged ? { staged_changes: {}, staged_at: null } : {}),
+        verified: gate.status === 'indexed',
+        verification_status: gate.status === 'indexed' ? 'VERIFIED' : 'LIKELY',
         quality_status: gate.status,
         quality_score: gate.score,
         quality_reasons: gate.reasons,
         quality_checked_at: now,
-        needs_review: false, 
-        reviewed_by: user.id, 
+        needs_review: false,
+        reviewed_by: user.id,
         reviewed_at: now,
         updated_at: now
       })
@@ -284,7 +299,12 @@ export async function approveModels(slugs: string[]) {
     action: 'bulk_approve_models',
     target_type: 'model',
     target_id: 'multiple',
-    metadata: { slugs }
+    metadata: {
+      slugs,
+      staged_promoted: models
+        .filter((m) => Object.keys(((m.staged_changes as Record<string, unknown>) || {})).length > 0)
+        .map((m) => m.slug),
+    }
   });
 
   updateTag('models');

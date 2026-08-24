@@ -9,7 +9,8 @@
  * 2. Hugging Face organization avatars & README markdown assets
  * 3. Verified Modelverse asset CDN
  * 
- * Writes verified assets into `model_evidence` table and updates `models.logo` and `models.images`.
+ * Stages logo/image proposals via staged-write (curator approval required) and
+ * records asset provenance in `model_evidence`.
  */
 
 require("dotenv").config({ path: ".env.local", quiet: true });
@@ -18,6 +19,7 @@ require("dotenv").config({ quiet: true });
 const fs = require("fs");
 const path = require("path");
 const { createClient } = require("@supabase/supabase-js");
+const { stageChanges } = require("../lib/staged-write");
 
 const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL || process.env.SUPABASE_URL;
 const SUPABASE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY;
@@ -158,43 +160,25 @@ async function runLogosWorker() {
         currentImages.push(logoUrl);
       }
 
-      // 1. Update models table
-      const { error: updateErr } = await db
-        .from("models")
-        .update({
-          logo: model.logo && model.logo.trim() !== "" ? model.logo : logoUrl,
-          images: currentImages,
-          updated_at: new Date().toISOString(),
-        })
-        .eq("id", model.id);
-
-      if (updateErr) {
-        throw updateErr;
-      }
-
-      // 2. Persist Evidence in model_evidence
+      // Stage logo/media proposals for curator approval — no direct live writes.
+      const proposedLogo = model.logo && model.logo.trim() !== "" ? model.logo : logoUrl;
       const citationUrl = (model.sources && model.sources[0]) || logoUrl;
-      try {
-        await db.from("model_evidence").upsert(
-          {
-            model_id: model.id,
-            field_name: "media.logo",
-            source_type: "official_model_card",
-            source_url: citationUrl,
-            extracted_value: { logo: logoUrl, images: currentImages },
-            confidence: "OFFICIAL",
-            verification_notes: `Logo substantiated via ${logoSource}`,
-            extracted_at: new Date().toISOString(),
-            updated_at: new Date().toISOString(),
-          },
-          { onConflict: "model_id,field_name,source_url" }
-        );
-      } catch (evErr) {
-        console.warn(`  ⚠️ Evidence insert note for ${model.name}:`, evErr.message);
-      }
+      await stageChanges(db, model.id, {
+        logo: proposedLogo,
+        images: currentImages,
+      }, [
+        {
+          field_name: "media.logo",
+          source_type: "official_model_card",
+          source_url: citationUrl,
+          extracted_value: { logo: proposedLogo, images: currentImages },
+          confidence: "OFFICIAL",
+          verification_notes: `Logo substantiated via ${logoSource}`,
+        },
+      ]);
 
       doneCount++;
-      console.log(`  ✅ [Media] ${model.name} -> Logo updated | Images: ${currentImages.length}`);
+      console.log(`  ✅ [Media] ${model.name} -> Logo staged | Images: ${currentImages.length}`);
     } catch (err) {
       console.error(`  ❌ Failed logo lookup for ${model.id}:`, err.message);
       failedCount++;

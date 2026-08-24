@@ -27,7 +27,7 @@ const ALLOWED_STAGED_FIELDS = new Set([
   "pricing", "cost_tiers", "benchmarks", "api_availability",
   "chatgpt_availability",
   // provenance & presentation
-  "links", "sources", "logo", "aliases", "field_confidence",
+  "links", "sources", "logo", "images", "aliases", "field_confidence",
 ]);
 
 /**
@@ -98,7 +98,11 @@ async function stageChanges(db, modelId, changes, evidenceRows = []) {
       model_id: modelId,
       extracted_value: evidence.extracted_value ?? proposals[evidence.field_name] ?? null,
     };
-    if (!row.field_name || !ALLOWED_STAGED_FIELDS.has(row.field_name)) continue;
+    // Evidence field names may be finer-grained than staged fields (dotted
+    // subfields like "capabilities.tool_calling" or "media.logo" follow the
+    // pre-existing model_evidence convention), so they are NOT held to the
+    // staged-field allowlist — but the DB requires both of these.
+    if (!row.field_name || !row.source_url) continue;
     try {
       const { error: evErr } = await db
         .from("model_evidence")

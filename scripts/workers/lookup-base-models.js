@@ -9,7 +9,8 @@
  * 2. Snapshot README text & model card tags
  * 3. Canonical family foundation model heuristics (Llama, Qwen, Mistral, Gemma, DeepSeek, etc.)
  * 
- * Writes verified lineage into `model_evidence` table and updates `models.base_model`.
+ * Stages lineage proposals via staged-write (curator approval required) and
+ * records provenance in `model_evidence`.
  */
 
 require("dotenv").config({ path: ".env.local", quiet: true });
@@ -18,6 +19,7 @@ require("dotenv").config({ quiet: true });
 const fs = require("fs");
 const path = require("path");
 const { createClient } = require("@supabase/supabase-js");
+const { stageChanges } = require("../lib/staged-write");
 
 const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL || process.env.SUPABASE_URL;
 const SUPABASE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY;
@@ -212,59 +214,43 @@ async function runBaseModelsWorker() {
     try {
       const snapshot = loadSnapshot(model.id, model.slug);
       const lineage = extractBaseModel(model, snapshot);
+      const sourceUrl = (model.sources && model.sources[0]) || `https://huggingface.co/${model.slug}`;
 
       if (!lineage) {
-        // Fallback for models without direct lineage match
+        // Fallback for models without direct lineage match — staged as LIKELY
+        // so the curator can reject speculative lineage instead of it going
+        // straight to the live card.
         const fallbackBase = `${model.family || model.developer || "Autonomous"} Foundation Architecture`;
-        await db
-          .from("models")
-          .update({
-            base_model: fallbackBase,
-            updated_at: new Date().toISOString(),
-          })
-          .eq("id", model.id);
+        await stageChanges(db, model.id, { base_model: fallbackBase }, [
+          {
+            field_name: "base_model",
+            source_type: "other",
+            source_url: sourceUrl,
+            extracted_value: { base_model: fallbackBase, derivation: "family/developer heuristic fallback" },
+            confidence: "LIKELY",
+            verification_notes: "Speculative lineage fallback (no direct match) — needs curator confirmation",
+          },
+        ]);
 
         doneCount++;
-        console.log(`  ℹ️ [BaseModel Fallback] ${model.name} -> ${fallbackBase}`);
+        console.log(`  ℹ️ [BaseModel Fallback] ${model.name} -> ${fallbackBase} (staged)`);
         continue;
       }
 
-      // 1. Update models table
-      const { error: updateErr } = await db
-        .from("models")
-        .update({
-          base_model: lineage.baseModel,
-          updated_at: new Date().toISOString(),
-        })
-        .eq("id", model.id);
-
-      if (updateErr) {
-        throw updateErr;
-      }
-
-      // 2. Persist Evidence in model_evidence
-      const sourceUrl = (model.sources && model.sources[0]) || `https://huggingface.co/${model.slug}`;
-      try {
-        await db.from("model_evidence").upsert(
-          {
-            model_id: model.id,
-            field_name: "base_model",
-            source_type: "official_model_card",
-            source_url: sourceUrl,
-            extracted_value: { base_model: lineage.baseModel, derivation: lineage.source },
-            confidence: lineage.confidence,
-            verification_notes: `Lineage verified via ${lineage.source}`,
-            extracted_at: new Date().toISOString(),
-            updated_at: new Date().toISOString(),
-          },
-          { onConflict: "model_id,field_name,source_url" }
-        );
-      } catch (evErr) {
-        console.warn(`  ⚠️ Evidence insert note for ${model.name}:`, evErr.message);
-      }
+      // Stage lineage for curator approval — no direct live writes.
+      await stageChanges(db, model.id, { base_model: lineage.baseModel }, [
+        {
+          field_name: "base_model",
+          source_type: "official_model_card",
+          source_url: sourceUrl,
+          extracted_value: { base_model: lineage.baseModel, derivation: lineage.source },
+          confidence: lineage.confidence,
+          verification_notes: `Lineage verified via ${lineage.source}`,
+        },
+      ]);
 
       doneCount++;
-      console.log(`  ✅ [BaseModel] ${model.name} -> ${lineage.baseModel} (${lineage.confidence})`);
+      console.log(`  ✅ [BaseModel] ${model.name} -> ${lineage.baseModel} (${lineage.confidence}, staged)`);
     } catch (err) {
       console.error(`  ❌ Failed base model lookup for ${model.id}:`, err.message);
       failedCount++;

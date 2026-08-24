@@ -8,9 +8,10 @@
  *    (Only models with verifiedFactCount >= 2 and >= 1 verified numeric benchmark are processed).
  * 2. Ineligible models: Left untouched (null editorial fields), never wasted on LLM calls.
  * 3. Eligible models: Generates grounded editorial prose (cardSummary, pageOverview, editorialNote).
- * 4. Structural Boilerplate Gate: Runs isStructuralBoilerplate() before write.
+ * 4. Structural Boilerplate Gate: Runs isStructuralBoilerplate() before staging.
  *    Retries once with structural variation directive; leaves null if still templated.
- * 5. Runs scoreModelPage() and updates Supabase models table.
+ * 5. Stages the prose via staged-write — curator approval required before it
+ *    reaches live columns (projected score computed for the review panel).
  */
 
 require("dotenv").config({ path: ".env.local", quiet: true });
@@ -20,6 +21,7 @@ const https = require("https");
 const { createClient } = require("@supabase/supabase-js");
 const { computeFactCompleteness } = require("../merge/compute-fact-completeness");
 const { isStructuralBoilerplate, scoreModelPage } = require("../quality/score-content");
+const { stageChanges } = require("../lib/staged-write");
 
 const SUPABASE_URL = process.env.SUPABASE_URL || process.env.NEXT_PUBLIC_SUPABASE_URL;
 const SUPABASE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY;
@@ -295,12 +297,21 @@ async function runEditorialWorker() {
         continue;
       }
 
-      // 3. Prepare payload and score
-      const updatedPayload = {
+      // 3. Stage the generated prose for curator approval — AI-generated text
+      // never reaches live columns directly (product rule: unreviewed AI
+      // content must not render publicly). The quality gate re-runs at
+      // approval time on the merged model.
+      const proposals = {
+        ...(editorial.cardSummary ? { card_summary: editorial.cardSummary } : {}),
+        ...(editorial.pageOverview ? { page_overview: editorial.pageOverview } : {}),
+        ...(editorial.editorialNote ? { editorial_note: editorial.editorialNote } : {}),
+      };
+
+      const mergedPreview = {
         ...model,
-        cardSummary: editorial.cardSummary || model.card_summary,
-        pageOverview: editorial.pageOverview || model.page_overview,
-        editorialNote: editorial.editorialNote || model.editorial_note,
+        card_summary: proposals.card_summary || model.card_summary,
+        page_overview: proposals.page_overview || model.page_overview,
+        editorial_note: proposals.editorial_note || model.editorial_note,
         parameters: model.parameters,
         contextWindow: model.context_window,
         license: model.license,
@@ -308,25 +319,26 @@ async function runEditorialWorker() {
         fieldConfidence: model.field_confidence || {},
         keyFeatures: model.key_features || [],
       };
+      const previewGate = scoreModelPage(mergedPreview);
 
-      const gate = scoreModelPage(updatedPayload);
-
-      await db
-        .from("models")
-        .update({
-          card_summary: updatedPayload.cardSummary,
-          page_overview: updatedPayload.pageOverview,
-          editorial_note: updatedPayload.editorialNote,
-          quality_status: gate.status,
-          quality_score: gate.score,
-          quality_reasons: gate.reasons,
-          quality_checked_at: new Date().toISOString(),
-          updated_at: new Date().toISOString(),
-        })
-        .eq("id", model.id);
+      await stageChanges(db, model.id, proposals, [
+        {
+          field_name: "editorial",
+          source_type: "other",
+          source_url: (Array.isArray(model.sources) && model.sources[0]) || `https://themodelverse.in/models/${model.slug}`,
+          extracted_value: {
+            generator: "generate-editorial",
+            fields: Object.keys(proposals),
+            projected_quality_score: previewGate.score,
+            projected_quality_status: previewGate.status,
+          },
+          confidence: "LIKELY",
+          verification_notes: "LLM-generated editorial prose grounded in verified facts — pending curator review",
+        },
+      ]);
 
       processedCount++;
-      console.log(`  🎉 Successfully generated editorial for ${model.name} -> Quality Score: ${gate.score}/100 (${gate.status})`);
+      console.log(`  🎉 Staged editorial for ${model.name} (${Object.keys(proposals).length} fields) -> projected quality ${previewGate.score}/100 (${previewGate.status}, live after approval)`);
     } catch (err) {
       console.error(`  ❌ Editorial generation failed for ${model.name}:`, err.message);
     }

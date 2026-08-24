@@ -4,13 +4,15 @@
  * Worker for action_type: 'lookup_aliases'
  * Generates and verifies canonical search aliases and shorthand abbreviations for models.
  * 
- * Writes verified aliases into `model_evidence` table and updates `models.aliases`.
+ * Stages generated aliases via staged-write (curator approval required) and
+ * records machine-derivation provenance in `model_evidence`.
  */
 
 require("dotenv").config({ path: ".env.local", quiet: true });
 require("dotenv").config({ quiet: true });
 
 const { createClient } = require("@supabase/supabase-js");
+const { stageChanges } = require("../lib/staged-write");
 
 const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL || process.env.SUPABASE_URL;
 const SUPABASE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY;
@@ -118,42 +120,24 @@ async function runAliasesWorker() {
     try {
       const generated = generateAliases(model);
 
-      // 1. Update models table
-      const { error: updateErr } = await db
-        .from("models")
-        .update({
-          aliases: generated,
-          updated_at: new Date().toISOString(),
-        })
-        .eq("id", model.id);
-
-      if (updateErr) {
-        throw updateErr;
-      }
-
-      // 2. Persist Evidence in model_evidence
+      // Stage alias proposals for curator approval — no direct live writes.
+      // Provenance is honest machine derivation, NOT curator_verified — this
+      // worker never had human review, and stamping it so created the fake
+      // curator-evidence backlog the audit flagged.
       const citationUrl = (model.sources && model.sources[0]) || `https://themodelverse.in/models/${model.slug}`;
-      try {
-        await db.from("model_evidence").upsert(
-          {
-            model_id: model.id,
-            field_name: "aliases",
-            source_type: "curator_verified",
-            source_url: citationUrl,
-            extracted_value: { aliases: generated },
-            confidence: "VERIFIED",
-            verification_notes: `Deterministic shorthand and search indexing aliases`,
-            extracted_at: new Date().toISOString(),
-            updated_at: new Date().toISOString(),
-          },
-          { onConflict: "model_id,field_name,source_url" }
-        );
-      } catch (evErr) {
-        console.warn(`  ⚠️ Evidence insert note for ${model.name}:`, evErr.message);
-      }
+      await stageChanges(db, model.id, { aliases: generated }, [
+        {
+          field_name: "aliases",
+          source_type: "other",
+          source_url: citationUrl,
+          extracted_value: { aliases: generated },
+          confidence: "LIKELY",
+          verification_notes: "Deterministic shorthand and search indexing aliases (lookup_aliases)",
+        },
+      ]);
 
       doneCount++;
-      console.log(`  ✅ [Aliases] ${model.name} -> ${generated.length} aliases populated.`);
+      console.log(`  ✅ [Aliases] ${model.name} -> ${generated.length} aliases staged.`);
     } catch (err) {
       console.error(`  ❌ Failed alias lookup for ${model.id}:`, err.message);
       failedCount++;

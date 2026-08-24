@@ -27,6 +27,10 @@ assert.ok(ALLOWED_STAGED_FIELDS.has("card_summary"));
 assert.ok(ALLOWED_STAGED_FIELDS.has("page_overview"));
 assert.ok(ALLOWED_STAGED_FIELDS.has("editorial_note"));
 
+// Presentation (written by lookup-logos-and-media)
+assert.ok(ALLOWED_STAGED_FIELDS.has("logo"));
+assert.ok(ALLOWED_STAGED_FIELDS.has("images"));
+
 // Bookkeeping fields must NEVER be stageable (curator-only)
 assert.ok(!ALLOWED_STAGED_FIELDS.has("updated_at"), "updated_at must not be stageable");
 assert.ok(!ALLOWED_STAGED_FIELDS.has("verified"), "verified is curator-only");
