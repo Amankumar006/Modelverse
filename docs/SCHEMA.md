@@ -54,7 +54,9 @@ Every model in Modelverse is backed by a relational record in the Supabase `mode
 | `verified` | `boolean` | **Human Gate Flag**. Indicates human review. Renders amber dot UI when false. |
 | `verificationStatus` | `enum` | Detailed state (`"VERIFIED"`, `"LIKELY"`, `"DRAFT"`, `"DISPUTED"`) |
 | `fieldConfidence` | `jsonb` | Field-level confidence scores for pricing, benchmarks, context window |
-| `needsReview` | `boolean` (optional) | Flags entries auto-enriched by scripts requiring human review |
+| `needsReview` | `boolean` (optional) | The review-queue signal: raised by every pipeline `stageChanges()` write; cleared only by curator approve/reject |
+| `stagedChanges` | `jsonb` (default `{}`) | **Approval staging bucket.** Pipeline workers propose edits here as `{field_name: value}`; never rendered publicly. Promoted to live columns by curator approval (`approveStaged` / bulk approve), discarded on rejection |
+| `stagedAt` | `timestamptz` (optional) | When the current staged proposal set was last written |
 | `sources` | `string[]` | Array of source URLs attached for provenance verification |
 | `curatorNotes` | `string` | Operational notes regarding verification status or migration history |
 
@@ -70,6 +72,7 @@ Every model in Modelverse is backed by a relational record in the Supabase `mode
 - `idx_models_family_active`: `(family, release_date DESC) WHERE family IS NOT NULL AND status != 'staged'`
 - `idx_models_primary_task_active`: `(primary_task, release_date DESC) WHERE status != 'staged'`
 - `idx_models_capabilities`: GIN index on `models(capabilities)`
+- `models_staged_changes_neq_empty_idx`: `(updated_at DESC) WHERE staged_changes <> '{}'` — review-queue lookup for models with pending proposals
 - `idx_news_items_published_date`: `(publish_date DESC) WHERE status = 'published'`
 - `idx_news_items_category_published`: `(category, publish_date DESC) WHERE status = 'published'`
 - `idx_community_submissions_submitted_by`: `(submitted_by)`
@@ -90,10 +93,10 @@ Cross-source factual substantiation layer storing extracted values and primary U
 | `id` | `uuid` (PK) | Unique evidence record ID |
 | `model_id` | `uuid` (FK) | Reference to `models.id` |
 | `field_name` | `text` | Target fact key (e.g. `benchmarks.mmlu`, `pricing`, `context_window`, `capabilities.tool_calling`) |
-| `source_type` | `text` | Provenance category (`official_model_card`, `provider_api`, `benchmark_paper`, `independent_eval`, `curator_verified`, `live_telemetry`) |
+| `source_type` | `text` | Provenance category (`official_model_card`, `provider_api`, `benchmark_paper`, `independent_eval`, `curator_verified`, `live_telemetry`, `web_research`, `machine_backfill`) |
 | `source_url` | `text` | Exact citation URL |
 | `extracted_value` | `jsonb` | Extracted numerical or structural payload |
-| `confidence` | `text` | Factual confidence level (`OFFICIAL`, `VERIFIED`, `LIKELY`, `DISPUTED`) |
+| `confidence` | `text` | Factual confidence level (`OFFICIAL`, `VERIFIED`, `LIKELY`, `DISPUTED`, `UNVERIFIED`) |
 | `extracted_at` | `timestamptz` | Extraction timestamp |
 
 ---
