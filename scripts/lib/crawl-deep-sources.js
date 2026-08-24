@@ -1,5 +1,7 @@
 const BOT_UA = "Modelverse-Bot/1.0 (+https://themodelverse.in; contact@themodelverse.in)";
 
+const { fetchReadme, extractOfficialUrls } = require("./extract-official-urls");
+
 // Utility to fetch raw text with timeout
 async function fetchRawText(url, timeoutMs = 10000) {
   try {
@@ -77,7 +79,6 @@ async function crawlDeepOfficialSource(hfRepoId) {
 
   // 4. Final Fallback: The original HuggingFace README itself
   console.log(`    🤗 Crawling HuggingFace README as fallback: ${hfRepoId}`);
-  const { fetchReadme } = require("./extract-official-urls");
   return await fetchReadme(hfRepoId);
 }
 
