@@ -7,7 +7,7 @@
  * 1. Claims a batch of 'queued' jobs for action_type = 'lookup_specs'.
  * 2. Deterministically parses parameters, context window, license, and model type from name/slug/developer metadata.
  * 3. Never calls external LLMs or fails on missing network data.
- * 4. Updates models table with normalized specs and sets fieldConfidence tiers.
+ * 4. Stages normalized specs + fieldConfidence via staged-write (curator approval required).
  * 5. Updates job status to 'done' (or 'failed' if a code exception occurs).
  */
 
@@ -16,6 +16,7 @@ require("dotenv").config({ quiet: true });
 
 const { createClient } = require("@supabase/supabase-js");
 const { markJobFailure } = require("../lib/job-lifecycle");
+const { stageChanges } = require("../lib/staged-write");
 
 const SUPABASE_URL = process.env.SUPABASE_URL || process.env.NEXT_PUBLIC_SUPABASE_URL;
 const SUPABASE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY;
@@ -177,19 +178,33 @@ async function runSpecsWorker() {
         fieldConfidence.license = fieldConfidence.license || "LIKELY";
       }
 
-      // Update model record
-      const updateData = {
+      // Stage proposed specs — never write live columns directly. Curator
+      // approves via /admin/review (stageChanges raises needs_review).
+      const specEvidence = [
+        ["parameters", parameters],
+        ["context_window", contextWindow],
+        ["license", license],
+        ["type", modelType],
+      ].map(([field, value]) => ({
+        field_name: field,
+        source_type: "other",
+        source_url: `https://huggingface.co/${model.slug}`,
+        extracted_value: { [field]: value },
+        confidence: "LIKELY",
+        verification_notes: "Deterministic spec inference from name/slug/developer metadata (lookup_specs)",
+      }));
+
+      const { staged, fields } = await stageChanges(db, model.id, {
         parameters,
         context_window: contextWindow,
         license,
         type: modelType,
         field_confidence: fieldConfidence,
-        updated_at: new Date().toISOString(),
-      };
-
-      await db.from("models").update(updateData).eq("id", model.id);
+      }, specEvidence);
 
       const resultSummary = {
+        staged,
+        stagedFields: fields,
         parameters,
         contextWindow,
         license,

@@ -16,11 +16,13 @@ export default async function ReviewQueuePage({ searchParams }: { searchParams: 
     return <div>Access Denied</div>
   }
 
-  // Fetch pending models
+  // Fetch pending models. needs_review=true already covers any model with
+  // staged changes (scripts/lib/staged-write.js raises it on every proposal),
+  // so the existing filter is sufficient.
   let query = supabase
     .from('models')
-    .select('slug, name, developer, verification_status, updated_at, primary_task, family')
-    
+    .select('slug, name, developer, verification_status, updated_at, primary_task, family, boost, featured, staged_changes, needs_review')
+
   if (statusFilter === 'VERIFIED') {
     query = query.eq('verification_status', 'VERIFIED')
   } else {

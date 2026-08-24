@@ -7,7 +7,8 @@
  * 2. Developer vendor status (e.g. OpenAI, Anthropic, Google, Cohere, Meta, Mistral)
  * 3. ChatGPT & Web platform availability
  * 
- * Persists granular evidence in `model_evidence` table.
+ * Stages provider/tier proposals via staged-write (curator approval required)
+ * and persists granular evidence in `model_evidence`.
  */
 
 require("dotenv").config({ path: ".env.local", quiet: true });
@@ -16,6 +17,7 @@ require("dotenv").config({ quiet: true });
 const fs = require("fs");
 const path = require("path");
 const { createClient } = require("@supabase/supabase-js");
+const { stageChanges } = require("../lib/staged-write");
 
 const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL || process.env.SUPABASE_URL;
 const SUPABASE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY;
@@ -174,47 +176,28 @@ async function runProvidersWorker() {
 
       const updatedProviders = Array.from(providers);
 
-      // 1. Update models table
-      const { error: updateErr } = await db
-        .from("models")
-        .update({
-          api_availability: updatedProviders,
-          vendor_api_status: vendorStatus,
-          chatgpt_availability: isAvailableInChatGPT,
-          tier: tier,
-          updated_at: new Date().toISOString(),
-        })
-        .eq("id", model.id);
-
-      if (updateErr) {
-        throw updateErr;
-      }
-
-      // 2. Persist Evidence in model_evidence
-      if (orMatch) {
-        try {
-          await db.from("model_evidence").upsert(
-            {
-              model_id: model.id,
-              field_name: "api_availability.openrouter",
-              source_type: "provider_api",
-              source_url: `https://openrouter.ai/${orMatch.id}`,
-              extracted_value: {
-                openRouterId: orMatch.id,
-                providers: updatedProviders,
-                context_length: orMatch.context_length,
-              },
-              confidence: "OFFICIAL",
-              verification_notes: `Active routing verified via OpenRouter marketplace ID ${orMatch.id}`,
-              extracted_at: new Date().toISOString(),
-              updated_at: new Date().toISOString(),
+      // Stage provider/tier proposals for curator approval — no direct live writes.
+      const providerEvidence = orMatch
+        ? [{
+            field_name: "api_availability.openrouter",
+            source_type: "provider_api",
+            source_url: `https://openrouter.ai/${orMatch.id}`,
+            extracted_value: {
+              openRouterId: orMatch.id,
+              providers: updatedProviders,
+              context_length: orMatch.context_length,
             },
-            { onConflict: "model_id,field_name,source_url" }
-          );
-        } catch (evErr) {
-          console.warn(`  ⚠️ Evidence insert note for ${model.name}:`, evErr.message);
-        }
-      }
+            confidence: "OFFICIAL",
+            verification_notes: `Active routing verified via OpenRouter marketplace ID ${orMatch.id}`,
+          }]
+        : [];
+
+      await stageChanges(db, model.id, {
+        api_availability: updatedProviders,
+        vendor_api_status: vendorStatus,
+        chatgpt_availability: isAvailableInChatGPT,
+        tier: tier,
+      }, providerEvidence);
 
       doneCount++;
       console.log(`  ✅ [Providers] ${model.name} -> ${updatedProviders.length} providers | Vendor: ${vendorStatus} | Tier: ${tier}`);
