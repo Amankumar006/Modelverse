@@ -15,6 +15,7 @@ require("dotenv").config({ path: ".env.local", quiet: true });
 require("dotenv").config({ quiet: true });
 
 const { createClient } = require("@supabase/supabase-js");
+const { markJobFailure } = require("../lib/job-lifecycle");
 
 const SUPABASE_URL = process.env.SUPABASE_URL || process.env.NEXT_PUBLIC_SUPABASE_URL;
 const SUPABASE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY;
@@ -210,14 +211,7 @@ async function runSpecsWorker() {
       console.log(`  ✅ Specs parsed for ${model.name}: params=${parameters}, ctx=${contextWindow}, license=${license}`);
     } catch (err) {
       console.error(`  ❌ Specs parsing failed for model ${job.model_id}:`, err.message);
-      await db
-        .from("enrichment_jobs")
-        .update({
-          status: "failed",
-          error: err.message,
-          updated_at: new Date().toISOString(),
-        })
-        .eq("id", job.id);
+      await markJobFailure(db, job.id, err.message, (job.attempts || 0) + 1);
       failedCount++;
     }
   }
