@@ -519,9 +519,123 @@ function scoreNewsArticle(article, sourceTexts) {
   }, "unlisted");
 }
 
+// ─── Gap Computation (research targeting) ──────────────────────────────────
+
+/**
+ * Derives which fields are missing/thin for a model using the SAME rules the
+ * scorer rewards — never parses `reasons` strings. Splits gaps into:
+ *
+ *   factGaps  — canonical DB column names that web research can fill
+ *               (specs, lineage, pricing, benchmarks, sources…)
+ *   proseGaps — editorial-owned fields (card_summary/page_overview/
+ *               editorial_note/quickstart) that only generators should fill;
+ *               returned for reporting, not for the researcher.
+ *
+ * Field names are canonical snake_case DB columns; input accepts camelCase or
+ * snake_case exactly like scoreModelPage does.
+ */
+const EMPTY_GAPS = Object.freeze({
+  factGaps: [],
+  proseGaps: [],
+  benchmarksNeeded: 0,
+  verifiedPerformanceCount: 0,
+  hasFactGaps: false,
+  hasProseGaps: false,
+});
+
+function computeMissingFields(model) {
+  // A missing model has no meaningful gaps to research.
+  if (!model || typeof model !== "object") return { ...EMPTY_GAPS };
+
+  try {
+    const factGaps = [];
+    const proseGaps = [];
+
+    // ── Identity ──
+    if (!populated(model?.releaseDate || model?.release_date)) factGaps.push("release_date");
+    if (!populated(model?.license)) factGaps.push("license");
+
+    // ── Specifications (mirrors scorer §2, incl. the proprietary-params rule) ──
+    const isProprietary = model?.type === "closed-source" || model?.type === "api-only" || model?.license === "Proprietary";
+    const parametersPopulated = populated(model?.parameters)
+      || (isProprietary && Boolean(text(model?.parameters)));
+    if (!parametersPopulated) factGaps.push("parameters");
+    if (!populated(model?.contextWindow || model?.context_window)) factGaps.push("context_window");
+    const modalityValue = Array.isArray(model?.modality) ? model.modality.length : model?.modality;
+    if (!populated(modalityValue)) factGaps.push("modality");
+    const deploymentValue = Array.isArray(model?.deployment) ? model.deployment.length : model?.deployment;
+    if (!populated(deploymentValue)) factGaps.push("deployment");
+    if (!populated(model?.primaryTask || model?.primary_task)) factGaps.push("primary_task");
+
+    // ── Lineage (mirrors scorer §3) ──
+    // Note: base_model is deliberately NOT a research target — foundation
+    // models legitimately lack one, and lookup-base-models owns that field
+    // with its self-rooted-foundation heuristics.
+    if (!populated(model?.family)) factGaps.push("family");
+    if (!populated(model?.tier)) factGaps.push("tier");
+
+    // ── Performance benchmarks gate (scorer §6) ──
+    const rawBenchmarks = Array.isArray(model?.benchmarks) ? model.benchmarks : [];
+    const verifiedPerformanceCount = rawBenchmarks.filter(
+      (b) => String(b?.metricType || "performance").toLowerCase().trim() === "performance"
+        && benchmarkIsVerifiedAndSourced(b, model),
+    ).length;
+    const benchmarksNeeded = Math.max(0, 2 - verifiedPerformanceCount);
+    if (benchmarksNeeded > 0) factGaps.push("benchmarks");
+
+    // ── Pricing (scorer §7 — open weights earn it implicitly) ──
+    const isOpenWeights = model?.type === "open-source" || model?.type === "open-weights";
+    if (!isOpenWeights) {
+      const pricing = model?.pricing;
+      const pricingPresent = (Array.isArray(pricing) && pricing.length > 0)
+        || (pricing && typeof pricing === "object" && Object.keys(pricing).length > 0);
+      if (!pricingPresent) factGaps.push("pricing");
+    }
+
+    // ── Sources & provenance (scorer §8) ──
+    const sources = Array.isArray(model?.sources) ? model.sources.filter(validHttpUrl) : [];
+    const links = model?.links && typeof model.links === "object"
+      ? Object.values(model.links).filter((l) => typeof l === "string" && validHttpUrl(l))
+      : [];
+    if (sources.length + links.length < 3) factGaps.push("sources");
+
+    // ── UI completeness (scorer §10) ──
+    const keyFeatures = model?.keyFeatures || model?.key_features;
+    if (!(Array.isArray(keyFeatures) && keyFeatures.length >= 2)) factGaps.push("key_features");
+    if (!(Array.isArray(model?.tags) && model.tags.length >= 2)) factGaps.push("tags");
+
+    // ── Editorial-owned prose (reported, not researched) ──
+    const pageOverview = text(model?.pageOverview || model?.page_overview);
+    const cardSummary = text(model?.cardSummary || model?.card_summary);
+    const editorialNote = text(model?.editorialNote || model?.editorial_note || model?.reviewedNote);
+
+    if (isStructuralBoilerplate(pageOverview, model) || pageOverview.length <= 100) proseGaps.push("page_overview");
+    if (isStructuralBoilerplate(cardSummary, model) || cardSummary.length <= 30) proseGaps.push("card_summary");
+    if (isStructuralBoilerplate(editorialNote, model) || editorialNote.length <= 150) proseGaps.push("editorial_note");
+
+    const quickstart = model?.quickstart || model?.metadata?.quickstart;
+    const codeLangs = quickstart && typeof quickstart === "object"
+      ? Object.keys(quickstart).filter((k) => !["overview", "prerequisites", "installation", "environment", "env"].includes(k))
+      : [];
+    if (codeLangs.length < 1) proseGaps.push("quickstart");
+
+    return {
+      factGaps,
+      proseGaps,
+      benchmarksNeeded,
+      verifiedPerformanceCount,
+      hasFactGaps: factGaps.length > 0,
+      hasProseGaps: proseGaps.length > 0,
+    };
+  } catch {
+    return { ...EMPTY_GAPS, factGaps: [], proseGaps: [] };
+  }
+}
+
 module.exports = {
   scoreModelPage,
   scoreNewsArticle,
+  computeMissingFields,
   shingleSet,
   jaccardSimilarity,
   extractStructuralSkeleton,

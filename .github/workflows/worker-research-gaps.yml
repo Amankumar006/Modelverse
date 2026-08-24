@@ -1,0 +1,75 @@
+name: Worker - Research Gaps
+
+on:
+  schedule:
+    # Runs hourly at :25 — off-minute, staggered away from the other workers.
+    - cron: '25 * * * *'
+  workflow_dispatch:
+    inputs:
+      batch_size:
+        description: 'Max models to research this run (cost-bounded: 1 grounded Gemini call each)'
+        required: false
+        default: '10'
+      wave:
+        description: 'featured = only featured models; all = full catalog sweep'
+        required: false
+        default: 'featured'
+      dry_run:
+        description: 'Log gaps without calling Gemini or writing to the DB'
+        required: false
+        default: 'false'
+
+jobs:
+  research-gaps:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    # Hourly cron: never let a slow run overlap the next one.
+    concurrency:
+      group: ${{ github.workflow }}
+      cancel-in-progress: false
+    timeout-minutes: 30
+    env:
+      SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+      SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+      GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+      BATCH_SIZE: ${{ github.event.inputs.batch_size || '10' }}
+      WAVE: ${{ github.event.inputs.wave || 'featured' }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run Research Gaps Worker
+        run: |
+          ARGS="--wave $WAVE --batch-size $BATCH_SIZE"
+          if [ "${{ github.event.inputs.dry_run }}" = "true" ]; then
+            ARGS="$ARGS --dry-run"
+          fi
+          node scripts/workers/research-gaps.js $ARGS
+
+      - name: Failure Alert Email
+        if: failure()
+        continue-on-error: true
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: smtp.gmail.com
+          server_port: 465
+          secure: true
+          username: 006amanraj@gmail.com
+          password: ${{ secrets.GMAIL_APP_PASSWORD }}
+          subject: '🚨 [Modelverse] Worker Research Gaps failed'
+          to: 006amanraj@gmail.com
+          from: Modelverse Alert Bot <006amanraj@gmail.com>
+          body: |
+            Workflow ${{ github.workflow }} failed on schedule.
+            Run: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
