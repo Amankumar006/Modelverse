@@ -54,9 +54,15 @@ const MAX_GROUNDED_CALLS = 40;  // hard cost ceiling per run
 
 function parseArgs() {
   const args = process.argv.slice(2);
+  // Accept both "--flag value" and "--flag=value" so cron/workflow invocations
+  // and manual ones behave identically.
   const getArg = (name) => {
     const idx = args.indexOf(name);
-    return idx !== -1 ? args[idx + 1] : undefined;
+    if (idx !== -1 && args[idx + 1] !== undefined && !args[idx + 1].startsWith("--")) {
+      return args[idx + 1];
+    }
+    const prefixed = args.find((a) => a.startsWith(`${name}=`));
+    return prefixed !== undefined ? prefixed.slice(name.length + 1) : undefined;
   };
 
   const numArg = (value) => {
@@ -124,10 +130,10 @@ async function recentlyResearchedModelIds() {
 }
 
 /**
- * When no jobs are queued, fan out to thin models directly so this worker
- * also functions standalone before Phase 3 wires discovery fan-out.
+ * Shared candidate selection for both selfEnqueue() and the dry-run preview:
+ * thin/unverified models, traffic-ordered, freshness-filtered.
  */
-async function selfEnqueue(limit, wave, freshSkip) {
+async function selectResearchCandidates(limit, wave, freshSkip) {
   let query = db
     .from("models")
     .select("id")
@@ -145,13 +151,21 @@ async function selfEnqueue(limit, wave, freshSkip) {
     .limit(limit * 3);
 
   if (error) {
-    console.warn(`⚠️ Self-enqueue candidate query failed: ${error.message}`);
-    return 0;
+    console.warn(`⚠️ Candidate selection query failed: ${error.message}`);
+    return [];
   }
 
-  const targets = (candidates || [])
+  return (candidates || [])
     .filter((m) => !freshSkip.has(m.id))
     .slice(0, limit);
+}
+
+/**
+ * When no jobs are queued, fan out to thin models directly so this worker
+ * also functions standalone before Phase 3 wires discovery fan-out.
+ */
+async function selfEnqueue(limit, wave, freshSkip) {
+  const targets = await selectResearchCandidates(limit, wave, freshSkip);
 
   if (targets.length === 0) return 0;
 
@@ -200,7 +214,8 @@ async function runResearchGapsWorker() {
   const { wave, max, dryRun } = parseArgs();
   console.log(`🚀 [Worker: ${ACTION_TYPE}] wave=${wave} max=${max}${dryRun ? " (DRY RUN)" : ""}`);
 
-  if (!process.env.GEMINI_API_KEY) {
+  // Observation mode needs no credentials; real grounded runs do.
+  if (!dryRun && !process.env.GEMINI_API_KEY) {
     console.error("❌ Missing GEMINI_API_KEY — web-grounded research unavailable.");
     process.exit(1);
   }
@@ -238,6 +253,16 @@ async function runResearchGapsWorker() {
         .order("created_at", { ascending: true })
         .limit(max * 2);
       claimedJobs = freshJobs || [];
+    }
+  }
+
+  if (claimedJobs.length === 0 && dryRun) {
+    // Preview the exact selection selfEnqueue would make — virtual jobs, no
+    // queue rows written.
+    const targets = await selectResearchCandidates(max, wave, freshSkip);
+    claimedJobs = targets.map((m) => ({ id: null, model_id: m.id, attempts: 0 }));
+    if (claimedJobs.length > 0) {
+      console.log(`👁 Previewing ${claimedJobs.length} candidate(s) self-enqueue would target.`);
     }
   }
 
