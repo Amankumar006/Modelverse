@@ -1,0 +1,11 @@
+{
+  "modelId": "217810f7-3c6c-42df-833c-d009c1122e09",
+  "slug": "text-moderation-stable",
+  "name": "text-moderation-stable",
+  "crawledAt": "2026-08-25T15:53:01.370Z",
+  "crawledUrls": [
+    "https://developers.openai.com/api/docs/models/text-moderation"
+  ],
+  "byteCounts": 176,
+  "text": "## Model Description (text-moderation-stable)\nStable legacy OpenAI text moderation identifier retained for compatibility with applications using a stable moderation model name."
+}
