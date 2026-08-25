@@ -1,0 +1,9 @@
+{
+  "modelId": "54a10311-4b02-41f9-90de-f45bb2f52d03",
+  "slug": "alibaba-qwen3.6-max-preview",
+  "name": "Qwen3.6 Max Preview",
+  "crawledAt": "2026-08-25T09:45:27.475Z",
+  "crawledUrls": [],
+  "byteCounts": 115,
+  "text": "## Model Description (Qwen3.6 Max Preview)\nFlagship Qwen model for complex reasoning, coding, and agentic workflows"
+}

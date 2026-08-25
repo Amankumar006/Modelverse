@@ -1,0 +1,9 @@
+{
+  "modelId": "3e91dee5-d080-4233-bb16-d93df2706e32",
+  "slug": "nvidia-llama-nemotron-rerank-vl-1b-v2",
+  "name": "Llama Nemotron Rerank VL 1B v2",
+  "crawledAt": "2026-08-25T10:41:38.892Z",
+  "crawledUrls": [],
+  "byteCounts": 138,
+  "text": "## Model Description (Llama Nemotron Rerank VL 1B v2)\nReranking model for improving retrieval quality in search and recommendation systems"
+}

@@ -1,0 +1,9 @@
+{
+  "modelId": "4f48d18a-6b2d-4c84-981f-92050385febf",
+  "slug": "cohere-command-a-plus-05-2026",
+  "name": "Command A Plus",
+  "crawledAt": "2026-08-25T08:53:25.665Z",
+  "crawledUrls": [],
+  "byteCounts": 179,
+  "text": "## Model Description (Command A Plus)\nCohere’s open-weight flagship MoE model for multimodal reasoning, multilingual agentic workflows, retrieval, and enterprise-grade tool use."
+}

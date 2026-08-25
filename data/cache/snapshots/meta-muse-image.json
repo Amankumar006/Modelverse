@@ -1,0 +1,11 @@
+{
+  "modelId": "59dfa82f-6b00-4cc9-8de9-ad0811efcb67",
+  "slug": "meta-muse-image",
+  "name": "Muse Image",
+  "crawledAt": "2026-08-25T07:01:07.161Z",
+  "crawledUrls": [
+    "https://https://ai.https://ai.meta.com/blog/introducing-muse-image-muse-video-msl//blog/introducing-muse-image-muse-video-msl/"
+  ],
+  "byteCounts": 386,
+  "text": "## Model Description (Muse Image)\nMeta MUSE Image is a proprietary agentic image generation model developed by Meta Superintelligence Labs (MSL). It structures its generation process using inference-time reasoning and active background web searches to gather accurate real-world visual references prior to rendering, powering generative features across meta.ai, Instagram, and WhatsApp."
+}

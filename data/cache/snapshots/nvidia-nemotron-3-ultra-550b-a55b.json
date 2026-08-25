@@ -1,0 +1,9 @@
+{
+  "modelId": "27465c10-22b3-4b3d-aded-330d8a842afb",
+  "slug": "nvidia-nemotron-3-ultra-550b-a55b",
+  "name": "Nemotron 3 Ultra 550B A55B",
+  "crawledAt": "2026-08-25T07:52:08.937Z",
+  "crawledUrls": [],
+  "byteCounts": 127,
+  "text": "## Model Description (Nemotron 3 Ultra 550B A55B)\nLargest Nemotron 3 model for maximum open-weight reasoning and agent accuracy"
+}
