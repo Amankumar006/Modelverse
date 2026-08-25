@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { type ModelEntry } from "@/lib/models";
 import { formatParameters } from "@/lib/model-format";
+import { formatContextWindow } from "@/lib/model-sections";
 import ShareBar from "@/components/ui/ShareBar";
 import CopyButton from "@/components/ui/CopyButton";
 import { ShieldCheck } from "lucide-react";
@@ -88,11 +89,7 @@ export default function ModelHero({ model }: ModelHeroProps) {
         <div className="p-3 rounded-[var(--radius-card)] bg-[var(--card-bg)] border border-[var(--muted)]/10 space-y-0.5">
           <span className="text-[var(--muted)] font-medium text-[11px] block">Context Window</span>
           <span className="font-mono tabular-nums font-bold text-[var(--text)] truncate block">
-            {typeof model.contextWindow === "object" && model.contextWindow !== null
-              ? (model.contextWindow as { native?: number }).native
-                ? `${(model.contextWindow as { native?: number }).native} tokens`
-                : JSON.stringify(model.contextWindow)
-              : model.contextWindow || "Undisclosed"}
+            {formatContextWindow(model.contextWindow)}
           </span>
         </div>
         <div className="p-3 rounded-[var(--radius-card)] bg-[var(--card-bg)] border border-[var(--muted)]/10 space-y-0.5">

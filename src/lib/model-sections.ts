@@ -10,6 +10,7 @@
 /* ------------------------------------------------------------------ */
 
 import { normalizePricing } from "./model-normalization";
+import type { NormalizedPricingItem } from "./model-normalization";
 import { formatParameters } from "./model-format";
 import type { Benchmark, ModelEntry, ModelEvidence } from "./models";
 
@@ -155,9 +156,9 @@ function formatMoney(amount: number): string {
   return `$${amount.toFixed(amount < 0.01 ? 4 : 2)}`;
 }
 
-// Mirrors the hero tile's context-window rendering; promoted here so the
-// rail and strip share one implementation.
-function formatContextWindow(cw: string | Record<string, unknown> | undefined): string {
+// Shared context-window rendering — hero tile, quick-facts rail, and
+// at-a-glance strip all display the same string for the same record.
+export function formatContextWindow(cw: string | Record<string, unknown> | undefined): string {
   if (cw && typeof cw === "object") {
     const native = (cw as { native?: number }).native;
     if (typeof native === "number" && native > 0) {
@@ -243,37 +244,55 @@ export interface PricingHighlights {
   blended: QuickFact | null;
 }
 
-/** Cheapest input/output rates from normalized pricing; cached-hit rows excluded. */
-export function derivePricingHighlights(rawPricing: unknown): PricingHighlights {
-  type PricingItem = ReturnType<typeof normalizePricing>[number];
-  const items = normalizePricing(rawPricing).filter(
-    (item) => !item.unit.toLowerCase().includes("cached")
-  );
+/**
+ * Indices of the cheapest input and output rows within a normalized pricing
+ * list (cached-hit rows excluded, ties → first). Lets the pricing table and
+ * the quick-facts rail agree on which rates are headline numbers.
+ */
+export function findCheapestPricingIndices(items: NormalizedPricingItem[]): {
+  input?: number;
+  output?: number;
+} {
+  let input: number | undefined;
+  let output: number | undefined;
 
-  let input: PricingItem | undefined;
-  let output: PricingItem | undefined;
-  let blended: PricingItem | undefined;
-
-  for (const item of items) {
+  for (let i = 0; i < items.length; i++) {
+    const item = items[i];
+    if (item.unit.toLowerCase().includes("cached")) continue;
     const unit = item.unit.toLowerCase();
     if (unit.includes("input")) {
-      if (!input || item.amount < input.amount) input = item;
+      if (input === undefined || item.amount < items[input].amount) input = i;
     } else if (unit.includes("output")) {
-      if (!output || item.amount < output.amount) output = item;
-    } else if (!blended || item.amount < blended.amount) {
-      blended = item;
+      if (output === undefined || item.amount < items[output].amount) output = i;
     }
   }
 
-  const toFact = (item: PricingItem): QuickFact => ({
+  return { input, output };
+}
+
+/** Cheapest input/output rates from normalized pricing; cached-hit rows excluded. */
+export function derivePricingHighlights(rawPricing: unknown): PricingHighlights {
+  const items = normalizePricing(rawPricing);
+  const { input, output } = findCheapestPricingIndices(items);
+
+  const toFact = (item: NormalizedPricingItem): QuickFact => ({
     label: `Cheapest ${unitWord(item.unit)}`,
     value: `${formatMoney(item.amount)} / ${item.unit}`,
   });
 
+  // Blended fallback: a single generic per-token rate with no directional units.
+  let blended: NormalizedPricingItem | undefined;
+  if (input === undefined && output === undefined) {
+    for (const item of items) {
+      if (item.unit.toLowerCase().includes("cached")) continue;
+      if (!blended || item.amount < blended.amount) blended = item;
+    }
+  }
+
   return {
-    input: input ? toFact(input) : null,
-    output: output ? toFact(output) : null,
-    blended: !input && !output && blended ? toFact(blended) : null,
+    input: input !== undefined ? toFact(items[input]) : null,
+    output: output !== undefined ? toFact(items[output]) : null,
+    blended: blended ? toFact(blended) : null,
   };
 }
 

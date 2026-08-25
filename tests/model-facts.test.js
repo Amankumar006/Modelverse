@@ -66,7 +66,10 @@ async function main() {
     deriveContextualFacts,
     deriveTopBenchmarks,
     derivePricingHighlights,
+    findCheapestPricingIndices,
+    formatContextWindow,
   } = await import("../src/lib/model-sections.ts");
+  const { normalizePricing } = await import("../src/lib/model-normalization.ts");
 
   function check(name, fn) {
     try {
@@ -290,6 +293,39 @@ async function main() {
       const highlights = derivePricingHighlights(empty);
       assert.deepStrictEqual(highlights, { input: null, output: null, blended: null });
     }
+  });
+
+  /* ---------------- findCheapestPricingIndices ---------------- */
+
+  check("findCheapestPricingIndices returns cheapest row indices, skipping cached", () => {
+    const items = normalizePricing([
+      { unit: "1M input tokens", amount: 3, currency: "USD" },
+      { unit: "1M input tokens", amount: 1.5, currency: "USD" },
+      { unit: "1M cached input tokens", amount: 0.01, currency: "USD" },
+      { unit: "1M output tokens", amount: 15, currency: "USD" },
+      { unit: "1M output tokens", amount: 12.5, currency: "USD" },
+    ]);
+    assert.deepStrictEqual(findCheapestPricingIndices(items), { input: 1, output: 4 });
+  });
+
+  check("findCheapestPricingIndices handles absent classes and ties (first wins)", () => {
+    const items = normalizePricing([
+      { unit: "1M tokens", amount: 5, currency: "USD" },
+      { unit: "1M input tokens", amount: 2, currency: "USD" },
+      { unit: "1M input tokens", amount: 2, currency: "USD" },
+    ]);
+    const { input } = findCheapestPricingIndices(items);
+    assert.strictEqual(input, 1);
+  });
+
+  /* ---------------- formatContextWindow ---------------- */
+
+  check("formatContextWindow renders native counts with locale separators", () => {
+    assert.strictEqual(formatContextWindow({ native: 200000 }), "200,000 tokens");
+    assert.strictEqual(formatContextWindow({ native: 0 }), '{"native":0}');
+    assert.strictEqual(formatContextWindow({}), "{}");
+    assert.strictEqual(formatContextWindow("1M tokens"), "1M tokens");
+    assert.strictEqual(formatContextWindow(undefined), "Undisclosed");
   });
 
   /* ---------------- deriveAlwaysOnFacts ---------------- */

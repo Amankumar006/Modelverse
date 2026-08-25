@@ -1,5 +1,8 @@
 import React from "react";
-import { CAPABILITY_TAXONOMY } from "@/lib/model-sections";
+import {
+  CAPABILITY_TAXONOMY,
+  groupCapabilities,
+} from "@/lib/model-sections";
 import {
   Brain,
   Wrench,
@@ -67,57 +70,81 @@ export default function CapabilitiesMatrix({
         </div>
       </div>
 
-      {/* Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 pt-1">
-        {CAPABILITY_TAXONOMY.map((def) => {
-          const isSupported = Boolean(capabilities[def.key]);
-          const Icon = CAPABILITY_ICONS[def.key] ?? Sparkles;
+      {/* Category-grouped grid — counts per category from the shared taxonomy */}
+      <div className="space-y-5 pt-1">
+        {groupCapabilities(capabilities).map((group) => (
+          <div key={group.category}>
+            <div className="flex items-center gap-2 mb-2">
+              <h4 className="text-xs font-bold uppercase tracking-wider text-[var(--muted)]">
+                {group.category}
+              </h4>
+              <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-[var(--bg)] text-[var(--text)] border border-[var(--muted)]/15 tabular-nums">
+                {group.supported}/{group.total}
+              </span>
+              <span className="flex-1 h-px bg-[var(--muted)]/10" aria-hidden="true" />
+            </div>
 
-          return (
-            <div
-              key={def.key}
-              className={`flex items-start gap-3 p-3 rounded-[12px] border transition-all duration-200 ${
-                isSupported
-                  ? "bg-[var(--accent-soft)]/10 border-[var(--accent)]/30 shadow-sm"
-                  : "bg-[var(--bg)]/40 border-[var(--muted)]/10 opacity-60"
-              }`}
-            >
-              <div
-                className={`p-2 rounded-[8px] shrink-0 ${
-                  isSupported
-                    ? "bg-[var(--accent)]/10 text-[var(--accent)]"
-                    : "bg-[var(--muted)]/10 text-[var(--muted)]"
-                }`}
-              >
-                <Icon size={16} />
-              </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2">
+              {CAPABILITY_TAXONOMY.filter((d) => d.category === group.category).map((def) => {
+                const isSupported = Boolean(capabilities[def.key]);
+                const Icon = CAPABILITY_ICONS[def.key] ?? Sparkles;
 
-              <div className="min-w-0 flex-1">
-                <div className="flex items-center justify-between gap-1">
-                  <h4
-                    className={`text-xs font-semibold truncate ${
-                      isSupported ? "text-[var(--text)]" : "text-[var(--muted)]"
+                return (
+                  <div
+                    key={def.key}
+                    className={`flex items-start gap-2.5 p-2.5 rounded-[12px] border transition-all duration-200 ${
+                      isSupported
+                        ? "bg-[var(--accent-soft)]/10 border-[var(--accent)]/30 shadow-sm"
+                        : "bg-[var(--bg)]/40 border-[var(--muted)]/10 opacity-60"
                     }`}
                   >
-                    {def.title}
-                  </h4>
-                  {isSupported ? (
-                    <span className="text-[10px] font-bold text-emerald-500 flex items-center gap-0.5 shrink-0">
-                      <CheckCircle2 size={11} /> YES
-                    </span>
-                  ) : (
-                    <span className="text-[10px] font-medium text-[var(--muted)]/70 flex items-center gap-0.5 shrink-0">
-                      <MinusCircle size={11} /> NO
-                    </span>
-                  )}
-                </div>
-                <p className="text-[11px] text-[var(--muted)] leading-tight mt-0.5 line-clamp-2">
-                  {def.description}
-                </p>
-              </div>
+                    <div
+                      className={`p-1.5 rounded-[8px] shrink-0 ${
+                        isSupported
+                          ? "bg-[var(--accent)]/10 text-[var(--accent)]"
+                          : "bg-[var(--muted)]/10 text-[var(--muted)]"
+                      }`}
+                    >
+                      <Icon size={15} />
+                    </div>
+
+                    <div className="min-w-0 flex-1">
+                      <div className="flex items-center justify-between gap-1">
+                        <h5
+                          className={`text-xs font-semibold truncate ${
+                            isSupported ? "text-[var(--text)]" : "text-[var(--muted)]"
+                          }`}
+                        >
+                          {def.title}
+                        </h5>
+                        {isSupported ? (
+                          <span
+                            aria-label="Supported"
+                            className="text-emerald-500 flex items-center shrink-0"
+                          >
+                            <CheckCircle2 size={13} />
+                            <span className="sr-only">Supported</span>
+                          </span>
+                        ) : (
+                          <span
+                            aria-label="Not supported"
+                            className="text-[var(--muted)]/70 flex items-center shrink-0"
+                          >
+                            <MinusCircle size={13} />
+                            <span className="sr-only">Not supported</span>
+                          </span>
+                        )}
+                      </div>
+                      <p className="text-[11px] text-[var(--muted)] leading-tight mt-0.5 line-clamp-2">
+                        {def.description}
+                      </p>
+                    </div>
+                  </div>
+                );
+              })}
             </div>
-          );
-        })}
+          </div>
+        ))}
       </div>
     </section>
   );

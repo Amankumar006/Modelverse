@@ -237,7 +237,7 @@ export default function ModelDocsLayout({
                 <h3 className="text-lg font-extrabold text-[var(--text)] tracking-tight">
                   Architecture &amp; System Overview
                 </h3>
-                <div className="text-sm text-[var(--text)] leading-relaxed prose prose-invert max-w-none">
+                <div className="text-sm text-[var(--text)] leading-relaxed prose max-w-none">
                   <MarkdownRenderer content={distinctPageOverview} />
                 </div>
               </div>
@@ -253,7 +253,7 @@ export default function ModelDocsLayout({
                 <Sparkles size={14} />
                 <span>Capabilities &amp; Highlights</span>
               </div>
-              <h2 className="text-2xl sm:text-3xl font-extrabold text-[var(--text)] tracking-tight">
+              <h2 className="text-xl sm:text-2xl font-extrabold text-[var(--text)] tracking-tight">
                 Key Features
               </h2>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
@@ -284,7 +284,7 @@ export default function ModelDocsLayout({
                 <Sparkles size={14} className="text-[var(--accent)]" />
                 <span>Expert Editorial Assessment</span>
               </div>
-              <h2 className="text-2xl sm:text-3xl font-extrabold text-[var(--text)] tracking-tight">
+              <h2 className="text-xl sm:text-2xl font-extrabold text-[var(--text)] tracking-tight">
                 Modelverse Editorial Analysis
               </h2>
               <div className="rounded-[var(--radius-card)] bg-[var(--card-bg)] shadow-[var(--shadow-card)] p-6 border border-[var(--accent)]/30 space-y-3 relative overflow-hidden">
@@ -322,12 +322,7 @@ export default function ModelDocsLayout({
           {/* ══════════════════════════════════════════════════════════ */}
           {/* BENCHMARKS                                                 */}
           {/* ══════════════════════════════════════════════════════════ */}
-          <BenchmarksSection
-            benchmarks={model.benchmarks}
-            visibleCols={model.metadata?.visible_benchmark_cols}
-            benchmarkColumns={model.metadata?.benchmark_columns}
-            developer={model.developer}
-          />
+          <BenchmarksSection benchmarks={model.benchmarks} />
 
           {/* ══════════════════════════════════════════════════════════ */}
           {/* PRICING                                                    */}

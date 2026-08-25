@@ -6,9 +6,6 @@ import { Award, ArrowUpRight, ArrowUpDown, ChevronDown, ChevronUp, ShieldCheck, 
 
 interface BenchmarksSectionProps {
   benchmarks?: Benchmark[];
-  visibleCols?: Record<string, boolean>;
-  benchmarkColumns?: { id: string; label: string }[];
-  developer?: string;
 }
 
 type SortField = "name" | "score" | "category" | "metricType" | "sourceType";
@@ -120,7 +117,7 @@ export default function BenchmarksSection({ benchmarks = [] }: BenchmarksSection
           <Award size={14} />
           <span>Evaluation Suite</span>
         </div>
-        <h2 className="text-2xl sm:text-3xl font-extrabold text-[var(--text)] tracking-tight">
+        <h2 className="text-xl sm:text-2xl font-extrabold text-[var(--text)] tracking-tight">
           Verified Benchmarks
         </h2>
         <div className="p-6 rounded-[var(--radius-card)] bg-[var(--card-bg)] border border-[var(--muted)]/10 text-center space-y-2">
@@ -141,7 +138,7 @@ export default function BenchmarksSection({ benchmarks = [] }: BenchmarksSection
             <Award size={14} />
             <span>Standardized Evaluation</span>
           </div>
-          <h2 className="text-2xl sm:text-3xl font-extrabold text-[var(--text)] tracking-tight">
+          <h2 className="text-xl sm:text-2xl font-extrabold text-[var(--text)] tracking-tight">
             Verified Benchmarks &amp; Metrics
           </h2>
         </div>
@@ -210,7 +207,7 @@ export default function BenchmarksSection({ benchmarks = [] }: BenchmarksSection
             <tr>
               <th
                 onClick={() => handleSort("name")}
-                className="p-3.5 text-left font-bold uppercase tracking-wider text-[11px] cursor-pointer select-none hover:text-[var(--accent)]"
+                className="p-3 text-left font-bold uppercase tracking-wider text-[11px] cursor-pointer select-none hover:text-[var(--accent)]"
               >
                 <div className="flex items-center gap-1.5">
                   <span>Benchmark / Metric</span>
@@ -220,7 +217,7 @@ export default function BenchmarksSection({ benchmarks = [] }: BenchmarksSection
 
               <th
                 onClick={() => handleSort("score")}
-                className="p-3.5 text-left font-bold uppercase tracking-wider text-[11px] cursor-pointer select-none hover:text-[var(--accent)]"
+                className="p-3 text-left font-bold uppercase tracking-wider text-[11px] cursor-pointer select-none hover:text-[var(--accent)]"
               >
                 <div className="flex items-center gap-1.5">
                   <span>Score / Value</span>
@@ -230,7 +227,7 @@ export default function BenchmarksSection({ benchmarks = [] }: BenchmarksSection
 
               <th
                 onClick={() => handleSort("metricType")}
-                className="p-3.5 text-left font-bold uppercase tracking-wider text-[11px] cursor-pointer select-none hover:text-[var(--accent)] hidden sm:table-cell"
+                className="p-3 text-left font-bold uppercase tracking-wider text-[11px] cursor-pointer select-none hover:text-[var(--accent)] hidden sm:table-cell"
               >
                 <div className="flex items-center gap-1.5">
                   <span>Type</span>
@@ -240,7 +237,7 @@ export default function BenchmarksSection({ benchmarks = [] }: BenchmarksSection
 
               <th
                 onClick={() => handleSort("category")}
-                className="p-3.5 text-left font-bold uppercase tracking-wider text-[11px] cursor-pointer select-none hover:text-[var(--accent)] hidden md:table-cell"
+                className="p-3 text-left font-bold uppercase tracking-wider text-[11px] cursor-pointer select-none hover:text-[var(--accent)] hidden md:table-cell"
               >
                 <div className="flex items-center gap-1.5">
                   <span>Category</span>
@@ -250,7 +247,7 @@ export default function BenchmarksSection({ benchmarks = [] }: BenchmarksSection
 
               <th
                 onClick={() => handleSort("sourceType")}
-                className="p-3.5 text-left font-bold uppercase tracking-wider text-[11px] cursor-pointer select-none hover:text-[var(--accent)] hidden lg:table-cell"
+                className="p-3 text-left font-bold uppercase tracking-wider text-[11px] cursor-pointer select-none hover:text-[var(--accent)] hidden lg:table-cell"
               >
                 <div className="flex items-center gap-1.5">
                   <span>Evaluator</span>
@@ -258,7 +255,7 @@ export default function BenchmarksSection({ benchmarks = [] }: BenchmarksSection
                 </div>
               </th>
 
-              <th className="p-3.5 text-right font-bold uppercase tracking-wider text-[11px] pr-4">
+              <th className="p-3 text-right font-bold uppercase tracking-wider text-[11px] pr-4">
                 Provenance
               </th>
             </tr>
@@ -283,14 +280,14 @@ export default function BenchmarksSection({ benchmarks = [] }: BenchmarksSection
                   <React.Fragment key={`${b.name}-${idx}`}>
                     <tr className="hover:bg-[var(--bg)]/50 transition-colors">
                       {/* Benchmark Name & Subcategory */}
-                      <td className="p-3.5">
+                      <td className="p-3">
                         <div className="flex items-start gap-2">
                           {b.verified ? (
-                            <span title="Verified provenance citation">
+                            <span title="Verified provenance citation" aria-label="Verified provenance citation">
                               <ShieldCheck size={14} className="text-emerald-500 shrink-0 mt-0.5" />
                             </span>
                           ) : (
-                            <span title="Unverified metric">
+                            <span title="Unverified metric" aria-label="Unverified metric">
                               <Activity size={14} className="text-[var(--muted)] shrink-0 mt-0.5" />
                             </span>
                           )}
@@ -304,26 +301,26 @@ export default function BenchmarksSection({ benchmarks = [] }: BenchmarksSection
                       </td>
 
                       {/* Numeric Score */}
-                      <td className="p-3.5 font-mono tabular-nums font-extrabold text-[var(--accent)] text-sm sm:text-base">
+                      <td className="p-3 font-mono tabular-nums font-extrabold text-[var(--accent)] text-sm sm:text-base">
                         {b.score !== undefined && b.score !== null && b.score !== "" ? String(b.score) : "—"}
                       </td>
 
                       {/* Metric Type Badge */}
-                      <td className="p-3.5 text-xs hidden sm:table-cell">
+                      <td className="p-3 text-xs hidden sm:table-cell">
                         <span className={`px-2 py-0.5 rounded-[var(--radius-pill)] border text-[11px] font-semibold uppercase tracking-wider ${metricBadge.className}`}>
                           {metricBadge.label}
                         </span>
                       </td>
 
                       {/* Category */}
-                      <td className="p-3.5 text-xs text-[var(--muted)] hidden md:table-cell">
+                      <td className="p-3 text-xs text-[var(--muted)] hidden md:table-cell">
                         <span className="px-2 py-0.5 rounded-[var(--radius-pill)] bg-[var(--bg)] border border-[var(--muted)]/10">
                           {b.category || "General"}
                         </span>
                       </td>
 
                       {/* Source Type */}
-                      <td className="p-3.5 text-xs hidden lg:table-cell">
+                      <td className="p-3 text-xs hidden lg:table-cell">
                         <span className="inline-flex items-center gap-1.5 text-xs text-[var(--muted)]">
                           <span
                             className={`w-2 h-2 rounded-full ${
@@ -335,7 +332,7 @@ export default function BenchmarksSection({ benchmarks = [] }: BenchmarksSection
                       </td>
 
                       {/* Provenance Link & Note Toggle */}
-                      <td className="p-3.5 text-right pr-4">
+                      <td className="p-3 text-right pr-4">
                         <div className="inline-flex items-center gap-2 justify-end">
                           {citationUrl && (
                             <a
@@ -353,6 +350,8 @@ export default function BenchmarksSection({ benchmarks = [] }: BenchmarksSection
                             <button
                               type="button"
                               onClick={() => toggleNote(b.name)}
+                              aria-label={isExpanded ? "Hide evaluation notes" : "Show evaluation notes"}
+                              aria-expanded={isExpanded}
                               className="text-xs text-[var(--muted)] hover:text-[var(--text)] p-1 rounded hover:bg-[var(--bg)] transition-colors"
                               title="Toggle evaluation notes"
                             >
@@ -366,7 +365,7 @@ export default function BenchmarksSection({ benchmarks = [] }: BenchmarksSection
                     {/* Expanded Notes Row */}
                     {hasNotes && isExpanded && (
                       <tr className="bg-[var(--bg)]/40">
-                        <td colSpan={6} className="p-3.5 pl-8 text-xs text-[var(--muted)] space-y-1">
+                        <td colSpan={6} className="p-3 pl-8 text-xs text-[var(--muted)] space-y-1">
                           {b.notes && (
                             <p className="leading-relaxed">
                               <strong className="text-[var(--text)] font-semibold">Evaluation Notes:</strong> {b.notes}

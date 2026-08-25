@@ -1,5 +1,6 @@
 import React from "react";
 import { normalizePricing, type NormalizedPricingItem } from "@/lib/model-normalization";
+import { findCheapestPricingIndices } from "@/lib/model-sections";
 import { DollarSign, Clock } from "lucide-react";
 
 interface PricingSectionProps {
@@ -11,6 +12,7 @@ interface PricingSectionProps {
 
 export default function PricingSection({ pricing, pricingLastVerified, costTiers, modelType }: PricingSectionProps) {
   const items: NormalizedPricingItem[] = normalizePricing(pricing);
+  const cheapest = findCheapestPricingIndices(items);
   const isOpenWeights = modelType === "open-source" || modelType === "open-weights";
 
   return (
@@ -21,7 +23,7 @@ export default function PricingSection({ pricing, pricingLastVerified, costTiers
             <DollarSign size={14} />
             <span>Commercial Rates &amp; Token Costs</span>
           </div>
-          <h2 className="text-2xl sm:text-3xl font-extrabold text-[var(--text)] tracking-tight">
+          <h2 className="text-xl sm:text-2xl font-extrabold text-[var(--text)] tracking-tight">
             API Pricing
           </h2>
         </div>
@@ -29,7 +31,7 @@ export default function PricingSection({ pricing, pricingLastVerified, costTiers
         {pricingLastVerified && (
           <div className="flex items-center gap-1.5 text-xs font-mono text-[var(--muted)] bg-[var(--card-bg)] px-2.5 py-1 rounded-[var(--radius-control)] border border-[var(--muted)]/10">
             <Clock size={12} />
-            <span>Last verified: {new Date(pricingLastVerified).toLocaleDateString("en-US", { year: "numeric", month: "short", day: "numeric" })}</span>
+            <span>Last verified: {new Date(pricingLastVerified).toLocaleDateString("en-US", { year: "numeric", month: "short", day: "numeric", timeZone: "UTC" })}</span>
           </div>
         )}
       </div>
@@ -64,12 +66,25 @@ export default function PricingSection({ pricing, pricingLastVerified, costTiers
               </thead>
               <tbody className="divide-y divide-[var(--muted)]/10 font-normal">
                 {items.map((item, idx) => {
+                  const isCheapest = cheapest.input === idx || cheapest.output === idx;
                   return (
-                    <tr key={idx} className="hover:bg-[var(--bg)]/50 transition-colors">
+                    <tr
+                      key={idx}
+                      className={`transition-colors ${
+                        isCheapest
+                          ? "bg-[var(--accent-soft)]/20 hover:bg-[var(--accent-soft)]/25"
+                          : "hover:bg-[var(--bg)]/50"
+                      }`}
+                    >
                       {/* Tier */}
                       <td className="p-3.5">
                         <span className="font-bold text-[var(--text)] capitalize block">
                           {item.tier || "Standard API"}
+                          {isCheapest && (
+                            <span className="ml-2 inline-flex items-center px-1.5 py-0.5 rounded-[var(--radius-pill)] bg-[var(--accent)] text-white text-[9px] font-bold uppercase tracking-wider align-middle">
+                              Cheapest
+                            </span>
+                          )}
                         </span>
                         <span className="text-[11px] text-[var(--muted)] font-mono">{item.unit}</span>
                       </td>
