@@ -1,0 +1,13 @@
+{
+  "modelId": "e7d39a24-2dae-4c44-a76f-83513968f866",
+  "slug": "muse-spark-1-1",
+  "name": "Muse Spark 1.1",
+  "crawledAt": "2026-08-25T10:41:08.536Z",
+  "crawledUrls": [
+    "https://https://ai.https://ai.meta.com/blog/introducing-muse-image-muse-video-msl//blog/introducing-muse-image-muse-video-msl/",
+    "https://www.youtube.com/watch?v=Ti1V7OI2Rro",
+    "https://ai.https://ai.https://ai.meta.com/blog/introducing-muse-image-muse-video-msl//blog/introducing-muse-image-muse-video-msl//blog/introducing-muse-spark-msl/"
+  ],
+  "byteCounts": 415,
+  "text": "- YouTube About Press Copyright Contact us Creators Advertise Developers Terms Privacy Policy &amp; Safety How YouTube works Test new features NFL Sunday Ticket &copy; 2026 Google LLC\n\n---\n\n## Model Description (Muse Spark 1.1)\nA multimodal reasoning model built for agentic tasks. It can autonomously use browsers, write and deploy code, and visually verify changes by taking and analyzing application screenshots."
+}
