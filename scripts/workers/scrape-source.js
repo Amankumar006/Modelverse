@@ -19,6 +19,7 @@ const { createClient } = require("@supabase/supabase-js");
 const { crawlDeepOfficialSource } = require("../lib/crawl-deep-sources");
 const { fetchReadme, extractOfficialUrls } = require("../lib/extract-official-urls");
 const { fetchPageText } = require("../lib/verify-citation-content");
+const { markJobFailure } = require("../lib/job-lifecycle");
 
 const SUPABASE_URL = process.env.SUPABASE_URL || process.env.NEXT_PUBLIC_SUPABASE_URL;
 const SUPABASE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY;
@@ -148,6 +149,7 @@ async function runScrapeWorker() {
   let doneCount = 0;
   let failedCount = 0;
   let skippedCount = 0;
+  let needsReviewCount = 0;
 
   for (const job of jobs) {
     // Mark running
@@ -177,19 +179,11 @@ async function runScrapeWorker() {
 
       if (!text || text.length < 50) {
         console.warn(`  ⚠️ No content extracted for ${model.name}`);
-        await db
-          .from("enrichment_jobs")
-          .update({
-            status: "failed",
-            error: "No source content could be retrieved",
-            result_summary: {
-              crawledUrls,
-              byteCounts: 0,
-              timestamp: new Date().toISOString(),
-            },
-            updated_at: new Date().toISOString(),
-          })
-          .eq("id", job.id);
+        const capped = await markJobFailure(db, job.id, "No source content could be retrieved", (job.attempts || 0) + 1);
+        if (capped) {
+          needsReviewCount++;
+          console.warn(`    ⛔ Attempt cap reached; moved to needs_review.`);
+        }
         failedCount++;
         continue;
       }
@@ -230,21 +224,18 @@ async function runScrapeWorker() {
       console.log(`  ✅ Successfully saved snapshot for ${model.name} (${byteCounts} bytes).`);
     } catch (err) {
       console.error(`  ❌ Job failed for model ${job.model_id}:`, err.message);
-      await db
-        .from("enrichment_jobs")
-        .update({
-          status: "failed",
-          error: err.message,
-          updated_at: new Date().toISOString(),
-        })
-        .eq("id", job.id);
+      const capped = await markJobFailure(db, job.id, err.message, (job.attempts || 0) + 1);
+      if (capped) {
+        needsReviewCount++;
+        console.warn(`    ⛔ Attempt cap reached; moved to needs_review.`);
+      }
       failedCount++;
     }
   }
 
   console.log(`\n=== WORKER (scrape_source) BATCH COMPLETED ===`);
-  console.log(`Done: ${doneCount} | Failed: ${failedCount} | Skipped: ${skippedCount}`);
-  return { done: doneCount, failed: failedCount, skipped: skippedCount };
+  console.log(`Done: ${doneCount} | Failed: ${failedCount} | Skipped: ${skippedCount} | Needs review: ${needsReviewCount}`);
+  return { done: doneCount, failed: failedCount, skipped: skippedCount, needsReview: needsReviewCount };
 }
 
 if (require.main === module) {

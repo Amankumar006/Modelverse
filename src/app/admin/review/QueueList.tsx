@@ -14,7 +14,15 @@ type Model = {
   updated_at: string;
   primary_task: string;
   family: string | null;
+  boost?: number;
+  featured?: boolean;
+  staged_changes?: Record<string, unknown>;
+  needs_review?: boolean;
 };
+
+function stagedCount(m: Model): number {
+  return m.staged_changes ? Object.keys(m.staged_changes).length : 0;
+}
 
 export default function QueueList({ models }: { models: Model[] }) {
   const [expandedTasks, setExpandedTasks] = useState<Record<string, boolean>>({});
@@ -58,10 +66,17 @@ export default function QueueList({ models }: { models: Model[] }) {
     families: Record<string, { total: number; disputed: number; models: Model[] }>;
   }>);
 
-  // Sorting
+  // Sorting: disputes first, then models with pending staged proposals, then
+  // by traffic signal (featured > boost > recency).
   const sortModels = (a: Model, b: Model) => {
     if (a.verification_status === 'DISPUTED' && b.verification_status !== 'DISPUTED') return -1;
     if (a.verification_status !== 'DISPUTED' && b.verification_status === 'DISPUTED') return 1;
+    const stagedDelta = stagedCount(b) - stagedCount(a);
+    if (stagedDelta !== 0) return stagedDelta;
+    const featuredDelta = Number(!!b.featured) - Number(!!a.featured);
+    if (featuredDelta !== 0) return featuredDelta;
+    const boostDelta = (b.boost ?? 1) - (a.boost ?? 1);
+    if (boostDelta !== 0) return boostDelta;
     return new Date(b.updated_at).getTime() - new Date(a.updated_at).getTime();
   };
 
@@ -242,6 +257,14 @@ function ModelRow({ model, isSelected, onSelect }: { model: Model, isSelected: b
         <div className="text-xs text-daylight-muted truncate">{model.developer}</div>
       </div>
       <div className="flex items-center gap-4">
+        {stagedCount(model) > 0 && (
+          <div
+            className="px-2.5 py-1 bg-daylight-accent/15 text-daylight-accent text-xs font-bold rounded-full border border-daylight-accent/30 whitespace-nowrap"
+            title={`${stagedCount(model)} pipeline-staged ${stagedCount(model) === 1 ? "change" : "changes"} awaiting your review`}
+          >
+            {stagedCount(model)} staged
+          </div>
+        )}
         <div className="flex flex-col items-end">
           <StatusDots status={model.verification_status as "VERIFIED" | "LIKELY" | "DRAFT" | "DISPUTED"} />
           <span className="text-[10px] uppercase tracking-wider text-daylight-muted mt-1 font-medium">{model.verification_status || 'DRAFT'}</span>

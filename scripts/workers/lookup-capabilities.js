@@ -7,14 +7,17 @@
  * 2. Hugging Face pipeline tags & model card metadata
  * 3. Canonical task classifications and model family architectures
  * 
- * Writes verified capabilities to models.capabilities (JSONB)
- * and records individual capability evidence in model_evidence table.
+ * Stages extracted capabilities in models.staged_changes via staged-write
+ * (curator approval required) and records individual capability evidence in
+ * model_evidence.
  */
 
 require("dotenv").config({ path: ".env.local", quiet: true });
 require("dotenv").config({ quiet: true });
 
 const { createClient } = require("@supabase/supabase-js");
+const { markJobFailure } = require("../lib/job-lifecycle");
+const { stageChanges } = require("../lib/staged-write");
 const fs = require("fs");
 const path = require("path");
 
@@ -315,20 +318,8 @@ async function runCapabilitiesWorker() {
       const { capabilities, orMatch } = extractCapabilities(model, openRouterCatalog);
       const sourceUrl = orMatch ? `https://openrouter.ai/api/v1/models` : `https://huggingface.co/${model.slug}`;
 
-      // 1. Update models table
-      const { error: updateErr } = await db
-        .from("models")
-        .update({
-          capabilities,
-          updated_at: new Date().toISOString(),
-        })
-        .eq("id", model.id);
-
-      if (updateErr) {
-        throw new Error(`Failed to update models.capabilities: ${updateErr.message}`);
-      }
-
-      // 2. Write key evidence entries into model_evidence
+      // Build per-capability evidence entries to ride along with the staged
+      // proposal so provenance and proposal land together.
       const capabilityKeys = [
         "vision_input",
         "image_generation",
@@ -344,28 +335,22 @@ async function runCapabilitiesWorker() {
         "prompt_caching",
       ];
 
+      const capabilityEvidence = [];
       for (const key of capabilityKeys) {
         if (capabilities[key] === true) {
-          try {
-            await db.from("model_evidence").upsert(
-              {
-                model_id: model.id,
-                field_name: `capabilities.${key}`,
-                source_type: orMatch ? "provider_api" : "official_model_card",
-                source_url: sourceUrl,
-                extracted_value: { enabled: true, feature: key },
-                confidence: orMatch ? "OFFICIAL" : "LIKELY",
-                verification_notes: `Extracted via ${capabilities.evidence_source}`,
-                extracted_at: new Date().toISOString(),
-                updated_at: new Date().toISOString(),
-              },
-              { onConflict: "model_id,field_name,source_url" }
-            );
-          } catch (evErr) {
-            console.warn(`  ⚠️ Evidence recording warning for ${key}:`, evErr.message);
-          }
+          capabilityEvidence.push({
+            field_name: `capabilities.${key}`,
+            source_type: orMatch ? "provider_api" : "official_model_card",
+            source_url: sourceUrl,
+            extracted_value: { enabled: true, feature: key },
+            confidence: orMatch ? "OFFICIAL" : "LIKELY",
+            verification_notes: `Extracted via ${capabilities.evidence_source}`,
+          });
         }
       }
+
+      // 1. Stage capabilities for curator approval — no direct live writes.
+      await stageChanges(db, model.id, { capabilities }, capabilityEvidence);
 
       // 3. Mark job done if tracked in enrichment_jobs
       if (job) {
@@ -386,14 +371,7 @@ async function runCapabilitiesWorker() {
     } catch (err) {
       console.error(`  ❌ Failed capability extraction for model ${modelId}:`, err.message);
       if (job) {
-        await db
-          .from("enrichment_jobs")
-          .update({
-            status: "failed",
-            error: err.message,
-            updated_at: new Date().toISOString(),
-          })
-          .eq("id", job.id);
+        await markJobFailure(db, job.id, err.message, (job.attempts || 0) + 1);
       }
       failedCount++;
     }

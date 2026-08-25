@@ -8,9 +8,10 @@
  *    (Only models with verifiedFactCount >= 2 and >= 1 verified numeric benchmark are processed).
  * 2. Ineligible models: Left untouched (null editorial fields), never wasted on LLM calls.
  * 3. Eligible models: Generates grounded editorial prose (cardSummary, pageOverview, editorialNote).
- * 4. Structural Boilerplate Gate: Runs isStructuralBoilerplate() before write.
+ * 4. Structural Boilerplate Gate: Runs isStructuralBoilerplate() before staging.
  *    Retries once with structural variation directive; leaves null if still templated.
- * 5. Runs scoreModelPage() and updates Supabase models table.
+ * 5. Stages the prose via staged-write — curator approval required before it
+ *    reaches live columns (projected score computed for the review panel).
  */
 
 require("dotenv").config({ path: ".env.local", quiet: true });
@@ -20,6 +21,9 @@ const https = require("https");
 const { createClient } = require("@supabase/supabase-js");
 const { computeFactCompleteness } = require("../merge/compute-fact-completeness");
 const { isStructuralBoilerplate, scoreModelPage } = require("../quality/score-content");
+const { stageChanges } = require("../lib/staged-write");
+const { markJobFailure } = require("../lib/job-lifecycle");
+const { parseEditorialOutput } = require("../../data/schemas/editorial-output.schema");
 
 const SUPABASE_URL = process.env.SUPABASE_URL || process.env.NEXT_PUBLIC_SUPABASE_URL;
 const SUPABASE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY;
@@ -173,11 +177,16 @@ Output valid JSON with keys: "cardSummary", "pageOverview", "editorialNote".`;
 
   let responseJson = null;
 
+  // LLM output is untrusted input (security.md): every provider response goes
+  // through the Zod-backed parse — malformed or injected payloads are treated
+  // as a provider failure and fall through to the next provider.
   // Try Gemini first
   if (process.env.GEMINI_API_KEY) {
     try {
       const raw = await callGemini(process.env.GEMINI_API_KEY, prompt);
-      responseJson = JSON.parse(raw);
+      const parsed = parseEditorialOutput(raw);
+      if (!parsed.ok) throw new Error(parsed.error);
+      responseJson = parsed.data;
     } catch (e) {
       console.warn(`  ⚠️ Gemini call failed (${e.message}); falling back...`);
     }
@@ -196,7 +205,9 @@ Output valid JSON with keys: "cardSummary", "pageOverview", "editorialNote".`;
           temperature: 0.7,
         }
       );
-      responseJson = JSON.parse(raw);
+      const parsed = parseEditorialOutput(raw);
+      if (!parsed.ok) throw new Error(parsed.error);
+      responseJson = parsed.data;
     } catch (e) {
       console.warn(`  ⚠️ Groq call failed (${e.message}); falling back...`);
     }
@@ -214,7 +225,9 @@ Output valid JSON with keys: "cardSummary", "pageOverview", "editorialNote".`;
           temperature: 0.7,
         }
       );
-      responseJson = JSON.parse(raw);
+      const parsed = parseEditorialOutput(raw);
+      if (!parsed.ok) throw new Error(parsed.error);
+      responseJson = parsed.data;
     } catch (e) {
       console.warn(`  ⚠️ OpenRouter call failed: ${e.message}`);
     }
@@ -227,35 +240,81 @@ async function runEditorialWorker() {
   const batchSize = parseBatchSize();
   console.log(`🚀 [Worker: generate_editorial] Starting editorial pipeline (batch size: ${batchSize})...`);
 
-  // Query models that either have thin status or are missing editorial fields
-  const { data: models, error } = await db
-    .from("models")
-    .select("*")
-    .or("editorial_note.is.null,page_overview.is.null")
-    .order("boost", { ascending: false })
-    .order("release_date", { ascending: false })
-    .limit(batchSize * 3);
+  // Claim queued generate_editorial jobs (discovery fans these out; the
+  // quality_check worker queues them when a card crosses into eligibility).
+  const { data: jobs, error } = await db
+    .from("enrichment_jobs")
+    .select("id, model_id, attempts")
+    .eq("action_type", "generate_editorial")
+    .eq("status", "queued")
+    .order("created_at", { ascending: true })
+    .limit(batchSize * 2);
 
   if (error) {
-    console.error("❌ Failed to query candidate models:", error.message);
+    console.error("❌ Failed to query queued jobs:", error.message);
     process.exit(1);
   }
 
-  console.log(`📋 Loaded ${models.length} candidate models to evaluate against factual completeness gate.`);
+  if (!jobs || jobs.length === 0) {
+    console.log("✨ No queued jobs for generate_editorial.");
+    return { processedCount: 0, ineligibleCount: 0, boilerplateRejectedCount: 0 };
+  }
+
+  const modelIds = [...new Set(jobs.map((j) => j.model_id))];
+  const { data: models, error: modelsErr } = await db
+    .from("models")
+    .select("*")
+    .in("id", modelIds);
+
+  if (modelsErr) {
+    console.error("❌ Failed to load models:", modelsErr.message);
+    process.exit(1);
+  }
+
+  const modelsById = new Map((models || []).map((m) => [m.id, m]));
+  const work = [];
+  for (const job of jobs) {
+    const model = modelsById.get(job.model_id);
+    if (model) work.push({ job, model });
+  }
+
+  console.log(`📥 Claimed ${work.length} job(s) to evaluate against factual completeness gate.`);
 
   let processedCount = 0;
   let eligibleCount = 0;
   let ineligibleCount = 0;
   let boilerplateRejectedCount = 0;
 
-  for (const model of models) {
+  const markJob = (id, payload) =>
+    db.from("enrichment_jobs").update(payload).eq("id", id);
+
+  for (const { job, model } of work) {
     if (processedCount >= batchSize) break;
+
+    await markJob(job.id, {
+      status: "running",
+      attempts: (job.attempts || 0) + 1,
+      last_run_at: new Date().toISOString(),
+    });
+    const attemptNo = (job.attempts || 0) + 1;
 
     // Task 4 Hard Gate: Check fact completeness
     const completeness = computeFactCompleteness(model);
 
     if (!completeness.eligible) {
       ineligibleCount++;
+      // Park rather than fail: facts may still arrive (research_gaps +
+      // approval), and the quality_check worker re-queues this job when the
+      // card crosses into eligibility.
+      await markJob(job.id, {
+        status: "blocked",
+        blocked_reason: "fact_completeness_gate",
+        result_summary: {
+          verifiedFacts: completeness.verifiedFactCount ?? null,
+          verifiedBenchmarks: completeness.verifiedBenchmarksCount ?? null,
+        },
+        updated_at: new Date().toISOString(),
+      });
       continue;
     }
 
@@ -268,8 +327,9 @@ async function runEditorialWorker() {
       let editorial = await generateEditorialWithLlm(model, completeness.verifiedFacts);
 
       if (!editorial) {
-        console.warn(`  ⚠️ LLM generation returned empty response for ${model.name}. Skipping.`);
-        continue;
+        // All providers came back empty — likely transient, so burn an
+        // attempt via the normal failure path rather than parking the job.
+        throw new Error("all LLM providers returned empty responses");
       }
 
       // 2. Structural boilerplate detection
@@ -292,15 +352,33 @@ async function runEditorialWorker() {
       if (isPoBoilerplate || isEnBoilerplate) {
         console.warn(`  ❌ Retry failed structural boilerplate check for ${model.name}. Leaving editorial fields null.`);
         boilerplateRejectedCount++;
+        // Completed evaluation with a negative result — mark done with the
+        // reason so the job doesn't strand in 'running'; discovery will
+        // naturally re-examine after its freshness window.
+        await markJob(job.id, {
+          status: "done",
+          error: null,
+          result_summary: { reason: "boilerplate_rejected" },
+          updated_at: new Date().toISOString(),
+        });
         continue;
       }
 
-      // 3. Prepare payload and score
-      const updatedPayload = {
+      // 3. Stage the generated prose for curator approval — AI-generated text
+      // never reaches live columns directly (product rule: unreviewed AI
+      // content must not render publicly). The quality gate re-runs at
+      // approval time on the merged model.
+      const proposals = {
+        ...(editorial.cardSummary ? { card_summary: editorial.cardSummary } : {}),
+        ...(editorial.pageOverview ? { page_overview: editorial.pageOverview } : {}),
+        ...(editorial.editorialNote ? { editorial_note: editorial.editorialNote } : {}),
+      };
+
+      const mergedPreview = {
         ...model,
-        cardSummary: editorial.cardSummary || model.card_summary,
-        pageOverview: editorial.pageOverview || model.page_overview,
-        editorialNote: editorial.editorialNote || model.editorial_note,
+        card_summary: proposals.card_summary || model.card_summary,
+        page_overview: proposals.page_overview || model.page_overview,
+        editorial_note: proposals.editorial_note || model.editorial_note,
         parameters: model.parameters,
         contextWindow: model.context_window,
         license: model.license,
@@ -308,27 +386,41 @@ async function runEditorialWorker() {
         fieldConfidence: model.field_confidence || {},
         keyFeatures: model.key_features || [],
       };
+      const previewGate = scoreModelPage(mergedPreview);
 
-      const gate = scoreModelPage(updatedPayload);
+      await stageChanges(db, model.id, proposals, [
+        {
+          field_name: "editorial",
+          source_type: "other",
+          source_url: (Array.isArray(model.sources) && model.sources[0]) || `https://themodelverse.in/models/${model.slug}`,
+          extracted_value: {
+            generator: "generate-editorial",
+            fields: Object.keys(proposals),
+            projected_quality_score: previewGate.score,
+            projected_quality_status: previewGate.status,
+          },
+          confidence: "LIKELY",
+          verification_notes: "LLM-generated editorial prose grounded in verified facts — pending curator review",
+        },
+      ]);
 
-      await db
-        .from("models")
-        .update({
-          card_summary: updatedPayload.cardSummary,
-          page_overview: updatedPayload.pageOverview,
-          editorial_note: updatedPayload.editorialNote,
-          quality_status: gate.status,
-          quality_score: gate.score,
-          quality_reasons: gate.reasons,
-          quality_checked_at: new Date().toISOString(),
-          updated_at: new Date().toISOString(),
-        })
-        .eq("id", model.id);
+      await markJob(job.id, {
+        status: "done",
+        error: null,
+        result_summary: {
+          stagedFields: Object.keys(proposals),
+          projectedQualityScore: previewGate.score,
+          projectedQualityStatus: previewGate.status,
+          timestamp: new Date().toISOString(),
+        },
+        updated_at: new Date().toISOString(),
+      });
 
       processedCount++;
-      console.log(`  🎉 Successfully generated editorial for ${model.name} -> Quality Score: ${gate.score}/100 (${gate.status})`);
+      console.log(`  🎉 Staged editorial for ${model.name} (${Object.keys(proposals).length} fields) -> projected quality ${previewGate.score}/100 (${previewGate.status}, live after approval)`);
     } catch (err) {
       console.error(`  ❌ Editorial generation failed for ${model.name}:`, err.message);
+      await markJobFailure(db, job.id, err.message, attemptNo);
     }
   }
 

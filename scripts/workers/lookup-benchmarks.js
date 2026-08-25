@@ -9,7 +9,8 @@
  *    (If not yet available, re-queues the job with a note and defers).
  * 3. Runs deterministic table extraction via extract-benchmarks-deterministic.js.
  * 4. Confirms content substantiation via verify-citation-content.js.
- * 5. Applies field_confidence logic and writes benchmarks ONLY via verified-write.js.
+ * 5. Applies field_confidence logic and stages benchmarks via staged-write
+ *    (curator approval required before they reach live columns).
  * 6. Updates job status to 'done' (or 'failed' / 'skipped') with result_summary.
  */
 
@@ -22,6 +23,7 @@ const { createClient } = require("@supabase/supabase-js");
 const { extractBenchmarksFromMarkdownTable } = require("../lib/extract-benchmarks-deterministic");
 const { verifyBenchmarkSubstantiation } = require("../lib/verify-citation-content");
 const { sanitizeBenchmarksForWrite } = require("../lib/verified-write");
+const { stageChanges } = require("../lib/staged-write");
 
 const SUPABASE_URL = process.env.SUPABASE_URL || process.env.NEXT_PUBLIC_SUPABASE_URL;
 const SUPABASE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY;
@@ -252,18 +254,14 @@ async function runBenchmarkWorker() {
         fieldConfidence.benchmarks = "LIKELY";
       }
 
-      // Update model record if benchmarks found
+      // Stage benchmark proposals for curator approval — no direct live writes.
       if (finalBenchmarks.length > 0) {
         const updatedSources = Array.from(new Set([...sources, primaryCitation]));
-        await db
-          .from("models")
-          .update({
-            benchmarks: finalBenchmarks,
-            field_confidence: fieldConfidence,
-            sources: updatedSources,
-            updated_at: new Date().toISOString(),
-          })
-          .eq("id", model.id);
+        await stageChanges(db, model.id, {
+          benchmarks: finalBenchmarks,
+          field_confidence: fieldConfidence,
+          sources: updatedSources,
+        });
       }
 
       const resultSummary = {

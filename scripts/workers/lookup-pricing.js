@@ -6,8 +6,9 @@
  * Worker: lookup_pricing
  * 1. Claims a batch of 'queued' jobs for action_type = 'lookup_pricing'.
  * 2. Fetches live pricing & context window data from OpenRouter API.
- * 3. Writes pricing & context_window with source citation 'https://openrouter.ai/api/v1/models'.
- * 4. Sets field_confidence.pricing = 'VERIFIED'.
+ * 3. Stages pricing & context_window proposals (source citation 'https://openrouter.ai/api/v1/models')
+ *    via staged-write — curator approval required before they reach live columns.
+ * 4. Sets field_confidence.pricing = 'VERIFIED' on the staged proposal.
  * 5. Updates job status to 'done' (or 'failed' / 'skipped') with result_summary.
  */
 
@@ -18,6 +19,8 @@ const fs = require("fs");
 const path = require("path");
 const https = require("https");
 const { createClient } = require("@supabase/supabase-js");
+const { markJobFailure } = require("../lib/job-lifecycle");
+const { stageChanges } = require("../lib/staged-write");
 
 const SUPABASE_URL = process.env.SUPABASE_URL || process.env.NEXT_PUBLIC_SUPABASE_URL;
 const SUPABASE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY;
@@ -163,20 +166,18 @@ async function runPricingWorker() {
       const sources = Array.isArray(model.sources) ? [...model.sources] : [];
       const links = typeof model.links === "object" && model.links !== null ? { ...model.links } : {};
 
-      const updateData = {
-        updated_at: new Date().toISOString(),
-      };
-
+      const proposals = {};
+      const evidenceRows = [];
       let resultSummary = {};
 
       if (orMatch) {
         const openRouterCitation = "https://openrouter.ai/api/v1/models";
         if (!sources.includes(openRouterCitation)) {
           sources.push(openRouterCitation);
-          updateData.sources = sources;
+          proposals.sources = sources;
         }
         links.openrouter = `https://openrouter.ai/${orMatch.id}`;
-        updateData.links = links;
+        proposals.links = links;
 
         // Extract context window
         if (orMatch.context_length) {
@@ -184,8 +185,17 @@ async function runPricingWorker() {
           const formattedCw = cwTokens >= 1000000
             ? `${(cwTokens / 1000000).toFixed(0)}M tokens`
             : `${Math.round(cwTokens / 1000)}K tokens`;
-          updateData.context_window = formattedCw;
+          proposals.context_window = formattedCw;
           fieldConfidence.contextWindow = "VERIFIED";
+
+          evidenceRows.push({
+            field_name: "context_window",
+            source_type: "provider_api",
+            source_url: openRouterCitation,
+            extracted_value: { context_window: formattedCw, tokens: orMatch.context_length },
+            confidence: "VERIFIED",
+            verification_notes: `Provider context length: ${orMatch.context_length} tokens`,
+          });
         }
 
         // Extract pricing
@@ -193,61 +203,39 @@ async function runPricingWorker() {
           const inPrice = orMatch.pricing.prompt ? parseFloat(orMatch.pricing.prompt) * 1000000 : null;
           const outPrice = orMatch.pricing.completion ? parseFloat(orMatch.pricing.completion) * 1000000 : null;
           if (inPrice != null && outPrice != null) {
-            updateData.pricing = {
+            proposals.pricing = {
               inputPricePerM: Number(inPrice.toFixed(4)),
               outputPricePerM: Number(outPrice.toFixed(4)),
             };
             fieldConfidence.pricing = "VERIFIED";
 
-            try {
-              await db.from("model_evidence").upsert({
-                model_id: model.id,
-                field_name: "pricing",
-                source_type: "provider_api",
-                source_url: "https://openrouter.ai/api/v1/models",
-                extracted_value: updateData.pricing,
-                confidence: "VERIFIED",
-                verification_notes: `Live provider rates for OpenRouter ID: ${orMatch.id}`,
-                extracted_at: new Date().toISOString(),
-                updated_at: new Date().toISOString(),
-              }, { onConflict: "model_id,field_name,source_url" });
-            } catch (evErr) {
-              console.warn(`  ⚠️ Pricing evidence note:`, evErr.message);
-            }
-          }
-        }
-
-        if (updateData.context_window) {
-          try {
-            await db.from("model_evidence").upsert({
-              model_id: model.id,
-              field_name: "context_window",
+            evidenceRows.push({
+              field_name: "pricing",
               source_type: "provider_api",
-              source_url: "https://openrouter.ai/api/v1/models",
-              extracted_value: { context_window: updateData.context_window, tokens: orMatch.context_length },
+              source_url: openRouterCitation,
+              extracted_value: proposals.pricing,
               confidence: "VERIFIED",
-              verification_notes: `Provider context length: ${orMatch.context_length} tokens`,
-              extracted_at: new Date().toISOString(),
-              updated_at: new Date().toISOString(),
-            }, { onConflict: "model_id,field_name,source_url" });
-          } catch (evErr) {
-            console.warn(`  ⚠️ Context window evidence note:`, evErr.message);
+              verification_notes: `Live provider rates for OpenRouter ID: ${orMatch.id}`,
+            });
           }
         }
 
-        updateData.field_confidence = fieldConfidence;
+        proposals.field_confidence = fieldConfidence;
 
-        await db.from("models").update(updateData).eq("id", model.id);
+        // Stage all proposals for curator approval — no direct live writes.
+        const { staged, fields } = await stageChanges(db, model.id, proposals, evidenceRows);
 
         resultSummary = {
+          staged,
+          stagedFields: fields,
           matched: true,
           openRouterId: orMatch.id,
-          pricing: updateData.pricing || null,
-          contextWindow: updateData.context_window || null,
+          pricing: proposals.pricing || null,
+          contextWindow: proposals.context_window || null,
           timestamp: new Date().toISOString(),
         };
 
-        console.log(`  ✅ Pricing match found for ${model.name} (${orMatch.id}).`);
+        console.log(`  ✅ Pricing match found for ${model.name} (${orMatch.id}) — ${fields.length} fields staged.`);
       } else {
         resultSummary = {
           matched: false,
@@ -271,14 +259,7 @@ async function runPricingWorker() {
       doneCount++;
     } catch (err) {
       console.error(`  ❌ Pricing job failed for model ${job.model_id}:`, err.message);
-      await db
-        .from("enrichment_jobs")
-        .update({
-          status: "failed",
-          error: err.message,
-          updated_at: new Date().toISOString(),
-        })
-        .eq("id", job.id);
+      await markJobFailure(db, job.id, err.message, (job.attempts || 0) + 1);
       failedCount++;
     }
   }
