@@ -1,0 +1,9 @@
+{
+  "modelId": "1ca37aee-95bf-404f-bd98-3212108394a0",
+  "slug": "google-gemini-flash-lite-latest",
+  "name": "Gemini Flash-Lite Latest",
+  "crawledAt": "2026-08-25T09:45:04.712Z",
+  "crawledUrls": [],
+  "byteCounts": 119,
+  "text": "## Model Description (Gemini Flash-Lite Latest)\nLow-latency Gemini model for high-volume multimodal and agent workloads"
+}

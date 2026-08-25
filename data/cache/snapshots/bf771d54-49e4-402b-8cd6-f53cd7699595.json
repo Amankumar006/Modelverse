@@ -1,0 +1,9 @@
+{
+  "modelId": "bf771d54-49e4-402b-8cd6-f53cd7699595",
+  "slug": "alibaba-qwen3.6-flash",
+  "name": "Qwen3.6 Flash",
+  "crawledAt": "2026-08-25T09:45:14.744Z",
+  "crawledUrls": [],
+  "byteCounts": 112,
+  "text": "## Model Description (Qwen3.6 Flash)\nQwen vision-language model for visual reasoning, documents, and agent tasks"
+}
