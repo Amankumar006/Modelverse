@@ -1,0 +1,11 @@
+{
+  "modelId": "6525d0c3-52fd-458f-858e-fa093160fda4",
+  "slug": "alibaba-qwen-vl-max",
+  "name": "Qwen-VL Max",
+  "crawledAt": "2026-08-25T16:48:22.437Z",
+  "crawledUrls": [
+    "https://modelverse.ai/models/alibaba-qwen-vl-max"
+  ],
+  "byteCounts": 231,
+  "text": "<!DOCTYPE html><html><head><script>window.onload=function(){window.location.href=\"/lander\"}</script></head></html>\n\n---\n\n## Model Description (Qwen-VL Max)\nQwen vision-language model for visual reasoning, documents, and agent tasks"
+}

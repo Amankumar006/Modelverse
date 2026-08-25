@@ -1,0 +1,11 @@
+{
+  "modelId": "e9d32e2f-ed17-4f64-a147-faba6aa208a0",
+  "slug": "openai-gpt-4o-mini",
+  "name": "GPT-4o mini",
+  "crawledAt": "2026-08-25T16:47:57.606Z",
+  "crawledUrls": [
+    "https://openai.com/index/gpt-4o-mini-advancing-cost-efficient-intelligence/"
+  ],
+  "byteCounts": 132,
+  "text": "## Model Description (GPT-4o mini)\nGPT-4o mini is a compact, low-cost multimodal model optimized for fast text and vision workloads."
+}
