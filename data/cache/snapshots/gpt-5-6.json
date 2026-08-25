@@ -1,0 +1,12 @@
+{
+  "modelId": "73fe2f0e-ccb8-4752-b515-4d69c57bebec",
+  "slug": "gpt-5-6",
+  "name": "GPT 5.6",
+  "crawledAt": "2026-08-25T07:01:32.910Z",
+  "crawledUrls": [
+    "https://openai.com",
+    "https://www.youtube.com/watch?v=Ti1V7OI2Rro"
+  ],
+  "byteCounts": 359,
+  "text": "- YouTube About Press Copyright Contact us Creators Advertise Developers Terms Privacy Policy &amp; Safety How YouTube works Test new features NFL Sunday Ticket &copy; 2026 Google LLC\n\n---\n\n## Model Description (GPT 5.6)\nOpenAI's latest flagship model engineered for prolonged, multi-step agentic coding tasks requiring minimal human oversight or handholding."
+}
