@@ -1,0 +1,11 @@
+{
+  "modelId": "367a9035-ad50-4cee-8618-14b05e34e325",
+  "slug": "text-embedding-3-small",
+  "name": "text-embedding-3-small",
+  "crawledAt": "2026-08-25T17:39:12.459Z",
+  "crawledUrls": [
+    "https://openai.com/index/new-embedding-models-and-api-updates/"
+  ],
+  "byteCounts": 162,
+  "text": "## Model Description (text-embedding-3-small)\nCost-efficient third-generation text embedding model for retrieval, clustering, classification, and semantic search."
+}

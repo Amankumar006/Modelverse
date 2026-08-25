@@ -1,0 +1,11 @@
+{
+  "modelId": "6217d3a5-45eb-4723-8daf-ed88e46758dd",
+  "slug": "text-embedding-3-large",
+  "name": "text-embedding-3-large",
+  "crawledAt": "2026-08-25T17:39:13.417Z",
+  "crawledUrls": [
+    "https://openai.com/index/new-embedding-models-and-api-updates/"
+  ],
+  "byteCounts": 157,
+  "text": "## Model Description (text-embedding-3-large)\nHigh-capacity text embedding model for semantic search, retrieval, clustering, classification, and RAG systems."
+}

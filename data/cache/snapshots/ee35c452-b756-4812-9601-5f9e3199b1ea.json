@@ -1,0 +1,12 @@
+{
+  "modelId": "ee35c452-b756-4812-9601-5f9e3199b1ea",
+  "slug": "gpt-4-vision",
+  "name": "GPT-4 with Vision",
+  "crawledAt": "2026-08-25T17:39:25.992Z",
+  "crawledUrls": [
+    "https://openai.com/index/gpt-4v-system-card/",
+    "https://openai.com/contributions/gpt-4v/"
+  ],
+  "byteCounts": 152,
+  "text": "## Model Description (GPT-4 with Vision)\nOpenAI's landmark multimodal model that introduced native visual understanding to the GPT-4 intelligence level."
+}
