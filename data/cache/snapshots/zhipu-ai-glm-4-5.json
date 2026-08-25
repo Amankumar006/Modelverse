@@ -1,0 +1,12 @@
+{
+  "modelId": "d4a75658-8019-42b2-a5c8-23b6eaacfaff",
+  "slug": "zhipu-ai-glm-4-5",
+  "name": "GLM 4.5",
+  "crawledAt": "2026-08-25T13:59:06.351Z",
+  "crawledUrls": [
+    "https://z.ai",
+    "https://z.ai/blog/glm-4.5"
+  ],
+  "byteCounts": 225,
+  "text": "Z.ai - Advanced AI Chatbot & Agent powered by GLM-5.2\n\n---\n\n## Model Description (GLM 4.5)\nZhipu AI's open-weights Mixture-of-Experts model, featuring dual thinking modes and unifying reasoning, coding, and autonomous action."
+}
