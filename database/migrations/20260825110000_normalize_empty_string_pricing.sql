@@ -17,4 +17,4 @@ SET pricing = NULL,
     updated_at = now()
 WHERE pricing IS NOT NULL
   AND jsonb_typeof(pricing) = 'string'
-  AND pricing = '';
+  AND pricing = '""'::jsonb;
