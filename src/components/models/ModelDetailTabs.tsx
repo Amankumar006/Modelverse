@@ -307,7 +307,7 @@ export default function ModelDetailTabs({
 
           <section>
             <h3 className="mb-2 text-xs uppercase tracking-wider font-bold text-[var(--muted)]">Pricing</h3>
-            {model.pricing && model.pricing.length > 0 ? (
+            {Array.isArray(model.pricing) && model.pricing.length > 0 ? (
               <div className="space-y-2 bg-[var(--card-bg)] shadow-[var(--shadow-card)] rounded-[var(--radius-card)] p-4 border border-[var(--muted)]/10">
                 {model.pricing.map((p, idx) => (
                   <p key={idx} className="text-sm text-[var(--text)]">
