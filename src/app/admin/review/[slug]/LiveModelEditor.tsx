@@ -657,11 +657,11 @@ export default function LiveModelEditor({ initialModel, allModels = [] }: LiveMo
                   ? "bg-emerald-500/10 text-emerald-400 border-emerald-500/30 hover:border-emerald-500"
                   : "bg-amber-500/10 text-amber-400 border-amber-500/30 hover:border-amber-500"
               }`}
-              title="Click to inspect live quality evaluation details"
+              title="Live preview score from the client rubric — the authoritative stored score appears in the banner after save"
             >
               {quality.status === "indexed" ? <CheckCircle2 size={13} /> : <AlertTriangle size={13} />}
               <span>
-                Gate: {quality.score}/100 ({quality.status.toUpperCase()})
+                Gate (live): {quality.score}/100 ({quality.status.toUpperCase()})
               </span>
               {inspectorOpen ? <ChevronUp size={13} /> : <ChevronDown size={13} />}
             </button>

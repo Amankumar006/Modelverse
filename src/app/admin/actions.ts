@@ -3,6 +3,7 @@
 import { requireCurator } from '@/utils/supabase/require-curator'
 import { createClient } from '@/utils/supabase/server'
 import { revalidatePath, updateTag } from 'next/cache'
+import { resolveVerificationStamp } from '@/../scripts/lib/verification-stamp'
 
 type Db = Awaited<ReturnType<typeof createClient>>
 
@@ -68,6 +69,12 @@ export async function approveModel(slug: string, edits: Record<string, unknown>)
   const { scoreModelPage } = await import('@/../scripts/quality/score-content');
   const gate = scoreModelPage(mergedModel);
 
+  // Dispute guard — see scripts/lib/verification-stamp.js. Approving content
+  // edits never silently overturns a DISPUTED status; only overrideVerification
+  // (reason-gated, audited) does that.
+  const stamp = resolveVerificationStamp(existingModel.verification_status, existingModel.verified, gate.status);
+  const keepDisputed = stamp.disputePreserved;
+
   const updates = {
     ...parsedEdits,
     ...(parsedEdits.metadata || parsedEdits.quickstart
@@ -79,8 +86,8 @@ export async function approveModel(slug: string, edits: Record<string, unknown>)
           },
         }
       : {}),
-    verified: gate.status === 'indexed',
-    verification_status: gate.status === 'indexed' ? 'VERIFIED' : 'LIKELY',
+    verified: stamp.verified,
+    verification_status: stamp.verification_status,
     quality_status: gate.status,
     quality_score: gate.score,
     quality_reasons: gate.reasons,
@@ -122,7 +129,7 @@ export async function approveModel(slug: string, edits: Record<string, unknown>)
   revalidatePath('/models');
   revalidatePath('/');
   
-  return { success: true, quality_status: gate.status, quality_score: gate.score };
+  return { success: true, quality_status: gate.status, quality_score: gate.score, dispute_preserved: keepDisputed };
 }
 
 export async function saveModelEdits(slug: string, edits: Record<string, unknown>) {
@@ -273,13 +280,16 @@ export async function approveModels(slugs: string[]) {
     const hasStaged = Object.keys(staged).length > 0;
     const scoredModel = hasStaged ? { ...model, ...staged } : model;
     const gate = scoreModelPage(scoredModel);
+    // Dispute guard — see scripts/lib/verification-stamp.js. Bulk approval
+    // never overturns DISPUTED.
+    const stamp = resolveVerificationStamp(model.verification_status, model.verified, gate.status);
     return supabase
       .from('models')
       .update({
         ...(hasStaged ? staged : {}),
         ...(hasStaged ? { staged_changes: {}, staged_at: null } : {}),
-        verified: gate.status === 'indexed',
-        verification_status: gate.status === 'indexed' ? 'VERIFIED' : 'LIKELY',
+        verified: stamp.verified,
+        verification_status: stamp.verification_status,
         quality_status: gate.status,
         quality_score: gate.score,
         quality_reasons: gate.reasons,
@@ -583,14 +593,20 @@ export async function approveStaged(slug: string) {
   const gate = scoreModelPage(mergedModel);
   const now = new Date().toISOString();
 
+  // Dispute guard — see scripts/lib/verification-stamp.js. Approving staged
+  // proposals never overturns a DISPUTED status; only overrideVerification
+  // (reason-gated, audited) does that.
+  const stamp = resolveVerificationStamp(existingModel.verification_status, existingModel.verified, gate.status);
+  const keepDisputed = stamp.disputePreserved;
+
   const { error: updateError } = await supabase
     .from('models')
     .update({
       ...staged,
       staged_changes: {},
       staged_at: null,
-      verified: gate.status === 'indexed',
-      verification_status: gate.status === 'indexed' ? 'VERIFIED' : 'LIKELY',
+      verified: stamp.verified,
+      verification_status: stamp.verification_status,
       quality_status: gate.status,
       quality_score: gate.score,
       quality_reasons: gate.reasons,
@@ -626,7 +642,7 @@ export async function approveStaged(slug: string) {
   revalidatePath('/models');
   revalidatePath('/');
 
-  return { success: true, fields_promoted: Object.keys(staged), quality_status: gate.status };
+  return { success: true, fields_promoted: Object.keys(staged), quality_status: gate.status, dispute_preserved: keepDisputed };
 }
 
 export async function rejectStaged(slug: string, feedback?: string) {
