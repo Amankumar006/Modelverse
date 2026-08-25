@@ -1,0 +1,11 @@
+{
+  "modelId": "b228a994-71e9-45f5-bb6d-c24fe3aae5f8",
+  "slug": "alibaba-qwen3.7-plus",
+  "name": "Qwen3.7 Plus",
+  "crawledAt": "2026-08-25T08:53:02.391Z",
+  "crawledUrls": [
+    "https://qwen.ai/blog?id=qwen3.7-plus"
+  ],
+  "byteCounts": 112,
+  "text": "## Model Description (Qwen3.7 Plus)\nMultimodal Qwen workhorse for long-context agents, visual inputs, and coding"
+}

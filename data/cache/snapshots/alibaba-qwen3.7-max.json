@@ -1,0 +1,9 @@
+{
+  "modelId": "415a5fa8-8031-42d1-bfe4-7e58f29ca177",
+  "slug": "alibaba-qwen3.7-max",
+  "name": "Qwen3.7 Max",
+  "crawledAt": "2026-08-25T08:53:20.542Z",
+  "crawledUrls": [],
+  "byteCounts": 116,
+  "text": "## Model Description (Qwen3.7 Max)\nQwen frontier model tuned for agent frameworks, coding assistants, and long tasks"
+}

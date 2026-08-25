@@ -1,0 +1,9 @@
+{
+  "modelId": "2c5b5328-647f-4b4c-b439-df966323ab5c",
+  "slug": "nvidia-nemotron-3.5-content-safety",
+  "name": "Nemotron 3.5 Content Safety",
+  "crawledAt": "2026-08-25T07:52:07.993Z",
+  "crawledUrls": [],
+  "byteCounts": 130,
+  "text": "## Model Description (Nemotron 3.5 Content Safety)\nSafety model for policy screening, moderation, and risk-aware routing workflows"
+}

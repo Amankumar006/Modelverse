@@ -1,0 +1,11 @@
+{
+  "modelId": "dd076b2b-a97c-44e3-8e6d-4dcba00c4d2a",
+  "slug": "10eros-max",
+  "name": "10Eros-Max",
+  "crawledAt": "2026-08-25T04:48:24.954Z",
+  "crawledUrls": [
+    "https://huggingface.co/TenStrip/10Eros-Max"
+  ],
+  "byteCounts": 2065,
+  "text": "---\nlicense: other\nlicense_name: minimax-h3-community-license-agreement\nlicense_link: https://huggingface.co/MiniMaxAI/MiniMax-H3/blob/main/LICENSE\npipeline_tag: image-text-to-video\nbase_model:\n- MiniMaxAI/MiniMax-H3\ntags:\n- text-to-video\n- image-text-to-video\n- image-to-video\n---\n\nInt8 versions\nhttps://huggingface.co/cicalooo/10Eros-Max-h3-int8-convrot\n\nFor TURBO model use multires/simple 6 steps, er_sde/simple 6 steps, or I prefer and merged it for er_sde with custom 7 step sigmas to get rid of motion noise details. Er_sde/simple and custom sigma string instead of basic scheduler: [1.00, 0.94, 0.83, 0.72, 0.55, 0.30, 0.10, 0.00]\n\nturbo from https://huggingface.co/silveroxides/MiniMax-H3_tests/tree/main with silu(t_emb) grid restored before merge. \n\n\nDue to a ton of confusion I've let Claude compile a full MD on the grafting, including code and methodology as it was mostly used to create code, document, and manage the graft project while I tested, architected, and mixed. I was keeping that to myself since maybe it'd actually be nice to have something to myself but after a handful of ignorant comments I'm open sourcing everything from it except the scripts themselves. You can hand the md back to claude or any competent agent and graft in the same way or have them explain it until you understand. No more dumbassery allowed now.\n\nThis is an evolving project subject to future fixes in H3 training. Training is clearly problematic, and my branch will rely on Sulphur H3 tunes. But I didn't want to wait for all that so I took the data from older models, grafting it in where the model needs it, grafting it to attn layers at a low level that doesn't disturb H3's visual or audio output quality. That's essentialy it.\n\nThe standard H3 community license applies. Because this release now carries transferred character from LTX 2.3, Wan 2.2, and Krea 2, the community licenses for those source models apply as well to the portions of character that came from each.\n\n---\n\n## Model Description (10Eros-Max)\n10Eros-Max is a model developed by TenStrip."
+}

@@ -1,0 +1,9 @@
+{
+  "modelId": "fcbb416d-2c2a-48ae-ad8e-af290dc31ada",
+  "slug": "nvidia-nemotron-3-nano-omni-30b-a3b-reasoning",
+  "name": "Nemotron 3 Nano Omni 30B A3B Reasoning",
+  "crawledAt": "2026-08-25T09:45:13.829Z",
+  "crawledUrls": [],
+  "byteCounts": 135,
+  "text": "## Model Description (Nemotron 3 Nano Omni 30B A3B Reasoning)\nOpen Nemotron omni model combining reasoning with text, vision, and audio"
+}
