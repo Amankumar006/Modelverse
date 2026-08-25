@@ -15,9 +15,12 @@ import ModelHero from "./ModelHero";
 import ShareBar from "@/components/ui/ShareBar";
 import { ActiveSectionProvider } from "./ActiveSectionProvider";
 import { SectionNavRail, SectionChipBar } from "./SectionNav";
+import QuickFactsRail from "./QuickFactsRail";
 import {
   buildSectionGroups,
   flattenSections,
+  deriveAlwaysOnFacts,
+  deriveContextualFacts,
 } from "@/lib/model-sections";
 import {
   Sparkles,
@@ -68,6 +71,13 @@ export default function ModelDocsLayout({
     hasSources: true, // SourcesSection always renders
   });
   const sections = flattenSections(sectionGroups);
+
+  // Quick-facts rail data — derived once server-side, shipped as plain
+  // strings so the client island carries no data logic.
+  const hasComparable = relatedModels.length > 0;
+  const alwaysOnFacts = deriveAlwaysOnFacts(model);
+  const contextualFacts = deriveContextualFacts(model, evidence);
+  const sectionLabels = Object.fromEntries(sections.map((s) => [s.id, s.label]));
 
   // Left Navigation Menu
   const renderLeftNav = () => (
@@ -140,8 +150,8 @@ export default function ModelDocsLayout({
       {/* ── Mobile section chip bar (<lg) ─────────────────── */}
       <SectionChipBar sections={sections} />
 
-      {/* ── Two-Column Documentation Grid (quick-facts rail arrives in M3) ── */}
-      <div className="mx-auto grid w-full max-w-[1700px] px-4 md:px-6 py-6 gap-8 grid-cols-1 lg:grid-cols-[240px_minmax(0,1fr)]">
+      {/* ── Three-Column Documentation Grid ───────────────────────── */}
+      <div className="mx-auto grid w-full max-w-[1700px] px-4 md:px-6 py-6 gap-8 grid-cols-1 lg:grid-cols-[240px_minmax(0,1fr)] xl:grid-cols-[240px_minmax(0,1fr)_280px]">
         {/* LEFT COLUMN: Section navigator + catalog links */}
         <aside className="w-full shrink-0 hidden lg:block rounded-[var(--radius-card)] bg-[var(--card-bg)] shadow-[var(--shadow-card)] p-4 space-y-6 sticky top-20 h-[calc(100vh-6rem)] overflow-y-auto border border-[var(--muted)]/10">
           <div>
@@ -171,6 +181,32 @@ export default function ModelDocsLayout({
           {/* 1. MODEL HEADER / IDENTITY (server-rendered hero)           */}
           {/* ══════════════════════════════════════════════════════════ */}
           <ModelHero model={model} />
+
+          {/* At-a-glance strip — same derived facts as the xl rail, zero JS */}
+          <section aria-label="At a glance" className="xl:hidden grid grid-cols-2 sm:grid-cols-4 gap-2 text-xs">
+            {alwaysOnFacts.priceFrom && (
+              <div className="p-3 rounded-[var(--radius-card)] bg-[var(--card-bg)] border border-[var(--muted)]/10 space-y-0.5">
+                <span className="text-[var(--muted)] font-medium text-[11px] block">Price from</span>
+                <span className="font-mono tabular-nums font-bold text-[var(--accent)] truncate block">{alwaysOnFacts.priceFrom}</span>
+              </div>
+            )}
+            <div className="p-3 rounded-[var(--radius-card)] bg-[var(--card-bg)] border border-[var(--muted)]/10 space-y-0.5">
+              <span className="text-[var(--muted)] font-medium text-[11px] block">Context</span>
+              <span className="font-mono tabular-nums font-bold text-[var(--text)] truncate block">{alwaysOnFacts.contextWindow}</span>
+            </div>
+            <div className="p-3 rounded-[var(--radius-card)] bg-[var(--card-bg)] border border-[var(--muted)]/10 space-y-0.5">
+              <span className="text-[var(--muted)] font-medium text-[11px] block">Params</span>
+              <span className="font-bold text-[var(--text)] truncate block">{alwaysOnFacts.parameters}</span>
+            </div>
+            {alwaysOnFacts.capabilitiesSupported !== null && (
+              <div className="p-3 rounded-[var(--radius-card)] bg-[var(--card-bg)] border border-[var(--muted)]/10 space-y-0.5">
+                <span className="text-[var(--muted)] font-medium text-[11px] block">Capabilities</span>
+                <span className="font-bold text-[var(--text)] truncate block">
+                  {alwaysOnFacts.capabilitiesSupported}/{alwaysOnFacts.capabilitiesTotal}
+                </span>
+              </div>
+            )}
+          </section>
 
           {/* ══════════════════════════════════════════════════════════ */}
           {/* 9. OVERVIEW & DESCRIPTIONS                                 */}
@@ -351,6 +387,15 @@ export default function ModelDocsLayout({
           />
         </main>
 
+        {/* RIGHT COLUMN: Quick-facts vitals rail (xl+) */}
+        <aside className="w-full shrink-0 hidden xl:block rounded-[var(--radius-card)] bg-[var(--card-bg)] shadow-[var(--shadow-card)] p-4 sticky top-20 h-[calc(100vh-6rem)] overflow-y-auto border border-[var(--muted)]/10">
+          <QuickFactsRail
+            alwaysOn={alwaysOnFacts}
+            contextual={contextualFacts}
+            sectionLabels={sectionLabels}
+            showCompareCta={hasComparable}
+          />
+        </aside>
       </div>
       </ActiveSectionProvider>
     </div>

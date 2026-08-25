@@ -144,3 +144,20 @@ body {
     scroll-behavior: smooth;
   }
 }
+
+/* Quick-facts contextual block swap (keyed remount in QuickFactsRail) */
+@media (prefers-reduced-motion: no-preference) {
+  .fact-swap {
+    animation: fact-fade 150ms ease-out;
+  }
+  @keyframes fact-fade {
+    from {
+      opacity: 0;
+      transform: translateY(2px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+}
