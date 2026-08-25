@@ -16,7 +16,7 @@ export default function CustomSectionsView({ customSections }: CustomSectionsVie
   if (sections.length === 0) return null;
 
   return (
-    <section id="custom-sections" className="space-y-8 pt-6 border-t border-[var(--muted)]/10">
+    <section id="custom-sections" className="section-anchor space-y-8 pt-6 border-t border-[var(--muted)]/10">
       <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[var(--accent)] mb-1">
         <BookOpen size={14} />
         <span>Developer Capabilities &amp; Integration Guides</span>

@@ -19,6 +19,10 @@
   --radius-control: 14px;
   --radius-pill: 999px;
   --shadow-card: 0 4px 24px var(--shadow);
+
+  /* Sticky Navbar height (py-3 padding + logo row). Single source of truth
+     for sticky offsets (mobile chip bar, scroll-margin of anchor targets). */
+  --navbar-h: 3.7rem;
 }
 
 html.dark, :root.dark {
@@ -58,4 +62,9 @@ html.dark, :root.dark {
     opacity: 1 !important;
     transform: none !important;
   }
+}
+
+/* Anchor targets land this far below the sticky Navbar instead of under it */
+.section-anchor {
+  scroll-margin-top: calc(var(--navbar-h) + 1.5rem);
 }

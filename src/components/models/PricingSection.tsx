@@ -16,7 +16,7 @@ export default function PricingSection({ pricing, pricingLastVerified, costTiers
   const isOpenWeights = modelType === "open-source" || modelType === "open-weights";
 
   return (
-    <section id="pricing" className="space-y-6 pt-6 border-t border-[var(--muted)]/10">
+    <section id="pricing" className="section-anchor space-y-6 pt-6 border-t border-[var(--muted)]/10">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
         <div>
           <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[var(--accent)] mb-1">

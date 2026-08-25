@@ -2,7 +2,8 @@
 
 import React from "react";
 import Link from "next/link";
-import { type ModelEntry, type ModelIndex, formatParameters } from "@/lib/models";
+import { type ModelEntry, type ModelIndex } from "@/lib/models";
+import { formatParameters } from "@/lib/model-format";
 import { Scale, ArrowRight } from "lucide-react";
 
 interface ComparableModelsSectionProps {
@@ -20,7 +21,7 @@ export default function ComparableModelsSection({ currentModel, comparableModels
   if (allModels.length <= 1) return null;
 
   return (
-    <section id="comparable-models" className="space-y-6 pt-6 border-t border-[var(--muted)]/10">
+    <section id="comparable-models" className="section-anchor space-y-6 pt-6 border-t border-[var(--muted)]/10">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
         <div>
           <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[var(--accent)] mb-1">

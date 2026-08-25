@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import type { ModelEntry } from "@/lib/models";
-import { formatParameters, getModalities } from "@/lib/models";
+import { formatParameters, getModalities } from "@/lib/model-format";
 import MarkdownRenderer from "@/components/ui/MarkdownRenderer";
 import { ArrowUpRight } from "lucide-react";
 

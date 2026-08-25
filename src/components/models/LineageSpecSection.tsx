@@ -2,7 +2,8 @@
 
 import React from "react";
 import Link from "next/link";
-import { type ModelEntry, formatParameters, getModalities } from "@/lib/models";
+import { type ModelEntry } from "@/lib/models";
+import { formatParameters, getModalities } from "@/lib/model-format";
 import { GitFork, ArrowRight, ExternalLink, Cpu, Layers, ShieldCheck, Tag } from "lucide-react";
 
 interface LineageSpecSectionProps {
@@ -44,7 +45,7 @@ export default function LineageSpecSection({ model }: LineageSpecSectionProps) {
   const regularTags = (model.tags || []).filter((tag) => !tag.startsWith("base:") && !tag.startsWith("arxiv:") && !tag.startsWith("lineage:"));
 
   return (
-    <section id="lineage-spec" className="space-y-6 pt-6 border-t border-[var(--muted)]/10">
+    <section id="lineage-spec" className="section-anchor space-y-6 pt-6 border-t border-[var(--muted)]/10">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
         <div>
           <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[var(--accent)] mb-1">
