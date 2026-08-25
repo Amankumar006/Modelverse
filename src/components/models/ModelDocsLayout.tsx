@@ -13,10 +13,16 @@ import ComparableModelsSection from "./ComparableModelsSection";
 import SourcesSection from "./SourcesSection";
 import ModelHero from "./ModelHero";
 import ShareBar from "@/components/ui/ShareBar";
+import { ActiveSectionProvider } from "./ActiveSectionProvider";
+import { SectionNavRail, SectionChipBar } from "./SectionNav";
 import {
-  ChevronDown,
+  buildSectionGroups,
+  flattenSections,
+} from "@/lib/model-sections";
+import {
   Sparkles,
   FileCode2,
+  ChevronDown,
 } from "lucide-react";
 
 interface ModelDocsLayoutProps {
@@ -47,6 +53,21 @@ export default function ModelDocsLayout({
       ? model.pageOverview.trim()
       : null;
   const editorialNote = model.editorialNote?.trim();
+
+  // Tiered navigator config — one source of truth for the desktop rail,
+  // mobile chip bar, and scroll-spy. Flags mirror the conditional sections
+  // below so no nav entry ever points at a missing anchor.
+  const sectionGroups = buildSectionGroups({
+    hasKeyFeatures,
+    hasEditorial: Boolean(editorialNote),
+    hasComparable: relatedModels.length > 0,
+    hasQuickstart,
+    hasCustomSections,
+    hasReadme: Boolean(markdownContent),
+    hasEvidence: evidence.length > 0,
+    hasSources: true, // SourcesSection always renders
+  });
+  const sections = flattenSections(sectionGroups);
 
   // Left Navigation Menu
   const renderLeftNav = () => (
@@ -110,22 +131,37 @@ export default function ModelDocsLayout({
 
   return (
     <div className="min-h-screen bg-[var(--bg)] text-[var(--text)] font-sans antialiased">
+      {/* Single scroll-spy owner for rail + chip bar (+ quick-facts in M3).
+          Children are server-rendered and never re-render on scroll. */}
+      <ActiveSectionProvider sections={sections}>
       {/* ── Global Top Navbar ────────────────────────────── */}
       <Navbar theme="dark" />
 
-      {/* ── 3-Column Main Documentation Grid ──────────────────────── */}
-      <div className="mx-auto grid w-full max-w-[1700px] px-4 md:px-6 py-6 gap-8 grid-cols-1 lg:grid-cols-[240px_1fr] xl:grid-cols-[240px_1fr_240px]">
-        {/* LEFT COLUMN: Sidebar Navigation */}
+      {/* ── Mobile section chip bar (<lg) ─────────────────── */}
+      <SectionChipBar sections={sections} />
+
+      {/* ── Two-Column Documentation Grid (quick-facts rail arrives in M3) ── */}
+      <div className="mx-auto grid w-full max-w-[1700px] px-4 md:px-6 py-6 gap-8 grid-cols-1 lg:grid-cols-[240px_minmax(0,1fr)]">
+        {/* LEFT COLUMN: Section navigator + catalog links */}
         <aside className="w-full shrink-0 hidden lg:block rounded-[var(--radius-card)] bg-[var(--card-bg)] shadow-[var(--shadow-card)] p-4 space-y-6 sticky top-20 h-[calc(100vh-6rem)] overflow-y-auto border border-[var(--muted)]/10">
+          <div>
+            <p className="px-2 pb-2 flex items-center gap-1.5 text-xs font-bold text-[var(--text)] uppercase tracking-wider">
+              <span className="w-1.5 h-3.5 bg-[var(--accent)] rounded-full" />
+              On this page
+            </p>
+            <SectionNavRail groups={sectionGroups} />
+          </div>
+
           {renderLeftNav()}
         </aside>
 
         {/* CENTER COLUMN: Main Reading Area */}
         <main className="flex-1 max-w-[880px] py-2 space-y-10 min-w-0">
-          {/* Mobile Left Nav Collapsible */}
+          {/* Mobile catalog collapsible — page sections live in the sticky
+              chip bar above; this only carries catalog/site links now. */}
           <details className="lg:hidden group rounded-[var(--radius-card)] bg-[var(--card-bg)] shadow-[var(--shadow-card)] border border-[var(--muted)]/10 mb-6">
             <summary className="p-4 font-bold text-[var(--text)] text-sm cursor-pointer list-none flex justify-between items-center">
-              <span>Documentation Navigation</span>
+              <span>Browse model catalog</span>
               <ChevronDown size={16} className="text-[var(--muted)] group-open:rotate-180 transition-transform" />
             </summary>
             <div className="p-4 pt-0 space-y-6">{renderLeftNav()}</div>
@@ -315,94 +351,8 @@ export default function ModelDocsLayout({
           />
         </main>
 
-        {/* RIGHT COLUMN: Table of Contents */}
-        <aside className="w-56 shrink-0 hidden xl:block p-5 border-l border-[var(--muted)]/10 sticky top-20 h-[calc(100vh-6rem)] overflow-y-auto text-xs space-y-4">
-          <div className="flex items-center gap-1.5 text-[var(--text)] font-bold">
-            <span className="w-1.5 h-3.5 bg-[var(--accent)] rounded-full" />
-            <span>On This Page</span>
-          </div>
-
-          <ul className="space-y-2 text-[var(--muted)] pl-2 border-l border-[var(--muted)]/10 font-medium">
-            <li>
-              <a href="#identity" className="hover:text-[var(--accent)] transition-colors block">
-                Overview &amp; Identity
-              </a>
-            </li>
-            {hasKeyFeatures && (
-              <li>
-                <a href="#key-features" className="hover:text-[var(--accent)] transition-colors block">
-                  Key features
-                </a>
-              </li>
-            )}
-            <li>
-              <a href="#lineage-spec" className="hover:text-[var(--accent)] transition-colors block">
-                Lineage &amp; specification
-              </a>
-            </li>
-            <li>
-              <a href="#capabilities" className="hover:text-[var(--accent)] transition-colors block">
-                Capabilities matrix
-              </a>
-            </li>
-            {hasQuickstart && (
-              <li>
-                <a href="#getting-started" className="hover:text-[var(--accent)] transition-colors block">
-                  Getting started
-                </a>
-              </li>
-            )}
-            {hasCustomSections && (
-              <li>
-                <a href="#custom-sections" className="hover:text-[var(--accent)] transition-colors block">
-                  Integration guides
-                </a>
-              </li>
-            )}
-            {relatedModels.length > 0 && (
-              <li>
-                <a href="#comparable-models" className="hover:text-[var(--accent)] transition-colors block">
-                  Comparable models
-                </a>
-              </li>
-            )}
-            <li>
-              <a href="#benchmarks" className="hover:text-[var(--accent)] transition-colors block">
-                Verified benchmarks
-              </a>
-            </li>
-            <li>
-              <a href="#pricing" className="hover:text-[var(--accent)] transition-colors block">
-                API pricing
-              </a>
-            </li>
-            {editorialNote && (
-              <li>
-                <a href="#editorial-analysis" className="hover:text-[var(--accent)] transition-colors block">
-                  Editorial analysis
-                </a>
-              </li>
-            )}
-            {markdownContent && (
-              <li>
-                <a href="#readme-docs" className="hover:text-[var(--accent)] transition-colors block">
-                  Technical readme
-                </a>
-              </li>
-            )}
-            <li>
-              <a href="#provenance" className="hover:text-[var(--accent)] transition-colors block">
-                Verified citations
-              </a>
-            </li>
-            <li>
-              <a href="#sources" className="hover:text-[var(--accent)] transition-colors block">
-                Sources &amp; provenance
-              </a>
-            </li>
-          </ul>
-        </aside>
       </div>
+      </ActiveSectionProvider>
     </div>
   );
 }
