@@ -24,7 +24,6 @@ import {
 } from "@/lib/model-sections";
 import {
   Sparkles,
-  FileCode2,
   ChevronDown,
 } from "lucide-react";
 
@@ -277,58 +276,7 @@ export default function ModelDocsLayout({
           )}
 
           {/* ══════════════════════════════════════════════════════════ */}
-          {/* 2. MODEL LINEAGE & SPECIFICATION                           */}
-          {/* ══════════════════════════════════════════════════════════ */}
-          <LineageSpecSection model={model} />
-
-          {/* ══════════════════════════════════════════════════════════ */}
-          {/* 2.5 TECHNICAL CAPABILITIES MATRIX                           */}
-          {/* ══════════════════════════════════════════════════════════ */}
-          <div id="capabilities" className="section-anchor">
-            <CapabilitiesMatrix capabilities={model.capabilities} modelName={model.name} />
-          </div>
-
-          {/* ══════════════════════════════════════════════════════════ */}
-          {/* 3. GETTING STARTED                                         */}
-          {/* ══════════════════════════════════════════════════════════ */}
-          {hasQuickstart && (
-            <QuickstartSection quickstart={quickstartData} modelName={model.name} developer={model.developer} />
-          )}
-
-          {/* ══════════════════════════════════════════════════════════ */}
-          {/* 4. CUSTOM DOCUMENTATION SECTIONS                           */}
-          {/* ══════════════════════════════════════════════════════════ */}
-          {hasCustomSections && <CustomSectionsView customSections={customSectionsData} />}
-
-          {/* ══════════════════════════════════════════════════════════ */}
-          {/* 7. COMPARABLE MODELS                                       */}
-          {/* ══════════════════════════════════════════════════════════ */}
-          {relatedModels.length > 0 && (
-            <ComparableModelsSection currentModel={model} comparableModels={relatedModels} />
-          )}
-
-          {/* ══════════════════════════════════════════════════════════ */}
-          {/* 5. BENCHMARKS                                              */}
-          {/* ══════════════════════════════════════════════════════════ */}
-          <BenchmarksSection
-            benchmarks={model.benchmarks}
-            visibleCols={model.metadata?.visible_benchmark_cols}
-            benchmarkColumns={model.metadata?.benchmark_columns}
-            developer={model.developer}
-          />
-
-          {/* ══════════════════════════════════════════════════════════ */}
-          {/* 6. PRICING                                                 */}
-          {/* ══════════════════════════════════════════════════════════ */}
-          <PricingSection
-            pricing={model.pricing}
-            pricingLastVerified={model.pricingLastVerified}
-            costTiers={model.costTiers}
-            modelType={model.type}
-          />
-
-          {/* ══════════════════════════════════════════════════════════ */}
-          {/* 9. EDITORIAL ANALYSIS                                      */}
+          {/* EDITORIAL ANALYSIS — promoted to Understand tier           */}
           {/* ══════════════════════════════════════════════════════════ */}
           {editorialNote && (
             <section id="editorial-analysis" className="section-anchor space-y-4 pt-6 border-t border-[var(--muted)]/10">
@@ -341,50 +289,155 @@ export default function ModelDocsLayout({
               </h2>
               <div className="rounded-[var(--radius-card)] bg-[var(--card-bg)] shadow-[var(--shadow-card)] p-6 border border-[var(--accent)]/30 space-y-3 relative overflow-hidden">
                 <div className="absolute top-0 left-0 w-1.5 h-full bg-[var(--accent)]" />
-                <div className="text-sm text-[var(--text)] leading-relaxed prose prose-invert max-w-none font-normal">
+                <div className="text-sm text-[var(--text)] leading-relaxed prose max-w-none font-normal">
                   <MarkdownRenderer content={editorialNote} />
                 </div>
               </div>
             </section>
           )}
 
-          {/* Candidate Markdown Readme (if attached) */}
-          {markdownContent && (
-            <section id="readme-docs" className="section-anchor space-y-4 pt-6 border-t border-[var(--muted)]/10">
-              <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[var(--accent)] mb-1">
-                <FileCode2 size={14} />
-                <span>Supplementary Documentation</span>
-              </div>
-              <h2 className="text-2xl sm:text-3xl font-extrabold text-[var(--text)] tracking-tight">
-                Technical Readme
-              </h2>
-              <div className="p-6 rounded-[var(--radius-card)] bg-[var(--card-bg)] shadow-[var(--shadow-card)] border border-[var(--muted)]/10">
-                <MarkdownRenderer content={markdownContent} />
-              </div>
-            </section>
+          {/* ────────────────────────────────────────────────────────
+              TIER 2 · EVALUATE — practitioner material in reading order
+              ──────────────────────────────────────────────────────── */}
+
+          {/* ══════════════════════════════════════════════════════════ */}
+          {/* MODEL LINEAGE & SPECIFICATION                              */}
+          {/* ══════════════════════════════════════════════════════════ */}
+          <LineageSpecSection model={model} />
+
+          {/* ══════════════════════════════════════════════════════════ */}
+          {/* TECHNICAL CAPABILITIES MATRIX                              */}
+          {/* ══════════════════════════════════════════════════════════ */}
+          <div id="capabilities" className="section-anchor">
+            <CapabilitiesMatrix capabilities={model.capabilities} modelName={model.name} />
+          </div>
+
+          {/* ══════════════════════════════════════════════════════════ */}
+          {/* COMPARABLE MODELS                                          */}
+          {/* ══════════════════════════════════════════════════════════ */}
+          {relatedModels.length > 0 && (
+            <ComparableModelsSection currentModel={model} comparableModels={relatedModels} />
           )}
 
           {/* ══════════════════════════════════════════════════════════ */}
-          {/* 9.5 VERIFIED EVIDENCE & PROVENANCE DRAWER                  */}
+          {/* BENCHMARKS                                                 */}
           {/* ══════════════════════════════════════════════════════════ */}
-          <div id="provenance" className="section-anchor">
-            <ProvenanceEvidenceDrawer evidence={evidence} modelName={model.name} />
-          </div>
+          <BenchmarksSection
+            benchmarks={model.benchmarks}
+            visibleCols={model.metadata?.visible_benchmark_cols}
+            benchmarkColumns={model.metadata?.benchmark_columns}
+            developer={model.developer}
+          />
+
+          {/* ══════════════════════════════════════════════════════════ */}
+          {/* PRICING                                                    */}
+          {/* ══════════════════════════════════════════════════════════ */}
+          <PricingSection
+            pricing={model.pricing}
+            pricingLastVerified={model.pricingLastVerified}
+            costTiers={model.costTiers}
+            modelType={model.type}
+          />
+
+          {/* ══════════════════════════════════════════════════════════ */}
+          {/* GETTING STARTED — closes Evaluate (conversion step)        */}
+          {/* ══════════════════════════════════════════════════════════ */}
+          {hasQuickstart && (
+            <QuickstartSection quickstart={quickstartData} modelName={model.name} developer={model.developer} />
+          )}
+
+          {/* ────────────────────────────────────────────────────────
+              TIER 3 · REFERENCE — deep material behind native
+              <details> disclosures; content stays SSR'd and crawlable,
+              deep links auto-open via ActiveSectionProvider.
+              ──────────────────────────────────────────────────────── */}
+
+          {/* Integration guides (custom documentation sections) */}
+          {hasCustomSections && (
+            <details className="group rounded-[var(--radius-card)] bg-[var(--card-bg)] shadow-[var(--shadow-card)] border border-[var(--muted)]/10 overflow-hidden">
+              <summary className="flex items-center justify-between gap-3 p-4 cursor-pointer list-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[var(--accent)]">
+                <span className="text-sm font-bold text-[var(--text)]">
+                  Integration guides
+                  <span className="ml-2 text-xs font-medium text-[var(--muted)]">
+                    · {customSectionsData!.length} {customSectionsData!.length === 1 ? "guide" : "guides"}
+                  </span>
+                </span>
+                <ChevronDown size={16} className="shrink-0 text-[var(--muted)] group-open:rotate-180 transition-transform motion-reduce:transition-none" />
+              </summary>
+              <div className="px-4 pb-4 [&>section]:pt-0 [&>section]:border-t-0">
+                <CustomSectionsView customSections={customSectionsData} />
+              </div>
+            </details>
+          )}
+
+          {/* Technical readme */}
+          {markdownContent && (
+            <details className="group rounded-[var(--radius-card)] bg-[var(--card-bg)] shadow-[var(--shadow-card)] border border-[var(--muted)]/10 overflow-hidden">
+              <summary className="flex items-center justify-between gap-3 p-4 cursor-pointer list-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[var(--accent)]">
+                <span className="text-sm font-bold text-[var(--text)]">
+                  Technical readme
+                  <span className="ml-2 text-xs font-medium text-[var(--muted)]">
+                    · {markdownContent.trim().split(/\s+/).length} words
+                  </span>
+                </span>
+                <ChevronDown size={16} className="shrink-0 text-[var(--muted)] group-open:rotate-180 transition-transform motion-reduce:transition-none" />
+              </summary>
+              <div className="px-4 pb-4 [&>section]:pt-0 [&>section]:border-t-0 [&>section>div:last-child]:p-4">
+                <section id="readme-docs" className="section-anchor space-y-4">
+                  <MarkdownRenderer content={markdownContent} />
+                </section>
+              </div>
+            </details>
+          )}
+
+          {/* Verified citations (evidence drawer) — collapsed only when there
+              is something inside; empty state renders bare */}
+          {evidence.length > 0 ? (
+            <details className="group rounded-[var(--radius-card)] bg-[var(--card-bg)] shadow-[var(--shadow-card)] border border-[var(--muted)]/10 overflow-hidden">
+              <summary className="flex items-center justify-between gap-3 p-4 cursor-pointer list-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[var(--accent)]">
+                <span className="text-sm font-bold text-[var(--text)]">
+                  Verified citations
+                  <span className="ml-2 text-xs font-medium text-[var(--muted)]">
+                    · {evidence.length} verified facts
+                  </span>
+                </span>
+                <ChevronDown size={16} className="shrink-0 text-[var(--muted)] group-open:rotate-180 transition-transform motion-reduce:transition-none" />
+              </summary>
+              <div id="provenance" className="section-anchor px-4 pb-4 [&>section]:pt-0 [&>section]:border-t-0">
+                <ProvenanceEvidenceDrawer evidence={evidence} modelName={model.name} />
+              </div>
+            </details>
+          ) : (
+            <div id="provenance" className="section-anchor">
+              <ProvenanceEvidenceDrawer evidence={evidence} modelName={model.name} />
+            </div>
+          )}
+
+          {/* Sources & links */}
+          <details className="group rounded-[var(--radius-card)] bg-[var(--card-bg)] shadow-[var(--shadow-card)] border border-[var(--muted)]/10 overflow-hidden">
+            <summary className="flex items-center justify-between gap-3 p-4 cursor-pointer list-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[var(--accent)]">
+              <span className="text-sm font-bold text-[var(--text)]">
+                Sources
+                <span className="ml-2 text-xs font-medium text-[var(--muted)]">
+                  · {(model.sources?.length ?? 0) + Object.keys(model.links ?? {}).length} references
+                </span>
+              </span>
+              <ChevronDown size={16} className="shrink-0 text-[var(--muted)] group-open:rotate-180 transition-transform motion-reduce:transition-none" />
+            </summary>
+            <div className="[&>section]:pt-0 [&>section]:border-t-0">
+              <SourcesSection
+                sources={model.sources}
+                links={model.links}
+                developer={model.developer}
+                modelName={model.name}
+              />
+            </div>
+          </details>
 
           {/* ══════════════════════════════════════════════════════════ */}
           {/* COMMUNITY SHARING                                          */}
           {/* ══════════════════════════════════════════════════════════ */}
           <ShareBar title={model.name} type="model" variant="card" className="my-6" />
-
-          {/* ══════════════════════════════════════════════════════════ */}
-          {/* 10. SOURCES & PROVENANCE                                   */}
-          {/* ══════════════════════════════════════════════════════════ */}
-          <SourcesSection
-            sources={model.sources}
-            links={model.links}
-            developer={model.developer}
-            modelName={model.name}
-          />
         </main>
 
         {/* RIGHT COLUMN: Quick-facts vitals rail (xl+) */}
