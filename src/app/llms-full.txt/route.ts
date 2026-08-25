@@ -28,14 +28,14 @@ export async function GET() {
 - **URL**: ${SITE_URL}/models/${m.slug}
 `;
 
-    if (m.benchmarks && m.benchmarks.length > 0) {
+    if (Array.isArray(m.benchmarks) && m.benchmarks.length > 0) {
       content += `- **Benchmarks**:\n`;
       for (const b of m.benchmarks) {
         content += `  - ${b.name}: ${b.score} (${b.metricType || "performance"})\n`;
       }
     }
 
-    if (m.pricing && m.pricing.length > 0) {
+    if (Array.isArray(m.pricing) && m.pricing.length > 0) {
       content += `- **Pricing**:\n`;
       for (const p of m.pricing) {
         content += `  - ${p.tier}: ${p.currency} ${p.amount} / ${p.unit}\n`;

@@ -164,8 +164,10 @@ export default async function ModelDetailPage({
     availability: "https://schema.org/InStock",
     itemCondition: "https://schema.org/NewCondition",
   };
-  // Include offers: use real pricing data if available, otherwise fallback to 0
-  if (model.pricing && model.pricing.length > 0) {
+  // Include offers: use real pricing data if available, otherwise fallback to 0.
+  // pricing is jsonb in the DB and historically holds several shapes (array,
+  // object, string, null) — only a real array may reach .map.
+  if (Array.isArray(model.pricing) && model.pricing.length > 0) {
     productEntity.offers = model.pricing.map((p) => ({
       "@type": "Offer",
       price: String(p.amount),
