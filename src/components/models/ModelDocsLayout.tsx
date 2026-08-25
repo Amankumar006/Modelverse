@@ -1,9 +1,5 @@
-"use client";
-
-import React, { useState } from "react";
 import Link from "next/link";
 import { type ModelEntry, type ModelIndex, type ModelEvidence } from "@/lib/models";
-import { formatParameters } from "@/lib/model-format";
 import Navbar from "@/components/layout/Navbar";
 import MarkdownRenderer from "@/components/ui/MarkdownRenderer";
 import QuickstartSection from "./QuickstartSection";
@@ -15,13 +11,10 @@ import BenchmarksSection from "./BenchmarksSection";
 import PricingSection from "./PricingSection";
 import ComparableModelsSection from "./ComparableModelsSection";
 import SourcesSection from "./SourcesSection";
+import ModelHero from "./ModelHero";
 import ShareBar from "@/components/ui/ShareBar";
 import {
-  Search,
   ChevronDown,
-  Copy,
-  Check,
-  ShieldCheck,
   Sparkles,
   FileCode2,
 } from "lucide-react";
@@ -41,17 +34,6 @@ export default function ModelDocsLayout({
   relatedModels = [],
   evidence = [],
 }: ModelDocsLayoutProps) {
-  const [copiedSlug, setCopiedSlug] = useState(false);
-  const [searchQuery, setSearchQuery] = useState("");
-
-  const handleCopySlug = () => {
-    if (typeof window !== "undefined") {
-      navigator.clipboard.writeText(model.slug);
-      setCopiedSlug(true);
-      setTimeout(() => setCopiedSlug(false), 2000);
-    }
-  };
-
   // Quickstart and custom sections detection
   const quickstartData = model.quickstart || model.metadata?.quickstart;
   const customSectionsData = model.customSections || model.metadata?.custom_sections || model.metadata?.customSections;
@@ -69,21 +51,6 @@ export default function ModelDocsLayout({
   // Left Navigation Menu
   const renderLeftNav = () => (
     <>
-      {/* Search Box */}
-      <div className="relative">
-        <Search size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-[var(--muted)]" />
-        <input
-          type="text"
-          placeholder="Search docs..."
-          value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)}
-          className="w-full rounded-[var(--radius-control)] bg-[var(--bg)] border border-[var(--muted)]/10 pl-8 pr-8 py-1.5 text-xs text-[var(--text)] placeholder:text-[var(--muted)] focus:outline-none focus:border-[var(--accent)]"
-        />
-        <span className="absolute right-2.5 top-1/2 -translate-y-1/2 text-[10px] font-mono text-[var(--muted)]">
-          ⌘K
-        </span>
-      </div>
-
       {/* Menu Sections */}
       <div className="space-y-1 text-xs">
         <p className="px-2 py-1 font-bold text-[var(--text)] text-xs uppercase tracking-wider">Models Catalog</p>
@@ -165,105 +132,9 @@ export default function ModelDocsLayout({
           </details>
 
           {/* ══════════════════════════════════════════════════════════ */}
-          {/* 1. MODEL HEADER / IDENTITY                                  */}
+          {/* 1. MODEL HEADER / IDENTITY (server-rendered hero)           */}
           {/* ══════════════════════════════════════════════════════════ */}
-          <section id="identity" className="section-anchor space-y-4">
-            {/* Breadcrumb Path */}
-            <nav aria-label="Breadcrumb" className="text-xs text-[var(--muted)] font-medium flex items-center gap-1.5 flex-wrap">
-              <Link href="/models" className="hover:text-[var(--text)]">Models</Link>
-              <span>/</span>
-              <Link href={`/models/developer/${encodeURIComponent(model.developer)}`} className="hover:text-[var(--text)]">
-                {model.developer}
-              </Link>
-              {model.family && (
-                <>
-                  <span>/</span>
-                  <Link href={`/models/family/${encodeURIComponent(model.family)}`} className="hover:text-[var(--text)]">
-                    {model.family}
-                  </Link>
-                </>
-              )}
-              <span>/</span>
-              <span className="text-[var(--text)] font-semibold">{model.name}</span>
-            </nav>
-
-            {/* Title & Top Action Bar */}
-            <div className="flex flex-wrap items-start justify-between gap-4">
-              <div className="space-y-2">
-                <div className="flex items-center gap-3 flex-wrap">
-                  <h1 className="font-extrabold text-3xl sm:text-4xl text-[var(--text)] tracking-tight">
-                    {model.name}
-                  </h1>
-                  {model.verified ? (
-                    <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-[var(--radius-pill)] bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 text-xs font-semibold">
-                      <ShieldCheck size={13} />
-                      Verified Model
-                    </span>
-                  ) : (
-                    <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-[var(--radius-pill)] bg-amber-500/10 text-amber-400 border border-amber-500/20 text-xs font-semibold">
-                      Community Record
-                    </span>
-                  )}
-                  <span className="capitalize px-2 py-0.5 rounded-[var(--radius-pill)] bg-[var(--accent-soft)] text-[var(--accent)] text-xs font-semibold">
-                    {model.status || "Active"}
-                  </span>
-                </div>
-
-                {/* API Identifier Copy Badge */}
-                <div className="flex items-center gap-2 flex-wrap">
-                  <span className="text-xs text-[var(--muted)] font-medium">API Model ID:</span>
-                  <div className="inline-flex items-center gap-1.5 bg-[var(--card-bg)] border border-[var(--muted)]/10 px-2.5 py-1 rounded-[var(--radius-control)] shadow-sm">
-                    <code className="text-xs font-mono font-bold text-[var(--accent)]">{model.slug}</code>
-                    <button
-                      type="button"
-                      onClick={handleCopySlug}
-                      className="text-[var(--muted)] hover:text-[var(--text)] p-0.5 transition-colors cursor-pointer"
-                      title="Copy API identifier"
-                    >
-                      {copiedSlug ? <Check size={12} className="text-emerald-400" /> : <Copy size={12} />}
-                    </button>
-                  </div>
-                </div>
-              </div>
-
-              {/* Action Buttons */}
-              <div className="flex items-center gap-2">
-                <ShareBar title={model.name} type="model" variant="header" />
-              </div>
-            </div>
-
-            {/* Quick Stat Pill Ribbon */}
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 pt-2 text-xs">
-              <div className="p-3 rounded-[var(--radius-card)] bg-[var(--card-bg)] border border-[var(--muted)]/10 space-y-0.5">
-                <span className="text-[var(--muted)] font-medium text-[11px] block">Developer</span>
-                <span className="font-bold text-[var(--text)] truncate block">{model.developer}</span>
-              </div>
-              <div className="p-3 rounded-[var(--radius-card)] bg-[var(--card-bg)] border border-[var(--muted)]/10 space-y-0.5">
-                <span className="text-[var(--muted)] font-medium text-[11px] block">Parameters</span>
-                <span className="font-mono tabular-nums font-bold text-[var(--text)] truncate block">
-                  {formatParameters(model)}
-                </span>
-              </div>
-              <div className="p-3 rounded-[var(--radius-card)] bg-[var(--card-bg)] border border-[var(--muted)]/10 space-y-0.5">
-                <span className="text-[var(--muted)] font-medium text-[11px] block">Context Window</span>
-                <span className="font-mono tabular-nums font-bold text-[var(--text)] truncate block">
-                  {typeof model.contextWindow === "object" && model.contextWindow !== null
-                    ? (model.contextWindow as { native?: number }).native
-                      ? `${(model.contextWindow as { native?: number }).native} tokens`
-                      : JSON.stringify(model.contextWindow)
-                    : model.contextWindow || "Undisclosed"}
-                </span>
-              </div>
-              <div className="p-3 rounded-[var(--radius-card)] bg-[var(--card-bg)] border border-[var(--muted)]/10 space-y-0.5">
-                <span className="text-[var(--muted)] font-medium text-[11px] block">License</span>
-                <span className="font-bold text-[var(--text)] truncate block">
-                  {model.license && typeof model.license === "object"
-                    ? (model.license as { name?: string }).name || "Custom"
-                    : model.license || "Not specified"}
-                </span>
-              </div>
-            </div>
-          </section>
+          <ModelHero model={model} />
 
           {/* ══════════════════════════════════════════════════════════ */}
           {/* 9. OVERVIEW & DESCRIPTIONS                                 */}

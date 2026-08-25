@@ -1,5 +1,3 @@
-"use client";
-
 import React from "react";
 import { normalizeCustomSections } from "@/lib/model-normalization";
 import MarkdownRenderer from "@/components/ui/MarkdownRenderer";

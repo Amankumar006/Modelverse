@@ -1,5 +1,3 @@
-"use client";
-
 import React from "react";
 import { normalizePricing, type NormalizedPricingItem } from "@/lib/model-normalization";
 import { DollarSign, Clock } from "lucide-react";

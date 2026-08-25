@@ -1,5 +1,3 @@
-"use client";
-
 import React from "react";
 import { extractDomainSources } from "@/lib/model-normalization";
 import { Link2, ExternalLink, FileText, Globe, Code, Shield, ArrowUpRight } from "lucide-react";
