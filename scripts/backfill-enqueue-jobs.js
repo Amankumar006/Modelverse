@@ -14,7 +14,9 @@
  * Idempotency: only rows that do not exist yet are inserted (upsert with
  * ignoreDuplicates on model_id,action_type). Jobs already done/failed/queued
  * are left exactly as they are — freshness-based re-queueing stays discovery's
- * job, not this script's.
+ * job, not this script's. (A backfilled quality_check job may therefore run
+ * once before facts land; that pass is cheap and LLM-free, and fact-stage
+ * completions chain fresh quality_check re-queues afterwards.)
  *
  * Usage:
  *   node scripts/backfill-enqueue-jobs.js [--dry-run] [--limit N]
@@ -36,14 +38,20 @@ if (!SUPABASE_URL || !SUPABASE_KEY) {
 
 const db = createClient(SUPABASE_URL, SUPABASE_KEY);
 
-// Same stage list discovery fans out, plus research_gaps so gap-closing is
-// part of every thin model's backlog (the worker orders featured-first).
+// Every pipeline stage except generate_editorial: the five fact stages plus
+// quality_check. Editorial is deliberately excluded — it generates prose via
+// paid LLM calls, and quality_check already creates/revives generate_editorial
+// jobs when a card clears its fact-completeness gate, so editorial fires only
+// for cards worth publishing. Fact workers chain a quality_check re-queue on
+// success (scripts/lib/job-lifecycle.js queueQualityCheck), so each model's
+// gate re-scores as its facts land.
 const ACTION_TYPES = [
   "scrape_source",
   "lookup_specs",
   "lookup_pricing",
   "lookup_benchmarks",
   "research_gaps",
+  "quality_check",
 ];
 
 function parseArgs() {

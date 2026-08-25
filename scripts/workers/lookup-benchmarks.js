@@ -24,6 +24,7 @@ const { extractBenchmarksFromMarkdownTable } = require("../lib/extract-benchmark
 const { verifyBenchmarkSubstantiation } = require("../lib/verify-citation-content");
 const { sanitizeBenchmarksForWrite } = require("../lib/verified-write");
 const { stageChanges } = require("../lib/staged-write");
+const { queueQualityCheck } = require("../lib/job-lifecycle");
 
 const SUPABASE_URL = process.env.SUPABASE_URL || process.env.NEXT_PUBLIC_SUPABASE_URL;
 const SUPABASE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY;
@@ -281,6 +282,9 @@ async function runBenchmarkWorker() {
           updated_at: new Date().toISOString(),
         })
         .eq("id", job.id);
+
+      // Fact stage completed — keep this model's quality gate fresh.
+      await queueQualityCheck(db, model.id);
 
       doneCount++;
       console.log(`  ✅ Benchmark lookup done for ${model.name}: ${substantiatedBenchmarks.length} substantiated / ${extracted.length} extracted.`);

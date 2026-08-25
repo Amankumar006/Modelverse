@@ -19,7 +19,7 @@ const { createClient } = require("@supabase/supabase-js");
 const { crawlDeepOfficialSource } = require("../lib/crawl-deep-sources");
 const { fetchReadme, extractOfficialUrls } = require("../lib/extract-official-urls");
 const { fetchPageText } = require("../lib/verify-citation-content");
-const { markJobFailure } = require("../lib/job-lifecycle");
+const { markJobFailure, queueQualityCheck } = require("../lib/job-lifecycle");
 
 const SUPABASE_URL = process.env.SUPABASE_URL || process.env.NEXT_PUBLIC_SUPABASE_URL;
 const SUPABASE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY;
@@ -219,6 +219,9 @@ async function runScrapeWorker() {
           updated_at: new Date().toISOString(),
         })
         .eq("id", job.id);
+
+      // Fact stage completed — keep this model's quality gate fresh.
+      await queueQualityCheck(db, model.id);
 
       doneCount++;
       console.log(`  ✅ Successfully saved snapshot for ${model.name} (${byteCounts} bytes).`);

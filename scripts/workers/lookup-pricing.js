@@ -19,7 +19,7 @@ const fs = require("fs");
 const path = require("path");
 const https = require("https");
 const { createClient } = require("@supabase/supabase-js");
-const { markJobFailure } = require("../lib/job-lifecycle");
+const { markJobFailure, queueQualityCheck } = require("../lib/job-lifecycle");
 const { stageChanges } = require("../lib/staged-write");
 
 const SUPABASE_URL = process.env.SUPABASE_URL || process.env.NEXT_PUBLIC_SUPABASE_URL;
@@ -255,6 +255,9 @@ async function runPricingWorker() {
           updated_at: new Date().toISOString(),
         })
         .eq("id", job.id);
+
+      // Fact stage completed — keep this model's quality gate fresh.
+      await queueQualityCheck(db, model.id);
 
       doneCount++;
     } catch (err) {

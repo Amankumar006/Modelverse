@@ -33,4 +33,54 @@ async function markJobFailure(db, jobId, message, currentAttempt) {
   return capped;
 }
 
-module.exports = { MAX_ATTEMPTS, markJobFailure };
+/**
+ * Stage chaining: after a fact-stage job completes successfully, make sure the
+ * model's quality_check job re-runs so the deterministic gate re-scores the
+ * card against its freshest state (raising needs_review when an unscored card
+ * crosses into index eligibility — quality_check never promotes directly,
+ * curator approval does). Without this, a long-tail model whose one QC pass
+ * ran before its facts landed would stay scored on stale data forever, since
+ * freshness re-queueing is discovery-driven and discovery only sweeps the
+ * top-100 thin models.
+ *
+ * Re-queues an existing done/blocked/skipped row, inserts one when absent, and
+ * leaves queued/running/needs_review rows untouched so in-flight or
+ * attempt-capped jobs are never clobbered.
+ *
+ * Best-effort by design: chaining is bookkeeping, not the job's payload — a
+ * failure here must never flip an already-completed job to failed.
+ *
+ * @param {import("@supabase/supabase-js").SupabaseClient} db - service-role client
+ * @param {string} modelId - models.id whose quality gate should refresh
+ * @returns {boolean} true when the quality_check job is queued or already live
+ */
+async function queueQualityCheck(db, modelId) {
+  const now = new Date().toISOString();
+  try {
+    const { data: revived, error: reviveErr } = await db
+      .from("enrichment_jobs")
+      .update({ status: "queued", updated_at: now })
+      .eq("model_id", modelId)
+      .eq("action_type", "quality_check")
+      .in("status", ["done", "skipped", "blocked"])
+      .select("id");
+    if (!reviveErr && revived && revived.length > 0) return true;
+
+    const { error: upsertErr } = await db
+      .from("enrichment_jobs")
+      .upsert(
+        [{ model_id: modelId, action_type: "quality_check", status: "queued" }],
+        { onConflict: "model_id,action_type", ignoreDuplicates: true },
+      );
+    if (upsertErr) {
+      console.warn(`⚠️ [job-lifecycle] could not chain quality_check for ${modelId}:`, upsertErr.message);
+      return false;
+    }
+    return true;
+  } catch (err) {
+    console.warn(`⚠️ [job-lifecycle] could not chain quality_check for ${modelId}:`, err.message);
+    return false;
+  }
+}
+
+module.exports = { MAX_ATTEMPTS, markJobFailure, queueQualityCheck };

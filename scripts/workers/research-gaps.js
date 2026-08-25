@@ -29,7 +29,7 @@ require("dotenv").config({ path: ".env.local", quiet: true });
 require("dotenv").config({ quiet: true });
 
 const { createClient } = require("@supabase/supabase-js");
-const { markJobFailure } = require("../lib/job-lifecycle");
+const { markJobFailure, queueQualityCheck } = require("../lib/job-lifecycle");
 const { stageChanges } = require("../lib/staged-write");
 const { computeMissingFields } = require("../quality/score-content");
 const { sanitizeResearchResults } = require("../../data/schemas/research-gap-result.schema");
@@ -340,6 +340,10 @@ async function runResearchGapsWorker() {
           result_summary: { reason: "no_fact_gaps", proseGaps: gaps.proseGaps },
           updated_at: new Date().toISOString(),
         }).eq("id", job.id);
+
+        // Fact stage completed — keep this model's quality gate fresh.
+        await queueQualityCheck(db, model.id);
+
         doneCount++;
         console.log(`  ✅ ${model.name}: no fact gaps — nothing to research.`);
         continue;
@@ -419,6 +423,10 @@ async function runResearchGapsWorker() {
           result_summary: { reason: "no_verifiable_values", dropped },
           updated_at: new Date().toISOString(),
         }).eq("id", job.id);
+
+        // Fact stage completed — keep this model's quality gate fresh.
+        await queueQualityCheck(db, model.id);
+
         doneCount++;
         console.log(`  ⚠️ ${model.name}: research returned nothing verifiable (dropped: ${Object.keys(dropped).join(", ") || "n/a"}).`);
         continue;
@@ -468,6 +476,9 @@ async function runResearchGapsWorker() {
         },
         updated_at: new Date().toISOString(),
       }).eq("id", job.id);
+
+      // Fact stage completed — keep this model's quality gate fresh.
+      await queueQualityCheck(db, model.id);
 
       doneCount++;
       console.log(`  🎉 ${model.name}: staged ${fields.length} field(s) [${fields.join(", ")}] (+${newBenchmarks.length} benchmarks)`);
