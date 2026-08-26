@@ -10,6 +10,7 @@ const { generateLongformArticle, generateDeepDiveArticle } = require("./news/gen
 const { isUnderDailyDeepDiveCap } = require("./news/deep-dive-gate");
 
 const NEWS_DIR = path.join(process.cwd(), "data", "news");
+const NEWS_SOURCES_DIR = path.join(process.cwd(), "data", "news-sources");
 const INGESTION_DIR = path.join(process.cwd(), "data", "ingestion");
 const QUARANTINE_DIR = path.join(process.cwd(), "data", "quarantine", "news");
 
@@ -886,6 +887,23 @@ async function extractFullArticleBody(url, fallbackDesc, lab) {
     newsJson.quality_score = gate.score;
     newsJson.quality_reasons = gate.reasons;
     newsJson.quality_checked_at = new Date().toISOString();
+
+    // Archive the exact source texts this scoring run verified against, so
+    // future re-scoring passes (scripts/rescore-news.js) can re-run the
+    // originality check instead of degrading to no-context semantics. Kept in
+    // a dedicated directory — data/news/*.json is an article-shaped legacy
+    // format other scripts read. Per-source cap bounds repo growth.
+    try {
+      if (!fs.existsSync(NEWS_SOURCES_DIR)) fs.mkdirSync(NEWS_SOURCES_DIR, { recursive: true });
+      const archived = {
+        slug: newsSlug,
+        archivedAt: new Date().toISOString(),
+        sourceTexts: sourceTextsForScoring.filter((t) => typeof t === "string" && t.trim()).map((t) => t.slice(0, 50000)),
+      };
+      fs.writeFileSync(path.join(NEWS_SOURCES_DIR, `${newsSlug}.json`), `${JSON.stringify(archived, null, 2)}\n`, "utf-8");
+    } catch (archiveErr) {
+      console.warn(`  ⚠️ Could not archive source texts for ${newsSlug}: ${archiveErr.message}`);
+    }
 
     // Always record the fingerprint, including unlisted and quarantined items.
     const fingerprint = appendFingerprint(newsJson);
