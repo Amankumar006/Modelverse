@@ -115,7 +115,7 @@ export default function BenchmarksSection({ benchmarks = [] }: BenchmarksSection
 
   if (!benchmarks || benchmarks.length === 0) {
     return (
-      <section id="benchmarks" className="space-y-4 pt-6 border-t border-[var(--muted)]/10">
+      <section id="benchmarks" className="section-anchor space-y-4 pt-6 border-t border-[var(--muted)]/10">
         <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[var(--accent)] mb-1">
           <Award size={14} />
           <span>Evaluation Suite</span>
@@ -134,7 +134,7 @@ export default function BenchmarksSection({ benchmarks = [] }: BenchmarksSection
   }
 
   return (
-    <section id="benchmarks" className="space-y-6 pt-6 border-t border-[var(--muted)]/10">
+    <section id="benchmarks" className="section-anchor space-y-6 pt-6 border-t border-[var(--muted)]/10">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
         <div>
           <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[var(--accent)] mb-1">

@@ -26,7 +26,7 @@ export default function QuickstartSection({ quickstart, modelName = "model" }: Q
   const activeExample = codeExamples.find((ex) => ex.language === selectedLang) || codeExamples[0];
 
   return (
-    <section id="getting-started" className="space-y-6 pt-6 border-t border-[var(--muted)]/10">
+    <section id="getting-started" className="section-anchor space-y-6 pt-6 border-t border-[var(--muted)]/10">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
         <div>
           <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[var(--accent)] mb-1">

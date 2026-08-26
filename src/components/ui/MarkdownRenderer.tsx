@@ -1,3 +1,8 @@
+"use client";
+
+// react-markdown v10 uses hooks internally and ships no "use client" banner,
+// so this wrapper must declare the boundary itself to stay importable from
+// both server and client components.
 import React from "react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";

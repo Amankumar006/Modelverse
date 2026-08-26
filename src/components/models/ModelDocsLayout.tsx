@@ -2,7 +2,8 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
-import { type ModelEntry, type ModelIndex, type ModelEvidence, formatParameters } from "@/lib/models";
+import { type ModelEntry, type ModelIndex, type ModelEvidence } from "@/lib/models";
+import { formatParameters } from "@/lib/model-format";
 import Navbar from "@/components/layout/Navbar";
 import MarkdownRenderer from "@/components/ui/MarkdownRenderer";
 import QuickstartSection from "./QuickstartSection";
@@ -28,7 +29,6 @@ import {
 interface ModelDocsLayoutProps {
   model: ModelEntry;
   markdownContent: string | null;
-  allModels?: (ModelIndex | ModelEntry)[];
   familyMembers: (ModelIndex | ModelEntry)[];
   relatedModels: (ModelIndex | ModelEntry)[];
   evidence?: ModelEvidence[];
@@ -167,7 +167,7 @@ export default function ModelDocsLayout({
           {/* ══════════════════════════════════════════════════════════ */}
           {/* 1. MODEL HEADER / IDENTITY                                  */}
           {/* ══════════════════════════════════════════════════════════ */}
-          <section id="identity" className="space-y-4">
+          <section id="identity" className="section-anchor space-y-4">
             {/* Breadcrumb Path */}
             <nav aria-label="Breadcrumb" className="text-xs text-[var(--muted)] font-medium flex items-center gap-1.5 flex-wrap">
               <Link href="/models" className="hover:text-[var(--text)]">Models</Link>
@@ -268,7 +268,7 @@ export default function ModelDocsLayout({
           {/* ══════════════════════════════════════════════════════════ */}
           {/* 9. OVERVIEW & DESCRIPTIONS                                 */}
           {/* ══════════════════════════════════════════════════════════ */}
-          <section id="overview" className="space-y-4 pt-4 border-t border-[var(--muted)]/10">
+          <section id="overview" className="section-anchor space-y-4 pt-4 border-t border-[var(--muted)]/10">
             {/* Primary Description */}
             <div className="text-base sm:text-lg text-[var(--text)] leading-relaxed font-normal max-w-3xl">
               <MarkdownRenderer
@@ -306,7 +306,7 @@ export default function ModelDocsLayout({
           {/* 8. KEY FEATURES                                            */}
           {/* ══════════════════════════════════════════════════════════ */}
           {hasKeyFeatures && (
-            <section id="key-features" className="space-y-4 pt-6 border-t border-[var(--muted)]/10">
+            <section id="key-features" className="section-anchor space-y-4 pt-6 border-t border-[var(--muted)]/10">
               <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[var(--accent)] mb-1">
                 <Sparkles size={14} />
                 <span>Capabilities &amp; Highlights</span>
@@ -341,7 +341,7 @@ export default function ModelDocsLayout({
           {/* ══════════════════════════════════════════════════════════ */}
           {/* 2.5 TECHNICAL CAPABILITIES MATRIX                           */}
           {/* ══════════════════════════════════════════════════════════ */}
-          <div id="capabilities">
+          <div id="capabilities" className="section-anchor">
             <CapabilitiesMatrix capabilities={model.capabilities} modelName={model.name} />
           </div>
 
@@ -388,7 +388,7 @@ export default function ModelDocsLayout({
           {/* 9. EDITORIAL ANALYSIS                                      */}
           {/* ══════════════════════════════════════════════════════════ */}
           {editorialNote && (
-            <section id="editorial-analysis" className="space-y-4 pt-6 border-t border-[var(--muted)]/10">
+            <section id="editorial-analysis" className="section-anchor space-y-4 pt-6 border-t border-[var(--muted)]/10">
               <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[var(--accent)] mb-1">
                 <Sparkles size={14} className="text-[var(--accent)]" />
                 <span>Expert Editorial Assessment</span>
@@ -407,7 +407,7 @@ export default function ModelDocsLayout({
 
           {/* Candidate Markdown Readme (if attached) */}
           {markdownContent && (
-            <section id="readme-docs" className="space-y-4 pt-6 border-t border-[var(--muted)]/10">
+            <section id="readme-docs" className="section-anchor space-y-4 pt-6 border-t border-[var(--muted)]/10">
               <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[var(--accent)] mb-1">
                 <FileCode2 size={14} />
                 <span>Supplementary Documentation</span>
@@ -424,7 +424,7 @@ export default function ModelDocsLayout({
           {/* ══════════════════════════════════════════════════════════ */}
           {/* 9.5 VERIFIED EVIDENCE & PROVENANCE DRAWER                  */}
           {/* ══════════════════════════════════════════════════════════ */}
-          <div id="provenance">
+          <div id="provenance" className="section-anchor">
             <ProvenanceEvidenceDrawer evidence={evidence} modelName={model.name} />
           </div>
 

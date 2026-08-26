@@ -137,3 +137,10 @@ body {
   margin-bottom: 1.4em;
 }
 
+
+/* Smooth anchor scrolling only for users who haven't asked for reduced motion */
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
