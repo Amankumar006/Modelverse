@@ -18,18 +18,20 @@
  *   no snapshot, indexed    → SKIP entirely. The body hasn't changed since a
  *                             full-context scoring verified it; a re-score
  *                             without source text can only lose information,
- *                             and acting on it would mass-demotion every
+ *                             and acting on it would mass-demote every
  *                             pre-archive article. Never demote on missing
  *                             context.
  *   no snapshot, unlisted   → allowed to PROMOTE (or receive a regenerated
  *                             analysis section) only with positive evidence
- *                             that the birth-time scoring ran and passed
- *                             originality: stored quality_reasons non-empty
- *                             and containing no "too close to source". In
- *                             that case originality points are carried over
- *                             via scoreNewsArticle's assumeOriginalityPass
- *                             flag (explicit audit reason attached). Without
- *                             such evidence the article is skipped.
+ *                             that the birth-time scoring ran AND saw source
+ *                             text: stored quality_reasons non-empty,
+ *                             containing neither "too close to source" nor
+ *                             the "source text unavailable" marker some
+ *                             historical blind-at-birth runs left behind.
+ *                             In that case originality points are carried
+ *                             over via assumeOriginalityPass (explicit audit
+ *                             reason attached). Without such evidence the
+ *                             article is skipped.
  *
  * Regeneration: recent near-misses whose only failing signal is the missing
  * analysis section get a grounded "Why It Matters" section generated via
@@ -387,7 +389,7 @@ async function main() {
   }
 
   console.log(`\n✨ Rescore complete. Promoted: ${promotedCount} | Demoted: ${demotedCount} | Regenerated: ${regeneratedCount} | Stable: ${stableCount} | Skipped (no source context): ${skippedNoContextCount}\n`);
-  console.log(`ℹ️  Articles skipped for missing source context regain full re-scoring once ingestion archives their source texts (data/news/<slug>.json).`);
+  console.log(`ℹ️  Articles skipped for missing source context regain full re-scoring once ingestion archives their source texts (data/news-sources/<slug>.json).`);
 
   if (process.env.GITHUB_ENV) {
     fs.appendFileSync(process.env.GITHUB_ENV, `RESCORE_PROMOTED=${promotedCount}\n`);
