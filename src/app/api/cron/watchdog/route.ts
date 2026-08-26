@@ -19,10 +19,13 @@ export const dynamic = "force-dynamic";
  *   2. model recheck lapse — newest models.quality_checked_at older than 26h
  *                            (the hourly quality-check worker refreshes it)
  *   3. Actions corroboration — last successful workflow run older than 26h
- *                            via the public GitHub API. API failures count as
- *                            "unknown", never as an alarm by themselves —
- *                            checks 1–2 measure actual pipeline output, this
- *                            one only corroborates.
+ *                            via the GitHub API (set GITHUB_TOKEN with
+ *                            actions:read — the repo is private, so the
+ *                            check degrades to "unknown" without one).
+ *                            API failures count as "unknown", never as an
+ *                            alarm by themselves — checks 1–2 measure
+ *                            actual pipeline output, this one only
+ *                            corroborates.
  *
  * Any `fail` posts to the shared Discord webhook. Always returns 200 after
  * evaluating (a stalled pipeline isn't fixed by Vercel retrying the cron);
@@ -98,11 +101,19 @@ async function checkModelRechecks(db: Db): Promise<WatchdogCheck> {
 }
 
 async function checkActionsRuns(): Promise<WatchdogCheck> {
+  // The repo is private, so this endpoint 404s for unauthenticated callers.
+  // A fine-grained token with actions:read makes the check functional;
+  // without one it stays a harmless "unknown" corroboration.
+  const githubToken = process.env.GITHUB_TOKEN;
   try {
     const res = await fetch(
       `https://api.github.com/repos/${GITHUB_REPO}/actions/runs?status=success&per_page=1`,
       {
-        headers: { Accept: "application/vnd.github+json", "User-Agent": "modelverse-watchdog" },
+        headers: {
+          Accept: "application/vnd.github+json",
+          "User-Agent": "modelverse-watchdog",
+          ...(githubToken ? { Authorization: `Bearer ${githubToken}` } : {}),
+        },
         signal: AbortSignal.timeout(10_000),
         // Corroboration only — never cache a stale "healthy" verdict.
         cache: "no-store",
