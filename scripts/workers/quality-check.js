@@ -10,9 +10,15 @@
  *    (quality_score / quality_reasons / quality_breakdown / quality_checked_at).
  * 3. Demotes on regression: a previously-indexed card that no longer clears
  *    the gate drops to its recomputed status immediately and raises needs_review.
- * 4. NEVER promotes: a thin card that crosses into index eligibility only gets
- *    needs_review raised — flipping quality_status to 'indexed' (which feeds
- *    the public indexed views) happens exclusively at curator approval.
+ * 4. Promotes automatically when AUTO_PROMOTE_MODELS=true: a thin card whose
+ *    recomputed scoreModelPage() clears the index gate flips quality_status to
+ *    'indexed', capped at PROMOTION_CAP promotions per day (default 25) so a
+ *    backlog can't flood the sitemap in one run. needs_review stays raised as
+ *    a post-hoc audit signal, and every promotion is recorded in the job's
+ *    result_summary.promoted for auditing. The `verified` flag and editorial
+ *    prose remain human-gated regardless of this setting. When the flag is
+ *    false (local default), crossing eligibility only raises needs_review and
+ *    flipping to 'indexed' stays at curator approval, as before.
  * 5. Updates job status to 'done' (or 'failed' via markJobFailure).
  */
 
@@ -42,6 +48,36 @@ function parseBatchSize() {
   const envSize = parseInt(process.env.BATCH_SIZE || "", 10);
   if (!isNaN(envSize) && envSize > 0) return envSize;
   return 50; // Pure compute + one read/write per model — cheap.
+}
+
+// Auto-promotion rails. Off by default; the scheduled workflow turns it on via
+// repository variables so flipping the policy never requires a code deploy.
+function promotionConfig() {
+  const capRaw = parseInt(process.env.PROMOTION_CAP || "", 10);
+  return {
+    enabled: process.env.AUTO_PROMOTE_MODELS === "true",
+    cap: !isNaN(capRaw) && capRaw > 0 ? capRaw : 25,
+  };
+}
+
+// Daily promotion budget: count today's already-promoted cards from the audit
+// trail (result_summary.promoted) so an hourly cron can't exceed the cap by
+// running many small batches across the day.
+async function countPromotionsToday(client) {
+  const startOfToday = new Date();
+  startOfToday.setUTCHours(0, 0, 0, 0);
+  const { count, error } = await client
+    .from("enrichment_jobs")
+    .select("id", { count: "exact", head: true })
+    .eq("action_type", "quality_check")
+    .contains("result_summary", { promoted: true })
+    .gte("updated_at", startOfToday.toISOString());
+  if (error) {
+    // Fail closed: an unreadable audit trail means we can't bound the cap.
+    console.warn(`⚠️ Could not count today's promotions (${error.message}); auto-promotion disabled for this run.`);
+    return null;
+  }
+  return count || 0;
 }
 
 // Same DB-row -> scorer mapping as scripts/recompute-quality.js: scoreModelPage
@@ -86,7 +122,15 @@ function modelForScore(row) {
 
 async function runQualityCheckWorker() {
   const batchSize = parseBatchSize();
-  console.log(`🚀 [Worker: quality_check] Starting batch processing (batch size: ${batchSize})...`);
+  const promotion = promotionConfig();
+  console.log(`🚀 [Worker: quality_check] Starting batch processing (batch size: ${batchSize}, auto-promote: ${promotion.enabled ? `on, cap ${promotion.cap}/day` : "off"})...`);
+
+  let promotionsRemaining = 0;
+  if (promotion.enabled) {
+    const promotedToday = await countPromotionsToday(db);
+    promotionsRemaining = promotedToday === null ? 0 : Math.max(0, promotion.cap - promotedToday);
+    console.log(`📈 Promotion budget today: ${promotedToday === null ? "unavailable" : `${promotedToday}/${promotion.cap} used, ${promotionsRemaining} remaining`}`);
+  }
 
   const { data: jobs, error } = await db
     .from("enrichment_jobs")
@@ -103,7 +147,7 @@ async function runQualityCheckWorker() {
 
   if (!jobs || jobs.length === 0) {
     console.log("✨ No queued jobs for quality_check.");
-    return { done: 0, failed: 0, demoted: 0, crossedEligibility: 0 };
+    return { done: 0, failed: 0, demoted: 0, crossedEligibility: 0, promoted: 0 };
   }
 
   console.log(`📥 Claimed ${jobs.length} jobs to process.`);
@@ -112,6 +156,7 @@ async function runQualityCheckWorker() {
   let failedCount = 0;
   let demotedCount = 0;
   let crossedCount = 0;
+  let promotedCount = 0;
 
   for (const job of jobs) {
     await db
@@ -149,6 +194,7 @@ async function runQualityCheckWorker() {
 
       let demoted = false;
       let crossedIntoEligibility = false;
+      let promoted = false;
 
       if (wasEligible && !nowEligible) {
         // Regression: pull the card out of indexed feeds immediately and put
@@ -158,12 +204,18 @@ async function runQualityCheckWorker() {
         updatePayload.quality_status = gate.status;
         updatePayload.needs_review = true;
       } else if (!wasEligible && nowEligible) {
-        // Crossing into eligibility is a PROMOTION signal, not a promotion:
-        // quality_status stays untouched until a curator approves. Raise the
-        // flag only when it isn't already pending review.
         crossedIntoEligibility = true;
         crossedCount++;
+        // needs_review stays raised either way — an auto-promotion is still a
+        // post-hoc audit item for the curator queue, just no longer a blocker.
         if (!model.needs_review) updatePayload.needs_review = true;
+
+        if (promotion.enabled && promotionsRemaining > 0) {
+          updatePayload.quality_status = "indexed";
+          promoted = true;
+          promotedCount++;
+          promotionsRemaining--;
+        }
 
         // The card now clears editorial's fact-completeness gate, so prose
         // generation becomes worthwhile. Revive any parked job first (the
@@ -212,6 +264,7 @@ async function runQualityCheckWorker() {
             prevStatus: model.quality_status ?? null,
             demoted,
             crossedIntoEligibility,
+            promoted,
             timestamp: new Date().toISOString(),
           },
           updated_at: new Date().toISOString(),
@@ -221,9 +274,13 @@ async function runQualityCheckWorker() {
       doneCount++;
       const transition = demoted
         ? `⬇️ DEMOTED (${model.quality_status} -> ${gate.status})`
-        : crossedIntoEligibility
-          ? "⬆️ eligible — awaiting curator approval"
-          : "steady";
+        : promoted
+          ? "⬆️ PROMOTED (auto) — flagged for curator audit"
+          : crossedIntoEligibility
+            ? promotion.enabled
+              ? "⬆️ eligible — daily cap reached, promoting on a future run"
+              : "⬆️ eligible — awaiting curator approval"
+            : "steady";
       console.log(`  ✅ ${model.name}: ${gate.score}/100 (${gate.status}) — ${transition}`);
     } catch (err) {
       console.error(`  ❌ Quality check failed for model ${job.model_id}:`, err.message);
@@ -233,8 +290,8 @@ async function runQualityCheckWorker() {
   }
 
   console.log(`\n=== WORKER (quality_check) BATCH COMPLETED ===`);
-  console.log(`Done: ${doneCount} | Failed: ${failedCount} | Demoted: ${demotedCount} | Newly eligible: ${crossedCount}`);
-  return { done: doneCount, failed: failedCount, demoted: demotedCount, crossedEligibility: crossedCount };
+  console.log(`Done: ${doneCount} | Failed: ${failedCount} | Demoted: ${demotedCount} | Newly eligible: ${crossedCount} | Auto-promoted: ${promotedCount}`);
+  return { done: doneCount, failed: failedCount, demoted: demotedCount, crossedEligibility: crossedCount, promoted: promotedCount };
 }
 
 if (require.main === module) {

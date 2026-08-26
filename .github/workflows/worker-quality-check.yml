@@ -25,6 +25,11 @@ jobs:
       SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
       SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
       BATCH_SIZE: ${{ github.event.inputs.batch_size || '50' }}
+      # Auto-promotion policy: eligible thin cards flip to 'indexed' when the
+      # deterministic gate passes, capped per day. Override via repo variables
+      # (Settings → Secrets and variables → Actions → Variables).
+      AUTO_PROMOTE_MODELS: ${{ vars.AUTO_PROMOTE_MODELS || 'true' }}
+      PROMOTION_CAP: ${{ vars.PROMOTION_CAP || '25' }}
 
     steps:
       - name: Checkout repository
