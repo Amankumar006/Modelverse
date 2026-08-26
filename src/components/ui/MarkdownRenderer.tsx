@@ -1,9 +1,6 @@
-"use client";
-
-// react-markdown v10 uses hooks internally and ships no "use client" banner,
-// so this wrapper must declare the boundary itself to stay importable from
-// both server and client components.
-import React from "react";
+// Deliberately NOT a client component: react-markdown v10's default export is
+// synchronous and hook-free, so this renders inside server components too.
+// The interactive leaf (CodeBlock) declares its own "use client" boundary.
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import CodeBlock from "./CodeBlock";
