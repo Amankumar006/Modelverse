@@ -98,6 +98,24 @@ jobs:
             echo "No new news articles to publish today."
           fi
 
+      - name: Re-score Unlisted News Backlog
+        if: always()
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL || secrets.NEXT_PUBLIC_SUPABASE_URL }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+          # Hourly cadence: per-run caps multiply by 24 across a day.
+          PROMOTE_CAP: '10'
+          REGEN_CAP: '20'
+        run: node scripts/rescore-news.js
+
+      - name: Ping Search Engines (IndexNow + sitemap pings)
+        if: always()
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL || secrets.NEXT_PUBLIC_SUPABASE_URL }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+        run: node scripts/ping-search-engines.js
+
       - name: Send Failure Alert Email
         if: failure()
         continue-on-error: true
