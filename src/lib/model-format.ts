@@ -54,3 +54,52 @@ export function getModalities(mod: any): string[] {
   }
   return [];
 }
+
+/** Compact token count for display: 128000 → "128K", 1500000 → "1.5M" */
+function formatTokenCount(n: number): string {
+  if (!Number.isFinite(n) || n <= 0) return "";
+  if (n >= 1_000_000) {
+    const m = n / 1_000_000;
+    return `${Number.isInteger(m) ? m : m.toFixed(1).replace(/\.0$/, "")}M`;
+  }
+  if (n >= 1_000) {
+    const k = n / 1_000;
+    return `${Number.isInteger(k) ? k : k.toFixed(1).replace(/\.0$/, "")}K`;
+  }
+  return n.toLocaleString("en-US");
+}
+
+/**
+ * Human-readable context window. Sources store several shapes — plain
+ * strings, bare numbers, and objects keyed by native/tokens/max — and the
+ * raw-JSON fallback this replaces rendered `{"tokens":128000}` straight into
+ * the stat tiles.
+ */
+export function formatContextWindow(
+  contextWindow?: string | number | Record<string, unknown> | null,
+): string {
+  if (contextWindow === null || contextWindow === undefined || contextWindow === "") {
+    return "Undisclosed";
+  }
+  if (typeof contextWindow === "number") {
+    const formatted = formatTokenCount(contextWindow);
+    return formatted ? `${formatted} tokens` : "Undisclosed";
+  }
+  if (typeof contextWindow === "object") {
+    // Known key conventions first, then any finite numeric value on the record.
+    const preferred = contextWindow as { native?: unknown; tokens?: unknown; max?: unknown };
+    const candidate =
+      [preferred.native, preferred.tokens, preferred.max].find(
+        (v) => typeof v === "number" && Number.isFinite(v),
+      ) ??
+      Object.values(contextWindow).find(
+        (v) => typeof v === "number" && Number.isFinite(v),
+      );
+    if (typeof candidate === "number") {
+      const formatted = formatTokenCount(candidate);
+      if (formatted) return `${formatted} tokens`;
+    }
+    return "Undisclosed";
+  }
+  return String(contextWindow);
+}
