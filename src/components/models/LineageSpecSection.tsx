@@ -1,7 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import { type ModelEntry } from "@/lib/models";
-import { formatParameters, getModalities } from "@/lib/model-format";
+import { formatParameters, getModalities, formatContextWindow } from "@/lib/model-format";
 import { GitFork, ArrowRight, ExternalLink, Cpu, Layers, ShieldCheck, Tag } from "lucide-react";
 
 interface LineageSpecSectionProps {
@@ -19,12 +19,7 @@ export default function LineageSpecSection({ model }: LineageSpecSectionProps) {
       : null;
 
   // Format context window
-  const contextWindowStr =
-    typeof model.contextWindow === "object" && model.contextWindow !== null
-      ? (model.contextWindow as { native?: number; max?: number }).native
-        ? `${(model.contextWindow as { native?: number }).native} tokens`
-        : JSON.stringify(model.contextWindow)
-      : model.contextWindow || "Undisclosed";
+  const contextWindowStr = formatContextWindow(model.contextWindow);
 
   // Format license
   const licenseStr =
