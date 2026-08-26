@@ -410,7 +410,18 @@ const OFFICIAL_PRIMARY_DOMAINS = new Set([
 
 const { scoreDeepDiveExtras, DEEP_DIVE_WORD_FLOOR, checkPedagogicalStructure } = require("./deep-dive-quality-checks");
 
-function scoreNewsArticle(article, sourceTexts) {
+/**
+ * @param {object} article
+ * @param {string[]} [sourceTexts]
+ * @param {{ assumeOriginalityPass?: boolean }} [opts]
+ *   assumeOriginalityPass: when NO source texts are available but a prior
+ *   scoring run already verified originality against them (caller must check
+ *   stored reasons for "too close to source" before setting this), carry the
+ *   originality points forward instead of zeroing them. Adds an explicit
+ *   audit reason so carried credit is never mistaken for a fresh check.
+ *   Similarity-based hard gates are skipped — unverifiable without text.
+ */
+function scoreNewsArticle(article, sourceTexts, opts = {}) {
   return safeResult(() => {
     const reasons = [];
     const body = text(article?.body);
@@ -424,7 +435,7 @@ function scoreNewsArticle(article, sourceTexts) {
       ? sourceTexts.filter((entry) => typeof entry === "string" && entry.trim())
       : [];
     const bodyShingles = shingleSet(body);
-    
+
     let maxSimilarity = 0;
     let closestSourceIdx = -1;
     sources.forEach((sourceText, idx) => {
@@ -437,8 +448,15 @@ function scoreNewsArticle(article, sourceTexts) {
 
     const maxAllowedSimilarity = isDeepDive ? 0.45 : (isLongform ? 0.50 : 0.55);
 
+    const assumeOriginalityPass = Boolean(opts.assumeOriginalityPass) && sources.length === 0;
+
     if (sources.length === 0) {
-      reasons.push("source text unavailable for originality check");
+      if (assumeOriginalityPass) {
+        score += 35;
+        reasons.push("originality carried over from prior verified scoring (source text unavailable)");
+      } else {
+        reasons.push("source text unavailable for originality check");
+      }
     } else if (body && maxSimilarity <= maxAllowedSimilarity) {
       score += 35;
     } else {
@@ -506,7 +524,9 @@ function scoreNewsArticle(article, sourceTexts) {
       if (wordCount < minWords) {
         isIndexed = false;
       }
-      if (maxSimilarity > maxAllowedSimilarity) {
+      // Skipped under assumeOriginalityPass — similarity is unverifiable
+      // without source text (and was verified at birth by the prior run).
+      if (!assumeOriginalityPass && maxSimilarity > maxAllowedSimilarity) {
         isIndexed = false;
       }
     }
