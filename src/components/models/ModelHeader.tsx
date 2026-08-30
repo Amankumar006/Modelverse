@@ -3,26 +3,73 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { ExternalLink, Calendar, ShieldCheck, ChevronRight, Copy, Check, Scale } from "lucide-react";
+import {
+  ExternalLink,
+  Calendar,
+  ShieldCheck,
+  ChevronRight,
+  Copy,
+  Check,
+  Scale,
+  Layers,
+  BookOpen,
+  FileText,
+  Terminal,
+  Cpu,
+  Globe,
+} from "lucide-react";
 import type { ModelRow } from "@/types/database";
 import { getProviderLogo } from "@/lib/logos";
+import { resolveModelLinks, type ResolvedModelLink } from "@/lib/model-links";
 
 interface ModelHeaderProps {
   model: ModelRow;
 }
 
-function isValidHttpUrl(string: string) {
-  try {
-    const url = new URL(string);
-    return url.protocol === "http:" || url.protocol === "https:";
-  } catch {
-    return false;
+function GithubIcon({ size = 13, className = "" }: { size?: number; className?: string }) {
+  return (
+    <svg
+      width={size}
+      height={size}
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className={className}
+    >
+      <path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4" />
+      <path d="M9 18c-4.51 2-5-2-7-2" />
+    </svg>
+  );
+}
+
+function getLinkIcon(type: ResolvedModelLink["type"]) {
+  switch (type) {
+    case "github":
+      return <GithubIcon size={13} />;
+    case "huggingface":
+      return <Layers size={13} className="text-amber-500" />;
+    case "docs":
+      return <BookOpen size={13} className="text-blue-500" />;
+    case "paper":
+      return <FileText size={13} className="text-purple-500" />;
+    case "ollama":
+      return <Terminal size={13} className="text-emerald-500" />;
+    case "openrouter":
+      return <Cpu size={13} className="text-rose-500" />;
+    case "website":
+      return <Globe size={13} className="text-sky-500" />;
+    default:
+      return <ExternalLink size={13} />;
   }
 }
 
 export default function ModelHeader({ model }: ModelHeaderProps) {
   const [copied, setCopied] = useState(false);
-  const links = (typeof model.links === "object" && model.links !== null ? model.links : {}) as Record<string, string>;
+  const resolvedLinks = resolveModelLinks(model);
+
   const dateStr = model.release_date
     ? new Date(model.release_date).toLocaleDateString("en-US", {
         month: "long",
@@ -123,63 +170,30 @@ export default function ModelHeader({ model }: ModelHeaderProps) {
           </p>
         )}
 
-        {/* Primary Action Buttons */}
+        {/* Primary Action & Source Links Bar */}
         <div className="pt-2 flex flex-wrap items-center gap-2.5 relative z-10">
-          {model.announcement_url && isValidHttpUrl(model.announcement_url) && (
-            <a
-              href={model.announcement_url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 px-4 py-2 rounded-[var(--radius-control)] bg-[var(--accent)] text-[var(--accent-contrast)] text-xs font-bold hover:opacity-90 transition-opacity btn-tactile shadow-sm"
-            >
-              <span>Announcement Blog</span>
-              <ExternalLink size={13} />
-            </a>
-          )}
-
           <Link
             href={`/compare?m1=${model.slug}`}
-            className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-[var(--radius-control)] bg-[var(--bg)] border border-[var(--muted)]/20 text-xs font-semibold text-[var(--text)] hover:border-[var(--accent)] hover:text-[var(--accent)] transition-all btn-tactile"
+            className="inline-flex items-center gap-1.5 px-4 py-2 rounded-[var(--radius-control)] bg-[var(--accent)] text-[var(--accent-contrast)] text-xs font-bold hover:opacity-90 transition-opacity btn-tactile shadow-sm"
           >
             <Scale size={13} />
             <span>Compare Model</span>
           </Link>
 
-          {links.huggingface && isValidHttpUrl(links.huggingface) && (
+          {resolvedLinks.map((link) => (
             <a
-              href={links.huggingface}
+              key={link.key}
+              href={link.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-[var(--radius-control)] bg-[var(--bg)] border border-[var(--muted)]/20 text-xs font-semibold text-[var(--text)] hover:border-[var(--accent)] transition-colors btn-tactile"
+              className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-[var(--radius-control)] bg-[var(--bg)] border border-[var(--muted)]/20 text-xs font-semibold text-[var(--text)] hover:border-[var(--accent)] hover:text-[var(--accent)] transition-all btn-tactile"
+              title={link.label}
             >
-              <span>Hugging Face</span>
-              <ExternalLink size={12} className="opacity-60" />
+              {getLinkIcon(link.type)}
+              <span>{link.label}</span>
+              <ExternalLink size={11} className="opacity-50" />
             </a>
-          )}
-
-          {links.ollama && isValidHttpUrl(links.ollama) && (
-            <a
-              href={links.ollama}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-[var(--radius-control)] bg-[var(--bg)] border border-[var(--muted)]/20 text-xs font-semibold text-[var(--text)] hover:border-[var(--accent)] transition-colors btn-tactile"
-            >
-              <span>Ollama</span>
-              <ExternalLink size={12} className="opacity-60" />
-            </a>
-          )}
-
-          {links.website && isValidHttpUrl(links.website) && !model.announcement_url && (
-            <a
-              href={links.website}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-[var(--radius-control)] bg-[var(--bg)] border border-[var(--muted)]/20 text-xs font-semibold text-[var(--text)] hover:border-[var(--accent)] transition-colors btn-tactile"
-            >
-              <span>Official Website</span>
-              <ExternalLink size={12} />
-            </a>
-          )}
+          ))}
         </div>
       </div>
     </header>
