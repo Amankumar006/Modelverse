@@ -67,17 +67,20 @@ html.dark, :root.dark {
   animation: pulseGlow 2.5s cubic-bezier(0.4, 0, 0.6, 1) infinite;
 }
 
-/* Micro-interaction card lift with GPU compositing */
+/* Micro-interaction card lift with GPU compositing and stacking elevation */
 .hover-lift {
+  position: relative;
   transform: translateZ(0);
   transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.22s ease, border-color 0.22s ease;
 }
 .hover-lift:hover {
   transform: translateY(-3px) translateZ(0);
   box-shadow: 0 14px 36px var(--shadow);
+  z-index: 20;
 }
 .hover-lift:active {
   transform: translateY(-1px) scale(0.99) translateZ(0);
+  z-index: 20;
 }
 
 /* Interactive button feedback */
