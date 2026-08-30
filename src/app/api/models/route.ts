@@ -3,10 +3,12 @@ import { z } from 'zod';
 import { getModels } from '@/lib/supabase/models';
 
 const QuerySchema = z.object({
-  developer: z.string().optional(),
-  institution: z.string().optional(),
-  family: z.string().optional(),
-  status: z.string().default('active'),
+  provider: z.string().optional(),
+  category: z.string().optional(),
+  is_active: z
+    .string()
+    .optional()
+    .transform((val) => (val === undefined ? true : val === 'true')),
   limit: z.coerce.number().int().min(1).max(100).default(20),
   offset: z.coerce.number().int().min(0).default(0),
   search: z.string().optional(),
@@ -24,7 +26,16 @@ export async function GET(request: NextRequest) {
       );
     }
 
-    const result = await getModels(parsed.data);
+    const { provider, category, is_active, limit, offset, search } = parsed.data;
+    const result = await getModels({
+      provider,
+      category,
+      isActive: is_active,
+      limit,
+      offset,
+      search,
+    });
+
     return NextResponse.json(result);
   } catch (err) {
     const message = err instanceof Error ? err.message : 'Internal Server Error';

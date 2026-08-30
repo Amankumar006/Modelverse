@@ -1,28 +1,26 @@
 import { createServerClient } from './server';
-import type { ModelRow, ModelInsert, ModelUpdate } from '@/types/database';
+import type { ArticleRow, ArticleInsert, ArticleUpdate } from '@/types/database';
 
-export interface GetModelsOptions {
-  provider?: string;
+export interface GetArticlesOptions {
   category?: string;
-  isActive?: boolean;
+  isPublished?: boolean;
   search?: string;
   limit?: number;
   offset?: number;
 }
 
-export interface GetModelsResult {
-  models: ModelRow[];
+export interface GetArticlesResult {
+  articles: ArticleRow[];
   total: number;
   limit: number;
   offset: number;
   warning?: string;
 }
 
-export async function getModels(options: GetModelsOptions = {}): Promise<GetModelsResult> {
+export async function getArticles(options: GetArticlesOptions = {}): Promise<GetArticlesResult> {
   const {
-    provider,
     category,
-    isActive = true,
+    isPublished = true,
     search,
     limit = 20,
     offset = 0,
@@ -31,17 +29,13 @@ export async function getModels(options: GetModelsOptions = {}): Promise<GetMode
   const supabase = createServerClient();
 
   let query = supabase
-    .from('models')
+    .from('articles')
     .select('*', { count: 'exact' })
     .range(offset, offset + limit - 1)
-    .order('created_at', { ascending: false });
+    .order('published_at', { ascending: false });
 
-  if (isActive !== undefined) {
-    query = query.eq('is_active', isActive);
-  }
-
-  if (provider) {
-    query = query.eq('provider', provider);
+  if (isPublished !== undefined) {
+    query = query.eq('is_published', isPublished);
   }
 
   if (category) {
@@ -49,14 +43,14 @@ export async function getModels(options: GetModelsOptions = {}): Promise<GetMode
   }
 
   if (search) {
-    query = query.ilike('name', `%${search}%`);
+    query = query.ilike('title', `%${search}%`);
   }
 
   const { data, error, count } = await query;
 
   if (error) {
     return {
-      models: [],
+      articles: [],
       total: 0,
       limit,
       offset,
@@ -65,17 +59,17 @@ export async function getModels(options: GetModelsOptions = {}): Promise<GetMode
   }
 
   return {
-    models: data ?? [],
+    articles: data ?? [],
     total: count ?? 0,
     limit,
     offset,
   };
 }
 
-export async function getModelBySlug(slug: string): Promise<ModelRow | null> {
+export async function getArticleBySlug(slug: string): Promise<ArticleRow | null> {
   const supabase = createServerClient();
   const { data, error } = await supabase
-    .from('models')
+    .from('articles')
     .select('*')
     .eq('slug', slug)
     .maybeSingle();
@@ -87,32 +81,32 @@ export async function getModelBySlug(slug: string): Promise<ModelRow | null> {
   return data;
 }
 
-export async function upsertModel(model: ModelInsert): Promise<ModelRow | null> {
+export async function upsertArticle(article: ArticleInsert): Promise<ArticleRow | null> {
   const supabase = createServerClient();
   const { data, error } = await supabase
-    .from('models')
-    .upsert(model, { onConflict: 'slug' })
+    .from('articles')
+    .upsert(article, { onConflict: 'slug' })
     .select()
     .single();
 
   if (error) {
-    throw new Error(`Failed to upsert model: ${error.message}`);
+    throw new Error(`Failed to upsert article: ${error.message}`);
   }
 
   return data;
 }
 
-export async function updateModel(slug: string, updates: ModelUpdate): Promise<ModelRow | null> {
+export async function updateArticle(slug: string, updates: ArticleUpdate): Promise<ArticleRow | null> {
   const supabase = createServerClient();
   const { data, error } = await supabase
-    .from('models')
+    .from('articles')
     .update({ ...updates, updated_at: new Date().toISOString() })
     .eq('slug', slug)
     .select()
     .single();
 
   if (error) {
-    throw new Error(`Failed to update model: ${error.message}`);
+    throw new Error(`Failed to update article: ${error.message}`);
   }
 
   return data;

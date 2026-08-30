@@ -1,24 +1,55 @@
 import assert from 'node:assert';
 
-console.log('Testing schema and API routes consistency...');
+console.log('Testing clean schema and API contracts...');
 
-// 1. Verify schema contract definitions
-const modelColumns = [
-  'id', 'slug', 'name', 'developer', 'institution', 'family', 'type',
-  'primary_task', 'status', 'vendor_api_status', 'deployment', 'release_date',
-  'parameters', 'active_parameters', 'context_window', 'benchmarks',
-  'capabilities', 'quality_status', 'quality_score'
+// 1. Verify clean models table contract
+const cleanModelColumns = [
+  'id',
+  'slug',
+  'name',
+  'provider',
+  'category',
+  'description',
+  'context_window',
+  'parameters',
+  'modalities',
+  'pricing',
+  'benchmarks',
+  'links',
+  'release_date',
+  'is_active',
+  'created_at',
+  'updated_at',
 ];
 
-const newsColumns = [
-  'id', 'slug', 'title', 'body', 'excerpt', 'author', 'category',
-  'publish_date', 'status', 'confidence_level', 'article_type',
-  'deep_dive_score', 'has_diagram', 'mermaid_diagrams'
+// 2. Verify clean articles table contract
+const cleanArticleColumns = [
+  'id',
+  'slug',
+  'title',
+  'summary',
+  'content',
+  'category',
+  'source_name',
+  'source_url',
+  'cover_image',
+  'related_models',
+  'is_published',
+  'published_at',
+  'created_at',
+  'updated_at',
 ];
 
-assert(modelColumns.includes('slug'), 'Models must include unique slug');
-assert(newsColumns.includes('slug'), 'News must include unique slug');
-assert(modelColumns.includes('developer'), 'Models must use developer rather than provider');
-assert(modelColumns.includes('status'), 'Models must use status rather than is_active');
+assert(cleanModelColumns.includes('provider'), 'Models must include provider');
+assert(cleanModelColumns.includes('context_window'), 'Models must include context_window');
+assert(cleanModelColumns.includes('pricing'), 'Models must include pricing');
+assert(cleanModelColumns.includes('benchmarks'), 'Models must include benchmarks');
+assert(cleanModelColumns.includes('is_active'), 'Models must include is_active');
 
-console.log('✔ All schema contract validations passed successfully.');
+assert(cleanArticleColumns.includes('slug'), 'Articles must include slug');
+assert(cleanArticleColumns.includes('title'), 'Articles must include title');
+assert(cleanArticleColumns.includes('content'), 'Articles must include content');
+assert(cleanArticleColumns.includes('related_models'), 'Articles must include related_models');
+assert(cleanArticleColumns.includes('is_published'), 'Articles must include is_published');
+
+console.log('✔ Clean schema contract validations passed successfully.');

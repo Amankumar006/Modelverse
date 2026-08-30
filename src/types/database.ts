@@ -1,9 +1,9 @@
 import type { ModelRow, ModelInsert, ModelUpdate } from './models';
-import type { NewsItemRow, NewsItemInsert, NewsItemUpdate } from './news';
+import type { ArticleRow, ArticleInsert, ArticleUpdate } from './articles';
 
 export type { Json } from './models';
 export * from './models';
-export * from './news';
+export * from './articles';
 
 export type Database = {
   public: {
@@ -14,10 +14,10 @@ export type Database = {
         Update: ModelUpdate;
         Relationships: [];
       };
-      news_items: {
-        Row: NewsItemRow;
-        Insert: NewsItemInsert;
-        Update: NewsItemUpdate;
+      articles: {
+        Row: ArticleRow;
+        Insert: ArticleInsert;
+        Update: ArticleUpdate;
         Relationships: [];
       };
     };
