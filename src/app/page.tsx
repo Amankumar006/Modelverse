@@ -4,7 +4,8 @@ import { ArrowRight, Newspaper } from "lucide-react";
 import { getModels } from "@/lib/supabase/models";
 import { getArticles } from "@/lib/supabase/articles";
 import HeroSection from "@/components/hero/HeroSection";
-import ModelCatalog from "@/components/models/ModelCatalog";
+import FeaturedModelsSection from "@/components/home/FeaturedModelsSection";
+import CategoryExplorerSection from "@/components/home/CategoryExplorerSection";
 import ArticleCard from "@/components/articles/ArticleCard";
 
 export const revalidate = 60;
@@ -12,7 +13,7 @@ export const revalidate = 60;
 export default async function HomePage() {
   const [{ models, total: totalModels }, { articles, total: totalArticles }] =
     await Promise.all([
-      getModels({ limit: 32, isActive: true }),
+      getModels({ limit: 6, isActive: true }),
       getArticles({ limit: 4, isPublished: true }),
     ]);
 
@@ -24,36 +25,13 @@ export default async function HomePage() {
       {/* Hero Section with Search & Stats */}
       <HeroSection totalModels={totalModels} totalArticles={totalArticles} />
 
-      {/* Model Catalog Section */}
-      <section className="w-full max-w-7xl mx-auto px-4 sm:px-6 md:px-10 lg:px-14 py-12 md:py-16">
-        <div className="flex flex-col gap-8">
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
-            <div>
-              <span className="text-xs font-bold uppercase tracking-wider text-[var(--accent)] mb-1 block">
-                Model Registry
-              </span>
-              <h2 className="text-2xl sm:text-3xl font-extrabold text-[var(--text)] tracking-tight">
-                Explore Foundation Models
-              </h2>
-              <p className="text-xs sm:text-sm text-[var(--muted)] mt-1">
-                Filter by architecture, parameter counts, context windows, and frontier capabilities.
-              </p>
-            </div>
+      {/* Featured Flagship Spotlight (6 Top Models) */}
+      <FeaturedModelsSection models={models} totalModels={totalModels} />
 
-            <Link
-              href="/models"
-              className="inline-flex items-center gap-1 text-xs font-bold text-[var(--accent)] hover:opacity-85 transition-opacity uppercase tracking-wider shrink-0"
-            >
-              Browse Full Archive
-              <ArrowRight size={14} />
-            </Link>
-          </div>
+      {/* Domain Modality Categories Hub */}
+      <CategoryExplorerSection />
 
-          <ModelCatalog initialModels={models} />
-        </div>
-      </section>
-
-      {/* Intelligence & Articles Section */}
+      {/* Intelligence & Technical Articles Section */}
       {articles.length > 0 && (
         <section className="w-full bg-[var(--card-bg)]/40 border-t border-[var(--muted)]/10 py-12 md:py-16">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-10 lg:px-14 flex flex-col gap-8">
@@ -64,7 +42,7 @@ export default async function HomePage() {
                   <span>Intelligence Digest</span>
                 </div>
                 <h2 className="text-2xl sm:text-3xl font-extrabold text-[var(--text)] tracking-tight">
-                  Latest AI News & Analysis
+                  Latest AI News &amp; Analysis
                 </h2>
                 <p className="text-xs sm:text-sm text-[var(--muted)] mt-1">
                   Real-time releases, architecture papers, and updates from leading research labs.
@@ -75,7 +53,7 @@ export default async function HomePage() {
                 href="/articles"
                 className="inline-flex items-center gap-1 text-xs font-bold text-[var(--accent)] hover:opacity-85 transition-opacity uppercase tracking-wider shrink-0"
               >
-                View All Articles
+                <span>View All Articles</span>
                 <ArrowRight size={14} />
               </Link>
             </div>
