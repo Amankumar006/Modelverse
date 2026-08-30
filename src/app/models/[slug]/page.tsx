@@ -2,6 +2,7 @@ import React from "react";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { getModelBySlug, getModels } from "@/lib/supabase/models";
+import { normalizeBenchmarks } from "@/lib/benchmarks";
 import ModelHeader from "@/components/models/ModelHeader";
 import LineageSpecSection from "@/components/models/LineageSpecSection";
 import PricingSection from "@/components/models/PricingSection";
@@ -48,7 +49,7 @@ export default async function ModelDetailPage({
     notFound();
   }
 
-  const benchmarks = (typeof model.benchmarks === "object" && model.benchmarks !== null ? model.benchmarks : {}) as Record<string, number | string>;
+  const hasBenchmarks = normalizeBenchmarks(model.benchmarks).length > 0;
 
   return (
     <main className="w-full max-w-7xl mx-auto px-4 sm:px-6 md:px-10 py-10 md:py-14">
@@ -66,9 +67,9 @@ export default async function ModelDetailPage({
           </div>
 
           {/* Verified Benchmarks Visualizer */}
-          {Object.keys(benchmarks).length > 0 && (
+          {hasBenchmarks && (
             <div id="benchmarks">
-              <BenchmarksSection benchmarks={benchmarks} />
+              <BenchmarksSection benchmarks={model.benchmarks} />
             </div>
           )}
 
@@ -106,7 +107,7 @@ export default async function ModelDetailPage({
                 Architecture &amp; Specs
               </a>
             </li>
-            {Object.keys(benchmarks).length > 0 && (
+            {hasBenchmarks && (
               <li>
                 <a href="#benchmarks" className="hover:text-[var(--accent)] transition-colors block">
                   Verified Benchmarks
