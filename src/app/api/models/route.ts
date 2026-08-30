@@ -1,9 +1,14 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
-import { createServerClient } from '@/lib/supabase/server';
+import { getModels } from '@/lib/supabase/models';
 
 const QuerySchema = z.object({
   provider: z.string().optional(),
+  category: z.string().optional(),
+  is_active: z
+    .string()
+    .optional()
+    .transform((val) => (val === undefined ? true : val === 'true')),
   limit: z.coerce.number().int().min(1).max(100).default(20),
   offset: z.coerce.number().int().min(0).default(0),
   search: z.string().optional(),
@@ -21,46 +26,17 @@ export async function GET(request: NextRequest) {
       );
     }
 
-    const { provider, limit, offset, search } = parsed.data;
-    const supabase = createServerClient();
-
-    let query = supabase
-      .from('models')
-      .select('*', { count: 'exact' })
-      .eq('is_active', true)
-      .range(offset, offset + limit - 1)
-      .order('created_at', { ascending: false });
-
-    if (provider) {
-      query = query.eq('provider', provider);
-    }
-
-    if (search) {
-      query = query.ilike('name', `%${search}%`);
-    }
-
-    const { data, error, count } = await query;
-
-    if (error) {
-      // If table doesn't exist yet or connection isn't configured, return a clean payload
-      return NextResponse.json(
-        {
-          models: [],
-          total: 0,
-          limit,
-          offset,
-          warning: error.message,
-        },
-        { status: 200 }
-      );
-    }
-
-    return NextResponse.json({
-      models: data ?? [],
-      total: count ?? 0,
+    const { provider, category, is_active, limit, offset, search } = parsed.data;
+    const result = await getModels({
+      provider,
+      category,
+      isActive: is_active,
       limit,
       offset,
+      search,
     });
+
+    return NextResponse.json(result);
   } catch (err) {
     const message = err instanceof Error ? err.message : 'Internal Server Error';
     return NextResponse.json({ error: message }, { status: 500 });
