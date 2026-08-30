@@ -1,3 +1,4 @@
+import { unstable_cache } from 'next/cache';
 import { createServerClient } from './server';
 import type { ModelRow, ModelInsert, ModelUpdate } from '@/types/database';
 
@@ -18,7 +19,7 @@ export interface GetModelsResult {
   warning?: string;
 }
 
-export async function getModels(options: GetModelsOptions = {}): Promise<GetModelsResult> {
+async function fetchModelsFromDb(options: GetModelsOptions): Promise<GetModelsResult> {
   const {
     provider,
     category,
@@ -72,19 +73,33 @@ export async function getModels(options: GetModelsOptions = {}): Promise<GetMode
   };
 }
 
+export async function getModels(options: GetModelsOptions = {}): Promise<GetModelsResult> {
+  const cacheKey = `models-${options.provider || ''}-${options.category || ''}-${options.search || ''}-${options.limit || 20}-${options.offset || 0}`;
+  return unstable_cache(
+    () => fetchModelsFromDb(options),
+    [cacheKey],
+    { revalidate: 60, tags: ['models'] }
+  )();
+}
+
 export async function getModelBySlug(slug: string): Promise<ModelRow | null> {
-  const supabase = createServerClient();
-  const { data, error } = await supabase
-    .from('models')
-    .select('*')
-    .eq('slug', slug)
-    .maybeSingle();
+  return unstable_cache(
+    async () => {
+      const supabase = createServerClient();
+      const { data, error } = await supabase
+        .from('models')
+        .select('*')
+        .eq('slug', slug)
+        .maybeSingle();
 
-  if (error || !data) {
-    return null;
-  }
-
-  return data;
+      if (error || !data) {
+        return null;
+      }
+      return data;
+    },
+    [`model-slug-${slug}`],
+    { revalidate: 300, tags: ['models', `model-${slug}`] }
+  )();
 }
 
 export async function upsertModel(model: ModelInsert): Promise<ModelRow | null> {
