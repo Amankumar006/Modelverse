@@ -1,3 +1,4 @@
+import { unstable_cache } from 'next/cache';
 import { createServerClient } from './server';
 import type { ArticleRow, ArticleInsert, ArticleUpdate } from '@/types/database';
 
@@ -17,7 +18,7 @@ export interface GetArticlesResult {
   warning?: string;
 }
 
-export async function getArticles(options: GetArticlesOptions = {}): Promise<GetArticlesResult> {
+async function fetchArticlesFromDb(options: GetArticlesOptions): Promise<GetArticlesResult> {
   const {
     category,
     isPublished = true,
@@ -66,19 +67,33 @@ export async function getArticles(options: GetArticlesOptions = {}): Promise<Get
   };
 }
 
+export async function getArticles(options: GetArticlesOptions = {}): Promise<GetArticlesResult> {
+  const cacheKey = `articles-${options.category || ''}-${options.search || ''}-${options.limit || 20}-${options.offset || 0}`;
+  return unstable_cache(
+    () => fetchArticlesFromDb(options),
+    [cacheKey],
+    { revalidate: 60, tags: ['articles'] }
+  )();
+}
+
 export async function getArticleBySlug(slug: string): Promise<ArticleRow | null> {
-  const supabase = createServerClient();
-  const { data, error } = await supabase
-    .from('articles')
-    .select('*')
-    .eq('slug', slug)
-    .maybeSingle();
+  return unstable_cache(
+    async () => {
+      const supabase = createServerClient();
+      const { data, error } = await supabase
+        .from('articles')
+        .select('*')
+        .eq('slug', slug)
+        .maybeSingle();
 
-  if (error || !data) {
-    return null;
-  }
-
-  return data;
+      if (error || !data) {
+        return null;
+      }
+      return data;
+    },
+    [`article-slug-${slug}`],
+    { revalidate: 300, tags: ['articles', `article-${slug}`] }
+  )();
 }
 
 export async function upsertArticle(article: ArticleInsert): Promise<ArticleRow | null> {
