@@ -1,7 +1,9 @@
 "use client";
 
 import React from "react";
+import Image from "next/image";
 import { X, SlidersHorizontal } from "lucide-react";
+import { getProviderLogo } from "@/lib/logos";
 
 interface CatalogSidebarProps {
   providers: string[];
@@ -101,19 +103,25 @@ export default function CatalogSidebar({
           >
             All Labs
           </button>
-          {providers.map((p) => (
-            <button
-              key={p}
-              onClick={() => onSelectProvider(p)}
-              className={`text-left px-3 py-1.5 rounded-[var(--radius-control)] transition-all cursor-pointer truncate ${
-                selectedProvider.toLowerCase() === p.toLowerCase()
-                  ? "bg-[var(--accent-soft)] text-[var(--accent)] font-bold shadow-sm"
-                  : "text-[var(--muted)] hover:text-[var(--text)] hover:bg-[var(--card-bg)]"
-              }`}
-            >
-              {p}
-            </button>
-          ))}
+          {providers.map((p) => {
+            const logo = getProviderLogo(p);
+            return (
+              <button
+                key={p}
+                onClick={() => onSelectProvider(p)}
+                className={`flex items-center gap-2 text-left px-3 py-1.5 rounded-[var(--radius-control)] transition-all cursor-pointer truncate ${
+                  selectedProvider.toLowerCase() === p.toLowerCase()
+                    ? "bg-[var(--accent-soft)] text-[var(--accent)] font-bold shadow-sm"
+                    : "text-[var(--muted)] hover:text-[var(--text)] hover:bg-[var(--card-bg)]"
+                }`}
+              >
+                <div className="w-3.5 h-3.5 rounded-full overflow-hidden shrink-0 flex items-center justify-center">
+                  <Image src={logo} alt={p} width={14} height={14} className="w-full h-full object-contain" />
+                </div>
+                <span className="truncate">{p}</span>
+              </button>
+            );
+          })}
         </div>
       </div>
 
