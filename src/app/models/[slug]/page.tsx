@@ -2,8 +2,10 @@ import React from "react";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowLeft, ExternalLink, Cpu, Layers, DollarSign, BarChart3, Globe } from "lucide-react";
+import { ArrowLeft, ExternalLink, Cpu, Layers, DollarSign, Globe } from "lucide-react";
 import { getModelBySlug, getModels } from "@/lib/supabase/models";
+import BenchmarksSection from "@/components/models/BenchmarksSection";
+import QuickstartSection from "@/components/models/QuickstartSection";
 
 export const revalidate = 60;
 
@@ -133,27 +135,11 @@ export default async function ModelDetailPage({
         </div>
       </div>
 
-      {/* Benchmarks Section */}
-      {Object.keys(benchmarks).length > 0 && (
-        <section className="p-6 rounded-[var(--radius-card)] bg-[var(--card-bg)] border border-[var(--muted)]/10 space-y-4">
-          <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[var(--accent)]">
-            <BarChart3 size={14} />
-            <span>Verified Benchmarks</span>
-          </div>
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
-            {Object.entries(benchmarks).map(([bench, score]) => (
-              <div key={bench} className="p-3 rounded-lg bg-[var(--bg)] border border-[var(--muted)]/10">
-                <span className="text-[10px] font-mono uppercase text-[var(--muted)] block mb-0.5">
-                  {bench}
-                </span>
-                <span className="text-base font-bold text-[var(--text)] font-mono">
-                  {String(score)}
-                </span>
-              </div>
-            ))}
-          </div>
-        </section>
-      )}
+      {/* Verified Benchmarks */}
+      <BenchmarksSection benchmarks={benchmarks} />
+
+      {/* API Quickstart */}
+      <QuickstartSection model={model} />
 
       {/* Primary Links */}
       {Object.keys(links).length > 0 && (

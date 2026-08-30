@@ -9,6 +9,7 @@ export const NAV_ITEMS = [
   { label: "Models", href: "/models" },
   { label: "Articles", href: "/articles" },
   { label: "Compare", href: "/compare" },
+  { label: "Timeline", href: "/timeline" },
   { label: "About", href: "/about" },
 ];
 
