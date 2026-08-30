@@ -1,11 +1,12 @@
 import React from "react";
 import type { Metadata } from "next";
-import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowLeft, ExternalLink, Cpu, Layers, DollarSign, Globe, Shield, HardDrive, Sparkles } from "lucide-react";
 import { getModelBySlug, getModels } from "@/lib/supabase/models";
+import ModelHeader from "@/components/models/ModelHeader";
+import SpecMatrix from "@/components/models/SpecMatrix";
 import BenchmarksSection from "@/components/models/BenchmarksSection";
 import QuickstartSection from "@/components/models/QuickstartSection";
+import SourcesSection from "@/components/models/SourcesSection";
 
 export const revalidate = 60;
 
@@ -27,10 +28,10 @@ export async function generateMetadata({
   }
 
   return {
-    title: `${model.name} (${model.provider}) — Specs & Benchmarks — Modelverse`,
+    title: `${model.name} (${model.provider}) — Architecture, Benchmarks & Specs — Modelverse`,
     description:
       model.description ||
-      `Technical specifications, context window, benchmarks, and pricing for ${model.name}.`,
+      `Verified specifications, parameter counts, context window size, benchmarks, and API quickstarts for ${model.name}.`,
   };
 }
 
@@ -46,160 +47,79 @@ export default async function ModelDetailPage({
     notFound();
   }
 
-  const links = (typeof model.links === "object" && model.links !== null ? model.links : {}) as Record<string, string>;
-  const pricing = (typeof model.pricing === "object" && model.pricing !== null ? model.pricing : {}) as Record<string, number | string>;
   const benchmarks = (typeof model.benchmarks === "object" && model.benchmarks !== null ? model.benchmarks : {}) as Record<string, number | string>;
-  const modalities = Array.isArray(model.modalities) ? model.modalities : ["text"];
 
   return (
-    <main className="w-full max-w-5xl mx-auto px-4 sm:px-6 md:px-10 py-10 md:py-14 flex flex-col gap-8">
-      {/* Back Link */}
-      <Link
-        href="/models"
-        className="inline-flex items-center gap-1.5 text-xs text-[var(--muted)] hover:text-[var(--text)] transition-colors font-medium self-start"
-      >
-        <ArrowLeft size={14} /> Back to Model Catalog
-      </Link>
-
-      {/* Model Header */}
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 p-6 sm:p-8 rounded-[var(--radius-card)] bg-[var(--card-bg)] shadow-[var(--shadow-card)] border border-[var(--muted)]/10">
-        <div className="space-y-2">
-          <div className="flex items-center gap-2">
-            <span className="text-xs font-bold uppercase tracking-wider text-[var(--accent)]">
-              {model.provider}
-            </span>
-            <span className="text-[10px] px-2.5 py-0.5 rounded-full bg-[var(--tag-bg)] text-[var(--tag-text)] font-medium uppercase tracking-wider">
-              {model.category || "LLM"}
-            </span>
-            {model.source_type && (
-              <span className="text-[10px] px-2.5 py-0.5 rounded-full bg-[var(--accent-soft)] text-[var(--accent)] font-semibold border border-[var(--accent)]/20">
-                {model.source_type}
-              </span>
-            )}
+    <main className="w-full max-w-7xl mx-auto px-4 sm:px-6 md:px-10 py-10 md:py-14">
+      <div className="grid grid-cols-1 xl:grid-cols-12 gap-10 items-start">
+        {/* Main Content Area (9 cols on wide) */}
+        <div className="xl:col-span-9 space-y-10">
+          {/* Identity & Header */}
+          <div id="overview">
+            <ModelHeader model={model} />
           </div>
-          <h1 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-[var(--text)] tracking-tight">
-            {model.name}
-          </h1>
-          {model.description && (
-            <p className="text-xs sm:text-sm text-[var(--muted)] leading-relaxed max-w-2xl">
-              {model.description}
-            </p>
+
+          {/* Key Specs Matrix */}
+          <div id="specifications">
+            <SpecMatrix model={model} />
+          </div>
+
+          {/* Verified Benchmarks Visualizer */}
+          {Object.keys(benchmarks).length > 0 && (
+            <div id="benchmarks">
+              <BenchmarksSection benchmarks={benchmarks} />
+            </div>
           )}
-        </div>
 
-        {/* Primary Action Buttons */}
-        <div className="flex flex-wrap gap-2 shrink-0 self-start md:self-center">
-          {model.announcement_url && (
-            <a
-              href={model.announcement_url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 px-4 py-2 rounded-[var(--radius-control)] bg-[var(--accent)] text-[var(--accent-contrast)] text-xs font-bold hover:opacity-90 transition-opacity"
-            >
-              <span>Announcement</span>
-              <ExternalLink size={13} />
-            </a>
-          )}
-          {links.website && !model.announcement_url && (
-            <a
-              href={links.website}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 px-4 py-2 rounded-[var(--radius-control)] bg-[var(--accent)] text-[var(--accent-contrast)] text-xs font-bold hover:opacity-90 transition-opacity"
-            >
-              <span>Official Page</span>
-              <ExternalLink size={13} />
-            </a>
-          )}
-        </div>
-      </div>
-
-      {/* Key Specifications Grid */}
-      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
-        <div className="p-4 rounded-[var(--radius-control)] bg-[var(--card-bg)] border border-[var(--muted)]/10">
-          <div className="flex items-center gap-1.5 text-[var(--muted)] text-[11px] mb-1 font-medium">
-            <Cpu size={13} className="text-[var(--accent)]" /> Context Window
+          {/* API Multi-Language Quickstart */}
+          <div id="quickstart">
+            <QuickstartSection model={model} />
           </div>
-          <p className="text-sm sm:text-base font-bold text-[var(--text)] font-mono">
-            {model.context_window ? `${model.context_window.toLocaleString()} ctx` : "Standard"}
-          </p>
+
+          {/* Sources & Provenance Links */}
+          <div id="sources">
+            <SourcesSection model={model} />
+          </div>
         </div>
 
-        <div className="p-4 rounded-[var(--radius-control)] bg-[var(--card-bg)] border border-[var(--muted)]/10">
-          <div className="flex items-center gap-1.5 text-[var(--muted)] text-[11px] mb-1 font-medium">
-            <Layers size={13} className="text-[var(--accent)]" /> Parameters
+        {/* Sticky Table of Contents (3 cols on desktop) */}
+        <aside className="hidden xl:block xl:col-span-3 sticky top-24 p-5 rounded-[var(--radius-card)] bg-[var(--card-bg)] shadow-[var(--shadow-card)] border border-[var(--muted)]/10 text-xs space-y-4">
+          <div className="flex items-center gap-2 text-[var(--text)] font-bold uppercase tracking-wider">
+            <span className="w-1.5 h-3 bg-[var(--accent)] rounded-full" />
+            <span>On This Page</span>
           </div>
-          <p className="text-sm sm:text-base font-bold text-[var(--text)] font-mono">
-            {model.parameters || "Proprietary"}
-          </p>
-        </div>
 
-        <div className="p-4 rounded-[var(--radius-control)] bg-[var(--card-bg)] border border-[var(--muted)]/10">
-          <div className="flex items-center gap-1.5 text-[var(--muted)] text-[11px] mb-1 font-medium">
-            <Sparkles size={13} className="text-[var(--accent)]" /> Active Params
-          </div>
-          <p className="text-sm sm:text-base font-bold text-[var(--text)] font-mono">
-            {model.active_parameters || model.parameters || "Dense"}
-          </p>
-        </div>
-
-        <div className="p-4 rounded-[var(--radius-control)] bg-[var(--card-bg)] border border-[var(--muted)]/10">
-          <div className="flex items-center gap-1.5 text-[var(--muted)] text-[11px] mb-1 font-medium">
-            <HardDrive size={13} className="text-[var(--accent)]" /> Weights Size
-          </div>
-          <p className="text-sm sm:text-base font-bold text-[var(--text)] font-mono">
-            {model.weights_size || "API Only"}
-          </p>
-        </div>
-
-        <div className="p-4 rounded-[var(--radius-control)] bg-[var(--card-bg)] border border-[var(--muted)]/10">
-          <div className="flex items-center gap-1.5 text-[var(--muted)] text-[11px] mb-1 font-medium">
-            <DollarSign size={13} className="text-[var(--accent)]" /> Pricing (1M in)
-          </div>
-          <p className="text-sm sm:text-base font-bold text-[var(--text)] font-mono">
-            {pricing.input_per_1m !== undefined ? `$${pricing.input_per_1m}` : "Free / Open"}
-          </p>
-        </div>
-
-        <div className="p-4 rounded-[var(--radius-control)] bg-[var(--card-bg)] border border-[var(--muted)]/10">
-          <div className="flex items-center gap-1.5 text-[var(--muted)] text-[11px] mb-1 font-medium">
-            <Globe size={13} className="text-[var(--accent)]" /> Modalities
-          </div>
-          <p className="text-xs sm:text-sm font-bold text-[var(--text)] capitalize truncate">
-            {modalities.join(", ")}
-          </p>
-        </div>
-      </div>
-
-      {/* Verified Benchmarks */}
-      <BenchmarksSection benchmarks={benchmarks} />
-
-      {/* API Quickstart */}
-      <QuickstartSection model={model} />
-
-      {/* Primary Links & Access Hub */}
-      {Object.keys(links).length > 0 && (
-        <section className="p-6 rounded-[var(--radius-card)] bg-[var(--card-bg)] border border-[var(--muted)]/10 space-y-3">
-          <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[var(--text)]">
-            <Shield size={14} className="text-[var(--accent)]" />
-            <span>Access Links & Verified Repositories</span>
-          </div>
-          <div className="flex flex-wrap gap-2">
-            {Object.entries(links).map(([key, url]) => (
-              <a
-                key={key}
-                href={url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-lg bg-[var(--bg)] hover:bg-[var(--accent-soft)] hover:text-[var(--accent)] text-xs text-[var(--text)] border border-[var(--muted)]/10 transition-colors capitalize font-medium"
-              >
-                <span>{key}</span>
-                <ExternalLink size={12} className="opacity-60" />
+          <ul className="space-y-2.5 text-[var(--muted)] pl-2 border-l border-[var(--muted)]/10 font-medium">
+            <li>
+              <a href="#overview" className="hover:text-[var(--accent)] transition-colors block">
+                Overview &amp; Identity
               </a>
-            ))}
-          </div>
-        </section>
-      )}
+            </li>
+            <li>
+              <a href="#specifications" className="hover:text-[var(--accent)] transition-colors block">
+                Architecture &amp; Specs
+              </a>
+            </li>
+            {Object.keys(benchmarks).length > 0 && (
+              <li>
+                <a href="#benchmarks" className="hover:text-[var(--accent)] transition-colors block">
+                  Verified Benchmarks
+                </a>
+              </li>
+            )}
+            <li>
+              <a href="#quickstart" className="hover:text-[var(--accent)] transition-colors block">
+                API Quickstart
+              </a>
+            </li>
+            <li>
+              <a href="#sources" className="hover:text-[var(--accent)] transition-colors block">
+                Sources &amp; Repositories
+              </a>
+            </li>
+          </ul>
+        </aside>
+      </div>
     </main>
   );
 }

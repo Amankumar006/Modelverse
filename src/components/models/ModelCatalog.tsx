@@ -1,211 +1,213 @@
 "use client";
 
 import React, { useState, useMemo } from "react";
-import { Search, LayoutGrid, List, SlidersHorizontal, X } from "lucide-react";
+import { X } from "lucide-react";
 import type { ModelRow } from "@/types/database";
 import ModelCard from "./ModelCard";
+import CatalogSidebar from "./CatalogSidebar";
+import CatalogToolbar from "./CatalogToolbar";
 
 interface ModelCatalogProps {
   initialModels: ModelRow[];
-  providers?: string[];
-  categories?: string[];
+  initialCategory?: string;
+  initialProvider?: string;
+  initialSearch?: string;
 }
 
 export default function ModelCatalog({
   initialModels,
-  providers = [],
-  categories = ["LLM", "Multimodal", "Code", "Embedding", "Vision"],
+  initialCategory = "All",
+  initialProvider = "All",
+  initialSearch = "",
 }: ModelCatalogProps) {
-  const [search, setSearch] = useState("");
-  const [selectedProvider, setSelectedProvider] = useState<string>("All");
-  const [selectedCategory, setSelectedCategory] = useState<string>("All");
+  const [searchQuery, setSearchQuery] = useState(initialSearch);
+  const [selectedCategory, setSelectedCategory] = useState(initialCategory);
+  const [selectedProvider, setSelectedProvider] = useState(initialProvider);
+  const [selectedSourceType, setSelectedSourceType] = useState("All");
+  const [sortKey, setSortKey] = useState("newest");
   const [viewMode, setViewMode] = useState<"grid" | "list">("grid");
+  const [mobileDrawerOpen, setMobileDrawerOpen] = useState(false);
+
+  const categories = useMemo(() => {
+    return Array.from(new Set(initialModels.map((m) => m.category))).filter(Boolean) as string[];
+  }, [initialModels]);
+
+  const providers = useMemo(() => {
+    return Array.from(new Set(initialModels.map((m) => m.provider))).filter(Boolean) as string[];
+  }, [initialModels]);
+
+  const totalActiveFilters = useMemo(() => {
+    let count = 0;
+    if (selectedCategory !== "All") count++;
+    if (selectedProvider !== "All") count++;
+    if (selectedSourceType !== "All") count++;
+    if (searchQuery.trim()) count++;
+    return count;
+  }, [selectedCategory, selectedProvider, selectedSourceType, searchQuery]);
+
+  const clearAllFilters = () => {
+    setSearchQuery("");
+    setSelectedCategory("All");
+    setSelectedProvider("All");
+    setSelectedSourceType("All");
+  };
 
   const filteredModels = useMemo(() => {
-    return initialModels.filter((m) => {
-      const matchSearch =
-        !search ||
-        m.name.toLowerCase().includes(search.toLowerCase()) ||
-        m.provider.toLowerCase().includes(search.toLowerCase()) ||
-        (m.description && m.description.toLowerCase().includes(search.toLowerCase()));
+    let result = [...initialModels];
 
-      const matchProvider =
-        selectedProvider === "All" ||
-        m.provider.toLowerCase() === selectedProvider.toLowerCase();
+    if (searchQuery.trim()) {
+      const q = searchQuery.toLowerCase();
+      result = result.filter(
+        (m) =>
+          m.name.toLowerCase().includes(q) ||
+          m.provider.toLowerCase().includes(q) ||
+          (m.description && m.description.toLowerCase().includes(q)) ||
+          (m.parameters && m.parameters.toLowerCase().includes(q))
+      );
+    }
 
-      const matchCategory =
-        selectedCategory === "All" ||
-        (m.category && m.category.toLowerCase() === selectedCategory.toLowerCase());
+    if (selectedCategory !== "All") {
+      result = result.filter(
+        (m) => m.category?.toLowerCase() === selectedCategory.toLowerCase()
+      );
+    }
 
-      return matchSearch && matchProvider && matchCategory;
+    if (selectedProvider !== "All") {
+      result = result.filter(
+        (m) => m.provider.toLowerCase() === selectedProvider.toLowerCase()
+      );
+    }
+
+    if (selectedSourceType !== "All") {
+      result = result.filter((m) => {
+        if (!m.source_type) return false;
+        return m.source_type.toLowerCase().includes(selectedSourceType.toLowerCase());
+      });
+    }
+
+    // Sort
+    result.sort((a, b) => {
+      if (sortKey === "newest") {
+        const dateA = a.release_date ? new Date(a.release_date).getTime() : 0;
+        const dateB = b.release_date ? new Date(b.release_date).getTime() : 0;
+        return dateB - dateA;
+      }
+      if (sortKey === "context") {
+        return (b.context_window || 0) - (a.context_window || 0);
+      }
+      if (sortKey === "name") {
+        return a.name.localeCompare(b.name);
+      }
+      return 0;
     });
-  }, [initialModels, search, selectedProvider, selectedCategory]);
 
-  const uniqueProviders = useMemo(() => {
-    if (providers.length > 0) return providers;
-    return Array.from(new Set(initialModels.map((m) => m.provider))).filter(Boolean);
-  }, [initialModels, providers]);
+    return result;
+  }, [initialModels, searchQuery, selectedCategory, selectedProvider, selectedSourceType, sortKey]);
 
   return (
-    <div className="w-full flex flex-col gap-6">
-      {/* Search & View Controls Bar */}
-      <div className="flex flex-col sm:flex-row gap-3 items-stretch sm:items-center justify-between">
-        <div className="relative flex-1 max-w-md">
-          <Search size={15} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-[var(--muted)] pointer-events-none" />
-          <input
-            type="text"
-            placeholder="Filter models by name, provider, or specs..."
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-            className="w-full bg-[var(--card-bg)] border border-[var(--muted)]/10 rounded-[var(--radius-control)] pl-10 pr-8 py-2 text-xs text-[var(--text)] placeholder:text-[var(--muted)] focus:outline-none focus:border-[var(--accent)] transition-all shadow-[var(--shadow-card)]"
-          />
-          {search && (
-            <button
-              onClick={() => setSearch("")}
-              className="absolute right-3 top-1/2 -translate-y-1/2 text-[var(--muted)] hover:text-[var(--text)]"
-            >
-              <X size={14} />
-            </button>
-          )}
-        </div>
+    <div className="w-full grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+      {/* Desktop Sidebar (3 cols) */}
+      <div className="hidden lg:block lg:col-span-3 sticky top-24 p-5 rounded-[var(--radius-card)] bg-[var(--card-bg)] shadow-[var(--shadow-card)] border border-[var(--muted)]/10">
+        <CatalogSidebar
+          providers={providers}
+          selectedProvider={selectedProvider}
+          onSelectProvider={setSelectedProvider}
+          categories={categories}
+          selectedCategory={selectedCategory}
+          onSelectCategory={setSelectedCategory}
+          selectedSourceType={selectedSourceType}
+          onSelectSourceType={setSelectedSourceType}
+          totalActiveFilters={totalActiveFilters}
+          onClearFilters={clearAllFilters}
+        />
+      </div>
 
-        {/* View Mode Toggle */}
-        <div className="flex items-center gap-1 bg-[var(--card-bg)] p-1 rounded-[var(--radius-control)] border border-[var(--muted)]/10 shadow-[var(--shadow-card)] self-end sm:self-auto">
-          <button
-            onClick={() => setViewMode("grid")}
-            className={`p-1.5 rounded-lg text-xs transition-colors cursor-pointer ${
+      {/* Main Catalog Area (9 cols) */}
+      <div className="lg:col-span-9 space-y-6">
+        <CatalogToolbar
+          searchQuery={searchQuery}
+          onSearchChange={setSearchQuery}
+          categories={categories}
+          selectedCategory={selectedCategory}
+          onSelectCategory={setSelectedCategory}
+          sortKey={sortKey}
+          onSortChange={setSortKey}
+          viewMode={viewMode}
+          onToggleViewMode={setViewMode}
+          totalFiltered={filteredModels.length}
+          onOpenMobileFilters={() => setMobileDrawerOpen(true)}
+        />
+
+        {/* Models Grid / List */}
+        {filteredModels.length > 0 ? (
+          <div
+            className={
               viewMode === "grid"
-                ? "bg-[var(--accent-soft)] text-[var(--accent)]"
-                : "text-[var(--muted)] hover:text-[var(--text)]"
-            }`}
-            title="Grid View"
+                ? "grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-5"
+                : "flex flex-col gap-3"
+            }
           >
-            <LayoutGrid size={15} />
-          </button>
-          <button
-            onClick={() => setViewMode("list")}
-            className={`p-1.5 rounded-lg text-xs transition-colors cursor-pointer ${
-              viewMode === "list"
-                ? "bg-[var(--accent-soft)] text-[var(--accent)]"
-                : "text-[var(--muted)] hover:text-[var(--text)]"
-            }`}
-            title="List View"
-          >
-            <List size={15} />
-          </button>
-        </div>
-      </div>
-
-      {/* Category Tabs */}
-      <div className="flex flex-wrap items-center gap-1.5 text-xs">
-        <button
-          onClick={() => setSelectedCategory("All")}
-          className={`px-3 py-1 rounded-[var(--radius-pill)] transition-all cursor-pointer ${
-            selectedCategory === "All"
-              ? "bg-[var(--accent-soft)] text-[var(--accent)] font-bold shadow-sm"
-              : "bg-[var(--card-bg)] text-[var(--muted)] hover:text-[var(--text)] border border-[var(--muted)]/10"
-          }`}
-        >
-          All Categories
-        </button>
-        {categories.map((c) => (
-          <button
-            key={c}
-            onClick={() => setSelectedCategory(c)}
-            className={`px-3 py-1 rounded-[var(--radius-pill)] transition-all cursor-pointer ${
-              selectedCategory === c
-                ? "bg-[var(--accent-soft)] text-[var(--accent)] font-bold shadow-sm"
-                : "bg-[var(--card-bg)] text-[var(--muted)] hover:text-[var(--text)] border border-[var(--muted)]/10"
-            }`}
-          >
-            {c}
-          </button>
-        ))}
-      </div>
-
-      {/* Provider Filter Chips Bar */}
-      {uniqueProviders.length > 0 && (
-        <div className="flex flex-wrap items-center gap-2 text-xs">
-          <span className="text-[var(--muted)] text-[11px] font-medium mr-1 flex items-center gap-1">
-            <SlidersHorizontal size={12} /> Provider:
-          </span>
-          <button
-            onClick={() => setSelectedProvider("All")}
-            className={`px-2.5 py-0.5 rounded-[var(--radius-pill)] transition-all cursor-pointer ${
-              selectedProvider === "All"
-                ? "bg-[var(--accent-soft)] text-[var(--accent)] font-bold shadow-sm"
-                : "bg-[var(--card-bg)] text-[var(--muted)] hover:text-[var(--text)] border border-[var(--muted)]/10"
-            }`}
-          >
-            All
-          </button>
-          {uniqueProviders.map((p) => (
+            {filteredModels.map((model) => (
+              <ModelCard key={model.id} model={model} variant={viewMode === "grid" ? "card" : "row"} />
+            ))}
+          </div>
+        ) : (
+          <div className="py-20 text-center flex flex-col items-center justify-center border border-[var(--muted)]/10 bg-[var(--card-bg)] rounded-[var(--radius-card)] p-8 space-y-3">
+            <p className="text-sm font-semibold text-[var(--text)]">No matching models found</p>
+            <p className="text-xs text-[var(--muted)] max-w-sm">
+              Try adjusting your search terms or clearing selected filter criteria.
+            </p>
             <button
-              key={p}
-              onClick={() => setSelectedProvider(p)}
-              className={`px-2.5 py-0.5 rounded-[var(--radius-pill)] transition-all cursor-pointer ${
-                selectedProvider === p
-                  ? "bg-[var(--accent-soft)] text-[var(--accent)] font-bold shadow-sm"
-                  : "bg-[var(--card-bg)] text-[var(--muted)] hover:text-[var(--text)] border border-[var(--muted)]/10"
-              }`}
+              onClick={clearAllFilters}
+              className="mt-2 bg-[var(--accent)] text-[var(--accent-contrast)] text-xs font-bold px-4 py-2 rounded-[var(--radius-control)] hover:opacity-90 transition-opacity cursor-pointer"
             >
-              {p}
+              Clear all filters
             </button>
-          ))}
-        </div>
-      )}
-
-      {/* Results Header */}
-      <div className="flex items-center justify-between text-xs text-[var(--muted)] font-mono">
-        <span>
-          Showing <strong className="text-[var(--text)]">{filteredModels.length}</strong> models
-        </span>
-        {(search || selectedProvider !== "All" || selectedCategory !== "All") && (
-          <button
-            onClick={() => {
-              setSearch("");
-              setSelectedProvider("All");
-              setSelectedCategory("All");
-            }}
-            className="text-[var(--accent)] hover:underline cursor-pointer font-sans text-xs"
-          >
-            Reset filters
-          </button>
+          </div>
         )}
       </div>
 
-      {/* Grid or List Display */}
-      {viewMode === "grid" ? (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
-          {filteredModels.map((model) => (
-            <ModelCard key={model.id} model={model} variant="card" />
-          ))}
-        </div>
-      ) : (
-        <div className="flex flex-col gap-2.5">
-          {filteredModels.map((model) => (
-            <ModelCard key={model.id} model={model} variant="row" />
-          ))}
-        </div>
-      )}
-
-      {/* Empty State */}
-      {filteredModels.length === 0 && (
-        <div className="py-16 text-center flex flex-col items-center justify-center bg-[var(--card-bg)]/60 rounded-[var(--radius-card)] border border-[var(--muted)]/10 p-8">
-          <p className="text-sm font-semibold text-[var(--text)]">No matching models found</p>
-          <p className="text-xs text-[var(--muted)] mt-1 max-w-sm">
-            Try adjusting your search keywords or clearing active filters.
-          </p>
-          <button
-            onClick={() => {
-              setSearch("");
-              setSelectedProvider("All");
-              setSelectedCategory("All");
-            }}
-            className="mt-4 px-4 py-2 rounded-[var(--radius-control)] bg-[var(--accent)] text-[var(--accent-contrast)] text-xs font-bold hover:opacity-90 transition-opacity"
-          >
-            Clear all filters
-          </button>
+      {/* Mobile Drawer */}
+      {mobileDrawerOpen && (
+        <div className="fixed inset-0 z-50 lg:hidden flex flex-col justify-end bg-black/60 backdrop-blur-sm">
+          <div className="absolute inset-0" onClick={() => setMobileDrawerOpen(false)} />
+          <div className="relative w-full max-h-[85vh] bg-[var(--bg)] border-t border-[var(--muted)]/20 rounded-t-3xl flex flex-col z-10 p-6 shadow-2xl">
+            <div className="flex items-center justify-between pb-3 border-b border-[var(--muted)]/10 mb-4">
+              <span className="text-sm font-bold uppercase tracking-wider text-[var(--text)]">Catalog Filters</span>
+              <button
+                onClick={() => setMobileDrawerOpen(false)}
+                className="p-1 rounded-full text-[var(--muted)] hover:text-[var(--text)]"
+              >
+                <X size={18} />
+              </button>
+            </div>
+            <div className="overflow-y-auto flex-1 pr-1 pb-4">
+              <CatalogSidebar
+                providers={providers}
+                selectedProvider={selectedProvider}
+                onSelectProvider={(p) => {
+                  setSelectedProvider(p);
+                  setMobileDrawerOpen(false);
+                }}
+                categories={categories}
+                selectedCategory={selectedCategory}
+                onSelectCategory={(c) => {
+                  setSelectedCategory(c);
+                  setMobileDrawerOpen(false);
+                }}
+                selectedSourceType={selectedSourceType}
+                onSelectSourceType={(s) => {
+                  setSelectedSourceType(s);
+                  setMobileDrawerOpen(false);
+                }}
+                totalActiveFilters={totalActiveFilters}
+                onClearFilters={() => {
+                  clearAllFilters();
+                  setMobileDrawerOpen(false);
+                }}
+              />
+            </div>
+          </div>
         </div>
       )}
     </div>
