@@ -1,31 +1,21 @@
-import fs from "fs/promises";
-import path from "path";
+import React from "react";
 import type { Metadata } from "next";
-import { notFound, permanentRedirect } from "next/navigation";
-import {
-  getAllModels,
-  getModelBySlug,
-  getFamilyModels,
-  getRelatedModels,
-  getModelEvidence,
-  SITE_URL,
-} from "@/lib/models";
-import JsonLd from "@/components/JsonLd";
-import ModelDocsLayout from "@/components/models/ModelDocsLayout";
+import { notFound } from "next/navigation";
+import { getModelBySlug, getModels } from "@/lib/supabase/models";
+import ModelHeader from "@/components/models/ModelHeader";
+import LineageSpecSection from "@/components/models/LineageSpecSection";
+import PricingSection from "@/components/models/PricingSection";
+import BenchmarksSection from "@/components/models/BenchmarksSection";
+import QuickstartSection from "@/components/models/QuickstartSection";
+import SourcesSection from "@/components/models/SourcesSection";
 
 export const revalidate = 60;
 
-// Enable static site generation at build time for all model entries
 export async function generateStaticParams() {
-  const models = await getAllModels();
-  return models
-    .filter((m) => m.status !== "staged" && m.verificationStatus !== "DISPUTED" && !m.metadata?.redirect_to && !m.metadata?.redirectTo)
-    .map((m) => ({
-      slug: m.slug,
-    }));
+  const { models } = await getModels({ limit: 50, isActive: true });
+  return models.map((m) => ({ slug: m.slug }));
 }
 
-// Generate metadata dynamically per model
 export async function generateMetadata({
   params,
 }: {
@@ -35,55 +25,14 @@ export async function generateMetadata({
   const model = await getModelBySlug(slug);
 
   if (!model) {
-    return {
-      title: "Model Not Found — Modelverse",
-    };
+    return { title: "Model Not Found — Modelverse" };
   }
-
-  const redirectTo = model.metadata?.redirect_to || model.metadata?.redirectTo;
-  if (redirectTo && typeof redirectTo === "string") {
-    permanentRedirect(`/models/${redirectTo}`);
-  }
-
-  if (model.status === "staged" || model.verificationStatus === "DISPUTED") {
-    return {
-      title: "Model Not Found — Modelverse",
-    };
-  }
-
-  let distinguishingFact = model.primaryTask;
-  if (typeof model.parameters === "string" && model.parameters !== "Unknown") {
-    distinguishingFact = `${model.parameters} Parameters`;
-  }
-
-  const title = `${model.name} by ${model.developer} — ${distinguishingFact}`;
-  const rawDesc = model.cardSummary || model.description || "";
-  const description =
-    rawDesc.length > 155
-      ? `${rawDesc.slice(0, 152)}...`
-      : rawDesc;
 
   return {
-    title,
-    description,
-    alternates: {
-      canonical: `${SITE_URL}/models/${model.slug}`,
-    },
-    openGraph: {
-      title,
-      description,
-      url: `${SITE_URL}/models/${model.slug}`,
-      type: "article",
-      siteName: "Modelverse Docs",
-    },
-    twitter: {
-      card: "summary_large_image",
-      title,
-      description,
-    },
-    robots: model.qualityStatus && model.qualityStatus !== "indexed"
-      ? { index: false, follow: true }
-      : undefined,
+    title: `${model.name} (${model.provider}) — Architecture, Benchmarks & Specs — Modelverse`,
+    description:
+      model.description ||
+      `Verified specifications, parameter counts, context window size, benchmarks, and API quickstarts for ${model.name}.`,
   };
 }
 
@@ -99,159 +48,89 @@ export default async function ModelDetailPage({
     notFound();
   }
 
-  const redirectTo = model.metadata?.redirect_to || model.metadata?.redirectTo;
-  if (redirectTo && typeof redirectTo === "string") {
-    permanentRedirect(`/models/${redirectTo}`);
-  }
-
-  if (model.status === "staged" || model.verificationStatus === "DISPUTED") {
-    notFound();
-  }
-
-  // Fetch candidate markdown documentation readmes
-  let markdownContent: string | null = null;
-  const candidateNames = Array.from(
-    new Set([
-      `${slug}.md`,
-      `${model.id}.md`,
-      slug.includes("-") ? `${slug.split("-").slice(1).join("-")}.md` : null,
-      slug.includes("-") ? `${slug.split("-").slice(2).join("-")}.md` : null,
-    ].filter(Boolean))
-  ) as string[];
-
-  for (const cand of candidateNames) {
-    try {
-      const readmePath = path.join(process.cwd(), "data", "models", "readme", cand);
-      markdownContent = await fs.readFile(readmePath, "utf-8");
-      if (markdownContent && markdownContent.trim().length > 0) break;
-    } catch {
-      // try next candidate
-    }
-  }
-
-  // Fetch family, related models, and verified evidence in parallel
-  const [familyMembers, relatedModels, evidence] = await Promise.all([
-    model.family ? getFamilyModels(model.family, model.id) : Promise.resolve([]),
-    model.primaryTask ? getRelatedModels(model.primaryTask, model.id) : Promise.resolve([]),
-    getModelEvidence(model.id),
-  ]);
-
-  // Structured JSON-LD: Product (the model) + TechArticle (the page)
-  const parametersText = typeof model.parameters === "string" ? model.parameters : "Unknown";
-  const contextWindowText = typeof model.contextWindow === "string" ? model.contextWindow : "Unknown";
-  const licenseText = typeof model.license === "string" ? model.license : model.license?.name || "Custom";
-
-  const imageUrl = model.logo ? `${SITE_URL}${model.logo}` : `${SITE_URL}/icon.jpg`;
-
-  // Build the SoftwareApplication entity
-  const productEntity: Record<string, unknown> = {
-    "@type": "SoftwareApplication",
-    "@id": `${SITE_URL}/models/${model.slug}#software`,
-    name: model.name,
-    description: model.description,
-    image: imageUrl,
-    applicationCategory: "WebApplication",
-    publisher: { "@type": "Organization", name: model.developer },
-    releaseDate: model.releaseDate,
-    additionalProperty: [
-      { "@type": "PropertyValue", name: "Parameters", value: parametersText },
-      { "@type": "PropertyValue", name: "Context Window", value: contextWindowText },
-      { "@type": "PropertyValue", name: "License", value: licenseText },
-    ],
-  };
-
-  const commonOfferDetails = {
-    availability: "https://schema.org/InStock",
-    itemCondition: "https://schema.org/NewCondition",
-  };
-  // Include offers: use real pricing data if available, otherwise fallback to 0.
-  // pricing is jsonb in the DB and historically holds several shapes (array,
-  // object, string, null) — only a real array may reach .map.
-  if (Array.isArray(model.pricing) && model.pricing.length > 0) {
-    productEntity.offers = model.pricing.map((p) => ({
-      "@type": "Offer",
-      price: String(p.amount),
-      priceCurrency: p.currency,
-      description: p.notes || `${p.unit}`,
-      ...commonOfferDetails,
-    }));
-  } else {
-    productEntity.offers = {
-      "@type": "Offer",
-      price: "0",
-      priceCurrency: "USD",
-      ...commonOfferDetails,
-    };
-  }
-
-  // Cross-link to base model if this is a variant
-  if (model.baseModel) {
-    productEntity.isVariantOf = {
-      "@type": "SoftwareApplication",
-      name: model.baseModel,
-      url: `${SITE_URL}/models/${model.baseModel}`,
-    };
-  }
-
-  const breadcrumbEntity = {
-    "@type": "BreadcrumbList",
-    "@id": `${SITE_URL}/models/${model.slug}#breadcrumb`,
-    itemListElement: [
-      {
-        "@type": "ListItem",
-        position: 1,
-        name: "Home",
-        item: SITE_URL,
-      },
-      {
-        "@type": "ListItem",
-        position: 2,
-        name: "Models",
-        item: `${SITE_URL}/models`,
-      },
-      {
-        "@type": "ListItem",
-        position: 3,
-        name: model.developer,
-        item: `${SITE_URL}/models/developer/${encodeURIComponent(model.developer)}`,
-      },
-      {
-        "@type": "ListItem",
-        position: 4,
-        name: model.name,
-        item: `${SITE_URL}/models/${model.slug}`,
-      },
-    ],
-  };
-
-  const structuredData = {
-    "@context": "https://schema.org",
-    "@graph": [
-      breadcrumbEntity,
-      {
-        "@type": "TechArticle",
-        "@id": `${SITE_URL}/models/${model.slug}#article`,
-        headline: `${model.name} Technical Specifications & Overview`,
-        description: model.description,
-        datePublished: model.releaseDate,
-        dateModified: model.updatedAt || model.releaseDate,
-        publisher: { "@type": "Organization", name: "Modelverse", url: SITE_URL },
-        about: { "@id": `${SITE_URL}/models/${model.slug}#software` },
-      },
-      productEntity,
-    ],
-  };
+  const benchmarks = (typeof model.benchmarks === "object" && model.benchmarks !== null ? model.benchmarks : {}) as Record<string, number | string>;
 
   return (
-    <>
-      <JsonLd data={structuredData} />
-      <ModelDocsLayout
-        model={model}
-        markdownContent={markdownContent}
-        familyMembers={familyMembers}
-        relatedModels={relatedModels}
-        evidence={evidence}
-      />
-    </>
+    <main className="w-full max-w-7xl mx-auto px-4 sm:px-6 md:px-10 py-10 md:py-14">
+      <div className="grid grid-cols-1 xl:grid-cols-12 gap-10 items-start">
+        {/* Main Content Area (9 cols on wide screens) */}
+        <div className="xl:col-span-9 space-y-10">
+          {/* Identity & Header */}
+          <div id="overview">
+            <ModelHeader model={model} />
+          </div>
+
+          {/* Technical Architecture & Execution Specifications */}
+          <div id="specifications">
+            <LineageSpecSection model={model} />
+          </div>
+
+          {/* Verified Benchmarks Visualizer */}
+          {Object.keys(benchmarks).length > 0 && (
+            <div id="benchmarks">
+              <BenchmarksSection benchmarks={benchmarks} />
+            </div>
+          )}
+
+          {/* Commercial Rates & API Pricing */}
+          <div id="pricing">
+            <PricingSection model={model} />
+          </div>
+
+          {/* API Multi-Language Quickstart */}
+          <div id="quickstart">
+            <QuickstartSection model={model} />
+          </div>
+
+          {/* Sources & Provenance Links */}
+          <div id="sources">
+            <SourcesSection model={model} />
+          </div>
+        </div>
+
+        {/* Sticky Table of Contents (3 cols on desktop) */}
+        <aside className="hidden xl:block xl:col-span-3 sticky top-24 p-5 rounded-[var(--radius-card)] bg-[var(--card-bg)] shadow-[var(--shadow-card)] border border-[var(--muted)]/10 text-xs space-y-4">
+          <div className="flex items-center gap-2 text-[var(--text)] font-bold uppercase tracking-wider">
+            <span className="w-1.5 h-3 bg-[var(--accent)] rounded-full" />
+            <span>On This Page</span>
+          </div>
+
+          <ul className="space-y-2.5 text-[var(--muted)] pl-2 border-l border-[var(--muted)]/10 font-medium">
+            <li>
+              <a href="#overview" className="hover:text-[var(--accent)] transition-colors block">
+                Overview &amp; Identity
+              </a>
+            </li>
+            <li>
+              <a href="#specifications" className="hover:text-[var(--accent)] transition-colors block">
+                Architecture &amp; Specs
+              </a>
+            </li>
+            {Object.keys(benchmarks).length > 0 && (
+              <li>
+                <a href="#benchmarks" className="hover:text-[var(--accent)] transition-colors block">
+                  Verified Benchmarks
+                </a>
+              </li>
+            )}
+            <li>
+              <a href="#pricing" className="hover:text-[var(--accent)] transition-colors block">
+                Commercial Pricing
+              </a>
+            </li>
+            <li>
+              <a href="#quickstart" className="hover:text-[var(--accent)] transition-colors block">
+                API Quickstart
+              </a>
+            </li>
+            <li>
+              <a href="#sources" className="hover:text-[var(--accent)] transition-colors block">
+                Sources &amp; Repositories
+              </a>
+            </li>
+          </ul>
+        </aside>
+      </div>
+    </main>
   );
 }

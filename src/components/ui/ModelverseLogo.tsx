@@ -37,7 +37,6 @@ export default function ModelverseLogo({
     );
   }
 
-  // Horizontal logo (1280x320 -> 4:1 aspect ratio)
   const calcWidth = Math.round(height * 4);
 
   return (

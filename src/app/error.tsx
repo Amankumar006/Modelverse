@@ -1,8 +1,10 @@
-'use client';
+"use client";
 
-import { useEffect } from 'react';
+import React, { useEffect } from "react";
+import Link from "next/link";
+import { AlertTriangle, RefreshCw, Home } from "lucide-react";
 
-export default function Error({
+export default function ErrorBoundary({
   error,
   reset,
 }: {
@@ -10,29 +12,37 @@ export default function Error({
   reset: () => void;
 }) {
   useEffect(() => {
-    // Log the error to an error reporting service
-    console.error(error);
+    console.error("Application runtime error:", error);
   }, [error]);
 
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center bg-[#141414] text-[#E4E4E7] font-sans px-4">
-      <div className="max-w-md w-full liquid-glass rounded-2xl p-8 text-center flex flex-col items-center animate-fade-rise">
-        <div className="w-12 h-12 rounded-full bg-red-900/30 flex items-center justify-center mb-6 text-red-500">
-           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
-              <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
-            </svg>
+    <main className="w-full flex-1 flex flex-col items-center justify-center text-center px-4 py-20">
+      <div className="max-w-md space-y-4">
+        <div className="p-3 rounded-full bg-[var(--accent-soft)] text-[var(--accent)] w-fit mx-auto">
+          <AlertTriangle size={24} />
         </div>
-        <h2 className="text-3xl mb-4 font-display text-[#F4F4F5] tracking-tight">Something went wrong</h2>
-        <p className="text-[#D4D4D8] mb-8 text-base">
-          An unexpected error has occurred. We&apos;ve logged the issue and are looking into it.
+        <h1 className="text-2xl sm:text-3xl font-extrabold text-[var(--text)] tracking-tight">
+          Something went wrong
+        </h1>
+        <p className="text-xs sm:text-sm text-[var(--muted)] leading-relaxed">
+          An unexpected error occurred while rendering this view. Please try refreshing or return home.
         </p>
-        <button
-          onClick={() => reset()}
-          className="px-6 py-2.5 rounded-full bg-[#10B981] hover:bg-[#059669] text-[#141414] font-semibold transition-colors duration-200"
-        >
-          Try Again
-        </button>
+
+        <div className="pt-4 flex flex-col sm:flex-row items-center justify-center gap-3">
+          <button
+            onClick={() => reset()}
+            className="inline-flex items-center gap-1.5 px-4 py-2 rounded-[var(--radius-control)] bg-[var(--accent)] text-[var(--accent-contrast)] text-xs font-bold hover:opacity-90 transition-opacity cursor-pointer"
+          >
+            <RefreshCw size={14} /> Try Again
+          </button>
+          <Link
+            href="/"
+            className="inline-flex items-center gap-1.5 px-4 py-2 rounded-[var(--radius-control)] bg-[var(--card-bg)] border border-[var(--muted)]/20 text-xs font-semibold text-[var(--text)] hover:border-[var(--accent)] transition-colors"
+          >
+            <Home size={14} /> Back to Home
+          </Link>
+        </div>
       </div>
-    </div>
+    </main>
   );
 }

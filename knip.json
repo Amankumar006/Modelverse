@@ -1,7 +1,0 @@
-{
-  "ignore": [
-    "scripts/**",
-    "tests/**",
-    "data/schema/**"
-  ]
-}

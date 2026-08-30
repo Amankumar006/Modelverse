@@ -3,31 +3,24 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev --turbopack",
+    "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint",
-    "recompute-quality": "node scripts/recompute-quality.js"
+    "lint": "eslint"
   },
   "dependencies": {
-    "@gsap/react": "^2.1.2",
-    "@next/third-parties": "^16.3.0",
-    "@supabase/ssr": "^0.12.4",
-    "@supabase/supabase-js": "^2.112.2",
+    "@supabase/supabase-js": "^2.112.4",
     "@tailwindcss/typography": "^0.5.20",
     "clsx": "^2.1.1",
-    "dotenv": "^17.4.2",
-    "fuse.js": "^7.4.2",
-    "gsap": "^3.15.0",
-    "lucide-react": "^1.24.0",
-    "mermaid": "^11.16.1",
-    "next": "^16.3.0",
+    "fuse.js": "^7.5.0",
+    "lucide-react": "^1.37.0",
+    "next": "16.3.3",
     "next-themes": "^0.4.6",
-    "react": "19.2.4",
-    "react-dom": "19.2.4",
+    "react": "19.2.8",
+    "react-dom": "19.2.8",
     "react-markdown": "^10.1.0",
     "remark-gfm": "^4.0.1",
-    "zod": "^4.4.3"
+    "zod": "^4.5.4"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
@@ -35,7 +28,7 @@
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "eslint": "^9",
-    "eslint-config-next": "16.2.10",
+    "eslint-config-next": "16.3.3",
     "tailwindcss": "^4",
     "typescript": "^5"
   }

@@ -31,18 +31,6 @@
   --text-fluid-base--line-height: 1.5;
   --text-fluid-sm: clamp(0.75rem, 2vw, 0.875rem);
   --text-fluid-sm--line-height: 1.5;
-
-  --animate-marquee-left: marquee-left 22s linear infinite;
-  --animate-marquee-right: marquee-right 26s linear infinite;
-
-  @keyframes marquee-left {
-    from { transform: translateX(0); }
-    to { transform: translateX(-50%); }
-  }
-  @keyframes marquee-right {
-    from { transform: translateX(-50%); }
-    to { transform: translateX(0); }
-  }
 }
 
 body {
@@ -53,7 +41,7 @@ body {
   transition: background-color 0.2s ease, color 0.2s ease;
 }
 
-/* Custom Scrollbar for all elements */
+/* Custom Scrollbar */
 ::-webkit-scrollbar {
   width: 6px;
   height: 6px;
@@ -74,66 +62,6 @@ body {
   scrollbar-color: var(--muted) transparent;
 }
 
-/* Utility to completely hide scrollbars if needed */
-@layer utilities {
-  .no-scrollbar::-webkit-scrollbar {
-    display: none;
-  }
-  .no-scrollbar {
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-  }
-}
-
 .tabular-nums {
   font-variant-numeric: tabular-nums;
 }
-
-/* ------------------------------------------------------------------ */
-/*  Prose & Typography Styles                                          */
-/* ------------------------------------------------------------------ */
-.prose {
-  font-size: 1rem;
-  line-height: 1.7;
-  color: var(--text);
-}
-
-.prose p {
-  margin-top: 1.25em;
-  margin-bottom: 1.25em;
-  color: var(--text);
-  font-size: 1rem;
-  font-weight: 400;
-  line-height: 1.7;
-}
-
-.prose h1, .prose h2, .prose h3, .prose h4 {
-  font-family: var(--font-sans);
-  color: var(--text);
-  font-weight: 700;
-  letter-spacing: -0.02em;
-}
-
-.prose a {
-  color: var(--accent);
-  text-decoration: underline;
-  text-underline-offset: 3px;
-  font-weight: 500;
-}
-
-.prose a:hover {
-  opacity: 0.85;
-}
-
-.prose blockquote {
-  border-left: 3px solid var(--accent);
-  color: var(--muted);
-  font-style: normal;
-  background: var(--card-bg);
-  padding: 0.85rem 1.15rem;
-  border-radius: var(--radius-control);
-  box-shadow: var(--shadow-card);
-  margin-top: 1.4em;
-  margin-bottom: 1.4em;
-}
-

@@ -1,76 +1,44 @@
+import React from "react";
 import type { Metadata } from "next";
-import { getTrendingModels } from "@/lib/trending";
-import { SITE_URL } from "@/lib/models";
-import JsonLd from "@/components/JsonLd";
-import Navbar from "@/components/layout/Navbar";
+import Link from "next/link";
+import { ArrowLeft, Flame } from "lucide-react";
+import { getModels } from "@/lib/supabase/models";
 import TrendingClient from "@/components/trending/TrendingClient";
 
-// Revalidate every hour so the decay function is reflected in the static build
-export const revalidate = 3600;
+export const revalidate = 60;
 
 export const metadata: Metadata = {
-  title: "Trending AI Models — Modelverse",
-  description: "The top trending foundation AI models, ranked by a recency-decay scoring algorithm.",
-  alternates: {
-    canonical: `${SITE_URL}/trending`,
-  },
-  openGraph: {
-    title: "Trending AI Models — Modelverse",
-    description: "The top trending foundation AI models, ranked by a recency-decay scoring algorithm.",
-    url: `${SITE_URL}/trending`,
-  },
+  title: "Trending AI Models & Leaderboard — Modelverse",
+  description:
+    "Explore the top trending foundation AI models, ranked by verified benchmark evaluations and search interest.",
 };
 
 export default async function TrendingPage() {
-  const trendingModels = await getTrendingModels(20);
-
-  const structuredData = {
-    "@context": "https://schema.org",
-    "@type": "ItemList",
-    "name": "Trending AI Models",
-    "description": "The top trending foundation AI models.",
-    "itemListElement": trendingModels.map((model, index) => ({
-      "@type": "ListItem",
-      "position": index + 1,
-      "url": `${SITE_URL}/models/${model.slug}`,
-      "name": model.name
-    }))
-  };
+  const { models } = await getModels({ limit: 20, isActive: true });
 
   return (
-    <main className="min-h-screen bg-[#F2EFE9] text-[#2E352B] selection:bg-[#2E352B] selection:text-[#F2EFE9] pb-24 font-sans antialiased relative">
-      <JsonLd data={structuredData} />
-      
-      {/* Navbar with light theme to blend with linen background */}
-      <div className="w-full">
-        <Navbar theme="light" />
+    <main className="w-full max-w-5xl mx-auto px-4 sm:px-6 md:px-8 py-10 md:py-14 flex flex-col gap-8">
+      <div>
+        <Link
+          href="/"
+          className="inline-flex items-center gap-1.5 text-xs text-[var(--muted)] hover:text-[var(--text)] transition-colors font-medium mb-4"
+        >
+          <ArrowLeft size={14} /> Back to Home
+        </Link>
+
+        <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[var(--accent)] mb-1">
+          <Flame size={14} />
+          <span>Frontier Index</span>
+        </div>
+        <h1 className="text-3xl sm:text-4xl font-extrabold text-[var(--text)] tracking-tight">
+          Trending Models Leaderboard
+        </h1>
+        <p className="text-xs sm:text-sm text-[var(--muted)] mt-1.5 max-w-2xl leading-relaxed">
+          Ranked foundation models across reasoning performance, context size, and engineering benchmark scores.
+        </p>
       </div>
 
-      <div className="max-w-6xl mx-auto px-6 sm:px-8 lg:px-12 pt-16 sm:pt-24">
-        {/* Style block for dimming hover logic */}
-        <style dangerouslySetInnerHTML={{ __html: `
-          .list-container:hover .list-item {
-            opacity: 0.25;
-          }
-          .list-container .list-item:hover {
-            opacity: 1;
-          }
-          .list-item .item-title {
-            font-family: var(--font-serif), 'Cormorant Garamond', Georgia, serif;
-          }
-        `}} />
-
-        <header className="fade-in flex flex-col sm:flex-row justify-between items-baseline gap-4 mb-16 sm:mb-24">
-          <div className="text-[10px] sm:text-xs uppercase tracking-[0.2em] text-[#8C9485] font-semibold">
-            Index 01—20 · Updated Hourly
-          </div>
-          <h1 className="text-fluid-h1 font-light italic text-[#2E352B]" style={{ fontFamily: "var(--font-serif), serif" }}>
-            Trending Now
-          </h1>
-        </header>
-
-        <TrendingClient initialModels={trendingModels} />
-      </div>
+      <TrendingClient initialModels={models} />
     </main>
   );
 }

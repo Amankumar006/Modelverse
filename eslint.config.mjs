@@ -11,24 +11,8 @@ const eslintConfig = defineConfig([
     ".next/**",
     "out/**",
     "build/**",
-    ".vercel/**",
     "next-env.d.ts",
   ]),
-  {
-    rules: {
-      "@typescript-eslint/no-explicit-any": "warn",
-      "@typescript-eslint/no-require-imports": "warn",
-      "@typescript-eslint/no-unused-vars": "warn",
-      "@next/next/no-img-element": "warn"
-    }
-  },
-  {
-    files: ["**/*.js"],
-    rules: {
-      "@typescript-eslint/no-require-imports": "off",
-      "@typescript-eslint/no-unused-vars": "off"
-    }
-  }
 ]);
 
 export default eslintConfig;

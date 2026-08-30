@@ -1,54 +1,27 @@
 "use client";
 
-import React, { useEffect, useRef, useState } from "react";
+import React, { useState } from "react";
 import Link from "next/link";
-import { TrendingModelEntry } from "@/lib/trending";
-import { Info } from "lucide-react";
+import { Info, ArrowUpRight, Cpu } from "lucide-react";
+import type { ModelRow } from "@/types/database";
 
 interface TrendingClientProps {
-  initialModels: TrendingModelEntry[];
+  initialModels: ModelRow[];
 }
 
 export default function TrendingClient({ initialModels }: TrendingClientProps) {
-  const containerRef = useRef<HTMLDivElement>(null);
   const [showExplainer, setShowExplainer] = useState(false);
-
-  useEffect(() => {
-    import("gsap").then(({ gsap }) => {
-      if (!containerRef.current) return;
-
-      const items = containerRef.current.querySelectorAll(".list-item");
-      const header = document.querySelector(".fade-in");
-
-      gsap.fromTo(
-        header,
-        { y: 20, opacity: 0 },
-        { y: 0, opacity: 1, duration: 1, ease: "power2.out" }
-      );
-
-      gsap.fromTo(
-        items,
-        { y: 20, opacity: 0 },
-        {
-          y: 0,
-          opacity: 1,
-          duration: 0.8,
-          stagger: 0.06,
-          ease: "power3.out",
-          delay: 0.1,
-        }
-      );
-    });
-  }, [initialModels]);
 
   return (
     <div className="w-full space-y-6">
       {/* Score Explainer Toggle */}
-      <div className="flex items-center justify-between pb-2 border-b border-[var(--muted)]/10">
-        <span className="text-xs text-[var(--muted)]">Ranked by Modelverse Activity & Search Velocity Index</span>
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-3 border-b border-[var(--muted)]/10">
+        <span className="text-xs text-[var(--muted)]">
+          Ranked by Modelverse Benchmark Performance & Context Capacity Index
+        </span>
         <button
           onClick={() => setShowExplainer(!showExplainer)}
-          className="inline-flex items-center gap-1.5 text-xs text-[var(--accent)] hover:underline font-semibold"
+          className="inline-flex items-center gap-1.5 text-xs text-[var(--accent)] hover:underline font-semibold self-start sm:self-auto cursor-pointer"
         >
           <Info size={14} />
           <span>How ranking works</span>
@@ -57,37 +30,56 @@ export default function TrendingClient({ initialModels }: TrendingClientProps) {
 
       {/* Explainer Popover */}
       {showExplainer && (
-        <div className="p-4 rounded-[var(--radius-card)] bg-[var(--card-bg)] shadow-[var(--shadow-card)] text-xs text-[var(--muted)] leading-relaxed space-y-2">
+        <div className="p-4 rounded-[var(--radius-card)] bg-[var(--card-bg)] shadow-[var(--shadow-card)] text-xs text-[var(--muted)] leading-relaxed space-y-1.5 border border-[var(--muted)]/10">
           <p className="font-bold text-[var(--text)]">Trending Score Algorithm:</p>
           <p>
-            Rankings are updated daily based on a composite score combining primary documentation traffic, curator verification status, release recency, and community search frequency.
+            Rankings evaluate a weighted blend of verified benchmark evaluations (MMLU, GPQA, MATH), context window capacity, active developer support, and release recency.
           </p>
         </div>
       )}
 
       {/* List Container */}
-      <div ref={containerRef} className="list-container w-full divide-y divide-[var(--muted)]/10">
+      <div className="w-full divide-y divide-[var(--muted)]/10">
         {initialModels.map((model, index) => {
           const rankNum = String(index + 1).padStart(2, "0");
           return (
             <Link
               key={model.id}
               href={`/models/${model.slug}`}
-              className="list-item relative grid grid-cols-[60px_1fr_120px] sm:grid-cols-[80px_1fr_200px] items-center py-6 sm:py-8 cursor-pointer text-inherit transition-all hover:bg-[var(--accent-soft)]/20 px-3 rounded-[var(--radius-control)] group"
+              className="grid grid-cols-[48px_1fr_auto] sm:grid-cols-[64px_1fr_auto] items-center py-5 sm:py-6 hover:bg-[var(--accent-soft)]/20 px-4 rounded-[var(--radius-control)] group transition-all"
             >
-              {/* Rank Number (Plain Figtree numerals, tabular-nums) */}
-              <div className="item-num text-sm sm:text-base text-[var(--muted)] font-semibold font-sans tabular-nums">
+              {/* Rank Number */}
+              <div className="text-base sm:text-lg font-bold text-[var(--muted)] font-mono tabular-nums">
                 {rankNum}
               </div>
 
-              {/* Title */}
-              <div className="item-title font-bold text-xl sm:text-3xl tracking-tight text-[var(--text)] group-hover:text-[var(--accent)] transition-colors pr-4">
-                {model.name}
+              {/* Title & Developer */}
+              <div className="min-w-0 pr-4">
+                <div className="flex items-center gap-2">
+                  <h3 className="font-bold text-base sm:text-xl tracking-tight text-[var(--text)] group-hover:text-[var(--accent)] transition-colors truncate">
+                    {model.name}
+                  </h3>
+                  <span className="text-[9px] px-2 py-0.5 rounded-full bg-[var(--tag-bg)] text-[var(--tag-text)] font-medium uppercase shrink-0">
+                    {model.category || "LLM"}
+                  </span>
+                </div>
+                <p className="text-xs text-[var(--muted)] truncate mt-0.5">{model.provider}</p>
               </div>
 
-              {/* Developer */}
-              <div className="item-category text-xs sm:text-sm text-[var(--muted)] text-right font-medium truncate">
-                {model.developer}
+              {/* Specs & Link Icon */}
+              <div className="flex items-center gap-4 text-xs text-[var(--muted)] font-mono">
+                {model.context_window && (
+                  <span className="hidden sm:flex items-center gap-1">
+                    <Cpu size={12} className="text-[var(--accent)]" />
+                    {model.context_window >= 1000000
+                      ? `${(model.context_window / 1000000).toFixed(0)}M ctx`
+                      : `${Math.round(model.context_window / 1000)}k ctx`}
+                  </span>
+                )}
+                <ArrowUpRight
+                  size={16}
+                  className="text-[var(--muted)] group-hover:text-[var(--accent)] transition-colors"
+                />
               </div>
             </Link>
           );

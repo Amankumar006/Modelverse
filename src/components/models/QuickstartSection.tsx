@@ -1,228 +1,136 @@
 "use client";
 
 import React, { useState } from "react";
-import { normalizeQuickstart } from "@/lib/model-normalization";
-import CodeBlock from "@/components/ui/CodeBlock";
-import MarkdownRenderer from "@/components/ui/MarkdownRenderer";
-import { Terminal, Key, Box, AlertCircle, Sparkles, CheckCircle2, ChevronRight } from "lucide-react";
+import { Terminal, Copy, Check } from "lucide-react";
+import type { ModelRow } from "@/types/database";
 
 interface QuickstartSectionProps {
-  quickstart: unknown;
-  modelName?: string;
-  developer?: string;
+  model: ModelRow;
 }
 
-export default function QuickstartSection({ quickstart, modelName = "model" }: QuickstartSectionProps) {
-  const normalized = normalizeQuickstart(quickstart);
-  const { codeExamples, overview, prerequisites, installation, environment, firstRequest, responseHandling, productionNotes } = normalized;
+export default function QuickstartSection({ model }: QuickstartSectionProps) {
+  const [activeTab, setActiveTab] = useState<"curl" | "python" | "node">("python");
+  const [copied, setCopied] = useState(false);
 
-  // Initialize selected language to first available code example
-  const [selectedLang, setSelectedLang] = useState<string>(codeExamples[0]?.language || "python");
+  const modelId = model.slug;
 
-  if (!normalized.hasContent) {
-    return null;
-  }
+  const pythonCode = `import os
+from openai import OpenAI
 
-  const activeExample = codeExamples.find((ex) => ex.language === selectedLang) || codeExamples[0];
+client = OpenAI(
+    api_key=os.environ.get("${model.provider.toUpperCase()}_API_KEY"),
+)
+
+response = client.chat.completions.create(
+    model="${modelId}",
+    messages=[
+        {"role": "system", "content": "You are a helpful assistant."},
+        {"role": "user", "content": "Explain quantum superposition in 2 sentences."}
+    ],
+    temperature=0.7,
+)
+
+print(response.choices[0].message.content)`;
+
+  const curlCode = `curl https://api.${model.provider.toLowerCase().replace(/\s+/g, '')}.com/v1/chat/completions \\
+  -H "Content-Type: application/json" \\
+  -H "Authorization: Bearer $${model.provider.toUpperCase()}_API_KEY" \\
+  -d '{
+    "model": "${modelId}",
+    "messages": [
+      {"role": "user", "content": "Hello world!"}
+    ]
+  }'`;
+
+  const nodeCode = `import OpenAI from "openai";
+
+const openai = new OpenAI({
+  apiKey: process.env.${model.provider.toUpperCase()}_API_KEY,
+});
+
+async function main() {
+  const completion = await openai.chat.completions.create({
+    model: "${modelId}",
+    messages: [{ role: "user", content: "Hello world!" }],
+  });
+
+  console.log(completion.choices[0].message.content);
+}
+
+main();`;
+
+  const getActiveCode = () => {
+    switch (activeTab) {
+      case "python":
+        return pythonCode;
+      case "curl":
+        return curlCode;
+      case "node":
+        return nodeCode;
+    }
+  };
+
+  const handleCopy = async () => {
+    await navigator.clipboard.writeText(getActiveCode());
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
 
   return (
-    <section id="getting-started" className="space-y-6 pt-6 border-t border-[var(--muted)]/10">
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
-        <div>
-          <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[var(--accent)] mb-1">
-            <Terminal size={14} />
-            <span>Developer Quickstart</span>
-          </div>
-          <h2 className="text-2xl sm:text-3xl font-extrabold text-[var(--text)] tracking-tight">
-            Getting Started
-          </h2>
+    <section className="p-6 sm:p-8 rounded-[var(--radius-card)] bg-[var(--card-bg)] shadow-[var(--shadow-card)] border border-[var(--muted)]/10 space-y-4">
+      <div className="flex items-center justify-between">
+        <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[var(--accent)]">
+          <Terminal size={16} />
+          <span>API Quickstart Integration</span>
         </div>
-        <span className="text-xs font-mono text-[var(--muted)] bg-[var(--card-bg)] px-2.5 py-1 rounded-[var(--radius-control)] border border-[var(--muted)]/10 w-fit">
-          API Reference &amp; SDKs
-        </span>
+
+        <button
+          onClick={handleCopy}
+          className="inline-flex items-center gap-1.5 px-3 py-1 rounded-[var(--radius-pill)] bg-[var(--bg)] border border-[var(--muted)]/15 text-xs text-[var(--text)] hover:border-[var(--accent)] transition-colors cursor-pointer"
+        >
+          {copied ? <Check size={13} className="text-emerald-500" /> : <Copy size={13} />}
+          <span>{copied ? "Copied!" : "Copy Snippet"}</span>
+        </button>
       </div>
 
-      {/* A. Overview */}
-      {overview && (
-        <div className="text-sm text-[var(--muted)] leading-relaxed font-normal max-w-3xl">
-          <MarkdownRenderer content={overview} />
-        </div>
-      )}
-
-      {/* Main Interactive Code Examples Panel */}
-      {codeExamples.length > 0 && (
-        <div className="space-y-3">
-          {/* Language Switcher Tabs */}
-          <div className="flex flex-wrap items-center justify-between gap-3">
-            <p className="text-xs text-[var(--muted)] font-medium">
-              Select an implementation language for {modelName}:
-            </p>
-            {codeExamples.length > 1 && (
-              <div className="flex gap-1.5 p-1 rounded-[var(--radius-pill)] bg-[var(--card-bg)] border border-[var(--muted)]/10">
-                {codeExamples.map((ex) => (
-                  <button
-                    key={ex.language}
-                    type="button"
-                    onClick={() => setSelectedLang(ex.language)}
-                    className={`px-3 py-1 text-xs font-bold rounded-[var(--radius-pill)] transition-all cursor-pointer ${
-                      selectedLang === ex.language
-                        ? "bg-[var(--accent-soft)] text-[var(--accent)] shadow-sm"
-                        : "text-[var(--muted)] hover:text-[var(--text)]"
-                    }`}
-                  >
-                    {ex.label}
-                  </button>
-                ))}
-              </div>
-            )}
-          </div>
-
-          {/* Active Code Block */}
-          {activeExample && (
-            <CodeBlock
-              language={activeExample.language}
-              code={activeExample.code}
-              filename={`${modelName.toLowerCase().replace(/[^a-z0-9]+/g, "-")}-quickstart.${
-                activeExample.language === "python" ? "py" : activeExample.language === "javascript" ? "js" : activeExample.language === "typescript" ? "ts" : "sh"
-              }`}
-            />
-          )}
-        </div>
-      )}
-
-      {/* Additional Implementation Guidance (B - H) */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-2">
-        {/* B. Prerequisites */}
-        {prerequisites && prerequisites.length > 0 && (
-          <div className="rounded-[var(--radius-card)] bg-[var(--card-bg)] shadow-[var(--shadow-card)] p-4 border border-[var(--muted)]/10 space-y-2.5">
-            <h4 className="text-xs uppercase tracking-wider font-bold text-[var(--text)] flex items-center gap-1.5">
-              <CheckCircle2 size={13} className="text-emerald-500" />
-              <span>Prerequisites</span>
-            </h4>
-            <ul className="space-y-1.5 text-xs text-[var(--muted)]">
-              {prerequisites.map((req, idx) => (
-                <li key={idx} className="flex items-start gap-2">
-                  <span className="text-[var(--accent)] font-bold">•</span>
-                  <span>{req}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-        )}
-
-        {/* C. Installation */}
-        {installation && (
-          <div className="rounded-[var(--radius-card)] bg-[var(--card-bg)] shadow-[var(--shadow-card)] p-4 border border-[var(--muted)]/10 space-y-2.5">
-            <h4 className="text-xs uppercase tracking-wider font-bold text-[var(--text)] flex items-center gap-1.5">
-              <Box size={13} className="text-[var(--accent)]" />
-              <span>Installation</span>
-            </h4>
-            {typeof installation === "string" ? (
-              <div className="text-xs font-mono bg-[var(--bg)] p-2.5 rounded-[var(--radius-control)] border border-[var(--muted)]/10 text-[var(--text)]">
-                {installation}
-              </div>
-            ) : (
-              <div className="space-y-2">
-                {Object.entries(installation).map(([pkgManager, cmd]) => (
-                  <div key={pkgManager} className="space-y-1">
-                    <span className="text-[10px] uppercase tracking-wider font-mono text-[var(--muted)]">{pkgManager}</span>
-                    <div className="text-xs font-mono bg-[var(--bg)] p-2 rounded-[var(--radius-control)] border border-[var(--muted)]/10 text-[var(--text)]">
-                      {cmd}
-                    </div>
-                  </div>
-                ))}
-              </div>
-            )}
-          </div>
-        )}
-
-        {/* D. Environment Variables */}
-        {environment && (
-          <div className="rounded-[var(--radius-card)] bg-[var(--card-bg)] shadow-[var(--shadow-card)] p-4 border border-[var(--muted)]/10 space-y-2.5">
-            <h4 className="text-xs uppercase tracking-wider font-bold text-[var(--text)] flex items-center gap-1.5">
-              <Key size={13} className="text-amber-500" />
-              <span>Authentication &amp; Environment</span>
-            </h4>
-            {typeof environment === "string" ? (
-              <div className="text-xs font-mono bg-[var(--bg)] p-2.5 rounded-[var(--radius-control)] border border-[var(--muted)]/10 text-[var(--text)]">
-                {environment}
-              </div>
-            ) : Array.isArray(environment) ? (
-              <ul className="space-y-1 text-xs font-mono text-[var(--text)]">
-                {environment.map((envVar, i) => (
-                  <li key={i} className="bg-[var(--bg)] px-2.5 py-1 rounded-[var(--radius-control)] border border-[var(--muted)]/10">
-                    {envVar}
-                  </li>
-                ))}
-              </ul>
-            ) : (
-              <div className="space-y-1.5">
-                {Object.entries(environment).map(([key, desc]) => (
-                  <div key={key} className="text-xs">
-                    <code className="text-[var(--accent)] font-bold font-mono">{key}</code>
-                    <span className="text-[var(--muted)] ml-2">— {desc}</span>
-                  </div>
-                ))}
-              </div>
-            )}
-          </div>
-        )}
-
-        {/* E. First Request */}
-        {firstRequest && (
-          <div className="rounded-[var(--radius-card)] bg-[var(--card-bg)] shadow-[var(--shadow-card)] p-4 border border-[var(--muted)]/10 space-y-2.5">
-            <h4 className="text-xs uppercase tracking-wider font-bold text-[var(--accent)] flex items-center gap-1.5">
-              <Sparkles size={13} className="text-[var(--accent)]" />
-              <span>First Request Guide</span>
-            </h4>
-            <div className="text-xs text-[var(--muted)] leading-relaxed">
-              <MarkdownRenderer content={firstRequest} />
-            </div>
-          </div>
-        )}
+      {/* Language Switcher Tabs */}
+      <div className="flex items-center gap-1 border-b border-[var(--muted)]/10 pb-2">
+        <button
+          onClick={() => setActiveTab("python")}
+          className={`px-3 py-1 rounded-md text-xs font-mono font-medium transition-colors ${
+            activeTab === "python"
+              ? "bg-[var(--accent-soft)] text-[var(--accent)] font-bold"
+              : "text-[var(--muted)] hover:text-[var(--text)]"
+          }`}
+        >
+          Python SDK
+        </button>
+        <button
+          onClick={() => setActiveTab("node")}
+          className={`px-3 py-1 rounded-md text-xs font-mono font-medium transition-colors ${
+            activeTab === "node"
+              ? "bg-[var(--accent-soft)] text-[var(--accent)] font-bold"
+              : "text-[var(--muted)] hover:text-[var(--text)]"
+          }`}
+        >
+          TypeScript / Node
+        </button>
+        <button
+          onClick={() => setActiveTab("curl")}
+          className={`px-3 py-1 rounded-md text-xs font-mono font-medium transition-colors ${
+            activeTab === "curl"
+              ? "bg-[var(--accent-soft)] text-[var(--accent)] font-bold"
+              : "text-[var(--muted)] hover:text-[var(--text)]"
+          }`}
+        >
+          cURL
+        </button>
       </div>
 
-      {/* G. Response Handling */}
-      {responseHandling && (
-        <div className="rounded-[var(--radius-card)] bg-[var(--card-bg)] shadow-[var(--shadow-card)] p-4 border border-[var(--muted)]/10 space-y-2.5">
-          <h4 className="text-xs uppercase tracking-wider font-bold text-[var(--text)] flex items-center gap-1.5">
-            <ChevronRight size={14} className="text-[var(--accent)]" />
-            <span>Response Parsing &amp; Handling</span>
-          </h4>
-          {typeof responseHandling === "string" ? (
-            <div className="text-xs text-[var(--muted)] leading-relaxed">
-              <MarkdownRenderer content={responseHandling} />
-            </div>
-          ) : (
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
-              {Object.entries(responseHandling).map(([field, explanation]) => (
-                <div key={field} className="p-2.5 rounded-[var(--radius-control)] bg-[var(--bg)] border border-[var(--muted)]/10">
-                  <span className="font-mono font-bold text-[var(--text)] block mb-0.5">{field}</span>
-                  <span className="text-[var(--muted)]">{explanation}</span>
-                </div>
-              ))}
-            </div>
-          )}
-        </div>
-      )}
-
-      {/* H. Production Notes */}
-      {productionNotes && productionNotes.length > 0 && (
-        <div className="p-4 rounded-[var(--radius-card)] bg-amber-500/5 border border-amber-500/20 text-xs space-y-2">
-          <h4 className="text-xs uppercase tracking-wider font-bold text-amber-500 flex items-center gap-1.5">
-            <AlertCircle size={13} />
-            <span>Production Best Practices &amp; Considerations</span>
-          </h4>
-          <ul className="space-y-1.5 text-zinc-300">
-            {productionNotes.map((note, idx) => (
-              <li key={idx} className="flex items-start gap-2">
-                <span className="text-amber-500 font-bold">•</span>
-                <span className="leading-relaxed">{note}</span>
-              </li>
-            ))}
-          </ul>
-        </div>
-      )}
+      {/* Code Viewer */}
+      <div className="relative rounded-[var(--radius-control)] bg-[#1a1714] text-[#f5efe6] p-4 overflow-x-auto font-mono text-xs leading-relaxed border border-[#332c25]">
+        <pre>{getActiveCode()}</pre>
+      </div>
     </section>
   );
 }

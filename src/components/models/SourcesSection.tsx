@@ -1,99 +1,91 @@
 "use client";
 
 import React from "react";
-import { extractDomainSources } from "@/lib/model-normalization";
-import { Link2, ExternalLink, FileText, Globe, Code, Shield, ArrowUpRight } from "lucide-react";
+import { ExternalLink, ShieldCheck, FileText, Code2, Calendar } from "lucide-react";
+import type { ModelRow } from "@/types/database";
 
 interface SourcesSectionProps {
-  sources: unknown;
-  links: unknown;
-  developer?: string;
-  modelName?: string;
+  model: ModelRow;
 }
 
-export default function SourcesSection({ sources, links, modelName }: SourcesSectionProps) {
-  const domainSources = extractDomainSources(sources, links);
+function isValidHttpUrl(string: string) {
+  try {
+    const url = new URL(string);
+    return url.protocol === "http:" || url.protocol === "https:";
+  } catch {
+    return false;
+  }
+}
 
-  if (domainSources.length === 0) {
-    return (
-      <section id="sources" className="space-y-4 pt-6 border-t border-[var(--muted)]/10">
-        <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[var(--accent)] mb-1">
-          <Link2 size={14} />
-          <span>Provenance &amp; Primary Documents</span>
-        </div>
-        <h2 className="text-2xl sm:text-3xl font-extrabold text-[var(--text)] tracking-tight">
-          Sources &amp; Provenance
-        </h2>
-        <div className="p-4 rounded-[var(--radius-card)] bg-[var(--card-bg)] border border-[var(--muted)]/10 text-xs text-[var(--muted)]">
-          No external research papers or primary source citations have been linked to this record yet.
-        </div>
-      </section>
-    );
+export default function SourcesSection({ model }: SourcesSectionProps) {
+  const rawLinks = (typeof model.links === "object" && model.links !== null ? model.links : {}) as Record<string, string>;
+
+  const webLinks: [string, string][] = [];
+  const metadataBadges: [string, string][] = [];
+
+  for (const [key, value] of Object.entries(rawLinks)) {
+    if (typeof value === "string" && isValidHttpUrl(value)) {
+      webLinks.push([key, value]);
+    } else if (value !== null && value !== undefined && String(value).trim()) {
+      metadataBadges.push([key, String(value)]);
+    }
   }
 
-  const getSourceIcon = (type?: string) => {
-    switch (type) {
-      case "paper":
-        return <FileText size={14} className="text-rose-400" />;
-      case "github":
-      case "huggingface":
-        return <Code size={14} className="text-amber-400" />;
-      case "system-card":
-        return <Shield size={14} className="text-emerald-400" />;
-      case "announcement":
-        return <Globe size={14} className="text-blue-400" />;
-      default:
-        return <ExternalLink size={14} className="text-[var(--accent)]" />;
-    }
-  };
-
   return (
-    <section id="sources" className="space-y-6 pt-6 border-t border-[var(--muted)]/10">
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
-        <div>
-          <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[var(--accent)] mb-1">
-            <Link2 size={14} />
-            <span>Verification &amp; Provenance</span>
-          </div>
-          <h2 className="text-2xl sm:text-3xl font-extrabold text-[var(--text)] tracking-tight">
-            Sources &amp; Provenance
-          </h2>
-        </div>
-        <span className="text-xs font-mono text-[var(--muted)] bg-[var(--card-bg)] px-2.5 py-1 rounded-[var(--radius-control)] border border-[var(--muted)]/10 w-fit">
-          {domainSources.length} Primary {domainSources.length === 1 ? "Citation" : "Citations"}
-        </span>
+    <section id="sources" className="p-6 sm:p-8 rounded-[var(--radius-card)] bg-[var(--card-bg)] shadow-[var(--shadow-card)] border border-[var(--muted)]/10 space-y-4">
+      <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[var(--accent)]">
+        <ShieldCheck size={16} />
+        <span>Primary Sources &amp; Access Repositories</span>
       </div>
 
-      <p className="text-sm text-[var(--muted)] leading-relaxed">
-        Direct references, official documentation endpoints, evaluation papers, and launch announcements referenced for <strong className="text-[var(--text)]">{modelName || "this model"}</strong>.
+      <p className="text-xs text-[var(--muted)] leading-relaxed max-w-2xl">
+        All specifications, parameters, and benchmark scores for <strong>{model.name}</strong> are audited against primary source release documentation, whitepapers, and verified vendor APIs.
       </p>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-        {domainSources.map((source, idx) => (
+      {/* Web & Repository Links */}
+      <div className="flex flex-wrap gap-2.5 pt-2">
+        {model.announcement_url && isValidHttpUrl(model.announcement_url) && (
           <a
-            key={`${source.url}-${idx}`}
-            href={source.url}
+            href={model.announcement_url}
             target="_blank"
-            rel="noreferrer"
-            className="rounded-[var(--radius-card)] bg-[var(--card-bg)] shadow-[var(--shadow-card)] p-4 border border-[var(--muted)]/10 hover:border-[var(--accent)] transition-all group flex items-start justify-between gap-3"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-[var(--radius-control)] bg-[var(--bg)] hover:bg-[var(--accent-soft)] hover:text-[var(--accent)] text-xs text-[var(--text)] border border-[var(--muted)]/15 transition-all font-medium cursor-pointer"
           >
-            <div className="space-y-1 min-w-0">
-              <div className="flex items-center gap-2">
-                {getSourceIcon(source.type)}
-                <span className="font-bold text-xs sm:text-sm text-[var(--text)] group-hover:text-[var(--accent)] transition-colors truncate">
-                  {source.label}
-                </span>
-              </div>
-              <p className="text-xs text-[var(--muted)] font-mono truncate">{source.domain}</p>
-              <p className="text-[11px] text-[var(--muted)]/70 font-mono truncate">{source.url}</p>
-            </div>
+            <FileText size={13} className="text-[var(--accent)]" />
+            <span>Official Announcement</span>
+            <ExternalLink size={12} className="opacity-60" />
+          </a>
+        )}
 
-            <div className="shrink-0 p-1 rounded bg-[var(--bg)] border border-[var(--muted)]/10 text-[var(--muted)] group-hover:text-[var(--accent)] transition-colors mt-0.5">
-              <ArrowUpRight size={13} />
-            </div>
+        {webLinks.map(([key, url]) => (
+          <a
+            key={key}
+            href={url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-[var(--radius-control)] bg-[var(--bg)] hover:bg-[var(--accent-soft)] hover:text-[var(--accent)] text-xs text-[var(--text)] border border-[var(--muted)]/15 transition-all capitalize font-medium cursor-pointer"
+          >
+            <span>{key.replace(/_/g, " ")}</span>
+            <ExternalLink size={12} className="opacity-60" />
           </a>
         ))}
       </div>
+
+      {/* Structured Technical Identifiers */}
+      {metadataBadges.length > 0 && (
+        <div className="pt-3 border-t border-[var(--muted)]/10 flex flex-wrap items-center gap-2 text-xs">
+          {metadataBadges.map(([key, val]) => (
+            <div
+              key={key}
+              className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-[var(--radius-control)] bg-[var(--bg)] border border-[var(--muted)]/10 text-[11px] text-[var(--muted)] font-mono"
+            >
+              {key.includes("api") ? <Code2 size={12} className="text-[var(--accent)]" /> : <Calendar size={12} className="text-[var(--accent)]" />}
+              <span className="capitalize">{key.replace(/_/g, " ")}:</span>
+              <strong className="text-[var(--text)] font-semibold">{val}</strong>
+            </div>
+          ))}
+        </div>
+      )}
     </section>
   );
 }

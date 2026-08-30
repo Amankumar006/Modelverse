@@ -1,152 +1,82 @@
-import { Metadata } from "next";
-import { getModelBySlug, getAllModels, SITE_URL } from "@/lib/models";
-import Navbar from "@/components/layout/Navbar";
-import CompareClient from "@/components/compare/CompareClient";
-import JsonLd from "@/components/JsonLd";
+import React from "react";
+import type { Metadata } from "next";
+import Link from "next/link";
+import { ArrowLeft } from "lucide-react";
+import { getModels } from "@/lib/supabase/models";
 
 export const revalidate = 60;
 
-interface PageProps {
-  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
-}
+export const metadata: Metadata = {
+  title: "Compare AI Models — Modelverse",
+  description: "Compare foundation models side-by-side across parameters, context windows, pricing, and benchmarks.",
+};
 
-export async function generateMetadata({
-  searchParams,
-}: PageProps): Promise<Metadata> {
-  const resolvedParams = await searchParams;
-  const modelsQuery = resolvedParams.models;
-  
-  let slugs: string[] = [];
-  if (typeof modelsQuery === "string") {
-    slugs = modelsQuery.split(",").map((s) => s.trim());
-  } else if (Array.isArray(modelsQuery)) {
-    slugs = modelsQuery.flatMap((s) => s.split(",").map((val) => val.trim()));
-  }
-
-  slugs = Array.from(new Set(slugs)).filter(Boolean).slice(0, 4);
-
-  const selectedModels = (
-    await Promise.all(slugs.map(async (slug) => await getModelBySlug(slug)))
-  ).filter((model): model is NonNullable<typeof model> => model !== null);
-
-  if (selectedModels.length > 0) {
-    const names = selectedModels.map((m) => m.name).join(" vs ");
-    const title = `Compare ${names} — Modelverse`;
-    const description = `Compare ${names} side-by-side. Analyze parameters, context windows, benchmarks, and licensing to find the best model for your use case.`;
-    const url = `${SITE_URL}/compare?models=${slugs.join(",")}`;
-
-    return {
-      title,
-      description,
-      alternates: {
-        canonical: url,
-      },
-      openGraph: {
-        title,
-        description,
-        url,
-        type: "website",
-        siteName: "Modelverse",
-        images: [`${SITE_URL}/api/og/compare?models=${slugs.join(",")}`],
-      },
-      twitter: {
-        card: "summary_large_image",
-        title,
-        description,
-        images: [`${SITE_URL}/api/og/compare?models=${slugs.join(",")}`],
-      },
-    };
-  }
-
-  return {
-    title: "Compare AI Models Side-by-Side — Modelverse",
-    description:
-      "Compare AI models side-by-side. Analyze parameters, context windows, benchmarks, and licensing to find the best model for your use case.",
-    alternates: {
-      canonical: `${SITE_URL}/compare`,
-    },
-    openGraph: {
-      title: "Compare AI Models Side-by-Side — Modelverse",
-      description: "Analyze parameters, context windows, benchmarks, and pricing across top AI foundation models.",
-      url: `${SITE_URL}/compare`,
-      type: "website",
-      siteName: "Modelverse",
-      images: [`${SITE_URL}/logos/social-avatar-1024.png`],
-    },
-    twitter: {
-      card: "summary_large_image",
-      title: "Compare AI Models Side-by-Side — Modelverse",
-      description: "Analyze parameters, context windows, benchmarks, and pricing across top AI foundation models.",
-      images: [`${SITE_URL}/logos/social-avatar-1024.png`],
-    },
-  };
-}
-
-export default async function ComparePage({ searchParams }: PageProps) {
-  const resolvedParams = await searchParams;
-  const modelsQuery = resolvedParams.models;
-
-  let slugs: string[] = [];
-  if (typeof modelsQuery === "string") {
-    slugs = modelsQuery.split(",").map((s) => s.trim());
-  } else if (Array.isArray(modelsQuery)) {
-    slugs = modelsQuery.flatMap((s) => s.split(",").map((val) => val.trim()));
-  }
-
-  slugs = Array.from(new Set(slugs)).filter(Boolean).slice(0, 4);
-
-  // Default to frontier flagship comparison if no query provided
-  if (slugs.length === 0) {
-    slugs = ["openai-gpt-4o", "anthropic-claude-3-5-sonnet"];
-  }
-
-  const [allAvailableModels, selectedModels] = await Promise.all([
-    getAllModels(),
-    Promise.all(slugs.map((slug) => getModelBySlug(slug))),
-  ]);
-
-  const initialModels = selectedModels.filter(
-    (model): model is NonNullable<typeof model> => model !== null
-  );
-
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@graph": [
-      {
-        "@type": "BreadcrumbList",
-        "@id": `${SITE_URL}/compare#breadcrumb`,
-        itemListElement: [
-          {
-            "@type": "ListItem",
-            position: 1,
-            name: "Home",
-            item: SITE_URL,
-          },
-          {
-            "@type": "ListItem",
-            position: 2,
-            name: "Compare Models",
-            item: `${SITE_URL}/compare`,
-          },
-        ],
-      },
-    ],
-  };
+export default async function ComparePage() {
+  const { models } = await getModels({ limit: 20, isActive: true });
 
   return (
-    <div className="min-h-screen bg-[var(--bg)] text-[var(--text)] font-sans flex flex-col justify-between">
-      <JsonLd data={jsonLd} />
+    <main className="w-full max-w-7xl mx-auto px-4 sm:px-6 md:px-10 lg:px-14 py-12 md:py-16 flex flex-col gap-8">
       <div>
-        <div className="sticky top-0 z-50 shrink-0 border-b border-[var(--muted)]/10 bg-[var(--bg)]">
-          <Navbar />
-        </div>
-        <main className="max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-10 md:py-14">
-          <CompareClient
-            initialModels={initialModels}
-            allAvailableModels={allAvailableModels}
-          />
-        </main>
+        <Link
+          href="/models"
+          className="inline-flex items-center gap-1.5 text-xs text-[var(--muted)] hover:text-[var(--text)] transition-colors font-medium mb-3"
+        >
+          <ArrowLeft size={14} /> Back to Catalog
+        </Link>
+        <h1 className="text-3xl sm:text-4xl font-extrabold text-[var(--text)] tracking-tight">
+          Model Comparison Matrix
+        </h1>
+        <p className="text-xs sm:text-sm text-[var(--muted)] mt-1.5 max-w-2xl leading-relaxed">
+          Side-by-side technical evaluation of frontier models, parameter sizing, context window capacity, and cost tiers.
+        </p>
       </div>
-    </div>
+
+      {models.length === 0 ? (
+        <div className="py-20 text-center flex flex-col items-center justify-center bg-[var(--card-bg)] rounded-[var(--radius-card)] border border-[var(--muted)]/10 p-8">
+          <p className="text-sm font-semibold text-[var(--text)]">No models available for comparison yet</p>
+          <p className="text-xs text-[var(--muted)] mt-1">Models will appear here once seeded or ingested.</p>
+        </div>
+      ) : (
+        <div className="overflow-x-auto rounded-[var(--radius-card)] border border-[var(--muted)]/10 bg-[var(--card-bg)] shadow-[var(--shadow-card)]">
+          <table className="w-full text-left text-xs sm:text-sm">
+            <thead>
+              <tr className="border-b border-[var(--muted)]/10 bg-[var(--accent-soft)]/20 text-[var(--text)]">
+                <th className="p-4 font-bold">Model</th>
+                <th className="p-4 font-bold">Provider</th>
+                <th className="p-4 font-bold">Context Window</th>
+                <th className="p-4 font-bold">Parameters</th>
+                <th className="p-4 font-bold">Category</th>
+                <th className="p-4 font-bold">Details</th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-[var(--muted)]/10 text-[var(--text)]">
+              {models.map((m) => (
+                <tr key={m.id} className="hover:bg-[var(--bg)] transition-colors">
+                  <td className="p-4 font-semibold">{m.name}</td>
+                  <td className="p-4 text-[var(--accent)] font-medium">{m.provider}</td>
+                  <td className="p-4 font-mono tabular-nums">
+                    {m.context_window ? `${m.context_window.toLocaleString("en-US")} tokens` : "Standard"}
+                  </td>
+                  <td className="p-4 font-mono">{m.parameters || "Proprietary"}</td>
+                  <td className="p-4">
+                    <span className="px-2.5 py-0.5 rounded-full text-[10px] font-medium bg-[var(--tag-bg)] text-[var(--tag-text)] uppercase">
+                      {m.category || "LLM"}
+                    </span>
+                  </td>
+                  <td className="p-4">
+                    <Link
+                      href={`/models/${m.slug}`}
+                      className="text-xs font-bold text-[var(--accent)] hover:underline"
+                    >
+                      View Specs &rarr;
+                    </Link>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      )}
+    </main>
   );
 }

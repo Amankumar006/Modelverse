@@ -1,84 +1,51 @@
+import React from "react";
 import type { Metadata } from "next";
 import Link from "next/link";
-import { getAllModels, SITE_URL } from "@/lib/models";
-import { ChevronLeft } from "lucide-react";
+import { ArrowLeft, Clock } from "lucide-react";
+import { getModels } from "@/lib/supabase/models";
 import TimelineContainer from "@/components/timeline/TimelineContainer";
-import JsonLd from "@/components/JsonLd";
 
 export const revalidate = 60;
 
 export const metadata: Metadata = {
-  title: "AI Model Release Timeline & Changelog — Modelverse",
+  title: "AI Model Release Timeline & History — Modelverse",
   description:
-    "A chronological ledger of every notable AI model release. Follow open-weight and closed-source updates as they ship.",
-  alternates: {
-    canonical: `${SITE_URL}/timeline`,
-  },
-  openGraph: {
-    title: "AI Model Release Timeline — Modelverse",
-    description:
-      "A chronological ledger of every notable AI model release. Follow open-weight and closed-source updates as they ship.",
-    url: `${SITE_URL}/timeline`,
-  },
+    "A chronological ledger of foundation model releases, architecture updates, and lab launches.",
 };
 
 export default async function TimelinePage() {
-  const models = await getAllModels(); // Already sorted newest-first by library
-
-  const structuredData = {
-    "@context": "https://schema.org",
-    "@type": "CollectionPage",
-    "name": "AI Model Release Timeline & Changelog",
-    "description": "A chronological ledger of every notable foundation AI model release tracked by Modelverse.",
-    "url": `${SITE_URL}/timeline`,
-    "mainEntity": {
-      "@type": "ItemList",
-      "itemListElement": models.slice(0, 50).map((m, idx) => ({
-        "@type": "ListItem",
-        "position": idx + 1,
-        "url": `${SITE_URL}/models/${m.slug}`,
-        "name": m.name,
-      })),
-    },
-  };
+  const { models } = await getModels({ limit: 100, isActive: true });
 
   return (
-    <main className="min-h-screen bg-[#141414] text-[#E4E4E7] selection:bg-[#DA7756] selection:text-white pb-24 relative font-sans">
-      <JsonLd data={structuredData} />
-      {/* ── Top Hero Background Gradient ── */}
-      <div className="absolute top-0 left-0 w-full h-[40vh] z-0 pointer-events-none select-none bg-gradient-to-b from-[#1C1C1E]/60 to-[#141414]" />
-
-      {/* ── Fixed Minimal Nav Back Link ─────────────────────── */}
-      <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 pt-8">
+    <main className="w-full max-w-4xl mx-auto px-4 sm:px-6 md:px-8 py-10 md:py-14 flex flex-col gap-8">
+      <div>
         <Link
           href="/"
-          className="inline-flex items-center gap-1 text-sm text-gray-400 hover:text-white transition-colors group focus-visible:outline-none rounded-lg px-2 py-1"
+          className="inline-flex items-center gap-1.5 text-xs text-[var(--muted)] hover:text-[var(--text)] transition-colors font-medium mb-4"
         >
-          <ChevronLeft size={16} className="transition-transform group-hover:-translate-x-0.5" />
-          Back to Home
+          <ArrowLeft size={14} /> Back to Home
         </Link>
-      </div>
 
-      {/* ── Content Container ───────────────────────────────── */}
-      <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 mt-6">
-        <div className="border-b border-[#27272A] pb-8 mb-12">
-          <h1 className="text-fluid-h1 font-serif font-normal tracking-tight text-[#F4F4F5]">
-            Release Timeline
-          </h1>
-          <p className="mt-2 text-sm text-white/50 max-w-xl">
-            A chronological changelog of frontier developments. Follow model updates
-            in order of their official release dates.
-          </p>
-          <div className="mt-4">
-            <Link href="/archive" className="text-sm text-brand-orange hover:text-[#e85a28] hover:underline transition-colors font-medium">
-              Prefer a plain list? View the archive &rarr;
-            </Link>
-          </div>
+        <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[var(--accent)] mb-1">
+          <Clock size={14} />
+          <span>Chronological Ledger</span>
         </div>
-
-        {/* ── Interactive Timeline Container ── */}
-        <TimelineContainer initialModels={models} />
+        <h1 className="text-3xl sm:text-4xl font-extrabold text-[var(--text)] tracking-tight">
+          Release Timeline
+        </h1>
+        <p className="text-xs sm:text-sm text-[var(--muted)] mt-1.5 max-w-2xl leading-relaxed">
+          Track the evolution of foundation AI models as they ship across frontier labs and open-source communities.
+        </p>
       </div>
+
+      {models.length === 0 ? (
+        <div className="py-20 text-center flex flex-col items-center justify-center bg-[var(--card-bg)] rounded-[var(--radius-card)] border border-[var(--muted)]/10 p-8">
+          <p className="text-sm font-semibold text-[var(--text)]">No model release history available yet</p>
+          <p className="text-xs text-[var(--muted)] mt-1">Releases will appear here in chronological order.</p>
+        </div>
+      ) : (
+        <TimelineContainer initialModels={models} />
+      )}
     </main>
   );
 }

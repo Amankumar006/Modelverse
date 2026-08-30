@@ -1,894 +1,215 @@
 "use client";
 
-import React, { useState, useMemo, Suspense, useEffect } from "react";
-import type { ModelEntry } from "@/lib/models";
-import ModelCard from "@/components/models/ModelCard";
-import { Search, SlidersHorizontal, X, ArrowUpDown } from "lucide-react";
-import { useRouter } from "next/navigation";
+import React, { useState, useMemo } from "react";
+import { X } from "lucide-react";
+import type { ModelRow } from "@/types/database";
+import ModelCard from "./ModelCard";
+import CatalogSidebar from "./CatalogSidebar";
+import CatalogToolbar from "./CatalogToolbar";
 
-/* ------------------------------------------------------------------ */
-/*  Facet Filters Config                                               */
-/* ------------------------------------------------------------------ */
-
-const TASK_OPTIONS = [
-  { value: "chat-reasoning", label: "Chat & Reasoning" },
-  { value: "code-generation", label: "Code Generation" },
-  { value: "image-generation", label: "Image Generation" },
-  { value: "video-generation", label: "Video Generation" },
-  { value: "audio-speech", label: "Audio & Speech" },
-  { value: "embedding", label: "Embedding" },
-  { value: "agentic", label: "Agentic" },
-  { value: "multimodal-general", label: "Multimodal General" },
-  { value: "translation", label: "Translation" },
-  { value: "search-retrieval", label: "Search & Retrieval" },
-  { value: "other", label: "Specialized/Other" },
-];
-
-const TYPE_OPTIONS = [
-  { value: "open-weights", label: "Open Weights" },
-  { value: "closed-source", label: "Closed Source" },
-  { value: "api-only", label: "API Only" },
-  { value: "research-preview", label: "Research Preview" },
-];
-
-const DEPLOYMENT_OPTIONS = [
-  { value: "api-only", label: "API Only" },
-  { value: "self-hostable", label: "Self-Hostable" },
-  { value: "on-device", label: "On-Device" },
-];
-
-const SORT_OPTIONS = [
-  { key: "newest", label: "Newest First" },
-  { key: "oldest", label: "Oldest First" },
-  { key: "name-asc", label: "Name A–Z" },
-  { key: "developer-asc", label: "Developer A–Z" },
-];
-
-const CAPABILITY_OPTIONS = [
-  { value: "reasoning", label: "Reasoning", icon: "🧠" },
-  { value: "tool_calling", label: "Tool Calling", icon: "🛠️" },
-  { value: "vision_input", label: "Vision", icon: "👁️" },
-  { value: "structured_outputs", label: "JSON Schema", icon: "📋" },
-  { value: "web_search", label: "Web Search", icon: "🌐" },
-  { value: "prompt_caching", label: "Prompt Caching", icon: "⚡" },
-  { value: "fine_tuning", label: "Fine-Tuning", icon: "🔧" },
-  { value: "image_generation", label: "Image Gen", icon: "🎨" },
-  { value: "audio_input", label: "Audio In", icon: "🎙️" },
-  { value: "audio_output", label: "Voice Out", icon: "🔊" },
-  { value: "computer_use", label: "Computer Use", icon: "💻" },
-  { value: "video_input", label: "Video", icon: "🎥" },
-];
-
-interface FiltersState {
-  q: string;
-  type: string[];
-  task: string[];
-  modality: string[];
-  developer: string[];
-  license: string[];
-  deployment: string[];
-  capabilities: string[];
+interface ModelCatalogProps {
+  initialModels: ModelRow[];
+  initialCategory?: string;
+  initialProvider?: string;
+  initialSearch?: string;
 }
 
-function filterModels(
-  models: ModelEntry[],
-  filters: FiltersState,
-  excludeKey?: keyof FiltersState
-): ModelEntry[] {
-  return models.filter((model) => {
-    if (excludeKey !== "q" && filters.q) {
-      const searchTerms = filters.q.toLowerCase().trim().split(/\s+/);
-      const targetStr = `${model.name} ${model.developer} ${model.tags?.join(" ") || ""}`.toLowerCase();
-      const match = searchTerms.every((term) => targetStr.includes(term));
-      if (!match) return false;
-    }
+export default function ModelCatalog({
+  initialModels,
+  initialCategory = "All",
+  initialProvider = "All",
+  initialSearch = "",
+}: ModelCatalogProps) {
+  const [searchQuery, setSearchQuery] = useState(initialSearch);
+  const [selectedCategory, setSelectedCategory] = useState(initialCategory);
+  const [selectedProvider, setSelectedProvider] = useState(initialProvider);
+  const [selectedSourceType, setSelectedSourceType] = useState("All");
+  const [sortKey, setSortKey] = useState("newest");
+  const [viewMode, setViewMode] = useState<"grid" | "list">("grid");
+  const [mobileDrawerOpen, setMobileDrawerOpen] = useState(false);
 
-    if (excludeKey !== "type" && filters.type.length > 0) {
-      if (!filters.type.includes(model.type)) return false;
-    }
+  const categories = useMemo(() => {
+    return Array.from(new Set(initialModels.map((m) => m.category))).filter(Boolean) as string[];
+  }, [initialModels]);
 
-    if (excludeKey !== "task" && filters.task.length > 0) {
-      if (!filters.task.includes(model.primaryTask)) return false;
-    }
+  const providers = useMemo(() => {
+    return Array.from(new Set(initialModels.map((m) => m.provider))).filter(Boolean) as string[];
+  }, [initialModels]);
 
-    if (excludeKey !== "capabilities" && filters.capabilities.length > 0) {
-      const modelCaps = model.capabilities || {};
-      const hasAllCaps = filters.capabilities.every((c) => Boolean(modelCaps[c]));
-      if (!hasAllCaps) return false;
-    }
-
-    if (excludeKey !== "modality" && filters.modality.length > 0) {
-      const getModalities = (mod: unknown): string[] => {
-        if (Array.isArray(mod)) return mod;
-        if (typeof mod === "object" && mod !== null) {
-          const allMods: string[] = [];
-          Object.values(mod).forEach((v) => {
-            if (Array.isArray(v)) allMods.push(...v);
-          });
-          return allMods;
-        }
-        return [];
-      };
-      
-      const mods = getModalities(model.modality);
-      const intersect = mods.some((m) => filters.modality.includes(m));
-      if (!intersect) return false;
-    }
-
-    if (excludeKey !== "developer" && filters.developer.length > 0) {
-      if (!filters.developer.includes(model.developer)) return false;
-    }
-
-    if (excludeKey !== "license" && filters.license.length > 0) {
-      let lic = model.license;
-      if (typeof lic === "object" && lic !== null) {
-        lic = (lic as { name?: string }).name || "Other/Custom";
-      }
-      if (!filters.license.includes(lic as string)) return false;
-    }
-
-    if (excludeKey !== "deployment" && filters.deployment.length > 0) {
-      const intersect = model.deployment.some((d) => filters.deployment.includes(d));
-      if (!intersect) return false;
-    }
-
-    return true;
-  });
-}
-
-function FacetGroupFilter<T>({
-  title,
-  options,
-  valFn,
-  labelFn,
-  selectedValues,
-  counts,
-  onToggle,
-}: {
-  title: string;
-  options: T[];
-  valFn: (opt: T) => string;
-  labelFn: (opt: T) => string;
-  selectedValues: string[];
-  counts: Record<string, number>;
-  onToggle: (val: string) => void;
-}) {
-  const [searchQuery, setSearchQuery] = useState("");
-  const showSearch = options.length > 10;
-
-  const filteredOptions = useMemo(() => {
-    if (!searchQuery) return options;
-    const q = searchQuery.toLowerCase();
-    return options.filter((opt) => {
-      const val = valFn(opt).toLowerCase();
-      const label = labelFn(opt).toLowerCase();
-      return val.includes(q) || label.includes(q);
-    });
-  }, [options, searchQuery, valFn, labelFn]);
-
-  return (
-    <div className="space-y-3 bg-[var(--card-bg)] shadow-[var(--shadow-card)] p-4 rounded-[var(--radius-card)]">
-      <h4 className="text-xs font-bold text-[var(--muted)] uppercase tracking-wider border-b border-[var(--muted)]/10 pb-2">
-        {title}
-      </h4>
-      {showSearch && (
-        <div className="relative mb-2">
-          <input
-            type="text"
-            placeholder={`Search ${title.toLowerCase()}...`}
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full bg-[var(--bg)] border border-[var(--muted)]/10 rounded-[var(--radius-control)] px-3 py-1.5 text-xs text-[var(--text)] placeholder:text-[var(--muted)] focus:outline-none focus:ring-1 focus:ring-[var(--accent)] transition-colors"
-          />
-          {searchQuery && (
-            <button
-              onClick={() => setSearchQuery("")}
-              className="absolute right-2 top-1/2 -translate-y-1/2 text-[var(--muted)] hover:text-[var(--text)] p-0.5"
-            >
-              <X size={12} />
-            </button>
-          )}
-        </div>
-      )}
-      <div className="space-y-1 flex flex-col max-h-52 overflow-y-auto pr-1 select-none">
-        {filteredOptions.map((opt) => {
-          const val = valFn(opt);
-          const label = labelFn(opt);
-          const isChecked = selectedValues.includes(val);
-          const count = counts[val] ?? 0;
-          const isDisabled = count === 0 && !isChecked;
-
-          return (
-            <label
-              key={val}
-              className={`flex items-center justify-between text-xs cursor-pointer min-h-[44px] py-2 px-2.5 rounded-[var(--radius-control)] transition-colors ${
-                isChecked
-                  ? "text-[var(--accent)] font-semibold bg-[var(--accent-soft)]"
-                  : isDisabled
-                  ? "text-[var(--muted)]/40 cursor-not-allowed"
-                  : "text-[var(--muted)] hover:text-[var(--text)] hover:bg-[var(--bg)]"
-              }`}
-            >
-              <div className="flex items-center gap-2.5 min-w-0 pr-1">
-                <input
-                  type="checkbox"
-                  checked={isChecked}
-                  disabled={isDisabled}
-                  onChange={() => onToggle(val)}
-                  className="h-4 w-4 rounded border border-[var(--muted)]/30 bg-[var(--bg)] text-[var(--accent)] focus:ring-0 accent-[var(--accent)] cursor-pointer disabled:cursor-not-allowed shrink-0"
-                />
-                <span className="truncate">{label}</span>
-              </div>
-              <span
-                className={`text-[10px] tabular-nums font-mono px-2 py-0.5 rounded-full ${
-                  isChecked ? "bg-[var(--accent)] text-[var(--accent-contrast)] font-bold" : "bg-[var(--tag-bg)] text-[var(--tag-text)]"
-                }`}
-              >
-                {count}
-              </span>
-            </label>
-          );
-        })}
-      </div>
-    </div>
-  );
-}
-
-function ModelCatalogContent({
-  models,
-  developers,
-  initialSearchParams = {},
-  hideDeveloperPrefix = false,
-}: {
-  models: ModelEntry[];
-  developers: string[];
-  initialSearchParams?: Record<string, string | string[] | undefined>;
-  hideDeveloperPrefix?: boolean;
-}) {
-  const router = useRouter();
-
-  const parseParamArray = (param?: string | string[]) => {
-    if (!param) return [];
-    if (Array.isArray(param)) return param;
-    return param.split(",").filter(Boolean);
-  };
-
-  const [filters, setFilters] = useState<FiltersState>({
-    q: (initialSearchParams.q as string) || "",
-    type: parseParamArray(initialSearchParams.type),
-    task: parseParamArray(initialSearchParams.task),
-    modality: parseParamArray(initialSearchParams.modality),
-    developer: parseParamArray(initialSearchParams.developer),
-    license: parseParamArray(initialSearchParams.license),
-    deployment: parseParamArray(initialSearchParams.deployment),
-    capabilities: parseParamArray(initialSearchParams.capabilities),
-  });
-
-  const [sortKey, setSortKey] = useState<string>(
-    (initialSearchParams.sort as string) || "newest"
-  );
-  const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
-  const [searchInput, setSearchInput] = useState<string>(filters.q);
-
-  useEffect(() => {
-    const t = setTimeout(() => setSearchInput(filters.q), 0);
-    return () => clearTimeout(t);
-  }, [filters.q]);
-
-  function updateUrl(updatedFilters: FiltersState, updatedSort: string) {
-    const params = new URLSearchParams();
-
-    if (updatedFilters.q) params.set("q", updatedFilters.q);
-    if (updatedFilters.type.length > 0) params.set("type", updatedFilters.type.join(","));
-    if (updatedFilters.task.length > 0) params.set("task", updatedFilters.task.join(","));
-    if (updatedFilters.capabilities.length > 0) params.set("capabilities", updatedFilters.capabilities.join(","));
-    if (updatedFilters.modality.length > 0) params.set("modality", updatedFilters.modality.join(","));
-    if (updatedFilters.developer.length > 0) params.set("developer", updatedFilters.developer.join(","));
-    if (updatedFilters.license.length > 0) params.set("license", updatedFilters.license.join(","));
-    if (updatedFilters.deployment.length > 0) params.set("deployment", updatedFilters.deployment.join(","));
-    if (updatedSort !== "newest") params.set("sort", updatedSort);
-
-    const queryStr = params.toString();
-    router.replace(`/models${queryStr ? `?${queryStr}` : ""}`, { scroll: false });
-  }
-
-  useEffect(() => {
-    const handler = setTimeout(() => {
-      if (searchInput !== filters.q) {
-        const newFilters = { ...filters, q: searchInput };
-        setFilters(newFilters);
-        updateUrl(newFilters, sortKey);
-      }
-    }, 250);
-    return () => clearTimeout(handler);
-  }, [searchInput, filters, sortKey]); // eslint-disable-line react-hooks/exhaustive-deps
-
-  const dynamicOptions = useMemo(() => {
-    const modalities = new Set<string>();
-    const licenses = new Set<string>();
-    for (const m of models) {
-      const getModalities = (mod: unknown): string[] => {
-        if (Array.isArray(mod)) return mod;
-        if (typeof mod === "object" && mod !== null) {
-          const allMods: string[] = [];
-          Object.values(mod).forEach((v) => {
-            if (Array.isArray(v)) allMods.push(...v);
-          });
-          return allMods;
-        }
-        return [];
-      };
-      
-      const mods = getModalities(m.modality);
-      mods.forEach((mod) => modalities.add(mod));
-
-      let lic = m.license;
-      if (typeof lic === "object" && lic !== null) {
-        lic = (lic as { name?: string }).name || "Other/Custom";
-      }
-      if (lic && lic !== "Other/Custom") licenses.add(lic as string);
-    }
-    return {
-      modalities: Array.from(modalities).sort(),
-      licenses: Array.from(licenses).sort(),
-    };
-  }, [models]);
-
-  const facetCounts = useMemo(() => {
-    const calculateCounts = (
-      options: string[],
-      key: keyof FiltersState,
-      modelValFn: (m: ModelEntry) => string | string[]
-    ) => {
-      const filtered = filterModels(models, filters, key);
-      const counts: Record<string, number> = {};
-      options.forEach((opt) => (counts[opt] = 0));
-      for (const m of filtered) {
-        const val = modelValFn(m);
-        if (Array.isArray(val)) {
-          val.forEach((v) => {
-            if (counts[v] !== undefined) counts[v]++;
-          });
-        } else {
-          if (counts[val] !== undefined) counts[val]++;
-        }
-      }
-      return counts;
-    };
-
-    return {
-      type: calculateCounts(
-        TYPE_OPTIONS.map((o) => o.value),
-        "type",
-        (m) => m.type
-      ),
-      task: calculateCounts(
-        TASK_OPTIONS.map((o) => o.value),
-        "task",
-        (m) => m.primaryTask
-      ),
-      capabilities: calculateCounts(
-        CAPABILITY_OPTIONS.map((c) => c.value),
-        "capabilities",
-        (m) => {
-          if (!m.capabilities || typeof m.capabilities !== "object") return [];
-          return Object.entries(m.capabilities)
-            .filter(([, v]) => Boolean(v))
-            .map(([k]) => k);
-        }
-      ),
-      modality: calculateCounts(dynamicOptions.modalities, "modality", (m) => {
-        const mod = m.modality;
-        if (Array.isArray(mod)) return mod;
-        if (typeof mod === "object" && mod !== null) {
-          const allMods: string[] = [];
-          Object.values(mod).forEach((v) => {
-            if (Array.isArray(v)) allMods.push(...v);
-          });
-          return allMods;
-        }
-        return [];
-      }),
-      developer: calculateCounts(developers, "developer", (m) => m.developer),
-      license: calculateCounts(dynamicOptions.licenses, "license", (m) => {
-        let lic = m.license;
-        if (typeof lic === "object" && lic !== null) {
-          lic = (lic as { name?: string }).name || "Other/Custom";
-        }
-        return lic as string;
-      }),
-      deployment: calculateCounts(
-        DEPLOYMENT_OPTIONS.map((o) => o.value),
-        "deployment",
-        (m) => m.deployment
-      ),
-    };
-  }, [models, filters, dynamicOptions, developers]);
-
-  const filtered = useMemo(() => {
-    const result = filterModels(models, filters);
-
-    switch (sortKey) {
-      case "newest":
-        result.sort(
-          (a, b) =>
-            new Date(b.releaseDate).getTime() - new Date(a.releaseDate).getTime()
-        );
-        break;
-      case "oldest":
-        result.sort(
-          (a, b) =>
-            new Date(a.releaseDate).getTime() - new Date(b.releaseDate).getTime()
-        );
-        break;
-      case "name-asc":
-        result.sort((a, b) => a.name.localeCompare(b.name));
-        break;
-      case "developer-asc":
-        result.sort((a, b) => a.developer.localeCompare(b.developer));
-        break;
-    }
-
-    return result;
-  }, [models, filters, sortKey]);
-
-  type CatalogItem =
-    | { type: "standalone"; model: ModelEntry }
-    | {
-        type: "family";
-        familySlug: string;
-        primaryModel: ModelEntry;
-        variantCount: number;
-        variants: ModelEntry[];
-      };
-
-  const groupedItems = useMemo(() => {
-    const finalItems: CatalogItem[] = [];
-    const seenFamilies = new Set<string>();
-
-    const shouldGroup =
-      filters.q === "" &&
-      filters.type.length === 0 &&
-      filters.task.length === 0 &&
-      filters.capabilities.length === 0 &&
-      filters.modality.length === 0 &&
-      filters.license.length === 0 &&
-      filters.deployment.length === 0;
-
-    for (const model of filtered) {
-      if (model.family && shouldGroup) {
-        if (!seenFamilies.has(model.family)) {
-          seenFamilies.add(model.family);
-          const allVariants = models.filter((m) => m.family === model.family);
-
-          const featuredVariant = allVariants.find((m) => m.featured && m.qualityStatus === "indexed");
-          const highestScoreVariant = [...allVariants].sort((a, b) => (b.qualityScore || 0) - (a.qualityScore || 0))[0];
-          const primaryModel = featuredVariant || highestScoreVariant || allVariants[0];
-
-          finalItems.push({
-            type: "family",
-            familySlug: model.family,
-            primaryModel,
-            variantCount: allVariants.length,
-            variants: allVariants,
-          });
-        }
-      } else {
-        finalItems.push({
-          type: "standalone",
-          model,
-        });
-      }
-    }
-    return finalItems;
-  }, [filtered, filters, models]);
-
-  const hasActiveFilters =
-    filters.q !== "" ||
-    filters.type.length > 0 ||
-    filters.task.length > 0 ||
-    filters.capabilities.length > 0 ||
-    filters.modality.length > 0 ||
-    filters.developer.length > 0 ||
-    filters.license.length > 0 ||
-    filters.deployment.length > 0;
-
-  const toggleFilter = (key: keyof Omit<FiltersState, "q">, val: string) => {
-    const current = filters[key] as string[];
-    const next = current.includes(val)
-      ? current.filter((v) => v !== val)
-      : [...current, val];
-
-    const newFilters = { ...filters, [key]: next };
-    setFilters(newFilters);
-    updateUrl(newFilters, sortKey);
-  };
-
-  const handleSearchChange = (val: string) => {
-    setSearchInput(val);
-  };
-
-  const handleSortChange = (newSort: string) => {
-    setSortKey(newSort);
-    updateUrl(filters, newSort);
-  };
+  const totalActiveFilters = useMemo(() => {
+    let count = 0;
+    if (selectedCategory !== "All") count++;
+    if (selectedProvider !== "All") count++;
+    if (selectedSourceType !== "All") count++;
+    if (searchQuery.trim()) count++;
+    return count;
+  }, [selectedCategory, selectedProvider, selectedSourceType, searchQuery]);
 
   const clearAllFilters = () => {
-    const blankFilters = {
-      q: "",
-      type: [],
-      task: [],
-      capabilities: [],
-      modality: [],
-      developer: [],
-      license: [],
-      deployment: [],
-    };
-    setFilters(blankFilters);
-    updateUrl(blankFilters, sortKey);
+    setSearchQuery("");
+    setSelectedCategory("All");
+    setSelectedProvider("All");
+    setSelectedSourceType("All");
   };
 
-  const renderSidebar = () => (
-    <div className="space-y-6">
-      <FacetGroupFilter
-        title="Technical Capabilities"
-        options={CAPABILITY_OPTIONS}
-        valFn={(o) => o.value}
-        labelFn={(o) => `${o.icon} ${o.label}`}
-        selectedValues={filters.capabilities}
-        counts={facetCounts.capabilities}
-        onToggle={(val) => toggleFilter("capabilities", val)}
-      />
-      <FacetGroupFilter
-        title="Type"
-        options={TYPE_OPTIONS}
-        valFn={(o) => o.value}
-        labelFn={(o) => o.label}
-        selectedValues={filters.type}
-        counts={facetCounts.type}
-        onToggle={(val) => toggleFilter("type", val)}
-      />
-      <FacetGroupFilter
-        title="Primary Task"
-        options={TASK_OPTIONS}
-        valFn={(o) => o.value}
-        labelFn={(o) => o.label}
-        selectedValues={filters.task}
-        counts={facetCounts.task}
-        onToggle={(val) => toggleFilter("task", val)}
-      />
-      <FacetGroupFilter
-        title="Modality"
-        options={dynamicOptions.modalities.map((m) => ({ value: m, label: m.toUpperCase() }))}
-        valFn={(o) => o.value}
-        labelFn={(o) => o.label}
-        selectedValues={filters.modality}
-        counts={facetCounts.modality}
-        onToggle={(val) => toggleFilter("modality", val)}
-      />
-      {!hideDeveloperPrefix && (
-        <FacetGroupFilter
-          title="Developer"
-          options={developers.map((d) => ({ value: d, label: d }))}
-          valFn={(o) => o.value}
-          labelFn={(o) => o.label}
-          selectedValues={filters.developer}
-          counts={facetCounts.developer}
-          onToggle={(val) => toggleFilter("developer", val)}
-        />
-      )}
-      <FacetGroupFilter
-        title="License"
-        options={dynamicOptions.licenses.map((l) => ({ value: l, label: l }))}
-        valFn={(o) => o.value}
-        labelFn={(o) => o.label}
-        selectedValues={filters.license}
-        counts={facetCounts.license}
-        onToggle={(val) => toggleFilter("license", val)}
-      />
-      <FacetGroupFilter
-        title="Deployment"
-        options={DEPLOYMENT_OPTIONS}
-        valFn={(o) => o.value}
-        labelFn={(o) => o.label}
-        selectedValues={filters.deployment}
-        counts={facetCounts.deployment}
-        onToggle={(val) => toggleFilter("deployment", val)}
-      />
-    </div>
-  );
+  const filteredModels = useMemo(() => {
+    let result = [...initialModels];
+
+    if (searchQuery.trim()) {
+      const q = searchQuery.toLowerCase();
+      result = result.filter(
+        (m) =>
+          m.name.toLowerCase().includes(q) ||
+          m.provider.toLowerCase().includes(q) ||
+          (m.description && m.description.toLowerCase().includes(q)) ||
+          (m.parameters && m.parameters.toLowerCase().includes(q))
+      );
+    }
+
+    if (selectedCategory !== "All") {
+      result = result.filter(
+        (m) => m.category?.toLowerCase() === selectedCategory.toLowerCase()
+      );
+    }
+
+    if (selectedProvider !== "All") {
+      result = result.filter(
+        (m) => m.provider.toLowerCase() === selectedProvider.toLowerCase()
+      );
+    }
+
+    if (selectedSourceType !== "All") {
+      result = result.filter((m) => {
+        if (!m.source_type) return false;
+        return m.source_type.toLowerCase().includes(selectedSourceType.toLowerCase());
+      });
+    }
+
+    // Sort
+    result.sort((a, b) => {
+      if (sortKey === "newest") {
+        const dateA = a.release_date ? new Date(a.release_date).getTime() : 0;
+        const dateB = b.release_date ? new Date(b.release_date).getTime() : 0;
+        return dateB - dateA;
+      }
+      if (sortKey === "context") {
+        return (b.context_window || 0) - (a.context_window || 0);
+      }
+      if (sortKey === "name") {
+        return a.name.localeCompare(b.name);
+      }
+      return 0;
+    });
+
+    return result;
+  }, [initialModels, searchQuery, selectedCategory, selectedProvider, selectedSourceType, sortKey]);
 
   return (
-    <div className="flex flex-col lg:flex-row gap-8 items-start relative w-full lg:h-full max-w-full lg:overflow-hidden pb-12 lg:pb-0">
-      {/* ── Desktop Sidebar Facets ───────────────────────────── */}
-      <aside className="hidden lg:block w-64 shrink-0 space-y-5 lg:h-full lg:overflow-y-auto overscroll-contain pr-3 border-r border-[var(--muted)]/10 text-[var(--text)] pb-8">
-        <div className="flex items-center justify-between pr-2">
-          <span className="text-xs font-bold uppercase tracking-wider text-[var(--muted)]">Filters</span>
-          {hasActiveFilters && (
-            <button
-              onClick={clearAllFilters}
-              className="text-xs text-[var(--accent)] hover:underline font-bold cursor-pointer"
-            >
-              Clear All
-            </button>
-          )}
-        </div>
-        {renderSidebar()}
-      </aside>
+    <div className="w-full grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+      {/* Desktop Sidebar (3 cols) */}
+      <div className="hidden lg:block lg:col-span-3 sticky top-24 p-5 rounded-[var(--radius-card)] bg-[var(--card-bg)] shadow-[var(--shadow-card)] border border-[var(--muted)]/10">
+        <CatalogSidebar
+          providers={providers}
+          selectedProvider={selectedProvider}
+          onSelectProvider={setSelectedProvider}
+          categories={categories}
+          selectedCategory={selectedCategory}
+          onSelectCategory={setSelectedCategory}
+          selectedSourceType={selectedSourceType}
+          onSelectSourceType={setSelectedSourceType}
+          totalActiveFilters={totalActiveFilters}
+          onClearFilters={clearAllFilters}
+        />
+      </div>
 
-      {/* ── Main Catalog Workspace ───────────────────────────── */}
-      <div className="flex-1 min-w-0 w-full lg:h-full lg:overflow-y-auto overscroll-contain space-y-6 lg:pb-24 lg:pr-4">
-        {/* Page Header */}
-        <div className="border-b border-[var(--muted)]/10 pb-5 pt-1">
-          <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-[var(--text)]">
-            Models Overview
-          </h1>
-          <p className="mt-2 text-sm sm:text-base text-[var(--muted)] max-w-2xl leading-relaxed">
-            Discover, filter, and compare performance specs across open-weights and commercial AI models in the catalog.
-          </p>
-        </div>
+      {/* Main Catalog Area (9 cols) */}
+      <div className="lg:col-span-9 space-y-6">
+        <CatalogToolbar
+          searchQuery={searchQuery}
+          onSearchChange={setSearchQuery}
+          categories={categories}
+          selectedCategory={selectedCategory}
+          onSelectCategory={setSelectedCategory}
+          sortKey={sortKey}
+          onSortChange={setSortKey}
+          viewMode={viewMode}
+          onToggleViewMode={setViewMode}
+          totalFiltered={filteredModels.length}
+          onOpenMobileFilters={() => setMobileDrawerOpen(true)}
+        />
 
-        {/* Horizontal Filter Task & Type Bar */}
-        <div className="space-y-3 border-b border-[var(--muted)]/10 pb-5">
-          <div className="flex flex-wrap gap-2 w-full">
-            <span className="text-xs font-bold uppercase tracking-wider text-[var(--muted)] shrink-0 mr-1">Task:</span>
-            <button
-              onClick={() => setFilters((f) => ({ ...f, task: [] }))}
-              className={`px-3.5 py-1.5 rounded-[var(--radius-pill)] text-xs font-medium transition-all whitespace-nowrap cursor-pointer ${
-                filters.task.length === 0
-                  ? "bg-[var(--accent-soft)] text-[var(--accent)] font-bold shadow-sm border border-[var(--accent)]/20"
-                  : "bg-[var(--card-bg)] text-[var(--muted)] hover:text-[var(--text)] border border-[var(--muted)]/10 shadow-[var(--shadow-card)]"
-              }`}
-            >
-              All Tasks ({models.length})
-            </button>
-            {TASK_OPTIONS.map((opt) => {
-              const isActive = filters.task.includes(opt.value);
-              const count = facetCounts.task[opt.value] || 0;
-              return (
-                <button
-                  key={opt.value}
-                  onClick={() => {
-                    setFilters((f) => {
-                      const newTasks = isActive
-                        ? f.task.filter((t) => t !== opt.value)
-                        : [...f.task, opt.value];
-                      return { ...f, task: newTasks };
-                    });
-                  }}
-                  className={`px-3.5 py-1.5 rounded-[var(--radius-pill)] text-xs font-medium transition-all whitespace-nowrap flex items-center gap-1.5 cursor-pointer ${
-                    isActive
-                      ? "bg-[var(--accent-soft)] text-[var(--accent)] font-bold shadow-sm border border-[var(--accent)]/20"
-                      : "bg-[var(--card-bg)] text-[var(--muted)] hover:text-[var(--text)] border border-[var(--muted)]/10 shadow-[var(--shadow-card)]"
-                  }`}
-                >
-                  <span>{opt.label}</span>
-                  <span className={`text-[10px] px-1.5 py-0.2 rounded-full font-mono tabular-nums ${isActive ? "bg-[var(--accent)]/15 text-[var(--accent)]" : "bg-[var(--muted)]/10 text-[var(--muted)]"}`}>
-                    {count}
-                  </span>
-                </button>
-              );
-            })}
-          </div>
-
-          <div className="flex flex-wrap gap-2 w-full">
-            <span className="text-xs font-bold uppercase tracking-wider text-[var(--muted)] shrink-0 mr-1">Type:</span>
-            <button
-              onClick={() => setFilters((f) => ({ ...f, type: [] }))}
-              className={`px-3.5 py-1.5 rounded-[var(--radius-pill)] text-xs font-medium transition-all whitespace-nowrap cursor-pointer ${
-                filters.type.length === 0
-                  ? "bg-[var(--accent-soft)] text-[var(--accent)] font-bold shadow-sm border border-[var(--accent)]/20"
-                  : "bg-[var(--card-bg)] text-[var(--muted)] hover:text-[var(--text)] border border-[var(--muted)]/10 shadow-[var(--shadow-card)]"
-              }`}
-            >
-              All Types
-            </button>
-            {TYPE_OPTIONS.map((opt) => {
-              const isActive = filters.type.includes(opt.value);
-              const count = facetCounts.type[opt.value] || 0;
-              return (
-                <button
-                  key={opt.value}
-                  onClick={() => {
-                    setFilters((f) => {
-                      const newType = isActive
-                        ? f.type.filter((t) => t !== opt.value)
-                        : [...f.type, opt.value];
-                      return { ...f, type: newType };
-                    });
-                  }}
-                  className={`px-3.5 py-1.5 rounded-[var(--radius-pill)] text-xs font-medium transition-all whitespace-nowrap flex items-center gap-1.5 cursor-pointer ${
-                    isActive
-                      ? "bg-[var(--accent-soft)] text-[var(--accent)] font-bold shadow-sm border border-[var(--accent)]/20"
-                      : "bg-[var(--card-bg)] text-[var(--muted)] hover:text-[var(--text)] border border-[var(--muted)]/10 shadow-[var(--shadow-card)]"
-                  }`}
-                >
-                  <span>{opt.label}</span>
-                  <span className={`text-[10px] px-1.5 py-0.2 rounded-full font-mono tabular-nums ${isActive ? "bg-[var(--accent)]/15 text-[var(--accent)]" : "bg-[var(--muted)]/10 text-[var(--muted)]"}`}>
-                    {count}
-                  </span>
-                </button>
-              );
-            })}
-          </div>
-
-          {/* Capabilities Quick Pills Row */}
-          <div className="flex flex-wrap items-center gap-1.5 w-full pt-1 border-t border-[var(--muted)]/5">
-            <span className="text-xs font-bold uppercase tracking-wider text-[var(--muted)] shrink-0 mr-1 flex items-center gap-1">
-              Capabilities:
-            </span>
-            <button
-              onClick={() => setFilters((f) => ({ ...f, capabilities: [] }))}
-              className={`px-3 py-1 rounded-[var(--radius-pill)] text-xs font-medium transition-all whitespace-nowrap cursor-pointer ${
-                filters.capabilities.length === 0
-                  ? "bg-[var(--accent-soft)] text-[var(--accent)] font-bold shadow-sm border border-[var(--accent)]/20"
-                  : "bg-[var(--card-bg)] text-[var(--muted)] hover:text-[var(--text)] border border-[var(--muted)]/10 shadow-[var(--shadow-card)]"
-              }`}
-            >
-              All
-            </button>
-            {CAPABILITY_OPTIONS.map((opt) => {
-              const isActive = filters.capabilities.includes(opt.value);
-              const count = facetCounts.capabilities[opt.value] || 0;
-              return (
-                <button
-                  key={opt.value}
-                  onClick={() => {
-                    setFilters((f) => {
-                      const newCaps = isActive
-                        ? f.capabilities.filter((c) => c !== opt.value)
-                        : [...f.capabilities, opt.value];
-                      return { ...f, capabilities: newCaps };
-                    });
-                  }}
-                  className={`px-2.5 py-1 rounded-[var(--radius-pill)] text-xs font-medium transition-all whitespace-nowrap flex items-center gap-1 cursor-pointer ${
-                    isActive
-                      ? "bg-[var(--accent-soft)] text-[var(--accent)] font-bold shadow-sm border border-[var(--accent)]/20"
-                      : "bg-[var(--card-bg)] text-[var(--muted)] hover:text-[var(--text)] border border-[var(--muted)]/10 shadow-[var(--shadow-card)]"
-                  }`}
-                >
-                  <span className="text-[11px]">{opt.icon}</span>
-                  <span>{opt.label}</span>
-                  <span
-                    className={`text-[10px] px-1.5 py-0.2 rounded-full font-mono tabular-nums ${
-                      isActive ? "bg-[var(--accent)]/15 text-[var(--accent)]" : "bg-[var(--muted)]/10 text-[var(--muted)]"
-                    }`}
-                  >
-                    {count}
-                  </span>
-                </button>
-              );
-            })}
-          </div>
-        </div>
-
-        {/* Search Input & Controls Bar */}
-        <div className="flex flex-col sm:flex-row gap-4 items-stretch sm:items-center justify-between border-b border-[var(--muted)]/10 pb-4">
-          <div className="relative flex-1 max-w-md">
-            <Search size={15} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-[var(--muted)]" />
-            <input
-              type="text"
-              placeholder="Search by name or developer..."
-              value={searchInput}
-              onChange={(e) => handleSearchChange(e.target.value)}
-              className="w-full bg-[var(--card-bg)] border border-[var(--muted)]/10 rounded-[var(--radius-control)] pl-10 pr-4 py-2 text-xs text-[var(--text)] placeholder:text-[var(--muted)] focus:outline-none focus:border-[var(--accent)] transition-all font-sans shadow-[var(--shadow-card)]"
-            />
-            {searchInput && (
-              <button
-                onClick={() => handleSearchChange("")}
-                className="absolute right-3 top-1/2 -translate-y-1/2 text-[var(--muted)] hover:text-[var(--text)]"
-              >
-                <X size={14} />
-              </button>
-            )}
-          </div>
-
-          <div className="flex items-center gap-3 justify-between sm:justify-start">
-            <button
-              onClick={() => setMobileFiltersOpen(true)}
-              className="lg:hidden flex items-center gap-2 px-3.5 py-2 border border-[var(--muted)]/10 rounded-[var(--radius-control)] text-xs font-medium text-[var(--muted)] hover:text-[var(--text)] bg-[var(--card-bg)] shadow-[var(--shadow-card)]"
-            >
-              <SlidersHorizontal size={14} />
-              Filters
-            </button>
-
-            <div className="flex items-center gap-2">
-              <span className="text-xs text-[var(--muted)] whitespace-nowrap hidden sm:block">Sort By</span>
-              <div className="relative">
-                <select
-                  value={sortKey}
-                  onChange={(e) => handleSortChange(e.target.value)}
-                  className="bg-[var(--card-bg)] border border-[var(--muted)]/10 rounded-[var(--radius-control)] px-3.5 py-2 pr-8 text-xs font-semibold text-[var(--text)] focus:outline-none focus:border-[var(--accent)] appearance-none cursor-pointer shadow-[var(--shadow-card)]"
-                >
-                  {SORT_OPTIONS.map((opt) => (
-                    <option key={opt.key} value={opt.key} className="bg-[#1C1C1E] text-white">
-                      {opt.label}
-                    </option>
-                  ))}
-                </select>
-                <ArrowUpDown size={12} className="absolute right-2.5 top-1/2 -translate-y-1/2 text-[#90908F] pointer-events-none" />
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Results Counter */}
-        <div className="flex flex-wrap items-center gap-3 justify-between">
-          <p className="text-xs text-[#90908F]">
-            Showing <span className="text-white font-medium">{groupedItems.length}</span> cards (from {filtered.length} matching models)
-          </p>
-        </div>
-
-        {/* Results Model Cards Grid */}
-        <div className="grid grid-cols-[repeat(auto-fill,minmax(230px,1fr))] gap-5">
-          {groupedItems.map((item) => {
-            if (item.type === "family") {
-              return (
-                <div key={`family-${item.familySlug}`}>
-                  <ModelCard
-                    model={item.primaryModel}
-                    variant="family"
-                    familyVariantCount={item.variantCount}
-                    familySlug={item.familySlug}
-                  />
-                </div>
-              );
+        {/* Models Grid / List */}
+        {filteredModels.length > 0 ? (
+          <div
+            className={
+              viewMode === "grid"
+                ? "grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-5"
+                : "flex flex-col gap-3"
             }
-            return (
-              <div key={item.model.id}>
-                <ModelCard
-                  model={item.model}
-                  variant="single"
-                  hideDeveloperPrefix={hideDeveloperPrefix}
-                />
-              </div>
-            );
-          })}
-        </div>
-
-        {groupedItems.length === 0 && (
-          <div className="py-20 text-center flex flex-col items-center justify-center border border-[#282828] bg-[#1C1C1E] rounded-xl p-8">
-            <p className="text-[#90908F] text-xs">
-              No models match these filters yet — try removing a filter
+          >
+            {filteredModels.map((model) => (
+              <ModelCard key={model.id} model={model} variant={viewMode === "grid" ? "card" : "row"} />
+            ))}
+          </div>
+        ) : (
+          <div className="py-20 text-center flex flex-col items-center justify-center border border-[var(--muted)]/10 bg-[var(--card-bg)] rounded-[var(--radius-card)] p-8 space-y-3">
+            <p className="text-sm font-semibold text-[var(--text)]">No matching models found</p>
+            <p className="text-xs text-[var(--muted)] max-w-sm">
+              Try adjusting your search terms or clearing selected filter criteria.
             </p>
             <button
               onClick={clearAllFilters}
-              className="mt-4 bg-[#D97757] text-white text-xs font-semibold px-5 py-2 rounded-lg hover:bg-opacity-90 transition-colors"
+              className="mt-2 bg-[var(--accent)] text-[var(--accent-contrast)] text-xs font-bold px-4 py-2 rounded-[var(--radius-control)] hover:opacity-90 transition-opacity cursor-pointer"
             >
-              Clear filters
+              Clear all filters
             </button>
           </div>
         )}
       </div>
 
       {/* Mobile Drawer */}
-      {mobileFiltersOpen && (
-        <div className="fixed inset-0 z-50 lg:hidden flex flex-col justify-end bg-black/70 backdrop-blur-sm">
-          <div className="absolute inset-0" onClick={() => setMobileFiltersOpen(false)} />
-          <div className="relative w-full max-h-[85vh] bg-[#141414] border-t border-[#282828] rounded-t-2xl flex flex-col z-10 p-5">
-            <div className="flex items-center justify-between pb-3 border-b border-[#282828]">
-              <span className="text-xs font-bold uppercase tracking-wider text-[#90908F]">Filters</span>
-              <button onClick={() => setMobileFiltersOpen(false)} className="p-1 text-gray-400 hover:text-white">
+      {mobileDrawerOpen && (
+        <div className="fixed inset-0 z-50 lg:hidden flex flex-col justify-end bg-black/60 backdrop-blur-sm">
+          <div className="absolute inset-0" onClick={() => setMobileDrawerOpen(false)} />
+          <div className="relative w-full max-h-[85vh] bg-[var(--bg)] border-t border-[var(--muted)]/20 rounded-t-3xl flex flex-col z-10 p-6 shadow-2xl">
+            <div className="flex items-center justify-between pb-3 border-b border-[var(--muted)]/10 mb-4">
+              <span className="text-sm font-bold uppercase tracking-wider text-[var(--text)]">Catalog Filters</span>
+              <button
+                onClick={() => setMobileDrawerOpen(false)}
+                className="p-1 rounded-full text-[var(--muted)] hover:text-[var(--text)]"
+              >
                 <X size={18} />
               </button>
             </div>
-            <div className="overflow-y-auto py-4 space-y-6 flex-1">{renderSidebar()}</div>
+            <div className="overflow-y-auto flex-1 pr-1 pb-4">
+              <CatalogSidebar
+                providers={providers}
+                selectedProvider={selectedProvider}
+                onSelectProvider={(p) => {
+                  setSelectedProvider(p);
+                  setMobileDrawerOpen(false);
+                }}
+                categories={categories}
+                selectedCategory={selectedCategory}
+                onSelectCategory={(c) => {
+                  setSelectedCategory(c);
+                  setMobileDrawerOpen(false);
+                }}
+                selectedSourceType={selectedSourceType}
+                onSelectSourceType={(s) => {
+                  setSelectedSourceType(s);
+                  setMobileDrawerOpen(false);
+                }}
+                totalActiveFilters={totalActiveFilters}
+                onClearFilters={() => {
+                  clearAllFilters();
+                  setMobileDrawerOpen(false);
+                }}
+              />
+            </div>
           </div>
         </div>
       )}
     </div>
-  );
-}
-
-export default function ModelCatalog(props: {
-  models: ModelEntry[];
-  developers: string[];
-  initialSearchParams?: Record<string, string | string[] | undefined>;
-  hideDeveloperPrefix?: boolean;
-}) {
-  return (
-    <Suspense fallback={<div className="text-gray-400 text-xs py-20 text-center">Loading catalog...</div>}>
-      <ModelCatalogContent {...props} />
-    </Suspense>
   );
 }

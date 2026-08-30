@@ -1,60 +1,41 @@
 import { NextResponse } from "next/server";
-import { getAllArticles } from "@/lib/news";
-import { SITE_URL } from "@/lib/models";
+import { getArticles } from "@/lib/supabase/articles";
 
-export const dynamic = "force-static";
+export const revalidate = 3600;
 
 export async function GET() {
-  const articles = await getAllArticles();
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://modelverse.ai";
+  const { articles } = await getArticles({ limit: 50, isPublished: true });
 
-  const xmlItems = articles
-    .map((article) => {
-      const pubDate = new Date(article.publishDate).toUTCString();
-      const articleUrl = `${SITE_URL}/news/${article.slug}`;
-      
-      let titlePrefix = "";
-      if (article.confidenceLevel === "reported") {
-        titlePrefix = "[Reported] ";
-      } else if (article.confidenceLevel === "rumor") {
-        titlePrefix = "[Rumor] ";
-      } else if (article.confidenceLevel === "community-discussion") {
-        titlePrefix = "[Community] ";
-      }
-      
-      const displayTitle = `${titlePrefix}${article.title}`;
-
-      return `
+  const itemsXml = articles
+    .map(
+      (a) => `
     <item>
-      <title><![CDATA[${displayTitle}]]></title>
-      <link>${articleUrl}</link>
-      <guid isPermaLink="true">${articleUrl}</guid>
-      <pubDate>${pubDate}</pubDate>
-      <description><![CDATA[${article.excerpt}]]></description>
-    </item>`;
-    })
+      <title><![CDATA[${a.title}]]></title>
+      <link>${baseUrl}/articles/${a.slug}</link>
+      <guid isPermaLink="true">${baseUrl}/articles/${a.slug}</guid>
+      <description><![CDATA[${a.summary || a.title}]]></description>
+      <pubDate>${new Date(a.published_at).toUTCString()}</pubDate>
+    </item>`
+    )
     .join("");
 
-  const mostRecentDate = articles.length > 0
-    ? new Date(articles[0].publishDate).toUTCString()
-    : new Date().toUTCString();
-
-  const rssFeed = `<?xml version="1.0" encoding="UTF-8" ?>
+  const rssXml = `<?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-<channel>
-  <title>Modelverse — AI Intelligence News</title>
-  <link>${SITE_URL}/news</link>
-  <description>Practical reads, weekly recaps, and deep-dive model reviews from the Modelverse editorial team.</description>
-  <language>en-us</language>
-  <lastBuildDate>${mostRecentDate}</lastBuildDate>
-  <atom:link href="${SITE_URL}/news/feed.xml" rel="self" type="application/rss+xml" />
-  ${xmlItems}
-</channel>
+  <channel>
+    <title>Modelverse — AI Intelligence &amp; News</title>
+    <link>${baseUrl}/articles</link>
+    <description>Daily analysis and fact-checked reports on foundation model releases and AI research.</description>
+    <language>en-us</language>
+    <atom:link href="${baseUrl}/news/feed.xml" rel="self" type="application/rss+xml"/>
+    ${itemsXml}
+  </channel>
 </rss>`;
 
-  return new NextResponse(rssFeed, {
+  return new NextResponse(rssXml, {
     headers: {
-      "Content-Type": "application/rss+xml; charset=utf-8",
-      "Cache-Control": "public, s-maxage=86400, stale-while-revalidate=86400",
+      "Content-Type": "application/xml; charset=utf-8",
+      "Cache-Control": "public, max-age=3600, s-maxage=3600",
     },
   });
 }

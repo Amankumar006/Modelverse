@@ -1,19 +1,18 @@
 "use client";
 
-import { useState } from "react";
+import React, { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import Navbar from "@/components/layout/Navbar";
-import { Search, ArrowRight, ShieldCheck } from "lucide-react";
+import { Search, ArrowRight, Sparkles } from "lucide-react";
 
 interface HeroSectionProps {
   totalModels?: number;
-  verifiedCount?: number;
+  totalArticles?: number;
 }
 
 export default function HeroSection({
-  totalModels = 120,
-  verifiedCount = 105,
+  totalModels = 0,
+  totalArticles = 0,
 }: HeroSectionProps) {
   const [query, setQuery] = useState("");
   const router = useRouter();
@@ -21,37 +20,32 @@ export default function HeroSection({
   const handleSearchSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (query.trim()) {
-      router.push(`/models?q=${encodeURIComponent(query.trim())}`);
+      router.push(`/models?search=${encodeURIComponent(query.trim())}`);
     } else {
       router.push("/models");
     }
   };
 
   const categoryChips = [
-    { label: "Text", href: "/models?modality=text" },
-    { label: "Image", href: "/models?modality=image" },
-    { label: "Code", href: "/models?task=code-generation" },
-    { label: "Open Weights", href: "/models?type=open-weights" },
+    { label: "LLMs", href: "/models?category=LLM" },
+    { label: "Multimodal", href: "/models?category=Multimodal" },
+    { label: "Code", href: "/models?category=Code" },
+    { label: "Anthropic", href: "/models?provider=Anthropic" },
+    { label: "OpenAI", href: "/models?provider=OpenAI" },
   ];
 
   return (
-    <section className="relative w-full bg-[var(--bg)] text-[var(--text)] pt-4 pb-12 md:pb-16 flex flex-col items-center border-b border-[var(--muted)]/10">
-      {/* Navigation Header */}
-      <div className="w-full relative z-20">
-        <Navbar theme="dark" />
-      </div>
-
-      {/* Centered Hero Container (max-w-640px) */}
-      <div className="w-full max-w-[640px] mx-auto px-5 pt-8 md:pt-14 flex flex-col items-center text-center relative z-10">
+    <section className="relative w-full bg-[var(--bg)] text-[var(--text)] pt-12 pb-14 md:pt-16 md:pb-20 flex flex-col items-center border-b border-[var(--muted)]/10">
+      <div className="w-full max-w-[680px] mx-auto px-5 flex flex-col items-center text-center relative z-10">
         {/* Stat Pill Badge */}
         <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-[var(--radius-pill)] bg-[var(--accent-soft)] text-[var(--accent)] text-xs font-semibold mb-6 shadow-sm">
-          <ShieldCheck size={14} className="shrink-0" />
+          <Sparkles size={14} className="shrink-0" />
           <span className="tabular-nums font-mono">
-            {totalModels} models tracked · {verifiedCount} verified by curators
+            {totalModels > 0 ? `${totalModels} foundation models` : "The Open Model Catalog"} • {totalArticles > 0 ? `${totalArticles} articles` : "Real-time AI Intelligence"}
           </span>
         </div>
 
-        {/* Headline */}
+        {/* Main Headline */}
         <h1 className="text-3xl sm:text-5xl md:text-6xl font-extrabold tracking-tight text-[var(--text)] leading-[1.1] mb-4">
           Every AI Model. <br className="hidden sm:inline" />
           <span className="text-[var(--accent)]">Every Release.</span>
@@ -67,26 +61,21 @@ export default function HeroSection({
           onSubmit={handleSearchSubmit}
           className="w-full relative flex items-center bg-[var(--card-bg)] shadow-[var(--shadow-card)] rounded-[var(--radius-control)] p-1.5 border border-[var(--muted)]/10 focus-within:ring-2 focus-within:ring-[var(--accent)] transition-all mb-5"
         >
-          <label htmlFor="hero-search-input" className="sr-only">
-            Search AI models, developers, or parameters
-          </label>
-
           <Search size={18} className="ml-3 text-[var(--muted)] shrink-0" />
 
           <input
-            id="hero-search-input"
             type="text"
-            placeholder="Search models, developers, or specs..."
+            placeholder="Search models, providers, or parameters..."
             value={query}
-            aria-label="Search AI models, developers, or parameters"
+            aria-label="Search models"
             onChange={(e) => setQuery(e.target.value)}
-            className="w-full bg-transparent px-3 py-2.5 text-sm text-[var(--text)] placeholder:text-[var(--muted)] focus:outline-none font-sans"
+            className="w-full bg-transparent px-3 py-2 text-sm text-[var(--text)] placeholder:text-[var(--muted)] focus:outline-none font-sans"
           />
 
           <button
             type="submit"
             aria-label="Submit search"
-            className="px-4 py-2.5 rounded-[var(--radius-control)] bg-[var(--accent)] text-[var(--accent-contrast)] text-xs font-bold hover:opacity-90 transition-all shrink-0 flex items-center gap-1.5 cursor-pointer"
+            className="px-5 py-2.5 rounded-[var(--radius-control)] bg-[var(--accent)] text-[var(--accent-contrast)] text-xs font-bold hover:opacity-90 transition-all shrink-0 flex items-center gap-1.5 cursor-pointer"
           >
             <span>Search</span>
             <ArrowRight size={14} />

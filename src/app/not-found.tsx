@@ -1,21 +1,34 @@
-import Link from 'next/link';
+import React from "react";
+import Link from "next/link";
+import { ArrowLeft, Search } from "lucide-react";
 
 export default function NotFound() {
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center bg-[#141414] text-[#E4E4E7] font-sans px-4">
-      <div className="max-w-md w-full liquid-glass rounded-2xl p-8 text-center flex flex-col items-center animate-fade-rise">
-        <div className="text-[#10B981] font-display text-5xl mb-4">404</div>
-        <h2 className="text-3xl mb-4 font-display text-[#F4F4F5] tracking-tight">Page Not Found</h2>
-        <p className="text-[#D4D4D8] mb-8 text-base leading-relaxed">
-          The page you are looking for doesn&apos;t exist or has been moved.
+    <main className="w-full flex-1 flex flex-col items-center justify-center text-center px-4 py-20">
+      <div className="max-w-md space-y-4">
+        <span className="text-4xl font-extrabold font-mono text-[var(--accent)]">404</span>
+        <h1 className="text-2xl sm:text-3xl font-extrabold text-[var(--text)] tracking-tight">
+          Page Not Found
+        </h1>
+        <p className="text-xs sm:text-sm text-[var(--muted)] leading-relaxed">
+          The AI model or article you are looking for might have been moved, renamed, or is temporarily unavailable.
         </p>
-        <Link 
-          href="/" 
-          className="px-6 py-2.5 rounded-full bg-[#10B981] hover:bg-[#059669] text-[#141414] font-semibold transition-colors duration-200"
-        >
-          Return Home
-        </Link>
+
+        <div className="pt-4 flex flex-col sm:flex-row items-center justify-center gap-3">
+          <Link
+            href="/"
+            className="inline-flex items-center gap-1.5 px-4 py-2 rounded-[var(--radius-control)] bg-[var(--accent)] text-[var(--accent-contrast)] text-xs font-bold hover:opacity-90 transition-opacity"
+          >
+            <ArrowLeft size={14} /> Back to Home
+          </Link>
+          <Link
+            href="/models"
+            className="inline-flex items-center gap-1.5 px-4 py-2 rounded-[var(--radius-control)] bg-[var(--card-bg)] border border-[var(--muted)]/20 text-xs font-semibold text-[var(--text)] hover:border-[var(--accent)] transition-colors"
+          >
+            <Search size={14} /> Search Catalog
+          </Link>
+        </div>
       </div>
-    </div>
+    </main>
   );
 }

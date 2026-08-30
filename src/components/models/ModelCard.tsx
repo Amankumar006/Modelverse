@@ -1,250 +1,130 @@
+"use client";
+
+import React from "react";
 import Link from "next/link";
-import type { ModelIndex, ModelEntry } from "@/lib/models";
+import Image from "next/image";
 import { ArrowUpRight } from "lucide-react";
+import type { ModelRow } from "@/types/database";
+import { getProviderLogo } from "@/lib/logos";
 
-function truncateAtWordBoundary(text: string, maxLength: number): string {
-  if (text.length <= maxLength) return text;
-  const sub = text.slice(0, maxLength);
-  const lastSpace = sub.lastIndexOf(" ");
-  if (lastSpace === -1) return sub + "...";
-  return sub.slice(0, lastSpace) + "...";
+interface ModelCardProps {
+  model: ModelRow;
+  variant?: "card" | "row";
 }
 
-function StatusDot({ status, verified }: { status?: string; verified?: boolean }) {
-  if (verified) {
-    return (
-      <span
-        aria-label="Verified model"
-        title="Verified by curators"
-        className="w-2.5 h-2.5 rounded-full bg-[var(--accent)] shrink-0 shadow-sm"
-      />
-    );
-  }
-  if (status === "unverified" || status === "draft") {
-    return (
-      <span
-        aria-label="Unverified model"
-        title="Unverified"
-        className="w-2.5 h-2.5 rounded-full border-2 border-[var(--accent)] bg-transparent shrink-0"
-      />
-    );
-  }
-  return (
-    <span
-      aria-label="Skeleton entry"
-      title="Skeleton entry"
-      className="w-2.5 h-2.5 rounded-full border border-dashed border-[var(--muted)] opacity-60 shrink-0"
-    />
-  );
+function formatContextWindow(tokens: number | null): string {
+  if (!tokens) return "";
+  if (tokens >= 1_000_000) return `${(tokens / 1_000_000).toFixed(tokens % 1_000_000 === 0 ? 0 : 1)}M ctx`;
+  if (tokens >= 1_000) return `${Math.round(tokens / 1_000)}k ctx`;
+  return `${tokens} ctx`;
 }
 
-export default function ModelCard({
-  model,
-  variant = "single",
-  familyVariantCount,
-  familySlug,
-  isFeatured = false,
-  hideDeveloperPrefix = false,
-}: {
-  model: ModelIndex | ModelEntry;
-  variant?: "single" | "family" | "row" | "card";
-  familyVariantCount?: number;
-  familySlug?: string;
-  isFeatured?: boolean;
-  hideDeveloperPrefix?: boolean;
-}) {
-  const formattedDate = new Date(model.releaseDate).toLocaleDateString(
-    "en-US",
-    { month: "short", year: "numeric" }
-  );
-
-  const isDetailed = "description" in model;
-  const rawDescription = isDetailed ? (model as ModelEntry).description : "";
-  const description = truncateAtWordBoundary(rawDescription, isFeatured ? 160 : 110);
-
-  
-  let modality = isDetailed ? (model as ModelEntry).modality : [];
-  if (modality && !Array.isArray(modality) && typeof modality === "object") {
-    const allMods: string[] = [];
-    Object.values(modality).forEach((v) => {
-      if (Array.isArray(v)) allMods.push(...v);
-    });
-    modality = allMods;
-  }
-
-  /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
-  const contextWindow = typeof (model as ModelEntry).contextWindow === "object" && (model as ModelEntry).contextWindow !== null ? String(((model as ModelEntry).contextWindow as any).native) : (model as ModelEntry).contextWindow;
-  let parameters = isDetailed ? (model as ModelEntry).parameters : undefined;
-  if (typeof parameters === "object" && parameters !== null) {
-    parameters = Object.values(parameters).join(" / ");
-  }
-  const isVerified = "verified" in model ? Boolean((model as ModelEntry).verified) : false;
-
-  const targetHref = familySlug ? `/models/family/${familySlug}` : `/models/${model.slug}`;
-  const isIndexed = "qualityStatus" in model ? model.qualityStatus === "indexed" : false;
-  const effectiveFeatured = Boolean(isFeatured) && isIndexed;
+export default function ModelCard({ model, variant = "card" }: ModelCardProps) {
+  const formattedContext = formatContextWindow(model.context_window);
+  const modalities = Array.isArray(model.modalities) ? model.modalities : ["text"];
+  const providerLogo = getProviderLogo(model.provider);
 
   if (variant === "row") {
     return (
       <Link
-        href={targetHref}
-        prefetch={false}
-        className="group grid grid-cols-[1fr_auto_auto_auto] sm:grid-cols-[1.4fr_0.8fr_0.6fr_0.5fr_auto] items-center gap-3 sm:gap-4 px-4 py-3.5 rounded-[14px] bg-[var(--card-bg)]/80 backdrop-blur-md border border-[var(--muted)]/10 hover:border-[var(--accent)]/30 hover:bg-[var(--accent-soft)]/5 transition-all duration-300 shadow-sm hover:shadow-md cursor-pointer"
+        href={`/models/${model.slug}`}
+        className="group grid grid-cols-[1fr_auto_auto_auto] sm:grid-cols-[1.4fr_0.8fr_0.6fr_auto] items-center gap-3 sm:gap-4 px-4 py-3.5 rounded-[14px] bg-[var(--card-bg)]/80 backdrop-blur-md border border-[var(--muted)]/10 hover:border-[var(--accent)]/30 hover:bg-[var(--accent-soft)]/5 transition-all duration-300 shadow-sm hover:shadow-md cursor-pointer"
       >
-        <div className="min-w-0">
-          <div className="flex items-center gap-2">
+        <div className="min-w-0 flex items-center gap-3">
+          <div className="relative w-6 h-6 rounded-full overflow-hidden shrink-0 bg-[var(--bg)] border border-[var(--muted)]/15 flex items-center justify-center p-0.5">
+            <Image
+              src={providerLogo}
+              alt={model.provider}
+              width={18}
+              height={18}
+              className="w-full h-full object-contain"
+            />
+          </div>
+          <div className="min-w-0">
             <p className="text-sm font-semibold text-[var(--text)] truncate group-hover:text-[var(--accent)] transition-colors">
               {model.name}
             </p>
-            {familyVariantCount && (
-              <span className="text-[10px] font-medium bg-[var(--tag-bg)] text-[var(--tag-text)] px-2 py-0.5 rounded-full shrink-0">
-                {familyVariantCount} variants
-              </span>
-            )}
+            <p className="text-xs text-[var(--muted)] truncate">{model.provider}</p>
           </div>
-          <p className="text-xs text-[var(--muted)] truncate">{model.developer}</p>
         </div>
 
-        <p className="hidden sm:block text-sm text-[var(--muted)] truncate">
-          {model.developer}
+        <p className="hidden sm:block text-xs font-mono text-[var(--muted)] truncate">
+          {formattedContext}
         </p>
 
-        <div className="flex justify-end sm:justify-start items-center gap-2">
-          <span className="text-xs px-2.5 py-1 rounded-full bg-[var(--tag-bg)] text-[var(--tag-text)] font-medium">
-            {model.type === "open-weights" ? "Open" : "API"}
-          </span>
-          <StatusDot status={model.status} verified={isVerified} />
-        </div>
-
-        <p className="text-xs text-[var(--muted)] tabular-nums whitespace-nowrap">
-          {formattedDate}
-        </p>
+        <span className="text-[10px] px-2.5 py-0.5 rounded-full bg-[var(--tag-bg)] text-[var(--tag-text)] font-medium uppercase tracking-wider">
+          {model.category || "LLM"}
+        </span>
 
         <ArrowUpRight
           size={14}
-          className="hidden sm:block text-[var(--muted)] group-hover:text-[var(--accent)] transition-colors"
+          className="text-[var(--muted)] group-hover:text-[var(--accent)] transition-colors"
         />
       </Link>
     );
   }
 
   return (
-    <div
-      className={`group relative flex flex-col justify-between rounded-[20px] bg-[var(--card-bg)]/90 backdrop-blur-xl border border-[var(--muted)]/10 shadow-sm hover:shadow-[0_15px_35px_-10px_rgba(0,0,0,0.1)] hover:border-[var(--accent)]/30 hover:-translate-y-1 transition-all duration-400 w-full text-left overflow-hidden z-0 ${
-        effectiveFeatured
-          ? "col-span-1 md:col-span-2 p-7 text-base"
-          : "col-span-1 p-5.5 text-xs"
-      }`}
+    <Link
+      href={`/models/${model.slug}`}
+      className="group relative flex flex-col justify-between rounded-[20px] bg-[var(--card-bg)]/90 backdrop-blur-xl border border-[var(--muted)]/10 shadow-sm hover:shadow-[0_15px_35px_-10px_rgba(0,0,0,0.1)] hover:border-[var(--accent)]/30 hover:-translate-y-1 transition-all duration-400 p-5.5 text-xs text-left overflow-hidden cursor-pointer"
     >
       <div className="absolute inset-0 bg-gradient-to-br from-[var(--accent)]/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
 
-      <Link
-        href={targetHref}
-        className="absolute inset-0 z-10"
-        aria-label={`View ${model.name}`}
-      />
-
-      <div className="flex flex-col relative z-20 pointer-events-none h-full justify-between">
+      <div className="relative z-10 flex flex-col h-full justify-between">
         <div>
-          {/* Header Row: Modality Tag Pill (left) + Status Dot (right) */}
+          {/* Header Row: Provider Logo & Category Badges */}
           <div className="flex items-center justify-between gap-2 mb-3">
-            <div className="flex items-center gap-1.5 flex-wrap">
-              {modality && modality.length > 0 ? (
-                modality.slice(0, 2).map((m) => (
-                  <span
-                    key={m}
-                    className="px-2.5 py-0.5 rounded-full text-[10px] font-medium bg-[var(--tag-bg)] text-[var(--tag-text)] uppercase tracking-wider"
-                  >
-                    {m}
-                  </span>
-                ))
-              ) : (
-                <span className="px-2.5 py-0.5 rounded-full text-[10px] font-medium bg-[var(--tag-bg)] text-[var(--tag-text)] uppercase tracking-wider">
-                  Text
-                </span>
-              )}
-
-              {effectiveFeatured && (
-                <span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-[var(--accent-soft)] text-[var(--accent)] uppercase tracking-wider">
-                  Featured
-                </span>
-              )}
-            </div>
-
-            <StatusDot status={model.status} verified={isVerified} />
-          </div>
-
-          {/* Title & Developer */}
-          <div className="mb-2">
-            {!hideDeveloperPrefix && (
-              <span className="text-[10px] font-semibold uppercase tracking-wider text-[var(--muted)] block mb-0.5">
-                {model.developer}
+            <div className="flex items-center gap-1.5 min-w-0">
+              <div className="relative w-4 h-4 rounded-full overflow-hidden shrink-0 bg-[var(--bg)] border border-[var(--muted)]/15 flex items-center justify-center p-0.5">
+                <Image
+                  src={providerLogo}
+                  alt={model.provider}
+                  width={14}
+                  height={14}
+                  className="w-full h-full object-contain"
+                />
+              </div>
+              <span className="text-[10px] font-bold uppercase tracking-wider text-[var(--accent)] truncate">
+                {model.provider}
               </span>
-            )}
-            <h3
-              className={`font-bold text-[var(--text)] group-hover:text-[var(--accent)] transition-colors leading-snug truncate ${
-                effectiveFeatured ? "text-xl md:text-2xl" : "text-base md:text-lg"
-              }`}
-            >
-              {variant === "family" && familySlug
-                ? familySlug.replace(/^gpt/i, "GPT").replace(/-/g, " ").replace(/\b\w/g, (c) => c.toUpperCase())
-                : model.name}
-            </h3>
+            </div>
+            <span className="px-2 py-0.5 rounded-full text-[10px] font-medium bg-[var(--tag-bg)] text-[var(--tag-text)] uppercase tracking-wider shrink-0">
+              {model.category || "LLM"}
+            </span>
           </div>
+
+          {/* Model Name */}
+          <h3 className="font-bold text-[var(--text)] group-hover:text-[var(--accent)] transition-colors text-base md:text-lg leading-snug truncate mb-2">
+            {model.name}
+          </h3>
 
           {/* Description */}
-          {description && (
-            <p className="text-[var(--muted)] text-xs md:text-sm line-clamp-2 leading-relaxed mb-3">
-              {description}
+          {model.description && (
+            <p className="text-[var(--muted)] text-xs line-clamp-2 leading-relaxed mb-4">
+              {model.description}
             </p>
           )}
 
-          {/* Capability Mini-Badges */}
-          {model.capabilities && typeof model.capabilities === "object" && (
-            <div className="flex items-center gap-1.5 flex-wrap mb-3">
-              {model.capabilities.reasoning && (
-                <span className="text-[10px] font-medium px-2 py-0.5 rounded-full bg-[var(--accent-soft)]/20 text-[var(--accent)] border border-[var(--accent)]/30 flex items-center gap-1">
-                  🧠 Reasoning
-                </span>
-              )}
-              {model.capabilities.tool_calling && (
-                <span className="text-[10px] font-medium px-2 py-0.5 rounded-full bg-blue-500/10 text-blue-400 border border-blue-500/20 flex items-center gap-1">
-                  🛠️ Tools
-                </span>
-              )}
-              {model.capabilities.vision_input && (
-                <span className="text-[10px] font-medium px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 flex items-center gap-1">
-                  👁️ Vision
-                </span>
-              )}
-              {model.capabilities.structured_outputs && (
-                <span className="text-[10px] font-medium px-2 py-0.5 rounded-full bg-purple-500/10 text-purple-400 border border-purple-500/20 flex items-center gap-1">
-                  📋 JSON
-                </span>
-              )}
-              {model.capabilities.prompt_caching && (
-                <span className="text-[10px] font-medium px-2 py-0.5 rounded-full bg-amber-500/10 text-amber-400 border border-amber-500/20 flex items-center gap-1">
-                  ⚡ Cache
-                </span>
-              )}
-            </div>
-          )}
+          {/* Modalities Chips */}
+          <div className="flex items-center gap-1.5 flex-wrap mb-4">
+            {modalities.slice(0, 3).map((m) => (
+              <span
+                key={String(m)}
+                className="text-[9px] px-2 py-0.5 rounded-full bg-[var(--card-bg)] text-[var(--muted)] border border-[var(--muted)]/20"
+              >
+                {String(m)}
+              </span>
+            ))}
+          </div>
         </div>
 
-        {/* Footer Metadata */}
-        <div className="pt-3 border-t border-[var(--muted)]/10 flex items-center justify-between text-[11px] text-[var(--muted)]">
-          <div className="flex items-center gap-2 font-mono tabular-nums">
-            {contextWindow && contextWindow !== "Unknown" && (
-              <span>{contextWindow as React.ReactNode}</span>
-            )}
-            {parameters && parameters !== "Unknown" && (
-              <span>• {parameters as React.ReactNode}</span>
-            )}
-          </div>
-
-          <span className="font-mono tabular-nums">{formattedDate}</span>
+        {/* Footer Meta: Context Window & Parameters / Weights */}
+        <div className="pt-3 border-t border-[var(--muted)]/10 flex items-center justify-between text-[11px] text-[var(--muted)] font-mono tabular-nums">
+          <span>{formattedContext || model.weights_size || "Standard"}</span>
+          <span>{model.active_parameters ? `${model.active_parameters} act` : model.parameters || "Proprietary"}</span>
         </div>
       </div>
-    </div>
+    </Link>
   );
 }

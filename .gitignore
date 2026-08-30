@@ -31,7 +31,13 @@ yarn-error.log*
 .pnpm-debug.log*
 
 # env files (can opt-in for committing if needed)
-.env*
+.env*.local
+.env
+!.env.example
+
+# IDE
+.idea/
+.vscode/
 
 # vercel
 .vercel
@@ -40,25 +46,6 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
-# Generated search index
-src/lib/search-index.json
-src/lib/models-archive.json
-src/lib/news-archive.json
-src/lib/news-index.json
-
-# Import cache & temporary logs
-data/ingestion/
-data/cache/news-research/
-scripts/.import-cache/
-*.log
-.claude/*
-!.claude/skills/
-.claude/skills/*
-!.claude/skills/git-commit-formatter/
-!.claude/skills/open-pull-request/
-!.claude/skills/release-to-main/
-!.claude/skills/supabase-migrations/
-!.claude/skills/ingestion-pipeline/
-!.claude/skills/quality-gate/
-!.claude/skills/debug-production/
-.mcp.json
+# temp & cli caches
+.temp/
+supabase/.temp/
