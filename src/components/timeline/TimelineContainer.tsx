@@ -71,6 +71,7 @@ export default function TimelineContainer({ initialModels }: TimelineContainerPr
                 month: "short",
                 day: "numeric",
                 year: "numeric",
+                timeZone: "UTC",
               })
             : "Recently Added";
 

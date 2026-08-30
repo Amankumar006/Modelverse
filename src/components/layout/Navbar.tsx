@@ -3,14 +3,13 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { Search, Sun, Moon, Menu, X } from "lucide-react";
-import { useTheme } from "@/components/ThemeProvider";
+import { Search, Menu, X } from "lucide-react";
 import ModelverseLogo from "@/components/ui/ModelverseLogo";
+import ThemeToggle from "./ThemeToggle";
 import { NavLinks, NAV_ITEMS } from "./NavLinks";
 
 export default function Navbar() {
   const router = useRouter();
-  const { mode, toggleMode } = useTheme();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
 
@@ -48,25 +47,12 @@ export default function Navbar() {
             />
           </form>
 
-          <button
-            onClick={toggleMode}
-            className="p-2 rounded-[var(--radius-pill)] bg-[var(--card-bg)] shadow-[var(--shadow-card)] text-[var(--muted)] hover:text-[var(--text)] transition-all flex items-center justify-center cursor-pointer border border-[var(--muted)]/10"
-            title={`Switch to ${mode === "dark" ? "Light" : "Dark"} Mode`}
-            aria-label="Toggle theme mode"
-          >
-            {mode === "dark" ? <Sun size={15} className="text-amber-400" /> : <Moon size={15} className="text-indigo-600" />}
-          </button>
+          <ThemeToggle />
         </div>
 
         {/* Mobile Controls */}
         <div className="flex md:hidden items-center gap-2">
-          <button
-            onClick={toggleMode}
-            className="p-2 rounded-lg text-[var(--muted)] hover:bg-[var(--card-bg)] transition-colors"
-            aria-label="Toggle theme mode"
-          >
-            {mode === "dark" ? <Sun size={16} className="text-amber-400" /> : <Moon size={16} className="text-indigo-600" />}
-          </button>
+          <ThemeToggle />
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             className="p-2 rounded-lg text-[var(--muted)] hover:bg-[var(--card-bg)] transition-colors"
