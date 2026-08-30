@@ -4,8 +4,8 @@ import { getArticles } from "@/lib/supabase/articles";
 export const revalidate = 3600;
 
 export async function GET() {
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://modelverse.ai";
-  const { articles } = await getArticles({ limit: 50, isPublished: true });
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://www.themodelverse.in";
+  const { articles } = await getArticles({ limit: 100, isPublished: true });
 
   const itemsXml = articles
     .map(
@@ -23,9 +23,9 @@ export async function GET() {
   const rssXml = `<?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Modelverse — AI Intelligence &amp; News</title>
+    <title>Modelverse — AI News & Intelligence Digest</title>
     <link>${baseUrl}/articles</link>
-    <description>Daily analysis and fact-checked reports on foundation model releases and AI research.</description>
+    <description>Daily breaking artificial intelligence research, papers, and lab releases.</description>
     <language>en-us</language>
     <atom:link href="${baseUrl}/news/feed.xml" rel="self" type="application/rss+xml"/>
     ${itemsXml}

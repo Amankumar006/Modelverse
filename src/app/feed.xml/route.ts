@@ -4,8 +4,8 @@ import { getModels } from "@/lib/supabase/models";
 export const revalidate = 3600;
 
 export async function GET() {
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://modelverse.ai";
-  const { models } = await getModels({ limit: 50, isActive: true });
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://www.themodelverse.in";
+  const { models } = await getModels({ limit: 100, isActive: true });
 
   const itemsXml = models
     .map(
