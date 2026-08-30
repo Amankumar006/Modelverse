@@ -3,15 +3,16 @@
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowUpRight } from "lucide-react";
+import { ArrowRight, Calendar, Clock, Sparkles } from "lucide-react";
 import type { ArticleRow } from "@/types/database";
+import { calculateReadingTime } from "@/lib/reading-time";
 
 interface ArticleCardProps {
   article: ArticleRow;
   featured?: boolean;
 }
 
-export default function ArticleCard({ article, featured = false }: ArticleCardProps) {
+export default function ArticleCard({ article }: ArticleCardProps) {
   const formattedDate = new Date(article.published_at).toLocaleDateString("en-US", {
     month: "short",
     day: "numeric",
@@ -19,98 +20,79 @@ export default function ArticleCard({ article, featured = false }: ArticleCardPr
     timeZone: "UTC",
   });
 
-  if (featured) {
-    return (
-      <div className="group relative rounded-[20px] bg-[var(--card-bg)]/90 backdrop-blur-xl border border-[var(--muted)]/10 shadow-sm hover:shadow-[0_15px_35px_-10px_rgba(0,0,0,0.1)] hover:border-[var(--accent)]/30 hover:-translate-y-1 transition-all duration-400 overflow-hidden flex flex-col justify-between">
-        <div className="relative aspect-[16/9] w-full overflow-hidden bg-[var(--muted)]/10">
-          {article.cover_image ? (
-            <Image
-              src={article.cover_image}
-              alt={article.title}
-              fill
-              priority
-              className="object-cover group-hover:scale-105 transition-transform duration-500"
-            />
-          ) : (
-            <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-[var(--accent-soft)]/30 to-[var(--card-bg)] text-[var(--accent)] text-lg font-bold">
-              Modelverse Intelligence
-            </div>
-          )}
-          <div className="absolute top-4 left-4 flex items-center gap-2 z-10">
-            <span className="px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider bg-[var(--accent)] text-[var(--accent-contrast)]">
-              {article.category || "AI News"}
-            </span>
-          </div>
-        </div>
-
-        <div className="p-6 md:p-8 flex flex-col justify-between flex-1">
-          <div>
-            <h3 className="text-xl md:text-2xl font-bold text-[var(--text)] group-hover:text-[var(--accent)] transition-colors leading-snug tracking-tight">
-              {article.title}
-            </h3>
-            {article.summary && (
-              <p className="text-sm text-[var(--muted)] mt-3 line-clamp-3 leading-relaxed">
-                {article.summary}
-              </p>
-            )}
-          </div>
-
-          <div className="mt-6 pt-4 border-t border-[var(--muted)]/10 flex items-center justify-between text-xs text-[var(--muted)] font-mono tabular-nums">
-            <div className="flex items-center gap-2">
-              <span>{article.source_name || "Editorial"}</span>
-              <span>•</span>
-              <span>{formattedDate}</span>
-            </div>
-            <span className="text-[var(--accent)] font-semibold flex items-center gap-1">
-              Read Story <ArrowUpRight size={14} />
-            </span>
-          </div>
-        </div>
-
-        <Link href={`/articles/${article.slug}`} className="absolute inset-0 z-20">
-          <span className="sr-only">Read {article.title}</span>
-        </Link>
-      </div>
-    );
-  }
+  const readingTime = calculateReadingTime(article.content || article.summary);
 
   return (
-    <div className="group relative rounded-[20px] bg-[var(--card-bg)]/90 backdrop-blur-xl border border-[var(--muted)]/10 shadow-sm hover:shadow-[0_10px_30px_-10px_rgba(0,0,0,0.1)] hover:border-[var(--accent)]/30 p-4 hover:-translate-y-1 transition-all duration-400 flex gap-4 items-center">
-      {article.cover_image && (
-        <div className="relative h-20 w-24 rounded-[14px] overflow-hidden shrink-0 bg-[var(--muted)]/10">
+    <article className="group relative h-full rounded-[var(--radius-card)] bg-[var(--card-bg)] border border-[var(--muted)]/10 shadow-[var(--shadow-card)] hover-lift flex flex-col justify-between overflow-hidden">
+      {/* Cover Image Container */}
+      <div className="relative aspect-[16/9] w-full overflow-hidden bg-[var(--muted)]/10">
+        {article.cover_image ? (
           <Image
             src={article.cover_image}
             alt={article.title}
             fill
-            className="object-cover group-hover:scale-105 transition-transform duration-300"
+            className="object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
           />
-        </div>
-      )}
-
-      <div className="flex-1 min-w-0 flex flex-col justify-between py-0.5">
-        <div className="flex items-center gap-2 mb-1">
-          <span className="text-[9px] font-bold uppercase tracking-wider text-[var(--accent)]">
-            {article.source_name || "News"}
-          </span>
-          <span className="text-[10px] font-mono tabular-nums text-[var(--muted)]">
-            {formattedDate}
-          </span>
-        </div>
-
-        <h4 className="text-xs sm:text-sm font-bold text-[var(--text)] group-hover:text-[var(--accent)] transition-colors line-clamp-2 leading-snug tracking-tight">
-          {article.title}
-        </h4>
-
-        {article.summary && (
-          <p className="text-[11px] text-[var(--muted)] line-clamp-1 mt-0.5">
-            {article.summary}
-          </p>
+        ) : (
+          <div className="w-full h-full flex flex-col items-center justify-center bg-gradient-to-br from-[var(--accent-soft)]/20 to-[var(--card-bg)] text-[var(--accent)] p-4 text-center">
+            <Sparkles size={24} className="mb-1 opacity-70" />
+            <span className="text-xs font-bold">Research Brief</span>
+          </div>
         )}
+
+        {/* Category Pill Badge */}
+        <div className="absolute top-3 left-3 z-10">
+          <span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider bg-[var(--accent)] text-[var(--accent-contrast)] shadow-sm">
+            {article.category || "Intelligence"}
+          </span>
+        </div>
       </div>
 
-      <Link href={`/articles/${article.slug}`} className="absolute inset-0 z-10">
+      {/* Card Body */}
+      <div className="p-5 sm:p-6 flex flex-col justify-between flex-1 space-y-4">
+        <div className="space-y-2.5">
+          {/* Metadata info */}
+          <div className="flex items-center gap-2.5 text-[11px] text-[var(--muted)] font-mono">
+            <span className="flex items-center gap-1">
+              <Calendar size={11} className="text-[var(--accent)]" />
+              {formattedDate}
+            </span>
+            <span>•</span>
+            <span className="flex items-center gap-1">
+              <Clock size={11} className="text-[var(--accent)]" />
+              {readingTime}
+            </span>
+          </div>
+
+          {/* Title */}
+          <h3 className="text-base sm:text-lg font-bold text-[var(--text)] group-hover:text-[var(--accent)] transition-colors line-clamp-2 leading-snug tracking-tight">
+            {article.title}
+          </h3>
+
+          {/* Summary Preview */}
+          {article.summary && (
+            <p className="text-xs text-[var(--muted)] line-clamp-3 leading-relaxed">
+              {article.summary}
+            </p>
+          )}
+        </div>
+
+        {/* Card Footer */}
+        <div className="pt-3 border-t border-[var(--muted)]/10 flex items-center justify-between text-xs">
+          <span className="text-[11px] text-[var(--muted)] font-medium truncate max-w-[140px]">
+            {article.source_name || "Modelverse Intelligence"}
+          </span>
+
+          <span className="inline-flex items-center gap-1 text-[11px] font-bold text-[var(--accent)] group-hover:translate-x-1 transition-transform">
+            <span>Read</span>
+            <ArrowRight size={12} />
+          </span>
+        </div>
+      </div>
+
+      <Link href={`/articles/${article.slug}`} className="absolute inset-0 z-20">
         <span className="sr-only">Read {article.title}</span>
       </Link>
-    </div>
+    </article>
   );
 }
