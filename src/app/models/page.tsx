@@ -11,7 +11,16 @@ export const metadata: Metadata = {
     "Comprehensive directory of LLMs, multimodal, vision, and code models with verified parameters, context windows, and benchmarks.",
 };
 
-export default async function ModelsPage() {
+interface ModelsPageProps {
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
+}
+
+export default async function ModelsPage({ searchParams }: ModelsPageProps) {
+  const resolved = await searchParams;
+  const initialSearch = typeof resolved.search === "string" ? resolved.search : "";
+  const initialCategory = typeof resolved.category === "string" ? resolved.category : "All";
+  const initialProvider = typeof resolved.provider === "string" ? resolved.provider : "All";
+
   const { models } = await getModels({ limit: 100, isActive: true });
 
   return (
@@ -28,7 +37,12 @@ export default async function ModelsPage() {
         </p>
       </div>
 
-      <ModelCatalog initialModels={models} />
+      <ModelCatalog
+        initialModels={models}
+        initialSearch={initialSearch}
+        initialCategory={initialCategory}
+        initialProvider={initialProvider}
+      />
     </main>
   );
 }
