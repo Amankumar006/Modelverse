@@ -2,7 +2,7 @@ import React from "react";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowLeft, ExternalLink, Cpu, Layers, DollarSign, Globe } from "lucide-react";
+import { ArrowLeft, ExternalLink, Cpu, Layers, DollarSign, Globe, Shield, HardDrive, Sparkles } from "lucide-react";
 import { getModelBySlug, getModels } from "@/lib/supabase/models";
 import BenchmarksSection from "@/components/models/BenchmarksSection";
 import QuickstartSection from "@/components/models/QuickstartSection";
@@ -71,6 +71,11 @@ export default async function ModelDetailPage({
             <span className="text-[10px] px-2.5 py-0.5 rounded-full bg-[var(--tag-bg)] text-[var(--tag-text)] font-medium uppercase tracking-wider">
               {model.category || "LLM"}
             </span>
+            {model.source_type && (
+              <span className="text-[10px] px-2.5 py-0.5 rounded-full bg-[var(--accent-soft)] text-[var(--accent)] font-semibold border border-[var(--accent)]/20">
+                {model.source_type}
+              </span>
+            )}
           </div>
           <h1 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-[var(--text)] tracking-tight">
             {model.name}
@@ -82,54 +87,85 @@ export default async function ModelDetailPage({
           )}
         </div>
 
-        {/* Action Link */}
-        {links.website && (
-          <a
-            href={links.website}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-1.5 px-4 py-2 rounded-[var(--radius-control)] bg-[var(--accent)] text-[var(--accent-contrast)] text-xs font-bold hover:opacity-90 transition-opacity shrink-0 self-start md:self-center"
-          >
-            <span>Official Page</span>
-            <ExternalLink size={14} />
-          </a>
-        )}
+        {/* Primary Action Buttons */}
+        <div className="flex flex-wrap gap-2 shrink-0 self-start md:self-center">
+          {model.announcement_url && (
+            <a
+              href={model.announcement_url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 px-4 py-2 rounded-[var(--radius-control)] bg-[var(--accent)] text-[var(--accent-contrast)] text-xs font-bold hover:opacity-90 transition-opacity"
+            >
+              <span>Announcement</span>
+              <ExternalLink size={13} />
+            </a>
+          )}
+          {links.website && !model.announcement_url && (
+            <a
+              href={links.website}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 px-4 py-2 rounded-[var(--radius-control)] bg-[var(--accent)] text-[var(--accent-contrast)] text-xs font-bold hover:opacity-90 transition-opacity"
+            >
+              <span>Official Page</span>
+              <ExternalLink size={13} />
+            </a>
+          )}
+        </div>
       </div>
 
       {/* Key Specifications Grid */}
-      <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
         <div className="p-4 rounded-[var(--radius-control)] bg-[var(--card-bg)] border border-[var(--muted)]/10">
-          <div className="flex items-center gap-1.5 text-[var(--muted)] text-xs mb-1 font-medium">
-            <Cpu size={14} className="text-[var(--accent)]" /> Context Window
+          <div className="flex items-center gap-1.5 text-[var(--muted)] text-[11px] mb-1 font-medium">
+            <Cpu size={13} className="text-[var(--accent)]" /> Context Window
           </div>
-          <p className="text-base sm:text-lg font-bold text-[var(--text)] font-mono">
-            {model.context_window ? `${model.context_window.toLocaleString()} tokens` : "Standard"}
+          <p className="text-sm sm:text-base font-bold text-[var(--text)] font-mono">
+            {model.context_window ? `${model.context_window.toLocaleString()} ctx` : "Standard"}
           </p>
         </div>
 
         <div className="p-4 rounded-[var(--radius-control)] bg-[var(--card-bg)] border border-[var(--muted)]/10">
-          <div className="flex items-center gap-1.5 text-[var(--muted)] text-xs mb-1 font-medium">
-            <Layers size={14} className="text-[var(--accent)]" /> Parameters
+          <div className="flex items-center gap-1.5 text-[var(--muted)] text-[11px] mb-1 font-medium">
+            <Layers size={13} className="text-[var(--accent)]" /> Parameters
           </div>
-          <p className="text-base sm:text-lg font-bold text-[var(--text)] font-mono">
+          <p className="text-sm sm:text-base font-bold text-[var(--text)] font-mono">
             {model.parameters || "Proprietary"}
           </p>
         </div>
 
         <div className="p-4 rounded-[var(--radius-control)] bg-[var(--card-bg)] border border-[var(--muted)]/10">
-          <div className="flex items-center gap-1.5 text-[var(--muted)] text-xs mb-1 font-medium">
-            <DollarSign size={14} className="text-[var(--accent)]" /> Pricing (1M in)
+          <div className="flex items-center gap-1.5 text-[var(--muted)] text-[11px] mb-1 font-medium">
+            <Sparkles size={13} className="text-[var(--accent)]" /> Active Params
           </div>
-          <p className="text-base sm:text-lg font-bold text-[var(--text)] font-mono">
-            {pricing.input_per_1m !== undefined ? `$${pricing.input_per_1m}` : "Custom"}
+          <p className="text-sm sm:text-base font-bold text-[var(--text)] font-mono">
+            {model.active_parameters || model.parameters || "Dense"}
           </p>
         </div>
 
         <div className="p-4 rounded-[var(--radius-control)] bg-[var(--card-bg)] border border-[var(--muted)]/10">
-          <div className="flex items-center gap-1.5 text-[var(--muted)] text-xs mb-1 font-medium">
-            <Globe size={14} className="text-[var(--accent)]" /> Modalities
+          <div className="flex items-center gap-1.5 text-[var(--muted)] text-[11px] mb-1 font-medium">
+            <HardDrive size={13} className="text-[var(--accent)]" /> Weights Size
           </div>
-          <p className="text-xs sm:text-sm font-bold text-[var(--text)] capitalize">
+          <p className="text-sm sm:text-base font-bold text-[var(--text)] font-mono">
+            {model.weights_size || "API Only"}
+          </p>
+        </div>
+
+        <div className="p-4 rounded-[var(--radius-control)] bg-[var(--card-bg)] border border-[var(--muted)]/10">
+          <div className="flex items-center gap-1.5 text-[var(--muted)] text-[11px] mb-1 font-medium">
+            <DollarSign size={13} className="text-[var(--accent)]" /> Pricing (1M in)
+          </div>
+          <p className="text-sm sm:text-base font-bold text-[var(--text)] font-mono">
+            {pricing.input_per_1m !== undefined ? `$${pricing.input_per_1m}` : "Free / Open"}
+          </p>
+        </div>
+
+        <div className="p-4 rounded-[var(--radius-control)] bg-[var(--card-bg)] border border-[var(--muted)]/10">
+          <div className="flex items-center gap-1.5 text-[var(--muted)] text-[11px] mb-1 font-medium">
+            <Globe size={13} className="text-[var(--accent)]" /> Modalities
+          </div>
+          <p className="text-xs sm:text-sm font-bold text-[var(--text)] capitalize truncate">
             {modalities.join(", ")}
           </p>
         </div>
@@ -141,12 +177,13 @@ export default async function ModelDetailPage({
       {/* API Quickstart */}
       <QuickstartSection model={model} />
 
-      {/* Primary Links */}
+      {/* Primary Links & Access Hub */}
       {Object.keys(links).length > 0 && (
         <section className="p-6 rounded-[var(--radius-card)] bg-[var(--card-bg)] border border-[var(--muted)]/10 space-y-3">
-          <h2 className="text-xs font-bold uppercase tracking-wider text-[var(--text)]">
-            Official Documentation & Resources
-          </h2>
+          <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[var(--text)]">
+            <Shield size={14} className="text-[var(--accent)]" />
+            <span>Access Links & Verified Repositories</span>
+          </div>
           <div className="flex flex-wrap gap-2">
             {Object.entries(links).map(([key, url]) => (
               <a
@@ -154,7 +191,7 @@ export default async function ModelDetailPage({
                 href={url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[var(--bg)] hover:bg-[var(--accent-soft)] hover:text-[var(--accent)] text-xs text-[var(--text)] border border-[var(--muted)]/10 transition-colors capitalize font-medium"
+                className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-lg bg-[var(--bg)] hover:bg-[var(--accent-soft)] hover:text-[var(--accent)] text-xs text-[var(--text)] border border-[var(--muted)]/10 transition-colors capitalize font-medium"
               >
                 <span>{key}</span>
                 <ExternalLink size={12} className="opacity-60" />

@@ -20,6 +20,9 @@ export type ModelLinks = {
   paper?: string;
   github?: string;
   huggingface?: string;
+  openrouter?: string;
+  ollama?: string;
+  announcement?: string;
   [key: string]: Json | undefined;
 };
 
@@ -32,6 +35,10 @@ export type ModelRow = {
   description: string | null;
   context_window: number | null;
   parameters: string | null;
+  active_parameters: string | null;
+  weights_size: string | null;
+  source_type: string | null;
+  announcement_url: string | null;
   modalities: Json;
   pricing: Json;
   benchmarks: Json;
@@ -51,6 +58,10 @@ export type ModelInsert = {
   description?: string | null;
   context_window?: number | null;
   parameters?: string | null;
+  active_parameters?: string | null;
+  weights_size?: string | null;
+  source_type?: string | null;
+  announcement_url?: string | null;
   modalities?: Json;
   pricing?: Json;
   benchmarks?: Json;
@@ -70,6 +81,10 @@ export type ModelUpdate = {
   description?: string | null;
   context_window?: number | null;
   parameters?: string | null;
+  active_parameters?: string | null;
+  weights_size?: string | null;
+  source_type?: string | null;
+  announcement_url?: string | null;
   modalities?: Json;
   pricing?: Json;
   benchmarks?: Json;

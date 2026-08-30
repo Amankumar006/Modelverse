@@ -94,10 +94,10 @@ export default function ModelCard({ model, variant = "card" }: ModelCardProps) {
           </div>
         </div>
 
-        {/* Footer Meta: Context Window & Parameters */}
+        {/* Footer Meta: Context Window & Parameters / Weights */}
         <div className="pt-3 border-t border-[var(--muted)]/10 flex items-center justify-between text-[11px] text-[var(--muted)] font-mono tabular-nums">
-          <span>{formattedContext || "Standard"}</span>
-          {model.parameters && <span>{model.parameters}</span>}
+          <span>{formattedContext || model.weights_size || "Standard"}</span>
+          <span>{model.active_parameters ? `${model.active_parameters} act` : model.parameters || "Proprietary"}</span>
         </div>
       </div>
     </Link>
