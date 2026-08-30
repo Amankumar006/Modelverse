@@ -1,54 +1,24 @@
-export type Json =
-  | string
-  | number
-  | boolean
-  | null
-  | { [key: string]: Json | undefined }
-  | Json[];
+import type { ModelRow, ModelInsert, ModelUpdate } from './models';
+import type { NewsItemRow, NewsItemInsert, NewsItemUpdate } from './news';
 
-export interface Database {
+export type { Json } from './models';
+export * from './models';
+export * from './news';
+
+export type Database = {
   public: {
     Tables: {
       models: {
-        Row: {
-          id: string;
-          name: string;
-          slug: string;
-          provider: string;
-          description: string | null;
-          architecture: string | null;
-          parameters: string | null;
-          context_window: number | null;
-          is_active: boolean;
-          created_at: string;
-          updated_at: string;
-        };
-        Insert: {
-          id?: string;
-          name: string;
-          slug: string;
-          provider: string;
-          description?: string | null;
-          architecture?: string | null;
-          parameters?: string | null;
-          context_window?: number | null;
-          is_active?: boolean;
-          created_at?: string;
-          updated_at?: string;
-        };
-        Update: {
-          id?: string;
-          name?: string;
-          slug?: string;
-          provider?: string;
-          description?: string | null;
-          architecture?: string | null;
-          parameters?: string | null;
-          context_window?: number | null;
-          is_active?: boolean;
-          created_at?: string;
-          updated_at?: string;
-        };
+        Row: ModelRow;
+        Insert: ModelInsert;
+        Update: ModelUpdate;
+        Relationships: [];
+      };
+      news_items: {
+        Row: NewsItemRow;
+        Insert: NewsItemInsert;
+        Update: NewsItemUpdate;
+        Relationships: [];
       };
     };
     Views: {
@@ -60,9 +30,8 @@ export interface Database {
     Enums: {
       [_ in never]: never;
     };
+    CompositeTypes: {
+      [_ in never]: never;
+    };
   };
-}
-
-export type ModelRow = Database['public']['Tables']['models']['Row'];
-export type ModelInsert = Database['public']['Tables']['models']['Insert'];
-export type ModelUpdate = Database['public']['Tables']['models']['Update'];
+};

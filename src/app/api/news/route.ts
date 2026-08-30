@@ -1,12 +1,11 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
-import { getModels } from '@/lib/supabase/models';
+import { getNewsItems } from '@/lib/supabase/news';
 
 const QuerySchema = z.object({
-  developer: z.string().optional(),
-  institution: z.string().optional(),
-  family: z.string().optional(),
-  status: z.string().default('active'),
+  category: z.string().optional(),
+  article_type: z.string().optional(),
+  status: z.string().default('published'),
   limit: z.coerce.number().int().min(1).max(100).default(20),
   offset: z.coerce.number().int().min(0).default(0),
   search: z.string().optional(),
@@ -24,7 +23,16 @@ export async function GET(request: NextRequest) {
       );
     }
 
-    const result = await getModels(parsed.data);
+    const { category, article_type, status, limit, offset, search } = parsed.data;
+    const result = await getNewsItems({
+      category,
+      articleType: article_type,
+      status,
+      limit,
+      offset,
+      search,
+    });
+
     return NextResponse.json(result);
   } catch (err) {
     const message = err instanceof Error ? err.message : 'Internal Server Error';
