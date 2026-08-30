@@ -74,7 +74,7 @@ export default function ModelCatalog({
 
   return (
     <div className="w-full grid grid-cols-1 lg:grid-cols-12 2xl:grid-cols-12 gap-8 items-start">
-      {/* Desktop Sidebar (3 cols on standard, 2.5 on ultrawide) */}
+      {/* Desktop Sidebar */}
       <div className="hidden lg:block lg:col-span-3 2xl:col-span-3 3xl:col-span-2 sticky top-24 p-5 sm:p-6 rounded-[var(--radius-card)] bg-[var(--card-bg)] shadow-[var(--shadow-card)] border border-[var(--muted)]/10">
         <CatalogSidebar
           providers={providers}
@@ -98,12 +98,18 @@ export default function ModelCatalog({
           categories={categories}
           selectedCategory={selectedCategory}
           onSelectCategory={setSelectedCategory}
+          selectedProvider={selectedProvider}
+          onSelectProvider={setSelectedProvider}
+          selectedSourceType={selectedSourceType}
+          onSelectSourceType={setSelectedSourceType}
           sortKey={sortKey}
           onSortChange={setSortKey}
           viewMode={viewMode}
           onToggleViewMode={setViewMode}
           totalFiltered={filteredModels.length}
+          totalModels={initialModels.length}
           onOpenMobileFilters={() => setMobileDrawerOpen(true)}
+          onClearAllFilters={clearAllFilters}
         />
 
         {/* Models Grid / List with Ultra-wide & TV Breakpoints */}

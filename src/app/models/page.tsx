@@ -2,6 +2,7 @@ import React from "react";
 import type { Metadata } from "next";
 import { getModels } from "@/lib/supabase/models";
 import ModelCatalog from "@/components/models/ModelCatalog";
+import ModelsPageHeader from "@/components/models/ModelsPageHeader";
 import { BreadcrumbJsonLd, ItemListJsonLd } from "@/components/seo/JsonLd";
 
 export const revalidate = 60;
@@ -74,6 +75,8 @@ export default async function ModelsPage({ searchParams }: ModelsPageProps) {
   // Fetch all active foundation models from database
   const { models } = await getModels({ limit: 1000, isActive: true });
 
+  const providersCount = new Set(models.map((m) => m.provider)).size;
+
   const breadcrumbs = [
     { name: "Home", url: "/" },
     { name: "Models", url: "/models" },
@@ -93,18 +96,11 @@ export default async function ModelsPage({ searchParams }: ModelsPageProps) {
         description="Comprehensive index of artificial intelligence foundation models."
         items={itemList}
       />
-      <main className="w-full max-w-7xl 2xl:max-w-[1600px] 3xl:max-w-[1920px] 4xl:max-w-[2400px] mx-auto px-4 sm:px-6 md:px-10 lg:px-12 2xl:px-16 3xl:px-20 py-12 md:py-16 flex flex-col gap-8">
-        <div>
-          <span className="text-xs font-bold uppercase tracking-wider text-[var(--accent)] mb-1 block">
-            Directory
-          </span>
-          <h1 className="text-3xl sm:text-4xl font-extrabold text-[var(--text)] tracking-tight">
-            Foundation Models Archive
-          </h1>
-          <p className="text-xs sm:text-sm text-[var(--muted)] mt-1.5 max-w-2xl leading-relaxed">
-            Filter and compare frontier foundation models, parameter counts, context architectures, and primary laboratory documentation.
-          </p>
-        </div>
+      <main className="w-full max-w-7xl 2xl:max-w-[1600px] 3xl:max-w-[1920px] 4xl:max-w-[2400px] mx-auto px-4 sm:px-6 md:px-10 lg:px-12 2xl:px-16 3xl:px-20 py-10 md:py-14 flex flex-col gap-8">
+        <ModelsPageHeader
+          totalModels={models.length}
+          totalProviders={providersCount}
+        />
 
         <ModelCatalog
           initialModels={models}
