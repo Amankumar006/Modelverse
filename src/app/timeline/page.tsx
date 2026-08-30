@@ -14,7 +14,7 @@ export const metadata: Metadata = {
 };
 
 export default async function TimelinePage() {
-  const { models } = await getModels({ limit: 100, isActive: true });
+  const { models } = await getModels({ limit: 1000, isActive: true });
 
   return (
     <main className="w-full max-w-4xl mx-auto px-4 sm:px-6 md:px-8 py-10 md:py-14 flex flex-col gap-8">

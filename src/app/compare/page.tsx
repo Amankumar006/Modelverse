@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 };
 
 export default async function ComparePage() {
-  const { models } = await getModels({ limit: 20, isActive: true });
+  const { models } = await getModels({ limit: 1000, isActive: true });
 
   return (
     <main className="w-full max-w-7xl mx-auto px-4 sm:px-6 md:px-10 lg:px-14 py-12 md:py-16 flex flex-col gap-8">

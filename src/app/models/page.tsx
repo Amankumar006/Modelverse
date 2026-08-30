@@ -21,7 +21,8 @@ export default async function ModelsPage({ searchParams }: ModelsPageProps) {
   const initialCategory = typeof resolved.category === "string" ? resolved.category : "All";
   const initialProvider = typeof resolved.provider === "string" ? resolved.provider : "All";
 
-  const { models } = await getModels({ limit: 100, isActive: true });
+  // Fetch all active foundation models from database
+  const { models } = await getModels({ limit: 1000, isActive: true });
 
   return (
     <main className="w-full max-w-7xl mx-auto px-4 sm:px-6 md:px-10 lg:px-14 py-12 md:py-16 flex flex-col gap-8">
