@@ -2,12 +2,12 @@ import type { MetadataRoute } from "next";
 import { getModels } from "@/lib/supabase/models";
 import { getArticles } from "@/lib/supabase/articles";
 
-const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://modelverse.ai";
+const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://www.themodelverse.in";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const [{ models }, { articles }] = await Promise.all([
-    getModels({ limit: 500, isActive: true }),
-    getArticles({ limit: 500, isPublished: true }),
+    getModels({ limit: 1000, isActive: true }),
+    getArticles({ limit: 1000, isPublished: true }),
   ]);
 
   const staticRoutes: MetadataRoute.Sitemap = [
