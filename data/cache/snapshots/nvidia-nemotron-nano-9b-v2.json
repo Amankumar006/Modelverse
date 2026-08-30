@@ -1,0 +1,9 @@
+{
+  "modelId": "cdb1d9da-f7ed-4a02-a8d4-94687007d172",
+  "slug": "nvidia-nemotron-nano-9b-v2",
+  "name": "Nemotron Nano 9B v2",
+  "crawledAt": "2026-08-25T13:58:52.248Z",
+  "crawledUrls": [],
+  "byteCounts": 114,
+  "text": "## Model Description (Nemotron Nano 9B v2)\nCompact Nemotron model for efficient reasoning and deployable AI agents"
+}

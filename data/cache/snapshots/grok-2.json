@@ -1,0 +1,11 @@
+{
+  "modelId": "d106b07e-e182-4497-a34c-ec1f10b4eb7e",
+  "slug": "grok-2",
+  "name": "Grok 2",
+  "crawledAt": "2026-08-25T16:47:52.495Z",
+  "crawledUrls": [
+    "https://x.ai/blog/grok-2"
+  ],
+  "byteCounts": 183,
+  "text": "## Model Description (Grok 2)\nxAI's frontier Mixture-of-Experts language model, featuring advanced reasoning, coding, and real-time information retrieval integrated on the X platform."
+}

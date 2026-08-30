@@ -1,0 +1,9 @@
+{
+  "modelId": "597d58fb-1e4c-4094-8284-6c07c286d452",
+  "slug": "google-gemini-3.1-flash-image-preview",
+  "name": "Nano Banana 2",
+  "crawledAt": "2026-08-25T11:36:02.647Z",
+  "crawledUrls": [],
+  "byteCounts": 115,
+  "text": "## Model Description (Nano Banana 2)\nImage model for prompt-driven generation, editing, and visual design workflows"
+}

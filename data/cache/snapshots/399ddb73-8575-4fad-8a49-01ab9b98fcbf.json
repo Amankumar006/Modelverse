@@ -1,0 +1,11 @@
+{
+  "modelId": "399ddb73-8575-4fad-8a49-01ab9b98fcbf",
+  "slug": "nvidia-llama-3.1-nemotron-ultra-253b",
+  "name": "Llama 3.1 Nemotron Ultra 253B",
+  "crawledAt": "2026-08-25T14:54:44.769Z",
+  "crawledUrls": [
+    "https://build.nvidia.com/nvidia/llama-3_1-nemotron-ultra-253b-v1"
+  ],
+  "byteCounts": 340,
+  "text": "## Model Description (Llama 3.1 Nemotron Ultra 253B)\nLlama 3.1 Nemotron Ultra 253B is NVIDIA’s large reasoning-oriented derivative of Meta Llama 3.1, designed to reduce inference cost and latency relative to a model of its scale. Its engineering story centers on architecture and inference efficiency as much as raw benchmark performance."
+}

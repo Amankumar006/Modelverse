@@ -1,0 +1,9 @@
+{
+  "modelId": "cd6b5c78-ccf3-40f3-b609-3889c1ccead5",
+  "slug": "alibaba-qwen-turbo",
+  "name": "Qwen Turbo",
+  "crawledAt": "2026-08-25T15:52:50.044Z",
+  "crawledUrls": [],
+  "byteCounts": 107,
+  "text": "## Model Description (Qwen Turbo)\nEfficient Qwen model for fast chat, extraction, and high-volume workloads"
+}

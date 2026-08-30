@@ -1,0 +1,9 @@
+{
+  "modelId": "f97a5b12-0676-43ee-83bd-11411265badf",
+  "slug": "mistral-devstral-medium-2507",
+  "name": "Devstral Medium",
+  "crawledAt": "2026-08-25T13:59:12.695Z",
+  "crawledUrls": [],
+  "byteCounts": 121,
+  "text": "## Model Description (Devstral Medium)\nMistral coding agent model for repository tasks and software engineering workflows"
+}

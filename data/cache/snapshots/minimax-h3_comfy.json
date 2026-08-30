@@ -1,0 +1,11 @@
+{
+  "modelId": "7f2e0e6c-3707-42d5-8bb5-7904b9b965be",
+  "slug": "minimax-h3_comfy",
+  "name": "MiniMax-H3_comfy",
+  "crawledAt": "2026-08-15T20:32:17.482Z",
+  "crawledUrls": [
+    "https://huggingface.co/Kijai/MiniMax-H3_comfy"
+  ],
+  "byteCounts": 626,
+  "text": "## Various MiniMax-H3 models converted for ComfyUI usage\n\n---\n\n# Lightx2v distill lora:\n\nhttps://huggingface.co/lightx2v/Minimax-h3-Turbo/tree/main\n\nNot 100% sure of the intended alpha, try using this one at lower strength if you get noisy outputs.\n\n`4 steps, 0.75 LoRA strength, er_sde:`\n\n<video controls width=50% src=https://cdn-uploads.huggingface.co/production/uploads/63297908f0b2fc94904a65b8/2k-mKHz4D0-88lC-ELiv9.mp4></video>\n\n`4 steps, 0.75 LoRA strength, sa_solver:`\n\n<video controls width=50% src=https://cdn-uploads.huggingface.co/production/uploads/63297908f0b2fc94904a65b8/kr1DyCMsfPP4EwY9Butlp.mp4></video>\n\n---"
+}

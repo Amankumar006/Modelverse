@@ -1,0 +1,9 @@
+{
+  "modelId": "c8c03da8-3f9a-4f02-b8d5-d358d20fa8db",
+  "slug": "nvidia-nemotron-3-nano-30b-a3b",
+  "name": "Nemotron 3 Nano 30B A3B",
+  "crawledAt": "2026-08-25T11:36:32.572Z",
+  "crawledUrls": [],
+  "byteCounts": 119,
+  "text": "## Model Description (Nemotron 3 Nano 30B A3B)\nSmall Nemotron 3 MoE for efficient coding, math, and long-context agents"
+}

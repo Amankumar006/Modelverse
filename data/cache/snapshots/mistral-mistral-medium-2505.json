@@ -1,0 +1,11 @@
+{
+  "modelId": "92676ab0-5e69-4daf-85b6-2b4796170cd8",
+  "slug": "mistral-mistral-medium-2505",
+  "name": "Mistral Medium 3",
+  "crawledAt": "2026-08-25T14:54:30.029Z",
+  "crawledUrls": [
+    "https://docs.mistral.ai/models/model-cards/mistral-medium-3-25-05"
+  ],
+  "byteCounts": 1729,
+  "text": "Mistral Medium 3 - Mistral AI | Mistral Docs Docs &amp; API Search docs ⌘K Vibe Studio Inference &amp; Models Admin Resources API Reference Search docs ⌘K Toggle theme Reach out Try Studio Home Inference Models Pricing Model lifecycle policy Regional inference Priority Tier Labs Prompting Sampling API Reference ↗ Inference &amp; Models Models Mistral Medium 3 Compare Legal May 7, 2025 Blog Deprecated Premier v 25.05 Mistral Medium 3 Our frontier-class multimodal model released May 2025. Learn more in our blog post mistral-medium-2505 Modalities Context 128k This model is deprecated. Use Mistral Medium 3.5 for new integrations. Deprecation date 5/22/2026 Replacement Mistral Medium 3.5 FEATURES Features Structured Outputs /v1/chat/completions /v1/conversations Function Calling /v1/chat/completions /v1/conversations Document QnA /v1/chat/completions /v1/conversations Prefix /v1/chat/completions /v1/conversations Chat Completions /v1/chat/completions Agents &amp; Conversations /v1/agents /v1/conversations Built-In Tools /v1/agents /v1/conversations Batching /v1/batch Predicted Outputs /v1/chat/completions /v1/conversations Other Models Other Models Z.ai GLM 5.2 v 5.2 Shieldstral 1.0 v 1.0 Mistral Medium 3.5 v 26.04 WHY MISTRAL About us Our customers Careers Contact us EXPLORE AI Solutions Partners Research DOCUMENTATION Documentation Ambassadors Cookbooks BUILD Studio Vibe Mistral Code Mistral Compute Try the API LEGAL Terms of service Privacy policy Legal notice Privacy Choices Brand COMMUNITY Discord ↗ X ↗ Github ↗ LinkedIn ↗ Ambassadors Mistral AI © 2026 Toggle theme\n\n---\n\n## Model Description (Mistral Medium 3)\nMistral model for multilingual chat, reasoning, and tool-assisted workflows"
+}

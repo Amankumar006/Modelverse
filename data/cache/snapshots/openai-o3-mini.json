@@ -1,0 +1,13 @@
+{
+  "modelId": "e01f3c8d-45f6-4231-b587-98a71e6c0ae7",
+  "slug": "openai-o3-mini",
+  "name": "o3-mini",
+  "crawledAt": "2026-08-25T15:52:13.670Z",
+  "crawledUrls": [
+    "https://modelverse.ai/models/openai-o3-mini",
+    "https://openai.com/index/openai-o3-mini/",
+    "https://openai.com/index/gpt-4-1/"
+  ],
+  "byteCounts": 260,
+  "text": "<!DOCTYPE html><html><head><script>window.onload=function(){window.location.href=\"/lander\"}</script></head></html>\n\n---\n\n## Model Description (o3-mini)\no3-mini is a compact reasoning model optimized for efficient performance on math, science, and coding tasks."
+}

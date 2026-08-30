@@ -1,0 +1,9 @@
+{
+  "modelId": "449f2bc1-6614-4c86-91af-c0b413556a70",
+  "slug": "alibaba-qwen-plus",
+  "name": "Qwen Plus",
+  "crawledAt": "2026-08-25T16:48:36.619Z",
+  "crawledUrls": [],
+  "byteCounts": 164,
+  "text": "## Model Description (Qwen Plus)\nQwen-Plus, based on the Qwen2.5 foundation model, is a 131K context model with a balanced performance, speed, and cost combination."
+}

@@ -1,0 +1,11 @@
+{
+  "modelId": "1a620f3c-03f0-44d7-9815-69ba6ac7bad0",
+  "slug": "stability-ai-stable-audio-3",
+  "name": "Stable Audio 3",
+  "crawledAt": "2026-08-16T05:26:56.281Z",
+  "crawledUrls": [
+    "https://stability.ai/news-updates/meeting-stable-audio-3"
+  ],
+  "byteCounts": 229,
+  "text": "## Model Description (Stable Audio 3)\nStable Audio 3 is a model developed by Stability AI, released on 2026-07-15. It is engineered for speech recognition, audio synthesis, and voice interaction with a 128K tokens context window."
+}

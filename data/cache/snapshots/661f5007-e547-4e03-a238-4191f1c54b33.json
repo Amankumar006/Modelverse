@@ -1,0 +1,9 @@
+{
+  "modelId": "661f5007-e547-4e03-a238-4191f1c54b33",
+  "slug": "nvidia-nemotron-3-super-120b-a12b",
+  "name": "Nemotron 3 Super 120B A12B",
+  "crawledAt": "2026-08-25T10:41:39.917Z",
+  "crawledUrls": [],
+  "byteCounts": 131,
+  "text": "## Model Description (Nemotron 3 Super 120B A12B)\nNemotron middle tier for collaborative agents and high-volume reasoning workloads"
+}

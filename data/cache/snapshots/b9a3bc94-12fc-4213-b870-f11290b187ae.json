@@ -1,0 +1,9 @@
+{
+  "modelId": "b9a3bc94-12fc-4213-b870-f11290b187ae",
+  "slug": "alibaba-qwen3.5-plus",
+  "name": "Qwen3.5 Plus",
+  "crawledAt": "2026-08-25T11:36:08.314Z",
+  "crawledUrls": [],
+  "byteCounts": 111,
+  "text": "## Model Description (Qwen3.5 Plus)\nQwen vision-language model for visual reasoning, documents, and agent tasks"
+}

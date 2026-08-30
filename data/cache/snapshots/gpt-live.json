@@ -1,0 +1,12 @@
+{
+  "modelId": "5f8a7ab7-5eef-457c-8656-9d6e60f8788b",
+  "slug": "gpt-live",
+  "name": "GPT Live",
+  "crawledAt": "2026-08-25T07:01:15.216Z",
+  "crawledUrls": [
+    "https://openai.com",
+    "https://www.youtube.com/watch?v=Ti1V7OI2Rro"
+  ],
+  "byteCounts": 460,
+  "text": "- YouTube About Press Copyright Contact us Creators Advertise Developers Terms Privacy Policy &amp; Safety How YouTube works Test new features NFL Sunday Ticket &copy; 2026 Google LLC\n\n---\n\n## Model Description (GPT Live)\nOpenAI's latest real-time voice interface designed to enable natural, flowing conversation. It supports dynamic interruptions, background task delegation to stronger frontier models, and can generate contextual visual responses in the UI."
+}

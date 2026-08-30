@@ -1,0 +1,9 @@
+{
+  "modelId": "36e7c4ba-c15e-4036-84e8-be8abb385c05",
+  "slug": "nvidia-llama-3.1-nemotron-70b-instruct",
+  "name": "Llama 3.1 Nemotron 70B Instruct",
+  "crawledAt": "2026-08-25T14:54:31.420Z",
+  "crawledUrls": [],
+  "byteCounts": 128,
+  "text": "## Model Description (Llama 3.1 Nemotron 70B Instruct)\nNemotron model for efficient reasoning, coding, and specialized AI agents"
+}
