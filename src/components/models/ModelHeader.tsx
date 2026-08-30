@@ -11,6 +11,15 @@ interface ModelHeaderProps {
   model: ModelRow;
 }
 
+function isValidHttpUrl(string: string) {
+  try {
+    const url = new URL(string);
+    return url.protocol === "http:" || url.protocol === "https:";
+  } catch {
+    return false;
+  }
+}
+
 export default function ModelHeader({ model }: ModelHeaderProps) {
   const links = (typeof model.links === "object" && model.links !== null ? model.links : {}) as Record<string, string>;
   const dateStr = model.release_date
@@ -95,7 +104,7 @@ export default function ModelHeader({ model }: ModelHeaderProps) {
 
         {/* Primary Action Buttons */}
         <div className="pt-2 flex flex-wrap items-center gap-2.5">
-          {model.announcement_url && (
+          {model.announcement_url && isValidHttpUrl(model.announcement_url) && (
             <a
               href={model.announcement_url}
               target="_blank"
@@ -106,7 +115,7 @@ export default function ModelHeader({ model }: ModelHeaderProps) {
               <ExternalLink size={13} />
             </a>
           )}
-          {links.huggingface && (
+          {links.huggingface && isValidHttpUrl(links.huggingface) && (
             <a
               href={links.huggingface}
               target="_blank"
@@ -117,7 +126,7 @@ export default function ModelHeader({ model }: ModelHeaderProps) {
               <ExternalLink size={12} className="opacity-60" />
             </a>
           )}
-          {links.ollama && (
+          {links.ollama && isValidHttpUrl(links.ollama) && (
             <a
               href={links.ollama}
               target="_blank"
@@ -128,7 +137,7 @@ export default function ModelHeader({ model }: ModelHeaderProps) {
               <ExternalLink size={12} className="opacity-60" />
             </a>
           )}
-          {links.website && !model.announcement_url && (
+          {links.website && isValidHttpUrl(links.website) && !model.announcement_url && (
             <a
               href={links.website}
               target="_blank"
