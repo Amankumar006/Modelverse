@@ -3,6 +3,8 @@ import { Geist, Geist_Mono } from "next/font/google";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
+import { CommandPaletteProvider } from "@/components/search/CommandPaletteContext";
+import CommandPaletteModal from "@/components/search/CommandPaletteModal";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -51,9 +53,12 @@ export default function RootLayout({
     >
       <body className="min-h-full flex flex-col bg-[var(--bg)] text-[var(--text)] transition-colors duration-200">
         <ThemeProvider>
-          <Navbar />
-          <div className="flex-1 flex flex-col">{children}</div>
-          <Footer />
+          <CommandPaletteProvider>
+            <Navbar />
+            <div className="flex-1 flex flex-col">{children}</div>
+            <Footer />
+            <CommandPaletteModal />
+          </CommandPaletteProvider>
         </ThemeProvider>
       </body>
     </html>
