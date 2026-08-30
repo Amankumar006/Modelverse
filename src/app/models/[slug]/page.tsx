@@ -3,7 +3,8 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { getModelBySlug, getModels } from "@/lib/supabase/models";
 import ModelHeader from "@/components/models/ModelHeader";
-import SpecMatrix from "@/components/models/SpecMatrix";
+import LineageSpecSection from "@/components/models/LineageSpecSection";
+import PricingSection from "@/components/models/PricingSection";
 import BenchmarksSection from "@/components/models/BenchmarksSection";
 import QuickstartSection from "@/components/models/QuickstartSection";
 import SourcesSection from "@/components/models/SourcesSection";
@@ -52,16 +53,16 @@ export default async function ModelDetailPage({
   return (
     <main className="w-full max-w-7xl mx-auto px-4 sm:px-6 md:px-10 py-10 md:py-14">
       <div className="grid grid-cols-1 xl:grid-cols-12 gap-10 items-start">
-        {/* Main Content Area (9 cols on wide) */}
+        {/* Main Content Area (9 cols on wide screens) */}
         <div className="xl:col-span-9 space-y-10">
           {/* Identity & Header */}
           <div id="overview">
             <ModelHeader model={model} />
           </div>
 
-          {/* Key Specs Matrix */}
+          {/* Technical Architecture & Execution Specifications */}
           <div id="specifications">
-            <SpecMatrix model={model} />
+            <LineageSpecSection model={model} />
           </div>
 
           {/* Verified Benchmarks Visualizer */}
@@ -70,6 +71,11 @@ export default async function ModelDetailPage({
               <BenchmarksSection benchmarks={benchmarks} />
             </div>
           )}
+
+          {/* Commercial Rates & API Pricing */}
+          <div id="pricing">
+            <PricingSection model={model} />
+          </div>
 
           {/* API Multi-Language Quickstart */}
           <div id="quickstart">
@@ -107,6 +113,11 @@ export default async function ModelDetailPage({
                 </a>
               </li>
             )}
+            <li>
+              <a href="#pricing" className="hover:text-[var(--accent)] transition-colors block">
+                Commercial Pricing
+              </a>
+            </li>
             <li>
               <a href="#quickstart" className="hover:text-[var(--accent)] transition-colors block">
                 API Quickstart
