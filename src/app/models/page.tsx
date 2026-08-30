@@ -93,7 +93,7 @@ export default async function ModelsPage({ searchParams }: ModelsPageProps) {
         description="Comprehensive index of artificial intelligence foundation models."
         items={itemList}
       />
-      <main className="w-full max-w-7xl mx-auto px-4 sm:px-6 md:px-10 lg:px-14 py-12 md:py-16 flex flex-col gap-8">
+      <main className="w-full max-w-7xl 2xl:max-w-[1600px] 3xl:max-w-[1920px] 4xl:max-w-[2400px] mx-auto px-4 sm:px-6 md:px-10 lg:px-12 2xl:px-16 3xl:px-20 py-12 md:py-16 flex flex-col gap-8">
         <div>
           <span className="text-xs font-bold uppercase tracking-wider text-[var(--accent)] mb-1 block">
             Directory

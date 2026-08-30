@@ -45,7 +45,7 @@ export default async function TimelinePage() {
   return (
     <>
       <BreadcrumbJsonLd items={breadcrumbs} />
-      <main className="w-full max-w-4xl mx-auto px-4 sm:px-6 md:px-8 py-10 md:py-14 flex flex-col gap-8">
+      <main className="w-full max-w-4xl 2xl:max-w-5xl 3xl:max-w-6xl 4xl:max-w-7xl mx-auto px-4 sm:px-6 md:px-8 2xl:px-12 3xl:px-16 py-10 md:py-14 flex flex-col gap-8">
         <div>
           <Link
             href="/"
@@ -58,7 +58,7 @@ export default async function TimelinePage() {
             <Clock size={14} />
             <span>Chronological Ledger</span>
           </div>
-          <h1 className="text-3xl sm:text-4xl font-extrabold text-[var(--text)] tracking-tight">
+          <h1 className="text-3xl sm:text-4xl 2xl:text-5xl font-extrabold text-[var(--text)] tracking-tight">
             Release Timeline
           </h1>
           <p className="text-xs sm:text-sm text-[var(--muted)] mt-1.5 max-w-2xl leading-relaxed">

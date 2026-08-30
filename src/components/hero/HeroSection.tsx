@@ -35,8 +35,8 @@ export default function HeroSection({
   ];
 
   return (
-    <section className="relative w-full bg-[var(--bg)] text-[var(--text)] pt-12 pb-14 md:pt-16 md:pb-20 flex flex-col items-center border-b border-[var(--muted)]/10">
-      <div className="w-full max-w-[680px] mx-auto px-5 flex flex-col items-center text-center relative z-10">
+    <section className="relative w-full bg-[var(--bg)] text-[var(--text)] pt-12 pb-14 md:pt-16 md:pb-20 2xl:pt-20 2xl:pb-24 flex flex-col items-center border-b border-[var(--muted)]/10">
+      <div className="w-full max-w-[680px] 2xl:max-w-[780px] 3xl:max-w-[900px] mx-auto px-5 flex flex-col items-center text-center relative z-10">
         {/* Stat Pill Badge */}
         <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-[var(--radius-pill)] bg-[var(--accent-soft)] text-[var(--accent)] text-xs font-semibold mb-6 shadow-sm">
           <Sparkles size={14} className="shrink-0" />
@@ -46,13 +46,13 @@ export default function HeroSection({
         </div>
 
         {/* Main Headline */}
-        <h1 className="text-3xl sm:text-5xl md:text-6xl font-extrabold tracking-tight text-[var(--text)] leading-[1.1] mb-4">
+        <h1 className="text-3xl sm:text-5xl md:text-6xl 2xl:text-7xl font-extrabold tracking-tight text-[var(--text)] leading-[1.1] mb-4">
           Every AI Model. <br className="hidden sm:inline" />
           <span className="text-[var(--accent)]">Every Release.</span>
         </h1>
 
         {/* Subtext */}
-        <p className="text-sm sm:text-base text-[var(--muted)] leading-relaxed max-w-lg mb-8">
+        <p className="text-sm sm:text-base 2xl:text-lg text-[var(--muted)] leading-relaxed max-w-lg 2xl:max-w-xl mb-8">
           From frontier closed APIs to open-weight breakthroughs — a living, fact-checked archive of parameters, context windows, and primary documentation.
         </p>
 
@@ -75,7 +75,7 @@ export default function HeroSection({
           <button
             type="submit"
             aria-label="Submit search"
-            className="px-5 py-2.5 rounded-[var(--radius-control)] bg-[var(--accent)] text-[var(--accent-contrast)] text-xs font-bold hover:opacity-90 transition-all shrink-0 flex items-center gap-1.5 cursor-pointer"
+            className="px-5 py-2.5 rounded-[var(--radius-control)] bg-[var(--accent)] text-[var(--accent-contrast)] text-xs font-bold hover:opacity-90 transition-all shrink-0 flex items-center gap-1.5 cursor-pointer btn-tactile"
           >
             <span>Search</span>
             <ArrowRight size={14} />
@@ -89,7 +89,7 @@ export default function HeroSection({
             <Link
               key={chip.label}
               href={chip.href}
-              className="px-3.5 py-1 rounded-[var(--radius-pill)] bg-[var(--tag-bg)] text-[var(--tag-text)] font-medium hover:bg-[var(--accent-soft)] hover:text-[var(--accent)] transition-colors cursor-pointer"
+              className="px-3.5 py-1 rounded-[var(--radius-pill)] bg-[var(--tag-bg)] text-[var(--tag-text)] font-medium hover:bg-[var(--accent-soft)] hover:text-[var(--accent)] transition-colors cursor-pointer btn-tactile"
             >
               {chip.label}
             </Link>

@@ -60,37 +60,46 @@ html.dark, :root.dark {
 }
 
 .animate-fade-rise {
-  animation: fadeRise 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation: fadeRise 0.4s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
 .animate-pulse-glow {
   animation: pulseGlow 2.5s cubic-bezier(0.4, 0, 0.6, 1) infinite;
 }
 
-/* Micro-interaction card lift */
+/* Micro-interaction card lift with GPU compositing */
 .hover-lift {
+  transform: translateZ(0);
   transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.22s ease, border-color 0.22s ease;
 }
 .hover-lift:hover {
-  transform: translateY(-3px);
+  transform: translateY(-3px) translateZ(0);
   box-shadow: 0 14px 36px var(--shadow);
 }
 .hover-lift:active {
-  transform: translateY(-1px) scale(0.99);
+  transform: translateY(-1px) scale(0.99) translateZ(0);
 }
 
 /* Interactive button feedback */
 .btn-tactile {
-  transition: transform 0.15s ease, opacity 0.15s ease, background-color 0.15s ease;
+  transform: translateZ(0);
+  transition: transform 0.12s ease, opacity 0.12s ease, background-color 0.12s ease;
 }
 .btn-tactile:active {
-  transform: scale(0.96);
+  transform: scale(0.96) translateZ(0);
+}
+
+/* Off-screen rendering containment for buttery 60/120fps scrolling */
+.model-card-contain {
+  content-visibility: auto;
+  contain-intrinsic-size: 1px 320px;
 }
 
 @media (prefers-reduced-motion: reduce) {
   .animate-fade-rise,
   .animate-pulse-glow,
-  .hover-lift {
+  .hover-lift,
+  .btn-tactile {
     animation: none !important;
     transition: none !important;
     transform: none !important;
