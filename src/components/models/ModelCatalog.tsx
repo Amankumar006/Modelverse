@@ -73,9 +73,9 @@ export default function ModelCatalog({
   }, [initialModels, searchQuery, selectedCategory, selectedProvider, selectedSourceType, sortKey]);
 
   return (
-    <div className="w-full grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-      {/* Desktop Sidebar (3 cols) */}
-      <div className="hidden lg:block lg:col-span-3 sticky top-24 p-5 rounded-[var(--radius-card)] bg-[var(--card-bg)] shadow-[var(--shadow-card)] border border-[var(--muted)]/10">
+    <div className="w-full grid grid-cols-1 lg:grid-cols-12 2xl:grid-cols-12 gap-8 items-start">
+      {/* Desktop Sidebar (3 cols on standard, 2.5 on ultrawide) */}
+      <div className="hidden lg:block lg:col-span-3 2xl:col-span-3 3xl:col-span-2 sticky top-24 p-5 sm:p-6 rounded-[var(--radius-card)] bg-[var(--card-bg)] shadow-[var(--shadow-card)] border border-[var(--muted)]/10">
         <CatalogSidebar
           providers={providers}
           selectedProvider={selectedProvider}
@@ -90,8 +90,8 @@ export default function ModelCatalog({
         />
       </div>
 
-      {/* Main Catalog Area (9 cols) */}
-      <div className="lg:col-span-9 space-y-6">
+      {/* Main Catalog Area */}
+      <div className="lg:col-span-9 2xl:col-span-9 3xl:col-span-10 space-y-6">
         <CatalogToolbar
           searchQuery={searchQuery}
           onSearchChange={setSearchQuery}
@@ -106,11 +106,13 @@ export default function ModelCatalog({
           onOpenMobileFilters={() => setMobileDrawerOpen(true)}
         />
 
-        {/* Models Grid / List */}
+        {/* Models Grid / List with Ultra-wide & TV Breakpoints */}
         {filteredModels.length > 0 ? (
-          <div className={viewMode === "grid" ? "grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-5" : "flex flex-col gap-3"}>
+          <div className={viewMode === "grid" ? "grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 3xl:grid-cols-4 4xl:grid-cols-5 gap-5 lg:gap-6" : "flex flex-col gap-3"}>
             {filteredModels.map((model) => (
-              <ModelCard key={model.id} model={model} variant={viewMode === "grid" ? "card" : "row"} />
+              <div key={model.id} className="model-card-contain">
+                <ModelCard model={model} variant={viewMode === "grid" ? "card" : "row"} />
+              </div>
             ))}
           </div>
         ) : (

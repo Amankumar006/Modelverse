@@ -88,10 +88,10 @@ export default async function ModelDetailPage({
     <>
       <BreadcrumbJsonLd items={breadcrumbs} />
       <ModelJsonLd model={model} />
-      <main className="w-full max-w-7xl mx-auto px-4 sm:px-6 md:px-10 py-10 md:py-14">
-        <div className="grid grid-cols-1 xl:grid-cols-12 gap-10 items-start">
-          {/* Main Content Area (9 cols on wide screens) */}
-          <div className="xl:col-span-9 space-y-10">
+      <main className="w-full max-w-7xl 2xl:max-w-[1600px] 3xl:max-w-[1920px] 4xl:max-w-[2400px] mx-auto px-4 sm:px-6 md:px-10 lg:px-12 2xl:px-16 3xl:px-20 py-10 md:py-14">
+        <div className="grid grid-cols-1 xl:grid-cols-12 3xl:grid-cols-12 gap-10 items-start">
+          {/* Main Content Area (9 cols on standard wide, 9.5 on ultrawide) */}
+          <div className="xl:col-span-9 3xl:col-span-10 space-y-10">
             {/* Identity & Header */}
             <div id="overview">
               <ModelHeader model={model} />
@@ -126,7 +126,7 @@ export default async function ModelDetailPage({
           </div>
 
           {/* Sticky Table of Contents (3 cols on desktop) */}
-          <aside className="hidden xl:block xl:col-span-3 sticky top-24 p-5 rounded-[var(--radius-card)] bg-[var(--card-bg)] shadow-[var(--shadow-card)] border border-[var(--muted)]/10 text-xs space-y-4">
+          <aside className="hidden xl:block xl:col-span-3 3xl:col-span-2 sticky top-24 p-5 rounded-[var(--radius-card)] bg-[var(--card-bg)] shadow-[var(--shadow-card)] border border-[var(--muted)]/10 text-xs space-y-4">
             <div className="flex items-center gap-2 text-[var(--text)] font-bold uppercase tracking-wider">
               <span className="w-1.5 h-3 bg-[var(--accent)] rounded-full" />
               <span>On This Page</span>

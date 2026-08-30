@@ -44,7 +44,7 @@ export default async function ComparePage() {
   return (
     <>
       <BreadcrumbJsonLd items={breadcrumbs} />
-      <main className="w-full max-w-7xl mx-auto px-4 sm:px-6 md:px-10 lg:px-14 py-12 md:py-16 flex flex-col gap-8">
+      <main className="w-full max-w-7xl 2xl:max-w-[1600px] 3xl:max-w-[1920px] 4xl:max-w-[2400px] mx-auto px-4 sm:px-6 md:px-10 lg:px-12 2xl:px-16 3xl:px-20 py-12 md:py-16 flex flex-col gap-8">
         <div>
           <Link
             href="/models"
@@ -52,7 +52,7 @@ export default async function ComparePage() {
           >
             <ArrowLeft size={14} /> Back to Catalog
           </Link>
-          <h1 className="text-3xl sm:text-4xl font-extrabold text-[var(--text)] tracking-tight">
+          <h1 className="text-3xl sm:text-4xl 2xl:text-5xl font-extrabold text-[var(--text)] tracking-tight">
             Model Comparison Matrix
           </h1>
           <p className="text-xs sm:text-sm text-[var(--muted)] mt-1.5 max-w-2xl leading-relaxed">

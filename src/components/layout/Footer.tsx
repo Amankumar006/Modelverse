@@ -47,8 +47,8 @@ export default function Footer() {
   ];
 
   return (
-    <footer className="relative w-full bg-[var(--bg)] text-[var(--text)] border-t border-[var(--muted)]/10 pt-16 pb-10 px-4 sm:px-6 md:px-10 lg:px-14">
-      <div className="max-w-7xl mx-auto grid grid-cols-2 sm:grid-cols-2 md:grid-cols-5 gap-8 md:gap-10 pb-12">
+    <footer className="relative w-full bg-[var(--bg)] text-[var(--text)] border-t border-[var(--muted)]/10 pt-16 pb-10 px-4 sm:px-6 md:px-10 lg:px-12 2xl:px-16 3xl:px-20">
+      <div className="max-w-7xl 2xl:max-w-[1600px] 3xl:max-w-[1920px] 4xl:max-w-[2400px] mx-auto grid grid-cols-2 sm:grid-cols-2 md:grid-cols-5 gap-8 md:gap-10 pb-12">
         {/* Brand Summary */}
         <div className="col-span-2 sm:col-span-2 md:col-span-1 space-y-4">
           <ModelverseLogo height={28} />
@@ -83,7 +83,7 @@ export default function Footer() {
       </div>
 
       {/* Bottom Bar */}
-      <div className="max-w-7xl mx-auto border-t border-[var(--muted)]/10 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-[var(--muted)] font-mono">
+      <div className="max-w-7xl 2xl:max-w-[1600px] 3xl:max-w-[1920px] 4xl:max-w-[2400px] mx-auto border-t border-[var(--muted)]/10 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-[var(--muted)] font-mono">
         <p>&copy; {currentYear} Modelverse. All rights reserved.</p>
         <div className="flex items-center gap-6">
           <Link href="/about" className="hover:text-[var(--text)] transition-colors">

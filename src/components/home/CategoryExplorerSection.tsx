@@ -60,12 +60,12 @@ const CATEGORIES: CategoryMeta[] = [
 export default function CategoryExplorerSection() {
   return (
     <section className="w-full bg-[var(--card-bg)]/30 border-y border-[var(--muted)]/10 py-12 md:py-16">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-10 lg:px-14 flex flex-col gap-8">
+      <div className="max-w-7xl 2xl:max-w-[1600px] 3xl:max-w-[1920px] 4xl:max-w-[2400px] mx-auto px-4 sm:px-6 md:px-10 lg:px-12 2xl:px-16 3xl:px-20 flex flex-col gap-8">
         <div>
           <span className="text-xs font-bold uppercase tracking-wider text-[var(--accent)] mb-1 block">
             Domain Explorer
           </span>
-          <h2 className="text-2xl sm:text-3xl font-extrabold text-[var(--text)] tracking-tight">
+          <h2 className="text-2xl sm:text-3xl 2xl:text-4xl font-extrabold text-[var(--text)] tracking-tight">
             Browse by Intelligence Capability
           </h2>
           <p className="text-xs sm:text-sm text-[var(--muted)] mt-1">
@@ -73,7 +73,7 @@ export default function CategoryExplorerSection() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 3xl:grid-cols-6 gap-5">
           {CATEGORIES.map((cat) => (
             <Link
               key={cat.category}
