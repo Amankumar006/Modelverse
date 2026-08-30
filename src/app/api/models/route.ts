@@ -9,7 +9,7 @@ const QuerySchema = z.object({
     .string()
     .optional()
     .transform((val) => (val === undefined ? true : val === 'true')),
-  limit: z.coerce.number().int().min(1).max(100).default(20),
+  limit: z.coerce.number().int().min(1).max(1000).default(50),
   offset: z.coerce.number().int().min(0).default(0),
   search: z.string().optional(),
 });
