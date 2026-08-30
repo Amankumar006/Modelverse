@@ -7,7 +7,7 @@ import { ArrowLeft, ExternalLink, Calendar, User } from "lucide-react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { getArticleBySlug, getArticles } from "@/lib/supabase/articles";
-import { ArticleJsonLd } from "@/components/seo/JsonLd";
+import { ArticleJsonLd, BreadcrumbJsonLd } from "@/components/seo/JsonLd";
 
 export const revalidate = 60;
 
@@ -34,6 +34,13 @@ export async function generateMetadata({
   return {
     title,
     description,
+    keywords: [
+      article.title,
+      article.category || "AI Research",
+      article.source_name || "Modelverse Intelligence",
+      "Artificial Intelligence Research",
+      "Foundation Model Architecture",
+    ],
     alternates: {
       canonical: `/articles/${slug}`,
     },
@@ -72,8 +79,15 @@ export default async function ArticleDetailPage({
     timeZone: "UTC",
   });
 
+  const breadcrumbs = [
+    { name: "Home", url: "/" },
+    { name: "Intelligence", url: "/articles" },
+    { name: article.title, url: `/articles/${slug}` },
+  ];
+
   return (
     <>
+      <BreadcrumbJsonLd items={breadcrumbs} />
       <ArticleJsonLd article={article} />
       <main className="w-full max-w-4xl mx-auto px-4 sm:px-6 md:px-8 py-10 md:py-14 flex flex-col gap-8">
         {/* Back Link */}

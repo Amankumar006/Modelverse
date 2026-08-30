@@ -9,7 +9,7 @@ import PricingSection from "@/components/models/PricingSection";
 import BenchmarksSection from "@/components/models/BenchmarksSection";
 import QuickstartSection from "@/components/models/QuickstartSection";
 import SourcesSection from "@/components/models/SourcesSection";
-import { ModelJsonLd } from "@/components/seo/JsonLd";
+import { ModelJsonLd, BreadcrumbJsonLd } from "@/components/seo/JsonLd";
 
 export const revalidate = 60;
 
@@ -38,6 +38,15 @@ export async function generateMetadata({
   return {
     title,
     description,
+    keywords: [
+      model.name,
+      model.provider,
+      `${model.name} benchmarks`,
+      `${model.name} context window`,
+      `${model.name} pricing`,
+      `${model.name} parameters`,
+      model.category || "AI Model",
+    ],
     alternates: {
       canonical: `/models/${slug}`,
     },
@@ -69,8 +78,15 @@ export default async function ModelDetailPage({
 
   const hasBenchmarks = normalizeBenchmarks(model.benchmarks).length > 0;
 
+  const breadcrumbs = [
+    { name: "Home", url: "/" },
+    { name: "Models", url: "/models" },
+    { name: model.name, url: `/models/${slug}` },
+  ];
+
   return (
     <>
+      <BreadcrumbJsonLd items={breadcrumbs} />
       <ModelJsonLd model={model} />
       <main className="w-full max-w-7xl mx-auto px-4 sm:px-6 md:px-10 py-10 md:py-14">
         <div className="grid grid-cols-1 xl:grid-cols-12 gap-10 items-start">

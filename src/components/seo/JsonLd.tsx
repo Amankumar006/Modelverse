@@ -1,6 +1,7 @@
 import React from "react";
 import type { ModelRow } from "@/types/database";
 import type { ArticleRow } from "@/types/database";
+import { normalizeBenchmarks } from "@/lib/benchmarks";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://www.themodelverse.in";
 
@@ -50,14 +51,69 @@ export function WebSiteJsonLd() {
   );
 }
 
+export function BreadcrumbJsonLd({
+  items,
+}: {
+  items: { name: string; url: string }[];
+}) {
+  const schema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: items.map((item, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      name: item.name,
+      item: item.url.startsWith("http") ? item.url : `${SITE_URL}${item.url}`,
+    })),
+  };
+
+  return (
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+    />
+  );
+}
+
+export function ItemListJsonLd({
+  name,
+  description,
+  items,
+}: {
+  name: string;
+  description: string;
+  items: { name: string; url: string; position: number }[];
+}) {
+  const schema = {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    name,
+    description,
+    itemListElement: items.map((item) => ({
+      "@type": "ListItem",
+      position: item.position,
+      name: item.name,
+      url: item.url.startsWith("http") ? item.url : `${SITE_URL}${item.url}`,
+    })),
+  };
+
+  return (
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+    />
+  );
+}
+
 export function ModelJsonLd({ model }: { model: ModelRow }) {
   const modelUrl = `${SITE_URL}/models/${model.slug}`;
   const links = (typeof model.links === "object" && model.links !== null ? model.links : {}) as Record<string, string>;
   const pricing = (typeof model.pricing === "object" && model.pricing !== null ? model.pricing : {}) as Record<string, number | string>;
+  const benchmarks = normalizeBenchmarks(model.benchmarks);
 
   const inputPrice = pricing.input_per_1m !== undefined ? pricing.input_per_1m : "0";
 
-  const schema = {
+  const appSchema = {
     "@context": "https://schema.org",
     "@type": "SoftwareApplication",
     name: model.name,
@@ -90,11 +146,55 @@ export function ModelJsonLd({ model }: { model: ModelRow }) {
     downloadUrl: links.huggingface || links.ollama || undefined,
   };
 
+  // Build FAQ items for Google Rich Snippets
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: [
+      {
+        "@type": "Question",
+        name: `What is ${model.name}'s context window capacity?`,
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: model.context_window
+            ? `${model.name} supports a maximum context window of ${model.context_window.toLocaleString()} tokens.`
+            : `${model.name} operates with standard token context parameters.`,
+        },
+      },
+      {
+        "@type": "Question",
+        name: `Who developed ${model.name} and what is its architecture?`,
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: `${model.name} was developed by ${model.provider}. It features ${model.parameters || "frontier"} parameters in the ${model.category || "LLM"} domain.`,
+        },
+      },
+      benchmarks.length > 0
+        ? {
+            "@type": "Question",
+            name: `What are ${model.name}'s verified benchmark scores?`,
+            acceptedAnswer: {
+              "@type": "Answer",
+              text: `${model.name} achieves verified evaluation scores of: ${benchmarks
+                .map((b) => `${b.name}: ${b.score}${typeof b.score === "number" ? "%" : ""}`)
+                .join(", ")}.`,
+            },
+          }
+        : null,
+    ].filter(Boolean),
+  };
+
   return (
-    <script
-      type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
-    />
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(appSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+      />
+    </>
   );
 }
 
