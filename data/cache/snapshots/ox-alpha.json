@@ -1,0 +1,9 @@
+{
+  "modelId": "73cbadb3-3096-42a3-9553-841d7f7f944c",
+  "slug": "ox-alpha",
+  "name": "Ox Alpha",
+  "crawledAt": "2026-08-23T12:56:05.256Z",
+  "crawledUrls": [],
+  "byteCounts": 358,
+  "text": "## Model Description (Ox Alpha)\nOx Alpha is a free, anonymous stealth-preview reasoning model listed on OpenRouter, built for coding, sustained agentic work, and production workloads. It offers a 1,048,576-token context window, multimodal text/image/video input, and tool calling, but its developer has chosen not to disclose an identity during this preview."
+}

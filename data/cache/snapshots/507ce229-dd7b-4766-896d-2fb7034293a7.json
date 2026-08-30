@@ -1,0 +1,13 @@
+{
+  "modelId": "507ce229-dd7b-4766-896d-2fb7034293a7",
+  "slug": "openai-o1-pro",
+  "name": "o1-pro",
+  "crawledAt": "2026-08-25T14:55:08.327Z",
+  "crawledUrls": [
+    "https://modelverse.ai/models/openai-o1-pro",
+    "https://openai.com/business/new-in-chatgpt-for-work-march-updates-2025/",
+    "https://help.openai.com/en/articles/6825453-how-chatgpt-uses-sources"
+  ],
+  "byteCounts": 314,
+  "text": "<!DOCTYPE html><html><head><script>window.onload=function(){window.location.href=\"/lander\"}</script></head></html>\n\n---\n\n## Model Description (o1-pro)\no1-pro is the higher-compute version of OpenAI o1, designed to spend more inference compute on difficult reasoning tasks where reliability matters more than speed."
+}

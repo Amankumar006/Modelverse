@@ -1,0 +1,11 @@
+{
+  "modelId": "d1b84632-c3de-4930-9f4b-af259b145659",
+  "slug": "cohere-command-a-reasoning-08-2025",
+  "name": "Command A Reasoning",
+  "crawledAt": "2026-08-25T13:58:51.272Z",
+  "crawledUrls": [
+    "https://huggingface.co/CohereLabs/c4ai-command-a-reasoning-08-2025"
+  ],
+  "byteCounts": 175,
+  "text": "## Model Description (Command A Reasoning)\nCohere’s first reasoning model, built for enterprise agents, tool use, retrieval-augmented generation, and multilingual reasoning."
+}

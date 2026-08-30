@@ -1,0 +1,11 @@
+{
+  "modelId": "ff8c3c3a-3a3d-45af-b772-b87873d04faf",
+  "slug": "cohere-command-a-vision-07-2025",
+  "name": "Command A Vision",
+  "crawledAt": "2026-08-25T13:58:59.308Z",
+  "crawledUrls": [
+    "https://huggingface.co/CohereLabs/c4ai-command-a-vision-07-2025"
+  ],
+  "byteCounts": 173,
+  "text": "## Model Description (Command A Vision)\nCohere’s multimodal enterprise model for visual document understanding, charts, tables, OCR, and image-grounded question answering."
+}

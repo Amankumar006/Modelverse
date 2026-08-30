@@ -1,0 +1,11 @@
+{
+  "modelId": "f637b969-ba2f-46d8-acb4-f5e66093c3f9",
+  "slug": "qwen38-27b-uncensored",
+  "name": "Qwen3.8-27B-Uncensored",
+  "crawledAt": "2026-08-25T07:01:03.692Z",
+  "crawledUrls": [
+    "https://huggingface.co/orcarouter/Qwen3.8-27B-Uncensored"
+  ],
+  "byteCounts": 865,
+  "text": "# orcarouter/Qwen3.8-27B-Uncensored\n\n{\"license\":\"apache-2.0\",\"base_model\":\"Qwen/Qwen3.8-27B\",\"base_model_relation\":\"finetune\",\"pipeline_tag\":\"image-text-to-text\",\"library_name\":\"transformers\",\"language\":[\"en\",\"zh\"],\"tags\":[\"abliterated\",\"qwen\",\"qwen3\",\"qwen3.8\",\"uncensored\",\"ai-red-team\",\"red-teaming\",\"bf16\",\"post-training\",\"fine-tuning\",\"vision-language\",\"function-calling\",\"reasoning\",\"mtp\"]}\n\ntransformers, safetensors, qwen3_5, image-text-to-text, abliterated, qwen, qwen3, qwen3.8, uncensored, ai-red-team, red-teaming, bf16, post-training, fine-tuning, vision-language, function-calling, reasoning, mtp, conversational, en, zh, base_model:Qwen/Qwen3.8-27B, base_model:finetune:Qwen/Qwen3.8-27B, license:apache-2.0, endpoints_compatible, region:us\n\n---\n\n## Model Description (Qwen3.8-27B-Uncensored)\nQwen3.8-27B-Uncensored is a model developed by orcarouter."
+}

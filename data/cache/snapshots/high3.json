@@ -1,0 +1,12 @@
+{
+  "modelId": "141bdf0a-7b95-4b45-8041-23ea1ff9d2d5",
+  "slug": "high3",
+  "name": "High3",
+  "crawledAt": "2026-08-25T07:01:28.268Z",
+  "crawledUrls": [
+    "https://tencent.com",
+    "https://www.youtube.com/watch?v=Ti1V7OI2Rro"
+  ],
+  "byteCounts": 400,
+  "text": "- YouTube About Press Copyright Contact us Creators Advertise Developers Terms Privacy Policy &amp; Safety How YouTube works Test new features NFL Sunday Ticket &copy; 2026 Google LLC\n\n---\n\n## Model Description (High3)\nA large open-weights Mixture of Experts (MoE) model focused on reasoning, math, and agentic coding that punches above its weight class against much larger trillion-parameter models."
+}

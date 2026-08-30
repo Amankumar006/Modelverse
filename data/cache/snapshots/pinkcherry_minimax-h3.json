@@ -1,0 +1,11 @@
+{
+  "modelId": "ef632948-c6a0-4606-8b41-8e9037ddc933",
+  "slug": "pinkcherry_minimax-h3",
+  "name": "PinkCherry_MiniMax-H3",
+  "crawledAt": "2026-08-15T20:32:21.554Z",
+  "crawledUrls": [
+    "https://huggingface.co/SexGod1979/PinkCherry_MiniMax-H3"
+  ],
+  "byteCounts": 785,
+  "text": "---\nlicense: apache-2.0\nlibrary_name: transformers\ntags:\n- text-to-video\n- minimax-h3\n---\n\n** Aug 12 2026 - Lots of fixes for t2v and bunny fluids in version beta-0.6.  bunny anatomy should be improved too.  should be a lot better now\n\n** Aug 7 2026 - Working on better/more lively furry rabbit motion, better detail on wet flower petals and better detail on unicorn horns. \n\n** Aug 6 2026 - This model is best for those that love tight snake holes, wet pink open flowers, hard and long unicorn horns, furry rabbits all alone\n\nNo guardrails or censorship has been removed or altered in this model.  All furry rabbits that once existed in this model remain there in their truest form.\n\nI live in china on weekends and Devon Island during the week.  Keep those cherries bouncing friends."
+}

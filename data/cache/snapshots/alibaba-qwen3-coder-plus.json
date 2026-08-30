@@ -1,0 +1,9 @@
+{
+  "modelId": "7c1bc335-2fcc-4488-8c80-9ece2714a419",
+  "slug": "alibaba-qwen3-coder-plus",
+  "name": "Qwen3 Coder Plus",
+  "crawledAt": "2026-08-25T13:59:07.292Z",
+  "crawledUrls": [],
+  "byteCounts": 112,
+  "text": "## Model Description (Qwen3 Coder Plus)\nHosted Qwen coder for software agents, repo edits, and long-context code"
+}

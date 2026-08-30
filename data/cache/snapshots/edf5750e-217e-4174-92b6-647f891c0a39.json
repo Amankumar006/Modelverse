@@ -1,0 +1,12 @@
+{
+  "modelId": "edf5750e-217e-4174-92b6-647f891c0a39",
+  "slug": "text-embedding-ada-002",
+  "name": "text-embedding-ada-002",
+  "crawledAt": "2026-08-25T17:39:35.465Z",
+  "crawledUrls": [
+    "https://openai.com/index/new-and-improved-embedding-model/",
+    "https://openai.com/index/new-embedding-models-and-api-updates/"
+  ],
+  "byteCounts": 261,
+  "text": "## Model Description (text-embedding-ada-002)\nThis model offers high-efficiency text processing at deeply discounted rates. It features a standard price of $0.13 per million tokens and a Batch API rate of $0.10 per million tokens for non-urgent, bulk workloads."
+}

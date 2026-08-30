@@ -1,0 +1,9 @@
+{
+  "modelId": "42622070-da22-4e26-a53d-7158e9273d9a",
+  "slug": "nvidia-nemotron-cascade-2-30b-a3b",
+  "name": "Nemotron Cascade 2 30B A3B",
+  "crawledAt": "2026-08-25T10:41:27.190Z",
+  "crawledUrls": [],
+  "byteCounts": 123,
+  "text": "## Model Description (Nemotron Cascade 2 30B A3B)\nNemotron model for efficient reasoning, coding, and specialized AI agents"
+}

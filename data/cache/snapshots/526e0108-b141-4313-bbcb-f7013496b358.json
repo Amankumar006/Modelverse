@@ -1,0 +1,11 @@
+{
+  "modelId": "526e0108-b141-4313-bbcb-f7013496b358",
+  "slug": "midjourney-v6",
+  "name": "Midjourney v6",
+  "crawledAt": "2026-08-25T17:39:14.995Z",
+  "crawledUrls": [
+    "https://www.midjourney.com/"
+  ],
+  "byteCounts": 164,
+  "text": "## Model Description (Midjourney v6)\nMidjourney's flagship image generation model, highly regarded for photorealism, artistic textures, and advanced text rendering."
+}

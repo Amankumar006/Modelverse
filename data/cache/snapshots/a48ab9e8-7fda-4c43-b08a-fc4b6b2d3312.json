@@ -1,0 +1,9 @@
+{
+  "modelId": "a48ab9e8-7fda-4c43-b08a-fc4b6b2d3312",
+  "slug": "nvidia-llama-3.1-nemotron-safety-guard-8b-v3",
+  "name": "Llama 3.1 Nemotron Safety Guard 8B v3",
+  "crawledAt": "2026-08-25T13:03:27.136Z",
+  "crawledUrls": [],
+  "byteCounts": 140,
+  "text": "## Model Description (Llama 3.1 Nemotron Safety Guard 8B v3)\nSafety model for policy screening, moderation, and risk-aware routing workflows"
+}

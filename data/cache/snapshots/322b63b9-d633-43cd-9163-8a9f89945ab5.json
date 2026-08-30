@@ -1,0 +1,9 @@
+{
+  "modelId": "322b63b9-d633-43cd-9163-8a9f89945ab5",
+  "slug": "google-gemini-2.5-flash-image",
+  "name": "Nano Banana",
+  "crawledAt": "2026-08-25T13:58:49.571Z",
+  "crawledUrls": [],
+  "byteCounts": 118,
+  "text": "## Model Description (Nano Banana)\nNano Banana image model for fast generation, edits, and character-consistent assets"
+}

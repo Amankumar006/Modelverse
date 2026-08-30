@@ -1,0 +1,11 @@
+{
+  "modelId": "e6b1a787-1673-4721-a3c5-2ad68632466f",
+  "slug": "nvidia-nemotron-nano-12b-v2-vl",
+  "name": "Nemotron Nano 12B v2 VL",
+  "crawledAt": "2026-08-25T13:03:16.082Z",
+  "crawledUrls": [
+    "https://modelverse.ai/models/nvidia-nemotron-nano-12b-v2-vl"
+  ],
+  "byteCounts": 239,
+  "text": "<!DOCTYPE html><html><head><script>window.onload=function(){window.location.href=\"/lander\"}</script></head></html>\n\n---\n\n## Model Description (Nemotron Nano 12B v2 VL)\nNemotron multimodal model for visual reasoning and agentic AI workflows"
+}

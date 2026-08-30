@@ -1,0 +1,13 @@
+{
+  "modelId": "e645254a-fe39-4de1-8a29-0dcfead75804",
+  "slug": "gpt-4o",
+  "name": "GPT-4o",
+  "crawledAt": "2026-08-25T16:48:17.857Z",
+  "crawledUrls": [
+    "https://openai.com/index/hello-gpt-4o/",
+    "https://openai.com/index/gpt-4o-and-more-tools-to-chatgpt-free/",
+    "https://openai.com/index/gpt-4o-system-card/"
+  ],
+  "byteCounts": 164,
+  "text": "## Model Description (GPT-4o)\nGPT-4o is an omni model designed to reason across text, vision, audio, and video with GPT-4-level intelligence and faster interaction."
+}

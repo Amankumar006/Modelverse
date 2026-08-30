@@ -1,0 +1,9 @@
+{
+  "modelId": "448dc140-46a1-4376-8660-f4513502c7b5",
+  "slug": "alibaba-qwen3.8-max-preview",
+  "name": "Qwen3.8 Max Preview",
+  "crawledAt": "2026-08-16T05:26:59.048Z",
+  "crawledUrls": [],
+  "byteCounts": 138,
+  "text": "## Model Description (Qwen3.8 Max Preview)\nPreview Qwen flagship for million-token multimodal reasoning and long-horizon agentic workflows"
+}

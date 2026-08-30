@@ -1,0 +1,11 @@
+{
+  "modelId": "6e22ab38-c02f-4988-85e6-657ec9c6ab21",
+  "slug": "cohere-command-a-translate-08-2025",
+  "name": "Command A Translate",
+  "crawledAt": "2026-08-25T13:58:48.622Z",
+  "crawledUrls": [
+    "https://huggingface.co/CohereLabs/c4ai-command-a-translate-08-2025"
+  ],
+  "byteCounts": 146,
+  "text": "## Model Description (Command A Translate)\nCohere’s specialized machine-translation model for secure enterprise translation across 23 languages."
+}

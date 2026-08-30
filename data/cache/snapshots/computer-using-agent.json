@@ -1,0 +1,11 @@
+{
+  "modelId": "a2f82e72-069e-4a87-b295-a73ec7294b8a",
+  "slug": "computer-using-agent",
+  "name": "OpenAI Computer-Using Agent",
+  "crawledAt": "2026-08-25T15:52:17.041Z",
+  "crawledUrls": [
+    "https://openai.com/blog"
+  ],
+  "byteCounts": 189,
+  "text": "## Model Description (OpenAI Computer-Using Agent)\nOpenAI's foundational model optimized for GUI automation, computer use, and active web navigation, powering the OpenAI Operator assistant."
+}

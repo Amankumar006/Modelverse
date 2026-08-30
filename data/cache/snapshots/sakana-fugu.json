@@ -1,0 +1,9 @@
+{
+  "modelId": "305f0278-ab35-4a9a-a291-f57e1fd140ee",
+  "slug": "sakana-fugu",
+  "name": "Fugu",
+  "crawledAt": "2026-08-25T07:51:43.526Z",
+  "crawledUrls": [],
+  "byteCounts": 103,
+  "text": "## Model Description (Fugu)\nMulti-agent model for routing expert agents across complex analytical tasks"
+}

@@ -1,0 +1,11 @@
+{
+  "modelId": "406be9bd-79e8-4d97-925d-f0eb698aa233",
+  "slug": "stability-ai-stable-layers",
+  "name": "Stable Layers",
+  "crawledAt": "2026-08-16T05:27:01.260Z",
+  "crawledUrls": [
+    "https://stability-ai.github.io/stable-layers/"
+  ],
+  "byteCounts": 248,
+  "text": "## Model Description (Stable Layers)\nStable Layers is a model developed by Stability AI, released on 2026-07-15. It is engineered for advanced text reasoning, instruction following, and conversational intelligence with a 128K tokens context window."
+}

@@ -1,0 +1,11 @@
+{
+  "modelId": "74eb15a3-fdc3-44b4-a5bf-e09101028845",
+  "slug": "maple-preview",
+  "name": "maple-preview",
+  "crawledAt": "2026-08-15T20:32:23.131Z",
+  "crawledUrls": [
+    "https://huggingface.co/deepgrove/maple-preview"
+  ],
+  "byteCounts": 1940,
+  "text": "---\nlicense: mit\nlanguage: en\nlibrary_name: transformers\npipeline_tag: text-generation\ntags:\n  - causal-lm\n  - mixture-of-experts\n  - reasoning\n  - ternary\n  - custom-code\n---\n\n# Maple-Preview\n\n**DeepGrove · 2026**\n\nToday we introduce Maple-Preview, an open-source 20B-A1B ternary-weight reasoning LLM. Maple-Preview has SOTA reasoning for its weight class and is even competitive with larger models. It solves IMO-level problems and runs at 200+ tokens/sec on a Mac mini M4, 5–16× faster than efficient models like Gemma 4, Qwen3.5, and gpt-oss.\n\n- 20B-A1B Model\n- 218 tok/s M4 Mac mini\n- 5.31 GB Checkpoint\n- 131,072 Token context\n\n![Maple-Preview speed and performance frontier](assets/01-speed-frontier.png)\n\n> [!NOTE]\n> The included Transformers implementation depends on Triton and FlashAttention\n> and is intended for a compatible CUDA environment. The reported Apple Silicon\n> result uses a separate on-device runtime.\n\n## Architecture\n\nMaple-Preview is a 20B-A1B reasoning model designed from the start for efficient on-device inference. It utilizes a 24-layer, 256-expert (8 active) configuration with 3:1 SWA-512:GA attention. \n\n## Evaluation\n\nOn benchmarks, Maple-Preview sets a new point on the Pareto frontier for both memory-to-performance and speed-to-performance, demonstrating its strong reasoning capabilities. However, we note that this preview is focused primarily on raw reasoning and, as such, may underperform on agentic benchmarks. We intend to continue improving general performance through extended training before Maple's full release.\n\n![Benchmark score comparison](assets/05-benchmark-scores-table.png)\n\nCapability comparison using the dense output head across LCBv6, AIME 2026, HMMT 2026, and GPQA-D.\n\n## Limitations\n\nThis preview received minimal post-training for agentic tasks and only\nsmall-scale general reinforcement learning.\n\n## License\n\nMaple-Preview is released under the [MIT License](LICENSE)."
+}

@@ -1,0 +1,11 @@
+{
+  "modelId": "1e1e6599-aca0-45a1-8b0c-c1b05c07c1d0",
+  "slug": "anthropic-claude-3-5-sonnet-20241022",
+  "name": "Claude Sonnet 3.5 v2",
+  "crawledAt": "2026-08-25T15:52:56.624Z",
+  "crawledUrls": [
+    "https://modelverse.ai/models/anthropic-claude-3-5-sonnet-20241022"
+  ],
+  "byteCounts": 242,
+  "text": "<!DOCTYPE html><html><head><script>window.onload=function(){window.location.href=\"/lander\"}</script></head></html>\n\n---\n\n## Model Description (Claude Sonnet 3.5 v2)\nBalanced Claude model for coding, analysis, agent workflows, and cost control"
+}

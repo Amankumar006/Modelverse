@@ -1,0 +1,9 @@
+{
+  "modelId": "6a6973d2-03b5-4f12-8693-0d5b823a9246",
+  "slug": "nvidia-llama-nemotron-embed-vl-1b-v2",
+  "name": "Llama Nemotron Embed VL 1B v2",
+  "crawledAt": "2026-08-25T11:36:11.933Z",
+  "crawledUrls": [],
+  "byteCounts": 134,
+  "text": "## Model Description (Llama Nemotron Embed VL 1B v2)\nEmbedding model for semantic search, retrieval, clustering, and ranking pipelines"
+}

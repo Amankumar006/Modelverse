@@ -1,0 +1,12 @@
+{
+  "modelId": "f81844f2-31dd-498f-af9d-b6115bd3e7d5",
+  "slug": "sora",
+  "name": "Sora Research Preview",
+  "crawledAt": "2026-08-25T16:48:33.463Z",
+  "crawledUrls": [
+    "https://openai.com/sora",
+    "https://help.openai.com/en/articles/20001152-what-to-know-about-the-sora-discontinuation"
+  ],
+  "byteCounts": 176,
+  "text": "## Model Description (Sora Research Preview)\nOpenAI's text-to-video diffusion transformer model, generating high-fidelity video clips up to 60 seconds with physical simulation."
+}

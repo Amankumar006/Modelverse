@@ -1,0 +1,9 @@
+{
+  "modelId": "f9a79fed-b594-48dd-9649-25e2499c4728",
+  "slug": "alibaba-qwen3-coder-flash",
+  "name": "Qwen3 Coder Flash",
+  "crawledAt": "2026-08-25T13:59:00.239Z",
+  "crawledUrls": [],
+  "byteCounts": 334,
+  "text": "## Model Description (Qwen3 Coder Flash)\nQwen3 Coder Flash is Alibaba's fast and cost efficient version of their proprietary Qwen3 Coder Plus. It is a powerful coding agent model specializing in autonomous programming via tool calling and environment interaction, combining coding proficiency with versatile general-purpose abilities."
+}
