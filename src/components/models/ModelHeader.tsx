@@ -2,8 +2,10 @@
 
 import React from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { ExternalLink, Calendar, ShieldCheck, ChevronRight } from "lucide-react";
 import type { ModelRow } from "@/types/database";
+import { getProviderLogo } from "@/lib/logos";
 
 interface ModelHeaderProps {
   model: ModelRow;
@@ -19,6 +21,8 @@ export default function ModelHeader({ model }: ModelHeaderProps) {
         timeZone: "UTC",
       })
     : null;
+
+  const providerLogo = getProviderLogo(model.provider);
 
   return (
     <header className="space-y-6">
@@ -38,11 +42,23 @@ export default function ModelHeader({ model }: ModelHeaderProps) {
       {/* Hero Header Card */}
       <div className="p-6 sm:p-8 rounded-[var(--radius-card)] bg-[var(--card-bg)] shadow-[var(--shadow-card)] border border-[var(--muted)]/10 space-y-4">
         <div className="flex flex-wrap items-center justify-between gap-3">
-          {/* Provider & Badges */}
-          <div className="flex flex-wrap items-center gap-2">
-            <span className="text-xs font-bold uppercase tracking-wider text-[var(--accent)]">
-              {model.provider}
-            </span>
+          {/* Provider Logo & Badges */}
+          <div className="flex flex-wrap items-center gap-2.5">
+            <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-[var(--bg)] border border-[var(--muted)]/15 shadow-sm">
+              <div className="relative w-4 h-4 rounded-full overflow-hidden shrink-0 flex items-center justify-center">
+                <Image
+                  src={providerLogo}
+                  alt={model.provider}
+                  width={16}
+                  height={16}
+                  className="w-full h-full object-contain"
+                />
+              </div>
+              <span className="text-xs font-bold uppercase tracking-wider text-[var(--accent)]">
+                {model.provider}
+              </span>
+            </div>
+
             <span className="text-[10px] px-2.5 py-0.5 rounded-full bg-[var(--tag-bg)] text-[var(--tag-text)] font-semibold uppercase tracking-wider">
               {model.category || "LLM"}
             </span>

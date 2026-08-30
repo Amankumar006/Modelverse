@@ -2,8 +2,10 @@
 
 import React, { useState, useMemo } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { Calendar, ArrowUpRight, Cpu } from "lucide-react";
 import type { ModelRow } from "@/types/database";
+import { getProviderLogo } from "@/lib/logos";
 
 interface TimelineContainerProps {
   initialModels: ModelRow[];
@@ -32,39 +34,44 @@ export default function TimelineContainer({ initialModels }: TimelineContainerPr
   }, [initialModels]);
 
   return (
-    <div className="w-full flex flex-col gap-8">
+    <div className="space-y-8">
       {/* Provider Filter Chips */}
-      {providers.length > 0 && (
-        <div className="flex flex-wrap items-center gap-2 text-xs">
-          <span className="text-[var(--muted)] font-medium mr-1">Filter Lab:</span>
-          <button
-            onClick={() => setSelectedProvider("All")}
-            className={`px-3 py-1 rounded-[var(--radius-pill)] transition-all cursor-pointer ${
-              selectedProvider === "All"
-                ? "bg-[var(--accent-soft)] text-[var(--accent)] font-bold shadow-sm"
-                : "bg-[var(--card-bg)] text-[var(--muted)] hover:text-[var(--text)] border border-[var(--muted)]/10"
-            }`}
-          >
-            All Labs ({initialModels.length})
-          </button>
-          {providers.map((p) => (
+      <div className="flex items-center gap-2 overflow-x-auto pb-2 scrollbar-none">
+        <button
+          onClick={() => setSelectedProvider("All")}
+          className={`px-3.5 py-1.5 rounded-full text-xs font-semibold transition-all cursor-pointer whitespace-nowrap ${
+            selectedProvider === "All"
+              ? "bg-[var(--accent)] text-[var(--accent-contrast)] shadow-sm"
+              : "bg-[var(--card-bg)] text-[var(--muted)] hover:text-[var(--text)] border border-[var(--muted)]/10"
+          }`}
+        >
+          All Labs ({sortedModels.length})
+        </button>
+        {providers.map((p) => {
+          const count = sortedModels.filter((m) => m.provider.toLowerCase() === p.toLowerCase()).length;
+          const logo = getProviderLogo(p);
+          return (
             <button
               key={p}
               onClick={() => setSelectedProvider(p)}
-              className={`px-3 py-1 rounded-[var(--radius-pill)] transition-all cursor-pointer ${
-                selectedProvider === p
-                  ? "bg-[var(--accent-soft)] text-[var(--accent)] font-bold shadow-sm"
+              className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold transition-all cursor-pointer whitespace-nowrap ${
+                selectedProvider.toLowerCase() === p.toLowerCase()
+                  ? "bg-[var(--accent)] text-[var(--accent-contrast)] shadow-sm"
                   : "bg-[var(--card-bg)] text-[var(--muted)] hover:text-[var(--text)] border border-[var(--muted)]/10"
               }`}
             >
-              {p}
+              <div className="w-3.5 h-3.5 rounded-full overflow-hidden shrink-0 flex items-center justify-center">
+                <Image src={logo} alt={p} width={14} height={14} className="w-full h-full object-contain" />
+              </div>
+              <span>{p}</span>
+              <span className="text-[10px] opacity-75">({count})</span>
             </button>
-          ))}
-        </div>
-      )}
+          );
+        })}
+      </div>
 
       {/* Timeline Stream */}
-      <div className="relative border-l-2 border-[var(--muted)]/20 pl-6 sm:pl-8 ml-3 space-y-8">
+      <div className="relative pl-6 sm:pl-8 border-l border-[var(--muted)]/20 space-y-8 ml-2 sm:ml-4">
         {filteredModels.map((model) => {
           const dateStr = model.release_date
             ? new Date(model.release_date).toLocaleDateString("en-US", {
@@ -73,7 +80,8 @@ export default function TimelineContainer({ initialModels }: TimelineContainerPr
                 year: "numeric",
                 timeZone: "UTC",
               })
-            : "Recently Added";
+            : "Recent";
+          const logo = getProviderLogo(model.provider);
 
           return (
             <div key={model.id} className="relative group">
@@ -84,6 +92,9 @@ export default function TimelineContainer({ initialModels }: TimelineContainerPr
               <div className="p-5 sm:p-6 rounded-[var(--radius-card)] bg-[var(--card-bg)] shadow-[var(--shadow-card)] border border-[var(--muted)]/10 hover:border-[var(--accent)]/30 transition-all space-y-3">
                 <div className="flex flex-wrap items-center justify-between gap-2">
                   <div className="flex items-center gap-2">
+                    <div className="relative w-4 h-4 rounded-full overflow-hidden shrink-0 bg-[var(--bg)] border border-[var(--muted)]/15 flex items-center justify-center p-0.5">
+                      <Image src={logo} alt={model.provider} width={14} height={14} className="w-full h-full object-contain" />
+                    </div>
                     <span className="text-[10px] font-bold uppercase tracking-wider text-[var(--accent)]">
                       {model.provider}
                     </span>

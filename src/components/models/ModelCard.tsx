@@ -2,8 +2,10 @@
 
 import React from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { ArrowUpRight } from "lucide-react";
 import type { ModelRow } from "@/types/database";
+import { getProviderLogo } from "@/lib/logos";
 
 interface ModelCardProps {
   model: ModelRow;
@@ -20,6 +22,7 @@ function formatContextWindow(tokens: number | null): string {
 export default function ModelCard({ model, variant = "card" }: ModelCardProps) {
   const formattedContext = formatContextWindow(model.context_window);
   const modalities = Array.isArray(model.modalities) ? model.modalities : ["text"];
+  const providerLogo = getProviderLogo(model.provider);
 
   if (variant === "row") {
     return (
@@ -27,11 +30,22 @@ export default function ModelCard({ model, variant = "card" }: ModelCardProps) {
         href={`/models/${model.slug}`}
         className="group grid grid-cols-[1fr_auto_auto_auto] sm:grid-cols-[1.4fr_0.8fr_0.6fr_auto] items-center gap-3 sm:gap-4 px-4 py-3.5 rounded-[14px] bg-[var(--card-bg)]/80 backdrop-blur-md border border-[var(--muted)]/10 hover:border-[var(--accent)]/30 hover:bg-[var(--accent-soft)]/5 transition-all duration-300 shadow-sm hover:shadow-md cursor-pointer"
       >
-        <div className="min-w-0">
-          <p className="text-sm font-semibold text-[var(--text)] truncate group-hover:text-[var(--accent)] transition-colors">
-            {model.name}
-          </p>
-          <p className="text-xs text-[var(--muted)] truncate">{model.provider}</p>
+        <div className="min-w-0 flex items-center gap-3">
+          <div className="relative w-6 h-6 rounded-full overflow-hidden shrink-0 bg-[var(--bg)] border border-[var(--muted)]/15 flex items-center justify-center p-0.5">
+            <Image
+              src={providerLogo}
+              alt={model.provider}
+              width={18}
+              height={18}
+              className="w-full h-full object-contain"
+            />
+          </div>
+          <div className="min-w-0">
+            <p className="text-sm font-semibold text-[var(--text)] truncate group-hover:text-[var(--accent)] transition-colors">
+              {model.name}
+            </p>
+            <p className="text-xs text-[var(--muted)] truncate">{model.provider}</p>
+          </div>
         </div>
 
         <p className="hidden sm:block text-xs font-mono text-[var(--muted)] truncate">
@@ -59,12 +73,23 @@ export default function ModelCard({ model, variant = "card" }: ModelCardProps) {
 
       <div className="relative z-10 flex flex-col h-full justify-between">
         <div>
-          {/* Header Row: Provider & Category Badges */}
+          {/* Header Row: Provider Logo & Category Badges */}
           <div className="flex items-center justify-between gap-2 mb-3">
-            <span className="text-[10px] font-bold uppercase tracking-wider text-[var(--accent)]">
-              {model.provider}
-            </span>
-            <span className="px-2 py-0.5 rounded-full text-[10px] font-medium bg-[var(--tag-bg)] text-[var(--tag-text)] uppercase tracking-wider">
+            <div className="flex items-center gap-1.5 min-w-0">
+              <div className="relative w-4 h-4 rounded-full overflow-hidden shrink-0 bg-[var(--bg)] border border-[var(--muted)]/15 flex items-center justify-center p-0.5">
+                <Image
+                  src={providerLogo}
+                  alt={model.provider}
+                  width={14}
+                  height={14}
+                  className="w-full h-full object-contain"
+                />
+              </div>
+              <span className="text-[10px] font-bold uppercase tracking-wider text-[var(--accent)] truncate">
+                {model.provider}
+              </span>
+            </div>
+            <span className="px-2 py-0.5 rounded-full text-[10px] font-medium bg-[var(--tag-bg)] text-[var(--tag-text)] uppercase tracking-wider shrink-0">
               {model.category || "LLM"}
             </span>
           </div>
