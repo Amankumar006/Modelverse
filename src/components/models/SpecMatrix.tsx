@@ -16,7 +16,7 @@ export default function SpecMatrix({ model }: SpecMatrixProps) {
     {
       icon: Cpu,
       label: "Context Window",
-      value: model.context_window ? `${model.context_window.toLocaleString()} tokens` : "Standard",
+      value: model.context_window ? `${model.context_window.toLocaleString("en-US")} tokens` : "Standard",
       subtext: model.context_window && model.context_window >= 1_000_000 ? "Frontier 1M+ Buffer" : "Input Capacity",
     },
     {

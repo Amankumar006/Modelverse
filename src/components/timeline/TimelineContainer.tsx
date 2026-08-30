@@ -114,7 +114,7 @@ export default function TimelineContainer({ initialModels }: TimelineContainerPr
                     {model.context_window && (
                       <span className="flex items-center gap-1">
                         <Cpu size={12} className="text-[var(--accent)]" />
-                        {model.context_window.toLocaleString()} ctx
+                        {model.context_window.toLocaleString("en-US")} ctx
                       </span>
                     )}
                     {model.parameters && <span>• {model.parameters}</span>}

@@ -55,7 +55,7 @@ export default async function ComparePage() {
                   <td className="p-4 font-semibold">{m.name}</td>
                   <td className="p-4 text-[var(--accent)] font-medium">{m.provider}</td>
                   <td className="p-4 font-mono tabular-nums">
-                    {m.context_window ? `${m.context_window.toLocaleString()} tokens` : "Standard"}
+                    {m.context_window ? `${m.context_window.toLocaleString("en-US")} tokens` : "Standard"}
                   </td>
                   <td className="p-4 font-mono">{m.parameters || "Proprietary"}</td>
                   <td className="p-4">
