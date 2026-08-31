@@ -22,6 +22,17 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "/compare",
   },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
   openGraph: {
     title: "Compare AI Foundation Models — Matrix & Specs",
     description: "Compare foundation models side-by-side across parameters, context windows, API pricing, and benchmark scores.",

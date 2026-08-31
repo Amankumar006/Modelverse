@@ -57,6 +57,17 @@ export async function generateMetadata({
     alternates: {
       canonical: `/models/${slug}`,
     },
+    robots: {
+      index: true,
+      follow: true,
+      googleBot: {
+        index: true,
+        follow: true,
+        "max-video-preview": -1,
+        "max-image-preview": "large",
+        "max-snippet": -1,
+      },
+    },
     openGraph: {
       title,
       description,
@@ -91,6 +102,7 @@ export default async function ModelDetailPage({
   const breadcrumbs = [
     { name: "Home", url: "/" },
     { name: "Models", url: "/models" },
+    { name: model.provider || "AI Lab", url: `/models?provider=${encodeURIComponent(model.provider || "")}` },
     { name: model.name, url: `/models/${slug}` },
   ];
 

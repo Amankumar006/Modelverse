@@ -113,12 +113,26 @@ export function ModelJsonLd({ model }: { model: ModelRow }) {
 
   const inputPrice = pricing.input_per_1m !== undefined ? pricing.input_per_1m : "0";
 
+  const parameters = model.parameters || "Unknown";
+  const contextNum = model.context_window || 8192;
+  const isMoE = Boolean(model.active_parameters);
+  const isOpenWeights = Boolean(model.source_type && model.source_type.toLowerCase().includes("open"));
+
+  let vramEstimate = "Cloud API — Zero Local VRAM";
+  if (isOpenWeights) {
+    if (parameters.includes("8B") || parameters.includes("7B")) vramEstimate = "8-12 GB VRAM (FP16/INT4)";
+    else if (parameters.includes("70B") || parameters.includes("72B")) vramEstimate = "40-80 GB VRAM (FP16/INT4)";
+    else if (parameters.includes("400B") || parameters.includes("314B") || parameters.includes("671B")) vramEstimate = "320-640 GB VRAM (Multi-GPU SXM5)";
+    else vramEstimate = "Hardware dependent on quantization";
+  }
+
   const appSchema = {
     "@context": "https://schema.org",
     "@type": "SoftwareApplication",
     name: model.name,
-    operatingSystem: "Cloud API, Linux, macOS, Windows",
+    operatingSystem: isOpenWeights ? "Linux, macOS, Windows (Local / Cloud)" : "Cloud API",
     applicationCategory: "AI/Machine Learning Model",
+    applicationSubCategory: "Foundation Model",
     description: model.description || `Technical specifications, context window, and benchmarks for ${model.name} by ${model.provider}.`,
     url: modelUrl,
     author: {
@@ -131,12 +145,20 @@ export function ModelJsonLd({ model }: { model: ModelRow }) {
       url: SITE_URL,
     },
     datePublished: model.release_date || model.created_at,
+    processorRequirements: vramEstimate,
+    memoryRequirements: `${contextNum.toLocaleString()} tokens certified context capacity`,
     offers: {
       "@type": "Offer",
       price: String(inputPrice),
       priceCurrency: "USD",
       description: pricing.input_per_1m !== undefined ? `$${pricing.input_per_1m} per 1M input tokens` : "Open Weights / Free Tier",
     },
+    additionalProperty: [
+      { "@type": "PropertyValue", name: "Parameters", value: model.parameters || "Proprietary" },
+      { "@type": "PropertyValue", name: "Context Window", value: `${contextNum.toLocaleString()} tokens` },
+      { "@type": "PropertyValue", name: "Architecture", value: isMoE ? `Sparse MoE (${model.active_parameters} active)` : "Dense Transformer" },
+      { "@type": "PropertyValue", name: "License", value: model.source_type || "Proprietary" },
+    ],
     featureList: [
       model.category ? `Category: ${model.category}` : "LLM",
       model.context_window ? `Context Window: ${model.context_window.toLocaleString()} tokens` : null,
@@ -147,17 +169,8 @@ export function ModelJsonLd({ model }: { model: ModelRow }) {
   };
 
   // Build FAQ items for Google Rich Snippets matching visible DOM
-  const isOpenWeights = Boolean(model.source_type && model.source_type.toLowerCase().includes("open"));
   const isCommercial = !model.source_type?.toLowerCase().includes("non-commercial");
   const isReasoning = model.category?.toLowerCase().includes("reasoning") || model.name.toLowerCase().includes("o1") || model.name.toLowerCase().includes("r1");
-  const parameters = model.parameters || "Unknown";
-  const contextNum = model.context_window || 8192;
-  const isMoE = Boolean(model.active_parameters);
-  
-  let vramEstimate = "Depends on quantization";
-  if (parameters.includes("8B") || parameters.includes("7B")) vramEstimate = "8-12 GB VRAM (4-bit to 8-bit)";
-  else if (parameters.includes("70B") || parameters.includes("72B")) vramEstimate = "40-80 GB VRAM (4-bit to 8-bit)";
-  else if (parameters.includes("400B") || parameters.includes("314B") || parameters.includes("671B")) vramEstimate = "Multiple 80GB GPUs (e.g., 4-8x H100)";
 
   const reasoningBenchmarks = benchmarks.filter(b => ["MMLU-Pro", "MATH-500", "GPQA Diamond"].includes(b.name));
   const codingBenchmarks = benchmarks.filter(b => ["SWE-bench Verified", "HumanEval", "LiveCodeBench"].includes(b.name));
@@ -248,21 +261,21 @@ export function ModelJsonLd({ model }: { model: ModelRow }) {
           } architecture and a certified context window of ${contextNum.toLocaleString()} tokens. ${
             contextNum >= 128000
               ? "This allows for extensive full-codebase repository indexing, multi-hour audio processing, and book-length document ingestion."
-              : "It is optimized for low-latency interactive conversations, API tool calls, and high-frequency structured JSON generation."
+              : "This capacity is ideal for standard instruction-following, summarization, and interactive conversational turns."
           }`
-        }
+        },
       },
       {
         "@type": "Question",
-        name: `How much does ${model.name} cost per million tokens?`,
+        name: `What are the API pricing and operational rates for ${model.name}?`,
         acceptedAnswer: {
           "@type": "Answer",
           text: pricing.input_per_1m !== undefined
-            ? `Standard API rates for ${model.name} are $${pricing.input_per_1m} per 1M input tokens and $${pricing.output_per_1m ?? "—"} per 1M output tokens.`
-            : `${model.name} is available under open weights distribution for free direct checkpoint download, with compute costs depending on self-hosted GPU provisioning.`
-        }
-      }
-    ].filter(Boolean),
+            ? `Official API inference rates for ${model.name} are $${pricing.input_per_1m} per 1M input tokens and $${pricing.output_per_1m || pricing.input_per_1m} per 1M output tokens.`
+            : `${model.name} is distributed as open weights. You can download and run it with zero API token costs on self-hosted infrastructure.`
+        },
+      },
+    ],
   };
 
   return (
@@ -291,6 +304,11 @@ export function ArticleJsonLd({ article }: { article: ArticleRow }) {
     image: article.cover_image || `${SITE_URL}/articles/${article.slug}/opengraph-image`,
     datePublished: article.published_at,
     dateModified: article.updated_at || article.published_at,
+    proficiencyLevel: "Expert",
+    speakable: {
+      "@type": "SpeakableSpecification",
+      cssSelector: ["h1", "article p"],
+    },
     author: {
       "@type": "Organization",
       name: article.source_name || "Modelverse Intelligence",
