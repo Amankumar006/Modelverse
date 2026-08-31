@@ -5,6 +5,7 @@ import { getModelBySlug, getModels } from "@/lib/supabase/models";
 import { normalizeBenchmarks } from "@/lib/benchmarks";
 import ModelHeader from "@/components/models/ModelHeader";
 import LineageSpecSection from "@/components/models/LineageSpecSection";
+import ModelEditorialAnalysis from "@/components/models/ModelEditorialAnalysis";
 import PricingSection from "@/components/models/PricingSection";
 import BenchmarksSection from "@/components/models/BenchmarksSection";
 import QuickstartSection from "@/components/models/QuickstartSection";
@@ -101,6 +102,11 @@ export default async function ModelDetailPage({
             {/* Technical Architecture & Execution Specifications */}
             <div id="specifications" className="scroll-mt-28">
               <LineageSpecSection model={model} />
+            </div>
+
+            {/* In-Depth Architectural & Production Analysis */}
+            <div id="analysis" className="scroll-mt-28">
+              <ModelEditorialAnalysis model={model} />
             </div>
 
             {/* Verified Benchmarks Visualizer */}
