@@ -84,7 +84,7 @@ export default function ModelDetailTableOfContents({
     if (target) {
       const topOffset = 100;
       const elementPosition = target.getBoundingClientRect().top;
-      const offsetPosition = elementPosition + window.pageYOffset - topOffset;
+      const offsetPosition = elementPosition + window.scrollY - topOffset;
 
       window.scrollTo({
         top: offsetPosition,
@@ -120,7 +120,8 @@ export default function ModelDetailTableOfContents({
               <a
                 href={`#${item.id}`}
                 onClick={(e) => scrollToSection(e, item.id)}
-                className={`group flex items-center gap-2.5 px-3 py-2 rounded-[var(--radius-control)] text-xs transition-all duration-200 cursor-pointer ${
+                aria-current={isActive ? "true" : undefined}
+                className={`group flex items-center gap-2.5 px-3 py-2 rounded-[var(--radius-control)] text-xs transition-all duration-200 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-1 focus-visible:ring-offset-[var(--bg)] ${
                   isActive
                     ? "bg-[var(--accent-soft)] text-[var(--accent)] font-bold shadow-sm"
                     : "text-[var(--muted)] hover:text-[var(--text)] hover:bg-[var(--bg)]"
@@ -130,6 +131,7 @@ export default function ModelDetailTableOfContents({
                   className={`transition-colors ${
                     isActive ? "text-[var(--accent)]" : "text-[var(--muted)] group-hover:text-[var(--text)]"
                   }`}
+                  aria-hidden="true"
                 >
                   {item.icon}
                 </span>
@@ -144,9 +146,9 @@ export default function ModelDetailTableOfContents({
       <div className="pt-2 border-t border-[var(--muted)]/10">
         <button
           onClick={scrollToTop}
-          className="flex items-center gap-1.5 text-[11px] text-[var(--muted)] hover:text-[var(--accent)] font-medium transition-colors cursor-pointer w-full"
+          className="flex items-center justify-center gap-1.5 px-3 py-2 rounded-[var(--radius-control)] text-[11px] text-[var(--muted)] hover:text-[var(--accent)] hover:bg-[var(--bg)] font-medium transition-colors cursor-pointer w-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)]"
         >
-          <ArrowUp size={12} />
+          <ArrowUp size={12} aria-hidden="true" />
           <span>Back to Top</span>
         </button>
       </div>
