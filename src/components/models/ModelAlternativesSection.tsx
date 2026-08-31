@@ -14,10 +14,23 @@ export default function ModelAlternativesSection({
   currentModel,
   allModels,
 }: ModelAlternativesSectionProps) {
-  // Find alternatives in same category first, or similar parameter scale
+  // Find alternatives in same category first with provider diversity and high relevance
   const candidates = allModels
     .filter((m) => m.id !== currentModel.id)
-    .filter((m) => m.category === currentModel.category || m.provider !== currentModel.provider)
+    .sort((a, b) => {
+      // 1. Prioritize same category
+      const aSameCat = a.category === currentModel.category ? 1 : 0;
+      const bSameCat = b.category === currentModel.category ? 1 : 0;
+      if (aSameCat !== bSameCat) return bSameCat - aSameCat;
+
+      // 2. Prioritize different providers for comparative insight
+      const aDiffProv = a.provider !== currentModel.provider ? 1 : 0;
+      const bDiffProv = b.provider !== currentModel.provider ? 1 : 0;
+      if (aDiffProv !== bDiffProv) return bDiffProv - aDiffProv;
+
+      // 3. Prioritize latest release dates
+      return (b.release_date || b.created_at || "").localeCompare(a.release_date || a.created_at || "");
+    })
     .slice(0, 3);
 
   if (candidates.length === 0) {
