@@ -3,6 +3,7 @@
 import React from "react";
 import { DollarSign } from "lucide-react";
 import type { ModelRow } from "@/types/database";
+import ModelCostCalculator from "@/components/models/ModelCostCalculator";
 
 interface PricingSectionProps {
   model: ModelRow;
@@ -70,6 +71,9 @@ export default function PricingSection({ model }: PricingSectionProps) {
             <span className="font-mono text-[var(--accent)] font-semibold">$0.00 Direct Download</span>
           </div>
         )}
+
+        {/* Embedded Interactive Cost Calculator */}
+        <ModelCostCalculator model={model} />
       </div>
     </section>
   );
