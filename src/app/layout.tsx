@@ -5,6 +5,7 @@ import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import { CommandPaletteProvider } from "@/components/search/CommandPaletteContext";
 import CommandPaletteModal from "@/components/search/CommandPaletteModal";
+import CookieConsent from "@/components/common/CookieConsent";
 import { WebSiteJsonLd } from "@/components/seo/JsonLd";
 import "./globals.css";
 
@@ -17,6 +18,8 @@ const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
 });
+
+const adsenseClientId = process.env.NEXT_PUBLIC_ADSENSE_CLIENT_ID || "ca-pub-5666739187500051";
 
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://www.themodelverse.in"),
@@ -81,6 +84,9 @@ export const metadata: Metadata = {
   verification: {
     google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION || undefined,
   },
+  other: {
+    "google-adsense-account": adsenseClientId,
+  },
 };
 
 export default function RootLayout({
@@ -100,6 +106,11 @@ export default function RootLayout({
             __html: `(function(){try{var t=localStorage.getItem("theme");var d=t==="dark"||(!t&&window.matchMedia("(prefers-color-scheme: dark)").matches);if(d){document.documentElement.classList.add("dark")}else{document.documentElement.classList.remove("dark")}}catch(e){}})();`,
           }}
         />
+        <script
+          async
+          src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${adsenseClientId}`}
+          crossOrigin="anonymous"
+        />
         <WebSiteJsonLd />
       </head>
       <body className="min-h-full flex flex-col bg-[var(--bg)] text-[var(--text)]">
@@ -109,6 +120,7 @@ export default function RootLayout({
             <div className="flex-1 flex flex-col">{children}</div>
             <Footer />
             <CommandPaletteModal />
+            <CookieConsent />
           </CommandPaletteProvider>
         </ThemeProvider>
       </body>

@@ -8,6 +8,7 @@ import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { getArticleBySlug, getArticles } from "@/lib/supabase/articles";
 import { ArticleJsonLd, BreadcrumbJsonLd } from "@/components/seo/JsonLd";
+import AdSenseUnit from "@/components/ads/AdSenseUnit";
 
 export const revalidate = 60;
 
@@ -190,6 +191,9 @@ export default async function ArticleDetailPage({
             {article.content}
           </ReactMarkdown>
         </article>
+
+        {/* In-Article AdSense Banner */}
+        <AdSenseUnit slotId="article-detail-footer-slot" format="horizontal" minHeight={90} />
       </main>
     </>
   );
