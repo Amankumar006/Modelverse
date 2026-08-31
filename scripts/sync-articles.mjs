@@ -59,7 +59,9 @@ async function syncArticles() {
       source_url: frontmatter.source_url || null,
       cover_image: frontmatter.cover_image || null,
       is_published: frontmatter.is_published !== false,
-      published_at: frontmatter.published_at || new Date().toISOString(),
+      published_at: frontmatter.published_at instanceof Date 
+        ? frontmatter.published_at.toISOString() 
+        : (frontmatter.published_at || new Date().toISOString()),
       updated_at: new Date().toISOString(),
     };
 
@@ -77,6 +79,12 @@ async function syncArticles() {
   }
 
   console.log(`\n🎉 Synchronized ${syncedCount} of ${mdFiles.length} article(s) to Supabase.`);
+
+  // Export URLs for indexing script if running in CI
+  if (process.env.GITHUB_OUTPUT && syncedSlugs.length > 0) {
+    const urls = syncedSlugs.map(slug => `${SITE_URL}/articles/${slug}`);
+    await fs.appendFile(process.env.GITHUB_OUTPUT, `synced_urls=${urls.join(' ')}\n`);
+  }
 
   // Trigger On-Demand Next.js Cache Revalidation
   if (SITE_URL && REVALIDATION_SECRET && syncedSlugs.length > 0) {

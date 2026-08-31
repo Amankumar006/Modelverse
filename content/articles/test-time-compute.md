@@ -12,7 +12,7 @@ tags:
   - "Claude 3.7"
   - "Reasoning"
   - "Test-Time Compute"
-published_at: "2026-09-01T09:00:00Z"
+published_at: 2026-09-01
 is_published: true
 reading_time: 8
 ---

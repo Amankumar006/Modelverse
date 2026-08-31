@@ -17,7 +17,10 @@ const FrontmatterSchema = z.object({
   source_url: z.string().url().optional(),
   cover_image: z.string().min(1, "Cover image is required"),
   tags: z.array(z.string()).min(1, "At least one tag is required"),
-  published_at: z.string().datetime({ offset: true }), // ISO 8601
+  published_at: z.union([
+    z.string().datetime({ offset: true }),
+    z.date()
+  ]), // ISO 8601 string or YAML parsed Date
   is_published: z.boolean(),
   reading_time: z.number().optional(), // Can be auto-calculated if missing
 });
