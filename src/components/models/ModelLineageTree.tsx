@@ -63,7 +63,7 @@ export default function ModelLineageTree({ model, allModels }: ModelLineageTreeP
         <div className="space-y-6">
           {/* Main Evolutionary Flow: Predecessors -> Active -> Successors */}
           <div className="p-5 rounded-[var(--radius-control)] bg-[var(--bg)] border border-[var(--muted)]/10 overflow-x-auto">
-            <div className="flex flex-col md:flex-row items-stretch md:items-center gap-4 min-w-[640px] md:min-w-0 justify-between">
+            <div className="flex flex-col md:flex-row items-stretch md:items-center gap-4 justify-between">
               {/* Predecessors (Ancestors) */}
               <div className="flex-1 space-y-2">
                 <span className="text-[10px] font-bold uppercase tracking-wider text-[var(--muted)] block">
@@ -76,7 +76,7 @@ export default function ModelLineageTree({ model, allModels }: ModelLineageTreeP
                 ) : (
                   <div className="space-y-2">
                     {predecessors.slice(0, 2).map((pred) => (
-                      <Link key={pred.id} href={`/models/${pred.slug}`} className="group block p-3 rounded-lg border border-[var(--muted)]/20 bg-[var(--card-bg)] hover:border-[var(--accent)] transition-all">
+                      <Link key={pred.id} href={`/models/${pred.slug}`} className="group block p-3 rounded-lg border border-[var(--muted)]/20 bg-[var(--card-bg)] hover:border-[var(--accent)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] transition-all">
                         <div className="flex items-center justify-between">
                           <span className="text-xs font-bold text-[var(--text)] group-hover:text-[var(--accent)] transition-colors truncate">{pred.name}</span>
                           <ChevronRight size={12} className="text-[var(--muted)] group-hover:text-[var(--accent)] shrink-0" />
@@ -92,8 +92,8 @@ export default function ModelLineageTree({ model, allModels }: ModelLineageTreeP
               </div>
 
               {/* Connecting Edge */}
-              <div className="hidden md:flex flex-col items-center justify-center px-1 text-[var(--muted)]">
-                <ArrowRight size={16} className="text-[var(--accent)] animate-pulse" />
+              <div className="flex items-center justify-center py-1 md:py-0 md:px-1 text-[var(--muted)]">
+                <ArrowRight size={16} className="text-[var(--accent)] animate-pulse rotate-90 md:rotate-0" />
               </div>
 
               {/* Active Current Node */}
@@ -113,8 +113,8 @@ export default function ModelLineageTree({ model, allModels }: ModelLineageTreeP
               </div>
 
               {/* Connecting Edge */}
-              <div className="hidden md:flex flex-col items-center justify-center px-1 text-[var(--muted)]">
-                <ArrowRight size={16} className="text-[var(--accent)]" />
+              <div className="flex items-center justify-center py-1 md:py-0 md:px-1 text-[var(--muted)]">
+                <ArrowRight size={16} className="text-[var(--accent)] rotate-90 md:rotate-0" />
               </div>
 
               {/* Successors (Next Generation) */}
@@ -129,7 +129,7 @@ export default function ModelLineageTree({ model, allModels }: ModelLineageTreeP
                 ) : (
                   <div className="space-y-2">
                     {successors.slice(0, 2).map((succ) => (
-                      <Link key={succ.id} href={`/models/${succ.slug}`} className="group block p-3 rounded-lg border border-[var(--muted)]/20 bg-[var(--card-bg)] hover:border-[var(--accent)] transition-all">
+                      <Link key={succ.id} href={`/models/${succ.slug}`} className="group block p-3 rounded-lg border border-[var(--muted)]/20 bg-[var(--card-bg)] hover:border-[var(--accent)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] transition-all">
                         <div className="flex items-center justify-between">
                           <span className="text-xs font-bold text-[var(--text)] group-hover:text-[var(--accent)] transition-colors truncate">{succ.name}</span>
                           <ChevronRight size={12} className="text-[var(--muted)] group-hover:text-[var(--accent)] shrink-0" />
@@ -156,7 +156,7 @@ export default function ModelLineageTree({ model, allModels }: ModelLineageTreeP
                 </div>
                 <div className="flex flex-wrap gap-2 pt-1">
                   {siblings.map((sib) => (
-                    <Link key={sib.id} href={`/models/${sib.slug}`} className="text-[11px] px-2.5 py-1 rounded bg-[var(--card-bg)] border border-[var(--muted)]/20 hover:border-[var(--accent)] text-[var(--text)] hover:text-[var(--accent)] font-medium transition-colors">
+                    <Link key={sib.id} href={`/models/${sib.slug}`} className="text-[11px] px-2.5 py-1 rounded bg-[var(--card-bg)] border border-[var(--muted)]/20 hover:border-[var(--accent)] text-[var(--text)] hover:text-[var(--accent)] font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)]">
                       {sib.name} {sib.parameters ? `(${sib.parameters})` : ""}
                     </Link>
                   ))}
@@ -172,7 +172,7 @@ export default function ModelLineageTree({ model, allModels }: ModelLineageTreeP
                 </div>
                 <div className="flex flex-wrap gap-2 pt-1">
                   {distillations.map((dist) => (
-                    <Link key={dist.id} href={`/models/${dist.slug}`} className="text-[11px] px-2.5 py-1 rounded bg-[var(--card-bg)] border border-emerald-500/20 text-[var(--text)] hover:border-emerald-500 hover:text-emerald-500 font-medium transition-colors">
+                    <Link key={dist.id} href={`/models/${dist.slug}`} className="text-[11px] px-2.5 py-1 rounded bg-[var(--card-bg)] border border-emerald-500/20 text-[var(--text)] hover:border-emerald-500 hover:text-emerald-500 font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500">
                       {dist.name}
                     </Link>
                   ))}
