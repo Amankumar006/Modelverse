@@ -159,27 +159,29 @@ export default function ModelCostCalculator({ model }: ModelCostCalculatorProps)
             {/* Cloud Rent Breakeven */}
             <div className="pt-4 border-t border-[var(--muted)]/10 space-y-3">
               <div className="flex items-center gap-2 text-[11px] font-bold uppercase tracking-wider text-[var(--muted)]">
-                <Server size={14} /><span>Cloud Rent Breakeven</span>
+                <Server size={14} /><span>{isOpenWeights ? "Cloud GPU Hosting Benchmark" : "Cloud Rent Breakeven"}</span>
               </div>
               
               <div className="space-y-2 text-[11px]">
                 <div className="flex justify-between items-center bg-[var(--bg)] p-2 rounded border border-[var(--muted)]/10">
                   <span className="text-[var(--text)] font-semibold">RunPod RTX 4090 <span className="text-[var(--muted)]">($316/mo)</span></span>
                   <span className={`font-mono font-bold ${rtxEquiv > 1 ? 'text-orange-500' : 'text-[var(--muted)]'}`}>
-                    {rtxEquiv.toFixed(1)}x
+                    {totalCost > 0 ? `${rtxEquiv.toFixed(1)}x` : "$0.44/hr"}
                   </span>
                 </div>
                 <div className="flex justify-between items-center bg-[var(--bg)] p-2 rounded border border-[var(--muted)]/10">
                   <span className="text-[var(--text)] font-semibold">Lambda H100 <span className="text-[var(--muted)]">($1,800/mo)</span></span>
                   <span className={`font-mono font-bold ${h100Equiv > 1 ? 'text-red-500' : 'text-[var(--muted)]'}`}>
-                    {h100Equiv.toFixed(1)}x
+                    {totalCost > 0 ? `${h100Equiv.toFixed(1)}x` : "$2.50/hr"}
                   </span>
                 </div>
               </div>
               
-              {isOpenWeights && h100Equiv >= 1 && (
+              {isOpenWeights && (
                 <div className="mt-3 p-2 bg-emerald-500/10 border border-emerald-500/20 rounded text-[10px] text-emerald-600 font-medium leading-relaxed">
-                  API spend exceeds an H100 instance. Deploying this open-weights model on dedicated infrastructure is likely highly ROI positive.
+                  {h100Equiv >= 1 
+                    ? "API spend exceeds an H100 instance. Deploying this open-weights model on dedicated infrastructure is likely highly ROI positive."
+                    : "Open weights distribution: Zero API token fees. Hardware compute cost is governed by your provisioned GPU cloud instance."}
                 </div>
               )}
               {!isOpenWeights && h100Equiv >= 1 && (

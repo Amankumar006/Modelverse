@@ -66,9 +66,38 @@ export default function PricingSection({ model }: PricingSectionProps) {
             </table>
           </div>
         ) : (
-          <div className="p-4 rounded-[var(--radius-control)] bg-[var(--bg)] border border-[var(--muted)]/10 text-xs text-[var(--muted)] flex items-center justify-between">
-            <span>{isOpenWeights ? "Free Open-Weights Download (Apache 2.0 / MIT)" : "Custom Enterprise Pricing"}</span>
-            <span className="font-mono text-[var(--accent)] font-semibold">$0.00 Direct Download</span>
+          <div className="overflow-x-auto rounded-[var(--radius-control)] border border-[var(--muted)]/10 bg-[var(--bg)]">
+            <table className="w-full text-left text-xs sm:text-sm">
+              <thead className="border-b border-[var(--muted)]/10 bg-[var(--accent-soft)]/20 text-[var(--text)] font-bold">
+                <tr>
+                  <th className="p-3.5 font-bold uppercase tracking-wider text-[11px]">Deployment Tier</th>
+                  <th className="p-3.5 font-bold uppercase tracking-wider text-[11px]">Pricing Structure</th>
+                  <th className="p-3.5 font-bold uppercase tracking-wider text-[11px] hidden sm:table-cell">Distribution Scope</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-[var(--muted)]/10">
+                <tr className="hover:bg-[var(--card-bg)] transition-colors">
+                  <td className="p-3.5 font-semibold text-[var(--text)]">
+                    {isOpenWeights ? "Open Checkpoint Weights" : "Managed Vendor API"}
+                  </td>
+                  <td className="p-3.5 font-mono font-bold text-emerald-500 text-sm">
+                    {isOpenWeights ? "$0.00 (Free Download)" : "Enterprise Quota"}
+                  </td>
+                  <td className="p-3.5 text-xs text-[var(--muted)] hidden sm:table-cell">
+                    {isOpenWeights ? "Self-hosted on private GPU instances" : "Available via vendor developer console"}
+                  </td>
+                </tr>
+                <tr className="hover:bg-[var(--card-bg)] transition-colors">
+                  <td className="p-3.5 font-semibold text-[var(--text)]">Inference Token Consumption</td>
+                  <td className="p-3.5 font-mono font-bold text-[var(--accent)] text-sm">
+                    {isOpenWeights ? "$0.00 / Token" : "Volume-Based SLA"}
+                  </td>
+                  <td className="p-3.5 text-xs text-[var(--muted)] hidden sm:table-cell">
+                    {isOpenWeights ? "Zero per-token billing; compute costs governed by GPU hardware" : "Custom volume licensing from provider"}
+                  </td>
+                </tr>
+              </tbody>
+            </table>
           </div>
         )}
 
