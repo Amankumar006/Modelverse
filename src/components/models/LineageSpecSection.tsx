@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { Cpu, Layers, HardDrive, ShieldCheck, Sparkles, DollarSign } from "lucide-react";
+import { Cpu, Layers, HardDrive, ShieldCheck, Sparkles, DollarSign, Calculator } from "lucide-react";
 import type { ModelRow } from "@/types/database";
 
 interface LineageSpecSectionProps {
@@ -14,6 +14,28 @@ export default function LineageSpecSection({ model }: LineageSpecSectionProps) {
   const formattedContext = model.context_window
     ? `${model.context_window.toLocaleString("en-US")} tokens`
     : "Standard";
+
+  const isOpenWeights = Boolean(model.source_type && model.source_type.toLowerCase().includes("open"));
+  const paramStr = model.parameters || "";
+  const paramNum = parseFloat(paramStr.replace(/[^0-9.]/g, "")) || 0;
+  const isBillion = paramStr.toLowerCase().includes("b") || (!paramStr.toLowerCase().includes("m") && paramNum > 0);
+  const paramInB = isBillion ? paramNum : paramNum / 1000;
+
+  // Deep Architecture Estimation (Standard Decoder-Only LLM heuristic)
+  // Approximated since exact architectural specs aren't always present in ModelRow.
+  const estLayers = paramInB > 50 ? 80 : paramInB > 14 ? 40 : 32;
+  const estHidden = paramInB > 50 ? 8192 : paramInB > 14 ? 5120 : 4096;
+  const contextLen = model.context_window || 4096;
+  
+  // KV Cache Calculation Formula: 2 * num_layers * hidden_size * num_heads/kv_heads * context_len * precision
+  // Assume GQA (Grouped Query Attention) with 1/4 ratio for modern models
+  const kvCacheFactor = 0.25; 
+  const bytesPerToken = 2 * estLayers * estHidden * 2 * kvCacheFactor; // 2 for (K, V), 2 for FP16 bytes
+  const maxKvCacheGb = (bytesPerToken * contextLen) / (1024 ** 3);
+
+  // Exact weights size
+  const weightsFp16 = paramInB * 2;
+  const weightsInt4 = paramInB * 0.55;
 
   return (
     <section id="specifications" className="space-y-4">
@@ -36,6 +58,21 @@ export default function LineageSpecSection({ model }: LineageSpecSectionProps) {
               {model.description || `Technical profile and hardware execution specifications for ${model.name} by ${model.provider}.`}
             </p>
           </div>
+
+          {isOpenWeights && paramInB > 0 && (
+            <div className="p-4 rounded-[var(--radius-control)] bg-[var(--bg)] border border-[var(--muted)]/10 space-y-2">
+              <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[var(--text)]">
+                <Calculator size={14} className="text-[var(--accent)]" />
+                <span>Memory Math Breakdown</span>
+              </div>
+              <ul className="text-[11px] text-[var(--muted)] space-y-1.5 font-mono">
+                <li>• FP16 Weights = {paramInB.toFixed(1)}B × 2B = {weightsFp16.toFixed(2)} GB</li>
+                <li>• INT4 Weights = {paramInB.toFixed(1)}B × 0.55B = {weightsInt4.toFixed(2)} GB</li>
+                <li>• KV Cache ({contextLen} ctx, FP16) ≈ {maxKvCacheGb.toFixed(2)} GB</li>
+                <li>• Activation Buffer = ~20% overhead</li>
+              </ul>
+            </div>
+          )}
 
           <div className="space-y-3 pt-4 border-t border-[var(--muted)]/10 text-xs">
             <span className="text-[11px] uppercase tracking-wider font-bold text-[var(--muted)] block">
@@ -104,7 +141,7 @@ export default function LineageSpecSection({ model }: LineageSpecSectionProps) {
                 Model Weights Footprint
               </span>
               <span className="font-mono font-bold text-sm text-[var(--text)]">
-                {model.weights_size || "Cloud Hosted API"}
+                {isOpenWeights && paramInB > 0 ? `${weightsFp16.toFixed(1)} GB (FP16) / ${weightsInt4.toFixed(1)} GB (INT4)` : model.weights_size || "Cloud Hosted API"}
               </span>
             </div>
 
