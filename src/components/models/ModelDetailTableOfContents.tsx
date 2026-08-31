@@ -13,6 +13,7 @@ import {
   Scale,
   Server,
   GitCompare,
+  GitBranch,
   HelpCircle,
 } from "lucide-react";
 
@@ -35,6 +36,7 @@ export default function ModelDetailTableOfContents({
   const navItems: TocItem[] = useMemo(() => [
     { id: "overview", label: "Overview & Identity", icon: <Sparkles size={13} /> },
     { id: "specifications", label: "Architecture & Specs", icon: <Cpu size={13} /> },
+    { id: "lineage", label: "Lineage & Heritage", icon: <GitBranch size={13} /> },
     { id: "analysis", label: "Architectural Analysis", icon: <BrainCircuit size={13} /> },
     { id: "tradeoffs", label: "Strengths & Trade-Offs", icon: <Scale size={13} /> },
     { id: "compatibility", label: "Hardware & Runtimes", icon: <Server size={13} /> },
