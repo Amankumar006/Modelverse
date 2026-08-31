@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useState, useMemo } from "react";
-import { ArrowUp, Sparkles, Cpu, BarChart3, DollarSign, Terminal, Link2 } from "lucide-react";
+import { ArrowUp, Sparkles, Cpu, BrainCircuit, BarChart3, DollarSign, Terminal, Link2 } from "lucide-react";
 
 interface TocItem {
   id: string;
@@ -22,6 +22,7 @@ export default function ModelDetailTableOfContents({
   const navItems: TocItem[] = useMemo(() => [
     { id: "overview", label: "Overview & Identity", icon: <Sparkles size={13} /> },
     { id: "specifications", label: "Architecture & Specs", icon: <Cpu size={13} /> },
+    { id: "analysis", label: "Architectural Analysis", icon: <BrainCircuit size={13} /> },
     ...(hasBenchmarks
       ? [{ id: "benchmarks", label: "Verified Benchmarks", icon: <BarChart3 size={13} /> }]
       : []),
@@ -37,7 +38,6 @@ export default function ModelDetailTableOfContents({
         setScrollProgress(Math.min(100, Math.max(0, Math.round((window.scrollY / totalScroll) * 100))));
       }
 
-      // Check which section is in view
       const sectionElements = navItems
         .map((item) => document.getElementById(item.id))
         .filter((el): el is HTMLElement => el !== null);
