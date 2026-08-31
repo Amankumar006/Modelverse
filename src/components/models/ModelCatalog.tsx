@@ -1,6 +1,7 @@
 "use client";
 
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useEffect } from "react";
+import { usePathname } from "next/navigation";
 import { X, SearchX } from "lucide-react";
 import type { ModelRow } from "@/types/database";
 import ModelCard from "./ModelCard";
@@ -12,6 +13,8 @@ interface ModelCatalogProps {
   initialCategory?: string;
   initialProvider?: string;
   initialSearch?: string;
+  initialSourceType?: string;
+  initialSort?: string;
 }
 
 export default function ModelCatalog({
@@ -19,12 +22,15 @@ export default function ModelCatalog({
   initialCategory = "All",
   initialProvider = "All",
   initialSearch = "",
+  initialSourceType = "All",
+  initialSort = "newest",
 }: ModelCatalogProps) {
+  const pathname = usePathname();
   const [searchQuery, setSearchQuery] = useState(initialSearch);
   const [selectedCategory, setSelectedCategory] = useState(initialCategory);
   const [selectedProvider, setSelectedProvider] = useState(initialProvider);
-  const [selectedSourceType, setSelectedSourceType] = useState("All");
-  const [sortKey, setSortKey] = useState("newest");
+  const [selectedSourceType, setSelectedSourceType] = useState(initialSourceType);
+  const [sortKey, setSortKey] = useState(initialSort);
   const [viewMode, setViewMode] = useState<"grid" | "list">("grid");
   const [mobileDrawerOpen, setMobileDrawerOpen] = useState(false);
 
@@ -39,6 +45,31 @@ export default function ModelCatalog({
     if (searchQuery.trim()) count++;
     return count;
   }, [selectedCategory, selectedProvider, selectedSourceType, searchQuery]);
+
+  useEffect(() => {
+    const params = new URLSearchParams();
+    if (searchQuery) params.set("search", searchQuery);
+    if (selectedCategory !== "All") params.set("category", selectedCategory);
+    if (selectedProvider !== "All") params.set("provider", selectedProvider);
+    if (selectedSourceType !== "All") params.set("sourceType", selectedSourceType);
+    if (sortKey !== "newest") params.set("sort", sortKey);
+    const query = params.toString();
+    const newUrl = query ? `${pathname}?${query}` : pathname;
+    window.history.replaceState(null, "", newUrl);
+  }, [searchQuery, selectedCategory, selectedProvider, selectedSourceType, sortKey, pathname]);
+
+  useEffect(() => {
+    const handlePopState = () => {
+      const params = new URLSearchParams(window.location.search);
+      setSearchQuery(params.get("search") || "");
+      setSelectedCategory(params.get("category") || "All");
+      setSelectedProvider(params.get("provider") || "All");
+      setSelectedSourceType(params.get("sourceType") || "All");
+      setSortKey(params.get("sort") || "newest");
+    };
+    window.addEventListener("popstate", handlePopState);
+    return () => window.removeEventListener("popstate", handlePopState);
+  }, []);
 
   const clearAllFilters = () => {
     setSearchQuery("");

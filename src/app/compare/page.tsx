@@ -1,9 +1,10 @@
-import React from "react";
+import React, { Suspense } from "react";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 import { getModels } from "@/lib/supabase/models";
 import { BreadcrumbJsonLd } from "@/components/seo/JsonLd";
+import { CompareDashboard } from "@/components/compare/CompareDashboard";
 
 export const revalidate = 60;
 
@@ -53,59 +54,16 @@ export default async function ComparePage() {
             <ArrowLeft size={14} /> Back to Catalog
           </Link>
           <h1 className="text-3xl sm:text-4xl 2xl:text-5xl font-extrabold text-[var(--text)] tracking-tight">
-            Model Comparison Matrix
+            Model Showdown & Comparison Engine
           </h1>
           <p className="text-xs sm:text-sm text-[var(--muted)] mt-1.5 max-w-2xl leading-relaxed">
-            Side-by-side technical evaluation of frontier models, parameter sizing, context window capacity, and cost tiers.
+            Select up to 3 models to perform a side-by-side technical evaluation across benchmarks, memory math, inference economics, and architectural matrices.
           </p>
         </div>
 
-        {models.length === 0 ? (
-          <div className="py-20 text-center flex flex-col items-center justify-center bg-[var(--card-bg)] rounded-[var(--radius-card)] border border-[var(--muted)]/10 p-8">
-            <p className="text-sm font-semibold text-[var(--text)]">No models available for comparison yet</p>
-            <p className="text-xs text-[var(--muted)] mt-1">Models will appear here once seeded or ingested.</p>
-          </div>
-        ) : (
-          <div className="overflow-x-auto rounded-[var(--radius-card)] border border-[var(--muted)]/10 bg-[var(--card-bg)] shadow-[var(--shadow-card)]">
-            <table className="w-full text-left text-xs sm:text-sm">
-              <thead>
-                <tr className="border-b border-[var(--muted)]/10 bg-[var(--accent-soft)]/20 text-[var(--text)]">
-                  <th className="p-4 font-bold">Model</th>
-                  <th className="p-4 font-bold">Provider</th>
-                  <th className="p-4 font-bold">Context Window</th>
-                  <th className="p-4 font-bold">Parameters</th>
-                  <th className="p-4 font-bold">Category</th>
-                  <th className="p-4 font-bold">Details</th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-[var(--muted)]/10 text-[var(--text)]">
-                {models.map((m) => (
-                  <tr key={m.id} className="hover:bg-[var(--bg)] transition-colors">
-                    <td className="p-4 font-semibold">{m.name}</td>
-                    <td className="p-4 text-[var(--accent)] font-medium">{m.provider}</td>
-                    <td className="p-4 font-mono tabular-nums">
-                      {m.context_window ? `${m.context_window.toLocaleString("en-US")} tokens` : "Standard"}
-                    </td>
-                    <td className="p-4 font-mono">{m.parameters || "Proprietary"}</td>
-                    <td className="p-4">
-                      <span className="px-2.5 py-0.5 rounded-full text-[10px] font-medium bg-[var(--tag-bg)] text-[var(--tag-text)] uppercase">
-                        {m.category || "LLM"}
-                      </span>
-                    </td>
-                    <td className="p-4">
-                      <Link
-                        href={`/models/${m.slug}`}
-                        className="text-xs font-bold text-[var(--accent)] hover:underline"
-                      >
-                        View Specs &rarr;
-                      </Link>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        )}
+        <Suspense fallback={<div className="h-96 w-full animate-pulse bg-[var(--card-bg)] rounded-xl border border-[var(--muted)]/10" />}>
+          <CompareDashboard models={models} />
+        </Suspense>
       </main>
     </>
   );

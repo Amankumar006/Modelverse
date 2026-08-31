@@ -73,6 +73,20 @@ export default function CatalogToolbar({
   onOpenMobileFilters,
   onClearAllFilters,
 }: CatalogToolbarProps) {
+  const searchInputRef = React.useRef<HTMLInputElement>(null);
+
+  React.useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (((e.metaKey || e.ctrlKey) && e.key === "k") || e.key === "/") {
+        if (e.target instanceof HTMLInputElement || e.target instanceof HTMLTextAreaElement) return;
+        e.preventDefault();
+        searchInputRef.current?.focus();
+      }
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, []);
+
   const hasActiveFilters =
     selectedCategory !== "All" ||
     selectedProvider !== "All" ||
@@ -87,8 +101,9 @@ export default function CatalogToolbar({
         <div className="relative flex-1">
           <Search size={14} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-[var(--muted)] pointer-events-none" />
           <input
+            ref={searchInputRef}
             type="text"
-            placeholder="Search 376+ foundation models by name, provider, or architecture..."
+            placeholder="Search 376+ models by name, lab... (Press '/' or 'Cmd+K')"
             value={searchQuery}
             onChange={(e) => onSearchChange(e.target.value)}
             className="w-full bg-[var(--card-bg)] border border-[var(--muted)]/15 rounded-[var(--radius-control)] pl-9 pr-8 py-2.5 text-xs text-[var(--text)] placeholder:text-[var(--muted)]/70 focus:outline-none focus:border-[var(--accent)] transition-all shadow-[var(--shadow-card)] font-sans"

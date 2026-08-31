@@ -39,5 +39,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.7,
   }));
 
-  return [...staticRoutes, ...modelRoutes, ...articleRoutes];
+  const modelCategories = Array.from(new Set(models.map(m => m.category).filter(Boolean)));
+  const categoryRoutes: MetadataRoute.Sitemap = modelCategories.map((c) => ({
+    url: `${baseUrl}/models?category=${encodeURIComponent(c!)}`,
+    lastModified: new Date(),
+    changeFrequency: "daily",
+    priority: 0.7,
+  }));
+
+  return [...staticRoutes, ...modelRoutes, ...articleRoutes, ...categoryRoutes];
 }

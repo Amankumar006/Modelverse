@@ -71,6 +71,8 @@ export default async function ModelsPage({ searchParams }: ModelsPageProps) {
   const initialSearch = typeof resolved.search === "string" ? resolved.search : "";
   const initialCategory = typeof resolved.category === "string" ? resolved.category : "All";
   const initialProvider = typeof resolved.provider === "string" ? resolved.provider : "All";
+  const initialSourceType = typeof resolved.sourceType === "string" ? resolved.sourceType : "All";
+  const initialSort = typeof resolved.sort === "string" ? resolved.sort : "newest";
 
   // Fetch all active foundation models from database
   const { models } = await getModels({ limit: 1000, isActive: true });
@@ -107,6 +109,8 @@ export default async function ModelsPage({ searchParams }: ModelsPageProps) {
           initialSearch={initialSearch}
           initialCategory={initialCategory}
           initialProvider={initialProvider}
+          initialSourceType={initialSourceType}
+          initialSort={initialSort}
         />
       </main>
     </>

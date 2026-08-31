@@ -1,36 +1,21 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+## Audit & Implementation Summary
 
-## Getting Started
+**1. API Routes (Reliability & Performance):**
+- Unified schema validation using `Zod` in `models`, `search`, and `articles` API routes.
+- Enforced HTTP 400 for bad parameters and generic 500 for internal errors.
+- Added explicit CORS headers `Access-Control-Allow-Origin: *` to enable public programmatic access.
+- Embedded strict caching rules: `Cache-Control: public, s-maxage=60, stale-while-revalidate=300`.
 
-First, run the development server:
+**2. Error Boundaries & Fallbacks:**
+- Generated `src/app/global-error.tsx` to handle fatal system crashes, complete with a clean UI, `lucide-react` icons, and a `Recover System` retry mechanism.
+- Verified `error.tsx` and `not-found.tsx` to ensure friendly error recovery for Supabase hiccups or 404s.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+**3. OpenGraph Dynamic Images:**
+- Enhanced `models/[slug]/opengraph-image.tsx` and `articles/[slug]/opengraph-image.tsx` to include elegant UI layouts.
+- Replaced basic fonts with fallback stacks `fontFamily: '"Inter", system-ui, -apple-system, sans-serif'`.
+- Placed clean visual identifiers (e.g., dynamic Provider initial/logos, parameter tags, watermark).
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+**4. Feeds and SEO Metadata:**
+- Refactored `feed.xml/route.ts` to index both Models and Articles, sorting sequentially by update timestamp.
+- Updated `sitemap.ts` to dynamically calculate and expose Category URLs based on available active models.
+- Mapped `<lastmod>` accurately to `updated_at` (falling back to `created_at` or `published_at`).
