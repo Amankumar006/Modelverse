@@ -28,6 +28,7 @@ const SUPABASE_KEY =
 
 const SERVICE_ACCOUNT_EMAIL = process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL;
 const SERVICE_ACCOUNT_PRIVATE_KEY = process.env.GOOGLE_SERVICE_ACCOUNT_PRIVATE_KEY?.replace(/\\n/g, "\n");
+const INDEXNOW_KEY = process.env.INDEXNOW_KEY;
 
 /**
  * Generate Google OAuth2 JWT Bearer Token without external packages
@@ -100,9 +101,30 @@ async function pushUrlToGoogle(url, accessToken, type = "URL_UPDATED") {
   return { ok: res.ok, status: res.status, data };
 }
 
+/**
+ * Publish batch of URLs to IndexNow (Bing, Yandex, Seznam)
+ */
+async function pushToIndexNow(host, key, urlList) {
+  try {
+    const res = await fetch("https://api.indexnow.org/indexnow", {
+      method: "POST",
+      headers: { "Content-Type": "application/json; charset=utf-8" },
+      body: JSON.stringify({
+        host,
+        key,
+        keyLocation: `https://${host}/${key}.txt`,
+        urlList,
+      }),
+    });
+    return { ok: res.ok, status: res.status };
+  } catch (err) {
+    return { ok: false, status: 500, error: err.message };
+  }
+}
+
 async function main() {
   console.log("==================================================");
-  console.log("   🚀 MODELVERSE GOOGLE INDEXING AUTO-PUSH       ");
+  console.log("   🚀 MODELVERSE SEARCH INDEXING AUTO-PUSH       ");
   console.log("==================================================");
 
   if (!SUPABASE_URL || !SUPABASE_KEY) {
@@ -141,12 +163,35 @@ async function main() {
     `${SITE_URL}/trending`,
     `${SITE_URL}/timeline`,
     `${SITE_URL}/compare`,
+    `${SITE_URL}/methodology`,
+    `${SITE_URL}/about`,
+    `${SITE_URL}/submit`,
+    `${SITE_URL}/privacy`,
+    `${SITE_URL}/terms`,
+    `${SITE_URL}/security`,
     ...models.map((m) => `${SITE_URL}/models/${m.slug}`),
     ...articles.map((a) => `${SITE_URL}/articles/${a.slug}`),
   ];
 
-  console.log(`📦 Discovered ${urlsToPush.length} total URLs (${models.length} models, ${articles.length} articles, 6 core pages).`);
+  console.log(`📦 Discovered ${urlsToPush.length} total URLs (${models.length} models, ${articles.length} articles, 12 core pages).`);
 
+  // 1. IndexNow Push (if configured)
+  if (INDEXNOW_KEY) {
+    try {
+      const urlHost = new URL(SITE_URL).hostname;
+      console.log(`\n⚡ Submitting ${urlsToPush.length} URLs to IndexNow (Bing / Yandex / Seznam)...`);
+      const indexNowRes = await pushToIndexNow(urlHost, INDEXNOW_KEY, urlsToPush);
+      if (indexNowRes.ok) {
+        console.log(`✅ IndexNow push successful! (HTTP ${indexNowRes.status})`);
+      } else {
+        console.log(`⚠️ IndexNow response: HTTP ${indexNowRes.status}`);
+      }
+    } catch (inErr) {
+      console.warn(`⚠️ IndexNow error: ${inErr.message}`);
+    }
+  }
+
+  // 2. Google Indexing API Push
   if (!SERVICE_ACCOUNT_EMAIL || !SERVICE_ACCOUNT_PRIVATE_KEY) {
     console.log("\n⚠️ Note: GOOGLE_SERVICE_ACCOUNT_EMAIL or GOOGLE_SERVICE_ACCOUNT_PRIVATE_KEY is not configured yet in .env.local.");
     console.log("👉 Dry-run mode completed successfully. To enable live auto-push to Google Indexing API:");
@@ -154,8 +199,8 @@ async function main() {
     console.log("   2. Add the Service Account email as an Owner in Google Search Console.");
     console.log("   3. Set GOOGLE_SERVICE_ACCOUNT_EMAIL and GOOGLE_SERVICE_ACCOUNT_PRIVATE_KEY in .env.local\n");
     console.log("Sample URLs ready for indexing:");
-    urlsToPush.slice(0, 8).forEach((u) => console.log(`   - ${u}`));
-    console.log(`   ... and ${urlsToPush.length - 8} more URLs.\n`);
+    urlsToPush.slice(0, 10).forEach((u) => console.log(`   - ${u}`));
+    console.log(`   ... and ${urlsToPush.length - 10} more URLs.\n`);
     return;
   }
 

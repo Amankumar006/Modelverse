@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "index:push": "node scripts/google-index-push.mjs"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.112.4",

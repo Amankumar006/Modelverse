@@ -9,6 +9,16 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "/terms",
   },
+  openGraph: {
+    title: "Terms of Service — Modelverse",
+    description: "Terms of service, acceptable usage guidelines, benchmark accuracy disclaimers, and advertising policies for Modelverse.",
+    url: "/terms",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Terms of Service — Modelverse",
+    description: "Terms of service, acceptable usage guidelines, benchmark accuracy disclaimers, and advertising policies for Modelverse.",
+  },
 };
 
 export default function TermsPage() {
