@@ -1,7 +1,20 @@
 "use client";
 
 import React, { useEffect, useState, useMemo } from "react";
-import { ArrowUp, Sparkles, Cpu, BrainCircuit, BarChart3, DollarSign, Terminal, Link2 } from "lucide-react";
+import {
+  ArrowUp,
+  Sparkles,
+  Cpu,
+  BrainCircuit,
+  BarChart3,
+  DollarSign,
+  Terminal,
+  Link2,
+  Scale,
+  Server,
+  GitCompare,
+  HelpCircle,
+} from "lucide-react";
 
 interface TocItem {
   id: string;
@@ -23,11 +36,15 @@ export default function ModelDetailTableOfContents({
     { id: "overview", label: "Overview & Identity", icon: <Sparkles size={13} /> },
     { id: "specifications", label: "Architecture & Specs", icon: <Cpu size={13} /> },
     { id: "analysis", label: "Architectural Analysis", icon: <BrainCircuit size={13} /> },
+    { id: "tradeoffs", label: "Strengths & Trade-Offs", icon: <Scale size={13} /> },
+    { id: "compatibility", label: "Hardware & Runtimes", icon: <Server size={13} /> },
     ...(hasBenchmarks
       ? [{ id: "benchmarks", label: "Verified Benchmarks", icon: <BarChart3 size={13} /> }]
       : []),
-    { id: "pricing", label: "Commercial Pricing", icon: <DollarSign size={13} /> },
+    { id: "pricing", label: "Pricing & Budget Estimator", icon: <DollarSign size={13} /> },
+    { id: "alternatives", label: "Alternative Models", icon: <GitCompare size={13} /> },
     { id: "quickstart", label: "API Quickstart", icon: <Terminal size={13} /> },
+    { id: "faq", label: "Frequently Asked Questions", icon: <HelpCircle size={13} /> },
     { id: "sources", label: "Sources & Provenance", icon: <Link2 size={13} /> },
   ], [hasBenchmarks]);
 

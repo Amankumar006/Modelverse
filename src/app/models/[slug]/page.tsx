@@ -6,9 +6,13 @@ import { normalizeBenchmarks } from "@/lib/benchmarks";
 import ModelHeader from "@/components/models/ModelHeader";
 import LineageSpecSection from "@/components/models/LineageSpecSection";
 import ModelEditorialAnalysis from "@/components/models/ModelEditorialAnalysis";
+import ModelTradeoffsSection from "@/components/models/ModelTradeoffsSection";
+import ModelCompatibilityMatrix from "@/components/models/ModelCompatibilityMatrix";
 import PricingSection from "@/components/models/PricingSection";
 import BenchmarksSection from "@/components/models/BenchmarksSection";
+import ModelAlternativesSection from "@/components/models/ModelAlternativesSection";
 import QuickstartSection from "@/components/models/QuickstartSection";
+import ModelFaqSection from "@/components/models/ModelFaqSection";
 import SourcesSection from "@/components/models/SourcesSection";
 import ModelDetailTableOfContents from "@/components/models/ModelDetailTableOfContents";
 import { ModelJsonLd, BreadcrumbJsonLd } from "@/components/seo/JsonLd";
@@ -72,7 +76,10 @@ export default async function ModelDetailPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const model = await getModelBySlug(slug);
+  const [model, { models: allModels }] = await Promise.all([
+    getModelBySlug(slug),
+    getModels({ limit: 1000, isActive: true }),
+  ]);
 
   if (!model) {
     notFound();
@@ -109,6 +116,16 @@ export default async function ModelDetailPage({
               <ModelEditorialAnalysis model={model} />
             </div>
 
+            {/* Production Trade-Offs & Capability Balance */}
+            <div id="tradeoffs" className="scroll-mt-28">
+              <ModelTradeoffsSection model={model} />
+            </div>
+
+            {/* Hardware Sizing & Serving Compatibility Matrix */}
+            <div id="compatibility" className="scroll-mt-28">
+              <ModelCompatibilityMatrix model={model} />
+            </div>
+
             {/* Verified Benchmarks Visualizer */}
             {hasBenchmarks && (
               <div id="benchmarks" className="scroll-mt-28">
@@ -116,14 +133,24 @@ export default async function ModelDetailPage({
               </div>
             )}
 
-            {/* Commercial Rates & API Pricing */}
+            {/* Commercial Rates, Pricing & Interactive Cost Calculator */}
             <div id="pricing" className="scroll-mt-28">
               <PricingSection model={model} />
+            </div>
+
+            {/* Similar Frontier Models & Alternatives */}
+            <div id="alternatives" className="scroll-mt-28">
+              <ModelAlternativesSection currentModel={model} allModels={allModels} />
             </div>
 
             {/* API Multi-Language Quickstart */}
             <div id="quickstart" className="scroll-mt-28">
               <QuickstartSection model={model} />
+            </div>
+
+            {/* Visual Frequently Asked Questions */}
+            <div id="faq" className="scroll-mt-28">
+              <ModelFaqSection model={model} />
             </div>
 
             {/* Sources & Provenance Links */}
