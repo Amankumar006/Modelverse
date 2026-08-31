@@ -1,0 +1,55 @@
+name: Publish Articles Pipeline
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'content/articles/**'
+      - 'public/images/articles/**'
+  workflow_dispatch:
+    inputs:
+      force_all:
+        description: 'Force sync all articles'
+        type: boolean
+        default: false
+
+jobs:
+  publish:
+    name: Validate, Sync & Index Articles
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      - name: Install Dependencies
+        run: npm ci
+
+      - name: Pre-Flight Markdown & Frontmatter Validation
+        run: npx tsx scripts/validate-articles.ts
+
+      - name: Sync Articles to Supabase Database
+        env:
+          NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+          NEXT_PUBLIC_SUPABASE_ANON_KEY: ${{ secrets.NEXT_PUBLIC_SUPABASE_ANON_KEY }}
+          REVALIDATION_SECRET: ${{ secrets.REVALIDATION_SECRET }}
+          SITE_URL: https://www.themodelverse.in
+        run: node scripts/sync-articles.mjs
+
+      - name: Ping Search Engines for Real-Time Indexing
+        if: env.GOOGLE_SERVICE_ACCOUNT_KEY != '' || env.INDEXNOW_KEY != ''
+        env:
+          GOOGLE_SERVICE_ACCOUNT_KEY: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_KEY }}
+          INDEXNOW_KEY: ${{ secrets.INDEXNOW_KEY }}
+          SITE_URL: https://www.themodelverse.in
+        run: node scripts/indexing/ping-search-engines.mjs
