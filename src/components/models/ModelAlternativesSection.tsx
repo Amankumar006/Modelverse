@@ -14,22 +14,47 @@ export default function ModelAlternativesSection({
   currentModel,
   allModels,
 }: ModelAlternativesSectionProps) {
-  // Find alternatives in same category first with provider diversity and high relevance
+  const getTier = (pricing: Record<string, unknown> | null, params: string) => {
+    const input = typeof pricing?.input_per_1m === "number" ? pricing.input_per_1m : parseFloat(String(pricing?.input_per_1m || "0")) || 0;
+    if (input > 10) return "frontier";
+    if (input > 2 || (params && params.includes("70B"))) return "heavy";
+    if (input > 0.5 || (params && params.includes("30B"))) return "mid";
+    return "lite";
+  };
+
+  const getModality = (m: ModelRow) => m.category || "LLM";
+
+  const curPricing = (typeof currentModel.pricing === "object" && currentModel.pricing !== null ? currentModel.pricing : {}) as Record<string, number | string>;
+  const curTier = getTier(curPricing, currentModel.parameters || "");
+  const curModality = getModality(currentModel);
+
   const candidates = allModels
     .filter((m) => m.id !== currentModel.id)
     .sort((a, b) => {
-      // 1. Prioritize same category
-      const aSameCat = a.category === currentModel.category ? 1 : 0;
-      const bSameCat = b.category === currentModel.category ? 1 : 0;
-      if (aSameCat !== bSameCat) return bSameCat - aSameCat;
+      let scoreA = 0;
+      let scoreB = 0;
 
-      // 2. Prioritize different providers for comparative insight
-      const aDiffProv = a.provider !== currentModel.provider ? 1 : 0;
-      const bDiffProv = b.provider !== currentModel.provider ? 1 : 0;
-      if (aDiffProv !== bDiffProv) return bDiffProv - aDiffProv;
+      const aPricing = (typeof a.pricing === "object" && a.pricing !== null ? a.pricing : {}) as Record<string, number | string>;
+      const bPricing = (typeof b.pricing === "object" && b.pricing !== null ? b.pricing : {}) as Record<string, number | string>;
 
-      // 3. Prioritize latest release dates
-      return (b.release_date || b.created_at || "").localeCompare(a.release_date || a.created_at || "");
+      // 1. Same Capability Tier (Price-performance matching)
+      if (getTier(aPricing, a.parameters || "") === curTier) scoreA += 4;
+      if (getTier(bPricing, b.parameters || "") === curTier) scoreB += 4;
+
+      // 2. Same Modality
+      if (getModality(a) === curModality) scoreA += 3;
+      if (getModality(b) === curModality) scoreB += 3;
+
+      // 3. Cross-provider alternatives (diversity)
+      if (a.provider !== currentModel.provider) scoreA += 2;
+      if (b.provider !== currentModel.provider) scoreB += 2;
+
+      // 4. Release Date fallback
+      const dateA = new Date(a.release_date || a.created_at || "1970-01-01").getTime();
+      const dateB = new Date(b.release_date || b.created_at || "1970-01-01").getTime();
+
+      if (scoreA !== scoreB) return scoreB - scoreA;
+      return dateB - dateA;
     })
     .slice(0, 3);
 
