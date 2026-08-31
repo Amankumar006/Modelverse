@@ -15,6 +15,7 @@ import {
   BookOpen,
   FileText,
   Terminal,
+  DollarSign,
   Cpu,
   Globe,
 } from "lucide-react";
@@ -81,6 +82,18 @@ export default function ModelHeader({ model }: ModelHeaderProps) {
 
   const providerLogo = getProviderLogo(model.provider);
 
+  const pricing = (typeof model.pricing === "object" && model.pricing !== null ? model.pricing : {}) as Record<string, unknown>;
+  const rawIn = typeof pricing.input_per_1m === "number" ? pricing.input_per_1m : parseFloat(String(pricing.input_per_1m || "0")) || 0;
+  const rawOut = typeof pricing.output_per_1m === "number" ? pricing.output_per_1m : parseFloat(String(pricing.output_per_1m || "0")) || 0;
+  const isOpenWeights = Boolean(model.source_type && model.source_type.toLowerCase().includes("open"));
+  
+  let pricingText = "Enterprise Tier";
+  if (rawIn > 0 || rawOut > 0) {
+    pricingText = `$${rawIn}/1M in · $${rawOut}/1M out`;
+  } else if (isOpenWeights) {
+    pricingText = "Free ($0 API Tokens)";
+  }
+
   const handleCopySlug = async () => {
     await navigator.clipboard.writeText(model.slug);
     setCopied(true);
@@ -136,6 +149,15 @@ export default function ModelHeader({ model }: ModelHeaderProps) {
             <span className="inline-flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-500 font-semibold border border-emerald-500/20">
               <ShieldCheck size={11} /> Verified Specs
             </span>
+
+            <a
+              href="#pricing"
+              className="inline-flex items-center gap-1 text-[10px] px-2.5 py-0.5 rounded-full bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 font-mono font-bold border border-emerald-500/20 hover:bg-emerald-500/20 transition-colors cursor-pointer"
+              title="Jump to Commercial Rates & Cost Calculator"
+            >
+              <DollarSign size={11} />
+              <span>{pricingText}</span>
+            </a>
           </div>
 
           {/* Quick Utility Actions (Copy Slug & Release Date) */}
