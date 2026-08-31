@@ -147,6 +147,11 @@ export function ModelJsonLd({ model }: { model: ModelRow }) {
   };
 
   // Build FAQ items for Google Rich Snippets
+  const isOpenWeights = Boolean(model.source_type && model.source_type.toLowerCase().includes("open"));
+  const contextNum = model.context_window || 8192;
+  const isMoE = Boolean(model.active_parameters);
+
+  // Build FAQ items for Google Rich Snippets matching visible DOM
   const faqSchema = {
     "@context": "https://schema.org",
     "@type": "FAQPage",
@@ -156,17 +161,37 @@ export function ModelJsonLd({ model }: { model: ModelRow }) {
         name: `What is ${model.name}'s context window capacity?`,
         acceptedAnswer: {
           "@type": "Answer",
-          text: model.context_window
-            ? `${model.name} supports a maximum context window of ${model.context_window.toLocaleString()} tokens.`
-            : `${model.name} operates with standard token context parameters.`,
+          text: `${model.name} provides a certified context window of ${contextNum.toLocaleString()} tokens.`,
         },
       },
       {
         "@type": "Question",
-        name: `Who developed ${model.name} and what is its architecture?`,
+        name: `Who developed ${model.name} and what is its neural architecture?`,
         acceptedAnswer: {
           "@type": "Answer",
-          text: `${model.name} was developed by ${model.provider}. It features ${model.parameters || "frontier"} parameters in the ${model.category || "LLM"} domain.`,
+          text: `${model.name} was created by ${model.provider}. It features a ${
+            isMoE ? `Sparse Mixture-of-Experts (${model.active_parameters} active parameters per token)` : "Dense Transformer"
+          } architecture with a total parameter capacity of ${model.parameters || "proprietary scale"}.`,
+        },
+      },
+      {
+        "@type": "Question",
+        name: `Can ${model.name} be run locally on private hardware?`,
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: isOpenWeights
+            ? `Yes. ${model.name} is an open-weights model compatible with local inference frameworks such as vLLM, Ollama, SGLang, and Llama.cpp.`
+            : `No. ${model.name} is a proprietary cloud-hosted model accessible via official vendor REST API endpoints.`,
+        },
+      },
+      {
+        "@type": "Question",
+        name: `How much does ${model.name} cost per million tokens?`,
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: pricing.input_per_1m !== undefined
+            ? `Standard API rates for ${model.name} are $${pricing.input_per_1m} per 1M input tokens and $${pricing.output_per_1m ?? "—"} per 1M output tokens.`
+            : `${model.name} is available under open distribution licenses for free direct checkpoint download.`,
         },
       },
       benchmarks.length > 0
@@ -175,7 +200,8 @@ export function ModelJsonLd({ model }: { model: ModelRow }) {
             name: `What are ${model.name}'s verified benchmark scores?`,
             acceptedAnswer: {
               "@type": "Answer",
-              text: `${model.name} achieves verified evaluation scores of: ${benchmarks
+              text: `In standardized evaluations, ${model.name} achieved: ${benchmarks
+                .slice(0, 4)
                 .map((b) => `${b.name}: ${b.score}${typeof b.score === "number" ? "%" : ""}`)
                 .join(", ")}.`,
             },
