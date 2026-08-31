@@ -33,7 +33,8 @@ export default function Footer() {
       links: [
         { label: "Latest Articles", href: "/articles" },
         { label: "Model Comparisons", href: "/compare" },
-        { label: "About Modelverse", href: "/about" },
+        { label: "Methodology", href: "/methodology" },
+        { label: "RSS Feed", href: "/news/feed.xml" },
       ],
     },
     {
@@ -68,7 +69,7 @@ export default function Footer() {
                 <li key={`link-${colIdx}-${linkIdx}`}>
                   <Link
                     href={link.href}
-                    target={link.href.startsWith("http") ? "_blank" : undefined}
+                    target={link.href.startsWith("http") || link.href.endsWith(".xml") ? "_blank" : undefined}
                     rel={link.href.startsWith("http") ? "noopener noreferrer" : undefined}
                     className="text-[var(--muted)] hover:text-[var(--accent)] transition-colors text-xs inline-flex items-center gap-1 font-medium"
                   >
@@ -85,9 +86,12 @@ export default function Footer() {
       {/* Bottom Bar */}
       <div className="max-w-7xl 2xl:max-w-[1600px] 3xl:max-w-[1920px] 4xl:max-w-[2400px] mx-auto border-t border-[var(--muted)]/10 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-[var(--muted)] font-mono">
         <p>&copy; {currentYear} Modelverse. All rights reserved.</p>
-        <div className="flex items-center gap-6">
+        <div className="flex flex-wrap items-center gap-6">
           <Link href="/about" className="hover:text-[var(--text)] transition-colors">
             About
+          </Link>
+          <Link href="/methodology" className="hover:text-[var(--text)] transition-colors">
+            Methodology
           </Link>
           <Link href="/terms" className="hover:text-[var(--text)] transition-colors">
             Terms

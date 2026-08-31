@@ -3,6 +3,7 @@
 import React from "react";
 import Link from "next/link";
 import { Cpu, Tag, Rss, ArrowUpRight } from "lucide-react";
+import AdSenseUnit from "@/components/ads/AdSenseUnit";
 
 const REFERENCED_MODELS = [
   { name: "DeepSeek-R1", slug: "deepseek-r1", provider: "DeepSeek", category: "Reasoning" },
@@ -49,6 +50,9 @@ export default function ArticlesSidebar() {
           ))}
         </div>
       </div>
+
+      {/* Responsive AdSense Unit in Sidebar */}
+      <AdSenseUnit slotId="sidebar-articles-slot" format="rectangle" minHeight={250} />
 
       {/* Research Taxonomy Themes */}
       <div className="p-5 rounded-[var(--radius-card)] bg-[var(--card-bg)] border border-[var(--muted)]/10 shadow-[var(--shadow-card)] space-y-3">
