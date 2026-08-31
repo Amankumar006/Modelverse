@@ -6,6 +6,19 @@ import { ArrowLeft, Lock, ShieldCheck } from "lucide-react";
 export const metadata: Metadata = {
   title: "Security & Vulnerability Disclosure — Modelverse",
   description: "Modelverse security standards, database protection, and responsible disclosure policy.",
+  alternates: {
+    canonical: "/security",
+  },
+  openGraph: {
+    title: "Security & Vulnerability Disclosure — Modelverse",
+    description: "Modelverse security standards, database protection, and responsible disclosure policy.",
+    url: "/security",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Security & Vulnerability Disclosure — Modelverse",
+    description: "Modelverse security standards, database protection, and responsible disclosure policy.",
+  },
 };
 
 export default function SecurityPage() {

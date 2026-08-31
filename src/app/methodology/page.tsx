@@ -10,6 +10,18 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "/methodology",
   },
+  openGraph: {
+    title: "Curation Methodology & Benchmarking Whitepaper — Modelverse",
+    description:
+      "Comprehensive whitepaper detailing Modelverse's data provenance protocols, benchmark normalization algorithms, and foundation model taxonomy standards.",
+    url: "/methodology",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Curation Methodology & Benchmarking Whitepaper — Modelverse",
+    description:
+      "Comprehensive whitepaper detailing Modelverse's data provenance protocols, benchmark normalization algorithms, and foundation model taxonomy standards.",
+  },
 };
 
 const GLOSSARY_TERMS = [

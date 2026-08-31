@@ -10,6 +10,18 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "/about",
   },
+  openGraph: {
+    title: "About Modelverse — The Open Foundation Model Catalog",
+    description:
+      "Learn about Modelverse's mission to provide an open, transparent, and fact-checked archive of AI foundation models.",
+    url: "/about",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "About Modelverse — The Open Foundation Model Catalog",
+    description:
+      "Learn about Modelverse's mission to provide an open, transparent, and fact-checked archive of AI foundation models.",
+  },
 };
 
 export default function AboutPage() {
