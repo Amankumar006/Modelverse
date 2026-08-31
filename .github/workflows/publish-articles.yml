@@ -38,6 +38,7 @@ jobs:
         run: npx tsx scripts/validate-articles.ts
 
       - name: Sync Articles to Supabase Database
+        id: sync
         env:
           NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
           SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
@@ -47,9 +48,9 @@ jobs:
         run: node scripts/sync-articles.mjs
 
       - name: Ping Search Engines for Real-Time Indexing
-        if: env.GOOGLE_SERVICE_ACCOUNT_KEY != '' || env.INDEXNOW_KEY != ''
+        if: (env.GOOGLE_SERVICE_ACCOUNT_JSON != '' || env.INDEXNOW_KEY != '') && steps.sync.outputs.synced_urls != ''
         env:
-          GOOGLE_SERVICE_ACCOUNT_KEY: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_KEY }}
+          GOOGLE_SERVICE_ACCOUNT_JSON: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_JSON }}
           INDEXNOW_KEY: ${{ secrets.INDEXNOW_KEY }}
           SITE_URL: https://www.themodelverse.in
-        run: node scripts/indexing/ping-search-engines.mjs
+        run: node scripts/indexing/ping-search-engines.mjs URL_UPDATED ${{ steps.sync.outputs.synced_urls }}

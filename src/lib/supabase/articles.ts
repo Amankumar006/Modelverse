@@ -68,7 +68,7 @@ async function fetchArticlesFromDb(options: GetArticlesOptions): Promise<GetArti
 }
 
 export async function getArticles(options: GetArticlesOptions = {}): Promise<GetArticlesResult> {
-  const cacheKey = `articles-${options.category || ''}-${options.search || ''}-${options.limit || 20}-${options.offset || 0}`;
+  const cacheKey = `articles-${options.category || ''}-${options.search || ''}-${options.limit || 20}-${options.offset || 0}-${options.isPublished ?? true}`;
   return unstable_cache(
     () => fetchArticlesFromDb(options),
     [cacheKey],
