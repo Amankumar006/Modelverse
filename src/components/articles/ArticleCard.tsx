@@ -3,7 +3,7 @@
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowRight, Calendar, Clock, Sparkles } from "lucide-react";
+import { ArrowRight, Calendar, Clock } from "lucide-react";
 import type { ArticleRow } from "@/types/database";
 import { calculateReadingTime } from "@/lib/reading-time";
 
@@ -26,19 +26,12 @@ export default function ArticleCard({ article }: ArticleCardProps) {
     <article className="group relative h-full rounded-[var(--radius-card)] bg-[var(--card-bg)] border border-[var(--muted)]/10 shadow-[var(--shadow-card)] hover-lift flex flex-col justify-between overflow-hidden">
       {/* Cover Image Container */}
       <div className="relative aspect-[16/9] w-full overflow-hidden bg-[var(--muted)]/10">
-        {article.cover_image ? (
-          <Image
-            src={article.cover_image}
-            alt={article.title}
-            fill
-            className="object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
-          />
-        ) : (
-          <div className="w-full h-full flex flex-col items-center justify-center bg-gradient-to-br from-[var(--accent-soft)]/20 to-[var(--card-bg)] text-[var(--accent)] p-4 text-center">
-            <Sparkles size={24} className="mb-1 opacity-70" />
-            <span className="text-xs font-bold">Research Brief</span>
-          </div>
-        )}
+        <Image
+          src={article.cover_image || "/images/articles/universal-cover.svg"}
+          alt={article.title}
+          fill
+          className="object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
+        />
 
         {/* Category Pill Badge */}
         <div className="absolute top-3 left-3 z-10">

@@ -15,7 +15,7 @@ const FrontmatterSchema = z.object({
   }),
   source_name: z.string().optional(),
   source_url: z.string().url().optional(),
-  cover_image: z.string().min(1, "Cover image is required"),
+  cover_image: z.string().optional(),
   tags: z.array(z.string()).min(1, "At least one tag is required"),
   published_at: z.union([
     z.string().datetime({ offset: true }),
@@ -24,6 +24,8 @@ const FrontmatterSchema = z.object({
   is_published: z.boolean(),
   reading_time: z.number().optional(), // Can be auto-calculated if missing
 });
+
+const DEFAULT_UNIVERSAL_COVER = '/images/articles/universal-cover.svg';
 
 async function validateArticles() {
   const articlesDir = path.join(process.cwd(), 'content/articles');
@@ -69,13 +71,15 @@ async function validateArticles() {
     slugs.add(frontmatter.slug);
 
     // 3. Validate Cover Image Existence (if local)
-    if (frontmatter.cover_image.startsWith('/')) {
-      const imagePath = path.join(process.cwd(), 'public', frontmatter.cover_image);
+    const rawCover = frontmatter.cover_image?.trim();
+    if (!rawCover || rawCover.toLowerCase().includes('placeholder')) {
+      console.log(`ℹ️ [Cover Image] ${file}: No custom cover provided. Universal poster (${DEFAULT_UNIVERSAL_COVER}) will be applied.`);
+    } else if (rawCover.startsWith('/')) {
+      const imagePath = path.join(process.cwd(), 'public', rawCover);
       try {
         await fs.access(imagePath);
       } catch {
-        console.error(`\n❌ Cover image not found for ${file}: ${frontmatter.cover_image}`);
-        hasErrors = true;
+        console.warn(`⚠️ [Cover Image Warning] ${file}: Image not found at "${rawCover}". Universal poster (${DEFAULT_UNIVERSAL_COVER}) will be used as fallback.`);
       }
     }
 
