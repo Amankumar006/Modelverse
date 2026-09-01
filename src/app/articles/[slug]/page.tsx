@@ -156,17 +156,15 @@ export default async function ArticleDetailPage({
         </header>
 
         {/* Hero Cover Image */}
-        {article.cover_image && (
-          <div className="relative aspect-[16/9] w-full rounded-[var(--radius-card)] overflow-hidden bg-[var(--muted)]/10 shadow-[var(--shadow-card)]">
-            <Image
-              src={article.cover_image}
-              alt={article.title}
-              fill
-              priority
-              className="object-cover"
-            />
-          </div>
-        )}
+        <div className="relative aspect-[16/9] w-full rounded-[var(--radius-card)] overflow-hidden bg-[var(--muted)]/10 shadow-[var(--shadow-card)]">
+          <Image
+            src={article.cover_image || "/images/articles/universal-cover.svg"}
+            alt={article.title}
+            fill
+            priority
+            className="object-cover"
+          />
+        </div>
 
         {/* Markdown Body Content */}
         <article className="prose dark:prose-invert max-w-none text-[var(--text)] leading-relaxed text-sm sm:text-base font-sans">

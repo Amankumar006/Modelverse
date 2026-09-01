@@ -60,7 +60,9 @@ async function syncArticles() {
       category: frontmatter.category || 'Architecture',
       source_name: typeof frontmatter.author === 'object' ? frontmatter.author.name : (frontmatter.source_name || 'Modelverse Intelligence'),
       source_url: frontmatter.source_url || null,
-      cover_image: frontmatter.cover_image || null,
+      cover_image: (frontmatter.cover_image && !frontmatter.cover_image.toLowerCase().includes('placeholder')) 
+        ? frontmatter.cover_image 
+        : '/images/articles/universal-cover.svg',
       is_published: frontmatter.is_published !== false,
       published_at: frontmatter.published_at instanceof Date 
         ? frontmatter.published_at.toISOString() 

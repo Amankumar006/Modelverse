@@ -1,0 +1,46 @@
+<svg viewBox="0 0 1200 630" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#12142A"/>
+      <stop offset="100%" stop-color="#1B1F3F"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#C9A15A" stop-opacity="0.16"/>
+      <stop offset="100%" stop-color="#C9A15A" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <circle cx="960" cy="200" r="320" fill="url(#glow)"/>
+
+  <!-- sparse connecting lines: model space plotted, not a dense mesh -->
+  <g stroke="#C9A15A" stroke-width="1" opacity="0.18">
+    <line x1="980" y1="90" x2="1050" y2="150"/>
+    <line x1="1050" y1="150" x2="1120" y2="220"/>
+    <line x1="890" y1="60" x2="980" y2="90"/>
+    <line x1="960" y1="230" x2="1080" y2="320"/>
+    <line x1="830" y1="140" x2="960" y2="230"/>
+  </g>
+
+  <!-- scattered points, denser upper-right, fading toward lower-left -->
+  <g fill="#5B6B99">
+    <circle cx="980" cy="90" r="3" opacity="0.9"/>
+    <circle cx="1050" cy="150" r="2" opacity="0.6"/>
+    <circle cx="890" cy="60" r="2.5" opacity="0.7"/>
+    <circle cx="1120" cy="220" r="3.5" fill="#C9A15A" opacity="1"/>
+    <circle cx="830" cy="140" r="2" opacity="0.5"/>
+    <circle cx="960" cy="230" r="2.5" opacity="0.8"/>
+    <circle cx="1080" cy="320" r="2" opacity="0.6"/>
+    <circle cx="720" cy="90" r="2" opacity="0.4"/>
+    <circle cx="1150" cy="80" r="2.5" opacity="0.7"/>
+    <circle cx="700" cy="220" r="2" opacity="0.35"/>
+    <circle cx="620" cy="60" r="1.8" opacity="0.3"/>
+    <circle cx="1030" cy="400" r="2" opacity="0.5"/>
+    <circle cx="870" cy="340" r="1.8" opacity="0.4"/>
+    <circle cx="560" cy="150" r="1.5" opacity="0.25"/>
+    <circle cx="1180" cy="340" r="2" opacity="0.45"/>
+  </g>
+
+  <!-- wordmark, bottom-left, alone -->
+  <text x="80" y="560" font-family="Georgia, 'Times New Roman', serif" font-size="44" fill="#EDEAE2" opacity="0.92">Modelverse</text>
+</svg>

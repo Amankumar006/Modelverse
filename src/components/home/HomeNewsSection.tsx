@@ -3,7 +3,7 @@
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowRight, Newspaper, Calendar, Clock, Sparkles } from "lucide-react";
+import { ArrowRight, Newspaper, Calendar, Clock } from "lucide-react";
 import type { ArticleRow } from "@/types/database";
 import { calculateReadingTime } from "@/lib/reading-time";
 
@@ -61,20 +61,13 @@ export default function HomeNewsSection({ articles }: HomeNewsSectionProps) {
             <article className="group relative w-full h-full rounded-[var(--radius-card)] bg-[var(--card-bg)] border border-[var(--muted)]/15 shadow-[var(--shadow-card)] hover-lift flex flex-col justify-between overflow-hidden">
               {/* Cover Image */}
               <div className="relative aspect-[16/10] sm:aspect-[16/9] w-full overflow-hidden bg-[var(--muted)]/10">
-                {featuredArticle.cover_image ? (
-                  <Image
-                    src={featuredArticle.cover_image}
-                    alt={featuredArticle.title}
-                    fill
-                    priority
-                    className="object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
-                  />
-                ) : (
-                  <div className="w-full h-full flex flex-col items-center justify-center bg-gradient-to-br from-[var(--accent-soft)]/20 to-[var(--card-bg)] text-[var(--accent)] p-6 text-center">
-                    <Sparkles size={32} className="mb-2 opacity-70" />
-                    <span className="text-sm font-bold">Featured Intelligence</span>
-                  </div>
-                )}
+                <Image
+                  src={featuredArticle.cover_image || "/images/articles/universal-cover.svg"}
+                  alt={featuredArticle.title}
+                  fill
+                  priority
+                  className="object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
+                />
 
                 {/* Subtle vignette overlay */}
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/20" />
@@ -153,18 +146,12 @@ export default function HomeNewsSection({ articles }: HomeNewsSectionProps) {
                 >
                   {/* Micro Thumbnail */}
                   <div className="relative w-24 sm:w-28 h-20 sm:h-24 rounded-[var(--radius-control)] overflow-hidden bg-[var(--muted)]/10 shrink-0">
-                    {article.cover_image ? (
-                      <Image
-                        src={article.cover_image}
-                        alt={article.title}
-                        fill
-                        className="object-cover group-hover:scale-105 transition-transform duration-300"
-                      />
-                    ) : (
-                      <div className="w-full h-full flex items-center justify-center bg-[var(--accent-soft)]/20 text-[var(--accent)]">
-                        <Sparkles size={16} />
-                      </div>
-                    )}
+                    <Image
+                      src={article.cover_image || "/images/articles/universal-cover.svg"}
+                      alt={article.title}
+                      fill
+                      className="object-cover group-hover:scale-105 transition-transform duration-300"
+                    />
                   </div>
 
                   {/* Content Column */}

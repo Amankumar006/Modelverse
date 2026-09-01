@@ -3,7 +3,7 @@
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowRight, Calendar, User, Clock, Sparkles } from "lucide-react";
+import { ArrowRight, Calendar, User, Clock } from "lucide-react";
 import type { ArticleRow } from "@/types/database";
 import { calculateReadingTime } from "@/lib/reading-time";
 
@@ -26,20 +26,13 @@ export default function FeaturedArticleHero({ article }: FeaturedArticleHeroProp
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-0 items-stretch">
         {/* Cover Image (7 cols on desktop) */}
         <div className="relative lg:col-span-7 aspect-[16/10] sm:aspect-[16/9] lg:aspect-auto min-h-[260px] lg:min-h-[380px] overflow-hidden bg-[var(--muted)]/10">
-          {article.cover_image ? (
-            <Image
-              src={article.cover_image}
-              alt={article.title}
-              fill
-              priority
-              className="object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
-            />
-          ) : (
-            <div className="w-full h-full flex flex-col items-center justify-center bg-gradient-to-br from-[var(--accent-soft)]/40 to-[var(--card-bg)] text-[var(--accent)] p-8 text-center">
-              <Sparkles size={36} className="mb-2 opacity-80" />
-              <span className="text-xl font-bold font-sans">Modelverse Intelligence Deep Dive</span>
-            </div>
-          )}
+          <Image
+            src={article.cover_image || "/images/articles/universal-cover.svg"}
+            alt={article.title}
+            fill
+            priority
+            className="object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
+          />
 
           {/* Category Tag Overlay */}
           <div className="absolute top-4 left-4 z-10">
