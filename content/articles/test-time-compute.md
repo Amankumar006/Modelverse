@@ -49,6 +49,9 @@ def generate_response(prompt: str, max_thinking_steps: int = 5):
     return model.generate_final_answer(prompt, current_thought)
 ```
 
-## Future Outlook
+## Future Outlook & Systems Trade-offs
 
-As inference optimization improves and hardware becomes more specialized, test-time compute will likely become the standard for tasks requiring deep logical deduction. The trade-off between latency and accuracy allows developers to tailor model performance to the specific needs of their applications.
+As inference optimization improves and hardware becomes more specialized, test-time compute will likely become the standard for tasks requiring deep logical deduction. 
+
+The primary trade-off shifts from parameter memory footprint to latency and tokens-per-second throughput. Systems running reasoning models must handle variable KV cache allocation and dynamic termination signals, paving the way for adaptive compute budgets where developers configure explicit reasoning depths depending on query complexity. This hybrid compute paradigm bridges the gap between fast conversational responses and formal verification systems.
+

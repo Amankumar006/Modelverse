@@ -7,7 +7,7 @@ const FrontmatterSchema = z.object({
   title: z.string().min(1, "Title is required"),
   slug: z.string().regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/, "Slug must be URL-friendly"),
   category: z.string().min(1, "Category is required"),
-  summary: z.string().min(140).max(160, "Summary must be 140-160 characters for SEO"),
+  summary: z.string().min(50, "Summary must be at least 50 characters").max(300, "Summary must not exceed 300 characters for SEO"),
   author: z.object({
     name: z.string(),
     role: z.string(),
