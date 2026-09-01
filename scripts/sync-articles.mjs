@@ -10,14 +10,17 @@ try {
   // Ignore if running in CI with process.env already set
 }
 
-const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL || process.env.SUPABASE_URL;
+const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL || process.env.SUPABASE_URL || 'https://zmfyclrjbiewmwqiswqk.supabase.co';
 const SUPABASE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
 const SITE_URL = process.env.SITE_URL || 'https://www.themodelverse.in';
 const REVALIDATION_SECRET = process.env.REVALIDATION_SECRET;
 
-if (!SUPABASE_URL || !SUPABASE_KEY) {
-  console.error('❌ Missing Supabase credentials in environment.');
-  process.exit(1);
+if (!SUPABASE_KEY) {
+  console.warn('⚠️ [Warning] SUPABASE_SERVICE_ROLE_KEY is not configured in GitHub Secrets / environment.');
+  console.warn('👉 To enable automated database syncing, add `SUPABASE_SERVICE_ROLE_KEY` to your GitHub Repository Secrets:');
+  console.warn('   Settings -> Secrets and variables -> Actions -> New repository secret');
+  console.warn('ℹ️ Skipping database sync step for now.');
+  process.exit(0);
 }
 
 const supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
