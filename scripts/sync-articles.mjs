@@ -2,6 +2,7 @@ import fs from 'fs/promises';
 import path from 'path';
 import matter from 'gray-matter';
 import { createClient } from '@supabase/supabase-js';
+import { extractSourcePoster, downloadAndCachePoster } from './download-article-posters.mjs';
 
 // Load local environment if running outside GitHub Actions
 try {
@@ -52,6 +53,23 @@ async function syncArticles() {
       continue;
     }
 
+    let finalCoverImage = '/images/articles/universal-cover.svg';
+    const explicitCover = frontmatter.cover_image;
+    
+    if (explicitCover && !explicitCover.toLowerCase().includes('placeholder')) {
+      finalCoverImage = explicitCover;
+    } else if (frontmatter.source_url) {
+      console.log(`🔍 Extracting poster for ${frontmatter.slug} from ${frontmatter.source_url}...`);
+      const extractedUrl = await extractSourcePoster(frontmatter.source_url);
+      if (extractedUrl) {
+        console.log(`⬇️ Downloading poster from ${extractedUrl}...`);
+        const localPath = await downloadAndCachePoster(extractedUrl, frontmatter.slug);
+        if (localPath) {
+          finalCoverImage = localPath;
+        }
+      }
+    }
+
     const payload = {
       slug: frontmatter.slug,
       title: frontmatter.title,
@@ -60,9 +78,7 @@ async function syncArticles() {
       category: frontmatter.category || 'Architecture',
       source_name: typeof frontmatter.author === 'object' ? frontmatter.author.name : (frontmatter.source_name || 'Modelverse Intelligence'),
       source_url: frontmatter.source_url || null,
-      cover_image: (frontmatter.cover_image && !frontmatter.cover_image.toLowerCase().includes('placeholder')) 
-        ? frontmatter.cover_image 
-        : '/images/articles/universal-cover.svg',
+      cover_image: finalCoverImage,
       is_published: frontmatter.is_published !== false,
       published_at: frontmatter.published_at instanceof Date 
         ? frontmatter.published_at.toISOString() 
