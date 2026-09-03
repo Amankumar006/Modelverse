@@ -1,13 +1,12 @@
 import React from "react";
 import type { Metadata } from "next";
-import Link from "next/link";
 import Image from "next/image";
 import { notFound } from "next/navigation";
-import { ArrowLeft, ExternalLink, Calendar, User } from "lucide-react";
-import ReactMarkdown from "react-markdown";
-import remarkGfm from "remark-gfm";
 import { getArticleBySlug, getArticles } from "@/lib/supabase/articles";
 import { ArticleJsonLd, BreadcrumbJsonLd } from "@/components/seo/JsonLd";
+import MediumArticleHeader from "@/components/articles/MediumArticleHeader";
+import MediumArticleBody from "@/components/articles/MediumArticleBody";
+import MediumArticleFooter from "@/components/articles/MediumArticleFooter";
 import AdSenseUnit from "@/components/ads/AdSenseUnit";
 
 export const revalidate = 60;
@@ -84,12 +83,9 @@ export default async function ArticleDetailPage({
     notFound();
   }
 
-  const formattedDate = new Date(article.published_at).toLocaleDateString("en-US", {
-    month: "long",
-    day: "numeric",
-    year: "numeric",
-    timeZone: "UTC",
-  });
+  // Fetch recent articles for the footer recommendation
+  const { articles: allArticles } = await getArticles({ limit: 4, isPublished: true });
+  const relatedArticles = allArticles.filter((a) => a.slug !== slug).slice(0, 2);
 
   const breadcrumbs = [
     { name: "Home", url: "/" },
@@ -97,113 +93,60 @@ export default async function ArticleDetailPage({
     { name: article.title, url: `/articles/${slug}` },
   ];
 
+  const coverImage = article.cover_image || "/images/articles/universal-cover.svg";
+  const isSvg = coverImage.endsWith(".svg");
+  const readingTime = Math.max(3, Math.round((article.content || "").split(/\s+/).length / 200));
+
   return (
     <>
       <BreadcrumbJsonLd items={breadcrumbs} />
       <ArticleJsonLd article={article} />
-      <main className="w-full max-w-4xl mx-auto px-4 sm:px-6 md:px-8 py-10 md:py-14 flex flex-col gap-8">
-        {/* Back Link */}
-        <Link
-          href="/articles"
-          className="inline-flex items-center gap-1.5 text-xs text-[var(--muted)] hover:text-[var(--text)] transition-colors font-medium self-start"
-        >
-          <ArrowLeft size={14} /> Back to Intelligence Hub
-        </Link>
 
-        {/* Article Header */}
-        <header className="space-y-4">
-          <div className="flex items-center gap-2">
-            <span className="px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider bg-[var(--accent)] text-[var(--accent-contrast)]">
-              {article.category || "AI News"}
-            </span>
+      <main className="w-full max-w-4xl mx-auto px-4 sm:px-6 md:px-8 py-8 md:py-12 flex flex-col items-center">
+        {/* Medium Header */}
+        <MediumArticleHeader
+          title={article.title}
+          summary={article.summary || undefined}
+          category={article.category || undefined}
+          sourceName={article.source_name || undefined}
+          sourceUrl={article.source_url || undefined}
+          publishedAt={article.published_at}
+          readingTime={readingTime}
+          slug={article.slug}
+        />
+
+        {/* Medium Hero Image & Caption */}
+        <figure className="w-full max-w-[728px] mx-auto my-6 sm:my-8">
+          <div className="relative aspect-[16/9] w-full rounded-2xl overflow-hidden bg-[var(--muted)]/10 shadow-[var(--shadow-card)] border border-[var(--muted)]/15">
+            <Image
+              src={coverImage}
+              alt={article.title}
+              fill
+              priority
+              unoptimized={isSvg}
+              className="object-cover"
+            />
           </div>
+          <figcaption className="text-center text-xs text-[var(--muted)] mt-3 font-sans tracking-wide">
+            Figure 1: Official research and architecture release visual · {article.source_name || "Modelverse Intelligence"}
+          </figcaption>
+        </figure>
 
-          <h1 className="text-2xl sm:text-4xl font-extrabold text-[var(--text)] tracking-tight leading-tight">
-            {article.title}
-          </h1>
+        {/* Medium Article Prose Body */}
+        <MediumArticleBody content={article.content} />
 
-          {article.summary && (
-            <p className="text-sm sm:text-base text-[var(--muted)] leading-relaxed font-normal">
-              {article.summary}
-            </p>
-          )}
+        {/* Medium Article Footer */}
+        <MediumArticleFooter
+          sourceName={article.source_name || undefined}
+          category={article.category || undefined}
+          slug={article.slug}
+          relatedArticles={relatedArticles}
+        />
 
-          <div className="flex flex-wrap items-center gap-4 text-xs text-[var(--muted)] pt-2 border-t border-[var(--muted)]/10 font-mono">
-            <span className="flex items-center gap-1.5">
-              <User size={13} className="text-[var(--accent)]" />
-              {article.source_name || "Modelverse Editorial"}
-            </span>
-            <span>•</span>
-            <span className="flex items-center gap-1.5">
-              <Calendar size={13} className="text-[var(--accent)]" />
-              {formattedDate}
-            </span>
-            {article.source_url && (
-              <>
-                <span>•</span>
-                <a
-                  href={article.source_url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1 text-[var(--accent)] hover:underline font-sans"
-                >
-                  <span>Original Source</span>
-                  <ExternalLink size={12} />
-                </a>
-              </>
-            )}
-          </div>
-        </header>
-
-        {/* Hero Cover Image */}
-        <div className="relative aspect-[16/9] w-full rounded-[var(--radius-card)] overflow-hidden bg-[var(--muted)]/10 shadow-[var(--shadow-card)]">
-          <Image
-            src={article.cover_image || "/images/articles/universal-cover.svg"}
-            alt={article.title}
-            fill
-            priority
-            unoptimized={(article.cover_image || "/images/articles/universal-cover.svg").endsWith(".svg")}
-            className="object-cover"
-          />
+        {/* In-Article AdSense Unit */}
+        <div className="w-full max-w-[728px] mx-auto mt-8">
+          <AdSenseUnit slotId="article-detail-footer-slot" format="horizontal" minHeight={90} />
         </div>
-
-        {/* Markdown Body Content */}
-        <article className="prose dark:prose-invert max-w-none text-[var(--text)] leading-relaxed text-sm sm:text-base font-sans">
-          <ReactMarkdown
-            remarkPlugins={[remarkGfm]}
-            components={{
-              h2: ({ children }) => (
-                <h2 className="text-xl sm:text-2xl font-extrabold text-[var(--text)] mt-8 mb-4 tracking-tight">
-                  {children}
-                </h2>
-              ),
-              h3: ({ children }) => (
-                <h3 className="text-lg sm:text-xl font-bold text-[var(--text)] mt-6 mb-3">
-                  {children}
-                </h3>
-              ),
-              p: ({ children }) => (
-                <p className="mb-5 leading-relaxed text-[var(--text)]">{children}</p>
-              ),
-              ul: ({ children }) => (
-                <ul className="list-disc pl-5 space-y-2 mb-5">{children}</ul>
-              ),
-              ol: ({ children }) => (
-                <ol className="list-decimal pl-5 space-y-2 mb-5">{children}</ol>
-              ),
-              blockquote: ({ children }) => (
-                <blockquote className="border-l-4 border-[var(--accent)] pl-4 italic bg-[var(--card-bg)] py-2 my-5 rounded-r-lg">
-                  {children}
-                </blockquote>
-              ),
-            }}
-          >
-            {article.content}
-          </ReactMarkdown>
-        </article>
-
-        {/* In-Article AdSense Banner */}
-        <AdSenseUnit slotId="article-detail-footer-slot" format="horizontal" minHeight={90} />
       </main>
     </>
   );
