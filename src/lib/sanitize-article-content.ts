@@ -20,7 +20,7 @@ export interface SanitizedArticle {
 }
 
 export function sanitizeArticleContent(rawText: string, fallbackTitle?: string): SanitizedArticle {
-  let text = rawText.trim();
+  const text = rawText.trim();
   let extractedTitle: string | undefined;
   let extractedSummary: string | undefined;
   let extractedCategory: string | undefined;

@@ -4,7 +4,7 @@ import fs from "fs";
 const supabase = createClient("https://zmfyclrjbiewmwqiswqk.supabase.co", process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || "");
 
 function cleanRawDoc(text: string, currentTitle: string) {
-  let cleaned = text.trim();
+  const cleaned = text.trim();
 
   // 1. Extract metadata if present
   const titleMatch = cleaned.match(/(?:^|\n)title:\s*["']?([^"'\n\r]+)["']?/i);
