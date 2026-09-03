@@ -105,12 +105,6 @@ export default async function CompareSlugPage({
 
   const { slug1, slug2 } = parsed;
 
-  // Enforce canonical sorted URL
-  const expectedCanonical = getCanonicalCompareSlug(slug1, slug2);
-  if (slug !== expectedCanonical) {
-    redirect(`/compare/${expectedCanonical}`);
-  }
-
   // Fetch both models and all models for the selector
   const [model1, model2, { models: allModels }] = await Promise.all([
     getModelBySlug(slug1),
@@ -118,20 +112,46 @@ export default async function CompareSlugPage({
     getModels({ limit: 1000, isActive: true }),
   ]);
 
-  if (!model1 || !model2) {
+  let resolved1 = model1;
+  let resolved2 = model2;
+
+  if (!resolved1) {
+    resolved1 =
+      allModels.find(
+        (m) => m.slug === slug1 || m.slug.startsWith(slug1) || m.slug.includes(slug1) || slug1.includes(m.slug)
+      ) || null;
+  }
+
+  if (!resolved2) {
+    resolved2 =
+      allModels.find(
+        (m) => m.slug === slug2 || m.slug.startsWith(slug2) || m.slug.includes(slug2) || slug2.includes(m.slug)
+      ) || null;
+  }
+
+  if (!resolved1 || !resolved2) {
     notFound();
   }
+
+  // Enforce canonical sorted URL
+  const expectedCanonical = getCanonicalCompareSlug(resolved1.slug, resolved2.slug);
+  if (slug !== expectedCanonical) {
+    redirect(`/compare/${expectedCanonical}`);
+  }
+
+  const activeModel1 = resolved1;
+  const activeModel2 = resolved2;
 
   const breadcrumbs = [
     { name: "Home", url: "/" },
     { name: "Compare", url: "/compare" },
-    { name: `${model1.name} vs ${model2.name}`, url: `/compare/${expectedCanonical}` },
+    { name: `${activeModel1.name} vs ${activeModel2.name}`, url: `/compare/${expectedCanonical}` },
   ];
 
   // Discover other popular comparisons involving either model
   const relatedPairs = CURATED_POPULAR_PAIRS.filter(
     ([s1, s2]) =>
-      (s1 === model1.slug || s2 === model1.slug || s1 === model2.slug || s2 === model2.slug) &&
+      (s1 === activeModel1.slug || s2 === activeModel1.slug || s1 === activeModel2.slug || s2 === activeModel2.slug) &&
       getCanonicalCompareSlug(s1, s2) !== expectedCanonical
   ).slice(0, 6);
 
@@ -139,8 +159,8 @@ export default async function CompareSlugPage({
     <>
       <BreadcrumbJsonLd items={breadcrumbs} />
       <ComparisonJsonLd
-        model1={model1}
-        model2={model2}
+        model1={activeModel1}
+        model2={activeModel2}
         canonicalUrl={`/compare/${expectedCanonical}`}
       />
 
@@ -156,36 +176,36 @@ export default async function CompareSlugPage({
 
           <div className="flex flex-wrap items-center gap-2 mb-3">
             <span className="text-[11px] font-bold px-2.5 py-1 rounded-md bg-[var(--accent)]/10 text-[var(--accent)] border border-[var(--accent)]/20">
-              {model1.provider}
+              {activeModel1.provider}
             </span>
             <span className="text-xs font-bold text-[var(--muted)]">vs</span>
             <span className="text-[11px] font-bold px-2.5 py-1 rounded-md bg-[var(--accent)]/10 text-[var(--accent)] border border-[var(--accent)]/20">
-              {model2.provider}
+              {activeModel2.provider}
             </span>
           </div>
 
           <h1 className="text-3xl sm:text-4xl 2xl:text-5xl font-extrabold text-[var(--text)] tracking-tight">
-            {model1.name} <span className="text-[var(--muted)] font-normal text-2xl sm:text-3xl">vs</span> {model2.name}
+            {activeModel1.name} <span className="text-[var(--muted)] font-normal text-2xl sm:text-3xl">vs</span> {activeModel2.name}
           </h1>
           <p className="text-xs sm:text-sm text-[var(--muted)] mt-2 max-w-3xl leading-relaxed">
-            Side-by-side technical showdown between {model1.name} and {model2.name}. Compare verified benchmark scores, quantization compression (FP16, FP8, INT4), local GPU VRAM requirements, and API inference pricing.
+            Side-by-side technical showdown between {activeModel1.name} and {activeModel2.name}. Compare verified benchmark scores, quantization compression (FP16, FP8, INT4), local GPU VRAM requirements, and API inference pricing.
           </p>
         </div>
 
         {/* Executive Verdict Cards */}
-        <CompareVerdict model1={model1} model2={model2} />
+        <CompareVerdict model1={activeModel1} model2={activeModel2} />
 
         {/* Model Compression & Hardware Math */}
-        <ModelCompressionMeter models={[model1, model2]} />
+        <ModelCompressionMeter models={[activeModel1, activeModel2]} />
 
         {/* Standardized Benchmark Showdown */}
-        <BenchmarkDiff models={[model1, model2]} />
+        <BenchmarkDiff models={[activeModel1, activeModel2]} />
 
         {/* Inference Economics Simulator */}
-        <InferenceEconomics models={[model1, model2]} />
+        <InferenceEconomics models={[activeModel1, activeModel2]} />
 
         {/* Architecture & Feature Matrix */}
-        <ArchitectureMatrix models={[model1, model2]} />
+        <ArchitectureMatrix models={[activeModel1, activeModel2]} />
 
         {/* Interactive Customizer & Add 3rd Model */}
         <div className="pt-6 border-t border-[var(--muted)]/15">
@@ -196,8 +216,8 @@ export default async function CompareSlugPage({
           <Suspense fallback={<div className="h-48 w-full animate-pulse bg-[var(--card-bg)] rounded-xl" />}>
             <CompareDashboard
               models={allModels}
-              initialM1={model1.slug}
-              initialM2={model2.slug}
+              initialM1={activeModel1.slug}
+              initialM2={activeModel2.slug}
             />
           </Suspense>
         </div>
@@ -206,7 +226,7 @@ export default async function CompareSlugPage({
         {relatedPairs.length > 0 && (
           <div className="pt-6 border-t border-[var(--muted)]/15 flex flex-col gap-4">
             <div className="text-xs font-bold uppercase tracking-wider text-[var(--muted)]">
-              More Head-to-Head Comparisons for {model1.name} & {model2.name}
+              More Head-to-Head Comparisons for {activeModel1.name} & {activeModel2.name}
             </div>
             <div className="flex flex-wrap gap-2.5">
               {relatedPairs.map(([s1, s2]) => {
