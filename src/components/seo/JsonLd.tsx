@@ -335,3 +335,93 @@ export function ArticleJsonLd({ article }: { article: ArticleRow }) {
     />
   );
 }
+
+export function ComparisonJsonLd({
+  model1,
+  model2,
+  canonicalUrl,
+}: {
+  model1: ModelRow;
+  model2: ModelRow;
+  canonicalUrl: string;
+}) {
+  const p1 = (model1.pricing || {}) as Record<string, unknown>;
+  const p2 = (model2.pricing || {}) as Record<string, unknown>;
+  const in1 = typeof p1.input_per_1m === "number" ? `$${p1.input_per_1m}` : "Open / Free";
+  const in2 = typeof p2.input_per_1m === "number" ? `$${p2.input_per_1m}` : "Open / Free";
+
+  const open1 = Boolean(model1.source_type?.toLowerCase().includes("open"));
+  const open2 = Boolean(model2.source_type?.toLowerCase().includes("open"));
+
+  const fullUrl = canonicalUrl.startsWith("http") ? canonicalUrl : `${SITE_URL}${canonicalUrl}`;
+
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: [
+      {
+        "@type": "Question",
+        name: `What is the difference between ${model1.name} and ${model2.name}?`,
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: `${model1.name} (${model1.provider}) features ${model1.parameters || "proprietary parameters"} with a ${model1.context_window ? (model1.context_window / 1000).toFixed(0) + "k" : "standard"} context window, while ${model2.name} (${model2.provider}) features ${model2.parameters || "proprietary parameters"} with a ${model2.context_window ? (model2.context_window / 1000).toFixed(0) + "k" : "standard"} context window.`,
+        },
+      },
+      {
+        "@type": "Question",
+        name: `Which is cheaper for production inference, ${model1.name} or ${model2.name}?`,
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: `${model1.name} input pricing is ${in1} per 1M tokens vs ${model2.name} at ${in2} per 1M tokens.`,
+        },
+      },
+      {
+        "@type": "Question",
+        name: `Can I run ${model1.name} or ${model2.name} locally on private GPU hardware?`,
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: `${model1.name} is ${open1 ? "an open-weights model and can be hosted locally using Ollama or vLLM" : "a closed cloud API and cannot be self-hosted"}. ${model2.name} is ${open2 ? "an open-weights model and can be hosted locally" : "a closed cloud API"}.`,
+        },
+      },
+    ],
+  };
+
+  const comparisonWebPage = {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    name: `${model1.name} vs ${model2.name} Comparison: Specs, Benchmarks & VRAM`,
+    description: `Side-by-side technical comparison between ${model1.name} and ${model2.name} across parameters, benchmarks, quantization compression, and token pricing.`,
+    url: fullUrl,
+    publisher: {
+      "@type": "Organization",
+      name: "Modelverse",
+      url: SITE_URL,
+    },
+    about: [
+      {
+        "@type": "SoftwareApplication",
+        name: model1.name,
+        author: { "@type": "Organization", name: model1.provider },
+      },
+      {
+        "@type": "SoftwareApplication",
+        name: model2.name,
+        author: { "@type": "Organization", name: model2.provider },
+      },
+    ],
+  };
+
+  return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(comparisonWebPage) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+      />
+    </>
+  );
+}
+
