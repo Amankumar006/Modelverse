@@ -1,6 +1,7 @@
 import type { MetadataRoute } from "next";
 import { getModels } from "@/lib/supabase/models";
 import { getArticles } from "@/lib/supabase/articles";
+import { CURATED_POPULAR_PAIRS, getCanonicalCompareSlug } from "@/lib/compare";
 
 const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://www.themodelverse.in";
 const SITE_LAUNCH_DATE = new Date("2025-01-01T00:00:00.000Z");
@@ -36,5 +37,22 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     lastModified: new Date(a.updated_at || a.published_at || SITE_LAUNCH_DATE),
   }));
 
-  return [...staticRoutes, ...modelRoutes, ...articleRoutes];
+  const existingModelSlugs = new Set(models.map((m) => m.slug));
+  const seenCompareSlugs = new Set<string>();
+  const compareRoutes: MetadataRoute.Sitemap = [];
+
+  for (const [s1, s2] of CURATED_POPULAR_PAIRS) {
+    if (existingModelSlugs.has(s1) && existingModelSlugs.has(s2)) {
+      const canonicalSlug = getCanonicalCompareSlug(s1, s2);
+      if (!seenCompareSlugs.has(canonicalSlug)) {
+        seenCompareSlugs.add(canonicalSlug);
+        compareRoutes.push({
+          url: `${baseUrl}/compare/${canonicalSlug}`,
+          lastModified: new Date(),
+        });
+      }
+    }
+  }
+
+  return [...staticRoutes, ...modelRoutes, ...articleRoutes, ...compareRoutes];
 }
