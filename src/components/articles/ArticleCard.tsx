@@ -30,6 +30,7 @@ export default function ArticleCard({ article }: ArticleCardProps) {
           src={article.cover_image || "/images/articles/universal-cover.svg"}
           alt={article.title}
           fill
+          unoptimized={(article.cover_image || "/images/articles/universal-cover.svg").endsWith(".svg")}
           className="object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
         />
 
