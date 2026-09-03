@@ -89,9 +89,50 @@ is_published: ${is_published}
 ${content.trim()}
 `;
 
-    const articlesDir = path.join(process.cwd(), "content/articles");
-    await fs.mkdir(articlesDir, { recursive: true });
-    await fs.writeFile(path.join(articlesDir, `${slug}.md`), frontmatterYaml, "utf-8");
+    // 2. Safely write Markdown file locally if filesystem is writable (e.g. local / CI)
+    try {
+      const articlesDir = path.join(process.cwd(), "content/articles");
+      await fs.mkdir(articlesDir, { recursive: true });
+      await fs.writeFile(path.join(articlesDir, `${slug}.md`), frontmatterYaml, "utf-8");
+    } catch {
+      // Serverless environments like Vercel Lambda have a read-only filesystem (/var/task)
+      // Supabase PostgreSQL serves as the production database and source of truth.
+    }
+
+    // Optional: Commit to GitHub repository if GITHUB_TOKEN is configured
+    const githubToken = process.env.GITHUB_TOKEN;
+    if (githubToken) {
+      try {
+        const ghUrl = `https://api.github.com/repos/Amankumar006/Modelverse/contents/content/articles/${slug}.md`;
+        const contentBase64 = Buffer.from(frontmatterYaml).toString("base64");
+        
+        let sha: string | undefined;
+        const checkRes = await fetch(ghUrl, {
+          headers: { Authorization: `Bearer ${githubToken}`, "User-Agent": "Modelverse-Ingest" },
+        });
+        if (checkRes.ok) {
+          const fileData = await checkRes.json();
+          sha = fileData.sha;
+        }
+
+        await fetch(ghUrl, {
+          method: "PUT",
+          headers: {
+            Authorization: `Bearer ${githubToken}`,
+            "Content-Type": "application/json",
+            "User-Agent": "Modelverse-Ingest",
+          },
+          body: JSON.stringify({
+            message: `feat(articles): auto-publish ${title}`,
+            content: contentBase64,
+            sha,
+            branch: "main",
+          }),
+        });
+      } catch {
+        // Non-blocking
+      }
+    }
 
     // 3. Upsert to Supabase PostgreSQL Database
     const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
