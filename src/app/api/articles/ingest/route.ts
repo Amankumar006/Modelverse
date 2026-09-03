@@ -5,6 +5,7 @@ import path from "path";
 import { createClient } from "@supabase/supabase-js";
 import { extractSourcePoster } from "@/lib/extract-source-poster";
 import { cacheArticlePosterLocally } from "@/lib/cache-article-poster";
+import { sanitizeArticleContent } from "@/lib/sanitize-article-content";
 
 const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL || process.env.SUPABASE_URL || "https://zmfyclrjbiewmwqiswqk.supabase.co";
 const INGEST_SECRET = process.env.INGESTION_SECRET || process.env.REVALIDATION_SECRET || "modelverse-ingest-secret-2026";
@@ -38,17 +39,19 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    const {
-      title,
-      summary,
-      content,
-      category = "Architecture",
-      source_name = "Modelverse Research",
-      source_url,
-      tags = ["Architecture", "AI"],
-      is_published = true,
-      published_at = new Date().toISOString(),
-    } = body;
+    const rawTitle = body.title || "";
+    const rawContent = body.content || "";
+    const sanitized = sanitizeArticleContent(rawContent, rawTitle);
+
+    const title = sanitized.title || rawTitle;
+    const summary = sanitized.summary || body.summary || title;
+    const category = sanitized.category || body.category || "Architecture";
+    const source_name = sanitized.source_name || body.source_name || "Modelverse Research";
+    const source_url = sanitized.source_url || body.source_url || null;
+    const content = sanitized.content;
+    const tags = body.tags || ["Architecture", "AI"];
+    const is_published = body.is_published !== false;
+    const published_at = body.published_at || new Date().toISOString();
 
     const slug = body.slug ? generateSlug(body.slug) : generateSlug(title);
 
