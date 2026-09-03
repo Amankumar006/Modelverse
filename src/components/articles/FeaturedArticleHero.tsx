@@ -31,6 +31,7 @@ export default function FeaturedArticleHero({ article }: FeaturedArticleHeroProp
             alt={article.title}
             fill
             priority
+            unoptimized={(article.cover_image || "/images/articles/universal-cover.svg").endsWith(".svg")}
             className="object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
           />
 

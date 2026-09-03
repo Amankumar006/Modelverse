@@ -66,6 +66,7 @@ export default function HomeNewsSection({ articles }: HomeNewsSectionProps) {
                   alt={featuredArticle.title}
                   fill
                   priority
+                  unoptimized={(featuredArticle.cover_image || "/images/articles/universal-cover.svg").endsWith(".svg")}
                   className="object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
                 />
 
@@ -150,6 +151,7 @@ export default function HomeNewsSection({ articles }: HomeNewsSectionProps) {
                       src={article.cover_image || "/images/articles/universal-cover.svg"}
                       alt={article.title}
                       fill
+                      unoptimized={(article.cover_image || "/images/articles/universal-cover.svg").endsWith(".svg")}
                       className="object-cover group-hover:scale-105 transition-transform duration-300"
                     />
                   </div>
