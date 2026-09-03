@@ -46,10 +46,11 @@ export async function extractSourcePoster(
   }
 
   const resolveUrl = (src: string) => {
+    const cleanSrc = src.replace(/&amp;/g, "&").replace(/&#38;/g, "&");
     try {
-      return new URL(src, url).href;
+      return new URL(cleanSrc, url).href;
     } catch {
-      return src;
+      return cleanSrc;
     }
   };
 
