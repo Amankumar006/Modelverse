@@ -159,6 +159,14 @@ export async function getArticlesForModel(
           return true;
         }
 
+        const strippedModelSlug = slugLower.replace(/^[a-z0-9]+-/, "").replace(/-\d{8}$/, "");
+        if (
+          strippedModelSlug.length >= 5 &&
+          (articleSlugLower.includes(strippedModelSlug) || articleTitleLower.includes(strippedModelSlug))
+        ) {
+          return true;
+        }
+
         if (
           nameTokens.length >= 2 &&
           nameTokens.every(
@@ -196,8 +204,16 @@ export async function getModelsForArticle(article: ArticleRow): Promise<ModelRow
         if (relatedSlugs.has(mSlugLower)) return true;
         if (articleSlugLower.includes(mSlugLower)) return true;
 
+        const strippedSlug = mSlugLower.replace(/^[a-z0-9]+-/, "").replace(/-\d{8}$/, "");
+        if (
+          strippedSlug.length >= 5 &&
+          (articleSlugLower.includes(strippedSlug) || articleTitleLower.includes(strippedSlug))
+        ) {
+          return true;
+        }
+
         const cleanName = m.name.toLowerCase().replace(/[^a-z0-9\s]/g, " ").trim();
-        const words = cleanName.split(/\s+/).filter((w) => w.length > 2);
+        const words = cleanName.split(/\s+/).filter((w) => w.length >= 2);
         if (words.length >= 2) {
           const joinedPattern = words.join(" ");
           if (articleTitleLower.includes(joinedPattern) || articleSlugLower.includes(words.join("-"))) {
