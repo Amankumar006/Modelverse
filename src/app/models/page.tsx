@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 import { getModels, getModelCount } from "@/lib/supabase/models";
 import ModelCatalog from "@/components/models/ModelCatalog";
 import ModelsPageHeader from "@/components/models/ModelsPageHeader";
-import { BreadcrumbJsonLd, ItemListJsonLd } from "@/components/seo/JsonLd";
+import { BreadcrumbJsonLd, ItemListJsonLd, DatasetJsonLd } from "@/components/seo/JsonLd";
 
 export const revalidate = 60;
 
@@ -96,6 +96,12 @@ export default async function ModelsPage({ searchParams }: ModelsPageProps) {
   return (
     <>
       <BreadcrumbJsonLd items={breadcrumbs} />
+      <DatasetJsonLd
+        name="Modelverse Foundation Models & Technical Specifications Dataset"
+        description="Fact-checked index and technical dataset of foundation models, LLMs, vision-language models, and code models with audited parameters, context windows, benchmark figures, and API rates."
+        modelCount={models.length}
+        url="/models"
+      />
       <ItemListJsonLd
         name="Foundation Models Directory"
         description="Comprehensive index of artificial intelligence foundation models."

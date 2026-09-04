@@ -2,11 +2,12 @@ import React from "react";
 import type { Metadata } from "next";
 import Image from "next/image";
 import { notFound } from "next/navigation";
-import { getArticleBySlug, getArticles } from "@/lib/supabase/articles";
+import { getArticleBySlug, getArticles, getModelsForArticle } from "@/lib/supabase/articles";
 import { ArticleJsonLd, BreadcrumbJsonLd } from "@/components/seo/JsonLd";
 import MediumArticleHeader from "@/components/articles/MediumArticleHeader";
 import MediumArticleBody from "@/components/articles/MediumArticleBody";
 import MediumArticleFooter from "@/components/articles/MediumArticleFooter";
+import ArticleReferencedModels from "@/components/articles/ArticleReferencedModels";
 import AdSenseUnit from "@/components/ads/AdSenseUnit";
 
 export const revalidate = 60;
@@ -83,8 +84,11 @@ export default async function ArticleDetailPage({
     notFound();
   }
 
-  // Fetch recent articles for the footer recommendation
-  const { articles: allArticles } = await getArticles({ limit: 4, isPublished: true });
+  // Fetch referenced models and recent articles concurrently
+  const [referencedModels, { articles: allArticles }] = await Promise.all([
+    getModelsForArticle(article),
+    getArticles({ limit: 4, isPublished: true }),
+  ]);
   const relatedArticles = allArticles.filter((a) => a.slug !== slug).slice(0, 2);
 
   const breadcrumbs = [
@@ -134,6 +138,9 @@ export default async function ArticleDetailPage({
 
         {/* Medium Article Prose Body */}
         <MediumArticleBody content={article.content} />
+
+        {/* Referenced Model Specifications & Benchmarks */}
+        <ArticleReferencedModels models={referencedModels} />
 
         {/* Medium Article Footer */}
         <MediumArticleFooter

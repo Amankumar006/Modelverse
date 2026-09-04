@@ -2,8 +2,9 @@
 
 import React from "react";
 import Link from "next/link";
-import { GitCompare, ArrowRight, Layers, Cpu, DollarSign } from "lucide-react";
+import { GitCompare, ArrowRight, Layers, Cpu, DollarSign, Swords } from "lucide-react";
 import type { ModelRow } from "@/types/database";
+import { getCanonicalCompareSlug, getPopularComparisonsForModel } from "@/lib/compare";
 
 interface ModelAlternativesSectionProps {
   currentModel: ModelRow;
@@ -14,6 +15,7 @@ export default function ModelAlternativesSection({
   currentModel,
   allModels,
 }: ModelAlternativesSectionProps) {
+  const popularPairs = getPopularComparisonsForModel(currentModel.slug);
   const getTier = (pricing: Record<string, unknown> | null, params: string) => {
     const input = typeof pricing?.input_per_1m === "number" ? pricing.input_per_1m : parseFloat(String(pricing?.input_per_1m || "0")) || 0;
     if (input > 10) return "frontier";
@@ -147,7 +149,7 @@ export default function ModelAlternativesSection({
 
                 <div className="pt-3 border-t border-[var(--muted)]/10 flex items-center gap-2">
                   <Link
-                    href={`/compare?m1=${currentModel.slug}&m2=${alt.slug}`}
+                    href={`/compare/${getCanonicalCompareSlug(currentModel.slug, alt.slug)}`}
                     className="flex-1 text-center py-1.5 px-2 rounded-md bg-[var(--accent-soft)] hover:bg-[var(--accent)] text-[var(--accent)] hover:text-[var(--accent-contrast)] text-[11px] font-bold transition-colors"
                   >
                     Compare Side-by-Side
@@ -164,6 +166,38 @@ export default function ModelAlternativesSection({
             );
           })}
         </div>
+
+        {popularPairs.length > 0 && (
+          <div className="pt-5 border-t border-[var(--muted)]/10 space-y-3">
+            <div className="flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-[var(--muted)]">
+              <Swords size={13} className="text-[var(--accent)]" />
+              <span>Direct Head-to-Head Comparisons</span>
+            </div>
+            <div className="flex flex-wrap gap-2">
+              {popularPairs.map(([s1, s2]) => {
+                const canonicalSlug = getCanonicalCompareSlug(s1, s2);
+                const otherSlug = s1.toLowerCase() === currentModel.slug.toLowerCase() ? s2 : s1;
+                const otherModel = allModels.find(
+                  (m) => m.slug.toLowerCase() === otherSlug.toLowerCase()
+                );
+                const otherName = otherModel?.name || otherSlug;
+
+                return (
+                  <Link
+                    key={canonicalSlug}
+                    href={`/compare/${canonicalSlug}`}
+                    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[var(--bg)] hover:bg-[var(--accent-soft)] hover:text-[var(--accent)] text-xs font-semibold text-[var(--text)] border border-[var(--muted)]/15 transition-all shadow-sm group"
+                  >
+                    <span>{currentModel.name}</span>
+                    <span className="text-[var(--muted)] text-[10px] font-mono font-normal">vs</span>
+                    <span>{otherName}</span>
+                    <ArrowRight size={11} className="text-[var(--muted)] group-hover:text-[var(--accent)] group-hover:translate-x-0.5 transition-all" />
+                  </Link>
+                );
+              })}
+            </div>
+          </div>
+        )}
       </div>
     </section>
   );

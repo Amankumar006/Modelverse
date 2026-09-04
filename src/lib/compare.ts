@@ -407,6 +407,19 @@ export function computeExecutiveVerdict(m1: ModelRow, m2: ModelRow): VerdictItem
  * Curated list of high-intent head-to-head comparison pairs for programmatic SEO indexing
  */
 export const CURATED_POPULAR_PAIRS: [string, string][] = [
+  // Frontier Showdowns 2026
+  ["google-gemini-3-8-flash-20260902", "openai-gpt-6-astra-20260903"],
+  ["alibaba-qwen-3-8-max-0902-20260902", "openai-gpt-6-astra-20260903"],
+  ["alibaba-qwen-3-8-max-0902-20260902", "google-gemini-3-8-flash-20260902"],
+  ["openai-gpt-6-astra-20260903", "gpt-4o"],
+  ["claude-3-5-sonnet-20241022", "openai-gpt-6-astra-20260903"],
+  ["anthropic-claude-3-7-sonnet-20250219", "openai-gpt-6-astra-20260903"],
+  ["deepseek-r1", "openai-gpt-6-astra-20260903"],
+  ["gemini-1-5-flash", "google-gemini-3-8-flash-20260902"],
+  ["deepseek-v3", "google-gemini-3-8-flash-20260902"],
+  ["alibaba-qwen-3-8-max-0902-20260902", "deepseek-r1"],
+
+  // Core Flagship Pairs
   ["claude-3-5-sonnet-20241022", "gpt-4o"],
   ["claude-3-5-sonnet-20241022", "deepseek-v3"],
   ["deepseek-v3", "gpt-4o"],
@@ -423,4 +436,14 @@ export const CURATED_POPULAR_PAIRS: [string, string][] = [
   ["deepseek-deepseek-r1-distill-qwen-32b", "llama-3-3-70b"],
   ["alibaba-qwen3.7-max", "deepseek-v3"],
 ];
+
+/**
+ * Returns popular comparison pairs involving the given model slug
+ */
+export function getPopularComparisonsForModel(modelSlug: string): [string, string][] {
+  const target = modelSlug.trim().toLowerCase();
+  return CURATED_POPULAR_PAIRS.filter(([s1, s2]) => {
+    return s1.toLowerCase() === target || s2.toLowerCase() === target;
+  });
+}
 

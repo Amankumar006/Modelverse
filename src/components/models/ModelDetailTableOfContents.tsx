@@ -15,6 +15,7 @@ import {
   GitCompare,
   GitBranch,
   HelpCircle,
+  BookOpen,
 } from "lucide-react";
 
 interface TocItem {
@@ -25,10 +26,12 @@ interface TocItem {
 
 interface ModelDetailTableOfContentsProps {
   hasBenchmarks: boolean;
+  hasArticles?: boolean;
 }
 
 export default function ModelDetailTableOfContents({
   hasBenchmarks,
+  hasArticles = false,
 }: ModelDetailTableOfContentsProps) {
   const [activeId, setActiveId] = useState<string>("overview");
   const [scrollProgress, setScrollProgress] = useState(0);
@@ -45,10 +48,13 @@ export default function ModelDetailTableOfContents({
       : []),
     { id: "pricing", label: "Pricing & Budget Estimator", icon: <DollarSign size={13} /> },
     { id: "alternatives", label: "Alternative Models", icon: <GitCompare size={13} /> },
+    ...(hasArticles
+      ? [{ id: "coverage", label: "Research & Analysis", icon: <BookOpen size={13} /> }]
+      : []),
     { id: "quickstart", label: "API Quickstart", icon: <Terminal size={13} /> },
     { id: "faq", label: "Frequently Asked Questions", icon: <HelpCircle size={13} /> },
     { id: "sources", label: "Sources & Provenance", icon: <Link2 size={13} /> },
-  ], [hasBenchmarks]);
+  ], [hasBenchmarks, hasArticles]);
 
   useEffect(() => {
     const handleScroll = () => {

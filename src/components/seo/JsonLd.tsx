@@ -105,6 +105,79 @@ export function ItemListJsonLd({
   );
 }
 
+export function DatasetJsonLd({
+  name = "Modelverse Foundation Models & Benchmark Dataset",
+  description = "Fact-checked technical specifications, context windows, parameter configurations, benchmark scores, licensing terms, and API pricing for artificial intelligence foundation models.",
+  modelCount,
+  url = "/models",
+}: {
+  name?: string;
+  description?: string;
+  modelCount?: number;
+  url?: string;
+}) {
+  const datasetUrl = url.startsWith("http") ? url : `${SITE_URL}${url}`;
+
+  const schema = {
+    "@context": "https://schema.org",
+    "@type": "Dataset",
+    name,
+    description,
+    url: datasetUrl,
+    identifier: `${SITE_URL}#dataset-models`,
+    isAccessibleForFree: true,
+    license: "https://creativecommons.org/licenses/by/4.0/",
+    keywords: [
+      "Artificial Intelligence",
+      "Foundation Models",
+      "Large Language Models",
+      "LLM Benchmarks",
+      "Context Window Comparison",
+      "Machine Learning Parameters",
+      "AI API Pricing",
+    ],
+    creator: {
+      "@type": "Organization",
+      name: "Modelverse Research",
+      url: SITE_URL,
+    },
+    publisher: {
+      "@type": "Organization",
+      name: "Modelverse",
+      url: SITE_URL,
+      logo: {
+        "@type": "ImageObject",
+        url: `${SITE_URL}/logos/social-avatar-1024.png`,
+      },
+    },
+    variableMeasured: [
+      "Total Parameters",
+      "Active Parameters",
+      "Context Window Capacity",
+      "Standardized Benchmark Evaluations",
+      "API Pricing per 1M Input Tokens",
+      "API Pricing per 1M Output Tokens",
+      "Model Modalities",
+      "Licensing and Weight Availability",
+    ],
+    distribution: [
+      {
+        "@type": "DataDownload",
+        encodingFormat: "application/json",
+        contentUrl: `${SITE_URL}/api/models`,
+      },
+    ],
+    ...(modelCount ? { size: `${modelCount} models` } : {}),
+  };
+
+  return (
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+    />
+  );
+}
+
 export function ModelJsonLd({ model }: { model: ModelRow }) {
   const modelUrl = `${SITE_URL}/models/${model.slug}`;
   const links = (typeof model.links === "object" && model.links !== null ? model.links : {}) as Record<string, string>;
@@ -295,13 +368,25 @@ export function ModelJsonLd({ model }: { model: ModelRow }) {
 export function ArticleJsonLd({ article }: { article: ArticleRow }) {
   const articleUrl = `${SITE_URL}/articles/${article.slug}`;
 
+  // Ensure absolute image URL array per Google Rich Results spec
+  let imageUrl = `${SITE_URL}/articles/${article.slug}/opengraph-image`;
+  if (article.cover_image) {
+    imageUrl = article.cover_image.startsWith("http")
+      ? article.cover_image
+      : `${SITE_URL}${article.cover_image.startsWith("/") ? "" : "/"}${article.cover_image}`;
+  }
+
+  const authorUrl = article.source_url?.startsWith("http")
+    ? article.source_url
+    : `${SITE_URL}/articles`;
+
   const schema = {
     "@context": "https://schema.org",
-    "@type": "TechArticle",
+    "@type": ["TechArticle", "Article"],
     headline: article.title,
     description: article.summary || article.title,
     url: articleUrl,
-    image: article.cover_image || `${SITE_URL}/articles/${article.slug}/opengraph-image`,
+    image: [imageUrl],
     datePublished: article.published_at,
     dateModified: article.updated_at || article.published_at,
     proficiencyLevel: "Expert",
@@ -309,10 +394,13 @@ export function ArticleJsonLd({ article }: { article: ArticleRow }) {
       "@type": "SpeakableSpecification",
       cssSelector: ["h1", "article p"],
     },
-    author: {
-      "@type": "Organization",
-      name: article.source_name || "Modelverse Intelligence",
-    },
+    author: [
+      {
+        "@type": "Organization",
+        name: article.source_name || "Modelverse Intelligence",
+        url: authorUrl,
+      },
+    ],
     publisher: {
       "@type": "Organization",
       name: "Modelverse",

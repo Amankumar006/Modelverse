@@ -1,6 +1,7 @@
 import { unstable_cache } from 'next/cache';
 import { createServerClient } from './server';
-import type { ArticleRow, ArticleInsert, ArticleUpdate } from '@/types/database';
+import { getModels } from './models';
+import type { ArticleRow, ArticleInsert, ArticleUpdate, ModelRow } from '@/types/database';
 
 export interface GetArticlesOptions {
   category?: string;
@@ -125,4 +126,90 @@ export async function updateArticle(slug: string, updates: ArticleUpdate): Promi
   }
 
   return data;
+}
+
+export async function getArticlesForModel(
+  modelSlug: string,
+  modelName?: string
+): Promise<ArticleRow[]> {
+  return unstable_cache(
+    async () => {
+      const { articles } = await getArticles({ limit: 100, isPublished: true });
+      const slugLower = modelSlug.toLowerCase();
+      const cleanModelName = (modelName || "").toLowerCase().replace(/[^a-z0-9\s]/g, " ").trim();
+      const nameTokens = cleanModelName.split(/\s+/).filter((t) => t.length > 2);
+
+      return articles.filter((a) => {
+        if (Array.isArray(a.related_models)) {
+          if (
+            a.related_models.some(
+              (m) =>
+                typeof m === "string" &&
+                (m.toLowerCase() === slugLower || m.toLowerCase().includes(slugLower))
+            )
+          ) {
+            return true;
+          }
+        }
+
+        const articleSlugLower = a.slug.toLowerCase();
+        const articleTitleLower = a.title.toLowerCase();
+
+        if (articleSlugLower.includes(slugLower) || articleTitleLower.includes(slugLower)) {
+          return true;
+        }
+
+        if (
+          nameTokens.length >= 2 &&
+          nameTokens.every(
+            (token) => articleSlugLower.includes(token) || articleTitleLower.includes(token)
+          )
+        ) {
+          return true;
+        }
+
+        return false;
+      });
+    },
+    [`articles-for-model-${modelSlug}`],
+    { revalidate: 60, tags: ["articles", "models", `model-articles-${modelSlug}`] }
+  )();
+}
+
+export async function getModelsForArticle(article: ArticleRow): Promise<ModelRow[]> {
+  return unstable_cache(
+    async () => {
+      const { models } = await getModels({ limit: 1000, isActive: true });
+      const relatedSlugs = new Set<string>();
+
+      if (Array.isArray(article.related_models)) {
+        article.related_models.forEach((m) => {
+          if (typeof m === "string") relatedSlugs.add(m.toLowerCase());
+        });
+      }
+
+      const articleTitleLower = article.title.toLowerCase();
+      const articleSlugLower = article.slug.toLowerCase();
+
+      const matched = models.filter((m) => {
+        const mSlugLower = m.slug.toLowerCase();
+        if (relatedSlugs.has(mSlugLower)) return true;
+        if (articleSlugLower.includes(mSlugLower)) return true;
+
+        const cleanName = m.name.toLowerCase().replace(/[^a-z0-9\s]/g, " ").trim();
+        const words = cleanName.split(/\s+/).filter((w) => w.length > 2);
+        if (words.length >= 2) {
+          const joinedPattern = words.join(" ");
+          if (articleTitleLower.includes(joinedPattern) || articleSlugLower.includes(words.join("-"))) {
+            return true;
+          }
+        }
+        return false;
+      });
+
+      return matched.slice(0, 3);
+    },
+    [`models-for-article-${article.slug}`],
+    { revalidate: 60, tags: ["articles", "models", `article-models-${article.slug}`] }
+  )();
 }
