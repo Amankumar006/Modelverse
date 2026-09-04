@@ -32,7 +32,41 @@ const SUPABASE_KEY =
 
 const SERVICE_ACCOUNT_EMAIL = process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL;
 const SERVICE_ACCOUNT_PRIVATE_KEY = process.env.GOOGLE_SERVICE_ACCOUNT_PRIVATE_KEY?.replace(/\\n/g, "\n");
-const INDEXNOW_KEY = process.env.INDEXNOW_KEY;
+const DEFAULT_INDEXNOW_KEY = "e4c1b98f2a7d45609381e029471bfa3c";
+const INDEXNOW_KEY = process.env.INDEXNOW_KEY || DEFAULT_INDEXNOW_KEY;
+
+const CURATED_POPULAR_PAIRS = [
+  ["google-gemini-3-8-flash-20260902", "openai-gpt-6-astra-20260903"],
+  ["alibaba-qwen-3-8-max-0902-20260902", "openai-gpt-6-astra-20260903"],
+  ["alibaba-qwen-3-8-max-0902-20260902", "google-gemini-3-8-flash-20260902"],
+  ["openai-gpt-6-astra-20260903", "gpt-4o"],
+  ["claude-3-5-sonnet-20241022", "openai-gpt-6-astra-20260903"],
+  ["anthropic-claude-3-7-sonnet-20250219", "openai-gpt-6-astra-20260903"],
+  ["deepseek-r1", "openai-gpt-6-astra-20260903"],
+  ["gemini-1-5-flash", "google-gemini-3-8-flash-20260902"],
+  ["deepseek-v3", "google-gemini-3-8-flash-20260902"],
+  ["alibaba-qwen-3-8-max-0902-20260902", "deepseek-r1"],
+  ["claude-3-5-sonnet-20241022", "gpt-4o"],
+  ["claude-3-5-sonnet-20241022", "deepseek-v3"],
+  ["deepseek-v3", "gpt-4o"],
+  ["deepseek-r1", "gpt-4o"],
+  ["deepseek-v3", "llama-3-3-70b"],
+  ["llama-3-3-70b", "gpt-4o"],
+  ["gemini-1-5-pro", "gpt-4o"],
+  ["gemini-1-5-flash", "gpt-4o"],
+  ["gemini-1-5-pro", "claude-3-5-sonnet-20241022"],
+  ["deepseek-v3", "deepseek-r1"],
+  ["mistral-large-2", "gpt-4o"],
+  ["mistral-large-2", "llama-3-3-70b"],
+  ["openai-gpt-4o-mini", "gemini-1-5-flash"],
+  ["deepseek-deepseek-r1-distill-qwen-32b", "llama-3-3-70b"],
+  ["alibaba-qwen3.7-max", "deepseek-v3"],
+];
+
+function getCanonicalCompareSlug(s1, s2) {
+  const sorted = [s1.toLowerCase().trim(), s2.toLowerCase().trim()].sort();
+  return `${sorted[0]}-vs-${sorted[1]}`;
+}
 
 /**
  * Generate Google OAuth2 JWT Bearer Token without external packages
@@ -106,7 +140,7 @@ async function pushUrlToGoogle(url, accessToken, type = "URL_UPDATED") {
 }
 
 /**
- * Publish batch of URLs to IndexNow (Bing, Yandex, Seznam)
+ * Publish batch of URLs to IndexNow (Bing, Yandex, Seznam, Naver)
  */
 async function pushToIndexNow(host, key, urlList) {
   try {
@@ -120,7 +154,10 @@ async function pushToIndexNow(host, key, urlList) {
         urlList,
       }),
     });
-    return { ok: res.ok, status: res.status };
+
+    const isSuccess = res.ok || res.status === 200 || res.status === 202;
+    const body = await res.text().catch(() => "");
+    return { ok: isSuccess, status: res.status, body };
   } catch (err) {
     return { ok: false, status: 500, error: err.message };
   }
@@ -128,7 +165,7 @@ async function pushToIndexNow(host, key, urlList) {
 
 async function main() {
   console.log("==================================================");
-  console.log("   🚀 MODELVERSE SEARCH INDEXING AUTO-PUSH       ");
+  console.log("   🚀 THEMODELVERSE SEARCH INDEXING AUTO-PUSH    ");
   console.log("==================================================");
 
   if (!SUPABASE_URL || !SUPABASE_KEY) {
@@ -160,51 +197,79 @@ async function main() {
     process.exit(1);
   }
 
-  const urlsToPush = [
-    `${SITE_URL}`,
-    `${SITE_URL}/models`,
-    `${SITE_URL}/articles`,
-    `${SITE_URL}/trending`,
-    `${SITE_URL}/timeline`,
-    `${SITE_URL}/compare`,
-    `${SITE_URL}/methodology`,
-    `${SITE_URL}/about`,
-    `${SITE_URL}/submit`,
-    `${SITE_URL}/privacy`,
-    `${SITE_URL}/terms`,
-    `${SITE_URL}/security`,
-    ...models.map((m) => `${SITE_URL}/models/${m.slug}`),
-    ...articles.map((a) => `${SITE_URL}/articles/${a.slug}`),
+  const baseUrl = SITE_URL.replace(/\/$/, "");
+
+  // Assemble all comparison URLs from curated pairs
+  const seenCompareSlugs = new Set();
+  const comparisonUrls = [];
+  for (const [s1, s2] of CURATED_POPULAR_PAIRS) {
+    const canonical = getCanonicalCompareSlug(s1, s2);
+    if (!seenCompareSlugs.has(canonical)) {
+      seenCompareSlugs.add(canonical);
+      comparisonUrls.push(`${baseUrl}/compare/${canonical}`);
+    }
+  }
+
+  const coreUrls = [
+    `${baseUrl}`,
+    `${baseUrl}/models`,
+    `${baseUrl}/articles`,
+    `${baseUrl}/trending`,
+    `${baseUrl}/timeline`,
+    `${baseUrl}/compare`,
+    `${baseUrl}/methodology`,
+    `${baseUrl}/about`,
+    `${baseUrl}/submit`,
+    `${baseUrl}/privacy`,
+    `${baseUrl}/terms`,
+    `${baseUrl}/security`,
   ];
 
-  console.log(`📦 Discovered ${urlsToPush.length} total URLs (${models.length} models, ${articles.length} articles, 12 core pages).`);
+  const modelUrls = models.map((m) => `${baseUrl}/models/${m.slug}`);
+  const articleUrls = articles.map((a) => `${baseUrl}/articles/${a.slug}`);
 
-  // 1. IndexNow Push (if configured)
-  if (INDEXNOW_KEY) {
-    try {
-      const urlHost = new URL(SITE_URL).hostname;
-      console.log(`\n⚡ Submitting ${urlsToPush.length} URLs to IndexNow (Bing / Yandex / Seznam)...`);
-      const indexNowRes = await pushToIndexNow(urlHost, INDEXNOW_KEY, urlsToPush);
-      if (indexNowRes.ok) {
-        console.log(`✅ IndexNow push successful! (HTTP ${indexNowRes.status})`);
-      } else {
-        console.log(`⚠️ IndexNow response: HTTP ${indexNowRes.status}`);
-      }
-    } catch (inErr) {
-      console.warn(`⚠️ IndexNow error: ${inErr.message}`);
+  const allUrls = Array.from(new Set([
+    ...coreUrls,
+    ...modelUrls,
+    ...articleUrls,
+    ...comparisonUrls,
+  ]));
+
+  console.log(`📦 Discovered ${allUrls.length} total URLs:`);
+  console.log(`   - Core Pages: ${coreUrls.length}`);
+  console.log(`   - Models: ${modelUrls.length}`);
+  console.log(`   - Articles: ${articleUrls.length}`);
+  console.log(`   - Comparisons: ${comparisonUrls.length}`);
+
+  // 1. IndexNow Push (Instant discovery for Microsoft Bing, Yandex, Seznam, Naver)
+  const urlHost = new URL(baseUrl).hostname;
+  console.log(`\n⚡ Submitting ${allUrls.length} URLs to IndexNow (Bing / Yandex)...`);
+  console.log(`   Host: ${urlHost}`);
+  console.log(`   Key: ${INDEXNOW_KEY}`);
+  console.log(`   Key Location: https://${urlHost}/${INDEXNOW_KEY}.txt`);
+
+  try {
+    const indexNowRes = await pushToIndexNow(urlHost, INDEXNOW_KEY, allUrls);
+    if (indexNowRes.ok) {
+      console.log(`✅ IndexNow push successful! (HTTP ${indexNowRes.status} Accepted)`);
+    } else {
+      console.log(`⚠️ IndexNow response: HTTP ${indexNowRes.status}`, indexNowRes.body || indexNowRes.error);
     }
+  } catch (inErr) {
+    console.warn(`⚠️ IndexNow error: ${inErr.message}`);
   }
 
   // 2. Google Indexing API Push
   if (!SERVICE_ACCOUNT_EMAIL || !SERVICE_ACCOUNT_PRIVATE_KEY) {
-    console.log("\n⚠️ Note: GOOGLE_SERVICE_ACCOUNT_EMAIL or GOOGLE_SERVICE_ACCOUNT_PRIVATE_KEY is not configured yet in .env.local.");
-    console.log("👉 Dry-run mode completed successfully. To enable live auto-push to Google Indexing API:");
-    console.log("   1. Create a Service Account in Google Cloud Console with Indexing API enabled.");
-    console.log("   2. Add the Service Account email as an Owner in Google Search Console.");
+    console.log("\n⚠️ Note: GOOGLE_SERVICE_ACCOUNT_EMAIL or GOOGLE_SERVICE_ACCOUNT_PRIVATE_KEY is not configured in .env.local.");
+    console.log("👉 Dry-run mode for Google Indexing completed successfully.");
+    console.log("   To enable direct Google Indexing API pushes:");
+    console.log("   1. Enable 'Web Search Indexing API' in Google Cloud Console.");
+    console.log("   2. Create a Service Account, generate a JSON key, and add the email as Owner in Google Search Console.");
     console.log("   3. Set GOOGLE_SERVICE_ACCOUNT_EMAIL and GOOGLE_SERVICE_ACCOUNT_PRIVATE_KEY in .env.local\n");
-    console.log("Sample URLs ready for indexing:");
-    urlsToPush.slice(0, 10).forEach((u) => console.log(`   - ${u}`));
-    console.log(`   ... and ${urlsToPush.length - 10} more URLs.\n`);
+    console.log("Sample URLs queued:");
+    allUrls.slice(0, 10).forEach((u) => console.log(`   - ${u}`));
+    console.log(`   ... and ${allUrls.length - 10} more URLs.\n`);
     return;
   }
 
@@ -212,14 +277,24 @@ async function main() {
   try {
     const jwtToken = generateGoogleJwtToken(SERVICE_ACCOUNT_EMAIL, SERVICE_ACCOUNT_PRIVATE_KEY);
     const accessToken = await getGoogleAccessToken(jwtToken);
-    console.log("✅ Authenticated successfully! Pushing URLs to Google Indexing API...");
+    console.log("✅ Authenticated successfully! Pushing priority URLs to Google Indexing API...");
+
+    // Push high-priority URLs first (core pages, new models, new comparisons)
+    const priorityUrls = [
+      ...coreUrls,
+      `${baseUrl}/models/openai-gpt-6-astra-20260903`,
+      `${baseUrl}/models/google-gemini-3-8-flash-20260902`,
+      `${baseUrl}/models/alibaba-qwen-3-8-max-0902-20260902`,
+      ...comparisonUrls.slice(0, 10),
+      ...articleUrls.slice(0, 5),
+    ];
 
     let successCount = 0;
     let failCount = 0;
 
-    for (let i = 0; i < urlsToPush.length; i++) {
-      const url = urlsToPush[i];
-      process.stdout.write(`[${i + 1}/${urlsToPush.length}] Pushing ${url}... `);
+    for (let i = 0; i < priorityUrls.length; i++) {
+      const url = priorityUrls[i];
+      process.stdout.write(`[${i + 1}/${priorityUrls.length}] Pushing ${url}... `);
       const res = await pushUrlToGoogle(url, accessToken);
 
       if (res.ok) {
@@ -234,7 +309,7 @@ async function main() {
       await new Promise((r) => setTimeout(r, 100));
     }
 
-    console.log(`\n🎉 Indexing batch finished: ${successCount} pushed successfully, ${failCount} errors.`);
+    console.log(`\n🎉 Google Indexing batch finished: ${successCount} pushed successfully, ${failCount} errors.`);
   } catch (err) {
     console.error("❌ Google Indexing Error:", err.message);
   }
