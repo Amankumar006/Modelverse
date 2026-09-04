@@ -5,10 +5,55 @@ export interface BenchmarkItem {
   source?: string;
 }
 
+
+const METADATA_KEYS = new Set([
+  "source",
+  "source_type",
+  "sources",
+  "url",
+  "urls",
+  "notes",
+  "note",
+  "eval_date",
+  "date",
+  "created_at",
+  "updated_at",
+  "type",
+  "description",
+  "provider",
+  "status",
+]);
+
 export function normalizeBenchmarks(raw: unknown): BenchmarkItem[] {
   if (!raw) return [];
 
-  // Array of benchmark objects: [ { name: "...", score: 74.4, metric: "..." } ]
+  // 1. If wrapped in an object like { results: [ ... ] } or { benchmarks: [ ... ] } or { data: [ ... ] }
+  if (typeof raw === "object" && raw !== null && !Array.isArray(raw)) {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const record = raw as Record<string, any>;
+    const parentSource = typeof record.source === "string" ? record.source : (typeof record.url === "string" ? record.url : undefined);
+
+    const nestedArray = Array.isArray(record.results)
+      ? record.results
+      : Array.isArray(record.benchmarks)
+      ? record.benchmarks
+      : Array.isArray(record.data)
+      ? record.data
+      : null;
+
+    if (nestedArray) {
+      return normalizeBenchmarks(
+        nestedArray.map((item) => {
+          if (typeof item === "object" && item !== null && parentSource && !item.source && !item.url) {
+            return { ...item, source: parentSource };
+          }
+          return item;
+        })
+      );
+    }
+  }
+
+  // 2. Array of benchmark objects: [ { name: "...", score: 74.4, metric: "..." } ]
   if (Array.isArray(raw)) {
     return raw
       .map((item, idx) => {
@@ -31,9 +76,10 @@ export function normalizeBenchmarks(raw: unknown): BenchmarkItem[] {
       .filter((b) => b.score !== "" && b.score !== undefined && b.score !== null);
   }
 
-  // Dictionary object: { "MMLU": 88.7, "GPQA": { score: 65 } }
+  // 3. Dictionary object: { "MMLU": 88.7, "GPQA": { score: 65 } }
   if (typeof raw === "object" && raw !== null) {
     return Object.entries(raw)
+      .filter(([key]) => !METADATA_KEYS.has(key.toLowerCase()))
       .map(([key, val]) => {
         if (typeof val === "object" && val !== null) {
           // eslint-disable-next-line @typescript-eslint/no-explicit-any
