@@ -47,6 +47,25 @@ export async function submitToIndexNow(
   };
 
   try {
+    // Bing is the primary IndexNow operator and immediately verifies the key
+    const bingRes = await fetch("https://www.bing.com/indexnow", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json; charset=utf-8",
+      },
+      body: JSON.stringify(payload),
+    });
+
+    if (bingRes.ok || bingRes.status === 200 || bingRes.status === 202) {
+      return {
+        ok: true,
+        status: bingRes.status,
+        message: "URLs successfully submitted to Microsoft Bing IndexNow",
+        urlCount: cleanUrls.length,
+      };
+    }
+
+    // Fallback to IndexNow API hub
     const res = await fetch("https://api.indexnow.org/indexnow", {
       method: "POST",
       headers: {
@@ -55,7 +74,6 @@ export async function submitToIndexNow(
       body: JSON.stringify(payload),
     });
 
-    // 200: OK, 202: Accepted (valid key and URLs received by IndexNow)
     const isSuccess = res.ok || res.status === 200 || res.status === 202;
     const resText = await res.text().catch(() => "");
 
@@ -63,7 +81,7 @@ export async function submitToIndexNow(
       ok: isSuccess,
       status: res.status,
       message: isSuccess
-        ? "URLs successfully submitted to IndexNow (Bing & participating search engines)"
+        ? "URLs successfully submitted to IndexNow"
         : resText || `HTTP ${res.status}`,
       urlCount: cleanUrls.length,
     };

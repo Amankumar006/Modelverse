@@ -143,21 +143,33 @@ async function pushUrlToGoogle(url, accessToken, type = "URL_UPDATED") {
  * Publish batch of URLs to IndexNow (Bing, Yandex, Seznam, Naver)
  */
 async function pushToIndexNow(host, key, urlList) {
+  const payload = {
+    host,
+    key,
+    keyLocation: `https://${host}/${key}.txt`,
+    urlList,
+  };
+
   try {
+    const bingRes = await fetch("https://www.bing.com/indexnow", {
+      method: "POST",
+      headers: { "Content-Type": "application/json; charset=utf-8" },
+      body: JSON.stringify(payload),
+    });
+
+    if (bingRes.ok || bingRes.status === 200 || bingRes.status === 202) {
+      return { ok: true, status: bingRes.status, provider: "Microsoft Bing" };
+    }
+
     const res = await fetch("https://api.indexnow.org/indexnow", {
       method: "POST",
       headers: { "Content-Type": "application/json; charset=utf-8" },
-      body: JSON.stringify({
-        host,
-        key,
-        keyLocation: `https://${host}/${key}.txt`,
-        urlList,
-      }),
+      body: JSON.stringify(payload),
     });
 
     const isSuccess = res.ok || res.status === 200 || res.status === 202;
     const body = await res.text().catch(() => "");
-    return { ok: isSuccess, status: res.status, body };
+    return { ok: isSuccess, status: res.status, provider: "IndexNow Hub", body };
   } catch (err) {
     return { ok: false, status: 500, error: err.message };
   }
