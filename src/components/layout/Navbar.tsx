@@ -34,7 +34,7 @@ export default function Navbar() {
           >
             <div className="flex items-center gap-2 min-w-0">
               <Search size={14} className="text-[var(--muted)] group-hover:text-[var(--accent)] transition-colors shrink-0" />
-              <span className="truncate">Search 376+ models...</span>
+              <span className="truncate">Search models...</span>
             </div>
             <kbd className="inline-flex items-center gap-0.5 text-[10px] px-1.5 py-0.5 rounded bg-[var(--bg)] border border-[var(--muted)]/20 font-mono text-[var(--muted)] shrink-0">
               <Command size={10} />K
@@ -76,7 +76,7 @@ export default function Navbar() {
           >
             <div className="flex items-center gap-2">
               <Search size={15} />
-              <span>Search 376+ foundation models...</span>
+              <span>Search foundation models...</span>
             </div>
             <kbd className="text-[10px] px-1.5 py-0.5 rounded bg-[var(--bg)] border border-[var(--muted)]/20 font-mono">
               ⌘K

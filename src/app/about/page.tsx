@@ -2,6 +2,9 @@ import React from "react";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight, ShieldCheck, Sparkles, Database, Layers, Mail, CheckCircle2 } from "lucide-react";
+import { getModelCount } from "@/lib/supabase/models";
+
+export const revalidate = 60;
 
 export const metadata: Metadata = {
   title: "About Modelverse — The Open Foundation Model Catalog",
@@ -24,7 +27,10 @@ export const metadata: Metadata = {
   },
 };
 
-export default function AboutPage() {
+export default async function AboutPage() {
+  const modelCount = await getModelCount();
+  const countText = modelCount > 0 ? `${modelCount}+` : "386+";
+
   return (
     <main className="w-full max-w-4xl mx-auto px-4 sm:px-6 md:px-8 py-12 md:py-16 flex flex-col gap-10">
       <div>
@@ -112,7 +118,7 @@ export default function AboutPage() {
       <div className="p-8 rounded-[var(--radius-card)] bg-[var(--accent-soft)]/20 border border-[var(--accent)]/30 flex flex-col sm:flex-row items-center justify-between gap-6 text-center sm:text-left">
         <div>
           <h3 className="text-lg font-bold text-[var(--text)]">Explore the Model Catalog</h3>
-          <p className="text-xs text-[var(--muted)] mt-1">Browse and filter 376+ foundation models by parameters and context.</p>
+          <p className="text-xs text-[var(--muted)] mt-1">Browse and filter {countText} foundation models by parameters and context.</p>
         </div>
         <Link
           href="/models"

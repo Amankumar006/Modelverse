@@ -28,7 +28,7 @@ export const metadata: Metadata = {
     template: "%s — Modelverse",
   },
   description:
-    "Explore 376+ foundation models, verified parameters, context windows, benchmark figures, and real-time AI news.",
+    "Explore 386+ foundation models, verified parameters, context windows, benchmark figures, and real-time AI news.",
   keywords: [
     "Foundation Models",
     "AI Models Catalog",
@@ -71,13 +71,13 @@ export const metadata: Metadata = {
     url: "https://www.themodelverse.in",
     siteName: "Modelverse",
     title: "Modelverse — The Open Foundation Model Catalog",
-    description: "Explore 376+ foundation models, parameters, context windows, and verified benchmarks.",
+    description: "Explore 386+ foundation models, parameters, context windows, and verified benchmarks.",
     images: [{ url: "/logos/social-avatar-1024.png", width: 1024, height: 1024, alt: "Modelverse Catalog" }],
   },
   twitter: {
     card: "summary_large_image",
     title: "Modelverse — The Open Foundation Model Catalog",
-    description: "Explore 376+ foundation models, parameters, context windows, and verified benchmarks.",
+    description: "Explore 386+ foundation models, parameters, context windows, and verified benchmarks.",
     creator: "@themodelverse",
     images: ["/logos/social-avatar-1024.png"],
   },

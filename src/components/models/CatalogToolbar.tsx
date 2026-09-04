@@ -103,7 +103,7 @@ export default function CatalogToolbar({
           <input
             ref={searchInputRef}
             type="text"
-            placeholder="Search 376+ models by name, lab... (Press '/' or 'Cmd+K')"
+            placeholder={`Search ${totalModels ? `${totalModels}+ models` : "models"} by name, lab... (Press '/' or 'Cmd+K')`}
             value={searchQuery}
             onChange={(e) => onSearchChange(e.target.value)}
             className="w-full bg-[var(--card-bg)] border border-[var(--muted)]/15 rounded-[var(--radius-control)] pl-9 pr-8 py-2.5 text-xs text-[var(--text)] placeholder:text-[var(--muted)]/70 focus:outline-none focus:border-[var(--accent)] transition-all shadow-[var(--shadow-card)] font-sans"

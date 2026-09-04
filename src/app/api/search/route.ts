@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { getModels } from "@/lib/supabase/models";
+import { getModels, getModelCount } from "@/lib/supabase/models";
 import { getArticles } from "@/lib/supabase/articles";
 import { z } from 'zod';
 
@@ -35,24 +35,28 @@ export async function GET(request: NextRequest) {
 
     if (!q) {
       // Return featured / top items if query is empty
-      const [modelsRes, articlesRes] = await Promise.all([
+      const [modelsRes, articlesRes, totalCount] = await Promise.all([
         getModels({ limit: 6, isActive: true }),
         getArticles({ limit: 4, isPublished: true }),
+        getModelCount(),
       ]);
 
       responseData = {
         models: modelsRes.models,
         articles: articlesRes.articles,
+        totalModels: totalCount,
       };
     } else {
-      const [modelsRes, articlesRes] = await Promise.all([
+      const [modelsRes, articlesRes, totalCount] = await Promise.all([
         getModels({ search: q, limit: 8, isActive: true }),
         getArticles({ search: q, limit: 5, isPublished: true }),
+        getModelCount(),
       ]);
 
       responseData = {
         models: modelsRes.models,
         articles: articlesRes.articles,
+        totalModels: totalCount,
       };
     }
 

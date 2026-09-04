@@ -1,6 +1,6 @@
 import React from "react";
 import type { Metadata } from "next";
-import { getModels } from "@/lib/supabase/models";
+import { getModels, getModelCount } from "@/lib/supabase/models";
 import ModelCatalog from "@/components/models/ModelCatalog";
 import ModelsPageHeader from "@/components/models/ModelsPageHeader";
 import { BreadcrumbJsonLd, ItemListJsonLd } from "@/components/seo/JsonLd";
@@ -19,8 +19,11 @@ export async function generateMetadata({
   const provider = typeof resolved.provider === "string" && resolved.provider !== "All" ? resolved.provider : null;
   const search = typeof resolved.search === "string" && resolved.search.trim() ? resolved.search.trim() : null;
 
+  const modelCount = await getModelCount();
+  const countText = modelCount > 0 ? `${modelCount}+` : "386+";
+
   let title = "AI Model Catalog & Foundation Model Registry";
-  let description = "Comprehensive directory of 376+ foundation models, LLMs, multimodal, vision, and code models with verified parameters, context windows, and benchmarks.";
+  let description = `Comprehensive directory of ${countText} foundation models, LLMs, multimodal, vision, and code models with verified parameters, context windows, and benchmarks.`;
 
   if (category) {
     title = `${category} AI Models & Foundation Architecture Directory`;

@@ -8,7 +8,7 @@ import CommandPaletteItem, { ActionItem } from "./CommandPaletteItem";
 import type { ModelRow, ArticleRow } from "@/types/database";
 
 const QUICK_ACTIONS: ActionItem[] = [
-  { id: "models", title: "Browse Model Catalog", subtitle: "Explore 370+ indexed frontier & open models", icon: <Compass size={16} />, href: "/models" },
+  { id: "models", title: "Browse Model Catalog", subtitle: "Explore indexed frontier & open models", icon: <Compass size={16} />, href: "/models" },
   { id: "compare", title: "Compare Models Matrix", subtitle: "Side-by-side technical specification diff", icon: <Scale size={16} />, href: "/compare" },
   { id: "timeline", title: "Releases Timeline", subtitle: "Chronological model release history", icon: <Clock size={16} />, href: "/timeline" },
   { id: "trending", title: "Trending Leaderboard", subtitle: "Top ranked models and community benchmarks", icon: <TrendingUp size={16} />, href: "/trending" },
@@ -22,6 +22,7 @@ function CommandPaletteContent({ onClose }: { onClose: () => void }) {
   const [activeTab, setActiveTab] = useState<"all" | "models" | "articles" | "actions">("all");
   const [models, setModels] = useState<ModelRow[]>([]);
   const [articles, setArticles] = useState<ArticleRow[]>([]);
+  const [totalModels, setTotalModels] = useState<number | null>(null);
   const [loading, setLoading] = useState(false);
   const [rawSelectedIndex, setRawSelectedIndex] = useState(0);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -40,6 +41,9 @@ function CommandPaletteContent({ onClose }: { onClose: () => void }) {
           const data = await res.json();
           setModels(data.models || []);
           setArticles(data.articles || []);
+          if (typeof data.totalModels === "number") {
+            setTotalModels(data.totalModels);
+          }
         }
       } catch {
         // Ignored aborted fetches
@@ -96,7 +100,7 @@ function CommandPaletteContent({ onClose }: { onClose: () => void }) {
         <input
           ref={inputRef}
           type="text"
-          placeholder="Search 370+ foundation models, labs, articles, or actions..."
+          placeholder="Search foundation models, labs, articles, or actions..."
           value={query}
           onChange={(e) => {
             setQuery(e.target.value);
@@ -160,7 +164,7 @@ function CommandPaletteContent({ onClose }: { onClose: () => void }) {
           <span className="inline-flex items-center gap-1"><kbd className="px-1.5 py-0.5 rounded bg-[var(--bg)] border border-[var(--muted)]/20 font-mono text-[10px]">ESC</kbd> Close</span>
         </div>
         <span className="text-[10px] font-mono text-[var(--accent)] font-semibold flex items-center gap-1">
-          <Check size={11} /> 376 Live Models
+          <Check size={11} /> {totalModels ? `${totalModels} Live Models` : "Live Catalog"}
         </span>
       </div>
     </div>
