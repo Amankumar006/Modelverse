@@ -4,7 +4,7 @@ title: "Claude Fable 5.1 & Claude Mythos 5.1: Frontier Reasoning and Scientific 
 category: "Architecture"
 summary: "An in-depth architectural and capability analysis of Anthropic's Claude Fable 5.1 and Claude Mythos 5.1, exploring native 1M token context scaling, advanced multi-turn hypothesis verification, agentic tool dispatch, and statistical text watermarking."
 author:
-  name: "Modelverse Research"
+  name: "TheModelverse Research"
   role: "AI Systems Engineer"
 source_name: "Anthropic"
 source_url: "https://www.anthropic.com/news"

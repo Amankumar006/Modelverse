@@ -17,7 +17,7 @@ export default function TrendingClient({ initialModels }: TrendingClientProps) {
       {/* Score Explainer Toggle */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-3 border-b border-[var(--muted)]/10">
         <span className="text-xs text-[var(--muted)]">
-          Ranked by Modelverse Benchmark Performance & Context Capacity Index
+          Ranked by TheModelverse Benchmark Performance & Context Capacity Index
         </span>
         <button
           onClick={() => setShowExplainer(!showExplainer)}

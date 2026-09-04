@@ -13,7 +13,7 @@ interface MediumArticleFooterProps {
 }
 
 export default function MediumArticleFooter({
-  sourceName = "Modelverse Intelligence",
+  sourceName = "TheModelverse Intelligence",
   category = "Architecture",
   slug,
   relatedArticles = [],
@@ -111,7 +111,7 @@ export default function MediumArticleFooter({
         <div className="pt-6">
           <div className="flex items-center justify-between mb-6">
             <h3 className="text-lg sm:text-xl font-bold text-[var(--text)] tracking-tight">
-              Recommended from Modelverse
+              Recommended from TheModelverse
             </h3>
             <Link
               href="/articles"

@@ -13,15 +13,15 @@ export const revalidate = 60;
 export async function generateMetadata(): Promise<Metadata> {
   const count = await getModelCount();
   const countText = count > 0 ? `${count}+` : "386+";
-  const description = `Explore ${countText} foundation models, verified parameters, context windows, benchmark figures, and real-time AI news.`;
+  const description = `Explore ${countText} foundation models, verified parameters, context windows, benchmark figures, and real-time AI news on TheModelverse.`;
 
   return {
     description,
     openGraph: {
-      description: `Explore ${countText} foundation models, parameters, context windows, and verified benchmarks.`,
+      description: `Explore ${countText} foundation models, parameters, context windows, and verified benchmarks on TheModelverse.`,
     },
     twitter: {
-      description: `Explore ${countText} foundation models, parameters, context windows, and verified benchmarks.`,
+      description: `Explore ${countText} foundation models, parameters, context windows, and verified benchmarks on TheModelverse.`,
     },
   };
 }
@@ -42,7 +42,7 @@ export default async function HomePage() {
   return (
     <>
       <DatasetJsonLd
-        name="Modelverse Foundation Models & Technical Specifications Dataset"
+        name="TheModelverse Foundation Models & Technical Specifications Dataset"
         description="Comprehensive dataset and benchmark ledger of frontier artificial intelligence foundation models with audited parameters, context windows, and pricing."
         modelCount={totalModels}
         url="/"

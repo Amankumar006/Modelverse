@@ -2,6 +2,8 @@ import React from "react";
 import type { ModelRow } from "@/types/database";
 import type { ArticleRow } from "@/types/database";
 import { normalizeBenchmarks } from "@/lib/benchmarks";
+import { normalizeArticleSourceName } from "@/lib/sanitize-article-content";
+
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://www.themodelverse.in";
 
@@ -13,8 +15,8 @@ export function WebSiteJsonLd() {
         "@type": "WebSite",
         "@id": `${SITE_URL}/#website`,
         url: SITE_URL,
-        name: "Modelverse",
-        description: "The Open Foundation Model Catalog, Technical Architecture Specifications, and Benchmark Ledger.",
+        name: "TheModelverse",
+        description: "The Open Foundation Model Catalog, LLM Benchmark Database & Hardware Sizing Ledger.",
         potentialAction: {
           "@type": "SearchAction",
           target: {
@@ -27,7 +29,7 @@ export function WebSiteJsonLd() {
       {
         "@type": "Organization",
         "@id": `${SITE_URL}/#organization`,
-        name: "Modelverse",
+        name: "TheModelverse",
         url: SITE_URL,
         logo: {
           "@type": "ImageObject",
@@ -38,6 +40,7 @@ export function WebSiteJsonLd() {
         sameAs: [
           "https://github.com/Amankumar006/Modelverse",
           "https://x.com/themodelverse",
+          "https://www.reddit.com/r/themodelversebot_dev/",
         ],
       },
     ],
@@ -106,7 +109,7 @@ export function ItemListJsonLd({
 }
 
 export function DatasetJsonLd({
-  name = "Modelverse Foundation Models & Benchmark Dataset",
+  name = "TheModelverse Foundation Model Catalog & LLM Benchmark Dataset",
   description = "Fact-checked technical specifications, context windows, parameter configurations, benchmark scores, licensing terms, and API pricing for artificial intelligence foundation models.",
   modelCount,
   url = "/models",
@@ -138,12 +141,12 @@ export function DatasetJsonLd({
     ],
     creator: {
       "@type": "Organization",
-      name: "Modelverse Research",
+      name: "TheModelverse Research",
       url: SITE_URL,
     },
     publisher: {
       "@type": "Organization",
-      name: "Modelverse",
+      name: "TheModelverse",
       url: SITE_URL,
       logo: {
         "@type": "ImageObject",
@@ -214,7 +217,7 @@ export function ModelJsonLd({ model }: { model: ModelRow }) {
     },
     publisher: {
       "@type": "Organization",
-      name: "Modelverse",
+      name: "TheModelverse",
       url: SITE_URL,
     },
     datePublished: model.release_date || model.created_at,
@@ -379,6 +382,7 @@ export function ArticleJsonLd({ article }: { article: ArticleRow }) {
   const authorUrl = article.source_url?.startsWith("http")
     ? article.source_url
     : `${SITE_URL}/articles`;
+  const authorName = normalizeArticleSourceName(article.source_name, "TheModelverse Intelligence");
 
   const schema = {
     "@context": "https://schema.org",
@@ -397,13 +401,13 @@ export function ArticleJsonLd({ article }: { article: ArticleRow }) {
     author: [
       {
         "@type": "Organization",
-        name: article.source_name || "Modelverse Intelligence",
+        name: authorName,
         url: authorUrl,
       },
     ],
     publisher: {
       "@type": "Organization",
-      name: "Modelverse",
+      name: "TheModelverse",
       url: SITE_URL,
       logo: {
         "@type": "ImageObject",
@@ -482,7 +486,7 @@ export function ComparisonJsonLd({
     url: fullUrl,
     publisher: {
       "@type": "Organization",
-      name: "Modelverse",
+      name: "TheModelverse",
       url: SITE_URL,
     },
     about: [

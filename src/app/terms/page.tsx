@@ -4,20 +4,20 @@ import Link from "next/link";
 import { ArrowLeft, FileText, CheckCircle2, AlertTriangle, Copyright } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Terms of Service — Modelverse",
-  description: "Terms of service, acceptable usage guidelines, benchmark accuracy disclaimers, and advertising policies for Modelverse.",
+  title: "Terms of Service & Usage Guidelines",
+  description: "Terms of service, acceptable usage guidelines, benchmark accuracy disclaimers, and advertising policies for TheModelverse.",
   alternates: {
     canonical: "/terms",
   },
   openGraph: {
-    title: "Terms of Service — Modelverse",
-    description: "Terms of service, acceptable usage guidelines, benchmark accuracy disclaimers, and advertising policies for Modelverse.",
+    title: "Terms of Service & Usage Guidelines | TheModelverse",
+    description: "Terms of service, acceptable usage guidelines, benchmark accuracy disclaimers, and advertising policies for TheModelverse.",
     url: "/terms",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Terms of Service — Modelverse",
-    description: "Terms of service, acceptable usage guidelines, benchmark accuracy disclaimers, and advertising policies for Modelverse.",
+    title: "Terms of Service & Usage Guidelines | TheModelverse",
+    description: "Terms of service, acceptable usage guidelines, benchmark accuracy disclaimers, and advertising policies for TheModelverse.",
   },
 };
 
@@ -50,7 +50,7 @@ export default function TermsPage() {
             <h2>1. Agreement to Terms</h2>
           </div>
           <p>
-            By accessing or browsing <strong>Modelverse</strong> (https://www.themodelverse.in), you acknowledge that you have read, understood, and agreed to be bound by these Terms of Service, our Privacy Policy, and all applicable global laws and regulations.
+            By accessing or browsing <strong>TheModelverse</strong> (https://www.themodelverse.in), you acknowledge that you have read, understood, and agreed to be bound by these Terms of Service, our Privacy Policy, and all applicable global laws and regulations.
           </p>
         </section>
 
@@ -69,7 +69,7 @@ export default function TermsPage() {
         <section className="space-y-2 p-4 rounded-[var(--radius-control)] bg-[var(--bg)] border border-[var(--muted)]/10">
           <h2 className="text-base font-bold text-[var(--text)]">3. Advertising &amp; Sponsorship Policy</h2>
           <p>
-            Modelverse may display third-party advertisements delivered by Google AdSense and programmatic networks. Advertisements are clearly distinguished from objective benchmark scores, editorial digests, and model metadata. Editorial coverage and model catalog inclusion remain 100% independent and unbiased.
+            TheModelverse may display third-party advertisements delivered by Google AdSense and programmatic networks. Advertisements are clearly distinguished from objective benchmark scores, editorial digests, and model metadata. Editorial coverage and model catalog inclusion remain 100% independent and unbiased.
           </p>
         </section>
 
@@ -80,7 +80,7 @@ export default function TermsPage() {
             <h2>4. Intellectual Property &amp; Trademarks</h2>
           </div>
           <p>
-            All registered trademarks, company names, model trademarks (e.g. OpenAI, Anthropic, Google DeepMind, Meta, Mistral, DeepSeek), and technical paper excerpts belong to their respective copyright holders. Modelverse does not claim ownership of third-party model weights or laboratory research papers.
+            All registered trademarks, company names, model trademarks (e.g. OpenAI, Anthropic, Google DeepMind, Meta, Mistral, DeepSeek), and technical paper excerpts belong to their respective copyright holders. TheModelverse does not claim ownership of third-party model weights or laboratory research papers.
           </p>
         </section>
 

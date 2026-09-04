@@ -18,15 +18,15 @@ export default function ModelsPageHeader({
       <div className="max-w-3xl space-y-2">
         <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[var(--accent-soft)] text-[var(--accent)] text-xs font-bold uppercase tracking-wider shadow-sm">
           <Sparkles size={13} className="shrink-0" />
-          <span>Frontier Architecture Registry</span>
+          <span>TheModelverse Architecture Registry</span>
         </div>
 
         <h1 className="text-3xl sm:text-4xl 2xl:text-5xl font-extrabold text-[var(--text)] tracking-tight">
-          Foundation Models Archive
+          Foundation Model Catalog
         </h1>
 
         <p className="text-xs sm:text-sm text-[var(--muted)] leading-relaxed max-w-2xl">
-          Filter and compare frontier foundation models, parameter counts, context architectures, commercial API pricing, and benchmark scores across {totalProviders} global AI laboratories.
+          Filter and compare the authoritative Foundation Model Catalog: parameter counts, context architectures, LLM benchmark evaluations, and commercial API pricing across {totalProviders} global AI laboratories.
         </p>
       </div>
 

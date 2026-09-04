@@ -22,18 +22,18 @@ export async function generateMetadata({
   const modelCount = await getModelCount();
   const countText = modelCount > 0 ? `${modelCount}+` : "386+";
 
-  let title = "AI Model Catalog & Foundation Model Registry";
-  let description = `Comprehensive directory of ${countText} foundation models, LLMs, multimodal, vision, and code models with verified parameters, context windows, and benchmarks.`;
+  let title = "Foundation Model Catalog & Architecture Directory";
+  let description = `Comprehensive directory of ${countText} foundation models, LLMs, multimodal, vision, and code models with verified parameters, context windows, and benchmarks on TheModelverse.`;
 
   if (category) {
     title = `${category} AI Models & Foundation Architecture Directory`;
-    description = `Explore verified ${category.toLowerCase()} foundation models, parameter counts, context architectures, and benchmark evaluations on Modelverse.`;
+    description = `Explore verified ${category.toLowerCase()} foundation models, parameter counts, context architectures, and benchmark evaluations on TheModelverse.`;
   } else if (provider) {
     title = `${provider} AI Models, Parameters & Pricing Ledger`;
-    description = `Browse all foundation models and API endpoints developed by ${provider} with verified benchmarks and context capacities.`;
+    description = `Browse all foundation models and API endpoints developed by ${provider} with verified benchmarks and context capacities on TheModelverse.`;
   } else if (search) {
     title = `Search Results for "${search}" — Foundation Models`;
-    description = `Discover foundation models matching "${search}" across all AI research laboratories.`;
+    description = `Discover foundation models matching "${search}" across all AI research laboratories on TheModelverse.`;
   }
 
   const canonicalUrl = category
@@ -57,13 +57,13 @@ export async function generateMetadata({
       canonical: canonicalUrl,
     },
     openGraph: {
-      title,
+      title: `${title} | TheModelverse`,
       description,
       url: canonicalUrl,
     },
     twitter: {
       card: "summary_large_image",
-      title,
+      title: `${title} | TheModelverse`,
       description,
     },
   };
@@ -97,7 +97,7 @@ export default async function ModelsPage({ searchParams }: ModelsPageProps) {
     <>
       <BreadcrumbJsonLd items={breadcrumbs} />
       <DatasetJsonLd
-        name="Modelverse Foundation Models & Technical Specifications Dataset"
+        name="TheModelverse Foundation Models & Technical Specifications Dataset"
         description="Fact-checked index and technical dataset of foundation models, LLMs, vision-language models, and code models with audited parameters, context windows, benchmark figures, and API rates."
         modelCount={models.length}
         url="/models"

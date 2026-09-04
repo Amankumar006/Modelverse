@@ -39,10 +39,10 @@ export async function generateMetadata({
     return { title: "Model Not Found" };
   }
 
-  const title = `${model.name} (${model.provider}) — Architecture, Benchmarks & Specs`;
+  const title = `${model.name} (${model.provider}) — Architecture, Benchmarks & Hardware Sizing`;
   const description =
     model.description ||
-    `Verified specifications, parameter counts, context window size, benchmarks, and API quickstarts for ${model.name}.`;
+    `Verified specifications, parameter counts, context window size, benchmarks, and API quickstarts for ${model.name} on TheModelverse.`;
 
   return {
     title,
@@ -71,14 +71,14 @@ export async function generateMetadata({
       },
     },
     openGraph: {
-      title,
+      title: `${title} | TheModelverse`,
       description,
       type: "article",
       url: `/models/${slug}`,
     },
     twitter: {
       card: "summary_large_image",
-      title,
+      title: `${title} | TheModelverse`,
       description,
     },
   };

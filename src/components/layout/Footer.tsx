@@ -54,7 +54,7 @@ export default function Footer() {
         <div className="col-span-2 sm:col-span-2 md:col-span-1 space-y-4">
           <ModelverseLogo height={28} />
           <p className="text-xs text-[var(--muted)] leading-relaxed">
-            The open intelligence catalog for foundation models, benchmarks, specs, and breaking AI research.
+            The open foundation model catalog, LLM benchmark database, hardware sizing, and AI intelligence.
           </p>
         </div>
 
@@ -85,7 +85,7 @@ export default function Footer() {
 
       {/* Bottom Bar */}
       <div className="max-w-7xl 2xl:max-w-[1600px] 3xl:max-w-[1920px] 4xl:max-w-[2400px] mx-auto border-t border-[var(--muted)]/10 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-[var(--muted)] font-mono">
-        <p>&copy; {currentYear} Modelverse. All rights reserved.</p>
+        <p>&copy; {currentYear} TheModelverse. All rights reserved.</p>
         <div className="flex flex-wrap items-center gap-6">
           <Link href="/about" className="hover:text-[var(--text)] transition-colors">
             About

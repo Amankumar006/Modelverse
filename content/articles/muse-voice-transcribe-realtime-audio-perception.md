@@ -4,7 +4,7 @@ title: "Muse Voice Transcribe: Meta's Real-Time Autoregressive Audio Perception 
 category: "Architecture"
 summary: "Meta releases Muse Voice Transcribe, an autoregressive streaming audio model executing real-time ASR, 20+ speaker diarization, and endpointing at 80ms chunk latency with native code-switching."
 author:
-  name: "Modelverse Research"
+  name: "TheModelverse Research"
   role: "AI Systems Engineer"
 source_name: "Meta AI Research"
 source_url: "https://research.meta.ai/blog/introducing-muse-voice-transcribe"

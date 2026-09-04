@@ -51,9 +51,9 @@ export async function GET() {
   const rssXml = `<?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Modelverse — AI Models and Articles</title>
+    <title>TheModelverse — Foundation Model Catalog &amp; LLM Benchmark Database</title>
     <link>${baseUrl}</link>
-    <description>Living catalogue of artificial intelligence models, parameters, context windows, documentation, and tech articles.</description>
+    <description>Living catalog of foundation models, LLM benchmarks, hardware sizing, and AI intelligence digests.</description>
     <language>en-us</language>
     <atom:link href="${baseUrl}/feed.xml" rel="self" type="application/rss+xml"/>
     ${itemsXml}

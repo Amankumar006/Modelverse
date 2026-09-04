@@ -18,7 +18,7 @@ export default function ArticleReferencedModels({ models }: ArticleReferencedMod
       </div>
 
       <p className="text-xs sm:text-sm text-[var(--muted)] mb-5 leading-relaxed">
-        This technical digest directly references verified architecture specifications documented in the Modelverse catalog.
+        This technical digest directly references verified architecture specifications documented in TheModelverse Foundation Model Catalog.
       </p>
 
       <div className="space-y-4">

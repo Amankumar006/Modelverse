@@ -74,7 +74,7 @@ export default function ArticleCard({ article }: ArticleCardProps) {
         {/* Card Footer */}
         <div className="pt-3 border-t border-[var(--muted)]/10 flex items-center justify-between text-xs">
           <span className="text-[11px] text-[var(--muted)] font-medium truncate max-w-[140px]">
-            {article.source_name || "Modelverse Intelligence"}
+            {article.source_name || "TheModelverse Intelligence"}
           </span>
 
           <span className="inline-flex items-center gap-1 text-[11px] font-bold text-[var(--accent)] group-hover:translate-x-1 transition-transform">

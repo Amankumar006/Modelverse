@@ -2,9 +2,9 @@ import type { MetadataRoute } from "next";
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: "Modelverse",
-    short_name: "Modelverse",
-    description: "The Open Foundation Model Catalog and Intelligence Platform",
+    name: "TheModelverse",
+    short_name: "TheModelverse",
+    description: "The Foundation Model Catalog, LLM Benchmark Database & Hardware Sizing",
     start_url: "/",
     display: "standalone",
     background_color: "#141414",

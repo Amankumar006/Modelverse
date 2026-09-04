@@ -70,13 +70,13 @@ export function BenchmarkDiff({
     <div className="flex flex-col gap-6 p-6 sm:p-8 rounded-2xl border border-[var(--muted)]/15 bg-[var(--card-bg)] shadow-sm">
       <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[var(--accent)]">
         <Award size={15} />
-        <span>Standardized Benchmarks</span>
+        <span>LLM Benchmark Database</span>
       </div>
 
       <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-2 pb-4 border-b border-[var(--muted)]/10">
         <div>
           <h3 className="text-xl sm:text-2xl font-black text-[var(--text)] tracking-tight">
-            Benchmark Showdown & Head-to-Head Deltas
+            LLM Benchmark Showdown &amp; Head-to-Head Deltas
           </h3>
           <p className="text-xs sm:text-sm text-[var(--muted)] mt-1">
             Normalized evaluation scores across code generation, advanced reasoning, mathematics, and multidisciplinary exams.

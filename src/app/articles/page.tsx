@@ -8,8 +8,8 @@ import { BreadcrumbJsonLd, ItemListJsonLd } from "@/components/seo/JsonLd";
 export const revalidate = 60;
 
 export const metadata: Metadata = {
-  title: "AI Research & Intelligence Hub — Modelverse",
-  description: "Comprehensive, fact-checked deep dives into frontier foundation model architectures, reinforcement learning paradigms, and AI research papers.",
+  title: "AI Model Architecture & Intelligence Hub",
+  description: "Comprehensive, fact-checked deep dives into frontier foundation model architectures, reinforcement learning paradigms, and AI research papers on TheModelverse.",
   keywords: [
     "AI news",
     "foundation model papers",
@@ -23,14 +23,14 @@ export const metadata: Metadata = {
     canonical: "/articles",
   },
   openGraph: {
-    title: "AI Research & Intelligence Hub — Modelverse",
-    description: "Comprehensive, fact-checked deep dives into frontier foundation model architectures, reinforcement learning paradigms, and AI research papers.",
+    title: "AI Model Architecture & Intelligence Hub | TheModelverse",
+    description: "Comprehensive, fact-checked deep dives into frontier foundation model architectures, reinforcement learning paradigms, and AI research papers on TheModelverse.",
     url: "/articles",
   },
   twitter: {
     card: "summary_large_image",
-    title: "AI Research & Intelligence Hub — Modelverse",
-    description: "Comprehensive, fact-checked deep dives into frontier foundation model architectures, reinforcement learning paradigms, and AI research papers.",
+    title: "AI Model Architecture & Intelligence Hub | TheModelverse",
+    description: "Comprehensive, fact-checked deep dives into frontier foundation model architectures, reinforcement learning paradigms, and AI research papers on TheModelverse.",
   },
 };
 

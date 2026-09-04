@@ -49,3 +49,6 @@ next-env.d.ts
 # temp & cli caches
 .temp/
 supabase/.temp/
+.agents/*
+!.agents/rules/
+!.agents/skills/

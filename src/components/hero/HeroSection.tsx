@@ -41,19 +41,18 @@ export default function HeroSection({
         <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-[var(--radius-pill)] bg-[var(--accent-soft)] text-[var(--accent)] text-xs font-semibold mb-6 shadow-sm">
           <Sparkles size={14} className="shrink-0" />
           <span className="tabular-nums font-mono">
-            {totalModels > 0 ? `${totalModels} foundation models` : "The Open Model Catalog"} • {totalArticles > 0 ? `${totalArticles} articles` : "Real-time AI Intelligence"}
+            {totalModels > 0 ? `${totalModels} foundation models` : "TheModelverse Catalog"} • {totalArticles > 0 ? `${totalArticles} research digests` : "LLM Benchmark Database"}
           </span>
         </div>
 
         {/* Main Headline */}
         <h1 className="text-3xl sm:text-5xl md:text-6xl 2xl:text-7xl font-extrabold tracking-tight text-[var(--text)] leading-[1.1] mb-4">
-          Every AI Model. <br className="hidden sm:inline" />
-          <span className="text-[var(--accent)]">Every Release.</span>
+          The Foundation Model Catalog & LLM Benchmark Database
         </h1>
 
         {/* Subtext */}
         <p className="text-sm sm:text-base 2xl:text-lg text-[var(--muted)] leading-relaxed max-w-lg 2xl:max-w-xl mb-8">
-          From frontier closed APIs to open-weight breakthroughs — a living, fact-checked archive of parameters, context windows, and primary documentation.
+          TheModelverse is the living, fact-checked directory of AI model architecture &amp; intelligence, verified benchmark figures, context windows, and hardware sizing.
         </p>
 
         {/* Search Input Form */}
@@ -65,9 +64,9 @@ export default function HeroSection({
 
           <input
             type="text"
-            placeholder="Search models, providers, or parameters..."
+            placeholder="Search foundation models, LLM benchmarks, or parameters..."
             value={query}
-            aria-label="Search models"
+            aria-label="Search foundation models"
             onChange={(e) => setQuery(e.target.value)}
             className="w-full bg-transparent px-3 py-2 text-sm text-[var(--text)] placeholder:text-[var(--muted)] focus:outline-none font-sans"
           />

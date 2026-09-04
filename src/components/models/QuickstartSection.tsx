@@ -68,7 +68,7 @@ export default function QuickstartSection({ model }: QuickstartSectionProps) {
     ? `version: '3.8'\nservices:\n  vllm:\n    image: vllm/vllm-openai:latest\n    runtime: nvidia\n    ports:\n      - "8000:8000"\n    volumes:\n      - ~/.cache/huggingface:/root/.cache/huggingface\n    environment:\n      - HUGGING_FACE_HUB_TOKEN=\${HF_TOKEN}\n    command: --model ${model.slug || modelId} --gpu-memory-utilization 0.95 --max-model-len ${model.context_window || 4096}`
     : `# Managed Cloud Service\n# No local container manifest required for proprietary models.`;
 
-  const bibtexCode = `@misc{modelverse_${(model.slug || 'model').replace(/[^a-zA-Z0-9_]/g, '_')},\n  title={${model.name}: Technical Profile and Sizing Specifications},\n  author={${model.provider || 'Modelverse Research Lab'}},\n  year={${model.release_date ? new Date(model.release_date).getFullYear() : 2025}},\n  publisher={Modelverse Architecture Database},\n  howpublished={\\url{https://www.themodelverse.in/models/${model.slug}}}\n}`;
+  const bibtexCode = `@misc{themodelverse_${(model.slug || 'model').replace(/[^a-zA-Z0-9_]/g, '_')},\n  title={${model.name}: Technical Profile and Sizing Specifications},\n  author={${model.provider || 'TheModelverse Research Lab'}},\n  year={${model.release_date ? new Date(model.release_date).getFullYear() : 2025}},\n  publisher={TheModelverse Architecture Database},\n  howpublished={\\url{https://www.themodelverse.in/models/${model.slug}}}\n}`;
 
   const getActiveCode = () => {
     switch (activeTab) {

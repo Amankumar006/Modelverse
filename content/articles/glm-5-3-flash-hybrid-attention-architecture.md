@@ -4,7 +4,7 @@ title: "GLM-5.3-Flash: Hybrid Linear-Sparse Attention and Visual Self-Verificati
 category: "Architecture"
 summary: "An architectural deep-dive into Z.ai's GLM-5.3-Flash, examining its 320B parameter MoE structure (18B active), hybrid linear and sparse attention with IndexPool, visual coding loops, and cluster-scale inference on dedicated AI accelerators."
 author:
-  name: "Modelverse Research"
+  name: "TheModelverse Research"
   role: "AI Systems Engineer"
 source_name: "Z.ai (Zhipu AI)"
 source_url: "https://z.ai/blog/glm-5.3-flash"

@@ -102,13 +102,13 @@ export default function ModelCompatibilityMatrix({ model }: ModelCompatibilityMa
     <section id="compatibility" className="space-y-4">
       <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[var(--accent)]">
         <Server size={14} />
-        <span>Hardware Sizing &amp; Runtime Compatibility</span>
+        <span>LLM Hardware Sizing &amp; Runtime Compatibility</span>
       </div>
 
       <div className="p-6 sm:p-8 rounded-[var(--radius-card)] bg-[var(--card-bg)] shadow-[var(--shadow-card)] border border-[var(--muted)]/10 space-y-6">
         <div>
           <h3 className="text-xl font-bold text-[var(--text)] tracking-tight">
-            Inference Runtimes &amp; Hardware Tiering
+            Inference Runtimes &amp; Hardware Sizing
           </h3>
           <p className="text-xs sm:text-sm text-[var(--muted)] mt-1 leading-relaxed">
             Deployment targets, inference engines, and memory requirements for <strong>{model.name}</strong>.

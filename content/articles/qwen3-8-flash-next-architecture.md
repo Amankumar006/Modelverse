@@ -4,7 +4,7 @@ slug: "qwen3-8-flash-next-architecture"
 category: "Architecture"
 summary: "An architectural deep-dive into Qwen3.8-Flash-Next, unpacking its hybrid Gated DeltaNet and Qwen Sparse Attention, 4-branch Gated Residual streams, and 51B offloadable N-gram embeddings activating just 6B parameters per token."
 author:
-  name: "Modelverse Research"
+  name: "TheModelverse Research"
   role: "AI Systems Engineer"
 source_name: "Qwen Team (Alibaba Group)"
 source_url: "https://github.com/QwenLM/Qwen"
