@@ -371,7 +371,7 @@ function BenchmarkCard({ item }: { item: BenchmarkItem }) {
                 : "bg-gradient-to-r from-orange-500/80 to-[var(--accent)]"
             }`}
             style={{
-              width: `${Math.min(item.lower_is_better ? Math.max(100 - numScore, 0) : numScore, 100)}%`,
+              width: `${Math.min(Math.max(numScore, 0), 100)}%`,
             }}
           />
         </div>
@@ -422,12 +422,16 @@ function BenchmarkTableRow({ item }: { item: BenchmarkItem }) {
                   item.lower_is_better ? "bg-emerald-500" : "bg-[var(--accent)]"
                 }`}
                 style={{
-                  width: `${Math.min(item.lower_is_better ? Math.max(100 - numScore, 0) : numScore, 100)}%`,
+                  width: `${Math.min(Math.max(numScore, 0), 100)}%`,
                 }}
               />
             </div>
           )}
-          <span className="font-bold text-[var(--accent)] font-mono text-xs">
+          <span
+            className={`font-bold font-mono text-xs ${
+              item.lower_is_better ? "text-emerald-500" : "text-[var(--accent)]"
+            }`}
+          >
             {formattedScore}
             {isPercentage && !String(formattedScore).includes("%") ? "%" : ""}
           </span>
@@ -460,12 +464,13 @@ function parseBenchmarkScore(item: BenchmarkItem) {
   const numScore = typeof item.score === "number" ? item.score : parseFloat(String(item.score));
 
   // Determine if this is an absolute non-percentage metric (e.g. ELO rating, NED error count)
+  // Use exact regex boundaries so "misaligned_outcome_rate" is NOT falsely matched by "ned"!
   const isNonPercentageMetric =
-    metricLower.includes("rating") ||
-    metricLower.includes("elo") ||
-    (metricLower.includes("index") && numScore > 100) ||
-    metricLower.includes("ned") ||
-    numScore > 100;
+    numScore > 100 ||
+    /\b(elo|rating)\b/i.test(metricLower) ||
+    metricLower === "omr-ned" ||
+    metricLower.endsWith("-ned") ||
+    (metricLower.includes("index") && numScore > 100);
 
   const isPercentage = !isNaN(numScore) && numScore <= 100 && numScore >= 0 && !isNonPercentageMetric;
   const formattedScore = typeof item.score === "number" ? item.score : String(item.score);
