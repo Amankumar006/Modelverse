@@ -3,8 +3,106 @@ export interface BenchmarkItem {
   score: string | number;
   metric?: string;
   source?: string;
+  category?: BenchmarkCategory;
+  lower_is_better?: boolean;
+  conditions?: string;
+  note?: string;
+  is_headline?: boolean;
 }
 
+export type BenchmarkCategory =
+  | "Reasoning & Science"
+  | "Coding & Software"
+  | "Agentic & Computer Use"
+  | "Cybersecurity & Safety"
+  | "Domain & Multimodal"
+  | "General / Other";
+
+export function inferBenchmarkCategory(name: string): BenchmarkCategory {
+  const n = name.toLowerCase();
+  if (
+    n.includes("arc-agi") ||
+    n.includes("gpqa") ||
+    n.includes("mmlu") ||
+    n.includes("frontiermath") ||
+    n.includes("humanity") ||
+    (n.includes("agent") && n.includes("exam")) ||
+    n.includes("aime") ||
+    n.includes("mgsm") ||
+    n.includes("mmmu") ||
+    n.includes("simpleqa") ||
+    n.includes("intelligence index") ||
+    n.includes("reasoning") ||
+    n.startsWith("math")
+  ) {
+    return "Reasoning & Science";
+  }
+  if (
+    n.includes("osworld") ||
+    n.includes("screenspot") ||
+    n.includes("browsecomp") ||
+    n.includes("automation") ||
+    n.includes("computer use") ||
+    n.includes("webdev") ||
+    n.includes("sre-bench")
+  ) {
+    return "Agentic & Computer Use";
+  }
+  if (
+    n.includes("terminal") ||
+    n.includes("swe") ||
+    n.includes("deepswe") ||
+    n.includes("frontiercode") ||
+    n.includes("code") ||
+    n.includes("humaneval") ||
+    n.includes("livebench") ||
+    n.includes("database migration")
+  ) {
+    return "Coding & Software";
+  }
+  if (
+    n.includes("exploit") ||
+    n.includes("cybergym") ||
+    n.includes("cwe") ||
+    n.includes("sec-bench") ||
+    n.includes("circumvention") ||
+    n.includes("hallucination") ||
+    n.includes("safety")
+  ) {
+    return "Cybersecurity & Safety";
+  }
+  if (
+    n.includes("cad") ||
+    n.includes("medchem") ||
+    n.includes("gene") ||
+    n.includes("lifesci") ||
+    n.includes("health") ||
+    n.includes("charxiv") ||
+    n.includes("tau-bench") ||
+    n.includes("openscore") ||
+    n.includes("mrcr") ||
+    n.includes("omr")
+  ) {
+    return "Domain & Multimodal";
+  }
+  return "General / Other";
+}
+
+export function isHeadlineBenchmark(name: string): boolean {
+  const n = name.toLowerCase();
+  return (
+    n.includes("arc-agi-3") ||
+    n.includes("osworld 2.0") ||
+    n.includes("gpqa diamond") ||
+    n.includes("terminal-bench 4.0") ||
+    n.includes("terminal-bench 2.1") ||
+    n.includes("deepswe") ||
+    n.includes("swe-bench") ||
+    n.includes("codearena") ||
+    n.includes("frontiermath") ||
+    n.includes("screenspot")
+  );
+}
 
 const METADATA_KEYS = new Set([
   "source",
@@ -61,16 +159,25 @@ export function normalizeBenchmarks(raw: unknown): BenchmarkItem[] {
           // eslint-disable-next-line @typescript-eslint/no-explicit-any
           const obj = item as Record<string, any>;
           const scoreVal = obj.score !== undefined ? obj.score : (obj.value !== undefined ? obj.value : "");
+          const name = String(obj.name || obj.benchmark || obj.metric || `Benchmark ${idx + 1}`);
           return {
-            name: String(obj.name || obj.benchmark || obj.metric || `Benchmark ${idx + 1}`),
+            name,
             score: typeof scoreVal === "object" ? JSON.stringify(scoreVal) : scoreVal,
             metric: obj.metric ? String(obj.metric) : undefined,
             source: obj.source || obj.url ? String(obj.source || obj.url) : undefined,
+            category: inferBenchmarkCategory(name),
+            lower_is_better: Boolean(obj.lower_is_better),
+            conditions: obj.conditions ? String(obj.conditions) : undefined,
+            note: obj.note ? String(obj.note) : undefined,
+            is_headline: isHeadlineBenchmark(name),
           };
         }
+        const name = `Benchmark ${idx + 1}`;
         return {
-          name: `Benchmark ${idx + 1}`,
+          name,
           score: String(item),
+          category: inferBenchmarkCategory(name),
+          is_headline: isHeadlineBenchmark(name),
         };
       })
       .filter((b) => b.score !== "" && b.score !== undefined && b.score !== null);
@@ -85,16 +192,25 @@ export function normalizeBenchmarks(raw: unknown): BenchmarkItem[] {
           // eslint-disable-next-line @typescript-eslint/no-explicit-any
           const nested = val as Record<string, any>;
           const scoreVal = nested.score !== undefined ? nested.score : (nested.value !== undefined ? nested.value : "");
+          const name = String(nested.name || key);
           return {
-            name: String(nested.name || key),
+            name,
             score: typeof scoreVal === "object" ? JSON.stringify(scoreVal) : scoreVal,
             metric: nested.metric ? String(nested.metric) : undefined,
             source: nested.source || nested.url ? String(nested.source || nested.url) : undefined,
+            category: inferBenchmarkCategory(name),
+            lower_is_better: Boolean(nested.lower_is_better),
+            conditions: nested.conditions ? String(nested.conditions) : undefined,
+            note: nested.note ? String(nested.note) : undefined,
+            is_headline: isHeadlineBenchmark(name),
           };
         }
+        const name = key;
         return {
-          name: key,
+          name,
           score: val as string | number,
+          category: inferBenchmarkCategory(name),
+          is_headline: isHeadlineBenchmark(name),
         };
       })
       .filter((b) => b.score !== "" && b.score !== undefined && b.score !== null);
