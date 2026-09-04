@@ -21,7 +21,7 @@ export async function cacheArticlePosterLocally(
     const timeoutId = setTimeout(() => controller.abort(), 8000);
 
     const res = await fetch(imageUrl, {
-      headers: { "User-Agent": "Modelverse-Asset-Cacher/1.0" },
+      headers: { "User-Agent": "TheModelverse-Asset-Cacher/1.0" },
       signal: controller.signal,
     });
     clearTimeout(timeoutId);

@@ -52,7 +52,7 @@ export default function SubmitModelPage() {
           Submit an AI Model
         </h1>
         <p className="text-xs sm:text-sm text-[var(--muted)] mt-1.5 max-w-2xl leading-relaxed">
-          Help expand the open intelligence index. Submit missing frontier models, fine-tunes, or open-weight checkpoints.
+          Help expand TheModelverse Foundation Model Catalog. Submit missing frontier models, fine-tunes, or open-weight checkpoints.
         </p>
       </div>
 
@@ -167,7 +167,7 @@ export default function SubmitModelPage() {
               </button>
 
               <a
-                href={`mailto:curation@modelverse.ai?subject=Model%20Submission:%20${encodeURIComponent(name || "New Model")}&body=${encodeURIComponent(modelPayload)}`}
+                href={`mailto:curation@themodelverse.in?subject=Model%20Submission:%20${encodeURIComponent(name || "New Model")}&body=${encodeURIComponent(modelPayload)}`}
                 className="flex-1 inline-flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-[var(--radius-control)] bg-[var(--accent)] text-[var(--accent-contrast)] text-xs font-bold hover:opacity-90 transition-opacity"
               >
                 <Send size={14} />

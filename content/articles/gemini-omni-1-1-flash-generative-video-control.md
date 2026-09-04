@@ -4,7 +4,7 @@ title: "Gemini Omni 1.1 Flash: Studio-Grade Generative Video with Long-Horizon T
 category: "Release"
 summary: "Google DeepMind releases Gemini Omni 1.1 Flash, bringing 10-second contextual scene extension, keyframe interpolation, 360p drafting, and 4K upscaling to developer APIs."
 author:
-  name: "Modelverse Research"
+  name: "TheModelverse Research"
   role: "AI Systems Engineer"
 source_name: "Google DeepMind"
 source_url: "https://blog.google/innovation-and-ai/technology/developers-tools/build-with-gemini-omni-1-1-flash/"

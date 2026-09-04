@@ -46,7 +46,7 @@ export async function POST(req: NextRequest) {
     const title = sanitized.title || rawTitle;
     const summary = sanitized.summary || body.summary || title;
     const category = sanitized.category || body.category || "Architecture";
-    const source_name = sanitized.source_name || body.source_name || "Modelverse Research";
+    const source_name = sanitized.source_name || body.source_name || "TheModelverse Research";
     const source_url = sanitized.source_url || body.source_url || null;
     const content = sanitized.content;
     const tags = body.tags || ["Architecture", "AI"];
@@ -79,7 +79,7 @@ title: ${JSON.stringify(title)}
 category: "${category}"
 summary: ${JSON.stringify(cleanSummary)}
 author:
-  name: "Modelverse Research"
+  name: "TheModelverse Research"
   role: "AI Systems Engineer"
 source_name: ${JSON.stringify(source_name)}
 ${source_url ? `source_url: "${source_url}"\n` : ""}cover_image: "${coverImage}"
@@ -111,7 +111,7 @@ ${content.trim()}
         
         let sha: string | undefined;
         const checkRes = await fetch(ghUrl, {
-          headers: { Authorization: `Bearer ${githubToken}`, "User-Agent": "Modelverse-Ingest" },
+          headers: { Authorization: `Bearer ${githubToken}`, "User-Agent": "TheModelverse-Ingest" },
         });
         if (checkRes.ok) {
           const fileData = await checkRes.json();
@@ -123,7 +123,7 @@ ${content.trim()}
           headers: {
             Authorization: `Bearer ${githubToken}`,
             "Content-Type": "application/json",
-            "User-Agent": "Modelverse-Ingest",
+            "User-Agent": "TheModelverse-Ingest",
           },
           body: JSON.stringify({
             message: `feat(articles): auto-publish ${title}`,

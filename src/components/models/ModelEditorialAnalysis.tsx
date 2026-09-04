@@ -44,9 +44,9 @@ export default function ModelEditorialAnalysis({ model }: ModelEditorialAnalysis
       <div className="space-y-2 border-b border-[var(--muted)]/10 pb-5">
         <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[var(--accent)]">
           <BrainCircuit size={16} />
-          <span>Architectural Analysis & Production Assessment</span>
+          <span>AI Model Architecture &amp; Intelligence</span>
         </div>
-        <h2 className="text-xl sm:text-2xl font-extrabold text-[var(--text)] tracking-tight">Engineering & Capability Deep-Dive</h2>
+        <h2 className="text-xl sm:text-2xl font-extrabold text-[var(--text)] tracking-tight">Architecture Engineering &amp; Capability Deep-Dive</h2>
         <p className="text-xs sm:text-sm text-[var(--muted)] leading-relaxed max-w-3xl">
           An objective architectural evaluation of <strong>{model.name}</strong> by <strong>{model.provider}</strong>, analyzing underlying compute dynamics, memory constraints, and deployment economics.
         </p>
@@ -90,7 +90,7 @@ export default function ModelEditorialAnalysis({ model }: ModelEditorialAnalysis
           <div className="space-y-2.5 mb-4">
             <div className="flex items-center gap-2 text-sm font-bold text-[var(--text)]">
               <Server size={16} className="text-blue-500" />
-              <h3>Hardware Sizing & Serving</h3>
+              <h3>LLM Hardware Sizing &amp; Serving</h3>
             </div>
             <p className="text-xs text-[var(--muted)] leading-relaxed">{hardwareText}</p>
             <div className="space-y-1 pt-1 text-[11px] text-[var(--muted)]">

@@ -4,23 +4,23 @@ import Link from "next/link";
 import { ArrowLeft, ShieldCheck, Database, Award, ClipboardCheck, Sparkles, BookOpen, Scale } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Curation Methodology & Benchmarking Whitepaper — Modelverse",
+  title: "Curation Methodology & LLM Benchmarking Standards",
   description:
-    "Comprehensive whitepaper detailing Modelverse's data provenance protocols, benchmark normalization algorithms, and foundation model taxonomy standards.",
+    "Comprehensive whitepaper detailing TheModelverse's data provenance protocols, benchmark normalization algorithms, and foundation model taxonomy standards.",
   alternates: {
     canonical: "/methodology",
   },
   openGraph: {
-    title: "Curation Methodology & Benchmarking Whitepaper — Modelverse",
+    title: "Curation Methodology & LLM Benchmarking Standards | TheModelverse",
     description:
-      "Comprehensive whitepaper detailing Modelverse's data provenance protocols, benchmark normalization algorithms, and foundation model taxonomy standards.",
+      "Comprehensive whitepaper detailing TheModelverse's data provenance protocols, benchmark normalization algorithms, and foundation model taxonomy standards.",
     url: "/methodology",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Curation Methodology & Benchmarking Whitepaper — Modelverse",
+    title: "Curation Methodology & LLM Benchmarking Standards | TheModelverse",
     description:
-      "Comprehensive whitepaper detailing Modelverse's data provenance protocols, benchmark normalization algorithms, and foundation model taxonomy standards.",
+      "Comprehensive whitepaper detailing TheModelverse's data provenance protocols, benchmark normalization algorithms, and foundation model taxonomy standards.",
   },
 };
 
@@ -63,7 +63,7 @@ export default function MethodologyPage() {
           Curation &amp; Benchmarking Methodology
         </h1>
         <p className="text-sm sm:text-base text-[var(--muted)] mt-2 max-w-2xl leading-relaxed">
-          The rigorous architectural framework and normalization protocols used by Modelverse to audit foundation model metrics, eliminate marketing bias, and ensure absolute reproducibility.
+          The rigorous architectural framework and normalization protocols used by TheModelverse to audit foundation model metrics, eliminate marketing bias, and ensure absolute reproducibility.
         </p>
       </div>
 
@@ -104,7 +104,7 @@ export default function MethodologyPage() {
       <section className="space-y-6 pt-6 border-t border-[var(--muted)]/10">
         <div className="flex items-center gap-2 text-lg font-bold text-[var(--text)]">
           <ClipboardCheck className="text-[var(--accent)]" size={20} />
-          <h2>The 4-Step Modelverse Audit Pipeline</h2>
+          <h2>The 4-Step TheModelverse Audit Pipeline</h2>
         </div>
 
         <div className="space-y-4">
@@ -153,7 +153,7 @@ export default function MethodologyPage() {
           <h2>Foundation Model Architecture Glossary</h2>
         </div>
         <p className="text-xs sm:text-sm text-[var(--muted)] leading-relaxed">
-          Standardized definitions of key architectural paradigms and evaluation suites referenced throughout the Modelverse catalog.
+          Standardized definitions of key architectural paradigms and evaluation suites referenced throughout TheModelverse Foundation Model Catalog.
         </p>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -178,7 +178,7 @@ export default function MethodologyPage() {
           <h2>Commitment to Editorial Independence</h2>
         </div>
         <p className="text-xs sm:text-sm text-[var(--muted)] leading-relaxed">
-          Modelverse accepts no financial compensation or vendor sponsorship in exchange for higher catalog rankings, biased benchmark scores, or favorable architectural reviews. All comparisons reflect standardized evaluation suites and verifiable primary sources.
+          TheModelverse accepts no financial compensation or vendor sponsorship in exchange for higher catalog rankings, biased benchmark scores, or favorable architectural reviews. All comparisons reflect standardized evaluation suites and verifiable primary sources.
         </p>
       </section>
     </main>

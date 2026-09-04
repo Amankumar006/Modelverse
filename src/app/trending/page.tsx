@@ -9,8 +9,8 @@ import { BreadcrumbJsonLd, ItemListJsonLd } from "@/components/seo/JsonLd";
 export const revalidate = 60;
 
 export const metadata: Metadata = {
-  title: "Trending AI Models Leaderboard & Frontier Rankings",
-  description: "Explore the top trending foundation AI models, ranked by verified benchmark evaluations, reasoning scores, and community search interest.",
+  title: "Trending AI Models Leaderboard & LLM Benchmark Rankings",
+  description: "Explore the top trending foundation AI models, ranked by verified benchmark evaluations, reasoning scores, and community search interest on TheModelverse.",
   keywords: [
     "Trending AI models",
     "LLM leaderboard",
@@ -22,14 +22,14 @@ export const metadata: Metadata = {
     canonical: "/trending",
   },
   openGraph: {
-    title: "Trending AI Models Leaderboard & Frontier Rankings",
-    description: "Explore the top trending foundation AI models, ranked by verified benchmark evaluations and search interest.",
+    title: "Trending AI Models Leaderboard & LLM Benchmark Rankings | TheModelverse",
+    description: "Explore the top trending foundation AI models, ranked by verified benchmark evaluations, reasoning scores, and community search interest on TheModelverse.",
     url: "/trending",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Trending AI Models Leaderboard & Frontier Rankings",
-    description: "Explore the top trending foundation AI models, ranked by verified benchmark evaluations and search interest.",
+    title: "Trending AI Models Leaderboard & LLM Benchmark Rankings | TheModelverse",
+    description: "Explore the top trending foundation AI models, ranked by verified benchmark evaluations, reasoning scores, and community search interest on TheModelverse.",
   },
 };
 

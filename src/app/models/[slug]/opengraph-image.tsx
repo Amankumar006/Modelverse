@@ -2,7 +2,7 @@ import { ImageResponse } from "next/og";
 import { getModelBySlug } from "@/lib/supabase/models";
 import { normalizeBenchmarks } from "@/lib/benchmarks";
 
-export const alt = "Foundation Model Specifications & Benchmarks — Modelverse";
+export const alt = "Foundation Model Specifications & Benchmarks — TheModelverse";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -46,8 +46,8 @@ export default async function OpenGraphImage({ params }: { params: Promise<{ slu
               M
             </div>
             <div style={{ display: "flex", flexDirection: "column" }}>
-              <span style={{ fontSize: "16px", fontWeight: "800", letterSpacing: "1px", color: "#F3F4F6" }}>MODELVERSE</span>
-              <span style={{ fontSize: "10px", color: "#9CA3AF", letterSpacing: "1.5px", textTransform: "uppercase" }}>Model Intelligence</span>
+              <span style={{ fontSize: "16px", fontWeight: "800", letterSpacing: "1px", color: "#F3F4F6" }}>THEMODELVERSE</span>
+              <span style={{ fontSize: "10px", color: "#9CA3AF", letterSpacing: "1.5px", textTransform: "uppercase" }}>LLM Benchmark Database & Sizing</span>
             </div>
           </div>
           <div style={{ display: "flex", alignItems: "center", padding: "6px 14px", borderRadius: "9999px", backgroundColor: "rgba(59, 130, 246, 0.15)", border: "1px solid rgba(59, 130, 246, 0.3)", color: "#60A5FA", fontSize: "13px", fontWeight: "700", textTransform: "uppercase", letterSpacing: "1px" }}>

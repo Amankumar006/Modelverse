@@ -61,7 +61,7 @@ export default function CookieConsent() {
       </div>
 
       <p className="text-xs text-[var(--muted)] leading-relaxed">
-        Modelverse uses cookies and trusted partners like Google to optimize performance, measure traffic, and serve relevant advertising. See our{" "}
+        TheModelverse uses cookies and trusted partners like Google to optimize performance, measure traffic, and serve relevant advertising. See our{" "}
         <Link href="/privacy" className="text-[var(--accent)] underline font-medium">
           Privacy Policy
         </Link>.

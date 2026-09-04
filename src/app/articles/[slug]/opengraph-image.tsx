@@ -1,7 +1,8 @@
 import { ImageResponse } from "next/og";
 import { getArticleBySlug } from "@/lib/supabase/articles";
+import { normalizeArticleSourceName } from "@/lib/sanitize-article-content";
 
-export const alt = "AI Research & Deep Dive — Modelverse";
+export const alt = "AI Research & Deep Dive — TheModelverse";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -11,7 +12,7 @@ export default async function OpenGraphImage({ params }: { params: Promise<{ slu
 
   const title = article?.title || slug;
   const category = article?.category || "Research";
-  const sourceName = article?.source_name || "Modelverse Research";
+  const sourceName = normalizeArticleSourceName(article?.source_name, "TheModelverse Research");
   const summary = article?.summary || "";
 
   return new ImageResponse(
@@ -31,8 +32,8 @@ export default async function OpenGraphImage({ params }: { params: Promise<{ slu
               M
             </div>
             <div style={{ display: "flex", flexDirection: "column" }}>
-              <span style={{ fontSize: "16px", fontWeight: "800", letterSpacing: "1px", color: "#F3F4F6" }}>MODELVERSE RESEARCH</span>
-              <span style={{ fontSize: "10px", color: "#9CA3AF", letterSpacing: "1.5px", textTransform: "uppercase" }}>Intelligence Digest &amp; Deep Dives</span>
+              <span style={{ fontSize: "16px", fontWeight: "800", letterSpacing: "1px", color: "#F3F4F6" }}>THEMODELVERSE RESEARCH</span>
+              <span style={{ fontSize: "10px", color: "#9CA3AF", letterSpacing: "1.5px", textTransform: "uppercase" }}>AI Model Architecture &amp; Intelligence</span>
             </div>
           </div>
           <div style={{ display: "flex", alignItems: "center", padding: "6px 14px", borderRadius: "9999px", backgroundColor: "rgba(147, 51, 234, 0.15)", border: "1px solid rgba(147, 51, 234, 0.3)", color: "#C084FC", fontSize: "13px", fontWeight: "700", textTransform: "uppercase", letterSpacing: "1px" }}>

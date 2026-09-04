@@ -15,15 +15,15 @@ export default function ArticlesHeader({ totalArticles }: ArticlesHeaderProps) {
       <div className="max-w-3xl space-y-2">
         <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[var(--accent-soft)] text-[var(--accent)] text-xs font-bold uppercase tracking-wider shadow-sm">
           <Sparkles size={13} className="shrink-0" />
-          <span>Research &amp; Intelligence Hub</span>
+          <span>TheModelverse Intelligence</span>
         </div>
 
         <h1 className="text-3xl sm:text-4xl 2xl:text-5xl font-extrabold text-[var(--text)] tracking-tight">
-          Frontier AI Research &amp; Analysis
+          AI Model Architecture &amp; Intelligence
         </h1>
 
         <p className="text-xs sm:text-sm text-[var(--muted)] leading-relaxed max-w-2xl">
-          Fact-checked deep dives into foundation model architectures, reinforcement learning paradigms, context window scaling, and primary laboratory research papers.
+          Fact-checked deep dives into AI model architecture, intelligence benchmarks, reinforcement learning paradigms, and primary research papers from TheModelverse.
         </p>
       </div>
 

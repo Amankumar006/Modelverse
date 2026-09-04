@@ -34,7 +34,7 @@ export async function generateMetadata({
   const parsed = parseCompareSlug(slug);
 
   if (!parsed) {
-    return { title: "Model Comparison — Modelverse" };
+    return { title: "Model Comparison" };
   }
 
   const { slug1, slug2 } = parsed;
@@ -44,12 +44,12 @@ export async function generateMetadata({
   ]);
 
   if (!model1 || !model2) {
-    return { title: "Model Showdown — Modelverse" };
+    return { title: "Model Showdown" };
   }
 
   const canonicalSlug = getCanonicalCompareSlug(model1.slug, model2.slug);
-  const title = `${model1.name} vs ${model2.name}: Specs, Benchmarks, VRAM & Pricing`;
-  const description = `Compare ${model1.name} (${model1.provider}) vs ${model2.name} (${model2.provider}) side-by-side. Analyze MMLU-Pro, SWE-bench, GPQA, required VRAM, quantization compression, and API token pricing.`;
+  const title = `${model1.name} vs ${model2.name} — LLM Benchmark & Hardware Sizing`;
+  const description = `Compare ${model1.name} (${model1.provider}) vs ${model2.name} (${model2.provider}) side-by-side on TheModelverse. Analyze MMLU-Pro, SWE-bench, GPQA, required VRAM, quantization compression, and API token pricing.`;
 
   return {
     title,
@@ -78,14 +78,14 @@ export async function generateMetadata({
       },
     },
     openGraph: {
-      title,
+      title: `${title} | TheModelverse`,
       description,
       type: "website",
       url: `/compare/${canonicalSlug}`,
     },
     twitter: {
       card: "summary_large_image",
-      title,
+      title: `${title} | TheModelverse`,
       description,
     },
   };
@@ -171,7 +171,7 @@ export default async function CompareSlugPage({
             href="/compare"
             className="inline-flex items-center gap-1.5 text-xs text-[var(--muted)] hover:text-[var(--text)] transition-colors font-medium mb-4"
           >
-            <ArrowLeft size={14} /> Back to Model Comparison Engine
+            <ArrowLeft size={14} /> Back to LLM Benchmark &amp; Hardware Sizing Engine
           </Link>
 
           <div className="flex flex-wrap items-center gap-2 mb-3">
@@ -188,7 +188,7 @@ export default async function CompareSlugPage({
             {activeModel1.name} <span className="text-[var(--muted)] font-normal text-2xl sm:text-3xl">vs</span> {activeModel2.name}
           </h1>
           <p className="text-xs sm:text-sm text-[var(--muted)] mt-2 max-w-3xl leading-relaxed">
-            Side-by-side technical showdown between {activeModel1.name} and {activeModel2.name}. Compare verified benchmark scores, quantization compression (FP16, FP8, INT4), local GPU VRAM requirements, and API inference pricing.
+            Side-by-side technical showdown between {activeModel1.name} and {activeModel2.name} on TheModelverse. Compare verified LLM benchmark scores, quantization compression, local GPU hardware sizing, and API inference pricing.
           </p>
         </div>
 

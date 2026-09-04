@@ -76,7 +76,7 @@ export default function FeaturedArticleHero({ article }: FeaturedArticleHeroProp
               <div className="w-6 h-6 rounded-full bg-[var(--accent-soft)] text-[var(--accent)] flex items-center justify-center font-bold text-[10px]">
                 <User size={12} />
               </div>
-              <span>{article.source_name || "Modelverse Editorial"}</span>
+              <span>{article.source_name || "TheModelverse Editorial"}</span>
             </div>
 
             <span className="inline-flex items-center gap-1.5 text-xs font-bold text-[var(--accent)] group-hover:translate-x-1 transition-transform">

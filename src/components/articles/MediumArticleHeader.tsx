@@ -19,7 +19,7 @@ export default function MediumArticleHeader({
   title,
   summary,
   category = "Architecture",
-  sourceName = "Modelverse Intelligence",
+  sourceName = "TheModelverse Intelligence",
   sourceUrl,
   publishedAt,
   readingTime = 6,

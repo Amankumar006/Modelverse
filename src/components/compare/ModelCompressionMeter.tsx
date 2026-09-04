@@ -42,10 +42,10 @@ export function ModelCompressionMeter({ models }: ModelCompressionMeterProps) {
         <div>
           <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[var(--accent)] mb-1">
             <Cpu size={15} />
-            <span>Hardware Math & Model Compression</span>
+            <span>Hardware Sizing &amp; Model Compression</span>
           </div>
           <h3 className="text-xl sm:text-2xl font-black text-[var(--text)] tracking-tight">
-            Quantization Sizing & VRAM Requirement
+            LLM Hardware Sizing &amp; Quantization Sizing
           </h3>
           <p className="text-xs sm:text-sm text-[var(--muted)] mt-1 max-w-2xl">
             Simulate weight compression levels and dynamic KV-cache expansion to verify whether these models fit on your local hardware or cloud GPU cluster.

@@ -27,7 +27,7 @@ export default function ModelverseLogo({
       >
         <Image
           src="/logos/android-chrome-192.png"
-          alt="Modelverse Logo"
+          alt="TheModelverse"
           width={iconSize}
           height={iconSize}
           priority={priority}
@@ -44,7 +44,7 @@ export default function ModelverseLogo({
       {/* Dark Theme Logo */}
       <Image
         src="/logos/logo-horizontal-dark@2x.png"
-        alt="Modelverse"
+        alt="TheModelverse"
         width={calcWidth}
         height={height}
         priority={priority}
@@ -54,7 +54,7 @@ export default function ModelverseLogo({
       {/* Light Theme Logo */}
       <Image
         src="/logos/logo-horizontal-light@2x.png"
-        alt="Modelverse"
+        alt="TheModelverse"
         width={calcWidth}
         height={height}
         priority={priority}

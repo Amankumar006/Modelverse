@@ -4,20 +4,20 @@ import Link from "next/link";
 import { ArrowLeft, Shield, Lock, Eye, Cookie, HelpCircle } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Privacy Policy — Modelverse",
-  description: "Comprehensive privacy policy, cookie disclosures, advertising policies, and data protection practices for Modelverse.",
+  title: "Privacy Policy & Data Protection",
+  description: "Comprehensive privacy policy, cookie disclosures, advertising policies, and data protection practices for TheModelverse.",
   alternates: {
     canonical: "/privacy",
   },
   openGraph: {
-    title: "Privacy Policy — Modelverse",
-    description: "Comprehensive privacy policy, cookie disclosures, advertising policies, and data protection practices for Modelverse.",
+    title: "Privacy Policy & Data Protection | TheModelverse",
+    description: "Comprehensive privacy policy, cookie disclosures, advertising policies, and data protection practices for TheModelverse.",
     url: "/privacy",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Privacy Policy — Modelverse",
-    description: "Comprehensive privacy policy, cookie disclosures, advertising policies, and data protection practices for Modelverse.",
+    title: "Privacy Policy & Data Protection | TheModelverse",
+    description: "Comprehensive privacy policy, cookie disclosures, advertising policies, and data protection practices for TheModelverse.",
   },
 };
 
@@ -50,7 +50,7 @@ export default function PrivacyPage() {
             <h2>1. Information We Collect</h2>
           </div>
           <p>
-            Modelverse (accessible at <strong>https://www.themodelverse.in</strong>) is an open research and benchmarking repository for artificial intelligence foundation models. We do not require user account registration, mandatory profiling, or credit card submission to search model archives, read intelligence digests, or access comparison matrices.
+            TheModelverse (accessible at <strong>https://www.themodelverse.in</strong>) is an open research and benchmarking repository for artificial intelligence foundation models. We do not require user account registration, mandatory profiling, or credit card submission to search model archives, read intelligence digests, or access comparison matrices.
           </p>
           <p>
             We may automatically receive standard server log records, including your IP address, browser user-agent, operating system, referring URL, and page timestamps, solely for uptime diagnostics, DDoS prevention, and traffic caching optimization.
@@ -71,7 +71,7 @@ export default function PrivacyPage() {
               Third-party vendors, including <strong>Google</strong>, use cookies (such as the DoubleClick cookie) to serve ads based on a user&apos;s prior visits to this website or other websites on the Internet.
             </li>
             <li>
-              Google&apos;s use of advertising cookies enables it and its partners to serve targeted and contextual ads to users based on their navigation history across Modelverse and across the broader web.
+              Google&apos;s use of advertising cookies enables it and its partners to serve targeted and contextual ads to users based on their navigation history across TheModelverse and across the broader web.
             </li>
             <li>
               Users may opt out of personalized advertising by visiting{" "}
@@ -128,7 +128,7 @@ export default function PrivacyPage() {
         <section className="space-y-2.5">
           <h2 className="text-base font-bold text-[var(--text)]">5. Outbound Links to Research Repositories</h2>
           <p>
-            Modelverse references primary source whitepapers on ArXiv, model cards on Hugging Face, GitHub source repositories, and vendor documentation. We are not responsible for the privacy practices, content policies, or tracking mechanisms of external third-party websites.
+            TheModelverse references primary source whitepapers on ArXiv, model cards on Hugging Face, GitHub source repositories, and vendor documentation. We are not responsible for the privacy practices, content policies, or tracking mechanisms of external third-party websites.
           </p>
         </section>
 

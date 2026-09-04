@@ -111,12 +111,51 @@ export function sanitizeArticleContent(rawText: string, fallbackTitle?: string):
     title: extractedTitle || fallbackTitle,
     summary: extractedSummary,
     category: extractedCategory || "Architecture",
-    source_name: extractedSourceName || "Modelverse Research",
+    source_name: normalizeArticleSourceName(extractedSourceName, "TheModelverse Research"),
     source_url: extractedSourceUrl,
     content: body,
   };
 }
 
+/**
+ * Normalizes article source names to establish consistent "TheModelverse" branding.
+ * - Sanitizes bare "Modelverse" or "Modelverse Research" -> "TheModelverse Research"
+ * - Sanitizes "Modelverse Intelligence" -> "TheModelverse Intelligence"
+ * - Sanitizes "Modelverse Editorial" -> "TheModelverse Editorial"
+ * - Normalizes spaced "The Modelverse ..." -> "TheModelverse ..."
+ * - Preserves legitimate external research labs (e.g. "Google DeepMind", "Anthropic", "Meta AI Research", "OpenAI")
+ * - Falls back to a standardized brand string when sourceName is empty/missing
+ */
+export function normalizeArticleSourceName(
+  sourceName?: string | null,
+  fallback: string = "TheModelverse Research"
+): string {
+  if (!sourceName || !sourceName.trim()) {
+    return fallback;
+  }
+
+  let s = sourceName.trim();
+
+  // Normalize spaced "The Modelverse" -> "TheModelverse"
+  s = s.replace(/\bthe\s+modelverse\b/gi, "TheModelverse");
+
+  // Replace any remaining bare "Modelverse" (without "The") with "TheModelverse"
+  s = s.replace(/\bmodelverse\b/gi, "TheModelverse");
+
+  // Ensure title-casing for known brand departments
+  s = s.replace(/\bTheModelverse\s+research\b/i, "TheModelverse Research");
+  s = s.replace(/\bTheModelverse\s+intelligence\b/i, "TheModelverse Intelligence");
+  s = s.replace(/\bTheModelverse\s+editorial\b/i, "TheModelverse Editorial");
+
+  // If the resulting string is standalone "TheModelverse" without a descriptor, apply fallback
+  if (s.toLowerCase() === "themodelverse") {
+    return fallback;
+  }
+
+  return s;
+}
+
 function escapeRegExp(string: string) {
   return string.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 }
+

@@ -113,7 +113,7 @@ export default function HomeNewsSection({ articles }: HomeNewsSectionProps) {
                 {/* Card Footer Action */}
                 <div className="pt-4 border-t border-[var(--muted)]/10 flex items-center justify-between text-xs">
                   <span className="text-xs text-[var(--muted)] font-medium">
-                    {featuredArticle.source_name || "Modelverse Research"}
+                    {featuredArticle.source_name || "TheModelverse Research"}
                   </span>
                   <span className="inline-flex items-center gap-1.5 text-xs font-bold text-[var(--accent)] group-hover:translate-x-1 transition-transform">
                     <span>Read Deep Dive</span>
@@ -173,7 +173,7 @@ export default function HomeNewsSection({ articles }: HomeNewsSectionProps) {
 
                     <div className="flex items-center justify-between text-[11px] text-[var(--muted)] pt-0.5">
                       <span className="truncate max-w-[130px] font-medium">
-                        {article.source_name || "Modelverse"}
+                        {article.source_name || "TheModelverse"}
                       </span>
                       <ArrowRight size={12} className="text-[var(--accent)] group-hover:translate-x-1 transition-transform shrink-0" />
                     </div>

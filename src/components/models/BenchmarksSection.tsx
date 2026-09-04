@@ -79,7 +79,7 @@ export default function BenchmarksSection({ benchmarks }: BenchmarksSectionProps
               <BarChart3 size={18} />
             </span>
             <h3 className="text-base sm:text-lg font-bold tracking-tight text-[var(--text)]">
-              Verified Performance Benchmarks
+              LLM Benchmark Database &amp; Performance Metrics
             </h3>
             <span className="text-[11px] font-mono px-2.5 py-0.5 rounded-full bg-[var(--accent)]/10 text-[var(--accent)] font-semibold">
               {items.length} Tested

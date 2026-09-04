@@ -2,29 +2,35 @@ import React from "react";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight, ShieldCheck, Sparkles, Database, Layers, Mail, CheckCircle2 } from "lucide-react";
+import { getModelCount } from "@/lib/supabase/models";
+
+export const revalidate = 60;
 
 export const metadata: Metadata = {
-  title: "About Modelverse — The Open Foundation Model Catalog",
+  title: "About The Foundation Model Catalog & Intelligence Mission",
   description:
-    "Learn about Modelverse's mission to provide an open, transparent, and fact-checked archive of AI foundation models.",
+    "Learn about TheModelverse's mission to provide an open, transparent, and fact-checked archive of AI foundation models.",
   alternates: {
     canonical: "/about",
   },
   openGraph: {
-    title: "About Modelverse — The Open Foundation Model Catalog",
+    title: "About The Foundation Model Catalog & Intelligence Mission | TheModelverse",
     description:
-      "Learn about Modelverse's mission to provide an open, transparent, and fact-checked archive of AI foundation models.",
+      "Learn about TheModelverse's mission to provide an open, transparent, and fact-checked archive of AI foundation models.",
     url: "/about",
   },
   twitter: {
     card: "summary_large_image",
-    title: "About Modelverse — The Open Foundation Model Catalog",
+    title: "About The Foundation Model Catalog & Intelligence Mission | TheModelverse",
     description:
-      "Learn about Modelverse's mission to provide an open, transparent, and fact-checked archive of AI foundation models.",
+      "Learn about TheModelverse's mission to provide an open, transparent, and fact-checked archive of AI foundation models.",
   },
 };
 
-export default function AboutPage() {
+export default async function AboutPage() {
+  const modelCount = await getModelCount();
+  const countText = modelCount > 0 ? `${modelCount}+` : "386+";
+
   return (
     <main className="w-full max-w-4xl mx-auto px-4 sm:px-6 md:px-8 py-12 md:py-16 flex flex-col gap-10">
       <div>
@@ -35,7 +41,7 @@ export default function AboutPage() {
           Democratizing AI Intelligence
         </h1>
         <p className="text-sm sm:text-base text-[var(--muted)] mt-3 leading-relaxed max-w-2xl">
-          Modelverse is an independent, open-source intelligence catalog for AI researchers, software engineers, and technology leaders. We index, verify, benchmark, and document every foundation model breakthrough.
+          TheModelverse is an independent, open-source intelligence catalog for AI researchers, software engineers, and technology leaders. We index, verify, benchmark, and document every foundation model breakthrough.
         </p>
       </div>
 
@@ -89,7 +95,7 @@ export default function AboutPage() {
           <span>Editorial Standards &amp; Contact Information</span>
         </div>
         <p className="text-xs sm:text-sm text-[var(--muted)] leading-relaxed">
-          Modelverse maintains strict editorial independence. Our benchmark figures and comparative metrics are algorithmically verified against published evaluation suites (MMLU, HumanEval, MATH, SWE-bench) without vendor favoritism.
+          TheModelverse maintains strict editorial independence. Our benchmark figures and comparative metrics are algorithmically verified against published evaluation suites (MMLU, HumanEval, MATH, SWE-bench) without vendor favoritism.
         </p>
         <div className="flex flex-wrap items-center gap-4 pt-2 text-xs text-[var(--text)]">
           <a
@@ -111,8 +117,8 @@ export default function AboutPage() {
       {/* CTA Box */}
       <div className="p-8 rounded-[var(--radius-card)] bg-[var(--accent-soft)]/20 border border-[var(--accent)]/30 flex flex-col sm:flex-row items-center justify-between gap-6 text-center sm:text-left">
         <div>
-          <h3 className="text-lg font-bold text-[var(--text)]">Explore the Model Catalog</h3>
-          <p className="text-xs text-[var(--muted)] mt-1">Browse and filter 376+ foundation models by parameters and context.</p>
+          <h3 className="text-lg font-bold text-[var(--text)]">Explore the Foundation Model Catalog</h3>
+          <p className="text-xs text-[var(--muted)] mt-1">Browse and filter {countText} foundation models by parameters and context.</p>
         </div>
         <Link
           href="/models"

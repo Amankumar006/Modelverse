@@ -27,9 +27,9 @@ export async function GET() {
   const rssXml = `<?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Modelverse — AI News &amp; Intelligence Digest</title>
+    <title>TheModelverse — AI Model Architecture &amp; Intelligence Digest</title>
     <link>${baseUrl}/articles</link>
-    <description>Daily breaking artificial intelligence research, papers, and lab releases.</description>
+    <description>Daily breaking artificial intelligence research, papers, and foundation model architecture releases.</description>
     <language>en-us</language>
     <atom:link href="${baseUrl}/news/feed.xml" rel="self" type="application/rss+xml"/>
     ${itemsXml}

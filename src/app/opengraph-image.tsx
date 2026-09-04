@@ -1,13 +1,18 @@
 import { ImageResponse } from "next/og";
+import { getModelCount } from "@/lib/supabase/models";
 
-export const alt = "Modelverse — The Open Foundation Model Catalog";
+export const alt = "TheModelverse — The Foundation Model Catalog & LLM Benchmark Database";
 export const size = {
   width: 1200,
   height: 630,
 };
 export const contentType = "image/png";
+export const revalidate = 60;
 
 export default async function OpenGraphImage() {
+  const modelCount = await getModelCount();
+  const countText = modelCount > 0 ? `${modelCount}+` : "386+";
+
   return new ImageResponse(
     (
       <div
@@ -54,10 +59,10 @@ export default async function OpenGraphImage() {
             </div>
             <div style={{ display: "flex", flexDirection: "column" }}>
               <span style={{ fontSize: "18px", fontWeight: "900", letterSpacing: "1px", color: "#FFFFFF" }}>
-                MODELVERSE
+                THEMODELVERSE
               </span>
               <span style={{ fontSize: "11px", color: "#9CA3AF", letterSpacing: "1.5px", textTransform: "uppercase" }}>
-                Open Intelligence Architecture
+                Foundation Model Catalog & LLM Benchmarks
               </span>
             </div>
           </div>
@@ -85,6 +90,7 @@ export default async function OpenGraphImage() {
         <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
           <div
             style={{
+              display: "flex",
               fontSize: "58px",
               fontWeight: "900",
               color: "#FFFFFF",
@@ -93,17 +99,18 @@ export default async function OpenGraphImage() {
               maxWidth: "1000px",
             }}
           >
-            The Open Foundation Model Catalog
+            The Foundation Model Catalog & LLM Benchmark Database
           </div>
           <div
             style={{
+              display: "flex",
               fontSize: "20px",
               color: "#9CA3AF",
               lineHeight: 1.4,
               maxWidth: "850px",
             }}
           >
-            Explore 376+ frontier AI models, verified benchmark scores, parameter counts, context architectures, and live API pricing rates.
+            {`Explore ${countText} frontier AI models, verified benchmark scores, parameter counts, context architectures, and live API pricing rates.`}
           </div>
         </div>
 
@@ -121,7 +128,7 @@ export default async function OpenGraphImage() {
               }}
             >
               <span style={{ fontSize: "11px", color: "#9CA3AF", textTransform: "uppercase" }}>Foundation Models</span>
-              <span style={{ fontSize: "22px", fontWeight: "900", color: "#60A5FA", marginTop: "2px" }}>376+ Models</span>
+              <span style={{ fontSize: "22px", fontWeight: "900", color: "#60A5FA", marginTop: "2px" }}>{`${countText} Models`}</span>
             </div>
 
             <div
@@ -166,7 +173,7 @@ export default async function OpenGraphImage() {
               themodelverse.in
             </span>
             <span style={{ fontSize: "14px", color: "#6B7280" }}>
-              Open Intelligence Catalog
+              The Foundation Model Catalog
             </span>
           </div>
         </div>

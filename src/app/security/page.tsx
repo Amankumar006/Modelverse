@@ -4,20 +4,20 @@ import Link from "next/link";
 import { ArrowLeft, Lock, ShieldCheck } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Security & Vulnerability Disclosure — Modelverse",
-  description: "Modelverse security standards, database protection, and responsible disclosure policy.",
+  title: "Security Standards & Vulnerability Disclosure",
+  description: "TheModelverse security standards, database protection, and responsible disclosure policy.",
   alternates: {
     canonical: "/security",
   },
   openGraph: {
-    title: "Security & Vulnerability Disclosure — Modelverse",
-    description: "Modelverse security standards, database protection, and responsible disclosure policy.",
+    title: "Security Standards & Vulnerability Disclosure | TheModelverse",
+    description: "TheModelverse security standards, database protection, and responsible disclosure policy.",
     url: "/security",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Security & Vulnerability Disclosure — Modelverse",
-    description: "Modelverse security standards, database protection, and responsible disclosure policy.",
+    title: "Security Standards & Vulnerability Disclosure | TheModelverse",
+    description: "TheModelverse security standards, database protection, and responsible disclosure policy.",
   },
 };
 
@@ -63,7 +63,7 @@ export default function SecurityPage() {
         <section className="space-y-2">
           <h2 className="text-base font-bold text-[var(--text)]">Responsible Disclosure Program</h2>
           <p>
-            If you discover a security vulnerability or data exposure issue, please report it responsibly by emailing security@modelverse.ai or opening an advisory on GitHub. We aim to respond within 24 hours.
+            If you discover a security vulnerability or data exposure issue, please report it responsibly by emailing security@themodelverse.in or opening an advisory on GitHub. We aim to respond within 24 hours.
           </p>
         </section>
       </div>

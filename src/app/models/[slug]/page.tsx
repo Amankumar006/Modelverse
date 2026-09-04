@@ -2,6 +2,7 @@ import React from "react";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { getModelBySlug, getModels } from "@/lib/supabase/models";
+import { getArticlesForModel } from "@/lib/supabase/articles";
 import { normalizeBenchmarks } from "@/lib/benchmarks";
 import ModelHeader from "@/components/models/ModelHeader";
 import LineageSpecSection from "@/components/models/LineageSpecSection";
@@ -12,6 +13,7 @@ import ModelCompatibilityMatrix from "@/components/models/ModelCompatibilityMatr
 import PricingSection from "@/components/models/PricingSection";
 import BenchmarksSection from "@/components/models/BenchmarksSection";
 import ModelAlternativesSection from "@/components/models/ModelAlternativesSection";
+import ModelRelatedArticlesSection from "@/components/models/ModelRelatedArticlesSection";
 import QuickstartSection from "@/components/models/QuickstartSection";
 import ModelFaqSection from "@/components/models/ModelFaqSection";
 import SourcesSection from "@/components/models/SourcesSection";
@@ -37,10 +39,10 @@ export async function generateMetadata({
     return { title: "Model Not Found" };
   }
 
-  const title = `${model.name} (${model.provider}) — Architecture, Benchmarks & Specs`;
+  const title = `${model.name} (${model.provider}) — Architecture, Benchmarks & Hardware Sizing`;
   const description =
     model.description ||
-    `Verified specifications, parameter counts, context window size, benchmarks, and API quickstarts for ${model.name}.`;
+    `Verified specifications, parameter counts, context window size, benchmarks, and API quickstarts for ${model.name} on TheModelverse.`;
 
   return {
     title,
@@ -69,14 +71,14 @@ export async function generateMetadata({
       },
     },
     openGraph: {
-      title,
+      title: `${title} | TheModelverse`,
       description,
       type: "article",
       url: `/models/${slug}`,
     },
     twitter: {
       card: "summary_large_image",
-      title,
+      title: `${title} | TheModelverse`,
       description,
     },
   };
@@ -97,6 +99,7 @@ export default async function ModelDetailPage({
     notFound();
   }
 
+  const relatedArticles = await getArticlesForModel(model.slug, model.name);
   const hasBenchmarks = normalizeBenchmarks(model.benchmarks).length > 0;
 
   const breadcrumbs = [
@@ -161,6 +164,13 @@ export default async function ModelDetailPage({
               <ModelAlternativesSection currentModel={model} allModels={allModels} />
             </div>
 
+            {/* Technical Analysis & News Coverage */}
+            {relatedArticles.length > 0 && (
+              <div id="coverage" className="scroll-mt-28">
+                <ModelRelatedArticlesSection articles={relatedArticles} model={model} />
+              </div>
+            )}
+
             {/* API Multi-Language Quickstart */}
             <div id="quickstart" className="scroll-mt-28">
               <QuickstartSection model={model} />
@@ -179,7 +189,7 @@ export default async function ModelDetailPage({
 
           {/* Interactive Sticky Table of Contents */}
           <aside className="hidden xl:block xl:col-span-3 3xl:col-span-2 sticky top-24 p-5 rounded-[var(--radius-card)] bg-[var(--card-bg)] shadow-[var(--shadow-card)] border border-[var(--muted)]/10 text-xs">
-            <ModelDetailTableOfContents hasBenchmarks={hasBenchmarks} />
+            <ModelDetailTableOfContents hasBenchmarks={hasBenchmarks} hasArticles={relatedArticles.length > 0} />
           </aside>
         </div>
       </main>

@@ -16,7 +16,7 @@ export default function Navbar() {
     <header className="sticky top-0 z-40 w-full bg-[var(--bg)]/85 backdrop-blur-md border-b border-[var(--muted)]/10 transform-gpu">
       <nav className="max-w-7xl 2xl:max-w-[1600px] 3xl:max-w-[1920px] 4xl:max-w-[2400px] mx-auto flex items-center justify-between px-4 sm:px-6 md:px-10 lg:px-12 2xl:px-16 3xl:px-20 h-16">
         {/* Brand Logo */}
-        <Link href="/" className="flex items-center gap-2 group cursor-pointer">
+        <Link href="/" aria-label="TheModelverse Home" className="flex items-center gap-2 group cursor-pointer">
           <ModelverseLogo height={32} />
         </Link>
 
@@ -34,7 +34,7 @@ export default function Navbar() {
           >
             <div className="flex items-center gap-2 min-w-0">
               <Search size={14} className="text-[var(--muted)] group-hover:text-[var(--accent)] transition-colors shrink-0" />
-              <span className="truncate">Search 376+ models...</span>
+              <span className="truncate">Search foundation models...</span>
             </div>
             <kbd className="inline-flex items-center gap-0.5 text-[10px] px-1.5 py-0.5 rounded bg-[var(--bg)] border border-[var(--muted)]/20 font-mono text-[var(--muted)] shrink-0">
               <Command size={10} />K
@@ -76,7 +76,7 @@ export default function Navbar() {
           >
             <div className="flex items-center gap-2">
               <Search size={15} />
-              <span>Search 376+ foundation models...</span>
+              <span>Search foundation models...</span>
             </div>
             <kbd className="text-[10px] px-1.5 py-0.5 rounded bg-[var(--bg)] border border-[var(--muted)]/20 font-mono">
               ⌘K

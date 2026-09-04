@@ -76,7 +76,9 @@ async function syncArticles() {
       summary: frontmatter.summary || frontmatter.title,
       content: body.trim(),
       category: frontmatter.category || 'Architecture',
-      source_name: typeof frontmatter.author === 'object' ? frontmatter.author.name : (frontmatter.source_name || 'Modelverse Intelligence'),
+      source_name: typeof frontmatter.author === 'object'
+        ? (frontmatter.author.name === 'Modelverse Research' ? 'TheModelverse Research' : frontmatter.author.name)
+        : (frontmatter.source_name || 'TheModelverse Intelligence'),
       source_url: frontmatter.source_url || null,
       cover_image: finalCoverImage,
       is_published: frontmatter.is_published !== false,

@@ -82,6 +82,29 @@ export async function getModels(options: GetModelsOptions = {}): Promise<GetMode
   )();
 }
 
+export async function getModelCount(): Promise<number> {
+  return unstable_cache(
+    async () => {
+      try {
+        const supabase = createServerClient();
+        const { count, error } = await supabase
+          .from('models')
+          .select('*', { count: 'exact', head: true })
+          .eq('is_active', true);
+
+        if (error || count === null || count === undefined) {
+          return 386;
+        }
+        return count;
+      } catch {
+        return 386;
+      }
+    },
+    ['model-count-active'],
+    { revalidate: 60, tags: ['models', 'model-count'] }
+  )();
+}
+
 export async function getModelBySlug(slug: string): Promise<ModelRow | null> {
   return unstable_cache(
     async () => {

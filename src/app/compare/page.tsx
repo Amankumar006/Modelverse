@@ -10,8 +10,8 @@ import { CURATED_POPULAR_PAIRS, getCanonicalCompareSlug } from "@/lib/compare";
 export const revalidate = 60;
 
 export const metadata: Metadata = {
-  title: "Compare AI Foundation Models — Matrix, Benchmarks & VRAM Sizing",
-  description: "Compare artificial intelligence foundation models side-by-side across parameters, quantization compression, context windows, API pricing, and benchmark scores.",
+  title: "Compare Foundation Models & LLM Benchmark Matrix",
+  description: "Compare foundation models side-by-side across parameters, quantization compression, context windows, API pricing, and benchmark scores on TheModelverse.",
   keywords: [
     "Compare AI models",
     "LLM comparison tool",
@@ -36,14 +36,14 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: "Compare AI Foundation Models — Matrix, Benchmarks & VRAM Sizing",
-    description: "Compare foundation models side-by-side across parameters, quantization compression, context windows, API pricing, and benchmark scores.",
+    title: "Compare Foundation Models & LLM Benchmark Matrix | TheModelverse",
+    description: "Compare foundation models side-by-side across parameters, quantization compression, context windows, API pricing, and benchmark scores on TheModelverse.",
     url: "/compare",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Compare AI Foundation Models — Matrix, Benchmarks & VRAM Sizing",
-    description: "Compare foundation models side-by-side across parameters, quantization compression, context windows, API pricing, and benchmark scores.",
+    title: "Compare Foundation Models & LLM Benchmark Matrix | TheModelverse",
+    description: "Compare foundation models side-by-side across parameters, quantization compression, context windows, API pricing, and benchmark scores on TheModelverse.",
   },
 };
 
@@ -67,10 +67,10 @@ export default async function ComparePage() {
             <ArrowLeft size={14} /> Back to Catalog
           </Link>
           <h1 className="text-3xl sm:text-4xl 2xl:text-5xl font-extrabold text-[var(--text)] tracking-tight">
-            Model Showdown & Comparison Engine
+            LLM Benchmark Database &amp; Hardware Sizing
           </h1>
           <p className="text-xs sm:text-sm text-[var(--muted)] mt-1.5 max-w-2xl leading-relaxed">
-            Select up to 3 models to perform a side-by-side technical evaluation across benchmarks, quantization compression, inference economics, and hardware VRAM requirements.
+            Select up to 3 foundation models from TheModelverse to perform a side-by-side technical evaluation across standardized benchmark evaluations, quantization compression, and GPU hardware sizing.
           </p>
 
           {/* Quick-Hop Popular Showdowns */}

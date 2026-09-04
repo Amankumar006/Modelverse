@@ -147,7 +147,7 @@ export default function ModelHeader({ model }: ModelHeaderProps) {
               </span>
             )}
             <span className="inline-flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-500 font-semibold border border-emerald-500/20">
-              <ShieldCheck size={11} /> Verified Specs
+              <ShieldCheck size={11} /> Verified Architecture &amp; Specs
             </span>
 
             <a

@@ -9,8 +9,8 @@ import { BreadcrumbJsonLd } from "@/components/seo/JsonLd";
 export const revalidate = 60;
 
 export const metadata: Metadata = {
-  title: "AI Model Release Timeline & Foundation AI History",
-  description: "A chronological ledger of foundation model releases, architecture breakthroughs, parameter scaling updates, and AI laboratory launches.",
+  title: "AI Model Release Timeline & Foundation History",
+  description: "A chronological ledger of foundation model releases, architecture breakthroughs, parameter scaling updates, and AI laboratory launches on TheModelverse.",
   keywords: [
     "AI release timeline",
     "foundation model history",
@@ -23,14 +23,14 @@ export const metadata: Metadata = {
     canonical: "/timeline",
   },
   openGraph: {
-    title: "AI Model Release Timeline & Foundation AI History",
-    description: "A chronological ledger of foundation model releases, architecture breakthroughs, and AI laboratory launches.",
+    title: "AI Model Release Timeline & Foundation History | TheModelverse",
+    description: "A chronological ledger of foundation model releases, architecture breakthroughs, and AI laboratory launches on TheModelverse.",
     url: "/timeline",
   },
   twitter: {
     card: "summary_large_image",
-    title: "AI Model Release Timeline & Foundation AI History",
-    description: "A chronological ledger of foundation model releases, architecture breakthroughs, and AI laboratory launches.",
+    title: "AI Model Release Timeline & Foundation History | TheModelverse",
+    description: "A chronological ledger of foundation model releases, architecture breakthroughs, and AI laboratory launches on TheModelverse.",
   },
 };
 
